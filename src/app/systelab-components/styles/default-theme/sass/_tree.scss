@@ -1,0 +1,40 @@
+.ui-tree {
+  border: none;
+  width: 100%;
+  line-height: $dropdown-line-height;
+  .ui-tree-container {
+    .ui-treenode {
+      .ui-treenode-content {
+        padding-left: 5px;
+        span[class*='icon-angle-'] {
+          font-weight: bold;
+          line-height: $dropdown-line-height;
+          font-size: 18px;
+          color: $dark-gray;
+        }
+        .ui-treenode-label {
+          margin-top: 7px;
+          line-height: $dropdown-line-height;
+          &.ui-state-highlight {
+            background: $selected;
+            border-top: 7px;
+            border-width: 7px;
+            border-style: solid;
+            border-color: $selected;
+            border-bottom: 0px;
+            border-left: 0px;
+            margin-top: 0px;
+            width: 100%;
+            color: rgb(34, 34, 34);
+          }
+          &:hover {
+            background: $selected;
+          }
+        }
+        &:hover {
+          background-color: $selected;
+        }
+      }
+    }
+  }
+}

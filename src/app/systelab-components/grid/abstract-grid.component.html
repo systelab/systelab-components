@@ -1,0 +1,10 @@
+    <div #hidden class="height-hidden"></div>
+    <ag-grid-angular id="agGrid" #agGrid style="position:absolute; top:0; bottom:0; left:0; right:0; overflow: hidden;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     (gridReady)="doGridReady($event)"
+                     (gridSizeChanged)="doGridSizeChanged($event)"
+                     (cellClicked)="doClick($event)"
+                     (columnResized)="doColumnResized($event)"
+                     (viewportChanged)="doViewportChanged()"
+                     (modelUpdated)="onModelUpdated($event)">
+    </ag-grid-angular>

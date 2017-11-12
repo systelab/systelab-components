@@ -1,0 +1,97 @@
+/**
+ * 1. Needed to prevent tabs to collapse to a new line when there's no horizontal room for them
+ * 2. Needed to prevent inherit color from UIkit
+ */
+
+/* $tab-min-width: defines the min-width of the tabs.*/
+$tab-min-width: 120px !default;
+/* $height-diff: used to calculate the $tab-vertical-padding.*/
+$height-diff: 40px - $tab-height;
+/* $tab-vertical-padding: defines the padding of the elements inside the uk-tab;
+                          defines the padding-bottom of the element when it’s hovered.*/
+$tab-vertical-padding: ceil(9px - $height-diff / 2);
+/* $tab-margin-top: used to define the top margin */
+$tab-margin-top: 5px;
+
+.uk-tab {
+  margin-top: $tab-margin-top;
+  padding-left: 25px;
+  white-space: nowrap;
+  overflow: visible;
+  background-color: white;
+
+  > li {
+    float: none;
+
+    /* 1 */
+    display: inline-block;
+
+    + li {
+      margin-left: 5px;
+    }
+
+    > a {
+      color: white;
+      text-shadow: none;
+      background-color: $secondary-color;
+      border-top: 3px solid $secondary-color;
+      margin-left: 0 !important;
+      padding: $tab-vertical-padding 12px;
+      min-width: $tab-min-width;
+      text-align: center;
+
+      &:hover {
+        color: white;
+
+        /* 2 */
+        background-color: $primary-color;
+        border-top-color: $primary-color;
+        padding-bottom: $tab-vertical-padding !important;
+      }
+    }
+
+    &.uk-active {
+      background-color: white;
+
+      a {
+        color: black;
+        background-color: white;
+        border-top-color: $primary-color;
+      }
+    }
+  }
+}
+
+.uk-form {
+  position: relative;
+  height: 100%;
+
+  > .uk-tab {
+    @include position(absolute, $top: 0, $left: 0, $right: 0);
+
+    height: $tab-height;
+    overflow: visible;
+
+    li {
+      height: $tab-height;
+    }
+
+    + * {
+      @include position(absolute, $top: $tab-height, $left: 0, $right: 0, $bottom: 0);
+
+      overflow: auto;
+    }
+
+    &.uk-margin-small-top + * {
+      top: $tab-height + 5px;
+    }
+
+    &.uk-margin-top + * {
+      top: $tab-height + 15px;
+    }
+
+    &.uk-margin-large-top + * {
+      top: $tab-height + 50px;
+    }
+  }
+}

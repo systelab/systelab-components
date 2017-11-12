@@ -1,0 +1,140 @@
+/* $status-size: used to define the size in the status-square class;
+                 to define the size of all elements inside the status-square;
+                 to define the line-height of the i elements inside.*/
+$status-size: 20px;
+
+.status-square {
+  @include size($status-size);
+
+  min-width: $status-size;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1em;
+  background-color: $selected;
+  border-radius: 3px;
+
+  > * {
+    @include size($status-size + 1px);
+    // @include size($status-size - 4px);
+  }
+
+  > i {
+    line-height: $status-size;
+  }
+
+  &.status-square-large {
+    padding: 5px;
+  }
+}
+
+.status-bar {
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.status-bar,
+.status-square {
+  text-align: center;
+
+  &.ko {
+    background-color: $in;
+  }
+
+  &.ok {
+    background-color: $fv;
+  }
+
+  &.finished,
+  &.tv {
+    background-color: $tv;
+  }
+
+  &.warning {
+    background-color: $warning;
+  }
+
+  &.primary {
+    background-color: $primary;
+  }
+
+  &.pending {
+    background-color: $pending;
+  }
+
+  &.tv {
+    background-color: $tv;
+  }
+
+  &.nr {
+    background-color: $nr;
+  }
+
+  &.wr {
+    background-color: $wr;
+  }
+
+  &.in {
+    background-color: $in;
+  }
+
+  &.fv {
+    background-color: $fv;
+  }
+
+  &.pl {
+    background-color: $pl;
+  }
+
+  &.pr {
+    background-color: $pr;
+  }
+
+  &.partial {
+    background-color: $partial;
+  }
+}
+
+.bg-primary {
+  background-color: $primary-color;
+  color: white;
+}
+
+.bg-error {
+  background-color: $error;
+  color: white;
+}
+
+.bg-warning {
+  background-color: $warning;
+  color: white;
+}
+
+.bg-success {
+  background-color: $success;
+  color: white;
+}
+
+.uk-text-error {
+  color: $error;
+}
+
+.uk-text-warning {
+  color: $warning;
+}
+
+.uk-text-success {
+  color: $success;
+}
+
+.uk-text-success {
+  color: $success;
+}
+
+.uk-text-primary {
+  color: $primary;
+}
+
+.uk-text-info {
+  color: $info;
+}

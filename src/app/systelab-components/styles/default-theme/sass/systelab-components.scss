@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+/**
+ * Import files from default theme folder
+ * src/slt-common/assets/styles/default-theme/sass/
+ */
+@import "styleColor";
+@import "styleSheet";
+@import "mixins";
+@import "ngDialog";
+@import "icon";
+@import "dropdown";
+@import "forms";
+@import "panel";
+@import "progressBar";
+@import "tabs";
+@import "ukswitcher";
+@import "contextMenu";
+@import "checkBox";
+@import "agGrid";
+@import "tree";
+@import "status";
+@import "table";
+@import "list";
+@import "box";
+@import "legend";
+@import "triageCell";
+@import "button";
+@import "comboBox";
+@import "datepicker";
+@import "input";
+@import "radio";
+@import "select";
+@import "slider";
+@import "textarea";
+
+html {
+  width: 100%;
+  font: normal $base-body-font-size $base-body-font-family;
+  color: $base-body-color;
+
+  body {
+    &:not(.is-login) {
+      min-width: $app-min-width;
+      min-height: $app-min-height;
+    }
+
+    //&.is-login {
+    //  @import "login";
+    //}
+  }
+
+  input,
+  button,
+  a,
+  a:focus {
+    outline: 0 !important;
+  }
+}
+
+// $primary-color: rgb(85, 174, 97);

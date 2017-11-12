@@ -1,0 +1,72 @@
+@import "../styles/default-theme/sass/variables";
+
+/* $twolist-row-height: define the row height*/
+$twolist-row-height: ceil(35px * $size_percentage) !default;
+
+.twolist {
+  display: -webkit-flex;
+  display: flex;
+  overflow: auto;
+
+  .twolistdiv {
+    $single-list-width: calc(50% - 30px);
+
+    flex: 1 0 $single-list-width;
+    min-width: $single-list-width;
+
+    input {
+      padding: 5px;
+      border-radius: 5px;
+      border-color: $medium-gray;
+      width: 99% !important;
+    }
+
+    .twolistboxtitle {
+      padding-left: 5px;
+    }
+
+    .twolistbox {
+      border-radius: 5px;
+      border-color: $medium-gray;
+      padding: 5px 0;
+      margin: 5px;
+      display: flex;
+      overflow: auto;
+
+      .twolistboxdiv {
+        flex: 1 0 auto;
+
+        .twolistboxrow {
+          line-height: $twolist-row-height;
+          padding-left: 5px;
+          cursor: pointer;
+
+          @include user-selection(none);
+        }
+
+        .twolistboxrowselected {
+          background-color: $selected-elements;
+          padding-left: 5px;
+        }
+
+        .twolistboxrowdrag {
+          cursor: move;
+        }
+      }
+    }
+  }
+
+  .twolistbuttondiv {
+    padding: 5px;
+    flex: 0 0 auto;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .twolistbutton {
+      margin: 5px;
+      min-width: 0;
+    }
+  }
+}

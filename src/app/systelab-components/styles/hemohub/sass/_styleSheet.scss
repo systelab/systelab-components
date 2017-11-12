@@ -1,0 +1,168 @@
+/************** SHARED - start ****************************************************************************************/
+/* $size_percentage: Change the component size */
+$size_percentage: 1 !default;
+/* $form-elements-height: Defines the line height;
+                          in “uk-button-medium” we redefine the line-height and the max-height of the medium size button and the size,
+                            the min-width and the min-height of a square button;
+                          defines the max-height of the multiSelectOutBox and the min-height of the uk-form-row;
+                          defines the line-height of the uk-grid;
+                          used to calculate the width of the input inside a uk-input-file;
+                          to calculate the size of a uk-button inside a uk-input-file;
+                          defines the line-height of the uk-line-height class;
+                          used to calculate the $top-icon value;
+                          used to calculate the line-height of the label inside the switch class */
+$form-elements-height: ceil(35px * $size_percentage) !default;
+/* $border-radius: Define the border radius for the components;
+                    used for the Box*/
+$border-radius: 3px !default;
+/* $base-font-size: defines the button font size;
+                    used to calculate the line-height of the span (when it is not in a multiselect);
+                    to calculate the padding-top of the uk-form-label inside the uk-form-row;
+                    to define the line-height of the uk-form-label inside a uk-form-row */
+$base-font-size: 15px !default;
+/* $base-body-font-size: used in the agGrid
+                         used in the comboBox */
+$base-body-font-size: $base-font-size unquote("/") ceil($base-font-size * 1.25) !default;
+/* $base-body-font-family: defines the application font
+                           defines the font-size of the inputs preceded by a uk-form */
+$base-body-font-family: Arial Unicode MS, Arial, sans-serif !default;
+/************** SHARED - end ******************************************************************************************/
+
+/* ************* RESPONSIVE - start ***********************************************************************************/
+/* $breakpoint-medium: defines the breakpoint of the mediaquery for the width of the ngdialogs for medium screens */
+$breakpoint-medium: 768px !default;
+/* $breakpoint-large: defines the breakpoint of the mediaquery for the width of the ngdialogs for large screens;
+                      used in the mediaquery to modify the Login logo */
+$breakpoint-large: 960px !default;
+/* $breakpoint-xlarge: defines the breakpoint of the mediaquery for the width of the ngdialogs for xlarge screens;
+                       used to increase the margin-left value of the uk-grid-add-margin class;
+                       used in the mediaquery to modify the Login logo */
+$breakpoint-xlarge: 1220px !default;
+/* $breakpoint-huge: used in the max-width of the mediaqueries to change the ngdialog-buttons-condensed.
+                     used to expand Cepario footer buttons;
+                     used in the max-width of the mediaqueries to change the ngdialog-buttons-condensed */
+$breakpoint-huge: 1350px !default;
+/* $breakpoint-medium-height: defines the breakpoint of the mediaquery for the height of the ngdialogs for medium screens */
+$breakpoint-medium-height: 600px !default;
+/* $breakpoint-large-height: defines the breakpoint of the mediaquery for the height of the ngdialogs for large screens  */
+$breakpoint-large-height: 768px !default;
+/* $breakpoint-xlarge-height: defines the breakpoint of the mediaquery for the height of the ngdialogs for xlarge screens */
+$breakpoint-xlarge-height: 960px !default;
+/* $ipad-width: used as mediaquery checkpoint.*/
+$ipad-width: 1024px !default;
+/* ************* RESPONSIVE - end *************************************************************************************/
+
+/************** MAIN APPLICATION - start ******************************************************************************/
+/* $app-min-width: defines the minimum width of the body */
+$app-min-width: 983px !default;
+/* $app-min-height: defines the minimum height of the body */
+$app-min-height: 600px !default;
+/* $header-height: application header height
+                   used in the sidebar */
+$header-height: 56px !default;
+/* $user-width: defines the width of the user area in the main screen*/
+$user-width: 130px !default;
+/************** MAIN APPLICATION - end ********************************************************************************/
+
+/************** BUTTON - start ****************************************************************************************/
+/* $button-large-height: defines the min-height and the line-height of the button when is large */
+$button-large-height: max(32px, ceil(40px * $size_percentage)) !default;
+/* $ng-dialog-button-width: defines the minimum width of the button */
+$ng-dialog-button-width: 85px !default;
+/************** BUTTON - end ******************************************************************************************/
+
+/************** CHARTS - start ****************************************************************************************/
+/* $chart-header-height: defines the height of the chart header;
+                         the height of the dropdown inside the cart;
+                         defines the size of the cell inside the dropdown
+                         used in QC Compare and QC Levey Jennings Charts */
+$chart-header-height: $form-elements-height + ceil(10 * $size_percentage) !default;
+/************** CHARTS - end ******************************************************************************************/
+
+/************** CHECKBOX - start **************************************************************************************/
+/* $checkbox-height: used to define the height and the line-height of the input,
+                       the padding left if the input is empty,
+                       the size and the font-size of the input’s before attribute.*/
+$checkbox-height: max(25px, $form-elements-height - 16px) !default;
+/************** CHECKBOX - end ******************************************************************************************/
+
+/************** DROPDOWN and Tree - start *****************************************************************************/
+/* $dropdown-line-height: defines the row line-height of the dropdown;
+                          defines the row line-height of the tree */
+$dropdown-line-height: $form-elements-height !default;
+/************** DROPDOWN - end ****************************************************************************************/
+
+/************** INPUT - start *****************************************************************************************/
+/* $input-width: defines the width of the input preceded by a uk-form that has not the class uk-width;
+                 defines the width of the uk-form-icon when it has not the class uk-width;
+                 defines the width of the ui-slider when the uk-width class is not present */
+$input-width: 100% !default;
+/* $input-height: used to calculate the line-height of the span (when it is not in a multiselect);
+                  to calculate the padding-top of the uk-form-label inside the uk-form-row;
+                  to calculate the line-height of a paragraph inside a uk-form-controls;
+                  defines the height of all the inputs preceded by a uk-form;
+                  defines the line-height and the height of the font inside a uk-input;
+                  defines the height and the line-height of the icon-container;
+                  defines the line-height and the heigth of a select */
+$input-height: $form-elements-height !default;
+/************** INPUT - end *******************************************************************************************/
+
+/************** FORMS - start *****************************************************************************************/
+/* $form-row-gutter: defines the margin-top of the uk-grid-small when it’s preceded by other uk-grid-small;
+                     defines the margin-top of the uk-form-row when it’s preceded by other uk-form-row */
+$form-row-gutter: ceil(5px * $size_percentage) !default;
+/************** FORMS - end *******************************************************************************************/
+
+/************** NGDIALOG - start **************************************************************************************/
+/* $ng-dialog-header-height: defines the max-height of the ngdialog-header;
+                             used to calculate the line-height of the ngdialog-header;
+                             used to calculate the height of the ngdialog-message;
+                             used to calculate the height of the ngdialog-message when has the class with-buttons;
+                             used to calculate the $top-offset variable value */
+$ng-dialog-header-height: max(45px, ceil(60px * $size_percentage)) !default;
+/* $ng-dialog-buttons-height: used to calculate the height of the ngdialog-message when has the class with-buttons;
+                              defines the max-height of the ngdialog-buttons class;
+                              used to calculate the value of the $button-size variable */
+$ng-dialog-buttons-height: max(54px, $ng-dialog-header-height) !default;
+/************** NGDIALOG - end ****************************************************************************************/
+
+/************** NGSEARCHER - start ************************************************************************************/
+/* $ng-searcher-button-width: defines the width of the searcher button */
+$ng-searcher-button-width: 40px !default;
+/************** NGSEARCHER - end **************************************************************************************/
+
+/************** TABLE - start *****************************************************************************************/
+/* $table-left-header-width: defines the width of the left-header inside a uk-table.*/
+$table-left-header-width: 200px !default;
+/************** TABLE - end *******************************************************************************************/
+
+/************** TABS - start ******************************************************************************************/
+/* $tab-height: used to calculate the $height-diff value;
+                defines the height of the uk-tab elements inside a uk-form;
+                defines the height of the li elements inside the previous uk-tab;
+                defines the top position of all elements inside the uk-tab;
+                defines the top value of the uk-margin-small-top, uk-margin-top and uk-margin-large-top.*/
+$tab-height: ceil(40px * $size_percentage) !default;
+/************** TABS - end ******************************************************************************************/
+
+/************** GRID - start ****************************************************************************************/
+/* $grid-header-height: defines the height of the ui-grid-header-cell;
+                          used to define the size of the grid-action-cell class */
+$grid-header-height: $form-elements-height + ceil(8 * $size_percentage) !default;
+/* $grid-header-line-height: defines the line-height of the ui-grid-header-cell.
+                               defines the header-line-height of the agGrid */
+$grid-header-line-height: $grid-header-height - $base-font-size + 2 !default;
+/* $grid-cell-height: defines the height and the min-height of the ui-grid-row;
+                        defines the height and the min-height of the ui-grid-cell;
+                        defines the line-height of the ui-grid-cell-contents;
+                        used to calculate the $status-square-right-size value;
+                        defines the line-height of the ui-grid-cell-line-height;
+                        defines the height of the ui-grid-cell-height;
+                        defines the font-size of the uk-text-large;
+                        used to calculate the size of the grid-acion-cell element */
+$grid-cell-height: $form-elements-height + ceil(4 * $size_percentage) !default;
+/* $grid-cell-line-height: defines the line-height of the ui-grid-cell
+                             defines the line-height of the combo-button */
+$grid-cell-line-height: $grid-cell-height - $base-font-size + 2 !default;
+/************** GRID - end ******************************************************************************************/
+

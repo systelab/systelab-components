@@ -1,0 +1,22 @@
+@import "styleColor";
+
+.stripe{
+  height: 12px;
+  width: 35px;
+  border: 1px solid $actions-separator;
+  &.critical{
+    background-color: #FF0000;
+  }
+  &.very-urgent{
+    background-color: #FF8C00;
+  }
+  &.urgent{
+    background-color: #FFFF00;
+  }
+  &.standard{
+    background-color: #32CD32;
+  }
+  &.nonurgent{
+    background-color: #4169E1;
+  }
+}

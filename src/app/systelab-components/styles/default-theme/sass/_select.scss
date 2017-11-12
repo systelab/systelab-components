@@ -1,0 +1,20 @@
+.uk-form select {
+    line-height: $input-height;
+    height: $input-height;
+    border-radius: $border-radius;
+    border: 1px solid $medium-gray;
+    padding: 0 0 0 10px !important;
+
+    option {
+        padding: 4px 8px  !important;
+        line-height: 30px;
+
+        &:hover {
+            background-color: $selected-elements !important;
+        }
+    }
+
+    &:disabled {
+        @include appearance-value(none);
+    }
+}

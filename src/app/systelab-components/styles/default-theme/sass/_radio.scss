@@ -1,0 +1,70 @@
+/* $radio-height: used to calculate the $top-icon variable value;
+                  to define the height and the line-height of the input;
+                  used to define the size of the input before class;
+                  used to define the padding-left of the input empty class.*/
+$radio-height: max(19px, $form-elements-height - 6px) !default;
+/* $radio-text-gap: defines the padding-left of the input.*/
+$radio-text-gap: $radio-height * 1.5 !default;
+
+/* $top-icon: defines the padding-top of the input;
+              used to define the top position of the input before class.*/
+$top-icon: ($form-elements-height - $radio-height) / 2;
+
+// Hide native radio
+input[type="radio"]:not(:checked), input[type="radio"]:checked {
+  @include position(absolute, $left: -9999px);
+
+  visibility: hidden;
+}
+
+// Styles for label after radio
+input[type="radio"] + label {
+  $top-icon: ($form-elements-height - $radio-height) / 2;
+
+  @include user-selection(none);
+
+  position: relative;
+  padding-left: $radio-text-gap;
+  cursor: pointer;
+  display: inline-block;
+  height: $radio-height;
+  line-height: $radio-height;
+  font-size: 1rem;
+  padding-top: $top-icon;
+
+  &:empty {
+    padding-left: $radio-height;
+  }
+
+  &:before {
+    @include size($radio-height);
+
+    @include position(absolute, $top: $top-icon, $left: 0);
+
+    @include backface-visibility(hidden);
+
+    content: '';
+    z-index: 0;
+    border: solid ($radio-height / 8) $medium-gray;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background-color: $radio-color;
+
+  }
+
+  &.uk-hide-radio {
+    &:before {
+      content: none;
+    }
+  }
+}
+
+// Define background color and icon size when checked
+input[type="radio"]:checked + label:before {
+  border: solid ($radio-height / 3) $radio-border-color;
+}
+
+input[type="radio"]:disabled + label {
+  opacity: 0.5;
+  cursor: default;
+}

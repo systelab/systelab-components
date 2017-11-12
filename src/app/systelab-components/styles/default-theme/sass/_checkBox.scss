@@ -1,0 +1,125 @@
+/* $checkbox-text-gap: defines the padding-left of the input.*/
+$checkbox-text-gap: $checkbox-height * 1.5 !default;
+
+// Hide native checkbox
+input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
+  @include position(absolute, $left: -9999px);
+
+  visibility: hidden;
+}
+
+// Styles for label after checkbox
+input[type="checkbox"]:not(.not-show) + label {
+  $top-icon: ($form-elements-height - $checkbox-height) / 2;
+
+  @include user-selection(none);
+
+  position: relative;
+  padding-left: $checkbox-text-gap;
+  cursor: pointer;
+  display: inline-block;
+  height: $checkbox-height;
+  line-height: $checkbox-height;
+  font-size: 1rem;
+  padding-top: $top-icon;
+
+  &:empty {
+    padding-left: $checkbox-height;
+  }
+
+  &:before {
+    @include size($checkbox-height);
+
+    @include position(absolute, $top: 0, $left: 0);
+
+    @include backface-visibility(hidden);
+
+    text-align: center;
+    z-index: 0;
+    background-color: $checkbox-color;
+    border-radius: 4px;
+    border: solid 1px $medium-gray;
+
+    @extend .uk-icon;
+
+    // These properties override .uk-icon default values
+    content: '';
+    line-height: 1em;
+    font-size: $checkbox-height - 3px;
+    color: $checkbox-color;
+    box-sizing: border-box;
+  }
+}
+
+// Define background color and icon when checked
+input[type="checkbox"]:not(.not-show):checked + label:before {
+  content: '\F00d';
+  background-color: $checkbox-border-color;
+}
+
+input[type="checkbox"]:not(.not-show):disabled + label {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@mixin selection-checkbox() {
+  .checkbox-unchecked {
+    width: $checkbox-height;
+    height: $checkbox-height;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-align: center;
+    z-index: 0;
+    background-color: $checkbox-color;
+    border-radius: 4px;
+    border: solid 1px $medium-gray;
+    content: '';
+    font-size: $checkbox-height - 3px;
+    color: $checkbox-color;
+    box-sizing: border-box;
+    margin-top: -1px !important;
+  }
+
+  .checkbox {
+    width: $checkbox-height;
+    height: $checkbox-height;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-align: center;
+    z-index: 0;
+    background-color: $checkbox-color;
+    border-radius: 4px;
+    border: solid 1px $medium-gray;
+    content: '';
+    font-size: $checkbox-height - 3px;
+    color: $checkbox-color;
+    box-sizing: border-box;
+    margin-top: -1px !important;
+  }
+
+  .checkbox::before {
+    font-family: "FontAwesome" !important;
+    content: '\F00d';
+    background-color: #158fef;
+    width: $checkbox-height;
+    height: $checkbox-height;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 1em;
+    font-size: $checkbox-height - 3px;
+    color: $checkbox-color;
+    border-radius: 4px;
+    border: solid 1px $checkbox-border-color;
+  }
+}

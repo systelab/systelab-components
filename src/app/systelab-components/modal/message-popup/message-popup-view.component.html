@@ -1,0 +1,27 @@
+<div class="ngdialog-header">{{ context.title }}</div>
+<div class="ngdialog-message msg-box with-buttons uk-vertical-align">
+    <div class="uk-vertical-align-middle img">
+        <i class="{{context.icon}} {{context.color}}"></i>
+    </div>
+    <div class="uk-vertical-align-middle msg">
+        {{ context.msg }}
+    </div>
+</div>
+<div class="ngdialog-buttons">
+    <div class="uk-float-right" *ngIf="context.yesNoButtons; else customcomponent">
+        <button type="button" class="uk-button uk-button-large" (click)="close(true)">{{ 'COMMON_OK' | translate | async }}
+        </button>
+        <button type="button" class="uk-button uk-button-large" (click)="close(false)">{{ 'COMMON_CANCEL' | translate | async }}
+        </button>
+    </div>
+    <ng-template #customcomponent>
+        <div class="uk-float-right">
+            <button type="button" class="uk-button uk-button-large" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}
+            </button>
+        </div>
+    </ng-template>
+    <div class="uk-clearfix"></div>
+</div>
+<div class="ngdialog-close" (click)="close()"></div>
+
+

@@ -1,0 +1,33 @@
+/*
+ *  To be used with UIkit native uk-dropdown
+ */
+
+.uk-open {
+    //disable default background color on dropdown tooltip
+    background-color: initial;
+}
+
+// 1. Hack, but we most override .uk-dropdown default values.
+.legend.uk-dropdown {
+    width: 250px !important; /* 1 */
+    line-height: 17px;
+    white-space: normal;
+    padding: 10px !important; /* 1 */
+    font-size: 0.8em;
+    color: black;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+
+    //Some styling for inner elements. Add as many elements as needed.
+    p {
+        padding: 0;
+        margin: 0;
+    }
+
+    hr {
+        margin: 5px 0;
+        padding: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}

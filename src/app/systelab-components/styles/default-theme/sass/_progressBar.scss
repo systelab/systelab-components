@@ -1,0 +1,28 @@
+.uk-progress {
+  /* $progress-bar-size: used to define the border-radius of the uk-progress and the uk-progress-bar.*/
+  $progress-bar-size: 8px;
+
+  border-radius: $progress-bar-size;
+
+  .uk-progress-bar {
+    border-radius: $progress-bar-size;
+  }
+}
+
+.ngdialog-header {
+  .uk-progress {
+    @include size(150px, 10px);
+
+    background-color: $primary-color-darken;
+    float: right;
+    display: inline-block;
+    margin: 0 50px 0;
+
+    .uk-progress-bar {
+      float: left;
+      max-width: 100%;
+      height: 10px;
+      background-color: white;
+    }
+  }
+}

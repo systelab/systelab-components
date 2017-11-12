@@ -1,0 +1,79 @@
+
+$size_percentage: 1;
+
+$form-elements-height: ceil(35px * $size_percentage) !default;
+
+
+$primary-color: rgb(21, 143, 239) !default;
+$dark-gray: rgb(128, 128, 128) !default;
+
+$switch-bg-color: transparent !default;
+$switch-circle-color: $dark-gray !default;
+$switch-bg-color-checked: $primary-color !default;
+$switch-circle-color-checked: white !default;
+
+
+$switch-height: max(22px, $form-elements-height - 6px) !default;
+
+// Shorthand mixin for basic sizing
+// @param {Length} $width [null] - Element width
+// @param {Length} $height [$width] - Element height
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+.switch {
+
+  $ball-size: $switch-height - 8px;
+  $top-icon: ceil(($form-elements-height - $switch-height) / 2);
+
+  background: $switch-bg-color;
+  border-radius: ($switch-height / 2) !important;
+
+  border: 1px solid #dfdfdf;
+  position: relative;
+  display: inline-block;
+  box-sizing: content-box;
+  overflow: hidden;
+  width: $switch-height * 2 - 4px;
+  height: $switch-height - 2px;
+  vertical-align: middle;
+  margin-top: $top-icon !important;
+
+  padding: 0;
+  margin: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: #dfdfdf 0 0 0 0 inset;
+  transition: .3s ease-out all;
+  -webkit-transition: .3s ease-out all;
+  top: -1px;
+
+  .tick {
+    @include size($ball-size);
+    background: $switch-circle-color;
+    box-shadow: none; /* 1 */
+    border-radius: 40px !important;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    margin-top: 0px !important;
+  }
+
+  &.checked {
+    background: $switch-bg-color-checked;
+    border-color: $switch-bg-color-checked;
+
+    .tick {
+      background: $switch-circle-color-checked;
+      left: $switch-height;
+    }
+  }
+
+}
+
+.switch.disabled {
+  opacity: .5;
+  cursor: not-allowed
+}

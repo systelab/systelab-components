@@ -1,0 +1,27 @@
+<div class="ngdialog-header">Options</div>
+<div class="ngdialog-message with-buttons">
+    <form class="uk-form uk-flex uk-flex-column uk-flex-nowrap">
+        <ul class="uk-tab" data-uk-switcher="{connect:'#my-id2', swiping: false}">
+            <li [ngClass]="{'uk-active': 1 === 1}">
+                <a>{{ 'COMMON_FIELDS'  | translate | async }}</a>
+            </li>
+        </ul>
+        <ul id="my-id2" class="uk-switcher from-tab uk-panel-space uk-height-1-1">
+            <li class="uk-height-1-1">
+                <div class="uk-height-1-1">
+                    <div class="uk-form-row uk-height-1-1">
+                        <mp-two-list [(available)]="availableColumns"
+                                     [(visible)]="visibleColumns"
+                                     [initialAvailableColumns]="initialAvailableColumns"
+                                     displayAttr="displayName">
+                        </mp-two-list>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+<div class="ngdialog-buttons">
+    <button type="button" class="uk-button uk-button-large uk-float-right" (click)="submit()"> Submit</button>
+</div>
+<div class="ngdialog-close" (click)="cancel()"></div>

@@ -1,0 +1,137 @@
+.uk-form-horizontal {
+    .uk-form-label {
+        width: auto;
+        float: none;
+    }
+
+    .uk-form-controls {
+        margin-left: 0;
+
+        &.uk-grid-add-margin {
+            margin-left: -25px !important;
+
+            @media (min-width: $breakpoint-xlarge) {
+                margin-left: -35px !important;
+            }
+        }
+    }
+
+    span:not(.multiSelect) span:not(.ag-header-cell-text){
+        line-height: $input-height - $base-font-size;
+        margin-top: 5px;
+        display: inline-block;
+    }
+
+    .multiSelect,
+    .multiSelectOutBox {
+        max-height: $form-elements-height;
+    }
+
+    .uk-form-row {
+        > .uk-form-label {
+            width: 200px;
+            float: left;
+            margin-top: 0;
+            padding-top: ($input-height - $base-font-size) / 2;
+            line-height: $base-font-size;
+            font-weight: normal;
+        }
+
+        > .uk-form-controls {
+            margin-left: 215px;
+
+            p {
+                line-height: $input-height;
+            }
+
+            &.uk-height-1-1 > textarea {
+                height: 100%;
+                min-height: 100%;
+            }
+        }
+    }
+
+    &.uk-form-horizontal-small {
+        .uk-form-row {
+            > .uk-form-label {
+                width: 100px;
+            }
+
+            > .uk-form-controls {
+                margin-left: 115px;
+            }
+        }
+    }
+
+    &.uk-form-horizontal-medium {
+        .uk-form-row {
+            > .uk-form-label {
+                width: 150px;
+            }
+
+            > .uk-form-controls {
+                margin-left: 165px;
+            }
+        }
+    }
+
+    &.uk-form-height-auto {
+        height: auto;
+    }
+}
+
+.uk-grid-small {
+    + .uk-grid-small {
+        margin-top: $form-row-gutter;
+    }
+}
+
+.uk-form-row {
+    min-height: $form-elements-height;
+
+    + .uk-form-row {
+        margin-top: $form-row-gutter;
+    }
+
+    &.uk-disabled {
+        opacity: 0.5;
+
+        input {
+            cursor: not-allowed;
+        }
+    }
+}
+
+/* Place input icon to the right size as in datepicker inputs */
+.uk-form-icon {
+    i {
+        left: 0;
+    }
+
+    &.position-right-icon {
+        input {
+            padding-left: 6px !important;
+            padding-right: 30px;
+        }
+
+        i {
+            @include position(absolute, $top: 50%, $right: 0, $left: auto);
+
+            margin-top: -7px;
+            cursor: pointer;
+        }
+    }
+
+    &.svg {
+        @include size(15px);
+
+        margin: 5px;
+    }
+}
+
+/* All forms inside uk-flex can't be 100% height for firefox compatibility */
+.uk-flex {
+    .uk-form {
+        height: auto;
+    }
+}
