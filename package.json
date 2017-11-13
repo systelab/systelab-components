@@ -54,7 +54,7 @@
     "ag-grid": "^13.1.0",
     "ag-grid-angular": "^13.1.0",
     "systelab-translate": "^0.1.1",
-    "systelab-preferences": "^0.0.2",
+    "systelab-preferences": "^0.0.2"
   },
   "peerDependencies": {
     "@angular/core": "^2.3.1 || >=4.0.0"
