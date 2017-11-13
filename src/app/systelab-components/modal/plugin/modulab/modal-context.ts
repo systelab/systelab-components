@@ -18,6 +18,16 @@ export class ModulabModalContext extends ModalOpenContext {
 	public height: number = null;
 
 	/**
+	 * Forced minWidth
+	 */
+	public minWidth: number = null;
+
+	/**
+	 * Forced minHeight
+	 */
+	public minHeight: number = null;
+
+	/**
 	 * Forced fullscreen
 	 */
 	public fullScreen: boolean = false;
