@@ -14,14 +14,18 @@ $tab-vertical-padding: ceil(9px - $height-diff / 2);
 $tab-margin-top: 5px;
 
 .uk-tab {
-  margin-top: $tab-margin-top;
+  // margin-top: $tab-margin-top;
   padding-left: 25px;
   white-space: nowrap;
   overflow: visible;
-  background-color: white;
+  // background-color: white;
+  height: calc(#{$tab-height} + 5px);
+  background-color: $background-hemohub;
 
   > li {
     float: none;
+    background-color: $background-hemohub;
+    padding-top: $tab-margin-top;
 
     /* 1 */
     display: inline-block;
@@ -51,12 +55,23 @@ $tab-margin-top: 5px;
     }
 
     &.uk-active {
-      background-color: white;
+      // background-color: white;
+      background-color: $background-hemohub;
 
       a {
         color: black;
         background-color: white;
         border-top-color: $primary-color;
+      }
+    }
+  }
+
+  &.uk-tab-left {
+    > li {
+      padding-top: 0;
+
+      &.uk-active {
+        background-color: white;
       }
     }
   }
@@ -69,11 +84,14 @@ $tab-margin-top: 5px;
   > .uk-tab {
     @include position(absolute, $top: 0, $left: 0, $right: 0);
 
-    height: $tab-height;
+    // height: $tab-height;
+    height: calc(#{$tab-height} + 5px);
     overflow: visible;
 
     li {
       height: $tab-height;
+      background-color: $background-hemohub;
+      padding-top: $tab-margin-top;
     }
 
     + * {
