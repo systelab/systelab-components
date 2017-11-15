@@ -1,0 +1,29 @@
+<div class="uk-form-controls uk-grid uk-grid-collapse" [style.height.%]="100" style="flex-wrap:nowrap;overflow: hidden">
+    <p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false" [locale]="language"
+                [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
+                (onBlur)="changeDate()"
+                [showOtherMonths]="true"
+                [required]="isRequired"
+                [disabled]="disabled"
+                appendTo="body"
+                [style.margin-right.px]="5"
+                [style.min-width.px]="140"
+                class="uk-width-2-5"
+                [ngClass]="{'date-error': error && !previousDate, 'is-disabled': disabled, 'previous-date': previousDate, 'input-expand-height':inputExpandHeight}">
+        <p-header id="{{datepickerId}}">
+            <a class="icon-angle-double-left uk-icon-medium" (click)="prevYear()"></a>
+            <a class="icon-angle-left uk-icon-medium" (click)="prevMonth($event)"></a>
+            <a class="icon-angle-double-right uk-icon-medium" (click)="nextYear()"></a>
+            <a class="icon-angle-right uk-icon-medium" (click)="nextMonth($event)"></a>
+            <div class="ui-datepicker-title uk-datepicker-heading">
+                <span class="ui-datepicker-month">{{ currentCalendar.currentMonthText }}</span>
+                <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>
+            </div>
+        </p-header>
+    </p-calendar>
+    <slt-touchspin [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"
+                   [style.min-width.px]="90" class="uk-width-1-5"></slt-touchspin>
+    <label class="uk-form-label">:</label>
+    <slt-touchspin [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes"
+                   [fillUnitsWithZero]="true" [style.min-width.px]="90" class="uk-width-1-5"></slt-touchspin>
+</div>

@@ -1,0 +1,4 @@
+<p-tree #expandingTree [value]="tree" selectionMode="single"
+        (onNodeSelect)="nodeSelect($event)"
+        [draggableNodes]="isDragabble" [droppableNodes]="isDropabble" dragdropScope="files">
+</p-tree>

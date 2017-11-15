@@ -1,0 +1,65 @@
+@import "../styles/default-theme/sass/variables";
+
+/* $touchspin-width: defines the width of the touchspin.*/
+$touchspin-width: $input-width !default;
+/* $touchspin-height: defines the height of the touchspin.*/
+$touchspin-height: $form-elements-height !default;
+
+:host {
+  box-sizing: border-box;
+  display: inline-block;
+
+  &:not([class*="uk-width-"]) {
+    width: $touchspin-width;
+  }
+
+  .tsinput {
+    border-radius: 0 !important;
+    height: $touchspin-height;
+    width: calc(100% - #{$touchspin-height + 1} * 2) !important;
+    text-align: right;
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .uk-button.tsbtnminus, .uk-button.tsbtnplus {
+    @include size($touchspin-height);
+
+    min-width: $touchspin-height;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+
+    span {
+      line-height: $touchspin-height;
+      vertical-align: top;
+      margin: 0;
+    }
+  }
+
+  .uk-button.tsbtnminus {
+    margin-right: -4px;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+
+  .uk-button.tsbtnplus {
+    margin-left: -4px;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}
+
+@-moz-document url-prefix() {
+  .uk-button.tsbtnminus, .uk-button.tsbtnplus {
+    span {
+      line-height: calc(#{$touchspin-height} - 3px) !important;
+    }
+  }
+}

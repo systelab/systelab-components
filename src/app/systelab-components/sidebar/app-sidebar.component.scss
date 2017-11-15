@@ -1,0 +1,87 @@
+@import '../styles/default-theme/sass/variables';
+
+$sidebar-width: 200px !default;
+
+.sidebar-menu-container {
+  @include position(fixed, $top: $header-height);
+
+  background-color: $background-hemohub;
+  width: $sidebar-width;
+  height: calc(100% - #{$header-height});
+
+  .tabs-container {
+    margin-top: 45px;
+    padding-left: 5px;
+    width: 100% !important;
+    background-color: $background-hemohub;
+
+    .tab {
+      @include size(95%, 50px);
+
+      display: block;
+      background-color: white;
+      margin-bottom: 2px;
+      float: right;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-right: 1px solid $background-hemohub;
+      border-top: 1px solid $background-hemohub;
+      border-bottom: 1px solid $background-hemohub;
+
+      .tab-decoration {
+        @include size(15px, 100%);
+
+        display: inline-block;
+        background-color: $table-gray;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      span {
+        @include user-selection(none);
+
+        position: absolute;
+        margin-left: 15px;
+        margin-top: 15px;
+        color: black;
+        cursor: default;
+      }
+
+      &.selected,
+      &:hover {
+        border-right: 1px solid white;
+        border-top: 1px solid $primary-color;
+        border-bottom: 1px solid $primary-color;
+
+        .tab-decoration {
+          background-color: $primary-color;
+        }
+
+        span {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .actions-container {
+    bottom: 0px;
+    position: absolute;
+    width: 94%;
+    padding: 0;
+    margin-left: 3%;
+
+    button {
+      width: 100%;
+      display: block;
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+.translate-cloak {
+  opacity: 0;
+}

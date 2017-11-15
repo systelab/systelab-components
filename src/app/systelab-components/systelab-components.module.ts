@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { PieComponent } from './pie-chart/pie.component';
 import { SwitchComponent } from './switch/switch.component';
-import { ContextMenuModule, SliderModule } from 'primeng/primeng';
+import { CalendarModule, ContextMenuModule, SliderModule, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
 import { ModulabModalModule } from './modal/plugin/modulab/modulab.module';
@@ -24,66 +24,109 @@ import { GridOptionsDialog } from './grid/options/grid-options-dialog.component'
 import { AgGridModule, AgGridNg2, BaseComponentFactory, Ng2ComponentFactory } from 'ag-grid-angular';
 import { DndModule } from 'ng2-dnd';
 import { SystelabTranslateModule } from 'systelab-translate';
+import { StylesUtilService } from './utilities/styles.util.service';
+import { ColorUtilService } from './utilities/color.util.service';
+import { ColorComboBox } from './colorpicker/colorpicker.component';
+import { AllYesNoComboBox } from './combobox/all-yes-no-combobox.component';
+import { NoYesComboBox } from './combobox/no-yes-combobox-component';
+import { PeriodComboBox } from './combobox/period-combobox.component';
+import { GenderComboBox } from './combobox/gender-combobox.component';
+import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
+import { ApplicationHeaderComponent } from './header/app-header.component';
+import { ApplicationSidebarComponent } from './sidebar/app-sidebar.component';
+import { Datepicker } from './datepicker/datepicker.component';
+import { DatepickerTime } from './datepicker/datepiker-time.component';
+import { TouchspinComponent } from './spinner/touchspin.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedModule,
-    SliderModule,
-    ModulabModalModule,
-    ContextMenuModule,
-    SystelabTranslateModule,
-    DndModule.forRoot(),
-    AgGridModule.withComponents([
-      GridContextMenuComponent,
-      GridHeaderContextMenuComponent
-    ]),
-  ],
-  declarations: [
-    SliderComponent,
-    PieComponent,
-    SwitchComponent,
-    ContextMenuComponent,
-    AbstractDialogComponent,
-    DialogComponent,
-    ButtonsDialogComponent,
-    MessagePopupComponent,
-    MessagePopupViewComponent,
-    DataFilterPipe,
-    TwoListComponent,
-    GridContextMenuComponent,
-    GridHeaderContextMenuComponent,
-    GridOptionsDialog,
-  ],
-  exports: [
-    SliderComponent,
-    PieComponent,
-    SwitchComponent,
-    MessagePopupComponent,
-    AbstractDialogComponent,
-    ButtonsDialogComponent,
-    ContextMenuComponent,
-    GridHeaderContextMenuComponent,
-    AgGridNg2
-  ],
-  entryComponents: [
-    MessagePopupViewComponent,
-    GridOptionsDialog
-  ]
+	imports:         [
+		CommonModule,
+		FormsModule,
+		SharedModule,
+		SliderModule,
+		CalendarModule,
+		TreeModule,
+		ModulabModalModule,
+		ContextMenuModule,
+		SystelabTranslateModule,
+		DndModule.forRoot(),
+		AgGridModule.withComponents([
+			GridContextMenuComponent,
+			GridHeaderContextMenuComponent
+		]),
+	],
+	declarations:    [
+		SliderComponent,
+		PieComponent,
+		SwitchComponent,
+		ContextMenuComponent,
+		AbstractDialogComponent,
+		DialogComponent,
+		ButtonsDialogComponent,
+		MessagePopupComponent,
+		MessagePopupViewComponent,
+		DataFilterPipe,
+		TwoListComponent,
+		GridContextMenuComponent,
+		GridHeaderContextMenuComponent,
+		GridOptionsDialog,
+		ColorCellRendererComponent,
+		ColorComboBox,
+		ApplicationHeaderComponent,
+		ApplicationSidebarComponent,
+		PieComponent,
+		AllYesNoComboBox,
+		NoYesComboBox,
+		PeriodComboBox,
+		GenderComboBox,
+		TouchspinComponent,
+		Datepicker,
+		DatepickerTime
+	],
+	exports:         [
+		SliderComponent,
+		PieComponent,
+		SwitchComponent,
+		MessagePopupComponent,
+		AbstractDialogComponent,
+		ButtonsDialogComponent,
+		ContextMenuComponent,
+		GridHeaderContextMenuComponent,
+		ColorCellRendererComponent,
+		ColorComboBox,
+		ApplicationHeaderComponent,
+		ApplicationSidebarComponent,
+		PieComponent,
+		AllYesNoComboBox,
+		NoYesComboBox,
+		PeriodComboBox,
+		GenderComboBox,
+		Datepicker,
+		TouchspinComponent,
+		DatepickerTime,
+		AgGridNg2
+	],
+	entryComponents: [
+		MessagePopupViewComponent,
+		GridOptionsDialog
+	],
+	providers:       [
+		StylesUtilService,
+		ColorUtilService
+	]
 })
 export class SystelabComponentsModule {
-  static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-    return {
-      ngModule: SystelabComponentsModule,
-      providers: [
-        {provide: OverlayRenderer, useClass: DOMOverlayRenderer},
-        {provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
-        {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
-        Ng2ComponentFactory,
-        {provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-        {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
-      ]
-    };
-  }
+	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
+		return {
+			ngModule:  SystelabComponentsModule,
+			providers: [
+				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
+				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
+				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
+				Ng2ComponentFactory,
+				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
+				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
+			]
+		};
+	}
 }

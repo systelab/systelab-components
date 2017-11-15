@@ -1,0 +1,110 @@
+{
+  "data": [
+    {
+      "label": "Documents",
+      "data": "Documents Folder",
+      "expandedIcon": "icon-angle-down",
+      "collapsedIcon": "icon-angle-right",
+      "children": [
+        {
+          "label": "Work",
+          "data": "Work Folder",
+          "expandedIcon": "icon-angle-down",
+          "collapsedIcon": "icon-angle-right",
+          "children": [
+            {
+              "label": "Expenses.doc",
+              "icon": "icon-calendar",
+              "data": "Expenses Document"
+            },
+            {
+              "label": "Resume.doc",
+              "icon": "icon-calendar",
+              "data": "Resume Document"
+            }
+          ]
+        },
+        {
+          "label": "Home",
+          "data": "Home Folder",
+          "expandedIcon": "icon-angle-down",
+          "collapsedIcon": "icon-angle-right",
+          "children": [
+            {
+              "label": "Invoices.txt",
+              "icon": "icon-calendar",
+              "data": "Invoices for this month"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pictures",
+      "data": "Pictures Folder",
+      "expandedIcon": "icon-angle-down",
+      "collapsedIcon": "icon-angle-right",
+      "children": [
+        {
+          "label": "barcelona.jpg",
+          "icon": "icon-calendar",
+          "data": "Barcelona Photo"
+        },
+        {
+          "label": "logo.jpg",
+          "icon": "icon-calendar",
+          "data": "PrimeFaces Logo"
+        },
+        {
+          "label": "primeui.png",
+          "icon": "icon-calendar",
+          "data": "PrimeUI Logo"
+        }
+      ]
+    },
+    {
+      "label": "Movies",
+      "data": "Movies Folder",
+      "expandedIcon": "icon-angle-down",
+      "collapsedIcon": "icon-angle-right",
+      "children": [
+        {
+          "label": "Al Pacino",
+          "data": "Pacino Movies",
+          "expandedIcon": "icon-angle-down",
+          "collapsedIcon": "icon-angle-right",
+          "children": [
+            {
+              "label": "Scarface",
+              "icon": "icon-calendar",
+              "data": "Scarface Movie"
+            },
+            {
+              "label": "Serpico",
+              "icon": "icon-calendar",
+              "data": "Serpico Movie"
+            }
+          ]
+        },
+        {
+          "label": "Robert De Niro",
+          "data": "De Niro Movies",
+          "expandedIcon": "icon-angle-down",
+          "collapsedIcon": "icon-angle-right",
+          "children": [
+            {
+              "label": "Goodfellas",
+              "icon": "icon-calendar",
+              "data": "Goodfellas Movie"
+            },
+            {
+              "label": "Untouchables",
+              "icon": "icon-calendar",
+              "data": "Untouchables Movie"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

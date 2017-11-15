@@ -1,0 +1,9 @@
+<p-tree #expandingTree [value]="tree" selectionMode="single"
+        (onNodeSelect)="nodeSelect($event)" [(selection)]="selectedNode"
+        [draggableNodes]="isDragabble" [droppableNodes]="isDropabble" dragdropScope="files">
+    <ng-template let-node  pTemplate="default">
+            <span class="{{node.status}}" style="vertical-align: top;">
+			</span>
+        <label>{{node.label}}</label>
+    </ng-template>
+</p-tree>
