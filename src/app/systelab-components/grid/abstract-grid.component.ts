@@ -9,7 +9,7 @@ import { GridOptionsDialog, GridOptionsDialogParameters } from './options/grid-o
 import { GridColumnsOptions } from './grid-column-options';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { StylesUtilService } from '../../../../build/utilities/styles.util.service';
+import { StylesUtilService } from '../utilities/styles.util.service';
 
 export type rowSelectionType = 'single' | 'multiple';
 
