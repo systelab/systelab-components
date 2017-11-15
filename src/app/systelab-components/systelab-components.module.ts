@@ -37,6 +37,7 @@ import { ApplicationSidebarComponent } from './sidebar/app-sidebar.component';
 import { Datepicker } from './datepicker/datepicker.component';
 import { DatepickerTime } from './datepicker/datepiker-time.component';
 import { TouchspinComponent } from './spinner/touchspin.component';
+import { ModulabSelect } from './select/select.component';
 
 @NgModule({
 	imports:         [
@@ -80,6 +81,7 @@ import { TouchspinComponent } from './spinner/touchspin.component';
 		PeriodComboBox,
 		GenderComboBox,
 		TouchspinComponent,
+		ModulabSelect,
 		Datepicker,
 		DatepickerTime
 	],
@@ -103,6 +105,7 @@ import { TouchspinComponent } from './spinner/touchspin.component';
 		GenderComboBox,
 		Datepicker,
 		TouchspinComponent,
+		ModulabSelect,
 		DatepickerTime,
 		AgGridNg2
 	],
