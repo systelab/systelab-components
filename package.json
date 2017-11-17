@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "1.1.24",
+  "version": "1.2.0",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -16,18 +16,23 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cleardown": "rimraf build lib",
+    "cleardown": "rimraf css html build widgets",
     "inline-build-templates": "gulp inline-build-templates",
     "copystyles": "gulp copystyles",
+    "copysass": "gulp copysass",
+    "copytemplates": "gulp copytemplates",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
-    "prepare": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copystyles"
+    "prepare": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copystyles && npm run copysass && npm run copytemplates"
   },
   "files": [
-    "lib",
+    "widgets",
+    "html",
+    "css",
+    "sass",
     "icons"
   ],
-  "main": "./lib/systelab-components.module.js",
-  "typings": "./lib/systelab-components.module.d.ts",
+  "main": "./widgets/systelab-components.module.js",
+  "typings": "./widgets/systelab-components.module.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/systelab/systelab-components.git"

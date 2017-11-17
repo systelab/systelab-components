@@ -8,7 +8,7 @@
         "experimentalDecorators": true,
         "removeComments": false,
         "declaration": true,
-        "outDir": "./lib",
+        "outDir": "./widgets",
         "stripInternal": true,
         "lib": [
             "es6",
