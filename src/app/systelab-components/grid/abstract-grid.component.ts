@@ -36,7 +36,9 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	protected firstSizeToFitExecuted = false;
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService) {
+	constructor(protected preferencesService: PreferencesService,
+	            protected i18nService: I18nService,
+	            protected dialogService: DialogService) {
 	}
 
 	public ngOnInit() {
@@ -78,7 +80,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		};
 		this.gridOptions.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
 
-		this.gridOptions.context = {componentParent: this};
+		this.gridOptions.context = { componentParent: this };
 	}
 
 	public onModelUpdated(event: any) {
@@ -182,7 +184,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 				colId:             'selectCol',
 				headerName:        '',
 				checkboxSelection: true,
-				width:             this.getContextMenuColumnWidth(),
+				width:             this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
 				suppressResize:    true,
 				suppressMovable:   true
@@ -282,6 +284,10 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	protected getContextMenuColumnWidth(): number {
 		return 40;
+	}
+
+	protected getCheckColumnWidth(): number {
+		return 28;
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
@@ -415,4 +421,3 @@ export abstract class AbstractGrid<T> implements OnInit {
 		return `<span class='checkbox'/>`;
 	}
 }
-

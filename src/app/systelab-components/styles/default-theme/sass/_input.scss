@@ -158,5 +158,7 @@
   .uk-form input[type="file"],
   .uk-form input[type="color"] {
     line-height: $input-height;
+    padding-bottom: 3px;
+    padding-top: 1px;
   }
 }
