@@ -20,6 +20,11 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
       border-color: $medium-gray;
       width: 99% !important;
     }
+    @media (max-width: 1024px) {
+      input {
+        display: none;
+      }
+    }
 
     .twolistboxtitle {
       padding-left: 5px;
