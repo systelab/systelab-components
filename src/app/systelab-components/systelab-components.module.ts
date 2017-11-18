@@ -32,12 +32,13 @@ import { NoYesComboBox } from './combobox/no-yes-combobox-component';
 import { PeriodComboBox } from './combobox/period-combobox.component';
 import { GenderComboBox } from './combobox/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
-import { ApplicationHeaderComponent } from './header/app-header.component';
-import { ApplicationSidebarComponent } from './sidebar/app-sidebar.component';
+import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
+import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
 import { Datepicker } from './datepicker/datepicker.component';
 import { DatepickerTime } from './datepicker/datepiker-time.component';
 import { TouchspinComponent } from './spinner/touchspin.component';
 import { ModulabSelect } from './select/select.component';
+import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
 
 @NgModule({
 	imports:         [
@@ -73,6 +74,7 @@ import { ModulabSelect } from './select/select.component';
 		GridOptionsDialog,
 		ColorCellRendererComponent,
 		ColorComboBox,
+		ApplicationFrameComponent,
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
 		PieComponent,
@@ -98,6 +100,7 @@ import { ModulabSelect } from './select/select.component';
 		ColorComboBox,
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
+		ApplicationFrameComponent,
 		PieComponent,
 		AllYesNoComboBox,
 		NoYesComboBox,

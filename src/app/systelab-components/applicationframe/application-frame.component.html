@@ -1,0 +1,13 @@
+<div class="container uk-flex uk-flex-column">
+  <app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
+    <ng-content select="[header-content]"></ng-content>
+  </app-header>
+  <div class="center uk-flex uk-flex-item-1">
+    <div class="east">
+      <app-sidebar [tabs]="tabs" [actions]="actions" (selected)="doSelect($event)"></app-sidebar>
+    </div>
+    <div class="uk-flex uk-flex-item-1 icons-scroll">
+      <ng-content select="[main-content]"></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DialogService } from '../modal/dialog/dialog.service';
+import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
 
