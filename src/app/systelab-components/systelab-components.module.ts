@@ -1,7 +1,7 @@
 import { ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
-import { PieComponent } from './pie-chart/pie.component';
+import { PieComponent } from './piechart/pie.component';
 import { SwitchComponent } from './switch/switch.component';
 import { CalendarModule, ContextMenuModule, SliderModule, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';

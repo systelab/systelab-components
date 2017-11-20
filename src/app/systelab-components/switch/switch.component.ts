@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
-	selector:    'systelab-switch',
+	selector:    'switch',
 	templateUrl: 'switch.component.html',
 	styleUrls:   ['switch.component.scss']
 })
