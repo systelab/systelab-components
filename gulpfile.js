@@ -33,10 +33,14 @@ gulp.task('copystyles', function() {
 });
 
 gulp.task('copytemplates', function() {
-	gulp.src('./src/app/systelab-components/grid/abstract-grid.component.html')
+	gulp.src([
+		'./src/app/systelab-components/grid/abstract-grid.component.html',
+		'./src/app/systelab-components/combobox/abstract-combobox.component.html',
+		'./src/app/systelab-components/combobox/autocomplete/autocomplete-combobox.component.html',
+		'./src/app/systelab-components/tree/abstract-tree.component.html'])
 		.pipe(gulp.dest('./html'));
-	gulp.src('./src/app/systelab-components/combobox/abstract-combobox.component.html')
-		.pipe(gulp.dest('./html'));
+
+
 });
 
 gulp.task('copysass', function() {
