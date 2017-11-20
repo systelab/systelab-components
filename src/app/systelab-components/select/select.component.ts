@@ -2,7 +2,7 @@ import { AbstractComboBox } from '../combobox/abstract-combobox.component';
 import { Component, Renderer2 } from '@angular/core';
 
 @Component({
-	selector:    'mp-select',
+	selector:    'systelab-select',
 	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 export class ModulabSelect extends AbstractComboBox {
