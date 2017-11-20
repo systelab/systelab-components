@@ -13,7 +13,7 @@ export class ApplicationSidebarAction {
 }
 
 @Component({
-	selector:    'app-sidebar',
+	selector:    'systelab-app-sidebar',
 	templateUrl: 'app-sidebar.component.html',
 	styleUrls:   ['app-sidebar.component.scss']
 })

@@ -4,7 +4,7 @@ import { ApplicationHeaderMenuEntry } from './header/app-header.component';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from './sidebar/app-sidebar.component';
 
 @Component({
-	selector:    'app-frame',
+	selector:    'systelab-app-frame',
 	templateUrl: 'application-frame.component.html',
 	styleUrls:   ['application-frame.component.scss']
 })

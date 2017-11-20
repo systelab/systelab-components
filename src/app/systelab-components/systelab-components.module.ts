@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { PieComponent } from './piechart/pie.component';
 import { SwitchComponent } from './switch/switch.component';
-import { CalendarModule, ContextMenuModule, SliderModule, TreeModule } from 'primeng/primeng';
+import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
 import { ModulabModalModule } from './modal/plugin/modulab/modulab.module';
@@ -39,6 +39,8 @@ import { DatepickerTime } from './datepicker/datepiker-time.component';
 import { TouchspinComponent } from './spinner/touchspin.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
+import { MDatepicker } from './datepicker/mdatepiker.component';
+import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDirective } from 'angular-split';
 
 @NgModule({
 	imports:         [
@@ -50,6 +52,7 @@ import { ApplicationFrameComponent } from './applicationframe/application-frame.
 		TreeModule,
 		ModulabModalModule,
 		ContextMenuModule,
+		AngularSplitModule,
 		SystelabTranslateModule,
 		DndModule.forRoot(),
 		AgGridModule.withComponents([
@@ -85,6 +88,7 @@ import { ApplicationFrameComponent } from './applicationframe/application-frame.
 		TouchspinComponent,
 		ModulabSelect,
 		Datepicker,
+		MDatepicker,
 		DatepickerTime
 	],
 	exports:         [
@@ -95,6 +99,7 @@ import { ApplicationFrameComponent } from './applicationframe/application-frame.
 		AbstractDialogComponent,
 		ButtonsDialogComponent,
 		ContextMenuComponent,
+		TwoListComponent,
 		GridHeaderContextMenuComponent,
 		ColorCellRendererComponent,
 		ColorComboBox,
@@ -107,10 +112,15 @@ import { ApplicationFrameComponent } from './applicationframe/application-frame.
 		PeriodComboBox,
 		GenderComboBox,
 		Datepicker,
+		MDatepicker,
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTime,
-		AgGridNg2
+		AgGridNg2,
+		Tree,
+		SplitComponent,
+		SplitAreaDirective,
+		SplitGutterDirective
 	],
 	entryComponents: [
 		MessagePopupViewComponent,

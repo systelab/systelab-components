@@ -6,7 +6,7 @@ import { ColorUtilService } from '../utilities/color.util.service';
 declare var jQuery: any;
 
 @Component({
-	selector:    'mp-color-combobox',
+	selector:    'systelab-color-picker',
 	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 export class ColorComboBox extends AbstractComboBox implements OnInit {
