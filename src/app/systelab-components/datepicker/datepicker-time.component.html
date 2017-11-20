@@ -21,9 +21,9 @@
             </div>
         </p-header>
     </p-calendar>
-    <slt-touchspin [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"
-                   [style.min-width.px]="90" class="uk-width-1-5"></slt-touchspin>
+    <systelab-spinner [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"
+                   [style.min-width.px]="90" class="uk-width-1-5"></systelab-spinner>
     <label class="uk-form-label">:</label>
-    <slt-touchspin [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes"
-                   [fillUnitsWithZero]="true" [style.min-width.px]="90" class="uk-width-1-5"></slt-touchspin>
+    <systelab-spinner [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes"
+                   [fillUnitsWithZero]="true" [style.min-width.px]="90" class="uk-width-1-5"></systelab-spinner>
 </div>
