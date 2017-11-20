@@ -35,6 +35,8 @@ gulp.task('copystyles', function() {
 gulp.task('copytemplates', function() {
 	gulp.src('./src/app/systelab-components/grid/abstract-grid.component.html')
 		.pipe(gulp.dest('./html'));
+	gulp.src('./src/app/systelab-components/combobox/abstract-combobox.component.html')
+		.pipe(gulp.dest('./html'));
 });
 
 gulp.task('copysass', function() {
