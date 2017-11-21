@@ -5,7 +5,7 @@ import { ContextMenuOption } from './context-menu-option';
 declare var jQuery: any;
 
 @Component({
-	selector:    'mp-context-menu',
+	selector:    'systelab-context-menu',
 	templateUrl: 'context-menu.component.html'
 })
 export class ContextMenuComponent {
