@@ -14,11 +14,11 @@ import { DialogService } from './systelab-components/modal/dialog/dialog.service
 
 @Component({
 	selector:      'app-root',
-	templateUrl:   './app.component.html',
-	styleUrls:     ['app.component.scss'],
+	templateUrl:   './showcase.component.html',
+	styleUrls:     ['showcase.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit {
+export class ShowcaseComponent implements OnInit {
 
 	public dateValue = '02/01/2015';
 

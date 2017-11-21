@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { ShowcaseComponent } from './showcase.component';
 import { SystelabComponentsModule } from './systelab-components/systelab-components.module';
 import { FormsModule } from '@angular/forms';
 import { DialogService } from './systelab-components/modal/dialog/dialog.service';
@@ -34,7 +34,7 @@ import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 		SystelabPreferencesModule.forRoot()
 	],
 	declarations: [
-		AppComponent,
+		ShowcaseComponent,
 		UpperFlexComponent,
 		LowerFlexComponent,
 		TwoColumnsComponent,
@@ -62,9 +62,9 @@ import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 		MessagePopupService,
 		DialogService
 	],
-	bootstrap:    [AppComponent]
+	bootstrap:    [ShowcaseComponent]
 })
-export class AppModule {
+export class ShowcaseModule {
 }
 
-export { AppComponent } from './app.component';
+export { ShowcaseComponent } from './showcase.component';

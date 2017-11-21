@@ -1,11 +1,8 @@
 
-$size_percentage: 1;
+@import "../styles/default-theme/sass/variables";
 
 $form-elements-height: ceil(35px * $size_percentage) !default;
 
-
-$primary-color: rgb(21, 143, 239) !default;
-$dark-gray: rgb(128, 128, 128) !default;
 
 $switch-bg-color: transparent !default;
 $switch-circle-color: $dark-gray !default;
