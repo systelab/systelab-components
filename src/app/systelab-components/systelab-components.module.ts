@@ -41,6 +41,10 @@ import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
 import { MDatepicker } from './datepicker/mdatepiker.component';
 import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDirective } from 'angular-split';
+import { FillerComponent } from './filler/filler.component';
+import { SearcherDialog } from './searcher/searcher.dialog.component';
+import { SearcherTableComponent } from './searcher/searcher.table.component';
+
 
 @NgModule({
 	imports:         [
@@ -89,7 +93,10 @@ import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDire
 		ModulabSelect,
 		Datepicker,
 		MDatepicker,
-		DatepickerTime
+		DatepickerTime,
+		FillerComponent,
+		SearcherDialog,
+		SearcherTableComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -116,6 +123,9 @@ import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDire
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTime,
+		FillerComponent,
+		SearcherDialog,
+		SearcherTableComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
@@ -124,7 +134,8 @@ import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDire
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
-		GridOptionsDialog
+		GridOptionsDialog,
+		SearcherDialog
 	],
 	providers:       [
 		StylesUtilService,

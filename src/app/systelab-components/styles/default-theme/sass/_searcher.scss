@@ -1,0 +1,36 @@
+
+.searcher-container {
+  input {
+    height: 100% !important;
+    width: 100px;
+  }
+  button {
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    margin-left: -5px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  &:hover {
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  label {
+    margin-left: 5px;
+  }
+}
+
+.searcher-container-dialog {
+  input {
+    width: 60%;
+  }
+
+  select {
+    width: 30%;
+  }
+}

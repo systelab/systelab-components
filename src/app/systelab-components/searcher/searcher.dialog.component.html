@@ -1,0 +1,30 @@
+<div class="ngdialog-header">{{titleForDialog}}</div>
+<div class="ngdialog-message" [ngClass]="{'with-buttons': multipleSelection}">
+    <form (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
+          class="uk-form uk-form-horizontal uk-form-horizontal-medium uk-panel-space uk-flex uk-flex-column uk-flex-nowrap">
+        <div class="uk-form-row uk-flex uk-flex-nowrap">
+            <label class="uk-flex-nowrap uk-form-label uk-text-truncate uk-width-1-5" for="valueToSearch">{{searchLabel}} </label>
+            <systelab-select class="uk-align-left uk-width-2-5"
+                       [description]="selectedComboItem.description"
+                       [id]="selectedComboItem.id"
+                       [values]="comboElements"
+                       (change)="refreshSearch($event)"></systelab-select>
+            <input class="searcher-input-dialog uk-width-2-5" #valueToSearch id="valueToSearch"
+                   (keyup)="($event.keyCode=== 13)?refreshSearch($event):0"
+                   [(ngModel)]="searchingValue" name="valueToSearch">
+        </div>
+        <div class="uk-form-row uk-flex-item-1 uk-flex">
+            <mp-searcher-table class="uk-flex-item-1 uk-position-relative" name="searcherTable"
+                               [contains]="selectedComboItem.id"
+                               [showChecks]="true"
+                               [multipleSelection]="multipleSelection"
+                               [valueForSearch]="searchingValue"
+                               [searcher]="dialogParameters.searcher"
+                               (clickRow)="selectOnClick($event)"></mp-searcher-table>
+        </div>
+    </form>
+</div>
+<div class="ngdialog-buttons" *ngIf="multipleSelection">
+    <button type="button" class="uk-button uk-button-large uk-float-right" (click)="submit()"> Submit</button>
+</div>
+<div class="ngdialog-close" (click)="close()"></div>
