@@ -3,7 +3,7 @@ import { Calendar } from 'primeng/components/calendar/calendar';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 @Component({
-	selector:    'mp-datepicker',
+	selector:    'systelab-datepicker',
 	templateUrl: 'datepicker.component.html'
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {

@@ -9,7 +9,7 @@ class Element {
 }
 
 @Component({
-	selector:    'all-yes-no-select',
+	selector:    'systelab-all-yes-no-select',
 	templateUrl: './abstract-combobox.component.html'
 })
 

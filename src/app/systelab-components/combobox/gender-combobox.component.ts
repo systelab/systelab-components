@@ -9,7 +9,7 @@ class Element {
 }
 
 @Component({
-	selector:    'gender-combobox',
+	selector:    'systelab-gender-select',
 	templateUrl: './abstract-combobox.component.html'
 })
 

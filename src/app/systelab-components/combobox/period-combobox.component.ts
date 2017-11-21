@@ -9,7 +9,7 @@ class Element {
 }
 
 @Component({
-	selector:    'period-select',
+	selector:    'systelab-period-select',
 	templateUrl: './abstract-combobox.component.html'
 })
 

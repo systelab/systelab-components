@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Datepicker } from './datepicker.component';
 
 @Component({
-	selector:    'mp-date',
+	selector:    'systelab-date',
 	templateUrl: 'datepicker.component.html'
 })
 export class MDatepicker extends Datepicker {

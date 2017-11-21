@@ -4,7 +4,7 @@ import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 @Component({
-	selector:    'mp-date-time',
+	selector:    'systelab-date-time',
 	templateUrl: 'datepicker-time.component.html'
 })
 export class DatepickerTime extends Datepicker {

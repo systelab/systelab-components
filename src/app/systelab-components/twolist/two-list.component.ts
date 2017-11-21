@@ -11,7 +11,7 @@ export class SelectedItem {
 }
 
 @Component({
-	selector:    'mp-two-list',
+	selector:    'systelab-two-list',
 	templateUrl: 'two-list.component.html',
 	styleUrls:   ['two-list.component.scss'],
 })
