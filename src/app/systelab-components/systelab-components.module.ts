@@ -135,7 +135,8 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 	entryComponents: [
 		MessagePopupViewComponent,
 		GridOptionsDialog,
-		SearcherDialog
+		SearcherDialog,
+		ColorCellRendererComponent
 	],
 	providers:       [
 		StylesUtilService,

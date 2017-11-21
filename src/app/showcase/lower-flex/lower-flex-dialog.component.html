@@ -1,0 +1,19 @@
+<div class="ngdialog-header">Form + lower flex textarea</div>
+<div class="ngdialog-message with-buttons">
+    <lower-flex [language]="lowerFlexDialogParameters.language"></lower-flex>
+</div>
+<div class="ngdialog-buttons">
+    <div class="uk-button-dropdown uk-float-left" data-uk-dropdown="{mode:'click', pos:'bottom-left'}">
+        <!-- This is the element toggling the dropdown -->
+        <button type="button" class="uk-button uk-button-large">Drop down bottom-left <i class="icon-chevron-up"></i></button>
+        <!-- This is the dropdown -->
+        <div class="uk-dropdown">
+            <ul class="uk-nav uk-nav-dropdown">
+                <li><a>Action 1</a></li>
+                <li><a>Action 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <button type="button" class="uk-button uk-button-large uk-float-right" (click)="close()"> Submit</button>
+</div>
+<div class="ngdialog-close" (click)="close()"></div>

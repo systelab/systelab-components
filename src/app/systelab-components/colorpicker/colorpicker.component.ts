@@ -3,10 +3,9 @@ import { AbstractComboBox } from '../combobox/abstract-combobox.component';
 import { ColorCellRendererComponent } from './color-cell-renderer.component';
 import { ColorUtilService } from '../utilities/color.util.service';
 
-declare var jQuery: any;
 
 @Component({
-	selector:    'systelab-color-picker',
+	selector:    'systelab-colorpicker',
 	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 export class ColorComboBox extends AbstractComboBox implements OnInit {

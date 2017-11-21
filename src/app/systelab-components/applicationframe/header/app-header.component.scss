@@ -59,27 +59,6 @@ $icon-header-margin: ($header-height - $icon-header-size) / 2;
     }
   }
 
-  mp-collection-header {
-    slt-modulab-select {
-      width: 95px;
-      height: $form-elements-height;
-    }
-
-    .input-container {
-      input[type="text"] {
-        width: 190px;
-      }
-
-      .uk-button {
-        min-width: $form-elements-height;
-        min-height: $form-elements-height;
-        height: $form-elements-height;
-        line-height: $form-elements-height;
-        padding: 0 7px;
-      }
-    }
-  }
-
   .user-container {
     box-sizing: border-box;
     border-left: 1px solid $background-hemohub;

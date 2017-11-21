@@ -1,7 +1,503 @@
+<div class="ngdialog ngdialog-disabled-animation ng-scope">
+    <div class="ngdialog-content" role="document">
+        <div class="ngdialog-header ng-binding">Showcase</div>
+        <div class="ngdialog-message with-buttons">
+            <form class="uk-form uk-form-horizontal uk-tab-fixed">
+                <ul class="uk-tab" data-uk-switcher="{connect:'#my-id',swiping: false}">
+                    <li (click)="selectTab(1)"><a href="">Grids</a></li>
+                    <li (click)="selectTab(2)"><a href="">Combos</a></li>
+                    <li (click)="selectTab(3)"><a href="">Inputs & textarea</a></li>
+                    <li (click)="selectTab(4)"><a href="">Date picker</a></li>
+                    <li (click)="selectTab(5)"><a href="">Spinners, checkbox & radios</a></li>
+                    <li (click)="selectTab(6)"><a href="">Two list</a></li>
+                    <li (click)="selectTab(7)"><a href="">Forms</a></li>
+                    <li (click)="selectTab(8)"><a href="">Icons</a></li>
+                    <li (click)="selectTab(9)"><a href="">Tooltip</a></li>
+                    <li (click)="selectTab(10)"><a href="">Route</a></li>
 
-<systelab-switch>asas</systelab-switch>
+                </ul>
+                <ul id="my-id" class="uk-switcher from-tab uk-panel-space">
+                    <li style="height:100%; width:100%;">
+                        <form *ngIf="currentTab===1"
+                              class="uk-form uk-form-horizontal uk-form-horizontal-medium uk-flex uk-flex-column uk-flex-nowrap">
+                            <inner-sample-grid></inner-sample-grid>
 
-<h3 class="first">Basic: {{sliderValue}}</h3>
-<systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25"
-                 name="slider"></systelab-slider>
-<inner-sample-grid></inner-sample-grid>
+                        </form>
+                    </li>
+                    <li>
+                        <div *ngIf="currentTab===2">
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Combo estático sin buscador</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3">
+                                        <systelab-select class="uk-width-1-1"
+                                                         [values]="comboOptionList"
+                                                         (change)="comboChangeEvent($event)"></systelab-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Combo estático sin buscador y con
+                                    valor
+                                    asignado</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3">
+                                        <systelab-select class="uk-width-1-1"
+                                                         [description]="'San Petersburgo'"
+                                                         [id]="1"
+                                                         [values]="comboOptionList"
+                                                         (change)="comboChangeEvent($event)"></systelab-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Combo estático con buscador</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3">
+                                        <systelab-select class="uk-width-1-1"
+                                                         [values]="comboOptionList" [filter]="true"
+                                                         (change)="comboChangeEvent($event)"></systelab-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Color Picker</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-10">
+                                        <systelab-colorpicker class="uk-width-1-1"
+                                                              (change)="comboChangeEvent($event)"></systelab-colorpicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row" style="position:absolute; bottom: 10px;">
+                                <label class="uk-form-label" for="form-h-s">Combo estático con buscador
+                                    abajo</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3">
+                                        <systelab-select class="uk-width-1-1"
+                                                         [values]="comboOptionList"
+                                                         (change)="comboChangeEvent($event)"></systelab-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div *ngIf="currentTab===3">
+
+                            <div class="uk-form-row">
+                                <p></p>
+
+                                <label class="uk-form-label" for="form-h-s">Full width</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-width-1-1" placeholder="Nombre ">
+                                </div>
+
+
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Small width</label>
+                                <div class="uk-form-controls">
+                                    <input type="text" class="uk-width-1-3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="uk-form-row uk-disabled">
+                                <label class="uk-form-label" for="form-h-s">Disabled input</label>
+                                <div class="uk-form-controls">
+                                    <input disabled type="text" class="uk-width-1-3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Textarea</label>
+                                <div class="uk-form-controls">
+								<textarea name="" id="" class="uk-width-1-1">
+
+Markup example:
+&lt;div class=&quot;uk-form-controls&quot;&gt;
+&lt;textarea name=&quot;&quot; id=&quot;&quot; class=&quot;uk-width-1-1&quot;&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+
+
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Textarea resizable (only vertical)</label>
+                                <div class="uk-form-controls">
+								<textarea name="" id="" class="uk-width-1-1 vertical-resize">
+Markup example:
+&lt;div class=&quot;uk-form-controls&quot;&gt;
+&lt;textarea name=&quot;&quot; id=&quot;&quot; class=&quot;uk-width-1-1 vertical-resize&quot;&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+									</textarea>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Textarea no resizable</label>
+                                <div class="uk-form-controls">
+								<textarea name="" id="" class="uk-width-1-1 no-resize">
+Markup example:
+&lt;div class=&quot;uk-form-controls&quot;&gt;
+&lt;textarea name=&quot;&quot; id=&quot;&quot; class=&quot;uk-width-1-1 no-resize&quot;&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+									</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div *ngIf="currentTab===4">
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker {{dateValue}}</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon position-right-icon">
+                                        <input type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue1"
+                                               [(ngModel)]="dateValue">
+                                        <i class="icon-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker (width-1-3)</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <input type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue2"
+                                               [(ngModel)]="dateValue">
+                                        <i class="icon-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row uk-disabled">
+                                <label class="uk-form-label" for="form-h-s">Datepicker (row disabled)</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <input disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
+                                               name="dateValue3" [(ngModel)]="dateValue">
+                                        <i class="icon-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker (input disabled)</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <input disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
+                                               name="dateValue4" [(ngModel)]="dateValue">
+                                        <i class="icon-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker ngPrime disabled</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <mp-datepicker
+                                                [disabled]="true"
+                                                [error]="false"
+                                                [notBlankAllowed]="false"
+                                                [(currentDate)]="myDate"
+                                                class="uk-width-1-3"></mp-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker ngPrime error</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <mp-datepicker
+                                                [disabled]="false"
+                                                [error]="true"
+                                                [notBlankAllowed]="false"
+                                                [(currentDate)]="myDate"
+                                                class="uk-width-1-3"></mp-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker ngPrime English</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <mp-datepicker
+                                                [otherLanguage]="'en'"
+                                                [disabled]="false"
+                                                [error]="false"
+                                                [notBlankAllowed]="false"
+                                                [(currentDate)]="myDate"
+                                                class="uk-width-1-3"></mp-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Datepicker ngPrime Poland</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <mp-datepicker
+                                                [otherLanguage]="'pl'"
+                                                [disabled]="false"
+                                                [error]="false"
+                                                [notBlankAllowed]="false"
+                                                [(currentDate)]="myDate"
+                                                class="uk-width-1-3"></mp-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row" style="position:absolute; bottom: 10px">
+                                <label class="uk-form-label" for="form-h-s">Datepicker ngPrime bottom</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                        <mp-datepicker
+                                                [disabled]="false"
+                                                [error]="false"
+                                                [notBlankAllowed]="false"
+                                                [(currentDate)]="myDate"
+                                                class="uk-width-1-3"></mp-datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div *ngIf="currentTab===5">
+
+                            <h4 class="uk-text-bold">Spinner</h4>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Spinner</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-row">
+                                        <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Spinner (width-1-3)</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-row">
+                                        <systelab-spinner [spinValues]="touchSpinValues2" id="touch2"
+                                                          class="uk-width-1-3"></systelab-spinner>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Spinner negative values</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-form-row">
+                                        <systelab-spinner [spinValues]="touchSpinValues3" id="touch2"></systelab-spinner>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="uk-text-bold">Checkbox</h4>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Switcher</label>
+                                <div class="uk-form-controls">
+                                    <systelab-switch id="enabled" name="enabled" [(isChecked)]="check2"></systelab-switch>
+                                    <systelab-switch [disabled]="true" id="enabled" name="enabled"
+                                                     [(isChecked)]="check1"></systelab-switch>
+                                    <systelab-switch [disabled]="true" id="enabled" name="enabled"
+                                                     [(isChecked)]="check3"></systelab-switch>
+                                </div>
+                            </div>
+
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Column</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-margin-bottom"><input type="checkbox" id="check_urgent"><label
+                                            for="check_urgent"> Urgent</label></div>
+                                    <div class="uk-margin-bottom"><input type="checkbox" checked
+                                                                         id="check_not_urgent"><label
+                                            for="check_not_urgent"> Not Urgent</label></div>
+                                </div>
+                            </div>
+
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Inline (using a grid)</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-grid uk-grid-collapse">
+                                        <div class="uk-width-1-5">
+                                            <input type="checkbox" id="check_urgent2"><label for="check_urgent2">
+                                            Urgent</label>
+                                        </div>
+                                        <div class="uk-width-1-5">
+                                            <input type="checkbox" checked id="check_not_urgent2"><label
+                                                for="check_not_urgent2"> Not Urgent</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="uk-text-bold">Radio</h4>
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Column</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-margin-bottom"><input name="status" type="radio" id="radio-urgent">
+                                        <label for="radio-urgent">Urgent</label></div>
+                                    <div class="uk-margin-bottom"><input name="status" type="radio"
+                                                                         id="radio-not-urgent">
+                                        <label for="radio-not-urgent">Not Urgent</label></div>
+                                </div>
+                            </div>
+
+                            <div class="uk-form-row">
+                                <label class="uk-form-label" for="form-h-s">Inline (using a grid)</label>
+                                <div class="uk-form-controls">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-5">
+                                            <input name="status" type="radio" id="radio-urgent2"> <label
+                                                for="radio-urgent2">Urgent</label>
+                                        </div>
+                                        <div class="uk-width-1-5">
+                                            <input name="status" type="radio" id="radio-not-urgent2"> <label
+                                                for="radio-not-urgent2">Not Urgent</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="uk-text-bold">Slider</h4>
+                            <div class="uk-form-row">
+                                <div class="uk-grid">
+                                    <div class="uk-width-2-10">
+                                        <systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25"
+                                                         name="slider"></systelab-slider>
+                                    </div>
+                                    <div class="uk-width-2-10">
+                                        {{sliderValue}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-height-1-1">
+                        <div *ngIf="currentTab===6" class="uk-height-1-1">
+                            <div class="uk-form-row uk-height-1-1">
+                                <div class="uk-height-1-1">
+                                    <div class="uk-form-row uk-height-1-1">
+                                        <mp-two-list [(available)]="availableColumns"
+                                                     [(visible)]="visibleColumns"
+                                                     [initialAvailableColumns]="getDefaultShowcaseColumns()"
+                                                     displayAttr="displayName">
+                                        </mp-two-list>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div *ngIf="currentTab===7">
+                            <div class="uk-form-row">
+                                <!--<button type="button" class="uk-button uk-button-large uk-margin-small-top" ng-click="vm.flex();">Flex snipper</button>-->
+                                <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                                        (click)="subFlex();">Form + lower flex textarea
+                                </button>
+                                <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                                        (click)="subFlexOtherLang();">Form + lower flex textarea (PL)
+                                </button>
+                                <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                                        (click)="upperFlex();">Form + upper flex textarea
+                                </button>
+                                <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                                        (click)="fullFlex();">Full flex textarea
+                                </button>
+                                <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                                        (click)="splitShowcase();">Split
+                                </button>
+                                <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                                        (click)="twoColumns();">Two columns
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div *ngIf="currentTab===8">
+                            <icons-list></icons-list>
+                        </div>
+                    </li>
+                    <li>
+                        <div *ngIf="currentTab===9">
+                            <div class="uk-form-row">
+							<span data-uk-dropdown="{mode:'click'}" class="uk-position-relative">
+								<div class="uk-button">Click me</div>
+								<div class="legend uk-dropdown uk-text-left">
+									<p>Hi, I'm a tooltip</p>
+									<hr><p>Lorem ipsum dolot sit amet</p>
+								</div>
+							</span>
+                            </div>
+                            <div class="uk-form-row">
+							<span data-uk-dropdown class="uk-position-relative">
+								<div class="uk-button">Hover me</div>
+								<div class="legend uk-dropdown uk-text-left">
+									<p>Hi, I'm another tooltip</p>
+									<hr><p>Lorem ipsum dolot sit amet</p>
+								</div>
+							</span>
+                            </div>
+                            <div class="uk-form-row">
+                                <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click', pos:'top-left'}">
+                                    <!-- This is the element toggling the dropdown -->
+                                    <button type="button" class="uk-button uk-button-large">Drop down top-left <i
+                                            class="icon-chevron-up"></i></button>
+                                    <!-- This is the dropdown -->
+                                    <div class="uk-dropdown">
+                                        <ul class="uk-nav uk-nav-dropdown">
+                                            <li><a (click)="showInfo();">Action 1 Info</a></li>
+                                            <li><a (click)="showWarning();">Action 2 Warning</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="uk-height-1-1">
+                        <div *ngIf="currentTab===10">
+                            <div [style.width.px]='1000' [style.height.px]='500'>
+                                <sample-route [fixedWidth]="1000" [fixedHeight]="500"></sample-route>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="uk-button uk-button-large" (click)="showError();"><i
+                    class="icon-times-circle"></i> Error
+            </button>
+            <button type="button" class="uk-button uk-button-large" (click)="showWarning();"><i
+                    class="icon-warning "></i> Warning
+            </button>
+            <button type="button" class="uk-button uk-button-large" (click)="showInfo();"><i
+                    class="icon-info-circle"></i> Information
+            </button>
+            <button type="button" class="uk-button uk-button-large" (click)="showQuestion();"><i
+                    class="icon-question-circle"></i> Question
+            </button>
+            <button type="button" class="uk-button uk-button-large" (click)="showQuestionYN();"><i
+                    class="icon-question-circle"></i> Question YN
+            </button>
+
+            <button type="button" class="uk-button uk-button-large uk-float-right"><i
+                    class="icon-chevron-circle-right"></i> Right buttons
+            </button>
+            <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click', pos:'auto-left'}">
+                <!-- This is the element toggling the dropdown -->
+                <button type="button" class="uk-button uk-button-large">Drop down auto-left <i
+                        class="icon-chevron-up"></i></button>
+                <!-- This is the dropdown -->
+                <div class="uk-dropdown">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a (click)="showInfo();">Action 1 Info</a></li>
+                        <li><a (click)="showWarning();">Action 2 Warning</a></li>
+                    </ul>
+                </div>
+            </div>
+            <button type="button" class="uk-button uk-button-large" (click)="saveTwoListPreferences();">Save Two List
+                Preferences
+            </button>
+            <button type="button" class="uk-button uk-button-large uk-float-right"><i
+                    class="icon-chevron-circle-right"></i> Right buttons
+            </button>
+        </div>
+        <div class="ngdialog-close" (click)="closeDialog();"></div>
+        <div class="ngdialog-buttons-top">
+            <div><i class="icon-question-circle"></i></div>
+        </div>
+    </div>
+</div>
