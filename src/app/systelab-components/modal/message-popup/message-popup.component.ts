@@ -14,24 +14,24 @@ export class MessagePopupComponent {
 	constructor(protected modal: Modal, protected i18nService: I18nService) {
 	}
 
-	public showErrorPopup(errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(this.i18nService.instant('COMMON_ERROR'), 'danger', 'icon-times-circle', errorDescription, modalClass, width, height);
+	public showErrorPopup(titleDescription: string, errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.showPopup(titleDescription, 'danger', 'icon-times-circle', errorDescription, modalClass, width, height);
 	}
 
-	public showWarningPopup(warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(this.i18nService.instant('COMMON_ATENTION'), 'warning', 'icon-warning', warningDescription, modalClass, width, height);
+	public showWarningPopup(titleDescription: string, warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.showPopup(titleDescription, 'warning', 'icon-warning', warningDescription, modalClass, width, height);
 	}
 
-	public showInformationPopup(messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(this.i18nService.instant('COMMON_MESSAGE'), 'info', 'icon-info-circle', messageDescription, modalClass, width, height);
+	public showInformationPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.showPopup(titleDescription, 'info', 'icon-info-circle', messageDescription, modalClass, width, height);
 	}
 
-	public showQuestionPopup(messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(this.i18nService.instant('COMMON_MESSAGE'), 'info', 'icon-question-circle', messageDescription, modalClass, width, height);
+	public showQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.showPopup(titleDescription, 'info', 'icon-question-circle', messageDescription, modalClass, width, height);
 	}
 
-	public showYesNoQuestionPopup(messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(this.i18nService.instant('COMMON_MESSAGE'), 'info', 'icon-question-circle', messageDescription, modalClass, width, height, true);
+	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.showPopup(titleDescription, 'info', 'icon-question-circle', messageDescription, modalClass, width, height, true);
 	}
 
 	protected showPopup(title: string, color: string, icon: string, message: string, modalClass?: string, width?: number, height?: number, yesNoButtons?: boolean): Observable<any> {
