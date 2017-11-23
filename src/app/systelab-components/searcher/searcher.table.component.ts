@@ -28,7 +28,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 	}
 
 	protected getColumnDefs(): Array<any> {
-		var columnsDef: Array<any> = this.searcher.getColumnDefs();
+		const columnsDef: Array<any> = this.searcher.getColumnDefs();
 		return columnsDef;
 	}
 

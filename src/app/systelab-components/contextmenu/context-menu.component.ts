@@ -19,15 +19,13 @@ export class ContextMenuComponent {
 
 	@Input() public elementID: string;
 
-	public top: number = 0;
-	public left: number = 0;
+	public top = 0;
+	public left = 0;
 
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
 
-	public isOpened: boolean = false;
-
-	// events: any;
+	public isOpened = false;
 
 	constructor(protected el: ElementRef, protected myRenderer: Renderer2) {
 	}
@@ -53,8 +51,7 @@ export class ContextMenuComponent {
 
 			this.showDropDown();
 
-			jQuery('#' + this.elementID)
-				.on('hide.uk.dropdown', this.closeDropDown.bind(this));
+			jQuery('#' + this.elementID).on('hide.uk.dropdown', this.closeDropDown.bind(this));
 
 		} else {
 			this.closeDropDown();
@@ -63,22 +60,9 @@ export class ContextMenuComponent {
 	}
 
 	protected loop(): void {
-		let result: boolean = true;
+		let result = true;
 
 		if (this.isDropDownOpened()) {
-
-
-			/*
-			 this.events = JSON.parse(JSON.stringify(jQuery._data( $( '#' + this.elementID )[0], 'events' )));
-
-			 $( '#' + this.elementID )
-			 .off(jQuery._data( $( '#' + this.elementID )[0], 'events' )[0] );
-
-			 console.log( jQuery._data( $( '#' + this.elementID )[0], 'events' ) );
-
-			 console.log( this.events );
-			 */
-
 			this.myRenderer.setStyle(this.dropdown.nativeElement, 'width', null);
 			this.myRenderer.setStyle(this.dropdown.nativeElement, 'height', null);
 
@@ -110,32 +94,13 @@ export class ContextMenuComponent {
 	}
 
 	public closeDropDown() {
-
-		//this.myRenderer.setStyle(this.dropdown.nativeElement, 'position', null);
-		//this.myRenderer.setStyle(this.dropdown.nativeElement, 'top', null);
-		//this.myRenderer.setStyle(this.dropdown.nativeElement, 'left', 'null');
-
 		this.destroyWheelListener();
 		this.destroyKeyListener();
 
-		jQuery('#' + this.elementID)
-			.off('hide.uk.dropdown');
+		jQuery('#' + this.elementID).off('hide.uk.dropdown');
 
 		this.myRenderer.addClass(this.dropdownParent.nativeElement, 'uk-dropdown-close');
-
 		this.isOpened = false;
-
-		/*
-		 console.log('En closeDropDown');
-		 console.log(this.events);
-
-		 $( '#' + this.elementID )
-		 .on( this.events[0] );
-
-		 console.log( jQuery._data( $( '#' + this.elementID )[0], 'events' ) );
-
-		 */
-
 	}
 
 	protected addListeners() {
@@ -167,7 +132,7 @@ export class ContextMenuComponent {
 
 	protected isEnabled(elementId: string, actionId: string): boolean {
 
-		let option: ContextMenuOption = this.contextMenuOptions.find(option => option.actionId === actionId);
+		const option: ContextMenuOption = this.contextMenuOptions.find(option => option.actionId === actionId);
 
 		if (option && option.isActionEnabled !== null && option.isActionEnabled !== undefined) {
 			return option.isActionEnabled(elementId, actionId);
@@ -177,15 +142,15 @@ export class ContextMenuComponent {
 	}
 
 	protected executeAction(elementId: string, actionId: string): void {
-		let option: ContextMenuOption = this.contextMenuOptions.find(option => option.actionId === actionId);
+		const option: ContextMenuOption = this.contextMenuOptions.find(option => option.actionId === actionId);
 
 		if (option && option.action !== null && option.action !== undefined) {
 
-			let actionData: ContextMenuActionData = new ContextMenuActionData(elementId, actionId);
+			const actionData: ContextMenuActionData = new ContextMenuActionData(elementId, actionId);
 			return option.action(actionData);
 
 		} else {
-			let actionData: ContextMenuActionData = new ContextMenuActionData(elementId, actionId);
+			const actionData: ContextMenuActionData = new ContextMenuActionData(elementId, actionId);
 			this.action.emit(actionData);
 		}
 	}

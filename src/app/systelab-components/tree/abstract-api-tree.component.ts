@@ -1,13 +1,13 @@
-import { OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Tree } from 'primeng/components/tree/tree';
-import { Observable } from 'rxjs';
 import { AbstractTree } from './abstract-tree.component';
+import { Observable } from 'rxjs/Observable';
 
 export abstract class AbstractApiTree<N> extends AbstractTree implements OnInit {
 
 	@ViewChild('expandingTree') public currentTree: Tree;
 
-	@Input() public withModal: boolean = true;
+	@Input() public withModal = true;
 	@Output() public nodeSelected = new EventEmitter<N>();
 
 	public tree: N[] = [];
@@ -43,7 +43,7 @@ export abstract class AbstractApiTree<N> extends AbstractTree implements OnInit 
 		this.onSelectNode(evt)
 			.subscribe(
 				(v: Array<any>) => {
-					let childrenList: N[] = [];
+					const childrenList: N[] = [];
 					v.forEach(current => childrenList.push(this.dataToNode(current)));
 					evt.node.children = childrenList;
 				});

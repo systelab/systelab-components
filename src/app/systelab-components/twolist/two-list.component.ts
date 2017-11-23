@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataFilterPipe } from './datafilter.pipe';
 
 export class TwoListItem {
 	constructor(public displayName: string, public selected: boolean, public visible: boolean) {
 	}
 }
+
 export class SelectedItem {
 	constructor(public available: Array<TwoListItem>, public current: Array<TwoListItem>) {
 	}
@@ -53,7 +54,7 @@ export class TwoListComponent {
 	public selected: SelectedItem = new SelectedItem([], []);
 
 	public add() {
-		for (let element of this.selected.available) {
+		for (const element of this.selected.available) {
 			element.visible = true;
 		}
 		this.visible = this.visible.concat(new DataFilterPipe().transform(this.selected.available, this.firstListSearch));
@@ -64,7 +65,7 @@ export class TwoListComponent {
 
 	public remove() {
 
-		for (let element of this.selected.available) {
+		for (const element of this.selected.available) {
 			element.visible = false;
 		}
 
@@ -78,11 +79,11 @@ export class TwoListComponent {
 
 	public sort(list: Array<TwoListItem>) {
 
-		let arrayAux                      = [],
-			theReturn: Array<TwoListItem> = [],
-			length                        = list.length;
+		const arrayAux = [];
+		const theReturn: Array<TwoListItem> = [];
+		const length = list.length;
 
-		for (let actual of this.initialAvailableColumns) {
+		for (const actual of this.initialAvailableColumns) {
 			if (arrayAux.length === length) {
 				break;
 			}
@@ -96,12 +97,11 @@ export class TwoListComponent {
 		for (let i = 0; i < length; i++) {
 			theReturn[i] = list[arrayAux[i]];
 		}
-
 		return theReturn;
 	}
 
 	public setElementNonSelected(list: Array<TwoListItem>) {
-		for (let element of list) {
+		for (const element of list) {
 			element.selected = false;
 		}
 	}
@@ -121,7 +121,6 @@ export class TwoListComponent {
 				resultList.push(element);
 			}
 		}
-
 		return resultList;
 	}
 
@@ -136,11 +135,11 @@ export class TwoListComponent {
 	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {
 		this.selected.current = [];
 		this.setElementNonSelected(this.visible);
-		let availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
+		const availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
 
 		if (this.selected.available.length > 0 && ev.shiftKey) {
-			let indexOfLastSelected = availableFilteredList.indexOf(this.selected.available[0]);
-			let indexOfSelected = availableFilteredList.indexOf(element);
+			const indexOfLastSelected = availableFilteredList.indexOf(this.selected.available[0]);
+			const indexOfSelected = availableFilteredList.indexOf(element);
 
 			this.setElementNonSelected(this.selected.available);
 			this.selected.available = [];
@@ -158,9 +157,7 @@ export class TwoListComponent {
 					this.selected.available.push(availableFilteredList[i]);
 				}
 			}
-
 			return;
-
 		}
 
 		element.selected = !element.selected;
@@ -186,11 +183,11 @@ export class TwoListComponent {
 	public selectVisibleCurrent(element: TwoListItem, ev: KeyboardEvent) {
 		this.selected.available = [];
 		this.setElementNonSelected(this.available);
-		let visibleFilteredList = new DataFilterPipe().transform(this.visible, this.secondListSearch);
+		const visibleFilteredList = new DataFilterPipe().transform(this.visible, this.secondListSearch);
 
 		if (this.selected.current.length > 0 && ev.shiftKey) {
-			let indexOfLastSelected = visibleFilteredList.indexOf(this.selected.current[0]);
-			let indexOfSelected = visibleFilteredList.indexOf(element);
+			const indexOfLastSelected = visibleFilteredList.indexOf(this.selected.current[0]);
+			const indexOfSelected = visibleFilteredList.indexOf(element);
 
 			this.setElementNonSelected(this.selected.current);
 			this.selected.current = [];
@@ -208,9 +205,7 @@ export class TwoListComponent {
 					this.selected.current.push(visibleFilteredList[i]);
 				}
 			}
-
 			return;
-
 		}
 
 		element.selected = !element.selected;
@@ -230,9 +225,7 @@ export class TwoListComponent {
 				this.selected.current = [];
 
 			}
-
 		}
-
 	}
 
 	public getTwoListBoxRowClass(element: TwoListItem) {

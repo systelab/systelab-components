@@ -25,7 +25,7 @@ export class SearcherDialog<T> extends DefaultModalActions implements ModalCompo
 	public selectedComboItem: any;
 	public searchLabel: string;
 	public titleForDialog: string;
-	public multipleSelection: boolean = false;
+	public multipleSelection = false;
 
 	constructor(public dialog: DialogRef<SearcherDialogParameters<T>>, protected i18nService: I18nService) {
 		super(dialog);
@@ -61,7 +61,7 @@ export class SearcherDialog<T> extends DefaultModalActions implements ModalCompo
 	public selectOnClick(data: T) {
 		if (!this.multipleSelection) {
 			if (data) {
-				let arr: Array<T> = new Array<T>();
+				const arr: Array<T> = new Array<T>();
 				arr.push(data);
 				this.dialog.close(arr);
 			}

@@ -1,9 +1,9 @@
-import { Component, ContentChild, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 export class Button {
 
-	public static LEFT_POSITION: string = 'LEFT';
-	public static RIGHT_POSITION: string = 'RIGHT';
+	public static LEFT_POSITION = 'LEFT';
+	public static RIGHT_POSITION = 'RIGHT';
 
 	constructor(public text: string, public action: string, public position: string) {
 	}
@@ -31,9 +31,6 @@ export class ButtonsDialogComponent {
 	}
 
 	public sendAction(actionName: string) {
-		console.log('Pasa por aki 1');
-		console.log(actionName);
-
 		this.action.emit(actionName);
 	}
 

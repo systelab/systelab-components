@@ -1,8 +1,8 @@
 import { Injectable, Type } from '@angular/core';
 import { DialogComponent } from './dialog.component';
-import { Observable } from 'rxjs';
 import { ModulabModalContext } from '../plugin/modulab/modal-context';
 import { Modal } from '../plugin/modulab/modal';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DialogService {

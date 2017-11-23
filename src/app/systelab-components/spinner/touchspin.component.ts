@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TouchSpinValues } from './touch.spin-values';
 
 @Component({
@@ -8,10 +8,10 @@ import { TouchSpinValues } from './touch.spin-values';
 })
 export class TouchspinComponent {
 
-	public isDisabled: boolean = false;
+	public isDisabled = false;
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
-	@Input() fillUnitsWithZero: boolean = false;
+	@Input() fillUnitsWithZero = false;
 
 	private previousValue: number;
 
@@ -78,9 +78,9 @@ export class TouchspinComponent {
 	@Output() public valueStrChange = new EventEmitter<string>();
 
 	public minus() {
-		let value: number       = Number(this._spinValues.value),
-			stepValue: number   = this._spinValues.step,
-			fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
+		const value: number = Number(this._spinValues.value);
+		const stepValue: number = this._spinValues.step;
+		const fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
 
 		if (value - stepValue > this._spinValues.min) {
 			this._spinValues.value = Number((value - this._spinValues.step).toFixed(fixedNumber));
@@ -94,9 +94,9 @@ export class TouchspinComponent {
 	}
 
 	public plus() {
-		let value: number       = Number(this._spinValues.value),
-			stepValue: number   = this._spinValues.step,
-			fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
+		const value: number = Number(this._spinValues.value);
+		const stepValue: number = this._spinValues.step;
+		const fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
 
 		if (value + stepValue < this._spinValues.max) {
 			this._spinValues.value = Number((value + this._spinValues.step).toFixed(2));
@@ -118,8 +118,8 @@ export class TouchspinComponent {
 	}
 
 	public checkValue(valueStr: string) {
-		let value: number       = Number(valueStr),
-			fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
+		const value: number = Number(valueStr);
+		const fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
 
 		if (isNaN(value)) {
 			this._spinValues.value = this.previousValue;
@@ -137,11 +137,9 @@ export class TouchspinComponent {
 				}
 			} else {
 				this.previousValue = value;
-				this.value = Number(value.toFixed(fixedNumber))
+				this.value = Number(value.toFixed(fixedNumber));
 				this.change.emit(Number(value.toFixed(fixedNumber)));
 			}
 		}
-
 	}
-
 }

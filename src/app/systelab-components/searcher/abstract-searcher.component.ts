@@ -7,7 +7,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	public searcherDialogParameters: SearcherDialogParameters<T>;
 
-	@Input() public multipleSelection: boolean = false;
+	@Input() public multipleSelection = false;
 	@Input() public isDisabled: boolean;
 
 	@Input() public fontFamily: string;
@@ -28,9 +28,9 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 		this._multipleSelectedItemList = value;
 		this.abstractSearcher.multipleSelectedItemList = this._multipleSelectedItemList;
 		this._code = '';
-		let description: string = '';
+		let description = '';
 
-		for (let selectedItem of value) {
+		for (const selectedItem of value) {
 			if (this._code !== '') {
 				this._code += ', ';
 			}
@@ -90,8 +90,8 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 	@Output() public selectedHasChanged = new EventEmitter();
 
 	public searchingValue: string;
-	@Input() public withButton: boolean = true;
-	@Input() public isManagement: boolean = false;
+	@Input() public withButton = true;
+	@Input() public isManagement = false;
 
 	@Input() public height;
 
@@ -127,13 +127,13 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 		if (this.multipleSelection && this.code) {
 			const listOfCodes = this.code.split(',');
 			this.abstractSearcher.multipleSelectedItemList = [];
-			for (let iterCode of listOfCodes) {
-				let newElement: T = {} as T;
+			for (const iterCode of listOfCodes) {
+				const newElement: T = {} as T;
 				newElement[this.abstractSearcher.getCodeField()] = iterCode.trim();
 				this.abstractSearcher.multipleSelectedItemList.push(newElement);
 			}
 		}
-		this.searcherDialogParameters.dialogClass = "uk-width-2-3 uk-height-2-3";
+		this.searcherDialogParameters.dialogClass = 'uk-width-2-3 uk-height-2-3';
 		this.searcherDialogParameters.searcher = this.abstractSearcher;
 		this.dialogService.showDialog(SearcherDialog, this.searcherDialogParameters)
 			.subscribe(

@@ -19,10 +19,6 @@ export abstract class AbstractTree implements OnInit {
 	constructor() {
 	}
 
-	// protected abstract dataToNode(data: any): N;
-
-	// protected abstract onSelectNode(evt: any): Observable<Array<any>>;
-
 	public ngOnInit() {
 	}
 

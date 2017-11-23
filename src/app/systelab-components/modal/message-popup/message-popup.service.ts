@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MessagePopupComponent } from './message-popup.component';
-import { Observable } from 'rxjs';
 import { Modal } from '../plugin/modulab/modal';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MessagePopupService {

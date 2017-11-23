@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
 	selector:    'systelab-slider',
@@ -6,13 +6,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SliderComponent {
 
+	private _sliderValue = 0;
 
- _sliderValue: number = 0;
-
-	@Input() public min: number = 0;
-
-	@Input() public max: number = 100;
-
+	@Input() public min = 0;
+	@Input() public max = 100;
 	@Input() public step: number;
 
 	@Input()

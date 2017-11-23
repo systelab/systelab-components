@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Modal, ModulabModalContext } from '../plugin/modulab';
 import { overlayConfigFactory, DialogRef } from 'angular2-modal';
 import { MessagePopupViewComponent } from './message-popup-view.component';
-import { Observable } from 'rxjs';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'mp-message-popup',

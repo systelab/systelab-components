@@ -56,10 +56,7 @@ export class ShowcaseComponent implements OnInit {
 
 	public currentTab = 1;
 
-	constructor(protected preferencesService: PreferencesService,
-	            protected languageService: I18nService,
-	            protected messagePopupService: MessagePopupService,
-	            protected dialogService: DialogService) {
+	constructor(protected preferencesService: PreferencesService, protected languageService: I18nService, protected messagePopupService: MessagePopupService, protected dialogService: DialogService) {
 
 		languageService.use('en_US')
 			.subscribe(() => {
