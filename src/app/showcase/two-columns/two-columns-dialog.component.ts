@@ -21,7 +21,7 @@ export class TwoColumnsDialog extends DefaultModalActions implements ModalCompon
 	}
 
 	public close(): void {
-		this.dialog.close( 'Esto es una prueba' );
+		this.dialog.close( 'This is a test' );
 	}
 
 	public static getParameters(): TwoColumnsDialogParameters {

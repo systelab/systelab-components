@@ -16,8 +16,8 @@ export class ComboTreeNode {
 
 export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit {
 
-	@Input() public isParentSelectable: boolean = false;
-	@Input() public isAllSelectable: boolean = true;
+	@Input() public isParentSelectable = false;
+	@Input() public isAllSelectable = true;
 
 	public _level: number;
 	@Input()
@@ -29,8 +29,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 		return this._level;
 	}
 
-	public totalItemsLoaded: boolean = false;
-	public isFirstTime: boolean = true;
+	public totalItemsLoaded = false;
+	public isFirstTime = true;
 
 	constructor(public myRenderer: Renderer2) {
 		super(myRenderer);
@@ -38,7 +38,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	public ngOnInit() {
 
-		var minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
+		const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
 		AbstractComboBox.ROW_HEIGHT = Number(minHeight);
 
 		this.columnDefs = [
@@ -85,7 +85,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	// override
 	public loop(): void {
-		let result: boolean = true;
+		let result = true;
 
 		if (this.isDropDownOpen()) {
 			// First time opened we load the table
@@ -95,11 +95,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 			if (this.totalItemsLoaded) {
 				this.calculateDropdownHeight();
-
 				this.setDropdownPosition();
-
 				this.addListeners();
-
 				result = false;
 			}
 		}
@@ -112,8 +109,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	// Override
 	public calculateDropdownHeight() {
-		let totalItems: number = Number(this.getTotalItems()),
-			calculatedHeight: number = 0;
+		const totalItems = Number(this.getTotalItems());
+		let calculatedHeight = 0;
 
 		if (totalItems === 0) {
 			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * 1;
@@ -126,8 +123,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 
 		if (this.filter) {
-			let agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular'),
-				agGridHeight  = calculatedHeight - 33;
+			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
+			const agGridHeight  = calculatedHeight - 33;
 			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
 		}
 
@@ -139,24 +136,24 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 		this.getData()
 			.subscribe(
 				(dataVector: Array<T>) => {
-					let nodeVector: Array<ComboTreeNode> = [];
+					const nodeVector: Array<ComboTreeNode> = [];
 					let previousParent: number | string;
 
 					if (this.isAllSelectable) {
-						let allElement: T = {} as T;
+						const allElement: T = {} as T;
 						allElement[this.getLevelIdField(0)] = this.getAllNodeId();
 						allElement[this.getLevelDescriptionField(0)] = this.getAllNodeDescription();
-						let allComboNode: ComboTreeNode = new ComboTreeNode(allElement, 0);
+						const allComboNode: ComboTreeNode = new ComboTreeNode(allElement, 0);
 						nodeVector.push(allComboNode);
 					}
 
 					dataVector.forEach((element: T) => {
 						if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
 							previousParent = element[this.getLevelIdField(0)];
-							let parentComboNode: ComboTreeNode = new ComboTreeNode(element, 0);
+							const parentComboNode: ComboTreeNode = new ComboTreeNode(element, 0);
 							nodeVector.push(parentComboNode);
 						}
-						let comboNode: ComboTreeNode = new ComboTreeNode(element, 1);
+						const comboNode: ComboTreeNode = new ComboTreeNode(element, 1);
 						nodeVector.push(comboNode);
 					});
 					this.totalItemsLoaded = true;
@@ -200,7 +197,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	// Overrides
 	public onSelectionChanged(event: any) {
-		let selectedRow = this.getSelectedRow();
+		const selectedRow = this.getSelectedRow();
 		if (selectedRow !== null && selectedRow !== undefined) {
 			this.id = selectedRow.nodeData[this.getLevelIdField(selectedRow.level)];
 			this.description = selectedRow.nodeData[this.getLevelDescriptionField(selectedRow.level)];
@@ -220,5 +217,4 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 			return true;
 		}
 	}
-
 }

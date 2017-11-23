@@ -94,8 +94,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 
 		if (this.filter) {
-			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular'),
-				  agGridHeight  = calculatedHeight - 36;
+			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
+			const agGridHeight  = calculatedHeight - 36;
 			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
 		}
 	}

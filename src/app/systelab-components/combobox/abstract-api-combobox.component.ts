@@ -1,14 +1,14 @@
-import { OnInit, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
-import { Observable } from 'rxjs';
 import { AbstractComboBox } from './abstract-combobox.component';
 import { StylesUtilService } from '../utilities/styles.util.service';
+import { Observable } from 'rxjs/Observable';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit {
 
-	@Input() public emptyElement: boolean = false;
-	@Input() public multipleSelection: boolean = false;
+	@Input() public emptyElement = false;
+	@Input() public multipleSelection = false;
 
 	public _multipleSelectedItemList: Array<T>;
 
@@ -17,7 +17,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this._multipleSelectedItemList = value;
 		this._description = '';
 		this._code = '';
-		for (let selectedItem of value) {
+		for (const selectedItem of value) {
 			if (this._code !== '') {
 				this._code += '; ';
 			}
@@ -37,7 +37,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
 
-	public startsWith: string = '';
+	public startsWith = '';
 
 	public params: any;
 
@@ -48,10 +48,9 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		super(myRenderer);
 	}
 
-	// override
 	public ngOnInit() {
 
-		var minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
+		const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
 		AbstractComboBox.ROW_HEIGHT = Number(minHeight);
 
 		this.columnDefs = [
@@ -133,13 +132,11 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	// override
 	public onComboClicked() {
 
-		let isOpen: boolean = this.isDropDownOpen();
+		const isOpen: boolean = this.isDropDownOpen();
 
 		if (!isOpen) {
 			this.isDropdownOpened = true;
-
 			super.showDropDown();
-
 		} else {
 			// close
 			this.checkMultipleSelectionClosed();
@@ -154,7 +151,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	// override
 	public loop(): void {
-		let result: boolean = true;
+		let result = true;
 		if (this.isDropDownOpen()) {
 			// First time opened we load the table
 			if (this.gridOptions.datasource === null) {
@@ -164,11 +161,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 			if (this.totalItemsLoaded) {
 				this.calculateDropdownHeight();
-
 				this.setDropdownPosition();
-
 				this.addListeners();
-
 				result = false;
 			}
 		}
@@ -181,8 +175,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	// override
 	public calculateDropdownHeight() {
-		let totalItems: number       = Number(this.getTotalItems()),
-			calculatedHeight: number = 0;
+		let totalItems = Number(this.getTotalItems());
+		let calculatedHeight = 0;
 
 		if (this.emptyElement) {
 			totalItems += 1;
@@ -199,8 +193,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 
 		if (this.filter) {
-			let agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular'),
-				agGridHeight  = calculatedHeight - 33;
+			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
+			const agGridHeight  = calculatedHeight - 33;
 			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
 		}
 	}
@@ -215,11 +209,11 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public getRows(params: IGetRowsParams): void {
 
-		let page: number     = params.endRow / this.gridOptions.paginationPageSize,
-			pageSize: number = this.gridOptions.paginationPageSize;
+		const page: number     = params.endRow / this.gridOptions.paginationPageSize;
+		const pageSize: number = this.gridOptions.paginationPageSize;
 
 		const emptyElemNumber: number = this.emptyElement ? 1 : 0;
-		let totalItems: number = this.getTotalItems() + emptyElemNumber;
+		const totalItems: number = this.getTotalItems() + emptyElemNumber;
 		const modulus: number = totalItems % pageSize;
 
 		if (page === 1 || page <= totalItems / pageSize || modulus > 1 || (modulus === 1 && !this.emptyElement)) {
@@ -229,10 +223,10 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 			this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe(
 					(previousPage: Array<T>) => {
-						let itemArray: Array<T> = new Array<T>();
-						let totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
+						const itemArray: Array<T> = new Array<T>();
+						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
 
-						let lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+						const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
 						itemArray.push(lastItemFromPreviousPage);
 
 						this.totalItemsLoaded = true;
@@ -251,18 +245,17 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this.getData(page, pageSize, this.startsWith)
 			.subscribe(
 				(v: Array<T>) => {
-					let itemArray: Array<T> = new Array<T>();
-					let totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
+					const itemArray: Array<T> = new Array<T>();
+					const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
 
 					if (this.emptyElement === true) {
 
 						if (page === 1) {
-							let newElement: T = this.getInstance();
+							const newElement: T = this.getInstance();
 							itemArray.push(newElement);
 
-							for (let originalElement of v) {
+							for (const originalElement of v) {
 								itemArray.push(originalElement);
-
 							}
 							params.successCallback(itemArray, totalItems);
 							this.totalItemsLoaded = true;
@@ -271,15 +264,14 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 							this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 								.subscribe(
 									(previousPage: Array<T>) => {
-										let lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+										const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
 										itemArray.push(lastItemFromPreviousPage);
 
-										for (let originalElement of v) {
+										for (const originalElement of v) {
 											itemArray.push(originalElement);
 										}
 										this.totalItemsLoaded = true;
 										params.successCallback(itemArray, totalItems);
-
 									},
 									error => {
 										params.failCallback();
@@ -287,14 +279,12 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 								);
 						}
 					} else {
-						for (let originalElement of v) {
+						for (const originalElement of v) {
 							itemArray.push(originalElement);
 						}
 						this.totalItemsLoaded = true;
 						params.successCallback(itemArray, totalItems);
-
 					}
-
 				},
 				error => {
 					params.failCallback();
@@ -303,7 +293,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	public getSelectedRow(): T {
-		let selectedRow: Array<T> = this.gridOptions.api.getSelectedRows();
+		const selectedRow: Array<T> = this.gridOptions.api.getSelectedRows();
 		if (selectedRow !== null) {
 			return selectedRow[0];
 		}
@@ -312,7 +302,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public onSelectionChanged(event: any) {
 		if (!this.multipleSelection) {
-			let selectedRow = this.getSelectedRow();
+			const selectedRow = this.getSelectedRow();
 			if (selectedRow !== null && selectedRow !== undefined) {
 				this.id = selectedRow[this.getIdField()];
 				this.code = selectedRow[this.getCodeField()];
@@ -338,12 +328,12 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		if (!this.multipleSelection) {
 		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
-				let elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 					return item[this.getIdField()] === event.node.data[this.getIdField()];
 				});
 				if (event.node.selected) {
 					if (elementIndexInSelectedList < 0) {
-						let newElement: T = this.getInstance();
+						const newElement: T = this.getInstance();
 						newElement[this.getIdField()] = event.node.data[this.getIdField()];
 						newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 						newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
@@ -358,7 +348,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				}
 			} else {
 				this.multipleSelectedItemList = new Array<T>();
-				let newElement: T = this.getInstance();
+				const newElement: T = this.getInstance();
 				newElement[this.getIdField()] = event.node.data[this.getIdField()];
 				newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 				newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
@@ -367,7 +357,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 			}
 			this._description = '';
 			this._code = '';
-			for (let selectedItem of this.multipleSelectedItemList) {
+			for (const selectedItem of this.multipleSelectedItemList) {
 				if (this._code !== '') {
 					this._code += '; ';
 				}

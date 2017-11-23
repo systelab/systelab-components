@@ -1,4 +1,4 @@
-import { ViewChild, ElementRef, OnInit, HostListener, Input, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
 import { StylesUtilService } from '../utilities/styles.util.service';
@@ -78,7 +78,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	@ViewChild('input') public inputElement: ElementRef;
 	@ViewChild('combobutton') public comboButtonElement: ElementRef;
 
-	public filterValue: string = '';
+	public filterValue = '';
 	public currentSelected: any = {};
 
 	public gridOptions: GridOptions;
@@ -86,9 +86,9 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	public params: any;
 
-	public top: number = 0;
-	public left: number = 0;
-	public windowResized: boolean = false;
+	public top = 0;
+	public left = 0;
+	public windowResized = false;
 
 	public destroyKeyListener: Function;
 	public isDropdownOpened: boolean;
@@ -100,7 +100,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	public ngOnInit() {
 
-		var minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
+		const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
 		AbstractComboBox.ROW_HEIGHT = Number(minHeight);
 
 		this.columnDefs = [
@@ -136,7 +136,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 		if (this.isDropDownOpen()) {
 			this.closeDropDown();
 		}
-		let parentWidth = this.comboboxElement.nativeElement.offsetWidth;
+		const parentWidth = this.comboboxElement.nativeElement.offsetWidth;
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'width', parentWidth + 'px');
 		this.windowResized = true;
 	}
@@ -146,7 +146,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public onComboClicked() {
-		let isOpen: boolean = this.isDropDownOpen();
+		const isOpen: boolean = this.isDropDownOpen();
 
 		if (!isOpen) {
 			this.isDropdownOpened = true;
@@ -155,11 +155,11 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public setDropdownSize() {
-		let dropdownParentRect = this.inputElement.nativeElement.getBoundingClientRect();
+		const dropdownParentRect = this.inputElement.nativeElement.getBoundingClientRect();
 		this.top = dropdownParentRect.top + this.inputElement.nativeElement.offsetHeight + 1;
 		this.left = dropdownParentRect.left;
 
-		let parentWidth = this.comboboxElement.nativeElement.offsetWidth;
+		const parentWidth = this.comboboxElement.nativeElement.offsetWidth;
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'width', parentWidth + 'px');
 
 		this.setGridSize();
@@ -190,16 +190,12 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public loop(): void {
-		let result: boolean = true;
+		let result = true;
 
 		if (this.isDropDownOpen()) {
-
 			this.calculateDropdownHeight();
-
 			this.setDropdownPosition();
-
 			this.addListeners();
-
 			result = false;
 		}
 		if (result) {
@@ -220,8 +216,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public calculateDropdownHeight() {
-		let calculatedHeight: number = 0,
-			totalItems: number       = Number(this.values ? this.values.length : 0);
+		let calculatedHeight = 0;
+		const totalItems: number = Number(this.values ? this.values.length : 0);
 
 		if (totalItems === 0) {
 			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * 1;
@@ -235,8 +231,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 		}
 
 		if (this.filter) {
-			let agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular'),
-				agGridHeight  = calculatedHeight - 36;
+			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
+			const agGridHeight = calculatedHeight - 36;
 			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
 		}
 	}
@@ -259,7 +255,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public getSelectedRow(): any {
-		let selectedRow: any = this.gridOptions.api.getSelectedRows();
+		const selectedRow: any = this.gridOptions.api.getSelectedRows();
 		if (selectedRow !== null) {
 			return selectedRow[0];
 		}
@@ -274,7 +270,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public onSelectionChanged(event: any) {
-		let selectedRow = this.getSelectedRow();
+		const selectedRow = this.getSelectedRow();
 		this.id = selectedRow.id;
 		this.description = selectedRow.description;
 		this.currentSelected = selectedRow;

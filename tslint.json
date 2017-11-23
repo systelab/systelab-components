@@ -20,7 +20,7 @@
     "import-spacing": true,
     "indent": [
       true,
-      "spaces"
+      "tabs"
     ],
     "interface-over-type-literal": true,
     "label-position": true,
@@ -117,13 +117,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "systelab",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "systelab",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

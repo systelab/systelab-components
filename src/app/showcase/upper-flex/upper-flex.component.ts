@@ -10,7 +10,6 @@ export class UpperFlexComponent {
 	public touchSpinValues1: TouchSpinValues;
 	public touchSpinValues2: TouchSpinValues;
 	public touchSpinValues3: TouchSpinValues;
-	public check2: boolean = false;
 
 	constructor() {
 

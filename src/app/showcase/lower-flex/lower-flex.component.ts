@@ -14,7 +14,6 @@ export class LowerFlexComponent {
 	public touchSpinValues2: TouchSpinValues;
 	public touchSpinValues3: TouchSpinValues;
 	public myDate: Date;
-	public check2: boolean = false;
 
 	constructor() {
 
