@@ -13,24 +13,24 @@ export class MessagePopupService {
 		this.messagePopUpComponent = new MessagePopupComponent(modal, i18nService);
 	}
 
-	public showErrorPopup(errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showErrorPopup(errorDescription, modalClass, width, height);
+	public showErrorPopup(titleDescription: string, errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.messagePopUpComponent.showErrorPopup(titleDescription, errorDescription, modalClass, width, height);
 	}
 
-	public showWarningPopup(warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showWarningPopup(warningDescription, modalClass, width, height);
+	public showWarningPopup(titleDescription: string, warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.messagePopUpComponent.showWarningPopup(titleDescription, warningDescription, modalClass, width, height);
 	}
 
-	public showInformationPopup(messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showInformationPopup(messageDescription, modalClass, width, height);
+	public showInformationPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.messagePopUpComponent.showInformationPopup(titleDescription, messageDescription, modalClass, width, height);
 	}
 
-	public showQuestionPopup(messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showQuestionPopup(messageDescription, modalClass, width, height);
+	public showQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.messagePopUpComponent.showQuestionPopup(titleDescription, messageDescription, modalClass, width, height);
 	}
 
-	public showYesNoQuestionPopup(messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showYesNoQuestionPopup(messageDescription, modalClass, width, height);
+	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		return this.messagePopUpComponent.showYesNoQuestionPopup(titleDescription, messageDescription, modalClass, width, height);
 	}
 
 }
