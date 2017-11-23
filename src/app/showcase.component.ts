@@ -43,7 +43,6 @@ export class ShowcaseComponent implements OnInit {
 
 	public myDate = new Date();
 
-
 	public touchSpinValues1: TouchSpinValues;
 	public touchSpinValues2: TouchSpinValues;
 	public touchSpinValues3: TouchSpinValues;
@@ -105,27 +104,27 @@ export class ShowcaseComponent implements OnInit {
 	}
 
 	public showError() {
-		this.messagePopupService.showErrorPopup('Error message popup example', null, 800, 600)
+		this.messagePopupService.showErrorPopup('Test', 'Error message popup example', null, 800, 600)
 			.subscribe((v) => {
 				console.log('Promise returned to showcase', v);
 			});
 	}
 
 	public showWarning() {
-		this.messagePopupService.showWarningPopup('Warning message popup example', 'uk-width-1-3 uk-height-1-3');
+		this.messagePopupService.showWarningPopup('Test', 'Warning message popup example', 'uk-width-1-3 uk-height-1-3');
 
 	}
 
 	public showInfo() {
-		this.messagePopupService.showInformationPopup('Info message popup example');
+		this.messagePopupService.showInformationPopup('Test', 'Info message popup example');
 
 	}
 
 	public showQuestion() {
 		// window.alert('Hall!!!!!');
-		this.messagePopupService.showQuestionPopup('Estás seguro?')
+		this.messagePopupService.showQuestionPopup('Test', 'Estás seguro?')
 			.subscribe((v) => {
-				console.log('estoy cerrando');
+				console.log('closing');
 			});
 	}
 
