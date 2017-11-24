@@ -328,6 +328,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			case 'sk': //'SK'
 			case 'ru': //'RU'
 			case 'de': //'DE'
+			case 'ko':
 			default:
 				return 1;
 		}
