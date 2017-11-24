@@ -287,11 +287,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		};
 
 		this.language.firstDayOfWeek = this.getFirstDayOfWeek();
-		this.language.dateFormatValue = this.i18nService.getDateFormat();
+		this.language.dateFormatValue = this.getDateFormat(true);
 	}
 
 	private getFirstDayOfWeek(): number {
-		switch (this.language) {
+		switch (this.i18nService.getCurrentLanguage()) {
 			case 'us': //'US'
 			case 'zh': //'CN'
 			case 'th': //'TH'
@@ -331,6 +331,79 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			default:
 				return 1;
 		}
+	}
+
+	private getDateFormat(isFullYear: boolean): string {
+		let stringDateFormat = '';
+		switch (this.i18nService.getCurrentLanguage()) {
+			case 'us':
+				stringDateFormat = 'm/d/y';
+				break;
+			case 'en':
+			case 'it':
+			case 'ar':
+			case 'es':
+			case 'bo':
+			case 'cl':
+			case 'co':
+			case 'cr':
+			case 'do':
+			case 'ec':
+			case 'gt':
+			case 'hn':
+			case 'mx':
+			case 'ni':
+			case 'pa':
+			case 'pe':
+			case 'pr':
+			case 'py':
+			case 'sv':
+			case 'ur':
+			case 've':
+			case 'fr':
+			case 'gl':
+			case 'ca':
+				stringDateFormat = 'dd/mm/y';
+				break;
+			case 'ko':
+				stringDateFormat = 'y. m. d';
+				break;
+			case 'pl':
+			case 'lt':
+				stringDateFormat = 'y-mm-dd';
+				break;
+			case 'pt':
+			case 'nl':
+				stringDateFormat = 'dd-mm-y';
+				break;
+			case 'sk':
+			case 'ru':
+				stringDateFormat = 'd.m.y';
+				break;
+			case 'zh':
+				stringDateFormat = 'y-m-d';
+				break;
+			case 'de':
+				stringDateFormat = 'dd.mm.y';
+				break;
+			case 'th':
+				stringDateFormat = 'd/m/y';
+				break;
+			case 'ja':
+				stringDateFormat = 'y/mm/dd';
+				break;
+			default:
+				stringDateFormat = 'dd/mm/y';
+				break;
+		}
+		if (isFullYear) {
+			stringDateFormat = stringDateFormat.replace('y', 'yy');
+			if (this.i18nService.getCurrentLanguage() === 'us') {
+				stringDateFormat = stringDateFormat.replace('m', 'mm');
+				stringDateFormat = stringDateFormat.replace('d', 'dd');
+			}
+		}
+		return stringDateFormat;
 	}
 
 	private addListeners(): void {
