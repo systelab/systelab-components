@@ -21,9 +21,8 @@ After this, in the .angular-cli.json you must add the following styles and javas
         "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/systelab-components/css/systelab-components.css",
         "../node_modules/systelab-components/icons/icomoon.css"
-
       ],
-      "scripts": [
+"scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/uikit/dist/js/uikit.js",
         "../node_modules/pako/dist/pako.min.js"
@@ -34,7 +33,7 @@ Finally, you must import the SystelabComponentsModule in your Application Module
 
 ```
 @NgModule({
-	imports:         [
+	imports: [
 		BrowserModule,
 		FormsModule,
 		HttpClientModule,
