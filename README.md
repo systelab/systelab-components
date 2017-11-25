@@ -62,4 +62,4 @@ In order to publish the library, an authorized npm user is required, update the 
 npm publish
 ```
 
-Temporary folders will be created (build, css, html, widgets,...) on order to create the package, but will not be part of the source files.
+Temporary folders will be created (build, css, html, widgets,...) in order to create the package, but will not be part of the source files.
