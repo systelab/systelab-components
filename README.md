@@ -2,13 +2,15 @@
 
 Library with common Systelab components to speed up our Angular developments
 
-## installing the library
+## Installing the library
+
+The first steep will be to add the package in your package.json
 
 ```bash
 npm install systelab-components --save
 ```
 
-In the .angular-cli.json you must add the following styles and javascripts:
+After this, in the .angular-cli.json you must add the following styles and javascripts:
 
 ```
 "styles": [
@@ -43,7 +45,7 @@ Finally, you must import the SystelabComponentsModule in your Application Module
     ...
 ```
 
-## working with the repo
+## Working with the repo
 
 
 ```bash
