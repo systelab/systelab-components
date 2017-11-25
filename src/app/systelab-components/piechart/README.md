@@ -25,4 +25,4 @@ Define in the component class, the Input and the Ouput method.
 
 ```
 
-Do not use colours symbolic names. 
+Do not use colour names. Use the old hex codes.
