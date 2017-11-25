@@ -17,7 +17,7 @@ Define in the component class, the Input and the Ouput method.
 		this.data.push(new PieElement('id3', 300, '#E0FFFF', 'ACTION3'));
 	}
   
-  public doSelect(action: string) {
+ 	public doSelect(action: string) {
 		console.log(action);
 	}
 
