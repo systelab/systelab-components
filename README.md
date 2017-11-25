@@ -53,3 +53,13 @@ cd systelab-components
 npm install
 ng serve
 ```
+
+This will bootstrap a showcase application to test the different components.
+
+In order to publish the library, an authorized npm user is required, update the version in the package.json, and run:
+
+```npm
+npm publish
+```
+
+Temporary folders will be created (build, css, html, widgets,...) on order to create the package, but will not be part of the source files.
