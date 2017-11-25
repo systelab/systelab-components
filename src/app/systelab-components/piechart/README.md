@@ -11,6 +11,8 @@ Component to show a pie chart
 Define in the component class, the Input and the Ouput method.
 
 ```
+	public data: PieElement[] = [];
+
 	public ngOnInit() {
 		this.data.push(new PieElement('id1', 120, '#FFDAB9', 'ACTION1'));
 		this.data.push(new PieElement('id2', 100, '#E6E6FA', 'ACTION2'));
