@@ -1,7 +1,7 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, HostListener, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-import { isBefore, isAfter, differenceInDays, format, addDays, differenceInMinutes } from 'date-fns';
+import { addDays, differenceInDays, differenceInMinutes, format, isAfter, isBefore } from 'date-fns';
 
 export class PieElement {
 	constructor(public label: string, public value: number, public color: string, public action: string) {
@@ -12,12 +12,12 @@ export class PieElement {
 @Component({
 	selector: 'systelab-pie',
 	template: `
-                  <canvas #chartCanvas style="width: 100%; heigth: 100%;" (click)="doClick($event)"
-                          (mousemove)="doMouseMove($event)" [class.pointer]="mustShowPointer"></canvas>`,
+                <canvas #chartCanvas style="width: 100%; heigth: 100%;" (click)="doClick($event)"
+                        (mousemove)="doMouseMove($event)" [class.pointer]="mustShowPointer"></canvas>`,
 	styles: [`
-        .pointer {
-            cursor: pointer;
-        }
+      .pointer {
+          cursor: pointer;
+      }
 	`]
 })
 export class PieComponent implements AfterViewInit, OnChanges {
@@ -25,6 +25,8 @@ export class PieComponent implements AfterViewInit, OnChanges {
 	@ViewChild('chartCanvas') public chartCanvas: ElementRef;
 
 	@Input() public data: PieElement[] = [];
+	@Input() public fixedWidth: number = null;
+	@Input() public fixedHeight: number = null;
 	@Output() public select = new EventEmitter();
 	public mustShowPointer = false;
 
@@ -50,8 +52,17 @@ export class PieComponent implements AfterViewInit, OnChanges {
 	public drawChart() {
 		console.log('drawChart()');
 
-		this.chartCanvas.nativeElement.width = this.chartCanvas.nativeElement.offsetWidth;
-		this.chartCanvas.nativeElement.height = this.chartCanvas.nativeElement.offsetHeight;
+		if (this.fixedWidth) {
+			this.chartCanvas.nativeElement.width = this.fixedWidth;
+		} else {
+			this.chartCanvas.nativeElement.width = this.chartCanvas.nativeElement.offsetWidth;
+		}
+
+		if (this.fixedHeight) {
+			this.chartCanvas.nativeElement.height = this.fixedHeight;
+		} else {
+			this.chartCanvas.nativeElement.height = this.chartCanvas.nativeElement.offsetHeight;
+		}
 
 		console.log(this.chartCanvas.nativeElement.width + 'x' + this.chartCanvas.nativeElement.height);
 
@@ -60,12 +71,12 @@ export class PieComponent implements AfterViewInit, OnChanges {
 		let startangle = 0;
 		const totalvalue = this.sumTo(this.data, this.data.length);
 		for (let i = 0; i < this.data.length; i++) {
-			this.drawSegment(context, i);
+			this.drawSegment(context, i, totalvalue);
 			startangle = this.drawSegmentLabel(context, i, startangle, totalvalue);
 		}
 	}
 
-	private drawSegment(context: CanvasRenderingContext2D, i: number) {
+	private drawSegment(context: CanvasRenderingContext2D, i: number, totalvalue: number) {
 		context.save();
 		const centerX = Math.floor(this.chartCanvas.nativeElement.width / 2);
 		const centerY = Math.floor(this.chartCanvas.nativeElement.height / 2);
@@ -77,14 +88,13 @@ export class PieComponent implements AfterViewInit, OnChanges {
 
 		radius = radius - 40;
 
-		const startingAngle = this.degreesToRadians(this.sumTo(this.data, i));
-		const arcSize = this.degreesToRadians(this.data[i].value);
+		const startingAngle = this.degreesToRadians(this.sumTo(this.data, i), totalvalue);
+		const arcSize = this.degreesToRadians(this.data[i].value, totalvalue);
 		const endingAngle = startingAngle + arcSize;
 
 		context.beginPath();
 		context.moveTo(centerX, centerY);
-		context.arc(centerX, centerY, radius,
-			startingAngle, endingAngle, false);
+		context.arc(centerX, centerY, radius, startingAngle, endingAngle, false);
 		context.closePath();
 
 		context.fillStyle = this.data[i].color;
@@ -114,8 +124,8 @@ export class PieComponent implements AfterViewInit, OnChanges {
 
 	}
 
-	private degreesToRadians(degrees: number) {
-		return (degrees * Math.PI) / 180;
+	private degreesToRadians(degrees: number, totalvalue: number) {
+		return (degrees * Math.PI) / (totalvalue / 2);
 	}
 
 	private sumTo(a: PieElement[], i: number) {
