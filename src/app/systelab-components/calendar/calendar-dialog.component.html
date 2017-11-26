@@ -10,7 +10,7 @@
         <ng-template  let-daySlot="daySlot">
             <a [ngClass]="{'is-holiday': daySlot.isHoliday,'disable-link':daySlot.isDisabled}" (click)="selectDaySlot(daySlot)">
                 {{daySlot.day}}
-            </a
+            </a>
             <div *ngIf="!daySlot.isHoliday" class="buttons">
                 <button class="button1" (click)="doSomething(daySlot)"></button>
             </div>

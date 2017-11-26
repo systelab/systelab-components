@@ -48,7 +48,7 @@ export class CalendarDialog extends DefaultModalActions implements ModalComponen
 	}
 
 	public doSomething(data: any) {
-		console.log(data)
+		console.log(data);
 	}
 
 	public changeYear(yearFactor: number): void {
