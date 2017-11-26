@@ -20,3 +20,5 @@ this.menu.push(new ApplicationHeaderMenuEntry(this.i18nService.instant('COMMON_C
 this.menu.push(new ApplicationHeaderMenuEntry('', true));
 this.menu.push(new ApplicationHeaderMenuEntry(this.i18nService.instant('COMMON_ABOUT'), false, () => this.showAbout()));
 ```
+If the second parameter in the ApplicationHeaderMenuEntry constructor method is set to true, the component will render a separator.
+The third parameter is the lambda function to execute once the menu item is selected.
