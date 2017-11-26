@@ -2,7 +2,7 @@
 
 Component to create an application bar.
 
-## Using the templates
+## Using the template
 
 ```
 <systelab-application-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
