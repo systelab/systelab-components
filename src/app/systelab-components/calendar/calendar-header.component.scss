@@ -1,0 +1,50 @@
+@import "../styles/default-theme/sass/variables";
+
+$datepicker-header-navigation-line-height: 40px;
+
+.ui-custom-calendar-header {
+  $icon-margin-right: 10px;
+  $icon-margin-left: 40px;
+  line-height: $datepicker-header-navigation-line-height !important;
+  background: $primary-color;
+  margin-bottom: 0;
+  color: white;
+  height: 40px;
+  .ui-custom-calendar-title {
+    display: block;
+    margin: 0;
+    text-align: center;
+  }
+  a {
+    color: white;
+    &:hover {
+      text-decoration: none;
+      background: none;
+      color: white;
+    }
+  }
+  .icon-angle-double-left {
+    float: left;
+    margin-left: $icon-margin-right;
+    line-height: $datepicker-header-navigation-line-height;
+  }
+
+  .icon-angle-double-right {
+    float: right;
+    margin-right: $icon-margin-right;
+    line-height: $datepicker-header-navigation-line-height;
+  }
+
+  .icon-angle-left {
+    float: left;
+    margin-left: $icon-margin-left;
+    line-height: $datepicker-header-navigation-line-height;
+  }
+
+  .icon-angle-right {
+    float: right;
+    margin-right: $icon-margin-left;
+    line-height: $datepicker-header-navigation-line-height;
+  }
+
+}

@@ -44,6 +44,9 @@ import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDire
 import { FillerComponent } from './filler/filler.component';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
 import { SearcherTableComponent } from './searcher/searcher.table.component';
+import { CalendarHeaderComponent } from './calendar/calendar-header.component';
+import { CalendarTableComponent } from './calendar/calendar-table.component';
+import { CalendarDialog } from './calendar/calendar-dialog.component';
 
 
 @NgModule({
@@ -96,7 +99,10 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		DatepickerTime,
 		FillerComponent,
 		SearcherDialog,
-		SearcherTableComponent
+		CalendarDialog,
+		SearcherTableComponent,
+		CalendarHeaderComponent,
+		CalendarTableComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -125,7 +131,10 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		DatepickerTime,
 		FillerComponent,
 		SearcherDialog,
+		CalendarDialog,
 		SearcherTableComponent,
+		CalendarHeaderComponent,
+		CalendarTableComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
@@ -136,6 +145,7 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		MessagePopupViewComponent,
 		GridOptionsDialog,
 		SearcherDialog,
+		CalendarDialog,
 		ColorCellRendererComponent
 	],
 	providers:       [
