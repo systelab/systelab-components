@@ -67,12 +67,8 @@ export class CalendarDialog extends DefaultModalActions implements ModalComponen
 		Observable.of(true).delay(1000).subscribe(
 			(response) => {
 				const returnedDays: DaySlot[] = [];
-				/*
-				returnedDays.push({date: new Date(2017, 10, 1), day: 1, isHoliday: true});
-				returnedDays.push({date: new Date(2017, 10, 2), day: 2, isHoliday: true});
-				returnedDays.push({date: new Date(2017, 10, 3), day: 3, isHoliday: true});
-				returnedDays.push({date: new Date(2017, 10, 4), day: 4, isHoliday: true});
-				*/
+				returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});
+				returnedDays.push({date: new Date(2017, 10, 26), day: 26, isHoliday: true});
 				this.days = returnedDays;
 			}
 		);
