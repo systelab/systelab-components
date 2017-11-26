@@ -1,4 +1,4 @@
-# systelab-application-hesader
+# systelab-application-header
 
 Component to create an application bar.
 
@@ -10,7 +10,7 @@ Component to create an application bar.
 ```
 A user name (alias), a full name and a Institution name will be rendered in the bar. 
 
-The menu input represents the different menu items that will apear under the user.
+The menu input represents the different menu items that will apear under the user icon.
 
 For example:
 ```
