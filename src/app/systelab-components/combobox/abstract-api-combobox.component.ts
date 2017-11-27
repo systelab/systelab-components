@@ -41,8 +41,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public params: any;
 
-	public selectionChanged: boolean = false;
-	public totalItemsLoaded: boolean = false;
+	public selectionChanged = false;
+	public totalItemsLoaded = false;
 
 	constructor(public myRenderer: Renderer2) {
 		super(myRenderer);

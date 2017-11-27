@@ -1,4 +1,4 @@
-import { AbstractComboBox } from './abstract-combobox.component';
+import { AbstractComboBox } from '../combobox/abstract-combobox.component';
 import { Component, Renderer2, EventEmitter, Output, Input } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
@@ -10,10 +10,10 @@ class Element {
 
 @Component({
 	selector:    'systelab-gender-select',
-	templateUrl: './abstract-combobox.component.html'
+	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 
-export class GenderComboBox extends AbstractComboBox {
+export class GenderSelect extends AbstractComboBox {
 
 	@Input() genderValue = '';
 	@Output() genderValueChange: EventEmitter<string|number> = new EventEmitter<string|number>();

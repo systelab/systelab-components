@@ -27,10 +27,10 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
 import { ColorComboBox } from './colorpicker/colorpicker.component';
-import { AllYesNoComboBox } from './combobox/all-yes-no-combobox.component';
-import { NoYesComboBox } from './combobox/no-yes-combobox-component';
-import { PeriodComboBox } from './combobox/period-combobox.component';
-import { GenderComboBox } from './combobox/gender-combobox.component';
+import { AllYesNoSelect } from './select/all-yes-no-combobox.component';
+import { NoYesSelect } from './select/no-yes-combobox-component';
+import { PeriodSelect } from './select/period-combobox.component';
+import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
@@ -88,10 +88,10 @@ import { CalendarDialog } from './calendar/calendar-dialog.component';
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
 		PieComponent,
-		AllYesNoComboBox,
-		NoYesComboBox,
-		PeriodComboBox,
-		GenderComboBox,
+		AllYesNoSelect,
+		NoYesSelect,
+		PeriodSelect,
+		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
 		Datepicker,
@@ -120,10 +120,10 @@ import { CalendarDialog } from './calendar/calendar-dialog.component';
 		ApplicationSidebarComponent,
 		ApplicationFrameComponent,
 		PieComponent,
-		AllYesNoComboBox,
-		NoYesComboBox,
-		PeriodComboBox,
-		GenderComboBox,
+		AllYesNoSelect,
+		NoYesSelect,
+		PeriodSelect,
+		GenderSelect,
 		Datepicker,
 		MDatepicker,
 		TouchspinComponent,
