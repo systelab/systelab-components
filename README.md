@@ -46,8 +46,8 @@ Finally, you must import the SystelabComponentsModule in your Application Module
 and add MessagePopupService and DialogService as providers.
 ```
 providers: [
-		MessagePopupService,
-		DialogService
+	MessagePopupService,
+	DialogService
 ],
 ```
 
