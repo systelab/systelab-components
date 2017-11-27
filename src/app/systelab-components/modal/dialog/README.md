@@ -22,7 +22,7 @@ export class MyDialogParameters extends ModulabModalContext {
 export class MyDialog extends DefaultModalActions implements ModalComponent<MyDialogParameters> {
   protected parameters: MyDialogParameters;
 
-  constructor( public dialog: DialogRef<FullFlexDialogParameters> ) {
+  constructor( public dialog: DialogRef<MyDialogParameters> ) {
     super( dialog );
     this.parameters = dialog.context;
   }
@@ -34,8 +34,8 @@ export class MyDialog extends DefaultModalActions implements ModalComponent<MyDi
     return new MyDialogParameters();
   }
 }
-
 ```
+In the constructor a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog. 
 
 ## Using The new component;
 
