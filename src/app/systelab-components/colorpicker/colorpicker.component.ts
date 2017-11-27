@@ -10,8 +10,6 @@ import { ColorUtilService } from '../utilities/color.util.service';
 })
 export class ColorComboBox extends AbstractComboBox implements OnInit {
 
-	// public colorList: Array<any>;
-
 	constructor(public myRenderer: Renderer2, public colorUtilService: ColorUtilService) {
 		super(myRenderer, true);
 		this.values = colorUtilService.generateColorArray([0, 128, 192, 255], true);

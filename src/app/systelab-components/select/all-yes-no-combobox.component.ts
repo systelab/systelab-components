@@ -1,4 +1,4 @@
-import { AbstractComboBox } from './abstract-combobox.component';
+import { AbstractComboBox } from '../combobox/abstract-combobox.component';
 import { Component, Renderer2 } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
@@ -10,10 +10,10 @@ class Element {
 
 @Component({
 	selector:    'systelab-all-yes-no-select',
-	templateUrl: './abstract-combobox.component.html'
+	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 
-export class AllYesNoComboBox extends AbstractComboBox {
+export class AllYesNoSelect extends AbstractComboBox {
 	constructor(myRenderer: Renderer2, public i18nService: I18nService) {
 		super(myRenderer);
 		this.values = new Array<Element>();

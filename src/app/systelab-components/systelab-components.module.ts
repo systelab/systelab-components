@@ -27,10 +27,10 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
 import { ColorComboBox } from './colorpicker/colorpicker.component';
-import { AllYesNoComboBox } from './combobox/all-yes-no-combobox.component';
-import { NoYesComboBox } from './combobox/no-yes-combobox-component';
-import { PeriodComboBox } from './combobox/period-combobox.component';
-import { GenderComboBox } from './combobox/gender-combobox.component';
+import { AllYesNoSelect } from './select/all-yes-no-combobox.component';
+import { NoYesSelect } from './select/no-yes-combobox-component';
+import { PeriodSelect } from './select/period-combobox.component';
+import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
@@ -44,6 +44,9 @@ import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDire
 import { FillerComponent } from './filler/filler.component';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
 import { SearcherTableComponent } from './searcher/searcher.table.component';
+import { CalendarHeaderComponent } from './calendar/calendar-header.component';
+import { CalendarTableComponent } from './calendar/calendar-table.component';
+import { CalendarDialog } from './calendar/calendar-dialog.component';
 
 
 @NgModule({
@@ -85,10 +88,10 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
 		PieComponent,
-		AllYesNoComboBox,
-		NoYesComboBox,
-		PeriodComboBox,
-		GenderComboBox,
+		AllYesNoSelect,
+		NoYesSelect,
+		PeriodSelect,
+		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
 		Datepicker,
@@ -96,7 +99,10 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		DatepickerTime,
 		FillerComponent,
 		SearcherDialog,
-		SearcherTableComponent
+		CalendarDialog,
+		SearcherTableComponent,
+		CalendarHeaderComponent,
+		CalendarTableComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -114,10 +120,10 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		ApplicationSidebarComponent,
 		ApplicationFrameComponent,
 		PieComponent,
-		AllYesNoComboBox,
-		NoYesComboBox,
-		PeriodComboBox,
-		GenderComboBox,
+		AllYesNoSelect,
+		NoYesSelect,
+		PeriodSelect,
+		GenderSelect,
 		Datepicker,
 		MDatepicker,
 		TouchspinComponent,
@@ -125,7 +131,10 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		DatepickerTime,
 		FillerComponent,
 		SearcherDialog,
+		CalendarDialog,
 		SearcherTableComponent,
+		CalendarHeaderComponent,
+		CalendarTableComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
@@ -136,6 +145,7 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 		MessagePopupViewComponent,
 		GridOptionsDialog,
 		SearcherDialog,
+		CalendarDialog,
 		ColorCellRendererComponent
 	],
 	providers:       [

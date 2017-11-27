@@ -1,0 +1,18 @@
+<div class="ui-custom-calendar">
+    <table class="ui-custom-calendar-table">
+        <thead>
+        <tr>
+            <th *ngFor="let dayName of daysHeader">{{dayName}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of rows">
+            <td *ngFor="let daySlot of row" [ngClass]="{'disabled-cell': !daySlot.date}">
+                <div *ngIf="daySlot.date" class="ui-custom-calendar-cell">
+                    <ng-container *ngTemplateOutlet="templateRef; context: { daySlot: daySlot }"></ng-container>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
