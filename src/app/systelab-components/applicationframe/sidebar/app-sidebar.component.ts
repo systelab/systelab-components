@@ -3,7 +3,7 @@ import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
 
-	constructor(public name: string, public isSelected: boolean, public isIconMenu = false, public id = '') {
+	constructor(public id: string, public name: string, public isSelected: boolean) {
 	}
 }
 
@@ -26,10 +26,10 @@ export class ApplicationSidebarComponent {
 	constructor(protected dialogService: DialogService) {
 	}
 
-	private selectTab(tab: number, redirection: string) {
+	private selectTab(id: string) {
 		for (let i = 0; i < this.tabs.length; i++) {
-			this.tabs[i].isSelected = (i === tab);
+			this.tabs[i].isSelected = (this.tabs[i].id === id);
 		}
-		this.selected.emit(tab);
+		this.selected.emit(id);
 	}
 }
