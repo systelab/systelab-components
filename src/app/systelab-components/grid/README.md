@@ -68,3 +68,36 @@ export class PatientGrid extends AbstractApiGrid<PatientData> {
 
 ```
 
+##Using your component
+Once you have your component, you can use it in your template.
+
+```
+<patient-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" (clickRow)="doSelect($event)">
+...
+</patient-grid>
+```
+
+You will have the option to automatize a submenu for each row, by defining the menu and the action. And you can be updated with the user selection with the output clickRow.
+
+```
+	public doSelect(compareProfileData: PatientData): void {
+    ...
+	}
+	public getMenu(): Array<GridContextMenuOption<PatientData>> {
+		return [
+			new GridContextMenuOption('action1', 'Action 1'),
+			new GridContextMenuOption('action2', 'Action 2'),
+			new GridContextMenuOption('action3', 'Action 3')
+		];
+	}
+	public doMenuAction(action: GridContextMenuActionData<PatientData>): void {
+		if (action.actionId === 'action1') {
+			...
+		} else if (action.actionId === 'action2') {
+			...
+		} else if (action.actionId === 'action3') {
+			...
+		}
+	}
+
+```
