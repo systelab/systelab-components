@@ -18,4 +18,4 @@ this.values = [
 ];
 ```
 
-Apart form the standard select, some predefined selects are provided: systelab-all-yes-no-select, systelab-gender-select, systelab-no-yes-select and systelab-period-select.
+Apart from the standard select, some predefined selects are provided: systelab-all-yes-no-select, systelab-gender-select, systelab-no-yes-select and systelab-period-select.
