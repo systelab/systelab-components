@@ -1,12 +1,12 @@
-# systelab-comboboxes
+# systelab-combobox
 
-Component to choose between different predefined options.
+Abstract class that lets you create a Combobox component.
 
-## Using the component
+## Using the class
 
-This is not a component by itself, it is an Abstract classes that lets you define your own comboboxes.
+This is not a component by itself, it is an Abstract class that lets you define your own comboboxes.
 
-In order to do that, you must create your own component and extend from the abstract class AbstractApiComboBox<T>. The following methods have to be implemented:
+In order to do that, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;. The following methods have to be implemented:
 ```
 public abstract getInstance(): T;
 public abstract getDescriptionField(): string;
