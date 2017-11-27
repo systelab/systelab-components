@@ -6,28 +6,28 @@ Classes to show a dialog
 
 This is not a component by itself, it is an abstract class that lets you define and show a dialog.  
 
-In order to do that, you must create your own components and extend from the abstract class DefaultModalActions and implement ModalComponent&lt;ModulabModalContext&gt;. The component will need to export a class in order to send paramters to the dialog that must extend ModulabModalContext.
+In order to do that, you must create your own components and extend from the abstract class DefaultModalActions and implement ModalComponent&lt;ModulabModalContext&gt;. The component will need to export a class in order to send parameters to the dialog that must extend ModulabModalContext. ModulabModalContext already has the width, height, dialogClass and fullScreen properties.
 
 Here there is an example:
 
 ```
 export class MyDialogParameters extends ModulabModalContext {
-	public index: number;
+  public index: number;
 }
 
-@Component( {
+@Component({
   selector:  'mysuper-dialog',
   templateUrl:  'mysuper-dialog.component.html',
-} )
+})
 export class MyDialog extends DefaultModalActions implements ModalComponent<MyDialogParameters> {
   protected parameters: MyDialogParameters;
 
-  constructor( public dialog: DialogRef<MyDialogParameters> ) {
-    super( dialog );
+  constructor(public dialog: DialogRef<MyDialogParameters>) {
+    super(dialog);
     this.parameters = dialog.context;
   }
   public close(): void {
-    this.dialog.close( 'Esto es una prueba' );
+    this.dialog.close('This is a test');
   }
 
   public static getParameters(): MyDialogParameters {
@@ -35,7 +35,7 @@ export class MyDialog extends DefaultModalActions implements ModalComponent<MyDi
   }
 }
 ```
-In the constructor a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog. 
+In the constructor, a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog. 
 
 ## Using The new component;
 
