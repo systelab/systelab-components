@@ -10,6 +10,7 @@ export class CalendarDialogParameters extends ModulabModalContext {
 
 	public width = 800;
 	public height = 600;
+	public headerDescription = '';
 }
 
 @Component({
