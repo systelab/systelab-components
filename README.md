@@ -30,7 +30,6 @@ After this, in the .angular-cli.json you must add the following styles and javas
 ```
 
 Finally, you must import the SystelabComponentsModule in your Application Module:
-
 ```
 @NgModule({
 	imports: [
@@ -42,6 +41,14 @@ Finally, you must import the SystelabComponentsModule in your Application Module
 		SystelabComponentsModule.forRoot(),
 		SystelabLoginModule.forRoot(),
     ...
+```
+
+and add MessagePopupService and DialogService as providers.
+```
+providers: [
+		MessagePopupService,
+		DialogService
+],
 ```
 
 ## Working with the repo
