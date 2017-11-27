@@ -35,13 +35,37 @@ protected abstract getColumnDefs(): Array<any>;
 protected abstract getTotalItems(): number;
 protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 ```
+Usually you will get the information to provide to getTotalItems and getData from your api:
 
-	@Input() protected menu: Array<GridContextMenuOption<T>>;
-	@Input() protected headerMenu: Array<GridContextMenuOption<Object>>;
-	@Input() protected preferenceName: string;
-	@Input() public multipleSelection = false;
-	@Input() public showChecks = false;
-	@Input() public rowData: Array<T> = [];
+For example:
+```
+@Component({
+	selector:    'patient-grid',
+	templateUrl: '../../../../../../node_modules/systelab-components/html/abstract-grid.component.html'
+})
+export class PatientGrid extends AbstractApiGrid<PatientData> {
+	constructor(protected api: PatientApi,protected preferencesService: PreferencesService,
+		protected i18nService: I18nService, protected dialogService: DialogService) {
+		super(preferencesService, i18nService, dialogService);
+	}
 
-	@Output() public action = new EventEmitter();
-	@Output() public clickRow = new EventEmitter();
+	protected getColumnDefs(): Array<any> {
+
+		// TODO Translate column names
+		const columnDefs: Array<any> = [
+			{colId: 'patientId', headerName: 'Id', field: 'patientId', width: 200},
+			{colId: 'patientDescription', headerName: 'Description', field: 'patientDescription', width: 200}
+		];
+		return columnDefs;
+	}
+	protected getTotalItems() {
+		return this.api.totalItems;
+	}
+
+	protected getData(page: number, itemsPerPage: number): Observable<Array<PatientData>> {
+		return this.api.getPatientList(page, itemsPerPage);
+	}
+}
+
+```
+
