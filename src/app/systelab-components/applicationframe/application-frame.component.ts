@@ -8,7 +8,7 @@ import { ApplicationSidebarAction, ApplicationSidebarTab } from './sidebar/app-s
 	templateUrl: 'application-frame.component.html',
 	styleUrls:   ['application-frame.component.scss']
 })
-export class ApplicationFrameComponent implements OnInit {
+export class ApplicationFrameComponent {
 
 	@Input() public title: string;
 
@@ -25,12 +25,8 @@ export class ApplicationFrameComponent implements OnInit {
 	constructor(protected i18nService: I18nService) {
 	}
 
-	public ngOnInit() {
-		this.doSelect(0);
-	}
-
-	public doSelect(tab: number) {
-		this.selected.emit(tab);
+	public doSelect(id: string) {
+		this.selected.emit(id);
 	}
 
 }
