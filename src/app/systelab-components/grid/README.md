@@ -26,6 +26,7 @@ protected getColumnDefs(): Array<any> {
   return columnDefs;
 }
 ```
+As the grid is based in Ag Grid, you will find usefull information at https://www.ag-grid.com/best-angular-2-data-grid.
 
 ## Using AbstractApiGrid&lt;T&gt;
 
