@@ -68,7 +68,7 @@ export class PatientGrid extends AbstractApiGrid<PatientData> {
 
 ```
 
-##Using your component
+## Using your component
 Once you have your component, you can use it in your template.
 
 ```
