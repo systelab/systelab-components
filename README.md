@@ -12,7 +12,7 @@ npm install systelab-components --save
 
 After this, in the .angular-cli.json you must add the following styles and javascripts:
 
-```
+```javascript
 "styles": [
         "../node_modules/uikit/dist/css/uikit.almost-flat.css",
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
@@ -30,7 +30,7 @@ After this, in the .angular-cli.json you must add the following styles and javas
 ```
 
 Finally, you must import the SystelabComponentsModule in your Application Module:
-```
+```javascript
 @NgModule({
 	imports: [
 		BrowserModule,
@@ -44,7 +44,7 @@ Finally, you must import the SystelabComponentsModule in your Application Module
 ```
 
 and add MessagePopupService and DialogService as providers.
-```
+```javascript
 providers: [
 	MessagePopupService,
 	DialogService
