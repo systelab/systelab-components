@@ -11,6 +11,8 @@ import { TouchSpinValues } from './systelab-components/spinner/touch.spin-values
 import { TwoListItem } from './systelab-components/twolist/two-list.component';
 import { MessagePopupService } from './systelab-components/modal/message-popup/message-popup.service';
 import { DialogService } from './systelab-components/modal/dialog/dialog.service';
+import { PieElement } from './systelab-components/piechart/pie.component';
+import { CalendarDialog, CalendarDialogParameters } from './systelab-components/calendar/calendar-dialog.component';
 
 @Component({
 	selector:      'app-root',
@@ -28,6 +30,9 @@ export class ShowcaseComponent implements OnInit {
 
 	public _disableRefreshButton = false;
 	private firstViewportChanged = true;
+
+	public colorId: any;
+	public colorValue: any;
 
 	@Input()
 	get disableRefreshButton() {
@@ -55,6 +60,8 @@ export class ShowcaseComponent implements OnInit {
 	public sliderValue = 100;
 
 	public currentTab = 1;
+
+	public data: PieElement[] = [];
 
 	constructor(protected preferencesService: PreferencesService, protected languageService: I18nService, protected messagePopupService: MessagePopupService, protected dialogService: DialogService) {
 
@@ -90,9 +97,19 @@ export class ShowcaseComponent implements OnInit {
 			{description: 'Amsterdam', id: 10},
 			{description: 'St Petersburgo', id: 11}
 		];
+
+
+
+	}
+
+	public doSelect(action: string) {
+		console.log(action);
 	}
 
 	public ngOnInit() {
+		this.data.push(new PieElement('id1', 150, '#FFDAB9', 'ACTION1'));
+		this.data.push(new PieElement('id2', 150, '#E6E6FA', 'ACTION2'));
+		this.data.push(new PieElement('id3', 300, '#E0FFFF', 'ACTION3'));
 
 	}
 
@@ -157,6 +174,10 @@ export class ShowcaseComponent implements OnInit {
 	}
 
 	public splitShowcase() {
+
+		const parametersC: CalendarDialogParameters = CalendarDialog.getParameters();
+		this.dialogService.showDialog(CalendarDialog, parametersC);
+
 		const parameters: SplitShowcaseDialogParameters = SplitShowcaseDialog.getParameters();
 		this.dialogService.showDialog(SplitShowcaseDialog, parameters);
 	}
@@ -236,5 +257,8 @@ export class ShowcaseComponent implements OnInit {
 
 	public comboChangeEvent(event: any): void {
 		console.log('comboValue ', event);
+		console.log(this.colorId);
+		console.log(this.colorValue);
+
 	}
 }
