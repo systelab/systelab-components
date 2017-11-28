@@ -1,9 +1,9 @@
-<div class="application-container uk-flex uk-flex-column">
+<div class="slab-application-container uk-flex uk-flex-column">
   <systelab-app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
     <ng-content select="[header-content]"></ng-content>
   </systelab-app-header>
-  <div class="center uk-flex uk-flex-item-1">
-    <div class="east">
+  <div class="slab-main-container uk-flex uk-flex-item-1">
+    <div class="slab-side-bar-container">
       <systelab-app-sidebar [tabs]="tabs" [actions]="actions" (selected)="doSelect($event)"></systelab-app-sidebar>
     </div>
     <div class="uk-flex uk-flex-item-1">

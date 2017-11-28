@@ -1,14 +1,14 @@
-<div class="twolist uk-height-1-1">
-    <div class="twolistdiv uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap">
-        <div class="twolistboxtitle">{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</div>
+<div class="slab-twolist uk-height-1-1">
+    <div class="slab-twolistdiv uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap">
+        <div class="slab-twolistboxtitle">{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</div>
         <div class="uk-margin-small-right">
             <input type="text" class="uk-margin-small-left" [(ngModel)]="firstListSearch">
         </div>
-        <div class="twolistbox uk-panel uk-panel-box uk-panel-box-secondary uk-height-1-1 uk-overflow-container">
-            <div class="twolistboxdiv">
-                <ul class="twolistboxrow list-group">
+        <div class="slab-twolistbox uk-panel uk-panel-box uk-panel-box-secondary uk-height-1-1 uk-overflow-container">
+            <div class="slab-twolistboxdiv">
+                <ul class="slab-twolistboxrow list-group">
                     <li *ngFor="let item of (available | datafilter:firstListSearch)"
-                        [ngClass]="{'twolistboxrow twolistboxrowselected':item.selected,'twolistboxrow':!item.selected}"
+                        [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.selected,'slab-twolistboxrow':!item.selected}"
                         (click)="selectAvailableItem(item, $event)">
                         {{item.displayName}}
                     </li>
@@ -16,23 +16,23 @@
             </div>
         </div>
     </div>
-    <div class="twolistbuttondiv">
-        <button class="twolistbutton uk-button icon-chevron-right" (click)="add()" title="Add selected"
+    <div class="slab-twolistbuttondiv">
+        <button class="slab-twolistbutton uk-button icon-chevron-right" (click)="add()" title="Add selected"
                 [disabled]="selected.available.length == 0">
         </button>
-        <button class="twolistbutton uk-button icon-chevron-left" (click)="remove()" title="Remove selected"
+        <button class="slab-twolistbutton uk-button icon-chevron-left" (click)="remove()" title="Remove selected"
                 [disabled]="selected.current.length == 0">
         </button>
     </div>
 
-    <div class="twolistdiv uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap">
-        <div class="twolistboxtitle">{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</div>
+    <div class="slab-twolistdiv uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap">
+        <div class="slab-twolistboxtitle">{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</div>
         <div class="uk-margin-small-right">
             <input type="text" class="uk-margin-small-left" [(ngModel)]="secondListSearch">
         </div>
-        <div class="twolistbox uk-panel uk-panel-box uk-panel-box-secondary uk-height-1-1 uk-overflow-container">
-            <div class="twolistboxdiv" dnd-droppable>
-                <ul class="twolistboxrow list-group" dnd-sortable-container [sortableData]="visible"
+        <div class="slab-twolistbox uk-panel uk-panel-box uk-panel-box-secondary uk-height-1-1 uk-overflow-container">
+            <div class="slab-twolistboxdiv" dnd-droppable>
+                <ul class="slab-twolistboxrow list-group" dnd-sortable-container [sortableData]="visible"
                     [dropZones]="['visible-dropZone']">
                     <li *ngFor="let visCol of (visible| datafilter:secondListSearch);let i = index"
                         [ngClass]="getTwoListBoxRowClass(visCol)"

@@ -1,11 +1,11 @@
-<div class="sidebar-menu-container">
-    <ul class="tabs-container uk-tab uk-tab-left uk-width-medium-1-2">
-        <li class="tab" *ngFor="let tab of tabs; let i=index;" (click)="selectTab(tab.id)" [class.selected]="tab.isSelected">
-            <div class="tab-decoration"></div>
+<div class="slab-sidebar-menu-container">
+    <ul class="slab-sidebar-tabs-container uk-tab uk-tab-left uk-width-medium-1-2">
+        <li class="slab-sidebar-tab" *ngFor="let tab of tabs; let i=index;" (click)="selectTab(tab.id)" [class.selected]="tab.isSelected">
+            <div class="slab-sidebar-tab-decoration"></div>
             <span>{{tab.name }}</span>
         </li>
     </ul>
-    <ul class="actions-container">
+    <ul class="slab-sidebar-actions-container">
         <button  *ngFor="let action of actions" class="uk-button uk-button-large" (click)="action.action()">{{ action.name}}</button>
     </ul>
 </div>
