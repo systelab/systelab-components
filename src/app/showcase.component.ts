@@ -160,19 +160,6 @@ export class ShowcaseComponent implements OnInit {
 		this.dialogService.showDialog(LowerFlexDialog, lowerFlexDialogParameters);
 	}
 
-	public subFlexOtherLang() {
-		const lowerFlexDialogParameters: LowerFlexDialogParameters = LowerFlexDialog.getParameters();
-
-		lowerFlexDialogParameters.width = 960;
-		lowerFlexDialogParameters.height = 600;
-		lowerFlexDialogParameters.index = 4;
-		this.languageService.use('pl')
-			.subscribe(() => {
-				this.dialogService.showDialog(LowerFlexDialog, lowerFlexDialogParameters);
-			});
-
-	}
-
 	public splitShowcase() {
 
 		const parametersC: CalendarDialogParameters = CalendarDialog.getParameters();

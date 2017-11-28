@@ -1,0 +1,38 @@
+/* $textarea-width: defines the width of the textarea inside the uk-form when the uk-width class is not present.*/
+$textarea-width: $input-width !default;
+/* $textarea-min-height: defines the min-height of the textarea inside the uk-form.*/
+$textarea-min-height: ceil(170px * $size_percentage) !default;
+
+.uk-form textarea {
+  border-radius: $border-radius;
+  min-height: $textarea-min-height;
+
+  &:not([class*="uk-width-"]) {
+    width: $textarea-width;
+  }
+
+  &.no-resize {
+    resize: none;
+  }
+
+  &.vertical-resize {
+    resize: vertical;
+  }
+
+  &.horizontal-resize {
+    resize: horizontal;
+  }
+
+  + .options-overlay {
+    top: 7px;
+    right: 7px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: $medium-gray;
+    padding: 3px;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

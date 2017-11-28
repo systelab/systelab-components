@@ -51,12 +51,6 @@ input[type="radio"] + label {
     background-color: $radio-color;
 
   }
-
-  &.uk-hide-radio {
-    &:before {
-      content: none;
-    }
-  }
 }
 
 // Define background color and icon size when checked
