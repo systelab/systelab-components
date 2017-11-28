@@ -107,43 +107,61 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						.replace('D', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentDate.setDate(today.getDate() - days);
 					this.currentCalendar._isValid = true;
+					if (!isNaN(days)) {
+						this.currentDate.setDate(today.getDate() - days);
+						emit = true;
+					}
 				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
 					let weeks: number = Number(dateStr.replace('w', '')
 						.replace('W', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentDate.setDate(today.getDate() - (weeks * 7));
 					this.currentCalendar._isValid = true;
+					if (!isNaN(weeks)) {
+						this.currentDate.setDate(today.getDate() - (weeks * 7));
+						emit = true;
+					}
 				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
 					let weeks: number = Number(dateStr.replace('s', '')
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentDate.setDate(today.getDate() - (weeks * 7));
 					this.currentCalendar._isValid = true;
+					if (!isNaN(weeks)) {
+						this.currentDate.setDate(today.getDate() - (weeks * 7));
+						emit = true;
+					}
 				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
 					let months: number = Number(dateStr.replace('m', '')
 						.replace('M', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentDate.setMonth(today.getMonth() - months);
 					this.currentCalendar._isValid = true;
+					if (!isNaN(months)) {
+						this.currentDate.setMonth(today.getMonth() - months);
+						emit = true;
+					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
 					let years: number = Number(dateStr.replace('a', '')
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
 					this.currentCalendar._isValid = true;
+					if (!isNaN(years)) {
+						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
+						emit = true;
+					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
 					let years: number = Number(dateStr.replace('y', '')
 						.replace('Y', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
 					this.currentCalendar._isValid = true;
+					if (!isNaN(years)) {
+						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
+						emit = true;
+					}
 				}
 			}
 		}
@@ -154,6 +172,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public saveEventOnFocus(evt: FocusEvent): void {
 		this.inputElement = new ElementRef(evt.target);
+		this.getLanguage();
 		this.focusEvt = evt;
 	}
 
@@ -209,42 +228,183 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	 }*/
 
 	private getLanguage(): void {
-		// TODO: To translate
-		switch (this.otherLanguage) {
+		this.language = {
+			dayNames:        [
+				this.i18nService.instant('COMMON_SUNDAY'),
+				this.i18nService.instant('COMMON_MONDAY'),
+				this.i18nService.instant('COMMON_TUESDAY'),
+				this.i18nService.instant('COMMON_WEDNESDAY'),
+				this.i18nService.instant('COMMON_THURSDAY'),
+				this.i18nService.instant('COMMON_FRIDAY'),
+				this.i18nService.instant('COMMON_SATURDAY')
+			],
+			dayNamesShort:   [
+				this.i18nService.instant('COMMON_SEVENTH_DAY'),
+				this.i18nService.instant('COMMON_FIRST_DAY'),
+				this.i18nService.instant('COMMON_SECOND_DAY'),
+				this.i18nService.instant('COMMON_THIRD_DAY'),
+				this.i18nService.instant('COMMON_FOURTH_DAY'),
+				this.i18nService.instant('COMMON_FIFTH_DAY'),
+				this.i18nService.instant('COMMON_SIXTH_DAY')
+			],
+			dayNamesMin:     [
+				this.i18nService.instant('COMMON_SEVENTH_DAY'),
+				this.i18nService.instant('COMMON_FIRST_DAY'),
+				this.i18nService.instant('COMMON_SECOND_DAY'),
+				this.i18nService.instant('COMMON_THIRD_DAY'),
+				this.i18nService.instant('COMMON_FOURTH_DAY'),
+				this.i18nService.instant('COMMON_FIFTH_DAY'),
+				this.i18nService.instant('COMMON_SIXTH_DAY')
+			],
+			monthNames:      [
+				this.i18nService.instant('COMMON_JANUARY'),
+				this.i18nService.instant('COMMON_FEBRUARY'),
+				this.i18nService.instant('COMMON_MARCH'),
+				this.i18nService.instant('COMMON_APRIL'),
+				this.i18nService.instant('COMMON_MAY'),
+				this.i18nService.instant('COMMON_JUNE'),
+				this.i18nService.instant('COMMON_JULY'),
+				this.i18nService.instant('COMMON_AUGUST'),
+				this.i18nService.instant('COMMON_SEPTEMBER'),
+				this.i18nService.instant('COMMON_OCTOBER'),
+				this.i18nService.instant('COMMON_NOVEMBER'),
+				this.i18nService.instant('COMMON_DECEMBER')
+			],
+			monthNamesShort: [
+				this.i18nService.instant('JOB_MONTHS_1'),
+				this.i18nService.instant('JOB_MONTHS_2'),
+				this.i18nService.instant('JOB_MONTHS_3'),
+				this.i18nService.instant('JOB_MONTHS_4'),
+				this.i18nService.instant('JOB_MONTHS_5'),
+				this.i18nService.instant('JOB_MONTHS_6'),
+				this.i18nService.instant('JOB_MONTHS_7'),
+				this.i18nService.instant('JOB_MONTHS_8'),
+				this.i18nService.instant('JOB_MONTHS_9'),
+				this.i18nService.instant('JOB_MONTHS_10'),
+				this.i18nService.instant('JOB_MONTHS_11'),
+				this.i18nService.instant('JOB_MONTHS_12')
+			]
+		};
+
+		this.language.firstDayOfWeek = this.getFirstDayOfWeek();
+		this.language.dateFormatValue = this.getDateFormat(true);
+	}
+
+	private getFirstDayOfWeek(): number {
+		switch (this.i18nService.getCurrentLanguage()) {
+			case 'us': //'US'
+			case 'zh': //'CN'
+			case 'th': //'TH'
+			case 'ja': //'JP'
+				return 0;
+			case 'en': //'GB'
+			case 'it': //'IT'
+			case 'ar':
+			case 'es':
+			case 'bo':
+			case 'cl':
+			case 'co':
+			case 'cr':
+			case 'do':
+			case 'ec':
+			case 'gt':
+			case 'hn':
+			case 'mx':
+			case 'ni':
+			case 'pa':
+			case 'pe':
+			case 'pr':
+			case 'py':
+			case 'sv':
+			case 'ur':
+			case 've':
+			case 'fr':
+			case 'gl':
+			case 'ca':
+			case 'pl': //'PL'
+			case 'lt': //'LT'
+			case 'pt': //'PT'
+			case 'nl': //'NL'
+			case 'sk': //'SK'
+			case 'ru': //'RU'
+			case 'de': //'DE'
+			case 'ko':
+			default:
+				return 1;
+		}
+	}
+
+	private getDateFormat(isFullYear: boolean): string {
+		let stringDateFormat = '';
+		switch (this.i18nService.getCurrentLanguage()) {
+			case 'us':
+				stringDateFormat = 'm/d/y';
+				break;
 			case 'en':
-				this.language = {
-					firstDayOfWeek:  0,
-					dayNames:        ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
-					dayNamesShort:   ['sun', 'mon', 'tue', 'wed', 'thu', 'fir', 'sat'],
-					dayNamesMin:     ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'],
-					monthNames:      ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-					monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-					dateFormatValue: 'mm/dd/yy'
-				};
+			case 'it':
+			case 'ar':
+			case 'es':
+			case 'bo':
+			case 'cl':
+			case 'co':
+			case 'cr':
+			case 'do':
+			case 'ec':
+			case 'gt':
+			case 'hn':
+			case 'mx':
+			case 'ni':
+			case 'pa':
+			case 'pe':
+			case 'pr':
+			case 'py':
+			case 'sv':
+			case 'ur':
+			case 've':
+			case 'fr':
+			case 'gl':
+			case 'ca':
+				stringDateFormat = 'dd/mm/y';
+				break;
+			case 'ko':
+				stringDateFormat = 'y. m. d';
 				break;
 			case 'pl':
-				this.language = {
-					firstDayOfWeek:  0,
-					dayNames:        ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-					dayNamesShort:   ['Niedz.', 'Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt', 'Sob.'],
-					dayNamesMin:     ['Nd', 'P', 'Wt', 'Śr', 'Cz', 'Pt', 'So'],
-					monthNames:      ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
-					monthNamesShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
-					dateFormatValue: 'dd-mm-y'
-				};
+			case 'lt':
+				stringDateFormat = 'y-mm-dd';
+				break;
+			case 'pt':
+			case 'nl':
+				stringDateFormat = 'dd-mm-y';
+				break;
+			case 'sk':
+			case 'ru':
+				stringDateFormat = 'd.m.y';
+				break;
+			case 'zh':
+				stringDateFormat = 'y-m-d';
+				break;
+			case 'de':
+				stringDateFormat = 'dd.mm.y';
+				break;
+			case 'th':
+				stringDateFormat = 'd/m/y';
+				break;
+			case 'ja':
+				stringDateFormat = 'y/mm/dd';
 				break;
 			default:
-				this.language = {
-					firstDayOfWeek:  1,
-					dayNames:        ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
-					dayNamesShort:   ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
-					dayNamesMin:     ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
-					monthNames:      ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
-					monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
-					dateFormatValue: 'dd/mm/yy'
-				};
+				stringDateFormat = 'dd/mm/y';
 				break;
 		}
+		if (isFullYear) {
+			stringDateFormat = stringDateFormat.replace('y', 'yy');
+			if (this.i18nService.getCurrentLanguage() === 'us') {
+				stringDateFormat = stringDateFormat.replace('m', 'mm');
+				stringDateFormat = stringDateFormat.replace('d', 'dd');
+			}
+		}
+		return stringDateFormat;
 	}
 
 	private addListeners(): void {
