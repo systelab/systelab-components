@@ -5,20 +5,23 @@ $sizes: (
   25: 25%,
   33: 33.333%,
   50: 50%,
-  66: 66.66%,
+  66: 66.666%,
   75: 75%,
   100: 100%
 );
 
-@import "node_modules/bootstrap/scss/bootstrap";
-
 /**
- * Import files from default theme folder
- * src/slt-common/assets/styles/default-theme/sass/
- */
+* Import files from default theme folder
+* src/slt-common/assets/styles/default-theme/sass/
+*/
 @import "styleColor";
 @import "styleSheet";
 @import "mixins";
+
+// we must load bootstrap after setting our own variables
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// then we can load ourcomponents
 @import "dialog";
 @import "icon_legacy";
 @import "dropdown";
