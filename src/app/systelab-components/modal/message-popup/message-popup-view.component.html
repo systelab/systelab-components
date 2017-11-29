@@ -9,14 +9,14 @@
 </div>
 <div class="ngdialog-buttons">
     <div class="uk-float-right" *ngIf="context.yesNoButtons; else customcomponent">
-        <button type="button" class="uk-button uk-button-large" (click)="close(true)">{{ 'COMMON_OK' | translate | async }}
+        <button type="button" class="btn btn-lg" (click)="close(true)">{{ 'COMMON_OK' | translate | async }}
         </button>
-        <button type="button" class="uk-button uk-button-large" (click)="close(false)">{{ 'COMMON_CANCEL' | translate | async }}
+        <button type="button" class="btn btn-lg" (click)="close(false)">{{ 'COMMON_CANCEL' | translate | async }}
         </button>
     </div>
     <ng-template #customcomponent>
         <div class="uk-float-right">
-            <button type="button" class="uk-button uk-button-large" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}
+            <button type="button" class="btn btn-lg" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}
             </button>
         </div>
     </ng-template>

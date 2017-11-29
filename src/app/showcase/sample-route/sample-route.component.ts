@@ -16,13 +16,13 @@ export class Connection {
 	selector: 'sample-route',
 	template: `
 <div style="padding-bottom: 10px;">
-	<button type="button" class="uk-button uk-button-large" (click)="setColor('green')">Green</button>
-	<button type="button" class="uk-button uk-button-large" (click)="setColor('red')">Red</button>
-	<button type="button" class="uk-button uk-button-large" (click)="setColor('blue')">Blue</button>
+	<button type="button" class="btn btn-lg" (click)="setColor('green')">Green</button>
+	<button type="button" class="btn btn-lg" (click)="setColor('red')">Red</button>
+	<button type="button" class="btn btn-lg" (click)="setColor('blue')">Blue</button>
 
-	<button type="button" class="uk-button uk-button-large" (click)="save()">Save</button>
-	<button type="button" class="uk-button uk-button-large" (click)="restore()">Restore</button>
-	<button type="button" class="uk-button uk-button-large" (click)="clear()">Clear</button>
+	<button type="button" class="btn btn-lg" (click)="save()">Save</button>
+	<button type="button" class="btn btn-lg" (click)="restore()">Restore</button>
+	<button type="button" class="btn btn-lg" (click)="clear()">Clear</button>
 
 </div>
 <div>

@@ -2,12 +2,12 @@
 /* $size_percentage: Change the component size */
 $size_percentage: 0.7 !default;
 /* $form-elements-height: Defines the line height;
-                          in “uk-button-medium” we redefine the line-height and the max-height of the medium size button and the size,
+                          in btn-medium” we redefine the line-height and the max-height of the medium size button and the size,
                             the min-width and the min-height of a square button;
                           defines the max-height of the multiSelectOutBox and the min-height of the uk-form-row;
                           defines the line-height of the uk-grid;
                           used to calculate the width of the input inside a uk-input-file;
-                          to calculate the size of a uk-button inside a uk-input-file;
+                          to calculate the size of a btn inside a uk-input-file;
                           defines the line-height of the uk-line-height class;
                           used to calculate the $top-icon value;
                           used to calculate the line-height of the label inside the switch class */

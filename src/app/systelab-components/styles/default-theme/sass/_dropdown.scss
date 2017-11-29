@@ -93,7 +93,11 @@
   }
 }
 
-.uk-button-dropdown {
+.btn-dropdown {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+
   &.uk-open {
     background: initial;
   }

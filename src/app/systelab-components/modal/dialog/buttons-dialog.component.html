@@ -1,9 +1,9 @@
 <div class="ngdialog-buttons">
-    <button *ngFor="let but of getLeftButtons()" type="button" class="uk-button uk-button-large" (click)="sendAction(but.action)">
+    <button *ngFor="let but of getLeftButtons()" type="button" class="btn btn-lg" (click)="sendAction(but.action)">
         {{but.text}}
     </button>
     <div class="uk-float-right">
-        <button *ngFor="let button of getRightButtons()" type="button" class="uk-button uk-button-large" (click)="sendAction(button.action)">
+        <button *ngFor="let button of getRightButtons()" type="button" class="btn btn-lg" (click)="sendAction(button.action)">
             {{button.text}}
         </button>
     </div>
