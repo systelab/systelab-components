@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: (
+  25: 25%,
+  33: 33.333%,
+  50: 50%,
+  66: 66.66%,
+  75: 75%,
+  100: 100%
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
 /**
  * Import files from default theme folder
  * src/slt-common/assets/styles/default-theme/sass/
