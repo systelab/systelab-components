@@ -112,14 +112,12 @@ $content-border-width: 4px;
 
   @include size(100%);
 
-  /* Fullscreen by default */
-
-  overflow: visible;
+  overflow: visible; /* Fullscreen by default */
 
   /* Styles for non full-screen and fixed size dialogs with dark button bar */
   &[class*="uk-height-"],
   &[class*="uk-width-"],
-  &.uk-fixed-size {
+  &.slab-dialog-fixed-size {
     .slab-dialog-content {
       z-index: 2;
       border: $content-border-width solid $slab-dialog-border-color;

@@ -27,7 +27,7 @@ export class ModulabModalContainer extends BaseDynamicComponent implements OnIni
 		if (this.dialog.context.dialogClass) {
 			this.computedClass = this.dialog.context.dialogClass;
 		} else if (this.dialog.context.width && this.dialog.context.height) {
-			this.computedClass = 'uk-fixed-size';
+			this.computedClass = 'slab-dialog-fixed-size';
 		} else if (this.dialog.context.fullScreen) {
 			this.computedClass = '';
 		}
