@@ -125,7 +125,7 @@ export class ShowcaseComponent implements OnInit {
 	}
 
 	public showWarning() {
-		this.messagePopupService.showWarningPopup('Test', 'Warning message popup example', 'uk-width-1-3 uk-height-1-3');
+		this.messagePopupService.showWarningPopup('Test', 'Warning message popup example', 'w-33 h-33');
 
 	}
 

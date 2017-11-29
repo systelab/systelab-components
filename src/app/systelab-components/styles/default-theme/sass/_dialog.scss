@@ -115,8 +115,8 @@ $content-border-width: 4px;
   overflow: visible; /* Fullscreen by default */
 
   /* Styles for non full-screen and fixed size dialogs with dark button bar */
-  &[class*="uk-height-"],
-  &[class*="uk-width-"],
+  &[class*="h-"],
+  &[class*="w-"],
   &.slab-dialog-fixed-size {
     .slab-dialog-content {
       z-index: 2;
@@ -136,8 +136,8 @@ $content-border-width: 4px;
   }
 
   /* Styles for full-screen dialogs with white button bar */
-  &.uk-height-1-1,
-  &.uk-width-1-1 {
+  &.w-100,
+  &.w-100 {
     .slab-dialog-content {
       z-index: 2;
       border: none;

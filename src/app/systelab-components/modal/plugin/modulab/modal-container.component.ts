@@ -22,7 +22,7 @@ export class ModulabModalContainer extends BaseDynamicComponent implements OnIni
 
 	public ngOnInit(): void {
 
-		this.computedClass = 'uk-width-1-3 uk-height-1-3';
+		this.computedClass = 'w-33 h-33';
 
 		if (this.dialog.context.dialogClass) {
 			this.computedClass = this.dialog.context.dialogClass;
