@@ -59,5 +59,9 @@ $tab-margin-top: 5px;
 
 .tab-content > .active {
   display: flex;
+  overflow: auto;
 }
 
+.tab-pane {
+  margin:5px;
+}
