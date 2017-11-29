@@ -1,5 +1,5 @@
-<div class="ngdialog-header">{{ context.title }}</div>
-<div class="ngdialog-message msg-box with-buttons uk-vertical-align">
+<div class="slab-dialog-header">{{ context.title }}</div>
+<div class="slab-dialog-message msg-box with-buttons uk-vertical-align">
     <div class="uk-vertical-align-middle img">
         <i class="{{context.icon}} {{context.color}}"></i>
     </div>
@@ -7,7 +7,7 @@
         {{ context.msg }}
     </div>
 </div>
-<div class="ngdialog-buttons">
+<div class="slab-dialog-buttons">
     <div class="uk-float-right" *ngIf="context.yesNoButtons; else customcomponent">
         <button type="button" class="btn btn-lg" (click)="close(true)">{{ 'COMMON_OK' | translate | async }}
         </button>
@@ -22,6 +22,6 @@
     </ng-template>
     <div class="uk-clearfix"></div>
 </div>
-<div class="ngdialog-close" (click)="close()"></div>
+<div class="slab-dialog-close" (click)="close()"></div>
 
 

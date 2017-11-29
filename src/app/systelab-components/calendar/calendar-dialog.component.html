@@ -1,7 +1,7 @@
-<div class="ngdialog-header ng-binding">
+<div class="slab-dialog-header ng-binding">
     <span>{{parameters.headerDescription}}</span>
 </div>
-<div class="custom-calendar-dialog ngdialog-message uk-flex uk-flex-column">
+<div class="custom-calendar-dialog slab-dialog-message uk-flex uk-flex-column">
     <systelab-calendar-header [currentDate]="currentDate"
                               (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"
                               (nextMonth)="changeMonth(1)" (nextYear)="changeYear(1)" [locale]="locale">
@@ -17,4 +17,4 @@
         </ng-template>
     </systelab-calendar-table>
 </div>
-<div class="ngdialog-close" (click)="close()"></div>
+<div class="slab-dialog-close" (click)="close()"></div>

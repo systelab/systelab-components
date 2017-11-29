@@ -8,7 +8,7 @@ import { IMessageModalPreset } from './presets/message-modal-preset';
 	host:        {
 		'tabindex': '-1',
 		'role':     'alertdialog',
-		'class':    'ngdialog-overlay',
+		'class':    'slab-dialog-overlay',
 	}
 })
 export class ModulabModalContainer extends BaseDynamicComponent implements OnInit {
@@ -32,7 +32,7 @@ export class ModulabModalContainer extends BaseDynamicComponent implements OnIni
 			this.computedClass = '';
 		}
 
-		this.computedClass += ' ngdialog-disabled-animation';
+		this.computedClass += ' slab-dialog-disabled-animation';
 	}
 
 }

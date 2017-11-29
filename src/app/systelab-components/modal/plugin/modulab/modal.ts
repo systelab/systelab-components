@@ -21,7 +21,7 @@ export class Modal extends Modal_ {
 
 		dialogRef.inElement ? overlay.insideElement() : overlay.fullscreen();
 
-		// This is needed in order to use the same z-index than default ngdialog styles do
+		// This is needed in order to use the same z-index than default slab-dialog styles do
 		overlay.setStyle('z-index', '10000');
 
 		// add body class if this is the only dialog in the stack
