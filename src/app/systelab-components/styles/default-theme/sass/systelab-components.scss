@@ -11,15 +11,15 @@ $sizes: (
 );
 
 /**
-* Import files from default theme folder
-* src/slt-common/assets/styles/default-theme/sass/
-*/
+ * Import files from default theme folder
+ * src/slt-common/assets/styles/default-theme/sass/
+ */
 @import "styleColor";
 @import "styleSheet";
 @import "mixins";
 
 // we must load bootstrap after setting our own variables
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 // then we can load ourcomponents
 @import "dialog";
