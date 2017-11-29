@@ -25,11 +25,11 @@ export class SplitShowcaseDialog extends DefaultModalActions implements ModalCom
 	constructor(public dialog: DialogRef<SplitShowcaseDialogParameters>, protected preferencesService: PreferencesService) {
 		super(dialog);
 		this.parameters = dialog.context;
-		if (preferencesService.getPreference('split1Size')) {
-			this.testSelectorSize = preferencesService.getPreference('split1Size');
+		if (preferencesService.get('split1Size')) {
+			this.testSelectorSize = preferencesService.get('split1Size');
 		}
-		if (preferencesService.getPreference('split2Size')) {
-			this.tableSize = preferencesService.getPreference('split2Size');
+		if (preferencesService.get('split2Size')) {
+			this.tableSize = preferencesService.get('split2Size');
 		}
 	}
 
@@ -42,11 +42,11 @@ export class SplitShowcaseDialog extends DefaultModalActions implements ModalCom
 	}
 
 	public dragProgressVertical(event: any) {
-		this.preferencesService.putPreference('split2Size', event[1]);
+		this.preferencesService.put('split2Size', event[1]);
 	}
 
 	public dragProgressHorizontal(event: any) {
-		this.preferencesService.putPreference('split1Size', event[0]);
+		this.preferencesService.put('split1Size', event[0]);
 	}
 
 	public setShowDetails() {
