@@ -170,15 +170,15 @@ $content-border-width: 4px;
       border-top: 1px solid $background-hemohub;
       background: $darker-gray;
 
-      .uk-button.uk-float-right + .uk-button.uk-float-right {
+      .btn.uk-float-right + .btn.uk-float-right {
         margin-right: 0.25em;
       }
 
       // Smaller buttons before $breakpoint-huge
       @media (max-width: $breakpoint-huge) {
         &.slab-dialog-buttons-condensed {
-          .uk-button,
-          .uk-button-large {
+          .btn,
+          .btn-lg {
             padding: 0 5px;
           }
         }
@@ -187,8 +187,8 @@ $content-border-width: 4px;
       // Larger icons after $breakpoint-huge
       @media (min-width: $breakpoint-huge) {
         &.slab-dialog-buttons-condensed {
-          .uk-button,
-          .uk-button-large {
+          .btn,
+          .btn-lg {
             i {
               @include position(relative, $top: 2px);
 
@@ -198,8 +198,8 @@ $content-border-width: 4px;
         }
       }
 
-      .uk-button {
-        /* $button-size: defines the line-height and the min-height of the uk-button;
+      .btn {
+        /* $button-size: defines the line-height and the min-height of the btn;
                          defines the size, the min-width and the min-height of the square button;
                          used to calculate the $top-offset variable;
                          used to calculate the size of the slab-dialog-close button;
