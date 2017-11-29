@@ -19,44 +19,6 @@ $content-border-width: 4px;
   left: 0
 }
 
-/* Remove if you do not want fade outs */
-
-@-webkit-keyframes slab-dialog-fadeout {
-  0% {
-    opacity: 1
-  }
-  100% {
-    opacity: 0
-  }
-}
-
-@keyframes slab-dialog-fadeout {
-  0% {
-    opacity: 1
-  }
-  100% {
-    opacity: 0
-  }
-}
-
-@-webkit-keyframes slab-dialog-fadein {
-  0% {
-    opacity: 0
-  }
-  100% {
-    opacity: 1
-  }
-}
-
-@keyframes slab-dialog-fadein {
-  0% {
-    opacity: 0
-  }
-  100% {
-    opacity: 1
-  }
-}
-
 .slab-dialog {
   box-sizing: border-box;
   overflow: auto;
