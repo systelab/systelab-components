@@ -20,14 +20,12 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/uikit/dist/css/uikit.almost-flat.css",
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
         "../node_modules/ag-grid/dist/styles/theme-fresh.css",
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "../icons/icomoon.css"
-
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

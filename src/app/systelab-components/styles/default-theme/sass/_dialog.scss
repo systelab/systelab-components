@@ -1,20 +1,17 @@
-@import "ngDialog-grid";
-@import "ngDialog-mixins";
+@import "dialog-mixins";
 
-/* $content-border-width: defines the border of the ngdialog-content and ng-dialog-header*/
+/* $content-border-width: defines the border of the slab-dialog-content and slab-dialog-header*/
 $content-border-width: 4px;
 
-.ngdialog-flyin {
-  @include ngdialog-flyin;
+.slab-dialog-flyin {
+  @include slab-dialog-flyin;
 }
 
-.ngdialog-flyout {
-  @include ngdialog-flyout;
+.slab-dialog-flyout {
+  @include slab-dialog-flyout;
 }
 
-/* This styles are taken directly from ng-dialog package */
-
-.ngdialog, .ngdialog-overlay {
+.slab-dialog, .slab-dialog-overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -22,115 +19,75 @@ $content-border-width: 4px;
   left: 0
 }
 
-/* Remove if you do not want fade outs */
-
-@-webkit-keyframes ngdialog-fadeout {
-  0% {
-    opacity: 1
-  }
-  100% {
-    opacity: 0
-  }
-}
-
-@keyframes ngdialog-fadeout {
-  0% {
-    opacity: 1
-  }
-  100% {
-    opacity: 0
-  }
-}
-
-@-webkit-keyframes ngdialog-fadein {
-  0% {
-    opacity: 0
-  }
-  100% {
-    opacity: 1
-  }
-}
-
-@keyframes ngdialog-fadein {
-  0% {
-    opacity: 0
-  }
-  100% {
-    opacity: 1
-  }
-}
-
-.ngdialog {
+.slab-dialog {
   box-sizing: border-box;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 10000
 }
 
-.ngdialog *, .ngdialog :after, .ngdialog :before {
+.slab-dialog *, .slab-dialog :after, .slab-dialog :before {
   box-sizing: inherit
 }
 
-.ngdialog.ngdialog-disabled-animation, .ngdialog.ngdialog-disabled-animation .ngdialog-content, .ngdialog.ngdialog-disabled-animation .ngdialog-overlay {
+.slab-dialog.slab-dialog-disabled-animation, .slab-dialog.slab-dialog-disabled-animation .slab-dialog-content, .slab-dialog.slab-dialog-disabled-animation .slab-dialog-overlay {
   -webkit-animation: none !important;
   animation: none !important
 }
 
-.ngdialog-overlay {
+.slab-dialog-overlay {
   background: rgba(0, 0, 0, .4);
   -webkit-backface-visibility: hidden
 }
 
-.ngdialog.ngdialog-closing .ngdialog-overlay {
+.slab-dialog.slab-dialog-closing .slab-dialog-overlay {
   -webkit-backface-visibility: hidden
 }
 
-.ngdialog-content {
+.slab-dialog-content {
   background: #fff;
   -webkit-backface-visibility: hidden;
   pointer-events: all
 }
 
-.ngdialog.ngdialog-closing .ngdialog-content {
+.slab-dialog.slab-dialog-closing .slab-dialog-content {
   -webkit-backface-visibility: hidden
 }
 
-.ngdialog-no-overlay {
+.slab-dialog-no-overlay {
   pointer-events: none
 }
 
-.ngdialog-close:before {
+.slab-dialog-close:before {
   font-family: Helvetica, Arial, sans-serif;
   content: '\00D7';
   cursor: pointer
 }
 
-.ngdialog {
+.slab-dialog {
   $content-border-width: 4px;
 
   @include position(fixed, $top: 50%, $left: 50%);
 
   @include size(100%);
 
-  /* Fullscreen by default */
-
-  overflow: visible;
+  overflow: visible; /* Fullscreen by default */
 
   /* Styles for non full-screen and fixed size dialogs with dark button bar */
-  &[class*="uk-height-"],
-  &[class*="uk-width-"],
-  &.uk-fixed-size {
-    .ngdialog-content {
+  &[class*="h-"],
+  &[class*="w-"],
+  &.slab-dialog-fixed-size {
+    .slab-dialog-content {
       z-index: 2;
-      border: $content-border-width solid $ngdialog-border-color;
-      background-color: $ngdialog-border-color;
+      border: $content-border-width solid $slab-dialog-border-color;
+      background-color: $slab-dialog-border-color;
       border-radius: 5px;
 
-      .ngdialog-header {
+      .slab-dialog-header {
         border-radius: $content-border-width $content-border-width 0 0;
       }
 
-      .ngdialog-buttons {
+      .slab-dialog-buttons {
         background: $background;
         border-radius: 0 0 4px 4px;
       }
@@ -138,32 +95,32 @@ $content-border-width: 4px;
   }
 
   /* Styles for full-screen dialogs with white button bar */
-  &.uk-height-1-1,
-  &.uk-width-1-1 {
-    .ngdialog-content {
+  &.w-100,
+  &.w-100 {
+    .slab-dialog-content {
       z-index: 2;
       border: none;
       border-radius: 0;
 
-      .ngdialog-header {
+      .slab-dialog-header {
         border-radius: 0;
       }
 
-      .ngdialog-buttons {
+      .slab-dialog-buttons {
         background: $background;
         border-radius: 0;
       }
     }
   }
 
-  &.ngdialog-closing .ngdialog-content {
-    @include animation(ngdialog-flyout, 0.5s);
+  &.slab-dialog-closing .slab-dialog-content {
+    @include animation(slab-dialog-flyout, 0.5s);
   }
 
-  .ngdialog-content {
+  .slab-dialog-content {
     @include position(relative, $top: -50%, $left: -50%);
 
-    @include animation(ngdialog-flyin, 0.5s);
+    @include animation(slab-dialog-flyin, 0.5s);
 
     @include size(100%);
 
@@ -173,55 +130,55 @@ $content-border-width: 4px;
     border-radius: 0;
     background: transparent;
 
-    .ngdialog-header {
-      /* $padding-header: defines the padding of the ngdialog-header;
-                          used to calculate the line-height of the ngdialog-header.*/
+    .slab-dialog-header {
+      /* $padding-header: defines the padding of the slab-dialog-header;
+                          used to calculate the line-height of the slab-dialog-header.*/
       $padding-header: 20px;
 
       padding: $padding-header;
       font-size: 20px;
       border-radius: 0;
       background: $primary-color;
-      max-height: $ng-dialog-header-height;
-      height: $ng-dialog-header-height;
-      line-height: $ng-dialog-header-height - $padding-header * 2;
+      max-height: $slab-dialog-header-height;
+      height: $slab-dialog-header-height;
+      line-height: $slab-dialog-header-height - $padding-header * 2;
       box-sizing: border-box;
       color: $background;
     }
 
-    .ngdialog-message {
-      height: calc(100% - #{$ng-dialog-header-height});
+    .slab-dialog-message {
+      height: calc(100% - #{$slab-dialog-header-height});
 
       &.with-buttons {
-        height: calc(100% - #{$ng-dialog-header-height} - #{$ng-dialog-buttons-height}) !important;
+        height: calc(100% - #{$slab-dialog-header-height} - #{$slab-dialog-buttons-height}) !important;
       }
 
       overflow-y: hidden;
       background: $background;
     }
 
-    .ngdialog-buttons {
-      /* $buttons-padding: defines the padding of the ngdialog-buttons;
+    .slab-dialog-buttons {
+      /* $buttons-padding: defines the padding of the slab-dialog-buttons;
                            used to calculate the $button-size value.*/
       $buttons-padding: ceil(14px * $size_percentage);
 
       @include position(absolute, $right: 0, $bottom: 0, $left: 0);
 
-      max-height: $ng-dialog-buttons-height + 1;
+      max-height: $slab-dialog-buttons-height + 1;
       padding: $buttons-padding;
       box-sizing: border-box;
       border-top: 1px solid $background-hemohub;
       background: $darker-gray;
 
-      .uk-button.uk-float-right + .uk-button.uk-float-right {
+      .btn.uk-float-right + .btn.uk-float-right {
         margin-right: 0.25em;
       }
 
       // Smaller buttons before $breakpoint-huge
       @media (max-width: $breakpoint-huge) {
-        &.ngdialog-buttons-condensed {
-          .uk-button,
-          .uk-button-large {
+        &.slab-dialog-buttons-condensed {
+          .btn,
+          .btn-lg {
             padding: 0 5px;
           }
         }
@@ -229,9 +186,9 @@ $content-border-width: 4px;
 
       // Larger icons after $breakpoint-huge
       @media (min-width: $breakpoint-huge) {
-        &.ngdialog-buttons-condensed {
-          .uk-button,
-          .uk-button-large {
+        &.slab-dialog-buttons-condensed {
+          .btn,
+          .btn-lg {
             i {
               @include position(relative, $top: 2px);
 
@@ -241,13 +198,13 @@ $content-border-width: 4px;
         }
       }
 
-      .uk-button {
-        /* $button-size: defines the line-height and the min-height of the uk-button;
+      .btn {
+        /* $button-size: defines the line-height and the min-height of the btn;
                          defines the size, the min-width and the min-height of the square button;
                          used to calculate the $top-offset variable;
-                         used to calculate the size of the ngdialog-close button;
-                         defines the line-height and the width of the before class of the ngdialog-close.*/
-        $button-size: $ng-dialog-buttons-height - $buttons-padding * 2 - 2;
+                         used to calculate the size of the slab-dialog-close button;
+                         defines the line-height and the width of the before class of the slab-dialog-close.*/
+        $button-size: $slab-dialog-buttons-height - $buttons-padding * 2 - 2;
 
         line-height: $button-size;
         min-height: $button-size;
@@ -265,16 +222,16 @@ $content-border-width: 4px;
       }
     }
     $button-size: ceil($size_percentage * 54px);
-    /* $button-fontsize: defines the font-size of the ngdialog-close before and the i element inside the ngdialog-close.*/
+    /* $button-fontsize: defines the font-size of the slab-dialog-close before and the i element inside the slab-dialog-close.*/
     $button-fontsize: ceil($size_percentage * 32px);
-    /* $right-offset: defines the right position of the ngdialog-buttons-top. */
+    /* $right-offset: defines the right position of the slab-dialog-buttons-top. */
     $right-offset: ceil($size_percentage * 66px);
-    /* $top-offset: defines the top position of the ngdialog-buttons-top;
-                    used to define the top position of the ngdialog-close.*/
-    $top-offset: ($ng-dialog-header-height - $button-size) / 2;
+    /* $top-offset: defines the top position of the slab-dialog-buttons-top;
+                    used to define the top position of the slab-dialog-close.*/
+    $top-offset: ($slab-dialog-header-height - $button-size) / 2;
 
-    .ngdialog-buttons-top > div,
-    .ngdialog-close {
+    .slab-dialog-buttons-top > div,
+    .slab-dialog-close {
       @include size($button-size);
 
       display: inline-block;
@@ -304,7 +261,7 @@ $content-border-width: 4px;
       }
     }
 
-    .ngdialog-buttons-top {
+    .slab-dialog-buttons-top {
       @include position(absolute, $top: $top-offset, $right: $right-offset);
 
       width: auto;
@@ -315,7 +272,7 @@ $content-border-width: 4px;
       }
     }
 
-    .ngdialog-close {
+    .slab-dialog-close {
       @include position(absolute, $top: $top-offset, $right: 3px);
 
       &:before {
