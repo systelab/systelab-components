@@ -1,5 +1,5 @@
 
-.searcher-container {
+.slab-searcher-container {
   input {
     height: 100% !important;
     width: 100px;
@@ -22,15 +22,5 @@
   }
   label {
     margin-left: 5px;
-  }
-}
-
-.searcher-container-dialog {
-  input {
-    width: 60%;
-  }
-
-  select {
-    width: 30%;
   }
 }
