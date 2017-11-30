@@ -293,6 +293,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	private getFirstDayOfWeek(): number {
 		switch (this.i18nService.getCurrentLanguage()) {
 			case 'us': //'US'
+			case 'en_US':
 			case 'zh': //'CN'
 			case 'th': //'TH'
 			case 'ja': //'JP'
