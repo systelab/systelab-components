@@ -5,8 +5,8 @@ Component to create an application bar.
 ## Using the template
 
 ```
-<systelab-application-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
-</systelab-application-header>
+<systelab-app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
+</systelab-app-header>
 ```
 A user name (alias), a full name and a Institution name will be rendered in the bar. 
 
