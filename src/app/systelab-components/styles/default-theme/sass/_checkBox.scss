@@ -9,7 +9,7 @@ input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
 }
 
 // Styles for label after checkbox
-input[type="checkbox"]:not(.not-show) + label {
+input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
   $top-icon: ($form-elements-height - $checkbox-height) / 2;
 
   @include user-selection(none);
@@ -34,36 +34,40 @@ input[type="checkbox"]:not(.not-show) + label {
 
     @include backface-visibility(hidden);
 
-    text-align: center;
+    content: '';
     z-index: 0;
+    box-sizing: border-box;
+    display: inline-block;
+
+    text-align: center;
     background-color: $checkbox-color;
     border-radius: 4px;
     border: solid 1px $medium-gray;
-
-    @extend .slab-icon;
-
-    // These properties override .slab-icon default values
-    content: '';
     line-height: 1em;
-    font-size: $checkbox-height - 3px;
     color: $checkbox-color;
-    box-sizing: border-box;
+
+    font-weight: bold;
+    font-style: normal;
+    font-family: icomoon;
+    font-size: $checkbox-height - 3px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 // Define background color and icon when checked
-input[type="checkbox"]:not(.not-show):checked + label:before {
+input[type="checkbox"]:not(.slab-checkbox-not-show):checked + label:before {
   content: '\F00d';
   background-color: $checkbox-border-color;
 }
 
-input[type="checkbox"]:not(.not-show):disabled + label {
+input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
   opacity: 0.5;
   cursor: default;
 }
 
 @mixin selection-checkbox() {
-  .checkbox-unchecked {
+  .slab-checkbox-unchecked {
     width: $checkbox-height;
     height: $checkbox-height;
     position: absolute;
@@ -85,7 +89,7 @@ input[type="checkbox"]:not(.not-show):disabled + label {
     margin-top: -1px !important;
   }
 
-  .checkbox {
+  .slab-checkbox {
     width: $checkbox-height;
     height: $checkbox-height;
     position: absolute;
@@ -107,7 +111,7 @@ input[type="checkbox"]:not(.not-show):disabled + label {
     margin-top: -1px !important;
   }
 
-  .checkbox::before {
+  .slab-checkbox::before {
     font-family: "FontAwesome" !important;
     content: '\F00d';
     background-color: #158fef;
