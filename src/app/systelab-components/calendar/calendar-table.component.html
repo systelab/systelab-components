@@ -1,5 +1,5 @@
-<div class="ui-custom-calendar">
-    <table class="ui-custom-calendar-table">
+<div class="slab-custom-calendar">
+<table class="slab-custom-calendar-table">
         <thead>
         <tr>
             <th *ngFor="let dayName of daysHeader">{{dayName}}</th>
@@ -8,7 +8,7 @@
         <tbody>
         <tr *ngFor="let row of rows">
             <td *ngFor="let daySlot of row" [ngClass]="{'disabled-cell': !daySlot.date}">
-                <div *ngIf="daySlot.date" class="ui-custom-calendar-cell">
+                <div *ngIf="daySlot.date" class="slab-custom-calendar-cell">
                     <ng-container *ngTemplateOutlet="templateRef; context: { daySlot: daySlot }"></ng-container>
                 </div>
             </td>

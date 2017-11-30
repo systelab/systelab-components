@@ -3,12 +3,12 @@
 /* $twolist-row-height: define the row height*/
 $twolist-row-height: ceil(35px * $size_percentage) !default;
 
-.twolist {
+.slab-twolist {
   display: -webkit-flex;
   display: flex;
   overflow: auto;
 
-  .twolistdiv {
+  .slab-twolistdiv {
     $single-list-width: calc(50% - 30px);
 
     flex: 1 0 $single-list-width;
@@ -26,11 +26,11 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
       }
     }
 
-    .twolistboxtitle {
+    .slab-twolistboxtitle {
       padding-left: 5px;
     }
 
-    .twolistbox {
+    .slab-twolistbox {
       border-radius: 5px;
       border-color: $medium-gray;
       padding: 5px 0;
@@ -38,10 +38,10 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
       display: flex;
       overflow: auto;
 
-      .twolistboxdiv {
+      .slab-twolistboxdiv {
         flex: 1 0 auto;
 
-        .twolistboxrow {
+        .slab-twolistboxrow {
           line-height: $twolist-row-height;
           padding-left: 5px;
           cursor: pointer;
@@ -49,19 +49,19 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
           @include user-selection(none);
         }
 
-        .twolistboxrowselected {
+        .slab-twolistboxrowselected {
           background-color: $selected-elements;
           padding-left: 5px;
         }
 
-        .twolistboxrowdrag {
+        .slab-twolistboxrowdrag {
           cursor: move;
         }
       }
     }
   }
 
-  .twolistbuttondiv {
+  .slab-twolistbuttondiv {
     padding: 5px;
     flex: 0 0 auto;
     display: -webkit-flex;
@@ -69,7 +69,7 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
     flex-direction: column;
     justify-content: center;
 
-    .twolistbutton {
+    .slab-twolistbutton {
       margin: 5px;
       min-width: 0;
     }

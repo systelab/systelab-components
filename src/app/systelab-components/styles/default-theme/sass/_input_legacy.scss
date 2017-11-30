@@ -1,0 +1,164 @@
+.uk-form .uk-input,
+.uk-form input:not([type]),
+.uk-form input[type="text"],
+.uk-form input[type="password"],
+.uk-form input[type="datetime"],
+.uk-form input[type="datetime-local"],
+.uk-form input[type="date"],
+.uk-form input[type="month"],
+.uk-form input[type="time"],
+.uk-form input[type="week"],
+.uk-form input[type="number"],
+.uk-form input[type="email"],
+.uk-form input[type="url"],
+.uk-form input[type="search"],
+.uk-form input[type="tel"],
+.uk-form input[type="file"],
+.uk-form input[type="color"] {
+  border-radius: $border-radius;
+  height: $input-height;
+  border-color: $medium-gray;
+  font-family: $base-body-font-family;
+
+  &:not([class*="uk-width-"]) {
+    width: $input-width;
+  }
+
+  /**
+   * We should avoid removing the outline without providing an
+   * alternative styling. It's all about accessibility
+   * Source: http://www.outlinenone.com/
+   */
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    background-color: white;
+    cursor: not-allowed;
+
+    + [class*='icon-'],
+    + [class*='uk-icon-'] {
+      opacity: 0.5;
+    }
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+/**
+ * We need to define the parent's input width when there's an icon and they need to work together
+ */
+.uk-form-icon {
+  &:not([class*="uk-width-"]) {
+    width: $input-width;
+  }
+
+  > input {
+    width: 100% !important;
+  }
+}
+
+/**
+ * We need to replicate the input styling for all the divs with the class uk-input
+ */
+.uk-form div.uk-input {
+  padding: 4px 6px;
+  border: 1px solid $form-border;
+  background: white;
+  color: $form-color;
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+
+  &:focus {
+    border-color: $form-focus-border;
+    background: $form-focus-background;
+    color: $form-color;
+  }
+
+  font {
+    line-height: $input-height;
+    height: $input-height;
+    display: inline-block;
+    position: relative;
+    bottom: 4px;
+  }
+}
+
+/**
+ * 1 - Button will be always squared
+ * 2 - Hide the actual input file and place it on top of the button so user can click there
+ */
+.uk-form .uk-input-file {
+  width: 100%;
+
+  > input[type="text"] {
+    width: calc(100% - #{$form-elements-height} - 10px);
+
+    + div.uk-button {
+      @include size($form-elements-height); /* 1 */
+
+      min-width: 30px;
+      position: relative;
+      overflow: hidden;
+      float: right;
+    }
+  }
+
+  input[type="file"] {
+    @include position(absolute, $top: 0, $right: 0); /* 2 */
+
+    @include opacity(0);
+
+    cursor: pointer !important;
+  }
+}
+
+.uk-line-height {
+  line-height: $form-elements-height !important;
+}
+
+.icon-image {
+  height: 1em;
+
+  &.numeric {
+    background-image: url("/slt-common/assets/images/icons/numpad.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    fill: #d2d2d2;
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  input {
+    line-height: 1px !important;
+  }
+}
+
+@-moz-document url-prefix() {
+  .uk-form .uk-input,
+  .uk-form input:not([type]),
+  .uk-form input[type="text"],
+  .uk-form input[type="password"],
+  .uk-form input[type="datetime"],
+  .uk-form input[type="datetime-local"],
+  .uk-form input[type="date"],
+  .uk-form input[type="month"],
+  .uk-form input[type="time"],
+  .uk-form input[type="week"],
+  .uk-form input[type="number"],
+  .uk-form input[type="email"],
+  .uk-form input[type="url"],
+  .uk-form input[type="search"],
+  .uk-form input[type="tel"],
+  .uk-form input[type="file"],
+  .uk-form input[type="color"] {
+    line-height: $input-height;
+    padding-bottom: 3px;
+    padding-top: 1px;
+  }
+}

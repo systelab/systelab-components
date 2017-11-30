@@ -2,20 +2,20 @@
 
 $sidebar-width: 200px !default;
 
-.sidebar-menu-container {
+.slab-sidebar-menu-container {
   @include position(fixed, $top: $header-height);
 
   background-color: $background-hemohub;
   width: $sidebar-width;
   height: calc(100% - #{$header-height});
 
-  .tabs-container {
+  .slab-sidebar-tabs-container {
     margin-top: 45px;
     padding-left: 5px;
     width: 100% !important;
     background-color: $background-hemohub;
 
-    .tab {
+    .slab-sidebar-tab {
       @include size(95%, 50px);
 
       display: block;
@@ -28,7 +28,7 @@ $sidebar-width: 200px !default;
       border-top: 1px solid $background-hemohub;
       border-bottom: 1px solid $background-hemohub;
 
-      .tab-decoration {
+      .slab-sidebar-tab-decoration {
         @include size(15px, 100%);
 
         display: inline-block;
@@ -53,7 +53,7 @@ $sidebar-width: 200px !default;
         border-top: 1px solid $primary-color;
         border-bottom: 1px solid $primary-color;
 
-        .tab-decoration {
+        .slab-tab-decoration {
           background-color: $primary-color;
         }
 
@@ -64,7 +64,7 @@ $sidebar-width: 200px !default;
     }
   }
 
-  .actions-container {
+  .slab-sidebar-actions-container {
     bottom: 0px;
     position: absolute;
     width: 94%;
@@ -80,8 +80,4 @@ $sidebar-width: 200px !default;
       }
     }
   }
-}
-
-.translate-cloak {
-  opacity: 0;
 }

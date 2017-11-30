@@ -1,0 +1,70 @@
+/*
+ * Cloned from [class*='uk-icon-'] to extend in other sass files
+ *
+ * 1. Needed to prevent inherit font style
+ */
+
+.uk-form-icon > [class*='icon-'] {
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    margin-top: -8px;
+    font-size: 14px;
+    color: #999999;
+    text-align: center;
+    pointer-events: none;
+}
+
+.uk-form-icon-flip > [class*='icon-'] {
+    right: 0;
+}
+
+.uk-icon,
+[class*='icon-'] {
+    @include font-smoothing(antialiased, grayscale);
+
+    display: inline-block;
+    line-height: 1;
+
+    /* 1 */
+    font-weight: normal;
+    font-style: normal;
+
+    &.dark-green {
+        color: $dark-green;
+    }
+
+    &.danger {
+        color: $error !important;
+    }
+
+    &.warning {
+        color: $warning !important;
+    }
+
+    &.info {
+        color: $primary-color !important;
+    }
+}
+
+.uk-icon {
+    font-family: FontAwesome;
+}
+
+[class*='icon-'],
+.uk-icon,
+.uk-icon:hover,
+.uk-icon:focus {
+    text-decoration: none;
+}
+
+.uk-grid {
+    [class*='uk-width-'] {
+        > [class*='icon-'],
+        > [class*='uk-icon-'] {
+            line-height: $form-elements-height;
+            top: 0;
+            margin-top: 0;
+        }
+    }
+}

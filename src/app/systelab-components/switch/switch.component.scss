@@ -20,7 +20,7 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
   height: $height;
 }
 
-.switch {
+.slab-switch {
 
   $ball-size: $switch-height - 8px;
   $top-icon: ceil(($form-elements-height - $switch-height) / 2);
@@ -47,7 +47,7 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
   -webkit-transition: .3s ease-out all;
   top: -1px;
 
-  .tick {
+  .slab-tick {
     @include size($ball-size);
     background: $switch-circle-color;
     box-shadow: none; /* 1 */
@@ -62,7 +62,7 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
     background: $switch-bg-color-checked;
     border-color: $switch-bg-color-checked;
 
-    .tick {
+    .slab-tick {
       background: $switch-circle-color-checked;
       left: $switch-height;
     }
@@ -70,7 +70,7 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
 
 }
 
-.switch.disabled {
+.slab-switch.disabled {
   opacity: .5;
   cursor: not-allowed
 }

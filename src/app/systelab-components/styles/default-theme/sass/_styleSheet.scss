@@ -138,9 +138,9 @@ $table-left-header-width: 200px !default;
 
 /************** TABS - start ******************************************************************************************/
 /* $tab-height: used to calculate the $height-diff value;
-                defines the height of the uk-tab elements inside a uk-form;
-                defines the height of the li elements inside the previous uk-tab;
-                defines the top position of all elements inside the uk-tab;
+                defines the height of the tab elements inside a uk-form;
+                defines the height of the li elements inside the previous tab;
+                defines the top position of all elements inside the tab;
                 defines the top value of the uk-margin-small-top, uk-margin-top and uk-margin-large-top.*/
 $tab-height: ceil(40px * $size_percentage) !default;
 /************** TABS - end ******************************************************************************************/

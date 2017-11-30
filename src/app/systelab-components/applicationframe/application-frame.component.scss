@@ -1,20 +1,22 @@
 
-.application-container {
+.slab-application-container {
   height: 100%;
-}
 
-.east {
-  background-color: lightgrey;
-  min-width: 200px;
-  width: 200px;
-}
-
-.center {
-  background-color: white;
-}
-
-@media (max-width: 1024px) {
-  .east {
-    display: none;
+  .slab-side-bar-container {
+    background-color: lightgrey;
+    min-width: 200px;
+    width: 200px;
   }
+
+  .slab-main-container {
+    background-color: white;
+  }
+
+  @media (max-width: 1024px) {
+    .slab-side-bar-container {
+      display: none;
+    }
+  }
+
 }
+
