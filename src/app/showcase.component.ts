@@ -74,8 +74,8 @@ export class ShowcaseComponent implements OnInit {
 		this.touchSpinValues2 = new TouchSpinValues(5, 1, 20, 2);
 		this.touchSpinValues3 = new TouchSpinValues(0, -10, 10, 1);
 
-		this.availableColumns = preferencesService.getPreference('showcase.twolist.availablecolumns');
-		this.visibleColumns = preferencesService.getPreference('showcase.twolist.visiblecolumns');
+		this.availableColumns = preferencesService.get('showcase.twolist.availablecolumns');
+		this.visibleColumns = preferencesService.get('showcase.twolist.visiblecolumns');
 
 		if (!this.availableColumns || this.availableColumns.length === 0) {
 			this.availableColumns = this.getDefaultShowcaseColumns();
@@ -226,11 +226,11 @@ export class ShowcaseComponent implements OnInit {
 
 	public saveTwoListPreferences() {
 
-		this.preferencesService.removePreference('showcase.twolist.availablecolumns');
-		this.preferencesService.removePreference('showcase.twolist.visiblecolumns');
+		this.preferencesService.remove('showcase.twolist.availablecolumns');
+		this.preferencesService.remove('showcase.twolist.visiblecolumns');
 
-		this.preferencesService.putPreference('showcase.twolist.availablecolumns', this.availableColumns);
-		this.preferencesService.putPreference('showcase.twolist.visiblecolumns', this.visibleColumns);
+		this.preferencesService.put('showcase.twolist.availablecolumns', this.availableColumns);
+		this.preferencesService.put('showcase.twolist.visiblecolumns', this.visibleColumns);
 
 	}
 

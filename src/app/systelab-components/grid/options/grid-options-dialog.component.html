@@ -1,24 +1,25 @@
 <div class="ngdialog-header">Options</div>
 <div class="ngdialog-message with-buttons">
     <form class="uk-form uk-flex uk-flex-column uk-flex-nowrap">
-        <ul class="uk-tab" data-uk-switcher="{connect:'#my-id2', swiping: false}">
-            <li [ngClass]="{'uk-active': 1 === 1}">
-                <a>{{ 'COMMON_FIELDS'  | translate | async }}</a>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="fields-tab" data-toggle="tab" href="#fields" role="tab"
+                   aria-controls="fields" aria-selected="true">{{ 'COMMON_FIELDS' | translate | async }}
+                </a>
             </li>
         </ul>
-        <ul id="my-id2" class="uk-switcher from-tab uk-panel-space uk-height-1-1">
-            <li class="uk-height-1-1">
-                <div class="uk-height-1-1">
-                    <div class="uk-form-row uk-height-1-1">
-                        <systelab-two-list [(available)]="availableColumns"
-                                     [(visible)]="visibleColumns"
-                                     [initialAvailableColumns]="initialAvailableColumns"
-                                     displayAttr="displayName">
-                        </systelab-two-list>
-                    </div>
+        <div class="tab-content uk-flex-item-1 uk-flex uk-flex-column" id="fields">
+            <div class="tab-pane active uk-flex-item-1 uk-flex uk-flex-column" id="fields" role="tabpanel"
+                 aria-labelledby="fields-tab">
+                <div class="uk-form-row uk-height-1-1">
+                    <systelab-two-list [(available)]="availableColumns"
+                                       [(visible)]="visibleColumns"
+                                       [initialAvailableColumns]="initialAvailableColumns"
+                                       displayAttr="displayName">
+                    </systelab-two-list>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
     </form>
 </div>
 <div class="ngdialog-buttons">

@@ -98,7 +98,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	protected saveColumnsStateInPreferences() {
 
 		if (this.firstSizeToFitExecuted) {
-			this.preferencesService.putPreference(
+			this.preferencesService.put(
 				this.getGridOptionsPreferencesPrefix(),
 				this.gridOptions.columnApi.getColumnState()
 			);
@@ -107,9 +107,9 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	protected loadColumnsStateFromPreferences() {
 
-		if (this.preferencesService.getPreference(this.getGridOptionsPreferencesPrefix())) {
+		if (this.preferencesService.get(this.getGridOptionsPreferencesPrefix())) {
 
-			const gridOptionsPreferences: Array<any> = this.preferencesService.getPreference(
+			const gridOptionsPreferences: Array<any> = this.preferencesService.get(
 				this.getGridOptionsPreferencesPrefix()
 			);
 
