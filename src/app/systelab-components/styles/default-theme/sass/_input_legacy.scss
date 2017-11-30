@@ -97,7 +97,7 @@
   > input[type="text"] {
     width: calc(100% - #{$form-elements-height} - 10px);
 
-    + div.uk-button {
+    + div.btn {
       @include size($form-elements-height); /* 1 */
 
       min-width: 30px;

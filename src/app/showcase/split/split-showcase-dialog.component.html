@@ -1,5 +1,5 @@
-<div class="ngdialog-header ng-binding">Split</div>
-<div class="ngdialog-message with-buttons uk-height-1-1">
+<div class="slab-dialog-header ng-binding">Split</div>
+<div class="slab-dialog-message with-buttons uk-height-1-1">
 
     <split direction="horizontal" (dragProgress)="dragProgressHorizontal($event)">
         <split-area [size]="testSelectorSize" [visible]="isShowSelector">
@@ -17,7 +17,7 @@
         </split-area>
     </split>
 </div>
-<div class="ngdialog-buttons">
+<div class="slab-dialog-buttons">
     <button type="button" class="btn btn-lg" (click)="setShowDetails()"
             [class.btn-primary]="isShowDetails">Details
     </button>
@@ -25,4 +25,4 @@
             [class.btn-primary]="isShowSelector">Selector
     </button>
 </div>
-<div class="ngdialog-close" (click)="close()"></div>
+<div class="slab-dialog-close" (click)="close()"></div>
