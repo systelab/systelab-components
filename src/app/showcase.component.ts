@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { UpperFlexDialog, UpperFlexDialogParameters } from './showcase/upper-flex/upper-flex-dialog.component';
 import { TwoColumnsDialog, TwoColumnsDialogParameters } from './showcase/two-columns/two-columns-dialog.component';
+import { ProgressbarDialog, ProgressbarDialogParameters } from './showcase/progressbar-dialog/progressbar-dialog.component';
 import { LowerFlexDialog, LowerFlexDialogParameters } from './showcase/lower-flex/lower-flex-dialog.component';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { FullFlexDialog, FullFlexDialogParameters } from './showcase/full-flex/full-flex-dialog.component';
@@ -183,9 +184,18 @@ export class ShowcaseComponent implements OnInit {
 		const fullFlexDialogParameters: FullFlexDialogParameters = FullFlexDialog.getParameters();
 
 		fullFlexDialogParameters.index = 4;
-		fullFlexDialogParameters.dialogClass = 'uk-width-2-3 uk-height-2-3';
+		fullFlexDialogParameters.dialogClass = 'w-66 h-66';
 
 		this.dialogService.showDialog(FullFlexDialog, fullFlexDialogParameters);
+	}
+
+	public progressBar() {
+		
+		const progressbarDialogParameters: ProgressbarDialogParameters = ProgressbarDialog.getParameters();
+
+		progressbarDialogParameters.dialogClass = 'w-33 h-25';
+
+		this.dialogService.showDialog(ProgressbarDialog, progressbarDialogParameters);
 	}
 
 	public inline() {

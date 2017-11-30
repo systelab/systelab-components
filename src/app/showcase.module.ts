@@ -22,6 +22,7 @@ import { FullFlexDialog } from './showcase/full-flex/full-flex-dialog.component'
 import { SampleRouteComponent } from './showcase/sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
+import { ProgressbarDialog } from './showcase/progressbar-dialog/progressbar-dialog.component';
 
 @NgModule({
 	imports:      [
@@ -47,7 +48,8 @@ import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 		EmptyDialog,
 		SplitShowcaseDialog,
 		InnerSampleGrid,
-		SampleRouteComponent
+		SampleRouteComponent,
+		ProgressbarDialog
 	],
 	entryComponents: [
 		UpperFlexDialog,
@@ -55,8 +57,8 @@ import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 		TwoColumnsDialog,
 		FullFlexDialog,
 		EmptyDialog,
-		EmptyDialog,
-		SplitShowcaseDialog
+		SplitShowcaseDialog,
+		ProgressbarDialog,
 	],
 	providers:    [
 		MessagePopupService,
