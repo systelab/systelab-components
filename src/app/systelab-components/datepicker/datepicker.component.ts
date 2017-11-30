@@ -37,6 +37,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public oldDateValue: boolean;
 	public currentDocSize: number;
+	public currentLanguage: string;
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
 	public inputElement: ElementRef;
@@ -55,6 +56,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		this.oldDateValue = this.currentCalendar._isValid;
 		this.currentDocSize = window.innerWidth;
+		this.currentLanguage = this.i18nService.getCurrentLanguage();
 
 		this.addListeners();
 	}
@@ -84,6 +86,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			if (this.pHeaderElement) {
 				this.repositionateCalendar(new ElementRef(this.pHeaderElement.parentElement.parentElement));
 			}
+		}
+
+		if (this.currentLanguage !== this.i18nService.getCurrentLanguage()) {
+			this.currentLanguage = this.i18nService.getCurrentLanguage();
+			this.getLanguage();
 		}
 	}
 
@@ -288,6 +295,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		this.language.firstDayOfWeek = this.getFirstDayOfWeek();
 		this.language.dateFormatValue = this.getDateFormat(true);
+		this.currentCalendar.dateFormat = this.language.dateFormatValue;
 	}
 
 	private getFirstDayOfWeek(): number {
@@ -340,6 +348,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		let stringDateFormat = '';
 		switch (this.i18nService.getCurrentLanguage()) {
 			case 'us':
+			case 'en_US':
 				stringDateFormat = 'm/d/y';
 				break;
 			case 'en':
@@ -376,6 +385,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				stringDateFormat = 'y-mm-dd';
 				break;
 			case 'pt':
+			case 'pt-BR':
 			case 'nl':
 				stringDateFormat = 'dd-mm-y';
 				break;
