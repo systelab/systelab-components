@@ -179,7 +179,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public saveEventOnFocus(evt: FocusEvent): void {
 		this.inputElement = new ElementRef(evt.target);
-		this.getLanguage();
+		// this.getLanguage();
 		this.focusEvt = evt;
 	}
 
