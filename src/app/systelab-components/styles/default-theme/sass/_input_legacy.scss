@@ -37,8 +37,7 @@
     background-color: white;
     cursor: not-allowed;
 
-    + [class*='icon-'],
-    + [class*='uk-icon-'] {
+    + [class*='icon-'] {
       opacity: 0.5;
     }
   }
@@ -51,7 +50,7 @@
 /**
  * We need to define the parent's input width when there's an icon and they need to work together
  */
-.uk-form-icon {
+.slab-form-icon {
   &:not([class*="uk-width-"]) {
     width: $input-width;
   }

@@ -40,9 +40,9 @@ input[type="checkbox"]:not(.not-show) + label {
     border-radius: 4px;
     border: solid 1px $medium-gray;
 
-    @extend .uk-icon;
+    @extend .slab-icon;
 
-    // These properties override .uk-icon default values
+    // These properties override .slab-icon default values
     content: '';
     line-height: 1em;
     font-size: $checkbox-height - 3px;
