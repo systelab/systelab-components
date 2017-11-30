@@ -1,7 +1,7 @@
 <div class="slab-dialog-header">{{titleForDialog}}</div>
 <div class="slab-dialog-message" [ngClass]="{'with-buttons': multipleSelection}">
     <form (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
-          class="uk-form uk-form-horizontal uk-form-horizontal-medium uk-panel-space uk-flex uk-flex-column uk-flex-nowrap">
+          class="uk-form uk-form-horizontal uk-form-horizontal-medium p-3 uk-flex uk-flex-column uk-flex-nowrap">
         <div class="uk-form-row uk-flex uk-flex-nowrap">
             <label class="uk-flex-nowrap uk-form-label uk-text-truncate uk-width-1-5" for="valueToSearch">{{searchLabel}} </label>
             <systelab-select class="uk-align-left uk-width-2-5"
