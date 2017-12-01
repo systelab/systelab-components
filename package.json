@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -54,7 +54,7 @@
     "jquery": "^3.2.1",
     "uikit": "^2.27.2",
     "date-fns": "^1.28.3",
-    "angular2-modal": "^3.0.1",
+    "ngx-modialog": "^3.0.1",
     "ng2-dnd": "^2.2.2",
     "angular-split": "0.2.0",
     "ag-grid": "^13.1.0",
