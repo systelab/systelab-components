@@ -1,4 +1,4 @@
-# systelab-application-header
+# systelab-app-sidebar
 
 Component to create an application bar.
 
