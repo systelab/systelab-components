@@ -227,13 +227,4 @@ export class TwoListComponent {
 			}
 		}
 	}
-
-	public getTwoListBoxRowClass(element: TwoListItem) {
-		var sClass = 'twolistboxrow';
-
-		if (element.selected) {
-			sClass += ' twolistboxrowselected';
-		}
-		return sClass;
-	}
 }

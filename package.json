@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "2.1.2",
+  "version": "2.1.4",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -59,7 +59,7 @@
     "angular-split": "0.2.0",
     "ag-grid": "^13.1.0",
     "ag-grid-angular": "^13.1.0",
-    "systelab-translate": "^1.0.0",
+    "systelab-translate": "^0.1.2",
     "systelab-preferences": "^1.0.0",
     "bootstrap": "^4.0.0-beta.2",
     "popper.js": "^1.12.9"
