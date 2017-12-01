@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Modal, ModulabModalContext } from '../plugin/modulab';
-import { overlayConfigFactory, DialogRef } from 'angular2-modal';
+import { overlayConfigFactory, DialogRef } from 'ngx-modialog';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { Observable } from 'rxjs/Observable';

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalComponent, DialogRef } from 'angular2-modal';
+import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { SearcherTableComponent } from './searcher.table.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { AbstractSearcher } from './abstract-searcher';
@@ -12,7 +12,6 @@ export class SearcherDialogParameters<T> extends ModulabModalContext {
 }
 
 @Component({
-	selector:    'searcher.dialog',
 	templateUrl: 'searcher.dialog.component.html'
 })
 export class SearcherDialog<T> extends DefaultModalActions implements ModalComponent<SearcherDialogParameters<T>> {

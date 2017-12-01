@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalComponent, DialogRef } from 'angular2-modal';
+import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { ModulabModalContext } from '../plugin/modulab/modal-context';
 
 export class MessagePopupViewContext extends ModulabModalContext {

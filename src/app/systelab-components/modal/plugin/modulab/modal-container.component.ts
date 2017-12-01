@@ -1,5 +1,5 @@
 import { Component, ElementRef, Renderer, OnInit } from '@angular/core';
-import { BaseDynamicComponent, DialogRef } from 'angular2-modal';
+import { BaseDynamicComponent, DialogRef } from 'ngx-modialog';
 import { IMessageModalPreset } from './presets/message-modal-preset';
 
 @Component({

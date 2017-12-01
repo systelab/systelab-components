@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalComponent, DialogRef } from 'angular2-modal';
+import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { ModulabModalContext } from '../../systelab-components/modal/plugin/modulab/modal-context';
 import { DefaultModalActions } from '../../systelab-components/modal/message-popup/message-popup-view.component';

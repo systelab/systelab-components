@@ -8,14 +8,12 @@ import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
 import { ModulabModalModule } from './modal/plugin/modulab/modulab.module';
 import { DialogComponent } from './modal/dialog/dialog.component';
-import { AbstractDialogComponent } from './modal/dialog/abstract-dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
-import { ButtonsDialogComponent } from './modal/dialog/buttons-dialog.component';
 import { MessagePopupComponent } from './modal/message-popup/message-popup.component';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
-import { DOMOverlayRenderer, ModalModule, OverlayRenderer } from 'angular2-modal';
+import { DOMOverlayRenderer, ModalModule, OverlayRenderer } from 'ngx-modialog';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { DOMOutsideEventPlugin } from 'angular2-modal/src/providers';
+import { DOMOutsideEventPlugin } from 'ngx-modialog/src/providers';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu.component';
@@ -47,6 +45,7 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
 import { CalendarTableComponent } from './calendar/calendar-table.component';
 import { CalendarDialog } from './calendar/calendar-dialog.component';
+import { DecoratedDialogComponent } from './modal/dialog/decorated-dialog.component';
 
 
 @NgModule({
@@ -72,9 +71,8 @@ import { CalendarDialog } from './calendar/calendar-dialog.component';
 		PieComponent,
 		SwitchComponent,
 		ContextMenuComponent,
-		AbstractDialogComponent,
+		DecoratedDialogComponent,
 		DialogComponent,
-		ButtonsDialogComponent,
 		MessagePopupComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
@@ -109,8 +107,7 @@ import { CalendarDialog } from './calendar/calendar-dialog.component';
 		PieComponent,
 		SwitchComponent,
 		MessagePopupComponent,
-		AbstractDialogComponent,
-		ButtonsDialogComponent,
+		DecoratedDialogComponent,
 		ContextMenuComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,

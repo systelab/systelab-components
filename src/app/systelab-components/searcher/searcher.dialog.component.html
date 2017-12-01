@@ -14,13 +14,13 @@
                    [(ngModel)]="searchingValue" name="valueToSearch">
         </div>
         <div class="uk-form-row uk-flex-item-1 uk-flex">
-            <mp-searcher-table class="uk-flex-item-1 uk-position-relative" name="searcherTable"
+            <systelab-internal-searcher-table class="uk-flex-item-1 uk-position-relative" name="searcherTable"
                                [contains]="selectedComboItem.id"
                                [showChecks]="true"
                                [multipleSelection]="multipleSelection"
                                [valueForSearch]="searchingValue"
                                [searcher]="dialogParameters.searcher"
-                               (clickRow)="selectOnClick($event)"></mp-searcher-table>
+                               (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
         </div>
     </form>
 </div>

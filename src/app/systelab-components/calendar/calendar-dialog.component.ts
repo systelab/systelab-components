@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { DialogRef, ModalComponent } from 'angular2-modal';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { addMonths, addYears } from 'date-fns';
 import { Observable } from 'rxjs/Observable';
 import { DefaultModalActions } from '../modal/message-popup/message-popup-view.component';
