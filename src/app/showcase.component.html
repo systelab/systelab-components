@@ -9,6 +9,10 @@
                            aria-controls="grids" aria-selected="true">Grids</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="tables-tab" data-toggle="tab" href="#table" role="tab"
+                           aria-controls="tables" aria-selected="false">Tables</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="combos-tab" data-toggle="tab" href="#combos" role="tab"
                            aria-controls="combos"
                            aria-selected="false">Combos</a>
@@ -62,6 +66,37 @@
                         <form class="uk-form uk-form-horizontal uk-form-horizontal-medium uk-flex-item-1 uk-flex uk-flex-column uk-flex-nowrap">
                             <inner-sample-grid></inner-sample-grid>
                         </form>
+                    </div>
+                    <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="table" role="tabpanel" aria-labelledby="tables-tab">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-light h-auto">
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="combos" role="tabpanel"
                          aria-labelledby="combos-tab">

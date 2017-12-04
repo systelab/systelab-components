@@ -7,7 +7,8 @@ $sizes: (
   50: 50%,
   66: 66.666%,
   75: 75%,
-  100: 100%
+  100: 100%,
+  auto: auto
 );
 
 /**
@@ -35,7 +36,7 @@ $sizes: (
 @import "agGrid";
 @import "tree";
 @import "status";
-@import "table_legacy";
+@import "table";
 @import "triageCell";
 @import "button";
 @import "comboBox";
