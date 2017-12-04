@@ -411,7 +411,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 		if (isFullYear) {
 			stringDateFormat = stringDateFormat.replace('y', 'yy');
-			if (this.i18nService.getCurrentLanguage() === 'us') {
+			if (this.i18nService.getCurrentLanguage() === 'us' || this.i18nService.getCurrentLanguage() === 'en_US') {
 				stringDateFormat = stringDateFormat.replace('m', 'mm');
 				stringDateFormat = stringDateFormat.replace('d', 'dd');
 			}
