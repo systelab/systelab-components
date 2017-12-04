@@ -1,12 +1,12 @@
-# systelab-application-sidebar
+# systelab-app-sidebar
 
 Component to create an application sidebar (left), with different tabs and some buttons in the bottom.
 
 ## Using the template
 
 ```
-<systelab-application-sidebar [actions]="actions" [tabs]="tabs" (selected)="doTabSelected($event)">
-</systelab-application-sidebar>
+<systelab-app-sidebar [actions]="actions" [tabs]="tabs" (selected)="doTabSelected($event)">
+</systelab-app-sidebar>
 ```
 The tabs input is an array of ApplicationSidebarTab objects, and represent the different tabs to show. The constructor, has three parameters.
 The first one is the Tab id (to be received on selected)), the second one the Tab name and the third one is true if the tab is selected.

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModulabModalContext } from '../../modal/plugin/modulab/modal-context';
-import { DialogRef, ModalComponent } from 'angular2-modal';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { TwoListItem } from '../../twolist/two-list.component';
 import { DefaultModalActions } from '../../modal/message-popup/message-popup-view.component';
 import { GridColumnsOptions } from '../grid-column-options';

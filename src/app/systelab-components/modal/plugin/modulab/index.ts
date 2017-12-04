@@ -4,7 +4,7 @@ export { ModulabMessageModal } from './message-modal.component';
 
 export { IMessageModalPreset } from './presets/message-modal-preset';
 
-export { ModalOpenContext, ModalOpenContextBuilder } from 'angular2-modal';
+export { ModalOpenContext, ModalOpenContextBuilder } from 'ngx-modialog';
 
 export { Modal } from './modal';
 

@@ -1,0 +1,8 @@
+<div class="ngdialog-header">{{title}}</div>
+<div class="ngdialog-message with-buttons uk-panel-space uk-panel-space-small uk-flex">
+    <ng-content select="[dialog-main]"></ng-content>
+</div>
+<div class="ngdialog-buttons">
+    <ng-content select="[dialog-buttons]"></ng-content>
+</div>
+<div class="ngdialog-close" (click)="emitClose()"></div>

@@ -1,6 +1,6 @@
 import { Component, Type } from '@angular/core';
 import { Modal } from '../plugin/modulab';
-import { overlayConfigFactory, DialogRef } from 'angular2-modal';
+import { overlayConfigFactory, DialogRef } from 'ngx-modialog';
 import { ModulabModalContext } from '../plugin/modulab/modal-context';
 import { Observable } from 'rxjs/Observable';
 

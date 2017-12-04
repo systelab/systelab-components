@@ -1,4 +1,4 @@
-import { ModalOpenContext } from 'angular2-modal';
+import { ModalOpenContext } from 'ngx-modialog';
 
 export class ModulabModalContext extends ModalOpenContext {
 	/**

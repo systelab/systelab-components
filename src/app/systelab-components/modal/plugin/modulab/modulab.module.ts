@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalModule, Modal as BaseModal } from 'angular2-modal';
+import { ModalModule, Modal as BaseModal } from 'ngx-modialog';
 import { Modal } from './modal';
 import { ModulabModalContainer } from './modal-container.component';
 import { ModulabMessageModal } from './message-modal.component';

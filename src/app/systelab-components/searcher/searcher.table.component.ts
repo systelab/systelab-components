@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Component({
-	selector:    'mp-searcher-table',
+	selector:    'systelab-internal-searcher-table',
 	templateUrl: '../grid/abstract-grid.component.html'
 
 })
