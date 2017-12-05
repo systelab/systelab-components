@@ -1,0 +1,99 @@
+/**
+ * 1. Override Bootstrap default behavior
+ */
+ .slab-input,
+ input:not([type]),
+ input[type="text"],
+ input[type="password"],
+ input[type="datetime"],
+ input[type="datetime-local"],
+ input[type="date"],
+ input[type="month"],
+ input[type="time"],
+ input[type="week"],
+ input[type="number"],
+ input[type="email"],
+ input[type="url"],
+ input[type="search"],
+ input[type="tel"],
+ input[type="file"],
+ input[type="color"] {
+     &.form-control{
+         height: $input-height;
+         border-color: $medium-gray;
+         border-radius: $border-radius;
+         font-family: $base-body-font-family;
+         padding: ($input-height - $base-font-size - 2px)/2 6px;
+     }
+     &:disabled {
+         color: $form-border;
+         border-color: $form-border;
+         background-color: white;
+         cursor: not-allowed;
+         @include placeholder-color($form-border);
+     }
+ }
+ .disabled {
+     label {
+         color: $disabled;
+     }
+ }
+
+/**
+ * We need to replicate the input styling for all the divs with the class uk-input
+ */
+ .slab-input {
+    padding: 4px 6px;
+    border: 1px solid $form-border;
+    background: white;
+    color: $form-color;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+
+    &:focus {
+      border-color: $form-focus-border;
+      background: $form-focus-background;
+      color: $form-color;
+    }
+
+    font {
+      line-height: $input-height;
+      height: $input-height;
+      display: inline-block;
+      position: relative;
+      bottom: 4px;
+    }
+}
+
+
+/**
+ * 1 - Button will be always squared
+ * 2 - Hide the actual input file and place it on top of the button so user can click there
+ */
+.slab-input-file {
+    width: 100%;
+
+    > input[type="text"] {
+      width: calc(100% - #{$form-elements-height} - 10px);
+      display: inline-block;
+
+      + div.btn {
+        @include size($form-elements-height); /* 1 */
+
+        min-width: $form-elements-height;
+        min-height: $form-elements-height;
+        padding: 0px 5px;
+        position: relative;
+        overflow: hidden;
+        float: right;
+      }
+    }
+
+    input[type="file"] {
+      @include position(absolute, $top: 0, $right: 0); /* 2 */
+
+      @include opacity(0);
+
+      cursor: pointer !important;
+    }
+  }

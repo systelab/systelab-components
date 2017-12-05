@@ -27,6 +27,7 @@ $sizes: (
 @import "icon";
 @import "dropdown";
 @import "forms_legacy";
+@import "forms";
 @import "progressBar";
 @import "tabs";
 @import "tabs_legacy";
@@ -41,7 +42,7 @@ $sizes: (
 @import "button";
 @import "comboBox";
 @import "datepicker";
-@import "input_legacy";
+@import "input";
 @import "radio";
 @import "slider";
 @import "textarea";
