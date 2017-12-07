@@ -4,7 +4,7 @@ import { IHeaderAngularComp } from 'ag-grid-angular';
 import { IHeaderParams } from 'ag-grid';
 import { AbstractGrid } from '../abstract-grid.component';
 @Component({
-	selector:    'mp-grid-header-context-menu',
+	selector:    'systelab-grid-header-context-menu',
 	templateUrl: './grid-header-context-menu.component.html'
 })
 export class GridHeaderContextMenuComponent<T> extends ContextMenuComponent implements IHeaderAngularComp {
@@ -32,7 +32,6 @@ export class GridHeaderContextMenuComponent<T> extends ContextMenuComponent impl
 	}
 
 	protected executeAction(elementId: string, actionId: string): void {
-		console.log('Pasa por GridHeaderContextMenuComponent executeAction');
 		this.container.executeHeaderContextMenuAction(elementId, actionId, this.headerData);
 	}
 

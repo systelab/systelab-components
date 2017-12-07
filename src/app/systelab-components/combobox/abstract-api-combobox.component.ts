@@ -158,11 +158,9 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				this.gridOptions.datasource = this;
 				this.refresh(null);
 			}
-
 			if (this.totalItemsLoaded) {
-				this.calculateDropdownHeight();
+				this.setDropdownHeight();
 				this.setDropdownPosition();
-				this.addListeners();
 				result = false;
 			}
 		}
@@ -174,7 +172,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	// override
-	public calculateDropdownHeight() {
+	public setDropdownHeight() {
 		let totalItems = Number(this.getTotalItems());
 		let calculatedHeight = 0;
 
@@ -183,7 +181,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		}
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * 1;
+			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
 			calculatedHeight = 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
@@ -224,16 +222,16 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				.subscribe(
 					(previousPage: Array<T>) => {
 						const itemArray: Array<T> = new Array<T>();
-						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
+						const totItems: number = Number(this.getTotalItems() + emptyElemNumber);
 
 						const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
 						itemArray.push(lastItemFromPreviousPage);
 
 						this.totalItemsLoaded = true;
-						params.successCallback(itemArray, totalItems);
+						params.successCallback(itemArray, totItems);
 
 					},
-					error => {
+					() => {
 						params.failCallback();
 					}
 				);
@@ -273,7 +271,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 										this.totalItemsLoaded = true;
 										params.successCallback(itemArray, totalItems);
 									},
-									error => {
+									() => {
 										params.failCallback();
 									}
 								);
@@ -315,11 +313,9 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		}
 	}
 
-	// overrides
-	public onRowClicked(event: any) {
-		if (!this.multipleSelection) {
-			this.myRenderer.addClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-			this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
+	public clickDropDownMenu(e: Event) {
+		if (this.multipleSelection) {
+			e.stopPropagation();
 		}
 	}
 

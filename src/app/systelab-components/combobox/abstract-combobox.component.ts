@@ -3,13 +3,11 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
 import { StylesUtilService } from '../utilities/styles.util.service';
 
-declare var jQuery: any;
-
 export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	public static ROW_HEIGHT: number;
 
-	@Input() public filter: boolean = false;
+	@Input() public filter = false;
 
 	@Input() public fontFamily: string;
 	@Input() public fontSize: string;
@@ -74,6 +72,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	@Output() public codeChange = new EventEmitter();
 
 	@ViewChild('combobox') public comboboxElement: ElementRef;
+	@ViewChild('dropdowntoogle') public dropdownToogleElement: ElementRef;
+	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
 	@ViewChild('dropdown') public dropdownElement: ElementRef;
 	@ViewChild('input') public inputElement: ElementRef;
 	@ViewChild('combobutton') public comboButtonElement: ElementRef;
@@ -89,11 +89,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	public top = 0;
 	public left = 0;
 	public windowResized = false;
-
-	public destroyKeyListener: Function;
 	public isDropdownOpened: boolean;
-
-	public comboId: string = (Math.floor(Math.random() * (999999999999 - 1)) ).toString();
 
 	constructor(public myRenderer: Renderer2, public isColorPicker?: boolean) {
 	}
@@ -154,48 +150,36 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 		}
 	}
 
-	public setDropdownSize() {
-		const dropdownParentRect = this.inputElement.nativeElement.getBoundingClientRect();
-		this.top = dropdownParentRect.top + this.inputElement.nativeElement.offsetHeight + 1;
-		this.left = dropdownParentRect.left;
-
+	public setDropdownWidth() {
 		const parentWidth = this.comboboxElement.nativeElement.offsetWidth;
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'width', parentWidth + 'px');
-
 		this.setGridSize();
-
 	}
 
 	public isDropDownOpen(): boolean {
-		return this.comboboxElement.nativeElement.className.includes('uk-open');
+		return this.comboboxElement.nativeElement.className.includes('show');
 	}
 
 	public closeDropDown() {
-		jQuery('#' + this.comboId)
-			.off('hide.uk.dropdown');
+		this.resetDropDownPositionAndHeight();
 		if (this.isDropDownOpen()) {
-			this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
+			this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'show');
+			this.myRenderer.removeClass(this.dropdownMenuElement.nativeElement, 'show');
 		}
 	}
 
-	public onRowClicked(event: any) {
-		this.myRenderer.addClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-		this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
-	}
-
-	public addListeners() {
-		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
-			this.handleKeyboardEvents(evt);
-		});
+	public resetDropDownPositionAndHeight() {
+		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', null);
+		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', null);
+		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', '0px');
 	}
 
 	public loop(): void {
 		let result = true;
 
 		if (this.isDropDownOpen()) {
-			this.calculateDropdownHeight();
+			this.setDropdownHeight();
 			this.setDropdownPosition();
-			this.addListeners();
 			result = false;
 		}
 		if (result) {
@@ -206,21 +190,21 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public showDropDown() {
-		jQuery('#' + this.comboId)
-			.on('hide.uk.dropdown', this.closeDropDown.bind(this));
-		this.setDropdownSize();
-
+		this.setDropdownWidth();
 		if (!this.isDropDownOpen()) {
 			setTimeout(() => this.loop(), 10);
 		}
 	}
 
-	public calculateDropdownHeight() {
+	public clickDropDownMenu(e: Event) {
+	}
+
+	public setDropdownHeight() {
 		let calculatedHeight = 0;
 		const totalItems: number = Number(this.values ? this.values.length : 0);
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * 1;
+			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
 			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
@@ -238,20 +222,16 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public setDropdownPosition() {
+		this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'position', 'fixed');
+		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'position', 'absolute');
+		const dropdownParentRect: ClientRect = this.inputElement.nativeElement.getBoundingClientRect();
+		this.top = dropdownParentRect.top;
+		this.left = dropdownParentRect.left;
 		if (this.top + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight) {
 			this.top = this.top - this.dropdownElement.nativeElement.offsetHeight - this.inputElement.nativeElement.offsetHeight - 2;
 		}
-
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', this.top + 'px');
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', this.left + 'px');
-	}
-
-	public handleKeyboardEvents(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
-			if (this.isDropDownOpen()) {
-				this.closeDropDown();
-			}
-		}
 	}
 
 	public getSelectedRow(): any {
@@ -264,8 +244,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	public doSearch(event: any) {
 		// TODO: check when translations are integrated
-		let auxListArray = this.values;
-		auxListArray = this.values.filter(element => element.description.indexOf(event.target.value) > -1);
+		const auxListArray = this.values.filter(element => element.description.indexOf(event.target.value) > -1);
 		this.gridOptions.api.setRowData(auxListArray);
 	}
 

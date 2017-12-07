@@ -16,11 +16,11 @@ $icon-rowaction-font-size: 20px;
       text-align: left;
       padding: 0px;
 
-      .grid-header-context-menu {
+      .slab-grid-header-context-menu {
         display: flex;
         align-items: center;
 
-        .context-menu {
+        .slab-context-menu {
           min-width: $grid-cell-height;
           width: $grid-cell-height;
           .icon-context-menu {
@@ -28,7 +28,7 @@ $icon-rowaction-font-size: 20px;
           }
         }
 
-        .grid-header-context-menu-label {
+        .slab-grid-header-context-menu-label {
           padding: 0 5px;
         }
       }
