@@ -1,5 +1,5 @@
 <div class="slab-sidebar-menu-container">
-    <ul class="slab-sidebar-tabs-container uk-width-medium-1-2">
+    <ul class="slab-sidebar-tabs-container">
         <li class="slab-sidebar-tab" *ngFor="let tab of tabs; let i=index;" (click)="selectTab(tab.id)" [class.selected]="tab.isSelected">
             <div class="slab-sidebar-tab-decoration"></div>
             <span>{{tab.name }}</span>
