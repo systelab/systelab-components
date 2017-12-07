@@ -32,6 +32,7 @@ $icon-header-margin: ($header-height - $icon-header-size) / 2;
     margin: $icon-header-margin;
     border-radius: 50px;
     border: solid 2px $medium-gray;
+    overflow:hidden;
 
     i {
       @include position(relative, $top: 1px);
@@ -42,11 +43,12 @@ $icon-header-margin: ($header-height - $icon-header-size) / 2;
   }
 
   .slab-header-labels-container {
-    padding: 10px;
+    padding: 5px;
 
     .slab-header-hospital-name {
       display: block;
       font-size: 20px;
+      margin-bottom: 0px;
     }
 
     a {

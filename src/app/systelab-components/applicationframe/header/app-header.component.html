@@ -1,16 +1,16 @@
-<nav class="slab-header-bar uk-flex uk-flex-row-reverse uk-flex-nowrap uk-flex-space-between">
-    <div class="uk-text-nowrap">
-        <div class="uk-form uk-text-nowrap uk-display-inline-block uk-vertical-align-middle uk-text-nowrap">
+<nav class="slab-header-bar d-flex flex-row-reverse flex-nowrap justify-content-between">
+    <div class="text-nowrap">
+        <div class="text-nowrap d-inline-block align-middle">
             <ng-content></ng-content>
         </div>
-        <div class="slab-header-user-container uk-position-relative uk-display-inline-block uk-vertical-align-middle uk-text-nowrap"
+        <div class="slab-header-user-container position-relative d-inline-block align-middle text-nowrap"
              data-uk-dropdown="{mode:'click'}">
-            <div class="slab-header-user-icon uk-overflow-hidden uk-display-inline-block uk-text-center  uk-vertical-align-middle">
-                <div class="uk-vertical-align uk-height-1-1">
-                    <i class="icon-user uk-vertical-align-bottom"></i>
+            <div class="slab-header-user-icon d-inline-block text-center align-middle">
+                <div class="align-middle h-100">
+                    <i class="icon-user align-bottom"></i>
                 </div>
             </div>
-            <label class="uk-text-truncate uk-vertical-align-middle">{{userName}}</label>
+            <label class="text-truncate align-middle">{{userName}}</label>
             <div class="uk-dropdown">
                 <ul class="uk-nav uk-nav-navbar">
                     <li *ngFor="let menuEntry of menu" [class.uk-nav-divider]="menuEntry.isDivider"
@@ -20,11 +20,11 @@
             </div>
         </div>
     </div>
-    <div class="uk-text-truncate uk-flex uk-flex-nowrap">
-        <i class="icon-modulab slab-header-modulab-icon uk-vertical-align-middle uk-display-inline-block"></i>
-        <div class="slab-header-labels-container uk-vertical-align-middle uk-display-inline-block uk-text-truncate">
-            <label class="slab-header-hospital-name uk-text-truncate">{{hospitalName}}</label>
-            <small class="uk-display-block uk-text-truncate">{{userFullName}}
+    <div class="text-truncate d-flex flex-nowrap">
+        <i class="icon-modulab slab-header-modulab-icon align-middle d-inline-block"></i>
+        <div class="slab-header-labels-container align-middle d-inline-block text-truncate">
+            <label class="slab-header-hospital-name text-truncate">{{hospitalName}}</label>
+            <small class="d-block text-truncate">{{userFullName}}
             </small>
         </div>
     </div>
