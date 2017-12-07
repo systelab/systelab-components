@@ -4,6 +4,8 @@ import { AbstractComboBox } from '../abstract-combobox.component';
 import { Observable } from 'rxjs/Observable';
 import { StylesUtilService } from '../../utilities/styles.util.service';
 
+declare var jQuery: any;
+
 export class ComboTreeNode {
 	public nodeData: any;
 	public level: number;
@@ -94,9 +96,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 			}
 
 			if (this.totalItemsLoaded) {
-				this.calculateDropdownHeight();
+				this.setDropdownHeight();
 				this.setDropdownPosition();
-				this.addListeners();
 				result = false;
 			}
 		}
@@ -108,12 +109,12 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 	}
 
 	// Override
-	public calculateDropdownHeight() {
+	public setDropdownHeight() {
 		const totalItems = Number(this.getTotalItems());
 		let calculatedHeight = 0;
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * 1;
+			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
 			calculatedHeight = 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
@@ -161,34 +162,32 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 					this.gridOptions.api.setRowData(nodeVector);
 					this.gridOptions.api.redrawRows();
 				},
-				error => {
+				() => {
 					this.gridOptions.api.hideOverlay();
 				}
 			);
 	}
 
+	public clickDropDownMenu(e: Event) {
+		e.stopPropagation();
+	}
+
+
 	// Overrides
 	public onRowSelected(event: any) {
 		if (event.node.selected) {
 			if (this.isParentSelectable) {
-				this.myRenderer.addClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-				this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
+				jQuery('.dropdown-toggle').dropdown('toggle');
 			} else if (this.isAllSelectable && event.node && event.node.data && event.node.data.level === 0) {
 				if (event.node.data.nodeData[this.getLevelIdField(0)] === this.getAllNodeId()) {
-					this.myRenderer.addClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-					this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
+					jQuery('.dropdown-toggle').dropdown('toggle');
 				} else {
-					this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-					this.myRenderer.addClass(this.comboboxElement.nativeElement, 'uk-open');
 					event.node.setSelected(false);
 				}
 			} else if (event.node && event.node.data && event.node.data.level > 0) {
-				this.myRenderer.addClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-				this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
+				jQuery('.dropdown-toggle').dropdown('toggle');
 			} else {
 				if (event.node) {
-					this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-dropdown-close');
-					this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'uk-open');
 					event.node.setSelected(false);
 				}
 			}
