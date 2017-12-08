@@ -22,6 +22,8 @@ import { FullFlexDialog } from './showcase/full-flex/full-flex-dialog.component'
 import { SampleRouteComponent } from './showcase/sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
+import { BootstrapDialog } from './showcase/bootstrap-dialog/bootstrap-dialog.component';
+import { BootstrapPanel } from './showcase/bootstrap-dialog/bootstrap-panel.component';
 
 @NgModule({
 	imports:      [
@@ -47,7 +49,9 @@ import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 		EmptyDialog,
 		SplitShowcaseDialog,
 		InnerSampleGrid,
-		SampleRouteComponent
+		BootstrapDialog,
+		SampleRouteComponent,
+		BootstrapPanel
 	],
 	entryComponents: [
 		UpperFlexDialog,
@@ -56,6 +60,7 @@ import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 		FullFlexDialog,
 		EmptyDialog,
 		EmptyDialog,
+		BootstrapDialog,
 		SplitShowcaseDialog
 	],
 	providers:    [

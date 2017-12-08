@@ -13,6 +13,7 @@ import { MessagePopupService } from './systelab-components/modal/message-popup/m
 import { DialogService } from './systelab-components/modal/dialog/dialog.service';
 import { PieElement } from './systelab-components/piechart/pie.component';
 import { CalendarDialog, CalendarDialogParameters } from './systelab-components/calendar/calendar-dialog.component';
+import { BootstrapDialog } from './showcase/bootstrap-dialog/bootstrap-dialog.component';
 
 @Component({
 	selector:      'app-root',
@@ -200,6 +201,10 @@ export class ShowcaseComponent implements OnInit {
 		twoColumnsDialogParameters.index = 4;
 
 		this.dialogService.showDialog(TwoColumnsDialog, twoColumnsDialogParameters);
+	}
+
+	public bootstrap() {
+		this.dialogService.showDialog(BootstrapDialog, BootstrapDialog.getParameters());
 	}
 
 	public getDefaultShowcaseColumns(): Array<TwoListItem> {

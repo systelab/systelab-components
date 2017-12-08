@@ -1,5 +1,5 @@
 <div class="ngdialog-header">{{title}}</div>
-<div class="ngdialog-message with-buttons uk-panel-space uk-panel-space-small uk-flex">
+<div class="ngdialog-message with-buttons d-flex" [class.slab-space]="space">
     <ng-content select="[dialog-main]"></ng-content>
 </div>
 <div class="ngdialog-buttons">
