@@ -13,4 +13,4 @@ Component to show more than one panel.
     Tab 2 content
   </systelab-tab>
 </systelab-tabs>
-``
+```
