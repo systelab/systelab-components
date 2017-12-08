@@ -162,13 +162,15 @@ export class ShowcaseComponent implements OnInit {
 	}
 
 	public splitShowcase() {
-
-		const parametersC: CalendarDialogParameters = CalendarDialog.getParameters();
-		this.dialogService.showDialog(CalendarDialog, parametersC);
-
 		const parameters: SplitShowcaseDialogParameters = SplitShowcaseDialog.getParameters();
 		this.dialogService.showDialog(SplitShowcaseDialog, parameters);
 	}
+
+	public calendarShowcase() {
+		const parametersC: CalendarDialogParameters = CalendarDialog.getParameters();
+		this.dialogService.showDialog(CalendarDialog, parametersC);
+	}
+
 
 	public upperFlex() {
 		const upperFlexDialogParameters: UpperFlexDialogParameters = UpperFlexDialog.getParameters();

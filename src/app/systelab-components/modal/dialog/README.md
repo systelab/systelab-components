@@ -37,9 +37,11 @@ export class MyDialog extends DefaultModalActions implements ModalComponent<MyDi
 ```
 In the constructor, a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog.
 
-In order to create the template 'mysuper-dialog.component.html' you can use the selector systelab-dialog with a [title] Input and a (close) Output. A margin is added unless you specify (space)="false"
-To specify the content use the selector dialog-content and to specify the buttons use the selector dialog-bottom
-And example with tabs is:
+In order to create the template 'mysuper-dialog.component.html' you can use the selector systelab-dialog with a [title] Input and a (close) Output. A margin is added unless you specify [space]="false"
+
+To specify the content use the selector dialog-content and to specify the buttons use the selector dialog-bottom.
+
+An example with tabs could be:
 
 ```html
 <systelab-dialog [title]="'Title'" [space]="false" (close)="close()">
