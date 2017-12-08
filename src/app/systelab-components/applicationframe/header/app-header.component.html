@@ -3,20 +3,22 @@
         <div class="text-nowrap d-inline-block align-middle">
             <ng-content></ng-content>
         </div>
-        <div class="slab-header-user-container position-relative d-inline-block align-middle text-nowrap"
-             data-uk-dropdown="{mode:'click'}">
-            <div class="slab-header-user-icon d-inline-block text-center align-middle">
-                <div class="align-middle h-100">
-                    <i class="icon-user align-bottom"></i>
+        <div class="dropdown slab-header-user-container position-relative d-inline-block align-middle text-nowrap">
+            <div class="dropdown-toggle" data-toggle="dropdown">
+                <div class="slab-header-user-icon d-inline-block text-center align-middle">
+                    <div class="align-middle h-100">
+                        <i class="icon-user align-bottom"></i>
+                    </div>
                 </div>
-            </div>
-            <label class="text-truncate align-middle">{{userName}}</label>
-            <div class="uk-dropdown">
-                <ul class="uk-nav uk-nav-navbar">
-                    <li *ngFor="let menuEntry of menu" [class.uk-nav-divider]="menuEntry.isDivider"
-                        (click)="menuEntry.action()">{{menuEntry.optionName }}
-                    </li>
-                </ul>
+                <label class="text-truncate align-middle">{{userName}}</label>
+                <div class="dropdown-menu dropdown-menu-right slab-dropdown">
+                    <ul>
+                        <li *ngFor="let menuEntry of menu"
+                            (click)="menuEntry.action()">{{menuEntry.optionName }}
+                            <div *ngIf="menuEntry.isDivider" class="dropdown-divider"></div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
