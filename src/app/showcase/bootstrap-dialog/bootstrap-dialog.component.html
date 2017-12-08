@@ -1,5 +1,5 @@
 <systelab-dialog [title]="'Title'" [space]="false" (close)="close()">
-    <ng-container dialog-main>
+    <ng-container dialog-content>
         <systelab-tabs>
             <systelab-tab [title]="'title 1'">
                 <bootstrap-panel></bootstrap-panel>
@@ -12,7 +12,7 @@
             </systelab-tab>
         </systelab-tabs>
     </ng-container>
-    <ng-container dialog-buttons>
+    <ng-container dialog-bottom>
         <button type="button" class="uk-button uk-button-large uk-float-right" (click)="close()"> Submit</button>
     </ng-container>
 </systelab-dialog>

@@ -1,8 +1,8 @@
 <div class="ngdialog-header">{{title}}</div>
 <div class="ngdialog-message with-buttons d-flex" [class.slab-space]="space">
-    <ng-content select="[dialog-main]"></ng-content>
+    <ng-content select="[dialog-content]"></ng-content>
 </div>
 <div class="ngdialog-buttons">
-    <ng-content select="[dialog-buttons]"></ng-content>
+    <ng-content select="[dialog-bottom]"></ng-content>
 </div>
 <div class="ngdialog-close" (click)="emitClose()"></div>
