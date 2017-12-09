@@ -64,7 +64,7 @@ An example with tabs could be:
 </systelab-dialog>
 ```
 
-## Using The new component;
+## Using the new component
 
 In order to show the dialog, you must inject an instance of DialogService and use it:
 ```javascript
