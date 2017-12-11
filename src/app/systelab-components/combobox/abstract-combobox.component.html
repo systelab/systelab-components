@@ -3,7 +3,7 @@
      data-uk-dropdown="{mode:'click'}"
      [ngClass]="{'disabled': isDisabled}">
     <div id="combo" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
-        <input *ngIf="!isColorPicker" #input readonly type="text" class="combo-label combo-input"
+        <input *ngIf="!isColorPicker" #input readonly type="text" class="form-control combo-label combo-input"
                [style.height.%]="inputHeight"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"

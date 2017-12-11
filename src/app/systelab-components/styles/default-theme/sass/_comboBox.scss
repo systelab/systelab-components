@@ -39,6 +39,9 @@ $combo-button-width: 32px;
     min-height: $input-height;
     border: 1px solid $medium-gray;
     font-family: $base-body-font-family;
+    &.form-control[readonly] {
+        background-color: white;
+    }
   }
 
   .color-container {
