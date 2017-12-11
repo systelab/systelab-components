@@ -93,6 +93,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.api.sizeColumnsToFit();
 
 		this.gridOptions.api.doLayout();
+		this.gridOptions.api.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
 	}
 
 	protected saveColumnsStateInPreferences() {
