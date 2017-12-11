@@ -1,6 +1,5 @@
 @import '../../styles/default-theme/sass/variables';
 
-
 /* Header nav */
 $form-elements-height-margin: ($header-height - $form-elements-height) / 2;
 $icon-header-size: 40px;
@@ -32,6 +31,7 @@ $icon-header-margin: ($header-height - $icon-header-size) / 2;
     margin: $icon-header-margin;
     border-radius: 50px;
     border: solid 2px $medium-gray;
+    overflow: hidden;
 
     i {
       @include position(relative, $top: 1px);
@@ -42,11 +42,12 @@ $icon-header-margin: ($header-height - $icon-header-size) / 2;
   }
 
   .slab-header-labels-container {
-    padding: 10px;
+    padding: 5px;
 
     .slab-header-hospital-name {
       display: block;
       font-size: 20px;
+      margin-bottom: 0px;
     }
 
     a {
@@ -67,26 +68,17 @@ $icon-header-margin: ($header-height - $icon-header-size) / 2;
       background-color: $background-hemohub;
     }
 
-    > label {
-      width: $user-width - $header-height - 1px;
-      display: none;
+    .dropdown-toggle {
 
-      @media (min-width: $ipad-width + 1px) {
-        display: inline-block;
-      }
-    }
-
-    .uk-dropdown {
-      cursor: default;
-
-      &.uk-dropdown-bottom {
-        left: -141px !important;
-        margin-top: 0;
+      > label {
+        width: $user-width - $header-height - 1px;
+        display: none;
 
         @media (min-width: $ipad-width + 1px) {
-          left: -71px !important;
+          display: inline-block;
         }
       }
     }
+
   }
 }

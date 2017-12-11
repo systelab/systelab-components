@@ -1,12 +1,12 @@
-import { ViewChild, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { OnInit, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 
-export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent, OnInit {
+declare var jQuery: any;
 
-	@ViewChild('dropdownParent') public dropdownParent: ElementRef;
+export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent, OnInit {
 
 	public startsWith = '';
 
@@ -15,11 +15,6 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	constructor(public myRenderer: Renderer2) {
 		super(myRenderer);
-	}
-
-	// Override
-	public isDropDownOpen(): boolean {
-		return this.dropdownParent.nativeElement.className.includes('uk-open');
 	}
 
 	public doSearch(event: any) {
@@ -34,10 +29,10 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.startsWith = event.target.value;
 			if (!this.isDropDownOpen()) {
 				if (this.startsWith) {
-					this.isDropdownOpened = true;
 					this.onComboClicked();
-					this.myRenderer.addClass(this.dropdownParent.nativeElement, 'uk-open');
-
+					jQuery('.dropdown-toggle').dropdown('toggle');
+					this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
+					this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
 					this.destroyOffClickListener = this.myRenderer.listen('document', 'click', (evt: MouseEvent) => {
 						this.offClickHandler(evt);
 					});
@@ -51,19 +46,11 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 				}
 			} else {
 				if (!this.startsWith) {
-					this.myRenderer.addClass(this.dropdownParent.nativeElement, 'uk-dropdown-close');
-					this.myRenderer.removeClass(this.dropdownParent.nativeElement, 'uk-open');
+					jQuery('.dropdown-toggle').dropdown('toggle');
 				}
 			}
-
 			this.refresh(null);
 		}
-	}
-
-	// overrides
-	public onRowClicked(event: any) {
-		this.myRenderer.addClass(this.dropdownParent.nativeElement, 'uk-dropdown-close');
-		this.myRenderer.removeClass(this.dropdownParent.nativeElement, 'uk-open');
 	}
 
 	public closeAndDestroyListeners() {
@@ -74,20 +61,19 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 				this.id = selectedRow[this.getIdField()];
 				this.description = selectedRow[this.getDescriptionField()];
 			}
-			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'uk-dropdown-close');
-			this.myRenderer.removeClass(this.dropdownParent.nativeElement, 'uk-open');
+			jQuery('.dropdown-toggle').dropdown('toggle');
 		}
 		this.destroyListeners();
 	}
 
 	public offClickHandler(event: MouseEvent) {
-		if (!this.dropdownParent.nativeElement.contains(event.target)) { // check click origin
+		if (!this.dropdownToogleElement.nativeElement.contains(event.target)) { // check click origin
 			this.closeAndDestroyListeners();
 		}
 	}
 
 	// Override
-	public calculateDropdownHeight() {
+	public setDropdownHeight() {
 		let calculatedHeight = 0;
 
 		calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;
@@ -127,7 +113,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 					this.totalItemsLoaded = true;
 					params.successCallback(v, this.getTotalItems());
 				},
-				error => {
+				() => {
 					this.gridOptions.api.hideOverlay();
 					params.failCallback();
 				}

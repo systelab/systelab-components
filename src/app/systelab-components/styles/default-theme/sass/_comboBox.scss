@@ -1,10 +1,10 @@
 $combo-button-width: 32px;
 
-.combobox {
+.slab-combobox {
 
   width: 100%;
 
-  .combo-button {
+  .slab-combo-button {
     @include user-selection(none);
 
     min-height: $form-elements-height;
@@ -23,11 +23,11 @@ $combo-button-width: 32px;
     margin-top: 0;
   }
 
-  .combo-label {
+  .slab-combo-label {
     @include user-selection(none);
   }
 
-  .combo-input {
+  .slab-combo-input {
     cursor: pointer;
     text-overflow: ellipsis !important;
     border-right: none !important;
@@ -41,14 +41,14 @@ $combo-button-width: 32px;
     font-family: $base-body-font-family;
   }
 
-  .color-container {
+  .slab-color-container {
     height: $form-elements-height;
     border: solid 1px #d6d6d6;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
   }
 
-  .color-tag {
+  .slab-color-tag {
     width: 95%;
     height: 75%;
     margin: 0 auto;
@@ -57,11 +57,11 @@ $combo-button-width: 32px;
     border: 1px solid;
   }
 
-  .combo-caret-down {
+  .slab-combo-caret-down {
     margin-right: 10px;
   }
 
-  .filter-container {
+  .slab-filter-container {
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
@@ -71,12 +71,12 @@ $combo-button-width: 32px;
     }
   }
 
-  .combo-dropdown {
+  .slab-combo-dropdown {
     margin-top: 1px;
     padding: 0;
     border: none;
 
-    .combo-dropdown-box {
+    .slab-combo-dropdown-box {
       position: fixed;
       z-index: 3;
       -webkit-transform: translate3d(0, 0, 0);
@@ -124,10 +124,10 @@ $combo-button-width: 32px;
 
   &.disabled {
     cursor: not-allowed;
-    .combo-label {
+    .slab-combo-label {
       opacity: 0.5;
     }
-    .combo-button {
+    .slab-combo-button {
       cursor: not-allowed;
     }
   }

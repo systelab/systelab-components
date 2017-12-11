@@ -1,9 +1,10 @@
-<div #combobox id="{{comboId}}" class="combobox" style="height: 100%" [style.font-family]="fontFamily"
+<div #combobox (hide.bs.dropdown)="closeDropDown()"
+     class="dropdown slab-combobox" style="height: 100%" [style.font-family]="fontFamily"
      [style.font-size.px]="fontSize"
      [style.font-weight]="fontWeight"
      [style.font-style]="fontStyle" [ngClass]="{'disabled': isDisabled}">
 
-    <input #input type="text" class="combo-label combo-input" style="height: 100%"
+    <input #input type="text" class="slab-combo-label slab-combo-input" style="height: 100%"
            [disabled]="isDisabled"
            [(ngModel)]="fieldToShow" (keyup)="doSearch($event)"
            [style.font-family]="fontFamily"
@@ -12,14 +13,13 @@
            [style.font-style]="fontStyle"
            (keydown.Tab)="closeAndDestroyListeners()"/>
 
-    <div #dropdownParent data-uk-dropdown="{mode:'click'}" style="height: 100%">
-
-        <button #combobutton class="combo-label combo-button icon-caret-down" [disabled]="isDisabled"
+    <div #dropdowntoogle class="dropdown-toggle" data-toggle="dropdown" style="height: 100%">
+        <button #combobutton class="slab-combo-label slab-combo-button icon-caret-down" [disabled]="isDisabled"
                 style="height: 100%"
                 (click)="onComboClicked()"></button>
 
-        <div class="uk-dropdown combo-dropdown" [ngClass]="{'disabled': isDisabled}">
-            <div #dropdown class="combo-dropdown-box">
+        <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" [ngClass]="{'disabled': isDisabled}">
+            <div #dropdown class="slab-combo-dropdown-box">
                 <ag-grid-angular *ngIf="this.isDropdownOpened" #grid id="agGrid" #agGrid
                                  style="width: 100%; height: 100%;"
                                  class="ag-fresh"
@@ -28,11 +28,10 @@
                                  [style.font-weight]="fontWeight"
                                  [style.font-style]="fontStyle"
                                  [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)"
-                                 (rowSelected)="onRowSelected($event)" (rowClicked)="onRowClicked($event)"
+                                 (rowSelected)="onRowSelected($event)"
                                  (modelUpdated)="onModelUpdated()">
                 </ag-grid-angular>
             </div>
         </div>
-
     </div>
 </div>

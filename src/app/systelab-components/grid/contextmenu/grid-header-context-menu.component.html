@@ -1,16 +1,19 @@
-<div class="grid-header-context-menu">
-    <div #dropdownparent id="{{elementID}}" (click)="dotsClicked($event)" class="context-menu uk-button-dropdown"
-         data-uk-dropdown="{mode:'click'}">
-        <i class="icon-context-menu"></i>
-        <div #dropdown class="uk-dropdown">
-            <div *ngIf="isOpened">
-                <ul class="uk-nav uk-nav-dropdown" *ngFor="let action of contextMenuOptions">
-                    <li class="{{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
-                        (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null ">
-                        <a>{{action.actionText}}</a></li>
-                </ul>
+<div class="slab-grid-header-context-menu">
+    <div #dropdownparent class="dropdown">
+        <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
+            <i class="icon-context-menu"></i>
+        </div>
+        <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
+            <div #dropdown class="slab-dropdown">
+                <div *ngIf="isOpened">
+                    <ul class="uk-nav uk-nav-dropdown" *ngFor="let action of contextMenuOptions">
+                        <li class="{{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
+                            (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null ">
+                            <a>{{action.actionText}}</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="grid-header-context-menu-label">{{headerName}}</div>
+    <div class="slab-grid-header-context-menu-label">{{headerName}}</div>
 </div>

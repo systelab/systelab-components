@@ -3,12 +3,13 @@
     <lower-flex [language]="lowerFlexDialogParameters.language"></lower-flex>
 </div>
 <div class="ngdialog-buttons">
-    <div class="uk-button-dropdown uk-float-left" data-uk-dropdown="{mode:'click', pos:'bottom-left'}">
+    <div class="dropup slab-button-dropdown">
         <!-- This is the element toggling the dropdown -->
-        <button type="button" class="uk-button uk-button-large">Drop down bottom-left <i class="icon-chevron-up"></i></button>
+        <button type="button" class="uk-button uk-button-large dropdown-toogle" data-toggle="dropdown">Drop down bottom-left <i
+                class="icon-chevron-up"></i></button>
         <!-- This is the dropdown -->
-        <div class="uk-dropdown">
-            <ul class="uk-nav uk-nav-dropdown">
+        <div class="dropdown-menu slab-dropdown">
+            <ul>
                 <li><a>Action 1</a></li>
                 <li><a>Action 2</a></li>
             </ul>

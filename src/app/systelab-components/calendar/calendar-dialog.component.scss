@@ -1,39 +1,42 @@
 @import "../styles/default-theme/sass/variables";
 
-a {
-  top: 0;
-  display: block;
 
-  padding: 0 !important;
-  text-align: center;
-  color: #444;
+.slab-calendar-dialog {
+  a {
+    top: 0;
+    display: block;
 
-  &.ui-state-highlight {
-    background-color: $selected !important;
+    padding: 0 !important;
+    text-align: center;
+    color: #444;
+
+    &.ui-state-highlight {
+      background-color: $selected !important;
+    }
+    &.is-holiday {
+      color: red;
+    }
+    &.disable-link {
+      pointer-events: none;
+    }
   }
-  &.is-holiday {
-    color: red;
-  }
-  &.disable-link {
-    pointer-events: none;
-  }
-}
 
-.buttons {
-  button {
-    border: 0;
-    background: none;
-    box-shadow: none;
-    border-radius: 0px;
-    position: absolute;
-    width: 20px;
-    height: 20px;
+  .slab-calendar-buttons {
+    button {
+      border: 0;
+      background: none;
+      box-shadow: none;
+      border-radius: 0px;
+      position: absolute;
+      width: 20px;
+      height: 20px;
 
-    &.button1 {
-      top: 2px;
-      right: 2px;
-      padding-top: 5px;
-      background-color: bisque;
+      &.slab-calendar-button1 {
+        top: 2px;
+        right: 2px;
+        padding-top: 5px;
+        background-color: bisque;
+      }
     }
   }
 }

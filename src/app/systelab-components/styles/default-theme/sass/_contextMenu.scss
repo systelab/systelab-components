@@ -1,6 +1,6 @@
 $icon-context-menu-font-size: 20px;
 
-.context-menu {
+.slab-context-menu {
   cursor: pointer;
   text-align: center;
   vertical-align: top;
@@ -13,10 +13,6 @@ $icon-context-menu-font-size: 20px;
     font-size: $icon-context-menu-font-size;
     padding-top: ceil(($grid-cell-height - $icon-context-menu-font-size) / 2);
     color: grey;
-  }
-
-  .uk-dropdown {
-    text-align: left;
   }
 
 }

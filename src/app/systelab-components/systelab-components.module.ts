@@ -46,6 +46,8 @@ import { CalendarHeaderComponent } from './calendar/calendar-header.component';
 import { CalendarTableComponent } from './calendar/calendar-table.component';
 import { CalendarDialog } from './calendar/calendar-dialog.component';
 import { DecoratedDialogComponent } from './modal/dialog/decorated-dialog.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { TabComponent } from './tabs/tab.component';
 
 
 @NgModule({
@@ -100,7 +102,9 @@ import { DecoratedDialogComponent } from './modal/dialog/decorated-dialog.compon
 		CalendarDialog,
 		SearcherTableComponent,
 		CalendarHeaderComponent,
-		CalendarTableComponent
+		CalendarTableComponent,
+		TabsComponent,
+		TabComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -132,6 +136,8 @@ import { DecoratedDialogComponent } from './modal/dialog/decorated-dialog.compon
 		SearcherTableComponent,
 		CalendarHeaderComponent,
 		CalendarTableComponent,
+		TabsComponent,
+		TabComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
