@@ -37,8 +37,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 	protected firstSizeToFitExecuted = false;
 
 	constructor(protected preferencesService: PreferencesService,
-	            protected i18nService: I18nService,
-	            protected dialogService: DialogService) {
+				protected i18nService: I18nService,
+				protected dialogService: DialogService) {
 	}
 
 	public ngOnInit() {
@@ -80,7 +80,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		};
 		this.gridOptions.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
 
-		this.gridOptions.context = { componentParent: this };
+		this.gridOptions.context = {componentParent: this};
 	}
 
 	public onModelUpdated(event: any) {
@@ -362,6 +362,18 @@ export abstract class AbstractGrid<T> implements OnInit {
 				if (column.getColId() !== 'contextMenu') {
 					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, false, true);
 					options.visible.push(item);
+				}
+			});
+
+		// default columns
+		this.getColumnDefs()
+			.forEach(column => {
+				if (!column.hide) {
+					const item: TwoListItem = new TwoListItem(column.headerName, false, true);
+					options.defaultVisibleColumns.push(item);
+				} else {
+					const item: TwoListItem = new TwoListItem(column.headerName, false, false);
+					options.defaultHiddenColumns.push(item);
 				}
 			});
 

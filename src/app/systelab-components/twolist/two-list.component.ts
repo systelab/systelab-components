@@ -48,6 +48,8 @@ export class TwoListComponent {
 
 	@Input() public displayAttr: string;
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
+	@Input() public defaultVisibleColumns: Array<TwoListItem>;
+	@Input() public defaultHiddenColumns: Array<TwoListItem>;
 
 	public firstListSearch: string;
 	public secondListSearch: string;
@@ -104,6 +106,11 @@ export class TwoListComponent {
 		for (const element of list) {
 			element.selected = false;
 		}
+	}
+
+	public setDefaultColumnValues(): void {
+		this.available = this.defaultHiddenColumns;
+		this.visible = this.defaultVisibleColumns;
 	}
 
 	public removeItemsFromList(list: Array<any>, itemsToRemove: Array<any>): Array<any> {
