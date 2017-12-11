@@ -7,10 +7,10 @@
             appendTo="body"
             [ngClass]="{'date-error': error && !previousDate, 'is-disabled': disabled, 'previous-date': previousDate && markPreviousDate, 'input-expand-height':inputExpandHeight}">
     <p-header id="{{datepickerId}}">
-        <a class="icon-angle-double-left uk-icon-medium" (click)="prevYear()"></a>
-        <a class="icon-angle-left uk-icon-medium" (click)="prevMonth($event)"></a>
-        <a class="icon-angle-double-right uk-icon-medium" (click)="nextYear()"></a>
-        <a class="icon-angle-right uk-icon-medium" (click)="nextMonth($event)"></a>
+        <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
+        <a class="icon-angle-left slab-icon-medium" (click)="prevMonth($event)"></a>
+        <a class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
+        <a class="icon-angle-right slab-icon-medium" (click)="nextMonth($event)"></a>
         <div class="ui-datepicker-title uk-datepicker-heading">
             <span class="ui-datepicker-month">{{ currentCalendar.currentMonthText }}</span>
             <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>

@@ -8,7 +8,7 @@ import { IMessageModalPreset } from './presets/message-modal-preset';
 	host:        {
 		'tabindex': '-1',
 		'role':     'alertdialog',
-		'class':    'ngdialog-overlay',
+		'class':    'slab-dialog-overlay',
 	}
 })
 export class ModulabModalContainer extends BaseDynamicComponent implements OnInit {
@@ -22,17 +22,17 @@ export class ModulabModalContainer extends BaseDynamicComponent implements OnIni
 
 	public ngOnInit(): void {
 
-		this.computedClass = 'uk-width-1-3 uk-height-1-3';
+		this.computedClass = 'w-33 h-33';
 
 		if (this.dialog.context.dialogClass) {
 			this.computedClass = this.dialog.context.dialogClass;
 		} else if (this.dialog.context.width && this.dialog.context.height) {
-			this.computedClass = 'uk-fixed-size';
+			this.computedClass = 'slab-dialog-fixed-size';
 		} else if (this.dialog.context.fullScreen) {
 			this.computedClass = '';
 		}
 
-		this.computedClass += ' ngdialog-disabled-animation';
+		this.computedClass += ' slab-dialog-disabled-animation';
 	}
 
 }

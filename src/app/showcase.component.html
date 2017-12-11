@@ -1,12 +1,16 @@
-<div class="ngdialog ngdialog-disabled-animation ng-scope">
-    <div class="ngdialog-content" role="document">
-        <div class="ngdialog-header ng-binding">Showcase</div>
-        <div class="ngdialog-message with-buttons">
-            <form class="uk-form uk-form-horizontal uk-flex uk-flex-column">
+<div class="slab-dialog slab-dialog-disabled-animation ng-scope">
+    <div class="slab-dialog-content" role="document">
+        <div class="slab-dialog-header ng-binding">Showcase</div>
+        <div class="slab-dialog-message with-buttons">
+            <div class="uk-flex uk-flex-column">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="grids-tab" data-toggle="tab" href="#grids" role="tab"
                            aria-controls="grids" aria-selected="true">Grids</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tables-tab" data-toggle="tab" href="#table" role="tab"
+                           aria-controls="tables" aria-selected="false">Tables</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="combos-tab" data-toggle="tab" href="#combos" role="tab"
@@ -63,12 +67,43 @@
                             <inner-sample-grid></inner-sample-grid>
                         </form>
                     </div>
+                    <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="table" role="tabpanel" aria-labelledby="tables-tab">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-light h-auto">
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="combos" role="tabpanel"
                          aria-labelledby="combos-tab">
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Combo estático sin buscador</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3">
+                                <div class="slab-form-icon uk-width-1-3">
                                     <systelab-select class="uk-width-1-1"
                                                      [values]="comboOptionList"
                                                      (change)="comboChangeEvent($event)"></systelab-select>
@@ -80,7 +115,7 @@
                                 valor
                                 asignado</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3">
+                                <div class="slab-form-icon uk-width-1-3">
                                     <systelab-select class="uk-width-1-1"
                                                      [description]="'San Petersburgo'"
                                                      [id]="1"
@@ -92,7 +127,7 @@
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Combo estático con buscador</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3">
+                                <div class="slab-form-icon uk-width-1-3">
                                     <systelab-select class="uk-width-1-1"
                                                      [values]="comboOptionList" [filter]="true"
                                                      (change)="comboChangeEvent($event)"></systelab-select>
@@ -102,7 +137,7 @@
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Color Picker</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-5">
+                                <div class="slab-form-icon uk-width-1-5">
                                     <systelab-colorpicker class="uk-width-1-1"
                                                           [(id)]="colorId"></systelab-colorpicker>
                                 </div>
@@ -111,7 +146,7 @@
                         <div class="uk-form-row" style="position:absolute; bottom: 10px;">
                             <label class="uk-form-label" for="form-h-s">Combo estático con buscador abajo</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-1">
+                                <div class="slab-form-icon uk-width-1-1">
                                     <systelab-select class="uk-width-1-1"
                                                      [values]="comboOptionList"
                                                      (change)="comboChangeEvent($event)"></systelab-select>
@@ -121,72 +156,78 @@
                     </div>
                     <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="inputs" role="tabpanel"
                          aria-labelledby="inputs-tab">
-                        <div class="uk-form-row">
-                            <p></p>
-
-                            <label class="uk-form-label" for="form-h-s">Full width</label>
-                            <div class="uk-form-controls">
-                                <input type="text" class="uk-width-1-1" placeholder="Nombre ">
-                            </div>
-
-
-                        </div>
-                        <div class="uk-form-row">
-                            <label class="uk-form-label" for="form-h-s">Small width</label>
-                            <div class="uk-form-controls">
-                                <input type="text" class="uk-width-1-3" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="uk-form-row uk-disabled">
-                            <label class="uk-form-label" for="form-h-s">Disabled input</label>
-                            <div class="uk-form-controls">
-                                <input disabled type="text" class="uk-width-1-3" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="uk-form-row">
-                            <label class="uk-form-label" for="form-h-s">Textarea</label>
-                            <div class="uk-form-controls">
-								<textarea name="" id="" class="uk-width-1-1">
-
-Markup example:
-&lt;div class=&quot;uk-form-controls&quot;&gt;
-&lt;textarea name=&quot;&quot; id=&quot;&quot; class=&quot;uk-width-1-1&quot;&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-
-
-									</textarea>
-                            </div>
-                        </div>
-                        <div class="uk-form-row">
-                            <label class="uk-form-label" for="form-h-s">Textarea resizable (only vertical)</label>
-                            <div class="uk-form-controls">
-								<textarea name="" id="" class="uk-width-1-1 vertical-resize">
-Markup example:
-&lt;div class=&quot;uk-form-controls&quot;&gt;
-&lt;textarea name=&quot;&quot; id=&quot;&quot; class=&quot;uk-width-1-1 vertical-resize&quot;&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-									</textarea>
-                            </div>
-                        </div>
-                        <div class="uk-form-row">
-                            <label class="uk-form-label" for="form-h-s">Textarea no resizable</label>
-                            <div class="uk-form-controls">
-								<textarea name="" id="" class="uk-width-1-1 no-resize">
-Markup example:
-&lt;div class=&quot;uk-form-controls&quot;&gt;
-&lt;textarea name=&quot;&quot; id=&quot;&quot; class=&quot;uk-width-1-1 no-resize&quot;&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-									</textarea>
-                            </div>
-                        </div>
-                    </div>
+                        <form>
+                            <div class="d-flex flex-column h-100 w-100 p-2">
+                                <div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="full-width-input">Full width</label>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="Nombre" id="full-width-input">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="third-width-input">Small width</label>
+                                        <div class="col col-sm-3">
+                                            <input type="text" class="form-control" placeholder="Email" id="third-width-input">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1 disabled">
+                                        <label class="col slab-mw-200"  for="disabled-input">Disabled input</label>
+                                        <div class="col col-sm-3">
+                                            <input disabled type="text" class="form-control" placeholder="Email" id="disabled-input">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="file-input">Input File</label>
+                                        <div class="col col-sm-3">
+                                            <div class="slab-input-file">
+                                            <input class="form-control" id="uploadFile" type="text" name="uploadFile" [(ngModel)]="fileName">
+                                            <div class="btn nt-sm">
+                                                <span>...</span>
+                                                <input id="uploadBtn" type="file" (change)="selectFile($event.target.files)">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="file-input">html with input style</label>
+                                        <div class="col col-sm-3">
+                                            <div class="slab-input form-control">
+                                                <font>1<sub>2S</sub>,</font>
+                                                <font class="uk-text-warning">1<sub>2.5S</sub>,</font>
+                                                <font class="uk-text-danger">1<sub>3S</sub></font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="textarea">Textarea</label>
+                                        <div class="col">
+                                            <textarea name="" id="textarea" class="slab-textarea w-100"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="resize-textarea">Textarea resizable (only vertical)</label>
+                                        <div class="col">
+                                            <textarea name="" id="resize-textarea" class="slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center mt-1">
+                                        <label class="slab-mw-200 col" for="noresize-textarea">Textarea no resizable</label>
+                                        <div class="col">
+                                            <textarea name="" id="noresize-textarea" class="slab-textarea w-100 slab-textarea-no-resize"></textarea>
+                                        </div>
+                                    </div>
+                                 </div>
+                             </div>
+                         </form>
+		            </div>
                     <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="datepickers" role="tabpanel"
                          aria-labelledby="datepickers-tab">
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker {{dateValue}}</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon position-right-icon">
-                                    <input type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue1"
+                                <div class="slab-form-icon position-right-icon">
+                                    <input class="form-control" type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue1"
                                            [(ngModel)]="dateValue">
                                     <i class="icon-calendar"></i>
                                 </div>
@@ -195,8 +236,8 @@ Markup example:
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker (width-1-3)</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
-                                    <input type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue2"
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
+                                    <input class="form-control" type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue2"
                                            [(ngModel)]="dateValue">
                                     <i class="icon-calendar"></i>
                                 </div>
@@ -205,8 +246,8 @@ Markup example:
                         <div class="uk-form-row uk-disabled">
                             <label class="uk-form-label" for="form-h-s">Datepicker (row disabled)</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
-                                    <input disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
+                                    <input class="form-control" disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
                                            name="dateValue3" [(ngModel)]="dateValue">
                                     <i class="icon-calendar"></i>
                                 </div>
@@ -215,8 +256,8 @@ Markup example:
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker (input disabled)</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
-                                    <input disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
+                                    <input class="form-control" disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
                                            name="dateValue4" [(ngModel)]="dateValue">
                                     <i class="icon-calendar"></i>
                                 </div>
@@ -225,7 +266,7 @@ Markup example:
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker ngPrime disabled</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
                                     <systelab-datepicker
                                             [disabled]="true"
                                             [error]="false"
@@ -238,7 +279,7 @@ Markup example:
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker ngPrime error</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
                                     <systelab-datepicker
                                             [disabled]="false"
                                             [error]="true"
@@ -251,7 +292,7 @@ Markup example:
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker ngPrime English</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
                                     <systelab-datepicker
                                             [otherLanguage]="'en'"
                                             [disabled]="false"
@@ -265,7 +306,7 @@ Markup example:
                         <div class="uk-form-row">
                             <label class="uk-form-label" for="form-h-s">Datepicker ngPrime Poland</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-3 position-right-icon">
+                                <div class="slab-form-icon uk-width-1-3 position-right-icon">
                                     <systelab-datepicker
                                             [otherLanguage]="'pl'"
                                             [disabled]="false"
@@ -279,7 +320,7 @@ Markup example:
                         <div class="uk-form-row" style="position:absolute; bottom: 10px">
                             <label class="uk-form-label" for="form-h-s">Datepicker ngPrime bottom</label>
                             <div class="uk-form-controls">
-                                <div class="uk-form-icon uk-width-1-1 position-right-icon">
+                                <div class="slab-form-icon uk-width-1-1 position-right-icon">
                                     <systelab-datepicker
                                             [disabled]="false"
                                             [error]="false"
@@ -417,28 +458,32 @@ Markup example:
                     <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="forms" role="tabpanel"
                          aria-labelledby="forms-tab">
                         <div class="uk-form-row">
-                            <!--<button type="button" class="uk-button uk-button-large uk-margin-small-top" ng-click="vm.flex();">Flex snipper</button>-->
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                            <!--<button type="button" class="btn btn-large uk-margin-small-top" ng-click="vm.flex();">Flex snipper</button>-->
+                            <button type="button" class="btn btn-large uk-margin-small-top"
                                     (click)="subFlex();">Form + lower flex textarea
                             </button>
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                            <button type="button" class="btn btn-large uk-margin-small-top"
                                     (click)="upperFlex();">Form + upper flex textarea
                             </button>
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+				<button type="button" class="btn btn-large uk-margin-small-top"
                                     (click)="twoColumns();">Two columns
                             </button>
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                            
+                            <button type="button" class="btn btn-lg uk-margin-small-top"
                                     (click)="calendarShowcase();">Calendar
                             </button>
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                            <button type="button" class="btn btn-large uk-margin-small-top"
                                     (click)="fullFlex();">Flex
                             </button>
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                            <button type="button" class="btn btn-lg uk-margin-small-top"
                                     (click)="splitShowcase();">Split
                             </button>
-                            <button type="button" class="uk-button uk-button-large uk-margin-small-top"
+                            <button type="button" class="btn btn-lg uk-margin-small-top"
                                     (click)="bootstrap();">Bootstrap
                             </button>
+                            <button type="button" class="btn btn-large uk-margin-small-top"
+                            (click)="progressBar();">Progress bar
+                    </button>
                         </div>
                     </div>
                     <div class="tab-pane uk-flex-item-1 uk-flex uk-flex-column" id="icons" role="tabpanel"
@@ -449,7 +494,7 @@ Markup example:
                          aria-labelledby="tooltips-tab">
                         <div class="uk-form-row">
 							<span data-uk-dropdown="{mode:'click'}" class="uk-position-relative">
-								<div class="uk-button">Click me</div>
+								<div class="btn">Click me</div>
 								<div class="legend uk-dropdown uk-text-left">
 									<p>Hi, I'm a tooltip</p>
 									<hr><p>Lorem ipsum dolot sit amet</p>
@@ -458,7 +503,7 @@ Markup example:
                         </div>
                         <div class="uk-form-row">
 							<span data-uk-dropdown class="uk-position-relative">
-								<div class="uk-button">Hover me</div>
+								<div class="btn">Hover me</div>
 								<div class="legend uk-dropdown uk-text-left">
 									<p>Hi, I'm another tooltip</p>
 									<hr><p>Lorem ipsum dolot sit amet</p>
@@ -468,7 +513,7 @@ Markup example:
                         <div class="uk-form-row">
                             <div class="dropup slab-button-dropdown">
                                 <!-- This is the element toggling the dropdown -->
-                                <button type="button" class="uk-button uk-button-large dropdown-toogle" data-toggle="dropdown">Drop down top-left <i
+                                <button type="button" class="btn btn-lg dropdown-toogle" data-toggle="dropdown">Drop down top-left <i
                                         class="icon-chevron-up"></i></button>
                                 <!-- This is the dropdown -->
                                 <div class="dropdown-menu slab-dropdown">
@@ -492,31 +537,31 @@ Markup example:
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="ngdialog-buttons">
-            <button type="button" class="uk-button uk-button-large" (click)="showError();"><i
+        <div class="slab-dialog-buttons">
+            <button type="button" class="btn btn-lg" (click)="showError();"><i
                     class="icon-times-circle"></i> Error
             </button>
-            <button type="button" class="uk-button uk-button-large" (click)="showWarning();"><i
+            <button type="button" class="btn btn-lg" (click)="showWarning();"><i
                     class="icon-warning "></i> Warning
             </button>
-            <button type="button" class="uk-button uk-button-large" (click)="showInfo();"><i
+            <button type="button" class="btn btn-lg" (click)="showInfo();"><i
                     class="icon-info-circle"></i> Information
             </button>
-            <button type="button" class="uk-button uk-button-large" (click)="showQuestion();"><i
+            <button type="button" class="btn btn-lg" (click)="showQuestion();"><i
                     class="icon-question-circle"></i> Question
             </button>
-            <button type="button" class="uk-button uk-button-large" (click)="showQuestionYN();"><i
+            <button type="button" class="btn btn-lg" (click)="showQuestionYN();"><i
                     class="icon-question-circle"></i> Question YN
             </button>
 
-            <button type="button" class="uk-button uk-button-large uk-float-right"><i
+            <button type="button" class="btn btn-lg uk-float-right"><i
                     class="icon-chevron-circle-right"></i> Right buttons
             </button>
             <div class="dropup slab-button-dropdown">
                 <!-- This is the element toggling the dropdown -->
-                <button type="button" class="uk-button uk-button-large dropdown-toogle" data-toggle="dropdown">Drop down auto-left <i
+                <button type="button" class="btn btn-lg dropdown-toogle" data-toggle="dropdown">Drop down auto-left <i
                         class="icon-chevron-up"></i></button>
                 <!-- This is the dropdown -->
                 <div class="dropdown-menu slab-dropdown">
@@ -526,15 +571,15 @@ Markup example:
                     </ul>
                 </div>
             </div>
-            <button type="button" class="uk-button uk-button-large" (click)="saveTwoListPreferences();">Save Two List
+            <button type="button" class="btn btn-lg" (click)="saveTwoListPreferences();">Save Two List
                 Preferences
             </button>
-            <button type="button" class="uk-button uk-button-large uk-float-right"><i
+            <button type="button" class="btn btn-lg uk-float-right"><i
                     class="icon-chevron-circle-right"></i> Right buttons
             </button>
         </div>
-        <div class="ngdialog-close" (click)="closeDialog();"></div>
-        <div class="ngdialog-buttons-top">
+        <div class="slab-dialog-close" (click)="closeDialog();"></div>
+        <div class="slab-dialog-buttons-top">
             <div><i class="icon-question-circle"></i></div>
         </div>
     </div>

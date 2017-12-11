@@ -1,5 +1,16 @@
 @charset "utf-8";
 
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: (
+  25: 25%,
+  33: 33.333%,
+  50: 50%,
+  66: 66.666%,
+  75: 75%,
+  100: 100%,
+  auto: auto
+);
+
 /**
  * Import files from default theme folder
  * src/slt-common/assets/styles/default-theme/sass/
@@ -7,13 +18,18 @@
 @import "styleColor";
 @import "styleSheet";
 @import "mixins";
-@import "ngDialog_legacy";
-@import "icon_legacy";
+
+// we must load bootstrap after setting our own variables
+@import "~bootstrap/scss/bootstrap";
+
+// then we can load ourcomponents
+@import "dialog";
+@import "icon";
 @import "dropdown";
 @import "dropdown_legacy";
 @import "forms_legacy";
-@import "panel_legacy";
-@import "progressBar_legacy";
+@import "forms";
+@import "progressBar";
 @import "tabs";
 @import "tabs_legacy";
 @import "ukswitcher";
@@ -22,15 +38,15 @@
 @import "agGrid";
 @import "tree";
 @import "status";
-@import "table_legacy";
+@import "table";
 @import "triageCell";
-@import "button_legacy";
+@import "button";
 @import "comboBox";
 @import "datepicker";
-@import "input_legacy";
+@import "input";
 @import "radio";
-@import "slider_legacy";
-@import "textarea_legacy";
+@import "slider";
+@import "textarea";
 @import "searcher";
 
 html {

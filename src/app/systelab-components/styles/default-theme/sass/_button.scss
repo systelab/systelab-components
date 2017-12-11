@@ -1,16 +1,24 @@
 %button {
-  min-width: $ng-dialog-button-width;
+  min-width: $slab-dialog-button-width;
   text-shadow: none !important;
   border-radius: $border-radius;
   background-color: $secondary-color;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0 12px;
+  min-height: 30px;
   color: white;
+  cursor: pointer;
+  box-shadow: none;
 
-  &.uk-button-primary {
+  &.btn-primary {
     background-color: $primary-color;
   }
 }
 
-.uk-button {
+/**
+ * 1. Override Bootstrap default behavior
+ */
+.btn {
   font-size: $base-font-size;
 
   &,
@@ -31,6 +39,7 @@
   }
 
   &:disabled {
+    opacity: 1; /* [1] */
     background-color: $dark-gray;
 
     &:hover {
@@ -43,7 +52,7 @@
     line-height: 100%;
     min-height: 100%;
   }
-  &.uk-button-link {
+  &.btn-link {
     color: $primary-color;
 
     &,
@@ -63,14 +72,7 @@
     }
   }
 
-  &.uk-button-medium {
-    padding: 0 20px;
-    line-height: $form-elements-height - 2px;
-    max-height: $form-elements-height;
-    min-height: 0;
-  }
-
-  &.uk-button-large {
+  &.btn-lg {
     padding: 0 20px;
     min-height: $button-large-height;
     line-height: $button-large-height - 2px;

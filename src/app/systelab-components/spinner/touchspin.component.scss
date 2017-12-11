@@ -27,7 +27,7 @@ $touchspin-height: $form-elements-height !default;
     }
   }
 
-  .uk-button.slab-tsbtnminus, .uk-button.slab-tsbtnplus {
+  .btn.slab-tsbtnminus, .btn.slab-tsbtnplus {
     @include size($touchspin-height);
 
     min-width: $touchspin-height;
@@ -43,13 +43,13 @@ $touchspin-height: $form-elements-height !default;
     }
   }
 
-  .uk-button.slab-tsbtnminus {
+  .btn.slab-tsbtnminus {
     margin-right: -4px;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
   }
 
-  .uk-button.slab-tsbtnplus {
+  .btn.slab-tsbtnplus {
     margin-left: -4px;
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
@@ -57,7 +57,7 @@ $touchspin-height: $form-elements-height !default;
 }
 
 @-moz-document url-prefix() {
-  .uk-button.tsbtnminus, .uk-button.tsbtnplus {
+  .btn.tsbtnminus, .btn.tsbtnplus {
     span {
       line-height: calc(#{$touchspin-height} - 3px) !important;
     }

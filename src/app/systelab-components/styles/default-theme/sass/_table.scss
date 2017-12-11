@@ -3,21 +3,10 @@ $table-min-row-height: $form-elements-height !default;
 /* $table-row-padding: defines the padding of the td elements inside the uk-table tr.*/
 $table-row-padding: $form-row-gutter !default;
 
-.uk-table {
-  .uk-row-highlight {
-    background-color: $light-gray;
-  }
+.table {
 
   tr {
     height: $table-min-row-height;
-
-    &.uk-height-auto {
-      height: auto;
-    }
-
-    td {
-      padding: $table-row-padding;
-    }
   }
 
   &.left-header {
@@ -33,15 +22,14 @@ $table-row-padding: $form-row-gutter !default;
   }
 }
 
-.table-horizontal-wrapper {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.uk-table-remove-border {
+/*
+ * This is a custom modifier class extending 
+ * default Bootstrap functionality
+ */
+.table-remove-border {
   border: 0;
 
-  tr, td {
+  tr, th, td {
     border: 0;
   }
 }

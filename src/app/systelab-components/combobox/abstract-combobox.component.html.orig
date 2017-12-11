@@ -1,0 +1,62 @@
+<<<<<<< HEAD
+<div #combobox
+     (hide.bs.dropdown)="closeDropDown()"
+     class="dropdown slab-combobox" [style.height.%]="inputHeight"
+     [ngClass]="{'disabled': isDisabled}">
+    <div #dropdowntoogle class="dropdown-toggle" data-toggle="dropdown" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
+        <input *ngIf="!isColorPicker" #input readonly type="text" class="slab-combo-label slab-combo-input"
+=======
+<div #combobox id="{{comboId}}"
+     class="btn-dropdown combobox" [style.height.%]="inputHeight"
+     data-uk-dropdown="{mode:'click'}"
+     [ngClass]="{'disabled': isDisabled}">
+    <div id="combo" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
+        <input *ngIf="!isColorPicker" #input readonly type="text" class="form-control combo-label combo-input"
+>>>>>>> master
+               [style.height.%]="inputHeight"
+               [style.font-family]="fontFamily"
+               [style.font-size.px]="fontSize"
+               [style.font-weight]="fontWeight"
+               [style.font-style]="fontStyle"
+               [(ngModel)]="description" [disabled]="isDisabled"/>
+
+        <div *ngIf="isColorPicker" #input readonly type="text" class="slab-combo-input slab-color-container"
+             [style.height.%]="inputHeight" style="white-space: nowrap; overflow: hidden">
+            <div *ngIf="id" class="stripe uk-align-left uk-display-inline-block"
+                 style="margin: 8px 10px"
+                 [ngClass]="{critical: id == '1', 'very-urgent': id == '2', urgent: id == '3', standard: id == '4', nonurgent: id == '5'}"></div>
+            <div style="margin: 4px 1px" [style.font-family]="fontFamily"
+                 [style.font-size.px]="fontSize"
+                 [style.font-weight]="fontWeight"
+                 [style.font-style]="fontStyle">
+                <span class="uk-text-truncate">{{description}}</span>
+            </div>
+        </div>
+
+        <button #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
+                [style.height.%]="inputHeight"></button>
+
+    </div>
+    <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
+        <div #dropdown class="slab-combo-dropdown-box">
+            <div *ngIf="filter" class="slab-filter-container" [style.font-family]="fontFamily"
+                 [style.font-size.px]="fontSize"
+                 [style.font-weight]="fontWeight"
+                 [style.font-style]="fontStyle">
+                <input [value]="filterValue" (keyup)="doSearch($event)">
+            </div>
+            <div #hidden class="height-hidden"></div>
+            <ag-grid-angular *ngIf="this.isDropdownOpened" #grid id="agGrid" #agGrid
+                             style="width: 100%; height: 100%;"
+                             [style.font-family]="fontFamily"
+                             [style.font-size.px]="fontSize"
+                             [style.font-weight]="fontWeight"
+                             [style.font-style]="fontStyle"
+                             class="ag-fresh"
+                             [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)"
+                             (modelUpdated)="onModelUpdated()"
+                             (rowSelected)="onRowSelected($event)">
+            </ag-grid-angular>
+        </div>
+    </div>
+</div>

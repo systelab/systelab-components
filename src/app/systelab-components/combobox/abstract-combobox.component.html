@@ -3,7 +3,7 @@
      class="dropdown slab-combobox" [style.height.%]="inputHeight"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="dropdown-toggle" data-toggle="dropdown" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
-        <input *ngIf="!isColorPicker" #input readonly type="text" class="slab-combo-label slab-combo-input"
+        <input *ngIf="!isColorPicker" #input readonly type="text" class="form-control slab-combo-label slab-combo-input"
                [style.height.%]="inputHeight"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"

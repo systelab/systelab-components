@@ -2,7 +2,7 @@
     <div class="slab-twolistdiv uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap">
         <div class="slab-twolistboxtitle">{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</div>
         <div class="uk-margin-small-right">
-            <input type="text" class="uk-margin-small-left" [(ngModel)]="firstListSearch">
+            <input type="text" class="form-control uk-margin-small-left" [(ngModel)]="firstListSearch">
         </div>
         <div class="slab-twolistbox uk-panel uk-panel-box uk-panel-box-secondary uk-height-1-1 uk-overflow-container">
             <div class="slab-twolistboxdiv">
@@ -17,10 +17,10 @@
         </div>
     </div>
     <div class="slab-twolistbuttondiv">
-        <button class="slab-twolistbutton uk-button icon-chevron-right" (click)="add()" title="Add selected"
+        <button class="slab-twolistbutton btn icon-chevron-right" (click)="add()" title="Add selected"
                 [disabled]="selected.available.length == 0">
         </button>
-        <button class="slab-twolistbutton uk-button icon-chevron-left" (click)="remove()" title="Remove selected"
+        <button class="slab-twolistbutton btn icon-chevron-left" (click)="remove()" title="Remove selected"
                 [disabled]="selected.current.length == 0">
         </button>
     </div>
@@ -28,7 +28,7 @@
     <div class="slab-twolistdiv uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap">
         <div class="slab-twolistboxtitle">{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</div>
         <div class="uk-margin-small-right">
-            <input type="text" class="uk-margin-small-left" [(ngModel)]="secondListSearch">
+            <input type="text" class="form-control uk-margin-small-left" [(ngModel)]="secondListSearch">
         </div>
         <div class="slab-twolistbox uk-panel uk-panel-box uk-panel-box-secondary uk-height-1-1 uk-overflow-container">
             <div class="slab-twolistboxdiv" dnd-droppable>

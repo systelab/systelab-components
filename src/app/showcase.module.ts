@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InnerSampleGrid } from './showcase/innner-sample-grid.component';
 import { BootstrapDialog } from './showcase/bootstrap-dialog/bootstrap-dialog.component';
 import { BootstrapPanel } from './showcase/bootstrap-dialog/bootstrap-panel.component';
+import { ProgressbarDialog } from './showcase/progressbar-dialog/progressbar-dialog.component';
 
 @NgModule({
 	imports:      [
@@ -51,7 +52,8 @@ import { BootstrapPanel } from './showcase/bootstrap-dialog/bootstrap-panel.comp
 		InnerSampleGrid,
 		BootstrapDialog,
 		SampleRouteComponent,
-		BootstrapPanel
+		BootstrapPanel,
+		ProgressbarDialog
 	],
 	entryComponents: [
 		UpperFlexDialog,
@@ -59,9 +61,9 @@ import { BootstrapPanel } from './showcase/bootstrap-dialog/bootstrap-panel.comp
 		TwoColumnsDialog,
 		FullFlexDialog,
 		EmptyDialog,
-		EmptyDialog,
 		BootstrapDialog,
-		SplitShowcaseDialog
+		SplitShowcaseDialog,
+		ProgressbarDialog
 	],
 	providers:    [
 		MessagePopupService,

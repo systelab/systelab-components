@@ -1,0 +1,52 @@
+<form class="h-100 d-flex flex-row flex-nowrap">
+    <div class="text-center text-nowrap bg-primary d-flex align-items-center justify-content-center">
+        <div>Content width div</div>
+    </div>
+    <div class="w-100 text-center bg-secondary">
+
+        <div class="h-100">
+            <div class="h-100 d-flex flex-column flex-nowrap">
+
+                <div class="text-center text-nowrap bg-warning d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <div>Content height div</div>
+                </div>
+<<<<<<< HEAD
+                <div class="d-flex flex-column flex-nowrap h-100 bg-danger">
+=======
+                <div class="uk-height-1-1" style="background-color: red;">
+                        <div class="uk-form-row uk-overflow-container uk-height-1-1">
+                            <div class="uk-form-controls uk-height-1-1">
+                <textarea readonly name="" id="" class="slab-textarea slab-textarea-no-resize">
+Markup example:
+
+&lt;div class=&quot;uk-height-1-1&quot;&gt;
+&lt;div class=&quot;uk-height-1-1 uk-flex uk-flex-column uk-flex-nowrap&quot;&gt;
+&lt;div&gt;
+Form ...
+&lt;/div&gt;
+&lt;div class=&quot;uk-overflow-container uk-height-1-1&quot;&gt;
+Content...
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+(You can also use this form as an example, this very textarea is also flexed)
+>>>>>>> master
+
+                <textarea readonly name="" id="" class="h-100 no-resize">
+Markup example:
+Markup example:
+
+(You can also use this form as an example, this very textarea is also flexed)
+                </textarea>
+                </div>
+                <div class="text-center text-nowrap bg-info d-flex align-items-center justify-content-center"  style="height: 120px;">
+                    <div>Content height div</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="text-center text-nowrap bg-success d-flex align-items-center justify-content-center" style="width: 300px;">
+        <div class="align-middle">Content width div</div>
+    </div>
+</form>

@@ -1,0 +1,43 @@
+<<<<<<< HEAD
+$icon-context-menu-font-size: 20px;
+
+.slab-context-menu {
+  cursor: pointer;
+  text-align: center;
+  vertical-align: top;
+  width: 100%;
+  height: $grid-cell-height;
+  background-color: transparent;
+  line-height: normal;
+
+  .icon-context-menu {
+    font-size: $icon-context-menu-font-size;
+    padding-top: ceil(($grid-cell-height - $icon-context-menu-font-size) / 2);
+    color: grey;
+  }
+
+}
+=======
+$icon-context-menu-font-size: 20px;
+
+.context-menu {
+  cursor: pointer;
+  text-align: center;
+  vertical-align: top;
+  width: 100%;
+  height: $grid-cell-height;
+  background-color: transparent;
+  line-height: normal;
+
+  .icon-context-menu {
+    font-size: $icon-context-menu-font-size;
+    padding-top: ceil(($grid-cell-height - $icon-context-menu-font-size) / 2);
+    color: grey;
+  }
+
+  .uk-dropdown {
+    text-align: left;
+  }
+
+}
+>>>>>>> master
