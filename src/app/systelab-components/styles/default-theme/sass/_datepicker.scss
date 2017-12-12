@@ -13,6 +13,8 @@ p-calendar {
   .ui-calendar {
     margin-top: 0px !important;
     input {
+      @extend %input;
+
       &:focus {
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -192,6 +194,11 @@ p-calendar {
       }
     }
   }
+}
+
+.ui-inputtext {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .ui-load-datepicker {

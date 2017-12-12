@@ -1,12 +1,8 @@
-<h4>
-    icomoon (Glyphs:&nbsp;{{icons.length}})</h4>
+<h4>Icomoon (Glyphs:&nbsp;{{icons.length}})</h4>
 
-<div *ngFor="let iconName of icons" class="uk-form-row">
-    <label class="uk-form-label">
-        <span [class]="iconName"></span>
-    </label>
-    <div class="uk-form-controls">
-        <input type="text" readonly [ngModel]="iconName">
-    </div>
-</div>
-
+<ul class="showcase-icon-list">
+    <li *ngFor="let iconName of icons">
+        <span class="slab-icon-medium mt-2 mb-2 {{iconName}}"></span>
+        <p><small>{{iconName}}</small></p>
+    </li>
+</ul>
