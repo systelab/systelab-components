@@ -5,7 +5,7 @@ import { DefaultModalActions } from '../../systelab-components/modal/message-pop
 
 export class BootstrapDialogParameters extends ModulabModalContext {
 	public index: number;
-	public width = 800;
+	public width = 1000;
 	public height = 600;
 }
 

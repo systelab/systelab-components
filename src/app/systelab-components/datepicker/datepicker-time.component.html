@@ -9,7 +9,7 @@
                 [style.margin-right.px]="5"
                 [style.min-width.px]="140"
                 class="uk-width-2-5"
-                [ngClass]="{'date-error': error && !previousDate, 'is-disabled': disabled, 'previous-date': previousDate, 'input-expand-height':inputExpandHeight}">
+                [ngClass]="{'date-error': error || (isRequired && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate, 'input-expand-height':inputExpandHeight}">
         <p-header id="{{datepickerId}}">
             <a class="icon-angle-double-left uk-icon-medium" (click)="prevYear()"></a>
             <a class="icon-angle-left uk-icon-medium" (click)="prevMonth($event)"></a>
