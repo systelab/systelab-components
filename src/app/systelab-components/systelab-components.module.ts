@@ -33,11 +33,10 @@ import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.co
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
 import { Datepicker } from './datepicker/datepicker.component';
-import { DatepickerTime } from './datepicker/datepiker-time.component';
+import { DatepickerTime } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/touchspin.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
-import { MDatepicker } from './datepicker/mdatepiker.component';
 import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDirective } from 'angular-split';
 import { FillerComponent } from './filler/filler.component';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
@@ -95,7 +94,6 @@ import { TabComponent } from './tabs/tab.component';
 		TouchspinComponent,
 		ModulabSelect,
 		Datepicker,
-		MDatepicker,
 		DatepickerTime,
 		FillerComponent,
 		SearcherDialog,
@@ -126,7 +124,6 @@ import { TabComponent } from './tabs/tab.component';
 		PeriodSelect,
 		GenderSelect,
 		Datepicker,
-		MDatepicker,
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTime,

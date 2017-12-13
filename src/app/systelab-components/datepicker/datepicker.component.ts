@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, DoCheck, OnDestroy, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Calendar } from 'primeng/components/calendar/calendar';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
@@ -8,18 +8,14 @@ import { I18nService } from 'systelab-translate/lib/i18n.service';
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
-	public previousDate: boolean = false;
-
 	protected _currentDate: Date;
-	@Input() public disabled: boolean;
-	@Input() public error: boolean;
-	@Input() public notBlankAllowed: boolean;
-	@Input() public isRequired: boolean;
+	@Input() public disabled = false;
+	@Input() public error = false;
+	@Input() public isRequired = false;
 	@Input() public inputExpandHeight: boolean;
-	@Input() public markPreviousDate: boolean = true;
+	@Input() public markPreviousDate = false;
 
-	// TODO: Review
-	@Input() public otherLanguage: string;
+	public previousDate = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -29,6 +25,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	set currentDate(value: Date) {
 		this._currentDate = value;
 		this.currentDateChange.emit(this._currentDate);
+		this.checkPreviousDate();
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
@@ -54,7 +51,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public ngOnInit() {
 		this.getLanguage();
 
-		this.oldDateValue = this.currentCalendar._isValid;
 		this.currentDocSize = window.innerWidth;
 		this.currentLanguage = this.i18nService.getCurrentLanguage();
 
@@ -66,15 +62,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		newElement.className = 'icon-calendar';
 		this.currentCalendar.el.nativeElement.childNodes[1].className = 'ui-calendar slab-form-icon';
 		this.currentCalendar.el.nativeElement.childNodes[1].appendChild(newElement);
-
-		let datePiker: any = document.getElementById(this.datepickerId);
 	}
 
 	public ngDoCheck() {
-		if (this.oldDateValue !== this.currentCalendar._isValid || !this.currentDate) {
-			this.oldDateValue = this.currentCalendar._isValid;
-			this.validateDate();
-		}
 
 		if (window.innerWidth !== this.currentDocSize) {
 			this.currentDocSize = window.innerWidth;
@@ -99,22 +89,38 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.destroyWheelListener();
 	}
 
+	private checkPreviousDate() {
+
+		if (this.currentDate) {
+			let today: Date = new Date();
+			today.setHours(0, 0, 0, 0);
+
+			if (this.currentDate.getTime() < today.getTime()) {
+				this.previousDate = true;
+			} else {
+				this.previousDate = false;
+			}
+		} else {
+			this.previousDate = false;
+		}
+	}
+
 	public changeDate(): void {
 		let emit: boolean = true;
+		const today: Date = new Date();
+
 		if (this.currentCalendar.inputfieldViewChild.nativeElement.value && this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()) {
 
 			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim();
 			dateStr = dateStr.toLowerCase();
 
 			if (dateStr.length >= 2) {
-				let today: Date = new Date();
 
 				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
 					let days: number = Number(dateStr.replace('d', '')
 						.replace('D', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentCalendar._isValid = true;
 					if (!isNaN(days)) {
 						this.currentDate.setDate(today.getDate() - days);
 						emit = true;
@@ -124,7 +130,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						.replace('W', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentCalendar._isValid = true;
 					if (!isNaN(weeks)) {
 						this.currentDate.setDate(today.getDate() - (weeks * 7));
 						emit = true;
@@ -134,7 +139,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentCalendar._isValid = true;
 					if (!isNaN(weeks)) {
 						this.currentDate.setDate(today.getDate() - (weeks * 7));
 						emit = true;
@@ -144,9 +148,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						.replace('M', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentCalendar._isValid = true;
 					if (!isNaN(months)) {
-						this.currentDate.setMonth(today.getMonth() - months);
+						this.currentDate.setMonth(today.getMonth() + months);
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
@@ -154,9 +157,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentCalendar._isValid = true;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
+						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
@@ -164,9 +166,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						.replace('Y', ''));
 					this.currentDate = new Date();
 					emit = false;
-					this.currentCalendar._isValid = true;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
+						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
 						emit = true;
 					}
 				}
@@ -194,14 +195,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
 			let newTop: number = inputElementTop + inputElementHeight - ( datepickerElementHeight + inputElementHeight + 10 );
 			this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
-		}
-	}
-
-	public validateDate(): void {
-		if (!this.currentCalendar._isValid || ( this.notBlankAllowed && !this.currentDate )) {
-			this.error = true;
-		} else {
-			this.error = false;
 		}
 	}
 

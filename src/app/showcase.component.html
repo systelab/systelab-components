@@ -216,62 +216,39 @@
                                 <div class="slab-form-icon">
                                     <systelab-datepicker
                                             [disabled]="true"
-                                            [error]="false"
-                                            [notBlankAllowed]="false"
                                             [(currentDate)]="myDate"
                                             class="w-33"></systelab-datepicker>
                                 </div>
                             </div>
                         </div>
                         <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215" for="form-h-s">ngPrime error</label>
+                            <label class="col slab-label-215" for="form-h-s">error always</label>
                             <div class="col-sm-4">
                                 <div class="slab-form-icon">
                                     <systelab-datepicker
-                                            [disabled]="false"
                                             [error]="true"
-                                            [notBlankAllowed]="false"
                                             [(currentDate)]="myDate"
                                             class="w-33"></systelab-datepicker>
                                 </div>
                             </div>
                         </div>
                         <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215" for="form-h-s">ngPrime English</label>
+                            <label class="col slab-label-215" for="form-h-s">error (red is past)</label>
                             <div class="col-sm-4">
                                 <div class="slab-form-icon">
                                     <systelab-datepicker
-                                            [otherLanguage]="'en'"
-                                            [disabled]="false"
-                                            [error]="false"
-                                            [notBlankAllowed]="false"
                                             [(currentDate)]="myDate"
+                                            [markPreviousDate]="true"
                                             class="w-33"></systelab-datepicker>
                                 </div>
                             </div>
                         </div>
                         <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215" for="form-h-s">ngPrime Poland</label>
+                            <label class="col slab-label-215" for="form-h-s">required bottom</label>
                             <div class="col-sm-4">
                                 <div class="slab-form-icon">
                                     <systelab-datepicker
-                                            [otherLanguage]="'pl'"
-                                            [disabled]="false"
-                                            [error]="false"
-                                            [notBlankAllowed]="false"
-                                            [(currentDate)]="myDate"
-                                            class="w-33"></systelab-datepicker>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mt-1" style="position:absolute; bottom: 10px">
-                            <label class="col slab-label-215" for="form-h-s">ngPrime bottom</label>
-                            <div class="col">
-                                <div class="slab-form-icon w-100">
-                                    <systelab-datepicker
-                                            [disabled]="false"
-                                            [error]="false"
-                                            [notBlankAllowed]="false"
+                                            [isRequired]="true"
                                             [(currentDate)]="myDate"
                                             class="w-33"></systelab-datepicker>
                                 </div>
