@@ -21,9 +21,9 @@ $background-line: round($slider-height / 3);
   .ui-slider-handle {
     @include size($slider-height !important);
 
-    background-color: $slider-circle-color;
+    background-color: $slab-slider-circle-color;
     border-radius: 50%;
-    border: 6px solid $slider-circle-border-color;
+    border: 6px solid $slab-slider-circle-border-color;
     // outline: none; //cleaned out from version 1
     cursor: pointer;
     top: 0 !important;
@@ -35,6 +35,6 @@ $background-line: round($slider-height / 3);
   &.ui-corner-all, &.ui-corner-top, &.ui-corner-right, &.ui-corner-tr {
     border-radius: 10px;
     // border: none; //cleaned out from version 1
-    background-color: $slider-background-color;
+    background-color: $slab-slider-background-color;
   }
 }

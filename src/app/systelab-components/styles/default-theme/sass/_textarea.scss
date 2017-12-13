@@ -1,0 +1,41 @@
+/* $slab-textarea-width: defines the width of the textarea when the w-* class is not present.*/
+$slab-textarea-width: $input-width !default;
+/* $slab-textarea-min-height: defines the min-height of the textarea.*/
+$slab-textarea-min-height: ceil(170px * $size_percentage) !default;
+
+
+.slab-textarea {
+  display: block;
+  border-radius: $border-radius;
+  min-height: $slab-textarea-min-height;
+  border: 1px solid $form-border;
+
+  &:not([class*="w-"]) {
+    width: $slab-textarea-width;
+  }
+
+  &.slab-textarea-no-resize {
+    resize: none;
+  }
+
+  &.slab-textarea-vertical-resize {
+    resize: vertical;
+  }
+
+  &.slab-textarea-horizontal-resize {
+    resize: horizontal;
+  }
+
+  + .slab-textarea-options-overlay {
+    top: 7px;
+    right: 7px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: $medium-gray;
+    padding: 3px;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

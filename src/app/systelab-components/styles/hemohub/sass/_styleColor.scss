@@ -26,7 +26,7 @@ $darker-gray: rgb(45, 45, 45) !default;
 
 //Translucent grayscale
 
-$ngdialog-border-color: rgba(170, 170, 170, 0.8) !default;
+$slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 
 // Form elements
 
@@ -34,9 +34,9 @@ $form-color: $base-body-color !default;
 $form-focus-border: rgb(153, 186, 202) !default;
 $form-focus-background: rgb(245, 251, 254) !default;
 
-$slider-circle-color: white !default;
-$slider-circle-border-color: $primary-color !default;
-$slider-background-color: $actions-separator !default;
+$slab-slider-circle-color: white !default;
+$slab-slider-circle-border-color: $primary-color !default;
+$slab-slider-background-color: $actions-separator !default;
 
 $checkbox-border-color: $primary-color !default;
 $checkbox-color: white !default;

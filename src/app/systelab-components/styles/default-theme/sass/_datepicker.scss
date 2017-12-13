@@ -13,6 +13,8 @@ p-calendar {
   .ui-calendar {
     margin-top: 0px !important;
     input {
+      @extend %input;
+
       &:focus {
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -135,7 +137,6 @@ p-calendar {
   /**
    * 1. Overrides default browser behaviour
    */
-  .uk-datepicker-table,
   .ui-datepicker-calendar {
     $datepicker-max-size: 60px;
     border-spacing: 0;
@@ -179,19 +180,19 @@ p-calendar {
               background-color: $selected !important;
             }
 
-            .uk-active,
             &.ui-state-active {
               background-color: $primary-color !important;
             }
-          }
-
-          .uk-datepicker-table-muted {
-            visibility: hidden;
           }
         }
       }
     }
   }
+}
+
+.ui-inputtext {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .ui-load-datepicker {
@@ -261,7 +262,6 @@ p-calendar {
   /**
    * 1. Overrides default browser behaviour
    */
-  .uk-load-datepicker-table,
   .ui-load-datepicker-calendar {
     $datepicker-max-size: 60px;
     border-spacing: 0;
@@ -308,14 +308,9 @@ p-calendar {
               background-color: $selected !important;
             }
 
-            .uk-active,
             &.ui-state-active {
               background-color: $primary-color !important;
             }
-          }
-
-          .uk-datepicker-table-muted {
-            visibility: hidden;
           }
         }
       }
@@ -400,7 +395,7 @@ systelab-date-time {
     }
     systelab-spinner {
       height: 100%;
-      .uk-button {
+      .btn {
         height: 100% !important;
         button {
           height: 100% !important;

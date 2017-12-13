@@ -1,10 +1,10 @@
-<div class="ngdialog-header">{{titleForDialog}}</div>
-<div class="ngdialog-message" [ngClass]="{'with-buttons': multipleSelection}">
+<div class="slab-dialog-header">{{titleForDialog}}</div>
+<div class="slab-dialog-message" [ngClass]="{'with-buttons': multipleSelection}">
     <form (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
-          class="uk-form uk-form-horizontal uk-form-horizontal-medium uk-panel-space uk-flex uk-flex-column uk-flex-nowrap">
-        <div class="uk-form-row uk-flex uk-flex-nowrap">
-            <label class="uk-flex-nowrap uk-form-label uk-text-truncate uk-width-1-5" for="valueToSearch">{{searchLabel}} </label>
-            <systelab-select class="uk-align-left uk-width-2-5"
+          class="uk-form uk-form-horizontal uk-form-horizontal-medium p-3 d-flex flex-column flex-nowrap">
+        <div class="uk-form-row d-flex flex-nowrap">
+            <label class="flex-nowrap uk-form-label text-truncate uk-width-1-5" for="valueToSearch">{{searchLabel}} </label>
+            <systelab-select class="text-left uk-width-2-5"
                              [description]="selectedComboItem.description"
                              [id]="selectedComboItem.id"
                              [values]="comboElements"
@@ -24,7 +24,7 @@
         </div>
     </form>
 </div>
-<div class="ngdialog-buttons" *ngIf="multipleSelection">
-    <button type="button" class="uk-button uk-button-large uk-float-right" (click)="submit()"> Submit</button>
+<div class="slab-dialog-buttons" *ngIf="multipleSelection">
+    <button type="button" class="btn btn-lg float-right" (click)="submit()"> Submit</button>
 </div>
-<div class="ngdialog-close" (click)="close()"></div>
+<div class="slab-dialog-close" (click)="close()"></div>

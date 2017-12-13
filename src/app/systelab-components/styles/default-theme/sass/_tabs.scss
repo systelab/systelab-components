@@ -14,24 +14,27 @@ $height-diff: 40px - $tab-height;
 /* $tab-vertical-padding: defines the padding of the elements inside the tab;
                           defines the padding-bottom of the element when it’s hovered.*/
 $tab-vertical-padding: ceil(6px - $height-diff / 2);
-/* $tab-margin-top: used to define the top margin */
-$tab-margin-top: 5px;
+/* $tab-space: used to define the top margin and the gutter between elements */
+$tab-space: 5px;
+
+$tabs-height: 37px;
 
 .nav {
+  height: $tabs-height;
   padding-left: 25px;
   white-space: nowrap;
   overflow: visible;
-  padding-top: $tab-margin-top;
   background-color: $background-hemohub;
 
   > .nav-item {
     background-color: $background-hemohub;
-    padding-top: $tab-margin-top;
-    margin-right: 5px;
+    padding-top: $tab-space;
+    margin-right: 2 * $tab-space;
 
     > .nav-link {
-      height: $tab-height;
-      color: white;
+      height: 100%;
+      line-height: $tab-height;
+      color: $background;
       text-shadow: none;
       background-color: $secondary-color;
       border-top: 3px solid $secondary-color;
@@ -39,29 +42,39 @@ $tab-margin-top: 5px;
       padding: $tab-vertical-padding 12px;
       min-width: $tab-min-width;
       text-align: center;
+      border-radius: 4px 4px 0 0;
 
       &:hover {
-        color: white;
+        color: $background;
         background-color: $primary-color;
-        border-top-color: $primary-color;
+        border-color: $primary-color;
         padding-bottom: $tab-vertical-padding;
       }
 
       &.active {
         color: black;
-        background-color: white;
+        background-color: $background;
         border-top-color: $primary-color;
+        
+        &:hover {
+          border-color: $primary-color $form-border $background $form-border;
+        }
       }
     }
 
   }
 }
 
-.tab-content > .active {
-  display: flex;
-  overflow: auto;
+.tab-content {
+  height: calc(100% - #{$tabs-height});
+
+  > .active {
+    display: flex;
+    overflow: auto;
+  }
 }
 
 .tab-pane {
-  margin:5px;
+  flex: 1;
+  flex-direction: column;
 }

@@ -1,28 +1,28 @@
-<div class="ngdialog-header ng-binding">Split</div>
-<div class="ngdialog-message with-buttons uk-height-1-1">
+<div class="slab-dialog-header ng-binding">Split</div>
+<div class="slab-dialog-message with-buttons w-100">
 
     <split direction="horizontal" (dragProgress)="dragProgressHorizontal($event)">
         <split-area [size]="testSelectorSize" [visible]="isShowSelector">
-            <div style="background-color: violet; height: 100%;"></div>
+            <div class="h-100" style="background-color: violet;"></div>
         </split-area>
         <split-area [size]="100-testSelectorSize">
             <split direction="vertical" (dragProgress)="dragProgressVertical($event)">
                 <split-area [size]="100-tableSize">
-                    <div style="background-color: red; height: 100%;"></div>
+                    <div class="h-100" style="background-color: red;"></div>
                 </split-area>
                 <split-area [size]="tableSize" [visible]="isShowDetails">
-                    <div style="background-color: green; height: 100%;"></div>
+                    <div class="h-100" style="background-color: green;"></div>
                 </split-area>
             </split>
         </split-area>
     </split>
 </div>
-<div class="ngdialog-buttons">
-    <button type="button" class="uk-button uk-button-large" (click)="setShowDetails()"
-            [class.uk-button-primary]="isShowDetails">Details
+<div class="slab-dialog-buttons">
+    <button type="button" class="btn btn-lg" (click)="setShowDetails()"
+            [class.btn-primary]="isShowDetails">Details
     </button>
-    <button type="button" class="uk-button uk-button-large" (click)="setShowSelector()"
-            [class.uk-button-primary]="isShowSelector">Selector
+    <button type="button" class="btn btn-lg" (click)="setShowSelector()"
+            [class.btn-primary]="isShowSelector">Selector
     </button>
 </div>
-<div class="ngdialog-close" (click)="close()"></div>
+<div class="slab-dialog-close" (click)="close()"></div>

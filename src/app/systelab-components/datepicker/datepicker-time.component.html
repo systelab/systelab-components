@@ -1,4 +1,4 @@
-<div class="uk-form-controls uk-grid uk-grid-collapse" [style.height.%]="100" style="flex-wrap:nowrap;overflow: hidden">
+<div [style.height.%]="100">
     <p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false" [locale]="language"
                 [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
                 (onBlur)="changeDate()"
@@ -8,22 +8,22 @@
                 appendTo="body"
                 [style.margin-right.px]="5"
                 [style.min-width.px]="140"
-                class="uk-width-2-5"
+                class="w-50"
                 [ngClass]="{'date-error': error || (isRequired && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate, 'input-expand-height':inputExpandHeight}">
         <p-header id="{{datepickerId}}">
-            <a class="icon-angle-double-left uk-icon-medium" (click)="prevYear()"></a>
-            <a class="icon-angle-left uk-icon-medium" (click)="prevMonth($event)"></a>
-            <a class="icon-angle-double-right uk-icon-medium" (click)="nextYear()"></a>
-            <a class="icon-angle-right uk-icon-medium" (click)="nextMonth($event)"></a>
-            <div class="ui-datepicker-title uk-datepicker-heading">
+            <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
+            <a class="icon-angle-left slab-icon-medium" (click)="prevMonth($event)"></a>
+            <a class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
+            <a class="icon-angle-right slab-icon-medium" (click)="nextMonth($event)"></a>
+            <div class="ui-datepicker-title">
                 <span class="ui-datepicker-month">{{ currentCalendar.currentMonthText }}</span>
                 <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>
             </div>
         </p-header>
     </p-calendar>
     <systelab-spinner [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"
-                   [style.min-width.px]="90" class="uk-width-1-5"></systelab-spinner>
-    <label class="uk-form-label">:</label>
+                   [style.min-width.px]="90"></systelab-spinner>
+    <label>:</label>
     <systelab-spinner [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes"
-                   [fillUnitsWithZero]="true" [style.min-width.px]="90" class="uk-width-1-5"></systelab-spinner>
+                   [fillUnitsWithZero]="true" [style.min-width.px]="90"></systelab-spinner>
 </div>

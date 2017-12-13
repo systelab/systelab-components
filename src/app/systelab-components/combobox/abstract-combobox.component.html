@@ -3,7 +3,7 @@
      class="dropdown slab-combobox" [style.height.%]="inputHeight"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="dropdown-toggle" data-toggle="dropdown" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
-        <input *ngIf="!isColorPicker" #input readonly type="text" class="slab-combo-label slab-combo-input"
+        <input *ngIf="!isColorPicker" #input readonly type="text" class="form-control slab-combo-label slab-combo-input"
                [style.height.%]="inputHeight"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"
@@ -13,14 +13,14 @@
 
         <div *ngIf="isColorPicker" #input readonly type="text" class="slab-combo-input slab-color-container"
              [style.height.%]="inputHeight" style="white-space: nowrap; overflow: hidden">
-            <div *ngIf="id" class="stripe uk-align-left uk-display-inline-block"
+            <div *ngIf="id" class="stripe text-left d-inline-block"
                  style="margin: 8px 10px"
                  [ngClass]="{critical: id == '1', 'very-urgent': id == '2', urgent: id == '3', standard: id == '4', nonurgent: id == '5'}"></div>
             <div style="margin: 4px 1px" [style.font-family]="fontFamily"
                  [style.font-size.px]="fontSize"
                  [style.font-weight]="fontWeight"
                  [style.font-style]="fontStyle">
-                <span class="uk-text-truncate">{{description}}</span>
+                <span class="text-truncate">{{description}}</span>
             </div>
         </div>
 

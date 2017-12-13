@@ -9,7 +9,7 @@ $touchspin-height: $form-elements-height !default;
   box-sizing: border-box;
   display: inline-block;
 
-  &:not([class*="uk-width-"]) {
+  &:not([class*="w-"]) {
     width: $touchspin-width;
   }
 
@@ -19,7 +19,7 @@ $touchspin-height: $form-elements-height !default;
     width: calc(100% - #{$touchspin-height + 1} * 2) !important;
     text-align: right;
     -moz-appearance: textfield;
-
+    padding: 0 3px;
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -27,7 +27,7 @@ $touchspin-height: $form-elements-height !default;
     }
   }
 
-  .uk-button.slab-tsbtnminus, .uk-button.slab-tsbtnplus {
+  .btn.slab-tsbtnminus, .btn.slab-tsbtnplus {
     @include size($touchspin-height);
 
     min-width: $touchspin-height;
@@ -43,21 +43,19 @@ $touchspin-height: $form-elements-height !default;
     }
   }
 
-  .uk-button.slab-tsbtnminus {
-    margin-right: -4px;
+  .btn.slab-tsbtnminus {
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
   }
 
-  .uk-button.slab-tsbtnplus {
-    margin-left: -4px;
+  .btn.slab-tsbtnplus {
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
   }
 }
 
 @-moz-document url-prefix() {
-  .uk-button.tsbtnminus, .uk-button.tsbtnplus {
+  .btn.tsbtnminus, .btn.tsbtnplus {
     span {
       line-height: calc(#{$touchspin-height} - 3px) !important;
     }

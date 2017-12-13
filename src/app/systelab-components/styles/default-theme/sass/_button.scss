@@ -1,0 +1,91 @@
+%button {
+  min-width: $slab-dialog-button-width;
+  text-shadow: none !important;
+  border-radius: $border-radius;
+  background-color: $secondary-color;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0 12px;
+  min-height: 30px;
+  color: white;
+  cursor: pointer;
+  box-shadow: none;
+
+  &.btn-primary {
+    background-color: $primary-color;
+  }
+}
+
+/**
+ * 1. Override Bootstrap default behavior
+ */
+.btn {
+  font-size: $base-font-size;
+
+  &,
+  &:disabled,
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    @extend %button;
+  }
+
+  &:hover {
+    background-color: $primary-color;
+  }
+
+  &:active {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  &:disabled {
+    opacity: 1; /* [1] */
+    background-color: $dark-gray;
+
+    &:hover {
+      background-color: none;
+    }
+  }
+  &.slab-btn-searcher {
+    min-width: $ng-searcher-button-width;
+    width: $ng-searcher-button-width;
+    line-height: 100%;
+    min-height: 100%;
+  }
+  &.btn-link {
+    color: $primary-color;
+
+    &,
+    &:disabled,
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+      text-shadow: none !important;
+      background-color: transparent;
+      border-radius: 0;
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &.btn-lg {
+    padding: 0 20px;
+    min-height: $button-large-height;
+    line-height: $button-large-height - 2px;
+  }
+
+  &.square {
+    @include size($form-elements-height);
+
+    min-width: $form-elements-height;
+    line-height: 1;
+
+    //Fixing for smaller sizes (such as $size_percentage = 0.7)
+    min-height: $form-elements-height;
+    padding: 0;
+  }
+}

@@ -1,131 +1,142 @@
-<form class="uk-form uk-form-horizontal uk-form-horizontal-medium uk-panel-space">
-    <h4 class="uk-text-bold">Rows system</h4>
-    <div class="uk-form-row uk-grid">
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Description</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text">
-            </div>
-        </div>
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Mnemonic</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text">
+<form class="d-flex align-items-end flex-column h-100 w-100 p-3">
+    <div class="w-100">
+        <div class="row align-items-center mt-1">
+            <div class="col">
+                <h4>Row system</h4>
             </div>
         </div>
     </div>
-    <div class="uk-form-row uk-grid">
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Lot Number</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text">
+    <div class="w-100">
+        <div class="row align-items-center mt-1">
+            <label class="col slab-label-215" for="valueid">
+                Element 1
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-1" class="form-control" name="value">
+            </div>
+            <label class="col slab-label-215" for="valueid">
+                Element 2
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-2" class="form-control" name="value">
             </div>
         </div>
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Expiration date</label>
+        <div class="row align-items-center mt-1">
+            <label class="col slab-label-215" for="valueid">
+                    Element 3
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-3" class="form-control" name="value">
+            </div>
+            <label class="col slab-label-215" for="valueid">
+                    Element 4
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-4" class="form-control" name="value">
+            </div>
         </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="expdate"
-                       [(ngModel)]="dateValue">
+        <div class="row align-items-center mt-1">
+            <label class="col slab-label-215" for="valueid">
+                    Element 5
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-5" class="form-control" name="value">
+            </div>
+            <label class="col slab-label-215" for="valueid">
+                    Element 6
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-6" class="form-control" name="value">
+            </div>
+        </div>
+        <div class="row align-items-center mt-1">
+            <label class="col slab-label-215" for="valueid">
+                    Element 7
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-7" class="form-control" name="value">
+            </div>
+            <label class="col slab-label-215" for="valueid">
+                    Element 8
+            </label>
+            <div class="col">
+                <input type="text" id="row-element-8" class="form-control" name="value">
             </div>
         </div>
     </div>
-    <div class="uk-form-row uk-grid">
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Status</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text">
-            </div>
-        </div>
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Sort</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
+    <div class="w-100">
+        <div class="row align-items-center mt-1">
+            <div class="col">
+                <h4>Column system</h4>
             </div>
         </div>
     </div>
-    <div class="uk-form-row uk-grid">
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Activation Date</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text">
-            </div>
-        </div>
-        <div class="uk-width-2-10 uk-form-row">
-            <label class="uk-form-label">Deactivations Date</label>
-        </div>
-        <div class="uk-width-3-10">
-            <div class="uk-form-controls uk-grid uk-grid-collapse">
-                <input type="text">
-            </div>
-        </div>
-    </div>
-
-    <h4 class="uk-text-bold">Columns system</h4>
-    <div class="uk-grid">
-        <div class="uk-width-1-2">
-            <div class="uk-form-row">
-                <label class="uk-form-label">Description</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text">
+    <div class="w-100 d-flex">
+        <div class="col pl-0">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 1
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-1" class="form-control" name="value">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">Lot number</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 2
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-2" class="form-control" name="value">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">Status</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 3
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-3" class="form-control" name="value">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">Activation Date</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 4
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-4" class="form-control" name="value">
                 </div>
             </div>
         </div>
-        <div class="uk-width-1-2">
-            <div class="uk-form-row">
-                <label class="uk-form-label">Mnemonic</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text">
+        <div class="col pr-0">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 5
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-5" class="form-control" name="value">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">Expiration Date</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="expdate"
-                           [(ngModel)]="dateValue">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 6
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-6" class="form-control" name="value">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">Sort</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 7
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-7" class="form-control" name="value">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">Deactivations Date</label>
-                <div class="uk-form-controls uk-grid uk-grid-collapse">
-                    <input type="text">
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="valueid">
+                    Element 8
+                </label>
+                <div class="col">
+                    <input type="text" id="col-element-8" class="form-control" name="value">
                 </div>
             </div>
         </div>

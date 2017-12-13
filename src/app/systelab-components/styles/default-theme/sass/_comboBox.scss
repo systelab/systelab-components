@@ -21,6 +21,8 @@ $combo-button-width: 32px;
     border-bottom-left-radius: 0;
     width: $combo-button-width;
     margin-top: 0;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
   }
 
   .slab-combo-label {
@@ -39,6 +41,17 @@ $combo-button-width: 32px;
     min-height: $input-height;
     border: 1px solid $medium-gray;
     font-family: $base-body-font-family;
+
+    &.form-control[readonly] {
+        background-color: white;
+    }
+
+    &:focus + .slab-combo-button {
+      border-color: $form-focus-border;
+      background-color: $form-focus-background;
+      color: $darker-gray;
+      box-shadow: none;
+    }
   }
 
   .slab-color-container {

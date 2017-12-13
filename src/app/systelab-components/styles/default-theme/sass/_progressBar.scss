@@ -1,0 +1,28 @@
+.slab-progress {
+  /* $progress-bar-size: used to define the border-radius of the slab-progress and the slab-progress-bar.*/
+  $progress-bar-size: 8px;
+
+  border-radius: $progress-bar-size;
+
+  .slab-progress-bar {
+    border-radius: $progress-bar-size;
+  }
+}
+
+.slab-dialog-header {
+  .slab-progress {
+    @include size(150px, 10px);
+
+    background-color: $primary-color-darken;
+    float: right;
+    display: inline-block;
+    margin: 0 50px 0;
+
+    .slab-progress-bar {
+      float: left;
+      max-width: 100%;
+      height: 10px;
+      background-color: white;
+    }
+  }
+}
