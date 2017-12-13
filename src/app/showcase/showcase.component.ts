@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { UpperFlexDialog, UpperFlexDialogParameters } from './showcase/upper-flex/upper-flex-dialog.component';
-import { TwoColumnsDialog, TwoColumnsDialogParameters } from './showcase/two-columns/two-columns-dialog.component';
-import { ProgressbarDialog, ProgressbarDialogParameters } from './showcase/progressbar-dialog/progressbar-dialog.component';
-import { LowerFlexDialog, LowerFlexDialogParameters } from './showcase/lower-flex/lower-flex-dialog.component';
+import { UpperFlexDialog, UpperFlexDialogParameters } from './upper-flex/upper-flex-dialog.component';
+import { TwoColumnsDialog, TwoColumnsDialogParameters } from './two-columns/two-columns-dialog.component';
+import { ProgressbarDialog, ProgressbarDialogParameters } from './progressbar-dialog/progressbar-dialog.component';
+import { LowerFlexDialog, LowerFlexDialogParameters } from './lower-flex/lower-flex-dialog.component';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { FullFlexDialog, FullFlexDialogParameters } from './showcase/full-flex/full-flex-dialog.component';
+import { FullFlexDialog, FullFlexDialogParameters } from './full-flex/full-flex-dialog.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
-import { SplitShowcaseDialog, SplitShowcaseDialogParameters } from './showcase/split/split-showcase-dialog.component';
-import { TouchSpinValues } from './systelab-components/spinner/touch.spin-values';
-import { TwoListItem } from './systelab-components/twolist/two-list.component';
-import { MessagePopupService } from './systelab-components/modal/message-popup/message-popup.service';
-import { DialogService } from './systelab-components/modal/dialog/dialog.service';
-import { PieElement } from './systelab-components/piechart/pie.component';
-import { CalendarDialog, CalendarDialogParameters } from './systelab-components/calendar/calendar-dialog.component';
-import { BootstrapDialog } from './showcase/bootstrap-dialog/bootstrap-dialog.component';
+import { SplitShowcaseDialog, SplitShowcaseDialogParameters } from './split/split-showcase-dialog.component';
+import { TouchSpinValues } from '../systelab-components/spinner/touch.spin-values';
+import { TwoListItem } from '../systelab-components/twolist/two-list.component';
+import { MessagePopupService } from '../systelab-components/modal/message-popup/message-popup.service';
+import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
+import { PieElement } from '../systelab-components/piechart/pie.component';
+import { CalendarDialog, CalendarDialogParameters } from '../systelab-components/calendar/calendar-dialog.component';
+import { BootstrapDialog } from './bootstrap-dialog/bootstrap-dialog.component';
 
 @Component({
 	selector:      'app-root',
-	templateUrl:   './showcase.component.html',
+	templateUrl:   'showcase.component.html',
 	styleUrls:     ['showcase.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })

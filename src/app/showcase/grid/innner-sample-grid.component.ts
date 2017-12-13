@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { AbstractGrid } from '../systelab-components/grid/abstract-grid.component';
-import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
+import { AbstractGrid } from '../../systelab-components/grid/abstract-grid.component';
+import { DialogService } from '../../systelab-components/modal/dialog/dialog.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
