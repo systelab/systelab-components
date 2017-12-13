@@ -9,22 +9,24 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
 import { SplitShowcaseDialog } from './split/split-showcase-dialog.component';
-import { EmptyDialog } from './empty-dialog/empty-dialog.component';
+import { EmptyDialog } from './forms/empty-dialog/empty-dialog.component';
 import { UpperFlexComponent } from './upper-flex/upper-flex.component';
-import { LowerFlexComponent } from './lower-flex/lower-flex.component';
+import { LowerFlexComponent } from './forms/lower-flex/lower-flex.component';
 import { TwoColumnsComponent } from './two-columns/two-columns.component';
 import { IconsListComponent } from './icons-list/icons-list.component';
-import { FullFlexComponent } from './full-flex/full-flex.component';
+import { FullFlexComponent } from './forms/full-flex/full-flex.component';
 import { UpperFlexDialog } from './upper-flex/upper-flex-dialog.component';
-import { LowerFlexDialog } from './lower-flex/lower-flex-dialog.component';
+import { LowerFlexDialog } from './forms/lower-flex/lower-flex-dialog.component';
 import { TwoColumnsDialog } from './two-columns/two-columns-dialog.component';
-import { FullFlexDialog } from './full-flex/full-flex-dialog.component';
+import { FullFlexDialog } from './forms/full-flex/full-flex-dialog.component';
 import { SampleRouteComponent } from './sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InnerSampleGrid } from './grid/innner-sample-grid.component';
-import { BootstrapDialog } from './bootstrap-dialog/bootstrap-dialog.component';
-import { BootstrapPanel } from './bootstrap-dialog/bootstrap-panel.component';
-import { ProgressbarDialog } from './progressbar-dialog/progressbar-dialog.component';
+import { BootstrapDialog } from './forms/bootstrap-dialog/bootstrap-dialog.component';
+import { BootstrapPanel } from './forms/bootstrap-dialog/bootstrap-panel.component';
+import { ProgressbarDialog } from './forms/progressbar-dialog/progressbar-dialog.component';
+import { ShowcaseSpinnersComponent } from './spinners/showcase-spinners.component';
+import { ShowcaseInputsComponent } from './inputs/showcase-inputs.component';
 
 @NgModule({
 	imports:      [
@@ -43,6 +45,8 @@ import { ProgressbarDialog } from './progressbar-dialog/progressbar-dialog.compo
 		TwoColumnsComponent,
 		IconsListComponent,
 		FullFlexComponent,
+		ShowcaseSpinnersComponent,
+		ShowcaseInputsComponent,
 		UpperFlexDialog,
 		LowerFlexDialog,
 		TwoColumnsDialog,

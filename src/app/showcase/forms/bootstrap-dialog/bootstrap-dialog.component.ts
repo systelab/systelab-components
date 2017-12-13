@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
-import { ModulabModalContext } from '../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../systelab-components/modal/message-popup/message-popup-view.component';
+import { ModulabModalContext } from '../../../systelab-components/modal/plugin/modulab/modal-context';
+import { DefaultModalActions } from '../../../systelab-components/modal/message-popup/message-popup-view.component';
 
 export class BootstrapDialogParameters extends ModulabModalContext {
 	public index: number;

@@ -65,128 +65,37 @@
                     <div class="tab-pane p-3" id="table" role="tabpanel" aria-labelledby="tables-tab">
                         <table class="table table-sm">
                             <thead>
-                                <tr>
+                            <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Username</th>
-                                </tr>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-light h-auto">
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                            <tr class="bg-light h-auto">
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-pane p-3" id="inputs" role="tabpanel"
                          aria-labelledby="inputs-tab">
-                        <form>
-                            <div class="d-flex flex-column h-100 w-100">
-                                <div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="full-width-input">Full width</label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" placeholder="Nombre" id="full-width-input">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="third-width-input">Small width</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" placeholder="Email" id="third-width-input">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-1 disabled">
-                                        <label class="col slab-label-215" for="disabled-input">Disabled input</label>
-                                        <div class="col">
-                                            <input disabled type="text" class="form-control" placeholder="Email" id="disabled-input">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="file-input">Input File</label>
-                                        <div class="col">
-                                            <div class="slab-input-file">
-                                            <input class="form-control" id="uploadFile" type="text" name="uploadFile" [(ngModel)]="fileName">
-                                            <div class="btn nt-sm">
-                                                <span>...</span>
-                                                <input id="uploadBtn" type="file" (change)="selectFile($event.target.files)">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="file-input">html with input style</label>
-                                        <div class="col">
-                                            <div class="slab-input form-control">
-                                                <font>1<sub>2S</sub>,</font>
-                                                <font class="text-warning">1<sub>2.5S</sub>,</font>
-                                                <font class="text-danger">1<sub>3S</sub></font>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="resize-textarea">Textarea resizable (only vertical)</label>
-                                        <div class="col">
-                                            <textarea name="" id="resize-textarea" class="slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="noresize-textarea">Textarea no resizable</label>
-                                        <div class="col">
-                                            <textarea name="" id="noresize-textarea" class="slab-textarea w-100 slab-textarea-no-resize"></textarea>
-                                        </div>
-                                    </div>
-                                    <h4>Combos</h4>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="form-h-s">Sin buscador</label>
-                                        <systelab-select
-                                            class="col-sm-4 w-33"
-                                            [values]="comboOptionList"
-                                            (change)="comboChangeEvent($event)">
-                                        </systelab-select>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="form-h-s">Con valor asignado</label>
-                                        <systelab-select
-                                            class="col-sm-4 w-33"
-                                            [description]="'San Petersburgo'"
-                                            [id]="1"
-                                            [values]="comboOptionList"
-                                            (change)="comboChangeEvent($event)">
-                                        </systelab-select>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="form-h-s">Con buscador</label>
-                                        <systelab-select
-                                            class="col-sm-4 w-33"
-                                            [values]="comboOptionList" [filter]="true"
-                                            (change)="comboChangeEvent($event)">
-                                        </systelab-select>
-                                    </div>
-                                    <div class="row align-items-center mt-1">
-                                        <label class="col slab-label-215" for="form-h-s">Color Picker</label>
-                                        <systelab-colorpicker
-                                            class="col-sm-4 w-25"
-                                            [(id)]="colorId">
-                                        </systelab-colorpicker>
-                                    </div>
-                                 </div>
-                             </div>
-                         </form>
+                        <showcase-inputs></showcase-inputs>
                     </div>
                     <div class="tab-pane p-3" id="datepickers" role="tabpanel"
                          aria-labelledby="datepickers-tab">
@@ -235,122 +144,17 @@
                     </div>
                     <div class="tab-pane p-3" id="checks" role="tabpanel"
                          aria-labelledby="checks-tab">
-                        <h3 class="font-weight-bold">Spinner</h3>
-
-                        <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215">Spinner</label>
-                            <div class="col">
-                                    <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
-                            </div>
-                        </div>
-
-                        <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215">Spinner (width-1-3)</label>
-                            <div class="col-3">
-                                    <systelab-spinner [spinValues]="touchSpinValues2" id="touch2"></systelab-spinner>
-                            </div>
-                        </div>
-
-                        <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215">Spinner negative values</label>
-                            <div class="col">
-                                <systelab-spinner [spinValues]="touchSpinValues3" id="touch2"></systelab-spinner>
-                            </div>
-                        </div>
-
-                        
-                        <h3 class="font-weight-bold mt-5">Checkbox</h3>
-
-                        <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215">Switcher</label>
-                            <div class="col">
-                                <systelab-switch id="enabled" name="enabled"
-                                    [(isChecked)]="check2"></systelab-switch>
-                                <systelab-switch [disabled]="true" id="enabled" name="enabled"
-                                    [(isChecked)]="check1"></systelab-switch>
-                                <systelab-switch [disabled]="true" id="enabled" name="enabled"
-                                    [(isChecked)]="check3"></systelab-switch>
-                            </div>
-                        </div>
-
-                        <div class="row align-items-top mt-3">
-                            <label class="col slab-label-215">Column</label>
-                            <div class="col">
-                                <div>
-                                    <input type="checkbox" id="check_urgent">
-                                    <label for="check_urgent"> Urgent</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" checked id="check_not_urgent">
-                                    <label for="check_not_urgent"> Not Urgent</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row align-items-center mt-3">
-                            <label class="col slab-label-215">Inline (using a grid)</label>
-                            <div class="col-2">
-                                <input type="checkbox" id="check_urgent2">
-                                <label for="check_urgent2"> Urgent</label>
-                            </div>
-                            <div class="col-2">
-                                <input type="checkbox" checked id="check_not_urgent2">
-                                <label for="check_not_urgent2"> Not Urgent</label>
-                            </div>
-                        </div>
-    
-                        
-                        
-                        <h3 class="font-weight-bold mt-5">Radio</h3>
-
-                        <div class="row align-items-top mt-1">
-                            <label class="col slab-label-215">Column</label>
-                            <div class="col">
-                                <div>
-                                    <input name="status-radio" type="radio" id="radio-urgent">
-                                    <label for="radio-urgent"> Urgent</label>
-                                </div>
-                                <div>
-                                    <input name="status-radio" type="radio" id="radio-not-urgent">
-                                    <label for="radio-not-urgent"> Not Urgent</label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row align-items-center mt-3">
-                            <label class="col slab-label-215">Inline (using a grid)</label>
-                            <div class="col-2">
-                                    <input name="status-radio2" type="radio" id="radio-urgent2"> <label
-                                    for="radio-urgent2">Urgent</label>
-                            </div>
-                            <div class="col-2">
-                                    <input name="status-radio2" type="radio" id="radio-not-urgent2"> <label
-                                    for="radio-not-urgent2">Not Urgent</label>
-                            </div>
-                        </div>
-        
-                            
-                        <h3 class="font-weight-bold mt-5">Slider</h3>
-                        <div class="row align-items-center mt-1">
-                            <div class="col-2">
-                                    <systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25"
-                                    name="slider"></systelab-slider>
-                            </div>
-                            <div class="col-1">
-                                    {{sliderValue}}      
-                            </div>
-                        </div>
+                        <showcase-spinners></showcase-spinners>
                     </div>
-                    
+
                     <div class="tab-pane p-3" id="twolist" role="tabpanel"
                          aria-labelledby="twolist-tab">
                         <systelab-two-list [(available)]="availableColumns"
-                                            [(visible)]="visibleColumns"
-                                            [initialAvailableColumns]="getDefaultShowcaseColumns()"
-                                            displayAttr="displayName">
+                                           [(visible)]="visibleColumns"
+                                           [initialAvailableColumns]="getDefaultShowcaseColumns()"
+                                           displayAttr="displayName">
                         </systelab-two-list>
-                    
+
                     </div>
                     <div class="tab-pane p-3" id="forms" role="tabpanel"
                          aria-labelledby="forms-tab">
@@ -362,10 +166,10 @@
                             <button type="button" class="btn btn-lg mt-2"
                                     (click)="upperFlex();">Form + upper flex textarea
                             </button>
-				        <button type="button" class="btn btn-lg mt-2"
+                            <button type="button" class="btn btn-lg mt-2"
                                     (click)="twoColumns();">Two columns
                             </button>
-                            
+
                             <button type="button" class="btn btn-lg mt-2"
                                     (click)="calendarShowcase();">Calendar
                             </button>
@@ -379,8 +183,8 @@
                                     (click)="bootstrap();">Bootstrap
                             </button>
                             <button type="button" class="btn btn-lg mt-2"
-                            (click)="progressBar();">Progress bar
-                        </button>
+                                    (click)="progressBar();">Progress bar
+                            </button>
                         </div>
                     </div>
                     <div class="tab-pane p-3" id="icons" role="tabpanel"
@@ -392,8 +196,9 @@
                         <div class="row mt-1">
                             <div class="dropup slab-button-dropdown">
                                 <!-- This is the element toggling the dropdown -->
-                                <button type="button" class="btn btn-lg dropdown-toogle" data-toggle="dropdown">Drop down top-left <i
-                                        class="icon-chevron-up"></i></button>
+                                <button type="button" class="btn btn-lg dropdown-toogle" data-toggle="dropdown">Drop
+                                    down top-left <i
+                                            class="icon-chevron-up"></i></button>
                                 <!-- This is the dropdown -->
                                 <div class="dropdown-menu slab-dropdown">
                                     <ul>
@@ -420,6 +225,9 @@
         </div>
         <div class="slab-dialog-buttons">
             <button type="button" class="btn btn-lg" (click)="grid.showOptions();"><i
+                    class="icon-info-circle"></i> Options
+            </button>
+            <button type="button" class="btn btn-lg" (click)="grid.showError();"><i
                     class="icon-times-circle"></i> Error
             </button>
             <button type="button" class="btn btn-lg" (click)="showWarning();"><i

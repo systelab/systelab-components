@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { UpperFlexDialog, UpperFlexDialogParameters } from './upper-flex/upper-flex-dialog.component';
 import { TwoColumnsDialog, TwoColumnsDialogParameters } from './two-columns/two-columns-dialog.component';
-import { ProgressbarDialog, ProgressbarDialogParameters } from './progressbar-dialog/progressbar-dialog.component';
-import { LowerFlexDialog, LowerFlexDialogParameters } from './lower-flex/lower-flex-dialog.component';
+import { ProgressbarDialog, ProgressbarDialogParameters } from './forms/progressbar-dialog/progressbar-dialog.component';
+import { LowerFlexDialog, LowerFlexDialogParameters } from './forms/lower-flex/lower-flex-dialog.component';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { FullFlexDialog, FullFlexDialogParameters } from './full-flex/full-flex-dialog.component';
+import { FullFlexDialog, FullFlexDialogParameters } from './forms/full-flex/full-flex-dialog.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 import { SplitShowcaseDialog, SplitShowcaseDialogParameters } from './split/split-showcase-dialog.component';
@@ -14,7 +14,7 @@ import { MessagePopupService } from '../systelab-components/modal/message-popup/
 import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
 import { PieElement } from '../systelab-components/piechart/pie.component';
 import { CalendarDialog, CalendarDialogParameters } from '../systelab-components/calendar/calendar-dialog.component';
-import { BootstrapDialog } from './bootstrap-dialog/bootstrap-dialog.component';
+import { BootstrapDialog } from './forms/bootstrap-dialog/bootstrap-dialog.component';
 
 @Component({
 	selector:      'app-root',

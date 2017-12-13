@@ -1,0 +1,106 @@
+<h3 class="font-weight-bold">Spinner</h3>
+
+<div class="row align-items-center mt-1">
+    <label class="col slab-label-215">Spinner</label>
+    <div class="col">
+        <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
+    </div>
+</div>
+
+<div class="row align-items-center mt-1">
+    <label class="col slab-label-215">Spinner (width-1-3)</label>
+    <div class="col-3">
+        <systelab-spinner [spinValues]="touchSpinValues2" id="touch2"></systelab-spinner>
+    </div>
+</div>
+
+<div class="row align-items-center mt-1">
+    <label class="col slab-label-215">Spinner negative values</label>
+    <div class="col">
+        <systelab-spinner [spinValues]="touchSpinValues3" id="touch2"></systelab-spinner>
+    </div>
+</div>
+
+
+<h3 class="font-weight-bold mt-5">Checkbox</h3>
+
+<div class="row align-items-center mt-1">
+    <label class="col slab-label-215">Switcher</label>
+    <div class="col">
+        <systelab-switch id="enabled" name="enabled"
+                         [(isChecked)]="check2"></systelab-switch>
+        <systelab-switch [disabled]="true" id="enabled" name="enabled"
+                         [(isChecked)]="check1"></systelab-switch>
+        <systelab-switch [disabled]="true" id="enabled" name="enabled"
+                         [(isChecked)]="check3"></systelab-switch>
+    </div>
+</div>
+
+<div class="row align-items-top mt-3">
+    <label class="col slab-label-215">Column</label>
+    <div class="col">
+        <div>
+            <input type="checkbox" id="check_urgent">
+            <label for="check_urgent"> Urgent</label>
+        </div>
+        <div>
+            <input type="checkbox" checked id="check_not_urgent">
+            <label for="check_not_urgent"> Not Urgent</label>
+        </div>
+    </div>
+</div>
+
+<div class="row align-items-center mt-3">
+    <label class="col slab-label-215">Inline (using a grid)</label>
+    <div class="col-2">
+        <input type="checkbox" id="check_urgent2">
+        <label for="check_urgent2"> Urgent</label>
+    </div>
+    <div class="col-2">
+        <input type="checkbox" checked id="check_not_urgent2">
+        <label for="check_not_urgent2"> Not Urgent</label>
+    </div>
+</div>
+
+
+
+<h3 class="font-weight-bold mt-5">Radio</h3>
+
+<div class="row align-items-top mt-1">
+    <label class="col slab-label-215">Column</label>
+    <div class="col">
+        <div>
+            <input name="status-radio" type="radio" id="radio-urgent">
+            <label for="radio-urgent"> Urgent</label>
+        </div>
+        <div>
+            <input name="status-radio" type="radio" id="radio-not-urgent">
+            <label for="radio-not-urgent"> Not Urgent</label>
+        </div>
+    </div>
+</div>
+
+
+<div class="row align-items-center mt-3">
+    <label class="col slab-label-215">Inline (using a grid)</label>
+    <div class="col-2">
+        <input name="status-radio2" type="radio" id="radio-urgent2"> <label
+            for="radio-urgent2">Urgent</label>
+    </div>
+    <div class="col-2">
+        <input name="status-radio2" type="radio" id="radio-not-urgent2"> <label
+            for="radio-not-urgent2">Not Urgent</label>
+    </div>
+</div>
+
+
+<h3 class="font-weight-bold mt-5">Slider</h3>
+<div class="row align-items-center mt-1">
+    <div class="col-2">
+        <systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25"
+                         name="slider"></systelab-slider>
+    </div>
+    <div class="col-1">
+        {{sliderValue}}
+    </div>
+</div>
