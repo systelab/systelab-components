@@ -178,6 +178,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
+	public onKeyPressed(event: KeyboardEvent) {
+		if (event.keyCode === 13) {
+			this.changeDate();
+			this.closeDatepicker();
+		}
+	}
+
 	public saveEventOnFocus(evt: FocusEvent): void {
 		this.inputElement = new ElementRef(evt.target);
 		// this.getLanguage();
