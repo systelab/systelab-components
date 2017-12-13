@@ -122,8 +122,8 @@ $content-border-width: 4px;
   &.uk-fixed-size {
     .ngdialog-content {
       z-index: 2;
-      border: $content-border-width solid $ngdialog-border-color;
-      background-color: $ngdialog-border-color;
+      border: $content-border-width solid $slab-dialog-border-color;
+      background-color: $slab-dialog-border-color;
       border-radius: 5px;
 
       .ngdialog-header {
@@ -182,18 +182,18 @@ $content-border-width: 4px;
       font-size: 20px;
       border-radius: 0;
       background: $primary-color;
-      max-height: $ng-dialog-header-height;
-      height: $ng-dialog-header-height;
-      line-height: $ng-dialog-header-height - $padding-header * 2;
+      max-height: $slab-dialog-header-height;
+      height: $slab-dialog-header-height;
+      line-height: $slab-dialog-header-height - $padding-header * 2;
       box-sizing: border-box;
       color: $background;
     }
 
     .ngdialog-message {
-      height: calc(100% - #{$ng-dialog-header-height});
+      height: calc(100% - #{$slab-dialog-header-height});
 
       &.with-buttons {
-        height: calc(100% - #{$ng-dialog-header-height} - #{$ng-dialog-buttons-height}) !important;
+        height: calc(100% - #{$slab-dialog-header-height} - #{$slab-dialog-buttons-height}) !important;
       }
 
       overflow-y: hidden;
@@ -207,7 +207,7 @@ $content-border-width: 4px;
 
       @include position(absolute, $right: 0, $bottom: 0, $left: 0);
 
-      max-height: $ng-dialog-buttons-height + 1;
+      max-height: $slab-dialog-buttons-height + 1;
       padding: $buttons-padding;
       box-sizing: border-box;
       border-top: 1px solid $background-hemohub;
@@ -247,7 +247,7 @@ $content-border-width: 4px;
                          used to calculate the $top-offset variable;
                          used to calculate the size of the ngdialog-close button;
                          defines the line-height and the width of the before class of the ngdialog-close.*/
-        $button-size: $ng-dialog-buttons-height - $buttons-padding * 2 - 2;
+        $button-size: $slab-dialog-buttons-height - $buttons-padding * 2 - 2;
 
         line-height: $button-size;
         min-height: $button-size;
@@ -271,7 +271,7 @@ $content-border-width: 4px;
     $right-offset: ceil($size_percentage * 66px);
     /* $top-offset: defines the top position of the ngdialog-buttons-top;
                     used to define the top position of the ngdialog-close.*/
-    $top-offset: ($ng-dialog-header-height - $button-size) / 2;
+    $top-offset: ($slab-dialog-header-height - $button-size) / 2;
 
     .ngdialog-buttons-top > div,
     .ngdialog-close {

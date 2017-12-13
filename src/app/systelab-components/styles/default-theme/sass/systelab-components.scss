@@ -22,11 +22,23 @@ $sizes: (
 // we must load bootstrap after setting our own variables
 @import "~bootstrap/scss/bootstrap";
 
-// then we can load ourcomponents
+@import "ngDialog_legacy";
+@import "icon_legacy";
+@import "dropdown_legacy";
+@import "forms_legacy";
+@import "panel_legacy";
+@import "progressBar_legacy";
+@import "tabs_legacy";
+@import "table_legacy";
+@import "button_legacy";
+@import "input_legacy";
+@import "slider_legacy";
+@import "textarea_legacy";
+
+// then we can load our components
 @import "dialog";
 @import "icon";
 @import "dropdown";
-@import "dropdown_legacy";
 @import "form";
 @import "progressBar";
 @import "tabs";
@@ -45,6 +57,7 @@ $sizes: (
 @import "slider";
 @import "textarea";
 @import "searcher";
+
 
 html {
   width: 100%;
