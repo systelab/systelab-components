@@ -1,11 +1,15 @@
-<button [class.disabled]="isDisabled" (click)="minus()" class="btn slab-tsbtnminus">
-    <span class="icon-minus-thin"></span>
-</button>
-<!-- onkeypress="return event.charCode >= 44 && event.charCode <= 57 && event.charCode !== 47" -->
-<input [class.disabled]="isDisabled" name="sp" [(ngModel)]="valueStr" class="slab-tsinput" type="text"
-       (keypress)="checkKey($event)"
-       (blur)="checkValue(valueStr)"
-       autocomplete="off">
-<button [class.disabled]="isDisabled" (click)="plus()" class="btn slab-tsbtnplus">
-    <span class="icon-plus-thin"></span>
-</button>
+
+<div class="row">
+    <button [class.disabled]="isDisabled" (click)="minus()" class="btn slab-tsbtnminus">
+        <span class="icon-minus-thin"></span>
+    </button>
+
+    <input [class.disabled]="isDisabled" name="sp" [(ngModel)]="valueStr" class="slab-tsinput" type="text"
+    (keypress)="checkKey($event)"
+    (blur)="checkValue(valueStr)"
+    autocomplete="off">
+
+    <button [class.disabled]="isDisabled" (click)="plus()" class="btn slab-tsbtnplus">
+        <span class="icon-plus-thin"></span>
+    </button>    
+</div>

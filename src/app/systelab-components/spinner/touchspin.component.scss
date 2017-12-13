@@ -19,7 +19,7 @@ $touchspin-height: $form-elements-height !default;
     width: calc(100% - #{$touchspin-height + 1} * 2) !important;
     text-align: right;
     -moz-appearance: textfield;
-
+    padding: 0 3px;
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -44,13 +44,11 @@ $touchspin-height: $form-elements-height !default;
   }
 
   .btn.slab-tsbtnminus {
-    margin-right: -4px;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
   }
 
   .btn.slab-tsbtnplus {
-    margin-left: -4px;
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
   }
