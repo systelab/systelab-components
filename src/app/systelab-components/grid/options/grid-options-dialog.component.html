@@ -1,6 +1,6 @@
 <div class="slab-dialog-header">Options</div>
 <div class="slab-dialog-message with-buttons">
-    <form class="uk-form uk-flex uk-flex-column uk-flex-nowrap">
+    <form class="h-100 d-flex flex-column flex-nowrap">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="fields-tab" data-toggle="tab" href="#fields" role="tab"
@@ -8,21 +8,19 @@
                 </a>
             </li>
         </ul>
-        <div class="tab-content uk-flex-item-1 uk-flex uk-flex-column" id="fields">
-            <div class="tab-pane active uk-flex-item-1 uk-flex uk-flex-column" id="fields" role="tabpanel"
+        <div class="tab-content" id="fields">
+            <div class="tab-pane p-3 active h-100" id="fields" role="tabpanel"
                  aria-labelledby="fields-tab">
-                <div class="uk-form-row uk-height-1-1">
                     <systelab-two-list [(available)]="availableColumns"
                                        [(visible)]="visibleColumns"
                                        [initialAvailableColumns]="initialAvailableColumns"
                                        displayAttr="displayName">
                     </systelab-two-list>
-                </div>
             </div>
         </div>
     </form>
 </div>
 <div class="slab-dialog-buttons">
-    <button type="button" class="btn btn-lg uk-float-right" (click)="submit()"> Submit</button>
+    <button type="button" class="btn btn-lg float-right" (click)="submit()"> Submit</button>
 </div>
 <div class="slab-dialog-close" (click)="cancel()"></div>

@@ -9,7 +9,7 @@ $touchspin-height: $form-elements-height !default;
   box-sizing: border-box;
   display: inline-block;
 
-  &:not([class*="uk-width-"]) {
+  &:not([class*="w-"]) {
     width: $touchspin-width;
   }
 

@@ -6,7 +6,7 @@
         <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
             <div #dropdown class="slab-dropdown">
                 <div *ngIf="isOpened">
-                    <ul class="uk-nav uk-nav-dropdown" *ngFor="let action of contextMenuOptions">
+                    <ul *ngFor="let action of contextMenuOptions">
                         <li class="{{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
                             (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null ">
                             <a>{{action.actionText}}</a></li>

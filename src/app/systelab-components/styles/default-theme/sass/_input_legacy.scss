@@ -37,7 +37,8 @@
     background-color: white;
     cursor: not-allowed;
 
-    + [class*='icon-'] {
+    + [class*='icon-'],
+    + [class*='uk-icon-'] {
       opacity: 0.5;
     }
   }
@@ -50,7 +51,7 @@
 /**
  * We need to define the parent's input width when there's an icon and they need to work together
  */
-.slab-form-icon {
+.uk-form-icon {
   &:not([class*="uk-width-"]) {
     width: $input-width;
   }
@@ -96,7 +97,7 @@
   > input[type="text"] {
     width: calc(100% - #{$form-elements-height} - 10px);
 
-    + div.btn {
+    + div.uk-button {
       @include size($form-elements-height); /* 1 */
 
       min-width: 30px;

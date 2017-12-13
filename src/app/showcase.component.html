@@ -56,13 +56,13 @@
 
 
                 <div class="tab-content d-flex" id="showcase-tab-content">
-                    <div class="tab-pane p-4 active" id="grids"
+                    <div class="tab-pane p-3 active" id="grids"
                          role="tabpanel" aria-labelledby="grids-tab">
                         <form class="position-relative h-100">
-                            <inner-sample-grid></inner-sample-grid>
+                            <inner-sample-grid #grid></inner-sample-grid>
                         </form>
                     </div>
-                    <div class="tab-pane p-4" id="table" role="tabpanel" aria-labelledby="tables-tab">
+                    <div class="tab-pane p-3" id="table" role="tabpanel" aria-labelledby="tables-tab">
                         <table class="table table-sm">
                             <thead>
                                 <tr>
@@ -93,7 +93,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane p-4" id="inputs" role="tabpanel"
+                    <div class="tab-pane p-3" id="inputs" role="tabpanel"
                          aria-labelledby="inputs-tab">
                         <form>
                             <div class="d-flex flex-column h-100 w-100">
@@ -188,36 +188,14 @@
                              </div>
                          </form>
                     </div>
-                    <div class="tab-pane p-4" id="datepickers" role="tabpanel"
+                    <div class="tab-pane p-3" id="datepickers" role="tabpanel"
                          aria-labelledby="datepickers-tab">
-                        <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215" for="form-h-s">Datepicker {{dateValue}}</label>
-                            <div class="col-sm-4">
-                                <div class="slab-form-icon">
-                                    <input class="form-control" type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" name="dateValue1"
-                                           [(ngModel)]="dateValue">
-                                    <i class="icon-calendar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row align-items-center mt-1">
-                            <label class="col slab-label-215" for="form-h-s">input disabled</label>
-                            <div class="col">
-                                <div class="slab-form-icon">
-                                    <input class="form-control" disabled type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}"
-                                           name="dateValue4" [(ngModel)]="dateValue">
-                                    <i class="icon-calendar"></i>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row align-items-center mt-1">
                             <label class="col slab-label-215" for="form-h-s">ngPrime disabled</label>
                             <div class="col-sm-4">
                                 <div class="slab-form-icon">
-                                    <systelab-datepicker
-                                            [disabled]="true"
-                                            [(currentDate)]="myDate"
-                                            class="w-33"></systelab-datepicker>
+                                    <systelab-date-time
+                                            [(currentDate)]="myDate"></systelab-date-time>
                                 </div>
                             </div>
                         </div>
@@ -255,9 +233,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane p-4" id="checks" role="tabpanel"
+                    <div class="tab-pane p-3" id="checks" role="tabpanel"
                          aria-labelledby="checks-tab">
-                        <h3 class="uk-text-bold">Spinner</h3>
+                        <h3 class="font-weight-bold">Spinner</h3>
 
                         <div class="row align-items-center mt-1">
                             <label class="col slab-label-215">Spinner</label>
@@ -281,7 +259,7 @@
                         </div>
 
                         
-                        <h3 class="uk-text-bold mt-5">Checkbox</h3>
+                        <h3 class="font-weight-bold mt-5">Checkbox</h3>
 
                         <div class="row align-items-center mt-1">
                             <label class="col slab-label-215">Switcher</label>
@@ -323,7 +301,7 @@
     
                         
                         
-                        <h3 class="uk-text-bold mt-5">Radio</h3>
+                        <h3 class="font-weight-bold mt-5">Radio</h3>
 
                         <div class="row align-items-top mt-1">
                             <label class="col slab-label-215">Column</label>
@@ -353,7 +331,7 @@
                         </div>
         
                             
-                        <h3 class="uk-text-bold mt-5">Slider</h3>
+                        <h3 class="font-weight-bold mt-5">Slider</h3>
                         <div class="row align-items-center mt-1">
                             <div class="col-2">
                                     <systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25"
@@ -365,75 +343,52 @@
                         </div>
                     </div>
                     
-                    <div class="tab-pane p-4" id="twolist" role="tabpanel"
+                    <div class="tab-pane p-3" id="twolist" role="tabpanel"
                          aria-labelledby="twolist-tab">
-                        <div class="uk-form-row uk-height-1-1">
-                            <div class="uk-height-1-1">
-                                <div class="uk-form-row uk-height-1-1">
-                                    <systelab-two-list [(available)]="availableColumns"
-                                                       [(visible)]="visibleColumns"
-                                                       [initialAvailableColumns]="getDefaultShowcaseColumns()"
-                                                       displayAttr="displayName">
-                                    </systelab-two-list>
-                                </div>
-                            </div>
-                        </div>
+                        <systelab-two-list [(available)]="availableColumns"
+                                            [(visible)]="visibleColumns"
+                                            [initialAvailableColumns]="getDefaultShowcaseColumns()"
+                                            displayAttr="displayName">
+                        </systelab-two-list>
+                    
                     </div>
-                    <div class="tab-pane p-4" id="forms" role="tabpanel"
+                    <div class="tab-pane p-3" id="forms" role="tabpanel"
                          aria-labelledby="forms-tab">
-                        <div class="uk-form-row">
-                            <!--<button type="button" class="btn btn-large uk-margin-small-top" ng-click="vm.flex();">Flex snipper</button>-->
-                            <button type="button" class="btn btn-large uk-margin-small-top"
+                        <div>
+                            <!--<button type="button" class="btn btn-large mt-2" ng-click="vm.flex();">Flex snipper</button>-->
+                            <button type="button" class="btn btn-large mt-2"
                                     (click)="subFlex();">Form + lower flex textarea
                             </button>
-                            <button type="button" class="btn btn-large uk-margin-small-top"
+                            <button type="button" class="btn btn-large mt-2"
                                     (click)="upperFlex();">Form + upper flex textarea
                             </button>
-				        <button type="button" class="btn btn-large uk-margin-small-top"
+				        <button type="button" class="btn btn-large mt-2"
                                     (click)="twoColumns();">Two columns
                             </button>
                             
-                            <button type="button" class="btn btn-lg uk-margin-small-top"
+                            <button type="button" class="btn btn-lg mt-2"
                                     (click)="calendarShowcase();">Calendar
                             </button>
-                            <button type="button" class="btn btn-large uk-margin-small-top"
+                            <button type="button" class="btn btn-large mt-2"
                                     (click)="fullFlex();">Flex
                             </button>
-                            <button type="button" class="btn btn-lg uk-margin-small-top"
+                            <button type="button" class="btn btn-lg mt-2"
                                     (click)="splitShowcase();">Split
                             </button>
-                            <button type="button" class="btn btn-lg uk-margin-small-top"
+                            <button type="button" class="btn btn-lg mt-2"
                                     (click)="bootstrap();">Bootstrap
                             </button>
-                            <button type="button" class="btn btn-large uk-margin-small-top"
+                            <button type="button" class="btn btn-large mt-2"
                             (click)="progressBar();">Progress bar
                         </button>
                         </div>
                     </div>
-                    <div class="tab-pane p-4" id="icons" role="tabpanel"
+                    <div class="tab-pane p-3" id="icons" role="tabpanel"
                          aria-labelledby="icons-tab">
                         <icons-list></icons-list>
                     </div>
-                    <div class="tab-pane p-4" id="tooltips" role="tabpanel"
+                    <div class="tab-pane p-3" id="tooltips" role="tabpanel"
                          aria-labelledby="tooltips-tab">
-                        <div class="row mt-1">
-							<span data-uk-dropdown="{mode:'click'}" class="uk-position-relative">
-								<div class="btn">Click me</div>
-								<div class="legend uk-dropdown uk-text-left">
-									<p>Hi, I'm a tooltip</p>
-									<hr><p>Lorem ipsum dolot sit amet</p>
-								</div>
-							</span>
-                        </div>
-                        <div class="row mt-1">
-							<span data-uk-dropdown class="uk-position-relative">
-								<div class="btn">Hover me</div>
-								<div class="legend uk-dropdown uk-text-left">
-									<p>Hi, I'm another tooltip</p>
-									<hr><p>Lorem ipsum dolot sit amet</p>
-								</div>
-							</span>
-                        </div>
                         <div class="row mt-1">
                             <div class="dropup slab-button-dropdown">
                                 <!-- This is the element toggling the dropdown -->
@@ -449,7 +404,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane p-4" id="route" role="tabpanel"
+                    <div class="tab-pane p-3" id="route" role="tabpanel"
                          aria-labelledby="route-tab">
                         <div [style.width.px]='1000' [style.height.px]='500' style="display: flex;">
                             <systelab-pie [data]="data" (select)="doSelect($event)" [fixedWidth]="1000"
@@ -464,7 +419,7 @@
             </div>
         </div>
         <div class="slab-dialog-buttons">
-            <button type="button" class="btn btn-lg" (click)="showError();"><i
+            <button type="button" class="btn btn-lg" (click)="grid.showOptions();"><i
                     class="icon-times-circle"></i> Error
             </button>
             <button type="button" class="btn btn-lg" (click)="showWarning();"><i
@@ -480,7 +435,7 @@
                     class="icon-question-circle"></i> Question YN
             </button>
 
-            <button type="button" class="btn btn-lg uk-float-right"><i
+            <button type="button" class="btn btn-lg float-right"><i
                     class="icon-chevron-circle-right"></i> Right buttons
             </button>
             <div class="dropup slab-button-dropdown">
@@ -498,7 +453,7 @@
             <button type="button" class="btn btn-lg" (click)="saveTwoListPreferences();">Save Two List
                 Preferences
             </button>
-            <button type="button" class="btn btn-lg uk-float-right"><i
+            <button type="button" class="btn btn-lg float-right"><i
                     class="icon-chevron-circle-right"></i> Right buttons
             </button>
         </div>

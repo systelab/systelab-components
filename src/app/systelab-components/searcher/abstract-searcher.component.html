@@ -1,4 +1,4 @@
-<div class="slab-searcher-container uk-flex uk-flex-nowrap uk-height-1-1" [ngClass]="{'disabled': isDisabled}">
+<div class="slab-searcher-container d-flex flex-nowrap h-100" [ngClass]="{'disabled': isDisabled}">
     <input type="search"
            #valueToSearch
            [(ngModel)]="code"
@@ -8,12 +8,12 @@
            [style.font-size.px]="fontSize"
            [style.font-weight]="fontWeight"
            [style.font-style]="fontStyle">
-    <button class="btn uk-searcher-button" [disabled]="isDisabled" [ngStyle]="getWidth()"
+    <button class="btn slab-btn-searcher" [disabled]="isDisabled" [ngStyle]="getWidth()"
             (click)="openSearchDialog()" *ngIf="withButton">
             <span class='icon-question'>
             </span>
     </button>
-    <label class="uk-flex-item-1 uk-form-label uk-text-truncate" [ngStyle]="getLineHeight()"
+    <label class="uk-flex-item-1 uk-form-label text-truncate" [ngStyle]="getLineHeight()"
            [style.font-family]="fontFamily"
            [style.font-size.px]="fontSize"
            [style.font-weight]="fontWeight"

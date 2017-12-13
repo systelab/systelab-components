@@ -133,7 +133,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 				this.abstractSearcher.multipleSelectedItemList.push(newElement);
 			}
 		}
-		this.searcherDialogParameters.dialogClass = 'uk-width-2-3 uk-height-2-3';
+		this.searcherDialogParameters.dialogClass = 'w-66 h-66';
 		this.searcherDialogParameters.searcher = this.abstractSearcher;
 		this.dialogService.showDialog(SearcherDialog, this.searcherDialogParameters)
 			.subscribe(

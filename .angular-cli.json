@@ -20,7 +20,6 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/uikit/dist/css/uikit.almost-flat.css",
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
         "../node_modules/ag-grid/dist/styles/theme-fresh.css",
         "../node_modules/primeng/resources/themes/omega/theme.css",
@@ -31,7 +30,6 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/uikit/dist/js/uikit.js",
         "../node_modules/pako/dist/pako.min.js"
       ],
       "environmentSource": "environments/environment.ts",

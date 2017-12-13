@@ -137,7 +137,6 @@ p-calendar {
   /**
    * 1. Overrides default browser behaviour
    */
-  .uk-datepicker-table,
   .ui-datepicker-calendar {
     $datepicker-max-size: 60px;
     border-spacing: 0;
@@ -181,14 +180,9 @@ p-calendar {
               background-color: $selected !important;
             }
 
-            .uk-active,
             &.ui-state-active {
               background-color: $primary-color !important;
             }
-          }
-
-          .uk-datepicker-table-muted {
-            visibility: hidden;
           }
         }
       }
@@ -268,7 +262,6 @@ p-calendar {
   /**
    * 1. Overrides default browser behaviour
    */
-  .uk-load-datepicker-table,
   .ui-load-datepicker-calendar {
     $datepicker-max-size: 60px;
     border-spacing: 0;
@@ -315,14 +308,9 @@ p-calendar {
               background-color: $selected !important;
             }
 
-            .uk-active,
             &.ui-state-active {
               background-color: $primary-color !important;
             }
-          }
-
-          .uk-datepicker-table-muted {
-            visibility: hidden;
           }
         }
       }

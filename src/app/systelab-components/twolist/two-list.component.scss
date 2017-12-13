@@ -3,6 +3,10 @@
 /* $twolist-row-height: define the row height*/
 $twolist-row-height: ceil(35px * $size_percentage) !default;
 
+:host {
+  @include size(100%);
+}
+
 .slab-twolist {
   display: -webkit-flex;
   display: flex;
@@ -18,7 +22,6 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
       padding: 5px;
       border-radius: 5px;
       border-color: $medium-gray;
-      width: 99% !important;
     }
     @media (max-width: 1024px) {
       input {
@@ -32,9 +35,8 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
 
     .slab-twolistbox {
       border-radius: 5px;
-      border-color: $medium-gray;
+      border: 1px solid $medium-gray;
       padding: 5px 0;
-      margin: 5px;
       display: flex;
       overflow: auto;
 
