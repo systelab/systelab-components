@@ -9,21 +9,20 @@ export class LowerFlexDialogParameters extends ModulabModalContext {
 }
 
 @Component( {
-	selector:    'lower-flex-dialog',
-	templateUrl: 'lower-flex-dialog.component.html',
+	templateUrl: 'showcase-lower-flex-dialog.component.html',
 } )
-export class LowerFlexDialog extends DefaultModalActions implements ModalComponent<LowerFlexDialogParameters> {
+export class ShowcaseLowerFlexDialog extends DefaultModalActions implements ModalComponent<LowerFlexDialogParameters> {
 
-	public lowerFlexDialogParameters: LowerFlexDialogParameters;
+	public parameters: LowerFlexDialogParameters;
 
 	constructor( public dialog: DialogRef<LowerFlexDialogParameters> ) {
 		super( dialog );
-		this.lowerFlexDialogParameters = dialog.context;
+		this.parameters = dialog.context;
 	}
 
 	public close(): void {
 
-		this.dialog.close( 'test' );
+		this.dialog.close( 'This is a test' );
 	}
 
 	public static getParameters(): LowerFlexDialogParameters {

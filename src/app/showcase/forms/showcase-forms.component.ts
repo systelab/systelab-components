@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { DialogService } from '../../systelab-components/modal/dialog/dialog.service';
-import { LowerFlexDialog, LowerFlexDialogParameters } from './lower-flex/lower-flex-dialog.component';
+import { LowerFlexDialogParameters, ShowcaseLowerFlexDialog } from './lower-flex/showcase-lower-flex-dialog.component';
 import { ShowcaseSplitDialog, SplitShowcaseDialogParameters } from './split/showcase-split-dialog.component';
 import { CalendarDialog, CalendarDialogParameters } from '../../systelab-components/calendar/calendar-dialog.component';
-import { UpperFlexDialog, UpperFlexDialogParameters } from './upper-flex/upper-flex-dialog.component';
-import { FullFlexDialog, FullFlexDialogParameters } from './full-flex/full-flex-dialog.component';
-import { ProgressbarDialog, ProgressbarDialogParameters } from './progressbar-dialog/progressbar-dialog.component';
-import { TwoColumnsDialog, TwoColumnsDialogParameters } from './two-columns/two-columns-dialog.component';
-import { BootstrapDialog } from './bootstrap-dialog/bootstrap-dialog.component';
+import { ShowcaseFullFlexDialog, ShowcaseFullFlexDialogParameters } from './full-flex/showcase-full-flex-dialog.component';
+import { ShowcaseProgressBarDialog, ShowcaseProgressBarDialogParameters } from './progressbar-dialog/showcase-progressbar-dialog.component';
+import { ShowcaseTwoColumnsDialog, ShowcaseTwoColumnsDialogParameters } from './two-columns/showcase-two-columns-dialog.component';
+import { ShowcaseUpperFlexDialog, ShowcaseUpperFlexDialogParameters } from './upper-flex/showcase-upper-flex-dialog.component';
+import { ShowcaseStandardDialog } from './standard-dialog/showcase-standard-dialog.component';
 
 @Component({
 	selector:    'showcase-forms',
@@ -18,66 +18,55 @@ export class ShowcaseFormsComponent {
 	constructor(protected dialogService: DialogService) {
 	}
 
-	public subFlex() {
-		const lowerFlexDialogParameters: LowerFlexDialogParameters = LowerFlexDialog.getParameters();
-
-		lowerFlexDialogParameters.width = 960;
-		lowerFlexDialogParameters.height = 600;
-		lowerFlexDialogParameters.index = 4;
-
-		this.dialogService.showDialog(LowerFlexDialog, lowerFlexDialogParameters);
+	public showLowerFlexDialog() {
+		const parameters: LowerFlexDialogParameters = ShowcaseLowerFlexDialog.getParameters();
+		parameters.width = 960;
+		parameters.height = 600;
+		parameters.index = 4;
+		this.dialogService.showDialog(ShowcaseLowerFlexDialog, parameters);
 	}
 
-	public splitShowcase() {
+	public showSplitDialog() {
 		const parameters: SplitShowcaseDialogParameters = ShowcaseSplitDialog.getParameters();
 		this.dialogService.showDialog(ShowcaseSplitDialog, parameters);
 	}
 
-	public calendarShowcase() {
-		const parametersC: CalendarDialogParameters = CalendarDialog.getParameters();
-		this.dialogService.showDialog(CalendarDialog, parametersC);
+	public showCalendarDialog() {
+		const parameters: CalendarDialogParameters = CalendarDialog.getParameters();
+		this.dialogService.showDialog(CalendarDialog, parameters);
 	}
 
-	public upperFlex() {
-		const upperFlexDialogParameters: UpperFlexDialogParameters = UpperFlexDialog.getParameters();
-
-		upperFlexDialogParameters.width = 960;
-		upperFlexDialogParameters.height = 600;
-		upperFlexDialogParameters.index = 4;
-
-		this.dialogService.showDialog(UpperFlexDialog, upperFlexDialogParameters);
+	public showUpperFlexDialog() {
+		const parameters: ShowcaseUpperFlexDialogParameters = ShowcaseUpperFlexDialog.getParameters();
+		parameters.width = 960;
+		parameters.height = 600;
+		parameters.index = 4;
+		this.dialogService.showDialog(ShowcaseUpperFlexDialog, parameters);
 	}
 
-	public fullFlex() {
-		const fullFlexDialogParameters: FullFlexDialogParameters = FullFlexDialog.getParameters();
-
-		fullFlexDialogParameters.index = 4;
-		fullFlexDialogParameters.dialogClass = 'w-66 h-66';
-
-		this.dialogService.showDialog(FullFlexDialog, fullFlexDialogParameters);
+	public showFullFlexDialog() {
+		const parameters: ShowcaseFullFlexDialogParameters = ShowcaseFullFlexDialog.getParameters();
+		parameters.index = 4;
+		parameters.dialogClass = 'w-66 h-66';
+		this.dialogService.showDialog(ShowcaseFullFlexDialog, parameters);
 	}
 
-	public progressBar() {
-
-		const progressbarDialogParameters: ProgressbarDialogParameters = ProgressbarDialog.getParameters();
-
-		progressbarDialogParameters.dialogClass = 'w-33 h-25';
-
-		this.dialogService.showDialog(ProgressbarDialog, progressbarDialogParameters);
+	public showProgressBarDialog() {
+		const parameters: ShowcaseProgressBarDialogParameters = ShowcaseProgressBarDialog.getParameters();
+		parameters.dialogClass = 'w-33 h-25';
+		this.dialogService.showDialog(ShowcaseProgressBarDialog, parameters);
 	}
 
-	public twoColumns() {
-		const twoColumnsDialogParameters: TwoColumnsDialogParameters = TwoColumnsDialog.getParameters();
-
-		twoColumnsDialogParameters.width = 960;
-		twoColumnsDialogParameters.height = 600;
-		twoColumnsDialogParameters.index = 4;
-
-		this.dialogService.showDialog(TwoColumnsDialog, twoColumnsDialogParameters);
+	public showTwoColumnsDialog() {
+		const parameters: ShowcaseTwoColumnsDialogParameters = ShowcaseTwoColumnsDialog.getParameters();
+		parameters.width = 960;
+		parameters.height = 600;
+		parameters.index = 4;
+		this.dialogService.showDialog(ShowcaseTwoColumnsDialog, parameters);
 	}
 
-	public bootstrap() {
-		this.dialogService.showDialog(BootstrapDialog, BootstrapDialog.getParameters());
+	public showStandardDialog() {
+		this.dialogService.showDialog(ShowcaseStandardDialog, ShowcaseStandardDialog.getParameters());
 	}
 
 }
