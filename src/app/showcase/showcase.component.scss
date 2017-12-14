@@ -11,22 +11,3 @@ input, button, a {
 .li {
   color: $background;
 }
-
-
-/* Display grid icon list */
-
-.showcase-icon-list{
-  padding-left: 0;
-  list-style: none;
-}
-
-.showcase-icon-list li {
-  float: left;
-  width: 90px;
-  height: 115px;
-  padding: 10px;
-  line-height: 1;
-  text-align: center;
-  background-color: #f9f9f9;
-  border: 1px solid #fff;
-}

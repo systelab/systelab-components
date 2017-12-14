@@ -87,9 +87,6 @@ export class ShowcaseComponent implements OnInit {
 
 	}
 
-	public inline() {
-
-	}
 
 	public getDefaultShowcaseColumns(): Array<TwoListItem> {
 		const defaultColumns = [

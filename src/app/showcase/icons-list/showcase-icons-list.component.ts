@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector:    'icons-list',
-	templateUrl: './icons-list.component.html'
+	selector:    'showcase-icons-list',
+	templateUrl: 'showcase-icons-list.component.html',
+	styleUrls:   ['showcase-icons-list.component.scss']
 })
-export class IconsListComponent {
+export class ShowcaseIconsListComponent {
 	public icons: string[] = [];
 
 	public constructor() {

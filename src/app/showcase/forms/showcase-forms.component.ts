@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { DialogService } from '../../systelab-components/modal/dialog/dialog.service';
 import { LowerFlexDialog, LowerFlexDialogParameters } from './lower-flex/lower-flex-dialog.component';
-import { SplitShowcaseDialog, SplitShowcaseDialogParameters } from '../split/split-showcase-dialog.component';
+import { ShowcaseSplitDialog, SplitShowcaseDialogParameters } from './split/showcase-split-dialog.component';
 import { CalendarDialog, CalendarDialogParameters } from '../../systelab-components/calendar/calendar-dialog.component';
-import { UpperFlexDialog, UpperFlexDialogParameters } from '../upper-flex/upper-flex-dialog.component';
+import { UpperFlexDialog, UpperFlexDialogParameters } from './upper-flex/upper-flex-dialog.component';
 import { FullFlexDialog, FullFlexDialogParameters } from './full-flex/full-flex-dialog.component';
 import { ProgressbarDialog, ProgressbarDialogParameters } from './progressbar-dialog/progressbar-dialog.component';
-import { TwoColumnsDialog, TwoColumnsDialogParameters } from '../two-columns/two-columns-dialog.component';
+import { TwoColumnsDialog, TwoColumnsDialogParameters } from './two-columns/two-columns-dialog.component';
 import { BootstrapDialog } from './bootstrap-dialog/bootstrap-dialog.component';
 
 @Component({
@@ -29,8 +29,8 @@ export class ShowcaseFormsComponent {
 	}
 
 	public splitShowcase() {
-		const parameters: SplitShowcaseDialogParameters = SplitShowcaseDialog.getParameters();
-		this.dialogService.showDialog(SplitShowcaseDialog, parameters);
+		const parameters: SplitShowcaseDialogParameters = ShowcaseSplitDialog.getParameters();
+		this.dialogService.showDialog(ShowcaseSplitDialog, parameters);
 	}
 
 	public calendarShowcase() {

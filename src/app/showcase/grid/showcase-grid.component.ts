@@ -12,7 +12,7 @@ export class QCControlValueData {
 }
 
 @Component({
-	selector: 'inner-sample-grid',
+	selector: 'showcase-grid',
 	template: `
                   <div #hidden class="height-hidden"></div>
                   <ag-grid-angular id="agGrid" #agGrid
@@ -27,7 +27,7 @@ export class QCControlValueData {
                                    (modelUpdated)="onModelUpdated($event)">
                   </ag-grid-angular>`
 })
-export class InnerSampleGrid extends AbstractGrid<QCControlValueData> implements AfterViewInit {
+export class ShowcaseGrid extends AbstractGrid<QCControlValueData> implements AfterViewInit {
 
 	public values: QCControlValueData[] = [];
 
