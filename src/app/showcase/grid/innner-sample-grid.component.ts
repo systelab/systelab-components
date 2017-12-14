@@ -1,6 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { AbstractGrid } from '../systelab-components/grid/abstract-grid.component';
-import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AbstractGrid } from '../../systelab-components/grid/abstract-grid.component';
+import { DialogService } from '../../systelab-components/modal/dialog/dialog.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
@@ -31,6 +31,21 @@ export class InnerSampleGrid extends AbstractGrid<QCControlValueData> implements
 
 	public values: QCControlValueData[] = [];
 
+	public _disableRefreshButton = false;
+	private firstViewportChanged = true;
+
+	@Output() public disableRefreshButtonChange = new EventEmitter();
+
+	@Input()
+	get disableRefreshButton() {
+		return this._disableRefreshButton;
+	}
+
+	set disableRefreshButton(pDisableRefreshButton: boolean) {
+		this._disableRefreshButton = pDisableRefreshButton;
+		this.disableRefreshButtonChange.emit(pDisableRefreshButton);
+	}
+
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService) {
 
 		super(preferencesService, i18nService, dialogService);
@@ -53,5 +68,11 @@ export class InnerSampleGrid extends AbstractGrid<QCControlValueData> implements
 			{colId: 'flags', headerName: 'Flags', field: 'errorWestgardOpinion', width: 220}];
 		return columnDefs;
 	}
-
+	public doViewportChanged() {
+		if (!this.firstViewportChanged) {
+			this.disableRefreshButton = false;
+		} else {
+			this.firstViewportChanged = false;
+		}
+	}
 }

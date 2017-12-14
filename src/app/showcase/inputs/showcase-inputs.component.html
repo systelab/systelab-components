@@ -1,0 +1,134 @@
+<form>
+    <div class="d-flex flex-column h-100 w-100">
+        <div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="full-width-input">Full width</label>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Nombre" id="full-width-input">
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="third-width-input">Small width</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Email" id="third-width-input">
+                </div>
+            </div>
+            <div class="row align-items-center mt-1 disabled">
+                <label class="col slab-label-215" for="disabled-input">Disabled input</label>
+                <div class="col">
+                    <input disabled type="text" class="form-control" placeholder="Email" id="disabled-input">
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="file-input">Input File</label>
+                <div class="col">
+                    <div class="slab-input-file">
+                        <input class="form-control" id="uploadFile" type="text" name="uploadFile" [(ngModel)]="fileName">
+                        <div class="btn nt-sm">
+                            <span>...</span>
+                            <input id="uploadBtn" type="file" (change)="selectFile($event.target.files)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="file-input">html with input style</label>
+                <div class="col">
+                    <div class="slab-input form-control">
+                        <font>1<sub>2S</sub>,</font>
+                        <font class="text-warning">1<sub>2.5S</sub>,</font>
+                        <font class="text-danger">1<sub>3S</sub></font>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="resize-textarea">Textarea resizable (only vertical)</label>
+                <div class="col">
+                    <textarea name="" id="resize-textarea" class="slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="noresize-textarea">Textarea no resizable</label>
+                <div class="col">
+                    <textarea name="" id="noresize-textarea" class="slab-textarea w-100 slab-textarea-no-resize"></textarea>
+                </div>
+            </div>
+            <h4>Combos</h4>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Sin buscador</label>
+                <systelab-select
+                        class="col-sm-4 w-33"
+                        [values]="comboOptionList"
+                        (change)="comboChangeEvent($event)">
+                </systelab-select>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Con valor asignado</label>
+                <systelab-select
+                        class="col-sm-4 w-33"
+                        [description]="'San Petersburgo'"
+                        [id]="1"
+                        [values]="comboOptionList"
+                        (change)="comboChangeEvent($event)">
+                </systelab-select>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Con buscador</label>
+                <systelab-select
+                        class="col-sm-4 w-33"
+                        [values]="comboOptionList" [filter]="true"
+                        (change)="comboChangeEvent($event)">
+                </systelab-select>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Color Picker</label>
+                <systelab-colorpicker
+                        class="col-sm-4 w-25"
+                        [(id)]="colorId">
+                </systelab-colorpicker>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Date disabled</label>
+                <div class="col-sm-4">
+                    <div class="slab-form-icon">
+                        <systelab-date-time
+                                [(currentDate)]="myDate"></systelab-date-time>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Date error always</label>
+                <div class="col-sm-4">
+                    <div class="slab-form-icon">
+                        <systelab-datepicker
+                                [error]="true"
+                                [(currentDate)]="myDate"
+                                class="w-33"></systelab-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Date error (red is past)</label>
+                <div class="col-sm-4">
+                    <div class="slab-form-icon">
+                        <systelab-datepicker
+                                [(currentDate)]="myDate"
+                                [markPreviousDate]="true"
+                                class="w-33"></systelab-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col slab-label-215" for="form-h-s">Date required bottom</label>
+                <div class="col-sm-4">
+                    <div class="slab-form-icon">
+                        <systelab-datepicker
+                                [isRequired]="true"
+                                [(currentDate)]="myDate"
+                                class="w-33"></systelab-datepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
