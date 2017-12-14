@@ -27,6 +27,7 @@ import { BootstrapPanel } from './forms/bootstrap-dialog/bootstrap-panel.compone
 import { ProgressbarDialog } from './forms/progressbar-dialog/progressbar-dialog.component';
 import { ShowcaseSpinnersComponent } from './spinners/showcase-spinners.component';
 import { ShowcaseInputsComponent } from './inputs/showcase-inputs.component';
+import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
 
 @NgModule({
 	imports:      [
@@ -47,6 +48,7 @@ import { ShowcaseInputsComponent } from './inputs/showcase-inputs.component';
 		FullFlexComponent,
 		ShowcaseSpinnersComponent,
 		ShowcaseInputsComponent,
+		ShowcaseFormsComponent,
 		UpperFlexDialog,
 		LowerFlexDialog,
 		TwoColumnsDialog,

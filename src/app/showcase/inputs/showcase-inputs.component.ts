@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
 	selector:    'showcase-inputs',
@@ -8,19 +8,6 @@ export class ShowcaseInputsComponent {
 
 	public colorId: any;
 	public colorValue: any;
-
-	public _disableRefreshButton = false;
-	private firstViewportChanged = true;
-
-	@Input()
-	get disableRefreshButton() {
-		return this._disableRefreshButton;
-	}
-
-	set disableRefreshButton(pDisableRefreshButton: boolean) {
-		this._disableRefreshButton = pDisableRefreshButton;
-		this.disableRefreshButtonChange.emit(pDisableRefreshButton);
-	}
 
 	@Output() public disableRefreshButtonChange = new EventEmitter();
 
