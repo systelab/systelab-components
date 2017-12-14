@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { ModulabModalContext } from '../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../systelab-components/modal/message-popup/message-popup-view.component';
+import { ModulabModalContext } from '../../../systelab-components/modal/plugin/modulab/modal-context';
+import { DefaultModalActions } from '../../../systelab-components/modal/message-popup/message-popup-view.component';
 
 export class SplitShowcaseDialogParameters extends ModulabModalContext {
 	public fullScreen = true;
 }
 
 @Component({
-	selector:    'split-showcase-dialog',
-	templateUrl: 'split-showcase-dialog.component.html',
+	templateUrl: 'showcase-split-dialog.component.html',
 })
-export class SplitShowcaseDialog extends DefaultModalActions implements ModalComponent<SplitShowcaseDialogParameters> {
+export class ShowcaseSplitDialog extends DefaultModalActions implements ModalComponent<SplitShowcaseDialogParameters> {
 
 	public parameters: SplitShowcaseDialogParameters;
 

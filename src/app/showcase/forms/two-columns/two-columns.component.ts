@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { TouchSpinValues } from '../../systelab-components/spinner/touch.spin-values';
+import { TouchSpinValues } from '../../../systelab-components/spinner/touch.spin-values';
 
 @Component( {
 	selector:    'two-columns-panel',

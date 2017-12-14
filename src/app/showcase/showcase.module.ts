@@ -8,20 +8,20 @@ import { MessagePopupService } from '../systelab-components/modal/message-popup/
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
-import { SplitShowcaseDialog } from './split/split-showcase-dialog.component';
+import { ShowcaseSplitDialog } from './forms/split/showcase-split-dialog.component';
 import { EmptyDialog } from './forms/empty-dialog/empty-dialog.component';
-import { UpperFlexComponent } from './upper-flex/upper-flex.component';
+import { UpperFlexComponent } from './forms/upper-flex/upper-flex.component';
 import { LowerFlexComponent } from './forms/lower-flex/lower-flex.component';
-import { TwoColumnsComponent } from './two-columns/two-columns.component';
-import { IconsListComponent } from './icons-list/icons-list.component';
+import { TwoColumnsComponent } from './forms/two-columns/two-columns.component';
+import { ShowcaseIconsListComponent } from './icons-list/showcase-icons-list.component';
 import { FullFlexComponent } from './forms/full-flex/full-flex.component';
-import { UpperFlexDialog } from './upper-flex/upper-flex-dialog.component';
+import { UpperFlexDialog } from './forms/upper-flex/upper-flex-dialog.component';
 import { LowerFlexDialog } from './forms/lower-flex/lower-flex-dialog.component';
-import { TwoColumnsDialog } from './two-columns/two-columns-dialog.component';
+import { TwoColumnsDialog } from './forms/two-columns/two-columns-dialog.component';
 import { FullFlexDialog } from './forms/full-flex/full-flex-dialog.component';
 import { SampleRouteComponent } from './sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InnerSampleGrid } from './grid/innner-sample-grid.component';
+import { ShowcaseGrid } from './grid/showcase-grid.component';
 import { BootstrapDialog } from './forms/bootstrap-dialog/bootstrap-dialog.component';
 import { BootstrapPanel } from './forms/bootstrap-dialog/bootstrap-panel.component';
 import { ProgressbarDialog } from './forms/progressbar-dialog/progressbar-dialog.component';
@@ -44,7 +44,7 @@ import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
 		UpperFlexComponent,
 		LowerFlexComponent,
 		TwoColumnsComponent,
-		IconsListComponent,
+		ShowcaseIconsListComponent,
 		FullFlexComponent,
 		ShowcaseSpinnersComponent,
 		ShowcaseInputsComponent,
@@ -54,8 +54,8 @@ import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
 		TwoColumnsDialog,
 		FullFlexDialog,
 		EmptyDialog,
-		SplitShowcaseDialog,
-		InnerSampleGrid,
+		ShowcaseSplitDialog,
+		ShowcaseGrid,
 		BootstrapDialog,
 		SampleRouteComponent,
 		BootstrapPanel,
@@ -68,7 +68,7 @@ import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
 		FullFlexDialog,
 		EmptyDialog,
 		BootstrapDialog,
-		SplitShowcaseDialog,
+		ShowcaseSplitDialog,
 		ProgressbarDialog
 	],
 	providers:    [

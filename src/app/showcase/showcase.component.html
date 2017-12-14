@@ -40,7 +40,7 @@
                     <li class="nav-item">
                         <a class="nav-link" id="route-tab" data-toggle="tab" href="#route" role="tab"
                            aria-controls="route"
-                           aria-selected="false">Route</a>
+                           aria-selected="false">Pie</a>
                     </li>
                 </ul>
 
@@ -49,7 +49,7 @@
                     <div class="tab-pane p-3 active" id="grids"
                          role="tabpanel" aria-labelledby="grids-tab">
                         <form class="position-relative h-100">
-                            <inner-sample-grid #grid></inner-sample-grid>
+                            <showcase-grid #grid></showcase-grid>
                         </form>
                     </div>
                     <div class="tab-pane p-3" id="table" role="tabpanel" aria-labelledby="tables-tab">
@@ -107,17 +107,13 @@
                     </div>
                     <div class="tab-pane p-3" id="icons" role="tabpanel"
                          aria-labelledby="icons-tab">
-                        <icons-list></icons-list>
+                        <showcase-icons-list></showcase-icons-list>
                     </div>
                     <div class="tab-pane p-3" id="route" role="tabpanel"
                          aria-labelledby="route-tab">
                         <div [style.width.px]='1000' [style.height.px]='500' style="display: flex;">
                             <systelab-pie [data]="data" (select)="doSelect($event)" [fixedWidth]="1000"
                                           [fixedHeight]="500"></systelab-pie>
-                        </div>
-                        <div [style.width.px]='1000' [style.height.px]='500' style="display: flex;">
-
-                            <sample-route [fixedWidth]="1000" [fixedHeight]="500"></sample-route>
                         </div>
                     </div>
                 </div>
