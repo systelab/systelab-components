@@ -1,9 +1,7 @@
 <div class="slab-dialog-header">{{ context.title }}</div>
-<div class="slab-dialog-message msg-box with-buttons uk-vertical-align">
-    <div class="uk-vertical-align-middle img">
-        <i class="{{context.icon}} {{context.color}}"></i>
-    </div>
-    <div class="uk-vertical-align-middle msg">
+<div class="slab-dialog-message d-flex align-items-center p-5">
+    <i class="slab-msg-box-icon {{context.icon}} {{context.color}}"></i>
+    <div class="pl-5">
         {{ context.msg }}
     </div>
 </div>
@@ -20,8 +18,5 @@
             </button>
         </div>
     </ng-template>
-    <div class="uk-clearfix"></div>
 </div>
 <div class="slab-dialog-close" (click)="close()"></div>
-
-
