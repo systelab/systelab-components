@@ -6,8 +6,8 @@
                               (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"
                               (nextMonth)="changeMonth(1)" (nextYear)="changeYear(1)" [locale]="locale">
     </systelab-calendar-header>
-    <systelab-calendar-table #calendar class="h-100 w-100" [currentDate]="currentDate" [days]="days" [locale]="locale">
-        <ng-template  let-daySlot="daySlot">
+    <systelab-calendar-table #calendar class="slab-calendar-table" [currentDate]="currentDate" [days]="days" [locale]="locale">
+        <ng-template let-daySlot="daySlot">
             <a [ngClass]="{'is-holiday': daySlot.isHoliday,'disable-link':daySlot.isDisabled}" (click)="selectDaySlot(daySlot)">
                 {{daySlot.day}}
             </a>

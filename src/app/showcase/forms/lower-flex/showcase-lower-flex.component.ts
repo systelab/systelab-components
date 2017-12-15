@@ -3,10 +3,10 @@ import { TouchSpinValues } from '../../../systelab-components/spinner/touch.spin
 
 
 @Component( {
-	selector:    'lower-flex',
-	templateUrl: 'lower-flex.component.html'
+	selector:    'showcase-lower-flex',
+	templateUrl: 'showcase-lower-flex.component.html'
 } )
-export class LowerFlexComponent {
+export class ShowcaseLowerFlexComponent {
 
 	@Input() public language: string;
 

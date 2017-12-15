@@ -2,12 +2,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { TouchSpinValues } from '../../../systelab-components/spinner/touch.spin-values';
 
 @Component( {
-	selector:    'two-columns-panel',
-	templateUrl: 'two-columns.component.html'
+	selector:    'showcase-two-columns-panel',
+	templateUrl: 'showcase-two-columns.component.html'
 } )
-export class TwoColumnsComponent {
-
-	public dateValue: string = '02/01/2015';
+export class ShowcaseTwoColumnsComponent {
 
 	public touchSpinValues1: TouchSpinValues;
 	public touchSpinValues2: TouchSpinValues;

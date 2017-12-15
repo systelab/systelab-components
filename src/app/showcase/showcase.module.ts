@@ -9,28 +9,27 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowcaseSplitDialog } from './forms/split/showcase-split-dialog.component';
-import { EmptyDialog } from './forms/empty-dialog/empty-dialog.component';
-import { UpperFlexComponent } from './forms/upper-flex/upper-flex.component';
-import { LowerFlexComponent } from './forms/lower-flex/lower-flex.component';
-import { TwoColumnsComponent } from './forms/two-columns/two-columns.component';
+import { ShowcaseUpperFlexComponent } from './forms/upper-flex/showcase-upper-flex.component';
+import { ShowcaseLowerFlexComponent } from './forms/lower-flex/showcase-lower-flex.component';
+import { ShowcaseTwoColumnsComponent } from './forms/two-columns/showcase-two-columns.component';
 import { ShowcaseIconsListComponent } from './icons-list/showcase-icons-list.component';
-import { FullFlexComponent } from './forms/full-flex/full-flex.component';
-import { UpperFlexDialog } from './forms/upper-flex/upper-flex-dialog.component';
-import { LowerFlexDialog } from './forms/lower-flex/lower-flex-dialog.component';
-import { TwoColumnsDialog } from './forms/two-columns/two-columns-dialog.component';
-import { FullFlexDialog } from './forms/full-flex/full-flex-dialog.component';
+import { ShowcaseFullFlexComponent } from './forms/full-flex/showcase-full-flex.component';
+import { ShowcaseUpperFlexDialog } from './forms/upper-flex/showcase-upper-flex-dialog.component';
+import { ShowcaseLowerFlexDialog } from './forms/lower-flex/showcase-lower-flex-dialog.component';
+import { ShowcaseTwoColumnsDialog } from './forms/two-columns/showcase-two-columns-dialog.component';
+import { ShowcaseFullFlexDialog } from './forms/full-flex/showcase-full-flex-dialog.component';
 import { SampleRouteComponent } from './sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShowcaseGrid } from './grid/showcase-grid.component';
-import { BootstrapDialog } from './forms/bootstrap-dialog/bootstrap-dialog.component';
-import { BootstrapPanel } from './forms/bootstrap-dialog/bootstrap-panel.component';
-import { ProgressbarDialog } from './forms/progressbar-dialog/progressbar-dialog.component';
+import { ShowcaseProgressBarDialog } from './forms/progressbar-dialog/showcase-progressbar-dialog.component';
 import { ShowcaseSpinnersComponent } from './spinners/showcase-spinners.component';
 import { ShowcaseInputsComponent } from './inputs/showcase-inputs.component';
 import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
+import { ShowcaseStandardDialog } from './forms/standard-dialog/showcase-standard-dialog.component';
+import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-standard.component';
 
 @NgModule({
-	imports:      [
+	imports:         [
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
@@ -39,43 +38,41 @@ import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot()
 	],
-	declarations: [
+	declarations:    [
 		ShowcaseComponent,
-		UpperFlexComponent,
-		LowerFlexComponent,
-		TwoColumnsComponent,
+		ShowcaseUpperFlexComponent,
+		ShowcaseLowerFlexComponent,
+		ShowcaseTwoColumnsComponent,
 		ShowcaseIconsListComponent,
-		FullFlexComponent,
+		ShowcaseFullFlexComponent,
 		ShowcaseSpinnersComponent,
 		ShowcaseInputsComponent,
 		ShowcaseFormsComponent,
-		UpperFlexDialog,
-		LowerFlexDialog,
-		TwoColumnsDialog,
-		FullFlexDialog,
-		EmptyDialog,
+		ShowcaseUpperFlexDialog,
+		ShowcaseLowerFlexDialog,
+		ShowcaseTwoColumnsDialog,
+		ShowcaseFullFlexDialog,
 		ShowcaseSplitDialog,
 		ShowcaseGrid,
-		BootstrapDialog,
+		ShowcaseStandardDialog,
 		SampleRouteComponent,
-		BootstrapPanel,
-		ProgressbarDialog
+		ShowcaseStandardComponent,
+		ShowcaseProgressBarDialog
 	],
 	entryComponents: [
-		UpperFlexDialog,
-		LowerFlexDialog,
-		TwoColumnsDialog,
-		FullFlexDialog,
-		EmptyDialog,
-		BootstrapDialog,
+		ShowcaseUpperFlexDialog,
+		ShowcaseLowerFlexDialog,
+		ShowcaseTwoColumnsDialog,
+		ShowcaseFullFlexDialog,
+		ShowcaseStandardDialog,
 		ShowcaseSplitDialog,
-		ProgressbarDialog
+		ShowcaseProgressBarDialog
 	],
-	providers:    [
+	providers:       [
 		MessagePopupService,
 		DialogService
 	],
-	bootstrap:    [ShowcaseComponent]
+	bootstrap:       [ShowcaseComponent]
 })
 export class ShowcaseModule {
 }

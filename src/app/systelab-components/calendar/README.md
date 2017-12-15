@@ -21,7 +21,7 @@ returnedDays.push({date: new Date(2017, 10, 26), day: 26, isHoliday: true});
 
 The interesting thing here, is that you can specify a custom template for systelab-calendar-table in order to render a component for each day. For example:
 ```
-<systelab-calendar-table  #calendar class="uk-flex-item-1" [currentDate]="currentDate" [locale]="locale" [days]="days">
+<systelab-calendar-table  #calendar class="h-100" [currentDate]="currentDate" [locale]="locale" [days]="days">
         <ng-template let-daySlot="daySlot">
             <a [ngClass]="{'is-holiday': daySlot.isHoliday,'disable-link':daySlot.isDisabled}" (click)="selectDaySlot(daySlot)">
                 {{daySlot.day}}
