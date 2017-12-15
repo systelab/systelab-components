@@ -18,7 +18,7 @@ $touchspin-width: 100px !default;
    *    need to override this behavior, because a flex item cannot shrink
    *    below the length of their content.
    */
-  .slab-tsinput {
+  .slab-touchspin-input {
     min-width: 0; /* [1] */
     width: $touchspin-width;
     text-align: center;

@@ -4,7 +4,7 @@
     </button>
 
     <input [class.disabled]="isDisabled" name="sp" [(ngModel)]="valueStr"
-        class="form-control slab-tsinput" type="text"
+        class="form-control slab-touchspin-input" type="text"
         (keypress)="checkKey($event)"
         (blur)="checkValue(valueStr)"
         autocomplete="off">
