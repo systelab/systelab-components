@@ -1,63 +1,53 @@
 @import "../styles/default-theme/sass/variables";
 
 /* $touchspin-width: defines the width of the touchspin.*/
-$touchspin-width: $input-width !default;
-/* $touchspin-height: defines the height of the touchspin.*/
-$touchspin-height: $form-elements-height !default;
+$touchspin-width: 100px !default;
 
 :host {
-  box-sizing: border-box;
   display: inline-block;
+  width: $touchspin-width;
 
-  &:not([class*="w-"]) {
-    width: $touchspin-width;
+
+  .slab-touchspin {
+    display: flex;
   }
 
+
+  /**
+   * 1. An input element, unlike a div, comes with an intrinsic width. We
+   *    need to override this behavior, because a flex item cannot shrink
+   *    below the length of their content.
+   */
   .slab-tsinput {
-    border-radius: 0 !important;
-    height: $touchspin-height;
-    width: calc(100% - #{$touchspin-height + 1} * 2) !important;
-    text-align: right;
-    -moz-appearance: textfield;
-    padding: 0 3px;
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-
-  .btn.slab-tsbtnminus, .btn.slab-tsbtnplus {
-    @include size($touchspin-height);
-
-    min-width: $touchspin-height;
+    min-width: 0; /* [1] */
+    width: $touchspin-width;
+    text-align: center;
     border-radius: 0;
-    margin: 0;
-    padding: 0;
-    min-height: 0;
-
-    span {
-      line-height: $touchspin-height;
-      vertical-align: top;
-      margin: 0;
-    }
   }
 
-  .btn.slab-tsbtnminus {
-    border-top-left-radius: $border-radius;
-    border-bottom-left-radius: $border-radius;
+
+  /**
+   * 1. Resetting of default button minimum size.
+   */
+  .slab-touchspin-minus,
+  .slab-touchspin-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: inherit; /* [1] */
+    min-height: inherit; /* [1] */
+    @include size($form-elements-height);
   }
 
-  .btn.slab-tsbtnplus {
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-  }
-}
 
-@-moz-document url-prefix() {
-  .btn.tsbtnminus, .btn.tsbtnplus {
-    span {
-      line-height: calc(#{$touchspin-height} - 3px) !important;
-    }
+  .slab-touchspin-minus {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+
+  .slab-touchspin-plus {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }

@@ -1,15 +1,15 @@
-
-<div class="row">
-    <button [class.disabled]="isDisabled" (click)="minus()" class="btn slab-tsbtnminus">
+<div class="slab-touchspin">
+    <button [class.disabled]="isDisabled" (click)="minus()" class="btn slab-touchspin-minus">
         <span class="icon-minus-thin"></span>
     </button>
 
-    <input [class.disabled]="isDisabled" name="sp" [(ngModel)]="valueStr" class="slab-tsinput" type="text"
-    (keypress)="checkKey($event)"
-    (blur)="checkValue(valueStr)"
-    autocomplete="off">
+    <input [class.disabled]="isDisabled" name="sp" [(ngModel)]="valueStr"
+        class="form-control slab-tsinput" type="text"
+        (keypress)="checkKey($event)"
+        (blur)="checkValue(valueStr)"
+        autocomplete="off">
 
-    <button [class.disabled]="isDisabled" (click)="plus()" class="btn slab-tsbtnplus">
+    <button [class.disabled]="isDisabled" (click)="plus()" class="btn slab-touchspin-plus">
         <span class="icon-plus-thin"></span>
-    </button>    
+    </button>
 </div>
