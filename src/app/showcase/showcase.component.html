@@ -7,162 +7,36 @@
                     <div class="d-flex flex-column h-100">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="grids-tab" data-toggle="tab" href="#grids" role="tab"
-                                   aria-controls="grids" aria-selected="true" (click)="selectTab(1)">Grids</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tables-tab" data-toggle="tab" href="#table" role="tab"
-                                   aria-controls="tables" aria-selected="false" (click)="selectTab(2)">Tables</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="inputs-tab" data-toggle="tab" href="#inputs" role="tab"
-                                   aria-controls="inputs"
-                                   aria-selected="false" (click)="selectTab(3)">Inputs & text area</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="checks-tab" data-toggle="tab" href="#checks" role="tab"
-                                   aria-controls="checks"
-                                   aria-selected="false" (click)="selectTab(4)">Spinners, checkbox & radios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="twolist-tab" data-toggle="tab" href="#twolist" role="tab"
-                                   aria-controls="twolist"
-                                   aria-selected="false" (click)="selectTab(5)">Two list</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="forms-tab" data-toggle="tab" href="#forms" role="tab"
-                                   aria-controls="forms"
-                                   aria-selected="false" (click)="selectTab(6)">Forms</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="icons-tab" data-toggle="tab" href="#icons" role="tab"
-                                   aria-controls="icons"
-                                   aria-selected="false" (click)="selectTab(7)">Icons</a>
+                                <a class="nav-link active" id="components-tab" data-toggle="tab" href="#components"
+                                   role="tab"
+                                   aria-controls="components"
+                                   aria-selected="false" (click)="selectTab(1)">Components</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="route-tab" data-toggle="tab" href="#route" role="tab"
                                    aria-controls="route"
-                                   aria-selected="false" (click)="selectTab(8)">Pie</a>
+                                   aria-selected="false" (click)="selectTab(2)">Tab</a>
                             </li>
                         </ul>
 
-
                         <div class="tab-content d-flex" id="showcase-tab-content">
-                            <div class="tab-pane p-3 active" id="grids"
-                                 role="tabpanel" aria-labelledby="grids-tab">
-                                <showcase-grid-panel #grid class="h-100"></showcase-grid-panel>
-                            </div>
-                            <div class="tab-pane p-3" id="table" role="tabpanel" aria-labelledby="tables-tab">
-                                <table class="table table-sm">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Username</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="bg-light h-auto">
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane p-3" id="inputs" role="tabpanel"
-                                 aria-labelledby="inputs-tab">
-                                <showcase-inputs></showcase-inputs>
-                            </div>
-                            <div class="tab-pane p-3" id="checks" role="tabpanel"
-                                 aria-labelledby="checks-tab">
-                                <showcase-spinners></showcase-spinners>
+                            <div class="tab-pane p-3 active" id="components" role="tabpanel"
+                                 aria-labelledby="components-tab">
+                                <showcase-components></showcase-components>
                             </div>
 
-                            <div class="tab-pane p-3" id="twolist" role="tabpanel"
-                                 aria-labelledby="twolist-tab">
-                                <systelab-two-list [(available)]="availableColumns"
-                                                   [(visible)]="visibleColumns"
-                                                   [initialAvailableColumns]="getDefaultShowcaseColumns()"
-                                                   displayAttr="displayName">
-                                </systelab-two-list>
-
-                            </div>
-                            <div class="tab-pane p-3" id="forms" role="tabpanel"
-                                 aria-labelledby="forms-tab">
-                                <showcase-forms></showcase-forms>
-                            </div>
-                            <div class="tab-pane p-3" id="icons" role="tabpanel"
-                                 aria-labelledby="icons-tab">
-                                <showcase-icons-list></showcase-icons-list>
-                            </div>
                             <div class="tab-pane p-3" id="route" role="tabpanel"
                                  aria-labelledby="route-tab">
-                                <div [style.width.px]='1000' [style.height.px]='500' style="display: flex;">
-                                    <systelab-pie [data]="data" (select)="doSelect($event)" [fixedWidth]="1000"
-                                                  [fixedHeight]="500"></systelab-pie>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="slab-dialog-buttons">
-                    <button type="button" class="btn btn-lg" (click)="showApplicationFrame();"><i
-                            class="icon-info-circle"></i> Frame
-                    </button>
-                    <button *ngIf="currentTab===1" type="button" class="btn btn-lg" (click)="grid.showOptions();"><i
-                            class="icon-info-circle"></i> Options
-                    </button>
-                    <button *ngIf="currentTab===6" type="button" class="btn btn-lg" (click)="showError();"><i
-                            class="icon-times-circle"></i> Error
-                    </button>
-                    <button *ngIf="currentTab===6"  type="button" class="btn btn-lg" (click)="showWarning();"><i
-                            class="icon-warning "></i> Warning
-                    </button>
-                    <button *ngIf="currentTab===6"  type="button" class="btn btn-lg" (click)="showInfo();"><i
-                            class="icon-info-circle"></i> Information
-                    </button>
-                    <button *ngIf="currentTab===6"  type="button" class="btn btn-lg" (click)="showQuestion();"><i
-                            class="icon-question-circle"></i> Question
-                    </button>
-                    <button *ngIf="currentTab===6"  type="button" class="btn btn-lg" (click)="showQuestionYN();"><i
-                            class="icon-question-circle"></i> Question YN
-                    </button>
-
-                    <button *ngIf="currentTab===6"  type="button" class="btn btn-lg float-right"><i
-                            class="icon-chevron-circle-right"></i> Right buttons
-                    </button>
-                    <div  *ngIf="currentTab===6" class="dropup slab-button-dropdown">
-                        <!-- This is the element toggling the dropdown -->
-                        <button type="button" class="btn btn-lg dropdown-toogle" data-toggle="dropdown">Drop down
-                            auto-left <i
-                                    class="icon-chevron-up"></i></button>
-                        <!-- This is the dropdown -->
-                        <div class="dropdown-menu slab-dropdown">
-                            <ul>
-                                <li><a (click)="showInfo();">Action 1 Info</a></li>
-                                <li><a (click)="showWarning();">Action 2 Warning</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button  *ngIf="currentTab===5" type="button" class="btn btn-lg" (click)="saveTwoListPreferences();">Save Two List
-                        Preferences
+                    <button type="button" class="btn btn-lg"><i
+                            class="icon-times-circle"></i> Left button
                     </button>
                     <button type="button" class="btn btn-lg float-right"><i
-                            class="icon-chevron-circle-right"></i> Right buttons
+                            class="icon-chevron-circle-right"></i> Right button
                     </button>
                 </div>
                 <div class="slab-dialog-close" (click)="closeDialog();"></div>
