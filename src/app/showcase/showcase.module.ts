@@ -42,6 +42,7 @@ import { ShowcaseApplicationFrameComponent } from './components/application-fram
 import { ShowcaseApplicationFrameDialog } from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
 import { ShowcasePieComponent } from './components/pie/showcase-pie.component';
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
+import { ShowcaseTitleComponent } from './components/showcase-title.component';
 
 @NgModule({
 	imports:         [
@@ -76,6 +77,7 @@ import { ShowcaseMessagePopupComponent } from './components/message-popup/showca
 		ShowcaseTwoListComponent,
 		ShowcaseApplicationFrameComponent,
 		ShowcaseMessagePopupComponent,
+		ShowcaseTitleComponent,
 		ShowcasePieComponent,
 		ShowcaseUpperFlexDialog,
 		ShowcaseLowerFlexDialog,

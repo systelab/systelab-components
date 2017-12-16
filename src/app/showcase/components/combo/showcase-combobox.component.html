@@ -1,7 +1,7 @@
 <div class="row align-items-center mt-1">
     <label class="col slab-label-215" for="form-h-s">Sin buscador</label>
     <systelab-select
-            class="col-sm-4 w-33"
+            class="col"
             [values]="comboOptionList"
             (change)="comboChangeEvent($event)">
     </systelab-select>
@@ -9,7 +9,7 @@
 <div class="row align-items-center mt-1">
     <label class="col slab-label-215" for="form-h-s">Con valor asignado</label>
     <systelab-select
-            class="col-sm-4 w-33"
+            class="col"
             [description]="'San Petersburgo'"
             [id]="1"
             [values]="comboOptionList"
@@ -19,7 +19,7 @@
 <div class="row align-items-center mt-1">
     <label class="col slab-label-215" for="form-h-s">Con buscador</label>
     <systelab-select
-            class="col-sm-4 w-33"
+            class="col"
             [values]="comboOptionList" [filter]="true"
             (change)="comboChangeEvent($event)">
     </systelab-select>
@@ -27,7 +27,7 @@
 <div class="row align-items-center mt-1">
     <label class="col slab-label-215" for="form-h-s">Color Picker</label>
     <systelab-colorpicker
-            class="col-sm-4 w-25"
+            class="col"
             [(id)]="colorId">
     </systelab-colorpicker>
 </div>
