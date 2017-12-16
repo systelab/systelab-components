@@ -20,7 +20,7 @@ $sizes: (
 @import "mixins";
 
 // we must load bootstrap after setting our own variables
-@import "~bootstrap/scss/bootstrap";
+@import "../../../../../../node_modules/bootstrap/scss/bootstrap";
 
 @import "ngDialog_legacy";
 @import "icon_legacy";

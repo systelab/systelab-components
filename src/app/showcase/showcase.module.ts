@@ -27,6 +27,8 @@ import { ShowcaseInputsComponent } from './inputs/showcase-inputs.component';
 import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
 import { ShowcaseStandardDialog } from './forms/standard-dialog/showcase-standard-dialog.component';
 import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-standard.component';
+import { ShowcaseApplicationFrameDialog } from './application-frame/showcase-application-frame-dialog.component';
+import { ShowcaseGridPanelComponent } from './grid/showcase-grid-panel.component';
 
 @NgModule({
 	imports:         [
@@ -48,6 +50,7 @@ import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-stan
 		ShowcaseSpinnersComponent,
 		ShowcaseInputsComponent,
 		ShowcaseFormsComponent,
+		ShowcaseGridPanelComponent,
 		ShowcaseUpperFlexDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
@@ -57,7 +60,8 @@ import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-stan
 		ShowcaseStandardDialog,
 		SampleRouteComponent,
 		ShowcaseStandardComponent,
-		ShowcaseProgressBarDialog
+		ShowcaseProgressBarDialog,
+		ShowcaseApplicationFrameDialog
 	],
 	entryComponents: [
 		ShowcaseUpperFlexDialog,
@@ -66,7 +70,8 @@ import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-stan
 		ShowcaseFullFlexDialog,
 		ShowcaseStandardDialog,
 		ShowcaseSplitDialog,
-		ShowcaseProgressBarDialog
+		ShowcaseProgressBarDialog,
+		ShowcaseApplicationFrameDialog
 	],
 	providers:       [
 		MessagePopupService,

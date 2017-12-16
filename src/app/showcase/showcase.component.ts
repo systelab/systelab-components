@@ -5,6 +5,7 @@ import { TwoListItem } from '../systelab-components/twolist/two-list.component';
 import { MessagePopupService } from '../systelab-components/modal/message-popup/message-popup.service';
 import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
 import { PieElement } from '../systelab-components/piechart/pie.component';
+import { ShowcaseApplicationFrameDialog } from './application-frame/showcase-application-frame-dialog.component';
 
 @Component({
 	selector:      'app-root',
@@ -87,6 +88,10 @@ export class ShowcaseComponent implements OnInit {
 
 	}
 
+	public showApplicationFrame() {
+		this.dialogService.showDialog(ShowcaseApplicationFrameDialog, ShowcaseApplicationFrameDialog.getParameters());
+
+	}
 
 	public getDefaultShowcaseColumns(): Array<TwoListItem> {
 		const defaultColumns = [
