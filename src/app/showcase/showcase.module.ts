@@ -31,7 +31,7 @@ import { ShowcaseTooltipComponent } from './components/tooltip/showcase-tooltip.
 import { ShowcaseSliderComponent } from './components/slider/showcase-slider.component';
 import { ShowcaseTextareaComponent } from './components/textarea/showcase-textarea.component';
 import { ShowcaseDatepickerComponent } from './components/datepicker/showcase-datepicker.component';
-import { ShowcaseComboboxComponent } from './components/combo/showcase-combobox.component';
+import { ShowcaseComboboxComponent } from './components/combobox/showcase-combobox.component';
 import { ShowcaseInputComponent } from './components/input/showcase-input.component';
 import { ShowcaseTableComponent } from './components/table/showcase-table.component';
 import { ShowcaseGridComponent } from './components/grid/showcase-grid.component';
