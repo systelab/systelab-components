@@ -43,6 +43,7 @@ import { ShowcaseApplicationFrameDialog } from './components/application-frame/a
 import { ShowcasePieComponent } from './components/pie/showcase-pie.component';
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
+import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
 
 @NgModule({
 	imports:         [
@@ -79,6 +80,7 @@ import { ShowcaseTitleComponent } from './components/showcase-title.component';
 		ShowcaseMessagePopupComponent,
 		ShowcaseTitleComponent,
 		ShowcasePieComponent,
+		ShowcaseProgressBarComponent,
 		ShowcaseUpperFlexDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
