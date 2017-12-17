@@ -44,6 +44,7 @@ import { ShowcasePieComponent } from './components/pie/showcase-pie.component';
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
+import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
 
 @NgModule({
 	imports:         [
@@ -69,6 +70,7 @@ import { ShowcaseProgressBarComponent } from './components/progress-bars/showcas
 		ShowcaseSliderComponent,
 		ShowcaseTooltipComponent,
 		ShowcaseInputComponent,
+		ShowcaseButtonComponent,
 		ShowcaseIconComponent,
 		ShowcaseComboboxComponent,
 		ShowcaseDatepickerComponent,
