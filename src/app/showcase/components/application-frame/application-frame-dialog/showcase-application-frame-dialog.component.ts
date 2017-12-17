@@ -70,6 +70,7 @@ export class ShowcaseApplicationFrameDialog extends DefaultModalActions implemen
 			this.menu.push(new ApplicationHeaderMenuEntry('Tab One', false, () => this.doSelect('T1')));
 			this.menu.push(new ApplicationHeaderMenuEntry('Tab Two', false, () => this.doSelect('T2')));
 			this.menu.push(new ApplicationHeaderMenuEntry('', true));
+			this.menu.push(new ApplicationHeaderMenuEntry('Close', false, () => this.close()));
 
 		}
 
