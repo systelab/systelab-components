@@ -103,7 +103,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
 .slab-dialog-message {
   flex: 1;
   overflow: auto;
-
+  -webkit-overflow-scrolling: touch;
   background-color: $background;
 }
 

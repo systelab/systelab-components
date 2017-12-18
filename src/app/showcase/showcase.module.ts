@@ -8,25 +8,43 @@ import { MessagePopupService } from '../systelab-components/modal/message-popup/
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
-import { ShowcaseSplitDialog } from './forms/split/showcase-split-dialog.component';
-import { ShowcaseUpperFlexComponent } from './forms/upper-flex/showcase-upper-flex.component';
-import { ShowcaseLowerFlexComponent } from './forms/lower-flex/showcase-lower-flex.component';
-import { ShowcaseTwoColumnsComponent } from './forms/two-columns/showcase-two-columns.component';
-import { ShowcaseIconsListComponent } from './icons-list/showcase-icons-list.component';
-import { ShowcaseFullFlexComponent } from './forms/full-flex/showcase-full-flex.component';
-import { ShowcaseUpperFlexDialog } from './forms/upper-flex/showcase-upper-flex-dialog.component';
-import { ShowcaseLowerFlexDialog } from './forms/lower-flex/showcase-lower-flex-dialog.component';
-import { ShowcaseTwoColumnsDialog } from './forms/two-columns/showcase-two-columns-dialog.component';
-import { ShowcaseFullFlexDialog } from './forms/full-flex/showcase-full-flex-dialog.component';
-import { SampleRouteComponent } from './sample-route/sample-route.component';
+import { ShowcaseSplitDialog } from './components/dialog/split/showcase-split-dialog.component';
+import { ShowcaseUpperFlexComponent } from './components/dialog/upper-flex/showcase-upper-flex.component';
+import { ShowcaseLowerFlexComponent } from './components/dialog/lower-flex/showcase-lower-flex.component';
+import { ShowcaseTwoColumnsComponent } from './components/dialog/two-columns/showcase-two-columns.component';
+import { ShowcaseFullFlexComponent } from './components/dialog/full-flex/showcase-full-flex.component';
+import { ShowcaseUpperFlexDialog } from './components/dialog/upper-flex/showcase-upper-flex-dialog.component';
+import { ShowcaseLowerFlexDialog } from './components/dialog/lower-flex/showcase-lower-flex-dialog.component';
+import { ShowcaseTwoColumnsDialog } from './components/dialog/two-columns/showcase-two-columns-dialog.component';
+import { ShowcaseFullFlexDialog } from './components/dialog/full-flex/showcase-full-flex-dialog.component';
+import { SampleRouteComponent } from './components/sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShowcaseGrid } from './grid/showcase-grid.component';
-import { ShowcaseProgressBarDialog } from './forms/progressbar-dialog/showcase-progressbar-dialog.component';
-import { ShowcaseSpinnersComponent } from './spinners/showcase-spinners.component';
-import { ShowcaseInputsComponent } from './inputs/showcase-inputs.component';
-import { ShowcaseFormsComponent } from './forms/showcase-forms.component';
-import { ShowcaseStandardDialog } from './forms/standard-dialog/showcase-standard-dialog.component';
-import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-standard.component';
+import { ShowcaseProgressBarDialog } from './components/dialog/progressbar-dialog/showcase-progressbar-dialog.component';
+import { ShowcaseDialogComponent } from './components/dialog/showcase-dialog.component';
+import { ShowcaseStandardDialog } from './components/dialog/standard-dialog/showcase-standard-dialog.component';
+import { ShowcaseStandardComponent } from './components/dialog/standard-dialog/showcase-standard.component';
+import { ShowcaseSpinnerComponent } from './components/spinner/showcase-spinner.component';
+import { ShowcaseComponentsComponent } from './components/showcase-components.component';
+import { ShowcaseCheckboxComponent } from './components/checkbox/showcase-checkbox.component';
+import { ShowcaseRadioComponent } from './components/radio/showcase-radio.component';
+import { ShowcaseTooltipComponent } from './components/tooltip/showcase-tooltip.component';
+import { ShowcaseSliderComponent } from './components/slider/showcase-slider.component';
+import { ShowcaseTextareaComponent } from './components/textarea/showcase-textarea.component';
+import { ShowcaseDatepickerComponent } from './components/datepicker/showcase-datepicker.component';
+import { ShowcaseComboboxComponent } from './components/combobox/showcase-combobox.component';
+import { ShowcaseInputComponent } from './components/input/showcase-input.component';
+import { ShowcaseTableComponent } from './components/table/showcase-table.component';
+import { ShowcaseGridComponent } from './components/grid/showcase-grid.component';
+import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
+import { ShowcaseIconComponent } from './components/icon/showcase-icon.component';
+import { ShowcaseTwoListComponent } from './components/two-list/showcase-two-list.component';
+import { ShowcaseApplicationFrameComponent } from './components/application-frame/showcase-application-frame.component';
+import { ShowcaseApplicationFrameDialog } from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
+import { ShowcasePieComponent } from './components/pie/showcase-pie.component';
+import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
+import { ShowcaseTitleComponent } from './components/showcase-title.component';
+import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
+import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
 
 @NgModule({
 	imports:         [
@@ -43,21 +61,39 @@ import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-stan
 		ShowcaseUpperFlexComponent,
 		ShowcaseLowerFlexComponent,
 		ShowcaseTwoColumnsComponent,
-		ShowcaseIconsListComponent,
 		ShowcaseFullFlexComponent,
-		ShowcaseSpinnersComponent,
-		ShowcaseInputsComponent,
-		ShowcaseFormsComponent,
+		ShowcaseDialogComponent,
+		ShowcaseComponentsComponent,
+		ShowcaseSpinnerComponent,
+		ShowcaseCheckboxComponent,
+		ShowcaseRadioComponent,
+		ShowcaseSliderComponent,
+		ShowcaseTooltipComponent,
+		ShowcaseInputComponent,
+		ShowcaseButtonComponent,
+		ShowcaseIconComponent,
+		ShowcaseComboboxComponent,
+		ShowcaseDatepickerComponent,
+		ShowcaseTextareaComponent,
+		ShowcaseTableComponent,
+		ShowcaseGridComponent,
+		ShowcaseTwoListComponent,
+		ShowcaseApplicationFrameComponent,
+		ShowcaseMessagePopupComponent,
+		ShowcaseTitleComponent,
+		ShowcasePieComponent,
+		ShowcaseProgressBarComponent,
 		ShowcaseUpperFlexDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
 		ShowcaseFullFlexDialog,
 		ShowcaseSplitDialog,
-		ShowcaseGrid,
+		ShowcaseInnerGridComponent,
 		ShowcaseStandardDialog,
 		SampleRouteComponent,
 		ShowcaseStandardComponent,
-		ShowcaseProgressBarDialog
+		ShowcaseProgressBarDialog,
+		ShowcaseApplicationFrameDialog
 	],
 	entryComponents: [
 		ShowcaseUpperFlexDialog,
@@ -66,7 +102,8 @@ import { ShowcaseStandardComponent } from './forms/standard-dialog/showcase-stan
 		ShowcaseFullFlexDialog,
 		ShowcaseStandardDialog,
 		ShowcaseSplitDialog,
-		ShowcaseProgressBarDialog
+		ShowcaseProgressBarDialog,
+		ShowcaseApplicationFrameDialog
 	],
 	providers:       [
 		MessagePopupService,

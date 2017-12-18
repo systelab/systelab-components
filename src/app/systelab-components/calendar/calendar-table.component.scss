@@ -24,8 +24,9 @@ $datepicker-header-navigation-line-height: 40px;
       tr {
         th {
           font-weight: normal;
-          min-width: $datepicker-max-size;
+          min-width: 40px;
           max-width: $datepicker-max-size;
+          text-align: center;
           padding: 0 !important;
         }
       }

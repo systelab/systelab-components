@@ -1,0 +1,31 @@
+<div>
+    <button type="button" class="btn btn-lg mt-2" (click)="showError();"><i
+            class="icon-times-circle"></i> Error
+    </button>
+    <button type="button" class="btn btn-lg mt-2" (click)="showWarning();"><i
+            class="icon-warning "></i> Warning
+    </button>
+    <button type="button" class="btn btn-lg mt-2" (click)="showInfo();"><i
+            class="icon-info-circle"></i> Information
+    </button>
+    <button type="button" class="btn btn-lg mt-2" (click)="showQuestion();"><i
+            class="icon-question-circle"></i> Question
+    </button>
+    <button type="button" class="btn btn-lg mt-2" (click)="showQuestionYN();"><i
+            class="icon-question-circle"></i> Question YN
+    </button>
+
+    <div class="dropup slab-button-dropdown">
+        <!-- This is the element toggling the dropdown -->
+        <button type="button" class="btn btn-lg dropdown-toogle mt-2" data-toggle="dropdown">Drop downauto-left <i
+                    class="icon-chevron-up"></i></button>
+        <!-- This is the dropdown -->
+        <div class="dropdown-menu slab-dropdown">
+            <ul>
+                <li><a (click)="showInfo();">Action 1 Info</a></li>
+                <li><a (click)="showWarning();">Action 2 Warning</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
