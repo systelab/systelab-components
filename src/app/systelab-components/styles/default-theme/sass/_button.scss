@@ -88,4 +88,8 @@
     min-height: $form-elements-height;
     padding: 0;
   }
+
+  &.float-right {
+    margin-right: 3.75px;
+  }
 }
