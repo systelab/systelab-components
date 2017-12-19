@@ -9,10 +9,6 @@
   color: white;
   cursor: pointer;
   box-shadow: none;
-
-  &.btn-primary {
-    background-color: $primary-color;
-  }
 }
 
 /**
@@ -87,5 +83,56 @@
     //Fixing for smaller sizes (such as $size_percentage = 0.7)
     min-height: $form-elements-height;
     padding: 0;
+  }
+
+  &.btn-primary {
+    background-color: $bootstrap-primary;
+    &:hover {
+      background-color: darken($bootstrap-primary, 10%);
+    }
+  }
+  &.btn-secondary {
+    background-color: $bootstrap-secondary;
+    &:hover {
+      background-color: darken($bootstrap-secondary, 10%);
+    }
+  }
+  &.btn-success {
+    background-color: $bootstrap-success;
+    &:hover {
+      background-color: darken($bootstrap-success, 10%);
+    }
+  }
+  &.btn-danger {
+    background-color: $bootstrap-danger;
+    &:hover {
+      background-color: darken($bootstrap-danger, 10%);
+    }
+  }
+  &.btn-warning {
+    background-color: $bootstrap-warning;
+    color: $secondary-color;
+    &:hover {
+      background-color: darken($bootstrap-warning, 10%);
+    }
+  }
+  &.btn-info {
+    background-color: $bootstrap-info;
+    &:hover {
+      background-color: darken($bootstrap-info, 10%);
+    }
+  }
+  &.btn-light {
+    background-color: $bootstrap-light;
+    color: $secondary-color;
+    &:hover {
+      background-color: darken($bootstrap-light, 10%);
+    }
+  }
+  &.btn-dark {
+    background-color: $bootstrap-dark;
+    &:hover {
+      background-color: darken($bootstrap-dark, 10%);
+    }
   }
 }
