@@ -22,17 +22,14 @@ $sizes: (
 // we must load bootstrap after setting our own variables
 @import "../../../../../../node_modules/bootstrap/scss/bootstrap";
 
-@import "ngDialog_legacy";
 @import "icon_legacy";
 @import "dropdown_legacy";
 @import "forms_legacy";
 @import "panel_legacy";
-@import "progressBar_legacy";
 @import "tabs_legacy";
 @import "table_legacy";
 @import "button_legacy";
 @import "input_legacy";
-@import "slider_legacy";
 @import "textarea_legacy";
 
 // then we can load our components
@@ -81,6 +78,10 @@ html {
   a:focus {
     outline: 0 !important;
   }
+}
+
+.slab-flex-100 {
+  flex: 1;
 }
 
 // $primary-color: rgb(85, 174, 97);

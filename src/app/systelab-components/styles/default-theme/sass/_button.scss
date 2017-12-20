@@ -135,4 +135,8 @@
       background-color: darken($bootstrap-dark, 10%);
     }
   }
+
+  &.float-right {
+    margin-right: 3.75px;
+  }
 }
