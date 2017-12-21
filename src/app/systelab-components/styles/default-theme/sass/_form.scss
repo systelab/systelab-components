@@ -4,6 +4,7 @@
 
 .slab-label {
   line-height: $base-font-size;
+  text-overflow: ellipsis;
   margin: 0;
 }
 
