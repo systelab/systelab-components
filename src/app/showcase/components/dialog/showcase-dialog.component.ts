@@ -53,7 +53,7 @@ export class ShowcaseDialogComponent {
 
 	public showProgressBarDialog() {
 		const parameters: ShowcaseProgressBarDialogParameters = ShowcaseProgressBarDialog.getParameters();
-		parameters.dialogClass = 'w-33 h-25';
+		parameters.dialogClass = 'w-50 h-25';
 		this.dialogService.showDialog(ShowcaseProgressBarDialog, parameters);
 	}
 

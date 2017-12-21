@@ -2,25 +2,7 @@
 
 @import "variables";
 
-/**
- * 1. Needed to prevent tabs to collapse to a new line when there's no horizontal room for them
- * 2. Needed to prevent inherit color from UIkit
- */
-
-/* $tab-min-width: defines the min-width of the tabs.*/
-$tab-min-width: 120px !default;
-/* $height-diff: used to calculate the $tab-vertical-padding.*/
-$height-diff: 40px - $tab-height;
-/* $tab-vertical-padding: defines the padding of the elements inside the tab;
-                          defines the padding-bottom of the element when it’s hovered.*/
-$tab-vertical-padding: ceil(6px - $height-diff / 2);
-/* $tab-space: used to define the top margin and the gutter between elements */
-$tab-space: 5px;
-
-$tabs-height: 37px;
-
 .nav {
-  height: $tabs-height;
   padding-left: 25px;
   white-space: nowrap;
   overflow: visible;
@@ -28,8 +10,8 @@ $tabs-height: 37px;
 
   > .nav-item {
     background-color: $background-hemohub;
-    padding-top: $tab-space;
-    margin-right: 2 * $tab-space;
+    padding-top: 2 * $tab-space;
+    margin-right: $tab-space;
 
     > .nav-link {
       height: 100%;
@@ -39,7 +21,7 @@ $tabs-height: 37px;
       background-color: $secondary-color;
       border-top: 3px solid $secondary-color;
       margin-left: 0;
-      padding: $tab-vertical-padding 12px;
+      padding: 0 12px;
       min-width: $tab-min-width;
       text-align: center;
       border-radius: 4px 4px 0 0;
@@ -48,7 +30,7 @@ $tabs-height: 37px;
         color: $background;
         background-color: $primary-color;
         border-color: $primary-color;
-        padding-bottom: $tab-vertical-padding;
+        padding-bottom: 0;
       }
 
       &.active {
@@ -61,20 +43,5 @@ $tabs-height: 37px;
         }
       }
     }
-
   }
-}
-
-.tab-content {
-  height: calc(100% - #{$tabs-height});
-
-  > .active {
-    display: flex;
-    overflow: auto;
-  }
-}
-
-.tab-pane {
-  flex: 1;
-  flex-direction: column;
 }
