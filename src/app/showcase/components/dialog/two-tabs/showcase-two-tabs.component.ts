@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { TouchSpinValues } from '../../../../systelab-components/spinner/touch.spin-values';
 
 @Component( {
-	selector:    'showcase-upper-flex',
-	templateUrl: 'showcase-upper-flex.component.html'
+	selector:    'showcase-two-tabs',
+	templateUrl: 'showcase-two-tabs.component.html'
 } )
-export class ShowcaseUpperFlexComponent {
+export class ShowcaseTwoTabsComponent {
 
 	public touchSpinValues1: TouchSpinValues;
 	public touchSpinValues2: TouchSpinValues;
