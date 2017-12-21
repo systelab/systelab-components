@@ -47,6 +47,7 @@ import { ShowcaseProgressBarComponent } from './components/progress-bars/showcas
 import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
 import { ShowcaseHeadingsComponent } from './components/headings/showcase-headings.component';
 import { ShowcaseAlertComponent } from './components/alert/showcase-alert.component';
+import { ShowcaseTextComponent } from './components/text/showcase-text.component';
 
 @NgModule({
 	imports:         [
@@ -87,6 +88,7 @@ import { ShowcaseAlertComponent } from './components/alert/showcase-alert.compon
 		ShowcaseProgressBarComponent,
 		ShowcaseHeadingsComponent,
 		ShowcaseAlertComponent,
+		ShowcaseTextComponent,
 		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
