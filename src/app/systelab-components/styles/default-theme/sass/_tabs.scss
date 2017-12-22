@@ -45,3 +45,17 @@
     }
   }
 }
+
+.tab-content {
+  height: 100%;
+
+  > .active {
+    display: flex;
+    overflow: auto;
+  }
+}
+
+.tab-pane {
+  flex: 1;
+  flex-direction: column;
+}
