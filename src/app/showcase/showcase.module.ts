@@ -45,6 +45,9 @@ import { ShowcaseMessagePopupComponent } from './components/message-popup/showca
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
 import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
+import { ShowcaseHeadingsComponent } from './components/headings/showcase-headings.component';
+import { ShowcaseAlertComponent } from './components/alert/showcase-alert.component';
+import { ShowcaseTextComponent } from './components/text/showcase-text.component';
 
 @NgModule({
 	imports:         [
@@ -83,6 +86,9 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 		ShowcaseTitleComponent,
 		ShowcasePieComponent,
 		ShowcaseProgressBarComponent,
+		ShowcaseHeadingsComponent,
+		ShowcaseAlertComponent,
+		ShowcaseTextComponent,
 		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
