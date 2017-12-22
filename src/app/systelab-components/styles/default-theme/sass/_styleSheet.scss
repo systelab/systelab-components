@@ -114,16 +114,8 @@ $form-row-gutter: ceil(5px * $size_percentage) !default;
 /************** FORMS - end *******************************************************************************************/
 
 /************** slab-dialog - start **************************************************************************************/
-/* $slab-dialog-header-height: defines the max-height of the slab-dialog-header;
-                             used to calculate the line-height of the slab-dialog-header;
-                             used to calculate the height of the slab-dialog-message;
-                             used to calculate the height of the slab-dialog-message when has the class with-buttons;
-                             used to calculate the $top-offset variable value */
+/* $slab-dialog-header-height: defines the max-height of the slab-dialog-header; */
 $slab-dialog-header-height: max(45px, ceil(60px * $size_percentage)) !default;
-/* $slab-dialog-buttons-height: used to calculate the height of the slab-dialog-message when has the class with-buttons;
-                              defines the max-height of the slab-dialog-buttons class;
-                              used to calculate the value of the $button-size variable */
-$slab-dialog-buttons-height: max(54px, $slab-dialog-header-height) !default;
 /************** slab-dialog - end ****************************************************************************************/
 
 /************** NGSEARCHER - start ************************************************************************************/
