@@ -1,4 +1,4 @@
-<div [style.height.%]="100">
+<div class="d-flex">
     <p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false" [locale]="language"
                 [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
                 (onBlur)="changeDate()"
@@ -21,9 +21,8 @@
             </div>
         </p-header>
     </p-calendar>
-    <systelab-spinner [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"
-                   [style.min-width.px]="90"></systelab-spinner>
-    <label>:</label>
+    <systelab-spinner [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"></systelab-spinner>
+    <label class="mx-1 my-0">:</label>
     <systelab-spinner [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes"
-                   [fillUnitsWithZero]="true" [style.min-width.px]="90"></systelab-spinner>
-</div>
+                    [fillUnitsWithZero]="true"></systelab-spinner>
+    </div>

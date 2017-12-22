@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "3.0.1",
+  "version": "3.0.8",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -22,7 +22,7 @@
     "copysass": "gulp copysass",
     "copytemplates": "gulp copytemplates",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
-    "prepare": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copystyles && npm run copysass && npm run copytemplates"
+    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copystyles && npm run copysass && npm run copytemplates"
   },
   "files": [
     "widgets",

@@ -1,141 +1,133 @@
-<form class="d-flex align-items-end flex-column h-100 w-100 p-3">
-    <div class="w-100">
-        <div class="row align-items-center mt-1">
-            <div class="col">
-                <h4>Row system</h4>
-            </div>
+<form class="d-flex flex-column h-100 w-100 p-4">
+    <div class="row align-items-center my-2">
+        <h4 class="col slab-form-title">Row system</h4>
+    </div>
+    <div class="row align-items-center my-1">
+        <label class="col slab-label slab-label-165" for="valueid">
+            Description
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-1" class="form-control" name="value">
+        </div>
+        <label class="col slab-label slab-label-165" for="valueid">
+            Mnemonic
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-2" class="form-control" name="value">
         </div>
     </div>
-    <div class="w-100">
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label-215" for="valueid">
-                Element 1
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-1" class="form-control" name="value">
-            </div>
-            <label class="col slab-label-215" for="valueid">
-                Element 2
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-2" class="form-control" name="value">
-            </div>
+    <div class="row align-items-center my-1">
+        <label class="col slab-label slab-label-165" for="valueid">
+            Lot Number
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-3" class="form-control" name="value">
         </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label-215" for="valueid">
-                    Element 3
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-3" class="form-control" name="value">
-            </div>
-            <label class="col slab-label-215" for="valueid">
-                    Element 4
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-4" class="form-control" name="value">
-            </div>
-        </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label-215" for="valueid">
-                    Element 5
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-5" class="form-control" name="value">
-            </div>
-            <label class="col slab-label-215" for="valueid">
-                    Element 6
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-6" class="form-control" name="value">
-            </div>
-        </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label-215" for="valueid">
-                    Element 7
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-7" class="form-control" name="value">
-            </div>
-            <label class="col slab-label-215" for="valueid">
-                    Element 8
-            </label>
-            <div class="col">
-                <input type="text" id="row-element-8" class="form-control" name="value">
-            </div>
+        <label class="col slab-label slab-label-165" for="valueid">
+            Expiration date
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-4" class="form-control" name="value">
         </div>
     </div>
-    <div class="w-100">
-        <div class="row align-items-center mt-1">
-            <div class="col">
-                <h4>Column system</h4>
-            </div>
+    <div class="row align-items-center my-1">
+        <label class="col slab-label slab-label-165" for="valueid">
+            Status
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-5" class="form-control" name="value">
+        </div>
+        <label class="col slab-label slab-label-165" for="valueid">
+            Sort
+        </label>
+        <div class="col">
+            <systelab-spinner [spinValues]="touchSpinValues1" id="touch1"></systelab-spinner>
         </div>
     </div>
-    <div class="w-100 d-flex">
+    <div class="row align-items-center my-1">
+        <label class="col slab-label slab-label-165" for="valueid">
+            Activation Date
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-7" class="form-control" name="value">
+        </div>
+        <label class="col slab-label slab-label-165" for="valueid">
+            Deactivations Date
+        </label>
+        <div class="col">
+            <input type="text" id="row-element-8" class="form-control" name="value">
+        </div>
+    </div>
+
+
+    <div class="row align-items-center mt-4 mb-2">
+        <h4 class="col slab-form-title">Column system</h4>
+    </div>
+    <div class="row mx-0">
         <div class="col pl-0">
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 1
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Description
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-1" class="form-control" name="value">
                 </div>
             </div>
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 2
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Lot number
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-2" class="form-control" name="value">
                 </div>
             </div>
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 3
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Status
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-3" class="form-control" name="value">
                 </div>
             </div>
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 4
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Activation Date
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-4" class="form-control" name="value">
                 </div>
             </div>
         </div>
         <div class="col pr-0">
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 5
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Mnemonic
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-5" class="form-control" name="value">
                 </div>
             </div>
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 6
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Expiration Date
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-6" class="form-control" name="value">
                 </div>
             </div>
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 7
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Sort
                 </label>
-                <div class="col">
-                    <input type="text" id="col-element-7" class="form-control" name="value">
+                <div class="col my-1">
+                    <systelab-spinner [spinValues]="touchSpinValues2" id="touch2"></systelab-spinner>
                 </div>
             </div>
-            <div class="row align-items-center mt-1">
-                <label class="col slab-label-215" for="valueid">
-                    Element 8
+            <div class="row align-items-center">
+                <label class="col slab-label slab-label-165" for="valueid">
+                    Deactivations Date
                 </label>
-                <div class="col">
+                <div class="col my-1">
                     <input type="text" id="col-element-8" class="form-control" name="value">
                 </div>
             </div>

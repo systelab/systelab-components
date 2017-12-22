@@ -9,11 +9,11 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowcaseSplitDialog } from './components/dialog/split/showcase-split-dialog.component';
-import { ShowcaseUpperFlexComponent } from './components/dialog/upper-flex/showcase-upper-flex.component';
+import { ShowcaseTwoTabsComponent } from './components/dialog/two-tabs/showcase-two-tabs.component';
 import { ShowcaseLowerFlexComponent } from './components/dialog/lower-flex/showcase-lower-flex.component';
 import { ShowcaseTwoColumnsComponent } from './components/dialog/two-columns/showcase-two-columns.component';
 import { ShowcaseFullFlexComponent } from './components/dialog/full-flex/showcase-full-flex.component';
-import { ShowcaseUpperFlexDialog } from './components/dialog/upper-flex/showcase-upper-flex-dialog.component';
+import { ShowcaseTwoTabsDialog } from './components/dialog/two-tabs/showcase-two-tabs-dialog.component';
 import { ShowcaseLowerFlexDialog } from './components/dialog/lower-flex/showcase-lower-flex-dialog.component';
 import { ShowcaseTwoColumnsDialog } from './components/dialog/two-columns/showcase-two-columns-dialog.component';
 import { ShowcaseFullFlexDialog } from './components/dialog/full-flex/showcase-full-flex-dialog.component';
@@ -45,6 +45,9 @@ import { ShowcaseMessagePopupComponent } from './components/message-popup/showca
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
 import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
+import { ShowcaseHeadingsComponent } from './components/headings/showcase-headings.component';
+import { ShowcaseAlertComponent } from './components/alert/showcase-alert.component';
+import { ShowcaseTextComponent } from './components/text/showcase-text.component';
 
 @NgModule({
 	imports:         [
@@ -58,7 +61,7 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 	],
 	declarations:    [
 		ShowcaseComponent,
-		ShowcaseUpperFlexComponent,
+		ShowcaseTwoTabsComponent,
 		ShowcaseLowerFlexComponent,
 		ShowcaseTwoColumnsComponent,
 		ShowcaseFullFlexComponent,
@@ -83,7 +86,10 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 		ShowcaseTitleComponent,
 		ShowcasePieComponent,
 		ShowcaseProgressBarComponent,
-		ShowcaseUpperFlexDialog,
+		ShowcaseHeadingsComponent,
+		ShowcaseAlertComponent,
+		ShowcaseTextComponent,
+		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
 		ShowcaseFullFlexDialog,
@@ -96,7 +102,7 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 		ShowcaseApplicationFrameDialog
 	],
 	entryComponents: [
-		ShowcaseUpperFlexDialog,
+		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
 		ShowcaseFullFlexDialog,
