@@ -3,7 +3,8 @@
     <form (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
           class="uk-form uk-form-horizontal uk-form-horizontal-medium p-3 d-flex flex-column flex-nowrap">
         <div class="uk-form-row d-flex flex-nowrap">
-            <label class="flex-nowrap uk-form-label text-truncate uk-width-1-5" for="valueToSearch">{{searchLabel}} </label>
+            <label class="flex-nowrap uk-form-label text-truncate uk-width-1-5"
+                   for="valueToSearch">{{searchLabel}} </label>
             <systelab-select class="text-left uk-width-2-5"
                              [description]="selectedComboItem.description"
                              [id]="selectedComboItem.id"
@@ -23,3 +24,4 @@
                                               (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
         </div>
     </form>
+</div>
