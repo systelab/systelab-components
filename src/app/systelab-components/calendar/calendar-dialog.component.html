@@ -1,7 +1,7 @@
 <div class="slab-dialog-header ng-binding">
     <span>{{parameters.headerDescription}}</span>
 </div>
-<div class="slab-calendar-dialog slab-dialog-message d-flex flex-column">
+<div class="slab-calendar-dialog slab-flex-1 d-flex flex-column">
     <systelab-calendar-header [currentDate]="currentDate"
                               (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"
                               (nextMonth)="changeMonth(1)" (nextYear)="changeYear(1)" [locale]="locale">
