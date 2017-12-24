@@ -8,15 +8,16 @@
   text-overflow: ellipsis;
   margin: 0;
 
-  @media (max-width: 700px) { /* [1] */
+  @media (max-width: ($breakpoint-medium)-1) { /* [1] */
     display: block;
     min-width: 100%;
     margin: 10px 0 5px 0;
-    
+
     &:not(.col) {
       padding-left: 15px;
     }
   }
+
 }
 
 .slab-label-115 {

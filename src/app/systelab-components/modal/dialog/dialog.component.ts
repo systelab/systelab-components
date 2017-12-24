@@ -11,11 +11,14 @@ import { Observable } from 'rxjs/Observable';
 
 export class DialogComponent {
 
+	// 768 comes form $breakpoint-medium in Bootstrap. Check forms.scss
+	public static breakpointMedium = 768;
+
 	constructor(protected modal: Modal) {
 	}
 
 	public showDialog(component: Type<any>, dialogParameters?: ModulabModalContext): Observable<any> {
-		if (window.innerWidth < 700) {
+		if (window.innerWidth <= DialogComponent.breakpointMedium) {
 			dialogParameters.fullScreen = true;
 			dialogParameters.width = undefined;
 			dialogParameters.height = undefined;
