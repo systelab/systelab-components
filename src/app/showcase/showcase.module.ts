@@ -48,6 +48,9 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 import { ShowcaseHeadingsComponent } from './components/headings/showcase-headings.component';
 import { ShowcaseAlertComponent } from './components/alert/showcase-alert.component';
 import { ShowcaseTextComponent } from './components/text/showcase-text.component';
+import { ShowcaseTabsComponent } from './components/tabs/showcase-tabs.component';
+import { ShowcaseSearcherComponent } from './components/searcher/showcase-searcher.component';
+import { InnerSearcherComponent } from './components/searcher/inner-searcher.component';
 
 @NgModule({
 	imports:         [
@@ -89,6 +92,9 @@ import { ShowcaseTextComponent } from './components/text/showcase-text.component
 		ShowcaseHeadingsComponent,
 		ShowcaseAlertComponent,
 		ShowcaseTextComponent,
+		ShowcaseTabsComponent,
+		ShowcaseSearcherComponent,
+		InnerSearcherComponent,
 		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
