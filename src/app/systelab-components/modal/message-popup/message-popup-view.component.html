@@ -1,22 +1,23 @@
-<div class="slab-dialog-header">{{ context.title }}</div>
-<div class="slab-dialog-message d-flex align-items-center p-5">
+<systelab-dialog-header [title]="context.title" [withInfo]="false"
+                        (close)="close();"></systelab-dialog-header>
+<div class="slab-flex-1 d-flex align-items-center p-5">
     <i class="slab-msg-box-icon {{context.icon}} {{context.color}}"></i>
     <div class="pl-5">
         {{ context.msg }}
     </div>
 </div>
-<div class="slab-dialog-buttons">
-    <div class="float-right" *ngIf="context.yesNoButtons; else customcomponent">
+<systelab-dialog-bottom>
+    <div class="ml-auto" *ngIf="context.yesNoButtons; else customcomponent">
         <button type="button" class="btn btn-lg" (click)="close(true)">{{ 'COMMON_OK' | translate | async }}
         </button>
         <button type="button" class="btn btn-lg" (click)="close(false)">{{ 'COMMON_CANCEL' | translate | async }}
         </button>
     </div>
     <ng-template #customcomponent>
-        <div class="float-right">
+        <div class="ml-auto">
             <button type="button" class="btn btn-lg" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}
             </button>
         </div>
     </ng-template>
-</div>
-<div class="slab-dialog-close" (click)="close()"></div>
+</systelab-dialog-bottom>
+

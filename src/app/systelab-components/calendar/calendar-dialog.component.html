@@ -1,6 +1,5 @@
-<div class="slab-dialog-header ng-binding">
-    <span>{{parameters.headerDescription}}</span>
-</div>
+<systelab-dialog-header [title]="parameters.headerDescription" [withInfo]="false"
+                        (close)="close();"></systelab-dialog-header>
 <div class="slab-calendar-dialog slab-flex-1 d-flex flex-column">
     <systelab-calendar-header [currentDate]="currentDate"
                               (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"
@@ -17,4 +16,3 @@
         </ng-template>
     </systelab-calendar-table>
 </div>
-<div class="slab-dialog-close" (click)="close()"></div>

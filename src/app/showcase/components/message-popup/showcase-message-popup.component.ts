@@ -37,6 +37,9 @@ export class ShowcaseMessagePopupComponent {
 	}
 
 	public showQuestionYN() {
-
+		this.messagePopupService.showYesNoQuestionPopup('Test', 'Error message popup example', null, 800, 600)
+			.subscribe((v) => {
+				console.log('Observable returned to showcase', v);
+			});
 	}
 }

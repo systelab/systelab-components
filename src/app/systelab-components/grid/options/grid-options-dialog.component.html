@@ -1,5 +1,6 @@
-<div class="slab-dialog-header">Options</div>
-<div class="slab-dialog-message">
+<systelab-dialog-header [title]="'Options'" [withInfo]="false"
+                        (close)="cancel();"></systelab-dialog-header>
+<div class="slab-flex-1">
     <form class="h-100 d-flex flex-column flex-nowrap">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
@@ -11,16 +12,16 @@
         <div class="tab-content" id="fields">
             <div class="tab-pane p-3 active h-100" id="fields" role="tabpanel"
                  aria-labelledby="fields-tab">
-                    <systelab-two-list [(available)]="availableColumns"
-                                       [(visible)]="visibleColumns"
-                                       [initialAvailableColumns]="initialAvailableColumns"
-                                       displayAttr="displayName">
-                    </systelab-two-list>
+                <systelab-two-list [(available)]="availableColumns"
+                                   [(visible)]="visibleColumns"
+                                   [initialAvailableColumns]="initialAvailableColumns"
+                                   displayAttr="displayName">
+                </systelab-two-list>
             </div>
         </div>
     </form>
 </div>
-<div class="slab-dialog-buttons">
-    <button type="button" class="btn btn-lg float-right" (click)="submit()"> Submit</button>
-</div>
-<div class="slab-dialog-close" (click)="cancel()"></div>
+<systelab-dialog-bottom>
+    <button type="button" class="btn btn-lg ml-auto" (click)="submit()"> Submit</button>
+</systelab-dialog-bottom>
+
