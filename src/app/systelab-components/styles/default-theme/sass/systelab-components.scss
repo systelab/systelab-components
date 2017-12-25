@@ -84,4 +84,9 @@ html {
   flex: 1;
 }
 
+.slab-overflow-container {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 // $primary-color: rgb(85, 174, 97);

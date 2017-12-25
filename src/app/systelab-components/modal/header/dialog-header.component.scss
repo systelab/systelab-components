@@ -1,0 +1,74 @@
+@import "../../styles/default-theme/sass/variables";
+
+$button-size: ceil(54px * $size_percentage);
+$content-border-width: 4px;
+$button-fontsize: ceil(32px * $size_percentage);
+$header-buttons-top-offset: 5px * $size_percentage;
+$close-button-right-offset: ceil(9px * $size_percentage);
+
+:host {
+  width: 100%;
+}
+.slab-dialog-header {
+  display: flex;
+  align-items: center;
+  height: $slab-dialog-header-height;
+  padding-left: 20px;
+
+  font-size: 20px;
+  border-radius: 0;
+  background: $primary-color;
+  color: $background;
+}
+
+
+
+.slab-dialog-info,
+.slab-dialog-close {
+  @include size($button-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $primary-color-darken;
+  cursor: pointer;
+  text-align: center;
+  border-radius: $content-border-width + 1;
+  color: $background;
+
+  i,
+  &:before {
+    @include font-smoothing(antialiased);
+    color: $background;
+    font-size: $button-fontsize;
+    font-family: icomoon;
+  }
+
+  &:hover {
+    background-color: $primary-color-darken-hover;
+  }
+}
+
+
+/**
+ * 1. This could be refactored but then we'd need to tweak all the dialogs and
+ *    place top buttons in the header.
+ */
+.slab-dialog-close {
+  @include position(absolute, $top: $header-buttons-top-offset, $right: $close-button-right-offset); /* [1] */
+
+  &:before {
+    content: "\F057";
+    cursor: pointer;
+  }
+}
+
+.slab-dialog-info {
+  @include position(absolute, $top: $header-buttons-top-offset, $right: $close-button-right-offset+$button-size+$content-border-width); /* [1] */
+
+  &:before {
+    content: "\f059";
+    cursor: pointer;
+  }
+}
+

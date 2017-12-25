@@ -1,25 +1,27 @@
-<div class="slab-dialog-header">{{titleForDialog}}</div>
-<div class="slab-dialog-message">
-    <form (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
-          class="uk-form uk-form-horizontal uk-form-horizontal-medium p-3 d-flex flex-column flex-nowrap">
-        <div class="uk-form-row d-flex flex-nowrap">
-            <label class="flex-nowrap uk-form-label text-truncate uk-width-1-5" for="valueToSearch">{{searchLabel}} </label>
-            <systelab-select class="text-left uk-width-2-5"
-                             [description]="selectedComboItem.description"
-                             [id]="selectedComboItem.id"
-                             [values]="comboElements"
-                             (change)="refreshSearch($event)"></systelab-select>
-            <input class="searcher-input-dialog uk-width-2-5" #valueToSearch id="valueToSearch"
-                   (keyup)="($event.keyCode=== 13)?refreshSearch($event):0"
-                   [(ngModel)]="searchingValue" name="valueToSearch">
-        </div>
-        <div class="uk-form-row uk-flex-item-1 uk-flex">
-            <systelab-internal-searcher-table class="uk-flex-item-1 uk-position-relative" name="searcherTable"
-                                              [contains]="selectedComboItem.id"
-                                              [showChecks]="multipleSelection"
-                                              [multipleSelection]="multipleSelection"
-                                              [valueForSearch]="searchingValue"
-                                              [searcher]="dialogParameters.searcher"
-                                              (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
-        </div>
+<systelab-dialog-header [title]="titleForDialog" [withClose]="flase"></systelab-dialog-header>
+
+<div (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
+     class="slab-flex-1 p-2 d-flex flex-column flex-nowrap">
+
+    <form class="form-group form-inline">
+        <label for="valueToSearch" class="text-truncate mr-2">{{searchLabel}}</label>
+        <systelab-select class="text-left mr-2"
+                         [description]="selectedComboItem.description"
+                         [id]="selectedComboItem.id"
+                         [values]="comboElements"
+                         (change)="refreshSearch($event)"></systelab-select>
+        <input type="text" class="form-control" #valueToSearch id="valueToSearch"
+               (keyup)="($event.keyCode=== 13)?refreshSearch($event):0"
+               [(ngModel)]="searchingValue" name="valueToSearch">
     </form>
+
+    <div class="slab-flex-1 d-flex">
+        <systelab-internal-searcher-table class="slab-flex-1 position-relative" name="searcherTable"
+                                          [contains]="selectedComboItem.id"
+                                          [showChecks]="multipleSelection"
+                                          [multipleSelection]="multipleSelection"
+                                          [valueForSearch]="searchingValue"
+                                          [searcher]="dialogParameters.searcher"
+                                          (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
+    </div>
+</div>

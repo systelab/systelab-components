@@ -1,6 +1,5 @@
-<div class="slab-dialog-header ng-binding">Split</div>
-<div class="slab-dialog-message w-100">
-
+<systelab-dialog-header [title]="'Split'" (close)="close();"></systelab-dialog-header>
+<div class="slab-flex-1">
     <split direction="horizontal" (dragProgress)="dragProgressHorizontal($event)">
         <split-area [size]="testSelectorSize" [visible]="isShowSelector">
             <div class="h-100" style="background-color: violet;"></div>
@@ -17,12 +16,11 @@
         </split-area>
     </split>
 </div>
-<div class="slab-dialog-buttons">
+<systelab-dialog-bottom>
     <button type="button" class="btn btn-lg" (click)="setShowDetails()"
             [class.btn-primary]="isShowDetails">Details
     </button>
     <button type="button" class="btn btn-lg" (click)="setShowSelector()"
             [class.btn-primary]="isShowSelector">Selector
     </button>
-</div>
-<div class="slab-dialog-close" (click)="close()"></div>
+</systelab-dialog-bottom>

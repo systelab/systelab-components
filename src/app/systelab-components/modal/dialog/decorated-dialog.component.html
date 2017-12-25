@@ -1,8 +1,7 @@
-<div class="slab-dialog-header">{{title}}</div>
-<div class="slab-dialog-message" [class.slab-space]="space">
+<systelab-dialog-header [title]="title"  (close)="emitClose();"></systelab-dialog-header>
+<div class="slab-flex-1" [class.slab-space]="space">
     <ng-content select="[dialog-content]"></ng-content>
 </div>
-<div class="slab-dialog-buttons">
+<systelab-dialog-bottom>
     <ng-content select="[dialog-bottom]"></ng-content>
-</div>
-<div class="slab-dialog-close" (click)="emitClose()"></div>
+</systelab-dialog-bottom>

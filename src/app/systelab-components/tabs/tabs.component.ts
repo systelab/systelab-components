@@ -18,6 +18,7 @@ import { TabComponent } from './tab.component';
 	          `,
 	styles: [`
       :host {
+		      width: 100%;
           display: flex;
           flex-direction: column;
       }
