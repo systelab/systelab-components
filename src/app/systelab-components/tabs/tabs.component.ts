@@ -4,16 +4,22 @@ import { TabComponent } from './tab.component';
 @Component({
 	selector: 'systelab-tabs',
 	template: `
-                <ul class="nav nav-tabs">
-                    <li class="nav-item" *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
-                        <a class="nav-link" [class.active]="tab.active" href="#">{{tab.title}}</a>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" *ngFor="let tab of tabs" (click)="selectTab(tab)">
+                        <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
+                           [attr.aria-controls]="tab.id" aria-selected="false">{{tab.title}}</a>
                     </li>
                 </ul>
-                <ng-content></ng-content>
+                <div style="flex: 1; display: flex; flex-direction: column;">
+                    <div class="tab-content" style="display: flex; flex-direction: column; overflow-x: hidden;  -webkit-overflow-scrolling: touch;">
+                        <ng-content></ng-content>
+                    </div>
+                </div>
 	          `,
-	styles:   [`
+	styles: [`
       :host {
-          width: 100%;
+          display: flex;
+          flex-direction: column;
       }
 	`]
 })
