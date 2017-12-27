@@ -1,6 +1,6 @@
 # systelab-components
 
-Library with common Systelab components to speed up our Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
+Library with common UI components to speed up Systelab Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
 
 ## Installing the library
 
@@ -30,7 +30,7 @@ After this, in the .angular-cli.json you must add the following styles and javas
       ],
 ```
 
-Finally, you must import the SystelabComponentsModule in your Application Module:
+Finally, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 ```javascript
 @NgModule({
 	imports: [
@@ -64,10 +64,10 @@ ng serve
 
 This will bootstrap a showcase application to test the different components.
 
-In order to publish the library, an authorized npm user is required, update the version in the package.json, and run:
+In order to publish the library, an authorized npm user is required. Once set, update the version in the package.json, and run the npm publish script:
 
 ```npm
 npm publish
 ```
 
-Temporary folders will be created (build, css, html, widgets,...) in order to create the package, but will not be part of the source files.
+Temporary folders will be created (build, css, html, widgets,...) in order to create the package, but will not be part of the target files.
