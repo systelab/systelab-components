@@ -26,7 +26,8 @@ After this, in the .angular-cli.json you must add the following styles and javas
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/pako/dist/pako.min.js"
+        "../node_modules/pako/dist/pako.min.js",
+        "../node_modules/nanobar/nanobar.js"
       ],
 ```
 
