@@ -19,7 +19,7 @@ import { ShowcaseTwoColumnsDialog } from './components/dialog/two-columns/showca
 import { ShowcaseFullFlexDialog } from './components/dialog/full-flex/showcase-full-flex-dialog.component';
 import { SampleRouteComponent } from './components/sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShowcaseProgressBarDialog } from './components/dialog/progressbar-dialog/showcase-progressbar-dialog.component';
+import { ShowcaseProgressBarDialog } from './components/progress-bars/progressbar-dialog/showcase-progressbar-dialog.component';
 import { ShowcaseDialogComponent } from './components/dialog/showcase-dialog.component';
 import { ShowcaseStandardDialog } from './components/dialog/standard-dialog/showcase-standard-dialog.component';
 import { ShowcaseStandardComponent } from './components/dialog/standard-dialog/showcase-standard.component';
