@@ -58,10 +58,12 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public ngAfterViewInit() {
-		let newElement = document.createElement('i');
+		const newElement = document.createElement('i');
 		newElement.className = 'icon-calendar';
-		this.currentCalendar.el.nativeElement.childNodes[1].className = 'ui-calendar slab-form-icon w-100';
-		this.currentCalendar.el.nativeElement.childNodes[1].appendChild(newElement);
+		if (this.currentCalendar) {
+			this.currentCalendar.el.nativeElement.childNodes[1].className = 'ui-calendar slab-form-icon w-100';
+			this.currentCalendar.el.nativeElement.childNodes[1].appendChild(newElement);
+		}
 	}
 
 	public ngDoCheck() {
@@ -92,7 +94,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	private checkPreviousDate() {
 
 		if (this.currentDate) {
-			let today: Date = new Date();
+			const today = new Date();
 			today.setHours(0, 0, 0, 0);
 
 			if (this.currentDate.getTime() < today.getTime()) {
@@ -106,10 +108,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public changeDate(): void {
-		let emit: boolean = true;
-		const today: Date = new Date();
+		let emit = true;
+		const today = new Date();
 
-		if (this.currentCalendar.inputfieldViewChild.nativeElement.value && this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()) {
+		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value
+			&& this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()) {
 
 			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim();
 			dateStr = dateStr.toLowerCase();
@@ -117,7 +120,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			if (dateStr.length >= 2) {
 
 				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
-					let days: number = Number(dateStr.replace('d', '')
+					const days: number = Number(dateStr.replace('d', '')
 						.replace('D', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -126,7 +129,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
-					let weeks: number = Number(dateStr.replace('w', '')
+					const weeks: number = Number(dateStr.replace('w', '')
 						.replace('W', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -135,7 +138,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
-					let weeks: number = Number(dateStr.replace('s', '')
+					const weeks: number = Number(dateStr.replace('s', '')
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -144,7 +147,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
-					let months: number = Number(dateStr.replace('m', '')
+					const months: number = Number(dateStr.replace('m', '')
 						.replace('M', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -153,7 +156,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
-					let years: number = Number(dateStr.replace('a', '')
+					const years: number = Number(dateStr.replace('a', '')
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -162,7 +165,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
-					let years: number = Number(dateStr.replace('y', '')
+					const years: number = Number(dateStr.replace('y', '')
 						.replace('Y', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -200,33 +203,45 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
 
 		if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
-			let newTop: number = inputElementTop + inputElementHeight - ( datepickerElementHeight + inputElementHeight + 10 );
+			const newTop: number = inputElementTop + inputElementHeight - ( datepickerElementHeight + inputElementHeight + 10 );
 			this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
 		}
 	}
 
 	public nextMonth(event: Event): void {
-		this.currentCalendar.nextMonth(event);
+		if (this.currentCalendar) {
+			this.currentCalendar.nextMonth(event);
+		}
 	}
 
 	public prevMonth(event: Event): void {
-		this.currentCalendar.prevMonth(event);
+		if (this.currentCalendar) {
+			this.currentCalendar.prevMonth(event);
+		}
 	}
 
 	public nextYear(): void {
-		let currentYear = this.currentCalendar.currentYear + 1;
-		this.currentCalendar.onYearDropdownChange(currentYear.toString());
+		if (this.currentCalendar) {
+			const currentYear = this.currentCalendar.currentYear + 1;
+			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+		}
 	}
 
 	public prevYear(): void {
-		let currentYear = this.currentCalendar.currentYear - 1;
-		this.currentCalendar.onYearDropdownChange(currentYear.toString());
+		if (this.currentCalendar) {
+
+			const currentYear = this.currentCalendar.currentYear - 1;
+			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+		}
 	}
 
 	public closeDatepicker(): void {
-		this.currentCalendar.focus = false;
-		this.currentCalendar.overlayVisible = false;
-		//this.currentCalendar.closeOverlay = true;
+		if (this.currentCalendar) {
+
+			this.currentCalendar.focus = false;
+			this.currentCalendar.overlayVisible = false;
+			// this.currentCalendar.closeOverlay = true;
+		}
 
 	}
 
@@ -295,19 +310,21 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		this.language.firstDayOfWeek = this.getFirstDayOfWeek();
 		this.language.dateFormatValue = this.getDateFormat(true);
-		this.currentCalendar.dateFormat = this.language.dateFormatValue;
+		if (this.currentCalendar) {
+			this.currentCalendar.dateFormat = this.language.dateFormatValue;
+		}
 	}
 
 	private getFirstDayOfWeek(): number {
 		switch (this.i18nService.getCurrentLanguage()) {
-			case 'us': //'US'
+			case 'us': // 'US'
 			case 'en_US':
-			case 'zh': //'CN'
-			case 'th': //'TH'
-			case 'ja': //'JP'
+			case 'zh': // 'CN'
+			case 'th': // 'TH'
+			case 'ja': // 'JP'
 				return 0;
-			case 'en': //'GB'
-			case 'it': //'IT'
+			case 'en': // 'GB'
+			case 'it': // 'IT'
 			case 'ar':
 			case 'es':
 			case 'bo':
@@ -330,14 +347,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			case 'fr':
 			case 'gl':
 			case 'ca':
-			case 'pl': //'PL'
-			case 'lt': //'LT'
-			case 'pt': //'PT'
+			case 'pl': // 'PL'
+			case 'lt': // 'LT'
+			case 'pt': // 'PT'
 			case 'pt_BR':
-			case 'nl': //'NL'
-			case 'sk': //'SK'
-			case 'ru': //'RU'
-			case 'de': //'DE'
+			case 'nl': // 'NL'
+			case 'sk': // 'SK'
+			case 'ru': // 'RU'
+			case 'de': // 'DE'
 			case 'ko':
 			default:
 				return 1;
