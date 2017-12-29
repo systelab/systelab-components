@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 declare var Nanobar: any;
 
@@ -14,22 +14,23 @@ export class DialogHeaderComponent implements AfterViewInit {
 	@Input() withInfo = false;
 	@Input() withProgressBar = false;
 
+	@ViewChild('progress') progress: ElementRef;
+
 	@Output() public close = new EventEmitter();
 	@Output() public info = new EventEmitter();
 
 	private nanobar: any;
-	public randomId: string;
 
 	constructor() {
-		this.randomId = (Math.random() * (999999999999 - 1) ).toString();
 	}
 
 	public ngAfterViewInit() {
-		const options = {
-			id:     'nanobar-id-' + this.randomId,
-			target: document.getElementById(this.randomId)
-		};
-		this.nanobar = new Nanobar(options);
+		if (this.progress) {
+			const options = {
+				target: this.progress.nativeElement
+			};
+			this.nanobar = new Nanobar(options);
+		}
 	}
 
 	public doClose() {

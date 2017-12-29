@@ -1,6 +1,6 @@
 <div class="slab-dialog-header d-flex">{{title}}</div>
 
-<div *ngIf="withProgressBar" id="{{randomId}}"></div>
+<div #progress *ngIf="withProgressBar"></div>
 
 <div *ngIf="withClose" class="slab-dialog-close" (click)="doClose()"></div>
 <div *ngIf="withInfo" class="slab-dialog-info" (click)="doInfo()"></div>
