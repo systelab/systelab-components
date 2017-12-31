@@ -1,5 +1,5 @@
-<systelab-dialog-header [title]="context.title" [withInfo]="false"
-                        (close)="close();"></systelab-dialog-header>
+<systelab-dialog-header [withInfo]="false"
+                        (close)="close();">{{context.title}}</systelab-dialog-header>
 <div class="slab-flex-1 d-flex align-items-center p-5">
     <i class="slab-msg-box-icon {{context.icon}} {{context.color}}"></i>
     <div class="pl-5">

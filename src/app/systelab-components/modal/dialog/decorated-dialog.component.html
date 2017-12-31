@@ -1,4 +1,4 @@
-<systelab-dialog-header [title]="title"  (close)="emitClose();"></systelab-dialog-header>
+<systelab-dialog-header (close)="emitClose();">{{title}}</systelab-dialog-header>
 <div class="slab-flex-1" [class.slab-space]="space">
     <ng-content select="[dialog-content]"></ng-content>
 </div>

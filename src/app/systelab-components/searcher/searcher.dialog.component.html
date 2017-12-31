@@ -1,4 +1,4 @@
-<systelab-dialog-header [title]="titleForDialog" [withClose]="false"></systelab-dialog-header>
+<systelab-dialog-header [withClose]="false">{{titleForDialog}}</systelab-dialog-header>
 
 <div (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
      class="slab-flex-1 p-2 d-flex flex-column flex-nowrap">

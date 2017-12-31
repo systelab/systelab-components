@@ -1,5 +1,4 @@
-<systelab-dialog-header [title]="parameters.headerDescription" [withInfo]="false"
-                        (close)="close();"></systelab-dialog-header>
+<systelab-dialog-header [withInfo]="false" (close)="close();">{{parameters.headerDescription}}</systelab-dialog-header>
 <div class="slab-calendar-dialog slab-flex-1 d-flex flex-column">
     <systelab-calendar-header [currentDate]="currentDate"
                               (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"

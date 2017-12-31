@@ -1,4 +1,4 @@
-<systelab-dialog-header [title]="'Split'" (close)="close();"></systelab-dialog-header>
+<systelab-dialog-header (close)="close();">Split</systelab-dialog-header>
 <div class="slab-flex-1">
     <split direction="horizontal" (dragProgress)="dragProgressHorizontal($event)">
         <split-area [size]="testSelectorSize" [visible]="isShowSelector">

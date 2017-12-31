@@ -9,7 +9,6 @@ declare var Nanobar: any;
 })
 export class DialogHeaderComponent implements AfterViewInit {
 
-	@Input() title;
 	@Input() withClose = true;
 	@Input() withInfo = false;
 	@Input() withProgressBar = false;
