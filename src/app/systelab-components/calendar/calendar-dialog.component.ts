@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { addMonths, addYears } from 'date-fns';
 import { Observable } from 'rxjs/Observable';
-import { ModulabModalContext } from '../modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../modal/modal-context';
 import { CalendarTableComponent, DaySlot } from './calendar-table.component';
 
-export class CalendarDialogParameters extends ModulabModalContext {
+export class CalendarDialogParameters extends SystelabModalContext {
 
 	public width = 800;
 	public height = 600;

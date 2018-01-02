@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
-export class ShowcaseStandardDialogParameters extends ModulabModalContext {
+export class ShowcaseStandardDialogParameters extends SystelabModalContext {
 	public index: number;
 	public width = 1000;
 	public height = 600;

@@ -3,9 +3,9 @@ import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { SearcherTableComponent } from './searcher.table.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { AbstractSearcher } from './abstract-searcher';
-import { ModulabModalContext } from '../modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../modal/modal-context';
 
-export class SearcherDialogParameters<T> extends ModulabModalContext {
+export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public valueToSearch: string;
 	public searcher: AbstractSearcher<T>;
 }

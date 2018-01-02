@@ -6,12 +6,12 @@ Classes to show a dialog
 
 This is not a component by itself, it is an abstract class that lets you define and show a dialog.  
 
-In order to do that, you must create your own components and implement ModalComponent&lt;ModulabModalContext&gt;. The component will need to export a class in order to send parameters to the dialog that must extend ModulabModalContext. ModulabModalContext already has the width, height, dialogClass and fullScreen properties.
+In order to do that, you must create your own components and implement ModalComponent&lt;SystelabModalContext&gt;. The component will need to export a class in order to send parameters to the dialog that must extend SystelabModalContext. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
 
 Here there is an example:
 
 ```javascript
-export class MyDialogParameters extends ModulabModalContext {
+export class MyDialogParameters extends SystelabModalContext {
   public index: number;
 }
 

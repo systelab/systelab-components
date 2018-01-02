@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 import { DialogHeaderComponent } from '../../../../systelab-components/modal/header/dialog-header.component';
 import { Observable } from 'rxjs/Observable';
 
-export class ShowcaseProgressBarDialogParameters extends ModulabModalContext {
+export class ShowcaseProgressBarDialogParameters extends SystelabModalContext {
 	public index: number;
 }
 

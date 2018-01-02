@@ -1,4 +1,4 @@
-export { ModulabModalContext } from './modal-context';
+export { SystelabModalContext } from '../../modal-context';
 export { ModulabModalContainer } from './modal-container.component';
 export { ModulabMessageModal } from './message-modal.component';
 

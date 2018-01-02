@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
-export class LowerFlexDialogParameters extends ModulabModalContext {
+export class LowerFlexDialogParameters extends SystelabModalContext {
 	public index: number;
 	public language: string;
 }

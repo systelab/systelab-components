@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ModulabModalContext } from '../../modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../../modal/modal-context';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { TwoListItem } from '../../twolist/two-list.component';
 import { GridColumnsOptions } from '../grid-column-options';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
-export class GridOptionsDialogParameters extends ModulabModalContext {
+export class GridOptionsDialogParameters extends SystelabModalContext {
 	public width = 800;
 	public height = 500;
 	public columnOptions: GridColumnsOptions;

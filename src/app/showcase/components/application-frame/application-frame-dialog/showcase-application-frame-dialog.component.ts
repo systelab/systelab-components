@@ -1,12 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 import { DialogService } from '../../../../systelab-components/modal/dialog/dialog.service';
 import { MessagePopupService } from '../../../../systelab-components/modal/message-popup/message-popup.service';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';
 
-export class ShowcaseApplicationFrameDialogParameters extends ModulabModalContext {
+export class ShowcaseApplicationFrameDialogParameters extends SystelabModalContext {
 	public fullScreen = true;
 }
 
