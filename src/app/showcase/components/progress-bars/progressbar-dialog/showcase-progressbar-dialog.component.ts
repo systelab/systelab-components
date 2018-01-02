@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
 import { DialogHeaderComponent } from '../../../../systelab-components/modal/header/dialog-header.component';
 import { Observable } from 'rxjs/Observable';
 
@@ -12,7 +11,7 @@ export class ShowcaseProgressBarDialogParameters extends ModulabModalContext {
 @Component({
 	templateUrl: 'showcase-progressbar-dialog.component.html',
 })
-export class ShowcaseProgressBarDialog extends DefaultModalActions implements ModalComponent<ShowcaseProgressBarDialogParameters> {
+export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgressBarDialogParameters> {
 
 	@ViewChild('header') header: DialogHeaderComponent;
 
@@ -20,7 +19,6 @@ export class ShowcaseProgressBarDialog extends DefaultModalActions implements Mo
 	private progress = 0;
 
 	constructor(public dialog: DialogRef<ShowcaseProgressBarDialogParameters>) {
-		super(dialog);
 		this.parameters = dialog.context;
 	}
 

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
 
 export class SplitShowcaseDialogParameters extends ModulabModalContext {
 	public fullScreen = true;
@@ -11,7 +10,7 @@ export class SplitShowcaseDialogParameters extends ModulabModalContext {
 @Component({
 	templateUrl: 'showcase-split-dialog.component.html',
 })
-export class ShowcaseSplitDialog extends DefaultModalActions implements ModalComponent<SplitShowcaseDialogParameters> {
+export class ShowcaseSplitDialog implements ModalComponent<SplitShowcaseDialogParameters> {
 
 	public parameters: SplitShowcaseDialogParameters;
 
@@ -22,7 +21,6 @@ export class ShowcaseSplitDialog extends DefaultModalActions implements ModalCom
 	public tableSize = 20;
 
 	constructor(public dialog: DialogRef<SplitShowcaseDialogParameters>, protected preferencesService: PreferencesService) {
-		super(dialog);
 		this.parameters = dialog.context;
 		if (preferencesService.get('split1Size')) {
 			this.testSelectorSize = preferencesService.get('split1Size');

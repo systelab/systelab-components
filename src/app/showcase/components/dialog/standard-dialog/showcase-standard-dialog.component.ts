@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
 
 export class ShowcaseStandardDialogParameters extends ModulabModalContext {
 	public index: number;
@@ -12,12 +11,11 @@ export class ShowcaseStandardDialogParameters extends ModulabModalContext {
 @Component({
 	templateUrl: 'showcase-standard-dialog.component.html',
 })
-export class ShowcaseStandardDialog extends DefaultModalActions implements ModalComponent<ShowcaseStandardDialogParameters> {
+export class ShowcaseStandardDialog implements ModalComponent<ShowcaseStandardDialogParameters> {
 
 	protected parameters: ShowcaseStandardDialogParameters;
 
 	constructor(public dialog: DialogRef<ShowcaseStandardDialogParameters>) {
-		super(dialog);
 		this.parameters = dialog.context;
 	}
 

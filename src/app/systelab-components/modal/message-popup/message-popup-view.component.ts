@@ -10,8 +10,7 @@ export class MessagePopupViewContext extends ModulabModalContext {
 	public yesNoButtons: boolean;
 }
 
-// TODO: Move this to its own file
-export class DefaultModalActions {
+class DefaultModalActions {
 
 	constructor(public dialog: DialogRef<ModulabModalContext>) {
 	}

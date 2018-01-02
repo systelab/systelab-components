@@ -6,7 +6,7 @@ Classes to show a dialog
 
 This is not a component by itself, it is an abstract class that lets you define and show a dialog.  
 
-In order to do that, you must create your own components and extend from the abstract class DefaultModalActions and implement ModalComponent&lt;ModulabModalContext&gt;. The component will need to export a class in order to send parameters to the dialog that must extend ModulabModalContext. ModulabModalContext already has the width, height, dialogClass and fullScreen properties.
+In order to do that, you must create your own components and implement ModalComponent&lt;ModulabModalContext&gt;. The component will need to export a class in order to send parameters to the dialog that must extend ModulabModalContext. ModulabModalContext already has the width, height, dialogClass and fullScreen properties.
 
 Here there is an example:
 
@@ -19,11 +19,10 @@ export class MyDialogParameters extends ModulabModalContext {
   selector:  'mysuper-dialog',
   templateUrl:  'mysuper-dialog.component.html',
 })
-export class MyDialog extends DefaultModalActions implements ModalComponent<MyDialogParameters> {
+export class MyDialog implements ModalComponent<MyDialogParameters> {
   protected parameters: MyDialogParameters;
 
   constructor(public dialog: DialogRef<MyDialogParameters>) {
-    super(dialog);
     this.parameters = dialog.context;
   }
   public close(): void {

@@ -1,7 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
 import { DialogService } from '../../../../systelab-components/modal/dialog/dialog.service';
 import { MessagePopupService } from '../../../../systelab-components/modal/message-popup/message-popup.service';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
@@ -14,7 +13,7 @@ export class ShowcaseApplicationFrameDialogParameters extends ModulabModalContex
 @Component({
 	templateUrl: 'showcase-application-frame-dialog.component.html'
 })
-export class ShowcaseApplicationFrameDialog extends DefaultModalActions implements ModalComponent<ShowcaseApplicationFrameDialogParameters>, OnInit {
+export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseApplicationFrameDialogParameters>, OnInit {
 
 	protected parameters: ShowcaseApplicationFrameDialogParameters;
 	public currentTab = 'T1';
@@ -32,7 +31,6 @@ export class ShowcaseApplicationFrameDialog extends DefaultModalActions implemen
 
 	constructor(public dialog: DialogRef<ShowcaseApplicationFrameDialogParameters>, protected messagePopupService: MessagePopupService,
 	            protected dialogService: DialogService) {
-		super(dialog);
 		this.parameters = dialog.context;
 		this.frameWidth = (window.innerWidth);
 		this.frameHeight = (window.innerHeight);
