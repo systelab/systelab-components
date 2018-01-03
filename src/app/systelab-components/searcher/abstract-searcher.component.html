@@ -6,6 +6,7 @@
            [style.font-family]="fontFamily"
            [style.font-size.px]="fontSize"
            [style.font-weight]="fontWeight"
+            [ngStyle]="getLineHeight()"
            [style.font-style]="fontStyle">
     <button class="btn" [disabled]="isDisabled" [ngStyle]="getWidth()"
             (click)="openSearchDialog()" *ngIf="withButton">
