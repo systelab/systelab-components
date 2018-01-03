@@ -51,6 +51,8 @@ import { ShowcaseTextComponent } from './components/text/showcase-text.component
 import { ShowcaseTabsComponent } from './components/tabs/showcase-tabs.component';
 import { ShowcaseSearcherComponent } from './components/searcher/showcase-searcher.component';
 import { InnerSearcherComponent } from './components/searcher/inner-searcher.component';
+import { ShowcaseLoadingComponent } from './components/loading/showcase-loading.component';
+import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showcase-loading-dialog.component';
 
 @NgModule({
 	imports:         [
@@ -95,6 +97,7 @@ import { InnerSearcherComponent } from './components/searcher/inner-searcher.com
 		ShowcaseTabsComponent,
 		ShowcaseSearcherComponent,
 		InnerSearcherComponent,
+		ShowcaseLoadingComponent,
 		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
@@ -105,7 +108,8 @@ import { InnerSearcherComponent } from './components/searcher/inner-searcher.com
 		SampleRouteComponent,
 		ShowcaseStandardComponent,
 		ShowcaseProgressBarDialog,
-		ShowcaseApplicationFrameDialog
+		ShowcaseApplicationFrameDialog,
+		ShowcaseLoadingDialog
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
@@ -115,7 +119,8 @@ import { InnerSearcherComponent } from './components/searcher/inner-searcher.com
 		ShowcaseStandardDialog,
 		ShowcaseSplitDialog,
 		ShowcaseProgressBarDialog,
-		ShowcaseApplicationFrameDialog
+		ShowcaseApplicationFrameDialog,
+		ShowcaseLoadingDialog
 	],
 	providers:       [
 		MessagePopupService,
