@@ -44,7 +44,6 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
 import { CalendarTableComponent } from './calendar/calendar-table.component';
 import { CalendarDialog } from './calendar/calendar-dialog.component';
-import { DecoratedDialogComponent } from './modal/dialog/decorated-dialog.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
@@ -75,7 +74,6 @@ import { LoadingComponent } from './loading/loading.component';
 		PieComponent,
 		SwitchComponent,
 		ContextMenuComponent,
-		DecoratedDialogComponent,
 		DialogComponent,
 		MessagePopupComponent,
 		MessagePopupViewComponent,
@@ -115,7 +113,6 @@ import { LoadingComponent } from './loading/loading.component';
 		PieComponent,
 		SwitchComponent,
 		MessagePopupComponent,
-		DecoratedDialogComponent,
 		ContextMenuComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,

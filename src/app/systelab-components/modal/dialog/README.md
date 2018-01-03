@@ -36,31 +36,18 @@ export class MyDialog implements ModalComponent<MyDialogParameters> {
 ```
 In the constructor, a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog.
 
-In order to create the template 'mysuper-dialog.component.html' you can use the selector systelab-dialog with a [title] Input and a (close) Output. A margin is added unless you specify [space]="false"
+In order to create the template 'mysuper-dialog.component.html' you can use some useful components like the header and the bottom, and you have take into account that the parent layout is a flex one.
 
-To specify the content use the selector dialog-content and to specify the buttons use the selector dialog-bottom.
-
-An example with tabs could be:
+An example could be:
 
 ```html
-<systelab-dialog [title]="'Title'" [space]="false" (close)="close()">
-    <ng-container dialog-content>
-        <systelab-tabs>
-            <systelab-tab [title]="'title 1'">
-                Panel 1
-            </systelab-tab>
-            <systelab-tab [title]="'title 2'">
-                Panel 2
-            </systelab-tab>
-            <systelab-tab [title]="'title 3'">
-                Panel 3
-            </systelab-tab>
-        </systelab-tabs>
-    </ng-container>
-    <ng-container dialog-bottom>
-        <button type="button" class="btn btn-primary" (click)="close()">Submit</button>
-    </ng-container>
-</systelab-dialog>
+<systelab-dialog-header (close)="close();">Dialog title</systelab-dialog-header>
+<div class="slab-flex-1">
+ Your content
+</div>
+<systelab-dialog-bottom>
+    <button type="button" class="btn btn-sm btn-lg ml-auto" (click)="close()"> Submit</button>
+</systelab-dialog-bottom>
 ```
 
 ## Using the new component
