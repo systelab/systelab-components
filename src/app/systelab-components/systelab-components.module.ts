@@ -49,6 +49,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 		TabsComponent,
 		TabComponent,
 		DialogHeaderComponent,
-		DialogBottomComponent
+		DialogBottomComponent,
+		LoadingComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -141,6 +143,7 @@ import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 		TabComponent,
 		DialogHeaderComponent,
 		DialogBottomComponent,
+		LoadingComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
