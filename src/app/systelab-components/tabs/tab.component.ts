@@ -18,7 +18,7 @@ import { Component, ElementRef, Input } from '@angular/core';
 export class TabComponent {
 	@Input() title: string;
 	@Input() active = false;
-	@Input() id = false;
+	@Input() id = '';
 
 	constructor(protected elementRef: ElementRef) {
 
