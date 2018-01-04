@@ -1,25 +1,22 @@
 <systelab-dialog-header [withInfo]="false" (close)="close();">Options</systelab-dialog-header>
-<div class="slab-flex-1">
-    <form class="h-100 d-flex flex-column flex-nowrap">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="fields-tab" data-toggle="tab" href="#fields" role="tab"
-                   aria-controls="fields" aria-selected="true">{{ 'COMMON_FIELDS' | translate | async }}
-                </a>
-            </li>
-        </ul>
-        <div class="tab-content" id="fields">
-            <div class="tab-pane p-3 active h-100" id="fields" role="tabpanel"
-                 aria-labelledby="fields-tab">
-                <systelab-two-list [(available)]="availableColumns"
-                                   [(visible)]="visibleColumns"
-                                   [initialAvailableColumns]="initialAvailableColumns"
-                                   displayAttr="displayName">
-                </systelab-two-list>
-            </div>
+<form class="slab-flex-1 d-flex flex-column flex-nowrap">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="fields-tab" data-toggle="tab" href="#fields" role="tab"
+               aria-controls="fields" aria-selected="true">{{ 'COMMON_FIELDS' | translate | async }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content d-flex" id="fields">
+        <div class="tab-pane p-1 active" id="fields" role="tabpanel" aria-labelledby="fields-tab">
+            <systelab-two-list [(available)]="availableColumns"
+                               [(visible)]="visibleColumns"
+                               [initialAvailableColumns]="initialAvailableColumns"
+                               displayAttr="displayName">
+            </systelab-two-list>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 <systelab-dialog-bottom>
     <button type="button" class="btn btn-lg ml-auto" (click)="submit()"> Submit</button>
 </systelab-dialog-bottom>
