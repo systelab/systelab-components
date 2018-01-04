@@ -1,13 +1,14 @@
 <systelab-dialog-header (close)="close();">Title</systelab-dialog-header>
 <systelab-tabs class="slab-flex-1">
-    <systelab-tab [title]="'title 1'" [id]="'1'">
-        <showcase-standard></showcase-standard>
+    <systelab-tab [title]="'title 3'" [id]="'3'">
+        <showcase-standard class="w-100"></showcase-standard>
     </systelab-tab>
     <systelab-tab [title]="'title 2'" [id]="'2'">
-        <showcase-standard></showcase-standard>
+        <div class="slab-flex-1">Second tab</div>
     </systelab-tab>
-    <systelab-tab [title]="'title 3'" [id]="'3'">
-        <showcase-standard></showcase-standard>
+    <systelab-tab [title]="'title 1'" [id]="'1'" class="p-1">
+        <showcase-inner-grid #grid2 class="slab-flex-1 d-flex position-relative" [menu]="getMenu()" (action)="doMenuAction($event)"
+                             (clickRow)="doSelect($event)"></showcase-inner-grid>
     </systelab-tab>
 </systelab-tabs>
 

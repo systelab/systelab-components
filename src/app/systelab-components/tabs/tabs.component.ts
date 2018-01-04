@@ -10,11 +10,10 @@ import { TabComponent } from './tab.component';
                            [attr.aria-controls]="tab.id" aria-selected="false">{{tab.title}}</a>
                     </li>
                 </ul>
-                <div style="flex: 1; display: flex; flex-direction: column;">
-                    <div class="tab-content" style="display: flex; flex-direction: column; overflow-x: hidden;  -webkit-overflow-scrolling: touch;">
-                        <ng-content></ng-content>
-                    </div>
-                </div>
+	                <div class="slab-flex-1 d-flex slab-overflow-container">
+	                    <ng-content></ng-content>
+	                </div>
+
 	          `,
 	styles: [`
       :host {
@@ -42,9 +41,10 @@ export class TabsComponent implements AfterContentInit {
 	selectTab(tab: TabComponent) {
 		// deactivate all tabs
 		this.tabs.toArray()
-			.forEach(t => t.active = false);
+			.forEach(t => {t.active = false;t.setVisible(false);});
 
 		// activate the tab the user has clicked on.
 		tab.active = true;
+		tab.setVisible(true);
 	}
 }
