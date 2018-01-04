@@ -1,11 +1,11 @@
-import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Output, QueryList } from '@angular/core';
 import { TabComponent } from './tab.component';
 
 @Component({
 	selector: 'systelab-tabs',
 	template: `
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" *ngFor="let tab of tabs" (click)="selectTab(tab)">
+                    <li class="nav-item" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
                         <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
                            [attr.aria-controls]="tab.id" aria-selected="false">{{tab.title}}</a>
                     </li>
@@ -27,26 +27,21 @@ export class TabsComponent implements AfterContentInit {
 
 	@ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
-	public currentTab = '';
+	@Output() public select = new EventEmitter<string>();
 
 	public ngAfterContentInit() {
 
 		if (this.tabs.length > 0) {
-
-			this.currentTab = this.tabs[0].id;
-
 			// get all active tabs
 			const activeTabs = this.tabs.filter((tab) => tab.active);
 			// if there is no active tab set, activate the first
 			if (activeTabs.length === 0) {
-				this.selectTab(this.tabs.first);
+				this.doSelectTab(this.tabs.first);
 			}
 		}
-
 	}
 
-	public selectTab(tab: TabComponent) {
-		this.currentTab = tab.id;
+	public doSelectTab(tab: TabComponent) {
 		// deactivate all tabs
 		this.tabs.toArray()
 			.forEach(t => {
@@ -57,5 +52,6 @@ export class TabsComponent implements AfterContentInit {
 		// activate the tab the user has clicked on.
 		tab.active = true;
 		tab.setVisible(true);
+		this.select.emit(tab.id);
 	}
 }
