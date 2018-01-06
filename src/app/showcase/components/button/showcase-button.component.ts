@@ -9,4 +9,8 @@ export class ShowcaseButtonComponent {
 
 	constructor() {
 	}
+
+	public doSomething() {
+
+	}
 }
