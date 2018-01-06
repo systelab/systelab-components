@@ -10,11 +10,15 @@ In order to do this, you must create your own component and implement the interf
 
 The component will need to export a class in order to get the context. This class must extend from SystelabModalContext. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
 
+It is suggested to define the width and height, or the class, in the context in order to make the dialog allways have the same dimension. For small devices, the dialog will be fullScreen.
+
 Here there is an example:
 
 ```javascript
 export class MyDialogParameters extends SystelabModalContext {
   public index: number;
+  public width = 960;
+  public height = 600;
 }
 
 @Component({
@@ -81,8 +85,6 @@ In order to show the dialog, you must inject an instance of DialogService and ca
 ```javascript
 public showDialog() {
   const parameters: MyDialogParameters = MyDialog.getParameters();
-  parameters.width = 960;
-  parameters.height = 600;
   parameters.index = 4;
   this.dialogService.showDialog(MyDialog, parameters);
 }
