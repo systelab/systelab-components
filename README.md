@@ -1,6 +1,6 @@
 # systelab-components
 
-Library with common UI components to speed up Systelab Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
+Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
 
 ## Installing the library
 
@@ -10,7 +10,7 @@ The first steep will be to add the package in your package.json
 npm install systelab-components --save
 ```
 
-After this, in the .angular-cli.json you must add the following styles and javascripts:
+After, you must add the following styles and javascripts in the .angular-cli.json file, 
 
 ```javascript
 "styles": [
@@ -71,4 +71,4 @@ In order to publish the library, an authorized npm user is required. Once set, u
 npm publish
 ```
 
-Temporary folders will be created (build, css, html, widgets,...) in order to create the package, but will not be part of the target files.
+Be careful because temporary folders will be created (build, css, html, widgets,...) and this files should be untracked as it is specified in the gitignore file.
