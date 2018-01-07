@@ -1,12 +1,14 @@
-<div style="height: 200px;">
-    <systelab-two-list [(available)]="availableColumns"
-                       [(visible)]="visibleColumns"
-                       [initialAvailableColumns]="getDefaultShowcaseColumns()"
-                       displayAttr="displayName">
-    </systelab-two-list>
-</div>
-<div class="pt-2">
-    <button type="button" class="btn btn-lg" (click)="savePreferences();"><i
-            class="icon-info-circle"></i> Save Preferences
-    </button>
+<div class="container-fluid">
+    <div style="height: 200px;">
+        <systelab-two-list [(available)]="availableColumns"
+                           [(visible)]="visibleColumns"
+                           [initialAvailableColumns]="getDefaultShowcaseColumns()"
+                           displayAttr="displayName">
+        </systelab-two-list>
+    </div>
+    <div class="pt-2">
+        <button type="button" class="btn btn-lg" (click)="savePreferences();"><i
+                class="icon-info-circle"></i> Save Preferences
+        </button>
+    </div>
 </div>

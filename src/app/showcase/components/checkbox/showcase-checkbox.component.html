@@ -1,37 +1,39 @@
-<div class="row align-items-center mt-1">
-    <label class="col slab-label slab-label-215">Switcher</label>
-    <div class="col-sm">
-        <systelab-switch id="enabled" name="enabled"
-                         [(isChecked)]="check2"></systelab-switch>
-        <systelab-switch [disabled]="true" id="enabled" name="enabled"
-                         [(isChecked)]="check1"></systelab-switch>
-        <systelab-switch [disabled]="true" id="enabled" name="enabled"
-                         [(isChecked)]="check3"></systelab-switch>
-    </div>
-</div>
-
-<div class="row align-items-top mt-3">
-    <label class="col slab-label slab-label-215">Column</label>
-    <div class="col-sm">
-        <div>
-            <input type="checkbox" id="check_urgent">
-            <label for="check_urgent"> Urgent</label>
-        </div>
-        <div>
-            <input type="checkbox" checked id="check_not_urgent">
-            <label for="check_not_urgent"> Not Urgent</label>
+<div class="container-fluid">
+    <div class="row align-items-center mt-1">
+        <label class="col slab-label slab-label-215">Switcher</label>
+        <div class="col-sm">
+            <systelab-switch id="enabled" name="enabled"
+                             [(isChecked)]="check2"></systelab-switch>
+            <systelab-switch [disabled]="true" id="enabled" name="enabled"
+                             [(isChecked)]="check1"></systelab-switch>
+            <systelab-switch [disabled]="true" id="enabled" name="enabled"
+                             [(isChecked)]="check3"></systelab-switch>
         </div>
     </div>
-</div>
 
-<div class="row align-items-center mt-3">
-    <label class="col slab-label slab-label-215">Inline (using a grid)</label>
-    <div class="col-sm-2">
-        <input type="checkbox" id="check_urgent2">
-        <label for="check_urgent2"> Urgent</label>
+    <div class="row align-items-top mt-3">
+        <label class="col slab-label slab-label-215">Column</label>
+        <div class="col-sm">
+            <div>
+                <input type="checkbox" id="check_urgent">
+                <label for="check_urgent"> Urgent</label>
+            </div>
+            <div>
+                <input type="checkbox" checked id="check_not_urgent">
+                <label for="check_not_urgent"> Not Urgent</label>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-2">
-        <input type="checkbox" checked id="check_not_urgent2">
-        <label for="check_not_urgent2"> Not Urgent</label>
+
+    <div class="row align-items-center mt-3">
+        <label class="col slab-label slab-label-215">Inline (using a grid)</label>
+        <div class="col-sm-2">
+            <input type="checkbox" id="check_urgent2">
+            <label for="check_urgent2"> Urgent</label>
+        </div>
+        <div class="col-sm-2">
+            <input type="checkbox" checked id="check_not_urgent2">
+            <label for="check_not_urgent2"> Not Urgent</label>
+        </div>
     </div>
 </div>
