@@ -3,10 +3,9 @@ import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { SearcherTableComponent } from './searcher.table.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { AbstractSearcher } from './abstract-searcher';
-import { DefaultModalActions } from '../modal/message-popup/message-popup-view.component';
-import { ModulabModalContext } from '../modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../modal/modal-context';
 
-export class SearcherDialogParameters<T> extends ModulabModalContext {
+export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public valueToSearch: string;
 	public searcher: AbstractSearcher<T>;
 }
@@ -14,7 +13,7 @@ export class SearcherDialogParameters<T> extends ModulabModalContext {
 @Component({
 	templateUrl: 'searcher.dialog.component.html'
 })
-export class SearcherDialog<T> extends DefaultModalActions implements ModalComponent<SearcherDialogParameters<T>> {
+export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>> {
 
 	@ViewChild(SearcherTableComponent)
 	public tableComponent: SearcherTableComponent<T>;
@@ -27,7 +26,6 @@ export class SearcherDialog<T> extends DefaultModalActions implements ModalCompo
 	public multipleSelection = false;
 
 	constructor(public dialog: DialogRef<SearcherDialogParameters<T>>, protected i18nService: I18nService) {
-		super(dialog);
 		this.dialogParameters = dialog.context;
 		this.searchingValue = this.dialogParameters.valueToSearch;
 
@@ -43,6 +41,10 @@ export class SearcherDialog<T> extends DefaultModalActions implements ModalCompo
 		this.titleForDialog = this.dialogParameters.searcher.getTitleForDialog();
 		this.multipleSelection = this.dialogParameters.searcher.multipleSelection;
 
+	}
+
+	public close(): void {
+		this.dialog.close(this.tableComponent.getSelectedElements());
 	}
 
 	public submit(): void {

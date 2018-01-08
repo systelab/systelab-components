@@ -2,11 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { addMonths, addYears } from 'date-fns';
 import { Observable } from 'rxjs/Observable';
-import { DefaultModalActions } from '../modal/message-popup/message-popup-view.component';
-import { ModulabModalContext } from '../modal/plugin/modulab/modal-context';
+import { SystelabModalContext } from '../modal/modal-context';
 import { CalendarTableComponent, DaySlot } from './calendar-table.component';
 
-export class CalendarDialogParameters extends ModulabModalContext {
+export class CalendarDialogParameters extends SystelabModalContext {
 
 	public width = 800;
 	public height = 600;
@@ -18,7 +17,7 @@ export class CalendarDialogParameters extends ModulabModalContext {
 	styleUrls:   ['calendar-dialog.component.scss']
 
 })
-export class CalendarDialog extends DefaultModalActions implements ModalComponent<CalendarDialogParameters> {
+export class CalendarDialog implements ModalComponent<CalendarDialogParameters> {
 
 	@ViewChild('calendar') calendar: CalendarTableComponent;
 
@@ -28,7 +27,6 @@ export class CalendarDialog extends DefaultModalActions implements ModalComponen
 	public days: DaySlot[] = [];
 
 	constructor(public dialog: DialogRef<CalendarDialogParameters>) {
-		super(dialog);
 		this.parameters = dialog.context;
 		this.currentDate = new Date();
 		this.getData();

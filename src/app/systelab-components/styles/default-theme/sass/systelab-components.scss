@@ -54,6 +54,7 @@ $sizes: (
 @import "slider";
 @import "textarea";
 @import "searcher";
+@import "nanobar";
 
 
 html {
@@ -84,8 +85,11 @@ html {
   flex: 1;
 }
 
+.slab-overflow-container {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .slab-mh-ft {
   max-height: fit-content;
 }
-
-// $primary-color: rgb(85, 174, 97);

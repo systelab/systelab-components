@@ -1,6 +1,6 @@
 import { Injectable, Type } from '@angular/core';
 import { DialogComponent } from './dialog.component';
-import { ModulabModalContext } from '../plugin/modulab/modal-context';
+import { SystelabModalContext } from '../modal-context';
 import { Modal } from '../plugin/modulab/modal';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,7 +13,7 @@ export class DialogService {
 		this.dialogComponent = new DialogComponent( modal );
 	}
 
-	public showDialog( component: Type<any>, dialogParameters?: ModulabModalContext ): Observable<any> {
+	public showDialog( component: Type<any>, dialogParameters?: SystelabModalContext ): Observable<any> {
 		return this.dialogComponent.showDialog( component, dialogParameters );
 	}
 

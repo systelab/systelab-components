@@ -1,63 +1,70 @@
-<form class="d-flex flex-column h-100 w-100 p-3">
-    <div class="align-self-end">
-        <systelab-switch id="switch1" name="enabled"></systelab-switch>
-        <label for="switch1">Omit</label>
-    </div>
-    <div class="w-100">
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label slab-label-215">
-                Date
-            </label>
-            <div class="col d-flex">
-                <div class="col px-0 mr-1">
-                    <systelab-datepicker [(currentDate)]="myDate"></systelab-datepicker>
-                </div>
-                <systelab-spinner class="mx-1" [spinValues]="touchSpinValues1" id="percentSample1">
-                </systelab-spinner>
-                <systelab-spinner class="mx-1" [spinValues]="touchSpinValues2" id="percentSample2">
-                </systelab-spinner>
-                <systelab-spinner class="ml-1" [spinValues]="touchSpinValues3" id="percentSample3">
-                </systelab-spinner>
-            </div>
-        </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label slab-label-215" for="valueid">
-                Value
-            </label>
-            <div class="col">
-                <input type="text" id="valueid" class="form-control" name="value">
-            </div>
-        </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label slab-label-215" for="to-input">
-                Entered by
-            </label>
-            <div class="col">
-                <input type="text" id="to-input" class="form-control" name="user">
-            </div>
-        </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label slab-label-215" for="to-input">
-                Subindex
-            </label>
-            <div class="col">
-                <div class="slab-input form-control w-100">
-                    <font>1<sub>2S</sub>,</font>
-                    <font class="text-warning">1<sub>2.5S</sub>,</font>
-                    <font class="text-danger">1<sub>3S</sub></font>
+<div class="container-fluid">
+    <form class="d-flex flex-column">
+
+        <div>
+            <div class="row align-items-center mt-1">
+                <div class="col-12 d-flex">
+                    <systelab-switch class="ml-auto" id="switch1" name="enabled"></systelab-switch>
+                    <label class="ml-2" for="switch1">Omit</label>
                 </div>
             </div>
-        </div>
-        <div class="row align-items-center mt-1">
-            <label class="col slab-label slab-label-215" for="to-input">
-                Across Flags
-            </label>
-            <div class="col">
-                <systelab-select></systelab-select>
+
+            <div class="row align-items-center mt-1">
+                <label class="col-md slab-label slab-label-215">Date</label>
+                <div class="col-md d-flex">
+                    <div class="col-md px-0 mr-1">
+                        <systelab-datepicker [(currentDate)]="myDate"></systelab-datepicker>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <systelab-spinner class="mx-1" [spinValues]="touchSpinValues1" id="percentSample1">
+                    </systelab-spinner>
+                    <systelab-spinner class="mx-1" [spinValues]="touchSpinValues2" id="percentSample2">
+                    </systelab-spinner>
+                    <systelab-spinner class="ml-1" [spinValues]="touchSpinValues3" id="percentSample3">
+                    </systelab-spinner>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col-md slab-label slab-label-215" for="valueid">
+                    Value
+                </label>
+                <div class="col-md">
+                    <input type="text" id="valueid" class="form-control" name="value">
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col-md slab-label slab-label-215" for="to-input">
+                    Entered by
+                </label>
+                <div class="col-md">
+                    <input type="text" id="to-input" class="form-control" name="user">
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col-md slab-label slab-label-215" for="to-input">
+                    Subindex
+                </label>
+                <div class="col-md">
+                    <div class="slab-input form-control w-100">
+                        <font>1<sub>2S</sub>,</font>
+                        <font class="text-warning">1<sub>2.5S</sub>,</font>
+                        <font class="text-danger">1<sub>3S</sub></font>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mt-1">
+                <label class="col-md slab-label slab-label-215" for="to-input">
+                    Across Flags
+                </label>
+                <div class="col-md">
+                    <systelab-select></systelab-select>
+                </div>
             </div>
         </div>
+
     </div>
-    <div class="w-100 h-100 d-flex">
+    <div class="slab-flex-1 d-flex">
         <div class="row no-gutters mt-1 w-100 flex-column flex-md-row">
             <label class="col slab-label slab-label-215 slab-mh-ft" for="to-input">
                 Comments
@@ -65,9 +72,9 @@
             <div class="col">
                 <textarea readonly name="" id="" class="form-control slab-textarea slab-textarea-no-resize h-100">
                 </textarea>
+                </div>
             </div>
         </div>
-    </div>
-</form>
-
+    </form>
+</div>
 

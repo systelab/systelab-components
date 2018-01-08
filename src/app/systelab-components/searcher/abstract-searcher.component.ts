@@ -115,6 +115,12 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 		return {};
 	}
 
+	public getInputHeight() {
+		if (this.height) {
+			return { 'height': '100%' };
+		}
+		return {};
+	}
 	public getLineHeight() {
 		if (this.height) {
 			return { 'line-height': this.height.toString() + 'px' };

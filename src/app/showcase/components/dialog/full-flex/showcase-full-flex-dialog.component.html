@@ -1,8 +1,7 @@
-<div class="slab-dialog-header">Flex</div>
-<div class="slab-dialog-message">
-    <showcase-full-flex>...</showcase-full-flex>
-</div>
-<div class="slab-dialog-buttons">
-    <button type="button" class="btn btn-primary float-right" (click)="close()"> Submit</button>
-</div>
-<div class="slab-dialog-close" (click)="close()"></div>
+<systelab-dialog-header [withInfo]="false"
+                        (close)="close();">Flex</systelab-dialog-header>
+<showcase-full-flex class="slab-flex-1 d-flex"></showcase-full-flex>
+<systelab-dialog-bottom>
+    <button type="button" class="btn btn-primary ml-auto" (click)="close()"> Submit</button>
+</systelab-dialog-bottom>
+

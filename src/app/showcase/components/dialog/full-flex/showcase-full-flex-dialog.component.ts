@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
-export class ShowcaseFullFlexDialogParameters extends ModulabModalContext {
+export class ShowcaseFullFlexDialogParameters extends SystelabModalContext {
 	public index: number;
 }
 
 @Component({
 	templateUrl: 'showcase-full-flex-dialog.component.html',
 })
-export class ShowcaseFullFlexDialog extends DefaultModalActions implements ModalComponent<ShowcaseFullFlexDialogParameters> {
+export class ShowcaseFullFlexDialog implements ModalComponent<ShowcaseFullFlexDialogParameters> {
 
 	protected parameters: ShowcaseFullFlexDialogParameters;
 
 	constructor(public dialog: DialogRef<ShowcaseFullFlexDialogParameters>) {
-		super(dialog);
 		this.parameters = dialog.context;
 	}
 

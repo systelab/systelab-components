@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal, ModulabModalContext } from '../plugin/modulab';
+import { Modal, SystelabModalContext } from '../plugin/modulab';
 import { overlayConfigFactory, DialogRef } from 'ngx-modialog';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
@@ -49,7 +49,7 @@ export class MessagePopupComponent {
 						height:       height,
 						yesNoButtons: yesNoButtons
 					},
-					ModulabModalContext)
+					SystelabModalContext)
 			)
 				.then((dialogRef: DialogRef<any>) => {
 					dialogRef.result.then((v) => {

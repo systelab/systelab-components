@@ -4,7 +4,6 @@ import { LowerFlexDialogParameters, ShowcaseLowerFlexDialog } from './lower-flex
 import { ShowcaseSplitDialog, SplitShowcaseDialogParameters } from './split/showcase-split-dialog.component';
 import { CalendarDialog, CalendarDialogParameters } from '../../../systelab-components/calendar/calendar-dialog.component';
 import { ShowcaseFullFlexDialog, ShowcaseFullFlexDialogParameters } from './full-flex/showcase-full-flex-dialog.component';
-import { ShowcaseProgressBarDialog, ShowcaseProgressBarDialogParameters } from './progressbar-dialog/showcase-progressbar-dialog.component';
 import { ShowcaseTwoColumnsDialog, ShowcaseTwoColumnsDialogParameters } from './two-columns/showcase-two-columns-dialog.component';
 import { ShowcaseTwoTabsDialog, ShowcaseTwoTabsDialogParameters } from './two-tabs/showcase-two-tabs-dialog.component';
 import { ShowcaseStandardDialog } from './standard-dialog/showcase-standard-dialog.component';
@@ -49,12 +48,6 @@ export class ShowcaseDialogComponent {
 		parameters.index = 4;
 		parameters.dialogClass = 'w-66 h-66';
 		this.dialogService.showDialog(ShowcaseFullFlexDialog, parameters);
-	}
-
-	public showProgressBarDialog() {
-		const parameters: ShowcaseProgressBarDialogParameters = ShowcaseProgressBarDialog.getParameters();
-		parameters.dialogClass = 'w-50 h-25';
-		this.dialogService.showDialog(ShowcaseProgressBarDialog, parameters);
 	}
 
 	public showTwoColumnsDialog() {

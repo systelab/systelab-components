@@ -120,7 +120,7 @@ $slab-dialog-header-height: max(45px, ceil(60px * $size_percentage)) !default;
 
 /************** NGSEARCHER - start ************************************************************************************/
 /* $ng-searcher-button-width: defines the width of the searcher button */
-$ng-searcher-button-width: 40px !default;
+$ng-searcher-button-width: $form-elements-height !default;
 /************** NGSEARCHER - end **************************************************************************************/
 
 /************** TABLE - start *****************************************************************************************/

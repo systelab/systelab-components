@@ -19,7 +19,7 @@ import { ShowcaseTwoColumnsDialog } from './components/dialog/two-columns/showca
 import { ShowcaseFullFlexDialog } from './components/dialog/full-flex/showcase-full-flex-dialog.component';
 import { SampleRouteComponent } from './components/sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShowcaseProgressBarDialog } from './components/dialog/progressbar-dialog/showcase-progressbar-dialog.component';
+import { ShowcaseProgressBarDialog } from './components/progress-bars/progressbar-dialog/showcase-progressbar-dialog.component';
 import { ShowcaseDialogComponent } from './components/dialog/showcase-dialog.component';
 import { ShowcaseStandardDialog } from './components/dialog/standard-dialog/showcase-standard-dialog.component';
 import { ShowcaseStandardComponent } from './components/dialog/standard-dialog/showcase-standard.component';
@@ -48,6 +48,11 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 import { ShowcaseHeadingsComponent } from './components/headings/showcase-headings.component';
 import { ShowcaseAlertComponent } from './components/alert/showcase-alert.component';
 import { ShowcaseTextComponent } from './components/text/showcase-text.component';
+import { ShowcaseTabsComponent } from './components/tabs/showcase-tabs.component';
+import { ShowcaseSearcherComponent } from './components/searcher/showcase-searcher.component';
+import { InnerSearcherComponent } from './components/searcher/inner-searcher.component';
+import { ShowcaseLoadingComponent } from './components/loading/showcase-loading.component';
+import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showcase-loading-dialog.component';
 
 @NgModule({
 	imports:         [
@@ -89,6 +94,10 @@ import { ShowcaseTextComponent } from './components/text/showcase-text.component
 		ShowcaseHeadingsComponent,
 		ShowcaseAlertComponent,
 		ShowcaseTextComponent,
+		ShowcaseTabsComponent,
+		ShowcaseSearcherComponent,
+		InnerSearcherComponent,
+		ShowcaseLoadingComponent,
 		ShowcaseTwoTabsDialog,
 		ShowcaseLowerFlexDialog,
 		ShowcaseTwoColumnsDialog,
@@ -99,7 +108,8 @@ import { ShowcaseTextComponent } from './components/text/showcase-text.component
 		SampleRouteComponent,
 		ShowcaseStandardComponent,
 		ShowcaseProgressBarDialog,
-		ShowcaseApplicationFrameDialog
+		ShowcaseApplicationFrameDialog,
+		ShowcaseLoadingDialog
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
@@ -109,7 +119,8 @@ import { ShowcaseTextComponent } from './components/text/showcase-text.component
 		ShowcaseStandardDialog,
 		ShowcaseSplitDialog,
 		ShowcaseProgressBarDialog,
-		ShowcaseApplicationFrameDialog
+		ShowcaseApplicationFrameDialog,
+		ShowcaseLoadingDialog
 	],
 	providers:       [
 		MessagePopupService,

@@ -42,12 +42,6 @@
       background-color: none;
     }
   }
-  &.slab-btn-searcher {
-    min-width: $ng-searcher-button-width;
-    width: $ng-searcher-button-width;
-    line-height: 100%;
-    min-height: 100%;
-  }
   &.btn-link {
     color: $primary-color;
 
@@ -133,6 +127,103 @@
     background-color: $bootstrap-dark;
     &:hover {
       background-color: darken($bootstrap-dark, 10%);
+    }
+  }
+
+  &.btn-outline-primary {
+    color: $bootstrap-primary;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-primary;
+
+    &:hover {
+      background-color: $bootstrap-primary;
+      border-color: $bootstrap-primary;
+      color: white;
+    }
+  }
+  &.btn-outline-secondary {
+    color: $bootstrap-secondary;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-secondary;
+
+    &:hover {
+      background-color: $bootstrap-secondary;
+      border-color: $bootstrap-secondary;
+      color: white;
+    }
+  }
+  &.btn-outline-success {
+    color: $bootstrap-success;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-success;
+
+    &:hover {
+      background-color: $bootstrap-success;
+      border-color: $bootstrap-success;
+      color: white;
+    }
+  }
+  &.btn-outline-danger {
+    color: $bootstrap-danger;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-danger;
+
+    &:hover {
+      background-color: $bootstrap-danger;
+      border-color: $bootstrap-danger;
+      color: white;
+    }
+  }
+  &.btn-outline-warning {
+    color: $bootstrap-warning;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-warning;
+
+    &:hover {
+      background-color: $bootstrap-warning;
+      border-color: $bootstrap-warning;
+      color: white;
+    }
+  }
+  &.btn-outline-info {
+    color: $bootstrap-info;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-info;
+
+    &:hover {
+      background-color: $bootstrap-info;
+      border-color: $bootstrap-info;
+      color: white;
+    }
+  }
+  &.btn-outline-light {
+    color: $bootstrap-light;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-light;
+
+    &:hover {
+      background-color: $bootstrap-light;
+      border-color: $bootstrap-light;
+      color: black;
+    }
+  }
+  &.btn-outline-dark {
+    color: $bootstrap-dark;
+    background-color: transparent;
+    background-image: none;
+    border-color: $bootstrap-dark;
+
+    &:hover {
+      background-color: $bootstrap-dark;
+      border-color: $bootstrap-dark;
+      color: white;
     }
   }
 }
