@@ -39,6 +39,21 @@
       line-height: 100%;
       min-height: 100%;
     }
+
+    &:disabled {
+      padding: 0px;
+      border: none;
+      cursor: pointer;
+      margin-left: -5px;
+      border-bottom-left-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+      min-width: $ng-searcher-button-width;
+      width: $ng-searcher-button-width;
+      line-height: 100%;
+      min-height: 100%;
+    }
   }
 
   label {
