@@ -1,4 +1,6 @@
-<div [style.width.px]='350' [style.height.px]='350' style="display: flex;">
-    <systelab-pie [data]="data" (select)="doSelect($event)" [fixedWidth]="350"
-                  [fixedHeight]="350"></systelab-pie>
+<div class="container-fluid">
+    <div [style.width.px]='350' [style.height.px]='350' style="display: flex;">
+        <systelab-pie [data]="data" (select)="doSelect($event)" [fixedWidth]="350"
+                      [fixedHeight]="350"></systelab-pie>
+    </div>
 </div>

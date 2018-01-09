@@ -1,0 +1,28 @@
+@import "../../styles/default-theme/sass/variables";
+
+$button-size: ceil(54px * $size_percentage);
+$footer-buttons-offset: ceil(16px * $size_percentage);
+
+:host {
+  width: 100%;
+}
+
+/**
+ * 1. Make sure smaller sizes (such as $size_percentage = 0.7) looks OK.
+ */
+.slab-dialog-buttons {
+  padding: $footer-buttons-offset;
+
+  border-top: 1px solid $background-hemohub;
+  background-color: $darker-gray;
+
+
+  .square {
+    @include size($button-size);
+
+    min-width: $button-size; /* [1] */
+    min-height: $button-size; /* [1] */
+    line-height: 1;
+    padding: 0;
+  }
+}

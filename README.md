@@ -1,6 +1,6 @@
 # systelab-components
 
-Library with common Systelab components to speed up our Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
+Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
 
 ## Installing the library
 
@@ -10,7 +10,7 @@ The first steep will be to add the package in your package.json
 npm install systelab-components --save
 ```
 
-After this, in the .angular-cli.json you must add the following styles and javascripts:
+After, you must add the following styles and javascripts in the .angular-cli.json file, 
 
 ```javascript
 "styles": [
@@ -26,11 +26,12 @@ After this, in the .angular-cli.json you must add the following styles and javas
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/pako/dist/pako.min.js"
+        "../node_modules/pako/dist/pako.min.js",
+        "../node_modules/nanobar/nanobar.js"
       ],
 ```
 
-Finally, you must import the SystelabComponentsModule in your Application Module:
+Finally, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 ```javascript
 @NgModule({
 	imports: [
@@ -64,10 +65,10 @@ ng serve
 
 This will bootstrap a showcase application to test the different components.
 
-In order to publish the library, an authorized npm user is required, update the version in the package.json, and run:
+In order to publish the library, an authorized npm user is required. Once set, update the version in the package.json, and run the npm publish script:
 
 ```npm
 npm publish
 ```
 
-Temporary folders will be created (build, css, html, widgets,...) in order to create the package, but will not be part of the source files.
+Be careful because temporary folders will be created (build, css, html, widgets,...) and this files should be untracked as it is specified in the gitignore file.

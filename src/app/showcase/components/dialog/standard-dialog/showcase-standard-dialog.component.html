@@ -1,21 +1,20 @@
-<div class="slab-dialog-header">Title</div>
-<div class="slab-dialog-message">
-    <systelab-tabs>
-        <systelab-tab [title]="'title 1'">
-            <showcase-standard></showcase-standard>
-        </systelab-tab>
-        <systelab-tab [title]="'title 2'">
-            <showcase-standard></showcase-standard>
-        </systelab-tab>
-        <systelab-tab [title]="'title 3'">
-            <showcase-standard></showcase-standard>
-        </systelab-tab>
-    </systelab-tabs>
-</div>
-<div class="slab-dialog-buttons">
-    <div class="dropup slab-button-dropdown">
-        <button type="button" class="btn btn-lg float-right" (click)="close()"> Submit</button>
+<systelab-dialog-header (close)="close();">Title</systelab-dialog-header>
+<systelab-tabs class="slab-flex-1">
+    <systelab-tab [title]="'title 3'" [id]="'3'">
+        <showcase-standard class="w-100"></showcase-standard>
+    </systelab-tab>
+    <systelab-tab [title]="'title 2'" [id]="'2'">
+        <div class="slab-flex-1">Second tab</div>
+    </systelab-tab>
+    <systelab-tab [title]="'title 1'" [id]="'1'" class="p-1">
+        <showcase-inner-grid #grid2 class="slab-flex-1 d-flex position-relative" [menu]="getMenu()" (action)="doMenuAction($event)"
+                             (clickRow)="doSelect($event)"></showcase-inner-grid>
+    </systelab-tab>
+</systelab-tabs>
+
+<systelab-dialog-bottom>
+    <div class="dropup slab-button-dropdown ml-auto">
+        <button type="button" class="btn btn-lg" (click)="close()"> Submit</button>
     </div>
-    <button type="button" class="btn btn-lg float-right" (click)="close()"> Submit</button>
-</div>
-<div class="slab-dialog-close" (click)="close()"></div>
+    <button type="button" class="btn btn-lg ml-1" (click)="close()"> Submit</button>
+</systelab-dialog-bottom>

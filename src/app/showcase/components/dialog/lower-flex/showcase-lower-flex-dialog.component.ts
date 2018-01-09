@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
-export class LowerFlexDialogParameters extends ModulabModalContext {
+export class LowerFlexDialogParameters extends SystelabModalContext {
 	public index: number;
 	public language: string;
 }
@@ -11,12 +10,11 @@ export class LowerFlexDialogParameters extends ModulabModalContext {
 @Component( {
 	templateUrl: 'showcase-lower-flex-dialog.component.html',
 } )
-export class ShowcaseLowerFlexDialog extends DefaultModalActions implements ModalComponent<LowerFlexDialogParameters> {
+export class ShowcaseLowerFlexDialog implements ModalComponent<LowerFlexDialogParameters> {
 
 	public parameters: LowerFlexDialogParameters;
 
 	constructor( public dialog: DialogRef<LowerFlexDialogParameters> ) {
-		super( dialog );
 		this.parameters = dialog.context;
 	}
 

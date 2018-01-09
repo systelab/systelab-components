@@ -4,26 +4,31 @@ Classes to show a dialog
 
 ## Using the class
 
-This is not a component by itself, it is an abstract class that lets you define and show a dialog.  
+This is not a component by itself, it is an abstract class that will help you define and show a dialog.  
 
-In order to do that, you must create your own components and extend from the abstract class DefaultModalActions and implement ModalComponent&lt;ModulabModalContext&gt;. The component will need to export a class in order to send parameters to the dialog that must extend ModulabModalContext. ModulabModalContext already has the width, height, dialogClass and fullScreen properties.
+In order to do this, you must create your own component and implement the interface ModalComponent&lt;SystelabModalContext&gt; (lets say, it must have a 'dialog' property that will be received in the constructor method). 
+
+The component will need to export a class in order to get the context. This class must extend from SystelabModalContext. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
+
+It is suggested to define the width and height, or the class, in the context in order to make the dialog allways have the same dimension. For small devices, the dialog will be fullScreen.
 
 Here there is an example:
 
 ```javascript
-export class MyDialogParameters extends ModulabModalContext {
+export class MyDialogParameters extends SystelabModalContext {
   public index: number;
+  public width = 960;
+  public height = 600;
 }
 
 @Component({
   selector:  'mysuper-dialog',
   templateUrl:  'mysuper-dialog.component.html',
 })
-export class MyDialog extends DefaultModalActions implements ModalComponent<MyDialogParameters> {
+export class MyDialog implements ModalComponent<MyDialogParameters> {
   protected parameters: MyDialogParameters;
 
   constructor(public dialog: DialogRef<MyDialogParameters>) {
-    super(dialog);
     this.parameters = dialog.context;
   }
   public close(): void {
@@ -37,43 +42,50 @@ export class MyDialog extends DefaultModalActions implements ModalComponent<MyDi
 ```
 In the constructor, a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog.
 
-In order to create the template 'mysuper-dialog.component.html' you can use the selector systelab-dialog with a [title] Input and a (close) Output. A margin is added unless you specify [space]="false"
+In order to create the template 'mysuper-dialog.component.html' it is suggested to use components like systelab-dialog-header and systelab-dialog-bottom. You have to take into account that the parent layout is a flex one.
 
-To specify the content use the selector dialog-content and to specify the buttons use the selector dialog-bottom.
-
-An example with tabs could be:
+An example could be:
 
 ```html
-<systelab-dialog [title]="'Title'" [space]="false" (close)="close()">
-    <ng-container dialog-content>
-        <systelab-tabs>
-            <systelab-tab [title]="'title 1'">
-                Panel 1
-            </systelab-tab>
-            <systelab-tab [title]="'title 2'">
-                Panel 2
-            </systelab-tab>
-            <systelab-tab [title]="'title 3'">
-                Panel 3
-            </systelab-tab>
-        </systelab-tabs>
-    </ng-container>
-    <ng-container dialog-bottom>
-        <button type="button" class="btn btn-primary" (click)="close()">Submit</button>
-    </ng-container>
-</systelab-dialog>
+<systelab-dialog-header (close)="close();">Dialog title</systelab-dialog-header>
+<div class="slab-flex-1">
+ Your content
+</div>
+<systelab-dialog-bottom>
+    <button type="button" class="btn btn-sm btn-lg ml-auto" (click)="close()"> Submit</button>
+</systelab-dialog-bottom>
+```
+
+An example to show a dialog with a tab control on top could be:
+
+```html
+<systelab-dialog-header (close)="close();">Dialog title</systelab-dialog-header>
+<systelab-tabs class="slab-flex-1">
+    <systelab-tab [title]="'Tab 1'" [id]="'1'">
+        <form class="w-100">
+        ...
+        </form>
+    </systelab-tab>
+    <systelab-tab [title]="'Tab 2'" [id]="'2'">
+        <div class="slab-flex-1">Second tab</div>
+    </systelab-tab>
+    <systelab-tab [title]="'Tab 3'" [id]="'3'" class="p-1">
+        <showcase-inner-grid #grid class="slab-flex-1 d-flex position-relative"</showcase-inner-grid>
+    </systelab-tab>
+</systelab-tabs>
+<systelab-dialog-bottom>
+    <button type="button" class="btn btn-sm btn-lg ml-auto" (click)="close()"> Submit</button>
+</systelab-dialog-bottom>
 ```
 
 ## Using the new component
 
-In order to show the dialog, you must inject an instance of DialogService and use it:
+In order to show the dialog, you must inject an instance of DialogService and call the method showDialog with the Dialog class and the context:
+
 ```javascript
 public showDialog() {
   const parameters: MyDialogParameters = MyDialog.getParameters();
-  parameters.width = 960;
-  parameters.height = 600;
   parameters.index = 4;
   this.dialogService.showDialog(MyDialog, parameters);
 }
-
 ```

@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ModulabModalContext } from '../../modal/plugin/modulab/modal-context';
+import { Component } from '@angular/core';
+import { SystelabModalContext } from '../../modal/modal-context';
 import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { TwoListItem } from '../../twolist/two-list.component';
-import { DefaultModalActions } from '../../modal/message-popup/message-popup-view.component';
 import { GridColumnsOptions } from '../grid-column-options';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
-export class GridOptionsDialogParameters extends ModulabModalContext {
+export class GridOptionsDialogParameters extends SystelabModalContext {
 	public width = 800;
 	public height = 500;
 	public columnOptions: GridColumnsOptions;
@@ -17,7 +16,7 @@ export class GridOptionsDialogParameters extends ModulabModalContext {
 	selector:    'grid-options-dialog',
 	templateUrl: 'grid-options-dialog.component.html',
 })
-export class GridOptionsDialog extends DefaultModalActions implements ModalComponent<GridOptionsDialogParameters> {
+export class GridOptionsDialog implements ModalComponent<GridOptionsDialogParameters> {
 
 	public gridOptionsDialogParameters: GridOptionsDialogParameters;
 
@@ -26,8 +25,7 @@ export class GridOptionsDialog extends DefaultModalActions implements ModalCompo
 	public visibleColumns: Array<TwoListItem> = [];
 	public initialAvailableColumns: Array<TwoListItem> = [];
 
-	constructor(public dialog: DialogRef<GridOptionsDialogParameters> , protected i18nService: I18nService,  protected preferencesService: PreferencesService) {
-		super(dialog);
+	constructor(public dialog: DialogRef<GridOptionsDialogParameters>, protected i18nService: I18nService, protected preferencesService: PreferencesService) {
 		this.gridOptionsDialogParameters = dialog.context;
 
 		this.availableColumns = this.gridOptionsDialogParameters.columnOptions.available;
@@ -41,7 +39,7 @@ export class GridOptionsDialog extends DefaultModalActions implements ModalCompo
 		this.dialog.close(tlp);
 	}
 
-	public cancel(): void {
+	public close(): void {
 		this.dialog.close();
 	}
 

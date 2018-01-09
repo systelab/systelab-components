@@ -1,0 +1,8 @@
+<div class="slab-dialog-header d-flex">
+    <ng-content></ng-content>
+</div>
+
+<div #progress *ngIf="withProgressBar"></div>
+
+<div *ngIf="withClose" class="slab-dialog-close" (click)="doClose()"></div>
+<div *ngIf="withInfo" class="slab-dialog-info" (click)="doInfo()"></div>

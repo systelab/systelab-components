@@ -44,9 +44,11 @@ import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
 import { CalendarTableComponent } from './calendar/calendar-table.component';
 import { CalendarDialog } from './calendar/calendar-dialog.component';
-import { DecoratedDialogComponent } from './modal/dialog/decorated-dialog.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
+import { DialogHeaderComponent } from './modal/header/dialog-header.component';
+import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -72,7 +74,6 @@ import { TabComponent } from './tabs/tab.component';
 		PieComponent,
 		SwitchComponent,
 		ContextMenuComponent,
-		DecoratedDialogComponent,
 		DialogComponent,
 		MessagePopupComponent,
 		MessagePopupViewComponent,
@@ -102,14 +103,16 @@ import { TabComponent } from './tabs/tab.component';
 		CalendarHeaderComponent,
 		CalendarTableComponent,
 		TabsComponent,
-		TabComponent
+		TabComponent,
+		DialogHeaderComponent,
+		DialogBottomComponent,
+		LoadingComponent
 	],
 	exports:         [
 		SliderComponent,
 		PieComponent,
 		SwitchComponent,
 		MessagePopupComponent,
-		DecoratedDialogComponent,
 		ContextMenuComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
@@ -135,6 +138,9 @@ import { TabComponent } from './tabs/tab.component';
 		CalendarTableComponent,
 		TabsComponent,
 		TabComponent,
+		DialogHeaderComponent,
+		DialogBottomComponent,
+		LoadingComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,

@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'ngx-modialog';
-import { ModulabModalContext } from '../../../../systelab-components/modal/plugin/modulab/modal-context';
-import { DefaultModalActions } from '../../../../systelab-components/modal/message-popup/message-popup-view.component';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
-export class ShowcaseTwoColumnsDialogParameters extends ModulabModalContext {
+export class ShowcaseTwoColumnsDialogParameters extends SystelabModalContext {
 	public index: number;
 }
 
 @Component( {
 	templateUrl: 'showcase-two-columns-dialog.component.html',
 } )
-export class ShowcaseTwoColumnsDialog extends DefaultModalActions implements ModalComponent<ShowcaseTwoColumnsDialogParameters> {
+export class ShowcaseTwoColumnsDialog implements ModalComponent<ShowcaseTwoColumnsDialogParameters> {
 
 	protected parameters: ShowcaseTwoColumnsDialogParameters;
 
 	constructor( public dialog: DialogRef<ShowcaseTwoColumnsDialogParameters> ) {
-		super( dialog );
 		this.parameters = dialog.context;
 	}
 

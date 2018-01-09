@@ -28,6 +28,10 @@ export class CalendarTableComponent implements OnChanges {
 	}
 
 	public ngOnChanges() {
+		this.refresh();
+	}
+
+	public refresh() {
 		if (!this.currentDate) {
 			this.currentDate = new Date();
 		}

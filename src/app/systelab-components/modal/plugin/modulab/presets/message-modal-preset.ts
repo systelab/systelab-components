@@ -1,6 +1,6 @@
-import { ModulabModalContext } from '../modal-context';
+import { SystelabModalContext } from '../../../modal-context';
 
-export interface IMessageModalPreset extends ModulabModalContext {
+export interface IMessageModalPreset extends SystelabModalContext {
 
 	/**
 	 * A Class for the header (title) container.
