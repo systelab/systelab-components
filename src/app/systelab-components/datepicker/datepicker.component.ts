@@ -2,13 +2,13 @@ import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnD
 import { Calendar } from 'primeng/components/calendar/calendar';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
-@Component({
+@Component( {
 	selector:    'systelab-datepicker',
 	templateUrl: 'datepicker.component.html'
-})
+} )
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
-	protected _currentDate: Date;
+	public _currentDate: Date;
 	@Input() public disabled = false;
 	@Input() public error = false;
 	@Input() public isRequired = false;
@@ -22,28 +22,26 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		return this._currentDate;
 	}
 
-	set currentDate(value: Date) {
+	set currentDate( value: Date ) {
 		this._currentDate = value;
-		this.currentDateChange.emit(this._currentDate);
 		this.checkPreviousDate();
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 	public language: any;
-	@ViewChild('calendar') public currentCalendar: Calendar;
+	@ViewChild( 'calendar' ) public currentCalendar: Calendar;
 
-	public oldDateValue: boolean;
 	public currentDocSize: number;
 	public currentLanguage: string;
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
-	public datepickerId: string = (Math.random() * (999999999999 - 1) ).toString();
+	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
 
-	public pHeaderElement: any = document.getElementById(this.datepickerId);
+	public pHeaderElement: any = document.getElementById( this.datepickerId );
 
-	constructor(private myRenderer: Renderer2, private i18nService: I18nService) {
+	constructor( private myRenderer: Renderer2, private i18nService: I18nService ) {
 		this.addListeners();
 		// TODO: To get the language and modify the values.
 	}
@@ -58,29 +56,29 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public ngAfterViewInit() {
-		const newElement = document.createElement('i');
+		const newElement = document.createElement( 'i' );
 		newElement.className = 'icon-calendar';
-		if (this.currentCalendar) {
+		if ( this.currentCalendar ) {
 			this.currentCalendar.el.nativeElement.childNodes[1].className = 'ui-calendar slab-form-icon w-100';
-			this.currentCalendar.el.nativeElement.childNodes[1].appendChild(newElement);
+			this.currentCalendar.el.nativeElement.childNodes[1].appendChild( newElement );
 		}
 	}
 
 	public ngDoCheck() {
 
-		if (window.innerWidth !== this.currentDocSize) {
+		if ( window.innerWidth !== this.currentDocSize ) {
 			this.currentDocSize = window.innerWidth;
 			this.closeDatepicker();
 		}
 
-		if (this.pHeaderElement !== document.getElementById(this.datepickerId)) {
-			this.pHeaderElement = document.getElementById(this.datepickerId);
-			if (this.pHeaderElement) {
-				this.repositionateCalendar(new ElementRef(this.pHeaderElement.parentElement.parentElement));
+		if ( this.pHeaderElement !== document.getElementById( this.datepickerId ) ) {
+			this.pHeaderElement = document.getElementById( this.datepickerId );
+			if ( this.pHeaderElement ) {
+				this.repositionateCalendar( new ElementRef( this.pHeaderElement.parentElement.parentElement ) );
 			}
 		}
 
-		if (this.currentLanguage !== this.i18nService.getCurrentLanguage()) {
+		if ( this.currentLanguage !== this.i18nService.getCurrentLanguage() ) {
 			this.currentLanguage = this.i18nService.getCurrentLanguage();
 			this.getLanguage();
 		}
@@ -93,11 +91,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private checkPreviousDate() {
 
-		if (this.currentDate) {
+		if ( this._currentDate ) {
 			const today = new Date();
-			today.setHours(0, 0, 0, 0);
+			today.setHours( 0, 0, 0, 0 );
 
-			if (this.currentDate.getTime() < today.getTime()) {
+			if ( this._currentDate.getTime() < today.getTime() ) {
 				this.previousDate = true;
 			} else {
 				this.previousDate = false;
@@ -107,94 +105,98 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
+	public selectDate(): void {
+		this.currentDateChange.emit( this.currentDate );
+	}
+
 	public changeDate(): void {
 		let emit = true;
 		const today = new Date();
 
-		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value
-			&& this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()) {
+		if ( this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value
+			&& this.currentCalendar.inputfieldViewChild.nativeElement.value.trim() ) {
 
 			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim();
 			dateStr = dateStr.toLowerCase();
 
-			if (dateStr.length >= 2) {
+			if ( dateStr.length >= 2 ) {
 
-				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
-					const days: number = Number(dateStr.replace('d', '')
-						.replace('D', ''));
-					this.currentDate = new Date();
+				if ( dateStr.lastIndexOf( 'd' ) === dateStr.length - 1 ) {
+					const days: number = Number( dateStr.replace( 'd', '' )
+						.replace( 'D', '' ) );
+					this._currentDate = new Date();
 					emit = false;
-					if (!isNaN(days)) {
-						this.currentDate.setDate(today.getDate() - days);
+					if ( !isNaN( days ) ) {
+						this._currentDate.setDate( today.getDate() - days );
 						emit = true;
 					}
-				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
-					const weeks: number = Number(dateStr.replace('w', '')
-						.replace('W', ''));
-					this.currentDate = new Date();
+				} else if ( dateStr.lastIndexOf( 'w' ) === dateStr.length - 1 ) {
+					const weeks: number = Number( dateStr.replace( 'w', '' )
+						.replace( 'W', '' ) );
+					this._currentDate = new Date();
 					emit = false;
-					if (!isNaN(weeks)) {
-						this.currentDate.setDate(today.getDate() - (weeks * 7));
+					if ( !isNaN( weeks ) ) {
+						this._currentDate.setDate( today.getDate() - (weeks * 7) );
 						emit = true;
 					}
-				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
-					const weeks: number = Number(dateStr.replace('s', '')
-						.replace('S', ''));
-					this.currentDate = new Date();
+				} else if ( dateStr.lastIndexOf( 's' ) === dateStr.length - 1 ) {
+					const weeks: number = Number( dateStr.replace( 's', '' )
+						.replace( 'S', '' ) );
+					this._currentDate = new Date();
 					emit = false;
-					if (!isNaN(weeks)) {
-						this.currentDate.setDate(today.getDate() - (weeks * 7));
+					if ( !isNaN( weeks ) ) {
+						this._currentDate.setDate( today.getDate() - (weeks * 7) );
 						emit = true;
 					}
-				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
-					const months: number = Number(dateStr.replace('m', '')
-						.replace('M', ''));
-					this.currentDate = new Date();
+				} else if ( dateStr.lastIndexOf( 'm' ) === dateStr.length - 1 ) {
+					const months: number = Number( dateStr.replace( 'm', '' )
+						.replace( 'M', '' ) );
+					this._currentDate = new Date();
 					emit = false;
-					if (!isNaN(months)) {
-						this.currentDate.setMonth(today.getMonth() + months);
+					if ( !isNaN( months ) ) {
+						this._currentDate.setMonth( today.getMonth() + months );
 						emit = true;
 					}
-				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
-					const years: number = Number(dateStr.replace('a', '')
-						.replace('S', ''));
-					this.currentDate = new Date();
+				} else if ( dateStr.lastIndexOf( 'a' ) === dateStr.length - 1 ) {
+					const years: number = Number( dateStr.replace( 'a', '' )
+						.replace( 'S', '' ) );
+					this._currentDate = new Date();
 					emit = false;
-					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
+					if ( !isNaN( years ) ) {
+						this._currentDate.setFullYear( today.getFullYear() + years, today.getMonth(), today.getDate() );
 						emit = true;
 					}
-				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
-					const years: number = Number(dateStr.replace('y', '')
-						.replace('Y', ''));
-					this.currentDate = new Date();
+				} else if ( dateStr.lastIndexOf( 'y' ) === dateStr.length - 1 ) {
+					const years: number = Number( dateStr.replace( 'y', '' )
+						.replace( 'Y', '' ) );
+					this._currentDate = new Date();
 					emit = false;
-					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
+					if ( !isNaN( years ) ) {
+						this._currentDate.setFullYear( today.getFullYear() + years, today.getMonth(), today.getDate() );
 						emit = true;
 					}
 				}
 			}
 		}
-		if (emit) {
-			this.currentDateChange.emit(this.currentDate);
+		if ( emit ) {
+			this.currentDateChange.emit( this.currentDate );
 		}
 	}
 
-	public onKeyPressed(event: KeyboardEvent) {
-		if (event.keyCode === 13) {
+	public onKeyPressed( event: KeyboardEvent ) {
+		if ( event.keyCode === 13 ) {
 			this.changeDate();
 			this.closeDatepicker();
 		}
 	}
 
-	public saveEventOnFocus(evt: FocusEvent): void {
-		this.inputElement = new ElementRef(evt.target);
+	public saveEventOnFocus( evt: FocusEvent ): void {
+		this.inputElement = new ElementRef( evt.target );
 		// this.getLanguage();
 		this.focusEvt = evt;
 	}
 
-	public repositionateCalendar(element?: ElementRef): void {
+	public repositionateCalendar( element?: ElementRef ): void {
 
 		let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
 
@@ -202,121 +204,114 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
 		datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
 
-		if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
-			const newTop: number = inputElementTop + inputElementHeight - ( datepickerElementHeight + inputElementHeight + 10 );
-			this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
+		if ( inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight ) {
+			const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
+			this.myRenderer.setAttribute( element.nativeElement, 'top', newTop + 'px' );
 		}
 	}
 
-	public nextMonth(event: Event): void {
-		if (this.currentCalendar) {
-			this.currentCalendar.nextMonth(event);
+	public nextMonth( event: Event ): void {
+		if ( this.currentCalendar ) {
+			this.currentCalendar.nextMonth( event );
 		}
 	}
 
-	public prevMonth(event: Event): void {
-		if (this.currentCalendar) {
-			this.currentCalendar.prevMonth(event);
+	public prevMonth( event: Event ): void {
+		if ( this.currentCalendar ) {
+			this.currentCalendar.prevMonth( event );
 		}
 	}
 
 	public nextYear(): void {
-		if (this.currentCalendar) {
+		if ( this.currentCalendar ) {
 			const currentYear = this.currentCalendar.currentYear + 1;
-			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+			this.currentCalendar.onYearDropdownChange( currentYear.toString() );
 		}
 	}
 
 	public prevYear(): void {
-		if (this.currentCalendar) {
-
+		if ( this.currentCalendar ) {
 			const currentYear = this.currentCalendar.currentYear - 1;
-			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+			this.currentCalendar.onYearDropdownChange( currentYear.toString() );
 		}
 	}
 
 	public closeDatepicker(): void {
-		if (this.currentCalendar) {
-
+		if ( this.currentCalendar ) {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
-			// this.currentCalendar.closeOverlay = true;
 		}
 
 	}
 
-	/*changeLanguage( event: Event ): void {
-	 this.currentCalendar.weekDays = this.language.dayNamesMin;
-	 }*/
-
 	private getLanguage(): void {
 		this.language = {
 			dayNames:        [
-				this.i18nService.instant('COMMON_SUNDAY'),
-				this.i18nService.instant('COMMON_MONDAY'),
-				this.i18nService.instant('COMMON_TUESDAY'),
-				this.i18nService.instant('COMMON_WEDNESDAY'),
-				this.i18nService.instant('COMMON_THURSDAY'),
-				this.i18nService.instant('COMMON_FRIDAY'),
-				this.i18nService.instant('COMMON_SATURDAY')
+				this.i18nService.instant( 'COMMON_SUNDAY' ),
+				this.i18nService.instant( 'COMMON_MONDAY' ),
+				this.i18nService.instant( 'COMMON_TUESDAY' ),
+				this.i18nService.instant( 'COMMON_WEDNESDAY' ),
+				this.i18nService.instant( 'COMMON_THURSDAY' ),
+				this.i18nService.instant( 'COMMON_FRIDAY' ),
+				this.i18nService.instant( 'COMMON_SATURDAY' )
 			],
 			dayNamesShort:   [
-				this.i18nService.instant('COMMON_SEVENTH_DAY'),
-				this.i18nService.instant('COMMON_FIRST_DAY'),
-				this.i18nService.instant('COMMON_SECOND_DAY'),
-				this.i18nService.instant('COMMON_THIRD_DAY'),
-				this.i18nService.instant('COMMON_FOURTH_DAY'),
-				this.i18nService.instant('COMMON_FIFTH_DAY'),
-				this.i18nService.instant('COMMON_SIXTH_DAY')
+				this.i18nService.instant( 'COMMON_SEVENTH_DAY' ),
+				this.i18nService.instant( 'COMMON_FIRST_DAY' ),
+				this.i18nService.instant( 'COMMON_SECOND_DAY' ),
+				this.i18nService.instant( 'COMMON_THIRD_DAY' ),
+				this.i18nService.instant( 'COMMON_FOURTH_DAY' ),
+				this.i18nService.instant( 'COMMON_FIFTH_DAY' ),
+				this.i18nService.instant( 'COMMON_SIXTH_DAY' )
 			],
 			dayNamesMin:     [
-				this.i18nService.instant('COMMON_SEVENTH_DAY'),
-				this.i18nService.instant('COMMON_FIRST_DAY'),
-				this.i18nService.instant('COMMON_SECOND_DAY'),
-				this.i18nService.instant('COMMON_THIRD_DAY'),
-				this.i18nService.instant('COMMON_FOURTH_DAY'),
-				this.i18nService.instant('COMMON_FIFTH_DAY'),
-				this.i18nService.instant('COMMON_SIXTH_DAY')
+				this.i18nService.instant( 'COMMON_SEVENTH_DAY' ),
+				this.i18nService.instant( 'COMMON_FIRST_DAY' ),
+				this.i18nService.instant( 'COMMON_SECOND_DAY' ),
+				this.i18nService.instant( 'COMMON_THIRD_DAY' ),
+				this.i18nService.instant( 'COMMON_FOURTH_DAY' ),
+				this.i18nService.instant( 'COMMON_FIFTH_DAY' ),
+				this.i18nService.instant( 'COMMON_SIXTH_DAY' )
 			],
 			monthNames:      [
-				this.i18nService.instant('COMMON_JANUARY'),
-				this.i18nService.instant('COMMON_FEBRUARY'),
-				this.i18nService.instant('COMMON_MARCH'),
-				this.i18nService.instant('COMMON_APRIL'),
-				this.i18nService.instant('COMMON_MAY'),
-				this.i18nService.instant('COMMON_JUNE'),
-				this.i18nService.instant('COMMON_JULY'),
-				this.i18nService.instant('COMMON_AUGUST'),
-				this.i18nService.instant('COMMON_SEPTEMBER'),
-				this.i18nService.instant('COMMON_OCTOBER'),
-				this.i18nService.instant('COMMON_NOVEMBER'),
-				this.i18nService.instant('COMMON_DECEMBER')
+				this.i18nService.instant( 'COMMON_JANUARY' ),
+				this.i18nService.instant( 'COMMON_FEBRUARY' ),
+				this.i18nService.instant( 'COMMON_MARCH' ),
+				this.i18nService.instant( 'COMMON_APRIL' ),
+				this.i18nService.instant( 'COMMON_MAY' ),
+				this.i18nService.instant( 'COMMON_JUNE' ),
+				this.i18nService.instant( 'COMMON_JULY' ),
+				this.i18nService.instant( 'COMMON_AUGUST' ),
+				this.i18nService.instant( 'COMMON_SEPTEMBER' ),
+				this.i18nService.instant( 'COMMON_OCTOBER' ),
+				this.i18nService.instant( 'COMMON_NOVEMBER' ),
+				this.i18nService.instant( 'COMMON_DECEMBER' )
 			],
 			monthNamesShort: [
-				this.i18nService.instant('JOB_MONTHS_1'),
-				this.i18nService.instant('JOB_MONTHS_2'),
-				this.i18nService.instant('JOB_MONTHS_3'),
-				this.i18nService.instant('JOB_MONTHS_4'),
-				this.i18nService.instant('JOB_MONTHS_5'),
-				this.i18nService.instant('JOB_MONTHS_6'),
-				this.i18nService.instant('JOB_MONTHS_7'),
-				this.i18nService.instant('JOB_MONTHS_8'),
-				this.i18nService.instant('JOB_MONTHS_9'),
-				this.i18nService.instant('JOB_MONTHS_10'),
-				this.i18nService.instant('JOB_MONTHS_11'),
-				this.i18nService.instant('JOB_MONTHS_12')
+				this.i18nService.instant( 'JOB_MONTHS_1' ),
+				this.i18nService.instant( 'JOB_MONTHS_2' ),
+				this.i18nService.instant( 'JOB_MONTHS_3' ),
+				this.i18nService.instant( 'JOB_MONTHS_4' ),
+				this.i18nService.instant( 'JOB_MONTHS_5' ),
+				this.i18nService.instant( 'JOB_MONTHS_6' ),
+				this.i18nService.instant( 'JOB_MONTHS_7' ),
+				this.i18nService.instant( 'JOB_MONTHS_8' ),
+				this.i18nService.instant( 'JOB_MONTHS_9' ),
+				this.i18nService.instant( 'JOB_MONTHS_10' ),
+				this.i18nService.instant( 'JOB_MONTHS_11' ),
+				this.i18nService.instant( 'JOB_MONTHS_12' )
 			]
 		};
 
 		this.language.firstDayOfWeek = this.getFirstDayOfWeek();
-		this.language.dateFormatValue = this.getDateFormat(true);
-		if (this.currentCalendar) {
+		this.language.dateFormatValue = this.getDateFormat( true );
+		if ( this.currentCalendar ) {
 			this.currentCalendar.dateFormat = this.language.dateFormatValue;
 		}
 	}
 
 	private getFirstDayOfWeek(): number {
-		switch (this.i18nService.getCurrentLanguage()) {
+		switch ( this.i18nService.getCurrentLanguage() ) {
 			case 'us': // 'US'
 			case 'en_US':
 			case 'zh': // 'CN'
@@ -361,9 +356,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	private getDateFormat(isFullYear: boolean): string {
+	private getDateFormat( isFullYear: boolean ): string {
 		let stringDateFormat = '';
-		switch (this.i18nService.getCurrentLanguage()) {
+		switch ( this.i18nService.getCurrentLanguage() ) {
 			case 'us':
 			case 'en_US':
 				stringDateFormat = 'm/d/y';
@@ -426,25 +421,25 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				stringDateFormat = 'dd/mm/y';
 				break;
 		}
-		if (isFullYear) {
-			stringDateFormat = stringDateFormat.replace('y', 'yy');
-			if (this.i18nService.getCurrentLanguage() === 'us' || this.i18nService.getCurrentLanguage() === 'en_US') {
-				stringDateFormat = stringDateFormat.replace('m', 'mm');
-				stringDateFormat = stringDateFormat.replace('d', 'dd');
+		if ( isFullYear ) {
+			stringDateFormat = stringDateFormat.replace( 'y', 'yy' );
+			if ( this.i18nService.getCurrentLanguage() === 'us' || this.i18nService.getCurrentLanguage() === 'en_US' ) {
+				stringDateFormat = stringDateFormat.replace( 'm', 'mm' );
+				stringDateFormat = stringDateFormat.replace( 'd', 'dd' );
 			}
 		}
 		return stringDateFormat;
 	}
 
 	private addListeners(): void {
-		this.destroyWheelListener = this.myRenderer.listen('window', 'wheel', () => {
+		this.destroyWheelListener = this.myRenderer.listen( 'window', 'wheel', () => {
 			this.closeDatepicker();
-		});
+		} );
 
-		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
-			if (evt.keyCode === 27) {
+		this.destroyKeyListener = this.myRenderer.listen( 'document', 'keydown', ( evt: KeyboardEvent ) => {
+			if ( evt.keyCode === 27 ) {
 				this.closeDatepicker();
 			}
-		});
+		} );
 	}
 }
