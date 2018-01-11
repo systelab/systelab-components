@@ -2,7 +2,7 @@
 .slab-searcher-container {
   input {
     height: $input-height;
-  //  height: 100% !important;
+    //  height: 100% !important;
     min-height: $input-height;
     width: 100px;
     border-bottom-left-radius: 3px;
@@ -58,5 +58,12 @@
 
   label {
     margin-left: 5px;
+  }
+}
+
+.slab-searcher-dialog-container {
+  .slab-table-container {
+    border: 1px solid $medium-gray;
+    border-radius: 3px;
   }
 }

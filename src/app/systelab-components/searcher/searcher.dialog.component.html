@@ -1,9 +1,9 @@
-<systelab-dialog-header [withClose]="false">{{titleForDialog}}</systelab-dialog-header>
+<systelab-dialog-header [withClose]="showClose" (close)="close()">{{titleForDialog}}</systelab-dialog-header>
 
 <div (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
-     class="slab-flex-1 p-2 d-flex flex-column flex-nowrap">
+     class="slab-flex-1 p-2 d-flex flex-column flex-nowrap slab-searcher-dialog-container">
 
-    <form class="form-group form-inline">
+    <form class="form-group form-inline ml-auto">
         <label for="valueToSearch" class="text-truncate mr-2">{{searchLabel}}</label>
         <systelab-select class="text-left mr-2"
                          [description]="selectedComboItem.description"
@@ -15,7 +15,7 @@
                [(ngModel)]="searchingValue" name="valueToSearch">
     </form>
 
-    <div class="slab-flex-1 d-flex">
+    <div class="slab-flex-1 d-flex slab-table-container">
         <systelab-internal-searcher-table class="slab-flex-1 position-relative" name="searcherTable"
                                           [contains]="selectedComboItem.id"
                                           [showChecks]="multipleSelection"

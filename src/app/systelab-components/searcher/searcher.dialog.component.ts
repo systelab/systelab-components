@@ -8,6 +8,7 @@ import {SystelabModalContext} from '../modal/modal-context';
 export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public valueToSearch: string;
 	public searcher: AbstractSearcher<T>;
+	public showCloseButton: boolean;
 }
 
 @Component({
@@ -24,6 +25,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	public searchLabel: string;
 	public titleForDialog: string;
 	public multipleSelection = false;
+	public showClose: boolean;
 
 	constructor(public dialog: DialogRef<SearcherDialogParameters<T>>, protected i18nService: I18nService) {
 		this.dialogParameters = dialog.context;
@@ -36,6 +38,12 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 			{description: this.i18nService.instant('COMMON_STARTS_WITH'), id: 1},
 			{description: this.i18nService.instant('COMMON_CONTAINS'), id: 2}
 		];
+
+		this.showClose = this.dialogParameters.showCloseButton || false;
+		if (!this.dialogParameters.showCloseButton) {
+			this.dialogParameters.isBlocking = true;
+			this.dialogParameters.keyboard = null;
+		}
 
 		if (this.dialogParameters.searcher) {
 			this.searchLabel = this.dialogParameters.searcher.getTextForSearcherLabel();
