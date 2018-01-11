@@ -38,7 +38,9 @@ gulp.task('copytemplates', function() {
 		'./src/app/systelab-components/combobox/abstract-combobox.component.html',
 		'./src/app/systelab-components/combobox/autocomplete/autocomplete-combobox.component.html',
 		'./src/app/systelab-components/tree/abstract-tree.component.html',
-		'./src/app/systelab-components/searcher/abstract-searcher.component.html'])
+		'./src/app/systelab-components/searcher/abstract-searcher.component.html',
+        './src/app/systelab-components/searcher/searcher.dialog.component.html'
+		])
 		.pipe(gulp.dest('./html'));
 
 

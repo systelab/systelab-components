@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { ModalComponent, DialogRef } from 'ngx-modialog';
-import { SearcherTableComponent } from './searcher.table.component';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { AbstractSearcher } from './abstract-searcher';
-import { SystelabModalContext } from '../modal/modal-context';
+import {Component, ViewChild} from '@angular/core';
+import {ModalComponent, DialogRef} from 'ngx-modialog';
+import {SearcherTableComponent} from './searcher.table.component';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
+import {AbstractSearcher} from './abstract-searcher';
+import {SystelabModalContext} from '../modal/modal-context';
 
 export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public valueToSearch: string;
@@ -33,13 +33,15 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 		this.setSelectedComboItem(1, this.i18nService.instant('COMMON_STARTS_WITH'));
 
 		this.comboElements = [
-			{ description: this.i18nService.instant('COMMON_STARTS_WITH'), id: 1 },
-			{ description: this.i18nService.instant('COMMON_CONTAINS'), id: 2 }
+			{description: this.i18nService.instant('COMMON_STARTS_WITH'), id: 1},
+			{description: this.i18nService.instant('COMMON_CONTAINS'), id: 2}
 		];
 
-		this.searchLabel = this.dialogParameters.searcher.getTextForSearcherLabel();
-		this.titleForDialog = this.dialogParameters.searcher.getTitleForDialog();
-		this.multipleSelection = this.dialogParameters.searcher.multipleSelection;
+		if (this.dialogParameters.searcher) {
+			this.searchLabel = this.dialogParameters.searcher.getTextForSearcherLabel();
+			this.titleForDialog = this.dialogParameters.searcher.getTitleForDialog();
+			this.multipleSelection = this.dialogParameters.searcher.multipleSelection;
+		}
 
 	}
 
