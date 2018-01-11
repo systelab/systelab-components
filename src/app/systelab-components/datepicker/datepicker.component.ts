@@ -110,11 +110,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public changeDate(): void {
-		let emit = true;
+		let emit = false;
 		const today = new Date();
 
-		if ( this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value
-			&& this.currentCalendar.inputfieldViewChild.nativeElement.value.trim() ) {
+		if ( this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined ) {
 
 			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim();
 			dateStr = dateStr.toLowerCase();
@@ -176,6 +175,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				}
+			} else if ( dateStr === '' ) {
+				emit = true;
 			}
 		}
 		if ( emit ) {
