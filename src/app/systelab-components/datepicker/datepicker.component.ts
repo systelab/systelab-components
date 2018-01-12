@@ -8,6 +8,8 @@ import { I18nService } from 'systelab-translate/lib/i18n.service';
 } )
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
+	public somethingChanged = false;
+
 	public _currentDate: Date;
 	@Input() public disabled = false;
 	@Input() public error = false;
@@ -107,11 +109,12 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public selectDate(): void {
 		this.currentDateChange.emit( this.currentDate );
+		this.somethingChanged = false;
 	}
 
 	public changeDate(): void {
-		let emit = false;
-		const today = new Date();
+		let emit = true;
+		const today: Date = new Date();
 
 		if ( this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined ) {
 
@@ -121,57 +124,57 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			if ( dateStr.length >= 2 ) {
 
 				if ( dateStr.lastIndexOf( 'd' ) === dateStr.length - 1 ) {
-					const days: number = Number( dateStr.replace( 'd', '' )
+					let days: number = Number( dateStr.replace( 'd', '' )
 						.replace( 'D', '' ) );
-					this._currentDate = new Date();
+					this.currentDate = new Date();
 					emit = false;
 					if ( !isNaN( days ) ) {
-						this._currentDate.setDate( today.getDate() - days );
+						this.currentDate.setDate( today.getDate() - days );
 						emit = true;
 					}
 				} else if ( dateStr.lastIndexOf( 'w' ) === dateStr.length - 1 ) {
-					const weeks: number = Number( dateStr.replace( 'w', '' )
+					let weeks: number = Number( dateStr.replace( 'w', '' )
 						.replace( 'W', '' ) );
-					this._currentDate = new Date();
+					this.currentDate = new Date();
 					emit = false;
 					if ( !isNaN( weeks ) ) {
-						this._currentDate.setDate( today.getDate() - (weeks * 7) );
+						this.currentDate.setDate( today.getDate() - (weeks * 7) );
 						emit = true;
 					}
 				} else if ( dateStr.lastIndexOf( 's' ) === dateStr.length - 1 ) {
-					const weeks: number = Number( dateStr.replace( 's', '' )
+					let weeks: number = Number( dateStr.replace( 's', '' )
 						.replace( 'S', '' ) );
-					this._currentDate = new Date();
+					this.currentDate = new Date();
 					emit = false;
 					if ( !isNaN( weeks ) ) {
-						this._currentDate.setDate( today.getDate() - (weeks * 7) );
+						this.currentDate.setDate( today.getDate() - (weeks * 7) );
 						emit = true;
 					}
 				} else if ( dateStr.lastIndexOf( 'm' ) === dateStr.length - 1 ) {
-					const months: number = Number( dateStr.replace( 'm', '' )
+					let months: number = Number( dateStr.replace( 'm', '' )
 						.replace( 'M', '' ) );
-					this._currentDate = new Date();
+					this.currentDate = new Date();
 					emit = false;
 					if ( !isNaN( months ) ) {
-						this._currentDate.setMonth( today.getMonth() + months );
+						this.currentDate.setMonth( today.getMonth() + months );
 						emit = true;
 					}
 				} else if ( dateStr.lastIndexOf( 'a' ) === dateStr.length - 1 ) {
-					const years: number = Number( dateStr.replace( 'a', '' )
+					let years: number = Number( dateStr.replace( 'a', '' )
 						.replace( 'S', '' ) );
-					this._currentDate = new Date();
+					this.currentDate = new Date();
 					emit = false;
 					if ( !isNaN( years ) ) {
-						this._currentDate.setFullYear( today.getFullYear() + years, today.getMonth(), today.getDate() );
+						this.currentDate.setFullYear( today.getFullYear() + years, today.getMonth(), today.getDate() );
 						emit = true;
 					}
 				} else if ( dateStr.lastIndexOf( 'y' ) === dateStr.length - 1 ) {
-					const years: number = Number( dateStr.replace( 'y', '' )
+					let years: number = Number( dateStr.replace( 'y', '' )
 						.replace( 'Y', '' ) );
-					this._currentDate = new Date();
+					this.currentDate = new Date();
 					emit = false;
 					if ( !isNaN( years ) ) {
-						this._currentDate.setFullYear( today.getFullYear() + years, today.getMonth(), today.getDate() );
+						this.currentDate.setFullYear( today.getFullYear() + years, today.getMonth(), today.getDate() );
 						emit = true;
 					}
 				}
@@ -179,15 +182,18 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				emit = true;
 			}
 		}
-		if ( emit ) {
+		if ( emit && this.somethingChanged ) {
 			this.currentDateChange.emit( this.currentDate );
+			this.somethingChanged = false;
 		}
 	}
 
-	public onKeyPressed( event: KeyboardEvent ) {
+	public onKeyDown( event: KeyboardEvent ) {
 		if ( event.keyCode === 13 ) {
 			this.changeDate();
 			this.closeDatepicker();
+		} else {
+			this.somethingChanged = true;
 		}
 	}
 
