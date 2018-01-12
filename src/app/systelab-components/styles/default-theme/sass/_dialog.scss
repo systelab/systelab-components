@@ -84,6 +84,19 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
     flex-direction: column;
     position: relative; /* [3] */
     width: 100% ;
+
+  }
+}
+
+@-moz-document url-prefix() {
+  .slab-dialog-content {
+    & > *:first-child { /* [2] */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative; /* [3] */
+      overflow: hidden ;
+    }
   }
 }
 
