@@ -1,0 +1,8 @@
+@import "../styles/default-theme/sass/variables";
+
+
+:host {
+  display: inline-block;
+  width: $slab-spinner-width;
+
+}

@@ -3,8 +3,8 @@ import { TouchSpinValues } from './touch.spin-values';
 
 @Component({
 	selector:    'systelab-spinner',
-	templateUrl: 'touchspin.component.html',
-	styleUrls:   ['touchspin.component.scss']
+	templateUrl: 'spinner.component.html',
+	styleUrls:   ['spinner.component.scss']
 })
 export class TouchspinComponent {
 

@@ -162,3 +162,5 @@ $grid-cell-height: $form-elements-height + ceil(4 * $size_percentage) !default;
 $grid-cell-line-height: $grid-cell-height - $base-font-size + 2 !default;
 /************** GRID - end ******************************************************************************************/
 
+/* $touchspin-width: defines the width of the touchspin.*/
+$slab-spinner-width: 100px !default;

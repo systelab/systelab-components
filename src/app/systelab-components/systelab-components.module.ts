@@ -34,7 +34,7 @@ import { ApplicationHeaderComponent } from './applicationframe/header/app-header
 import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
 import { Datepicker } from './datepicker/datepicker.component';
 import { DatepickerTime } from './datepicker/datepicker-time.component';
-import { TouchspinComponent } from './spinner/touchspin.component';
+import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
 import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDirective } from 'angular-split';
