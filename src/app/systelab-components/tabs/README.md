@@ -37,3 +37,5 @@ If you are adding a grid as a content, remember to specify that it will be the e
     </systelab-tab>
 </systelab-tabs>
 ```
+
+The styles for the tabs are defined in the tabs.scss Saas file.
