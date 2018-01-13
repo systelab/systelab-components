@@ -7,7 +7,7 @@
         <div class="slab-flex-1">Second tab</div>
     </systelab-tab>
     <systelab-tab [title]="'title 1'" [id]="'1'" class="p-1">
-        <showcase-inner-grid #grid2 class="slab-flex-1 d-flex position-relative" [menu]="getMenu()" (action)="doMenuAction($event)"
+        <showcase-inner-grid #grid2 class="slab-flex-1 position-relative" [menu]="getMenu()" (action)="doMenuAction($event)"
                              (clickRow)="doSelect($event)"></showcase-inner-grid>
     </systelab-tab>
 </systelab-tabs>
