@@ -2,8 +2,7 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 
 @Component({
 	selector:    'systelab-switch',
-	templateUrl: 'switch.component.html',
-	styleUrls:   ['switch.component.scss']
+	templateUrl: 'switch.component.html'
 })
 export class SwitchComponent {
 	private checked = false;
