@@ -6,26 +6,27 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SliderComponent {
 
-	private _sliderValue = 0;
-
 	@Input() public min = 0;
 	@Input() public max = 100;
-	@Input() public step: number;
+	@Input() public step = 1;
+	@Input() public continuous = true;
 
-	@Input()
-	get value() {
-		return this._sliderValue;
-	}
-
+	@Input() public value = 0;
 	@Output() public valueChange = new EventEmitter();
 
-	set value(val: number) {
-		this._sliderValue = val;
-		this.valueChange.emit(this._sliderValue);
-	}
-
 	public sliderChangeEvent(event: any) {
-
+		if (!this.continuous) {
+			console.log(this.value);
+			this.value = event.srcElement.value;
+			this.valueChange.emit(this.value);
+		}
 	}
 
+	public sliderInputEvent(event: any) {
+		if (this.continuous) {
+			console.log(this.value);
+			this.value = event.srcElement.value;
+			this.valueChange.emit(this.value);
+		}
+	}
 }

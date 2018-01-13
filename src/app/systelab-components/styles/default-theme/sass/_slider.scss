@@ -8,7 +8,7 @@ $slab-slider-height: $form-elements-height !default;
                      to calculate the margin-top value of the ui-slider-handle.*/
 $slab-slider-background-line: round($slab-slider-height / 3);
 
-.ui-slider {
+.slab-slider {
   height: $slab-slider-background-line;
 
   &:not([class*="w-"]) {
@@ -18,23 +18,37 @@ $slab-slider-background-line: round($slab-slider-height / 3);
   margin-bottom: ($slab-slider-height - $slab-slider-background-line) / 2;
   box-shadow: none;
 
-  .ui-slider-handle {
-    @include size($slab-slider-height !important);
+  -webkit-appearance: none;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
 
-    background-color: $slab-slider-circle-color;
-    border-radius: 50%;
-    border: 6px solid $slab-slider-circle-border-color;
-    // outline: none; //cleaned out from version 1
-    cursor: pointer;
-    top: 0 !important;
-    margin-top: -(($slab-slider-height - $slab-slider-background-line) / 2 ) - 1 !important;
-    margin-left: -$slab-slider-height / 2;
-    background-image: none;
-  }
+.slab-slider:hover {
+  opacity: 1;
+}
 
-  &.ui-corner-all, &.ui-corner-top, &.ui-corner-right, &.ui-corner-tr {
-    border-radius: 10px;
-    // border: none; //cleaned out from version 1
-    background-color: $slab-slider-background-color;
-  }
+.slab-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  @include size($slab-slider-height !important);
+
+  background-color: $slab-slider-circle-color;
+  border-radius: 50%;
+  border: 6px solid $slab-slider-circle-border-color;
+  background-image: none;
+  cursor: pointer;
+}
+
+.slab-slider::-moz-range-thumb {
+  @include size($slab-slider-height !important);
+
+  background-color: $slab-slider-circle-color;
+  border-radius: 50%;
+  border: 6px solid $slab-slider-circle-border-color;
+  background-image: none;
+  cursor: pointer;
 }
