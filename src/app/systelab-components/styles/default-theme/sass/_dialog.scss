@@ -15,11 +15,7 @@
  *     <div class="slab-dialog">
  *       <div class="slab-dialog-content">
  *         <div>
- *           <div class="slab-dialog-header">...</div>
- *           <div class="slab-dialog-message">...</div>
- *           <div class="slab-dialog-buttons">...</div>
- *           <div class="slab-dialog-close">...</div>
- *           <div class="slab-dialog-buttons-top">...</div>
+ *
  *         </div>
  *       </div>
  *     </div>
@@ -113,13 +109,6 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
   color: $background;
 }
 
-
-.slab-dialog-message {
-  flex: 1;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  background-color: $background;
-}
 
 
 /**

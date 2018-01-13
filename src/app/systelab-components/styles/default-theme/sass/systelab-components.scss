@@ -23,21 +23,14 @@ $sizes: (
 @import "../../../../../../node_modules/bootstrap/scss/bootstrap";
 
 @import "icon_legacy";
-@import "dropdown_legacy";
 @import "forms_legacy";
-@import "panel_legacy";
-@import "tabs_legacy";
-@import "table_legacy";
-@import "button_legacy";
 @import "input_legacy";
-@import "textarea_legacy";
 
 // then we can load our components
 @import "dialog";
 @import "icon";
 @import "dropdown";
 @import "form";
-@import "progressBar";
 @import "tabs";
 @import "contextMenu";
 @import "checkBox";

@@ -27,13 +27,7 @@ $status-size: 20px;
   }
 }
 
-.status-bar {
-  height: 20px;
-  display: inline-block;
-  vertical-align: middle;
-}
 
-.status-bar,
 .status-square {
   text-align: center;
 
@@ -93,48 +87,4 @@ $status-size: 20px;
   &.partial {
     background-color: $partial;
   }
-}
-
-.bg-primary {
-  background-color: $primary-color;
-  color: white;
-}
-
-.bg-error {
-  background-color: $error;
-  color: white;
-}
-
-.bg-warning {
-  background-color: $warning;
-  color: white;
-}
-
-.bg-success {
-  background-color: $success;
-  color: white;
-}
-
-.uk-text-error {
-  color: $error;
-}
-
-.uk-text-warning {
-  color: $warning;
-}
-
-.uk-text-success {
-  color: $success;
-}
-
-.uk-text-success {
-  color: $success;
-}
-
-.uk-text-primary {
-  color: $primary;
-}
-
-.uk-text-info {
-  color: $info;
 }
