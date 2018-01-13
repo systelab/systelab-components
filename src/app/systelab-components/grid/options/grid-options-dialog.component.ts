@@ -46,4 +46,8 @@ export class GridOptionsDialog implements ModalComponent<GridOptionsDialogParame
 	public static getParameters(): GridOptionsDialogParameters {
 		return new GridOptionsDialogParameters();
 	}
+
+	public getTabTitle(code: string): string {
+		return this.i18nService.instant(code);
+	}
 }
