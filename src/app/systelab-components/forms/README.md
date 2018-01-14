@@ -1,5 +1,7 @@
 # Forms
 
+## Layout
+
 In order to do a form, it is suggested to use the Bootstrap's grid system and include some specific styles included in the library.
 
 Regarding the Bootstrap's grid system, you must consider:
@@ -53,7 +55,7 @@ Use slab-form-title class for the section titles.
 
 It could be useful, but it is not necessary add for each row, the class align-items-center or align-items-top in order to vertically align the label.
 
-## Inline Forms
+### Inline Forms
 
 Use the .form-inline class to display a series of labels, form controls, and buttons on a single horizontal row. Form controls within inline forms vary slightly from their default states.
 
@@ -72,4 +74,7 @@ In that case, ml-auto aligns the components on the right.
 
 The styles for the forms are defined in the forms.scss Saas file.
 
+## Validation
+
+For the moment, but this is something that will be improved, you can indicate invalid and valid form fields with .is-invalid and .is-valid classes.
 
