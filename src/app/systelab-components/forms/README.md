@@ -25,29 +25,29 @@ Here is an example:
         <label class="slab-form-title">Section title</label>
 
         <div class="row align-items-center mt-1">
-            <label for="field0" class="col-md-2 slab-label slab-label-165 text-truncate">Line 1</label>
+            <label for="field0" class="col-md-2 slab-label-165">Line 1</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" id="field0" name="field0">
             </div>
         </div>
 
         <div class="row align-items-center mt-1">
-            <label for="field1" class="col-md-2 slab-label slab-label-165 text-truncate">Line 2</label>
+            <label for="field1" class="col-md-2 slab-label-165">Line 2</label>
             <div class="col-md-5">
                 <input type="text" class="form-control" id="field1" name="field1">
             </div>
-            <label for="field2" class="col-md-1 slab-label text-truncate">Field 2</label>
+            <label for="field2" class="col-md-1 slab-label">Field 2</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" id="field2" name="field2">
             </div>
         </div>
 
         <div class="row align-items-center mt-1">
-            <label class="col-md-2 slab-label slab-label-165 text-truncate">Line 7</label>
+            <label class="col-md-2 slab-label-165">Line 7</label>
             <div class="col-md-5">
                 <systelab-select></systelab-select>
             </div>
-            <label class="col-md-1 slab-label text-truncate">Field 2</label>
+            <label class="col-md-1 slab-label">Field 2</label>
             <div class="col-md-4">
                 <systelab-select></systelab-select>
             </div>

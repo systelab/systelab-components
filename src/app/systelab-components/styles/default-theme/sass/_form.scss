@@ -3,10 +3,13 @@
  *
  * 1. Same media query as in /modal/dialog/dialog.component.ts line 18.
  */
-.slab-label {
+.slab-label, .slab-label-115, .slab-label-165, .slab-label-215 {
   line-height: $input-height;
-  text-overflow: ellipsis;
   margin: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media (max-width: ($breakpoint-medium)-1) { /* [1] */
     display: block;
@@ -17,7 +20,6 @@
       padding-left: 15px;
     }
   }
-
 }
 
 .slab-label-115 {
@@ -35,4 +37,8 @@
 .slab-form-title {
   font-size: 1.1rem;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 10px;
 }
