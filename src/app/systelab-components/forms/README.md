@@ -26,14 +26,14 @@ Here is an example:
         <label class="slab-form-title">Section title</label>
 
         <div class="row mt-1">
-            <label for="field-1" class="col-md-2 slab-label-165">Line 1</label>
+            <label for="field-1" class="col-md-2 slab-label">Line 1</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" id="field-1" name="field-1">
             </div>
         </div>
 
         <div class="row mt-1">
-            <label for="field-2a" class="col-md-2 slab-label-165">Line 2.a</label>
+            <label for="field-2a" class="col-md-2 slab-label">Line 2.a</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" id="field-2a" name="field-2a">
             </div>
@@ -47,11 +47,11 @@ Here is an example:
 </div>
 ```
 
-It could be useful, but it is not necessary add for each row, the class align-items-center or align-items-top in order to vertically align the label.
+> It is very important to use the class **.slab-label** (or **.slab-label-115** or **.slab-label-165** or **.slab-label-215**) for the labels and the class **.form-control** for the controls.
 
 Use slab-form-title class for the section titles.
 
-Use slab-label or slab-label-xxx  classes for the labels.
+It could be useful, but it is not necessary add for each row, the class align-items-center or align-items-top in order to vertically align the label.
 
 ## Inline Forms
 
