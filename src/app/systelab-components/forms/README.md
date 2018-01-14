@@ -19,7 +19,10 @@ Regarding the Bootstrap's grid system, you must consider:
 
 > Also, please take into account that is very important to put a div with the col size and do not put the class in the input element.
 
-Here is an example:
+
+### Regular Forms
+
+The regular forms will be horizontal. Here is an example:
 
 ```html
 <div class="container-fluid">
@@ -54,6 +57,38 @@ Here is an example:
 Use slab-form-title class for the section titles.
 
 It could be useful, but it is not necessary add for each row, the class align-items-center or align-items-top in order to vertically align the label.
+
+### Vertical Forms
+
+Vertical forms are also possible.
+
+```html
+<div class="container-fluid">
+    <form class="p-2">
+
+        <label class="slab-form-title">Section title</label>
+
+        <div class="row mt-1">
+            <div class="col-md-12">
+                <label class="slab-label" for="field-1">Line 1</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-md-6">
+                <label class="slab-label" for="field-2a">Line 2.a</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="slab-label" for="field-2b">Line 2.b</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    
+    </form>
+</div>
+```
 
 ### Inline Forms
 
