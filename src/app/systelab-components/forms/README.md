@@ -15,7 +15,7 @@ Regarding the Bootstrap's grid system, you must consider:
 - There are five grid tiers, one for each responsive breakpoint: all breakpoints (extra small), small, medium, large, and extra large.
 - Grid tiers are based on minimum widths, meaning they apply to that one tier and all those above it (e.g., .col-sm-4 applies to small, medium, large, and extra large devices).
 
-Also, please take into account that is very important to put a div with the col size and do not put the class in the input element.
+> Also, please take into account that is very important to put a div with the col size and do not put the class in the input element.
 
 Here is an example:
 
