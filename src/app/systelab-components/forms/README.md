@@ -15,6 +15,7 @@ Regarding the Bootstrap's grid system, you must consider:
 - There are five grid tiers, one for each responsive breakpoint: all breakpoints (extra small), small, medium, large, and extra large.
 - Grid tiers are based on minimum widths, meaning they apply to that one tier and all those above it (e.g., .col-sm-4 applies to small, medium, large, and extra large devices).
 
+Also, please take into account that is very important to put a div with the col size and do not put the class in the input element.
 
 Here is an example:
 
@@ -58,6 +59,22 @@ Here is an example:
 
 Use slab-form-title class for the section titles.
 Use slab-label or slab-label-xxx  classes for the labels.
+
+Use the .form-inline class to display a series of labels, form controls, and buttons on a single horizontal row. Form controls within inline forms vary slightly from their default states.
+
+- Controls are display: flex, collapsing any HTML white space and allowing you to provide alignment control with spacing and flexbox utilities.
+- Controls and input groups receive width: auto to override the Bootstrap default width: 100%.
+- Controls only appear inline in viewports that are at least 576px wide to account for narrow viewports on mobile devices.
+
+```html
+<form class="form-inline ml-auto">
+    <label for="valueToSearch" class="mr-2">Find by </label>
+    <input type="text" class="form-control" #valueToSearch>
+</form>
+```
+
+In that case, ml-auto aligns the components on the right.
+
 
 The styles for the forms are defined in the forms.scss Saas file.
 
