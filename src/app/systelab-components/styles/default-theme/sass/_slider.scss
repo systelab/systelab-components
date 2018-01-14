@@ -25,30 +25,33 @@ $slab-slider-background-line: round($slab-slider-height / 3);
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+
+  &:hover {
+    opacity: 1;
+
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    @include size($slab-slider-height !important);
+
+    background-color: $slab-slider-circle-color;
+    border-radius: 50%;
+    border: 6px solid $slab-slider-circle-border-color;
+    background-image: none;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    @include size($slab-slider-height !important);
+
+    background-color: $slab-slider-circle-color;
+    border-radius: 50%;
+    border: 6px solid $slab-slider-circle-border-color;
+    background-image: none;
+    cursor: pointer;
+  }
 }
 
-.slab-slider:hover {
-  opacity: 1;
-}
 
-.slab-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  @include size($slab-slider-height !important);
-
-  background-color: $slab-slider-circle-color;
-  border-radius: 50%;
-  border: 6px solid $slab-slider-circle-border-color;
-  background-image: none;
-  cursor: pointer;
-}
-
-.slab-slider::-moz-range-thumb {
-  @include size($slab-slider-height !important);
-
-  background-color: $slab-slider-circle-color;
-  border-radius: 50%;
-  border: 6px solid $slab-slider-circle-border-color;
-  background-image: none;
-  cursor: pointer;
-}
