@@ -25,14 +25,14 @@ Here is an example:
 
         <label class="slab-form-title">Section title</label>
 
-        <div class="row align-items-center mt-1">
+        <div class="row mt-1">
             <label for="field0" class="col-md-2 slab-label-165">Line 1</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" id="field0" name="field0">
             </div>
         </div>
 
-        <div class="row align-items-center mt-1">
+        <div class="row mt-1">
             <label for="field1" class="col-md-2 slab-label-165">Line 2</label>
             <div class="col-md-5">
                 <input type="text" class="form-control" id="field1" name="field1">
@@ -43,7 +43,7 @@ Here is an example:
             </div>
         </div>
 
-        <div class="row align-items-center mt-1">
+        <div class="row mt-1">
             <label class="col-md-2 slab-label-165">Line 7</label>
             <div class="col-md-5">
                 <systelab-select></systelab-select>
@@ -56,6 +56,8 @@ Here is an example:
     </form>
 </div>
 ```
+
+It could be useful, but it is not necessary add for each row, the class align-items-center or align-items-top in order to vertically align the label.
 
 Use slab-form-title class for the section titles.
 
