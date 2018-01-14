@@ -18,7 +18,7 @@ Regarding the Bootstrap's grid system, you must consider:
 
 Here is an example:
 
-```
+```html
 <div class="container-fluid">
     <form class="d-flex flex-column p-2">
 

@@ -7,7 +7,8 @@ Clases to show a popup
 This is not a component by itself, it is a class that lets you show a popup.
 
 In order to do that, you must inject the and instance of MessagePopupService and use it:
-```
+
+```javascript
 public showError() {
   this.messagePopupService.showErrorPopup('Test', 'Error message popup example', null, 800, 600)
     .subscribe((v) => {

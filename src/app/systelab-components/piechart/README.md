@@ -4,13 +4,13 @@ Component to show a pie chart
 
 ## Using the template
 
-```
+```html
 <systelab-pie [data]="data" (select)="doSelect($event)" [fixedWidth]="1000" [fixedHeight]="500"></systelab-pie>
 ```
 
 Define in the component class, the Input and the Ouput method.
 
-```
+```javascript
 public data: PieElement[] = [];
 
 public ngOnInit() {

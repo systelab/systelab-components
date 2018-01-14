@@ -4,7 +4,7 @@ Component to select between two values.
 
 ## Using the template
 
-```
+```html
 <systelab-switch [(isChecked)]="check" [disabled]="true"></systelab-switch>
 ```
 
@@ -12,7 +12,7 @@ The Input disabled is a boolean value in order to make the component disable. By
 
 If you want the defaults the template will look like:
 
-```
+```html
 <systelab-switch [(isChecked)]="check"></systelab-switch>
 ```
 
