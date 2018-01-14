@@ -20,7 +20,7 @@ Here is an example:
 
 ```html
 <div class="container-fluid">
-    <form class="d-flex flex-column p-2">
+    <form class="p-2">
 
         <label class="slab-form-title">Section title</label>
 
