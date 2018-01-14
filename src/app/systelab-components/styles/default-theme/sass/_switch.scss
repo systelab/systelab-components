@@ -10,13 +10,6 @@ $switch-circle-color-checked: white !default;
 
 $switch-height: max(22px, $form-elements-height - 6px) !default;
 
-// Shorthand mixin for basic sizing
-// @param {Length} $width [null] - Element width
-// @param {Length} $height [$width] - Element height
-@mixin size($width, $height: $width) {
-  width: $width;
-  height: $height;
-}
 
 .slab-switch {
 
@@ -65,10 +58,9 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
       left: $switch-height;
     }
   }
+  &.disabled {
+    opacity: .5;
+    cursor: not-allowed
+  }
 
-}
-
-.slab-switch.disabled {
-  opacity: .5;
-  cursor: not-allowed
 }
