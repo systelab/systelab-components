@@ -61,16 +61,13 @@ An example to show a dialog with a tab control on top could be:
 ```html
 <systelab-dialog-header (close)="close();">Dialog title</systelab-dialog-header>
 <systelab-tabs class="slab-flex-1">
-    <systelab-tab [title]="'Tab 1'" [id]="'1'">
+    <systelab-tab [title]="'Form'" [id]="'FromTab'">
         <form class="w-100">
-        ...
+         ....
         </form>
     </systelab-tab>
-    <systelab-tab [title]="'Tab 2'" [id]="'2'">
-        <div class="slab-flex-1">Second tab</div>
-    </systelab-tab>
-    <systelab-tab [title]="'Tab 3'" [id]="'3'" class="p-1">
-        <showcase-inner-grid #grid class="slab-flex-1 d-flex position-relative"</showcase-inner-grid>
+    <systelab-tab [title]="'Table'" [id]="'TableTab'" class="p-1">
+        <some-inner-grid #grid class="slab-flex-1 position-relative"></some-inner-grid>
     </systelab-tab>
 </systelab-tabs>
 <systelab-dialog-bottom>
