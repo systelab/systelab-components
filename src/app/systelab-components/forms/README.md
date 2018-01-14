@@ -58,7 +58,10 @@ Here is an example:
 ```
 
 Use slab-form-title class for the section titles.
+
 Use slab-label or slab-label-xxx  classes for the labels.
+
+## Inline Forms
 
 Use the .form-inline class to display a series of labels, form controls, and buttons on a single horizontal row. Form controls within inline forms vary slightly from their default states.
 
@@ -74,7 +77,6 @@ Use the .form-inline class to display a series of labels, form controls, and but
 ```
 
 In that case, ml-auto aligns the components on the right.
-
 
 The styles for the forms are defined in the forms.scss Saas file.
 
