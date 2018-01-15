@@ -26,7 +26,7 @@ The regular forms will be horizontal. Here is an example:
 
 ```html
 <div class="container-fluid">
-    <form class="p-2">
+    <form class="pt-2">
 
         <label class="slab-form-title">Section title</label>
 
