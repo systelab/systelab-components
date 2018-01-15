@@ -1,37 +1,34 @@
 <div class="container-fluid">
     <div class="row mt-1">
-        <label class="col slab-label-215" for="form-h-s">Datepicker Time</label>
-        <div class="col">
+        <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time</label>
+        <div class="col-md-9">
             <systelab-date-time
                     [(currentDate)]="myDate"></systelab-date-time>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col slab-label-215" for="form-h-s">Date error always</label>
-        <div class="col-sm-4">
+        <label class="col-md-3 col-form-label" for="form-h-s">Date error always</label>
+        <div class="col-md-4">
             <systelab-datepicker
                     [error]="true"
-                    [(currentDate)]="myDate"
-                    class="w-33"></systelab-datepicker>
+                    [(currentDate)]="myDate"></systelab-datepicker>
 
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col slab-label-215" for="form-h-s">Date error (red is past)</label>
-        <div class="col-sm-4">
+        <label class="col-md-3 col-form-label" for="form-h-s">Date error (red is past)</label>
+        <div class="col-md-4">
             <systelab-datepicker
                     [(currentDate)]="myDate"
-                    [markPreviousDate]="true"
-                    class="w-33"></systelab-datepicker>
+                    [markPreviousDate]="true"></systelab-datepicker>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col slab-label-215" for="form-h-s">Date required bottom</label>
-        <div class="col-sm-4">
+        <label class="col-md-3 col-form-label" for="form-h-s">Date required bottom</label>
+        <div class="col-md-4">
             <systelab-datepicker
                     [isRequired]="true"
-                    [(currentDate)]="myDate"
-                    class="w-33"></systelab-datepicker>
+                    [(currentDate)]="myDate"></systelab-datepicker>
         </div>
     </div>
 </div>
