@@ -1,38 +1,3 @@
-/**
- * Custom classes to set structural styles to form labels.
- *
- * 1. Same media query as in /modal/dialog/dialog.component.ts line 18.
- */
-.slab-label, .slab-label-115, .slab-label-165, .slab-label-215 {
-  line-height: $input-height;
-  margin: 0;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  @media (max-width: ($breakpoint-medium)-1) { /* [1] */
-    display: block;
-    min-width: 100%;
-    margin: 10px 0 5px 0;
-
-    &:not(.col) {
-      padding-left: 15px;
-    }
-  }
-}
-
-.slab-label-115 {
-  max-width: 115px;
-}
-
-.slab-label-165 {
-  max-width: 165px;
-}
-
-.slab-label-215 {
-  max-width: 215px;
-}
 
 .slab-form-title {
   font-size: 1.1rem;
