@@ -23,7 +23,6 @@
  *
  */
 
-@import "dialog-mixins";
 
 $content-border-width: 4px;
 $header-buttons-top-offset: 5px * $size_percentage;
@@ -223,23 +222,6 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
       }
     }
   }
-
-
-
-
-
-/* Animations.
-   ========================================================================== */
-
-
-.slab-dialog-flyin {
-  @include slab-dialog-flyin;
-}
-
-
-.slab-dialog-flyout {
-  @include slab-dialog-flyout;
-}
 
 
 .slab-dialog.slab-dialog-disabled-animation,

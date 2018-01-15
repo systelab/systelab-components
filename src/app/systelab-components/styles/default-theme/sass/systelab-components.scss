@@ -22,10 +22,6 @@ $sizes: (
 // we must load bootstrap after setting our own variables
 @import "../../../../../../node_modules/bootstrap/scss/bootstrap";
 
-@import "icon_legacy";
-@import "forms_legacy";
-@import "input_legacy";
-
 // then we can load our components
 @import "dialog";
 @import "icon";
