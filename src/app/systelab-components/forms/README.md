@@ -52,7 +52,7 @@ The regular forms will be horizontal. Here is an example:
 </div>
 ```
 
-> It is very important to use the class **.slab-label** (or **.slab-label-115** or **.slab-label-165** or **.slab-label-215**) for the labels and the class **.form-control** for the controls.
+> It is very important to use the class **.class="col-form-label"** for the labels and the class **.form-control** for the controls.
 
 Use slab-form-title class for the section titles.
 
