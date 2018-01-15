@@ -42,3 +42,12 @@
   white-space: nowrap;
   padding-top: 10px;
 }
+
+/*
+ * Override Bootstrap style in order to be aligned to the top.
+ */
+.col-form-label {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: $input-height !important;
+}
