@@ -26,23 +26,23 @@ The regular forms will be horizontal. Here is an example:
 
 ```html
 <div class="container-fluid">
-    <form class="p-2">
+    <form class="pt-2">
 
         <label class="slab-form-title">Section title</label>
 
         <div class="row mt-1">
-            <label for="field-1" class="col-md-2 col-form-label">Line 1</label>
+            <label for="field-1" class="col-md-2 col-form-label text-truncate">Line 1</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" id="field-1" name="field-1">
             </div>
         </div>
 
         <div class="row mt-1">
-            <label for="field-2a" class="col-md-2 col-form-label">Line 2.a</label>
+            <label for="field-2a" class="col-md-2 col-form-label text-truncate">Line 2.a</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" id="field-2a" name="field-2a">
             </div>
-            <label for="field-2b" class="col-md-2 col-form-label">Line 2.b</label>
+            <label for="field-2b" class="col-md-2 col-form-label text-truncate">Line 2.b</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" id="field-2b" name="field-2b">
             </div>
@@ -70,18 +70,18 @@ Vertical forms are also possible.
 
         <div class="row mt-1">
             <div class="col-md-12">
-                <label class="col-form-label" for="field-1">Line 1</label>
+                <label class="col-form-label text-truncate" for="field-1">Line 1</label>
                 <input type="text" class="form-control">
             </div>
         </div>
 
         <div class="row mt-1">
             <div class="col-md-6">
-                <label class="col-form-label" for="field-2a">Line 2.a</label>
+                <label class="col-form-label text-truncate" for="field-2a">Line 2.a</label>
                 <input type="text" class="form-control">
             </div>
             <div class="col-md-6">
-                <label class="col-form-label" for="field-2b">Line 2.b</label>
+                <label class="col-form-label text-truncate" for="field-2b">Line 2.b</label>
                 <input type="text" class="form-control">
             </div>
         </div>
