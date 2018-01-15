@@ -396,10 +396,10 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	public getCheckboxUnchecked(): string {
-		return `<div style='display: inline-block; width: 15px'><span class='slab-checkbox-unchecked'/></div>`;
+		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox-unchecked'/></div>`;
 	}
 
 	public getCheckboxChecked(): string {
-		return `<div style='display: inline-block; width: 15px'><span class='slab-checkbox'/></div>`;
+		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
 	}
 }

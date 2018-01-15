@@ -245,24 +245,3 @@ systelab-date-time {
     }
   }
 }
-
-mp-load-date {
-  &.custom-height {
-    height: 100%;
-    .ui-calendar {
-      height: 100%;
-    }
-    &.input-expand-height {
-      input {
-        height: 100% !important;
-      }
-    }
-
-    label {
-      margin: auto;
-      margin-left: 1px;
-      margin-right: 1px;
-    }
-
-  }
-}

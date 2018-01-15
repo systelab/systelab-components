@@ -60,8 +60,11 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
   cursor: default;
 }
 
+
+// Only for grid and combobox
+
 @mixin selection-checkbox() {
-  .slab-checkbox-unchecked {
+  .slab-grid-checkbox-unchecked {
     width: $checkbox-height;
     height: $checkbox-height;
     position: absolute;
@@ -83,7 +86,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     margin-top: -1px !important;
   }
 
-  .slab-checkbox {
+  .slab-grid-checkbox {
     width: $checkbox-height;
     height: $checkbox-height;
     position: absolute;
@@ -105,7 +108,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     margin-top: -1px !important;
   }
 
-  .slab-checkbox::before {
+  .slab-grid-checkbox::before {
     font-family: "FontAwesome" !important;
     content: '\F00d';
     background-color: #158fef;

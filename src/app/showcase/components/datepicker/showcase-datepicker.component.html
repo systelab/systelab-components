@@ -9,34 +9,29 @@
     <div class="row mt-1">
         <label class="col slab-label-215" for="form-h-s">Date error always</label>
         <div class="col-sm-4">
-            <div class="slab-form-icon">
-                <systelab-datepicker
-                        [error]="true"
-                        [(currentDate)]="myDate"
-                        class="w-33"></systelab-datepicker>
-            </div>
+            <systelab-datepicker
+                    [error]="true"
+                    [(currentDate)]="myDate"
+                    class="w-33"></systelab-datepicker>
+
         </div>
     </div>
     <div class="row mt-1">
         <label class="col slab-label-215" for="form-h-s">Date error (red is past)</label>
         <div class="col-sm-4">
-            <div class="slab-form-icon">
-                <systelab-datepicker
-                        [(currentDate)]="myDate"
-                        [markPreviousDate]="true"
-                        class="w-33"></systelab-datepicker>
-            </div>
+            <systelab-datepicker
+                    [(currentDate)]="myDate"
+                    [markPreviousDate]="true"
+                    class="w-33"></systelab-datepicker>
         </div>
     </div>
     <div class="row mt-1">
         <label class="col slab-label-215" for="form-h-s">Date required bottom</label>
         <div class="col-sm-4">
-            <div class="slab-form-icon">
-                <systelab-datepicker
-                        [isRequired]="true"
-                        [(currentDate)]="myDate"
-                        class="w-33"></systelab-datepicker>
-            </div>
+            <systelab-datepicker
+                    [isRequired]="true"
+                    [(currentDate)]="myDate"
+                    class="w-33"></systelab-datepicker>
         </div>
     </div>
 </div>

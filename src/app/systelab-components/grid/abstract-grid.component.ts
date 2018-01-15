@@ -427,10 +427,10 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	private getCheckboxUnchecked(): string {
-		return `<span class='slab-checkbox-unchecked'/>`;
+		return `<span class='slab-grid-checkbox-unchecked'/>`;
 	}
 
 	private getCheckboxChecked(): string {
-		return `<span class='slab-checkbox'/>`;
+		return `<span class='slab-grid-checkbox'/>`;
 	}
 }
