@@ -16,7 +16,7 @@
   }
 }
 
-.slab-input,
+.slab-input-simulator,
 input {
   &.form-control {
     @extend %input;
@@ -38,9 +38,9 @@ input {
 }
 
 /**
- * We need to replicate the input styling for all the divs with the class slab-input
+ * We need to replicate the input styling for all the divs with the class slab-input-simulator
  */
-.slab-input {
+.slab-input-simulator {
   padding: ($input-height - $base-font-size - 2px) / 2 6px;
   border: 1px solid $form-border;
   background: $background;
