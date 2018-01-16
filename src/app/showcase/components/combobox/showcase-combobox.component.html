@@ -1,35 +1,39 @@
 <div class="container-fluid">
     <div class="row mt-1">
-    <label class="col slab-label-215" for="form-h-s">Sin buscador</label>
-    <systelab-select
-            class="col-sm"
-            [values]="comboOptionList"
-            (change)="comboChangeEvent($event)">
-    </systelab-select>
-</div>
-<div class="row mt-1">
-    <label class="col slab-label-215" for="form-h-s">Con valor asignado</label>
-    <systelab-select
-            class="col-sm"
-            [description]="'San Petersburgo'"
-            [id]="1"
-            [values]="comboOptionList"
-            (change)="comboChangeEvent($event)">
-    </systelab-select>
-</div>
-<div class="row mt-1">
-    <label class="col slab-label-215" for="form-h-s">Con buscador</label>
-    <systelab-select
-            class="col-sm"
-            [values]="comboOptionList" [filter]="true"
-            (change)="comboChangeEvent($event)">
-    </systelab-select>
-</div>
-<div class="row mt-1">
-    <label class="col slab-label-215" for="form-h-s">Color Picker</label>
-    <systelab-colorpicker
-            class="col-sm"
-            [(id)]="colorId">
-    </systelab-colorpicker>
-</div>
+        <label class="col-md-3 col-form-label" for="form-h-s">Sin buscador</label>
+        <div class="col-md-9">
+            <systelab-select
+                    [values]="comboOptionList"
+                    (change)="comboChangeEvent($event)">
+            </systelab-select>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Con valor asignado</label>
+        <div class="col-md-9">
+            <systelab-select
+                    [description]="'San Petersburgo'"
+                    [id]="1"
+                    [values]="comboOptionList"
+                    (change)="comboChangeEvent($event)">
+            </systelab-select>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Con buscador</label>
+        <div class="col-md-9">
+            <systelab-select
+                    [values]="comboOptionList" [filter]="true"
+                    (change)="comboChangeEvent($event)">
+            </systelab-select>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Color Picker</label>
+        <div class="col-md-9">
+            <systelab-colorpicker
+                    [(id)]="colorId">
+            </systelab-colorpicker>
+        </div>
+    </div>
 </div>

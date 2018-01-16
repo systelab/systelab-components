@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row mt-1">
-        <label class="col slab-label-215">Switcher</label>
-        <div class="col-sm">
+        <label class="col-md-3 col-form-label">Switcher</label>
+        <div class="col-md-9">
             <systelab-switch id="enabled" name="enabled"
                              [(isChecked)]="check2"></systelab-switch>
             <systelab-switch [disabled]="true" id="enabled" name="enabled"
@@ -12,8 +12,8 @@
     </div>
 
     <div class="row align-items-top mt-3">
-        <label class="col slab-label-215">Column</label>
-        <div class="col-sm">
+        <label class="col-md-3 col-form-label">Column</label>
+        <div class="col-md-9">
             <div>
                 <input type="checkbox" id="check_urgent">
                 <label for="check_urgent"> Urgent</label>
@@ -26,12 +26,12 @@
     </div>
 
     <div class="row mt-3">
-        <label class="col slab-label-215">Inline (using a grid)</label>
-        <div class="col-sm-2">
+        <label class="col-md-3 col-form-label">Inline (using a grid)</label>
+        <div class="col-md-4">
             <input type="checkbox" id="check_urgent2">
             <label for="check_urgent2"> Urgent</label>
         </div>
-        <div class="col-sm-2">
+        <div class="col-md-4">
             <input type="checkbox" checked id="check_not_urgent2">
             <label for="check_not_urgent2"> Not Urgent</label>
         </div>
