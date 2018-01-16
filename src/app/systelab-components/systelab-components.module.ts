@@ -11,7 +11,7 @@ import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
 import { MessagePopupComponent } from './modal/message-popup/message-popup.component';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
-import { DOMOverlayRenderer, ModalModule, OverlayRenderer } from 'ngx-modialog';
+import { DOMOverlayRenderer, OverlayRenderer } from 'ngx-modialog';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { DOMOutsideEventPlugin } from 'ngx-modialog/src/providers';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
@@ -49,7 +49,7 @@ import { TabComponent } from './tabs/tab.component';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 import { LoadingComponent } from './loading/loading.component';
-
+import { InputToggleComponent } from './toggle-button/toggle-button.component';
 
 @NgModule({
 	imports:         [
@@ -87,6 +87,7 @@ import { LoadingComponent } from './loading/loading.component';
 		ApplicationFrameComponent,
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
+		InputToggleComponent,
 		PieComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -133,6 +134,7 @@ import { LoadingComponent } from './loading/loading.component';
 		FillerComponent,
 		SearcherDialog,
 		CalendarDialog,
+		InputToggleComponent,
 		SearcherTableComponent,
 		CalendarHeaderComponent,
 		CalendarTableComponent,
