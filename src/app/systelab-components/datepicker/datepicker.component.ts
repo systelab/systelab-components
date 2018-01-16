@@ -190,7 +190,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public onKeyDown( event: KeyboardEvent ) {
 		if ( event.keyCode === 13 ) {
-			this.changeDate();
+			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
+			this.currentCalendar.onBlur.emit( event );
 			this.closeDatepicker();
 		} else {
 			this.somethingChanged = true;
