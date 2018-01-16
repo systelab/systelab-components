@@ -7,7 +7,7 @@ import { TabComponent } from './tab.component';
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
                         <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
-                           [attr.aria-controls]="tab.id">{{tab.title}}</a>
+                           [attr.aria-controls]="tab.id">{{tab.title}}<i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i></a>
                     </li>
                 </ul>
                 <div class="slab-flex-1 d-flex slab-overflow-container">
