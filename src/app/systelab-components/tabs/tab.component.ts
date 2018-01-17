@@ -19,6 +19,7 @@ export class TabComponent {
 	@Input() title: string;
 	@Input() active = false;
 	@Input() id = '';
+	@Input() warning= false;
 
 	constructor(protected elementRef: ElementRef) {
 
