@@ -1,5 +1,5 @@
 
-$toggle-bg-color: transparent !default;
+$toggle-bg-color: white !default;
 $toggle-bg-color-checked: $primary-color !default;
 
 $toggle-color: black !default;
@@ -23,12 +23,12 @@ $toggle-color-checked: white !default;
   transition: .3s ease-out all;
   -webkit-transition: .3s ease-out all;
 
-
   &.checked {
     background: $toggle-bg-color-checked;
     color: $toggle-color-checked;
     border-color: $toggle-bg-color-checked;
  }
+
   &.disabled {
     opacity: .5;
     cursor: not-allowed
@@ -40,4 +40,68 @@ $toggle-color-checked: white !default;
     vertical-align: middle;
   }
 
+}
+
+.btn-primary {
+  .slab-toggle {
+    &.checked {
+        background: $bootstrap-primary;
+        border-color: $bootstrap-primary;
+    }
+  }
+}
+
+.btn-secondary {
+  .slab-toggle {
+    &.checked {
+      background: $bootstrap-secondary;
+      border-color: $bootstrap-secondary;
+    }
+  }
+}
+
+.btn-success {
+  .slab-toggle {
+    &.checked {
+      background: $bootstrap-success;
+      border-color: $bootstrap-success;
+    }
+  }
+}
+
+.btn-danger {
+  .slab-toggle {
+    &.checked {
+      background: $bootstrap-danger;
+      border-color: $bootstrap-danger;
+    }
+  }
+}
+
+.btn-warning {
+  .slab-toggle {
+    &.checked {
+      background: $bootstrap-warning;
+      border-color: $bootstrap-warning;
+    }
+  }
+}
+
+.btn-info {
+  .slab-toggle {
+    &.checked {
+      background: $bootstrap-info;
+      border-color: $bootstrap-info;
+    }
+  }
+}
+
+
+.btn-dark {
+  .slab-toggle {
+    &.checked {
+      background: $bootstrap-dark;
+      border-color: $bootstrap-dark;
+    }
+  }
 }
