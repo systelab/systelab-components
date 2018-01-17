@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 @Component({
 	selector:    'systelab-toggle-button',
 	templateUrl: 'toggle-button.component.html'})
-export class InputToggleComponent {
+export class ToggleButtonComponent {
 	private checked = false;
 
 	@Input() get isChecked() {

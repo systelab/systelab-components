@@ -49,7 +49,7 @@ import { TabComponent } from './tabs/tab.component';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 import { LoadingComponent } from './loading/loading.component';
-import { InputToggleComponent } from './toggle-button/toggle-button.component';
+import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 
 @NgModule({
 	imports:         [
@@ -87,7 +87,7 @@ import { InputToggleComponent } from './toggle-button/toggle-button.component';
 		ApplicationFrameComponent,
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
-		InputToggleComponent,
+		ToggleButtonComponent,
 		PieComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -134,7 +134,7 @@ import { InputToggleComponent } from './toggle-button/toggle-button.component';
 		FillerComponent,
 		SearcherDialog,
 		CalendarDialog,
-		InputToggleComponent,
+		ToggleButtonComponent,
 		SearcherTableComponent,
 		CalendarHeaderComponent,
 		CalendarTableComponent,
