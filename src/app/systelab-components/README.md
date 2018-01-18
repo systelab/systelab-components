@@ -4,5 +4,5 @@ You can find the different components and the documentation in the different fol
 
 Component | Status | Link
 --------- | ------ | ----
-systelab-combobox | :smile: | [/combobox](../combobox)
-systelab-switch | :smiley: |  [/switch](../switch)
+systelab-combobox | :smile: | [/combobox](./combobox)
+systelab-switch | :smiley: |  [/switch](./switch)
