@@ -14,8 +14,7 @@ $size_percentage: 0.7 !default;
                           used to calculate the $top-icon value;
                           used to calculate the line-height of the label inside the switch class */
 $form-elements-height: ceil(35px * $size_percentage) !default;
-/* $border-radius: Define the border radius for the components;
-                    used for the Box*/
+
 $base-font-size: 15px !default;
 /* $base-body-font-size: used in the agGrid
                          used in the comboBox */
@@ -26,26 +25,7 @@ $base-body-font-family: Arial Unicode MS, Arial, sans-serif !default;
 /************** SHARED - end ******************************************************************************************/
 
 /*************** RESPONSIVE - start ***********************************************************************************/
-/* $breakpoint-medium: defines the breakpoint of the mediaquery for the width of the slab-dialogs for medium screens */
-$breakpoint-medium: 768px !default;
-/* $breakpoint-large: defines the breakpoint of the mediaquery for the width of the slab-dialogs for large screens;
-                      used in the mediaquery to modify the Login logo */
-$breakpoint-large: 960px !default;
-/* $breakpoint-xlarge: defines the breakpoint of the mediaquery for the width of the slab-dialogs for xlarge screens;
-                       used to increase the margin-left value of the uk-grid-add-margin class;
-                       used in the mediaquery to modify the Login logo */
-$breakpoint-xlarge: 1220px !default;
-/* $breakpoint-huge: used in the max-width of the mediaqueries to change the  slab-dialog-bottom-condensed.
-                     used to expand Cepario footer buttons;
-                     used in the max-width of the mediaqueries to change the  slab-dialog-bottom-condensed */
-$breakpoint-huge: 1350px !default;
-/* $breakpoint-medium-height: defines the breakpoint of the mediaquery for the height of the slab-dialogs for medium screens */
-$breakpoint-medium-height: 600px !default;
-/* $breakpoint-large-height: defines the breakpoint of the mediaquery for the height of the slab-dialogs for large screens  */
-$breakpoint-large-height: 768px !default;
-/* $breakpoint-xlarge-height: defines the breakpoint of the mediaquery for the height of the slab-dialogs for xlarge screens */
-$breakpoint-xlarge-height: 960px !default;
-/* $ipad-width: used as mediaquery checkpoint.*/
+
 $ipad-width: 1024px !default;
 /* ************* RESPONSIVE - end *************************************************************************************/
 
@@ -234,11 +214,3 @@ $results: rgb(153, 0, 51) !default;
 $pending: rgb(255, 200, 200) !default;
 $selected: rgb(165, 221, 229) !default;
 $partial: rgb(255, 255, 152) !default;
-
-$patient-history-default-background-color: $table-row-odd-background-color;
-
-$patient-history-chapter-background-color: $primary-color;
-$patient-history-chapter-color: white;
-
-$patient-history-profile-background-color: rgb(190,221,252);
-$patient-history-profile-color: rgb(64,162,242);
