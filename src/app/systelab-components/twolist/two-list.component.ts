@@ -14,7 +14,12 @@ export class SelectedItem {
 @Component({
 	selector:    'systelab-two-list',
 	templateUrl: 'two-list.component.html',
-	styleUrls:   ['two-list.component.scss'],
+	styles: [`		
+      :host {
+      	width: 100%;  
+		    height: 100%;
+      }
+	`]
 })
 export class TwoListComponent {
 
