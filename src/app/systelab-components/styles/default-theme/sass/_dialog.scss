@@ -113,7 +113,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
 /**
  * 1. Make sure smaller sizes (such as $size_percentage = 0.7) looks OK.
  */
-.slab-dialog-buttons {
+.slab-dialog-bottom {
   padding: $footer-buttons-offset;
 
   border-top: 1px solid $background-hemohub;
@@ -131,7 +131,6 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
 }
 
 
-.slab-dialog-buttons-top > div,
 .slab-dialog-close {
     @include size($button-size);
     display: flex;
@@ -172,13 +171,6 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
 }
 
 
-.slab-dialog-buttons-top {
-  @include position(absolute, $top: $header-buttons-top-offset, $right: $top-buttons-right-offset);
-  width: auto;
-}
-
-
-
 
 
 /* Style modifies.
@@ -197,7 +189,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
           border-radius: $content-border-width $content-border-width 0 0;
         }
   
-        .slab-dialog-buttons {
+        .slab-dialog-bottom {
           border-radius: 0 0 $content-border-width $content-border-width;
           background: $background;
         }
@@ -209,7 +201,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
     &.h-100 {
       .slab-dialog-content,
       .slab-dialog-header,
-      .slab-dialog-buttons {
+      .slab-dialog-bottom {
         border-radius: 0;
       }
 
@@ -217,7 +209,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
         border: none;
       }
 
-      .slab-dialog-buttons {
+      .slab-dialog-bottom {
         background-color: $darker-gray;
       }
     }

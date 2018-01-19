@@ -5,7 +5,11 @@ declare var Nanobar: any;
 @Component({
 	selector:    'systelab-dialog-header',
 	templateUrl: 'dialog-header.component.html',
-	styleUrls:   ['dialog-header.component.scss']
+	styles:   [`
+			:host {
+      width: 100%;
+  	}
+	`]
 })
 export class DialogHeaderComponent implements AfterViewInit {
 
