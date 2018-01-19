@@ -26,12 +26,6 @@ gulp.task('inline-build-templates', () => {
 
 });
 
-gulp.task('copystyles', function() {
-	gulp.src('./src/app/systelab-components/styles/sass/systelab-components.scss')
-		.pipe(sass2())
-		.pipe(gulp.dest('css'));
-});
-
 gulp.task('copytemplates', function() {
 	gulp.src([
 		'./src/app/systelab-components/grid/abstract-grid.component.html',

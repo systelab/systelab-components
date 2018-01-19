@@ -18,11 +18,10 @@
     "e2e": "ng e2e",
     "cleardown": "rimraf css html build widgets",
     "inline-build-templates": "gulp inline-build-templates",
-    "copystyles": "gulp copystyles",
     "copysass": "gulp copysass",
     "copytemplates": "gulp copytemplates",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
-    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copystyles && npm run copysass && npm run copytemplates"
+    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copysass && npm run copytemplates"
   },
   "files": [
     "widgets",
