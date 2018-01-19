@@ -1,11 +1,6 @@
-@import "../styles/default-theme/sass/variables";
 
 /* $twolist-row-height: define the row height*/
 $twolist-row-height: ceil(35px * $size_percentage) !default;
-
-:host {
-  @include size(100%);
-}
 
 .slab-twolist {
   display: -webkit-flex;
@@ -27,10 +22,6 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
       input {
         display: none;
       }
-    }
-
-    .slab-twolistboxtitle {
-      padding-left: 5px;
     }
 
     .slab-twolistbox {

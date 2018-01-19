@@ -1,6 +1,6 @@
 <div class="slab-twolist h-100">
     <div class="slab-twolistdiv h-100 d-flex flex-column flex-nowrap">
-        <div class="slab-twolistboxtitle">{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</div>
+        <label>{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</label>
         <div>
             <input type="text" class="form-control" [(ngModel)]="firstListSearch">
         </div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="slab-twolistdiv h-100 d-flex flex-column flex-nowrap">
-        <div class="slab-twolistboxtitle">{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</div>
+        <label>{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</label>
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
