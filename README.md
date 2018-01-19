@@ -14,12 +14,10 @@ After, you must add the following styles and javascripts in the .angular-cli.jso
 
 ```javascript
 "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
         "../node_modules/ag-grid/dist/styles/theme-fresh.css",
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/systelab-components/css/systelab-components.css",
         "../node_modules/systelab-components/icons/icomoon.css"
       ],
 "scripts": [
@@ -31,9 +29,9 @@ After, you must add the following styles and javascripts in the .angular-cli.jso
       ],
 ```
 
-Finally, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
+You must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 ```javascript
-@NgModule({
+NgModule({
 	imports: [
 		BrowserModule,
 		FormsModule,
@@ -51,6 +49,46 @@ providers: [
 	MessagePopupService,
 	DialogService
 ],
+```
+
+Finally, you must import the systelab-bootstrap-settings, bootstrap and systelab-components sass files in the styles of your main component, and make them available for all your components.
+
+In the following example, for the component AppComponent, we have created a app.component.scss, and we have add it as styleUrl. Also we have set the encapsulation as None.
+
+```javascript
+@Component({
+	selector:      'app-root',
+	templateUrl:   'app.component.html',
+	styleUrls:     ['app.component.scss'],
+	encapsulation: ViewEncapsulation.None
+})
+export class AppComponent {
+
+	public currentTab = 1;
+
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
+        ...
+	}
+}
+```
+
+And in the sass file app.component.scss we have imported the files.
+
+```sass
+@import "../systelab-components/styles/sass/systelab-bootstrap-settings";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../systelab-components/styles/sass/systelab-components";
+```
+
+If you want to redefine any sass variable for Bootstrap or for systelab-components, add the variables values at the top. For example:
+
+```sass
+$size_percentage: 1;
+$primary-color: rgb(0, 154, 181) !default;
+
+@import "../systelab-components/styles/sass/systelab-bootstrap-settings";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../systelab-components/styles/sass/systelab-components";
 ```
 
 ## Working with the repo
