@@ -2,15 +2,15 @@
 
 Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/systelab-components-dist/
 
-## Installing the library
+## Using the library
 
-The first steep will be to add the package in your package.json
+First, you have to add the package in your package.json
 
 ```bash
 npm install systelab-components --save
 ```
 
-After, you must add the following styles and javascripts in the .angular-cli.json file, 
+After, you must add the following styles and scripts in the .angular-cli.json file,
 
 ```javascript
 "styles": [
@@ -29,7 +29,7 @@ After, you must add the following styles and javascripts in the .angular-cli.jso
       ],
 ```
 
-You must import SystelabComponentsModule, as well as other libraries, in your Application Module:
+After, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 ```javascript
 NgModule({
 	imports: [
@@ -44,6 +44,7 @@ NgModule({
 ```
 
 and add MessagePopupService and DialogService as providers.
+
 ```javascript
 providers: [
 	MessagePopupService,
@@ -51,9 +52,9 @@ providers: [
 ],
 ```
 
-Finally, you must import the systelab-bootstrap-settings, bootstrap and systelab-components sass files in the styles of your main component, and make them available for all your components.
+Finally, you must import the systelab-bootstrap-settings, bootstrap and systelab-components sass files in the styles of your main component, and make them visible for all your components.
 
-In the following example, for the component AppComponent, we have created a app.component.scss, and we have add it as styleUrl. Also we have set the encapsulation as None.
+In the following example, for the component AppComponent, we have created and added the sass file app.component.scss. Also we have set the encapsulation as None.
 
 ```javascript
 @Component({
@@ -72,7 +73,7 @@ export class AppComponent {
 }
 ```
 
-And in the sass file app.component.scss we have imported the files.
+In the sass file app.component.scss, we have imported the bootstrap and systelab-component sass styles.
 
 ```sass
 @import "../systelab-components/styles/sass/systelab-bootstrap-settings";
@@ -80,7 +81,7 @@ And in the sass file app.component.scss we have imported the files.
 @import "../systelab-components/styles/sass/systelab-components";
 ```
 
-If you want to redefine any sass variable for Bootstrap or for systelab-components, add the variables values at the top. For example:
+If you want to redefine any sass variable for Bootstrap or for systelab-components, you have to add the variables before importing the standard. For example:
 
 ```sass
 $size_percentage: 1;
