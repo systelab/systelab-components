@@ -8,8 +8,7 @@ export class ApplicationHeaderMenuEntry {
 
 @Component({
 	selector:    'systelab-app-header',
-	templateUrl: 'app-header.component.html',
-	styleUrls:   ['app-header.component.scss']
+	templateUrl: 'app-header.component.html'
 })
 export class ApplicationHeaderComponent {
 
