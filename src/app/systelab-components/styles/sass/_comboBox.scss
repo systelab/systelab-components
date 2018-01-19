@@ -1,0 +1,147 @@
+$combo-button-width: 32px;
+
+.slab-combobox {
+
+  width: 100%;
+
+  .slab-combo-button {
+    @include user-selection(none);
+
+    min-height: $input-height;
+    height: $input-height;
+    cursor: pointer;
+    font: normal $base-body-font-size $base-body-font-family;
+    padding: 1px 8px;
+    border-radius: 4px;
+    color: #424242;
+    background-color: white;
+    border: 1px solid $medium-gray;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: $combo-button-width;
+    margin-top: 0;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+  }
+
+  .slab-combo-label {
+    @include user-selection(none);
+  }
+
+  .slab-combo-input {
+    cursor: pointer;
+    text-overflow: ellipsis !important;
+    border-right: none !important;
+    border-radius: $border-radius;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    float: left;
+    width: calc(100% - #{$combo-button-width}) !important;
+    min-height: $input-height;
+    border: 1px solid $medium-gray;
+    font-family: $base-body-font-family;
+
+    &.form-control[readonly] {
+        background-color: white;
+    }
+
+    &:focus + .slab-combo-button {
+      border-color: $form-focus-border;
+      background-color: $form-focus-background;
+      color: $darker-gray;
+      box-shadow: none;
+    }
+  }
+
+  .slab-color-container {
+    height: $form-elements-height;
+    border: solid 1px #d6d6d6;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+
+  .slab-color-tag {
+    width: 95%;
+    height: 75%;
+    margin: 0 auto;
+    margin-top: 3px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .slab-combo-caret-down {
+    margin-right: 10px;
+  }
+
+  .slab-filter-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    input {
+      padding-left: 5px;
+    }
+  }
+
+  .slab-combo-dropdown {
+    margin-top: 1px;
+    padding: 0;
+    border: none;
+
+    .slab-combo-dropdown-box {
+      position: fixed;
+      z-index: 3;
+      -webkit-transform: translate3d(0, 0, 0);
+      border: 1px solid $medium-gray;
+      border-radius: 3px;
+      background-color: white;
+    }
+
+    @include selection-checkbox;
+
+    .ag-fresh .ag-root {
+      border: none;
+      overflow: hidden;
+
+      .ag-body {
+        background-color: $background;
+
+        .ag-body-viewport {
+
+          .ag-row {
+            background-color: $background;
+
+            &.ag-row-selected {
+              background-color: $combo-selected-color;
+            }
+
+            &.ag-row-hover {
+              background-color: $combo-selected-color;
+            }
+
+            .ag-cell {
+              border: none;
+              padding: 0 12px;
+            }
+
+          }
+        }
+
+      }
+    }
+    &.disabled {
+      visibility: hidden;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    .slab-combo-label {
+      opacity: 0.5;
+    }
+    .slab-combo-button {
+      cursor: not-allowed;
+    }
+  }
+}

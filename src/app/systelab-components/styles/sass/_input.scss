@@ -41,7 +41,7 @@ input {
  * We need to replicate the input styling for all the divs with the class slab-input-simulator
  */
 .slab-input-simulator {
-  padding: ($input-height - $base-font-size - 2px) / 2 6px;
+  padding-top: 2px;
   border: 1px solid $form-border;
   background: $background;
   color: $form-color;

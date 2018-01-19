@@ -137,7 +137,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
     align-items: center;
     justify-content: center;
 
-    background-color: $primary-color-darken;
+    background-color: darken($primary-color, 10%);
     cursor: pointer;
     text-align: center;
     border-radius: $content-border-width + 1;
@@ -152,7 +152,7 @@ $top-buttons-right-offset: ceil($button-size + $close-button-right-offset + 6);
     }
 
     &:hover {
-      background-color: $primary-color-darken-hover;
+      background-color: darken($primary-color, 20%);
     }
 }
 

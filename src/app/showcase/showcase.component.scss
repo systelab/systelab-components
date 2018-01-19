@@ -1,4 +1,8 @@
-@import "../systelab-components/styles/default-theme/sass/systelab-components";
+
+// we must set bootstrap variables before importing bootstrap
+@import "../systelab-components/styles/sass/systelab-bootstrap-settings";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../systelab-components/styles/sass/systelab-components";
 
 body {
   background-color: $background;

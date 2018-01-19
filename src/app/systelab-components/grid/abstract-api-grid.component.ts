@@ -31,7 +31,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 
 	}
 
-	protected abstract getTotalItems(): number;
+	public abstract getTotalItems(): number;
 
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 

@@ -48,7 +48,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 		return new Array<any>();
 	}
 
-	protected getTotalItems() {
+	public getTotalItems() {
 		return this.searcher.getTotalItems();
 	}
 

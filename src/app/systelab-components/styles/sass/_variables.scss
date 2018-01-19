@@ -1,3 +1,5 @@
+@import "mixins";
+
 /************** SHARED - start ****************************************************************************************/
 /* $size_percentage: Change the component size */
 $size_percentage: 0.7 !default;
@@ -14,11 +16,6 @@ $size_percentage: 0.7 !default;
 $form-elements-height: ceil(35px * $size_percentage) !default;
 /* $border-radius: Define the border radius for the components;
                     used for the Box*/
-$border-radius: 3px !default;
-/* $base-font-size: defines the button font size;
-                    used to calculate the line-height of the span (when it is not in a multiselect);
-                    to calculate the padding-top of the uk-form-label inside the uk-form-row;
-                    to define the line-height of the uk-form-label inside a uk-form-row */
 $base-font-size: 15px !default;
 /* $base-body-font-size: used in the agGrid
                          used in the comboBox */
@@ -97,14 +94,6 @@ $dropdown-line-height: $form-elements-height !default;
                  defines the width of the slab-form-icon when it has not the class uk-width;
                  defines the width of the ui-slider when the uk-width class is not present */
 $input-width: 100% !default;
-/* $input-height: used to calculate the line-height of the span (when it is not in a multiselect);
-                  to calculate the padding-top of the uk-form-label inside the uk-form-row;
-                  to calculate the line-height of a paragraph inside a uk-form-controls;
-                  defines the height of all the inputs preceded by a uk-form;
-                  defines the line-height and the height of the font inside a uk-input;
-                  defines the height and the line-height of the icon-container;
-                  defines the line-height and the heigth of a select */
-$input-height: $form-elements-height !default;
 /************** INPUT - end *******************************************************************************************/
 
 /************** FORMS - start *****************************************************************************************/
@@ -164,3 +153,92 @@ $grid-cell-line-height: $grid-cell-height - $base-font-size + 2 !default;
 
 /* $touchspin-width: defines the width of the touchspin.*/
 $slab-spinner-width: 100px !default;
+
+
+
+
+
+// Main application colors
+
+$primary-color: rgb(21, 143, 239) !default;
+$secondary-color: rgb(66, 66, 66) !default;
+$base-body-color: $secondary-color !default;
+
+
+//Grayscale
+$background: rgb(255, 255, 255) !default;
+$light-gray: rgb(248, 248, 248) !default;
+$background-hemohub: rgb(235, 235, 235) !default;
+$form-border: rgb(221, 221, 221) !default;
+$medium-gray: rgb(214, 214, 214) !default;
+$actions-separator: rgb(192, 192, 192) !default;
+$disabled: rgb(169, 169, 169) !default;
+$nr: $disabled !default;
+$table-gray: rgb(149, 149, 149) !default;
+$dark-gray: rgb(128, 128, 128) !default;
+$darker-gray: rgb(45, 45, 45) !default;
+
+//Translucent grayscale
+
+$slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
+
+// Form elements
+
+$form-color: rgb(66, 66, 66) !default;
+$form-focus-border: rgb(153, 186, 202) !default;
+$form-focus-background: rgb(245, 251, 254) !default;
+
+$slab-slider-circle-color: white !default;
+$slab-slider-circle-border-color: $primary-color !default;
+$slab-slider-background-color: $actions-separator !default;
+
+$checkbox-border-color: $primary-color !default;
+$checkbox-color: white !default;
+
+$radio-border-color: $primary-color !default;
+$radio-color: white !default;
+
+$switch-bg-color: transparent !default;
+$switch-circle-color: $dark-gray !default;
+$switch-bg-color-checked: $primary-color !default;
+$switch-circle-color-checked: white !default;
+
+$table-row-odd-background-color: rgb(243, 243, 243) !default;
+$table-row-even-background-color: rgb(253, 253, 253) !default;
+$table-row-selected-background-color: rgb(201, 221, 225) !default;
+
+$combo-selected-color: rgb(200, 223, 252) !default;
+
+// Component specific / status colors
+$error-message-text: rgb(255, 51, 45) !default;
+$error: rgb(215, 56, 45) !default;
+
+
+
+
+// To be moved
+$in: $error !default;
+$tbr: rgb(249, 136, 0) !default;
+$pr: rgb(4, 123, 87) !default;
+$pl: rgb(255, 217, 0) !default;
+$fv: rgb(174, 222, 51) !default;
+$tv: rgb(40, 189, 35) !default;
+$dark-green: rgb(4, 123, 87) !default;
+$darker-green: rgb(47, 148, 60) !default;
+$pending: rgb(0, 143, 173) !default;
+$ol: $pending !default;
+$wr: rgb(232, 179, 255) !default;
+
+$selected-elements: rgb(234, 248, 250) !default;
+$results: rgb(153, 0, 51) !default;
+$pending: rgb(255, 200, 200) !default;
+$selected: rgb(165, 221, 229) !default;
+$partial: rgb(255, 255, 152) !default;
+
+$patient-history-default-background-color: $table-row-odd-background-color;
+
+$patient-history-chapter-background-color: $primary-color;
+$patient-history-chapter-color: white;
+
+$patient-history-profile-background-color: rgb(190,221,252);
+$patient-history-profile-color: rgb(64,162,242);

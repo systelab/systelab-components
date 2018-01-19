@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+@import "variables";
+
+@import "dialog";
+@import "icon";
+@import "dropdown";
+@import "form";
+@import "tabs";
+@import "contextMenu";
+@import "checkBox";
+@import "agGrid";
+@import "tree";
+@import "two-list";
+@import "status";
+@import "table";
+@import "triageCell";
+@import "button";
+@import "comboBox";
+@import "datepicker";
+@import "input";
+@import "radio";
+@import "slider";
+@import "switch";
+@import "textarea";
+@import "searcher";
+@import "spinner";
+@import "nanobar";
+@import "toggle-button";
+@import "app-frame";
+
+html {
+  width: 100%;
+  font: normal $base-body-font-size $base-body-font-family;
+  color: $base-body-color;
+
+  body {
+    &:not(.is-login) {
+      min-width: $app-min-width;
+      min-height: $app-min-height;
+    }
+  }
+
+  input,
+  button,
+  a,
+  a:focus {
+    outline: 0 !important;
+  }
+}
+
+.slab-flex-1 {
+  flex: 1;
+}
+
+.slab-overflow-container {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}

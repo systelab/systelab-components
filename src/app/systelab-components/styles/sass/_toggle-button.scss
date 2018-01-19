@@ -45,8 +45,8 @@ $toggle-color-checked: white !default;
 .btn-primary {
   .slab-toggle {
     &.checked {
-        background: $bootstrap-primary;
-        border-color: $bootstrap-primary;
+        background: $primary;
+        border-color: $primary;
     }
   }
 }
@@ -54,8 +54,8 @@ $toggle-color-checked: white !default;
 .btn-secondary {
   .slab-toggle {
     &.checked {
-      background: $bootstrap-secondary;
-      border-color: $bootstrap-secondary;
+      background: $secondary;
+      border-color: $secondary;
     }
   }
 }
@@ -63,8 +63,8 @@ $toggle-color-checked: white !default;
 .btn-success {
   .slab-toggle {
     &.checked {
-      background: $bootstrap-success;
-      border-color: $bootstrap-success;
+      background: $success;
+      border-color: $success;
     }
   }
 }
@@ -72,8 +72,8 @@ $toggle-color-checked: white !default;
 .btn-danger {
   .slab-toggle {
     &.checked {
-      background: $bootstrap-danger;
-      border-color: $bootstrap-danger;
+      background: $danger;
+      border-color: $danger;
     }
   }
 }
@@ -81,8 +81,8 @@ $toggle-color-checked: white !default;
 .btn-warning {
   .slab-toggle {
     &.checked {
-      background: $bootstrap-warning;
-      border-color: $bootstrap-warning;
+      background: $warning;
+      border-color: $warning;
     }
   }
 }
@@ -90,8 +90,8 @@ $toggle-color-checked: white !default;
 .btn-info {
   .slab-toggle {
     &.checked {
-      background: $bootstrap-info;
-      border-color: $bootstrap-info;
+      background: $info;
+      border-color: $info;
     }
   }
 }
@@ -100,8 +100,8 @@ $toggle-color-checked: white !default;
 .btn-dark {
   .slab-toggle {
     &.checked {
-      background: $bootstrap-dark;
-      border-color: $bootstrap-dark;
+      background: $dark;
+      border-color: $dark;
     }
   }
 }

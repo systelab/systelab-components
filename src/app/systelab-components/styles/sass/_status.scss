@@ -15,15 +15,10 @@ $status-size: 20px;
 
   > * {
     @include size($status-size + 1px);
-    // @include size($status-size - 4px);
   }
 
   > i {
     line-height: $status-size;
-  }
-
-  &.status-square-large {
-    padding: 5px;
   }
 }
 
@@ -39,13 +34,21 @@ $status-size: 20px;
     background-color: $fv;
   }
 
-  &.finished,
-  &.tv {
-    background-color: $tv;
+  &.partial {
+    background-color: $partial;
   }
 
   &.warning {
     background-color: $warning;
+  }
+
+  &.nr {
+    background-color: $nr;
+  }
+
+  &.finished,
+  &.tv {
+    background-color: $tv;
   }
 
   &.primary {
@@ -84,7 +87,4 @@ $status-size: 20px;
     background-color: $pr;
   }
 
-  &.partial {
-    background-color: $partial;
-  }
 }

@@ -46,3 +46,12 @@
     margin-left: 0px;
   }
 }
+
+.row {
+  .slab-spinner-minus,
+  .slab-spinner-plus {
+    line-height: $input-height !important;
+    min-height: $input-height !important;
+
+  }
+}

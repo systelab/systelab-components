@@ -27,7 +27,7 @@ gulp.task('inline-build-templates', () => {
 });
 
 gulp.task('copystyles', function() {
-	gulp.src('./src/app/systelab-components/styles/default-theme/sass/systelab-components.scss')
+	gulp.src('./src/app/systelab-components/styles/sass/systelab-components.scss')
 		.pipe(sass2())
 		.pipe(gulp.dest('css'));
 });
@@ -48,9 +48,6 @@ gulp.task('copytemplates', function() {
 
 gulp.task('copysass', function() {
 	gulp.src([
-		'./src/app/systelab-components/styles/default-theme/sass/_variables.scss',
-		'./src/app/systelab-components/styles/default-theme/sass/_styleColor.scss',
-		'./src/app/systelab-components/styles/default-theme/sass/_styleSheet.scss',
-		'./src/app/systelab-components/styles/default-theme/sass/_mixins.scss'])
+		'./src/app/systelab-components/styles/sass/**/*.scss'])
 		.pipe(gulp.dest('./sass'));
 });
