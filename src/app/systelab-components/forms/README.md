@@ -99,7 +99,7 @@ Use the .form-inline class to display a series of labels, form controls, and but
 - Controls only appear inline in viewports that are at least 576px wide to account for narrow viewports on mobile devices.
 
 ```html
-<form class="form-inline ml-auto">
+<form class="form-inline justify-content-end">
     <label for="valueToSearch" class="mr-2">Find by </label>
     <input type="text" class="form-control" #valueToSearch>
 </form>
