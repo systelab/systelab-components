@@ -2,13 +2,11 @@
 .slab-searcher-container {
   input {
     height: $input-height;
-    //  height: 100% !important;
     min-height: $input-height;
     width: 100px;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
     border: 1px solid $medium-gray;
-    padding: ($input-height - $base-font-size - 2px) / 2 6px;
 
   }
   button {
@@ -30,6 +28,7 @@
 
   label {
     margin-left: 5px;
+    line-height: $input-height;
   }
 }
 

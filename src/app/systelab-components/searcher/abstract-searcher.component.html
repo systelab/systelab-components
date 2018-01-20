@@ -1,5 +1,5 @@
 <div class="slab-searcher-container d-flex flex-nowrap h-100" [ngClass]="{'disabled': isDisabled}">
-<input #valueToSearch type="input"
+<input #valueToSearch type="input" class="form-control"
            [(ngModel)]="code"
            (blur)="doSearch()"
            [disabled]="isDisabled"
