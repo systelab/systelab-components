@@ -1,78 +1,77 @@
-<div class="container-fluid">
-    <form class="d-flex flex-column">
-        <div>
-            <div class="row mt-1">
-                <div class="col-md-12 d-flex">
-                    <systelab-switch class="ml-auto" id="switch1" name="enabled"></systelab-switch>
-                    <label class="ml-2" for="switch1">Omit</label>
-                </div>
-            </div>
-
-            <div class="row mt-1">
-                <label class="col-md-3 col-form-label">Date</label>
-                <div class="col-md-3 d-flex">
-                    <div class="col-md px-0 mr-1">
-                        <systelab-datepicker [(currentDate)]="myDate"></systelab-datepicker>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <systelab-spinner class="mx-1" [spinValues]="touchSpinValues1" id="percentSample1">
-                    </systelab-spinner>
-                    <systelab-spinner class="mx-1" [spinValues]="touchSpinValues2" id="percentSample2">
-                    </systelab-spinner>
-                    <systelab-spinner class="ml-1" [spinValues]="touchSpinValues3" id="percentSample3">
-                    </systelab-spinner>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <label class="col-md-3 col-form-label" for="valueid">
-                    Value
-                </label>
-                <div class="col-md-9">
-                    <input type="text" id="valueid" class="form-control" name="value">
-                </div>
-            </div>
-            <div class="row mt-1">
-                <label class="col-md-3 col-form-label" for="to-input">
-                    Entered by
-                </label>
-                <div class="col-md-9">
-                    <input type="text" id="to-input" class="form-control" name="user">
-                </div>
-            </div>
-            <div class="row mt-1">
-                <label class="col-md-3 col-form-label" for="to-input">
-                    Subindex
-                </label>
-                <div class="col-md-9">
-                    <div class="slab-input-simulator form-control w-100">
-                        <font>1<sub>2S</sub>,</font>
-                        <font class="text-warning">1<sub>2.5S</sub>,</font>
-                        <font class="text-danger">1<sub>3S</sub></font>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <label class="col-md-3 col-form-label" for="to-input">
-                    Across Flags
-                </label>
-                <div class="col-md-9">
-                    <systelab-select></systelab-select>
-                </div>
+<form class="slab-flex-1 d-flex flex-column">
+    <div>
+        <div class="row mt-1">
+            <div class="col-md-12 d-flex justify-content-end">
+                <systelab-switch id="switch1" name="enabled"></systelab-switch>
+                <label class="ml-2" for="switch1">Omit</label>
             </div>
         </div>
 
-        <div class="slab-flex-1 d-flex">
-            <div class="row no-gutters mt-1 w-100 flex-column flex-md-row">
-                <label class="col-md-3 col-form-label slab-mh-ft" for="to-input">
-                    Comments
-                </label>
-                <div class="col-md-9">
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Date</label>
+            <div class="col-md-3 d-flex">
+                <div class="col-md px-0 mr-1">
+                    <systelab-datepicker [(currentDate)]="myDate"></systelab-datepicker>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <systelab-spinner class="mx-1" [spinValues]="touchSpinValues1" id="percentSample1">
+                </systelab-spinner>
+                <systelab-spinner class="mx-1" [spinValues]="touchSpinValues2" id="percentSample2">
+                </systelab-spinner>
+                <systelab-spinner class="ml-1" [spinValues]="touchSpinValues3" id="percentSample3">
+                </systelab-spinner>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="valueid">
+                Value
+            </label>
+            <div class="col-md-9">
+                <input type="text" id="valueid" class="form-control" name="value">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="to-input">
+                Entered by
+            </label>
+            <div class="col-md-9">
+                <input type="text" id="to-input" class="form-control" name="user">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="to-input">
+                Subindex
+            </label>
+            <div class="col-md-9">
+                <div class="slab-input-simulator form-control w-100">
+                    <font>1<sub>2S</sub>,</font>
+                    <font class="text-warning">1<sub>2.5S</sub>,</font>
+                    <font class="text-danger">1<sub>3S</sub></font>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="to-input">
+                Across Flags
+            </label>
+            <div class="col-md-9">
+                <systelab-select></systelab-select>
+            </div>
+        </div>
+    </div>
+
+    <div class="slab-flex-1 d-flex">
+        <div class="row no-gutters mt-1 w-100 flex-column flex-md-row">
+            <label class="col-md-3 col-form-label slab-mh-ft" for="to-input">
+                Comments
+            </label>
+            <div class="col-md-9">
                 <textarea readonly name="" id="" class="form-control slab-textarea slab-textarea-no-resize h-100">
                 </textarea>
-                </div>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
+
 
