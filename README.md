@@ -81,7 +81,7 @@ In the sass file app.component.scss, we have imported the bootstrap and systelab
 @import "../systelab-components/styles/sass/systelab-components";
 ```
 
-If you want to redefine any sass variable for Bootstrap or for systelab-components, you have to add the variables before importing the standard. For example:
+To change the default Bootstrap or systelab-components settings like colors, border-radius, etc, add or change the value of the property in the scss file before importing the standard. For example:
 
 ```sass
 $size_percentage: 1;
@@ -91,6 +91,10 @@ $primary-color: rgb(0, 154, 181) !default;
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../systelab-components/styles/sass/systelab-components";
 ```
+
+All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](src/app/systelab-components/styles/sass/_variables.scss) can be overwritten here.
+
+Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
 
 ## Working with the repo
 
