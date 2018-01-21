@@ -1,4 +1,1 @@
-<span class="slab-toggle" [class.checked]="isChecked" [class.disabled]="disabled">
-    <input type="checkbox" name="checkbox" [checked]="isChecked" [disabled]="disabled" style="display:none">
-    <span class="slab-toggle-text text-truncate text-center"><ng-content></ng-content></span>
-</span>
+<button class="btn" [class.btn-outline-primary]="!isChecked" [class.btn-primary]="isChecked" [disabled]="disabled"><ng-content></ng-content></button>

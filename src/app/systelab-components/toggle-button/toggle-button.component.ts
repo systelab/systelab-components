@@ -1,8 +1,13 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Component({
 	selector:    'systelab-toggle-button',
-	templateUrl: 'toggle-button.component.html'})
+	templateUrl: 'toggle-button.component.html',
+	styles:      [`
+      :host {
+          background-color: transparent;
+      }`]
+})
 export class ToggleButtonComponent {
 	private checked = false;
 
@@ -14,6 +19,7 @@ export class ToggleButtonComponent {
 		this.checked = val;
 		this.isCheckedChange.emit(this.checked);
 	}
+
 	@Output() public isCheckedChange = new EventEmitter();
 
 	@Input() public disabled = false;
