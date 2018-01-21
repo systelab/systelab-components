@@ -116,11 +116,18 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 		this.gridOptions.rowData = this.values;
 
-		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-family', this.fontFamily);
-		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-size', this.fontSize);
-		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-weight', this.fontWeight);
-		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-tyle', this.fontStyle);
-
+		if (this.fontFamily) {
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-family', this.fontFamily);
+		}
+		if (this.fontSize) {
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-size', this.fontSize);
+		}
+		if (this.fontWeight) {
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-weight', this.fontWeight);
+		}
+		if (this.fontStyle) {
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-style', this.fontStyle);
+		}
 	}
 
 	public refresh(params: any): boolean {

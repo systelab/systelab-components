@@ -34,7 +34,7 @@
                  [style.font-size.px]="fontSize"
                  [style.font-weight]="fontWeight"
                  [style.font-style]="fontStyle">
-                <input [value]="filterValue" (keyup)="doSearch($event)">
+                <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
             </div>
             <div #hidden class="height-hidden"></div>
             <ag-grid-angular *ngIf="this.isDropdownOpened" #grid id="agGrid" #agGrid
