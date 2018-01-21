@@ -10,8 +10,6 @@ import { ApplicationSidebarAction, ApplicationSidebarTab } from './sidebar/app-s
 })
 export class ApplicationFrameComponent {
 
-	@Input() public title: string;
-
 	@Input() public userName: string;
 	@Input() public userFullName: string;
 	@Input() public hospitalName: string;
