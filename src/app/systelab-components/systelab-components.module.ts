@@ -38,7 +38,6 @@ import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
 import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDirective } from 'angular-split';
-import { FillerComponent } from './filler/filler.component';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
 import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
@@ -97,7 +96,6 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 		ModulabSelect,
 		Datepicker,
 		DatepickerTime,
-		FillerComponent,
 		SearcherDialog,
 		CalendarDialog,
 		SearcherTableComponent,
@@ -131,7 +129,6 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTime,
-		FillerComponent,
 		SearcherDialog,
 		CalendarDialog,
 		ToggleButtonComponent,
