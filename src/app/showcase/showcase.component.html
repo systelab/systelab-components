@@ -6,19 +6,29 @@
                 <showcase-components></showcase-components>
             </div>
         </systelab-tab>
-        <systelab-tab [title]="'Tab'" [id]="'2'" [warning]="true" (click)="selectTab(2)">
-            <div class="p-1">
-                Hello from tab 2!
+        <systelab-tab [title]="'Inline'" [id]="'2'" [warning]="true" (click)="selectTab(2)">
+            <div class="p-1 w-100">
+                <form class="form-inline justify-content-end">
+                    <label for="valueToSearch" class="mr-2">Find by </label>
+                    <input type="text" class="form-control mr-2" #valueToSearch>
+                    <div class="mr-2">
+                        <input type="checkbox" id="check_urgent">
+                        <label for="check_urgent">Urgent</label>
+                    </div>
+                    <systelab-spinner class="mr-2" id="touch2"></systelab-spinner>
+                    <button class="btn">Button</button>
+                </form>
+                <form class="form-inline">
+                    <label for="valueToSearch" class="mr-2">Find by </label>
+                    <systelab-datepicker></systelab-datepicker>
+                    <button class="btn ml-2">Button</button>
+                </form>
             </div>
         </systelab-tab>
     </systelab-tabs>
 
     <systelab-dialog-bottom>
-        <button type="button" class="btn btn-lg">
-            <i class="icon-times-circle mr-1"></i>Left button
-        </button>
-        <button type="button" class="btn btn-lg ml-auto">
-            <i class="icon-chevron-circle-right mr-1"></i>Right button
-        </button>
+        <button type="button" class="btn"><i class="icon-times-circle mr-1"></i>Left button</button>
+        <button type="button" class="btn ml-auto"><i class="icon-chevron-circle-right mr-1"></i>Right button</button>
     </systelab-dialog-bottom>
 </div>
