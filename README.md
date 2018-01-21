@@ -4,7 +4,7 @@ Library with common UI components to speed up your Angular developments. You can
 
 ## Working with the repo
 
-In order to clone the repository, and test the library use the following commands:
+In order to clone the repository and test the library use the following commands:
 
 ```bash
 git clone https://github.com/systelab/systelab-components.git

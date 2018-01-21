@@ -30,10 +30,13 @@ $sidebar-width: 200px !default;
     border-radius: 50px;
     border: solid 2px $medium-gray;
     overflow: hidden;
+    z-index: 1;
+    position: relative;
 
     i {
-      @include position(relative, $top: 1px);
-
+      position: relative;
+      top:3px;
+      left:-1px;
       color: $medium-gray;
       font-size: $icon-header-size - 10px;
     }
