@@ -105,7 +105,7 @@ Anyway, think it twice before you change this settings and think in the value of
 
 A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples.
 
-## Implementing a User Interface
+As this components will be placed in a container, in the following sections you will find some tips about how to do it:
 
 ### Layout
 
@@ -128,7 +128,7 @@ In the following example, the div in the middle will grow:
     <div class="bg-white">White</div>
 </div>
 ```
-Combine as needed. In this case will have elements placed in the north, south, east, west and in the middle. 
+Combine as needed. In this case will have elements placed in the north (info), south (white), west (warning), east (danger) and in the center (success). 
 
 ```html
 <div class="d-flex flex-column">
@@ -143,11 +143,11 @@ Combine as needed. In this case will have elements placed in the north, south, e
 </div>
 ```
 
-Use **.ml-auto** in a flex container if you want to push the item to the left.
+Use **.ml-auto** in a flex container if you want to push the item to the left. This will be helpful for example to push a button and place it to the bottom right of a dialog.
 
 ### Forms
 
-Check the folder [forms](forms) to get an introduction and some examples about the design of forms.
+Check the folder [forms](forms) to get an introduction and some examples about how to the design of forms.
 
 ### Borders
 
@@ -155,4 +155,4 @@ Check the Bootstrap utilities at https://getbootstrap.com/docs/4.0/utilities/bor
 
 As a super basic summary:
 
-Add **.border** and **.rounded** if you want a classical gray rounded border.
+Add **.border** and **.rounded**, and probably some margin classes, if you want a classical gray rounded border.
