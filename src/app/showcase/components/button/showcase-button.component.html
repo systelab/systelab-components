@@ -2,6 +2,7 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="full-width-input">Regular</label>
         <div class="col-md-9">
+            <button type="button" class="btn">Default</button>
             <button type="button" class="btn btn-primary">Primary</button>
             <button type="button" class="btn btn-secondary">Secondary</button>
             <button type="button" class="btn btn-success">Success</button>
@@ -11,6 +12,22 @@
             <button type="button" class="btn btn-light">Light</button>
             <button type="button" class="btn btn-dark">Dark</button>
             <button type="button" class="btn btn-link">Link</button>
+        </div>
+    </div>
+
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="full-width-input">Disabled</label>
+        <div class="col-md-9">
+            <button type="button" class="btn" disabled>Default</button>
+            <button type="button" class="btn btn-primary" disabled>Primary</button>
+            <button type="button" class="btn btn-secondary" disabled>Secondary</button>
+            <button type="button" class="btn btn-success" disabled>Success</button>
+            <button type="button" class="btn btn-danger" disabled>Danger</button>
+            <button type="button" class="btn btn-warning" disabled>Warning</button>
+            <button type="button" class="btn btn-info" disabled>Info</button>
+            <button type="button" class="btn btn-light" disabled>Light</button>
+            <button type="button" class="btn btn-dark" disabled>Dark</button>
+            <button type="button" class="btn btn-link" disabled>Link</button>
         </div>
     </div>
 
@@ -42,8 +59,8 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="full-width-input">Small</label>
         <div class="col-md-9">
-            <button type="button" class="btn btn-primary">Primary</button>
-            <button type="button" class="btn btn-secondary">Secondary</button>
+            <button type="button" class="btn btn-sm btn-primary">Primary</button>
+            <button type="button" class="btn btn-sm btn-secondary">Secondary</button>
         </div>
     </div>
 
@@ -59,7 +76,7 @@
         <label class="col-md-3 col-form-label" for="full-width-input">With dropdown</label>
         <div class="col-md-9">
             <div class="dropup slab-button-dropdown">
-                <button type="button" class="btn btn-sm dropdown-toogle" data-toggle="dropdown">Drop down<i class="icon-chevron-up"></i></button>
+                <button type="button" class="btn dropdown-toogle" data-toggle="dropdown">Drop down<i class="icon-chevron-up"></i></button>
                 <div class="dropdown-menu slab-dropdown">
                     <ul>
                         <li><a (click)="doSomething();">Action 1</a></li>
@@ -71,11 +88,26 @@
     </div>
 
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="full-width-input">Toggle button</label>
+        <div class="col-md-9">
+            <systelab-toggle-button>Default</systelab-toggle-button>
+            <systelab-toggle-button [disabled]="true">Disabled</systelab-toggle-button>
+            <systelab-toggle-button class="btn-primary">Primary</systelab-toggle-button>
+            <systelab-toggle-button class="btn-secondary">Secondary</systelab-toggle-button>
+            <systelab-toggle-button class="btn-success">Success</systelab-toggle-button>
+            <systelab-toggle-button class="btn-danger">Danger</systelab-toggle-button>
+            <systelab-toggle-button class="btn-warning">Warning</systelab-toggle-button>
+            <systelab-toggle-button class="btn-info">Info</systelab-toggle-button>
+            <systelab-toggle-button class="btn-dark">Dark</systelab-toggle-button>
+        </div>
+    </div>
+
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="full-width-input">Segmented</label>
         <div class="col-md-9">
             <div class="input-group">
                 <input type="text" class="form-control" aria-label="Text input with segmented button dropdown">
-                <div class="input-group-btn">
+                <div class="input-group-append">
                     <button type="button" class="btn btn-secondary">Action</button>
                     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
@@ -92,23 +124,5 @@
         </div>
     </div>
 
-    <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="full-width-input">Toggle button</label>
-        <div class="col-md-9">
-            <systelab-toggle-button>Toggle 1</systelab-toggle-button>
-            <systelab-toggle-button>Toggle number 2</systelab-toggle-button>
-            <systelab-toggle-button [disabled]="true">Toggle</systelab-toggle-button>
-            <systelab-toggle-button>Toggle</systelab-toggle-button>
-            <systelab-toggle-button class="btn-primary">Primary</systelab-toggle-button>
-            <systelab-toggle-button class="btn-secondary">Secondary</systelab-toggle-button>
-            <systelab-toggle-button class="btn-success">Success</systelab-toggle-button>
-            <systelab-toggle-button class="btn-danger">Danger</systelab-toggle-button>
-            <systelab-toggle-button class="btn-warning">Warning</systelab-toggle-button>
-            <systelab-toggle-button class="btn-info">Info</systelab-toggle-button>
-            <systelab-toggle-button class="btn-dark">Dark</systelab-toggle-button>
 
-            <button type="button" class="btn btn-danger">Danger</button>
-
-        </div>
-    </div>
 </div>
