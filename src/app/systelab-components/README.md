@@ -118,7 +118,7 @@ As a general tip:
 
 If still is not clear for you what to do, we suggest:
 
-> Use the grid for forms or layouts where the height is defined by the components. Use flex is the height is important for you, for example when you are defining a application like layout.
+> Use the grid for forms or layouts where the height is defined by the components. Use flex if the height is important for you, for example when you are defining a application like layout.
 
 For the grid, refer to https://getbootstrap.com/docs/4.0/layout/grid/.
 
