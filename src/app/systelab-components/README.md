@@ -2,11 +2,11 @@
 
 systelab-components is a set of components that use wide accepted and adopted standard technologies like Angular and Bootstrap, as well as other popular libraries. Please read the ATTRIBUTION.md file for a complete list of dependencies.
 
-Bootstrap 4 knowledge will be very useful to understand and use the library, as we rely on it.
+Bootstrap 4 knowledge will be very useful to understand and use the library, as is founded on it.
                                                     
 ## Using the library
 
-In order to use the library, the first thing will be add the package in your package.json
+In order to use the library, the first thing will be to add it in your package.json
 
 ```bash
 npm install systelab-components --save
@@ -82,7 +82,7 @@ In the sass file app.component.scss, we have imported the Bootstrap and systelab
 @import "../systelab-components/styles/sass/systelab-components";
 ```
 
-Notice that the bootstrap package is a dependency for systelab-components, and npm will download it.
+Notice that the Bootstrap package is a dependency for systelab-components, and npm will download it.
 
 ### Changing the default style
 
