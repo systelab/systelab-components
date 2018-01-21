@@ -157,9 +157,11 @@ Combine as needed. In this case will have elements placed in the north (info), s
 
 Use **.ml-auto** in a flex container if you want to push the item to the left. This will be helpful for example to push a button and place it to the bottom right of a dialog.
 
+Use **.slab-overflow-container** for the element that could/should scroll. 
+
 ### Forms
 
-Check the folder [forms](forms) to get an introduction and some examples about how to the design of forms.
+Check the folder [forms](forms) to get an introduction and some examples about how to design forms forms.
 
 ### Borders
 

@@ -10,7 +10,7 @@ In order to do this, you must create your own component and implement the interf
 
 The component will need to export a class in order to get the context. This class must extend from SystelabModalContext. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
 
-It is suggested to define the width and height, or the class, in the context in order to make the dialog allways have the same dimension. For small devices, the dialog will be fullScreen.
+It is suggested to define the width and height, or the class, in the context in order to make the dialog always have the same dimension. For small devices, the dialog will be fullScreen.
 
 Here there is an example:
 
@@ -40,6 +40,7 @@ export class MyDialog implements ModalComponent<MyDialogParameters> {
   }
 }
 ```
+
 In the constructor, a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog.
 
 In order to create the template 'mysuper-dialog.component.html' it is suggested to use the components [systelab-dialog-header](../header) and  [systelab-dialog-bottom](../bottom). You have to take into account that the parent layout is a flex one.
