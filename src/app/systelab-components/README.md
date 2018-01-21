@@ -109,8 +109,20 @@ As this components will be placed in a container, in the following sections you 
 
 ### Layout
 
-To manage the layout, alignment, and sizing of grid columns, navigation, components, ... use Flexbox. 
-Refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/ as a general guide and check https://getbootstrap.com/docs/4.0/utilities/flex/ to better know the utility classes that Bootstrap provides.
+To manage the layout, alignment, and sizing of grid columns, navigation, components, ... you can use the Bootstrap Grid or Flexbox. 
+
+As a general tip:
+
+- If you want to let your content control the way it is displayed, on a row by row or column by column basis, that’s flexbox.
+- Or, if you want to define a grid, and either allow items to be auto-placed into the cells defined by that grid, or control their positioning using line-based positioning or grid template areas, that’s grid.
+
+If still is not clear for you what to do, we suggest:
+
+> Use the grid for forms or layouts where the height is defined by the components. Use flex is the height is important for you, for example when you are defining a application like layout.
+
+For the grid, refer to https://getbootstrap.com/docs/4.0/layout/grid/.
+
+For the Flexbox, refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/ as a general guide and check https://getbootstrap.com/docs/4.0/utilities/flex/ to better know the utility classes that Bootstrap provides.
 
 As a super basic summary:
 

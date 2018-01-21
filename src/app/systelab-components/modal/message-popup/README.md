@@ -1,14 +1,16 @@
 # systelab-message-popup
 
-Clases to show a popup
+Classes to show a popup
 
 ## Using the class
 
-This is not a component by itself, it is a class that lets you show a popup.
+This is not a component by itself, it is a service that lets you show a popup.
 
-In order to do that, you must inject the and instance of MessagePopupService and use it:
+In order to do that, you must inject an instance of MessagePopupService and use it:
 
 ```javascript
+constructor(protected messagePopupService:MessagePopupService) {
+}
 public showError() {
   this.messagePopupService.showErrorPopup('Test', 'Error message popup example', null, 800, 600)
     .subscribe((v) => {
@@ -25,7 +27,7 @@ public showInfo() {
 }
 
 public showQuestion() {
-  this.messagePopupService.showQuestionPopup('Test', 'Estás seguro?')
+  this.messagePopupService.showQuestionPopup('Test', 'Are you sure?')
     .subscribe((v) => {
         console.log('closing');
   });

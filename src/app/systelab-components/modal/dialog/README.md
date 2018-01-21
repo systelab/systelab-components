@@ -42,7 +42,7 @@ export class MyDialog implements ModalComponent<MyDialogParameters> {
 ```
 In the constructor, a parameter with the DialogRef will be received, and you will get the parameters in the context of the dialog.
 
-In order to create the template 'mysuper-dialog.component.html' it is suggested to use components like systelab-dialog-header and systelab-dialog-bottom. You have to take into account that the parent layout is a flex one.
+In order to create the template 'mysuper-dialog.component.html' it is suggested to use the components [systelab-dialog-header](../header) and  [systelab-dialog-bottom](../bottom). You have to take into account that the parent layout is a flex one.
 
 An example could be:
 
