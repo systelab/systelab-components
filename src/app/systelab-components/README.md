@@ -110,7 +110,7 @@ A bunch of different components and utilities are provided as part of the librar
 ### Layout
 
 To manage the layout, alignment, and sizing of grid columns, navigation, components, ... use Flexbox. 
-Refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/ as a general guide and understand https://getbootstrap.com/docs/4.0/utilities/flex/ to better know the utility classes that Bootstrap provides.
+Refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/ as a general guide and check https://getbootstrap.com/docs/4.0/utilities/flex/ to better know the utility classes that Bootstrap provides.
 
 As a super basic summary:
 
@@ -130,7 +130,7 @@ In the following example, the div in the middle will grow:
 ```
 Combine as needed. In this case will have elements placed in the north, south, east, west and in the middle. 
 
-```html`
+```html
 <div class="d-flex flex-column">
     <div class="bg-info">Info</div>
     <div class="slab-flex-1 d-flex flex-row">
@@ -141,14 +141,13 @@ Combine as needed. In this case will have elements placed in the north, south, e
     </div>
     <div class="bg-white">White</div>
 </div>
-
-``
+```
 
 Use **.ml-auto** in a flex container if you want to push the item to the left.
 
 ### Forms
 
-Check the folder forms to get an introduction and some examples about the design of forms.
+Check the folder [forms](forms) to get an introduction and some examples about the design of forms.
 
 ### Borders
 
