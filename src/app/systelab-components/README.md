@@ -1,8 +1,12 @@
 # systelab-components
 
+systelab-components is a set of components that use wide accepted and adopted standard technologies like Angular and Bootstrap, as well as other popular libraries. Please read the ATTRIBUTION.md file for a complete list of dependencies.
+
+Bootstrap 4 knowledge will be very useful to understand and use the library, as we rely on it.
+                                                    
 ## Using the library
 
-First, you have to add the package in your package.json
+In order to use the library, the first thing will be add the package in your package.json
 
 ```bash
 npm install systelab-components --save
@@ -28,6 +32,7 @@ After, you must add the following styles and scripts in the .angular-cli.json fi
 ```
 
 After, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
+
 ```javascript
 NgModule({
 	imports: [
@@ -63,21 +68,21 @@ In the following example, for the component AppComponent, we have created and ad
 })
 export class AppComponent {
 
-	public currentTab = 1;
-
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
         ...
 	}
 }
 ```
 
-In the sass file app.component.scss, we have imported the bootstrap and systelab-component sass styles.
+In the sass file app.component.scss, we have imported the Bootstrap and systelab-component sass styles.
 
 ```sass
 @import "../systelab-components/styles/sass/systelab-bootstrap-settings";
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../systelab-components/styles/sass/systelab-components";
 ```
+
+Notice that the bootstrap package is a dependency for systelab-components, and npm will download it.
 
 ### Changing the default style
 
@@ -95,3 +100,60 @@ $primary-color: rgb(0, 154, 181);
 All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](src/app/systelab-components/styles/sass/_variables.scss) can be overwritten here.
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
+
+## Components
+
+A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples.
+
+## Implementing a User Interface
+
+### Layout
+
+To manage the layout, alignment, and sizing of grid columns, navigation, components, ... use Flexbox. 
+Refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/ as a general guide and understand https://getbootstrap.com/docs/4.0/utilities/flex/ to better know the utility classes that Bootstrap provides.
+
+As a super basic summary:
+
+- Use **.d-flex** to set a flex box container. By default the container will arrange the elements in a single row. Use **flex-column** to arranges the items in a column.
+- Use **justify-content-end**, **justify-content-center**, **justify-content-between**, **justify-content-around** if they are needed.
+- Place your elements inside the box container and use **.slab-flex-1** in the element that you want to grow (internally applies the style flex: 1).
+- Apply the same pattern to the containers that you place inside to get more complex layouts. 
+
+In the following example, the div in the middle will grow:
+
+```html
+<div class="d-flex flex-column">
+    <div class="bg-info">Info</div>
+    <div class="slab-flex-1 bg-success"></div>
+    <div class="bg-white">White</div>
+</div>
+```
+Combine as needed. In this case will have elements placed in the north, south, east, west and in the middle. 
+
+```html`
+<div class="d-flex flex-column">
+    <div class="bg-info">Info</div>
+    <div class="slab-flex-1 d-flex flex-row">
+        <div class="bg-warning">Warning</div>
+        <div class="slab-flex-1 bg-success">
+        </div>
+        <div class="bg-danger">Danger</div>
+    </div>
+    <div class="bg-white">White</div>
+</div>
+
+``
+
+Use **.ml-auto** in a flex container if you want to push the item to the left.
+
+### Forms
+
+Check the folder forms to get an introduction and some examples about the design of forms.
+
+### Borders
+
+Check the Bootstrap utilities at https://getbootstrap.com/docs/4.0/utilities/borders/ to add some borders.
+
+As a super basic summary:
+
+Add **.border** and **.rounded** if you want a classical gray rounded border.
