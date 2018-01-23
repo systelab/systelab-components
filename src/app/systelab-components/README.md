@@ -103,9 +103,9 @@ Anyway, think it twice before you change this settings and think in the value of
 
 ## Components
 
-A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples.
+A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples. 
 
-As this components will be placed in a container, in the following sections you will find some tips about how to do it:
+As this components will be placed in a container, in the following sections you will find some tips about how to do it. Please check our [application frame](applicationframe), [dialog](modal/dialog) as a base containers of the layout.
 
 ### Layout
 
