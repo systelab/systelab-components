@@ -8,14 +8,22 @@
   padding-top: 10px;
 }
 
-/*
- * Override Bootstrap style in order to be aligned to the top.
- */
-.col-form-label {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: $input-height !important;
+.form-control {
+  padding-top: 1px;
+  padding-bottom: 1px;
+
+  padding-left: 5px;
+  padding-right: 5px;
+
 }
+
+.col-form-label {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0; // Override the `<label>` default
+  line-height: 26px !important;
+}
+
 
 .slab-mh-ft {
   max-height: fit-content;

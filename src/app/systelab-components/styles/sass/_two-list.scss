@@ -13,11 +13,6 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
     flex: 1 0 $single-list-width;
     min-width: $single-list-width;
 
-    input {
-      padding: 5px;
-      border-radius: 5px;
-      border-color: $medium-gray;
-    }
     @media (max-width: 1024px) {
       input {
         display: none;

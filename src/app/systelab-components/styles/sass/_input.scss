@@ -2,12 +2,10 @@
  * 1. Override Bootstrap default behavior
  */
 %input {
-  height: $input-height;
   border-color: $medium-gray;
   border-radius: $border-radius;
   font-family: $base-body-font-family;
-  padding: ($input-height - $base-font-size - 2px) / 2 6px;
-  
+
   &:focus {
     border-color: $form-focus-border; /* [1] */
     background-color: $form-focus-background; /* [1] */
@@ -16,8 +14,8 @@
   }
 }
 
-.slab-input-simulator,
-input {
+.slab-input-simulator
+ {
   &.form-control {
     @extend %input;
   }
@@ -55,8 +53,6 @@ input {
   }
 
   font {
-    line-height: $input-height;
-    height: $input-height;
     display: inline-block;
     position: relative;
     bottom: 4px;
@@ -68,6 +64,7 @@ input {
  * 1 - Button will be always squared
  * 2 - Hide the actual input file and place it on top of the button so user can click there
  */
+
 .slab-input-file {
   width: 100%;
 
@@ -76,7 +73,7 @@ input {
     display: inline-block;
 
     + div.btn {
-      @include size($form-elements-height); /* 1 */
+      @include size($form-elements-height);
 
       min-width: $form-elements-height;
       min-height: $form-elements-height;
@@ -89,7 +86,7 @@ input {
 
   input[type="file"] {
     @include size(#{$form-elements-height});
-    @include position(absolute, $top: -2px, $right: -1px); /* 2 */
+    @include position(absolute, $top: -2px, $right: -1px);
     @include opacity(0);
     cursor: pointer !important;
   }

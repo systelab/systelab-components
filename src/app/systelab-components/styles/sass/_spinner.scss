@@ -1,5 +1,4 @@
-.slab-spinner {
-  display: flex;
+.slab-spinner-container {
 
   /**
    * 1. An input element, unlike a div, comes with an intrinsic width. We
@@ -47,11 +46,3 @@
   }
 }
 
-.row {
-  .slab-spinner-minus,
-  .slab-spinner-plus {
-    line-height: $input-height !important;
-    min-height: $input-height !important;
-
-  }
-}

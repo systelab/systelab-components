@@ -1,15 +1,15 @@
-<div class="slab-spinner">
-    <button [class.disabled]="isDisabled" (click)="minus()" class="btn square slab-spinner-minus">
+<div class="slab-spinner-container d-flex align-items-stretch">
+    <button [class.disabled]="isDisabled" (click)="minus()" class="btn slab-spinner-minus">
         <span class="icon-minus-thin"></span>
     </button>
 
     <input [class.disabled]="isDisabled" name="sp" [(ngModel)]="valueStr"
-        class="form-control slab-spinner-input" type="text"
+        class="slab-flex-1 form-control slab-spinner-input" type="text"
         (keypress)="checkKey($event)"
         (blur)="checkValue(valueStr)"
         autocomplete="off">
 
-    <button [class.disabled]="isDisabled" (click)="plus()" class="btn square slab-spinner-plus">
+    <button [class.disabled]="isDisabled" (click)="plus()" class="btn slab-spinner-plus">
         <span class="icon-plus-thin"></span>
     </button>
 </div>

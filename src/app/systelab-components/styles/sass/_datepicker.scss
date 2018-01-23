@@ -11,15 +11,7 @@ $icon-margin-left: 40px;
 
 p-calendar {
   .ui-calendar {
-    margin-top: 0px !important;
-    input {
-      @extend %input;
 
-      &:focus {
-        -webkit-box-shadow: none;
-        box-shadow: none;
-      }
-    }
   }
   &.input-expand-height {
     input {
@@ -191,8 +183,8 @@ p-calendar {
 }
 
 .ui-inputtext {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 1px;
+  padding-bottom: 1px;
   width: 100%;
 }
 
@@ -230,18 +222,6 @@ systelab-date-time {
       margin: auto;
       margin-left: 1px;
       margin-right: 1px;
-    }
-    systelab-spinner {
-      height: 100%;
-      .btn {
-        height: 100% !important;
-        button {
-          height: 100% !important;
-        }
-      }
-      .tsinput {
-        height: 100% !important;
-      }
     }
   }
 }
