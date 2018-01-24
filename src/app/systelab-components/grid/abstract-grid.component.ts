@@ -1,15 +1,15 @@
-import { ViewChild, ElementRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { GridOptions, ColDef, Column, RowNode } from 'ag-grid';
-import { GridContextMenuComponent } from './contextmenu/grid-context-menu.component';
-import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
-import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
-import { TwoListItem } from '../twolist/two-list.component';
-import { DialogService } from '../modal/dialog/dialog.service';
-import { GridOptionsDialog, GridOptionsDialogParameters } from './options/grid-options-dialog.component';
-import { GridColumnsOptions } from './grid-column-options';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { StylesUtilService } from '../utilities/styles.util.service';
+import {ViewChild, ElementRef, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {GridOptions, ColDef, Column, RowNode} from 'ag-grid';
+import {GridContextMenuComponent} from './contextmenu/grid-context-menu.component';
+import {GridContextMenuOption} from './contextmenu/grid-context-menu-option';
+import {GridContextMenuActionData} from './contextmenu/grid-context-menu-action-data';
+import {TwoListItem} from '../twolist/two-list.component';
+import {DialogService} from '../modal/dialog/dialog.service';
+import {GridOptionsDialog, GridOptionsDialogParameters} from './options/grid-options-dialog.component';
+import {GridColumnsOptions} from './grid-column-options';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
+import {StylesUtilService} from '../utilities/styles.util.service';
 
 export type rowSelectionType = 'single' | 'multiple';
 
@@ -54,12 +54,12 @@ export abstract class AbstractGrid<T> implements OnInit {
 			this.gridOptions.suppressRowClickSelection = true;
 			this.gridOptions.icons = {
 				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked()
+				checkboxChecked: this.getCheckboxChecked()
 			};
 		} else if (this.showChecks) {
 			this.gridOptions.icons = {
 				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked()
+				checkboxChecked: this.getCheckboxChecked()
 			};
 		}
 		this.menu = this.getContextMenuOptions();
@@ -84,6 +84,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	public onModelUpdated(event: any) {
+		this.gridOptions.api.sizeColumnsToFit();
 		return event;
 	}
 
@@ -118,7 +119,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			const gridOptions = this.gridOptions;
 			const filteredGridOptionsPreferences: Array<any> = [];
 			gridOptionsPreferences
-				.forEach(function(colPref) {
+				.forEach(function (colPref) {
 					if (gridOptions.columnApi.getAllColumns()
 							.find((column: any) => colPref.colId === column.getColId())) {
 						filteredGridOptionsPreferences.push(colPref);
@@ -127,16 +128,16 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 			// Show new added columns
 			this.gridOptions.columnApi.getAllColumns()
-				.forEach(function(column) {
+				.forEach(function (column) {
 					if (!filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId())) {
 
 						const newColumn: any = {
-							'colId':         column.getColId(),
-							'hide':          !column.isVisible(),
-							'aggFunc':       null,
-							'width':         column.getActualWidth(),
-							'pivotIndex':    null,
-							'pinned':        null,
+							'colId': column.getColId(),
+							'hide': !column.isVisible(),
+							'aggFunc': null,
+							'width': column.getActualWidth(),
+							'pivotIndex': null,
+							'pinned': null,
 							'rowGroupIndex': null
 						};
 
@@ -151,7 +152,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			// Set to null width of preferences of columns without supressSizeToFit
 			// If not set to null these columns are not sizedtofit
 			this.gridOptions.columnApi.getAllColumns()
-				.forEach(function(column) {
+				.forEach(function (column) {
 					if (!column.getColDef().suppressSizeToFit) {
 						const columnPref: any = filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId());
 						columnPref.width = null;
@@ -170,25 +171,25 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		if (this.getContextMenuOptions() && this.getContextMenuOptions().length > 0) {
 			colDefs.unshift({
-				colId:                 AbstractGrid.contextMenuColId,
-				headerName:            '',
-				width:                 this.getContextMenuColumnWidth(),
-				suppressSizeToFit:     true,
-				suppressResize:        true,
-				suppressMovable:       true,
+				colId: AbstractGrid.contextMenuColId,
+				headerName: '',
+				width: this.getContextMenuColumnWidth(),
+				suppressSizeToFit: true,
+				suppressResize: true,
+				suppressMovable: true,
 				cellRendererFramework: GridContextMenuComponent
 			});
 		}
 		if (this.showChecks) {
 			// .headerCheckboxSelection is not supported for 'infinite' rowModelType
 			colDefs.unshift({
-				colId:             'selectCol',
-				headerName:        '',
+				colId: 'selectCol',
+				headerName: '',
 				checkboxSelection: true,
-				width:             this.getCheckColumnWidth(),
+				width: this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
-				suppressResize:    true,
-				suppressMovable:   true
+				suppressResize: true,
+				suppressMovable: true
 			});
 		}
 
@@ -292,7 +293,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(function(columnDef: ColDef) {
+		colDefs.forEach(function (columnDef: ColDef) {
 			if (columnDef.width) {
 				columnDef.suppressSizeToFit = true;
 			}
@@ -348,7 +349,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		// initial & available
 		this.gridOptions.columnApi.getAllColumns()
-			.forEach(function(column: Column) {
+			.forEach(function (column: Column) {
 				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, false, false);
 				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId)
 						.isVisible()) {
@@ -359,7 +360,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		// visible
 		this.gridOptions.columnApi.getAllDisplayedColumns()
-			.forEach(function(column) {
+			.forEach(function (column) {
 				if (column.getColId() !== 'contextMenu') {
 					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, false, true);
 					options.visible.push(item);
@@ -390,7 +391,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			numberOfFixedInitialColumns = 1;
 		}
 
-		options.visible.forEach(function(tlp, index) {
+		options.visible.forEach(function (tlp, index) {
 			const col: Column = this.gridOptions.columnApi.getAllColumns()
 				.find((column: Column) => column.getColDef().headerName === tlp.displayName);
 			col.setVisible(true);
@@ -398,7 +399,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		}, this);
 
 		this.gridOptions.columnApi.getAllColumns()
-			.forEach(function(column) {
+			.forEach(function (column) {
 				if (column.getColId() !== 'contextMenu') {
 					if (!options.visible.find(tlp => tlp.displayName === column.getColDef().headerName)) {
 						this.gridOptions.columnApi.setColumnVisible(column.getColId(), false);

@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { RowNode } from 'ag-grid';
-import { AbstractSearcher } from './abstract-searcher';
-import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
-import { DialogService } from '../modal/dialog/dialog.service';
-import { Observable } from 'rxjs/Observable';
+import {Component, Input} from '@angular/core';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
+import {RowNode} from 'ag-grid';
+import {AbstractSearcher} from './abstract-searcher';
+import {AbstractApiGrid} from '../grid/abstract-api-grid.component';
+import {DialogService} from '../modal/dialog/dialog.service';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
-	selector:    'systelab-internal-searcher-table',
+	selector: 'systelab-internal-searcher-table',
 	templateUrl: '../grid/abstract-grid.component.html'
 
 })
@@ -73,7 +73,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 	}
 
 	public onModelUpdated(event: any) {
-		this.gridOptions.api.sizeColumnsToFit();
+		super.onModelUpdated(event);
 		if (this.multipleSelection) {
 
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
