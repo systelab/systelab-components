@@ -55,7 +55,7 @@ $combo-button-width: 32px;
     border: solid 1px #d6d6d6;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    height: 26px;
+    height: $input-height;
   }
 
   .slab-color-tag {

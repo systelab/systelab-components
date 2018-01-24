@@ -21,7 +21,7 @@
   padding-top: 0;
   padding-bottom: 0;
   margin-bottom: 0; // Override the `<label>` default
-  line-height: 26px !important;
+  line-height: $input-height !important;
 }
 
 
