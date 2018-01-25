@@ -4,7 +4,7 @@
 %input {
   border-color: $medium-gray;
   border-radius: $border-radius;
-  font-family: $base-body-font-family;
+  font-family: $slab-base-body-font-family;
 
   &:focus {
     border-color: $form-focus-border; /* [1] */
@@ -29,11 +29,6 @@
   }
 }
 
-.disabled {
-  label {
-    color: $disabled;
-  }
-}
 
 /**
  * We need to replicate the input styling for all the divs with the class slab-input-simulator

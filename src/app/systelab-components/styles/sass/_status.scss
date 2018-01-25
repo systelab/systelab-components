@@ -10,7 +10,7 @@ $status-size: 20px;
   display: inline-block;
   vertical-align: middle;
   line-height: 1em;
-  background-color: $selected;
+  background-color: $slab-selected-background-color;
   border-radius: 3px;
 
   > * {

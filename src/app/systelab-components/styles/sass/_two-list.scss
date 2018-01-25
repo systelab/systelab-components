@@ -1,6 +1,6 @@
 
 /* $twolist-row-height: define the row height*/
-$twolist-row-height: ceil(35px * $size_percentage) !default;
+$twolist-row-height: ceil(35px * $slab-size-percentage) !default;
 
 .slab-twolist {
   display: -webkit-flex;
@@ -38,7 +38,7 @@ $twolist-row-height: ceil(35px * $size_percentage) !default;
         }
 
         .slab-twolistboxrowselected {
-          background-color: $selected-elements;
+          background-color: $slab-selected-background-color;
           padding-left: 5px;
         }
 

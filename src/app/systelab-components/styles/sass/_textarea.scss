@@ -1,7 +1,7 @@
 /* $slab-textarea-width: defines the width of the textarea when the w-* class is not present.*/
 $slab-textarea-width: $input-width !default;
 /* $slab-textarea-min-height: defines the min-height of the textarea.*/
-$slab-textarea-min-height: ceil(170px * $size_percentage) !default;
+$slab-textarea-min-height: ceil(170px * $slab-size-percentage) !default;
 
 
 .slab-textarea {

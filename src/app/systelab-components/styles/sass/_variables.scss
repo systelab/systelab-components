@@ -1,8 +1,11 @@
 @import "mixins";
 
-/************** SHARED - start ****************************************************************************************/
-/* $size_percentage: Change the component size */
-$size_percentage: 0.7 !default;
+// Internal variable to help set the size
+$slab-size-percentage: 0.7 !default;
+// Internal variable to set the font size
+$slab-base-font-size: 15px !default;
+
+// TBD
 /* $form-elements-height: Defines the line height;
                           in btn-medium” we redefine the line-height and the max-height of the medium size button and the size,
                             the min-width and the min-height of a square button;
@@ -13,62 +16,53 @@ $size_percentage: 0.7 !default;
                           defines the line-height of the uk-line-height class;
                           used to calculate the $top-icon value;
                           used to calculate the line-height of the label inside the switch class */
-$form-elements-height: ceil(35px * $size_percentage) !default;
+$form-elements-height: ceil(35px * $slab-size-percentage) !default;
 
-$base-font-size: 15px !default;
-/* $base-body-font-size: used in the agGrid
-                         used in the comboBox */
-$base-body-font-size: $base-font-size unquote("/") ceil($base-font-size * 1.25) !default;
-/* $base-body-font-family: defines the application font
-                           defines the font-size of the inputs preceded by a uk-form */
-$base-body-font-family: Arial Unicode MS, Arial, sans-serif !default;
-/************** SHARED - end ******************************************************************************************/
 
-/*************** RESPONSIVE - start ***********************************************************************************/
 
-$ipad-width: 1024px !default;
-/* ************* RESPONSIVE - end *************************************************************************************/
+// Defines the application font size
+$slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-font-size * 1.25) !default;
+// Defines the application font family
+$slab-base-body-font-family: Arial Unicode MS, Arial, sans-serif !default;
+// Defines the appication body color
+$slab-base-body-color: rgb(66, 66, 66) !default;
 
-/************** MAIN APPLICATION - start ******************************************************************************/
-/* $app-min-width: defines the minimum width of the body */
-$app-min-width: 367px !default;
-/* $app-min-height: defines the minimum height of the body */
-$app-min-height: 375px !default;
-/* $header-height: application header height
-                   used in the sidebar */
-$header-height: 56px !default;
-/* $user-width: defines the width of the user area in the main screen*/
-$user-width: 130px !default;
-/************** MAIN APPLICATION - end ********************************************************************************/
+// Defines the ipad
+$slab-ipad-width: 1024px !default;
 
-/************** BUTTON - start ****************************************************************************************/
-/* $button-large-height: defines the min-height and the line-height of the button when is large */
-$button-large-height: max(34px, ceil(40px * $size_percentage)) !default;
-/* $slab-dialog-button-width: defines the minimum width of the button */
-$slab-dialog-button-width: 85px !default;
-/************** BUTTON - end ******************************************************************************************/
+// Defines the minimum width of the body
+$slab-app-min-width: 367px !default;
+// defines the minimum height of the body
+$slab-app-min-height: 375px !default;
+// Defines the application header height
+$slab-app-header-height: 56px !default;
+// Defines the width of the user area in the application header
+$slab-app-header-user-width: 130px !default;
 
-/************** CHARTS - start ****************************************************************************************/
-/* $chart-header-height: defines the height of the chart header;
-                         the height of the dropdown inside the cart;
-                         defines the size of the cell inside the dropdown
-                         used in QC Compare and QC Levey Jennings Charts */
-$chart-header-height: $form-elements-height + ceil(10 * $size_percentage) !default;
-/************** CHARTS - end ******************************************************************************************/
+// Defines the height of the dialogs header
+$slab-dialog-header-height: max(45px, ceil(60px * $slab-size-percentage)) !default;
 
-/************** CHECKBOX - start **************************************************************************************/
-/* $checkbox-height: used to define the height and the line-height of the input,
-                       the padding left if the input is empty,
-                       the size and the font-size of the input’s before attribute.*/
-$checkbox-height: max(19px, $form-elements-height - 16px) !default;
-/************** CHECKBOX - end ******************************************************************************************/
 
-/************** DROPDOWN and Tree - start *****************************************************************************/
-/* $dropdown-line-height: defines the row line-height of the dropdown;
-                          defines the row line-height of the tree */
-$dropdown-line-height: $form-elements-height !default;
-/************** DROPDOWN - end ****************************************************************************************/
+// Defines the min-height and the line-height of the button when is large */
+$button-large-height: max(34px, ceil(40px * $slab-size-percentage)) !default;
+// Defines the minimum width for the button
+$slab-minimum-button-width: 85px !default;
 
+
+// Defines the height of the tab
+$slab-tab-height: ceil(38px * $slab-size-percentage) !default;
+// Defines the min-width of the tab
+$slab-tab-min-width: 120px !default;
+// Define the top margin and the gutter between tab elements
+$slab-tab-space: 5px;
+
+// Define the height and the line-height of the input,
+$slab-checkbox-height: max(19px, $form-elements-height - 16px) !default;
+
+// Defines the row line-height of the dropdown and the row line-height of the tree
+$slab-dropdown-line-height: $form-elements-height !default;
+
+// TBD
 /************** INPUT - start *****************************************************************************************/
 /* $input-width: defines the width of the input preceded by a uk-form that has not the class uk-width;
                  defines the width of the slab-form-icon when it has not the class uk-width;
@@ -77,47 +71,21 @@ $input-width: 100% !default;
 $input-height: 26px;
 /************** INPUT - end *******************************************************************************************/
 
-/************** FORMS - start *****************************************************************************************/
-/* $form-row-gutter: defines the margin-top of the uk-grid-small when it’s preceded by other uk-grid-small;
-                     defines the margin-top of the uk-form-row when it’s preceded by other uk-form-row */
-$form-row-gutter: ceil(5px * $size_percentage) !default;
-/************** FORMS - end *******************************************************************************************/
 
-/************** slab-dialog - start **************************************************************************************/
-/* $slab-dialog-header-height: defines the max-height of the slab-dialog-header; */
-$slab-dialog-header-height: max(45px, ceil(60px * $size_percentage)) !default;
-/************** slab-dialog - end ****************************************************************************************/
+// Defines the width of the searcher button
+$slab-searcher-button-width: $form-elements-height !default;
 
-/************** NGSEARCHER - start ************************************************************************************/
-/* $ng-searcher-button-width: defines the width of the searcher button */
-$ng-searcher-button-width: $form-elements-height !default;
-/************** NGSEARCHER - end **************************************************************************************/
+// Defines the default width of the spinner
+$slab-spinner-width: 100px !default;
 
-/************** TABLE - start *****************************************************************************************/
-/* $table-left-header-width: defines the width of the left-header inside a uk-table.*/
-$table-left-header-width: 200px !default;
-/************** TABLE - end *******************************************************************************************/
-
-/************** TABS - start ******************************************************************************************/
-/* $tab-height: used to calculate the $height-diff value;
-                defines the height of the tab elements inside a uk-form;
-                defines the height of the li elements inside the previous tab;
-                defines the top position of all elements inside the tab;
-                defines the top value of the uk-margin-small-top, uk-margin-top and uk-margin-large-top.*/
-$tab-height: ceil(38px * $size_percentage) !default;
-/* $tab-min-width: defines the min-width of the tabs.*/
-$tab-min-width: 120px !default;
-/* $tab-space: used to define the top margin and the gutter between elements */
-$tab-space: 5px;
-/************** TABS - end ******************************************************************************************/
 
 /************** GRID - start ****************************************************************************************/
 /* $grid-header-height: defines the height of the ui-grid-header-cell;
                           used to define the size of the grid-action-cell class */
-$grid-header-height: $form-elements-height + ceil(8 * $size_percentage) !default;
+$grid-header-height: $form-elements-height + ceil(8 * $slab-size-percentage) !default;
 /* $grid-header-line-height: defines the line-height of the ui-grid-header-cell.
                                defines the header-line-height of the agGrid */
-$grid-header-line-height: $grid-header-height - $base-font-size + 2 !default;
+$grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
 /* $grid-cell-height: defines the height and the min-height of the ui-grid-row;
                         defines the height and the min-height of the ui-grid-cell;
                         defines the line-height of the ui-grid-cell-contents;
@@ -126,16 +94,16 @@ $grid-header-line-height: $grid-header-height - $base-font-size + 2 !default;
                         defines the height of the ui-grid-cell-height;
                         defines the font-size of the uk-text-large;
                         used to calculate the size of the grid-acion-cell element */
-$grid-cell-height: $form-elements-height + ceil(4 * $size_percentage) !default;
+$grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
 /* $grid-cell-line-height: defines the line-height of the ui-grid-cell
                              defines the line-height of the combo-button */
-$grid-cell-line-height: $grid-cell-height - $base-font-size + 2 !default;
+$grid-cell-line-height: $grid-cell-height - $slab-base-font-size + 2 !default;
 /************** GRID - end ******************************************************************************************/
 
-/* $touchspin-width: defines the width of the touchspin.*/
-$slab-spinner-width: 100px !default;
 
 
+
+$slab-selected-background-color: rgb(200, 223, 252) !default;
 
 
 
@@ -143,7 +111,7 @@ $slab-spinner-width: 100px !default;
 
 $primary-color: rgb(21, 143, 239) !default;
 $secondary-color: rgb(66, 66, 66) !default;
-$base-body-color: $secondary-color !default;
+
 
 
 //Grayscale
@@ -153,8 +121,6 @@ $background-hemohub: rgb(235, 235, 235) !default;
 $form-border: rgb(221, 221, 221) !default;
 $medium-gray: rgb(214, 214, 214) !default;
 $actions-separator: rgb(192, 192, 192) !default;
-$disabled: rgb(169, 169, 169) !default;
-$nr: $disabled !default;
 $table-gray: rgb(149, 149, 149) !default;
 $dark-gray: rgb(128, 128, 128) !default;
 $darker-gray: rgb(45, 45, 45) !default;
@@ -171,7 +137,7 @@ $form-focus-background: rgb(245, 251, 254) !default;
 
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: $primary-color !default;
-$slab-slider-background-color: $actions-separator !default;
+$slab-slider-background-color: rgb(192, 192, 192) !default;
 
 $checkbox-border-color: $primary-color !default;
 $checkbox-color: white !default;
@@ -179,39 +145,38 @@ $checkbox-color: white !default;
 $radio-border-color: $primary-color !default;
 $radio-color: white !default;
 
-$switch-bg-color: transparent !default;
-$switch-circle-color: $dark-gray !default;
-$switch-bg-color-checked: $primary-color !default;
-$switch-circle-color-checked: white !default;
 
 $table-row-odd-background-color: rgb(243, 243, 243) !default;
 $table-row-even-background-color: rgb(253, 253, 253) !default;
-$table-row-selected-background-color: rgb(201, 221, 225) !default;
+$table-row-selected-background-color: $slab-selected-background-color !default;
 
-$combo-selected-color: rgb(200, 223, 252) !default;
+
+$slab-switch-bg-color: transparent !default;
+$slab-switch-circle-color: $dark-gray !default;
+$slab-switch-bg-color-checked: $primary-color !default;
+$slab-switch-circle-color-checked: white !default;
+$slab-switch-height: max(22px, $form-elements-height - 6px) !default;
+
 
 // Component specific / status colors
 $error-message-text: rgb(255, 51, 45) !default;
 $error: rgb(215, 56, 45) !default;
 
-
+$dark-green: rgb(4, 123, 87) !default;
+$darker-green: rgb(47, 148, 60) !default;
 
 
 // To be moved
-$in: $error !default;
+$in: rgb(215, 56, 45) !default;
+$nr: rgb(169, 169, 169) !default;
 $tbr: rgb(249, 136, 0) !default;
 $pr: rgb(255, 188, 0) !default;
 $pl: rgb(255, 217, 0) !default;
 $fv: rgb(174, 222, 51) !default;
 $tv: rgb(40, 189, 35) !default;
-$dark-green: rgb(4, 123, 87) !default;
-$darker-green: rgb(47, 148, 60) !default;
-$pending: rgb(0, 143, 173) !default;
-$ol: $pending !default;
+$ol: rgb(0, 143, 173) !default;
 $wr: rgb(232, 179, 255) !default;
 
-$selected-elements: rgb(234, 248, 250) !default;
 $results: rgb(153, 0, 51) !default;
 $pending: rgb(255, 200, 200) !default;
-$selected: rgb(165, 221, 229) !default;
 $partial: rgb(255, 255, 152) !default;

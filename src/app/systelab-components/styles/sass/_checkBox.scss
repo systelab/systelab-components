@@ -1,5 +1,5 @@
 /* $checkbox-text-gap: defines the padding-left of the input.*/
-$checkbox-text-gap: $checkbox-height * 1.5 !default;
+$checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
 // Hide native checkbox
 input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
@@ -10,7 +10,7 @@ input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
 
 // Styles for label after checkbox
 input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
-  $top-icon: ($form-elements-height - $checkbox-height) / 2;
+  $top-icon: ($form-elements-height - $slab-checkbox-height) / 2;
 
   @include user-selection(none);
 
@@ -22,11 +22,11 @@ input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
   font-size: 1rem;
 
   &:empty {
-    padding-left: $checkbox-height;
+    padding-left: $slab-checkbox-height;
   }
 
   &:before {
-    @include size($checkbox-height);
+    @include size($slab-checkbox-height);
 
     @include position(absolute, $top: 1px, $left: 0);
 
@@ -43,7 +43,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
 
     font-weight: bold;
     font-family: icomoon;
-    font-size: $checkbox-height - 3px;
+    font-size: $slab-checkbox-height - 3px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -65,8 +65,8 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
 
 @mixin selection-checkbox() {
   .slab-grid-checkbox-unchecked {
-    width: $checkbox-height;
-    height: $checkbox-height;
+    width: $slab-checkbox-height;
+    height: $slab-checkbox-height;
     position: absolute;
     top: 4px;
     left: 4px;
@@ -80,15 +80,15 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     border-radius: 4px;
     border: solid 1px $medium-gray;
     content: '';
-    font-size: $checkbox-height - 3px;
+    font-size: $slab-checkbox-height - 3px;
     color: $checkbox-color;
     box-sizing: border-box;
     margin-top: -1px !important;
   }
 
   .slab-grid-checkbox {
-    width: $checkbox-height;
-    height: $checkbox-height;
+    width: $slab-checkbox-height;
+    height: $slab-checkbox-height;
     position: absolute;
     top: 4px;
     left: 4px;
@@ -102,7 +102,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     border-radius: 4px;
     border: solid 1px $medium-gray;
     content: '';
-    font-size: $checkbox-height - 3px;
+    font-size: $slab-checkbox-height - 3px;
     color: $checkbox-color;
     box-sizing: border-box;
     margin-top: -1px !important;
@@ -112,13 +112,13 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     font-family: "FontAwesome" !important;
     content: '\F00d';
     background-color: #158fef;
-    width: $checkbox-height;
-    height: $checkbox-height;
+    width: $slab-checkbox-height;
+    height: $slab-checkbox-height;
     position: absolute;
     top: 0;
     left: 0;
     line-height: 1em;
-    font-size: $checkbox-height - 3px;
+    font-size: $slab-checkbox-height - 3px;
     color: $checkbox-color;
     border-radius: 4px;
     border: solid 1px $checkbox-border-color;

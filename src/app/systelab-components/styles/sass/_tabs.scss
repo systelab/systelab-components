@@ -6,19 +6,19 @@
 
   > .nav-item {
     background-color: $background-hemohub;
-    padding-top: 2 * $tab-space;
-    margin-right: $tab-space;
+    padding-top: 2 * $slab-tab-space;
+    margin-right: $slab-tab-space;
 
     > .nav-link {
       height: 100%;
-      line-height: $tab-height;
+      line-height: $slab-tab-height;
       color: $background;
       text-shadow: none;
       background-color: $secondary-color;
       border-top: 3px solid $secondary-color;
       margin-left: 0;
       padding: 0 12px;
-      min-width: $tab-min-width;
+      min-width: $slab-tab-min-width;
       text-align: center;
       border-radius: 4px 4px 0 0;
 

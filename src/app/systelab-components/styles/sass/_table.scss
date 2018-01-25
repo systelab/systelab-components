@@ -1,24 +1,10 @@
 /* $table-min-row-height: defines the height of the tr elements inside a table.*/
 $table-min-row-height: $form-elements-height !default;
-/* $table-row-padding: defines the padding of the td elements inside the table tr.*/
-$table-row-padding: $form-row-gutter !default;
 
 .table {
 
   tr {
     height: $table-min-row-height;
-  }
-
-  &.left-header {
-    border-right: 1px solid $form-border;
-    width: $table-left-header-width;
-    overflow-x: scroll;
-
-    tbody {
-      @include size(100%);
-
-      display: table;
-    }
   }
 }
 

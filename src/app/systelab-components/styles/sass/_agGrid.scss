@@ -1,6 +1,6 @@
 /* This styles are used to override the default ag-grid styles (https://www.ag-grid.com).*/
 
-$checkbox-text-gap: $checkbox-height * 1.5 !default;
+$checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
 $icon-rowaction-font-size: 20px;
 
@@ -72,7 +72,7 @@ $icon-rowaction-font-size: 20px;
 .ag-fresh .ag-root {
   border: none;
   overflow: hidden;
-  font: normal $base-body-font-size $base-body-font-family;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
   .ag-header {
     border-bottom: none;

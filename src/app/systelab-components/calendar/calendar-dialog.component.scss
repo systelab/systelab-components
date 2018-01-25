@@ -11,7 +11,7 @@
     color: #444;
 
     &.ui-state-highlight {
-      background-color: $selected !important;
+      background-color: $slab-selected-background-color !important;
     }
     &.is-holiday {
       color: red;

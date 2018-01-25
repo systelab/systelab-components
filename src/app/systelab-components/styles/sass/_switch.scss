@@ -1,30 +1,23 @@
 
-$switch-bg-color: transparent !default;
-$switch-circle-color: $dark-gray !default;
-$switch-bg-color-checked: $primary-color !default;
-$switch-circle-color-checked: white !default;
-
-
-$switch-height: max(22px, $form-elements-height - 6px) !default;
 
 
 .slab-switch {
 
-  $ball-size: $switch-height - 8px;
-  $top-icon: ceil(($form-elements-height - $switch-height) / 2);
+  $slab-ball-size: $slab-switch-height - 8px;
+  $slab-top-icon: ceil(($form-elements-height - $slab-switch-height) / 2);
 
-  background: $switch-bg-color;
-  border-radius: ($switch-height / 2) !important;
+  background: $slab-switch-bg-color;
+  border-radius: ($slab-switch-height / 2) !important;
 
   border: 1px solid #dfdfdf;
   position: relative;
   display: inline-block;
   box-sizing: content-box;
   overflow: hidden;
-  width: $switch-height * 2 - 4px;
-  height: $switch-height - 2px;
+  width: $slab-switch-height * 2 - 4px;
+  height: $slab-switch-height - 2px;
   vertical-align: middle;
-  margin-top: $top-icon !important;
+  margin-top: $slab-top-icon !important;
 
   padding: 0;
   margin: 0;
@@ -36,8 +29,8 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
   top: -1px;
 
   .slab-tick {
-    @include size($ball-size);
-    background: $switch-circle-color;
+    @include size($slab-ball-size);
+    background: $slab-switch-circle-color;
     box-shadow: none; /* 1 */
     border-radius: 40px !important;
     position: absolute;
@@ -47,12 +40,12 @@ $switch-height: max(22px, $form-elements-height - 6px) !default;
   }
 
   &.checked {
-    background: $switch-bg-color-checked;
-    border-color: $switch-bg-color-checked;
+    background: $slab-switch-bg-color-checked;
+    border-color: $slab-switch-bg-color-checked;
 
     .slab-tick {
-      background: $switch-circle-color-checked;
-      left: $switch-height;
+      background: $slab-switch-circle-color-checked;
+      left: $slab-switch-height;
     }
   }
   &.disabled {

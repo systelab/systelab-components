@@ -89,7 +89,7 @@ Notice that the Bootstrap package is a dependency for systelab-components, and n
 To change the default Bootstrap or systelab-components settings like colors, border-radius, etc, add or change the value of the property in the scss file before importing the standard. For example:
 
 ```sass
-$size_percentage: 1;
+$slab-size-percentage: 1;
 $primary-color: rgb(0, 154, 181);
 
 @import "../systelab-components/styles/sass/systelab-bootstrap-settings";

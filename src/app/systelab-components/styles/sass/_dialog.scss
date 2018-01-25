@@ -24,9 +24,9 @@
  */
 
 $content-border-width: 4px;
-$footer-buttons-offset: ceil(16px * $size_percentage);
-$button-size: ceil(54px * $size_percentage);
-$button-fontsize: ceil(32px * $size_percentage);
+$footer-buttons-offset: ceil(16px * $slab-size-percentage);
+$button-size: ceil(54px * $slab-size-percentage);
+$button-fontsize: ceil(32px * $slab-size-percentage);
 
 
 /**
@@ -103,7 +103,7 @@ $button-fontsize: ceil(32px * $size_percentage);
 }
 
 /**
- * 1. Make sure smaller sizes (such as $size_percentage = 0.7) looks OK.
+ * 1. Make sure smaller sizes (such as $slab-size-percentage = 0.7) looks OK.
  */
 .slab-dialog-bottom {
   padding: $footer-buttons-offset;

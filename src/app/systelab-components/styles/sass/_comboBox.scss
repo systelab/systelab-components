@@ -8,7 +8,6 @@ $combo-button-width: 32px;
     @include user-selection(none);
 
     cursor: pointer;
-    font: normal $base-body-font-size $base-body-font-family;
     padding: 1px 8px;
     border-radius: 4px;
     color: #424242;
@@ -37,7 +36,7 @@ $combo-button-width: 32px;
     float: left;
     width: calc(100% - #{$combo-button-width}) !important;
     border: 1px solid $medium-gray;
-    font-family: $base-body-font-family;
+    font-family: $slab-base-body-font-family;
 
     &.form-control[readonly] {
         background-color: white;
@@ -110,11 +109,11 @@ $combo-button-width: 32px;
             background-color: $background;
 
             &.ag-row-selected {
-              background-color: $combo-selected-color;
+              background-color: $slab-selected-background-color;
             }
 
             &.ag-row-hover {
-              background-color: $combo-selected-color;
+              background-color: $slab-selected-background-color;
             }
 
             .ag-cell {

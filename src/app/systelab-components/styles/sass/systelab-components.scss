@@ -26,18 +26,17 @@
 @import "searcher";
 @import "spinner";
 @import "nanobar";
-@import "toggle-button";
 @import "app-frame";
 
 html {
   width: 100%;
-  font: normal $base-body-font-size $base-body-font-family;
-  color: $base-body-color;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
+  color: $slab-base-body-color;
 
   body {
     &:not(.is-login) {
-      min-width: $app-min-width;
-      min-height: $app-min-height;
+      min-width: $slab-app-min-width;
+      min-height: $slab-app-min-height;
     }
   }
 
