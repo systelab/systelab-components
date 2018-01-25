@@ -28,15 +28,14 @@ export class MyDialogParameters extends SystelabModalContext {
 export class MyDialog implements ModalComponent<MyDialogParameters> {
   protected parameters: MyDialogParameters;
 
+  public static getParameters(): MyDialogParameters {
+    return new MyDialogParameters();
+  }
   constructor(public dialog: DialogRef<MyDialogParameters>) {
     this.parameters = dialog.context;
   }
   public close(): void {
     this.dialog.close('This is a test');
-  }
-
-  public static getParameters(): MyDialogParameters {
-    return new MyDialogParameters();
   }
 }
 ```
