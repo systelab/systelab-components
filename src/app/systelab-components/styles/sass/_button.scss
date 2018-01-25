@@ -4,7 +4,6 @@
 
   background-color: $dark;
   color: white;
-
   &:hover {
     background-color: $primary-color;
     border-color: $primary-color;
@@ -12,3 +11,6 @@
   }
 }
 
+.btn {
+  min-width: $slab-minimum-button-width;
+}
