@@ -1,7 +1,6 @@
 import { ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
-import { StylesUtilService } from '../utilities/styles.util.service';
 
 export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
@@ -96,8 +95,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	public ngOnInit() {
 
-		// const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
-		AbstractComboBox.ROW_HEIGHT = Number(26);
+		this.setRowHeight();
 
 		this.columnDefs = [
 			{
@@ -128,6 +126,11 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 		if (this.fontStyle) {
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-style', this.fontStyle);
 		}
+	}
+
+	protected setRowHeight() {
+		// const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
+		AbstractComboBox.ROW_HEIGHT = Number(26);
 	}
 
 	public refresh(params: any): boolean {

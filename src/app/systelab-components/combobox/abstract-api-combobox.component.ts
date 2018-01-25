@@ -50,8 +50,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public ngOnInit() {
 
-		// const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
-		AbstractComboBox.ROW_HEIGHT = Number(26);
+		this.setRowHeight();
 
 		this.columnDefs = [
 			{
