@@ -119,6 +119,11 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
     line-height: 1;
     padding: 0;
   }
+
+  .btn {
+    min-width: $slab-minimum-button-width;
+  }
+
 }
 
 .slab-dialog-header-button {
