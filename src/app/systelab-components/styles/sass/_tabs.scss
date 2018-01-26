@@ -14,8 +14,8 @@
       line-height: $slab-tab-height;
       color: $background;
       text-shadow: none;
-      background-color: $secondary-color;
-      border-top: 3px solid $secondary-color;
+      background-color: $slab-tab-no-active-bg-color;
+      border-top: 3px solid $slab-tab-no-active-bg-color;
       margin-left: 0;
       padding: 0 12px;
       min-width: $slab-tab-min-width;

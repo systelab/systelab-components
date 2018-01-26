@@ -42,12 +42,8 @@ $slab-app-header-user-width: 130px !default;
 // Defines the height of the dialogs header
 $slab-dialog-header-height: max(45px, ceil(60px * $slab-size-percentage)) !default;
 
-
-// Defines the min-height and the line-height of the button when is large */
-$button-large-height: max(34px, ceil(40px * $slab-size-percentage)) !default;
 // Defines the minimum width for the button
 $slab-minimum-button-width: 85px !default;
-
 
 // Defines the height of the tab
 $slab-tab-height: ceil(38px * $slab-size-percentage) !default;
@@ -55,6 +51,9 @@ $slab-tab-height: ceil(38px * $slab-size-percentage) !default;
 $slab-tab-min-width: 120px !default;
 // Define the top margin and the gutter between tab elements
 $slab-tab-space: 5px;
+// Define the color for non active tabs
+$slab-tab-no-active-bg-color: rgb(66, 66, 66) !default;
+
 
 // Define the height and the line-height of the input,
 $slab-checkbox-height: max(19px, $form-elements-height - 16px) !default;
@@ -110,7 +109,6 @@ $slab-selected-background-color: rgb(200, 223, 252) !default;
 // Main application colors
 
 $primary-color: rgb(21, 143, 239) !default;
-$secondary-color: rgb(66, 66, 66) !default;
 
 
 
@@ -137,7 +135,6 @@ $form-focus-background: rgb(245, 251, 254) !default;
 
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: $primary-color !default;
-$slab-slider-background-color: rgb(192, 192, 192) !default;
 
 $checkbox-border-color: $primary-color !default;
 $checkbox-color: white !default;
