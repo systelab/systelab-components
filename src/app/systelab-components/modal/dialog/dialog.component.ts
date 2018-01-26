@@ -1,5 +1,5 @@
 import { Component, Type } from '@angular/core';
-import { Modal } from '../plugin/modulab';
+import { Modal } from '../plugin/custom';
 import { DialogRef, overlayConfigFactory } from 'ngx-modialog';
 import { SystelabModalContext } from '../modal-context';
 import { Observable } from 'rxjs/Observable';

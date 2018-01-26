@@ -6,7 +6,7 @@ import { SwitchComponent } from './switch/switch.component';
 import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
-import { ModulabModalModule } from './modal/plugin/modulab/modulab.module';
+import { SystelabModalModule } from './modal/plugin/custom/systelab-modal.module';
 import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
 import { MessagePopupComponent } from './modal/message-popup/message-popup.component';
@@ -59,7 +59,7 @@ import { FileSelectorComponent } from './file-selector/file-selector.component';
 		SliderModule,
 		CalendarModule,
 		TreeModule,
-		ModulabModalModule,
+		SystelabModalModule,
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
