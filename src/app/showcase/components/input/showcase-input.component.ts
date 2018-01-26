@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
 })
 export class ShowcaseInputComponent {
 
-
 	constructor() {
 	}
 }

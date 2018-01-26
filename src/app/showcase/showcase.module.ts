@@ -53,6 +53,7 @@ import { ShowcaseSearcherComponent } from './components/searcher/showcase-search
 import { InnerSearcherComponent } from './components/searcher/inner-searcher.component';
 import { ShowcaseLoadingComponent } from './components/loading/showcase-loading.component';
 import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showcase-loading-dialog.component';
+import { ShowcaseFileSelectorComponent } from './components/file-selector/showcase-file-selector.component';
 
 @NgModule({
 	imports:         [
@@ -107,6 +108,7 @@ import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showc
 		ShowcaseStandardDialog,
 		SampleRouteComponent,
 		ShowcaseStandardComponent,
+		ShowcaseFileSelectorComponent,
 		ShowcaseProgressBarDialog,
 		ShowcaseApplicationFrameDialog,
 		ShowcaseLoadingDialog

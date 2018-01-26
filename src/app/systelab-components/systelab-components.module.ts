@@ -49,6 +49,7 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
+import { FileSelectorComponent } from './file-selector/file-selector.component';
 
 @NgModule({
 	imports:         [
@@ -105,7 +106,8 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 		TabComponent,
 		DialogHeaderComponent,
 		DialogBottomComponent,
-		LoadingComponent
+		LoadingComponent,
+		FileSelectorComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -140,6 +142,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 		DialogHeaderComponent,
 		DialogBottomComponent,
 		LoadingComponent,
+		FileSelectorComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,

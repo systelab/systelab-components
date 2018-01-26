@@ -1,0 +1,7 @@
+<div class="input-group">
+    <input class="form-control" id="uploadFile" type="text" name="uploadFile" [(ngModel)]="fileName" (click)="uploadBtn.click()" readonly>
+    <input #uploadBtn type="file" class="d-none" (change)="selectFile($event.target.files)">
+    <div class="input-group-append">
+        <button class="btn btn-sm" type="button" (click)="uploadBtn.click()">...</button>
+    </div>
+</div>
