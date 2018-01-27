@@ -4,45 +4,73 @@
 $slab-size-percentage: 0.7 !default;
 // Internal variable to set the font size
 $slab-base-font-size: 15px !default;
-
-// TBD
-/* $form-elements-height: Defines the line height;
-                          in btn-medium” we redefine the line-height and the max-height of the medium size button and the size,
-                            the min-width and the min-height of a square button;
-                          defines the max-height of the multiSelectOutBox and the min-height of the uk-form-row;
-                          defines the line-height of the uk-grid;
-                          used to calculate the width of the input inside a uk-input-file;
-                          to calculate the size of a btn inside a uk-input-file;
-                          defines the line-height of the uk-line-height class;
-                          used to calculate the line-height of the label inside the switch class */
-$form-elements-height: ceil(35px * $slab-size-percentage) !default;
-
-
-
 // Defines the application font size
 $slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-font-size * 1.25) !default;
 // Defines the application font family
 $slab-base-body-font-family: Arial Unicode MS, Arial, sans-serif !default;
 // Defines the appication body color
 $slab-base-body-color: rgb(66, 66, 66) !default;
-
-// Defines the ipad
-$slab-ipad-width: 1024px !default;
-
 // Defines the minimum width of the body
 $slab-app-min-width: 367px !default;
 // defines the minimum height of the body
 $slab-app-min-height: 375px !default;
+
+// Defines the ipad
+$slab-ipad-width: 1024px !default;
+
+
+// Defines the primary color
+$primary-color: rgb(21, 143, 239) !default;
+$background-hemohub: rgb(235, 235, 235) !default;
+$background: rgb(255, 255, 255) !default;
+// Defines the color for selected elements
+$slab-selected-background-color: rgb(200, 223, 252) !default;
+
+
+// Internal variable to define the height of the elements in a form
+$form-elements-height: ceil(35px * $slab-size-percentage) !default;
+$form-focus-border: rgb(153, 186, 202) !default;
+$form-focus-background: rgb(245, 251, 254) !default;
+$form-border: rgb(221, 221, 221) !default;
+
+//Grayscale
+$light-gray: rgb(248, 248, 248) !default;
+$medium-gray: rgb(214, 214, 214) !default;
+$dark-gray: rgb(128, 128, 128) !default;
+$darker-gray: rgb(45, 45, 45) !default;
+
+$dark-green: rgb(4, 123, 87) !default;
+$darker-green: rgb(47, 148, 60) !default;
+
+$table-gray: rgb(149, 149, 149) !default;
+
+
 // Defines the application header height
 $slab-app-header-height: 56px !default;
 // Defines the width of the user area in the application header
 $slab-app-header-user-width: 130px !default;
 
+
+//Translucent grayscale
+$slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 // Defines the height of the dialogs header
 $slab-dialog-header-height: max(45px, ceil(60px * $slab-size-percentage)) !default;
-
 // Defines the minimum width for the button
 $slab-minimum-button-width: 85px !default;
+
+
+// Defines the height of the rows of a table
+$slab-table-min-row-height: $form-elements-height !default;
+$table-row-odd-background-color: rgb(243, 243, 243) !default;
+$table-row-even-background-color: rgb(253, 253, 253) !default;
+$table-row-selected-background-color: $slab-selected-background-color !default;
+// Defines the height of the ui-grid-header-cell
+$grid-header-height: $form-elements-height + ceil(8 * $slab-size-percentage) !default;
+// Defines the line-height of the ui-grid-header-cell.
+$grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
+// Defines the height and the min-height of the ui-grid row and cell
+$grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
+
 
 // Defines the height of the tab
 $slab-tab-height: ceil(38px * $slab-size-percentage) !default;
@@ -56,89 +84,8 @@ $slab-tab-no-active-bg-color: rgb(66, 66, 66) !default;
 
 // Define the height and the line-height of the checkbox
 $slab-checkbox-height: max(19px, $form-elements-height - 2px) !default;
-
-// Define the height and the line-height of the radio
-$slab-radio-height: max(19px, $form-elements-height - 4px) !default;
-// Defines the padding-left of the radio
-$slab-radio-text-gap: $slab-radio-height * 1.5 !default;
-
-// Defines the slider height
-$slab-slider-height: $form-elements-height !default;
-// Defines the height of the ui-slider
-$slab-slider-background-line: round($slab-slider-height / 3);
-
-// Defines the row line-height of the dropdown and the row line-height of the tree
-$slab-dropdown-line-height: $form-elements-height !default;
-
-// Defines the width of the searcher button
-$slab-searcher-button-width: $form-elements-height !default;
-
-// Defines the default width of the spinner
-$slab-spinner-width: 100px !default;
-
-// Define the line-height of the datepicker’s navigation bar.*/
-$datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
-
-/************** GRID - start ****************************************************************************************/
-/* $grid-header-height: defines the height of the ui-grid-header-cell;
-                          used to define the size of the grid-action-cell class */
-$grid-header-height: $form-elements-height + ceil(8 * $slab-size-percentage) !default;
-/* $grid-header-line-height: defines the line-height of the ui-grid-header-cell.
-                               defines the header-line-height of the agGrid */
-$grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
-/* $grid-cell-height: defines the height and the min-height of the ui-grid-row;
-                        defines the height and the min-height of the ui-grid-cell;
-                        defines the line-height of the ui-grid-cell-contents;
-                        used to calculate the $status-square-right-size value;
-                        defines the line-height of the ui-grid-cell-line-height;
-                        defines the height of the ui-grid-cell-height;
-                        defines the font-size of the uk-text-large;
-                        used to calculate the size of the grid-acion-cell element */
-$grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
-/************** GRID - end ******************************************************************************************/
-
-$slab-selected-background-color: rgb(200, 223, 252) !default;
-
-// Main application colors
-
-$primary-color: rgb(21, 143, 239) !default;
-
-
-
-//Grayscale
-$background: rgb(255, 255, 255) !default;
-$light-gray: rgb(248, 248, 248) !default;
-$background-hemohub: rgb(235, 235, 235) !default;
-$form-border: rgb(221, 221, 221) !default;
-$medium-gray: rgb(214, 214, 214) !default;
-$actions-separator: rgb(192, 192, 192) !default;
-$table-gray: rgb(149, 149, 149) !default;
-$dark-gray: rgb(128, 128, 128) !default;
-$darker-gray: rgb(45, 45, 45) !default;
-
-//Translucent grayscale
-
-$slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
-
-// Form elements
-
-$form-color: rgb(66, 66, 66) !default;
-$form-focus-border: rgb(153, 186, 202) !default;
-$form-focus-background: rgb(245, 251, 254) !default;
-
-$slab-slider-circle-color: white !default;
-$slab-slider-circle-border-color: $primary-color !default;
-
-$checkbox-border-color: $primary-color !default;
-$checkbox-color: white !default;
-
-$radio-border-color: $primary-color !default;
-$radio-color: white !default;
-
-
-$table-row-odd-background-color: rgb(243, 243, 243) !default;
-$table-row-even-background-color: rgb(253, 253, 253) !default;
-$table-row-selected-background-color: $slab-selected-background-color !default;
+$slab-checkbox-border-color: $primary-color !default;
+$slab-checkbox-color: white !default;
 
 
 $slab-switch-bg-color: transparent !default;
@@ -148,11 +95,37 @@ $slab-switch-circle-color-checked: white !default;
 $slab-switch-height: max(22px, $form-elements-height - 6px) !default;
 
 
-// Component specific / status colors
-$error-message-text: rgb(255, 51, 45) !default;
-$error: rgb(215, 56, 45) !default;
+// Define the height and the line-height of the radio
+$slab-radio-height: max(19px, $form-elements-height - 4px) !default;
+// Defines the padding-left of the radio
+$slab-radio-text-gap: $slab-radio-height * 1.5 !default;
+$slab-radio-border-color: $primary-color !default;
+$slab-radio-color: white !default;
 
-$dark-green: rgb(4, 123, 87) !default;
-$darker-green: rgb(47, 148, 60) !default;
+
+// Defines the slider height
+$slab-slider-height: $form-elements-height !default;
+// Defines the height of the ui-slider
+$slab-slider-background-line: round($slab-slider-height / 3);
+$slab-slider-circle-color: white !default;
+$slab-slider-circle-border-color: $primary-color !default;
+
+
+// Defines the row line-height of the dropdown and the row line-height of the tree
+$slab-dropdown-line-height: $form-elements-height !default;
+$slab-dropdown-disabled-fg-color: rgb(192, 192, 192) !default;
+
+
+// Defines the width of the searcher button
+$slab-searcher-button-width: $form-elements-height !default;
+
+// Defines the default width of the spinner
+$slab-spinner-width: 100px !default;
+// Defines the width of the spinner button
+$slab-spinner-button-width: $form-elements-height !default;
+
+
+// Define the line-height of the datepicker’s navigation bar.*/
+$slab-datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
 
 

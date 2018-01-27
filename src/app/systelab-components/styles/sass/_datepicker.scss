@@ -16,7 +16,7 @@ p-calendar {
   }
   &.previous-date {
     input {
-      background-color: $error-message-text !important;
+      background-color: $danger !important;
     }
     &.input-expand-height {
       height: 100% !important;
@@ -27,14 +27,14 @@ p-calendar {
   }
   &.date-error {
     input {
-      color: $error-message-text !important;
-      border: 1px solid $error-message-text !important;
+      color: $danger !important;
+      border: 1px solid $danger !important;
     }
     &.input-expand-height {
       height: 100% !important;
     }
     i {
-      color: $error-message-text !important;
+      color: $danger !important;
     }
   }
 
@@ -68,7 +68,7 @@ p-calendar {
   width: auto;
   box-shadow: none;
   .ui-datepicker-title {
-    line-height: $datepicker-header-navigation-line-height !important;
+    line-height: $slab-datepicker-header-navigation-line-height !important;
   }
   .ui-datepicker-header {
     $icon-margin-right: 10px;
@@ -76,7 +76,7 @@ p-calendar {
     background: $primary-color;
     padding: 15px;
     margin-bottom: 0;
-    line-height: $datepicker-header-navigation-line-height !important;
+    line-height: $slab-datepicker-header-navigation-line-height !important;
     color: white;
     .ui-datepicker-prev,
     .ui-datepicker-next,
@@ -100,25 +100,25 @@ p-calendar {
       .icon-angle-double-left {
         float: left;
         margin-left: $icon-margin-right;
-        line-height: $datepicker-header-navigation-line-height;
+        line-height: $slab-datepicker-header-navigation-line-height;
       }
 
       .icon-angle-double-right {
         float: right;
         margin-right: $icon-margin-right;
-        line-height: $datepicker-header-navigation-line-height;
+        line-height: $slab-datepicker-header-navigation-line-height;
       }
 
       .icon-angle-left {
         float: left;
         margin-left: $icon-margin-left;
-        line-height: $datepicker-header-navigation-line-height;
+        line-height: $slab-datepicker-header-navigation-line-height;
       }
 
       .icon-angle-right {
         float: right;
         margin-right: $icon-margin-left;
-        line-height: $datepicker-header-navigation-line-height;
+        line-height: $slab-datepicker-header-navigation-line-height;
       }
     }
   }

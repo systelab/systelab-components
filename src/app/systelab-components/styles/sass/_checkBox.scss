@@ -38,7 +38,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
     border-radius: 4px;
     border: solid 1px $medium-gray;
     line-height: 1em;
-    color: $checkbox-color;
+    color: $slab-checkbox-color;
 
     font-weight: bold;
     font-family: icomoon;
@@ -51,7 +51,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
 // Define background color and icon when checked
 input[type="checkbox"]:not(.slab-checkbox-not-show):checked + label:before {
   content: '\F00d';
-  background-color: $checkbox-border-color;
+  background-color: $slab-checkbox-border-color;
 }
 
 input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
@@ -75,12 +75,12 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     backface-visibility: hidden;
     text-align: center;
     z-index: 0;
-    background-color: $checkbox-color;
+    background-color: $slab-checkbox-color;
     border-radius: 4px;
     border: solid 1px $medium-gray;
     content: '';
     font-size: $slab-checkbox-height - 3px;
-    color: $checkbox-color;
+    color: $slab-checkbox-color;
     box-sizing: border-box;
     margin-top: -1px !important;
   }
@@ -97,12 +97,12 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     backface-visibility: hidden;
     text-align: center;
     z-index: 0;
-    background-color: $checkbox-color;
+    background-color: $slab-checkbox-color;
     border-radius: 4px;
     border: solid 1px $medium-gray;
     content: '';
     font-size: $slab-checkbox-height - 3px;
-    color: $checkbox-color;
+    color: $slab-checkbox-color;
     box-sizing: border-box;
     margin-top: -1px !important;
   }
@@ -118,8 +118,8 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     left: 0;
     line-height: 1em;
     font-size: $slab-checkbox-height - 3px;
-    color: $checkbox-color;
+    color: $slab-checkbox-color;
     border-radius: 4px;
-    border: solid 1px $checkbox-border-color;
+    border: solid 1px $slab-checkbox-border-color;
   }
 }

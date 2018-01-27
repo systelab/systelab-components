@@ -50,7 +50,7 @@
       &.disabled {
         a {
           cursor: not-allowed;
-          color: $actions-separator;
+          color: $slab-dropdown-disabled-fg-color;
         }
 
         &:hover {

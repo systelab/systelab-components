@@ -39,14 +39,14 @@ input[type="radio"] + label {
     border: solid ($slab-radio-height / 8) $medium-gray;
     border-radius: 50%;
     box-sizing: border-box;
-    background-color: $radio-color;
+    background-color: $slab-radio-color;
 
   }
 }
 
 // Define background color and icon size when checked
 input[type="radio"]:checked + label:before {
-  border: solid ($slab-radio-height / 3) $radio-border-color;
+  border: solid ($slab-radio-height / 3) $slab-radio-border-color;
 }
 
 input[type="radio"]:disabled + label {

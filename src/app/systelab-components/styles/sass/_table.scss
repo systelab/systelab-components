@@ -1,10 +1,8 @@
-/* $table-min-row-height: defines the height of the tr elements inside a table.*/
-$table-min-row-height: $form-elements-height !default;
 
 .table {
 
   tr {
-    height: $table-min-row-height;
+    height: $slab-table-min-row-height;
   }
 }
 
