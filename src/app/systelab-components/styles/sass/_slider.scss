@@ -1,18 +1,10 @@
-/* $slab-slider-height: used to calculate the $slab-slider-background-line variable;
-                   used to define the size;
-                   used to calculate the margin top;
-                   used to define the margin-left of the ui-slider-handle.*/
-$slab-slider-height: $form-elements-height !default;
-/* $slab-slider-background-line: defines the height of the ui-slider;
-                     to calculate the margin-top and the margin-bottom of the ui-slider;
-                     to calculate the margin-top value of the ui-slider-handle.*/
-$slab-slider-background-line: round($slab-slider-height / 3);
+
 
 .slab-slider {
   height: $slab-slider-background-line;
 
   &:not([class*="w-"]) {
-    width: $input-width;
+    width: 100%;
   }
   margin-top: ($slab-slider-height - $slab-slider-background-line) / 2;
   margin-bottom: ($slab-slider-height - $slab-slider-background-line) / 2;

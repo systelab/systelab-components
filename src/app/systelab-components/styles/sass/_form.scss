@@ -17,17 +17,15 @@
 .form-control {
   padding-top: 1px;
   padding-bottom: 1px;
-
   padding-left: 5px;
   padding-right: 5px;
-
 }
 
 .col-form-label {
   padding-top: 0;
   padding-bottom: 0;
   margin-bottom: 0; // Override the `<label>` default
-  line-height: $input-height !important;
+  line-height: $form-elements-height !important;
 }
 
 

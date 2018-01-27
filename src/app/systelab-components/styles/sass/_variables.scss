@@ -14,7 +14,6 @@ $slab-base-font-size: 15px !default;
                           used to calculate the width of the input inside a uk-input-file;
                           to calculate the size of a btn inside a uk-input-file;
                           defines the line-height of the uk-line-height class;
-                          used to calculate the $top-icon value;
                           used to calculate the line-height of the label inside the switch class */
 $form-elements-height: ceil(35px * $slab-size-percentage) !default;
 
@@ -55,21 +54,21 @@ $slab-tab-space: 5px;
 $slab-tab-no-active-bg-color: rgb(66, 66, 66) !default;
 
 
-// Define the height and the line-height of the input,
-$slab-checkbox-height: max(19px, $form-elements-height - 16px) !default;
+// Define the height and the line-height of the checkbox
+$slab-checkbox-height: max(19px, $form-elements-height - 2px) !default;
+
+// Define the height and the line-height of the radio
+$slab-radio-height: max(19px, $form-elements-height - 4px) !default;
+// Defines the padding-left of the radio
+$slab-radio-text-gap: $slab-radio-height * 1.5 !default;
+
+// Defines the slider height
+$slab-slider-height: $form-elements-height !default;
+// Defines the height of the ui-slider
+$slab-slider-background-line: round($slab-slider-height / 3);
 
 // Defines the row line-height of the dropdown and the row line-height of the tree
 $slab-dropdown-line-height: $form-elements-height !default;
-
-// TBD
-/************** INPUT - start *****************************************************************************************/
-/* $input-width: defines the width of the input preceded by a uk-form that has not the class uk-width;
-                 defines the width of the slab-form-icon when it has not the class uk-width;
-                 defines the width of the ui-slider when the uk-width class is not present */
-$input-width: 100% !default;
-$input-height: 26px;
-/************** INPUT - end *******************************************************************************************/
-
 
 // Defines the width of the searcher button
 $slab-searcher-button-width: $form-elements-height !default;
@@ -77,6 +76,8 @@ $slab-searcher-button-width: $form-elements-height !default;
 // Defines the default width of the spinner
 $slab-spinner-width: 100px !default;
 
+// Define the line-height of the datepicker’s navigation bar.*/
+$datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
 
 /************** GRID - start ****************************************************************************************/
 /* $grid-header-height: defines the height of the ui-grid-header-cell;
@@ -94,17 +95,9 @@ $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !defaul
                         defines the font-size of the uk-text-large;
                         used to calculate the size of the grid-acion-cell element */
 $grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
-/* $grid-cell-line-height: defines the line-height of the ui-grid-cell
-                             defines the line-height of the combo-button */
-$grid-cell-line-height: $grid-cell-height - $slab-base-font-size + 2 !default;
 /************** GRID - end ******************************************************************************************/
 
-
-
-
 $slab-selected-background-color: rgb(200, 223, 252) !default;
-
-
 
 // Main application colors
 
