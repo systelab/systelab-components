@@ -1,11 +1,21 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
-export class NgxCliLibraryPage {
-  navigateTo() {
-    return browser.get('/');
-  }
+export class ShowcasePage {
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
-  }
+	public navigateTo() {
+		return browser.get('/');
+	}
+
+	public getTitle() {
+		return browser.getTitle();
+	}
+
+	public getContentForTab(n: number): ElementFinder {
+		return element(by.css('#tab-' + n));
+	}
+
+	public getTab(n: number): ElementFinder {
+		// Return the element to be clicked.
+		return element.all(by.css('#tabs a')).get(n);
+	}
 }
