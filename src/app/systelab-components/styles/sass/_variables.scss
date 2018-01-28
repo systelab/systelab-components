@@ -82,6 +82,10 @@ $slab-tab-space: 5px;
 $slab-tab-no-active-bg-color: rgb(66, 66, 66) !default;
 
 
+// Defines the width of the combobox button
+$slab-combobox-button-width: $form-elements-height !default;
+
+
 // Define the height and the line-height of the checkbox
 $slab-checkbox-height: max(19px, $form-elements-height - 2px) !default;
 $slab-checkbox-border-color: $primary-color !default;

@@ -1,4 +1,3 @@
-$combo-button-width: 32px;
 
 .slab-combobox {
 
@@ -16,7 +15,7 @@ $combo-button-width: 32px;
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: $combo-button-width;
+    width: $slab-combobox-button-width;
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
@@ -34,19 +33,12 @@ $combo-button-width: 32px;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
     float: left;
-    width: calc(100% - #{$combo-button-width}) !important;
+    width: calc(100% - #{$slab-combobox-button-width}) !important;
     border: 1px solid $medium-gray;
     font-family: $slab-base-body-font-family;
 
     &.form-control[readonly] {
         background-color: white;
-    }
-
-    &:focus + .slab-combo-button {
-      border-color: $form-focus-border;
-      background-color: $form-focus-background;
-      color: $darker-gray;
-      box-shadow: none;
     }
   }
 
