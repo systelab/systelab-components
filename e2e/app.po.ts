@@ -9,13 +9,4 @@ export class ShowcasePage {
 	public getTitle() {
 		return browser.getTitle();
 	}
-
-	public getContentForTab(n: number): ElementFinder {
-		return element(by.css('#tab-' + n));
-	}
-
-	public getTab(n: number): ElementFinder {
-		// Return the element to be clicked.
-		return element.all(by.css('#tabs a')).get(n);
-	}
 }
