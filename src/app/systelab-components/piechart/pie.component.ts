@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-import { addDays, differenceInDays, differenceInMinutes, format, isAfter, isBefore } from 'date-fns';
 
 export class PieElement {
 	constructor(public label: string, public value: number, public color: string, public action: string) {

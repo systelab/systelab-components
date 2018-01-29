@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { format } from 'date-fns';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 @Component({
