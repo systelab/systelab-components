@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { format } from 'date-fns';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 @Component({
 	selector:    'systelab-calendar-header',
@@ -8,8 +9,7 @@ import { format } from 'date-fns';
 })
 export class CalendarHeaderComponent {
 
-	@Input() currentDate: string;
-	@Input() locale: string;
+	@Input() currentDate: Date;
 
 	@Output() previousYear = new EventEmitter();
 	@Output() previousMonth = new EventEmitter();
@@ -17,6 +17,9 @@ export class CalendarHeaderComponent {
 	@Output() nextMonth = new EventEmitter();
 	@Output() nextYear = new EventEmitter();
 
+	constructor(private i18nService: I18nService) {
+
+	}
 	public doPreviousYear() {
 		this.previousYear.emit();
 	}
@@ -34,7 +37,7 @@ export class CalendarHeaderComponent {
 	}
 
 	public getTitle() {
-		return format(this.currentDate, 'MMMM, YYYY', {locale: this.locale});
+		return this.i18nService.formatMonthAndYear(this.currentDate);
 	}
 }
 

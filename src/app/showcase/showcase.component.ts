@@ -12,11 +12,11 @@ export class ShowcaseComponent {
 
 	public currentTab = 1;
 
-	constructor(protected preferencesService: PreferencesService, protected languageService: I18nService) {
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
 
-		languageService.use('en_US')
+		i18nService.use('en-US')
 			.subscribe(() => {
-				console.log(languageService.getCurrentLanguage());
+				console.log(i18nService.getCurrentLanguage());
 			});
 
 	}

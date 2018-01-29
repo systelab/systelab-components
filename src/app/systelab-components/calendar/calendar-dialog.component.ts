@@ -4,6 +4,7 @@ import { addMonths, addYears } from 'date-fns';
 import { Observable } from 'rxjs/Observable';
 import { SystelabModalContext } from '../modal/modal-context';
 import { CalendarTableComponent, DaySlot } from './calendar-table.component';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 export class CalendarDialogParameters extends SystelabModalContext {
 
@@ -23,10 +24,9 @@ export class CalendarDialog implements ModalComponent<CalendarDialogParameters> 
 
 	public parameters: CalendarDialogParameters;
 	public currentDate: Date;
-	public locale = 'es';
 	public days: DaySlot[] = [];
 
-	constructor(public dialog: DialogRef<CalendarDialogParameters>) {
+	constructor(public dialog: DialogRef<CalendarDialogParameters>, private i18nService: I18nService) {
 		this.parameters = dialog.context;
 		this.currentDate = new Date();
 		this.getData();
@@ -63,14 +63,16 @@ export class CalendarDialog implements ModalComponent<CalendarDialogParameters> 
 	}
 
 	private getData() {
-		Observable.of(true).delay(1000).subscribe(
-			(response) => {
-				const returnedDays: DaySlot[] = [];
-				returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});
-				returnedDays.push({date: new Date(2017, 10, 26), day: 26, isHoliday: true});
-				this.days = returnedDays;
-			}
-		);
+		Observable.of(true)
+			.delay(1000)
+			.subscribe(
+				(response) => {
+					const returnedDays: DaySlot[] = [];
+					returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});
+					returnedDays.push({date: new Date(2017, 10, 26), day: 26, isHoliday: true});
+					this.days = returnedDays;
+				}
+			);
 	}
 
 }
