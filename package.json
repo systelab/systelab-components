@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -39,7 +39,6 @@
   "dependencies": {
     "primeng": "^4.3.0",
     "jquery": "^3.2.1",
-    "uikit": "^2.27.2",
     "date-fns": "^1.28.3",
     "ngx-modialog": "^3.0.1",
     "ng2-dnd": "^2.2.2",
