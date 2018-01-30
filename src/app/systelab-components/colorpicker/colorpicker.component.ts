@@ -3,16 +3,18 @@ import { AbstractComboBox } from '../combobox/abstract-combobox.component';
 import { ColorCellRendererComponent } from './color-cell-renderer.component';
 import { ColorUtilService } from '../utilities/color.util.service';
 
-
-@Component({
+@Component( {
 	selector:    'systelab-colorpicker',
 	templateUrl: '../combobox/abstract-combobox.component.html'
-})
+} )
 export class ColorComboBox extends AbstractComboBox implements OnInit {
 
-	constructor(public myRenderer: Renderer2, public colorUtilService: ColorUtilService) {
-		super(myRenderer, true);
-		this.values = colorUtilService.generateColorArray([0, 128, 192, 255], true);
+	constructor( public myRenderer: Renderer2 ) {
+		super( myRenderer );
+
+		this.customInputRenderer = ColorCellRendererComponent;
+
+		this.values = ColorUtilService.generateColorArray( [0, 128, 192, 255], true );
 	}
 
 	public ngOnInit() {
@@ -21,7 +23,7 @@ export class ColorComboBox extends AbstractComboBox implements OnInit {
 		this.columnDefs = [
 			{
 				colID:                 'id',
-				field:                 'value',
+				field:                 'description',
 				cellRendererFramework: ColorCellRendererComponent,
 			}
 		];

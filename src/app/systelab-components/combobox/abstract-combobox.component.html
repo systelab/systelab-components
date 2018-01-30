@@ -3,23 +3,20 @@
      class="dropdown slab-combobox d-flex"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle" data-toggle="dropdown" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
-        <input *ngIf="!isColorPicker" #input readonly type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
+        <input *ngIf="!customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"
                [style.font-weight]="fontWeight"
                [style.font-style]="fontStyle"
                [(ngModel)]="description" [disabled]="isDisabled"/>
-
-        <div *ngIf="isColorPicker" #input readonly type="text" class="slab-flex-1 slab-combo-input slab-color-container"
-             style="white-space: nowrap; overflow: hidden">
-            <div style="margin: 2px 1px" [style.font-family]="fontFamily"
-                 [style.font-size.px]="fontSize"
-                 [style.font-weight]="fontWeight"
-                 [style.font-style]="fontStyle">
-                <span class="text-truncate">{{description}}</span>
-            </div>
+        <div *ngIf="customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-input slab-color-container"
+             style="white-space: nowrap; overflow: hidden; padding: 0 12px" [style.font-family]="fontFamily"
+             [style.font-size.px]="fontSize"
+             [style.font-weight]="fontWeight"
+             [style.font-style]="fontStyle">
+            <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
+                                     [componentData]="getSelectedRow()"></combobox-input-renderer>
         </div>
-
         <button #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
 
     </div>

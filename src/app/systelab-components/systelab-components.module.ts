@@ -50,8 +50,9 @@ import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
+import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
 
-@NgModule({
+@NgModule( {
 	imports:         [
 		CommonModule,
 		FormsModule,
@@ -64,10 +65,10 @@ import { FileSelectorComponent } from './file-selector/file-selector.component';
 		AngularSplitModule,
 		SystelabTranslateModule,
 		DndModule.forRoot(),
-		AgGridModule.withComponents([
+		AgGridModule.withComponents( [
 			GridContextMenuComponent,
 			GridHeaderContextMenuComponent
-		]),
+		] ),
 	],
 	declarations:    [
 		SliderComponent,
@@ -107,7 +108,8 @@ import { FileSelectorComponent } from './file-selector/file-selector.component';
 		DialogHeaderComponent,
 		DialogBottomComponent,
 		LoadingComponent,
-		FileSelectorComponent
+		FileSelectorComponent,
+		ComboBoxInputRendererComponent,
 	],
 	exports:         [
 		SliderComponent,
@@ -147,31 +149,32 @@ import { FileSelectorComponent } from './file-selector/file-selector.component';
 		Tree,
 		SplitComponent,
 		SplitAreaDirective,
-		SplitGutterDirective
+		SplitGutterDirective,
+		ComboBoxInputRendererComponent,
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
 		GridOptionsDialog,
 		SearcherDialog,
 		CalendarDialog,
-		ColorCellRendererComponent
+		ColorCellRendererComponent,
 	],
 	providers:       [
 		StylesUtilService,
 		ColorUtilService
 	]
-})
+} )
 export class SystelabComponentsModule {
-	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
+	static forRoot( entryComponents?: Array<Type<any> | any[]> ): ModuleWithProviders {
 		return {
 			ngModule:  SystelabComponentsModule,
 			providers: [
-				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
-				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
+				{ provide: OverlayRenderer, useClass: DOMOverlayRenderer },
+				{ provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true },
+				{ provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true },
 				Ng2ComponentFactory,
-				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
+				{ provide: BaseComponentFactory, useExisting: Ng2ComponentFactory },
+				{ provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true }
 			]
 		};
 	}
