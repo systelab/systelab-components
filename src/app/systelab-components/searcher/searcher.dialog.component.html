@@ -1,4 +1,5 @@
-<systelab-dialog-header [withClose]="showClose" (close)="close()">{{titleForDialog}}</systelab-dialog-header>
+<systelab-dialog-header [withClose]="showClose || multipleSelection" (close)="close()">{{titleForDialog}}
+</systelab-dialog-header>
 
 <div (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
      class="slab-flex-1 p-2 d-flex flex-column flex-nowrap slab-searcher-dialog-container">
@@ -25,3 +26,6 @@
                                           (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
     </div>
 </div>
+<systelab-dialog-bottom *ngIf="multipleSelection">
+    <button type="button" class="btn ml-auto" (click)="submit()"> {{ 'COMMON_OK' | translate | async }}</button>
+</systelab-dialog-bottom>
