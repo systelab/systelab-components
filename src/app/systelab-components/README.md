@@ -97,7 +97,7 @@ $primary-color: rgb(0, 154, 181);
 @import "../systelab-components/styles/sass/systelab-components";
 ```
 
-All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](src/app/systelab-components/styles/sass/_variables.scss) can be overwritten here.
+All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](styles/sass/_variables.scss) can be overwritten here.
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
 
