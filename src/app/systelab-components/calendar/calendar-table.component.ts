@@ -180,7 +180,7 @@ export class CalendarTableComponent implements OnChanges {
 		};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
-		this.language.dateFormatValue = this.i18nService.getDateFormat(true);
+		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);
 	}
 
 }

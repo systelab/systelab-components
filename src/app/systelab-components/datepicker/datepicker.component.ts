@@ -312,7 +312,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
-		this.language.dateFormatValue = this.i18nService.getDateFormat(true);
+		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);
 		if (this.currentCalendar) {
 			this.currentCalendar.dateFormat = this.language.dateFormatValue;
 		}
