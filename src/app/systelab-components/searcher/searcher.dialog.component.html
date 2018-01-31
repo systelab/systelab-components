@@ -5,20 +5,31 @@
      class="slab-flex-1 p-2 d-flex flex-column flex-nowrap slab-searcher-dialog-container">
 
     <form class="form-inline">
-        <label for="valueToSearch" class="text-truncate mr-2 ml-auto">{{searchLabel}}</label>
-        <systelab-select class="text-left mr-2"
-                         [description]="selectedComboItem.description"
-                         [id]="selectedComboItem.id"
-                         [values]="comboElements"
-                         (change)="refreshSearch($event)"></systelab-select>
-        <input type="text" class="form-control" #valueToSearch id="valueToSearch"
-               (keyup)="refreshSearch($event)"
-               [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
+        <div class="input-group ml-auto">
+            <input type="text" class="form-control" #valueToSearch id="valueToSearch"
+                   (keyup)="refreshSearch()"
+                   [attr.placeholder]="getPlaceHolder()"
+                   [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
+
+            <div class="input-group-append">
+                <button type="button" class="btn btn-sm square" (click)="refreshSearch()" style="width: 35px;">Go</button>
+                <button type="button" class="btn btn-sm square dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" [ngClass]="{'font-weight-bold': !searchByContains}" (click)="searchByContains=false;">{{ 'COMMON_STARTS_WITH' | translate |
+                        async}}</a>
+                    <a class="dropdown-item" [ngClass]="{'font-weight-bold': searchByContains}" (click)="searchByContains=true">{{ 'COMMON_CONTAINS' |
+                        translate | async}}</a>
+                </div>
+            </div>
+        </div>
     </form>
 
     <div class="slab-flex-1 mt-2 d-flex slab-table-container">
         <systelab-internal-searcher-table class="slab-flex-1 position-relative" name="searcherTable"
-                                          [contains]="selectedComboItem.id"
+                                          [contains]="searchByContains"
                                           [showChecks]="multipleSelection"
                                           [multipleSelection]="multipleSelection"
                                           [valueForSearch]="searchingValue"

@@ -1,9 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
-import {ModalComponent, DialogRef} from 'ngx-modialog';
-import {SearcherTableComponent} from './searcher.table.component';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
-import {AbstractSearcher} from './abstract-searcher';
-import {SystelabModalContext} from '../modal/modal-context';
+import { Component, ViewChild } from '@angular/core';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
+import { SearcherTableComponent } from './searcher.table.component';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { AbstractSearcher } from './abstract-searcher';
+import { SystelabModalContext } from '../modal/modal-context';
 
 export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public valueToSearch: string;
@@ -20,24 +20,17 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	public tableComponent: SearcherTableComponent<T>;
 	public dialogParameters: SearcherDialogParameters<T>;
 	public searchingValue: string;
-	public comboElements: Array<Object>;
-	public selectedComboItem: any;
+
 	public searchLabel: string;
 	public titleForDialog: string;
 	public multipleSelection = false;
 	public showClose: boolean;
 
+	public searchByContains = false;
+
 	constructor(public dialog: DialogRef<SearcherDialogParameters<T>>, protected i18nService: I18nService) {
 		this.dialogParameters = dialog.context;
 		this.searchingValue = this.dialogParameters.valueToSearch;
-
-		this.selectedComboItem = {};
-		this.setSelectedComboItem(1, this.i18nService.instant('COMMON_STARTS_WITH'));
-
-		this.comboElements = [
-			{description: this.i18nService.instant('COMMON_STARTS_WITH'), id: 1},
-			{description: this.i18nService.instant('COMMON_CONTAINS'), id: 2}
-		];
 
 		this.showClose = this.dialogParameters.showCloseButton || false;
 		if (!this.dialogParameters.showCloseButton) {
@@ -53,6 +46,14 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 
 	}
 
+	public getPlaceHolder() {
+		if (this.searchByContains) {
+			return this.i18nService.instant('COMMON_CONTAINS');
+		} else {
+			return this.i18nService.instant('COMMON_STARTS_WITH');
+		}
+	}
+
 	public close(): void {
 		this.dialog.close(this.tableComponent.getSelectedElements());
 	}
@@ -62,10 +63,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 		this.dialog.close(this.tableComponent.getSelectedElements());
 	}
 
-	public refreshSearch(event: any): void {
-		if (event && event.id) {
-			this.setSelectedComboItem(event.id, event.description);
-		}
+	public refreshSearch(): void {
 		this.tableComponent.refreshTable();
 	}
 
@@ -78,12 +76,6 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 			}
 		}
 	}
-
-	private setSelectedComboItem(id: number, description: string) {
-		this.selectedComboItem.id = id;
-		this.selectedComboItem.description = description;
-	}
-
 }
 
 

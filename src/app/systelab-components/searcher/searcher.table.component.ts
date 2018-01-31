@@ -16,7 +16,7 @@ import {Observable} from 'rxjs/Observable';
 export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 
 	@Input('valueForSearch') public valueForSearch: string;
-	@Input('contains') public searchForContain: number;
+	@Input('contains') public searchForContain: boolean;
 	@Input() public searcher: AbstractSearcher<T>;
 
 	constructor(protected preferencesService: PreferencesService,
@@ -55,7 +55,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 	protected getData(page: number, itemsPerPage: number): Observable<Array<T>> {
 		let searchText: string;
 		if (this.valueForSearch) {
-			searchText = (this.searchForContain === 2) ? '%' + this.valueForSearch : this.valueForSearch;
+			searchText = (this.searchForContain) ? '%' + this.valueForSearch : this.valueForSearch;
 		}
 		return this.searcher.getData(searchText, page, itemsPerPage);
 	}
