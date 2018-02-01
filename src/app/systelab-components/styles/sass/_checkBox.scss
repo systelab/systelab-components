@@ -62,55 +62,42 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
 
 // Only for grid and combobox
 
+%slab-grid-checkbox-base {
+  width: $slab-checkbox-grid-height;
+  height: $slab-checkbox-grid-height;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  text-align: center;
+  z-index: 0;
+  background-color: $slab-checkbox-color;
+  border-radius: 4px;
+  border: solid 1px $medium-gray;
+  content: '';
+  font-size: $slab-checkbox-grid-height - 3px;
+  color: $slab-checkbox-color;
+  box-sizing: border-box;
+  margin-top: -1px !important;
+}
+
 @mixin selection-checkbox() {
-  .slab-grid-checkbox-unchecked {
-    width: $slab-checkbox-height;
-    height: $slab-checkbox-height;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    text-align: center;
-    z-index: 0;
-    background-color: $slab-checkbox-color;
-    border-radius: 4px;
-    border: solid 1px $medium-gray;
-    content: '';
-    font-size: $slab-checkbox-height - 3px;
-    color: $slab-checkbox-color;
-    box-sizing: border-box;
-    margin-top: -1px !important;
-  }
 
   .slab-grid-checkbox {
-    width: $slab-checkbox-grid-height;
-    height: $slab-checkbox-grid-height;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    text-align: center;
-    z-index: 0;
-    background-color: $slab-checkbox-color;
-    border-radius: 4px;
-    border: solid 1px $medium-gray;
-    content: '';
-    font-size: $slab-checkbox-grid-height - 3px;
-    color: $slab-checkbox-color;
-    box-sizing: border-box;
-    margin-top: -1px !important;
+    @extend %slab-grid-checkbox-base;
+  }
+
+  .slab-grid-checkbox-unchecked {
+    @extend %slab-grid-checkbox-base;
   }
 
   .slab-grid-checkbox::before {
     font-family: icomoon !important;
     content: '\F00d';
-    background-color: #158fef;
+    background-color: $primary;
     width: $slab-checkbox-grid-height;
     height: $slab-checkbox-grid-height;
     position: absolute;
