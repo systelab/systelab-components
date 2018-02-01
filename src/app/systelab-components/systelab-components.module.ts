@@ -51,6 +51,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
+import {TooltipDirective} from './tooltip/tooltip.directive';
 
 @NgModule( {
 	imports:         [
@@ -110,6 +111,7 @@ import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-inp
 		LoadingComponent,
 		FileSelectorComponent,
 		ComboBoxInputRendererComponent,
+		TooltipDirective
 	],
 	exports:         [
 		SliderComponent,
@@ -151,6 +153,7 @@ import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-inp
 		SplitAreaDirective,
 		SplitGutterDirective,
 		ComboBoxInputRendererComponent,
+		TooltipDirective
 	],
 	entryComponents: [
 		MessagePopupViewComponent,

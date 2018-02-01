@@ -1,31 +1,7 @@
 <div class="container-fluid">
-
-    <div class="dropup slab-button-dropdown mt-2">
-        <button type="button" class="btn dropdown-toogle" data-toggle="dropdown">Drop down top-left <i class="icon-chevron-up"></i></button>
-        <div class="dropdown-menu slab-dropdown">
-            <ul>
-                <li><a (click)="showInfo();">Action 1 Info</a></li>
-                <li><a (click)="showWarning();">Action 2 Warning</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <button type="button" class="btn mt-2" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-        Tooltip on top
-    </button>
-    <button type="button" class="btn mt-2" data-toggle="tooltip" data-placement="right"
-            title="Tooltip on right">
-        Tooltip on right
-    </button>
-    <button type="button" class="btn  mt-2" data-toggle="tooltip" data-placement="bottom"
-            title="Tooltip on bottom">
-        Tooltip on bottom
-    </button>
-    <button type="button" class="btn mt-2" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
-        Tooltip on left
-    </button>
-    <button type="button" class="btn mt-2" data-toggle="tooltip" data-html="true"
-            title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
-        Tooltip with HTML
-    </button>
+    <button type="button" class="btn mt-2" systelabTooltip="Tooltip on top">Tooltip on top</button>
+    <button type="button" class="btn mt-2" systelabTooltip="Tooltip on right" systelabTooltipPlacement="right">Tooltip on right</button>
+    <button type="button" class="btn  mt-2" systelabTooltip="Tooltip on bottom" systelabTooltipPlacement="bottom">Tooltip on bottom</button>
+    <button type="button" class="btn mt-2" systelabTooltip="Tooltip on left" systelabTooltipPlacement="left">Tooltip on left</button>
+    <button type="button" class="btn mt-2" systelabTooltipHtml="<em>Tooltip</em> <u>with</u> <b>HTML</b>">Tooltip with HTML</button>
 </div>
