@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { ComboBoxInputRenderer } from '../combobox/renderer/combobox-input-renderer';
+import { ColorUtilService } from '../utilities/color.util.service';
 
 @Component( {
 	selector:    'systelab-cell-colorpicker',
@@ -16,7 +17,7 @@ export class ColorCellRendererComponent extends ComboBoxInputRenderer implements
 		if ( params.data ) {
 			this.id = params.data.id.toString();
 			this.description = params.data.id.toString();
-			this.border = params.data.border;
+			this.border = '#' + ColorUtilService.darkColorFromHex( params.data.id.toString() );
 		}
 	}
 
@@ -25,12 +26,8 @@ export class ColorCellRendererComponent extends ComboBoxInputRenderer implements
 	}
 
 	public ngAfterViewInit() {
-		if ( this.componentData ) {
-			this.border = this.componentData.border;
-		} else if ( this.agGridParams && this.agGridParams.data ) {
-			this.border = this.agGridParams.data.border;
-		} else {
-			this.border = 'white';
+		if ( this.id && this.id !== null ) {
+			this.border = '#' + ColorUtilService.darkColorFromHex( this.id.toString() );
 		}
 	}
 }

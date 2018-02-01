@@ -36,6 +36,20 @@ export class ColorUtilService {
 		return '0123456789ABCDEF'.charAt( (n - n % 16) / 16 ) + '0123456789ABCDEF'.charAt( n % 16 );
 	}
 
+	public static hexToRGB( hex: string ) {
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( hex );
+		return result ? {
+			r: parseInt( result[1], 16 ),
+			g: parseInt( result[2], 16 ),
+			b: parseInt( result[3], 16 )
+		} : null;
+	}
+
+	public static darkColorFromHex( hex: string ) {
+		const rgbColor = this.hexToRGB( hex );
+		return this.darkColor( rgbColor.r, rgbColor.g, rgbColor.b );
+	}
+
 	public static darkColor( R: any, G: any, B: any ) {
 		return this.rgbToHex( R * 0.7, G * 0.7, B * 0.7 );
 	}

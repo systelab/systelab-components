@@ -1,1 +1,1 @@
-<div class="slab-color-tag" [style.background-color]="id" [style.border-color]="border"></div>
+<div class="slab-color-tag" [ngClass]="{'slab-color-tag-border': id && id!==''}" [style.background-color]="id" [style.border-color]="border"></div>

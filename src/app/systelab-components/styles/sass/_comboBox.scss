@@ -38,7 +38,7 @@
     font-family: $slab-base-body-font-family;
 
     &.form-control[readonly] {
-        background-color: white;
+      background-color: white;
     }
   }
 
@@ -54,6 +54,9 @@
     height: 75%;
     margin: 0 auto;
     margin-top: 3px;
+  }
+
+  .slab-color-tag-border {
     border-radius: 3px;
     border: 1px solid;
   }
