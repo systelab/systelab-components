@@ -1,6 +1,6 @@
 <div #combobox
      (hide.bs.dropdown)="closeDropDown()"
-     class="dropdown slab-combobox d-flex"
+     class="dropdown slab-combobox d-flex h-100"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle" data-toggle="dropdown" (click)="onComboClicked()" style="box-sizing: border-box;height: 100%;">
         <input *ngIf="!customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
