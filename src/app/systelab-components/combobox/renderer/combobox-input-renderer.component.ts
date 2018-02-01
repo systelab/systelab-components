@@ -22,22 +22,6 @@ export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit,
 	constructor( public componentFactoryResolver: ComponentFactoryResolver ) {
 	}
 
-	updateComponent() {
-		if ( !this.isViewInitialized ) {
-			return;
-		}
-		if ( this.cmpRef ) {
-			this.cmpRef.destroy();
-		}
-		const factory = this.componentFactoryResolver.resolveComponentFactory( this.componentType );
-		this.cmpRef = this.target.createComponent( factory );
-		this.cmpRef.instance.id = this.id;
-		this.cmpRef.instance.description = this.description;
-		this.cmpRef.instance.componentData = this.componentData;
-		this.cmpRef.instance.initialParams = this.initialParams;
-		this.target.insert( this.cmpRef.hostView );
-	}
-
 	ngOnChanges() {
 		this.updateComponent();
 	}
@@ -51,5 +35,27 @@ export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit,
 		if ( this.cmpRef ) {
 			this.cmpRef.destroy();
 		}
+	}
+
+	private updateComponent() {
+		if ( !this.isViewInitialized ) {
+			return;
+		}
+		if ( this.cmpRef ) {
+			this.cmpRef.destroy();
+		}
+		const factory = this.componentFactoryResolver.resolveComponentFactory( this.componentType );
+		this.cmpRef = this.target.createComponent( factory );
+		this.target.insert( this.cmpRef.hostView );
+
+		this.updateComponentInputs();
+	}
+
+	private updateComponentInputs() {
+		this.cmpRef.instance.id = this.id;
+		this.cmpRef.instance.description = this.description;
+		this.cmpRef.instance.componentData = this.componentData;
+		this.cmpRef.instance.initialParams = this.initialParams;
+		this.cmpRef.changeDetectorRef.detectChanges();
 	}
 }
