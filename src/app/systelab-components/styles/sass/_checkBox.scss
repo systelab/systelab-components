@@ -108,7 +108,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
   }
 
   .slab-grid-checkbox::before {
-    font-family: "FontAwesome" !important;
+    font-family: icomoon !important;
     content: '\F00d';
     background-color: #158fef;
     width: $slab-checkbox-height;
