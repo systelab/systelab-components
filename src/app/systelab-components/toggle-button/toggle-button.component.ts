@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Component({
 	selector:    'systelab-toggle-button',
@@ -23,6 +23,14 @@ export class ToggleButtonComponent {
 	@Output() public isCheckedChange = new EventEmitter();
 
 	@Input() public disabled = false;
+
+	constructor(private element: ElementRef) {
+
+	}
+
+	public getId() {
+		return this.element.nativeElement.id;
+	}
 
 	@HostListener('click')
 	public onToggle() {
