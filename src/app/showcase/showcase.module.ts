@@ -54,6 +54,8 @@ import { InnerSearcherComponent } from './components/searcher/inner-searcher.com
 import { ShowcaseLoadingComponent } from './components/loading/showcase-loading.component';
 import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showcase-loading-dialog.component';
 import { ShowcaseFileSelectorComponent } from './components/file-selector/showcase-file-selector.component';
+import { ShowcaseTimelineComponent } from './components/timeline/showcase-timeline.component';
+import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/showcase-timeline-dialog.component';
 
 @NgModule({
 	imports:         [
@@ -111,7 +113,9 @@ import { ShowcaseFileSelectorComponent } from './components/file-selector/showca
 		ShowcaseFileSelectorComponent,
 		ShowcaseProgressBarDialog,
 		ShowcaseApplicationFrameDialog,
-		ShowcaseLoadingDialog
+		ShowcaseLoadingDialog,
+		ShowcaseTimelineDialog,
+		ShowcaseTimelineComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
@@ -122,7 +126,8 @@ import { ShowcaseFileSelectorComponent } from './components/file-selector/showca
 		ShowcaseSplitDialog,
 		ShowcaseProgressBarDialog,
 		ShowcaseApplicationFrameDialog,
-		ShowcaseLoadingDialog
+		ShowcaseLoadingDialog,
+		ShowcaseTimelineDialog
 	],
 	providers:       [
 		MessagePopupService,
