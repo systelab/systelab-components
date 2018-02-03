@@ -1,13 +1,17 @@
-import { ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+    ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild,
+    ViewContainerRef
+} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
 
-export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
+declare var jQuery: any;
+
+export abstract class AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static ROW_HEIGHT: number;
 
 	@Input() public customInputRenderer: any;
-	@Input() public initialParams: any;
 	@Input() public filter = false;
 
 	@Input() public fontFamily: string;
@@ -17,7 +21,6 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	@Input() public values: Array<any>;
 	@Input() public isDisabled: boolean;
-	@Input() public inputHeight: number = null;
 	@Output() public change = new EventEmitter();
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
@@ -77,8 +80,6 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	@ViewChild( 'dropdownmenu' ) public dropdownMenuElement: ElementRef;
 	@ViewChild( 'dropdown' ) public dropdownElement: ElementRef;
 	@ViewChild( 'input' ) public inputElement: ElementRef;
-	@ViewChild( 'combobutton' ) public comboButtonElement: ElementRef;
-	@ViewChild( 'input', { read: ViewContainerRef } ) customInputRendererContainer: ViewContainerRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
@@ -92,6 +93,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	public left = 0;
 	public windowResized = false;
 	public isDropdownOpened: boolean;
+	public scrollHandler: any;
 
 	constructor( public myRenderer: Renderer2 ) {
 	}
@@ -99,6 +101,27 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	public ngOnInit() {
 		this.setRowHeight();
 
+		if ( this.fontFamily ) {
+			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-family', this.fontFamily );
+		}
+		if ( this.fontSize ) {
+			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-size', this.fontSize );
+		}
+		if ( this.fontWeight ) {
+			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-weight', this.fontWeight );
+		}
+		if ( this.fontStyle ) {
+			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-style', this.fontStyle );
+		}
+
+		jQuery(this.comboboxElement.nativeElement).on('hide.bs.dropdown', this.closeDropDown.bind(this));
+
+		this.configGrid();
+
+
+	}
+
+	protected configGrid() {
 		this.columnDefs = [
 			{
 				colID: 'id',
@@ -115,19 +138,6 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 		this.gridOptions.rowSelection = 'single';
 
 		this.gridOptions.rowData = this.values;
-
-		if ( this.fontFamily ) {
-			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-family', this.fontFamily );
-		}
-		if ( this.fontSize ) {
-			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-size', this.fontSize );
-		}
-		if ( this.fontWeight ) {
-			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-weight', this.fontWeight );
-		}
-		if ( this.fontStyle ) {
-			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'font-style', this.fontStyle );
-		}
 	}
 
 	protected setRowHeight() {
@@ -139,24 +149,12 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 		return true;
 	}
 
-	@HostListener( 'window:resize', ['$event'] )
-	public onResize( event: any ) {
-		if ( this.isDropDownOpen() ) {
-			this.closeDropDown();
-		}
-		const parentWidth = this.comboboxElement.nativeElement.offsetWidth;
-		this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'width', parentWidth + 'px' );
-		this.windowResized = true;
-	}
-
 	public agInit( params: any ): void {
 		this.params = params;
 	}
 
 	public onComboClicked() {
-		const isOpen: boolean = this.isDropDownOpen();
-
-		if ( !isOpen ) {
+		if ( !this.isDropDownOpen() ) {
 			this.isDropdownOpened = true;
 			this.showDropDown();
 		}
@@ -173,6 +171,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public closeDropDown() {
+		this.removeScrollHandler();
 		this.resetDropDownPositionAndHeight();
 		if ( this.isDropDownOpen() ) {
 			this.myRenderer.removeClass( this.comboboxElement.nativeElement, 'show' );
@@ -202,6 +201,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public showDropDown() {
+		this.addScrollHandler();
 		this.setDropdownWidth();
 		if ( !this.isDropDownOpen() ) {
 			setTimeout( () => this.loop(), 10 );
@@ -235,9 +235,14 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 
 	public setDropdownPosition() {
 		this.myRenderer.setStyle( this.dropdownMenuElement.nativeElement, 'position', 'fixed' );
-		this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'position', 'absolute' );
-		const dropdownParentRect: ClientRect = this.inputElement.nativeElement.getBoundingClientRect();
+		const dropdownParentRect: any = this.inputElement.nativeElement.getBoundingClientRect();
 		this.top = dropdownParentRect.top;
+
+		// Trick for positioning in IE11
+		if (!dropdownParentRect.x) {
+			this.top = dropdownParentRect.top + this.inputElement.nativeElement.offsetHeight;
+		}
+
 		this.left = dropdownParentRect.left;
 		if ( this.top + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight ) {
 			this.top = this.top - this.dropdownElement.nativeElement.offsetHeight - this.inputElement.nativeElement.offsetHeight - 2;
@@ -295,5 +300,43 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit {
 	}
 
 	public afterSettingId( value: number | string ) {
+	}
+
+	@HostListener( 'window:resize', ['$event'] )
+	public onResize( event: any ) {
+		if ( this.isDropDownOpen() ) {
+			this.closeDropDown();
+		}
+		const parentWidth = this.comboboxElement.nativeElement.offsetWidth;
+		this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'width', parentWidth + 'px' );
+		this.windowResized = true;
+	}
+
+	protected isComboBoxScrolling(element: HTMLElement): boolean {
+		if (element.id === this.dropdownElement.nativeElement.id) {
+			return true;
+		} else if (element.parentElement) {
+			return this.isComboBoxScrolling(element.parentElement);
+		}
+		return false;
+	}
+
+    protected scroll(event) {
+		if (!this.isComboBoxScrolling(event.target)) {
+            this.closeDropDown();
+        }
+    }
+
+	protected addScrollHandler() {
+        this.scrollHandler = this.scroll.bind(this);
+        window.addEventListener('scroll', this.scrollHandler , true);
+	}
+
+	protected removeScrollHandler() {
+		window.removeEventListener('scroll', this.scrollHandler , true);
+    }
+
+	public ngOnDestroy() {
+	    this.removeScrollHandler();
 	}
 }
