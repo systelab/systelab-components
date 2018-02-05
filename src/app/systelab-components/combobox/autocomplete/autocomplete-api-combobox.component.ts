@@ -1,4 +1,4 @@
-import { OnInit, Renderer2 } from '@angular/core';
+import {OnDestroy, OnInit, Renderer2} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
@@ -6,7 +6,7 @@ import { AbstractComboBox } from '../abstract-combobox.component';
 
 declare var jQuery: any;
 
-export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent, OnInit {
+export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
 	public startsWith = '';
 

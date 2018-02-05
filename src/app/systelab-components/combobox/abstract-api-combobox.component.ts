@@ -1,10 +1,11 @@
-import { EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import {EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractComboBox } from './abstract-combobox.component';
 import { Observable } from 'rxjs/Observable';
 
-export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit {
+
+export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
 	@Input() public emptyElement = false;
 	@Input() public multipleSelection = false;
@@ -48,13 +49,15 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	public ngOnInit() {
+		super.ngOnInit();
+		this.configGrid();
+	}
 
-		this.setRowHeight();
-
+	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID:             'itemDescription',
-				field:             this.getDescriptionField(),
+				colID: 'itemDescription',
+				field: this.getDescriptionField(),
 				checkboxSelection: this.getMultipleSelection()
 			}
 		];
@@ -67,7 +70,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
 
-		if ( this.multipleSelection ) {
+		if (this.multipleSelection) {
 			this.gridOptions.rowSelection = 'multiple';
 			this.gridOptions.suppressRowClickSelection = true;
 		} else {
@@ -84,12 +87,12 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked:   this.getCheckboxChecked()
+			checkboxChecked: this.getCheckboxChecked()
 		};
 
 		this.gridOptions.getRowNodeId =
-			( item ) => {
-				if ( item[this.getIdField()] ) {
+			(item) => {
+				if (item[this.getIdField()]) {
 					return item[this.getIdField()];
 				} else {
 					return null;
@@ -97,7 +100,6 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 			};
 
 		this.gridOptions.datasource = null;
-
 	}
 
 	public abstract getInstance(): T;
@@ -402,4 +404,5 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public getCheckboxChecked(): string {
 		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
 	}
+
 }
