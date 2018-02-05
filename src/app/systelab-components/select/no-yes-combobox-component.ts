@@ -1,5 +1,5 @@
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
-import { Component, Renderer2 } from '@angular/core';
+import {ChangeDetectorRef, Component, Renderer2} from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 class Element {
@@ -14,8 +14,8 @@ class Element {
 })
 
 export class NoYesSelect extends AbstractComboBox {
-	constructor(public myRenderer: Renderer2, public i18nService: I18nService) {
-		super(myRenderer);
+	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
+		super(myRenderer, chRef);
 		this.values = new Array<Element>();
 		this.values.push(new Element('N', this.i18nService.instant('COMMON_NO')));
 		this.values.push(new Element('Y', this.i18nService.instant('COMMON_YES')));

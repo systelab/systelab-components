@@ -1,4 +1,5 @@
-import { ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2,
+	ViewChild} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
 
@@ -91,10 +92,10 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	public top = 0;
 	public left = 0;
 	public windowResized = false;
-	public isDropdownOpened: boolean;
+	public isDropdownOpened = false;
 	public scrollHandler: any;
 
-	constructor( public myRenderer: Renderer2 ) {
+	constructor( public myRenderer: Renderer2, public chRef: ChangeDetectorRef) {
 	}
 
 	public ngOnInit() {
@@ -116,8 +117,6 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		jQuery(this.comboboxElement.nativeElement).on('hide.bs.dropdown', this.closeDropDown.bind(this));
 
 		this.configGrid();
-
-
 	}
 
 	protected configGrid() {
@@ -170,12 +169,14 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	public closeDropDown() {
+		this.isDropdownOpened = false;
 		this.removeScrollHandler();
 		this.resetDropDownPositionAndHeight();
 		if ( this.isDropDownOpen() ) {
 			this.myRenderer.removeClass( this.comboboxElement.nativeElement, 'show' );
 			this.myRenderer.removeClass( this.dropdownMenuElement.nativeElement, 'show' );
 		}
+		this.chRef.detectChanges();
 	}
 
 	public resetDropDownPositionAndHeight() {
@@ -192,7 +193,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 			this.setDropdownPosition();
 			result = false;
 		}
-		if ( result ) {
+		if ( result && this.isDropdownOpened ) {
 			setTimeout( () => this.loop(), 10 );
 		} else {
 			return;
@@ -208,6 +209,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	public clickDropDownMenu( e: Event ) {
+		e.stopPropagation();
 	}
 
 	public setDropdownHeight() {
@@ -238,7 +240,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.top = dropdownParentRect.top;
 
 		// Trick for positioning in IE11
-		if (!dropdownParentRect.x) {
+		if (!!(<any>window).MSInputMethodContext && !!(<any>window).document.documentMode) {
 			this.top = dropdownParentRect.top + this.inputElement.nativeElement.offsetHeight;
 		}
 
@@ -267,12 +269,15 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	public onSelectionChanged( event: any ) {
+
 		const selectedRow = this.getSelectedRow();
 		this.id = selectedRow.id;
 		this.description = selectedRow.description;
 		this.currentSelected = selectedRow;
 		this.change.emit( selectedRow );
 		this.idChange.emit( selectedRow.id );
+
+		this.closeDropDown();
 	}
 
 	public onModelUpdated( event: any ) {
@@ -337,6 +342,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	public ngOnDestroy() {
 		this.removeScrollHandler();
+		this.chRef.detach();
 	}
 
 

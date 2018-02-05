@@ -1,5 +1,5 @@
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
-import { Component, Renderer2, EventEmitter, Output, Input } from '@angular/core';
+import {Component, Renderer2, EventEmitter, Output, Input, ChangeDetectorRef} from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 class Element {
@@ -18,8 +18,8 @@ export class GenderSelect extends AbstractComboBox {
 	@Input() genderValue = '';
 	@Output() genderValueChange: EventEmitter<string|number> = new EventEmitter<string|number>();
 
-	constructor(public myRenderer: Renderer2, public i18nService: I18nService) {
-		super(myRenderer);
+	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
+		super(myRenderer, chRef);
 		this.values = new Array<Element>();
 		this.values.push(new Element('U', this.i18nService.instant('COMMON_UNKNOWN')));
 		this.values.push(new Element('M', this.i18nService.instant('COMMON_MALE')));
