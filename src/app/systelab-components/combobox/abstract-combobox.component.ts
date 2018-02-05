@@ -1,7 +1,4 @@
-import {
-    ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild,
-    ViewContainerRef
-} from '@angular/core';
+import { ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
 
@@ -12,6 +9,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	public static ROW_HEIGHT: number;
 
 	@Input() public customInputRenderer: any;
+	@Input() public initialParams: any;
 	@Input() public filter = false;
 
 	@Input() public fontFamily: string;
@@ -21,6 +19,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	@Input() public values: Array<any>;
 	@Input() public isDisabled: boolean;
+	@Input() public inputHeight: number = null;
 	@Output() public change = new EventEmitter();
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
@@ -321,22 +320,24 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		return false;
 	}
 
-    protected scroll(event) {
+	protected scroll(event) {
 		if (!this.isComboBoxScrolling(event.target)) {
-            this.closeDropDown();
-        }
-    }
+			this.closeDropDown();
+		}
+	}
 
 	protected addScrollHandler() {
-        this.scrollHandler = this.scroll.bind(this);
-        window.addEventListener('scroll', this.scrollHandler , true);
+		this.scrollHandler = this.scroll.bind(this);
+		window.addEventListener('scroll', this.scrollHandler , true);
 	}
 
 	protected removeScrollHandler() {
 		window.removeEventListener('scroll', this.scrollHandler , true);
-    }
+	}
 
 	public ngOnDestroy() {
-	    this.removeScrollHandler();
+		this.removeScrollHandler();
 	}
+
+
 }
