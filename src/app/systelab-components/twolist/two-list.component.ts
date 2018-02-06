@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataFilterPipe } from './datafilter.pipe';
 
 export class TwoListItem {
-	constructor(public displayName: string, public selected: boolean, public visible: boolean) {
+	constructor(public displayName: string, public coldId, public selected: boolean, public visible: boolean) {
 	}
 }
 
