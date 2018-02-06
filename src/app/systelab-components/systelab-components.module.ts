@@ -52,6 +52,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
 import {TooltipDirective} from './tooltip/tooltip.directive';
+import { TimelineComponent } from './timeline/timeline.component';
 
 @NgModule( {
 	imports:         [
@@ -110,6 +111,7 @@ import {TooltipDirective} from './tooltip/tooltip.directive';
 		DialogBottomComponent,
 		LoadingComponent,
 		FileSelectorComponent,
+		TimelineComponent,
 		ComboBoxInputRendererComponent,
 		TooltipDirective
 	],
@@ -147,6 +149,7 @@ import {TooltipDirective} from './tooltip/tooltip.directive';
 		DialogBottomComponent,
 		LoadingComponent,
 		FileSelectorComponent,
+		TimelineComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,

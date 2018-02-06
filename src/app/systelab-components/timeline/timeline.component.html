@@ -1,0 +1,14 @@
+<ul class="slab-timeline p-3 mt-3">
+    <li *ngFor="let event of events" [class.slab-timeline-inverted]="event.inverted">
+        <div class="slab-timeline-badge {{event.getColor()}}"><i class="{{event.getIcon()}}"></i></div>
+        <div class="slab-timeline-panel">
+            <div class="slab-timeline-heading">
+                <h4 class="slab-timeline-title">{{event.title}}</h4>
+                <p><small class="text-muted"><i class="icon-clock"></i> {{getPrintableDate(event)}}</small></p>
+            </div>
+            <div class="slab-timeline-body">
+                <p>{{event.text}}</p>
+            </div>
+        </div>
+    </li>
+</ul>

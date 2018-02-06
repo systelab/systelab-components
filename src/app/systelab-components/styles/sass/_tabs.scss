@@ -41,3 +41,9 @@
     }
   }
 }
+
+@-moz-document url-prefix() {
+  systelab-tabs {
+      overflow: auto;
+  }
+}

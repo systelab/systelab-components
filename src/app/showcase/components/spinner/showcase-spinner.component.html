@@ -16,8 +16,10 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label">Next to each other</label>
         <div class="col-md-9">
-            <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
-            <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
+            <div class="d-flex">
+                <systelab-spinner [spinValues]="touchSpinValues1" id="touch2" class="mr-1"></systelab-spinner>
+                <systelab-spinner [spinValues]="touchSpinValues1" id="touch2"></systelab-spinner>
+            </div>
         </div>
     </div>
 </div>

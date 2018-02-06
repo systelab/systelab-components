@@ -1,48 +1,8 @@
 .slab-spinner-container {
 
-  /**
-   * 1. An input element, unlike a div, comes with an intrinsic width. We
-   *    need to override this behavior, because a flex item cannot shrink
-   *    below the length of their content.
-   */
   .slab-spinner-input {
-    min-width: 0; /* [1] */
+    min-width: 0;
     text-align: center;
-    border-radius: 0;
-    border-top: 1px solid #ced4da;
-    border-bottom: 1px solid #ced4da;
-    border-left: 0px;
-    border-right: 0px;
-  }
-
-  /**
-   * 1. Resetting of default button minimum size.
-   */
-  .slab-spinner-minus,
-  .slab-spinner-plus {
-    padding: 0px;
-    border: none;
-    cursor: pointer;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    min-width: $slab-spinner-button-width;
-    width: $slab-spinner-button-width;
-    line-height: 100%;
-    min-height: 100%;
-  }
-
-  .slab-spinner-minus {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-right: 0px;
-  }
-
-  .slab-spinner-plus {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: 0px;
   }
 }
 

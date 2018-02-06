@@ -1,5 +1,5 @@
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
-import { Component, Renderer2 } from '@angular/core';
+import {ChangeDetectorRef, Component, Renderer2} from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 class Element {
@@ -14,8 +14,8 @@ class Element {
 })
 
 export class PeriodSelect extends AbstractComboBox {
-	constructor(public myRenderer: Renderer2, public i18nService: I18nService) {
-		super(myRenderer);
+	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
+		super(myRenderer, chRef);
 		this.values = new Array<Element>();
 		this.values.push(new Element(this.i18nService.instant('COMMON_PERIOD_WILL_BE_SPECIFIED'), this.i18nService.instant('COMMON_PERIOD_WILL_BE_SPECIFIED')));
 		this.values.push(new Element(this.i18nService.instant('COMMON_CURRENT_MONTH'), this.i18nService.instant('COMMON_CURRENT_MONTH')));

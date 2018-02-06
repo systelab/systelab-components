@@ -1,4 +1,4 @@
-import { Input, OnInit, Renderer2 } from '@angular/core';
+import {ChangeDetectorRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +16,7 @@ export class ComboTreeNode {
 	}
 }
 
-export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit {
+export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
 	@Input() public isParentSelectable = false;
 	@Input() public isAllSelectable = true;
@@ -34,17 +34,20 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 	public totalItemsLoaded = false;
 	public isFirstTime = true;
 
-	constructor(public myRenderer: Renderer2) {
-		super(myRenderer);
+	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
+		super(myRenderer, chref);
 	}
 
 	public ngOnInit() {
-
 		this.setRowHeight();
+		this.configGrid();
 
+	}
+
+	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID:        'itemDescription',
+				colID: 'itemDescription',
 				cellRenderer: (params: any) => {
 					return this.getLabelForLevel(params.data);
 				}
@@ -59,7 +62,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.rowSelection = 'single';
-
 	}
 
 	public abstract getData(): Observable<Array<T>>;
@@ -82,6 +84,12 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 				+ comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)]
 				+ '</span>';
 		}
+	}
+
+	// override
+	public closeDropDown() {
+		this.isFirstTime = true;
+		super.closeDropDown();
 	}
 
 	// override
@@ -167,11 +175,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 			);
 	}
 
-	public clickDropDownMenu(e: Event) {
-		e.stopPropagation();
-	}
-
-
 	// Overrides
 	public onRowSelected(event: any) {
 		if (event.node.selected) {
@@ -205,6 +208,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 				|| this.isParentSelectable) {
 				this.change.emit(this.id);
 				this.idChange.emit(this.id);
+				this.closeDropDown();
 			}
 		}
 	}

@@ -1,7 +1,10 @@
 
 .slab-combobox {
 
-  width: 100%;
+  .slab-dropdown-toogle{
+    box-sizing: border-box;
+    height: 100%;
+  }
 
   .slab-combo-button {
     @include user-selection(none);
@@ -36,6 +39,9 @@
     width: calc(100% - #{$slab-combobox-button-width}) !important;
     border: 1px solid $medium-gray;
     font-family: $slab-base-body-font-family;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 12px;
 
     &.form-control[readonly] {
       background-color: white;

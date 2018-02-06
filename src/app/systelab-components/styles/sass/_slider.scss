@@ -11,6 +11,7 @@
   box-shadow: none;
 
   -webkit-appearance: none;
+  -moz-appearance: none;
   border-radius: 5px;
   background: #d3d3d3;
   outline: none;
@@ -35,14 +36,23 @@
     cursor: pointer;
   }
 
-  &::-moz-range-thumb {
-    @include size($slab-slider-height !important);
+  &::-moz-range-track {
+    background: #d3d3d3;
+    border: none;
+  }
 
+  &::-moz-range-thumb {
+    width: ($slab-slider-height) / 2 !important;
+    height: ($slab-slider-height) / 2 !important;
     background-color: $slab-slider-circle-color;
     border-radius: 50%;
     border: 6px solid $slab-slider-circle-border-color;
     background-image: none;
     cursor: pointer;
+  }
+
+  &::-moz-focus-outer {
+    border: 0;
   }
 }
 

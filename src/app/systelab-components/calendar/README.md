@@ -29,7 +29,7 @@ The interesting thing here, is that you can specify a custom template for systel
                 {{daySlot.day}}
             </a>
             <div *ngIf="!daySlot.isHoliday" class="buttons">
-                <button class="button1" (click)="doSomething(daySlot)"></button>
+                <button type="button" class="button1" (click)="doSomething(daySlot)"></button>
             </div>
         </ng-template>
 </systelab-calendar-table>
