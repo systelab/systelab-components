@@ -1,36 +1,105 @@
 import { Injectable } from '@angular/core';
-import { MessagePopupComponent } from './message-popup.component';
-import { Modal } from '../plugin/custom/modal';
+import { Modal, SystelabModalContext } from '../plugin/custom';
+import { DialogRef, overlayConfigFactory } from 'ngx-modialog';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { MessagePopupViewComponent } from './message-popup-view.component';
 import { Observable } from 'rxjs/Observable';
+import { MessageWithIconComponent } from './message-with-icon.component';
+
+export class MessagePopupButton {
+	constructor(public title: string, public returnValue: any) {
+
+	}
+}
 
 @Injectable()
 export class MessagePopupService {
 
-	private messagePopUpComponent: MessagePopupComponent;
+	public static breakpointMedium = 500;
 
-	constructor(modal: Modal, i18nService: I18nService) {
-		this.messagePopUpComponent = new MessagePopupComponent(modal, i18nService);
+	constructor(protected modal: Modal, protected i18nService: I18nService) {
 	}
 
 	public showErrorPopup(titleDescription: string, errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showErrorPopup(titleDescription, errorDescription, modalClass, width, height);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_ERROR, errorDescription, modalClass, width, height, []);
 	}
 
 	public showWarningPopup(titleDescription: string, warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showWarningPopup(titleDescription, warningDescription, modalClass, width, height);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_WARNING, warningDescription, modalClass, width, height, []);
 	}
 
 	public showInformationPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showInformationPopup(titleDescription, messageDescription, modalClass, width, height);
-	}
-
-	public showQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showQuestionPopup(titleDescription, messageDescription, modalClass, width, height);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_INFO, messageDescription, modalClass, width, height, []);
 	}
 
 	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.messagePopUpComponent.showYesNoQuestionPopup(titleDescription, messageDescription, modalClass, width, height);
+		const buttons: MessagePopupButton[] = [];
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_OK'), true));
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_CANCEL'), false));
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons);
+	}
+
+	protected showPopup(title: string, type: number, message: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[]): Observable<any> {
+
+		let fullScreen = false;
+		let maxWidth = 700;
+		let minWidth = 499;
+		let maxHeight = 400;
+		let minHeight = 280;
+
+		if (window.innerWidth <= MessagePopupService.breakpointMedium) {
+			fullScreen = true;
+			width = undefined;
+			height = undefined;
+			maxWidth = undefined;
+			minWidth = undefined;
+			maxHeight = undefined;
+			minHeight = undefined;
+			modalClass = undefined;
+		} else {
+			if (height && height > maxHeight) {
+				height = maxHeight;
+			}
+			if (height && height < minHeight) {
+				height = minHeight;
+			}
+			if (width && width > maxWidth) {
+				width = maxWidth;
+			}
+			if (width && width < minWidth) {
+				width = minWidth;
+			}
+		}
+		let p: Promise<any> = new Promise((resolve: any, reject: any) => {
+			this.modal.open(MessagePopupViewComponent,
+				overlayConfigFactory(
+					{
+						fullScreen:   fullScreen,
+						dialogClass:  modalClass,
+						msg:          message,
+						buttons:      buttons,
+						title:        title,
+						type:         type,
+						width:        width,
+						maxWidth:     maxWidth,
+						minWidth:     minWidth,
+						maxHeight:    maxHeight,
+						minHeight:    minHeight,
+						height:       height
+					},
+					SystelabModalContext)
+			)
+				.then((dialogRef: DialogRef<any>) => {
+					dialogRef.result.then((v) => {
+						resolve(v);
+					})
+						.catch((e) => {
+							reject(e);
+						});
+				});
+		});
+
+		return Observable.fromPromise(p);
 	}
 
 }

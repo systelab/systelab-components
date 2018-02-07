@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { SystelabModalContext } from '../modal-context';
+import { MessagePopupButton } from './message-popup.service';
 
 export class MessagePopupViewContext extends SystelabModalContext {
 	public title: string;
 	public msg: string;
 	public icon: string;
 	public color: string;
-	public yesNoButtons: boolean;
+	public buttons: MessagePopupButton[];
 }
 
 
 @Component({
 	selector:    'dialog-view',
-	templateUrl: 'message-popup-view.component.html',
-	styleUrls:   ['message-popup-view.component.scss']
+	templateUrl: 'message-popup-view.component.html'
 })
 export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext> {
 

@@ -26,10 +26,5 @@ public showInfo() {
   this.messagePopupService.showInformationPopup('Test', 'Info message popup example');
 }
 
-public showQuestion() {
-  this.messagePopupService.showQuestionPopup('Test', 'Are you sure?')
-    .subscribe((v) => {
-        console.log('closing');
-  });
-}
+
 ```
