@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { SystelabModalModule } from './modal/plugin/custom/systelab-modal.module';
 import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
-import { MessagePopupComponent } from './modal/message-popup/message-popup.component';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
 import { DOMOverlayRenderer, OverlayRenderer } from 'ngx-modialog';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
@@ -54,6 +53,8 @@ import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-inp
 import {TooltipDirective} from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NavsComponent } from './navs/navs.component';
+import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
+
 
 @NgModule( {
 	imports:         [
@@ -79,7 +80,6 @@ import { NavsComponent } from './navs/navs.component';
 		SwitchComponent,
 		ContextMenuComponent,
 		DialogComponent,
-		MessagePopupComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
 		TwoListComponent,
@@ -113,6 +113,7 @@ import { NavsComponent } from './navs/navs.component';
 		LoadingComponent,
 		FileSelectorComponent,
 		TimelineComponent,
+		MessageWithIconComponent,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
 		NavsComponent
@@ -121,7 +122,6 @@ import { NavsComponent } from './navs/navs.component';
 		SliderComponent,
 		PieComponent,
 		SwitchComponent,
-		MessagePopupComponent,
 		ContextMenuComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
@@ -153,6 +153,7 @@ import { NavsComponent } from './navs/navs.component';
 		FileSelectorComponent,
 		TimelineComponent,
 		NavsComponent,
+		MessageWithIconComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,

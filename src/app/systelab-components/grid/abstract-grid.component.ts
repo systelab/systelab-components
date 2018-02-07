@@ -350,7 +350,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		// initial & available
 		this.gridOptions.columnApi.getAllColumns()
 			.forEach(function (column: Column) {
-				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, false, false);
+				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false);
 				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId)
 						.isVisible()) {
 					options.available.push(item);
@@ -362,7 +362,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.columnApi.getAllDisplayedColumns()
 			.forEach(function (column) {
 				if (column.getColId() !== 'contextMenu') {
-					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, false, true);
+					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true);
 					options.visible.push(item);
 				}
 			});
@@ -371,10 +371,10 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.getColumnDefs()
 			.forEach(column => {
 				if (!column.hide) {
-					const item: TwoListItem = new TwoListItem(column.headerName, false, true);
+					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, true);
 					options.defaultVisibleColumns.push(item);
 				} else {
-					const item: TwoListItem = new TwoListItem(column.headerName, false, false);
+					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, false);
 					options.defaultHiddenColumns.push(item);
 				}
 			});
