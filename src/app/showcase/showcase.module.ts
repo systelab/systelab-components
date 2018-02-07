@@ -56,6 +56,7 @@ import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showc
 import { ShowcaseFileSelectorComponent } from './components/file-selector/showcase-file-selector.component';
 import { ShowcaseTimelineComponent } from './components/timeline/showcase-timeline.component';
 import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/showcase-timeline-dialog.component';
+import { ShowcaseNavsComponent } from './components/navs/showcase-navs.component';
 
 @NgModule({
 	imports:         [
@@ -115,7 +116,8 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 		ShowcaseApplicationFrameDialog,
 		ShowcaseLoadingDialog,
 		ShowcaseTimelineDialog,
-		ShowcaseTimelineComponent
+		ShowcaseTimelineComponent,
+		ShowcaseNavsComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

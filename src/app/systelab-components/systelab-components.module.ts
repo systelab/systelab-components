@@ -53,6 +53,7 @@ import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
 import {TooltipDirective} from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
+import { NavsComponent } from './navs/navs.component';
 
 @NgModule( {
 	imports:         [
@@ -113,7 +114,8 @@ import { TimelineComponent } from './timeline/timeline.component';
 		FileSelectorComponent,
 		TimelineComponent,
 		ComboBoxInputRendererComponent,
-		TooltipDirective
+		TooltipDirective,
+		NavsComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -150,6 +152,7 @@ import { TimelineComponent } from './timeline/timeline.component';
 		LoadingComponent,
 		FileSelectorComponent,
 		TimelineComponent,
+		NavsComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
