@@ -55,6 +55,16 @@ Each item has the follow structure:
     public target:string,
     public url: string
 ```
+
+Examples to how to add nav items to the list:
+```javascript
+
+    this.navsItems.push(new NavsItems(5,'Blank Link','',false,false,true,'_blank','https://werfen.com'));
+    this.navsItems.push(new NavsItems(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
+
+```
+
+
 **navId** is the id of the item.
 
 **navText** is the text of the item.
