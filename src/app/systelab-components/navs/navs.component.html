@@ -1,11 +1,25 @@
-<ul [style.background-color]="backgroundColor" class="nav nav-pills slab-ul-navs align-items-center d-flex" [class.justify-content-center]="alignNavs === 'center'" [class.justify-content-end]="alignNavs === 'right'" [class.flex-row]="!isVertical" [class.flex-column]="isVertical">
-  <li class="nav-item  " [class.disabled]="!ins.isEnabled"
-  [style.background-color]="hovered == ins.navId && ins.isEnabled ? backgroundHoverItemColor : !ins.isEnabled ? '#cccccc': backgroundColor"
-  *ngFor="let ins of navsItems"   (mouseover)="hovered = ins.navId" (mouseout)="hovered = -1" >
-      <a class="nav-link slab-nav-link text-center align-self-stretch align-items-center"  [href]="ins.isEnabled ?  ins.url : ''" [target]='ins.target' [style.color]="fontColor" [class.disabled]="!ins.isEnabled"  [class.active]="ins.isActive" >
-        <i *ngIf="ins.icon"  [class]="ins.icon" [style.color]="fontColor" [class.slab-icon-floatImage]="ins.floatImage" [class.slab-icon-verticalImage]="!ins.floatImage" ></i>
-        {{ins.navText}}
-      </a>
-  </li>
-</ul>
+
+<div class=" navbar-expand-md navbar-light " [style.background-color]="backgroundColor" >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" [attr.data-target]="'#' + idNav"  [attr.aria-controls]="idNav" aria-expanded="false" aria-label="Toggle navigation"
+    [style.background-color]="hovered == -2  ? backgroundHoverItemColor :  backgroundColor"  (mouseover)="hovered = -2" (mouseout)="hovered = -1">
+           <i class="slab-icon-medium mt-2 mb-2 icon-list" [style.color]="fontColor"></i>
+    </button>
+
+
+<div class="collapse navbar-collapse" [id]="idNav" [class.justify-content-center]="alignNavs === 'center'" [class.justify-content-end]="alignNavs === 'right'"> 
+    <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical"  class="nav nav-pills slab-ul-navs align-items-center d-flex"  >
+        <li class="nav-item  " [class.disabled]="!ins.isEnabled"
+        [style.background-color]="hovered == ins.navId && ins.isEnabled ? backgroundHoverItemColor : !ins.isEnabled ? '#cccccc': backgroundColor"
+        *ngFor="let ins of navsItems"   (mouseover)="hovered = ins.navId" (mouseout)="hovered = -1" >
+            <a class="nav-link slab-nav-link text-center align-self-stretch align-items-center"  [href]="ins.isEnabled ?  ins.url : ''" [target]='ins.target' [style.color]="fontColor" [class.disabled]="!ins.isEnabled"  [class.active]="ins.isActive" >
+              <i *ngIf="ins.icon"  [class]="ins.icon" [style.color]="fontColor" [class.slab-icon-floatImage]="ins.floatImage" [class.slab-icon-verticalImage]="!ins.floatImage" ></i>
+              {{ins.navText}}
+            </a>
+        </li>
+      </ul>
+</div>
+   
+
+</div>
+
 

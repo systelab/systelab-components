@@ -12,6 +12,11 @@ export class ShowcaseNavsComponent implements OnInit {
   public navsItems3: Array<NavsItems>=[];
   public navsItems4: Array<NavsItems>=[];
   public navsItems5: Array<NavsItems>=[];
+  public idNav1 :string ="nav-content1";
+  public idNav2 :string ="nav-content2";
+  public idNav3 :string ="nav-content3";
+  public idNav4 :string ="nav-content4";
+  public idNav5 :string ="nav-content5";
   public alignNavsCenter:string="center";
   public alignNavsRight:string="right";
   public alignNavsLeft:string="left";
@@ -22,6 +27,7 @@ export class ShowcaseNavsComponent implements OnInit {
   public backgroundHoverItemColor:string="rgb(66, 161,205)";
   public backgroundColor2:string="rgb(242, 158, 0)";
   public backgroundHoverItemColor2:string="rgb(239, 170, 107)";
+
   constructor() { 
     this.navsItems1.push(new NavsItems(1,'Option 1','',false,true,true,'_self','https://google.com'));
     this.navsItems1.push(new NavsItems(2,'Disabled','',false,false,false,'_self','https://werfen.com'));
@@ -29,24 +35,24 @@ export class ShowcaseNavsComponent implements OnInit {
     this.navsItems1.push(new NavsItems(4,'Option 4','',false,false,true,'_self','https://werfen.com'));
     this.navsItems1.push(new NavsItems(5,'Blank Link','',false,false,true,'_blank','https://werfen.com'));
 
-    this.navsItems2.push(new NavsItems(1,'Option 1','slab-icon-medium mt-2 mb-2 icon-home',false,true,true,'_self','https://google.com'));
-    this.navsItems2.push(new NavsItems(2,'Disabled','slab-icon-medium mt-2 mb-2 icon-bug',false,false,false,'_self','https://werfen.com'));
-    this.navsItems2.push(new NavsItems(3,'Option 3','slab-icon-medium mt-2 mb-2 icon-calendar',false,false,true,'_self','https://werfen.com'));
-    this.navsItems2.push(new NavsItems(4,'Option 4','slab-icon-medium mt-2 mb-2 icon-clock',false,false,true,'_self','https://werfen.com'));
-    this.navsItems2.push(new NavsItems(5,'Blank Link','slab-icon-medium mt-2 mb-2 icon-print',false,false,true,'_blank','https://werfen.com'));
+    this.navsItems2.push(new NavsItems(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
+    this.navsItems2.push(new NavsItems(2,'Disabled','slab-icon-medium icon-bug',false,false,false,'_self','https://werfen.com'));
+    this.navsItems2.push(new NavsItems(3,'Option 3','slab-icon-medium icon-calendar',false,false,true,'_self','https://werfen.com'));
+    this.navsItems2.push(new NavsItems(4,'Option 4','slab-icon-medium icon-clock',false,false,true,'_self','https://werfen.com'));
+    this.navsItems2.push(new NavsItems(5,'Blank Link','slab-icon-medium icon-print',false,false,true,'_blank','https://werfen.com'));
 
-    this.navsItems3.push(new NavsItems(1,'Option 1','slab-icon-medium mt-2 mb-2 icon-home',true,true,true,'_self','https://google.com'));
-    this.navsItems3.push(new NavsItems(2,'Disabled','slab-icon-medium mt-2 mb-2 icon-bug',true,false,false,'_self','https://werfen.com'));
-    this.navsItems3.push(new NavsItems(3,'Option 3','slab-icon-medium mt-2 mb-2 icon-calendar',true,false,true,'_self','https://werfen.com'));
-    this.navsItems3.push(new NavsItems(5,'Blank Link','slab-icon-medium mt-2 mb-2 icon-clock',true,false,true,'_blank','https://werfen.com'));
+    this.navsItems3.push(new NavsItems(1,'Option 1','slab-icon-medium icon-home',true,true,true,'_self','https://google.com'));
+    this.navsItems3.push(new NavsItems(2,'Disabled','slab-icon-medium icon-bug',true,false,false,'_self','https://werfen.com'));
+    this.navsItems3.push(new NavsItems(3,'Option 3','slab-icon-medium icon-calendar',true,false,true,'_self','https://werfen.com'));
+    this.navsItems3.push(new NavsItems(5,'Blank Link','slab-icon-medium icon-clock',true,false,true,'_blank','https://werfen.com'));
 
     this.navsItems4.push(new NavsItems(1,'Option 1','',false,true,true,'_self','https://google.com'));
     this.navsItems4.push(new NavsItems(2,'Disabled','',false,false,false,'_self','https://werfen.com'));
     this.navsItems4.push(new NavsItems(5,'Blank Link','',false,false,true,'_blank','https://werfen.com'));
 
-    this.navsItems5.push(new NavsItems(1,'Option 1','slab-icon-medium mt-2 mb-2 icon-home',false,true,true,'_self','https://google.com'));
-    this.navsItems5.push(new NavsItems(2,'Option 2','slab-icon-medium mt-2 mb-2 icon-bug',false,false,true,'_self','https://werfen.com'));
-    this.navsItems5.push(new NavsItems(3,'Option 3','slab-icon-medium mt-2 mb-2 icon-calendar',true,false,true,'_self','https://werfen.com'));
+    this.navsItems5.push(new NavsItems(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
+    this.navsItems5.push(new NavsItems(2,'Option 2','slab-icon-medium icon-bug',false,false,true,'_self','https://werfen.com'));
+    this.navsItems5.push(new NavsItems(3,'Option 3','slab-icon-medium icon-calendar',true,false,true,'_self','https://werfen.com'));
   }
 
   ngOnInit() {

@@ -11,7 +11,7 @@
     margin-right: 0;
     padding: 10px 8px;
 }
-.flex-column > .nav-item{
+.flex-column > .nav-item,.flex-column{
     width: 100%;
 }
 .slab-ul-navs > .nav-item > .nav-link{
@@ -33,4 +33,11 @@ li.disabled{
 }
 .labelWithOutImage{
     display:table-cell;
+}
+
+
+@media (max-width: 768px){
+    .nav-item{
+        width: 100%;
+    }
 }

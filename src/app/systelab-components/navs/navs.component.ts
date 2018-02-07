@@ -16,7 +16,8 @@ export class NavsComponent  {
   @Input() public backgroundHoverItemColor: string="rgb(66, 161,205)";
   @Input() public fontColor: string="#ffffff";
   @Input() public alignNavs: string="left";
-
+  @Input() public idNav:string="nav-content";
+  
   public style;
   public hovered:number=0;
 
