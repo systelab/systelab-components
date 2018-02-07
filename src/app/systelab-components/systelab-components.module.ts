@@ -52,6 +52,7 @@ import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
 import {TooltipDirective} from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
+
 import { NavsComponent } from './navs/navs.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
 
