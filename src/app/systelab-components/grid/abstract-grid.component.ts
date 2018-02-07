@@ -374,7 +374,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, true);
 					options.defaultVisibleColumns.push(item);
 				} else {
-					const item: TwoListItem = new TwoListItem(column.headerName, column.coldId, false, false);
+					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, false);
 					options.defaultHiddenColumns.push(item);
 				}
 			});
