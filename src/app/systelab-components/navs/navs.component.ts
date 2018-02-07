@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class NavsComponent  {
  
-
   @Input() public navsItems: Array<NavsItems>=[];
 	@Input() public elementID: number=0;
   @Input() public isVertical: boolean=false;
@@ -17,13 +16,10 @@ export class NavsComponent  {
   @Input() public fontColor: string="#ffffff";
   @Input() public alignNavs: string="left";
   @Input() public idNav:string="nav-content";
-  
+
   public style;
   public hovered:number=0;
 
   constructor() { 
-
   }
-
-
 }
