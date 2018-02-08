@@ -4,7 +4,7 @@
             (onSelect)="selectDate()"
             (keydown)="onKeyDown($event)"
             [showOtherMonths]="true"
-            [required]="isRequired"
+            [required]="required"
             [disabled]="disabled"
             appendTo="body"
             [ngClass]="{'date-error': error || (isRequired && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate && markPreviousDate, 'input-expand-height':inputExpandHeight}">
