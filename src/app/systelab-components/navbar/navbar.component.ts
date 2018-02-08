@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {NavbarItem} from './NavbarItem';
-import {Router} from '@angular/router';
+
 @Component({
   selector: 'systelab-navbar',
   templateUrl: './navbar.component.html',
@@ -15,8 +15,7 @@ export class NavbarComponent {
   @Input() public fontColor: string;
   @Input() public alignNavbar: string;
   @Input() public id: string;
-
-  public style;
+  
   public hovered: number = 0;
 
   constructor() {

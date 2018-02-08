@@ -54,6 +54,7 @@ import { TooltipDirective } from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		MessageWithIconComponent,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
-		NavbarComponent
+		NavbarComponent,
+		BreadcrumbComponent
 	],
 	exports: [
 		SliderComponent,
@@ -154,6 +156,7 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		TimelineComponent,
 		NavbarComponent,
 		MessageWithIconComponent,
+		BreadcrumbComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
