@@ -1,8 +1,8 @@
-export class NavsItems {
+export class NavbarItem {
 
-	constructor( public navId: number,
-                 public navText: string,
-                 public icon: string,
+	constructor( public id: number,
+                 public text: string,
+                 public image: string,
                  public floatImage: boolean,
                  public isActive:boolean,
                  public isEnabled:boolean,

@@ -53,7 +53,7 @@ import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-inp
 import {TooltipDirective} from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
 
-import { NavsComponent } from './navs/navs.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
 
 
@@ -117,7 +117,7 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		MessageWithIconComponent,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
-		NavsComponent
+		NavbarComponent
 	],
 	exports:         [
 		SliderComponent,
@@ -153,7 +153,7 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		LoadingComponent,
 		FileSelectorComponent,
 		TimelineComponent,
-		NavsComponent,
+		NavbarComponent,
 		MessageWithIconComponent,
 		AgGridNg2,
 		Tree,

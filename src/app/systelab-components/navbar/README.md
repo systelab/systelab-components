@@ -1,4 +1,4 @@
-# systelab-pie
+# systelab-navbar
 
 Component to show a Nav
 
