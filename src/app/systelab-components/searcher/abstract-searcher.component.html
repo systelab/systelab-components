@@ -1,18 +1,21 @@
 <div class="slab-searcher-container d-flex flex-nowrap h-100" [ngClass]="{'disabled': isDisabled}">
-    <input #valueToSearch type="input" class="form-control"
-           [(ngModel)]="code"
-           (blur)="doSearch()"
-           [disabled]="isDisabled"
-           [style.font-family]="fontFamily"
-           [style.font-size.px]="fontSize"
-           [style.font-weight]="fontWeight"
-           [ngStyle]="getInputHeight()"
-           [style.font-style]="fontStyle">
-    <button class="btn" [disabled]="isDisabled" [ngStyle]="getWidth()"
-            (click)="openSearchDialog()" *ngIf="withButton">
-            <span class='icon-question'>
-            </span>
-    </button>
+
+    <div class="input-group" style="width: 120px;">
+        <input #valueToSearch type="input" class="form-control"
+               [(ngModel)]="code"
+               (blur)="doSearch()"
+               [disabled]="isDisabled"
+               [style.font-family]="fontFamily"
+               [style.font-size.px]="fontSize"
+               [style.font-weight]="fontWeight"
+               [ngStyle]="getInputHeight()"
+               [style.font-style]="fontStyle">
+
+        <div class="input-group-append">
+            <button class="btn btn-sm pt-0 pb-0" type="button" [disabled]="isDisabled" [ngStyle]="getWidth()"
+                    (click)="openSearchDialog()" *ngIf="withButton"><i class="icon-question"></i></button>
+        </div>
+    </div>
     <p class="slab-flex-1 text-truncate mb-0 ml-1" style="width: 30px;" [ngStyle]="getLineHeight()"
        [style.font-family]="fontFamily"
        [style.font-size.px]="fontSize"

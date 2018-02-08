@@ -1,23 +1,13 @@
-<systelab-dialog-header [withInfo]="false"
-                        (close)="close();">{{context.title}}</systelab-dialog-header>
-<div class="slab-flex-1 d-flex align-items-center p-5">
-    <i class="slab-msg-box-icon {{context.icon}} {{context.color}}"></i>
-    <div class="pl-5" id="popup-message">
-        {{ context.msg }}
-    </div>
+<systelab-dialog-header (close)="close()">{{context.title}}</systelab-dialog-header>
+<div class="slab-flex-1 d-flex align-items-center pl-3">
+    <systelab-message-with-icon class="w-100 h-100" [message]="context.msg" [type]="context.type"></systelab-message-with-icon>
 </div>
 <systelab-dialog-bottom>
-    <div class="ml-auto" *ngIf="context.yesNoButtons; else customcomponent">
-        <button type="button" class="btn" (click)="close(true)">{{ 'COMMON_OK' | translate | async }}
-        </button>
-        <button type="button" class="btn" (click)="close(false)">{{ 'COMMON_CANCEL' | translate | async }}
-        </button>
+    <div class="ml-auto" *ngIf="context.buttons.length>0">
+        <button *ngFor="let button of context.buttons" type="button" class="btn ml-1" (click)="close(button.returnValue)">{{button.title}}</button>
     </div>
-    <ng-template #customcomponent>
-        <div class="ml-auto">
-            <button type="button" class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}
-            </button>
-        </div>
-    </ng-template>
+     <div class="ml-auto" *ngIf="context.buttons.length===0">
+            <button type="button" class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}</button>
+     </div>
 </systelab-dialog-bottom>
 

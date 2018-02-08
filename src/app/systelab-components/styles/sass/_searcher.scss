@@ -2,26 +2,8 @@
 .slab-searcher-container {
   input {
     width: 100px;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
-    border: 1px solid $medium-gray;
 
-  }
-  button {
-    &, &:hover, &:disabled {
-      padding: 0px;
-      border: none;
-      cursor: pointer;
-      margin-left: -5px;
-      border-bottom-left-radius: 0px !important;
-      border-top-left-radius: 0px !important;;
-      border-bottom-right-radius: 3px !important;;
-      border-top-right-radius: 3px !important;;
-      min-width: $slab-searcher-button-width;
-      width: $slab-searcher-button-width;
-      line-height: 100%;
-      min-height: 100%;
-    }
+
   }
 
   label {

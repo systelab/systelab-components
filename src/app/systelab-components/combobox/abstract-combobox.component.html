@@ -16,7 +16,7 @@
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
                                      [componentData]="getSelectedRow()"></combobox-input-renderer>
         </div>
-        <button #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
+        <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
 
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
@@ -28,7 +28,7 @@
                 <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
             </div>
             <div #hidden class="height-hidden"></div>
-            <ag-grid-angular *ngIf="this.isDropdownOpened" #grid id="agGrid" #agGrid
+            <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid
                              style="width: 100%; height: 100%;"
                              [style.font-family]="fontFamily"
                              [style.font-size.px]="fontSize"

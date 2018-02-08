@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { SystelabModalModule } from './modal/plugin/custom/systelab-modal.module';
 import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
-import { MessagePopupComponent } from './modal/message-popup/message-popup.component';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
 import { DOMOverlayRenderer, OverlayRenderer } from 'ngx-modialog';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
@@ -51,11 +50,15 @@ import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
-import {TooltipDirective} from './tooltip/tooltip.directive';
+import { TooltipDirective } from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
-@NgModule( {
-	imports:         [
+
+@NgModule({
+	imports: [
 		CommonModule,
 		FormsModule,
 		SharedModule,
@@ -67,18 +70,17 @@ import { TimelineComponent } from './timeline/timeline.component';
 		AngularSplitModule,
 		SystelabTranslateModule,
 		DndModule.forRoot(),
-		AgGridModule.withComponents( [
+		AgGridModule.withComponents([
 			GridContextMenuComponent,
 			GridHeaderContextMenuComponent
-		] ),
+		]),
 	],
-	declarations:    [
+	declarations: [
 		SliderComponent,
 		PieComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		DialogComponent,
-		MessagePopupComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
 		TwoListComponent,
@@ -112,14 +114,16 @@ import { TimelineComponent } from './timeline/timeline.component';
 		LoadingComponent,
 		FileSelectorComponent,
 		TimelineComponent,
+		MessageWithIconComponent,
 		ComboBoxInputRendererComponent,
-		TooltipDirective
+		TooltipDirective,
+		NavbarComponent,
+		BreadcrumbComponent
 	],
-	exports:         [
+	exports: [
 		SliderComponent,
 		PieComponent,
 		SwitchComponent,
-		MessagePopupComponent,
 		ContextMenuComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
@@ -150,6 +154,9 @@ import { TimelineComponent } from './timeline/timeline.component';
 		LoadingComponent,
 		FileSelectorComponent,
 		TimelineComponent,
+		NavbarComponent,
+		MessageWithIconComponent,
+		BreadcrumbComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
@@ -165,15 +172,15 @@ import { TimelineComponent } from './timeline/timeline.component';
 		CalendarDialog,
 		ColorCellRendererComponent,
 	],
-	providers:       [
+	providers: [
 		StylesUtilService,
 		ColorUtilService
 	]
-} )
+})
 export class SystelabComponentsModule {
-	static forRoot( entryComponents?: Array<Type<any> | any[]> ): ModuleWithProviders {
+	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule:  SystelabComponentsModule,
+			ngModule: SystelabComponentsModule,
 			providers: [
 				{ provide: OverlayRenderer, useClass: DOMOverlayRenderer },
 				{ provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true },

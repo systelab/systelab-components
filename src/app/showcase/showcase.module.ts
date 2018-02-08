@@ -56,9 +56,11 @@ import { ShowcaseLoadingDialog } from './components/loading/loading-dialog/showc
 import { ShowcaseFileSelectorComponent } from './components/file-selector/showcase-file-selector.component';
 import { ShowcaseTimelineComponent } from './components/timeline/showcase-timeline.component';
 import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/showcase-timeline-dialog.component';
+import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.component';
+import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-breadcrumb.component';
 
 @NgModule({
-	imports:         [
+	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
@@ -67,7 +69,7 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot()
 	],
-	declarations:    [
+	declarations: [
 		ShowcaseComponent,
 		ShowcaseTwoTabsComponent,
 		ShowcaseLowerFlexComponent,
@@ -115,7 +117,9 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 		ShowcaseApplicationFrameDialog,
 		ShowcaseLoadingDialog,
 		ShowcaseTimelineDialog,
-		ShowcaseTimelineComponent
+		ShowcaseTimelineComponent,
+		ShowcaseNavbarComponent,
+		ShowcaseBreadcrumbComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
@@ -129,11 +133,11 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 		ShowcaseLoadingDialog,
 		ShowcaseTimelineDialog
 	],
-	providers:       [
+	providers: [
 		MessagePopupService,
 		DialogService
 	],
-	bootstrap:       [ShowcaseComponent]
+	bootstrap: [ShowcaseComponent]
 })
 export class ShowcaseModule {
 }

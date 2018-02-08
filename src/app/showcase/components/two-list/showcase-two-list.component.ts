@@ -26,23 +26,23 @@ export class ShowcaseTwoListComponent {
 
 	public getDefaultShowcaseColumns(): Array<TwoListItem> {
 		const defaultColumns = [
-			new TwoListItem('Laboratorios', false, true),
-			new TwoListItem('Muestra', false, true),
-			new TwoListItem('Contenedores', false, true),
-			new TwoListItem('Diágnostico', false, true),
-			new TwoListItem('Número de petición', false, true),
-			new TwoListItem('Urgente', false, true),
-			new TwoListItem('Fecha de petición', false, true),
-			new TwoListItem('Fecha de nacimiento', false, true),
-			new TwoListItem('Nombre de paciente', false, true),
-			new TwoListItem('Centro de Extracción', false, true),
-			new TwoListItem('Género', false, true),
-			new TwoListItem('Edad', false, true),
-			new TwoListItem('Teléfono', false, true),
-			new TwoListItem('Tipo de paciente', false, true),
-			new TwoListItem('Centro', false, true),
-			new TwoListItem('Servicio', false, true),
-			new TwoListItem('Doctor', false, true)];
+			new TwoListItem('Laboratorios', 'lab', false, true),
+			new TwoListItem('Muestra', 'sample', false, true),
+			new TwoListItem('Contenedores', 'containers', false, true),
+			new TwoListItem('Diágnostico', 'diagnostic', false, true),
+			new TwoListItem('Número de petición', 'requestLabel', false, true),
+			new TwoListItem('Urgente', 'isUrgent', false, true),
+			new TwoListItem('Fecha de petición', 'requestDate', false, true),
+			new TwoListItem('Fecha de nacimiento', 'dOB', false, true),
+			new TwoListItem('Nombre de paciente',  'patientName',false, true),
+			new TwoListItem('Centro de Extracción', 'collectionCenter', false, true),
+			new TwoListItem('Género', 'genre',false, true),
+			new TwoListItem('Edad', 'age', false, true),
+			new TwoListItem('Teléfono', 'phone', false, true),
+			new TwoListItem('Tipo de paciente', 'patientType', false, true),
+			new TwoListItem('Centro', 'center', false, true),
+			new TwoListItem('Servicio', 'service', false, true),
+			new TwoListItem('Doctor', 'doctor', false, true)];
 		return defaultColumns;
 	}
 

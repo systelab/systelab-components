@@ -1,4 +1,4 @@
-import {EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractComboBox } from './abstract-combobox.component';
@@ -44,8 +44,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public selectionChanged = false;
 	public totalItemsLoaded = false;
 
-	constructor( public myRenderer: Renderer2 ) {
-		super( myRenderer );
+	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
+		super( myRenderer, chref );
 	}
 
 	public ngOnInit() {
@@ -123,7 +123,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	public refresh( params: any ): boolean {
-		if ( this.gridOptions && this.gridOptions.datasource ) {
+		if ( this.gridOptions && this.gridOptions.api ) {
 			this.gridOptions.api.setDatasource( this );
 		}
 		return true;
@@ -152,6 +152,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	// override
 	public loop(): void {
 		let result = true;
+
 		if ( this.isDropDownOpen() ) {
 			// First time opened we load the table
 			if ( this.gridOptions.datasource === null ) {
@@ -164,7 +165,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				result = false;
 			}
 		}
-		if ( result ) {
+		if ( result && this.isDropdownOpened ) {
 			setTimeout( () => this.loop(), 10 );
 		} else {
 			return;
@@ -309,15 +310,10 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				this.description = selectedRow[this.getDescriptionField()];
 				this.change.emit( this.id );
 				this.idChange.emit( this.id );
+				this.closeDropDown();
 			}
 		} else {
 			this.selectionChanged = true;
-		}
-	}
-
-	public clickDropDownMenu( e: Event ) {
-		if ( this.multipleSelection ) {
-			e.stopPropagation();
 		}
 	}
 

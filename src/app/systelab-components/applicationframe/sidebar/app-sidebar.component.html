@@ -6,6 +6,6 @@
         </li>
     </ul>
     <ul class="slab-app-sidebar-actions-container">
-        <button  *ngFor="let action of actions" class="btn" (click)="action.action()">{{ action.name}}</button>
+        <button type="button" *ngFor="let action of actions" class="btn" (click)="action.action()">{{ action.name}}</button>
     </ul>
 </div>

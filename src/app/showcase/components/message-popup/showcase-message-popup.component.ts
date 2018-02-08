@@ -24,16 +24,8 @@ export class ShowcaseMessagePopupComponent {
 	}
 
 	public showInfo() {
-		this.messagePopupService.showInformationPopup('Test', 'Info message popup example');
+		this.messagePopupService.showInformationPopup('Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque libero sem, bibendum in urna non, mollis luctus urna. Nunc placerat urna vitae lobortis accumsan. In hac habitasse platea dictumst. In ut dapibus mauris, luctus facilisis velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc blandit ut dui in malesuada. Pellentesque efficitur pellentesque faucibus. Sed urna felis, porta eu pharetra in, euismod non ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia felis sit amet leo consectetur suscipit. Ut maximus libero et felis faucibus gravida ut ac enim. Donec in fermentum mauris. Praesent aliquet felis vitae urna pharetra tempus. Cras vestibulum nisl ante, sit amet posuere sem volutpat at. Nulla mollis sapien a quam accumsan, eget ultricies lorem pretium. In vel lectus rutrum, semper felis id, dignissim est.');
 
-	}
-
-	public showQuestion() {
-		// window.alert('Hall!!!!!');
-		this.messagePopupService.showQuestionPopup('Test', 'Are you sure?')
-			.subscribe((v) => {
-				console.log('closing');
-			});
 	}
 
 	public showQuestionYN() {

@@ -12,7 +12,7 @@
                [style.font-weight]="fontWeight"
                [style.font-style]="fontStyle"
                (keydown.Tab)="closeAndDestroyListeners()"/>
-        <button #combobutton class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled"
+        <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled"
                 (click)="onComboClicked()"></button>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" [ngClass]="{'disabled': isDisabled}">
