@@ -22,7 +22,7 @@ Regarding the Bootstrap's grid system, you must consider:
 
 ### Regular Forms
 
-The regular forms will be horizontal. Here is an example:
+The regular form will be horizontal. Here is an example:
 
 ```html
 <div class="container-fluid">
@@ -52,11 +52,11 @@ The regular forms will be horizontal. Here is an example:
 </div>
 ```
 
-> It is very important to use the class **.class="col-form-label"** for the labels and the class **.form-control** for the controls.
+> It is very important to use the class **.col-form-label** for the labels and the class **.form-control** for the controls.
 
-Use slab-form-title class for the section titles.
+Use .slab-form-title class for the section titles.
 
-It could be useful, but it is not necessary add for each row, the class align-items-center or align-items-top in order to vertically align the label.
+It could be useful, but it is not necessary add for each row, the class **.align-items-center** or **.align-items-top** in order to vertically align the label.
 
 ### Vertical Forms
 
@@ -92,7 +92,7 @@ Vertical forms are also possible.
 
 ### Inline Forms
 
-Use the .form-inline class to display a series of labels, form controls, and buttons on a single horizontal row. Form controls within inline forms vary slightly from their default states.
+Use the **.form-inline** class to display a series of labels, form controls, and buttons on a single horizontal row. Form controls within inline forms vary slightly from their default states.
 
 - Controls are display: flex, collapsing any HTML white space and allowing you to provide alignment control with spacing and flexbox utilities.
 - Controls and input groups receive width: auto to override the Bootstrap default width: 100%.
@@ -105,7 +105,7 @@ Use the .form-inline class to display a series of labels, form controls, and but
 </form>
 ```
 
-In that case, ml-auto aligns the components on the right.
+In that case, **.ml-auto** aligns the components on the right.
 
 The styles for the forms are defined in the forms.scss Saas file.
 

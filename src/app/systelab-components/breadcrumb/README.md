@@ -2,13 +2,13 @@
 
 Component to show a Breadcrumb.
 
-## Using the template
+## Using the component
 
 ```html
 <systelab-breadcrumb [items]="items" [backgroundColor]="backgroundColor" [fontColor]="fontColor"></systelab-breadcrumb>
 ```
 
-It is optional to set a **backgroundColor**, and a **fontColor**for the elements of the Breadcrumb.
+It is optional to set a **backgroundColor**, and a **fontColor** for the elements of the Breadcrumb.
 
 
 ### Items
@@ -26,18 +26,15 @@ Each item has the following structure (BreadcrumbItem):
     public action?: any
 ```
 
-The following example shows how to add an item to the Breadcrum:
+The following example shows how to add an item to the Breadcrumb:
 
 ```javascript
-
     this.items.push(new BreadcrumbItem('1', 'Home', false,'https://google.com'));
-    
-
 ```
 
 In this case, **id** is the id of the item, **text** is the text of the item, **isActive** defines if the nav item is selected or not, and **url** is the url to link to.
 
-The **subItems** attribute, lets you define a sub menu. It is an array of BreadcrumbSubItem elements that have the following structure:
+The **subItems** attribute, lets you define a sub menu. It is an array of BreadcrumbSubItem elements, that have the following structure:
 
 ```javascript
     public id: string,

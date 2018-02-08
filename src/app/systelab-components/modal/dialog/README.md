@@ -6,9 +6,9 @@ Classes to show a dialog
 
 This is not a component by itself, it is an abstract class that will help you define and show a dialog.  
 
-In order to do this, you must create your own component and implement the interface ModalComponent&lt;SystelabModalContext&gt; (lets say, it must have a 'dialog' property that will be received in the constructor method). 
+In order to do this, you must create your own component and implement the interface **ModalComponent&lt;SystelabModalContext&gt;** (lets say, it must have a 'dialog' property that will be received in the constructor method). 
 
-The component will need to export a class in order to get the context. This class must extend from SystelabModalContext. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
+The component will need to export a class in order to get the context. This class must extend from **SystelabModalContext**. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
 
 It is suggested to define the width and height, or the class, in the context in order to make the dialog always have the same dimension. For small devices, the dialog will be fullScreen.
 
