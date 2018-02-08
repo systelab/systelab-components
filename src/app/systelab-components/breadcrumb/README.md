@@ -1,30 +1,21 @@
 # systelab-breadcrumb
 
-Component to show a Breadcrumb
+Component to show a Breadcrumb.
 
 ## Using the template
 
 ```html
-<systelab-breadcrumb [items]="items" [backgroundColor]="backgroundColor" [activeFontColor]="activeFontColor" [fontColor]="fontColor"></systelab-breadcrumb>
+<systelab-breadcrumb [items]="items" [backgroundColor]="backgroundColor" [fontColor]="fontColor"></systelab-breadcrumb>
 ```
 
-### Properties
+It is optional to set a **backgroundColor**, and a **fontColor**for the elements of the Breadcrumb.
 
-#### Colors: BackgroundColor and fontColor
 
-The component requests three colors:
+### Items
 
-**BackgroundColor**, is the color of the background of the breadcrumb.
+Items is an array with the elements of the breadcrumb.
 
-**FontColor**, is the color of the text and icon in the breadcrumb item.
-
-Do not use color names. Use the old hex codes or rgb mode to define the colors.
-
-#### Data: items
-
-Items is an array with the items which will compose the breadcrumb.
-
-Each item has the follow structure (BreadcrumbItem):
+Each item has the following structure (BreadcrumbItem):
 
 ```javascript
     public id: number,
@@ -35,7 +26,8 @@ Each item has the follow structure (BreadcrumbItem):
     public action?: any
 ```
 
-Examples to how to add nav items to the list:
+The following example shows how to add an item to the Breadcrum:
+
 ```javascript
 
     this.items.push(new BreadcrumbItem('1', 'Home', false,'https://google.com'));
@@ -43,15 +35,10 @@ Examples to how to add nav items to the list:
 
 ```
 
-**id** is the id of the item.
+In this case, **id** is the id of the item, **text** is the text of the item, **isActive** defines if the nav item is selected or not, and **url** is the url to link to.
 
-**text** is the text of the item.
+The **subItems** attribute, lets you define a sub menu. It is an array of BreadcrumbSubItem elements that have the following structure:
 
-**isActive** define if the nav item is selected or not.
-
-**url** is the url link of the nav item.
-
-**subItems** you can configure a sub menu in the level you want of the breadcrumb, you should fill the subItems with other items following the structure of BreadcrumbSubItem
 ```javascript
     public id: string,
     public text: string,
@@ -59,9 +46,9 @@ Examples to how to add nav items to the list:
     public action?: any
 ```
 
-**action** you can configure the action you want or set in blank. The url parameter should be set as blank and the action parameter.
-```javascript
+Finally, **action** is the arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called). For example:
 
+```javascript
 this.items.push(new BreadcrumbItem('2', 'Holidays', false,'',null,() => this.showModal()));
 
 ```
