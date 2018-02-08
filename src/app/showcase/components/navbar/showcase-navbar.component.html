@@ -1,34 +1,39 @@
+<div class="mt-3 pl-2  pb-2">
+    <h6>Default Navbar</h6>
+    <systelab-navbar [id]="'navBar1'" [items]="items1"></systelab-navbar>
+</div>
+
 <!-- Horizontal without images -->
 <div class="mt-3 pl-2  pb-2">
     <h6>Horizontal Nav without Images</h6>
-    <systelab-navbar [id]="idNavbar1" [isVertical]="isVertical" [backgroundColor]="backgroundColor" [backgroundHoverColor]="backgroundHoverColor"
-        [items]="items1" [fontColor]="fontColor" [alignNavbar]="alignNavbarRight"></systelab-navbar>
+    <systelab-navbar [id]="'navBar2'" [isVertical]="false" [backgroundColor]="'rgb(21, 143, 239)'" [backgroundHoverColor]="'rgb(66, 161,205)'"
+        [items]="items1" [fontColor]="'white'" [align]="'right'"></systelab-navbar>
 </div>
 
 <!-- Horizontal with images -->
 <div class="mt-3 pl-2  pb-2">
     <h6>Horizontal Nav with Images</h6>
-    <systelab-navbar [id]="idNavbar2" [isVertical]="isVertical" [backgroundColor]="backgroundColor2" [backgroundHoverColor]="backgroundHoverColor2"
-        [items]="items2" [fontColor]="fontColor" [alignNavbar]="alignNavbarCenter"></systelab-navbar>
+    <systelab-navbar [id]="'navBar3'" [isVertical]="false" [backgroundColor]="'rgb(242, 158, 0)'" [backgroundHoverColor]="'rgb(239, 170, 107)'"
+        [items]="items2" [fontColor]="'white'" [align]="'center'"></systelab-navbar>
 </div>
 
 <!-- Horizontal with images inline -->
 <div class="mt-3 pl-2  pb-2">
     <h6>Horizontal Nav with Images inline</h6>
-    <systelab-navbar [id]="idNavbar3" [isVertical]="isVertical" [backgroundColor]="backgroundColor" [backgroundHoverColor]="backgroundHoverColor"
-        [items]="items3" [fontColor]="fontColor" [alignNavbar]="alignNavbarLeft"></systelab-navbar>
+    <systelab-navbar [id]="'navBar4'" [isVertical]="false" [backgroundColor]="'rgb(21, 143, 239)'" [backgroundHoverColor]="'rgb(66, 161,205)'"
+        [items]="items3" [fontColor]="'white'" [align]="'left'"></systelab-navbar>
 </div>
 
 <!-- Vertical without images -->
 <div class="mt-3 col-sm-12 col-md-3 pl-2  pb-2">
     <h6>Vertical Nav without Images</h6>
-    <systelab-navbar [id]="idNavbar4" [isVertical]="isVertical2" [backgroundColor]="backgroundColor" [backgroundHoverColor]="backgroundHoverColor"
-        [items]="items4" [fontColor]="fontColor" [alignNavbar]="alignNavbarCenter"></systelab-navbar>
+    <systelab-navbar [id]="'navBar5'" [isVertical]="true" [backgroundColor]="'rgb(21, 143, 239)'" [backgroundHoverColor]="'rgb(66, 161,205)'"
+        [items]="items4" [fontColor]="'white'" [align]="'center'"></systelab-navbar>
 </div>
 
 <!-- Vertical with images  -->
 <div class="mt-3  pl-2  pb-2 col-sm-12 col-md-3">
     <h6>Vertical Nav with Images</h6>
-    <systelab-navbar [id]="idNavbar5" [isVertical]="isVertical2" [backgroundColor]="backgroundColor2" [backgroundHoverColor]="backgroundHoverColor2"
-        [items]="items5" [fontColor]="fontColor" [alignNavbar]="alignNavbarCenter"></systelab-navbar>
+    <systelab-navbar [id]="'navBar6'" [isVertical]="true" [backgroundColor]="'rgb(242, 158, 0)'" [backgroundHoverColor]="'rgb(239, 170, 107)'"
+        [items]="items5" [fontColor]="'white'" [align]="'center'"></systelab-navbar>
 </div>

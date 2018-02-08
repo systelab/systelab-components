@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { BreadcrumbItem, BreadcrumbSubItem } from '../../../systelab-components/breadcrumb/BreadcrumbItem';
 import { MessagePopupService } from '../../../systelab-components/modal/message-popup/message-popup.service';
+import { BreadcrumbItem, BreadcrumbSubItem } from '../../../systelab-components/breadcrumb/breadcrumb.component';
 
 @Component({
 	selector:    'showcase-breadcrumb',
-	templateUrl: './showcase-breadcrumb.component.html'
+	templateUrl: 'showcase-breadcrumb.component.html'
 })
 export class ShowcaseBreadcrumbComponent {
 
-	public items: Array<Object> = [];
+	public items: BreadcrumbItem[] = [];
 
 	constructor(protected messagePopupService: MessagePopupService) {
 
-		const subItems: Array<BreadcrumbSubItem> = [];
+		const subItems: BreadcrumbSubItem[] = [];
 		subItems.push(new BreadcrumbSubItem('1', 'Apartments', 'https://google.com?apartments'));
 		subItems.push(new BreadcrumbSubItem('2', 'Campings', '', () => this.showModal()));
 

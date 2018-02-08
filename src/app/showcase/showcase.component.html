@@ -1,5 +1,7 @@
 <div class="d-flex flex-column position-fixed" style="top: 0; bottom: 0; left: 0; right: 0;">
-    <systelab-dialog-header [withInfo]="true" (click)="closeDialog();">Showcase</systelab-dialog-header>
+    <systelab-navbar [id]="'navBar2'" [isVertical]="false" [backgroundColor]="'rgb(21, 143, 239)'"
+                     [backgroundHoverColor]="'rgba(21, 143, 239, 0.8)'"
+                     [items]="items1" [fontColor]="'white'" [align]="'left'"></systelab-navbar>
     <systelab-tabs class="slab-flex-1">
         <systelab-tab [title]="'Components'" [id]="'1'" (click)="selectTab(1)">
             <div class="w-100">
