@@ -1,14 +1,15 @@
 <ol class="breadcrumb" [style.background-color]="backgroundColor">
   <li (click)="bread.action()" *ngFor="let bread of items" [class.active]="bread.isActive">
-    <a *ngIf="!bread.isActive" [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null " [style.color]="fontColor"  >{{bread.text}}</a>
+    <a *ngIf="!bread.isActive" [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null " [style.color]="fontColor">{{bread.text}}</a>
     <label *ngIf="bread.isActive">{{bread.text}}</label>
-    <button *ngIf="bread.subItems" class="dropdown-toggle slab-caret-button"  [style.background-color]="backgroundColor" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-       
-      </button>
-      <ul *ngIf="bread.subItems" class="dropdown-menu slab-ul-subItems" aria-labelledby="dropdownMenu1">
-          <li (click)="subBread.action()" class="slab-li-subItems" *ngFor="let subBread of bread.subItems">
-            <a [attr.target]="subBread.url ? '_self' : null " [attr.href]="subBread.url ?  subBread.url  : null " [style.color]="fontColor" >{{subBread.text}}</a>
-          </li>
-        </ul>
+    <button *ngIf="bread.subItems" class="dropdown-toggle slab-caret-button" [style.background-color]="backgroundColor" type="button"
+      id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+    </button>
+    <ul *ngIf="bread.subItems" class="dropdown-menu slab-ul-subItems" aria-labelledby="dropdownMenu1">
+      <li (click)="subBread.action()" class="slab-li-subItems" *ngFor="let subBread of bread.subItems">
+        <a [attr.target]="subBread.url ? '_self' : null " [attr.href]="subBread.url ?  subBread.url  : null " [style.color]="fontColor">{{subBread.text}}</a>
+      </li>
+    </ul>
   </li>
 </ol>

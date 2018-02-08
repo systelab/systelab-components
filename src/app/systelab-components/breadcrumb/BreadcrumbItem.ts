@@ -1,10 +1,10 @@
-export class BreadcrumbSubItem{
+export class BreadcrumbSubItem {
     constructor(public id: string,
         public text: string,
         public url: string,
         public action?: any) {
     }
-} 
+}
 export class BreadcrumbItem {
 
     constructor(public id: string,
