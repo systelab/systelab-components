@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarItem } from '../../../systelab-components/navbar/NavbarItem';
-
+import { MessagePopupService } from '../../../systelab-components/modal/message-popup/message-popup.service';
 @Component({
   selector: 'showcase-navbar',
   templateUrl: './showcase-navbar.component.html'
@@ -28,7 +28,7 @@ export class ShowcaseNavbarComponent {
   public backgroundColor2:string="rgb(242, 158, 0)";
   public backgroundHoverColor2:string="rgb(239, 170, 107)";
 
-  constructor() { 
+  constructor(protected messagePopupService: MessagePopupService) { 
     /* Items for the horizontal navbar without images */
     this.items1.push(new NavbarItem(1,'Option 1','',false,true,true,'_self','https://google.com'));
     this.items1.push(new NavbarItem(2,'Disabled','',false,false,false,'_self','https://werfen.com'));
@@ -57,6 +57,9 @@ export class ShowcaseNavbarComponent {
     /*Items for the vertical navbar with images */
     this.items5.push(new NavbarItem(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
     this.items5.push(new NavbarItem(2,'Option 2','slab-icon-medium icon-bug',false,false,true,'_self','https://werfen.com'));
-    this.items5.push(new NavbarItem(3,'Option 3','slab-icon-medium icon-calendar',true,false,true,'_self','https://werfen.com'));
+    this.items5.push(new NavbarItem(3,'Open Modal','slab-icon-medium icon-calendar',true,false,true,'','',() => this.showModal()));
+  }
+  public showModal(){
+    this.messagePopupService.showInformationPopup('Test', 'Example Text', 'w-33 h-33');
   }
 }

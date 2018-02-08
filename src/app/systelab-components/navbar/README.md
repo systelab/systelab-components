@@ -53,7 +53,8 @@ Each item has the follow structure:
     public isActive:boolean,
     public isEnabled:boolean,
     public target:string,
-    public url: string
+    public url: string,
+     public action?: any
 ```
 
 Examples to how to add nav items to the list:
@@ -80,6 +81,15 @@ Examples to how to add nav items to the list:
 **target** define if you want to open the link in the same tab or not, you have these values as possible ('_blank' or '_self')
 
 **url** is the url link of the nav item.
+
+**action** you can configure the action you want or set in blank. The url parameter should be set as blank and the action parameter.
+```javascript
+
+this.items.push(new NavbarItem(3,'Open Modal','slab-icon-medium icon-calendar',true,false,true,'','',() => this.showModal()));
+
+```
+
+
 
 
 

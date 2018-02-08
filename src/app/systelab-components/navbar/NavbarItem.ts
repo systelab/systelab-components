@@ -7,7 +7,8 @@ export class NavbarItem {
                  public isActive:boolean,
                  public isEnabled:boolean,
                  public target:string,
-                 public url: string) {
+                 public url: string,
+                 public action?: any) {
 	}
 
 }
