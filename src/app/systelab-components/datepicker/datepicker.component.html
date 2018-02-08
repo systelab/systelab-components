@@ -7,7 +7,7 @@
             [required]="required"
             [disabled]="disabled"
             appendTo="body"
-            [ngClass]="{'date-error': error || (isRequired && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate && markPreviousDate, 'input-expand-height':inputExpandHeight}">
+            [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate && markPreviousDate, 'input-expand-height':inputExpandHeight}">
     <p-header id="{{datepickerId}}">
         <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
         <a class="icon-angle-left slab-icon-medium" (click)="prevMonth($event)"></a>
@@ -19,3 +19,4 @@
         </div>
     </p-header>
 </p-calendar>
+HOLA

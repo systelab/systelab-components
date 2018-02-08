@@ -3,12 +3,12 @@
                 [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
                 (onBlur)="changeDate()"
                 [showOtherMonths]="true"
-                [required]="isRequired"
+                [required]="required"
                 [disabled]="disabled"
                 appendTo="body"
                 [style.margin-right.px]="5"
                 [style.min-width.px]="130"
-                [ngClass]="{'date-error': error || (isRequired && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate, 'input-expand-height':inputExpandHeight}">
+                [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate, 'input-expand-height':inputExpandHeight}">
         <p-header id="{{datepickerId}}">
             <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
             <a class="icon-angle-left slab-icon-medium" (click)="prevMonth($event)"></a>
