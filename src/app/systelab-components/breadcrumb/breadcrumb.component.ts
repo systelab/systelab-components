@@ -1,18 +1,16 @@
-import {Component, Input} from '@angular/core';
-import {BreadcrumbItem} from './BreadcrumbItem';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'systelab-breadcrumb',
-  templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.scss']
+	selector:    'systelab-breadcrumb',
+	templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {
 
-  @Input() public items: Array<Object>;
-  @Input() public backgroundColor: string;
-  @Input() public activeFontColor: string;
-  @Input() public fontColor: string;
-  constructor() { }
+	@Input() public items: Array<Object>;
+	@Input() public backgroundColor: string;
+	@Input() public fontColor: string;
 
+	constructor() {
+	}
 
 }

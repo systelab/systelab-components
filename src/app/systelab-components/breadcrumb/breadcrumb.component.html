@@ -1,13 +1,13 @@
 <ol class="breadcrumb" [style.background-color]="backgroundColor">
-  <li (click)="bread.action()" *ngFor="let bread of items" [class.active]="bread.isActive">
+  <li *ngFor="let bread of items" [class.active]="bread.isActive" (click)="bread.action()" >
     <a *ngIf="!bread.isActive" [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null " [style.color]="fontColor">{{bread.text}}</a>
     <label *ngIf="bread.isActive">{{bread.text}}</label>
-    <button *ngIf="bread.subItems" class=" slab-caret-button" [style.background-color]="backgroundColor" type="button"
+    <button *ngIf="bread.subItems" class="slab-caret-button" type="button"
       id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           <i class="icon-caret-down" [style.color]="fontColor"></i>
     </button>
-    <ul *ngIf="bread.subItems" class="dropdown-menu slab-ul-subItems" aria-labelledby="dropdownMenu1">
-      <li (click)="subBread.action()" class="slab-li-subItems" *ngFor="let subBread of bread.subItems">
+    <ul *ngIf="bread.subItems" class="dropdown-menu slab-sub-items" aria-labelledby="dropdownMenu1">
+      <li (click)="subBread.action()" class="slab-items" *ngFor="let subBread of bread.subItems">
         <a [attr.target]="subBread.url ? '_self' : null " [attr.href]="subBread.url ?  subBread.url  : null " [style.color]="fontColor">{{subBread.text}}</a>
       </li>
     </ul>
