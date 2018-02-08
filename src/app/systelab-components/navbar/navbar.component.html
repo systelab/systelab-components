@@ -5,7 +5,7 @@
     <i class="slab-icon-medium mt-2 mb-2 icon-list" [style.color]="fontColor"></i>
   </button>
 
-  <div class="collapse navbar-collapse" [id]="id" [class.justify-content-center]="alignNavs === 'center'" [class.justify-content-end]="alignNavs === 'right'">
+  <div class="collapse navbar-collapse" [id]="id" [class.justify-content-center]="alignNavbar === 'center'" [class.justify-content-end]="alignNavbar === 'right'">
     <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical" class="nav nav-pills slab-ul-navs align-items-center d-flex">
       <li class="nav-item  " [class.disabled]="!nav.isEnabled" [style.background-color]="hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor"
         *ngFor="let nav of items" (mouseover)="hovered = nav.id" (mouseout)="hovered = -1">

@@ -1,54 +1,54 @@
 # systelab-navbar
 
-Component to show a Nav
+Component to show a Navbar
 
 ## Using the template
 
 ```html
-<systelab-navs [isVertical]="isVertical" [backgroundColor]="backgroundColor" [backgroundHoverItemColor]="backgroundHoverItemColor"
-        [navsItems]="navsItems" [fontColor]="fontColor" [alignNavs]="alignNavs"></systelab-navs>
+    <systelab-navbar [id]="id" [isVertical]="isVertical" [backgroundColor]="backgroundColor" [backgroundHoverColor]="backgroundHoverColor"
+        [items]="items" [fontColor]="fontColor" [alignNavbar]="alignNavbar"></systelab-navbar>
 ```
 
 ### Properties
 
 #### Orientation: isVertical
 
-You can configure the nav as a vertical orientation or in a horizontal orientation.
+You can configure the navbar as a vertical orientation or in a horizontal orientation.
 
 To set as vertical set **isVertical=true**, and if you want in horizontal orientation set **isVertical=false**
 
-#### Align of the nav items: alignNavs
+#### Align of the nav items: alignNavbar
 
 You can configure the alignaments of the nav items as three different ways:
 
- Define **alignNavs = 'center'** to display the nav items in the center.
+ Define **alignNavbar = 'center'** to display the navbar items align in the center.
 
- Define **alignNavs = 'left'** to display the nav items in the left.
+ Define **alignNavbar = 'left'** to display the navbar items align to the left.
 
- Define **alignNavs = 'right'** to display the nav items in the right.
+ Define **alignNavbar = 'right'** to display the navbar items align to the right.
 
-#### Colors: BackgroundColor, backgroundHoverItemColor and fontColor
+#### Colors: BackgroundColor, BackgroundHoverColor and fontColor
 
 The component requests three colors:
 
-**BackgroundColor**, is the color of the background of the nav.
+**BackgroundColor**, is the color of the background of the navbar.
 
-**BackgroundHoverItemColor**, is the color for the nav items when they are hovered.
+**BackgroundHoverColor**, is the color for the navbar items when they are hovered.
 
-**FontColor**, is the color of the text and icon in the nav item.
+**FontColor**, is the color of the text and icon in the navbar item.
 
 Do not use color names. Use the old hex codes or rgb mode to define the colors.
 
-#### Data: navsItems
+#### Data: items
 
-navsItems is an array with the items which will compose the nav.
+Items is an array with the items which will compose the navbar.
 
 Each item has the follow structure:
 
 ```javascript
-    public navId: number,
-    public navText: string,
-    public icon: string,
+    public id: number,
+    public text: string,
+    public image: string,
     public floatImage: boolean,
     public isActive:boolean,
     public isEnabled:boolean,
@@ -59,17 +59,17 @@ Each item has the follow structure:
 Examples to how to add nav items to the list:
 ```javascript
 
-    this.navsItems.push(new NavsItems(5,'Blank Link','',false,false,true,'_blank','https://werfen.com'));
-    this.navsItems.push(new NavsItems(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
+    this.items.push(new NavbarItem(5,'Blank Link','',false,false,true,'_blank','https://werfen.com'));
+    this.items.push(new NavbarItem(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
 
 ```
 
 
-**navId** is the id of the item.
+**id** is the id of the item.
 
-**navText** is the text of the item.
+**text** is the text of the item.
 
-**icon** is a string with the class of the icon, this is not mandatory.
+**image** is a string with the class of the icon, this is not mandatory.
 
 **floatImage** define if you want the icon in the same line (set to true) as teh text or not.
 

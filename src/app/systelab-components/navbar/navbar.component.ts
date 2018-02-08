@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent  {
  
-  @Input() public items: Array<NavbarItem>=[];
-	@Input() public elementID: number=0;
-  @Input() public isVertical: boolean=false;
-  @Input() public backgroundColor: string="rgb(21, 143, 239)";
-  @Input() public backgroundHoverColor: string="rgb(66, 161,205)";
-  @Input() public fontColor: string="#ffffff";
-  @Input() public alignNavs: string="left";
-  @Input() public id:string="nav-content";
+  @Input() public items: Array<Object>;
+  @Input() public isVertical: boolean;
+  @Input() public backgroundColor: string;
+  @Input() public backgroundHoverColor: string;
+  @Input() public fontColor: string;
+  @Input() public alignNavbar: string;
+  @Input() public id:string;
 
   public style;
   public hovered:number=0;
