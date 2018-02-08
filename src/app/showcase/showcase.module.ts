@@ -59,7 +59,7 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.component';
 
 @NgModule({
-	imports:         [
+	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
@@ -68,7 +68,7 @@ import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.com
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot()
 	],
-	declarations:    [
+	declarations: [
 		ShowcaseComponent,
 		ShowcaseTwoTabsComponent,
 		ShowcaseLowerFlexComponent,
@@ -131,11 +131,11 @@ import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.com
 		ShowcaseLoadingDialog,
 		ShowcaseTimelineDialog
 	],
-	providers:       [
+	providers: [
 		MessagePopupService,
 		DialogService
 	],
-	bootstrap:       [ShowcaseComponent]
+	bootstrap: [ShowcaseComponent]
 })
 export class ShowcaseModule {
 }

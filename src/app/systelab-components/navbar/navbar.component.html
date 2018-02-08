@@ -9,8 +9,9 @@
     <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical" class="nav nav-pills slab-ul-navs align-items-center d-flex">
       <li class="nav-item  " [class.disabled]="!nav.isEnabled" [style.background-color]="hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor"
         *ngFor="let nav of items" (mouseover)="hovered = nav.id" (mouseout)="hovered = -1">
-        <a class="nav-link slab-nav-link text-center align-self-stretch align-items-center" [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "  (click)="nav.action()"
-           [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null "  [style.color]="fontColor" [class.disabled]="!nav.isEnabled" [class.active]="nav.isActive">
+        <a class="nav-link slab-nav-link text-center align-self-stretch align-items-center" [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
+          (click)="nav.action()" [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null " [style.color]="fontColor"
+          [class.disabled]="!nav.isEnabled" [class.active]="nav.isActive">
           <i *ngIf="nav.image" [class]="nav.image" [style.color]="fontColor" [class.slab-icon-floatImage]="nav.floatImage" [class.slab-icon-verticalImage]="!nav.floatImage"></i>
           {{nav.text}}
         </a>
