@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { NavbarItem } from './NavbarItem';
-import { Router } from '@angular/router';
+import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import {NavbarItem} from './NavbarItem';
+import {Router} from '@angular/router';
 @Component({
   selector: 'systelab-navbar',
   templateUrl: './navbar.component.html',

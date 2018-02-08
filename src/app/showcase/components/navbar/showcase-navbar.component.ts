@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { NavbarItem } from '../../../systelab-components/navbar/NavbarItem';
-import { MessagePopupService } from '../../../systelab-components/modal/message-popup/message-popup.service';
+import {Component} from '@angular/core';
+import {NavbarItem} from '../../../systelab-components/navbar/NavbarItem';
+import {MessagePopupService} from '../../../systelab-components/modal/message-popup/message-popup.service';
 @Component({
   selector: 'showcase-navbar',
   templateUrl: './showcase-navbar.component.html'
