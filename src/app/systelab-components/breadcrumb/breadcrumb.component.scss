@@ -1,0 +1,34 @@
+.breadcrumb>li+li:before {
+    padding: 0 5px;
+    color: #cccccc;
+    content: "/\00a0";
+}
+.breadcrumb>li>a{
+    cursor: pointer;
+}
+.breadcrumb>li>a:hover{
+    text-decoration: underline;
+}
+.slab-caret-button{
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.slab-ul-subItems{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.slab-li-subItems{
+    padding: 5px;
+    cursor: pointer;
+}
+.slab-li-subItems > a{
+    width:100%;
+    display:block;
+}
+.slab-li-subItems:hover{
+    background-color: #cccccc;
+}
+.slab-li-subItems:hover > a{
+    text-decoration: underline;
+}

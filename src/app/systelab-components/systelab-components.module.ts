@@ -50,12 +50,15 @@ import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
-import {TooltipDirective} from './tooltip/tooltip.directive';
+import { TooltipDirective } from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
-@NgModule( {
-	imports:         [
+
+@NgModule({
+	imports: [
 		CommonModule,
 		FormsModule,
 		SharedModule,
@@ -67,12 +70,12 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		AngularSplitModule,
 		SystelabTranslateModule,
 		DndModule.forRoot(),
-		AgGridModule.withComponents( [
+		AgGridModule.withComponents([
 			GridContextMenuComponent,
 			GridHeaderContextMenuComponent
-		] ),
+		]),
 	],
-	declarations:    [
+	declarations: [
 		SliderComponent,
 		PieComponent,
 		SwitchComponent,
@@ -113,9 +116,11 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		TimelineComponent,
 		MessageWithIconComponent,
 		ComboBoxInputRendererComponent,
-		TooltipDirective
+		TooltipDirective,
+		NavbarComponent,
+		BreadcrumbComponent
 	],
-	exports:         [
+	exports: [
 		SliderComponent,
 		PieComponent,
 		SwitchComponent,
@@ -149,7 +154,9 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		LoadingComponent,
 		FileSelectorComponent,
 		TimelineComponent,
+		NavbarComponent,
 		MessageWithIconComponent,
+		BreadcrumbComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
@@ -165,15 +172,15 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 		CalendarDialog,
 		ColorCellRendererComponent,
 	],
-	providers:       [
+	providers: [
 		StylesUtilService,
 		ColorUtilService
 	]
-} )
+})
 export class SystelabComponentsModule {
-	static forRoot( entryComponents?: Array<Type<any> | any[]> ): ModuleWithProviders {
+	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule:  SystelabComponentsModule,
+			ngModule: SystelabComponentsModule,
 			providers: [
 				{ provide: OverlayRenderer, useClass: DOMOverlayRenderer },
 				{ provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true },
