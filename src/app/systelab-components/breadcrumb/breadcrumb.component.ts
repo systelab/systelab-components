@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
 export class BreadcrumbSubItem {
-	constructor(public id: string, public text: string, public url: string, public action?: any) {
+	constructor(public id: string, public text: string,  public action: any, public url?: string) {
 	}
 }
 
 export class BreadcrumbItem {
-	constructor(public id: string, public text: string, public isActive: boolean, public url: string, public subItems?: BreadcrumbSubItem[], public action?: any) {
+	constructor(public id: string, public text: string, public isActive: boolean, public action: any, public subItems?: BreadcrumbSubItem[], public url?: string) {
 	}
 }
 

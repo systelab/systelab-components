@@ -13,13 +13,13 @@ export class ShowcaseBreadcrumbComponent {
 	constructor(protected messagePopupService: MessagePopupService) {
 
 		const subItems: BreadcrumbSubItem[] = [];
-		subItems.push(new BreadcrumbSubItem('1', 'Apartments', 'https://google.com?apartments'));
-		subItems.push(new BreadcrumbSubItem('2', 'Campings', '', () => this.showModal()));
+		subItems.push(new BreadcrumbSubItem('1', 'Apartments', null, 'https://google.com?apartments'));
+		subItems.push(new BreadcrumbSubItem('2', 'Campings', () => this.showModal()));
 
-		this.items.push(new BreadcrumbItem('1', 'Home', false, 'https://google.com'));
-		this.items.push(new BreadcrumbItem('2', 'Holidays', false, '', null, () => this.showModal()));
-		this.items.push(new BreadcrumbItem('3', 'Hotels', false, 'https://google.com', subItems));
-		this.items.push(new BreadcrumbItem('4', 'Rooms', true, 'https://google.com'));
+		this.items.push(new BreadcrumbItem('1', 'Home', false, null, null, 'https://google.com'));
+		this.items.push(new BreadcrumbItem('2', 'Holidays', false, () => this.showModal()));
+		this.items.push(new BreadcrumbItem('3', 'Hotels', false, null, subItems, 'https://google.com'));
+		this.items.push(new BreadcrumbItem('4', 'Rooms', true, null, null, 'https://google.com'));
 
 	}
 

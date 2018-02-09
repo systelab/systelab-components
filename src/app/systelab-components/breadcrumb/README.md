@@ -13,7 +13,7 @@ It is optional to set a **backgroundColor**, and a **fontColor** for the element
 
 ### Items
 
-Items is an array with the elements of the breadcrumb.
+Items is an array with the elements to be shownmin the breadcrumb.
 
 Each item has the following structure (BreadcrumbItem):
 
@@ -21,32 +21,31 @@ Each item has the following structure (BreadcrumbItem):
     public id: number,
     public text: string,
     public isActive:boolean,
-    public url: string,
+    public action?: any,
     public subItems?: Array<BreadcrumbSubItem>,
-    public action?: any
+    public url?: string
 ```
 
-The following example shows how to add an item to the Breadcrumb:
+Apart from the **id** and **text**, **isActive** defines if the element is selected or not, and **action** is an arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called).
 
 ```javascript
-    this.items.push(new BreadcrumbItem('1', 'Home', false,'https://google.com'));
+this.items.push(new BreadcrumbItem('2', 'Holidays', false, () => this.showModal()));
 ```
-
-In this case, **id** is the id of the item, **text** is the text of the item, **isActive** defines if the nav item is selected or not, and **url** is the url to link to.
 
 The **subItems** attribute, lets you define a sub menu. It is an array of BreadcrumbSubItem elements, that have the following structure:
 
 ```javascript
     public id: string,
     public text: string,
-    public url: string,
-    public action?: any
+    public action: any,
+    public url?: string
+
 ```
 
-Finally, **action** is the arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called). For example:
+Finally, **url** is the url to link to. For example:
 
 ```javascript
-this.items.push(new BreadcrumbItem('2', 'Holidays', false,'',null,() => this.showModal()));
+this.items.push(new BreadcrumbItem('2', 'Holidays', false, null, null, 'http://www.google.com'));
 
 ```
 
