@@ -25,16 +25,18 @@ Items is an array with the elements of the Navbar. Each element has the follow s
     public floatImage: boolean,
     public isActive:boolean,
     public isEnabled:boolean,
-    public target:string,
-    public url: string,
-    public action?: any
+    public action: any,
+    public target?:string,
+    public url?: string
+
 ```
 
 Here is an example:
 
 ```javascript
-    this.items.push(new NavbarItem(5,'Blank Link','',false,false,true,'_blank','https://werfen.com'));
-    this.items.push(new NavbarItem(1,'Option 1','slab-icon-medium icon-home',false,true,true,'_self','https://google.com'));
+    this.items.push(new NavbarItem(3,'Option 1','slab-icon-medium icon-calendar',true,false,true,() => this.showModal()));
+    this.items.push(new NavbarItem(5,'Option 2','',false,false,true,null,'_blank','https://werfen.com'));
+    this.items.push(new NavbarItem(1,'OPtion 3','slab-icon-medium icon-home',false,true,true,null,'_self','https://google.com'));
 ```
 
 The following attributes will help you define the elements:
@@ -45,17 +47,9 @@ The following attributes will help you define the elements:
 - **floatImage** defines if you want the icon in the same line (set to true) as the text or not.
 - **isActive** defines if the item is selected or not.
 - **isEnabled** defines if the item is disabled or not.
+- **action** is the arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called). For example:
 - **target** defines if you want to open the link in the same tab or not. Two values are possible '_blank' and '_self'.
 - **url** is the url to link to.
-- **action** is the arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called). For example:
-
-```javascript
-this.items.push(new NavbarItem(3,'Open Modal','slab-icon-medium icon-calendar',true,false,true,'','',() => this.showModal()));
-```
-
-
-
-
 
 
 

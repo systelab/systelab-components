@@ -15,9 +15,9 @@ export class ShowcaseComponent {
 	public items1: NavbarItem[] = [];
 
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
-		this.items1.push(new NavbarItem(1, 'Option 1', '', false, true, true, '', '', () => this.action1()));
-		this.items1.push(new NavbarItem(2, 'Option 2', '', false, true, true, '', '', () => this.action2()));
-		this.items1.push(new NavbarItem(3, 'Option 3', '', false, false, false, '', '', () => this.action3()));
+		this.items1.push(new NavbarItem(1, 'Option 1', '', false, true, true, () => this.action1()));
+		this.items1.push(new NavbarItem(2, 'Option 2', '', false, true, true, () => this.action2()));
+		this.items1.push(new NavbarItem(3, 'Option 3', '', false, false, false, () => this.action3()));
 
 
 
