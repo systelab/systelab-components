@@ -6,12 +6,9 @@ import { AbstractComboBox } from '../abstract-combobox.component';
 
 declare var jQuery: any;
 
-export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
+export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
 
 	public startsWith = '';
-
-	public destroyOffClickListener: Function;
-	public destroyTabListener: Function;
 
 	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
 		super(myRenderer, chref);
@@ -23,56 +20,22 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		}
 		if (event.keyCode === 27) {
 			if (this.isDropDownOpen()) {
-				this.closeAndDestroyListeners();
+				this.closeDropDown();
 			}
 		} else {
-			this.startsWith = event.target.value;
-			if (!this.isDropDownOpen()) {
-				if (this.startsWith) {
-					this.onComboClicked();
-					jQuery('.dropdown-toggle').dropdown('toggle');
-					this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
-					this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
-					this.destroyOffClickListener = this.myRenderer.listen('document', 'click', (evt: MouseEvent) => {
-						this.offClickHandler(evt);
-					});
-					this.destroyTabListener = this.myRenderer.listen('document', 'click', (evt: KeyboardEvent) => {
-						this.tabPressedHandler(evt);
-					});
-				} else {
-					this.id = undefined;
-					this.code = undefined;
-					this.description = undefined;
-				}
-			} else {
-				if (!this.startsWith) {
-					jQuery('.dropdown-toggle').dropdown('toggle');
-				}
-			}
-			this.refresh(null);
+			this.doSearchText( event.target.value);
 		}
 	}
 
-	public closeAndDestroyListeners() {
-		this.startsWith = '';
-		if (this.isDropDownOpen()) {
-			const selectedRow: T = this.getSelectedRow();
-			if (selectedRow) {
-				this.id = selectedRow[this.getIdField()];
-				this.description = selectedRow[this.getDescriptionField()];
-			}
-			jQuery('.dropdown-toggle').dropdown('toggle');
+	protected doSearchText(text: string) {
+		this.startsWith = text;
+		if (!this.startsWith || this.startsWith.length < 1) {
+			this.resetComboSelection();
 		}
-		this.destroyListeners();
+		this.refresh(null);
 	}
 
-	public offClickHandler(event: MouseEvent) {
-		if (!this.dropdownToogleElement.nativeElement.contains(event.target)) { // check click origin
-			this.closeAndDestroyListeners();
-		}
-	}
-
-	// Override
+	// Overrides
 	public setDropdownHeight() {
 		let calculatedHeight = 0;
 
@@ -86,18 +49,43 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		}
 	}
 
-	public tabPressedHandler(event: KeyboardEvent) {
-		if (event.key === 'Tab') {
-			this.closeAndDestroyListeners();
+	public onInputClicked(event: MouseEvent) {
+		event.stopPropagation();
+		jQuery('.dropdown-toggle').dropdown('toggle');
+		if (!this.isDropDownOpen()) {
+			this.isDropdownOpened = true;
+			this.showDropDown();
+			this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
+			this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
+			this.doSearchText(this.description);
 		}
 	}
 
-	public destroyListeners() {
-		if (this.destroyOffClickListener) {
-			this.destroyOffClickListener();
+	// Overrides
+	public onComboClicked() {
+		super.onComboClicked();
+		this.doSearchText(this.description);
+	}
+
+	// Overrides
+	public closeDropDown() {
+		this.startsWith = '';
+		const selectedRow: T = this.getSelectedRow();
+		if (selectedRow) {
+			this.id = selectedRow[this.getIdField()];
+			this.description = selectedRow[this.getDescriptionField()];
+		} else if (!this.id) {
+			this.resetComboSelection();
 		}
-		if (this.destroyTabListener) {
-			this.destroyTabListener();
+		super.closeDropDown();
+	}
+
+	protected resetComboSelection() {
+		this.id = undefined;
+		this.code = undefined;
+		this.description = undefined;
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.deselectAll();
 		}
 	}
 
