@@ -59,6 +59,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
 			this.doSearchText(this.description);
 		}
+		this.inputElement.nativeElement.focus();
 	}
 
 	// Overrides

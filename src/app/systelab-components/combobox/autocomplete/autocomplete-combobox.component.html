@@ -2,7 +2,7 @@
      class="dropdown slab-combobox d-flex h-100 w-100"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" data-toggle="dropdown">
-        <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-label slab-combo-input"
+        <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input"
                [disabled]="isDisabled"
                [(ngModel)]="fieldToShow" (keyup)="doSearch($event)"
                [style.font-family]="fontFamily"
