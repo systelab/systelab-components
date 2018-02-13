@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Modal, SystelabModalContext } from '../plugin/custom';
-import { DialogRef, overlayConfigFactory } from 'ngx-modialog';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { MessagePopupViewComponent } from './message-popup-view.component';
-import { Observable } from 'rxjs/Observable';
-import { MessageWithIconComponent } from './message-with-icon.component';
+import {Injectable} from '@angular/core';
+import {Modal, SystelabModalContext} from '../plugin/custom';
+import {DialogRef, overlayConfigFactory} from 'ngx-modialog';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
+import {MessagePopupViewComponent} from './message-popup-view.component';
+import {Observable} from 'rxjs/Observable';
+import {MessageWithIconComponent} from './message-with-icon.component';
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any) {
@@ -34,8 +34,8 @@ export class MessagePopupService {
 
 	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
 		const buttons: MessagePopupButton[] = [];
-		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_OK'), true));
-		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_CANCEL'), false));
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true));
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false));
 		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons);
 	}
 
@@ -74,18 +74,18 @@ export class MessagePopupService {
 			this.modal.open(MessagePopupViewComponent,
 				overlayConfigFactory(
 					{
-						fullScreen:   fullScreen,
-						dialogClass:  modalClass,
-						msg:          message,
-						buttons:      buttons,
-						title:        title,
-						type:         type,
-						width:        width,
-						maxWidth:     maxWidth,
-						minWidth:     minWidth,
-						maxHeight:    maxHeight,
-						minHeight:    minHeight,
-						height:       height
+						fullScreen: fullScreen,
+						dialogClass: modalClass,
+						msg: message,
+						buttons: buttons,
+						title: title,
+						type: type,
+						width: width,
+						maxWidth: maxWidth,
+						minWidth: minWidth,
+						maxHeight: maxHeight,
+						minHeight: minHeight,
+						height: height
 					},
 					SystelabModalContext)
 			)
