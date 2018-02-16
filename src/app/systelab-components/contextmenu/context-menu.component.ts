@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 import { ContextMenuActionData } from './context-menu-action-data';
 import { ContextMenuOption } from './context-menu-option';
 
@@ -8,7 +8,7 @@ declare var jQuery: any;
 	selector:    'systelab-context-menu',
 	templateUrl: 'context-menu.component.html',
 })
-export class ContextMenuComponent {
+export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	@ViewChild('dropdownparent') public dropdownParent: ElementRef;
 	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
@@ -25,10 +25,15 @@ export class ContextMenuComponent {
 
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
+	public scrollHandler: any;
 
 	public isOpened = false;
 
 	constructor(protected el: ElementRef, protected myRenderer: Renderer2) {
+	}
+
+	public ngOnInit() {
+		jQuery(this.dropdownParent.nativeElement).on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
 	}
 
 	public isDropDownOpened(): boolean {
@@ -36,11 +41,24 @@ export class ContextMenuComponent {
 	}
 
 	public dotsClicked(event: MouseEvent) {
-		if (!this.isDropDownOpened()) {
-			this.isOpened = true;
-			this.top = event.clientY;
-			this.left = event.clientX;
-			this.showDropDown();
+		if (this.existsAtLeastOneActionEnabled()) {
+			if (!this.isDropDownOpened()) {
+				this.isOpened = true;
+				this.top = event.clientY;
+				this.left = event.clientX;
+				this.showDropDown();
+			}
+		} else {
+			event.stopPropagation();
+		}
+	}
+
+	protected existsAtLeastOneActionEnabled(): boolean {
+		if (this.contextMenuOptions) {
+			const optionEnabled: ContextMenuOption = this.contextMenuOptions.find((menuOption: ContextMenuOption) => {
+				return this.isEnabled(this.elementID, menuOption.actionId);
+			});
+			return (optionEnabled != null);
 		}
 	}
 
@@ -75,19 +93,31 @@ export class ContextMenuComponent {
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', null);
 	}
 
-	public closeDropDown() {
-		this.destroyWheelListener();
-		this.destroyKeyListener();
-		this.resetDropDownPositionAndHeight();
-		if (this.isDropDownOpened()) {
-			jQuery('.dropdown-toggle')
-				.dropdown('toggle');
-		}
+	public actionsAfterCloseDropDown() {
 		this.isOpened = false;
+		this.removeScrollHandler();
+		if (this.destroyWheelListener) {
+			this.destroyWheelListener();
+		}
+		if (this.destroyKeyListener) {
+			this.destroyKeyListener();
+		}
+		this.resetDropDownPositionAndHeight();
+
+	}
+
+	public closeDropDown() {
+		if (this.isDropDownOpened()) {
+			jQuery('#' + this.elementID).dropdown('toggle');
+		}
+		this.actionsAfterCloseDropDown();
 	}
 
 	protected addListeners() {
-		this.destroyWheelListener = this.myRenderer.listen('window', 'wheel', (evt: WheelEvent) => {
+
+		this.addScrollHandler();
+
+		this.destroyWheelListener = this.myRenderer.listen('window', 'scroll', (evt: WheelEvent) => {
 			this.handleWheelEvents(evt);
 		});
 
@@ -109,6 +139,21 @@ export class ContextMenuComponent {
 		if (this.isDropDownOpened()) {
 			this.closeDropDown();
 		}
+	}
+
+	protected scroll() {
+		if (this.isDropDownOpened()) {
+			this.closeDropDown();
+		}
+	}
+
+	protected addScrollHandler() {
+		this.scrollHandler = this.scroll.bind(this);
+		window.addEventListener('scroll', this.scrollHandler , true);
+	}
+
+	protected removeScrollHandler() {
+		window.removeEventListener('scroll', this.scrollHandler , true);
 	}
 
 	protected isEnabled(elementId: string, actionId: string): boolean {
@@ -134,6 +179,10 @@ export class ContextMenuComponent {
 			const actionData: ContextMenuActionData = new ContextMenuActionData(elementId, actionId);
 			this.action.emit(actionData);
 		}
+	}
+
+	public ngOnDestroy() {
+		this.removeScrollHandler();
 	}
 }
 
