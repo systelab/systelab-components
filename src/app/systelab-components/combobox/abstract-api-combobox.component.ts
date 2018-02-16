@@ -131,15 +131,18 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	// override
 	public onComboClicked() {
-
-		const isOpen: boolean = this.isDropDownOpen();
-
-		if ( !isOpen ) {
-			this.isDropdownOpened = true;
-			super.showDropDown();
+		if (this.isDisabled) {
+			event.stopPropagation();
 		} else {
-			// close
-			this.checkMultipleSelectionClosed();
+			const isOpen: boolean = this.isDropDownOpen();
+
+			if (!isOpen) {
+				this.isDropdownOpened = true;
+				super.showDropDown();
+			} else {
+				// close
+				this.checkMultipleSelectionClosed();
+			}
 		}
 	}
 

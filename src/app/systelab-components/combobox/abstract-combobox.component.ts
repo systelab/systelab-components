@@ -153,10 +153,14 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.params = params;
 	}
 
-	public onComboClicked() {
-		if (!this.isDropDownOpen()) {
-			this.isDropdownOpened = true;
-			this.showDropDown();
+	public onComboClicked(event: MouseEvent) {
+		if (this.isDisabled) {
+			event.stopPropagation();
+		} else {
+			if (!this.isDropDownOpen()) {
+				this.isDropdownOpened = true;
+				this.showDropDown();
+			}
 		}
 	}
 
