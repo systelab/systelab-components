@@ -19,3 +19,5 @@ Use systelabTooltipHtml to show a tooltip with HTML.
 
 Use systelabTooltipPlacement to indicate the placement of the tooltip. Possible values for placement are: top (default), right, bottom. left.
 
+Use systelabTooltipDelay to indicate delay showing the combo in ms. Default is 1000 ms.
+

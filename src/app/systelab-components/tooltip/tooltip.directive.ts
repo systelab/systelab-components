@@ -8,10 +8,12 @@ declare var jQuery: any;
 export class TooltipDirective implements OnInit, AfterViewInit, OnDestroy {
 
 	public static DEFAULT_PLACEMENT = 'top';
+	public static DEFAULT_DELAY = 1000;
 
 	@Input() systelabTooltip: string;
 	@Input() systelabTooltipHtml: string;
 	@Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
+	@Input() systelabTooltipDelay: number;
 
 	constructor(private el: ElementRef, private renderer: Renderer2) {
 	}
@@ -24,6 +26,8 @@ export class TooltipDirective implements OnInit, AfterViewInit, OnDestroy {
 		}
 		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
 			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
+		this.renderer.setAttribute(this.el.nativeElement, 'data-delay',
+			(this.systelabTooltipDelay) ? this.systelabTooltipDelay.toString() : TooltipDirective.DEFAULT_DELAY.toString());
 		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : this.systelabTooltip);
 	}
 
