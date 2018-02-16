@@ -1,7 +1,7 @@
 
 .slab-combobox {
 
-  .slab-dropdown-toogle{
+  .slab-dropdown-toogle {
     box-sizing: border-box;
     height: 100%;
   }
@@ -132,11 +132,10 @@
 
   &.disabled {
     cursor: not-allowed;
-    .slab-combo-label {
-      opacity: 0.5;
-    }
+    .slab-combo-label,
     .slab-combo-button {
       cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 }
