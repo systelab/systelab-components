@@ -65,8 +65,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	// Overrides
-	public onComboClicked() {
-		super.onComboClicked();
+	public onComboClicked(event: MouseEvent) {
+		super.onComboClicked(event);
 		this.doSearchText(this.description);
 	}
 

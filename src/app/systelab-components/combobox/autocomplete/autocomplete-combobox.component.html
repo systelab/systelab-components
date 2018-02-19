@@ -12,7 +12,7 @@
                (keydown.Tab)="closeDropDown()"
                 (click)="onInputClicked($event)"/>
         <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled"
-                (click)="onComboClicked()"></button>
+                (click)="onComboClicked($event)"></button>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
         <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">

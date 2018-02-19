@@ -130,7 +130,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	// override
-	public onComboClicked() {
+	public onComboClicked(event: MouseEvent) {
 		if (this.isDisabled) {
 			event.stopPropagation();
 		} else {
