@@ -34,8 +34,8 @@ $sidebar-width: 200px !default;
 
     i {
       position: relative;
-      top:3px;
-      left:-1px;
+      top: 3px;
+      left: -1px;
       color: $medium-gray;
       font-size: $icon-header-size - 10px;
     }
@@ -82,8 +82,6 @@ $sidebar-width: 200px !default;
 
   }
 }
-
-
 
 .slab-app-sidebar-menu-container {
   @include position(fixed, $top: $slab-app-header-height);
@@ -136,7 +134,7 @@ $sidebar-width: 200px !default;
         border-top: 1px solid $primary-color;
         border-bottom: 1px solid $primary-color;
 
-        .slab-sidebar-tab-decoration {
+        .slab-app-sidebar-tab-decoration {
           background-color: $primary-color;
         }
 

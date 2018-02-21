@@ -1,7 +1,8 @@
 <systelab-dialog-header [withInfo]="false" (close)="close();">Options</systelab-dialog-header>
-<systelab-tabs class="slab-flex-1">
-    <systelab-tab [title]="getTabTitle('COMMON_FIELDS')" class="p-2">
-        <systelab-two-list [(available)]="availableColumns"
+<systelab-tabs class="slab-flex-1 slab-overflow-container">
+    <systelab-tab [title]="getTabTitle('COMMON_FIELDS')" class="p-2 slab-overflow-container">
+        <systelab-two-list class="slab-flex-1 slab-overflow-container"
+                           [(available)]="availableColumns"
                            [(visible)]="visibleColumns"
                            [initialAvailableColumns]="initialAvailableColumns"
                            displayAttr="displayName">
