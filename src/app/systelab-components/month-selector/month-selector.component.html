@@ -1,0 +1,21 @@
+<div class="dropdown slab-combobox slab-month-selector d-flex w-100" [ngClass]="{'disabled': isDisabled}">
+  <div class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle">
+    <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [disabled]="isDisabled" [(ngModel)]="this.selectedMonth.text"
+      (click)="onClicked($event)" />
+    <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled" (click)="onClicked($event)"></button>
+  </div>
+  <div *ngIf="isOpened" class="slab-month-selector-dropdown" [ngClass]="{'disabled': isDisabled}" (mouseleave)="hideSelector()">
+    <div class="header-selector">
+      <systelab-calendar-header [currentDate]="currentDate" (previousYear)="changeYear(-1)"
+        (nextYear)="changeYear(1)">
+      </systelab-calendar-header>
+    </div>
+    <div class="box">
+      <ul>
+        <li *ngFor="let month of months" [class.active]="month.isActive" (click)="onClickedMonth(month)">
+          {{month.text}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

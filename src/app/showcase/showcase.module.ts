@@ -58,6 +58,8 @@ import { ShowcaseTimelineComponent } from './components/timeline/showcase-timeli
 import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/showcase-timeline-dialog.component';
 import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.component';
 import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-breadcrumb.component';
+import { ShowcaseWeekSelectorComponent } from './components/week-selector/showcase-week-selector.component';
+import { ShowcaseMonthSelectorComponent } from './components/month-selector/showcase-month-selector.component';
 
 @NgModule({
 	imports: [
@@ -119,7 +121,9 @@ import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-br
 		ShowcaseTimelineDialog,
 		ShowcaseTimelineComponent,
 		ShowcaseNavbarComponent,
-		ShowcaseBreadcrumbComponent
+		ShowcaseBreadcrumbComponent,
+		ShowcaseWeekSelectorComponent,
+		ShowcaseMonthSelectorComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
