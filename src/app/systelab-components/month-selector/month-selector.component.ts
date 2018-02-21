@@ -1,5 +1,5 @@
-import { Component, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
+import {Component, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
 export class Month {
   constructor(public month: number, public text: string, public year: number, public isActive: boolean) {
   }

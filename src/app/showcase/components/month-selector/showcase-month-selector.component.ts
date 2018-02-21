@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MonthSelectorComponent, Month} from '../../../systelab-components/month-selector/month-selector.component';
 @Component({
   selector: 'showcase-month-selector',
   templateUrl: './showcase-month-selector.component.html'
 })
 export class ShowcaseMonthSelectorComponent{
-
   public maxDate: Date;
   public minDate: Date;
   public currentDate: Date;
@@ -17,5 +16,4 @@ export class ShowcaseMonthSelectorComponent{
     this.minDate = new Date(2016, 0, 20);
     this.isDisabled = false;
   }
-
 }

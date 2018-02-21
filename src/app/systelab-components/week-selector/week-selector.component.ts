@@ -1,5 +1,5 @@
-import { Component, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
+import {Component, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
 export class Week {
   constructor(public week: number, public text: string, public day: number, public month: number, public year: number, public isActive: boolean) {
   }
@@ -202,5 +202,4 @@ export class WeekSelectorComponent implements AfterViewInit {
     var numberOfWeek = Math.floor(d1 / 7) + 1;
     return numberOfWeek;
   }
-
 }
