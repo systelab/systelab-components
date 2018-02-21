@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractComboBox } from './abstract-combobox.component';
 import { Observable } from 'rxjs/Observable';
-
+import { current } from 'codelyzer/util/syntaxKind';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
@@ -44,7 +44,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public selectionChanged = false;
 	public totalItemsLoaded = false;
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
+	constructor( public myRenderer: Renderer2, public chref: ChangeDetectorRef ) {
 		super( myRenderer, chref );
 	}
 
@@ -56,8 +56,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID: 'itemDescription',
-				field: this.getDescriptionField(),
+				colID:             'itemDescription',
+				field:             this.getDescriptionField(),
 				checkboxSelection: this.getMultipleSelection()
 			}
 		];
@@ -70,7 +70,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
 
-		if (this.multipleSelection) {
+		if ( this.multipleSelection ) {
 			this.gridOptions.rowSelection = 'multiple';
 			this.gridOptions.suppressRowClickSelection = true;
 		} else {
@@ -87,12 +87,12 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked: this.getCheckboxChecked()
+			checkboxChecked:   this.getCheckboxChecked()
 		};
 
 		this.gridOptions.getRowNodeId =
-			(item) => {
-				if (item[this.getIdField()]) {
+			( item ) => {
+				if ( item[this.getIdField()] ) {
 					return item[this.getIdField()];
 				} else {
 					return null;
@@ -130,13 +130,13 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	// override
-	public onComboClicked(event: MouseEvent) {
-		if (this.isDisabled) {
+	public onComboClicked( event: MouseEvent ) {
+		if ( this.isDisabled ) {
 			event.stopPropagation();
 		} else {
 			const isOpen: boolean = this.isDropDownOpen();
 
-			if (!isOpen) {
+			if ( !isOpen ) {
 				this.isDropdownOpened = true;
 				super.showDropDown();
 			} else {
@@ -311,6 +311,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				this.id = selectedRow[this.getIdField()];
 				this.code = selectedRow[this.getCodeField()];
 				this.description = selectedRow[this.getDescriptionField()];
+				this.currentSelected = selectedRow;
 				this.change.emit( this.id );
 				this.idChange.emit( this.id );
 				this.closeDropDown();
@@ -383,6 +384,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		} else if ( this._id && this._id !== undefined ) {
 			this.gridOptions.api.forEachNode( node => {
 				if ( node.id === this._id ) {
+					this.currentSelected = node.data;
 					node.selectThisNode( true );
 				}
 			} );
