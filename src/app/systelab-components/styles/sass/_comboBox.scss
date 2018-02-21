@@ -76,6 +76,9 @@
     margin-bottom: 3px;
     input {
       padding-left: 5px;
+      &::-ms-clear {
+        display: none;
+      }
     }
   }
 

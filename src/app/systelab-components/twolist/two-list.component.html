@@ -1,10 +1,10 @@
 <div class="slab-twolist h-100">
-    <div class="slab-twolistdiv h-100 d-flex flex-column flex-nowrap">
+    <div class="slab-twolistdiv d-flex flex-column flex-nowrap">
         <label>{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</label>
         <div>
             <input type="text" class="form-control" [(ngModel)]="firstListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 h-100">
+        <div class="slab-twolistbox mt-2 slab-flex-1">
             <div class="slab-twolistboxdiv">
                 <ul class="slab-twolistboxrow list-group">
                     <li *ngFor="let item of (available | datafilter:firstListSearch)"
@@ -20,17 +20,18 @@
         <button type="button" class="slab-twolistbutton btn icon-chevron-right" (click)="add()" title="Add selected"
                 [disabled]="selected.available.length == 0">
         </button>
-        <button type="button" class="slab-twolistbutton btn icon-chevron-left" (click)="remove()" title="Remove selected"
+        <button type="button" class="slab-twolistbutton btn icon-chevron-left" (click)="remove()"
+                title="Remove selected"
                 [disabled]="selected.current.length == 0">
         </button>
     </div>
 
-    <div class="slab-twolistdiv h-100 d-flex flex-column flex-nowrap">
+    <div class="slab-twolistdiv d-flex flex-column flex-nowrap">
         <label>{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</label>
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 h-100">
+        <div class="slab-twolistbox mt-2 slab-flex-1">
             <div class="slab-twolistboxdiv" dnd-droppable>
                 <ul class="slab-twolistboxrow list-group" dnd-sortable-container [sortableData]="visible"
                     [dropZones]="['visible-dropZone']">
