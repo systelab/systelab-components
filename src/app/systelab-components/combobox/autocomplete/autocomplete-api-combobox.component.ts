@@ -87,6 +87,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		this.id = undefined;
 		this.code = undefined;
 		this.description = undefined;
+		this.currentSelected = undefined;
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.deselectAll();
 		}
