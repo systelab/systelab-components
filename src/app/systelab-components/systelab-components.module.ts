@@ -57,6 +57,7 @@ import { MessageWithIconComponent } from './modal/message-popup/message-with-ico
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { WeekSelectorComponent } from './week-selector/week-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
+import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { MonthSelectorComponent } from './month-selector/month-selector.componen
 		NavbarComponent,
 		BreadcrumbComponent,
 		WeekSelectorComponent,
-		MonthSelectorComponent
+		MonthSelectorComponent,
+		SignatureCanvasComponent
 	],
 	exports: [
 		SliderComponent,
@@ -163,6 +165,7 @@ import { MonthSelectorComponent } from './month-selector/month-selector.componen
 		BreadcrumbComponent,
 		WeekSelectorComponent,
 		MonthSelectorComponent,
+		SignatureCanvasComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,

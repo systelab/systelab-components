@@ -60,6 +60,7 @@ import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.com
 import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-breadcrumb.component';
 import { ShowcaseWeekSelectorComponent } from './components/week-selector/showcase-week-selector.component';
 import { ShowcaseMonthSelectorComponent } from './components/month-selector/showcase-month-selector.component';
+import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/showcase-signature-canvas.component';
 
 @NgModule({
 	imports: [
@@ -123,7 +124,8 @@ import { ShowcaseMonthSelectorComponent } from './components/month-selector/show
 		ShowcaseNavbarComponent,
 		ShowcaseBreadcrumbComponent,
 		ShowcaseWeekSelectorComponent,
-		ShowcaseMonthSelectorComponent
+		ShowcaseMonthSelectorComponent,
+		ShowcaseSignatureCanvasComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

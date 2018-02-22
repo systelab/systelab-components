@@ -1,0 +1,23 @@
+systelab-signature-canvas {
+    & > div {
+        padding:15px;
+    }
+    canvas{
+        border: 1px solid #d3d3d3;
+    }
+    & .alert{
+        padding: 0.5rem 0.3rem;
+    }
+    & .optionsBar{
+        margin-top:10px;
+    }
+    & .slab-form{
+        padding:15px;
+    }
+    & .mt-15{
+        margin-top: 15px;
+    }
+    .slab-form_input--error{
+        border-left: 3px solid #f45642 !important;
+    }
+}
