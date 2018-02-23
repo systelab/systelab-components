@@ -42,10 +42,11 @@
             & > ul {
                 max-height: 280px;
                 overflow-y: auto;
+                padding-left:2px;
                 & > li{
                     transition: all 0.2s ease-out;
                     list-style: none;
-                    padding: 10px;
+                    padding:5px 2px 5px 2px;
                     cursor: pointer;
                     &.active{
                         background-color: $primary-color;

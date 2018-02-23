@@ -1,6 +1,6 @@
 <div class="dropdown slab-combobox slab-month-selector d-flex w-100" [ngClass]="{'disabled': isDisabled}">
   <div class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle">
-    <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [disabled]="isDisabled" [(ngModel)]="this.selectedMonth.text"
+    <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [disabled]="isDisabled" [(ngModel)]="selectedMonth.text"
       (click)="onClicked($event)" />
     <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled" (click)="onClicked($event)"></button>
   </div>

@@ -1,5 +1,5 @@
-import {Component, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
+import { Component, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
 export class Week {
   constructor(public week: number, public text: string, public day: number, public month: number, public year: number, public isActive: boolean) {
   }
@@ -34,26 +34,26 @@ export class WeekSelectorComponent implements AfterViewInit {
 
   public weeks: Array<Week> = [];
   public months: Array<Month> = [];
-  public isOpened: boolean = false;
+  public isOpened = false;
   public monthNames = [];
   public daysNames = [];
 
   constructor(private i18nService: I18nService) {
-    var year = new Date();
-    for (var i = 1; i <= 12; i++) {
-      var month = this.i18nService.formatMonthAndYear(new Date(i + "/01/" + year.getFullYear())).split(',');
+    const year = new Date();
+    for (let i = 1; i <= 12; i++) {
+      const month = this.i18nService.formatMonthAndYear(new Date(i + '/01/' + year.getFullYear())).split(',');
       this.monthNames.push(month[0]);
     }
-    this.daysNames.push(this.i18nService.instant("COMMON_SUNDAY"));
-    this.daysNames.push(this.i18nService.instant("COMMON_MONDAY"));
-    this.daysNames.push(this.i18nService.instant("COMMON_TUESDAY"));
-    this.daysNames.push(this.i18nService.instant("COMMON_WEDNESDAY"));
-    this.daysNames.push(this.i18nService.instant("COMMON_THURSDAY"));
-    this.daysNames.push(this.i18nService.instant("COMMON_FRIDAY"));
-    this.daysNames.push(this.i18nService.instant("COMMON_SATURDAY"));
+    this.daysNames.push(this.i18nService.instant('COMMON_SUNDAY'));
+    this.daysNames.push(this.i18nService.instant('COMMON_MONDAY'));
+    this.daysNames.push(this.i18nService.instant('COMMON_TUESDAY'));
+    this.daysNames.push(this.i18nService.instant('COMMON_WEDNESDAY'));
+    this.daysNames.push(this.i18nService.instant('COMMON_THURSDAY'));
+    this.daysNames.push(this.i18nService.instant('COMMON_FRIDAY'));
+    this.daysNames.push(this.i18nService.instant('COMMON_SATURDAY'));
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     if (!this.currentDate) {
       this.currentDate = new Date();
     }
@@ -67,12 +67,12 @@ export class WeekSelectorComponent implements AfterViewInit {
   }
   public getMonths() {
     this.months = [];
-    var idmonth = this.currentDate.getMonth();
-    var year = this.currentDate.getFullYear();
-    for (var i = 0; i < this.monthNames.length; i++) {
-      var d = new Date(year, i + 1, 1, 0, 0, 0, 0);
+    const idmonth = this.currentDate.getMonth();
+    const year = this.currentDate.getFullYear();
+    for (let i = 0; i < this.monthNames.length; i++) {
+      const d = new Date(year, i + 1, 1, 0, 0, 0, 0);
       if (this.checkDateIntoIntervals(d)) {
-        var isActive = i == idmonth ? true : false;
+        const isActive = i === idmonth ? true : false;
         this.months.push({ month: i, year: year, text: this.monthNames[i], isActive: isActive });
       }
     }
@@ -81,20 +81,20 @@ export class WeekSelectorComponent implements AfterViewInit {
   }
   public getWeeks() {
     this.weeks = [];
-    var monthWeeksActive = this.months[this.currentDate.getMonth()].month;
-    var yearActive = this.months[this.currentDate.getMonth()].year;
-    var g = this.getWeeksStartAndEndInMonth(monthWeeksActive, yearActive, 'm', 1);
-    var week = this.getWeek(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate());
-    for (var i = 0; i < g.length - 1; i++) {
-      var isActive = false;
-      var d = new Date(yearActive, monthWeeksActive, g[i].start, 0, 0, 0, 0);
-      if (this.checkDateIntoIntervals(d)) {
-        var dend = new Date(yearActive, monthWeeksActive, g[i].end, 0, 0, 0, 0);
-        var text = this.i18nService.instant("COMMON_WEEK") + " " + g[i].number + ": " + this.daysNames[d.getDay()] + " " + g[i].start + " " + this.i18nService.instant("COMMON_TO") + " " + this.daysNames[dend.getDay()] + " " + g[i].end;
-        if (g[i].number === week) {
+    const monthWeeksActive = this.months[this.currentDate.getMonth()].month;
+    const yearActive = this.months[this.currentDate.getMonth()].year;
+    const weekInfo = this.getWeeksInMonth(monthWeeksActive, yearActive);
+    const week = this.getWeek(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), true);
+    for (let i = 0; i < weekInfo.length - 1; i++) {
+      let isActive = false;
+      const dateStart = new Date(yearActive, monthWeeksActive, weekInfo[i].start, 0, 0, 0, 0);
+      if (this.checkDateIntoIntervals(dateStart)) {
+        const dateEnd = new Date(yearActive, monthWeeksActive, weekInfo[i].end, 0, 0, 0, 0);
+        const text = this.i18nService.instant('COMMON_WEEK') + ' ' + weekInfo[i].number + ': ' + this.daysNames[dateStart.getDay()] + ' ' + weekInfo[i].start + ' ' + this.i18nService.instant('COMMON_TO') + ' ' + this.daysNames[dateEnd.getDay()] + ' ' + weekInfo[i].end;
+        if (weekInfo[i].number === week) {
           isActive = true;
         }
-        var weekObj: Week = new Week(g[i].number, text, g[i].start, monthWeeksActive, yearActive, isActive);
+        const weekObj: Week = new Week(weekInfo[i].number, text, weekInfo[i].start, monthWeeksActive, yearActive, isActive);
         this.weeks.push(weekObj);
         if (isActive) {
           this.selectedWeek = weekObj;
@@ -113,93 +113,87 @@ export class WeekSelectorComponent implements AfterViewInit {
     this.getMonths();
   }
   public changeYear(v: number) {
-    var da = this.currentDate;
-    var curr_year = da.getFullYear() + (v);
-    var gDate = new Date(curr_year, da.getMonth(), da.getDate());
-    if (this.checkDateIntoIntervals(gDate)) {
-      this.currentDate = gDate;
+    const curr_year = this.currentDate.getFullYear() + (v);
+    const newDate = new Date(curr_year, this.currentDate.getMonth(), this.currentDate.getDate());
+    if (this.checkDateIntoIntervals(newDate)) {
+      this.currentDate = newDate;
       this.getMonths();
     }
   }
   public changeMonth(v: number) {
-    var da = this.currentDate;
-    var curr_month = da.getMonth() + (v);
-    var gDate = new Date(da.getFullYear(), curr_month, da.getDate());
-    if (this.checkDateIntoIntervals(gDate)) {
-      this.currentDate = gDate;
+    const curr_month = this.currentDate.getMonth() + (v);
+    const newDate = new Date(this.currentDate.getFullYear(), curr_month, this.currentDate.getDate());
+    if (this.checkDateIntoIntervals(newDate)) {
+      this.currentDate = newDate;
       this.getMonths();
     }
   }
   public checkDateIntoIntervals(date: Date) {
     if (this.maxDate && this.minDate) {
-      if (date <= this.maxDate && date >= this.minDate) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      if (date <= this.maxDate && date >= this.minDate) { return true; }
+      else { return false; }
     }
     else if (this.maxDate) {
-      if (date <= this.maxDate) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      if (date <= this.maxDate) { return true; }
+      else { return false; }
     }
     else if (this.minDate) {
-      if (date >= this.minDate) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      if (date >= this.minDate) { return true; }
+      else { return false; }
     }
     else {
       return true;
     }
   }
-  public getWeeksStartAndEndInMonth(month: number, year: number, start: string, st: number) {
-    let w = [],
-      firstDate = new Date(year, month, 1),
-      lastDate = new Date(year, month + 1, 0),
-      numDays = lastDate.getDate();
-    st = 1;
-    let end = 7 - firstDate.getDay();
-    if (start === 'm') {
-      if (firstDate.getDay() === 0) {
-        end = 1;
-      } else {
-        end = 7 - firstDate.getDay() + 1;
-      }
+  // TODO: Move to Translate Library
+  public getWeeksInMonth(monthActual: number, yearActual: number) {
+    const firstDate = new Date(yearActual, monthActual, 1),
+      lastDate = new Date(yearActual, monthActual + 1, 0),
+      numDays = lastDate.getDate(),
+      weeks = [];
+    let endDay = 7 - firstDate.getDay(),
+      startDay = 1;
+    if (firstDate.getDay() === 0) {
+      endDay = 1;
+    } else {
+      endDay = 7 - firstDate.getDay() + 1;
     }
-    while (st <= numDays) {
-      if (st == 1) {
-        w.push({ start: st, end: end, number: this.getWeek(year, month, st) });
+    while (startDay <= numDays) {
+      if (startDay === 1) {
+        weeks.push({ start: startDay, end: endDay, number: this.getWeek(yearActual, monthActual, startDay, true) });
       }
-      st = end + 1;
-      end = end + 7;
-      end = st === 1 && end === 8 ? 1 : end;
-      if (end > numDays) {
-        end = numDays;
+      startDay = endDay + 1;
+      endDay = endDay + 7;
+      endDay = startDay === 1 && endDay === 8 ? 1 : endDay;
+      if (endDay > numDays) {
+        endDay = numDays;
       }
-      w.push({ start: st, end: end, number: this.getWeek(year, month, st) });
+      weeks.push({ start: startDay, end: endDay, number: this.getWeek(yearActual, monthActual, startDay, true) });
     }
-    return w;
+    return weeks;
   }
-
-  public getWeek(year, month, day) {
-    month += 1;//use 1-12
-    var a = Math.floor((14 - (month)) / 12);
-    var y = year + 4800 - a;
-    var m = (month) + (12 * a) - 3;
-    var jd = day + Math.floor(((153 * m) + 2) / 5) +
-      (365 * y) + Math.floor(y / 4) - Math.floor(y / 100) +
-      Math.floor(y / 400) - 32045;  // (gregorian calendar)
-    var d4 = (jd + 31741 - (jd % 7)) % 146097 % 36524 % 1461;
-    var l = Math.floor(d4 / 1460);
-    var d1 = ((d4 - l) % 365) + l;
-    var numberOfWeek = Math.floor(d1 / 7) + 1;
-    return numberOfWeek;
+  // TODO: Move to Translate Library
+  public getWeek(yearActual, monthActual, dayActual, isGregorian) {
+    monthActual += 1; // use 1-12
+    const binaryMod = Math.floor((14 - (monthActual)) / 12), // Only can have as result 1 or 0
+      yearValue = yearActual + 4800 - binaryMod,
+      monthValue = (monthActual) + (12 * binaryMod) - 3;
+    // Find JulianDay
+    let julianday = 0;
+    if (isGregorian) {
+      julianday = dayActual + Math.floor(((153 * monthValue) + 2) / 5) +
+        (365 * yearValue) + Math.floor(yearValue / 4) - Math.floor(yearValue / 100) +
+        Math.floor(yearValue / 400) - 32045;  // (gregorian calendar)
+    }
+    else {
+      julianday = (dayActual + 1) + Math.round(((153 * monthValue) + 2) / 5) + (365 + yearValue) +
+        Math.round(yearValue / 4) - 32083;    // (julian calendar)
+    }
+    // now calc weekNumber according to Julian Day
+    const d4 = (julianday + 31741 - (julianday % 7)) % 146097 % 36524 % 1461;
+    const l = Math.floor(d4 / 1460);
+    const totalDays = ((d4 - l) % 365) + l;
+    const weekNumber = Math.floor(totalDays / 7) + 1;
+    return weekNumber;
   }
 }

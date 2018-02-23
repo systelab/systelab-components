@@ -58,8 +58,6 @@ import { ShowcaseTimelineComponent } from './components/timeline/showcase-timeli
 import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/showcase-timeline-dialog.component';
 import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.component';
 import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-breadcrumb.component';
-import { ShowcaseWeekSelectorComponent } from './components/week-selector/showcase-week-selector.component';
-import { ShowcaseMonthSelectorComponent } from './components/month-selector/showcase-month-selector.component';
 import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/showcase-signature-canvas.component';
 
 @NgModule({
@@ -123,8 +121,6 @@ import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/
 		ShowcaseTimelineComponent,
 		ShowcaseNavbarComponent,
 		ShowcaseBreadcrumbComponent,
-		ShowcaseWeekSelectorComponent,
-		ShowcaseMonthSelectorComponent,
 		ShowcaseSignatureCanvasComponent
 	],
 	entryComponents: [
