@@ -2,8 +2,9 @@
 .slab-searcher-container {
   input {
     width: 100px;
-
-
+    &::-ms-clear {
+      display: none;
+    }
   }
 
   label {

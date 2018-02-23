@@ -22,7 +22,7 @@ export class ComboBoxInputRenderer {
 		return this._description;
 	}
 
-	@Input() componentData: any;
+	@Input() selectedData: any;
 	@Input() initialParams: any;
 
 	constructor() {

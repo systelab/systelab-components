@@ -14,7 +14,7 @@ export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit,
 	@Input() componentType: any;
 	@Input() id: number | string;
 	@Input() description: string;
-	@Input() componentData: any;
+	@Input() selectedData: any;
 	@Input() initialParams: any;
 	cmpRef: ComponentRef<ComboBoxInputRenderer>;
 	private isViewInitialized = false;
@@ -54,7 +54,7 @@ export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit,
 	private updateComponentInputs() {
 		this.cmpRef.instance.id = this.id;
 		this.cmpRef.instance.description = this.description;
-		this.cmpRef.instance.componentData = this.componentData;
+		this.cmpRef.instance.selectedData = this.selectedData;
 		this.cmpRef.instance.initialParams = this.initialParams;
 		this.cmpRef.changeDetectorRef.detectChanges();
 	}
