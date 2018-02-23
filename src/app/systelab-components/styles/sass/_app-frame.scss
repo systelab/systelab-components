@@ -31,6 +31,8 @@ $sidebar-width: 200px !default;
     overflow: hidden;
     z-index: 1;
     position: relative;
+    padding: 0;
+    background-color: transparent;
 
     i {
       position: relative;
