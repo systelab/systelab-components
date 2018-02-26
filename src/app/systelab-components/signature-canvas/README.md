@@ -23,8 +23,7 @@ Set **isDownloadable** to true, to provide the option to download the canvas con
 
 Set **isIncorrectCode**  to true, if the second verification fails.
 
-
-**doFinish($event)** is a method. If the second verification is activated this will happen when the user enter the code/password that you requested and press the verificatio button, else the event will be performed when the user press in the Finish button.
+**doFinish($event)** is a method. If the second verification is activated this will happen when the user enter the code/password that you requested and press the verification button, else the event will be performed when the user press in the Finish button.
 
 ### Translations
 

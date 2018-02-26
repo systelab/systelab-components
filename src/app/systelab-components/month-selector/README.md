@@ -6,7 +6,8 @@ Component to show a Month Selector
 
 ```html
 <systelab-month-selector #wselector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="currentDate"
-    [(selectedMonth)]="selectedMonth"></systelab-month-selector>
+    [(selectedMonth)]="selectedMonth">
+</systelab-month-selector>
 ```
 
 Set **isDisabled** to true, if you want to display a disabled month selector, it will displaying the month belonging to the date selected.
@@ -19,7 +20,9 @@ Set **currentDate** with the date you want, to display the month belonging to th
 
 
 **selectedMonth** is an 'Month' object where you can retrieve the information of the selected month.
+
 The Month object has the follow structure:
+
 ```javascript
     public month: number,    //Number of the month
     public text: string,    //Description of month selected

@@ -51,12 +51,12 @@
           padding: 10px;
           cursor: pointer;
           &.active {
-            background-color: $primary-color;
+            background-color: $slab-selected-background-color;
             color: #ffffff;
           }
         }
         & > li:hover {
-          background-color: $dark-gray;
+          background-color: $medium-gray;
           color: #ffffff;
         }
       }

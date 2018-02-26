@@ -6,8 +6,7 @@
     </div>
     <div *ngIf="isOpened" class="slab-week-selector-dropdown" [ngClass]="{'disabled': isDisabled}" (mouseleave)="hideSelector()">
         <div class="header-selector">
-            <systelab-calendar-header [currentDate]="currentDate" (previousYear)="addYear(-1)" (previousMonth)="addMonth(-1)" (nextMonth)="addMonth(1)"
-                                      (nextYear)="addYear(1)">
+            <systelab-calendar-header [currentDate]="currentDate" (previousYear)="addYear(-1)" (previousMonth)="addMonth(-1)" (nextMonth)="addMonth(1)" (nextYear)="addYear(1)">
             </systelab-calendar-header>
         </div>
         <div class="box">

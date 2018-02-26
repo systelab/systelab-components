@@ -16,9 +16,10 @@ Set **minDate** with the minimum date that you want to display in the selector.
 
 Set **currentDate** with the date you want, to display the week belonging to this date, if you don't set any current date the selector will choose the actual date.
 
-
 **selectedWeek** is an 'Week' object where you can retrieve the information of the selected week.
+
 The Week object has the follow structure:
+
 ```javascript
     public week: number,    //Number of the week
     public text: string,    //Description of range of the days of the week and the number of the week
