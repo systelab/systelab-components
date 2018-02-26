@@ -179,6 +179,9 @@ p-calendar {
       }
     }
   }
+  p-footer {
+    background-color: $light-gray;
+  }
 }
 
 .ui-inputtext {
@@ -186,7 +189,6 @@ p-calendar {
   padding-bottom: 1px;
   width: 100%;
 }
-
 
 systelab-datepicker {
   &.custom-height {

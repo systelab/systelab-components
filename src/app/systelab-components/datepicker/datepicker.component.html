@@ -6,6 +6,7 @@
             [showOtherMonths]="true"
             [required]="required"
             [disabled]="disabled"
+            [readonlyInput]="isTablet"
             appendTo="body"
             [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate && markPreviousDate, 'input-expand-height':inputExpandHeight}">
     <p-header id="{{datepickerId}}">
@@ -18,4 +19,7 @@
             <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>
         </div>
     </p-header>
+    <p-footer class="p-1 d-flex border-top">
+        <button class="btn btn-sm ml-auto" (click)="clearDate($event)">Clear</button>
+    </p-footer>
 </p-calendar>
