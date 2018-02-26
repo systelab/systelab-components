@@ -12,7 +12,7 @@ export class Month {
 }
 
 @Component({
-	selector:    'systelab-week-selector',
+	selector: 'systelab-week-selector',
 	templateUrl: './week-selector.component.html'
 })
 export class WeekSelectorComponent implements AfterViewInit {
@@ -133,7 +133,7 @@ export class WeekSelectorComponent implements AfterViewInit {
 	public addMonth(num: number) {
 		const dateStart = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + (num), 1);
 		const dateEnd = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1 + (num), 0);
-		if (this.checkDateIntoIntervals(dateStart) || this.checkDateIntoIntervals(dateEnd) ) {
+		if (this.checkDateIntoIntervals(dateStart) || this.checkDateIntoIntervals(dateEnd)) {
 			this.currentDate = dateStart;
 			this.getMonths();
 		}
@@ -169,7 +169,7 @@ export class WeekSelectorComponent implements AfterViewInit {
 		const lastDate = new Date(yearActual, monthActual + 1, 0);
 		const numDays = lastDate.getDate();
 		const weeks = [];
-		let endDay   = 7 - firstDate.getDay(), startDay = 1;
+		let endDay = 7 - firstDate.getDay(), startDay = 1;
 		if (firstDate.getDay() === 0) {
 			endDay = 1;
 		} else {

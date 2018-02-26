@@ -7,7 +7,7 @@ export class Month {
 }
 
 @Component({
-	selector:    'systelab-month-selector',
+	selector: 'systelab-month-selector',
 	templateUrl: './month-selector.component.html'
 })
 export class MonthSelectorComponent implements AfterViewInit {
@@ -76,10 +76,10 @@ export class MonthSelectorComponent implements AfterViewInit {
 			if (this.checkDateIntoIntervals(dateStart) || this.checkDateIntoIntervals(dateEnd)) {
 				const isActive = (i === month);
 				const monthObj: Month = new Month(i, this.monthNames[i], year, isActive);
-					this.months.push(monthObj);
-					if (isActive) {
-						this.selectedMonth = monthObj;
-					}
+				this.months.push(monthObj);
+				if (isActive) {
+					this.selectedMonth = monthObj;
+				}
 			}
 		}
 	}
