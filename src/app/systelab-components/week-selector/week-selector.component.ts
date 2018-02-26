@@ -113,8 +113,7 @@ export class WeekSelectorComponent implements AfterViewInit {
     this.getMonths();
   }
   public changeYear(v: number) {
-    const curr_year = this.currentDate.getFullYear() + (v);
-    const newDate = new Date(curr_year, this.currentDate.getMonth(), this.currentDate.getDate());
+    const newDate = new Date(this.currentDate.getFullYear() + (v), this.currentDate.getMonth(), this.currentDate.getDate());
     if (this.checkDateIntoIntervals(newDate)) {
       this.currentDate = newDate;
       this.getMonths();
@@ -129,16 +128,16 @@ export class WeekSelectorComponent implements AfterViewInit {
     }
   }
   public checkDateIntoIntervals(date: Date) {
-    if (this.maxDate && this.minDate) {
-      if (date <= this.maxDate && date >= this.minDate) { return true; }
-      else { return false; }
-    }
-    else if (this.maxDate) {
-      if (date <= this.maxDate) { return true; }
+    if (this.minDate && this.maxDate) {
+      if (date >= this.minDate && date <= this.maxDate) { return true; }
       else { return false; }
     }
     else if (this.minDate) {
       if (date >= this.minDate) { return true; }
+      else { return false; }
+    }
+    else if (this.maxDate) {
+      if (date <= this.maxDate) { return true; }
       else { return false; }
     }
     else {

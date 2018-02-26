@@ -63,12 +63,12 @@ export class MonthSelectorComponent implements AfterViewInit {
   }
   public getMonths() {
     this.months = [];
-    const idmonth = this.currentDate.getMonth();
+    const month = this.currentDate.getMonth();
     const year = this.currentDate.getFullYear();
     for (let i = 0; i < this.monthNames.length; i++) {
-      const d = new Date(year, i + 1, 1, 0, 0, 0, 0);
-      if (this.checkDateIntoIntervals(d)) {
-        const isActive = i === idmonth ? true : false;
+      const date = new Date(year, i + 1, 1, 0, 0, 0, 0);
+      if (this.checkDateIntoIntervals(date)) {
+        const isActive = (i === month);
         const monthObj: Month = new Month(i, this.monthNames[i], year, isActive);
         this.months.push(monthObj);
         if (isActive) {
@@ -79,26 +79,24 @@ export class MonthSelectorComponent implements AfterViewInit {
     console.log(this.months);
   }
   public changeYear(v: number) {
-    const da = this.currentDate;
-    const curr_year = da.getFullYear() + (v);
-    const gDate = new Date(curr_year, da.getMonth(), da.getDate());
-    if (this.checkDateIntoIntervals(gDate)) {
-      this.currentDate = gDate;
+    const date = new Date(this.currentDate.getFullYear() + (v), this.currentDate.getMonth(), this.currentDate.getDate());
+    if (this.checkDateIntoIntervals(date)) {
+      this.currentDate = date;
       this.setMonthsNames(this.currentDate.getFullYear());
       this.getMonths();
     }
   }
   public checkDateIntoIntervals(date: Date) {
-    if (this.maxDate && this.minDate) {
-      if (date <= this.maxDate && date >= this.minDate) { return true; }
-      else { return false; }
-    }
-    else if (this.maxDate) {
-      if (date <= this.maxDate) { return true; }
+    if (this.minDate && this.maxDate) {
+      if (date >= this.minDate && date <= this.maxDate) { return true; }
       else { return false; }
     }
     else if (this.minDate) {
       if (date >= this.minDate) { return true; }
+      else { return false; }
+    }
+    else if (this.maxDate) {
+      if (date <= this.maxDate) { return true; }
       else { return false; }
     }
     else { return true; }
