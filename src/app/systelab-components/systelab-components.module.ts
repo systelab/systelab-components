@@ -55,6 +55,9 @@ import { TimelineComponent } from './timeline/timeline.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { WeekSelectorComponent } from './week-selector/week-selector.component';
+import { MonthSelectorComponent } from './month-selector/month-selector.component';
+import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
 
 
 @NgModule({
@@ -118,7 +121,10 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
 		NavbarComponent,
-		BreadcrumbComponent
+		BreadcrumbComponent,
+		WeekSelectorComponent,
+		MonthSelectorComponent,
+		SignatureCanvasComponent
 	],
 	exports: [
 		SliderComponent,
@@ -157,6 +163,9 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 		NavbarComponent,
 		MessageWithIconComponent,
 		BreadcrumbComponent,
+		WeekSelectorComponent,
+		MonthSelectorComponent,
+		SignatureCanvasComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,
