@@ -16,8 +16,8 @@ export class ShowcaseDatepickerComponent {
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
 	constructor() {
 		this.currentDate = new Date();
-		this.maxDate = new Date(2018, 10, 20);
-		this.minDate = new Date(2016, 0, 20);
+		this.maxDate = new Date(2018, 9, 20);	// October 20, 2018
+		this.minDate = new Date(2017, 0, 20);	// January 20, 2017
 		this.isDisabled = false;
 	}
 }

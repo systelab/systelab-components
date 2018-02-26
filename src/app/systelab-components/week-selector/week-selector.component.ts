@@ -12,7 +12,7 @@ export class Month {
 }
 
 @Component({
-	selector:    'systelab-week-selector',
+	selector: 'systelab-week-selector',
 	templateUrl: './week-selector.component.html'
 })
 export class WeekSelectorComponent implements AfterViewInit {
@@ -74,35 +74,34 @@ export class WeekSelectorComponent implements AfterViewInit {
 
 	public getMonths() {
 		this.months = [];
-		const idmonth = this.currentDate.getMonth();
+		const month = this.currentDate.getMonth();
 		const year = this.currentDate.getFullYear();
-		for (let i = 0; i < this.monthNames.length; i++) {
-			const d = new Date(year, i + 1, 1, 0, 0, 0, 0);
-			if (this.checkDateIntoIntervals(d)) {
-				const isActive = i === idmonth ? true : false;
+		for (let i = 0; i <= 11; i++) {
+			const dateStart = new Date(year, i, 1, 0, 0, 0, 0);
+			const dateEnd = new Date(year, i + 1, 0);
+			if (this.checkDateIntoIntervals(dateStart) || this.checkDateIntoIntervals(dateEnd)) {
+				const isActive = (i === month);
 				this.months.push({month: i, year: year, text: this.monthNames[i], isActive: isActive});
 			}
 		}
-
 		this.getWeeks();
 	}
 
 	public getWeeks() {
 		this.weeks = [];
-		const monthWeeksActive = this.months[this.currentDate.getMonth()].month;
-		const yearActive = this.months[this.currentDate.getMonth()].year;
-		const weekInfo = this.getWeeksInMonth(monthWeeksActive, yearActive);
+		const monthActive = this.months.filter(x => x.month === this.currentDate.getMonth())[0];
+		const weekInfo = this.getWeeksInMonth(monthActive.month, monthActive.year);
 		const week = this.getWeek(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), true);
 		for (let i = 0; i < weekInfo.length - 1; i++) {
 			let isActive = false;
-			const dateStart = new Date(yearActive, monthWeeksActive, weekInfo[i].start, 0, 0, 0, 0);
-			if (this.checkDateIntoIntervals(dateStart)) {
-				const dateEnd = new Date(yearActive, monthWeeksActive, weekInfo[i].end, 0, 0, 0, 0);
+			const dateStart = new Date(monthActive.year, monthActive.month, weekInfo[i].start, 0, 0, 0, 0);
+			const dateEnd = new Date(monthActive.year, monthActive.month, weekInfo[i].end, 0, 0, 0, 0);
+			if (this.checkDateIntoIntervals(dateStart) || this.checkDateIntoIntervals(dateEnd)) {
 				const text = this.i18nService.instant('COMMON_WEEK') + ' ' + weekInfo[i].number + ': ' + this.daysNames[dateStart.getDay()] + ' ' + weekInfo[i].start + ' ' + this.i18nService.instant('COMMON_TO') + ' ' + this.daysNames[dateEnd.getDay()] + ' ' + weekInfo[i].end;
 				if (weekInfo[i].number === week) {
 					isActive = true;
 				}
-				const weekObj: Week = new Week(weekInfo[i].number, text, weekInfo[i].start, monthWeeksActive, yearActive, isActive);
+				const weekObj: Week = new Week(weekInfo[i].number, text, weekInfo[i].start, monthActive.month, monthActive.year, isActive);
 				this.weeks.push(weekObj);
 				if (isActive) {
 					this.selectedWeek = weekObj;
@@ -132,10 +131,10 @@ export class WeekSelectorComponent implements AfterViewInit {
 	}
 
 	public addMonth(num: number) {
-		const curr_month = this.currentDate.getMonth() + (num);
-		const newDate = new Date(this.currentDate.getFullYear(), curr_month, this.currentDate.getDate());
-		if (this.checkDateIntoIntervals(newDate)) {
-			this.currentDate = newDate;
+		const dateStart = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + (num), 1);
+		const dateEnd = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1 + (num), 0);
+		if (this.checkDateIntoIntervals(dateStart) || this.checkDateIntoIntervals(dateEnd)) {
+			this.currentDate = dateStart;
 			this.getMonths();
 		}
 	}
@@ -170,7 +169,7 @@ export class WeekSelectorComponent implements AfterViewInit {
 		const lastDate = new Date(yearActual, monthActual + 1, 0);
 		const numDays = lastDate.getDate();
 		const weeks = [];
-		let endDay   = 7 - firstDate.getDay(), startDay = 1;
+		let endDay = 7 - firstDate.getDay(), startDay = 1;
 		if (firstDate.getDay() === 0) {
 			endDay = 1;
 		} else {
