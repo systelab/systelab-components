@@ -220,7 +220,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	public executeContextMenuAction( elementId: string, actionId: string ): void {
-		const option: GridContextMenuOption<T> = this.menu.find( option => option.actionId === actionId );
+		const option: GridContextMenuOption<T> = this.menu.find( opt => opt.actionId === actionId );
 		const rowId: number = Number( elementId.replace( 'row', '' ) );
 		const data: T = this.gridOptions.api.getModel()
 			.getRow( rowId ).data;
@@ -237,7 +237,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	public isContextMenuOptionEnabled( elementId: string, actionId: string ): boolean {
 
-		const option: GridContextMenuOption<T> = this.menu.find( option => option.actionId === actionId );
+		const option: GridContextMenuOption<T> = this.menu.find( opt => opt.actionId === actionId );
 		const rowId: number = Number( elementId.replace( 'row', '' ) );
 		const data: T = this.gridOptions.api.getModel()
 			.getRow( rowId ).data;
@@ -255,7 +255,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	public executeHeaderContextMenuAction( elementId: string, actionId: string, headerData: any ): void {
 
-		const option: GridContextMenuOption<Object> = this.headerMenu.find( option => option.actionId === actionId );
+		const option: GridContextMenuOption<Object> = this.headerMenu.find( opt => opt.actionId === actionId );
 
 		if ( option && option.action !== null && option.action !== undefined ) {
 			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData( elementId, actionId, headerData, this.gridOptions );
@@ -269,7 +269,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	public isHeaderContextMenuOptionEnabled( elementId: string, actionId: string, headerData: any ): boolean {
 
-		const option: GridContextMenuOption<Object> = this.headerMenu.find( option => option.actionId === actionId );
+		const option: GridContextMenuOption<Object> = this.headerMenu.find( opt => opt.actionId === actionId );
 		if ( option && option.isActionEnabled !== null && option.isActionEnabled !== undefined ) {
 			return option.isActionEnabled( headerData );
 		}
@@ -394,7 +394,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		options.visible.forEach( function( tlp, index ) {
 			const col: Column = this.gridOptions.columnApi.getAllColumns()
-				.find( ( column: Column ) => column.getColDef().headerName === tlp.displayName );
+				.find( ( column: Column ) => column.getColDef().colId === tlp.colId );
 			col.setVisible( true );
 			this.gridOptions.columnApi.moveColumn( col.getColId(), index + numberOfFixedInitialColumns );
 		}, this );
@@ -402,7 +402,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.columnApi.getAllColumns()
 			.forEach( function( column ) {
 				if ( column.getColId() !== 'contextMenu' ) {
-					if ( !options.visible.find( tlp => tlp.displayName === column.getColDef().headerName ) ) {
+					if ( !options.visible.find( tlp => tlp.colId === column.getColDef().colId ) ) {
 						this.gridOptions.columnApi.setColumnVisible( column.getColId(), false );
 					}
 				}
