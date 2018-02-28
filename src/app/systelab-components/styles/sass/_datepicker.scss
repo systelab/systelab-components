@@ -10,6 +10,9 @@ p-calendar {
     input::-ms-clear {
       display: none;
     }
+    .icon-calendar {
+      height: 100%;
+    }
 
   }
   &.input-expand-height {
