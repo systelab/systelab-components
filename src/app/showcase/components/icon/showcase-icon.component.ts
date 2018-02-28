@@ -97,5 +97,6 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-custom-ifa-linked-tag');
 		this.icons.push('icon-culture');
 		this.icons.push('icon-culture-linked');
+		this.icons.push('icon-paperclip');
 	}
 }
