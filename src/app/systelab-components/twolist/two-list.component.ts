@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DataFilterPipe } from './datafilter.pipe';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {DataFilterPipe} from './datafilter.pipe';
+import {polyfill} from 'mobile-drag-drop';
 
 export class TwoListItem {
 	constructor(public displayName: string, public colId: string, public selected: boolean, public visible: boolean) {
@@ -12,13 +13,13 @@ export class SelectedItem {
 }
 
 @Component({
-	selector:    'systelab-two-list',
+	selector: 'systelab-two-list',
 	templateUrl: 'two-list.component.html',
-	styles: [`		
-      :host {
-      	width: 100%;  
-		    height: 100%;
-      }
+	styles: [`
+        :host {
+            width: 100%;
+            height: 100%;
+        }
 	`]
 })
 export class TwoListComponent {
@@ -59,6 +60,15 @@ export class TwoListComponent {
 	public firstListSearch: string;
 	public secondListSearch: string;
 	public selected: SelectedItem = new SelectedItem([], []);
+
+	constructor() {
+		polyfill({});
+	}
+
+	public preventDefault(event) {
+		event.mouseEvent.preventDefault();
+		return false;
+	}
 
 	public add() {
 		for (const element of this.selected.available) {
