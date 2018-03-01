@@ -58,6 +58,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { WeekSelectorComponent } from './week-selector/week-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
+import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.co
 		SearcherTableComponent,
 		CalendarHeaderComponent,
 		CalendarTableComponent,
+		CalendarFooterComponent,
 		TabsComponent,
 		TabComponent,
 		DialogHeaderComponent,
@@ -153,6 +155,7 @@ import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.co
 		SearcherTableComponent,
 		CalendarHeaderComponent,
 		CalendarTableComponent,
+		CalendarFooterComponent,
 		TabsComponent,
 		TabComponent,
 		DialogHeaderComponent,
