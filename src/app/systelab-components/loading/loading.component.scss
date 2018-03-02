@@ -1,8 +1,4 @@
 
-:host {
-  z-index: 9999999;
-}
-
 .application-loader-spinner {
   width: 40px;
   height: 40px;
@@ -10,7 +6,7 @@
   margin: -20px 0 0 -20px;
   top: 50%;
   left: 50%;
-
+  z-index: 9999999;
 }
 
 .application-loader-spinner:before {
