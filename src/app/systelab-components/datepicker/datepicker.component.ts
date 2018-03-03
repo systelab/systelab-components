@@ -28,6 +28,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public required = false;
 	@Input() public inputExpandHeight: boolean;
 	@Input() public markPreviousDate = false;
+	@Input() public inputFontSize: number;
 
 	public previousDate = false;
 
@@ -69,7 +70,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		this.addListeners();
 
-		if ( navigator.userAgent.indexOf('iPad') > -1 || navigator.userAgent.indexOf('Android') > -1 ) {
+		if (navigator.userAgent.indexOf('iPad') > -1 || navigator.userAgent.indexOf('Android') > -1) {
 			this.isTablet = true;
 		}
 	}
