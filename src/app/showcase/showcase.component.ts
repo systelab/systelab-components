@@ -18,7 +18,7 @@ export class ShowcaseComponent {
 		this.itemsNav.push(new NavbarItem(0, 'Form Components', '', false, true, true, () => this.selectNav(0)));
 		this.itemsNav.push(new NavbarItem(1, 'Modals', '', false, false, true, () => this.selectNav(1)));
 		this.itemsNav.push(new NavbarItem(2, 'Charts', '', false, false, true, () => this.selectNav(2)));
-		this.itemsNav.push(new NavbarItem(3, 'Navegation', '', false, false, true, () => this.selectNav(3)));
+		this.itemsNav.push(new NavbarItem(3, 'Navigation', '', false, false, true, () => this.selectNav(3)));
 		this.itemsNav.push(new NavbarItem(4, 'Tables', '', false, false, true, () => this.selectNav(4)));
 		this.itemsNav.push(new NavbarItem(5, 'Utils', '', false, false, true, () => this.selectNav(5)));
 		this.itemsNav.push(new NavbarItem(6, 'Icons', '', false, false, true, () => this.selectNav(6)));

@@ -10,9 +10,7 @@ import { SystelabModalModule } from './modal/plugin/custom/systelab-modal.module
 import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
-import { DOMOverlayRenderer, OverlayRenderer } from 'ngx-modialog';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { DOMOutsideEventPlugin } from 'ngx-modialog/src/providers';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu.component';
@@ -36,7 +34,7 @@ import { DatepickerTime } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
-import { AngularSplitModule, SplitAreaDirective, SplitComponent, SplitGutterDirective } from 'angular-split';
+import { AngularSplitModule, SplitAreaDirective, SplitComponent } from 'angular-split';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
 import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
@@ -61,6 +59,8 @@ import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.co
 import { ChartComponent } from './chart/chart.component';
 import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
+import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './modal/base/providers';
+import { OverlayRenderer } from './modal/base/models/tokens';
 
 
 @NgModule({
@@ -179,7 +179,6 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 		Tree,
 		SplitComponent,
 		SplitAreaDirective,
-		SplitGutterDirective,
 		ComboBoxInputRendererComponent,
 		TooltipDirective
 	],

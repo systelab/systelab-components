@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { SystelabModalContext } from '../../modal/modal-context';
-import { DialogRef, ModalComponent } from 'ngx-modialog';
+import { DialogRef, ModalComponent, SystelabModalContext } from '../../modal';
 import { TwoListItem } from '../../twolist/two-list.component';
 import { GridColumnsOptions } from '../grid-column-options';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
