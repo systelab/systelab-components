@@ -15,8 +15,12 @@ export class ApplicationHeaderComponent {
 	@Input() public userName: string;
 	@Input() public userFullName: string;
 	@Input() public hospitalName: string;
+	@Input() public logoIcon: string;
 	@Input() public menu: ApplicationHeaderMenuEntry[] = [];
 
 	constructor(protected dialogService: DialogService) {
+		if(!this.logoIcon) {
+			this.logoIcon = 'icon-modulab';
+		}
 	}
 }

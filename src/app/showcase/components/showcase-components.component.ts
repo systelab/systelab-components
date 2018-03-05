@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
 	selector:    'showcase-components',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 	styleUrls:   ['showcase-components.component.scss']
 })
 export class ShowcaseComponentsComponent {
-
+	@Input() public currentNav: number;
 }

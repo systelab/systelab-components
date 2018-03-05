@@ -1,91 +1,107 @@
-<showcase-title [href]="'tabs'">Tabs</showcase-title>
-<showcase-tabs></showcase-tabs>
+<div class="w-100 components" *ngIf="currentNav === 0">
+    <showcase-title [href]="'input'">Input</showcase-title>
+    <showcase-input></showcase-input>
 
-<showcase-title [href]="'input'">Input</showcase-title>
-<showcase-input></showcase-input>
+    <showcase-title [href]="'file-selector'">File Selector</showcase-title>
+    <showcase-file-selector></showcase-file-selector>
 
-<showcase-title [href]="'file-selector'">File Selector</showcase-title>
-<showcase-file-selector></showcase-file-selector>
+    <showcase-title [href]="'textarea'">Textarea</showcase-title>
+    <showcase-textarea></showcase-textarea>
 
-<showcase-title [href]="'textarea'">Textarea</showcase-title>
-<showcase-textarea></showcase-textarea>
+    <showcase-title [href]="'searcher'">Searcher</showcase-title>
+    <showcase-searcher></showcase-searcher>
 
-<showcase-title [href]="'searcher'">Searcher</showcase-title>
-<showcase-searcher></showcase-searcher>
+    <showcase-title [href]="'checkbox'">Checkbox</showcase-title>
+    <showcase-checkbox></showcase-checkbox>
 
-<showcase-title [href]="'checkbox'">Checkbox</showcase-title>
-<showcase-checkbox></showcase-checkbox>
+    <showcase-title [href]="'radio'">Radio</showcase-title>
+    <showcase-radio></showcase-radio>
 
-<showcase-title [href]="'radio'">Radio</showcase-title>
-<showcase-radio></showcase-radio>
+    <showcase-title [href]="'combobox'">Combobox</showcase-title>
+    <showcase-combobox></showcase-combobox>
 
-<showcase-title [href]="'button'">Button</showcase-title>
-<showcase-button></showcase-button>
+    <showcase-title>Form Inline</showcase-title>
+    <showcase-inline></showcase-inline>
+</div>
+<div class="w-100 components" *ngIf="currentNav === 1">
+    <showcase-title [href]="'tooltip'">Tooltip</showcase-title>
+    <showcase-tooltip></showcase-tooltip>
 
-<showcase-title [href]="'spinner'">Spinner</showcase-title>
-<showcase-spinner></showcase-spinner>
+    <showcase-title [href]="'dialog'">Dialog</showcase-title>
+    <showcase-dialog></showcase-dialog>
 
-<showcase-title [href]="'datepicker'">Datepicker</showcase-title>
-<showcase-datepicker></showcase-datepicker>
+    <showcase-title [href]="'message-popup'">Message Popup</showcase-title>
+    <showcase-message-popup></showcase-message-popup>
+</div>
+<div class="w-100 components" *ngIf="currentNav === 2">
+    <showcase-title [href]="'pie'">Pie</showcase-title>
+    <showcase-pie></showcase-pie>
 
-<showcase-title [href]="'combobox'">Combobox</showcase-title>
-<showcase-combobox></showcase-combobox>
+    <showcase-title [href]="'chart'">Line Chart</showcase-title>
+    <showcase-chart></showcase-chart>
+    
+</div>
+<div class="w-100 components" *ngIf="currentNav === 3">
+    <showcase-title [href]="'tabs'">Tabs</showcase-title>
+    <showcase-tabs></showcase-tabs>
 
-<showcase-title [href]="'slider'">Slider</showcase-title>
-<showcase-slider></showcase-slider>
+    <showcase-title [href]="'navbar'">Navbar</showcase-title>
+    <showcase-navbar></showcase-navbar>
 
-<showcase-title [href]="'progress-bar'">Progress bar</showcase-title>
-<showcase-progress-bar></showcase-progress-bar>
+    <showcase-title [href]="'breadcrumb'">Breadcrumb</showcase-title>
+    <showcase-breadcrumb></showcase-breadcrumb>
+</div>
+<div class="w-100 components" *ngIf="currentNav === 4">
+    <showcase-title [href]="'table'">Table</showcase-title>
+    <showcase-table></showcase-table>
 
-<showcase-title [href]="'table'">Table</showcase-title>
-<showcase-table></showcase-table>
+    <showcase-title [href]="'grid'">Grid</showcase-title>
+    <showcase-grid></showcase-grid>
+</div>
+<div class="w-100 components" *ngIf="currentNav === 5">
+    <showcase-title [href]="'application-frame'">Application Frame</showcase-title>
+    <showcase-application-frame></showcase-application-frame>
 
-<showcase-title [href]="'grid'">Grid</showcase-title>
-<showcase-grid></showcase-grid>
+    <showcase-title [href]="'datepicker'">Datepicker</showcase-title>
+    <showcase-datepicker></showcase-datepicker>
 
-<showcase-title [href]="'tooltip'">Tooltip</showcase-title>
-<showcase-tooltip></showcase-tooltip>
+    <showcase-title [href]="'spinner'">Spinner</showcase-title>
+    <showcase-spinner></showcase-spinner>
 
-<showcase-title [href]="'dialog'">Dialog</showcase-title>
-<showcase-dialog></showcase-dialog>
+    <showcase-title [href]="'slider'">Slider</showcase-title>
+    <showcase-slider></showcase-slider>
 
-<showcase-title [href]="'message-popup'">Message Popup</showcase-title>
-<showcase-message-popup></showcase-message-popup>
+    <showcase-title [href]="'progress-bar'">Progress bar</showcase-title>
+    <showcase-progress-bar></showcase-progress-bar>
 
-<showcase-title [href]="'icon'">Icon</showcase-title>
-<showcase-icon></showcase-icon>
+    <!--
+    <showcase-title [href]="'two-list'">Two-List</showcase-title>
+    <showcase-two-list></showcase-two-list>
+    -->
 
-<showcase-title [href]="'headings'">Headings</showcase-title>
-<showcase-headings></showcase-headings>
+    <showcase-title [href]="'loading'">Loading</showcase-title>
+    <showcase-loading></showcase-loading>
 
-<showcase-title [href]="'text'">Text</showcase-title>
-<showcase-text></showcase-text>
+    <showcase-title [href]="'timeline'">TimeLine</showcase-title>
+    <showcase-timeline></showcase-timeline>
 
-<showcase-title [href]="'alert'">Alert</showcase-title>
-<showcase-alert></showcase-alert>
+    <showcase-title [href]="'signature-canvas'">Signature Canvas</showcase-title>
+    <showcase-signature-canvas></showcase-signature-canvas>
+</div>
+<div class="w-100 components" *ngIf="currentNav === 6">
+    <showcase-title [href]="'icon'">Icon</showcase-title>
+    <showcase-icon></showcase-icon>
+</div>
+<div class="w-100 components" *ngIf="currentNav === 7">
+    <showcase-title [href]="'button'">Button</showcase-title>
+    <showcase-button></showcase-button>
 
-<!--
-<showcase-title [href]="'two-list'">Two-List</showcase-title>
-<showcase-two-list></showcase-two-list>
--->
+    <showcase-title [href]="'headings'">Headings</showcase-title>
+    <showcase-headings></showcase-headings>
 
-<showcase-title [href]="'application-frame'">Application Frame</showcase-title>
-<showcase-application-frame></showcase-application-frame>
+    <showcase-title [href]="'text'">Text</showcase-title>
+    <showcase-text></showcase-text>
 
-<showcase-title [href]="'pie'">Pie</showcase-title>
-<showcase-pie></showcase-pie>
-
-<showcase-title [href]="'loading'">Loading</showcase-title>
-<showcase-loading></showcase-loading>
-
-<showcase-title [href]="'timeline'">TimeLine</showcase-title>
-<showcase-timeline></showcase-timeline>
-
-<showcase-title [href]="'navbar'">Navbar</showcase-title>
-<showcase-navbar></showcase-navbar>
-
-<showcase-title [href]="'breadcrumb'">Breadcrumb</showcase-title>
-<showcase-breadcrumb></showcase-breadcrumb>
-
-<showcase-title [href]="'signature-canvas'">Signature Canvas</showcase-title>
-<showcase-signature-canvas></showcase-signature-canvas>
+    <showcase-title [href]="'alert'">Alert</showcase-title>
+    <showcase-alert></showcase-alert>
+</div>

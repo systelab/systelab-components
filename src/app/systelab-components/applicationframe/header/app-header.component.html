@@ -1,25 +1,24 @@
 <nav class="slab-app-header-bar d-flex align-items-center align-items-stretch">
-    <i class="icon-modulab slab-app-header-modulab-icon"></i>
+    <i [ngClass]="logoIcon" class="slab-app-header-modulab-icon"></i>
     <div class="slab-app-header-labels-container slab-flex-1 text-truncate">
-        <label class="slab-app-header-hospital-name text-truncate">{{hospitalName}}</label>
-        <small id="username" class="d-block text-truncate">{{userFullName}}
+        <label *ngIf="hospitalName" class="slab-app-header-hospital-name text-truncate">{{hospitalName}}</label>
+        <small *ngIf="userFullName" id="username" class="d-block text-truncate">{{userFullName}}
         </small>
     </div>
     <div class="d-flex align-items-center mr-2">
         <ng-content></ng-content>
     </div>
     <div class="dropdown slab-app-header-user-container">
-        <div class="dropdown-toggle" data-toggle="dropdown">
+        <div class="dropdown-toggle" data-toggle="dropdown" *ngIf="menu.length > 0 || userName">
             <button class="slab-app-header-user-icon d-inline-block align-middle">
                 <div class="align-middle h-100">
                     <i class="icon-user align-bottom"></i>
                 </div>
             </button>
             <label class="text-truncate align-middle">{{userName}}</label>
-            <div class="dropdown-menu dropdown-menu-right slab-dropdown">
+            <div class="dropdown-menu dropdown-menu-right slab-dropdown" *ngIf="menu.length > 0">
                 <ul>
-                    <li *ngFor="let menuEntry of menu"
-                        (click)="menuEntry.action()">{{menuEntry.optionName }}
+                    <li *ngFor="let menuEntry of menu" (click)="menuEntry.action()">{{menuEntry.optionName}}
                         <div *ngIf="menuEntry.isDivider" class="dropdown-divider"></div>
                     </li>
                 </ul>

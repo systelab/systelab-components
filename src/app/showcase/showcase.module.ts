@@ -59,6 +59,8 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.component';
 import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-breadcrumb.component';
 import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/showcase-signature-canvas.component';
+import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
+import { ShowcaseChartComponent } from './components/chart/showcase-chart.component';
 
 @NgModule({
 	imports: [
@@ -121,7 +123,9 @@ import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/
 		ShowcaseTimelineComponent,
 		ShowcaseNavbarComponent,
 		ShowcaseBreadcrumbComponent,
-		ShowcaseSignatureCanvasComponent
+		ShowcaseSignatureCanvasComponent,
+		ShowcaseInlineComponent,
+		ShowcaseChartComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

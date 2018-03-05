@@ -58,7 +58,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { WeekSelectorComponent } from './week-selector/week-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
-
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
 	imports: [
@@ -124,7 +124,8 @@ import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.co
 		BreadcrumbComponent,
 		WeekSelectorComponent,
 		MonthSelectorComponent,
-		SignatureCanvasComponent
+		SignatureCanvasComponent,
+		ChartComponent
 	],
 	exports: [
 		SliderComponent,
@@ -166,6 +167,7 @@ import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.co
 		WeekSelectorComponent,
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
+		ChartComponent,
 		AgGridNg2,
 		Tree,
 		SplitComponent,

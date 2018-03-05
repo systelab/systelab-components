@@ -45,6 +45,7 @@
       & > ul {
         max-height: 280px;
         overflow-y: auto;
+        padding-left: 0;
         & > li {
           transition: all 0.2s ease-out;
           list-style: none;

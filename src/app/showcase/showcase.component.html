@@ -1,36 +1,5 @@
-<div class="d-flex flex-column position-fixed" style="top: 0; bottom: 0; left: 0; right: 0;">
-    <systelab-navbar [id]="'navBar2'" [isVertical]="false" [backgroundColor]="'rgb(21, 143, 239)'"
-                     [backgroundHoverColor]="'rgba(21, 143, 239, 0.8)'"
-                     [items]="items1" [fontColor]="'white'" [align]="'left'"></systelab-navbar>
-    <systelab-tabs class="slab-flex-1">
-        <systelab-tab [title]="'Components'" [id]="'1'" (click)="selectTab(1)">
-            <div class="w-100">
-                <showcase-components></showcase-components>
-            </div>
-        </systelab-tab>
-        <systelab-tab [title]="'Inline'" [id]="'2'" [warning]="true" (click)="selectTab(2)">
-            <div class="p-1 w-100">
-                <form class="form-inline justify-content-end">
-                    <label for="valueToSearch" class="mr-2">Find by </label>
-                    <input type="text" class="form-control mr-2" #valueToSearch>
-                    <div class="mr-2">
-                        <input type="checkbox" id="check_urgent">
-                        <label for="check_urgent">Urgent</label>
-                    </div>
-                    <systelab-spinner class="mr-2" id="touch2"></systelab-spinner>
-                    <button class="btn btn-sm">Button</button>
-                </form>
-                <form class="form-inline">
-                    <label for="valueToSearch" class="mr-2">Find by </label>
-                    <systelab-datepicker></systelab-datepicker>
-                    <button class="btn btn-sm ml-2">Button</button>
-                </form>
-            </div>
-        </systelab-tab>
-    </systelab-tabs>
-
-    <systelab-dialog-bottom>
-        <button type="button" class="btn"><i class="icon-times-circle mr-1"></i>Left button</button>
-        <button type="button" class="btn ml-auto"><i class="icon-chevron-circle-right mr-1"></i>Right button</button>
-    </systelab-dialog-bottom>
+<div class="d-flex flex-column position-fixed principal-container w-100">
+    <systelab-navbar [id]="'navBar2'" [isVertical]="false" [backgroundColor]="'rgb(21, 143, 239)'" [backgroundHoverColor]="'rgba(21, 143, 239, 0.8)'"
+        [items]="itemsNav" [fontColor]="'white'" [align]="'left'"></systelab-navbar>
+    <showcase-components [currentNav]="currentNav"></showcase-components>
 </div>
