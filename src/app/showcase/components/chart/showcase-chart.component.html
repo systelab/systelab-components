@@ -14,16 +14,16 @@
         </div>
         <div class="col-md-6  p-3">
             <showcase-title [href]="'chart'">Radar Chart</showcase-title>
-            <systelab-chart [labels]="labels" [data]="dataRadar" [legend]="legend" [typeChart]="'radar'"></systelab-chart>
+            <systelab-chart [labels]="labels" [data]="dataRadar" [legend]="legend" [typeChart]="'radar'" [isBackgroundGrid]="isBackgroundGrid"></systelab-chart>
         </div>
         <div class="col-md-6  p-3">
             <showcase-title [href]="'chart'">Pie Chart</showcase-title>
             <systelab-chart [labels]="labels" [data]="dataPie" [legend]="legend" [(itemSelected)]="itemSelected" [typeChart]="'pie'"
-                (action)="doAction($event)"></systelab-chart>
+                (action)="doAction($event)" [isBackgroundGrid]="isBackgroundGrid"></systelab-chart>
         </div>
         <div class="col-md-6  p-3">
             <showcase-title [href]="'chart'">Doughunt Chart</showcase-title>
-            <systelab-chart [labels]="labels" [data]="dataDoughnut" [legend]="'false'" [typeChart]="'doughnut'"></systelab-chart>
+            <systelab-chart [labels]="labels" [data]="dataDoughnut" [legend]="'false'" [typeChart]="'doughnut'" [isBackgroundGrid]="isBackgroundGrid"></systelab-chart>
         </div>
         <div class="col-md-6  p-3">
             <showcase-title [href]="'chart'">Bubble Chart</showcase-title>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-md-6  p-3">
             <showcase-title [href]="'chart'">Polar Area Chart</showcase-title>
-            <systelab-chart [labels]="labels" [data]="dataPolarArea" [legend]="legend" [typeChart]="'polarArea'"></systelab-chart>
+            <systelab-chart [labels]="labels" [data]="dataPolarArea" [legend]="legend" [typeChart]="'polarArea'" [isBackgroundGrid]="isBackgroundGrid"></systelab-chart>
         </div>
         <div class="col-md-6  p-3">
             <showcase-title [href]="'chart'">Mixed Line Chart and Bar Chart</showcase-title>

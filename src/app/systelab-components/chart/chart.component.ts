@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, Input, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { Chart } from 'chart.js';
 
-export class dataObject {
+export class chartItem {
 	constructor(public label: string, public data: Array<any>, public borderColor?: string,
 		public backgroundColor?: string, public fill?: boolean, public showLine?: boolean,
 		public isGradient?: boolean, public borderWidth?: number, public chartType?: string) {
@@ -40,13 +40,14 @@ export class ChartComponent implements AfterViewInit {
 		this.itemSelectedChange.emit(this._itemSelected);
 	}
 	@Input() labels: Array<any> = [];
-	@Input() data: Array<dataObject> = [];
+	@Input() data: Array<chartItem> = [];
 	@Input() legend = true;
 	@Input() isHorizontal = false;
 	@Input() startInZero = true;
-	@Input() isGradient = false;
+	@Input() isBackgroundGrid = true;
 	@Input() typeChart: string;
 	public dataset: Array<any> = [];
+	public axesVisible= true;
 
 	@Output() action = new EventEmitter();
 
@@ -116,6 +117,9 @@ export class ChartComponent implements AfterViewInit {
 				});
 			}
 		}
+		if (this.typeChart === 'pie' || this.typeChart === 'doughnut' || this.typeChart === 'polarArea' || this.typeChart === 'radar') {
+			this.axesVisible = false;
+		}
 
 		if (canvas) {
 			this.chart = new Chart(this.cx, {
@@ -139,7 +143,21 @@ export class ChartComponent implements AfterViewInit {
 					scales: {
 						yAxes: [{
 							ticks: {
-								beginAtZero: this.startInZero
+								beginAtZero: this.startInZero,
+								display: this.axesVisible
+							},
+							gridLines: {
+								display: this.isBackgroundGrid,
+								drawBorder: this.axesVisible
+							}
+						}],
+						xAxes: [{
+							ticks: {
+								display: this.axesVisible
+							},
+							gridLines: {
+								display: this.isBackgroundGrid,
+								drawBorder: this.axesVisible
 							}
 						}]
 					}
