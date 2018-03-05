@@ -59,6 +59,9 @@ import { ShowcaseTimelineDialog } from './components/timeline/timeline-dialog/sh
 import { ShowcaseNavbarComponent } from './components/navbar/showcase-navbar.component';
 import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-breadcrumb.component';
 import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/showcase-signature-canvas.component';
+import { ShowcaseInnerTreeComponent } from './components/tree/showcase-inner-tree.component';
+import { ShowcaseTreeComponent } from './components/tree/showcase-tree.component';
+import { TreeModule } from 'primeng/primeng';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
 import { ShowcaseChartComponent } from './components/chart/showcase-chart.component';
 
@@ -67,6 +70,7 @@ import { ShowcaseChartComponent } from './components/chart/showcase-chart.compon
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
+		TreeModule,
 		HttpClientModule,
 		SystelabComponentsModule.forRoot(),
 		SystelabTranslateModule.forRoot(),
@@ -124,6 +128,9 @@ import { ShowcaseChartComponent } from './components/chart/showcase-chart.compon
 		ShowcaseNavbarComponent,
 		ShowcaseBreadcrumbComponent,
 		ShowcaseSignatureCanvasComponent,
+		ShowcaseTreeComponent,
+		ShowcaseInnerTreeComponent,
+		ShowcasePercentageCircleComponent,
 		ShowcaseInlineComponent,
 		ShowcaseChartComponent
 	],

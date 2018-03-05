@@ -32,7 +32,10 @@
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
         <div class="slab-twolistbox mt-2 slab-flex-1">
-            <div class="slab-twolistboxdiv" dnd-droppable>
+            <div class="slab-twolistboxdiv" dnd-droppable
+                 (onDragEnter)="preventDefault($event)"
+                 (onDragOver)="preventDefault($event)"
+                 (onDragLeave)="preventDefault($event)">
                 <ul class="slab-twolistboxrow list-group" dnd-sortable-container [sortableData]="visible"
                     [dropZones]="['visible-dropZone']">
                     <li *ngFor="let visCol of (visible| datafilter:secondListSearch);let i = index"

@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "4.3.35",
+  "version": "4.3.41",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -44,6 +44,7 @@
     "chart.js": "^2.7.2",
     "date-fns": "^1.28.3",
     "jquery": "^3.2.1",
+    "mobile-drag-drop": "^2.3.0-rc.0",
     "nanobar": "^0.4.2",
     "ng2-dnd": "^2.2.2",
     "ngx-modialog": "^3.0.1",
