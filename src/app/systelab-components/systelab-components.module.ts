@@ -58,6 +58,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { WeekSelectorComponent } from './week-selector/week-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
+import { ChartComponent } from './chart/chart.component';
 import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
 
@@ -128,6 +129,7 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 		WeekSelectorComponent,
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
+		ChartComponent,
 		PercentageCircleComponent
 	],
 	exports: [
@@ -171,6 +173,7 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 		WeekSelectorComponent,
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
+		ChartComponent,
 		PercentageCircleComponent,
 		AgGridNg2,
 		Tree,
