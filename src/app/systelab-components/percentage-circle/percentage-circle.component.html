@@ -1,0 +1,14 @@
+<div class="percentage-circle" [attr.data-percentage]="value">
+                <span class="percentage-circle-left">
+                    <span class="percentage-circle-bar" [style.border-color]="color"></span>
+                </span>
+                <span class="percentage-circle-right">
+                    <span class="percentage-circle-bar" [style.border-color]="color"></span>
+                </span>
+    <div class="percentage-circle-value">
+        <div>
+            {{value}}%<br>
+            <span>{{text}}</span>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,7 @@
             [required]="required"
             [disabled]="disabled"
             [readonlyInput]="isTablet"
+            [style.font-size.px]="inputFontSize"
             appendTo="body"
             [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'previous-date': previousDate && markPreviousDate, 'input-expand-height':inputExpandHeight}">
     <p-header id="{{datepickerId}}">
