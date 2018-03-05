@@ -58,13 +58,10 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { WeekSelectorComponent } from './week-selector/week-selector.component';
 import { MonthSelectorComponent } from './month-selector/month-selector.component';
 import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
-<<<<<<< HEAD
 import { ChartComponent } from './chart/chart.component';
-=======
 import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
 
->>>>>>> 1dcca67bc25da4b261191ba651dffab0b68db3f6
 
 @NgModule({
 	imports: [
@@ -132,11 +129,8 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 		WeekSelectorComponent,
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
-<<<<<<< HEAD
-		ChartComponent
-=======
+		ChartComponent,
 		PercentageCircleComponent
->>>>>>> 1dcca67bc25da4b261191ba651dffab0b68db3f6
 	],
 	exports: [
 		SliderComponent,
@@ -179,11 +173,8 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 		WeekSelectorComponent,
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
-<<<<<<< HEAD
 		ChartComponent,
-=======
 		PercentageCircleComponent,
->>>>>>> 1dcca67bc25da4b261191ba651dffab0b68db3f6
 		AgGridNg2,
 		Tree,
 		SplitComponent,

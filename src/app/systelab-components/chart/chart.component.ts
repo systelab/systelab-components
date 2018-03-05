@@ -1,11 +1,11 @@
-import { Component, ViewChild, ElementRef, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { Chart } from 'chart.js';
 
 export class dataObject {
 	constructor(public label: string, public data: Array<any>, public borderColor?: string,
-		public backgroundColor?: string, public fill?: boolean, public showLine?: boolean, public borderWidth?: number,
-		public chartType?: string) {
-}
+		public backgroundColor?: string, public fill?: boolean, public showLine?: boolean,
+		public isGradient?: boolean, public borderWidth?: number, public chartType?: string) {
+	}
 }
 
 @Component({
@@ -13,29 +13,45 @@ export class dataObject {
 	templateUrl: './chart.component.html'
 })
 export class ChartComponent implements AfterViewInit {
-	public  defaultColors: Array<number[]> = [
+	public defaultColors: Array<number[]> = [
 		[255, 99, 132],
 		[54, 162, 235],
 		[255, 206, 86],
-		[231, 233, 237],
 		[75, 192, 192],
-		[151, 187, 205],
 		[220, 220, 220],
 		[247, 70, 74],
 		[70, 191, 189],
 		[253, 180, 92],
 		[148, 159, 177],
+		[151, 187, 205],
+		[231, 233, 237],
 		[77, 83, 96]];
-	chartx = [];
+	chart = [];
 	public cx: CanvasRenderingContext2D;
-	@Input() xAxesLabels: Array<any> = [];
+	private _itemSelected: any;
+
+	@Input()
+	get itemSelected(): any {
+		return this._itemSelected;
+	}
+	@Output() itemSelectedChange = new EventEmitter();
+	set itemSelected(value: any) {
+		this._itemSelected = value;
+		this.itemSelectedChange.emit(this._itemSelected);
+	}
+	@Input() labels: Array<any> = [];
 	@Input() data: Array<dataObject> = [];
 	@Input() legend = true;
 	@Input() isHorizontal = false;
+	@Input() startInZero = true;
+	@Input() isGradient = false;
 	@Input() typeChart: string;
 	public dataset: Array<any> = [];
+
+	@Output() action = new EventEmitter();
+
 	@ViewChild('canvas') canvas: ElementRef;
-	constructor() {	}
+	constructor() { }
 	ngAfterViewInit() {
 		const canvas: HTMLCanvasElement = this.canvas.nativeElement;
 		/* If is horizontal */
@@ -44,53 +60,98 @@ export class ChartComponent implements AfterViewInit {
 				this.typeChart = 'horizontalBar';
 			}
 		}
+		let borderColors: any;
+		let backgroundColors: any;
+		if (canvas) {
+			this.cx = canvas.getContext('2d');
+		}
 
 		/* Data */
 		if (this.data) {
+			let colorNumber = 0;
+
 			for (let i = 0; i < this.data.length; i++) {
-
-				const rndNumberColor = Math.floor(Math.random() * 11);
-
-				if (!this.data[i].borderColor) {
-					if (this.typeChart === 'line' || this.typeChart === 'bubble' ||
-						this.data[i].chartType === 'line' || this.data[i].chartType === 'bubble') {
-							this.data[i].borderColor = this.rgba(this.defaultColors[rndNumberColor], 1);
-					}
+				colorNumber = i;
+				if (this.data[i].isGradient) {
+					this.cx = canvas.getContext('2d');
+					const gradientStroke = this.cx.createLinearGradient(500, 0, 100, 0);
+					gradientStroke.addColorStop(0, this.rgba(this.defaultColors[0], 1));
+					gradientStroke.addColorStop(1, this.rgba(this.defaultColors[1], 1));
+					borderColors = gradientStroke;
+					backgroundColors = gradientStroke;
 				}
-				if (!this.data[i].backgroundColor) {
-					if (this.typeChart !== 'line') {
-						let alpha = 0.6;
-						if (!this.data[i].borderColor) {
-							alpha = 1;
+				else if ((this.typeChart === 'pie' || this.typeChart === 'doughnut' || this.typeChart === 'polarArea') && !this.data[i].chartType) {
+					const backgroundColorList: Array<any> = [];
+					const borderColorList: Array<any> = [];
+					for (let j = 0; j < this.data[i].data.length; j++) {
+						borderColorList.push(this.rgba(this.defaultColors[colorNumber], 1));
+						backgroundColorList.push(this.rgba(this.defaultColors[colorNumber], 1));
+						colorNumber++;
+						if (colorNumber > (this.defaultColors.length - 1)) {
+							colorNumber = 0;
 						}
-						this.data[i].backgroundColor = this.rgba(this.defaultColors[rndNumberColor], alpha);
 					}
+					borderColors = borderColorList;
+					backgroundColors = backgroundColorList;
 				}
-				this.dataset.push({label: this.data[i].label, data: this.data[i].data, borderColor: this.data[i].borderColor,
-					backgroundColor: this.data[i].backgroundColor, fill: this.data[i].fill,
-					type: this.data[i].chartType, borderWidth: this.data[i].borderWidth, showLine: this.data[i].showLine});
+				else {
+					if (colorNumber > (this.defaultColors.length - 1)) {
+						colorNumber = 0;
+					}
+					if (!this.data[i].borderColor) {
+						this.data[i].borderColor = this.rgba(this.defaultColors[colorNumber], 1);
+					}
+					if (!this.data[i].backgroundColor) {
+						if (this.data[i].fill) {
+							this.data[i].backgroundColor = this.rgba(this.defaultColors[colorNumber], 0.6);
+						} else { this.data[i].backgroundColor = 'transparent'; }
+					}
+					borderColors = this.data[i].borderColor;
+					backgroundColors = this.data[i].backgroundColor;
+				}
+				this.dataset.push({
+					label: this.data[i].label, data: this.data[i].data, borderColor: borderColors,
+					backgroundColor: backgroundColors, fill: this.data[i].fill,
+					type: this.data[i].chartType, borderWidth: this.data[i].borderWidth, showLine: this.data[i].showLine
+				});
 			}
 		}
 
 		if (canvas) {
-			this.cx = canvas.getContext('2d');
-			this.chartx = new Chart(this.cx, {
+			this.chart = new Chart(this.cx, {
 				type: this.typeChart,
 				data: {
-					labels: this.xAxesLabels,
+					labels: this.labels,
 					datasets: this.dataset
 				},
 				options: {
+					onClick: (evt, item) => {
+						const e = item[0];
+						if (e) {
+							this.itemSelected = e;
+							this.action.emit();
+						}
+					},
+					display: true,
 					legend: {
 						display: this.legend
 					},
-					showLine:false
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: this.startInZero
+							}
+						}]
+					}
 				}
 			});
 		}
 	}
-	public rgba (colour: Array<number>, alpha: number): string {
+	public rgba(colour: Array<number>, alpha: number): string {
 		return 'rgba(' + colour.concat(alpha).join(',') + ')';
+	}
+	public doSomenthing(yValue, xValue) {
+		alert(yValue);
 	}
 
 }
