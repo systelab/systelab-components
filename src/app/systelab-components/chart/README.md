@@ -6,7 +6,8 @@ Component to show a Chart
 
 ```html
    <systelab-chart [labels]="labels" [data]="data" [legend]="legend" [(itemSelected)]="itemSelected" [typeChart]="typeChart"
-                (action)="doAction($event)" [isBackgroundGrid]="isBackgroundGrid" [isHorizontal]="isHorizontal" [startInZero]="startInZero"></systelab-chart>
+                (action)="doAction($event)" [isBackgroundGrid]="isBackgroundGrid" [isHorizontal]="isHorizontal" [lineTension]="lineTension" 
+                [yMinValue]="yMinValue" [yMaxValue]="yMaxValue" [chartAnnotations]="chartAnnotationBubbleAnnotation" [xLabelAxis]="xLabelAxis" [yLabelAxis]="yLabelAxis"></systelab-chart>
 ```
 
 
@@ -34,18 +35,21 @@ Set **legend** to false, if you want to hide the legend of the chart (by default
 
 Set **isBackgroundGrid** to false, if you want to hide the background grid of the chart (by default is defined as true).
 
-Set **startInZero** to false, if you want that the y axes start from the lowest value (by default is defined as true).
+**lineTension** is the tension of the line joining the points, min value is 0.
+
+**yMinValue** is the min value of the axis Y.
+
+**yMaxValue** is the max value of the axis Y.
+
+**xLabelAxis** define the title of the Axis X.
+
+**yLabelAxis** define the title of the Axis Y.
 
 Set **isHorizontal** to true, if you want that display a bar chart in horizontal view (by default is defined as false).
 
 **DATA**
 
 Is an array with the items of the Chart. Each item has the follow structure:
-
-	constructor(public label: string, public data: Array<any>, public borderColor?: string,
-		public backgroundColor?: string, public fill?: boolean, public showLine?: boolean,
-		public isGradient?: boolean, public borderWidth?: number, public chartType?: string) {
-	}
 
 ```javascript
     public label: string,
@@ -66,7 +70,7 @@ Here is an example:
     this.dataLine.push(new chartItem('Only Line', [13, 20, 21, 15], '', '', false, true, false, 3));
 ```
 
-The following attributes will help you define the elements:
+Clarification of each attribute:
 
 - **label** is the label name of the item.
 - **data** list of values of the item.
@@ -84,4 +88,58 @@ The following attributes will help you define the elements:
 ```
 
 
+**Annotations**
 
+You can define two types of annotations, line or box type annotations.
+
+**chartAnnotations** is an array of annotations. Depend of the annotations that you want you will use the **chartBoxAnnotation** structure or **chartLineAnnotation**.
+
+**chartBoxAnnotation**
+
+```javascript
+    public drawTime: string,
+    public type: string,
+    public xMin: number,
+    public xMax: number,
+    public yMin: number,
+    public yMax: number,
+    public backgroundColor?:string,
+    public borderColor?:string,
+    public borderWidth?:string
+```
+
+Clarification of each attribute:
+
+- **drawTime** you can define when draw the annotation 'afterDatasetsDraw' or 'beforeDatasetsDraw'.
+- **type** in this case will be 'box'.
+- **xMin** min value in the axis X.
+- **xMax**  max value in the axis X.
+- **yMin** min value in the axis Y.
+- **yMax** max value in the axis Y.
+- **backgroundColor** define the color of the box area.
+- **borderWidth** define the width of the border.
+- **borderColor** define the color of the box.
+
+
+**chartLineAnnotation**
+
+```javascript
+    public label: chartLabelAnnotation,
+    public value: number,
+    public orientation: string,
+    public drawTime: string,
+    public type: string,
+    public borderDash?:Array<number>,
+    public borderColor?:string,
+    public borderWidth?:string
+```
+Clarification of each attribute:
+
+- **drawTime** you can define when draw the annotation 'afterDatasetsDraw' or 'beforeDatasetsDraw'.
+- **type** in this case will be 'box'.
+- **value** is the value where the line is located.
+- **orientation**  define the orientation can be 'vertical' or horizontal.
+- **borderDash** if you want a dashed line you will establish the dash properties in a number array.
+- **borderWidth** define the width of the border.
+- **borderColor** define the color of the box.
+- **label** you can define a label for the annotation, setting the text, position ('left', 'center', 'right'), backgroundColor, fontStyle and the fontColor.

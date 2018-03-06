@@ -12,7 +12,6 @@
       margin-right: 0;
       padding: 10px 8px;
       background: transparent;
-      border-bottom:3px solid;
       & > .nav-link {
         border-top: none;
         background: transparent;
@@ -21,7 +20,6 @@
     }
     & > .nav-item.active{
       background-color: white !important;
-      border-bottom-color: transparent !important;
       & > .nav-link {
         color: black !important;
       }
