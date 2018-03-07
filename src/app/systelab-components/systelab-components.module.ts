@@ -61,6 +61,7 @@ import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.co
 import { ChartComponent } from './chart/chart.component';
 import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
+import {LoadingService} from "./loading/loading.service";
 
 
 @NgModule({
@@ -192,7 +193,8 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 	],
 	providers: [
 		StylesUtilService,
-		ColorUtilService
+		ColorUtilService,
+        LoadingService
 	]
 })
 export class SystelabComponentsModule {
