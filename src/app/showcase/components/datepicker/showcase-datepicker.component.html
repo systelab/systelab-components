@@ -20,7 +20,7 @@
         <div class="col-md-4">
             <systelab-datepicker
                     [(currentDate)]="myDate"
-                    [markPreviousDate]="true"></systelab-datepicker>
+                    [markPreviousAfterDate]="true"></systelab-datepicker>
         </div>
     </div>
     <div class="row mt-1">
@@ -34,15 +34,17 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Date required bottom</label>
         <div class="col-md-4">
-            <systelab-month-selector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="myDate"
-            [(selectedMonth)]="selectedMonth"></systelab-month-selector>
+            <systelab-month-selector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate"
+                                     [currentDate]="myDate"
+                                     [(selectedMonth)]="selectedMonth"></systelab-month-selector>
         </div>
     </div>
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Date required bottom</label>
         <div class="col-md-7">
-            <systelab-week-selector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="myDate"
-            [(selectedWeek)]="selectedWeek"></systelab-week-selector>
+            <systelab-week-selector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate"
+                                    [currentDate]="myDate"
+                                    [(selectedWeek)]="selectedWeek"></systelab-week-selector>
         </div>
     </div>
 

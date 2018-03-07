@@ -11,11 +11,11 @@ import {
 	Renderer2,
 	ViewChild
 } from '@angular/core';
-import {Calendar} from 'primeng/components/calendar/calendar';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
+import { Calendar } from 'primeng/components/calendar/calendar';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 @Component({
-	selector: 'systelab-datepicker',
+	selector:    'systelab-datepicker',
 	templateUrl: 'datepicker.component.html'
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
@@ -27,10 +27,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public error = false;
 	@Input() public required = false;
 	@Input() public inputExpandHeight: boolean;
-	@Input() public markPreviousDate = false;
+	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
 
-	public previousDate = false;
+	public previousAfterDate = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -39,7 +39,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.checkPreviousDate();
+		this.checkPreviousAfterDate();
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
@@ -109,19 +109,21 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.destroyWheelListener();
 	}
 
-	private checkPreviousDate() {
+	private checkPreviousAfterDate() {
 
 		if (this._currentDate) {
 			const today = new Date();
+			const futureDate = new Date();
 			today.setHours(0, 0, 0, 0);
+			futureDate.setTime(futureDate.getTime() + (1000 * 120 * 24 * 30));
 
-			if (this._currentDate.getTime() < today.getTime()) {
-				this.previousDate = true;
+			if (this._currentDate.getTime() < today.getTime() || this._currentDate.getTime() > futureDate.getTime()) {
+				this.previousAfterDate = true;
 			} else {
-				this.previousDate = false;
+				this.previousAfterDate = false;
 			}
 		} else {
-			this.previousDate = false;
+			this.previousAfterDate = false;
 		}
 	}
 
@@ -281,7 +283,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private getLanguage(): void {
 		this.language = {
-			dayNames: [
+			dayNames:        [
 				this.i18nService.instant('COMMON_SUNDAY'),
 				this.i18nService.instant('COMMON_MONDAY'),
 				this.i18nService.instant('COMMON_TUESDAY'),
@@ -290,7 +292,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.i18nService.instant('COMMON_FRIDAY'),
 				this.i18nService.instant('COMMON_SATURDAY')
 			],
-			dayNamesShort: [
+			dayNamesShort:   [
 				this.i18nService.instant('COMMON_SEVENTH_DAY'),
 				this.i18nService.instant('COMMON_FIRST_DAY'),
 				this.i18nService.instant('COMMON_SECOND_DAY'),
@@ -299,7 +301,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.i18nService.instant('COMMON_FIFTH_DAY'),
 				this.i18nService.instant('COMMON_SIXTH_DAY')
 			],
-			dayNamesMin: [
+			dayNamesMin:     [
 				this.i18nService.instant('COMMON_SEVENTH_DAY'),
 				this.i18nService.instant('COMMON_FIRST_DAY'),
 				this.i18nService.instant('COMMON_SECOND_DAY'),
@@ -308,7 +310,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.i18nService.instant('COMMON_FIFTH_DAY'),
 				this.i18nService.instant('COMMON_SIXTH_DAY')
 			],
-			monthNames: [
+			monthNames:      [
 				this.i18nService.instant('COMMON_JANUARY'),
 				this.i18nService.instant('COMMON_FEBRUARY'),
 				this.i18nService.instant('COMMON_MARCH'),
