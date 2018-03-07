@@ -21,4 +21,4 @@ In order to publish the library, an authorized npm user is required. Once set, u
 npm publish
 ```
 
-Be careful because temporary folders will be created (build, css, html, widgets,...) and this files should be untracked as it is specified in the gitignore file.
+Test Be careful because temporary folders will be created (build, css, html, widgets,...) and this files should be untracked as it is specified in the gitignore file.
