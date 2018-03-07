@@ -11,11 +11,11 @@ import {
 	Renderer2,
 	ViewChild
 } from '@angular/core';
-import { Calendar } from 'primeng/components/calendar/calendar';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
+import {Calendar} from 'primeng/components/calendar/calendar';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
 
 @Component({
-	selector:    'systelab-datepicker',
+	selector: 'systelab-datepicker',
 	templateUrl: 'datepicker.component.html'
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
@@ -176,7 +176,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date();
 					emit = false;
 					if (!isNaN(months)) {
-						this.currentDate.setMonth(today.getMonth() + months);
+						this.currentDate.setMonth(today.getMonth() - months);
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
@@ -185,7 +185,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date();
 					emit = false;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
+						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
@@ -194,7 +194,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date();
 					emit = false;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
+						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
 						emit = true;
 					}
 				}
@@ -283,7 +283,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private getLanguage(): void {
 		this.language = {
-			dayNames:        [
+			dayNames: [
 				this.i18nService.instant('COMMON_SUNDAY'),
 				this.i18nService.instant('COMMON_MONDAY'),
 				this.i18nService.instant('COMMON_TUESDAY'),
@@ -292,7 +292,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.i18nService.instant('COMMON_FRIDAY'),
 				this.i18nService.instant('COMMON_SATURDAY')
 			],
-			dayNamesShort:   [
+			dayNamesShort: [
 				this.i18nService.instant('COMMON_SEVENTH_DAY'),
 				this.i18nService.instant('COMMON_FIRST_DAY'),
 				this.i18nService.instant('COMMON_SECOND_DAY'),
@@ -301,7 +301,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.i18nService.instant('COMMON_FIFTH_DAY'),
 				this.i18nService.instant('COMMON_SIXTH_DAY')
 			],
-			dayNamesMin:     [
+			dayNamesMin: [
 				this.i18nService.instant('COMMON_SEVENTH_DAY'),
 				this.i18nService.instant('COMMON_FIRST_DAY'),
 				this.i18nService.instant('COMMON_SECOND_DAY'),
@@ -310,7 +310,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.i18nService.instant('COMMON_FIFTH_DAY'),
 				this.i18nService.instant('COMMON_SIXTH_DAY')
 			],
-			monthNames:      [
+			monthNames: [
 				this.i18nService.instant('COMMON_JANUARY'),
 				this.i18nService.instant('COMMON_FEBRUARY'),
 				this.i18nService.instant('COMMON_MARCH'),
