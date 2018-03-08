@@ -7,12 +7,12 @@
 
     <div class="collapse navbar-collapse" [id]="id" [class.justify-content-center]="align === 'center'" [class.justify-content-end]="align === 'right'">
         <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical" class="nav nav-pills slab-navbar-elements align-items-center d-flex">
-            <li *ngFor="let nav of items" class="nav-item" [class.disabled]="!nav.isEnabled"
+            <li *ngFor="let nav of items" class="nav-item" [class.disabled]="!nav.isEnabled" (click)="nav.action()"
                 [style.background-color]="hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor"
-                [style.border-bottom-color]="hovered == nav.id && nav.isEnabled ? '#ffffff' : backgroundColor"
+                
                 (mouseover)="hovered = nav.id" (mouseout)="hovered = -1" [class.active]="nav.isSelected">
                 <a class="nav-link text-center align-self-stretch align-items-center" [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
-                   (click)="nav.action()" [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null " [style.color]="fontColor"
+                    [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null " [style.color]="fontColor"
                    [class.disabled]="!nav.isEnabled" [class.active]="nav.isSelected">
                     <i *ngIf="nav.image" [class]="nav.image" [style.color]="fontColor" [class.slab-icon-float-image]="nav.floatImage"
                        [class.slab-icon-vertical-image]="!nav.floatImage"></i>

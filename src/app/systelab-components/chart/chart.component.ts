@@ -1,10 +1,31 @@
 import { Component, ViewChild, ElementRef, Input, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { Chart } from 'chart.js';
+import 'chartjs-plugin-annotation';
 
 export class chartItem {
 	constructor(public label: string, public data: Array<any>, public borderColor?: string,
 		public backgroundColor?: string, public fill?: boolean, public showLine?: boolean,
 		public isGradient?: boolean, public borderWidth?: number, public chartType?: string) {
+	}
+}
+
+export class chartLineAnnotation {
+	constructor(public label: chartLabelAnnotation, public value: number, public orientation: string, public drawTime: string,
+		public type: string, public borderDash?: Array<number>,
+		public borderColor?: string, public borderWidth?: number) {
+	}
+}
+
+export class chartBoxAnnotation {
+	constructor(public drawTime: string, public xMin: number, public xMax: number, public yMin: number, public yMax: number,
+		public type: string, public backgroundColor?: string,
+		public borderColor?: string, public borderWidth?: number) {
+	}
+}
+
+export class chartLabelAnnotation {
+	constructor(public text?: string, public position?: string, public backgroundColor?: string,
+		public fontStyle?: string, public fontColor?: string) {
 	}
 }
 
@@ -41,13 +62,21 @@ export class ChartComponent implements AfterViewInit {
 	}
 	@Input() labels: Array<any> = [];
 	@Input() data: Array<chartItem> = [];
+	@Input() chartAnnotations: Array<any> = [];
 	@Input() legend = true;
 	@Input() isHorizontal = false;
-	@Input() startInZero = true;
+	@Input() yMinValue: any;
+	@Input() yMaxValue: any;
+	@Input() yLabelAxis: string;
+	@Input() xLabelAxis: string;
+	@Input() lineTension: number;
 	@Input() isBackgroundGrid = true;
 	@Input() typeChart: string;
 	public dataset: Array<any> = [];
-	public axesVisible= true;
+	public annotations: Array<any> = [];
+	public axesVisible = true;
+	public yAxisLabelVisible = false;
+	public xAxisLabelVisible = false;
 
 	@Output() action = new EventEmitter();
 
@@ -61,6 +90,15 @@ export class ChartComponent implements AfterViewInit {
 				this.typeChart = 'horizontalBar';
 			}
 		}
+
+		/* Axes Labels */
+		if (this.xLabelAxis) {
+			this.xAxisLabelVisible = true;
+		}
+		if (this.yLabelAxis) {
+			this.yAxisLabelVisible = true;
+		}
+
 		let borderColors: any;
 		let backgroundColors: any;
 		if (canvas) {
@@ -117,10 +155,68 @@ export class ChartComponent implements AfterViewInit {
 				});
 			}
 		}
+
 		if (this.typeChart === 'pie' || this.typeChart === 'doughnut' || this.typeChart === 'polarArea' || this.typeChart === 'radar') {
 			this.axesVisible = false;
 		}
 
+		/* Annotations */
+		if (this.chartAnnotations) {
+			let colorNumber = 0;
+			for (let i = 0; i < this.chartAnnotations.length; i++) {
+				colorNumber = i;
+				if (colorNumber > (this.defaultColors.length - 1)) {
+					colorNumber = 0;
+				}
+				if (!this.chartAnnotations[i].borderColor) {
+					this.chartAnnotations[i].borderColor = this.rgba(this.defaultColors[colorNumber], 1);
+				}
+				if (!this.chartAnnotations[i].borderWidth) {
+					this.chartAnnotations[i].borderWidth = 2;
+				}
+				if (this.chartAnnotations[i].type === 'line') {
+					if (this.chartAnnotations[i].label) {
+						if (!this.chartAnnotations[i].label.backgroundColor) {
+							this.chartAnnotations[i].label.backgroundColor = this.rgba(this.defaultColors[colorNumber + 1], 1);
+						}
+						if (!this.chartAnnotations[i].label.position) {
+							this.chartAnnotations[i].label.position = 'center';
+						}
+						if (!this.chartAnnotations[i].label.fontColor) {
+							this.chartAnnotations[i].label.fontColor = '#ffffff';
+						}
+						if (!this.chartAnnotations[i].label.fontStyle) {
+							this.chartAnnotations[i].label.fontStyle = 'normal';
+						}
+					}
+					this.annotations.push({
+						drawTime: this.chartAnnotations[i].drawTime, id: 'annotation' + i, type: this.chartAnnotations[i].type,
+						mode: this.chartAnnotations[i].orientation, scaleID: 'y-axis-0', value: this.chartAnnotations[i].value,
+						borderColor: this.chartAnnotations[i].borderColor,
+						label: {
+							backgroundColor: this.chartAnnotations[i].label.backgroundColor, position: this.chartAnnotations[i].label.position,
+							content: this.chartAnnotations[i].label.text, fontColor: this.chartAnnotations[i].label.fontColor, enabled: true,
+							fontStyle: this.chartAnnotations[i].label.fontStyle
+						}, borderWidth: this.chartAnnotations[i].borderWidth, borderDash: this.chartAnnotations[i].borderDash
+					});
+				}
+				else if (this.chartAnnotations[i].type === 'box') {
+
+					if (!this.chartAnnotations[i].backgroundColor) {
+						this.chartAnnotations[i].backgroundColor = 'transparent';
+					}
+
+					this.annotations.push({
+						drawTime: this.chartAnnotations[i].drawTime, id: 'annotation' + i, type: this.chartAnnotations[i].type,
+						backgroundColor: this.chartAnnotations[i].backgroundColor, borderWidth: this.chartAnnotations[i].borderWidth,
+						borderColor: this.chartAnnotations[i].borderColor, xMin: this.chartAnnotations[i].xMin, xMax: this.chartAnnotations[i].xMax,
+						yMin: this.chartAnnotations[i].yMin, yMax: this.chartAnnotations[i].yMax, xScaleID: 'x-axis-0', yScaleID: 'y-axis-0'
+					});
+				}
+			}
+		}
+
+		/* Draw the chart */
 		if (canvas) {
 			this.chart = new Chart(this.cx, {
 				type: this.typeChart,
@@ -136,6 +232,11 @@ export class ChartComponent implements AfterViewInit {
 							this.action.emit();
 						}
 					},
+					elements: {
+						line: {
+							tension: this.lineTension
+						}
+					},
 					display: true,
 					legend: {
 						display: this.legend
@@ -143,12 +244,17 @@ export class ChartComponent implements AfterViewInit {
 					scales: {
 						yAxes: [{
 							ticks: {
-								beginAtZero: this.startInZero,
+								min: this.yMinValue,
+								max: this.yMaxValue,
 								display: this.axesVisible
 							},
 							gridLines: {
 								display: this.isBackgroundGrid,
 								drawBorder: this.axesVisible
+							},
+							scaleLabel: {
+								display: this.yAxisLabelVisible,
+								labelString: this.yLabelAxis
 							}
 						}],
 						xAxes: [{
@@ -158,8 +264,16 @@ export class ChartComponent implements AfterViewInit {
 							gridLines: {
 								display: this.isBackgroundGrid,
 								drawBorder: this.axesVisible
+							},
+							scaleLabel: {
+								display: this.xAxisLabelVisible,
+								labelString: this.xLabelAxis
 							}
 						}]
+					},
+					annotation: {
+						events: ['click'],
+						annotations: this.annotations
 					}
 				}
 			});
@@ -171,5 +285,4 @@ export class ChartComponent implements AfterViewInit {
 	public doSomenthing(yValue, xValue) {
 		alert(yValue);
 	}
-
 }
