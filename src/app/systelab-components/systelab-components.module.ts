@@ -61,6 +61,7 @@ import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
 import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './modal/base/providers';
 import { OverlayRenderer } from './modal/base/models/tokens';
+import { LoadingService } from './loading/loading.service';
 
 
 @NgModule({
@@ -191,7 +192,8 @@ import { OverlayRenderer } from './modal/base/models/tokens';
 	],
 	providers: [
 		StylesUtilService,
-		ColorUtilService
+		ColorUtilService,
+		LoadingService
 	]
 })
 export class SystelabComponentsModule {
