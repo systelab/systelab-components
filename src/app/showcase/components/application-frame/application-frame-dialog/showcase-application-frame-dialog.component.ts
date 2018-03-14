@@ -1,7 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DialogRef, ModalComponent } from 'ngx-modialog';
-import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
-import { DialogService } from '../../../../systelab-components/modal/dialog/dialog.service';
+import { DialogRef, DialogService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
 import { MessagePopupService } from '../../../../systelab-components/modal/message-popup/message-popup.service';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';

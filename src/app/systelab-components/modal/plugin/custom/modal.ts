@@ -2,7 +2,7 @@ import 'rxjs/add/operator/combineLatest';
 
 import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
 
-import { ContainerContent, DialogRef, Maybe, Modal as Modal_, Overlay, PromiseCompleter } from 'ngx-modialog';
+import { ContainerContent, DialogRef, Maybe, Modal as Modal_, Overlay, PromiseCompleter } from '../../base/base-modal';
 
 import { SystelabModalContainer } from './modal-container.component';
 

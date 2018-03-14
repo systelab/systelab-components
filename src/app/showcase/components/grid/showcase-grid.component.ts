@@ -21,6 +21,7 @@ export class ShowcaseGridComponent {
 		return [
 			new GridContextMenuOption('action1', 'Action 1'),
 			new GridContextMenuOption('action2', 'Action 2'),
+			new GridContextMenuOption('', '', null, null, true),
 			new GridContextMenuOption('action3', 'Action 3')
 		];
 	}

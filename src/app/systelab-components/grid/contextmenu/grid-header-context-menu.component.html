@@ -10,6 +10,7 @@
                         <li class="{{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
                             (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null ">
                             <a>{{action.actionText}}</a></li>
+                        <div *ngIf="action.isDivider" class="dropdown-divider"></div>
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { SystelabModalContext } from '../modal-context';
 import { MessagePopupButton } from './message-popup.service';
+import { ModalComponent } from '../base/models/tokens';
+import { DialogRef } from '../base/models/dialog-ref';
 
 export class MessagePopupViewContext extends SystelabModalContext {
 	public title: string;
