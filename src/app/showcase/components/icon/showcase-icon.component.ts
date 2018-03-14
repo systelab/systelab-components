@@ -98,5 +98,8 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-culture');
 		this.icons.push('icon-culture-linked');
 		this.icons.push('icon-paperclip');
+		this.icons.push('icon-instrument-icon');
+		this.icons.push('icon-tree');
+		this.icons.push('icon-sitemap');
 	}
 }

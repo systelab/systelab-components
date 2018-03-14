@@ -27,10 +27,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public error = false;
 	@Input() public required = false;
 	@Input() public inputExpandHeight: boolean;
-	@Input() public markPreviousDate = false;
+	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
 
-	public previousDate = false;
+	public previousAfterDate = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -39,7 +39,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.checkPreviousDate();
+		this.checkPreviousAfterDate();
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
@@ -109,19 +109,21 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.destroyWheelListener();
 	}
 
-	private checkPreviousDate() {
+	private checkPreviousAfterDate() {
 
 		if (this._currentDate) {
 			const today = new Date();
+			const futureDate = new Date();
 			today.setHours(0, 0, 0, 0);
+			futureDate.setTime(futureDate.getTime() + (1000 * 120 * 24 * 30));
 
-			if (this._currentDate.getTime() < today.getTime()) {
-				this.previousDate = true;
+			if (this._currentDate.getTime() < today.getTime() || this._currentDate.getTime() > futureDate.getTime()) {
+				this.previousAfterDate = true;
 			} else {
-				this.previousDate = false;
+				this.previousAfterDate = false;
 			}
 		} else {
-			this.previousDate = false;
+			this.previousAfterDate = false;
 		}
 	}
 
@@ -174,7 +176,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date();
 					emit = false;
 					if (!isNaN(months)) {
-						this.currentDate.setMonth(today.getMonth() + months);
+						this.currentDate.setMonth(today.getMonth() - months);
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
@@ -183,7 +185,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date();
 					emit = false;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
+						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
@@ -192,7 +194,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date();
 					emit = false;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() + years, today.getMonth(), today.getDate());
+						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
 						emit = true;
 					}
 				}
