@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-	selector:    'showcase-icon',
+	selector: 'showcase-icon',
 	templateUrl: 'showcase-icon.component.html',
-	styleUrls:   ['showcase-icon.component.scss']
+	styleUrls: ['showcase-icon.component.scss']
 })
 export class ShowcaseIconComponent {
 
@@ -101,5 +101,6 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-instrument-icon');
 		this.icons.push('icon-tree');
 		this.icons.push('icon-sitemap');
+		this.icons.push('icon-refresh');
 	}
 }
