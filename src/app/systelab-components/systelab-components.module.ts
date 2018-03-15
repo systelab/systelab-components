@@ -61,6 +61,7 @@ import { PercentageCircleComponent } from './percentage-circle/percentage-circle
 import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './modal/base/providers';
 import { OverlayRenderer } from './modal/base/models/tokens';
 import { LoadingService } from './loading/loading.service';
+import {ExpirySelect} from './select/expiry-combobox.component';
 
 
 @NgModule({
@@ -103,6 +104,7 @@ import { LoadingService } from './loading/loading.service';
 		AllYesNoSelect,
 		NoYesSelect,
 		PeriodSelect,
+		ExpirySelect,
 		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
@@ -147,6 +149,7 @@ import { LoadingService } from './loading/loading.service';
 		AllYesNoSelect,
 		NoYesSelect,
 		PeriodSelect,
+		ExpirySelect,
 		GenderSelect,
 		Datepicker,
 		TouchspinComponent,
