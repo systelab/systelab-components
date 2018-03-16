@@ -40,7 +40,6 @@ import { ShowcaseIconComponent } from './components/icon/showcase-icon.component
 import { ShowcaseTwoListComponent } from './components/two-list/showcase-two-list.component';
 import { ShowcaseApplicationFrameComponent } from './components/application-frame/showcase-application-frame.component';
 import { ShowcaseApplicationFrameDialog } from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
-import { ShowcasePieComponent } from './components/pie/showcase-pie.component';
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
@@ -101,7 +100,6 @@ import { ShowcaseInlineComponent } from './components/inline/showcase-inline.com
 		ShowcaseApplicationFrameComponent,
 		ShowcaseMessagePopupComponent,
 		ShowcaseTitleComponent,
-		ShowcasePieComponent,
 		ShowcaseProgressBarComponent,
 		ShowcaseHeadingsComponent,
 		ShowcaseAlertComponent,

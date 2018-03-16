@@ -1,7 +1,6 @@
 import { ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
-import { PieComponent } from './piechart/pie.component';
 import { SwitchComponent } from './switch/switch.component';
 import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
@@ -84,7 +83,6 @@ import {ExpirySelect} from './select/expiry-combobox.component';
 	],
 	declarations: [
 		SliderComponent,
-		PieComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		DialogComponent,
@@ -100,7 +98,6 @@ import {ExpirySelect} from './select/expiry-combobox.component';
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
 		ToggleButtonComponent,
-		PieComponent,
 		AllYesNoSelect,
 		NoYesSelect,
 		PeriodSelect,
@@ -135,7 +132,6 @@ import {ExpirySelect} from './select/expiry-combobox.component';
 	],
 	exports: [
 		SliderComponent,
-		PieComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		TwoListComponent,
@@ -145,7 +141,6 @@ import {ExpirySelect} from './select/expiry-combobox.component';
 		ApplicationHeaderComponent,
 		ApplicationSidebarComponent,
 		ApplicationFrameComponent,
-		PieComponent,
 		AllYesNoSelect,
 		NoYesSelect,
 		PeriodSelect,
