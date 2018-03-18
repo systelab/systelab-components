@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/systelab/systelab-components.svg?branch=master)](https://travis-ci.org/systelab/systelab-components)
+
 # systelab-components
 
 Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components
