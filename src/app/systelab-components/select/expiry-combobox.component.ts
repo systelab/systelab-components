@@ -1,6 +1,6 @@
-import { AbstractComboBox } from '../combobox/abstract-combobox.component';
+import {AbstractComboBox} from '../combobox/abstract-combobox.component';
 import {ChangeDetectorRef, Component, Renderer2} from '@angular/core';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
 
 class Element {
 	constructor(public id: string, public description: string) {
@@ -9,7 +9,7 @@ class Element {
 }
 
 @Component({
-	selector:    'systelab-expiry-select',
+	selector: 'systelab-expiry-select',
 	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 
@@ -27,12 +27,9 @@ export class ExpirySelect extends AbstractComboBox {
 		this._description = '';
 	}
 
-	public afterSettingId(value: number | string) {
+	public afterSettingId(value: string) {
 		if (value) {
-			this.description = value + '';
-		} else {
-			this.id = '';
-			this.description = '';
+			this.description = value;
 		}
 	}
 }
