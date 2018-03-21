@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 })
 export class ShowcaseRadioComponent {
 
+	public urgency = 'no-urgent';
+	public urgency2 = 'urgent';
 
 	constructor() {
 	}

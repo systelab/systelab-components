@@ -3,11 +3,11 @@
         <label class="col-md-3 col-form-label">Column</label>
         <div class="col-md-9">
             <div>
-                <input name="status-radio" type="radio" id="radio-urgent">
+                <input name="status-radio" type="radio" id="radio-urgent" [(ngModel)]="urgency" value="urgent">
                 <label for="radio-urgent"> Urgent</label>
             </div>
             <div class="mt-1">
-                <input name="status-radio" type="radio" id="radio-not-urgent">
+                <input name="status-radio" type="radio" id="radio-not-urgent" [(ngModel)]="urgency" value="no-urgent">
                 <label for="radio-not-urgent"> Not Urgent</label>
             </div>
         </div>
@@ -15,14 +15,17 @@
 
 
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label">Inline (using a grid)</label>
-        <div class="col-md-4">
-            <input name="status-radio2" type="radio" id="radio-urgent2"> <label
-                for="radio-urgent2">Urgent</label>
+        <label class="col-md-3 col-form-label">Inline (using a grid).</label>
+        <div class="col-md-3">
+            <input name="status-radio2" type="radio" id="radio-urgent2" [(ngModel)]="urgency2" value="urgent">
+            <label for="radio-urgent2">Urgent</label>
         </div>
-        <div class="col-md-4">
-            <input name="status-radio2" type="radio" id="radio-not-urgent2"> <label
-                for="radio-not-urgent2">Not Urgent</label>
+        <div class="col-md-3">
+            <input name="status-radio2" type="radio" id="radio-not-urgent2" [(ngModel)]="urgency2" value="no-urgent">
+            <label for="radio-not-urgent2">Not Urgent</label>
+        </div>
+        <div class="col-md-3">
+            <label>Selected {{urgency2}}</label>
         </div>
     </div>
 </div>
