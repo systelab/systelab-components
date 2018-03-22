@@ -28,6 +28,11 @@ protected getColumnDefs(): Array<any> {
 ```
 As the grid is based in Ag Grid, you will find usefull information at https://www.ag-grid.com/best-angular-2-data-grid.
 
+We can add custom-cells as cellRendererFramework in our column definition. At this moment, we have two generic cellRenderers for the table, with an input and a checkbox.
+To use the checkbox we need to send a parameter that has to be searched in the data to get a unique id. By this way we can have all the checkbox working independent from the other.
+
+Take in mind that if you add a custom-cell that can be clicked by the user (checkboxes, spinners, inputs, ...) we have to avoid the click over the row to open other dialogs or realize some action over the table. For this reason it's needed to rewrite the doClick function in each table detailing the columns that must not execute some kind of action.
+
 ## Using AbstractApiGrid&lt;T&gt;
 
 Extend AbstractApiGrid&lt;T&gt; and define:
