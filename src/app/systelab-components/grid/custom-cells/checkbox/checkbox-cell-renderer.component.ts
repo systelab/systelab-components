@@ -15,7 +15,6 @@ export class CheckboxCellRendererComponent implements AgRendererComponent {
 		this.params = params;
 
 		if (params.data) {
-			console.log(params.data);
 			this.id = params.data[params.colDef.elementID];
 			this.isCheckboxActive = params.data.active;
 		}
