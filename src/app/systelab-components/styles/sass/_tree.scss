@@ -2,32 +2,27 @@
 
 .ui-tree {
   width: 100%;
-  line-height: $slab-dropdown-line-height;
-  border: 1px solid $form-border !important;
+  height: 100%;
   .ui-tree-container {
     padding: 0;
     .ui-treenode {
+
       .ui-treenode-content {
         padding-left: 5px;
         span[class*='icon-angle-'] {
           font-weight: bold;
-          line-height: $slab-dropdown-line-height;
           font-size: 18px;
           color: $dark-gray;
         }
         .ui-treenode-label {
-          margin-top: 7px;
-          line-height: $slab-dropdown-line-height;
+
+          label {
+            margin: 0px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+          }
           &.ui-state-highlight {
             background: $slab-selected-background-color;
-            border-top: 7px;
-            border-width: 7px;
-            border-style: solid;
-            border-color: $slab-selected-background-color;
-            border-bottom: 0px;
-            border-left: 0px;
-            margin-top: 0px;
-            width: 100%;
             color: rgb(34, 34, 34);
           }
           &:hover {
@@ -36,6 +31,10 @@
         }
         &:hover {
           background-color: $slab-selected-background-color;
+        }
+        &.ui-treenode-content-selected {
+          background: $slab-selected-background-color;
+          color: rgb(34, 34, 34);
         }
       }
     }

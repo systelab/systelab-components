@@ -8,4 +8,8 @@ export class ShowcaseTreeComponent {
 
 	constructor() {
 	}
+
+	public nodeSelected(event: any) {
+
+	}
 }

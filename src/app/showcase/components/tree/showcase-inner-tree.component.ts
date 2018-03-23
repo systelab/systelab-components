@@ -17,20 +17,17 @@ export class ShowcaseInnerTreeComponent extends AbstractTree  {
 			collapsedIcon : 'icon-angle-right',
 			expandedIcon : 'icon-angle-down',
 			status : 'mlab-qc-status mlab-qc-status-ko',
-			expanded : true,
 			children: [
 				{
 					label: 'First',
 					collapsedIcon : 'icon-angle-right',
 					expandedIcon : 'icon-angle-down',
-					status : 'mlab-qc-status mlab-qc-status-ko',
-					expanded : true},
+					status : 'mlab-qc-status mlab-qc-status-ko'},
 				{
 					label: 'Second',
 					collapsedIcon : 'icon-angle-right',
 					expandedIcon : 'icon-angle-down',
-					status : 'mlab-qc-status mlab-qc-status-ko',
-					expanded : true}
+					status : 'mlab-qc-status mlab-qc-status-ko'}
 			]
 		});
 
@@ -48,16 +45,5 @@ export class ShowcaseInnerTreeComponent extends AbstractTree  {
 
 	public nodeSelect(evt: any) {
 		this.nodeSelected.emit(evt.node);
-	}
-
-	public selectTest(testID: number) {
-		for (let i = 0; i < this.tree.length; i++) {
-			const node: any = this.tree[i];
-			if (node.testID && node.testID === testID) {
-				this.selectedNode = node;
-				console.log('select node ' + node.testID);
-				return;
-			}
-		}
 	}
 }
