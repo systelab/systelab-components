@@ -39,6 +39,25 @@ export class ShowcaseInnerTreeComponent extends AbstractTree  {
 			status : 'mlab-qc-status mlab-qc-status-ko',
 			expanded : true
 		});
+		myTree.push({
+			label: 'Bye',
+			collapsedIcon : 'icon-angle-right',
+			expandedIcon : 'icon-angle-down',
+			status : 'mlab-qc-status mlab-qc-status-ko',
+			expanded : true,
+			children: [
+				{
+					label: 'First',
+					collapsedIcon : 'icon-angle-right',
+					expandedIcon : 'icon-angle-down',
+					status : 'mlab-qc-status mlab-qc-status-ko'},
+				{
+					label: 'Second',
+					collapsedIcon : 'icon-angle-right',
+					expandedIcon : 'icon-angle-down',
+					status : 'mlab-qc-status mlab-qc-status-ko'}
+			]
+		});
 
 		this.tree = myTree;
 	}
