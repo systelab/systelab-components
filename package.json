@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "5.4.0",
+  "version": "5.4.1",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -16,7 +16,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cleardown": "rimraf css html build widgets",
+    "cleardown": "rimraf css sass html build widgets",
     "inline-build-templates": "gulp inline-build-templates",
     "copysass": "gulp copysass",
     "copytemplates": "gulp copytemplates",
