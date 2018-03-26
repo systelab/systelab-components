@@ -5,10 +5,10 @@ Component to show a Week Selector
 ## Using the component
 
 ```html
-<systelab-week-selector #wselector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="currentDate" [(selectedWeek)]="selectedWeek"></systelab-week-selector>
+<systelab-week-selector #wselector [disabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="currentDate" [(selectedWeek)]="selectedWeek"></systelab-week-selector>
 ```
 
-Set **isDisabled** to true, if you want to display a disabled week selector, it will displaying the week belonging to the date selected.
+Set **disabled** to true, if you want to display a disabled week selector, it will displaying the week belonging to the date selected.
 
 Set **maxDate** with the maximum date that you want to display in the selector.
 

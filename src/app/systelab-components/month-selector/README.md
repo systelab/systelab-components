@@ -5,12 +5,12 @@ Component to show a Month Selector
 ## Using the component
 
 ```html
-<systelab-month-selector #wselector [isDisabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="currentDate"
+<systelab-month-selector #wselector [disabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="currentDate"
     [(selectedMonth)]="selectedMonth">
 </systelab-month-selector>
 ```
 
-Set **isDisabled** to true, if you want to display a disabled month selector, it will displaying the month belonging to the date selected.
+Set **disabled** to true, if you want to display a disabled month selector, it will displaying the month belonging to the date selected.
 
 Set **maxDate** with the maximum date that you want to display in the selector.
 

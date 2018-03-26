@@ -20,7 +20,7 @@ export class WeekSelectorComponent implements AfterViewInit {
 	@Input() public maxDate: Date;
 	@Input() public minDate: Date;
 	@Input() public currentDate: Date;
-	@Input() public isDisabled: boolean;
+	@Input() public disabled: boolean;
 
 	private _selectedWeek: Week;
 	@Input()
