@@ -1,10 +1,10 @@
-<div class="dropdown slab-combobox slab-week-selector d-flex w-100" [ngClass]="{'disabled': isDisabled}">
+<div class="dropdown slab-combobox slab-week-selector d-flex w-100" [ngClass]="{'disabled': disabled}">
     <div class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle">
-        <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [disabled]="isDisabled" [(ngModel)]="this.selectedWeek.text"
+        <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [disabled]="disabled" [(ngModel)]="this.selectedWeek.text"
                (click)="onClicked($event)"/>
-        <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled" (click)="onClicked($event)"></button>
+        <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="disabled" (click)="onClicked($event)"></button>
     </div>
-    <div *ngIf="isOpened" class="slab-week-selector-dropdown" [ngClass]="{'disabled': isDisabled}" (mouseleave)="hideSelector()">
+    <div *ngIf="isOpened" class="slab-week-selector-dropdown" [ngClass]="{'disabled': disabled}" (mouseleave)="hideSelector()">
         <div class="header-selector">
             <systelab-calendar-header [currentDate]="currentDate" (previousYear)="addYear(-1)" (previousMonth)="addMonth(-1)" (nextMonth)="addMonth(1)" (nextYear)="addYear(1)">
             </systelab-calendar-header>
