@@ -8,7 +8,7 @@ import { TouchSpinValues } from './touch.spin-values';
 })
 export class TouchspinComponent {
 
-	@Input() public isDisabled = false;
+	@Input() public disabled = false;
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
 	@Input() fillUnitsWithZero = false;
