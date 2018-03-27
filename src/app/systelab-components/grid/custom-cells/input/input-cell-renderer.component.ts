@@ -23,7 +23,7 @@ export class InputCellRendererComponent implements AgRendererComponent {
 		this.params.data[this.params.colDef.field] = this.params.value;
 	}
 
-	private checkIsEditable(): void {
+	protected checkIsEditable(): void {
 		if (this.params.colDef.isEditable) {
 			this.isEditable = this.params.colDef.isEditable(this.params.data);
 		}

@@ -63,6 +63,7 @@ import {LoadingService} from './loading/loading.service';
 import {ExpirySelect} from './select/expiry-combobox.component';
 import {CheckboxCellRendererComponent} from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-renderer.component';
+import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
 
 
 @NgModule({
@@ -132,6 +133,7 @@ import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-r
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
 		InputCellRendererComponent,
+		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent
 	],
 	exports: [
@@ -182,6 +184,7 @@ import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-r
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
 		InputCellRendererComponent,
+		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent
 	],
 	entryComponents: [
@@ -191,6 +194,7 @@ import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-r
 		CalendarDialog,
 		ColorCellRendererComponent,
 		InputCellRendererComponent,
+		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent
 	],
 	providers: [
