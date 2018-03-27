@@ -3,7 +3,7 @@
         <label class="col-md-3 col-form-label">Column</label>
         <div class="col-md-9">
             <div>
-                <input name="status-radio" type="radio" id="radio-urgent" [(ngModel)]="urgency" value="urgent">
+                <input name="status-radio" type="radio" id="radio-urgent" [(ngModel)]="urgency" value="urgent" [checked]="urgency=='no-urgent'">
                 <label for="radio-urgent"> Urgent</label>
             </div>
             <div class="mt-1">
@@ -17,7 +17,7 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label">Inline (using a grid).</label>
         <div class="col-md-3">
-            <input name="status-radio2" type="radio" id="radio-urgent2" [(ngModel)]="urgency2" value="urgent">
+            <input name="status-radio2" type="radio" id="radio-urgent2" [(ngModel)]="urgency2" value="urgent" [checked]="urgency2=='urgent'">
             <label for="radio-urgent2">Urgent</label>
         </div>
         <div class="col-md-3">
