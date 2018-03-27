@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
 	selector:    'systelab-slider',
@@ -14,18 +14,21 @@ export class SliderComponent {
 	@Input() public value = 0;
 	@Output() public valueChange = new EventEmitter();
 
+	@ViewChild('range') element: ElementRef;
+
+
 	public sliderChangeEvent(event: any) {
 		if (!this.continuous) {
-			console.log(this.value);
-			this.value = event.srcElement.value;
+			console.log(this.element.nativeElement.value);
+			this.value = this.element.nativeElement.value;
 			this.valueChange.emit(this.value);
 		}
 	}
 
 	public sliderInputEvent(event: any) {
 		if (this.continuous) {
-			console.log(this.value);
-			this.value = event.srcElement.value;
+			console.log(this.element.nativeElement.value);
+			this.value = this.element.nativeElement.value;
 			this.valueChange.emit(this.value);
 		}
 	}
