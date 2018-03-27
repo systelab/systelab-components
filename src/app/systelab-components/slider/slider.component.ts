@@ -17,7 +17,8 @@ export class SliderComponent {
 	public sliderChangeEvent(event: any) {
 		if (!this.continuous) {
 			console.log(this.value);
-			this.value = event.srcElement.value;
+			const target: any  = event.target || event.srcElement;
+			this.value = target.value;
 			this.valueChange.emit(this.value);
 		}
 	}
@@ -25,7 +26,8 @@ export class SliderComponent {
 	public sliderInputEvent(event: any) {
 		if (this.continuous) {
 			console.log(this.value);
-			this.value = event.srcElement.value;
+			const target: any  = event.target || event.srcElement;
+			this.value = target.value;
 			this.valueChange.emit(this.value);
 		}
 	}
