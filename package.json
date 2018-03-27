@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "5.4.2",
+  "version": "5.4.3",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -90,7 +90,7 @@
     "typescript": "~2.4.2",
     "gulp": "^3.9.1",
     "gulp-inline-ng2-template": "^4.0.0",
-    "node-sass": "^3.1.0",
-    "gulp-sass": "^3.1.0"
+    "node-sass": "^4.8.3",
+    "gulp-sass": "^3.2.1"
   }
 }
