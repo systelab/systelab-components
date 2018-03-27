@@ -11,6 +11,7 @@ export class SliderComponent {
 	@Input() public step = 1;
 	@Input() public continuous = true;
 
+
 	@Input() public value = 0;
 	@Output() public valueChange = new EventEmitter();
 
