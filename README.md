@@ -1,5 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/552f28d2a1834de2856f8d6e1ff5bb3a)](https://app.codacy.com/app/alfonsserra/systelab-components?utm_source=github.com&utm_medium=referral&utm_content=systelab/systelab-components&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/systelab/systelab-components.svg?branch=master)](https://travis-ci.org/systelab/systelab-components)
+[![npm version](https://badge.fury.io/js/systelab-components.svg)](https://badge.fury.io/js/systelab-components)
 
 # systelab-components
 
