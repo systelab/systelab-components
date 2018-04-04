@@ -49,6 +49,7 @@ this.items.push(new BreadcrumbItem('2', 'Holidays', false, null, null, 'http://w
 
 ```
 
+Use **action** for navigating intenally in the application and use the **url** external navigations.
 
 
 
