@@ -51,7 +51,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public onInputClicked(event: MouseEvent) {
 		event.stopPropagation();
-		if (this.isDisabled) {
+		if (!this.isDisabled) {
 			jQuery('.dropdown-toggle').dropdown('toggle');
 			if (!this.isDropDownOpen()) {
 				this.isDropdownOpened = true;
