@@ -1,7 +1,6 @@
-import { Component, ElementRef, Renderer, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer, OnInit } from '@angular/core';
+import { BaseDynamicComponent, DialogRef } from 'ngx-modialog';
 import { IMessageModalPreset } from './presets/message-modal-preset';
-import { BaseDynamicComponent } from '../../base/components/base-dynamic-component';
-import { DialogRef } from '../../base/models/dialog-ref';
 
 @Component({
 	selector:    'mp-modal-container',
@@ -16,7 +15,7 @@ export class SystelabModalContainer extends BaseDynamicComponent implements OnIn
 
 	public computedClass: string;
 
-	constructor(public dialog: DialogRef<IMessageModalPreset>, el: ElementRef, renderer: Renderer2) {
+	constructor(public dialog: DialogRef<IMessageModalPreset>, el: ElementRef, renderer: Renderer) {
 		super(el, renderer);
 		this.activateAnimationListener();
 	}

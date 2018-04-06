@@ -64,6 +64,7 @@ import { ShowcaseTreeComponent } from './components/tree/showcase-tree.component
 import { TreeModule } from 'primeng/primeng';
 import { ShowcasePercentageCircleComponent } from './components/percentage-circle/showcase-percentage-circle.component';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
+import { ShowcaseChartComponent } from './components/chart/showcase-chart.component';
 
 @NgModule({
 	imports: [
@@ -132,6 +133,7 @@ import { ShowcaseInlineComponent } from './components/inline/showcase-inline.com
 		ShowcaseInnerTreeComponent,
 		ShowcasePercentageCircleComponent,
 		ShowcaseInlineComponent,
+		ShowcaseChartComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

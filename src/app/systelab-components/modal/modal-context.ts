@@ -1,4 +1,4 @@
-import { ModalOpenContext } from './base/models/modal-open-context';
+import { ModalOpenContext } from 'ngx-modialog';
 
 export class SystelabModalContext extends ModalOpenContext {
 	/**

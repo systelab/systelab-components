@@ -8,8 +8,7 @@ export class ContextMenuOption {
 	constructor( public actionId: string,
 				 public actionText: string,
 				 public action?: ContextMenuActionFunction,
-				 public isActionEnabled?: ContextMenuIsEnabledFunction,
-				 public isDivider?: boolean ) {
+				 public isActionEnabled?: ContextMenuIsEnabledFunction ) {
 	}
 
 }

@@ -1,11 +1,10 @@
 /* This styles are used to override the default primeng styles for trees (https://www.primefaces.org/primeng/#/tree).*/
 
 .ui-tree {
+  border: none;
   width: 100%;
   line-height: $slab-dropdown-line-height;
-  border: 1px solid $form-border !important;
   .ui-tree-container {
-    padding: 0;
     .ui-treenode {
       .ui-treenode-content {
         padding-left: 5px;

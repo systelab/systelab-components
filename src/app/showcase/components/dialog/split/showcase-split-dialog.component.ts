@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalComponent, DialogRef } from 'ngx-modialog';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
 export class SplitShowcaseDialogParameters extends SystelabModalContext {
 	public fullScreen = true;

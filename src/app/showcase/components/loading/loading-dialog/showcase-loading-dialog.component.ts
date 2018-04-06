@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { DialogHeaderComponent, DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
+import { DialogHeaderComponent } from '../../../../systelab-components/modal/header/dialog-header.component';
 import { Observable } from 'rxjs/Observable';
 
 export class ShowcaseLoadingDialogParameters extends SystelabModalContext {

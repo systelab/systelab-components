@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 
 export class ShowcaseFullFlexDialogParameters extends SystelabModalContext {
 	public index: number;

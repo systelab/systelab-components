@@ -4,7 +4,7 @@ export { SystelabMessageModal } from './message-modal.component';
 
 export { IMessageModalPreset } from './presets/message-modal-preset';
 
-export { ModalOpenContext } from '../../base/base-modal';
+export { ModalOpenContext, ModalOpenContextBuilder } from 'ngx-modialog';
 
 export { Modal } from './modal';
 

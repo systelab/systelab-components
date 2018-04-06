@@ -8,8 +8,7 @@ export class GridContextMenuOption<T> {
 	constructor( public actionId: string,
 				 public actionText: string,
 				 public action?: GridContextMenuActionFunction<T>,
-				 public isActionEnabled?: GridContextMenuIsEnabledFunction<T>,
-				 public isDivider?: boolean) {
+				 public isActionEnabled?: GridContextMenuIsEnabledFunction<T> ) {
 	}
 
 }

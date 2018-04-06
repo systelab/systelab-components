@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Modal, SystelabModalContext} from '../plugin/custom';
+import {DialogRef, overlayConfigFactory} from 'ngx-modialog';
 import {I18nService} from 'systelab-translate/lib/i18n.service';
 import {MessagePopupViewComponent} from './message-popup-view.component';
 import {Observable} from 'rxjs/Observable';
 import {MessageWithIconComponent} from './message-with-icon.component';
-import { overlayConfigFactory } from '../base/models/overlay-context';
-import { DialogRef } from '../';
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any) {

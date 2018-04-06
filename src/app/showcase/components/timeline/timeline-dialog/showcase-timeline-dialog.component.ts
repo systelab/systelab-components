@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
+import { SystelabModalContext } from '../../../../systelab-components/modal/modal-context';
 import { TimelineEvent } from '../../../../systelab-components/timeline/timeline.component';
 
 export class ShowcaseTimelineDialogParameters extends SystelabModalContext {

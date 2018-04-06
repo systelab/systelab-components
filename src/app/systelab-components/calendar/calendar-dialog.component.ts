@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
+import { DialogRef, ModalComponent } from 'ngx-modialog';
 import { addMonths, addYears } from 'date-fns';
 import { Observable } from 'rxjs/Observable';
-import { DialogRef, ModalComponent, SystelabModalContext } from '../modal';
+import { SystelabModalContext } from '../modal/modal-context';
 import { CalendarTableComponent, DaySlot } from './calendar-table.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
