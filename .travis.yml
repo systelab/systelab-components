@@ -28,3 +28,15 @@ deploy:
   api_key: $NPM_TOKEN
   on:
     tags: true
+
+after_success: |
+  if [ -n "$GITHUB_API_KEY" ]; then
+    git clone https://github.com/systelab/systelab.github.io.git
+    rm ./systelab.github.io/components/*
+    cp ./dist/* ./systelab.github.io/components
+    sed -i -e "s~base href=\"/\"~base href=\"/components/\"~g" ./systelab.github.io/components/index.html
+    cd systelab.github.io
+    git add .
+    git -c user.name='travis' -c user.email='travis' commit -m 'New deploy from Travis'
+    git push -f -q https://systelab:$GITHUB_API_KEY@github.com/systelab/systelab.github.io
+  fi
