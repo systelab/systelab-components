@@ -20,8 +20,8 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - npm run build
   - npm run e2e
+  - npm run build
 
 after_success: |
   if [ -n "$GITHUB_API_KEY" ]; then
