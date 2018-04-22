@@ -20,9 +20,27 @@ ng serve (or npm run ng serve)
 
 This will bootstrap a showcase application to test the different components.
 
+## Test
+For testing purposes, the strategy chosen is Snapshot Testing.
+Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
+A typical snapshot test case for a mobile app renders a UI component, takes a screenshot, then compares it to a reference image stored alongside the test. The test will fail if the two images do not match: either the change is unexpected, or the screenshot needs to be updated to the new version of the UI component.
+In order to run the test, run the command:
+
+```bash
+ng e2e
+```
+
+If you want to update the snapshots, run the command:
+
+```bash
+npm run update-snapshots
+```
+
+## Publish the Library
+
 In order to publish the library, an authorized npm user is required. Once set, update the version in the package.json, and run the npm publish script:
 
-```npm
+```bash
 npm publish
 ```
 
