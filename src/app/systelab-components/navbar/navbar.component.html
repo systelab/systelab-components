@@ -11,7 +11,7 @@
                 [style.background-color]="hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor"
                 
                 (mouseover)="hovered = nav.id" (mouseout)="hovered = -1" [class.active]="nav.isSelected">
-                <a class="nav-link text-center align-self-stretch align-items-center" [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
+                <a [id]="'nav-'+nav.id" class="nav-link text-center align-self-stretch align-items-center" [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
                     [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null " [style.color]="fontColor"
                    [class.disabled]="!nav.isEnabled" [class.active]="nav.isSelected">
                     <i *ngIf="nav.image" [class]="nav.image" [style.color]="fontColor" [class.slab-icon-float-image]="nav.floatImage"
