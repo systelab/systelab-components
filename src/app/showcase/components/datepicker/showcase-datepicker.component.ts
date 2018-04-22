@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {MonthSelectorComponent, Month} from '../../../systelab-components/month-selector/month-selector.component';
-import {WeekSelectorComponent, Week} from '../../../systelab-components/week-selector/week-selector.component';
+import { Month } from '../../../systelab-components/month-selector/month-selector.component';
+import { Week } from '../../../systelab-components/week-selector/week-selector.component';
+
 @Component({
 	selector:    'showcase-datepicker',
 	templateUrl: 'showcase-datepicker.component.html'
