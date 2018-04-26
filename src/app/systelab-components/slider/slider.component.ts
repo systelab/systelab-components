@@ -20,7 +20,6 @@ export class SliderComponent {
 
 	public sliderChangeEvent(event: any) {
 		if (!this.continuous) {
-			console.log(this.element.nativeElement.value);
 			this.value = this.element.nativeElement.value;
 			this.valueChange.emit(this.value);
 		}
@@ -28,7 +27,6 @@ export class SliderComponent {
 
 	public sliderInputEvent(event: any) {
 		if (this.continuous) {
-			console.log(this.element.nativeElement.value);
 			this.value = this.element.nativeElement.value;
 			this.valueChange.emit(this.value);
 		}
