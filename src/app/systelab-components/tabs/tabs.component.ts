@@ -1,11 +1,11 @@
-import { AfterContentInit, Component, ContentChildren, EventEmitter, Output, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { TabComponent } from './tab.component';
 
 @Component({
 	selector: 'systelab-tabs',
 	template: `
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
+                <ul class="nav nav-tabs" [class.hideTabBackground]="!showTabBackground" role="tablist">
+                    <li class="nav-item" [class.hideTabBackground]="!showTabBackground" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
                         <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
                            [attr.aria-controls]="tab.id">{{tab.title}}<i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i></a>
                     </li>
@@ -15,7 +15,7 @@ import { TabComponent } from './tab.component';
                 </div>
 
 	          `,
-	styles:   [`
+	styles: [`
       :host {
           width: 100%;
           display: flex;
@@ -27,6 +27,7 @@ export class TabsComponent implements AfterContentInit {
 
 	@ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
+	@Input() public showTabBackground = true;
 	@Output() public select = new EventEmitter<string>();
 
 	public ngAfterContentInit() {
