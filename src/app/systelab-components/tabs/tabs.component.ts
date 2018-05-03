@@ -4,8 +4,8 @@ import { TabComponent } from './tab.component';
 @Component({
 	selector: 'systelab-tabs',
 	template: `
-                <ul [ngClass]="'nav nav-tabs' + (showTabBackground ? '' : ' hideTabBackground')" role="tablist">
-                    <li [ngClass]="'nav-item' + (showTabBackground ? '' : ' hideTabBackground')" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
+                <ul class="nav nav-tabs" [class.hideTabBackground]="!showTabBackground" role="tablist">
+                    <li class="nav-item" [class.hideTabBackground]="!showTabBackground" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
                         <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
                            [attr.aria-controls]="tab.id">{{tab.title}}<i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i></a>
                     </li>
