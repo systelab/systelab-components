@@ -4,8 +4,8 @@ import { TabComponent } from './tab.component';
 @Component({
 	selector: 'systelab-tabs',
 	template: `
-                <ul [ngClass]="'nav nav-tabs' + (hideBackground ? ' hideTabBackground' : '')" role="tablist">
-                    <li [ngClass]="'nav-item' + (hideBackground ? '  hideTabBackground' : '')" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
+                <ul [ngClass]="'nav nav-tabs' + (showTabBackground ? '' : ' hideTabBackground')" role="tablist">
+                    <li [ngClass]="'nav-item' + (showTabBackground ? '' : ' hideTabBackground')" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
                         <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
                            [attr.aria-controls]="tab.id">{{tab.title}}<i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i></a>
                     </li>
@@ -27,7 +27,7 @@ export class TabsComponent implements AfterContentInit {
 
 	@ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
-	@Input() public hideBackground = false;
+	@Input() public showTabBackground = true;
 	@Output() public select = new EventEmitter<string>();
 
 	public ngAfterContentInit() {
