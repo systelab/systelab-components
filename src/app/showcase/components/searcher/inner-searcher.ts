@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { AbstractSearcher } from '../../../systelab-components/searcher/abstract-searcher';
 import { SearcherDialogParameters } from '../../../systelab-components/searcher/searcher.dialog.component';
@@ -44,7 +44,7 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 		array.push(new ShowcaseSearcherData('14', '14', '14'));
 		array.push(new ShowcaseSearcherData('15', '15', '15'));
 
-		return Observable.of(array);
+		return of(array);
 	}
 
 	public getTotalItems(): number {

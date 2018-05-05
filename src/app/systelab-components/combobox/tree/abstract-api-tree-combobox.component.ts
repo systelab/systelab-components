@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { AbstractComboBox } from '../abstract-combobox.component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { StylesUtilService } from '../../utilities/styles.util.service';
 
 declare var jQuery: any;

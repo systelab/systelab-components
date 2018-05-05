@@ -79,11 +79,8 @@ import {DragAndDropService} from 'ag-grid';
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		DndModule.forRoot(),
-		AgGridModule.withComponents([
-			GridContextMenuComponent,
-			GridHeaderContextMenuComponent
-		]),
+		DndModule,
+		AgGridModule
 	],
 	declarations: [
 		SliderComponent,
@@ -206,16 +203,23 @@ import {DragAndDropService} from 'ag-grid';
 })
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		return {
-			ngModule: SystelabComponentsModule,
-			providers: [
-				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
-				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
-				Ng2ComponentFactory,
-				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
-			]
-		};
+		const module = AgGridModule.withComponents([
+			GridContextMenuComponent,
+			GridHeaderContextMenuComponent
+		]);
+
+		const dndModule = DndModule.forRoot();
+		module.providers.push(dndModule.providers);
+
+		module.ngModule = SystelabComponentsModule;
+		module.providers.push([
+			{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
+			{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
+			{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
+			Ng2ComponentFactory,
+			{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
+			{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
+		]);
+		return module;
 	}
 }

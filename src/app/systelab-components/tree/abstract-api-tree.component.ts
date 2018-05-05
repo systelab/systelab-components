@@ -1,7 +1,7 @@
 import { EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Tree } from 'primeng/components/tree/tree';
 import { AbstractTree } from './abstract-tree.component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export abstract class AbstractApiTree<N> extends AbstractTree implements OnInit {
 

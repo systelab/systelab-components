@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, HostListener, Input, OnInit, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { timer } from 'rxjs';
 
 export class RouteNode {
 	constructor(public id: number, public x: number, public y: number, public w: number, public h: number) {
@@ -72,8 +72,7 @@ export class SampleRouteComponent implements OnInit, AfterViewInit {
 	}
 
 	public ngAfterViewInit(): void {
-		const timer = Observable.timer(50);
-		timer.subscribe(t => {
+		timer(50).subscribe(t => {
 			this.initCanvasSize();
 			this.restore();
 		});

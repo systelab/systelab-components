@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { addMonths, addYears } from 'date-fns';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
 import { DialogRef, ModalComponent, SystelabModalContext } from '../modal';
 import { CalendarTableComponent, DaySlot } from './calendar-table.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
@@ -62,9 +64,7 @@ export class CalendarDialog implements ModalComponent<CalendarDialogParameters> 
 	}
 
 	private getData() {
-		Observable.of(true)
-			.delay(1000)
-			.subscribe(
+		of(true).pipe(delay(1000)).subscribe(
 				(response) => {
 					const returnedDays: DaySlot[] = [];
 					returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});

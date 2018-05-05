@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DialogHeaderComponent, DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
-import { Observable } from 'rxjs/Observable';
+import { interval  } from 'rxjs';
+
 
 export class ShowcaseLoadingDialogParameters extends SystelabModalContext {
 	public index: number;
@@ -38,7 +39,7 @@ export class ShowcaseLoadingDialog implements ModalComponent<ShowcaseLoadingDial
 
 	private submit(): void {
 		this.isLoading = true;
-		Observable.interval(5000)
+		interval(5000)
 			.subscribe(data => {
 				this.isLoading = false;
 			});

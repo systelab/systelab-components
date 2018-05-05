@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-
+import { fromEvent } from 'rxjs';
+import { pairwise, switchMap, takeUntil } from 'rxjs/operators';
 
 export class Point {
 	constructor(public x: number, public y: number) {
@@ -79,15 +79,15 @@ export class SignatureCanvasComponent implements AfterViewInit {
 	}
 
 	public captureEvents(canvas: HTMLCanvasElement) {
-		Observable
-			.fromEvent(canvas, 'mousedown')
-			.switchMap((e) => {
-				return Observable
-					.fromEvent(canvas, 'mousemove')
-					.takeUntil(Observable.fromEvent(canvas, 'mouseup'))
-					.takeUntil(Observable.fromEvent(canvas, 'mouseleave'))
-					.pairwise();
-			})
+		fromEvent(canvas, 'mousedown')
+			.pipe(switchMap((e) => {
+				return fromEvent(canvas, 'mousemove')
+					.pipe(
+						takeUntil(fromEvent(canvas, 'mouseup')))
+					.pipe(
+						takeUntil(fromEvent(canvas, 'mouseleave')))
+					.pipe(pairwise());
+			}))
 			.subscribe((res: [MouseEvent, MouseEvent]) => {
 				const rect = canvas.getBoundingClientRect();
 				const prevPos = new Point(res[0].clientX - rect.left, res[0].clientY - rect.top);

@@ -2,7 +2,7 @@ import {ChangeDetectorRef, EventEmitter, Input, OnDestroy, OnInit, Output, Rende
 import {AgRendererComponent} from 'ag-grid-angular';
 import {IGetRowsParams} from 'ag-grid';
 import {AbstractComboBox} from './abstract-combobox.component';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {current} from 'codelyzer/util/syntaxKind';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {

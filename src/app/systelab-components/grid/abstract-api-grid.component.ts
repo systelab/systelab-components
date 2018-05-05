@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { AbstractGrid } from './abstract-grid.component';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IDatasource, IGetRowsParams } from 'ag-grid';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';

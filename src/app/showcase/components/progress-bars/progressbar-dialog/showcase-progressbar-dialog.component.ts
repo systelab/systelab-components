@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DialogHeaderComponent, DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 
 export class ShowcaseProgressBarDialogParameters extends SystelabModalContext {
 	public index: number;
@@ -26,7 +26,7 @@ export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgres
 
 	public submit(): void {
 		this.progress = 0;
-		Observable.interval(500)
+		interval(500)
 			.subscribe(data => {
 				if (this.progress < 100) {
 					this.progress = this.progress + 10;

@@ -79,8 +79,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		const newElement = document.createElement('i');
 		newElement.className = 'icon-calendar';
 		if (this.currentCalendar) {
-			this.currentCalendar.el.nativeElement.childNodes[1].className = 'ui-calendar slab-form-icon w-100';
-			this.currentCalendar.el.nativeElement.childNodes[1].appendChild(newElement);
+			this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
+			this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 		}
 	}
 

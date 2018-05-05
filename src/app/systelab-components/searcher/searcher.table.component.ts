@@ -5,7 +5,7 @@ import {RowNode} from 'ag-grid';
 import {AbstractSearcher} from './abstract-searcher';
 import {AbstractApiGrid} from '../grid/abstract-api-grid.component';
 import {DialogService} from '../modal/dialog/dialog.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 
 @Component({

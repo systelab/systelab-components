@@ -1,8 +1,7 @@
 import { ComponentRef, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { filter } from 'rxjs/operator/filter';
+import { Observable ,  Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { createComponent, CreateComponentArgs } from '../framework/createComponent';
 

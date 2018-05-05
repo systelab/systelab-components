@@ -1,9 +1,11 @@
 import { Component, Type } from '@angular/core';
 import { Modal } from '../plugin/custom';
 import { SystelabModalContext } from '../modal-context';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { overlayConfigFactory } from '../base/models/overlay-context';
 import { DialogRef } from '../base/models/dialog-ref';
+import { from } from 'rxjs';
+
 
 @Component({
 	selector: 'dialog',
@@ -33,7 +35,7 @@ export class DialogComponent {
 				});
 		});
 
-		return Observable.fromPromise(p);
+		return from(p);
 	}
 
 }

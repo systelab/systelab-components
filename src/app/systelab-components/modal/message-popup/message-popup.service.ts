@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Modal, SystelabModalContext} from '../plugin/custom';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
-import {MessagePopupViewComponent} from './message-popup-view.component';
-import {Observable} from 'rxjs/Observable';
-import {MessageWithIconComponent} from './message-with-icon.component';
+import { Injectable } from '@angular/core';
+import { Modal, SystelabModalContext } from '../plugin/custom';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { MessagePopupViewComponent } from './message-popup-view.component';
+import { from } from 'rxjs';
+import { MessageWithIconComponent } from './message-with-icon.component';
 import { overlayConfigFactory } from '../base/models/overlay-context';
 import { DialogRef } from '../';
+import { Observable } from 'rxjs/Rx';
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any) {
@@ -75,18 +76,18 @@ export class MessagePopupService {
 			this.modal.open(MessagePopupViewComponent,
 				overlayConfigFactory(
 					{
-						fullScreen: fullScreen,
+						fullScreen:  fullScreen,
 						dialogClass: modalClass,
-						msg: message,
-						buttons: buttons,
-						title: title,
-						type: type,
-						width: width,
-						maxWidth: maxWidth,
-						minWidth: minWidth,
-						maxHeight: maxHeight,
-						minHeight: minHeight,
-						height: height
+						msg:         message,
+						buttons:     buttons,
+						title:       title,
+						type:        type,
+						width:       width,
+						maxWidth:    maxWidth,
+						minWidth:    minWidth,
+						maxHeight:   maxHeight,
+						minHeight:   minHeight,
+						height:      height
 					},
 					SystelabModalContext)
 			)
@@ -100,7 +101,7 @@ export class MessagePopupService {
 				});
 		});
 
-		return Observable.fromPromise(p);
+		return from(p);
 	}
 
 }
