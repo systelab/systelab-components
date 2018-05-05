@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
-import * as blueharvest from 'blue-harvest';
 import * as path from 'path';
+import { compareScreenshot } from 'snapshot-testing/dist';
 
 export class ShowcasePage {
 
@@ -19,6 +19,6 @@ export class ShowcasePage {
 	public async checkNavigationItem(i: number) {
 		await this.getNavItem(i).click();
 		const data = await this.takeScreenshot();
-		return await blueharvest.compareScreenshot(data, path.join(__dirname, `snapshots/snapshots_${i + 1}.png`));
+		return await compareScreenshot(data, path.join(__dirname, `snapshots`), `snapshots_${i + 1}.png`);
 	}
 }

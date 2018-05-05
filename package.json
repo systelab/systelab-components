@@ -85,7 +85,7 @@
         "karma-jasmine": "~1.1.0",
         "karma-jasmine-html-reporter": "^0.2.2",
         "protractor": "^5.3.0",
-        "blue-harvest": "^0.2.0",
+        "snapshot-testing": "^1.0.0",
         "rimraf": "^2.6.1",
         "ts-node": "~3.2.0",
         "tslint": "~5.3.2",
