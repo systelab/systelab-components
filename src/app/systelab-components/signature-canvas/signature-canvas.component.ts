@@ -81,12 +81,9 @@ export class SignatureCanvasComponent implements AfterViewInit {
 	public captureEvents(canvas: HTMLCanvasElement) {
 		fromEvent(canvas, 'mousedown')
 			.pipe(switchMap((e) => {
-				return fromEvent(canvas, 'mousemove')
-					.pipe(
-						takeUntil(fromEvent(canvas, 'mouseup')))
-					.pipe(
-						takeUntil(fromEvent(canvas, 'mouseleave')))
-					.pipe(pairwise());
+				return fromEvent(canvas, 'mousemove').pipe(
+						takeUntil(fromEvent(canvas, 'mouseup')),
+						takeUntil(fromEvent(canvas, 'mouseleave')), pairwise());
 			}))
 			.subscribe((res: [MouseEvent, MouseEvent]) => {
 				const rect = canvas.getBoundingClientRect();

@@ -4,7 +4,7 @@
     </div>
     <canvas class="border rounded" #signature></canvas>
     <div class="text-right mt-2" [style.width.px]="width" *ngIf="!verificationActive">
-        <button class="btn btn-primary" (click)="cleanCanvas()">{{ 'SIGN_CLEAN' | translate | async }}</button>
+        <button class="btn btn-primary mr-1" (click)="cleanCanvas()">{{ 'SIGN_CLEAN' | translate | async }}</button>
         <button [disabled]="isCanvasEmpty" class="btn btn-success" (click)="finishDrawing()">{{ 'SIGN_FINISH' | translate | async }}</button>
         <a href="#" *ngIf="idsDownloadable" class="btn btn-primary " [attr.download]="downPath" [attr.href]="href" id="btn-download"
            (click)="downloadImage()">{{ 'SIGN_DOWNLOAD' | translate | async }}</a>
