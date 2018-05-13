@@ -67,6 +67,8 @@ import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-inp
 import {DragAndDropService} from 'ag-grid';
 
 
+
+
 @NgModule({
 	imports: [
 		CommonModule,
@@ -79,9 +81,9 @@ import {DragAndDropService} from 'ag-grid';
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		DndModule,
-		AgGridModule
-	],
+		AgGridModule,
+		DndModule
+],
 	declarations: [
 		SliderComponent,
 		SwitchComponent,
@@ -203,23 +205,16 @@ import {DragAndDropService} from 'ag-grid';
 })
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		const module = AgGridModule.withComponents([
-			GridContextMenuComponent,
-			GridHeaderContextMenuComponent
-		]);
-
-		const dndModule = DndModule.forRoot();
-		module.providers.push(dndModule.providers);
-
-		module.ngModule = SystelabComponentsModule;
-		module.providers.push([
-			{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
-			{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
-			{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
-			Ng2ComponentFactory,
-			{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-			{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
-		]);
-		return module;
+		return {
+			ngModule: SystelabComponentsModule,
+			providers: [
+				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
+				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
+				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
+				Ng2ComponentFactory,
+				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
+				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
+			]
+		};
 	}
 }

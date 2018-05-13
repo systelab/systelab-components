@@ -63,6 +63,10 @@ import { ShowcaseTreeComponent } from './components/tree/showcase-tree.component
 import { TreeModule } from 'primeng/primeng';
 import { ShowcasePercentageCircleComponent } from './components/percentage-circle/showcase-percentage-circle.component';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { GridContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-context-menu.component';
+import { GridHeaderContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-header-context-menu.component';
+import {DndModule} from 'ng2-dnd';
 
 @NgModule({
 	imports: [
@@ -73,7 +77,12 @@ import { ShowcaseInlineComponent } from './components/inline/showcase-inline.com
 		HttpClientModule,
 		SystelabComponentsModule.forRoot(),
 		SystelabTranslateModule.forRoot(),
-		SystelabPreferencesModule.forRoot()
+		SystelabPreferencesModule.forRoot(),
+		AgGridModule.withComponents([
+			GridContextMenuComponent,
+			GridHeaderContextMenuComponent
+		]),
+		DndModule.forRoot()
 	],
 	declarations: [
 		ShowcaseComponent,
