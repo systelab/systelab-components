@@ -35,14 +35,19 @@ After, you must import SystelabComponentsModule, as well as other libraries, in 
 
 ```javascript
 NgModule({
-	imports: [
-		BrowserModule,
-		FormsModule,
-		HttpClientModule,
-		SystelabTranslateModule.forRoot(),
-		SystelabPreferencesModule.forRoot(),
-		SystelabComponentsModule.forRoot(),
-		SystelabLoginModule.forRoot(),
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        SystelabTranslateModule.forRoot(),
+        SystelabPreferencesModule.forRoot(),
+        SystelabLoginModule.forRoot(),
+        SystelabComponentsModule.forRoot(),
+        DndModule.forRoot(),
+        AgGridModule.withComponents([
+            GridContextMenuComponent,
+            GridHeaderContextMenuComponent
+        ]),
     ...
 ```
 
@@ -50,8 +55,8 @@ and add MessagePopupService and DialogService as providers.
 
 ```javascript
 providers: [
-	MessagePopupService,
-	DialogService
+    MessagePopupService,
+    DialogService
 ],
 ```
 
@@ -61,16 +66,16 @@ In the following example, for the component AppComponent, we have created and ad
 
 ```javascript
 @Component({
-	selector:      'app-root',
-	templateUrl:   'app.component.html',
-	styleUrls:     ['app.component.scss'],
-	encapsulation: ViewEncapsulation.None
+    selector:      'app-root',
+    templateUrl:   'app.component.html',
+    styleUrls:     ['app.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
+    constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
         ...
-	}
+    }
 }
 ```
 
