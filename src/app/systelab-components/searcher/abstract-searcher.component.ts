@@ -112,20 +112,20 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 				'min-width': this.height.toString() + 'px',
 			};
 		}
-		return {};
+		return undefined;
 	}
 
 	public getInputHeight() {
 		if (this.height) {
 			return { 'height': '100%' };
 		}
-		return {};
+		return undefined;
 	}
 	public getLineHeight() {
 		if (this.height) {
 			return { 'line-height': this.height.toString() + 'px' };
 		}
-		return {};
+		return undefined;
 	}
 
 	public openSearchDialog(): void {
