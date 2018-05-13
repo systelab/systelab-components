@@ -1,6 +1,6 @@
 {
     "name": "systelab-components",
-    "version": "6.1.0",
+    "version": "6.2.0",
     "license": "MIT",
     "keywords": [
         "Angular",
@@ -53,9 +53,6 @@
         "systelab-translate": "^4.2.0",
         "rxjs-compat": "^6.1.0"
     },
-    "peerDependencies": {
-        "@angular/core": ">=5.0.0"
-    },
     "devDependencies": {
         "@angular/animations": "^6.0.1",
         "@angular/common": "^6.0.1",
@@ -87,7 +84,7 @@
         "snapshot-testing": "^1.0.0",
         "rimraf": "^2.6.1",
         "rxjs": "6.1.0",
-        "ts-node": "~3.0.4",
+        "ts-node": "~3.2.0",
         "tslint": "~5.3.2",
         "typescript": "2.7.2",
         "zone.js": "0.8.26",
