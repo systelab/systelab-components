@@ -12,7 +12,7 @@ In order to use the library, the first thing will be to add it in your package.j
 npm install systelab-components --save
 ```
 
-After, you must add the following styles and scripts in the .angular-cli.json file,
+After, you must add the following styles and scripts in the angular.json file,
 
 ```javascript
 "styles": [
