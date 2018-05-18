@@ -60,7 +60,7 @@ import {PercentageCircleComponent} from './percentage-circle/percentage-circle.c
 import {DOMOutsideEventPlugin, DOMOverlayRenderer} from './modal/base/providers';
 import {OverlayRenderer} from './modal/base/models/tokens';
 import {LoadingService} from './loading/loading.service';
-import {ExpirySelect} from './select/expiry-combobox.component';
+import {TimeUnitSelectComponent} from './select/time-unit-combobox.component';
 import {CheckboxCellRendererComponent} from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-renderer.component';
 import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
@@ -104,7 +104,7 @@ import {DragAndDropService} from 'ag-grid';
 		AllYesNoSelect,
 		NoYesSelect,
 		PeriodSelect,
-		ExpirySelect,
+		TimeUnitSelectComponent,
 		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
@@ -150,7 +150,7 @@ import {DragAndDropService} from 'ag-grid';
 		AllYesNoSelect,
 		NoYesSelect,
 		PeriodSelect,
-		ExpirySelect,
+		TimeUnitSelectComponent,
 		GenderSelect,
 		Datepicker,
 		TouchspinComponent,
