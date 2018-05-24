@@ -27,6 +27,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
 	@Input() public allowEditInput = false;
+	@Input() public emptyElement = false;
 
 	public _id: number | string;
 	@Input()
