@@ -39,25 +39,6 @@ export class GenderSelect extends AbstractComboBox implements AfterViewInit {
 			this._id = 'U';
 			this._description = this.i18nService.instant( 'COMMON_UNKNOWN' );
 		}
-	}
-
-	public afterSettingId( value: number | string ) {
-		this.genderValueChange.emit( value );
-		switch ( value ) {
-			case 'A':
-				this.description = this.i18nService.instant( 'COMMON_ALL' );
-				break;
-			case 'U':
-				this.description = this.i18nService.instant( 'COMMON_UNKNOWN' );
-				break;
-			case 'M':
-				this.description = this.i18nService.instant( 'COMMON_MALE' );
-				break;
-			case 'F':
-				this.description = this.i18nService.instant( 'COMMON_FEMALE' );
-				break;
-			default:
-				break;
-		}
+		this.gridOptions.rowData = this.values;
 	}
 }
