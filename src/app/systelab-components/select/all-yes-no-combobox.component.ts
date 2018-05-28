@@ -20,11 +20,11 @@ export class AllYesNoSelect extends AbstractComboBox implements AfterViewInit {
 
 	public ngAfterViewInit() {
 		this.values = new Array<Element>();
-		this.values.push( new Element( 'A', this.i18nService.instant( 'COMMON_ALL' ) ) );
+		this.values.push( new Element( '', this.i18nService.instant( 'COMMON_ALL' ) ) );
 		this.values.push( new Element( 'Y', this.i18nService.instant( 'COMMON_YES' ) ) );
 		this.values.push( new Element( 'N', this.i18nService.instant( 'COMMON_NO' ) ) );
 		if ( !this._id ) {
-			this._id = 'A';
+			this._id = '';
 			this._description = this.i18nService.instant( 'COMMON_ALL' );
 		}
 		this.gridOptions.rowData = this.values;
@@ -38,10 +38,8 @@ export class AllYesNoSelect extends AbstractComboBox implements AfterViewInit {
 			case 'N':
 				this.description = this.i18nService.instant( 'COMMON_NO' );
 				break;
-			case 'A':
-				this.description = this.i18nService.instant( 'COMMON_ALL' );
-				break;
 			default:
+				this.description = this.i18nService.instant( 'COMMON_ALL' );
 				break;
 		}
 	}
