@@ -32,12 +32,14 @@ export class GenderSelect extends AbstractComboBox implements AfterViewInit {
 		this.values.push( new Element( 'M', this.i18nService.instant( 'COMMON_MALE' ) ) );
 		this.values.push( new Element( 'F', this.i18nService.instant( 'COMMON_FEMALE' ) ) );
 
-		if ( this.showAll ) {
-			this._id = 'A';
-			this._description = this.i18nService.instant( 'COMMON_ALL' );
-		} else {
-			this._id = 'U';
-			this._description = this.i18nService.instant( 'COMMON_UNKNOWN' );
+		if ( !this._id ) {
+			if ( this.showAll ) {
+				this._id = 'A';
+				this._description = this.i18nService.instant( 'COMMON_ALL' );
+			} else {
+				this._id = 'U';
+				this._description = this.i18nService.instant( 'COMMON_UNKNOWN' );
+			}
 		}
 		this.gridOptions.rowData = this.values;
 	}
