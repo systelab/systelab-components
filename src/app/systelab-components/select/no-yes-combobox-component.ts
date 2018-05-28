@@ -1,5 +1,5 @@
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
-import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 class Element {
@@ -13,9 +13,12 @@ class Element {
 	templateUrl: '../combobox/abstract-combobox.component.html'
 } )
 
-export class NoYesSelect extends AbstractComboBox {
+export class NoYesSelect extends AbstractComboBox implements AfterViewInit {
 	constructor( public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService ) {
 		super( myRenderer, chRef );
+	}
+
+	public ngAfterViewInit() {
 		this.values = new Array<Element>();
 		this.values.push( new Element( 'N', this.i18nService.instant( 'COMMON_NO' ) ) );
 		this.values.push( new Element( 'Y', this.i18nService.instant( 'COMMON_YES' ) ) );
@@ -23,6 +26,7 @@ export class NoYesSelect extends AbstractComboBox {
 			this._id = 'Y';
 			this._description = this.i18nService.instant( 'COMMON_YES' );
 		}
+		this.gridOptions.rowData = this.values;
 	}
 
 	public afterSettingId( value: number | string ) {
