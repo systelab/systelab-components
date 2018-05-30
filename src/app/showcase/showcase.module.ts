@@ -67,6 +67,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-context-menu.component';
 import { GridHeaderContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-header-context-menu.component';
 import {DndModule} from 'ng2-dnd';
+import { ShowcaseWizardStepsComponent } from './components/wizard-steps/showcase-wizard-steps.component';
 
 @NgModule({
 	imports: [
@@ -139,6 +140,7 @@ import {DndModule} from 'ng2-dnd';
 		ShowcaseInnerTreeComponent,
 		ShowcasePercentageCircleComponent,
 		ShowcaseInlineComponent,
+		ShowcaseWizardStepsComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
