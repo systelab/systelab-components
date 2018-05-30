@@ -20,7 +20,7 @@ export class NavbarComponent {
 	@Input() public align = 'left';
 	@Input() public id: string;
 
-	public hovered = 0;
+	public hovered:number;
 
 	constructor() {
 	}
