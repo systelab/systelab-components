@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-export class StepWizard {
-	num: number;
-	text: string;
-	viewed: boolean;
+export class WizardStep {
+	step: number;
+	description: string;
+	visited: boolean;
 }
 @Component({
 	selector: 'systelab-wizard-steps',
@@ -11,8 +11,8 @@ export class StepWizard {
 })
 export class WizardStepsComponent {
 
-	@Input() steps: Array<StepWizard> = [];
-	@Input() circleSteps: boolean;
+	@Input() steps: Array<WizardStep> = [];
+	@Input() roundedStep: boolean;
 	@Input() allowNavigation: boolean;
 	private _currentStep = 1;
 	@Input()

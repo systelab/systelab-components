@@ -2,10 +2,10 @@
 	<div class="stepsWizard w-100 ">
 		<div class="row setup-panel">
 			<div class="step" *ngFor="let step of steps">
-				<button (click)="doAction(step)" [disabled]="(!allowNavigation  && step.num < currentStep) || step.num > currentStep" class="btn cursor"
-				 [class.btn-default]="step.num > currentStep && !step.viewed" [class.btn-info]="step.num < currentStep && step.viewed || step.viewed && step.num != currentStep"
-				 [class.btn-primary]="step.num == currentStep" [class.btn-circle]="circleSteps">{{step.num}}</button>
-				<p class="mt-3">{{step.text}}</p>
+				<button (click)="doAction(step)" [disabled]="(!allowNavigation  && step.step < currentStep) || step.step > currentStep" class="btn cursor"
+				 [class.btn-default]="step.step > currentStep && !step.visited" [class.btn-info]="step.step < currentStep && step.visited || step.visited && step.step !== currentStep"
+				 [class.btn-primary]="step.step === currentStep" [class.btn-round]="roundedStep">{{step.step}}</button>
+				<p class="mt-3">{{step.description}}</p>
 			</div>
 		</div>
 	</div>

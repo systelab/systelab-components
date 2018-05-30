@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StepWizard } from '../../../systelab-components/wizard-steps/wizard-steps.component';
+import { WizardStep } from '../../../systelab-components/wizard-steps/wizard-steps.component';
 
 @Component({
 	selector: 'showcase-wizard-steps',
@@ -8,12 +8,12 @@ import { StepWizard } from '../../../systelab-components/wizard-steps/wizard-ste
 export class ShowcaseWizardStepsComponent {
 	public allowNavigation = true;
 	public currentStep = 3;
-	public steps: Array<StepWizard> = [];
-	public circleSteps = false;
+	public steps: Array<WizardStep> = [];
+	public roundedStep = false;
 	constructor() {
-		this.steps.push({ num: 1, text: 'Step 1', viewed: true }, { num: 2, text: 'Step 2', viewed: true }, { num: 3, text: 'Step 3', viewed: false }, { num: 4, text: 'Step 4', viewed: false }, { num: 5, text: 'Step 5', viewed: false });
+		this.steps.push({ step: 1, description: 'Step 1', visited: true }, { step: 2, description: 'Step 2', visited: true }, { step: 3, description: 'Step 3', visited: false }, { step: 4, description: 'Step 4', visited: false }, { step: 5, description: 'Step 5', visited: false });
 	}
-	public goStep(e) {
+	public gotoStep(e) {
 		console.log(e)
 	}
 }
