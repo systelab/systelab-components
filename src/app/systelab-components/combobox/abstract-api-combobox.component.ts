@@ -1,8 +1,8 @@
-import {ChangeDetectorRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-import {IGetRowsParams} from 'ag-grid';
-import {AbstractComboBox} from './abstract-combobox.component';
-import {Observable} from 'rxjs';
+import { ChangeDetectorRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { IGetRowsParams } from 'ag-grid';
+import { AbstractComboBox } from './abstract-combobox.component';
+import { Observable } from 'rxjs';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
@@ -11,22 +11,23 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public _multipleSelectedItemList: Array<T>;
 
 	@Input()
-	set multipleSelectedItemList(value: Array<T>) {
+	set multipleSelectedItemList( value: Array<T> ) {
 		this._multipleSelectedItemList = value;
 		this._description = '';
 		this._code = '';
-		for (const selectedItem of value) {
-			if (this._code !== '') {
+		for ( const selectedItem of value ) {
+			if ( this._code !== '' ) {
 				this._code += '; ';
 			}
 			this._code += selectedItem[this.getCodeField()];
 
-			if (this._description !== '') {
+			if ( this._description !== '' ) {
 				this._description += '; ';
 			}
 			this._description += selectedItem[this.getDescriptionField()];
 		}
-		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
+		this.multipleSelectedItemListChange.emit( this._multipleSelectedItemList );
+		this.multipleSelectedIDListChange.emit( this.selectionItemListToIDList() );
 	}
 
 	get multipleSelectedItemList() {
@@ -34,6 +35,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
+	@Output() public multipleSelectedIDListChange = new EventEmitter();
 
 	public startsWith = '';
 
@@ -42,8 +44,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public selectionChanged = false;
 	public totalItemsLoaded = false;
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
-		super(myRenderer, chref);
+	constructor( public myRenderer: Renderer2, public chref: ChangeDetectorRef ) {
+		super( myRenderer, chref );
 	}
 
 	public ngOnInit() {
@@ -54,8 +56,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID: 'itemDescription',
-				field: this.getDescriptionField(),
+				colID:             'itemDescription',
+				field:             this.getDescriptionField(),
 				checkboxSelection: this.getMultipleSelection()
 			}
 		];
@@ -68,7 +70,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
 
-		if (this.multipleSelection) {
+		if ( this.multipleSelection ) {
 			this.gridOptions.rowSelection = 'multiple';
 			this.gridOptions.suppressRowClickSelection = true;
 		} else {
@@ -85,12 +87,12 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked: this.getCheckboxChecked()
+			checkboxChecked:   this.getCheckboxChecked()
 		};
 
 		this.gridOptions.getRowNodeId =
-			(item) => {
-				if (item[this.getIdField()]) {
+			( item ) => {
+				if ( item[this.getIdField()] ) {
 					return item[this.getIdField()];
 				} else {
 					return null;
@@ -108,33 +110,33 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public abstract getIdField(): string;
 
-	public abstract getData(page: number, itemsPerPage: number, startsWithParameter: string): Observable<Array<T>>;
+	public abstract getData( page: number, itemsPerPage: number, startsWithParameter: string ): Observable<Array<T>>;
 
 	public abstract getTotalItems(): number;
 
 	public getMultipleSelection(): boolean {
-		if (this.multipleSelection) {
+		if ( this.multipleSelection ) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public refresh(params: any): boolean {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.setDatasource(this);
+	public refresh( params: any ): boolean {
+		if ( this.gridOptions && this.gridOptions.api ) {
+			this.gridOptions.api.setDatasource( this );
 		}
 		return true;
 	}
 
 	// override
-	public onComboClicked(event: MouseEvent) {
-		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
+	public onComboClicked( event: MouseEvent ) {
+		if ( this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf( 'input' ) > -1) ) {
 			event.stopPropagation();
 		} else {
 			const isOpen: boolean = this.isDropDownOpen();
 
-			if (!isOpen) {
+			if ( !isOpen ) {
 				this.isDropdownOpened = true;
 				super.showDropDown();
 			} else {
@@ -154,20 +156,20 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public loop(): void {
 		let result = true;
 
-		if (this.isDropDownOpen()) {
+		if ( this.isDropDownOpen() ) {
 			// First time opened we load the table
-			if (this.gridOptions.datasource === null) {
+			if ( this.gridOptions.datasource === null ) {
 				this.gridOptions.datasource = this;
-				this.refresh(null);
+				this.refresh( null );
 			}
-			if (this.totalItemsLoaded) {
+			if ( this.totalItemsLoaded ) {
 				this.setDropdownHeight();
 				this.setDropdownPosition();
 				result = false;
 			}
 		}
-		if (result && this.isDropdownOpened) {
-			setTimeout(() => this.loop(), 10);
+		if ( result && this.isDropdownOpened ) {
+			setTimeout( () => this.loop(), 10 );
 		} else {
 			return;
 		}
@@ -175,39 +177,39 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	// override
 	public setDropdownHeight() {
-		let totalItems = Number(this.getTotalItems());
+		let totalItems = Number( this.getTotalItems() );
 		let calculatedHeight = 0;
 
-		if (this.emptyElement) {
+		if ( this.emptyElement ) {
 			totalItems += 1;
 		}
 
-		if (totalItems === 0) {
+		if ( totalItems === 0 ) {
 			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
-		} else if (totalItems < 10) {
+			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px' );
+		} else if ( totalItems < 10 ) {
 			calculatedHeight = 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
 		} else {
 			calculatedHeight = AbstractComboBox.ROW_HEIGHT * 10;
 		}
-		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
+		this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px' );
 
-		if (this.filter) {
-			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
+		if ( this.filter ) {
+			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName( 'ag-grid-angular' );
 			const agGridHeight = calculatedHeight - 33;
-			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
+			this.myRenderer.setStyle( agGridElement[0], 'height', agGridHeight + 'px' );
 		}
 	}
 
-	public doSearch(event: any) {
-		if (event.shiftKey || event.ctrlKey) {
+	public doSearch( event: any ) {
+		if ( event.shiftKey || event.ctrlKey ) {
 			return;
 		}
 		this.startsWith = event.target.value;
-		this.refresh(null);
+		this.refresh( null );
 	}
 
-	public getRows(params: IGetRowsParams): void {
+	public getRows( params: IGetRowsParams ): void {
 
 		const page: number = params.endRow / this.gridOptions.paginationPageSize;
 		const pageSize: number = this.gridOptions.paginationPageSize;
@@ -216,21 +218,21 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		const totalItems: number = this.getTotalItems() + emptyElemNumber;
 		const modulus: number = totalItems % pageSize;
 
-		if (page === 1 || page <= totalItems / pageSize || modulus > 1 || (modulus === 1 && !this.emptyElement)) {
-			this.getElements(page, pageSize, emptyElemNumber, params);
+		if ( page === 1 || page <= totalItems / pageSize || modulus > 1 || (modulus === 1 && !this.emptyElement) ) {
+			this.getElements( page, pageSize, emptyElemNumber, params );
 		} else {
 			this.totalItemsLoaded = false;
-			this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
+			this.getData( page - 1, this.gridOptions.paginationPageSize, this.startsWith )
 				.subscribe(
-					(previousPage: Array<T>) => {
+					( previousPage: Array<T> ) => {
 						const itemArray: Array<T> = new Array<T>();
-						const totItems: number = Number(this.getTotalItems() + emptyElemNumber);
+						const totItems: number = Number( this.getTotalItems() + emptyElemNumber );
 
 						const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-						itemArray.push(lastItemFromPreviousPage);
+						itemArray.push( lastItemFromPreviousPage );
 
 						this.totalItemsLoaded = true;
-						params.successCallback(itemArray, totItems);
+						params.successCallback( itemArray, totItems );
 
 					},
 					() => {
@@ -240,38 +242,38 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		}
 	}
 
-	private getElements(page: number, pageSize: number, emptyElemNumber: number, params: IGetRowsParams) {
+	private getElements( page: number, pageSize: number, emptyElemNumber: number, params: IGetRowsParams ) {
 		this.totalItemsLoaded = false;
-		this.getData(page, pageSize, this.startsWith)
+		this.getData( page, pageSize, this.startsWith )
 			.subscribe(
-				(v: Array<T>) => {
+				( v: Array<T> ) => {
 					const itemArray: Array<T> = new Array<T>();
-					const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
+					const totalItems: number = Number( this.getTotalItems() + emptyElemNumber );
 
-					if (this.emptyElement === true) {
+					if ( this.emptyElement === true ) {
 
-						if (page === 1) {
+						if ( page === 1 ) {
 							const newElement: T = this.getInstance();
-							itemArray.push(newElement);
+							itemArray.push( newElement );
 
-							for (const originalElement of v) {
-								itemArray.push(originalElement);
+							for ( const originalElement of v ) {
+								itemArray.push( originalElement );
 							}
-							params.successCallback(itemArray, totalItems);
+							params.successCallback( itemArray, totalItems );
 							this.totalItemsLoaded = true;
 
 						} else {
-							this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
+							this.getData( page - 1, this.gridOptions.paginationPageSize, this.startsWith )
 								.subscribe(
-									(previousPage: Array<T>) => {
+									( previousPage: Array<T> ) => {
 										const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-										itemArray.push(lastItemFromPreviousPage);
+										itemArray.push( lastItemFromPreviousPage );
 
-										for (const originalElement of v) {
-											itemArray.push(originalElement);
+										for ( const originalElement of v ) {
+											itemArray.push( originalElement );
 										}
 										this.totalItemsLoaded = true;
-										params.successCallback(itemArray, totalItems);
+										params.successCallback( itemArray, totalItems );
 									},
 									() => {
 										params.failCallback();
@@ -279,11 +281,11 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 								);
 						}
 					} else {
-						for (const originalElement of v) {
-							itemArray.push(originalElement);
+						for ( const originalElement of v ) {
+							itemArray.push( originalElement );
 						}
 						this.totalItemsLoaded = true;
-						params.successCallback(itemArray, totalItems);
+						params.successCallback( itemArray, totalItems );
 					}
 				},
 				error => {
@@ -293,25 +295,25 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	public getSelectedRow(): T {
-		if (this.gridOptions && this.gridOptions.api) {
+		if ( this.gridOptions && this.gridOptions.api ) {
 			const selectedRow: Array<T> = this.gridOptions.api.getSelectedRows();
-			if (selectedRow !== null) {
+			if ( selectedRow !== null ) {
 				return selectedRow[0];
 			}
 		}
 		return undefined;
 	}
 
-	public onSelectionChanged(event: any) {
-		if (!this.multipleSelection) {
+	public onSelectionChanged( event: any ) {
+		if ( !this.multipleSelection ) {
 			const selectedRow = this.getSelectedRow();
-			if (selectedRow !== null && selectedRow !== undefined) {
+			if ( selectedRow !== null && selectedRow !== undefined ) {
 				this.id = selectedRow[this.getIdField()];
 				this.code = selectedRow[this.getCodeField()];
 				this.description = selectedRow[this.getDescriptionField()];
 				this.currentSelected = selectedRow;
-				this.change.emit(this.id);
-				this.idChange.emit(this.id);
+				this.change.emit( this.id );
+				this.idChange.emit( this.id );
 				this.closeDropDown();
 			}
 		} else {
@@ -320,25 +322,25 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	}
 
 	// overrides
-	public onRowSelected(event: any) {
-		if (!this.multipleSelection) {
-		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
-			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
-				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+	public onRowSelected( event: any ) {
+		if ( !this.multipleSelection ) {
+		} else if ( event.node && event.node.data && event.node.data[this.getIdField()] !== undefined ) {
+			if ( this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined ) {
+				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex( ( item ) => {
 					return item[this.getIdField()] === event.node.data[this.getIdField()];
-				});
-				if (event.node.selected) {
-					if (elementIndexInSelectedList < 0) {
+				} );
+				if ( event.node.selected ) {
+					if ( elementIndexInSelectedList < 0 ) {
 						const newElement: T = this.getInstance();
 						newElement[this.getIdField()] = event.node.data[this.getIdField()];
 						newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 						newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
-						this.multipleSelectedItemList.push(newElement);
+						this.multipleSelectedItemList.push( newElement );
 						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 					}
 				} else {
-					if (elementIndexInSelectedList !== -1) {
-						this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
+					if ( elementIndexInSelectedList !== -1 ) {
+						this.multipleSelectedItemList.splice( elementIndexInSelectedList, 1 );
 						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 					}
 				}
@@ -348,17 +350,17 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 				newElement[this.getIdField()] = event.node.data[this.getIdField()];
 				newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 				newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
-				this.multipleSelectedItemList.push(newElement);
+				this.multipleSelectedItemList.push( newElement );
 				this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 			}
 			this._description = '';
 			this._code = '';
-			for (const selectedItem of this.multipleSelectedItemList) {
-				if (this._code !== '') {
+			for ( const selectedItem of this.multipleSelectedItemList ) {
+				if ( this._code !== '' ) {
 					this._code += '; ';
 				}
 				this._code += selectedItem[this.getCodeField()];
-				if (this._description !== '') {
+				if ( this._description !== '' ) {
 					this._description += '; ';
 				}
 				this._description += selectedItem[this.getDescriptionField()];
@@ -368,31 +370,33 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public onModelUpdated() {
 		this.gridOptions.api.sizeColumnsToFit();
-		if (this.multipleSelection) {
-			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
-				this.gridOptions.api.forEachNode(node => {
-					if (this.multipleSelectedItemList
-							.filter((selectedItem) => {
-								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
-							}).length > 0) {
-						node.selectThisNode(true);
+		if ( this.multipleSelection ) {
+			if ( this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0 ) {
+				this.gridOptions.api.forEachNode( node => {
+					if ( this.multipleSelectedItemList
+						.filter( ( selectedItem ) => {
+							return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+						} ).length > 0 ) {
+						node.selectThisNode( true );
 					}
-				});
+				} );
 			}
-		} else if (this._id && this._id !== undefined) {
-			this.gridOptions.api.forEachNode(node => {
-				if (node.id === this._id) {
+		} else if ( this._id && this._id !== undefined ) {
+			this.gridOptions.api.forEachNode( node => {
+				if ( node.id === this._id ) {
 					this.currentSelected = node.data;
-					node.selectThisNode(true);
+					node.selectThisNode( true );
 				}
-			});
+			} );
 		}
 	}
 
 	public checkMultipleSelectionClosed() {
-		if (this.selectionChanged) {
-			this.change.emit(this.multipleSelectedItemList);
-			this.multipleSelectedItemListChange.emit(this.multipleSelectedItemList);
+		if ( this.selectionChanged ) {
+			this.change.emit( this.multipleSelectedItemList );
+			this.multipleSelectedItemListChange.emit( this.multipleSelectedItemList );
+			this.multipleSelectedIDListChange.emit( this.selectionItemListToIDList() );
+
 		}
 	}
 
@@ -402,6 +406,14 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 
 	public getCheckboxChecked(): string {
 		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
+	}
+
+	private selectionItemListToIDList(): Array<string | number> {
+		const idList = new Array<string | number>();
+		for ( const item of this.multipleSelectedItemList ) {
+			idList.push( item[this.getIdField()] );
+		}
+		return idList;
 	}
 
 }
