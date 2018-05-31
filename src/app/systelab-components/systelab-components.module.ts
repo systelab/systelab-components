@@ -65,6 +65,7 @@ import {CheckboxCellRendererComponent} from './grid/custom-cells/checkbox/checkb
 import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-renderer.component';
 import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
 import {DragAndDropService} from 'ag-grid';
+import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 
 
 
@@ -134,7 +135,8 @@ import {DragAndDropService} from 'ag-grid';
 		PercentageCircleComponent,
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
-		CheckboxCellRendererComponent
+		CheckboxCellRendererComponent,
+		WizardStepsComponent
 	],
 	exports: [
 		SliderComponent,
@@ -185,7 +187,8 @@ import {DragAndDropService} from 'ag-grid';
 		TooltipDirective,
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
-		CheckboxCellRendererComponent
+		CheckboxCellRendererComponent,
+		WizardStepsComponent
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
