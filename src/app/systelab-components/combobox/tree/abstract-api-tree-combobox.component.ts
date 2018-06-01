@@ -117,8 +117,12 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	// Override
 	public setDropdownHeight() {
-		const totalItems = Number( this.getTotalItems() );
+		let totalItems = Number( this.getTotalItems() );
 		let calculatedHeight = 0;
+
+		if (this.emptyElement) {
+			totalItems += 1;
+		}
 
 		if ( totalItems === 0 ) {
 			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
@@ -146,6 +150,14 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 				( dataVector: Array<T> ) => {
 					const nodeVector: Array<ComboTreeNode> = [];
 					let previousParent: number | string;
+
+					if ( this.emptyElement ) {
+						const emptyElement: T = {} as T;
+						emptyElement[this.getLevelIdField( 0 )] = '';
+						emptyElement[this.getLevelDescriptionField( 0 )] = '';
+						const emptyElementNode: ComboTreeNode = new ComboTreeNode( emptyElement, 0 );
+						nodeVector.push(emptyElementNode);
+					}
 
 					if ( this.isAllSelectable ) {
 						const allElement: T = {} as T;
