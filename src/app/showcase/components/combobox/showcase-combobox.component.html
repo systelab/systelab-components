@@ -60,4 +60,16 @@
             </systelab-gender-select>
         </div>
     </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Multiple Selection</label>
+        <div class="col-md-9">
+            <systelab-select
+                    [multiple]="multiple"
+                    [filter]="true"
+                    [listSelectedValues]="listSelectedValues"
+                    [values]="comboOptionList"
+                    (change)="comboChangeEvent($event)">
+            </systelab-select>
+        </div>
+    </div>
 </div>

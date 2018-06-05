@@ -2,8 +2,8 @@ import {
 	ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2,
 	ViewChild
 } from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-import {GridOptions} from 'ag-grid';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { GridOptions } from 'ag-grid';
 
 declare var jQuery: any;
 
@@ -14,6 +14,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Input() public customInputRenderer: any;
 	@Input() public initialParams: any;
 	@Input() public filter = false;
+	@Input() public multiple = false;
+	@Input() public listSelectedValues = false;
 
 	@Input() public fontFamily: string;
 	@Input() public fontSize: string;
@@ -87,6 +89,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	public filterValue = '';
 	public currentSelected: any = {};
+	public currentListSelected: Array<any> = [];
 
 	public gridOptions: GridOptions;
 	public columnDefs: Array<any>;
@@ -124,21 +127,22 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	protected configGrid() {
-		this.columnDefs = [
-			{
-				colID: 'id',
-				field: 'description'
-			}
-		];
-
+		this.columnDefs = [];
 		this.gridOptions = {};
 
-		this.gridOptions.columnDefs = this.columnDefs;
+		if (this.multiple === true) {
+			this.columnDefs.push({ checkboxSelection: true, maxWidth: 30, width: 30, minWidth: 30, suppressSorting: true, cellClass: 'text-center pointer' });
+			this.gridOptions.rowSelection = 'multiple';
+			this.gridOptions.suppressRowClickSelection = true;
+		}
+		else {
+			this.gridOptions.rowSelection = 'single';
+		}
+		this.columnDefs.push({ colID: 'id', field: 'description' });
 
+		this.gridOptions.columnDefs = this.columnDefs;
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
-		this.gridOptions.rowSelection = 'single';
-
 		this.gridOptions.rowData = this.values;
 	}
 
@@ -263,8 +267,11 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	public getSelectedRow(): any {
 		if (this.gridOptions && this.gridOptions.api) {
 			const selectedRow: any = this.gridOptions.api.getSelectedRows();
-			if (selectedRow !== null) {
+			if (selectedRow !== null && this.multiple === false) {
 				return selectedRow[0];
+			}
+			else if (selectedRow !== null && this.multiple === true) {
+				return selectedRow
 			}
 		}
 		return undefined;
@@ -272,20 +279,32 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	public doSearch(event: any) {
 		// TODO: check when translations are integrated
-		const auxListArray = this.values.filter(element => element.description.indexOf(event.target.value) > -1);
+		this.filterValue = event.target.value;
+		this.doFilter();
+	}
+
+	public doFilter() {
+		const auxListArray = this.values.filter(element => element.description.toLowerCase().indexOf(this.filterValue.toLowerCase()) > -1);
 		this.gridOptions.api.setRowData(auxListArray);
 	}
 
 	public onSelectionChanged(event: any) {
 
 		const selectedRow = this.getSelectedRow();
-		this.id = selectedRow.id;
-		this.description = selectedRow.description;
-		this.currentSelected = selectedRow;
-		this.change.emit(selectedRow);
-		this.idChange.emit(selectedRow.id);
 
-		this.closeDropDown();
+		if (this.multiple === true) {
+			this.currentListSelected = selectedRow;
+			this.setMultipleDescription();
+			this.change.emit(this.currentListSelected);
+		}
+		else {
+			this.id = selectedRow.id;
+			this.description = selectedRow.description;
+			this.currentSelected = selectedRow;
+			this.change.emit(selectedRow);
+			this.idChange.emit(selectedRow.id);
+			this.closeDropDown();
+		}
 	}
 
 	public onModelUpdated(event: any) {
@@ -354,5 +373,33 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.chRef.detach();
 	}
 
+	public removeItem(item) {
+		const index = this.currentListSelected.findIndex(x => x.id == item.id);
+		if (index !== -1) {
+			this.currentListSelected.splice(index, 1);
+		}
+		this.setMultipleDescription();
+	}
+
+	public setMultipleDescription() {
+		this.description = '';
+		for (let i = 0; i < this.currentListSelected.length; i++) {
+			if (this.description) {
+				this.description += ', ';
+			}
+			this.description += this.currentListSelected[i].description;
+		}
+	}
+	public doGridReady(e) {
+		this.gridOptions.api.forEachNode((node) => {
+			if (this.currentListSelected.find(x => x.id === node.data.id)) {
+				node.setSelected(true);
+			}
+		});
+
+		if (this.filterValue && this.filter === true) {
+			this.doFilter();
+		}
+	}
 
 }
