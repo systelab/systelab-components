@@ -38,8 +38,12 @@ export class TimeUnitSelectComponent extends AbstractComboBox implements AfterVi
 		this.values.push( new Element( this.i18nService.instant( 'COMMON_DAYS' ), this.i18nService.instant( 'COMMON_DAYS' ) ) );
 		this.values.push( new Element( this.i18nService.instant( 'COMMON_MONTHS' ), this.i18nService.instant( 'COMMON_MONTHS' ) ) );
 		this.values.push( new Element( this.i18nService.instant( 'COMMON_YEARS' ), this.i18nService.instant( 'COMMON_YEARS' ) ) );
-		this._id = '';
-		this._description = '';
+
+		if ( !this.id ) {
+			this._id = '';
+			this._description = '';
+		}
+
 		this.gridOptions.rowData = this.values;
 	}
 
