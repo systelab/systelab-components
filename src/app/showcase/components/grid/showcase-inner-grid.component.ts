@@ -5,12 +5,14 @@ import {I18nService} from 'systelab-translate/lib/i18n.service';
 import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
 import {InputCellRendererComponent} from '../../../systelab-components/grid/custom-cells/input/input-cell-renderer.component';
 import {CheckboxCellRendererComponent} from '../../../systelab-components/grid/custom-cells/checkbox/checkbox-cell-renderer.component';
+import {SpinnerCellRendererComponent} from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-renderer.component';
+import {TouchSpinValues} from '../../../systelab-components/spinner/touch.spin-values';
 
 export class ShowcaseData {
+
 	constructor(public eventDate: string, public value: string, public flag: string, public inputValue: number, public checkboxValue: boolean, public checkboxID: number) {
 
 	}
-
 }
 
 @Component({
@@ -84,6 +86,39 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 				cellRendererFramework: CheckboxCellRendererComponent,
 				elementID: 'checkboxID',
 				supressResize: true
+			}, {
+				colId: 'spinner',
+				headerName: 'Cell with Spinner',
+				width: 200,
+				cellRendererFramework: SpinnerCellRendererComponent,
+				getTouchspinConfiguration: () => {
+					const touchspinCellConfig = {
+						touchspinValues: this.getTouchspinValues(),
+						isEnabled: true
+					};
+					return touchspinCellConfig;
+				},
+				modifyTouchspinValue: (newValue) => {
+					// console.log(newValue);
+				},
+				supressResize: true
+			},
+			{
+				colId: 'spinner disabled',
+				headerName: 'Cell with Spinner Disabled',
+				width: 200,
+				cellRendererFramework: SpinnerCellRendererComponent,
+				getTouchspinConfiguration: () => {
+					const touchspinCellConfig = {
+						touchspinValues: this.getTouchspinValues(),
+						isEnabled: false
+					};
+					return touchspinCellConfig;
+				},
+				modifyTouchspinValue: (newValue) => {
+					// console.log(newValue);
+				},
+				supressResize: true
 			}];
 		return columnDefs;
 	}
@@ -94,5 +129,9 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 		} else {
 			this.firstViewportChanged = false;
 		}
+	}
+
+	private getTouchspinValues(): TouchSpinValues {
+		return new TouchSpinValues(5, 0, 100, 1);
 	}
 }

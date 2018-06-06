@@ -1,0 +1,5 @@
+<div class="text-center d-flex align-items-center">
+    <systelab-spinner *ngIf="isSpinnerEnabled" class="mx-1 w-100" style="margin-top:1px;"
+                      [spinValues]="spinnerCellValues" (change)="modifyValue()"></systelab-spinner>
+    <span *ngIf="!isSpinnerEnabled" class="w-100">{{spinnerCellValues.value}}</span>
+</div>

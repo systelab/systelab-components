@@ -65,9 +65,8 @@ import {CheckboxCellRendererComponent} from './grid/custom-cells/checkbox/checkb
 import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-renderer.component';
 import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
 import {DragAndDropService} from 'ag-grid';
-import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
-
-
+import {WizardStepsComponent} from './wizard-steps/wizard-steps.component';
+import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-cell-renderer.component';
 
 
 @NgModule({
@@ -84,7 +83,7 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		SystelabTranslateModule,
 		AgGridModule,
 		DndModule
-],
+	],
 	declarations: [
 		SliderComponent,
 		SwitchComponent,
@@ -136,6 +135,7 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
+		SpinnerCellRendererComponent,
 		WizardStepsComponent
 	],
 	exports: [
@@ -188,6 +188,7 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
+		SpinnerCellRendererComponent,
 		WizardStepsComponent
 	],
 	entryComponents: [
@@ -198,7 +199,8 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		ColorCellRendererComponent,
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
-		CheckboxCellRendererComponent
+		CheckboxCellRendererComponent,
+		SpinnerCellRendererComponent
 	],
 	providers: [
 		StylesUtilService,
