@@ -98,7 +98,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 					};
 					return touchspinCellConfig;
 				},
-				modifyTouchspinValue: (newValue) => {
+				modifyTouchspinValue: (data, newValue) => {
 					// console.log(newValue);
 				},
 				supressResize: true
@@ -108,7 +108,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 				headerName: 'Cell with Spinner Disabled',
 				width: 200,
 				cellRendererFramework: SpinnerCellRendererComponent,
-				getTouchspinConfiguration: () => {
+				getTouchspinConfiguration: (data) => {
 					const touchspinCellConfig = {
 						touchspinValues: this.getTouchspinValues(),
 						isEnabled: false

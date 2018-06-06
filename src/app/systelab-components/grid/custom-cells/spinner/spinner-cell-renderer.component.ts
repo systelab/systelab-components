@@ -25,13 +25,13 @@ export class SpinnerCellRendererComponent implements AgRendererComponent {
 
 	public modifyValue(): void {
 		if (this.params.colDef.modifyTouchspinValue) {
-			this.params.colDef.modifyTouchspinValue(this.spinnerCellValues.value);
+			this.params.colDef.modifyTouchspinValue(this.params.data, this.spinnerCellValues.value);
 		}
 	}
 
 	private getTouchspinValues(): void {
 		if (this.params.colDef.getTouchspinConfiguration) {
-			const touchspinCellConfiguration = this.params.colDef.getTouchspinConfiguration();
+			const touchspinCellConfiguration = this.params.colDef.getTouchspinConfiguration(this.params.data);
 			this.spinnerCellValues = touchspinCellConfiguration.touchspinValues;
 			this.isSpinnerEnabled = touchspinCellConfiguration.isEnabled;
 		}
