@@ -64,9 +64,12 @@ import {TimeUnitSelectComponent} from './select/time-unit-combobox.component';
 import {CheckboxCellRendererComponent} from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-renderer.component';
 import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
+
+;
 import {DragAndDropService} from 'ag-grid';
 import {WizardStepsComponent} from './wizard-steps/wizard-steps.component';
 import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-cell-renderer.component';
+import {TwoListSortableListComponent} from './twolist/two-list-sortable-list.component';
 
 
 @NgModule({
@@ -136,7 +139,8 @@ import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
 		SpinnerCellRendererComponent,
-		WizardStepsComponent
+		WizardStepsComponent,
+		TwoListSortableListComponent
 	],
 	exports: [
 		SliderComponent,
@@ -189,7 +193,9 @@ import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
 		SpinnerCellRendererComponent,
-		WizardStepsComponent
+		WizardStepsComponent,
+		TwoListSortableListComponent,
+		DataFilterPipe
 	],
 	entryComponents: [
 		MessagePopupViewComponent,

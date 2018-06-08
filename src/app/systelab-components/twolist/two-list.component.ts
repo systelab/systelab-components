@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DataFilterPipe} from './datafilter.pipe';
-import {polyfill} from 'mobile-drag-drop';
 
 export class TwoListItem {
 	constructor(public displayName: string, public colId: string, public selected: boolean, public visible: boolean) {
@@ -62,12 +61,6 @@ export class TwoListComponent {
 	public selected: SelectedItem = new SelectedItem([], []);
 
 	constructor() {
-		polyfill({});
-	}
-
-	public preventDefault(event) {
-		event.mouseEvent.preventDefault();
-		return false;
 	}
 
 	public add() {
@@ -152,101 +145,5 @@ export class TwoListComponent {
 		this.selected.current = [];
 		this.setElementNonSelected(this.available);
 		this.setElementNonSelected(this.visible);
-	}
-
-	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {
-		this.selected.current = [];
-		this.setElementNonSelected(this.visible);
-		const availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
-
-		if (this.selected.available.length > 0 && ev.shiftKey) {
-			const indexOfLastSelected = availableFilteredList.indexOf(this.selected.available[0]);
-			const indexOfSelected = availableFilteredList.indexOf(element);
-
-			this.setElementNonSelected(this.selected.available);
-			this.selected.available = [];
-
-			let i;
-			if (indexOfLastSelected < indexOfSelected) {
-				for (i = indexOfLastSelected; i <= indexOfSelected; i++) {
-					availableFilteredList[i].selected = true;
-					this.selected.available.push(availableFilteredList[i]);
-				}
-
-			} else {
-				for (i = indexOfLastSelected; i >= indexOfSelected; i--) {
-					availableFilteredList[i].selected = true;
-					this.selected.available.push(availableFilteredList[i]);
-				}
-			}
-			return;
-		}
-
-		element.selected = !element.selected;
-		if (element.selected) {
-			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
-				this.selected.available.push(element);
-			} else {
-				this.setElementNonSelected(this.selected.available);
-				this.selected.available = [];
-				this.selected.available.push(element);
-			}
-
-		} else {
-			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
-				this.selected.available.splice(this.selected.available.indexOf(element), 1);
-			} else {
-				this.setElementNonSelected(this.selected.available);
-				this.selected.available = [];
-			}
-		}
-	}
-
-	public selectVisibleCurrent(element: TwoListItem, ev: KeyboardEvent) {
-		this.selected.available = [];
-		this.setElementNonSelected(this.available);
-		const visibleFilteredList = new DataFilterPipe().transform(this.visible, this.secondListSearch);
-
-		if (this.selected.current.length > 0 && ev.shiftKey) {
-			const indexOfLastSelected = visibleFilteredList.indexOf(this.selected.current[0]);
-			const indexOfSelected = visibleFilteredList.indexOf(element);
-
-			this.setElementNonSelected(this.selected.current);
-			this.selected.current = [];
-
-			let i;
-			if (indexOfLastSelected < indexOfSelected) {
-				for (i = indexOfLastSelected; i <= indexOfSelected; i++) {
-					visibleFilteredList[i].selected = true;
-					this.selected.current.push(visibleFilteredList[i]);
-				}
-
-			} else {
-				for (i = indexOfLastSelected; i >= indexOfSelected; i--) {
-					visibleFilteredList[i].selected = true;
-					this.selected.current.push(visibleFilteredList[i]);
-				}
-			}
-			return;
-		}
-
-		element.selected = !element.selected;
-		if (element.selected) {
-			if (this.selected.current.length === 0 || (this.selected.current.length > 0 && ev.ctrlKey)) {
-				this.selected.current.push(element);
-			} else {
-				this.setElementNonSelected(this.selected.current);
-				this.selected.current = [];
-				this.selected.current.push(element);
-			}
-		} else {
-			if (this.selected.current.length === 0 || (this.selected.current.length > 0 && ev.ctrlKey)) {
-				this.selected.current.splice(this.selected.current.indexOf(element), 1);
-			} else {
-				this.setElementNonSelected(this.selected.current);
-				this.selected.current = [];
-
-			}
-		}
 	}
 }
