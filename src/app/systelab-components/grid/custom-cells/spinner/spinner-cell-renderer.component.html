@@ -1,5 +1,5 @@
-<div class="text-center d-flex align-items-center">
-    <systelab-spinner *ngIf="isSpinnerEnabled" class="mx-1 w-100" style="margin-top:1px;"
-                      [spinValues]="spinnerCellValues" (change)="modifyValue()"></systelab-spinner>
-    <span *ngIf="!isSpinnerEnabled" class="w-100">{{spinnerCellValues.value}}</span>
+<div class="text-center d-flex align-items-center" (click)="onFocus()">
+    <systelab-spinner *ngIf="isSpinnerEnabled || isActive" class="mx-1 w-100" style="margin-top:1px;"
+                      [spinValues]="params.data.spinnerValues" (change)="modifyValue()"></systelab-spinner>
+    <span *ngIf="!isSpinnerEnabled && !isActive" class="w-100">{{params.data.spinnerValues.value}}</span>
 </div>

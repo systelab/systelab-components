@@ -10,7 +10,8 @@ import {TouchSpinValues} from '../../../systelab-components/spinner/touch.spin-v
 
 export class ShowcaseData {
 
-	constructor(public eventDate: string, public value: string, public flag: string, public inputValue: number, public checkboxValue: boolean, public checkboxID: number) {
+	constructor(public eventDate: string, public value: string, public flag: string, public inputValue: number, public checkboxValue: boolean,
+	            public checkboxID: number, public spinnerValues: TouchSpinValues) {
 
 	}
 }
@@ -54,7 +55,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 
 		super(preferencesService, i18nService, dialogService);
 		for (let i = 0; i < 10; i++) {
-			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 10, false, i));
+			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 10, false, i, new TouchSpinValues(5, 0, 100, 1)));
 		}
 	}
 
@@ -91,16 +92,6 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 				headerName: 'Cell with Spinner',
 				width: 200,
 				cellRendererFramework: SpinnerCellRendererComponent,
-				getTouchspinConfiguration: () => {
-					const touchspinCellConfig = {
-						touchspinValues: this.getTouchspinValues(),
-						isEnabled: true
-					};
-					return touchspinCellConfig;
-				},
-				modifyTouchspinValue: (data, newValue) => {
-					// console.log(newValue);
-				},
 				supressResize: true
 			},
 			{
@@ -108,16 +99,6 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 				headerName: 'Cell with Spinner Disabled',
 				width: 200,
 				cellRendererFramework: SpinnerCellRendererComponent,
-				getTouchspinConfiguration: (data) => {
-					const touchspinCellConfig = {
-						touchspinValues: this.getTouchspinValues(),
-						isEnabled: false
-					};
-					return touchspinCellConfig;
-				},
-				modifyTouchspinValue: (newValue) => {
-					// console.log(newValue);
-				},
 				supressResize: true
 			}];
 		return columnDefs;
@@ -131,7 +112,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 		}
 	}
 
-	private getTouchspinValues(): TouchSpinValues {
-		return new TouchSpinValues(5, 0, 100, 1);
+	public modifyValueAction(): void {
+		console.log(this.values);
 	}
 }

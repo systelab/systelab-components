@@ -70,6 +70,8 @@ import {DndModule} from 'ng2-dnd';
 import {ShowcaseWizardStepsComponent} from './components/wizard-steps/showcase-wizard-steps.component';
 import {ShowcaseSortableListComponent} from './components/sortable-list/showcase-sortable-list.component';
 import {ShowcaseInnerSortableListComponent} from './components/sortable-list/showcase-inner-sortable-list.component';
+import {ShowcaseAddRemoveListComponent} from './components/add-remove-list/showcase-add-remove-list.component';
+import {ShowcaseInnerAddRemoveListComponent} from './components/add-remove-list/showcase-inner-add-remove-list.component';
 
 @NgModule({
 	imports: [
@@ -144,7 +146,9 @@ import {ShowcaseInnerSortableListComponent} from './components/sortable-list/sho
 		ShowcaseInlineComponent,
 		ShowcaseWizardStepsComponent,
 		ShowcaseSortableListComponent,
-		ShowcaseInnerSortableListComponent
+		ShowcaseInnerSortableListComponent,
+		ShowcaseAddRemoveListComponent,
+		ShowcaseInnerAddRemoveListComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

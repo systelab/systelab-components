@@ -7,16 +7,14 @@ import {TouchSpinValues} from '../../../spinner/touch.spin-values';
 	templateUrl: 'spinner-cell-renderer.component.html'
 })
 export class SpinnerCellRendererComponent implements AgRendererComponent {
-	private params: any;
+	public params: any;
 
 	public isSpinnerEnabled: boolean;
 	public id: string;
-
-	public spinnerCellValues: TouchSpinValues; // = new TouchSpinValues(0, 0, 100, 1);
+	public isActive = false;
 
 	public agInit(params: any): void {
 		this.params = params;
-		this.getTouchspinValues();
 	}
 
 	public refresh(params: any): boolean {
@@ -24,16 +22,12 @@ export class SpinnerCellRendererComponent implements AgRendererComponent {
 	}
 
 	public modifyValue(): void {
-		if (this.params.colDef.modifyTouchspinValue) {
-			this.params.colDef.modifyTouchspinValue(this.params.data, this.spinnerCellValues.value);
+		if (this.params.context.componentParent.modifyValueAction) {
+			this.params.context.componentParent.modifyValueAction();
 		}
 	}
 
-	private getTouchspinValues(): void {
-		if (this.params.colDef.getTouchspinConfiguration) {
-			const touchspinCellConfiguration = this.params.colDef.getTouchspinConfiguration(this.params.data);
-			this.spinnerCellValues = touchspinCellConfiguration.touchspinValues;
-			this.isSpinnerEnabled = touchspinCellConfiguration.isEnabled;
-		}
+	public onFocus(): void {
+		this.isActive = true;
 	}
 }
