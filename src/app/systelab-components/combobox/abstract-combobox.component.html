@@ -1,44 +1,43 @@
-<div #combobox
-     class="dropdown slab-combobox d-flex h-100 w-100"
-     [ngClass]="{'disabled': isDisabled}">
-    <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" data-toggle="dropdown" (click)="onComboClicked($event)">
-        <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
-               [style.font-family]="fontFamily"
-               [style.font-size.px]="fontSize"
-               [style.font-weight]="fontWeight"
-               [style.font-style]="fontStyle"
-               [(ngModel)]="description" [disabled]="isDisabled"/>
-        <div *ngIf="customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-input h-100"
-             [style.font-family]="fontFamily"
-             [style.font-size.px]="fontSize"
-             [style.font-weight]="fontWeight"
-             [style.font-style]="fontStyle">
-            <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
-                                     [selectedData]="currentSelected"></combobox-input-renderer>
-        </div>
-        <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
-
-    </div>
-    <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
-        <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">
-            <div *ngIf="filter" class="slab-filter-container" [style.font-family]="fontFamily"
-                 [style.font-size.px]="fontSize"
-                 [style.font-weight]="fontWeight"
-                 [style.font-style]="fontStyle">
-                <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
+<div #combobox class="dropdown slab-combobox d-flex h-100 w-100" [ngClass]="{'disabled': isDisabled}"  >
+        <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" data-toggle="dropdown" (click)="onComboClicked($event)">
+            <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
+                [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle"
+                [(ngModel)]="description" [disabled]="isDisabled" />
+            <div *ngIf="customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-input h-100" [style.font-family]="fontFamily"
+                [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle">
+                <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
+                    [selectedData]="currentSelected"></combobox-input-renderer>
             </div>
-            <div #hidden class="height-hidden"></div>
-            <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid
-                             style="width: 100%; height: 100%;"
-                             [style.font-family]="fontFamily"
-                             [style.font-size.px]="fontSize"
-                             [style.font-weight]="fontWeight"
-                             [style.font-style]="fontStyle"
-                             class="ag-fresh"
-                             [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)"
-                             (modelUpdated)="onModelUpdated()"
-                             (rowSelected)="onRowSelected($event)">
-            </ag-grid-angular>
+            <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
+        </div>
+
+        <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
+            <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">
+                <div *ngIf="filter" class="slab-filter-container" [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight"
+                    [style.font-style]="fontStyle">
+                    <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
+                </div>
+                <div #hidden class="height-hidden"></div>
+                <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid style="width: 100%; height: 100%;" [style.font-family]="fontFamily" 
+                    [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle" class="ag-fresh"
+                    [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)" (modelUpdated)="onModelUpdated()"  
+                    (rowSelected)="onRowSelected($event)"  (gridReady)="doGridReady($event)">
+                </ag-grid-angular>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="position-absolute" *ngIf="listSelectedValues === true">
+        <ul class="ml-1 mt-2 pl-0" *ngIf="multiple === true && currentListSelected.length < 8">
+            <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge" *ngFor="let item of currentListSelected"><span class="float-left mr-2">{{item.description}}</span>
+                <button data-dismiss="badge" type="button" class="close" (click)="removeItem(item)" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+        </ul>
+        <ul class="ml-1 mt-2 pl-0" *ngIf="multiple === true && currentListSelected.length > 7">
+                <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge">{{'COMMON_SELECTED_ITEMS' | translate | async }}
+                    <span class="badge badge-light">{{currentListSelected.length}}</span>
+                </li>
+            </ul>
+    </div>
