@@ -1,17 +1,13 @@
 import {Component} from '@angular/core';
 import {AgRendererComponent} from 'ag-grid-angular';
-import {TouchSpinValues} from '../../../spinner/touch.spin-values';
+
 
 @Component({
-	selector: 'systelab-spinner-cell',
-	templateUrl: 'spinner-cell-renderer.component.html'
+	selector: 'systelab-input-cell',
+	template: `<span class="w-100 text-align-center">{{this.params.data.spinnerValues.value}}</span>`
 })
 export class SpinnerCellRendererComponent implements AgRendererComponent {
 	public params: any;
-
-	public isSpinnerEnabled: boolean;
-	public id: string;
-	public isActive = false;
 
 	public agInit(params: any): void {
 		this.params = params;
@@ -19,15 +15,5 @@ export class SpinnerCellRendererComponent implements AgRendererComponent {
 
 	public refresh(params: any): boolean {
 		return true;
-	}
-
-	public modifyValue(): void {
-		if (this.params.context.componentParent.modifyValueAction) {
-			this.params.context.componentParent.modifyValueAction();
-		}
-	}
-
-	public onFocus(): void {
-		this.isActive = true;
 	}
 }

@@ -70,6 +70,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.enableRangeSelection = true;
+		this.gridOptions.singleClickEdit = true;
 		this.gridOptions.enableColResize = this.isColResizeEnabled();
 		this.gridOptions.rowSelection = this.getRowSelectionType();
 		this.gridOptions.rowDeselection = true;

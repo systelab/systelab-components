@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
+import {AgRendererComponent, ICellEditorAngularComp} from 'ag-grid-angular';
 
 @Component({
 	selector: 'systelab-checkbox-cell',
@@ -16,12 +16,12 @@ export class CheckboxCellRendererComponent implements AgRendererComponent {
 
 		if (params.data) {
 			this.id = params.data[params.colDef.elementID];
-			this.isCheckboxActive	 = params.data.active;
+			this.isCheckboxActive = params.data.active;
 		}
 	}
 
 	public refresh(params: any): boolean {
-		if ( params.value ) {
+		if (params.value) {
 			this.isCheckboxActive = params.value;
 		}
 		return true;
