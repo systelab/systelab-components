@@ -28,14 +28,14 @@
     </div>
 
     <div class="position-absolute" *ngIf="listSelectedValues === true">
-        <ul class="ml-1 mt-2 pl-0" *ngIf="multiple === true && currentListSelected.length < 8">
+        <ul class="ml-1 mt-2 pl-0" *ngIf="multipleSelection === true && currentListSelected.length < 8">
             <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge" *ngFor="let item of currentListSelected"><span class="float-left mr-2">{{item.description}}</span>
                 <button data-dismiss="badge" type="button" class="close" (click)="removeItem(item)" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </li>
         </ul>
-        <ul class="ml-1 mt-2 pl-0" *ngIf="multiple === true && currentListSelected.length > 7">
+        <ul class="ml-1 mt-2 pl-0" *ngIf="multipleSelection === true && currentListSelected.length > 7">
                 <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge">{{'COMMON_SELECTED_ITEMS' | translate | async }}
                     <span class="badge badge-light">{{currentListSelected.length}}</span>
                 </li>

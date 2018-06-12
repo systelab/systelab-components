@@ -1,7 +1,4 @@
-import {
-	ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2,
-	ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
 
@@ -14,7 +11,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Input() public customInputRenderer: any;
 	@Input() public initialParams: any;
 	@Input() public filter = false;
-	@Input() public multiple = false;
+	@Input() public multipleSelection = false;
 	@Input() public listSelectedValues = false;
 
 	@Input() public fontFamily: string;
@@ -121,24 +118,33 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-style', this.fontStyle);
 		}
 
-		jQuery(this.comboboxElement.nativeElement).on('hide.bs.dropdown', this.closeDropDown.bind(this));
+		jQuery(this.comboboxElement.nativeElement)
+			.on('hide.bs.dropdown', this.closeDropDown.bind(this));
 
 		this.configGrid();
 	}
 
 	protected configGrid() {
-		this.columnDefs = [];
+		this.columnDefs = [
+			{
+				colID:             'id',
+				field:             'description',
+				checkboxSelection: this.multipleSelection
+			}
+		];
 		this.gridOptions = {};
 
-		if (this.multiple === true) {
-			this.columnDefs.push({ checkboxSelection: true, maxWidth: 30, width: 30, minWidth: 30, suppressSorting: true, cellClass: 'text-center pointer' });
+		if (this.multipleSelection) {
 			this.gridOptions.rowSelection = 'multiple';
 			this.gridOptions.suppressRowClickSelection = true;
-		}
-		else {
+		} else {
 			this.gridOptions.rowSelection = 'single';
 		}
-		this.columnDefs.push({ colID: 'id', field: 'description' });
+
+		this.gridOptions.icons = {
+			checkboxUnchecked: this.getCheckboxUnchecked(),
+			checkboxChecked:   this.getCheckboxChecked()
+		};
 
 		this.gridOptions.columnDefs = this.columnDefs;
 		this.gridOptions.headerHeight = 0;
@@ -267,11 +273,10 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	public getSelectedRow(): any {
 		if (this.gridOptions && this.gridOptions.api) {
 			const selectedRow: any = this.gridOptions.api.getSelectedRows();
-			if (selectedRow !== null && this.multiple === false) {
+			if (selectedRow !== null && this.multipleSelection === false) {
 				return selectedRow[0];
-			}
-			else if (selectedRow !== null && this.multiple === true) {
-				return selectedRow
+			} else if (selectedRow !== null && this.multipleSelection === true) {
+				return selectedRow;
 			}
 		}
 		return undefined;
@@ -284,7 +289,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	public doFilter() {
-		const auxListArray = this.values.filter(element => element.description.toLowerCase().indexOf(this.filterValue.toLowerCase()) > -1);
+		const auxListArray = this.values.filter(element => element.description.toLowerCase()
+			.indexOf(this.filterValue.toLowerCase()) > -1);
 		this.gridOptions.api.setRowData(auxListArray);
 	}
 
@@ -292,12 +298,11 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 		const selectedRow = this.getSelectedRow();
 
-		if (this.multiple === true) {
+		if (this.multipleSelection === true) {
 			this.currentListSelected = selectedRow;
 			this.setMultipleDescription();
 			this.change.emit(this.currentListSelected);
-		}
-		else {
+		} else {
 			this.id = selectedRow.id;
 			this.description = selectedRow.description;
 			this.currentSelected = selectedRow;
@@ -374,7 +379,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	public removeItem(item) {
-		const index = this.currentListSelected.findIndex(x => x.id == item.id);
+		const index = this.currentListSelected.findIndex(x => x.id === item.id);
 		if (index !== -1) {
 			this.currentListSelected.splice(index, 1);
 		}
@@ -390,6 +395,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 			this.description += this.currentListSelected[i].description;
 		}
 	}
+
 	public doGridReady(e) {
 		this.gridOptions.api.forEachNode((node) => {
 			if (this.currentListSelected.find(x => x.id === node.data.id)) {
@@ -400,6 +406,14 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		if (this.filterValue && this.filter === true) {
 			this.doFilter();
 		}
+	}
+
+	public getCheckboxUnchecked(): string {
+		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox-unchecked'/></div>`;
+	}
+
+	public getCheckboxChecked(): string {
+		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
 	}
 
 }
