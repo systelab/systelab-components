@@ -3,8 +3,8 @@ import {AgRendererComponent} from 'ag-grid-angular';
 
 
 @Component({
-	selector: 'systelab-input-cell',
-	template: `<span class="w-100 text-align-center">{{this.params.value.value}}</span>`
+	selector: 'systelab-spinner-cell',
+	template: `<span class="slab-flex-1 text-center">{{this.params.value.value}}</span>`
 })
 export class SpinnerCellRendererComponent implements AgRendererComponent {
 	public params: any;
