@@ -18,10 +18,10 @@ export abstract class AbstractAddRemoveList<T>  extends AbstractSortableListComp
 	public remove(): void {
 	}
 
-	public abstract getDescriptionField(): string;
+	public abstract getDescriptionField(element: T): string;
 
 	public getDescription(element: T): string {
-		return element[this.getDescriptionField()];
+		return element[this.getDescriptionField(element)];
 	}
 
 	public preventDefault(event) {

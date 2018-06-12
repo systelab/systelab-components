@@ -10,16 +10,16 @@ export abstract class AbstractSortableListComponent<T> {
 		polyfill({});
 	}
 
-	public abstract getDescriptionField(): string;
+	public abstract getDescriptionField(element?: T): string;
 
-	public abstract getSelectionField(): string;
+	public abstract getSelectionField(element?: T): string;
 
 	public getDescription(element: T): string {
-		return element[this.getDescriptionField()];
+		return element[this.getDescriptionField(element)];
 	}
 
 	public getSelectionFieldValue(element: T): boolean {
-		return element[this.getSelectionField()];
+		return element[this.getSelectionField(element)];
 	}
 
 	public preventDefault(event) {
@@ -28,10 +28,10 @@ export abstract class AbstractSortableListComponent<T> {
 	}
 
 	public selectVisibleCurrent(element: T, ev: KeyboardEvent) {
-		element[this.getSelectionField()] = !element[this.getSelectionField()];
+		element[this.getSelectionField(element)] = !element[this.getSelectionField(element)];
 	}
 
 	public getSelectedRows(): Array<T> {
-		return this.elementsList.filter( element => element[this.getSelectionField()]);
+		return this.elementsList.filter( element => element[this.getSelectionField(element)]);
 	}
 }

@@ -24,11 +24,11 @@ export class ShowcaseInnerAddRemoveListComponent extends AbstractAddRemoveList<S
 		super();
 	}
 
-	public getDescriptionField(): string {
+	public getDescriptionField(element: ShowcaseAddRemoveListData): string {
 		return 'description';
 	}
 
-	public getSelectionField(): string {
+	public getSelectionField(element: ShowcaseAddRemoveListData): string {
 		return 'isSelected';
 	}
 
