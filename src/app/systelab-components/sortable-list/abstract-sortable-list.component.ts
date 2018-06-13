@@ -28,10 +28,15 @@ export abstract class AbstractSortableListComponent<T> {
 	}
 
 	public selectVisibleCurrent(element: T, ev: KeyboardEvent) {
+		if (!ev.ctrlKey) {
+			this.elementsList.forEach(elementInList => {
+				elementInList[this.getSelectionField(element)] = false;
+			});
+		}
 		element[this.getSelectionField(element)] = !element[this.getSelectionField(element)];
 	}
 
 	public getSelectedRows(): Array<T> {
-		return this.elementsList.filter( element => element[this.getSelectionField(element)]);
+		return this.elementsList.filter(element => element[this.getSelectionField(element)]);
 	}
 }
