@@ -6,6 +6,9 @@ export abstract class AbstractSortableListComponent<T> {
 	@Input() public elementsList: Array<T> = [];
 	@Input() public secondListSearch: string;
 
+	public deleteWithSupr = false;
+	public showIcon = false;
+
 	constructor() {
 		polyfill({});
 	}
@@ -13,6 +16,8 @@ export abstract class AbstractSortableListComponent<T> {
 	public abstract getDescriptionField(element?: T): string;
 
 	public abstract getSelectionField(element?: T): string;
+
+	public abstract getIcon(element?: T): string;
 
 	public getDescription(element: T): string {
 		return element[this.getDescriptionField(element)];

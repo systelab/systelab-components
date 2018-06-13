@@ -21,6 +21,8 @@ export class ShowcaseInnerSortableListComponent extends AbstractSortableListComp
 
 	constructor() {
 		super();
+		this.deleteWithSupr = true;
+		this.showIcon = true;
 	}
 
 	public getDescriptionField(): string {
@@ -29,5 +31,9 @@ export class ShowcaseInnerSortableListComponent extends AbstractSortableListComp
 
 	public getSelectionField(): string {
 		return 'isSelected';
+	}
+
+	public getIcon(): string {
+		return 'icon-bug';
 	}
 }
