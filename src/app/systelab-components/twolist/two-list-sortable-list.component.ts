@@ -27,6 +27,10 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 		return 'selected';
 	}
 
+	public getIcon(): string {
+		return '';
+	}
+
 	public setElementNonSelected(list: Array<TwoListItem>) {
 		for (const element of list) {
 			element.selected = false;
