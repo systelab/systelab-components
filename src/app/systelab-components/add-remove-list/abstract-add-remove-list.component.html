@@ -9,7 +9,7 @@
             <li *ngFor="let listElement of elementsList;let i = index"
                 [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(listElement),'slab-sortable-list-row':!getSelectionFieldValue(listElement)}"
                 (click)="selectVisibleCurrent(listElement,$event)" dnd-sortable [sortableIndex]="i">
-                {{getDescription(listElement)}}
+                <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(listElement)"></i>{{getDescription(listElement)}}
             </li>
         </ul>
     </div>

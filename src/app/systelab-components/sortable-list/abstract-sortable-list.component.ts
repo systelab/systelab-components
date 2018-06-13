@@ -44,4 +44,10 @@ export abstract class AbstractSortableListComponent<T> {
 	public getSelectedRows(): Array<T> {
 		return this.elementsList.filter(element => element[this.getSelectionField(element)]);
 	}
+
+	public removeElement(element: T, event: KeyboardEvent): void {
+		if (this.deleteWithSupr && event.keyCode === 46) {
+			this.elementsList.splice(this.elementsList.indexOf(element), 1);
+		}
+	}
 }

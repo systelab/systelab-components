@@ -22,6 +22,7 @@ export class ShowcaseInnerAddRemoveListComponent extends AbstractAddRemoveList<S
 
 	constructor() {
 		super();
+		this.showIcon = true;
 	}
 
 	public getDescriptionField(element: ShowcaseAddRemoveListData): string {
@@ -30,6 +31,10 @@ export class ShowcaseInnerAddRemoveListComponent extends AbstractAddRemoveList<S
 
 	public getSelectionField(element: ShowcaseAddRemoveListData): string {
 		return 'isSelected';
+	}
+
+	public getIcon(): string {
+		return 'icon-clock';
 	}
 
 	public add(): void {
