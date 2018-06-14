@@ -4,6 +4,7 @@ import {AbstractSortableListComponent} from '../sortable-list/abstract-sortable-
 export abstract class AbstractAddRemoveList<T>  extends AbstractSortableListComponent<T> implements OnInit {
 
 	@Input() public elementsList: Array<T> = [];
+	@Input() public buttonsOnBottom = false;
 
 	constructor() {
 		super();
