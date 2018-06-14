@@ -1,4 +1,4 @@
-<div class="text-center d-flex align-items-center">
+<div *ngIf="!hideCheckbox" class="text-center d-flex align-items-center">
     <input type="checkbox" id="{{id}}-active" [checked]="isCheckboxActive"
            (change)="isCheckboxActive=!isCheckboxActive;modifyValue()">
     <label for="{{id}}-active" class="d-inline-block ml-auto mr-auto"></label>
