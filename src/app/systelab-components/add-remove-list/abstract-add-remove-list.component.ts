@@ -1,10 +1,11 @@
-import { Input, OnInit } from '@angular/core';
+import {Input, OnInit} from '@angular/core';
 import {AbstractSortableListComponent} from '../sortable-list/abstract-sortable-list.component';
 
-export abstract class AbstractAddRemoveList<T>  extends AbstractSortableListComponent<T> implements OnInit {
+export abstract class AbstractAddRemoveList<T> extends AbstractSortableListComponent<T> implements OnInit {
 
 	@Input() public elementsList: Array<T> = [];
 	@Input() public buttonsOnBottom = false;
+	@Input() public isDisabled = false;
 
 	constructor() {
 		super();

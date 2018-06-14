@@ -13,7 +13,7 @@
             </li>
         </ul>
     </div>
-    <div class="d-flex" [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
+    <div *ngIf="!isDisabled" class="d-flex" [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
         <button class="btn" (click)="add()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
         </button>
