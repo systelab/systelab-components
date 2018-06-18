@@ -69,6 +69,7 @@ import {WizardStepsComponent} from './wizard-steps/wizard-steps.component';
 import {SpinnerCellEditorComponent} from './grid/custom-cells/spinner/spinner-cell-editor.component';
 import {TwoListSortableListComponent} from './twolist/two-list-sortable-list.component';
 import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-cell-renderer.component';
+import {InputCellEditorComponent} from './grid/custom-cells/input/input-cell-editor.component';
 
 
 @NgModule({
@@ -140,7 +141,8 @@ import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-
 		SpinnerCellEditorComponent,
 		WizardStepsComponent,
 		TwoListSortableListComponent,
-		SpinnerCellRendererComponent
+		SpinnerCellRendererComponent,
+		InputCellEditorComponent
 	],
 	exports: [
 		SliderComponent,
@@ -196,7 +198,8 @@ import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-
 		WizardStepsComponent,
 		TwoListSortableListComponent,
 		DataFilterPipe,
-		SpinnerCellRendererComponent
+		SpinnerCellRendererComponent,
+		InputCellEditorComponent
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -208,7 +211,8 @@ import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
-		SpinnerCellRendererComponent
+		SpinnerCellRendererComponent,
+		InputCellEditorComponent
 	],
 	providers: [
 		StylesUtilService,

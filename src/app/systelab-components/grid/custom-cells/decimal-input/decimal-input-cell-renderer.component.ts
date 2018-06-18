@@ -4,8 +4,7 @@ import {InputCellRendererComponent} from '../input/input-cell-renderer.component
 
 @Component({
 	selector: 'systelab-decimal-input-cell',
-	templateUrl: 'decimal-input-cell-renderer.component.html',
-	styleUrls: ['../input/input-cell-renderer.component.scss']
+	templateUrl: 'decimal-input-cell-renderer.component.html'
 })
 export class DecimalInputCellRendererComponent extends InputCellRendererComponent implements AgRendererComponent {
 	public params: any;

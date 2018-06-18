@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AgEditorComponent} from 'ag-grid-angular';
 
 @Component({
-	selector: 'systelab-spinner-cell',
+	selector: 'systelab-spinner-cell-editor',
 	templateUrl: 'spinner-cell-editor.component.html'
 })
 export class SpinnerCellEditorComponent implements AgEditorComponent {
