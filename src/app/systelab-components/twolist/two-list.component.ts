@@ -146,4 +146,52 @@ export class TwoListComponent {
 		this.setElementNonSelected(this.available);
 		this.setElementNonSelected(this.visible);
 	}
+
+	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {
+		this.selected.current = [];
+		this.setElementNonSelected(this.visible);
+		const availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
+
+		if (this.selected.available.length > 0 && ev.shiftKey) {
+			const indexOfLastSelected = availableFilteredList.indexOf(this.selected.available[0]);
+			const indexOfSelected = availableFilteredList.indexOf(element);
+
+			this.setElementNonSelected(this.selected.available);
+			this.selected.available = [];
+
+			let i;
+			if (indexOfLastSelected < indexOfSelected) {
+				for (i = indexOfLastSelected; i <= indexOfSelected; i++) {
+					availableFilteredList[i].selected = true;
+					this.selected.available.push(availableFilteredList[i]);
+				}
+
+			} else {
+				for (i = indexOfLastSelected; i >= indexOfSelected; i--) {
+					availableFilteredList[i].selected = true;
+					this.selected.available.push(availableFilteredList[i]);
+				}
+			}
+			return;
+		}
+
+		element.selected = !element.selected;
+		if (element.selected) {
+			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
+				this.selected.available.push(element);
+			} else {
+				this.setElementNonSelected(this.selected.available);
+				this.selected.available = [];
+				this.selected.available.push(element);
+			}
+
+		} else {
+			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
+				this.selected.available.splice(this.selected.available.indexOf(element), 1);
+			} else {
+				this.setElementNonSelected(this.selected.available);
+				this.selected.available = [];
+			}
+		}
+	}
 }
