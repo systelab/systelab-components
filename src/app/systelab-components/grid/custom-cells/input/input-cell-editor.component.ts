@@ -13,7 +13,6 @@ export class InputCellEditorComponent implements AgEditorComponent {
 
 	public agInit(params: any): void {
 		this.params = params;
-		this.checkIsEditable();
 	}
 
 	public getValue(): any {
@@ -22,11 +21,5 @@ export class InputCellEditorComponent implements AgEditorComponent {
 
 	public refresh(params: any): boolean {
 		return true;
-	}
-
-	protected checkIsEditable(): void {
-		if (this.params.context.componentParent.isInputEditable) {
-			this.isEditable = this.params.context.componentParent.isInputEditable(this.params.node.data);
-		}
 	}
 }
