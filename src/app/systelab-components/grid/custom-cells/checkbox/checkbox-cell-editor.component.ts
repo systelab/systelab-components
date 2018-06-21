@@ -20,6 +20,7 @@ export class CheckboxCellEditorComponent implements AgEditorComponent {
 	}
 
 	public getValue(): any {
+		this.params.value = this.isCheckboxActive;
 		return this.isCheckboxActive;
 	}
 
