@@ -13,6 +13,9 @@ export class CheckboxCellEditorComponent implements AgEditorComponent {
 
 	public agInit( params: any ): void {
 		this.params = params;
+		if (this.params.column.colDef['elementID']) {
+			this.id = this.params.node.data[this.params.column.colDef['elementID']];
+		}
 		this.isCheckboxActive = this.params.value;
 	}
 
