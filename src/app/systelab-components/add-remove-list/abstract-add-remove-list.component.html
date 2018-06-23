@@ -1,0 +1,24 @@
+<div class="d-flex mb-1" [ngClass]="{'flex-column': buttonsOnBottom}">
+    <div class="slab-flex-1 text-nowrap border rounded slab-overflow-containers slab-sortable-list" dnd-droppable
+         style="height:150px"
+         (onDragEnter)="preventDefault($event)"
+         (onDragOver)="preventDefault($event)"
+         (onDragLeave)="preventDefault($event)">
+        <ul class="slab-sortable-list-row list-group w-100" dnd-sortable-container [sortableData]="elementsList"
+            [dropZones]="['visible-dropZone']">
+            <li *ngFor="let listElement of elementsList;let i = index"
+                [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(listElement),'slab-sortable-list-row':!getSelectionFieldValue(listElement)}"
+                (click)="selectVisibleCurrent(listElement,$event)" dnd-sortable [sortableIndex]="i">
+                <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(listElement)"></i>{{getDescription(listElement)}}
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="!isDisabled" class="d-flex" [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
+        <button class="btn" (click)="add()">
+            <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
+        </button>
+        <button class="btn" [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (click)="remove()">
+            <i *ngIf="!buttonsOnBottom" class="mr-2 icon-minus-circle"></i>{{ 'COMMON_REMOVE' | translate | async }}
+        </button>
+    </div>
+</div>

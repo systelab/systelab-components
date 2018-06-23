@@ -1,4 +1,4 @@
-$slab-slider-track-brackground-color : #d3d3d3;
+$slab-slider-track-brackground-color: #d3d3d3;
 $slab-slider-track-border-radius: 5px;
 $slab-slider-thumb-border-radius: 50%;
 $slab-slider-thumb-border: 6px solid $slab-slider-circle-border-color;
@@ -9,6 +9,7 @@ $slab-slider-thumb-cursor: pointer;
   &:not([class*="w-"]) {
     width: 100%;
   }
+  padding: 0;
   background: transparent;
   box-shadow: none;
 
@@ -18,7 +19,6 @@ $slab-slider-thumb-cursor: pointer;
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
-
 
   &:hover {
     opacity: 1;
@@ -77,7 +77,7 @@ $slab-slider-thumb-cursor: pointer;
   }
   &::-ms-thumb {
     @include size(($slab-slider-height/2) !important);
-    background-color:  $slab-slider-circle-color;
+    background-color: $slab-slider-circle-color;
     border-radius: $slab-slider-thumb-border-radius;
     border: $slab-slider-thumb-border;
     cursor: $slab-slider-thumb-cursor;

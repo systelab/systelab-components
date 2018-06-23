@@ -3,8 +3,7 @@ import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
 	selector: 'systelab-input-cell',
-	templateUrl: 'input-cell-renderer.component.html',
-	styleUrls: ['input-cell-renderer.component.scss']
+	templateUrl: 'input-cell-renderer.component.html'
 })
 export class InputCellRendererComponent implements AgRendererComponent {
 	public params: any;

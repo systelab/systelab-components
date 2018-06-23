@@ -34,7 +34,9 @@ gulp.task('copytemplates', function() {
 		'./src/app/systelab-components/tree/abstract-tree.component.html',
 		'./src/app/systelab-components/tree/abstract-tree-status.component.html',
 		'./src/app/systelab-components/searcher/abstract-searcher.component.html',
-        './src/app/systelab-components/searcher/searcher.dialog.component.html'
+        './src/app/systelab-components/searcher/searcher.dialog.component.html',
+		'./src/app/systelab-components/sortable-list/abstract-sortable-list.component.html',
+        './src/app/systelab-components/add-remove-list/abstract-add-remove-list.component.html'
 		])
 		.pipe(gulp.dest('./html'));
 
