@@ -71,6 +71,7 @@ import {TwoListSortableListComponent} from './twolist/two-list-sortable-list.com
 import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-cell-renderer.component';
 import {InputCellEditorComponent} from './grid/custom-cells/input/input-cell-editor.component';
 import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkbox-cell-editor.component';
+import {DecimalInputCellEditorComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 
 
 @NgModule({
@@ -144,6 +145,7 @@ import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkb
 		TwoListSortableListComponent,
 		SpinnerCellRendererComponent,
 		InputCellEditorComponent,
+		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent
 	],
 	exports: [
@@ -202,6 +204,7 @@ import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkb
 		DataFilterPipe,
 		SpinnerCellRendererComponent,
 		InputCellEditorComponent,
+		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent
 	],
 	entryComponents: [
@@ -216,6 +219,7 @@ import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkb
 		SpinnerCellEditorComponent,
 		SpinnerCellRendererComponent,
 		InputCellEditorComponent,
+		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent
 	],
 	providers: [

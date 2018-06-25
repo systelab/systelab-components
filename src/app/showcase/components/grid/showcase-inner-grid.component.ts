@@ -2,19 +2,18 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@an
 import {AbstractGrid} from '../../../systelab-components/grid/abstract-grid.component';
 import {I18nService} from 'systelab-translate/lib/i18n.service';
 import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
-import {InputCellRendererComponent} from '../../../systelab-components/grid/custom-cells/input/input-cell-renderer.component';
 import {CheckboxCellRendererComponent} from '../../../systelab-components/grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import {SpinnerCellEditorComponent} from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-editor.component';
 import {TouchSpinValues} from '../../../systelab-components/spinner/touch.spin-values';
 import {SpinnerCellRendererComponent} from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-renderer.component';
 import {InputCellEditorComponent} from '../../../systelab-components/grid/custom-cells/input/input-cell-editor.component';
 import {DialogService} from '../../../systelab-components/modal';
+import {DecimalInputCellEditorComponent} from '../../../systelab-components/grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 
 export class ShowcaseData {
 
-	constructor(public eventDate: string, public value: string, public flag: string, public inputValue: number, public checkboxValue: boolean,
-	            public checkboxID: number, public spinnerValues: TouchSpinValues) {
-
+	constructor(public eventDate: string, public value: string, public flag: string, public decimalValue: number, public inputValue: number,
+	            public checkboxValue: boolean, public checkboxID: number, public spinnerValues: TouchSpinValues) {
 	}
 }
 
@@ -57,7 +56,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 
 		super(preferencesService, i18nService, dialogService);
 		for (let i = 0; i < 10; i++) {
-			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 10, false, i, new TouchSpinValues(5, 0, 100, 1)));
+			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 28.5, 10, false, i, new TouchSpinValues(5, 0, 100, 1)));
 		}
 	}
 
@@ -79,6 +78,18 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 			},
 			{colId: 'value', headerName: 'Value (%)', field: 'value', width: 120},
 			{colId: 'flags', headerName: 'Flags', field: 'flag', width: 220},
+			{
+				colId: 'input',
+				headerName: 'Cell with Input',
+				field: 'decimalValue',
+				width: 200,
+				// cellRendererFramework: InputCellRendererComponent,
+				cellEditorFramework: DecimalInputCellEditorComponent,
+				editable: true,
+				onCellValueChanged: (e) => {
+					console.log('input', e);
+				}
+			},
 			{
 				colId: 'input',
 				headerName: 'Cell with Input',
