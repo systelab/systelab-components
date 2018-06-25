@@ -56,7 +56,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 
 		super(preferencesService, i18nService, dialogService);
 		for (let i = 0; i < 10; i++) {
-			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 28.5, 10, false, i, new TouchSpinValues(5, 0, 100, 1)));
+			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 26, 10, false, i, new TouchSpinValues(5, 0, 100, 1)));
 		}
 	}
 
@@ -80,7 +80,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 			{colId: 'flags', headerName: 'Flags', field: 'flag', width: 220},
 			{
 				colId: 'input',
-				headerName: 'Cell with Input',
+				headerName: 'Cell with Decimal Input',
 				field: 'decimalValue',
 				width: 200,
 				// cellRendererFramework: InputCellRendererComponent,
