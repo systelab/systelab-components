@@ -26,9 +26,7 @@ export class ApplicationSidebarComponent {
 	}
 
 	private selectTab(id: string) {
-		for (let i = 0; i < this.tabs.length; i++) {
-			this.tabs[i].isSelected = (this.tabs[i].id === id);
-		}
+		this.tabs.forEach((tab) => tab.isSelected = (tab.id === id));
 		this.selected.emit(id);
 	}
 }
