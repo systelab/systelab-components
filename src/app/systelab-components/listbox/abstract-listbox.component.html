@@ -1,0 +1,7 @@
+<div class="slab-listbox slab-flex-1 d-flex h-100 text-nowrap border rounded slab-overflow-containers" [ngClass]="{'disabled': isDisabled}">
+    <ag-grid-angular #grid id="agGrid"
+                     class="slab-flex-1 ag-fresh"
+                     [gridOptions]="gridOptions"
+                     (gridReady)="resizeColumn($event)">
+    </ag-grid-angular>
+</div>

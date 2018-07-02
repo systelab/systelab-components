@@ -1,0 +1,42 @@
+.slab-listbox {
+
+  margin-top: 1px;
+  padding: 0;
+  border: none;
+
+  @include selection-checkbox;
+
+  .ag-fresh .ag-root {
+    border: none;
+    overflow: hidden;
+
+    .ag-body {
+      background-color: $background;
+
+      .ag-body-viewport {
+
+        .ag-row {
+          background-color: $background;
+
+          &.ag-row-selected {
+            background-color: $background;
+          }
+
+          &.ag-row-hover {
+            background-color: $slab-selected-background-color;
+          }
+
+          .ag-cell {
+            border: none;
+            padding: 0 0;
+          }
+
+        }
+      }
+
+    }
+  }
+  &.disabled {
+    visibility: hidden;
+  }
+}
