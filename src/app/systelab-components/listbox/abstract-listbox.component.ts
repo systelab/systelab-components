@@ -150,7 +150,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 				});
 				if (anyNode) {
 					this.values.filter((value: TreeListBoxElement) => {
-						if (value.id === parentID) {
+						if (value.level === 0 && value.id === parentID) {
 							value.selected = allChildSelected;
 							this.addRemoveToMultipleSelectedItem(value);
 						}
