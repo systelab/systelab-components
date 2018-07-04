@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
-import { AbstractComboBox } from '../abstract-combobox.component';
-import { Observable } from 'rxjs';
-import { StylesUtilService } from '../../utilities/styles.util.service';
+import {ChangeDetectorRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {AgRendererComponent} from 'ag-grid-angular';
+import {AbstractComboBox} from '../abstract-combobox.component';
+import {Observable} from 'rxjs';
+import {StylesUtilService} from '../../utilities/styles.util.service';
 
 declare var jQuery: any;
 
@@ -10,7 +10,7 @@ export class ComboTreeNode {
 	public nodeData: any;
 	public level: number;
 
-	constructor( pNodeData?: any, pLevel?: number ) {
+	constructor(pNodeData?: any, pLevel?: number) {
 		this.nodeData = pNodeData;
 		this.level = pLevel;
 	}
@@ -23,7 +23,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	public _level: number;
 	@Input()
-	set level( value: number ) {
+	set level(value: number) {
 		this._level = value;
 	}
 
@@ -34,8 +34,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 	public totalItemsLoaded = false;
 	public isFirstTime = true;
 
-	constructor( public myRenderer: Renderer2, public chref: ChangeDetectorRef ) {
-		super( myRenderer, chref );
+	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
+		super(myRenderer, chref);
 	}
 
 	public ngOnInit() {
@@ -47,9 +47,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID:        'itemDescription',
-				cellRenderer: ( params: any ) => {
-					return this.getLabelForLevel( params.data );
+				colID: 'itemDescription',
+				cellRenderer: (params: any) => {
+					return this.getLabelForLevel(params.data);
 				}
 			}
 		];
@@ -68,20 +68,20 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	public abstract getTotalItems(): number;
 
-	public abstract getLevelDescriptionField( level: number ): string;
+	public abstract getLevelDescriptionField(level: number): string;
 
-	public abstract getLevelIdField( level: number ): string;
+	public abstract getLevelIdField(level: number): string;
 
 	public abstract getAllNodeId(): string | number;
 
 	public abstract getAllNodeDescription(): string;
 
-	public getLabelForLevel( comboTreeNode: ComboTreeNode ): string {
-		if ( comboTreeNode.level === 0 ) {
-			return comboTreeNode.nodeData[this.getLevelDescriptionField( 0 )];
-		} else if ( comboTreeNode.level > 0 ) {
+	public getLabelForLevel(comboTreeNode: ComboTreeNode): string {
+		if (comboTreeNode.level === 0) {
+			return comboTreeNode.nodeData[this.getLevelDescriptionField(0)];
+		} else if (comboTreeNode.level > 0) {
 			return '<span style="padding-left: ' + (20 * comboTreeNode.level) + 'px">'
-				+ comboTreeNode.nodeData[this.getLevelDescriptionField( comboTreeNode.level )]
+				+ comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)]
 				+ '</span>';
 		}
 	}
@@ -96,20 +96,20 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 	public loop(): void {
 		let result = true;
 
-		if ( this.isDropDownOpen() ) {
+		if (this.isDropDownOpen()) {
 			// First time opened we load the table
-			if ( this.isFirstTime ) {
+			if (this.isFirstTime) {
 				this.getRows();
 			}
 
-			if ( this.totalItemsLoaded ) {
+			if (this.totalItemsLoaded) {
 				this.setDropdownHeight();
 				this.setDropdownPosition();
 				result = false;
 			}
 		}
-		if ( result ) {
-			setTimeout( () => this.loop(), 10 );
+		if (result) {
+			setTimeout(() => this.loop(), 10);
 		} else {
 			return;
 		}
@@ -117,27 +117,27 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 
 	// Override
 	public setDropdownHeight() {
-		let totalItems = Number( this.getTotalItems() );
+		let totalItems = Number(this.getTotalItems());
 		let calculatedHeight = 0;
 
 		if (this.emptyElement) {
 			totalItems += 1;
 		}
 
-		if ( totalItems === 0 ) {
+		if (totalItems === 0) {
 			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
-			this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px' );
-		} else if ( totalItems < 10 ) {
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
+		} else if (totalItems < 10) {
 			calculatedHeight = 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
 		} else {
 			calculatedHeight = AbstractComboBox.ROW_HEIGHT * 10;
 		}
-		this.myRenderer.setStyle( this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px' );
+		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 
-		if ( this.filter ) {
-			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName( 'ag-grid-angular' );
+		if (this.filter) {
+			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
 			const agGridHeight = calculatedHeight - 33;
-			this.myRenderer.setStyle( agGridElement[0], 'height', agGridHeight + 'px' );
+			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
 		}
 
 	}
@@ -147,38 +147,38 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 		this.isFirstTime = false;
 		this.getData()
 			.subscribe(
-				( dataVector: Array<T> ) => {
+				(dataVector: Array<T>) => {
 					const nodeVector: Array<ComboTreeNode> = [];
 					let previousParent: number | string;
 
-					if ( this.emptyElement ) {
+					if (this.emptyElement) {
 						const emptyElement: T = {} as T;
-						emptyElement[this.getLevelIdField( 0 )] = '';
-						emptyElement[this.getLevelDescriptionField( 0 )] = '';
-						const emptyElementNode: ComboTreeNode = new ComboTreeNode( emptyElement, 0 );
+						emptyElement[this.getLevelIdField(0)] = '';
+						emptyElement[this.getLevelDescriptionField(0)] = '';
+						const emptyElementNode: ComboTreeNode = new ComboTreeNode(emptyElement, 0);
 						nodeVector.push(emptyElementNode);
 					}
 
-					if ( this.isAllSelectable ) {
+					if (this.isAllSelectable) {
 						const allElement: T = {} as T;
-						allElement[this.getLevelIdField( 0 )] = this.getAllNodeId();
-						allElement[this.getLevelDescriptionField( 0 )] = this.getAllNodeDescription();
-						const allComboNode: ComboTreeNode = new ComboTreeNode( allElement, 0 );
-						nodeVector.push( allComboNode );
+						allElement[this.getLevelIdField(0)] = this.getAllNodeId();
+						allElement[this.getLevelDescriptionField(0)] = this.getAllNodeDescription();
+						const allComboNode: ComboTreeNode = new ComboTreeNode(allElement, 0);
+						nodeVector.push(allComboNode);
 					}
 
-					dataVector.forEach( ( element: T ) => {
-						if ( !previousParent || element[this.getLevelIdField( 0 )] !== previousParent ) {
-							previousParent = element[this.getLevelIdField( 0 )];
-							const parentComboNode: ComboTreeNode = new ComboTreeNode( element, 0 );
-							nodeVector.push( parentComboNode );
+					dataVector.forEach((element: T) => {
+						if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
+							previousParent = element[this.getLevelIdField(0)];
+							const parentComboNode: ComboTreeNode = new ComboTreeNode(element, 0);
+							nodeVector.push(parentComboNode);
 						}
-						const comboNode: ComboTreeNode = new ComboTreeNode( element, 1 );
-						nodeVector.push( comboNode );
-					} );
+						const comboNode: ComboTreeNode = new ComboTreeNode(element, 1);
+						nodeVector.push(comboNode);
+					});
 					this.totalItemsLoaded = true;
 					this.gridOptions.api.hideOverlay();
-					this.gridOptions.api.setRowData( nodeVector );
+					this.gridOptions.api.setRowData(nodeVector);
 					this.gridOptions.api.redrawRows();
 				},
 				() => {
@@ -188,49 +188,49 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox implem
 	}
 
 	// Overrides
-	public onRowSelected( event: any ) {
-		if ( event.node.selected ) {
-			if ( this.isParentSelectable ) {
-				jQuery( '.dropdown-toggle' )
-					.dropdown( 'toggle' );
-			} else if ( this.isAllSelectable && event.node && event.node.data && event.node.data.level === 0 ) {
-				if ( event.node.data.nodeData[this.getLevelIdField( 0 )] === this.getAllNodeId() ) {
-					jQuery( '.dropdown-toggle' )
-						.dropdown( 'toggle' );
+	public onRowSelected(event: any) {
+		if (event.node.selected) {
+			if (this.isParentSelectable) {
+				jQuery('#' + this.comboId)
+					.dropdown('toggle');
+			} else if (this.isAllSelectable && event.node && event.node.data && event.node.data.level === 0) {
+				if (event.node.data.nodeData[this.getLevelIdField(0)] === this.getAllNodeId()) {
+					jQuery('#' + this.comboId)
+						.dropdown('toggle');
 				} else {
-					event.node.setSelected( false );
+					event.node.setSelected(false);
 				}
-			} else if ( event.node && event.node.data && event.node.data.level > 0 ) {
-				jQuery( '.dropdown-toggle' )
-					.dropdown( 'toggle' );
+			} else if (event.node && event.node.data && event.node.data.level > 0) {
+				jQuery('#' + this.comboId)
+					.dropdown('toggle');
 			} else {
-				if ( event.node ) {
-					event.node.setSelected( false );
+				if (event.node) {
+					event.node.setSelected(false);
 				}
 			}
 		}
 	}
 
 	// Overrides
-	public onSelectionChanged( event: any ) {
+	public onSelectionChanged(event: any) {
 		const selectedRow = this.getSelectedRow();
-		if ( selectedRow !== null && selectedRow !== undefined ) {
-			this.id = selectedRow.nodeData[this.getLevelIdField( selectedRow.level )];
-			this.description = selectedRow.nodeData[this.getLevelDescriptionField( selectedRow.level )];
+		if (selectedRow !== null && selectedRow !== undefined) {
+			this.id = selectedRow.nodeData[this.getLevelIdField(selectedRow.level)];
+			this.description = selectedRow.nodeData[this.getLevelDescriptionField(selectedRow.level)];
 			this.currentSelected = selectedRow.nodeData;
 			this.level = selectedRow.level;
-			if ( selectedRow.level > 0
-				|| (this.isAllSelectable && selectedRow.nodeData[this.getLevelIdField( 0 )] === this.getAllNodeId())
-				|| this.isParentSelectable ) {
-				this.change.emit( this.id );
-				this.idChange.emit( this.id );
+			if (selectedRow.level > 0
+				|| (this.isAllSelectable && selectedRow.nodeData[this.getLevelIdField(0)] === this.getAllNodeId())
+				|| this.isParentSelectable) {
+				this.change.emit(this.id);
+				this.idChange.emit(this.id);
 				this.closeDropDown();
 			}
 		}
 	}
 
-	public refresh( params: any ): boolean {
-		if ( this.gridOptions && this.gridOptions.api ) {
+	public refresh(params: any): boolean {
+		if (this.gridOptions && this.gridOptions.api) {
 			this.getRows();
 			return true;
 		}

@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
-import { IGetRowsParams } from 'ag-grid';
-import { AbstractApiComboBox } from '../abstract-api-combobox.component';
-import { AbstractComboBox } from '../abstract-combobox.component';
+import {AgRendererComponent} from 'ag-grid-angular';
+import {IGetRowsParams} from 'ag-grid';
+import {AbstractApiComboBox} from '../abstract-api-combobox.component';
+import {AbstractComboBox} from '../abstract-combobox.component';
 
 declare var jQuery: any;
 
@@ -23,7 +23,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 				this.closeDropDown();
 			}
 		} else {
-			this.doSearchText( event.target.value);
+			this.doSearchText(event.target.value);
 		}
 	}
 
@@ -44,7 +44,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 		if (this.filter) {
 			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
-			const agGridHeight  = calculatedHeight - 36;
+			const agGridHeight = calculatedHeight - 36;
 			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
 		}
 	}
@@ -52,7 +52,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public onInputClicked(event: MouseEvent) {
 		event.stopPropagation();
 		if (!this.isDisabled) {
-			jQuery('.dropdown-toggle').dropdown('toggle');
+			jQuery('#' + this.comboId).dropdown('toggle');
 			if (!this.isDropDownOpen()) {
 				this.isDropdownOpened = true;
 				this.showDropDown();

@@ -1,12 +1,25 @@
-import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
-import { GridOptions } from 'ag-grid';
+import {
+	ChangeDetectorRef,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
+import {AgRendererComponent} from 'ag-grid-angular';
+import {GridOptions} from 'ag-grid';
 
 declare var jQuery: any;
 
 export abstract class AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static ROW_HEIGHT: number;
+
+	public comboId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
 	@Input() public customInputRenderer: any;
 	@Input() public initialParams: any;
@@ -127,8 +140,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID:             'id',
-				field:             'description',
+				colID: 'id',
+				field: 'description',
 				checkboxSelection: this.multipleSelection
 			}
 		];
@@ -143,7 +156,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked:   this.getCheckboxChecked()
+			checkboxChecked: this.getCheckboxChecked()
 		};
 
 		this.gridOptions.columnDefs = this.columnDefs;
@@ -295,7 +308,6 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	public onSelectionChanged(event: any) {
-
 		const selectedRow = this.getSelectedRow();
 
 		if (this.multipleSelection === true) {
