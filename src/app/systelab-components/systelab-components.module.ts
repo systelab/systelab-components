@@ -65,10 +65,14 @@ import {CheckboxCellRendererComponent} from './grid/custom-cells/checkbox/checkb
 import {InputCellRendererComponent} from './grid/custom-cells/input/input-cell-renderer.component';
 import {DecimalInputCellRendererComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
 import {DragAndDropService} from 'ag-grid';
-import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
-
-
-
+import {WizardStepsComponent} from './wizard-steps/wizard-steps.component';
+import {SpinnerCellEditorComponent} from './grid/custom-cells/spinner/spinner-cell-editor.component';
+import {TwoListSortableListComponent} from './twolist/two-list-sortable-list.component';
+import {SpinnerCellRendererComponent} from './grid/custom-cells/spinner/spinner-cell-renderer.component';
+import {InputCellEditorComponent} from './grid/custom-cells/input/input-cell-editor.component';
+import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkbox-cell-editor.component';
+import {DecimalInputCellEditorComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
+import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-listbox-renderer.component';
 
 @NgModule({
 	imports: [
@@ -84,7 +88,7 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		SystelabTranslateModule,
 		AgGridModule,
 		DndModule
-],
+	],
 	declarations: [
 		SliderComponent,
 		SwitchComponent,
@@ -136,7 +140,14 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
-		WizardStepsComponent
+		SpinnerCellEditorComponent,
+		WizardStepsComponent,
+		TwoListSortableListComponent,
+		SpinnerCellRendererComponent,
+		InputCellEditorComponent,
+		DecimalInputCellEditorComponent,
+		CheckboxCellEditorComponent,
+		AbstractListboxRendererComponent
 	],
 	exports: [
 		SliderComponent,
@@ -188,7 +199,15 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
-		WizardStepsComponent
+		SpinnerCellEditorComponent,
+		WizardStepsComponent,
+		TwoListSortableListComponent,
+		DataFilterPipe,
+		SpinnerCellRendererComponent,
+		InputCellEditorComponent,
+		DecimalInputCellEditorComponent,
+		CheckboxCellEditorComponent,
+		AbstractListboxRendererComponent
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -198,7 +217,13 @@ import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 		ColorCellRendererComponent,
 		InputCellRendererComponent,
 		DecimalInputCellRendererComponent,
-		CheckboxCellRendererComponent
+		CheckboxCellRendererComponent,
+		SpinnerCellEditorComponent,
+		SpinnerCellRendererComponent,
+		InputCellEditorComponent,
+		DecimalInputCellEditorComponent,
+		CheckboxCellEditorComponent,
+		AbstractListboxRendererComponent
 	],
 	providers: [
 		StylesUtilService,

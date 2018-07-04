@@ -31,20 +31,10 @@
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1">
-            <div class="slab-twolistboxdiv" dnd-droppable
-                 (onDragEnter)="preventDefault($event)"
-                 (onDragOver)="preventDefault($event)"
-                 (onDragLeave)="preventDefault($event)">
-                <ul class="slab-twolistboxrow list-group" dnd-sortable-container [sortableData]="visible"
-                    [dropZones]="['visible-dropZone']">
-                    <li *ngFor="let visCol of (visible| datafilter:secondListSearch);let i = index"
-                        [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':visCol.selected,'slab-twolistboxrow':!visCol.selected}"
-                        (click)="selectVisibleCurrent(visCol,$event)" dnd-sortable [sortableIndex]="i">
-                        {{visCol.displayName}}
-                    </li>
-                </ul>
-            </div>
+        <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
+            <systelab-two-list-sortable-list class="w-100" [selected]="selected" [available]="available"
+                                             [(elementsList)]="visible"
+                                             [secondListSearch]="secondListSearch"></systelab-two-list-sortable-list>
         </div>
     </div>
 </div>

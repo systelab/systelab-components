@@ -110,3 +110,7 @@ $icon-rowaction-font-size: 20px;
   line-height: $grid-cell-height; //Table Row Height
   height: $grid-header-height; //Table Header Height
 }
+
+systelab-spinner-cell {
+  display: flex;
+}

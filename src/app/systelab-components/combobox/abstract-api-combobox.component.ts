@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
 
-	@Input() public multipleSelection = false;
-
 	public _multipleSelectedItemList: Array<T>;
 
 	@Input()
@@ -58,7 +56,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 			{
 				colID:             'itemDescription',
 				field:             this.getDescriptionField(),
-				checkboxSelection: this.getMultipleSelection()
+				checkboxSelection: this.multipleSelection
 			}
 		];
 
@@ -70,7 +68,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
 
-		if ( this.multipleSelection ) {
+		if (this.multipleSelection) {
 			this.gridOptions.rowSelection = 'multiple';
 			this.gridOptions.suppressRowClickSelection = true;
 		} else {
@@ -113,14 +111,6 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 	public abstract getData( page: number, itemsPerPage: number, startsWithParameter: string ): Observable<Array<T>>;
 
 	public abstract getTotalItems(): number;
-
-	public getMultipleSelection(): boolean {
-		if ( this.multipleSelection ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public refresh( params: any ): boolean {
 		if ( this.gridOptions && this.gridOptions.api ) {
@@ -398,14 +388,6 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox implements
 			this.multipleSelectedIDListChange.emit( this.selectionItemListToIDList() );
 
 		}
-	}
-
-	public getCheckboxUnchecked(): string {
-		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox-unchecked'/></div>`;
-	}
-
-	public getCheckboxChecked(): string {
-		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {

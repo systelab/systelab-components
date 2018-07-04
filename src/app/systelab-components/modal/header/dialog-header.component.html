@@ -1,6 +1,8 @@
 <div class="slab-dialog-header d-flex">
-    <div class="slab-flex-1 d-flex">
-    <ng-content></ng-content>
+    <div class="slab-flex-1 d-flex text-truncate">
+        <span class="text-truncate">
+            <ng-content></ng-content>
+        </span>
     </div>
     <div *ngIf="withInfo" class="slab-dialog-header-button slab-dialog-info mr-1" (click)="doInfo()"></div>
     <div *ngIf="withClose" class="slab-dialog-header-button slab-dialog-close mr-2" (click)="doClose()"></div>

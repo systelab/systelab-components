@@ -26,15 +26,18 @@ gulp.task('inline-build-templates', () => {
 
 });
 
-gulp.task('copytemplates', function() {
-	gulp.src([
-		'./src/app/systelab-components/grid/abstract-grid.component.html',
-		'./src/app/systelab-components/combobox/abstract-combobox.component.html',
-		'./src/app/systelab-components/combobox/autocomplete/autocomplete-combobox.component.html',
-		'./src/app/systelab-components/tree/abstract-tree.component.html',
-		'./src/app/systelab-components/tree/abstract-tree-status.component.html',
-		'./src/app/systelab-components/searcher/abstract-searcher.component.html',
-        './src/app/systelab-components/searcher/searcher.dialog.component.html'
+gulp.task('copytemplates', function () {
+    gulp.src([
+        './src/app/systelab-components/grid/abstract-grid.component.html',
+        './src/app/systelab-components/combobox/abstract-combobox.component.html',
+        './src/app/systelab-components/combobox/autocomplete/autocomplete-combobox.component.html',
+        './src/app/systelab-components/listbox/abstract-listbox.component.html',
+        './src/app/systelab-components/tree/abstract-tree.component.html',
+        './src/app/systelab-components/tree/abstract-tree-status.component.html',
+        './src/app/systelab-components/searcher/abstract-searcher.component.html',
+        './src/app/systelab-components/searcher/searcher.dialog.component.html',
+		'./src/app/systelab-components/sortable-list/abstract-sortable-list.component.html',
+        './src/app/systelab-components/add-remove-list/abstract-add-remove-list.component.html'
 		])
 		.pipe(gulp.dest('./html'));
 

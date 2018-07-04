@@ -1,16 +1,20 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractGrid} from '../../../systelab-components/grid/abstract-grid.component';
-import {DialogService} from '../../../systelab-components/modal/dialog/dialog.service';
 import {I18nService} from 'systelab-translate/lib/i18n.service';
 import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
-import {InputCellRendererComponent} from '../../../systelab-components/grid/custom-cells/input/input-cell-renderer.component';
 import {CheckboxCellRendererComponent} from '../../../systelab-components/grid/custom-cells/checkbox/checkbox-cell-renderer.component';
+import {SpinnerCellEditorComponent} from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-editor.component';
+import {TouchSpinValues} from '../../../systelab-components/spinner/touch.spin-values';
+import {SpinnerCellRendererComponent} from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-renderer.component';
+import {InputCellEditorComponent} from '../../../systelab-components/grid/custom-cells/input/input-cell-editor.component';
+import {DialogService} from '../../../systelab-components/modal';
+import {DecimalInputCellEditorComponent} from '../../../systelab-components/grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 
 export class ShowcaseData {
-	constructor(public eventDate: string, public value: string, public flag: string, public inputValue: number, public checkboxValue: boolean, public checkboxID: number) {
 
+	constructor(public eventDate: string, public value: string, public flag: string, public decimalValue: number, public inputValue: number,
+	            public checkboxValue: boolean, public checkboxID: number, public spinnerValues: TouchSpinValues) {
 	}
-
 }
 
 @Component({
@@ -29,7 +33,7 @@ export class ShowcaseData {
                          (modelUpdated)="onModelUpdated($event)">
         </ag-grid-angular>`
 })
-export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements AfterViewInit {
+export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements AfterViewInit, OnInit {
 
 	public values: ShowcaseData[] = [];
 
@@ -52,12 +56,17 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 
 		super(preferencesService, i18nService, dialogService);
 		for (let i = 0; i < 10; i++) {
-			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 10, false, i));
+			this.values.push(new ShowcaseData('12/12/2017', i + '', '10x', 26, 10, false, i, new TouchSpinValues(5, 0, 100, 1)));
 		}
 	}
 
 	public ngAfterViewInit() {
 		this.gridOptions.api.setRowData(this.values);
+	}
+
+	public ngOnInit() {
+		super.ngOnInit();
+		this.gridOptions.suppressCellSelection = false;
 	}
 
 	protected getColumnDefs(): Array<any> {
@@ -71,10 +80,27 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 			{colId: 'flags', headerName: 'Flags', field: 'flag', width: 220},
 			{
 				colId: 'input',
+				headerName: 'Cell with Decimal Input',
+				field: 'decimalValue',
+				width: 200,
+				// cellRendererFramework: InputCellRendererComponent,
+				cellEditorFramework: DecimalInputCellEditorComponent,
+				editable: true,
+				onCellValueChanged: (e) => {
+					console.log('input', e);
+				}
+			},
+			{
+				colId: 'input',
 				headerName: 'Cell with Input',
 				field: 'inputValue',
 				width: 200,
-				cellRendererFramework: InputCellRendererComponent
+				// cellRendererFramework: InputCellRendererComponent,
+				cellEditorFramework: InputCellEditorComponent,
+				editable: true,
+				onCellValueChanged: (e) => {
+					console.log('input', e);
+				}
 			},
 			{
 				colId: 'checkbox',
@@ -83,6 +109,18 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 				width: 200,
 				cellRendererFramework: CheckboxCellRendererComponent,
 				elementID: 'checkboxID',
+				supressResize: true
+			}, {
+				colId: 'spinner',
+				headerName: 'Cell with Spinner',
+				field: 'spinnerValues',
+				width: 200,
+				editable: true,
+				cellRendererFramework: SpinnerCellRendererComponent,
+				cellEditorFramework: SpinnerCellEditorComponent,
+				onCellValueChanged: (e) => {
+					console.log('test', e);
+				},
 				supressResize: true
 			}];
 		return columnDefs;
@@ -94,5 +132,10 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 		} else {
 			this.firstViewportChanged = false;
 		}
+	}
+
+	public isInputEditable(data: ShowcaseData): boolean {
+		console.log(data);
+		return true;
 	}
 }

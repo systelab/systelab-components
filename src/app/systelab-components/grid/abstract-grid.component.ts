@@ -70,6 +70,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.enableRangeSelection = true;
+		this.gridOptions.singleClickEdit = true;
 		this.gridOptions.enableColResize = this.isColResizeEnabled();
 		this.gridOptions.rowSelection = this.getRowSelectionType();
 		this.gridOptions.rowDeselection = true;
@@ -321,9 +322,10 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	public doClick( event: any ) {
-		if ( event.column.colId !== 'contextMenu' ) {
+		if ( event.column.colId !== 'contextMenu' && !event.column.isCellEditable(event.node)) {
 			this.clickRow.emit( (event.event.ctrlKey && !this.showChecks) ? event.event : event.data );
 		}
+
 	}
 
 	public doColumnResized( event: any ) {
