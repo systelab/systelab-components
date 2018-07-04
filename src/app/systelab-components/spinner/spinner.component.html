@@ -1,16 +1,19 @@
 <div class="slab-spinner-container d-flex h-100">
     <div class="input-group">
         <div class="input-group-prepend">
-            <button type="button" class="btn pt-0 pb-0 pl-1 pr-1" type="button" [disabled]="disabled" [class.disabled]="disabled" (click)="minus()"><i
+            <button type="button" class="btn pt-0 pb-0 pl-1 pr-1"[disabled]="disabled"
+                    [class.disabled]="disabled" (click)="minus()"><i
                     class="icon-minus-thin"></i></button>
         </div>
         <input [class.disabled]="disabled" name="sp" [(ngModel)]="valueStr"
                class="slab-flex-1 form-control text-center" type="text"
+               (keydown)="($event.keyCode===13||$event.keyCode===9)?pushEnter($event.keyCode):0"
                (keypress)="checkKey($event)"
                (blur)="checkValue(valueStr)"
                autocomplete="off" [disabled]="disabled">
         <div class="input-group-append">
-            <button type="button" class="btn pt-0 pb-0 pl-1 pr-1" type="button" [disabled]="disabled" [class.disabled]="disabled" (click)="plus()"><i
+            <button type="button" class="btn pt-0 pb-0 pl-1 pr-1" [disabled]="disabled"
+                    [class.disabled]="disabled" (click)="plus()"><i
                     class="icon-plus-thin"></i></button>
         </div>
     </div>

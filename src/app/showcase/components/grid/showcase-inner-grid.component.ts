@@ -8,7 +8,10 @@ import {TouchSpinValues} from '../../../systelab-components/spinner/touch.spin-v
 import {SpinnerCellRendererComponent} from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-renderer.component';
 import {InputCellEditorComponent} from '../../../systelab-components/grid/custom-cells/input/input-cell-editor.component';
 import {DialogService} from '../../../systelab-components/modal';
-import {DecimalInputCellEditorComponent} from '../../../systelab-components/grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
+import {
+	DecimalInputCellEditorComponent
+} from '../../../systelab-components/grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
+import {CheckboxCellEditorComponent} from '../../../systelab-components/grid/custom-cells/checkbox/checkbox-cell-editor.component';
 
 export class ShowcaseData {
 
@@ -108,6 +111,11 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 				field: 'checkboxValue',
 				width: 200,
 				cellRendererFramework: CheckboxCellRendererComponent,
+				cellEditorFramework: CheckboxCellEditorComponent,
+				onCellValueChanged: (e) => {
+					console.log('checkbox', e);
+				},
+				editable: true,
 				elementID: 'checkboxID',
 				supressResize: true
 			}, {
