@@ -16,7 +16,17 @@ class Element {
 export class GenderSelect extends AbstractComboBox implements AfterViewInit {
 
 	@Input() showAll = false;
-	@Input() genderValue = '';
+
+	public _genderValue: number | string;
+	@Input()
+	set genderValue( value: number | string ) {
+		this._genderValue = value;
+	}
+
+	get genderValue() {
+		return this._genderValue;
+	}
+
 	@Output() genderValueChange: EventEmitter<string | number> = new EventEmitter<string | number>();
 
 	constructor( public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService ) {
@@ -32,12 +42,12 @@ export class GenderSelect extends AbstractComboBox implements AfterViewInit {
 		this.values.push( new Element( 'M', this.i18nService.instant( 'COMMON_MALE' ) ) );
 		this.values.push( new Element( 'F', this.i18nService.instant( 'COMMON_FEMALE' ) ) );
 
-		if ( !this._id ) {
+		if ( !this._genderValue ) {
 			if ( this.showAll ) {
-				this._id = 'A';
+				this._genderValue = 'A';
 				this._description = this.i18nService.instant( 'COMMON_ALL' );
 			} else {
-				this._id = 'U';
+				this._genderValue = 'U';
 				this._description = this.i18nService.instant( 'COMMON_UNKNOWN' );
 			}
 		}
