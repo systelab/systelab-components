@@ -220,7 +220,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public saveEventOnFocus(evt: FocusEvent): void {
 		this.inputElement = new ElementRef(evt.target);
-		// this.getLanguage();
 		this.focusEvt = evt;
 	}
 
@@ -282,62 +281,34 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	private getLanguage(): void {
+
+		let weekDaysNames: Array<string> = [];
+		let weekDaysNamesShort: Array<string> = [];
+		let monthNames: Array<string> = [];
+		let monthNamesShort: Array<string> = [];
+
+		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY']).subscribe((res) => {
+			weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);
+		});
+
+		this.i18nService.get(['COMMON_SEVENTH_DAY', 'COMMON_FIRST_DAY', 'COMMON_SECOND_DAY', 'COMMON_THIRD_DAY', 'COMMON_FOURTH_DAY', 'COMMON_FIFTH_DAY', 'COMMON_SIXTH_DAY']).subscribe((res) => {
+			weekDaysNamesShort.push(res.COMMON_SEVENTH_DAY, res.COMMON_FIRST_DAY, res.COMMON_SECOND_DAY, res.COMMON_THIRD_DAY, res.COMMON_FOURTH_DAY, res.COMMON_FIFTH_DAY, res.COMMON_SIXTH_DAY);
+		});
+
+		this.i18nService.get(['COMMON_JANUARY', 'COMMON_FEBRUARY', 'COMMON_MARCH', 'COMMON_APRIL', 'COMMON_MAY', 'COMMON_JUNE', 'COMMON_JULY', 'COMMON_AUGUST', 'COMMON_SEPTEMBER', 'COMMON_OCTOBER', 'COMMON_NOVEMBER', 'COMMON_DECEMBER']).subscribe((res) => {
+			monthNames.push(res.COMMON_JANUARY, res.COMMON_FEBRUARY, res.COMMON_MARCH, res.COMMON_APRIL, res.COMMON_MAY, res.COMMON_JUNE, res.COMMON_JULY, res.COMMON_AUGUST, res.COMMON_SEPTEMBER, res.COMMON_OCTOBER, res.COMMON_NOVEMBER, res.COMMON_DECEMBER);
+		});
+
+		this.i18nService.get(['JOB_MONTHS_1', 'JOB_MONTHS_2', 'JOB_MONTHS_3', 'JOB_MONTHS_4', 'JOB_MONTHS_5', 'JOB_MONTHS_6', 'JOB_MONTHS_7', 'JOB_MONTHS_8', 'JOB_MONTHS_9', 'JOB_MONTHS_10', 'JOB_MONTHS_11', 'JOB_MONTHS_12']).subscribe((res) => {
+			monthNamesShort.push(res.JOB_MONTHS_1, res.JOB_MONTHS_2, res.JOB_MONTHS_3, res.JOB_MONTHS_4, res.JOB_MONTHS_5, res.JOB_MONTHS_6, res.JOB_MONTHS_7, res.JOB_MONTHS_8, res.JOB_MONTHS_9, res.JOB_MONTHS_10, res.JOB_MONTHS_11, res.JOB_MONTHS_12);
+		});
+
 		this.language = {
-			dayNames: [
-				this.i18nService.instant('COMMON_SUNDAY'),
-				this.i18nService.instant('COMMON_MONDAY'),
-				this.i18nService.instant('COMMON_TUESDAY'),
-				this.i18nService.instant('COMMON_WEDNESDAY'),
-				this.i18nService.instant('COMMON_THURSDAY'),
-				this.i18nService.instant('COMMON_FRIDAY'),
-				this.i18nService.instant('COMMON_SATURDAY')
-			],
-			dayNamesShort: [
-				this.i18nService.instant('COMMON_SEVENTH_DAY'),
-				this.i18nService.instant('COMMON_FIRST_DAY'),
-				this.i18nService.instant('COMMON_SECOND_DAY'),
-				this.i18nService.instant('COMMON_THIRD_DAY'),
-				this.i18nService.instant('COMMON_FOURTH_DAY'),
-				this.i18nService.instant('COMMON_FIFTH_DAY'),
-				this.i18nService.instant('COMMON_SIXTH_DAY')
-			],
-			dayNamesMin: [
-				this.i18nService.instant('COMMON_SEVENTH_DAY'),
-				this.i18nService.instant('COMMON_FIRST_DAY'),
-				this.i18nService.instant('COMMON_SECOND_DAY'),
-				this.i18nService.instant('COMMON_THIRD_DAY'),
-				this.i18nService.instant('COMMON_FOURTH_DAY'),
-				this.i18nService.instant('COMMON_FIFTH_DAY'),
-				this.i18nService.instant('COMMON_SIXTH_DAY')
-			],
-			monthNames: [
-				this.i18nService.instant('COMMON_JANUARY'),
-				this.i18nService.instant('COMMON_FEBRUARY'),
-				this.i18nService.instant('COMMON_MARCH'),
-				this.i18nService.instant('COMMON_APRIL'),
-				this.i18nService.instant('COMMON_MAY'),
-				this.i18nService.instant('COMMON_JUNE'),
-				this.i18nService.instant('COMMON_JULY'),
-				this.i18nService.instant('COMMON_AUGUST'),
-				this.i18nService.instant('COMMON_SEPTEMBER'),
-				this.i18nService.instant('COMMON_OCTOBER'),
-				this.i18nService.instant('COMMON_NOVEMBER'),
-				this.i18nService.instant('COMMON_DECEMBER')
-			],
-			monthNamesShort: [
-				this.i18nService.instant('JOB_MONTHS_1'),
-				this.i18nService.instant('JOB_MONTHS_2'),
-				this.i18nService.instant('JOB_MONTHS_3'),
-				this.i18nService.instant('JOB_MONTHS_4'),
-				this.i18nService.instant('JOB_MONTHS_5'),
-				this.i18nService.instant('JOB_MONTHS_6'),
-				this.i18nService.instant('JOB_MONTHS_7'),
-				this.i18nService.instant('JOB_MONTHS_8'),
-				this.i18nService.instant('JOB_MONTHS_9'),
-				this.i18nService.instant('JOB_MONTHS_10'),
-				this.i18nService.instant('JOB_MONTHS_11'),
-				this.i18nService.instant('JOB_MONTHS_12')
-			]
+			dayNames: weekDaysNames,
+			dayNamesShort: weekDaysNamesShort,
+			dayNamesMin: weekDaysNamesShort,
+			monthNames: monthNames,
+			monthNamesShort: monthNamesShort
 		};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
