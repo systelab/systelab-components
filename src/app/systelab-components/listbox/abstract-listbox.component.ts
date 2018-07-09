@@ -18,11 +18,13 @@ export class TreeListBoxElement {
 export abstract class AbstractListBox<T> implements OnInit {
 
 	@Input() public isDisabled: boolean;
+	@Input() public multipleSelection = false;
 	@Input() public prefixID = '';
 	@Input() public values: Array<ListBoxElement | TreeListBoxElement> = [];
 
 	public gridOptions: GridOptions;
 	public columnDefs: Array<any>;
+	public paddingSingleSelection = 0;
 
 	protected _multipleSelectedItemList: Array<any>;
 
@@ -102,26 +104,37 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected configGrid() {
-		this.columnDefs = [
-			{
-				colID:                 'id',
-				cellRendererFramework: AbstractListboxRendererComponent,
-				cellRendererParams:    {
-					changeFunction: (e) => {
-						this.changeValues(e);
-					},
-					isTree:         this.isTree,
-					prefix:         this.prefixID
-				}
-			}
-		]
-		;
-
+		this.paddingSingleSelection = this.multipleSelection ? 0 : 2;
 		this.gridOptions = {};
-		this.gridOptions.columnDefs = this.columnDefs;
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.rowSelection = 'single';
+		this.gridOptions.suppressCellSelection = true;
+
+		if (this.multipleSelection) {
+			this.columnDefs = [
+				{
+					colID:                 'id',
+					cellRendererFramework: AbstractListboxRendererComponent,
+					cellRendererParams:    {
+						changeFunction: (e) => {
+							this.changeValues(e);
+						},
+						isTree:         this.isTree,
+						prefix:         this.prefixID,
+						isDisabled:     this.isDisabled
+					}
+				}
+			];
+		} else {
+			this.columnDefs = [
+				{
+					colID: 'id',
+					field: 'description',
+				}
+			];
+		}
+		this.gridOptions.columnDefs = this.columnDefs;
+
 	}
 
 	public changeValues(event: any) {
