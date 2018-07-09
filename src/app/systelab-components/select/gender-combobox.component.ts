@@ -16,8 +16,6 @@ class Element {
 export class GenderSelect extends AbstractComboBox implements AfterViewInit {
 
 	@Input() showAll = false;
-	@Input() genderValue = '';
-	@Output() genderValueChange: EventEmitter<string | number> = new EventEmitter<string | number>();
 
 	constructor( public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService ) {
 		super( myRenderer, chRef );
@@ -42,5 +40,22 @@ export class GenderSelect extends AbstractComboBox implements AfterViewInit {
 			}
 		}
 		this.gridOptions.rowData = this.values;
+	}
+
+	public afterSettingId( value: number | string ) {
+		switch ( value ) {
+			case 'U':
+				this.description = this.i18nService.instant( 'COMMON_UNKNOWN' );
+				break;
+			case 'M':
+				this.description = this.i18nService.instant( 'COMMON_MALE' );
+				break;
+			case 'F':
+				this.description = this.i18nService.instant( 'COMMON_FEMALE' );
+				break;
+			default:
+				break;
+		}
+		super.afterSettingId( value );
 	}
 }

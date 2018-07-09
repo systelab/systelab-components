@@ -2,7 +2,9 @@
     <form class="position-relative" style="height: 200px;">
         <showcase-inner-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)"
                              (clickRow)="doSelect($event)"></showcase-inner-grid>
+
     </form>
+    {{grid.values | json}}
     <div class="pt-2">
         <button type="button" class="btn" (click)="grid.showOptions();"><i
                 class="icon-info-circle mr-1"></i>Options

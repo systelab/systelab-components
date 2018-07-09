@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TouchSpinValues } from './touch.spin-values';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {TouchSpinValues} from './touch.spin-values';
 
 @Component({
-	selector:    'systelab-spinner',
+	selector: 'systelab-spinner',
 	templateUrl: 'spinner.component.html',
-	styleUrls:   ['spinner.component.scss']
+	styleUrls: ['spinner.component.scss']
 })
 export class TouchspinComponent {
 
@@ -12,6 +12,8 @@ export class TouchspinComponent {
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
 	@Input() fillUnitsWithZero = false;
+
+	@Input() public isInGrid = false;
 
 	private previousValue: number;
 
@@ -80,7 +82,7 @@ export class TouchspinComponent {
 	public minus() {
 		const value: number = Number(this._spinValues.value);
 		const stepValue: number = this._spinValues.step;
-		const fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
+		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
 		if (value - stepValue > this._spinValues.min) {
 			this._spinValues.value = Number((value - this._spinValues.step).toFixed(fixedNumber));
@@ -96,7 +98,7 @@ export class TouchspinComponent {
 	public plus() {
 		const value: number = Number(this._spinValues.value);
 		const stepValue: number = this._spinValues.step;
-		const fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
+		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
 		if (value + stepValue < this._spinValues.max) {
 			this._spinValues.value = Number((value + this._spinValues.step).toFixed(2));
@@ -110,16 +112,22 @@ export class TouchspinComponent {
 	}
 
 	public checkKey($event: KeyboardEvent): boolean {
-		if ($event.charCode >= 44 && $event.charCode <= 57 && $event.charCode !== 47 || $event.keyCode === 9) {
+		if ($event.charCode >= 44 && $event.charCode <= 57 && $event.charCode !== 47) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	public pushEnter(keyCode: number): void {
+		if (keyCode === 9 && this.isInGrid || keyCode === 13) {
+			this.checkValue(this.valueStr);
+		}
+	}
+
 	public checkValue(valueStr: string) {
 		const value: number = Number(valueStr);
-		const fixedNumber: number = ( this._spinValues.isDecimal ) ? 2 : 0;
+		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
 		if (isNaN(value)) {
 			this._spinValues.value = this.previousValue;
