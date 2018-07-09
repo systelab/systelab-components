@@ -19,7 +19,7 @@
           background-color: $background;
 
           &.ag-row-selected {
-            background-color: $background;
+            background-color: $slab-selected-background-color;
           }
 
           &.ag-row-hover {
@@ -37,6 +37,7 @@
     }
   }
   &.disabled {
-    visibility: hidden;
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
