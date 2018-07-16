@@ -10,21 +10,29 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public startsWith = '';
 
+	private searchTimeout: any;
+
 	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
 		super(myRenderer, chref);
 	}
 
 	public doSearch(event: any) {
-		if (event.shiftKey || event.ctrlKey) {
-			return;
+		if (this.searchTimeout) {
+			clearTimeout(this.searchTimeout);
 		}
-		if (event.keyCode === 27) {
-			if (this.isDropDownOpen()) {
-				this.closeDropDown();
+		this.searchTimeout = setTimeout(() => {
+			if (event.shiftKey || event.ctrlKey) {
+				return;
 			}
-		} else {
-			this.doSearchText(event.target.value);
-		}
+			if (event.keyCode === 27) {
+				if (this.isDropDownOpen()) {
+					this.closeDropDown();
+				}
+			} else {
+				this.doSearchText(event.target.value);
+			}
+		}, 300);
+
 	}
 
 	protected doSearchText(text: string) {
@@ -50,17 +58,22 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	public onInputClicked(event: MouseEvent) {
-		event.stopPropagation();
-		if (!this.isDisabled) {
-			jQuery('#' + this.comboId).dropdown('toggle');
-			if (!this.isDropDownOpen()) {
-				this.isDropdownOpened = true;
-				this.showDropDown();
-				this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
-				this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
-				this.doSearchText(this.description);
+		const isIE = navigator.userAgent.indexOf('MSIE ') > -1 || navigator.appVersion.indexOf('Trident/') > 0;
+		if (isIE) {
+			event.stopPropagation();
+			if (!this.isDisabled) {
+				jQuery('#' + this.comboId).dropdown('toggle');
+				if (!this.isDropDownOpen()) {
+					this.isDropdownOpened = true;
+					this.showDropDown();
+					this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
+					this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
+					this.doSearchText(this.description);
+				}
+				this.inputElement.nativeElement.focus();
 			}
-			this.inputElement.nativeElement.focus();
+		} else {
+			this.onComboClicked(event);
 		}
 	}
 
