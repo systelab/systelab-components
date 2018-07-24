@@ -6,7 +6,7 @@ import { TabComponent } from './tab.component';
 	template: `
                 <ul class="nav nav-tabs" [class.hideTabBackground]="!showTabBackground" role="tablist">
                     <li class="nav-item" [class.hideTabBackground]="!showTabBackground" *ngFor="let tab of tabs" (click)="doSelectTab(tab)">
-                        <a class="nav-link" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
+                        <a class="nav-link nav-single-tab" [class.active]="tab.active" href="#" data-toggle="tab" role="tab"
                            [attr.aria-controls]="tab.id">{{tab.title}}<i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i></a>
                     </li>
                 </ul>
