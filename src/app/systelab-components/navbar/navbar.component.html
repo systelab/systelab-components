@@ -7,9 +7,11 @@
 
     <div class="collapse navbar-collapse" [id]="id" [class.justify-content-center]="align === 'center'" [class.justify-content-end]="align === 'right'">
         <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical" class="nav nav-pills slab-navbar-elements align-items-center d-flex">
-            <li *ngFor="let nav of items; let last=last" [style.border]="borderColor?'1px solid '+borderColor:'none'"
-                [style.border-right]="!isVertical && !last ?'none': borderColor ? '1px solid '+borderColor:'none'"
-                [style.border-bottom]="isVertical && !last ?'none': borderColor ? '1px solid '+borderColor:'none'"
+            <li *ngFor="let nav of items; let last=last"
+                [style.border-right]="hideRightBorder?'none':(!isVertical && !last ?'none': borderColor  ? '1px solid '+borderColor:'none')"
+                [style.border-bottom]="hideBottomBorder?'none':(isVertical && !last ?'none': borderColor ? '1px solid '+borderColor:'none')"
+                [style.border-left]="borderColor && !hideLeftBorder? '1px solid '+borderColor:'none'"
+                [style.border-top]="borderColor && !hideTopBorder? '1px solid '+borderColor:'none'"
                 class="nav-item"
                 [class.disabled]="!nav.isEnabled"
                 (click)="nav.action()"

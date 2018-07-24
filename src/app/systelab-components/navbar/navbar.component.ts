@@ -22,6 +22,10 @@ export class NavbarComponent {
 	@Input() public fontColor = 'white';
 	@Input() public align = 'left';
 	@Input() public id: string;
+	@Input() public hideBottomBorder: boolean;
+	@Input() public hideTopBorder: boolean;
+	@Input() public hideRightBorder: boolean;
+	@Input() public hideLeftBorder: boolean;
 
 	public hovered: number;
 
