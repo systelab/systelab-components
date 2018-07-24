@@ -7,14 +7,18 @@
 
     <div class="collapse navbar-collapse" [id]="id" [class.justify-content-center]="align === 'center'" [class.justify-content-end]="align === 'right'">
         <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical" class="nav nav-pills slab-navbar-elements align-items-center d-flex">
-            <li *ngFor="let nav of items" class="nav-item" [class.disabled]="!nav.isEnabled" (click)="nav.action()"
-                [style.background-color]="hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor"
-                
+            <li *ngFor="let nav of items; let last=last" [style.border]="borderColor?'1px solid '+borderColor:'none'"
+                [style.border-right]="!isVertical && !last ?'none': borderColor ? '1px solid '+borderColor:'none'"
+                [style.border-bottom]="isVertical && !last ?'none': borderColor ? '1px solid '+borderColor:'none'"
+                class="nav-item"
+                [class.disabled]="!nav.isEnabled"
+                (click)="nav.action()"
+                [style.background-color]="nav.isSelected? activeColor : (hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor)"
                 (mouseover)="hovered = nav.id" (mouseout)="hovered = -1" [class.active]="nav.isSelected">
                 <a [id]="'nav-'+nav.id" class="nav-link text-center align-self-stretch align-items-center" [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
-                    [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null " [style.color]="fontColor"
+                   [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null " [style.color]="nav.isSelected?activeFontColor:fontColor"
                    [class.disabled]="!nav.isEnabled" [class.active]="nav.isSelected">
-                    <i *ngIf="nav.image" [class]="nav.image" [style.color]="fontColor" [class.slab-icon-float-image]="nav.floatImage"
+                    <i *ngIf="nav.image" [class]="nav.image" [style.color]="nav.isSelected?activeFontColor:fontColor" [class.slab-icon-float-image]="nav.floatImage"
                        [class.slab-icon-vertical-image]="!nav.floatImage"></i>
                     {{nav.text}}
                 </a>
