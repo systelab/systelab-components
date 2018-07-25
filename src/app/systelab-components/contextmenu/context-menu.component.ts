@@ -19,6 +19,8 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@Input() public contextMenuOptions: Array<ContextMenuOption>;
 
 	@Input() public elementID: string;
+	@Input() public fontSize: string;
+	@Input() public fontColor: string;
 
 	public top = 0;
 	public left = 0;

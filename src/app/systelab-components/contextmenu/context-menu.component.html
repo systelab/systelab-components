@@ -1,6 +1,6 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
-        <i class="icon-context-menu"></i>
+        <i class="icon-context-menu" [style.font-size]="fontSize" [style.color]="fontColor"></i>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown">
@@ -10,7 +10,8 @@
                         (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null"
                         *ngIf="isEnabled(elementID, action.actionId)">
                         <a>{{action.actionText}}</a>
-                        <div *ngIf="action.isDivider && isEnabled(elementID, action.actionId)" class="dropdown-divider"></div>
+                        <div *ngIf="action.isDivider && isEnabled(elementID, action.actionId)"
+                             class="dropdown-divider"></div>
                     </li>
                 </ul>
             </div>
