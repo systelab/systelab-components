@@ -21,6 +21,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@Input() public elementID: string;
 	@Input() public fontSize: string;
 	@Input() public fontColor: string;
+	@Input() public hasIcons = false;
 
 	public top = 0;
 	public left = 0;
@@ -167,6 +168,14 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		}
 		return true;
 
+	}
+
+	protected isIconEnabled( elementId: string, actionId: string): boolean {
+		const option: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actionId);
+		if ( option && option.isIconEnabled !== null && option.isIconEnabled !== undefined ) {
+			return option.isIconEnabled(elementId, actionId);
+		}
+		return true;
 	}
 
 	protected executeAction(elementId: string, actionId: string): void {
