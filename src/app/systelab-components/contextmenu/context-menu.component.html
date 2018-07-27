@@ -16,7 +16,7 @@
                              class="slab-icon-container rounded d-flex text-center justify-content-center align-items-center"
                              [style.background-color]="action.backgroundColor">
                             <i class="slab-flex-1 slab-menu-icon {{action.iconClass}}"
-                               [style.color]="action.iconColor" [ngClass]="{'text-white': action.iconColor}"></i>
+                               [style.color]="action.iconColor" [ngClass]="{'text-white': !action.iconColor}"></i>
                         </div>
                         <a [style.padding-left]="hasIcons && !isIconEnabled(elementID, action.actionId)?'20px':'0'"
                            [ngClass]="{'ml-2': hasIcons}">{{action.actionText}}</a>
