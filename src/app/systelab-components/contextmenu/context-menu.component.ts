@@ -1,11 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
-import { ContextMenuActionData } from './context-menu-action-data';
-import { ContextMenuOption } from './context-menu-option';
+import {ContextMenuActionData} from './context-menu-action-data';
+import {ContextMenuOption} from './context-menu-option';
 
 declare var jQuery: any;
 
 @Component({
-	selector:    'systelab-context-menu',
+	selector: 'systelab-context-menu',
 	templateUrl: 'context-menu.component.html',
 })
 export class ContextMenuComponent implements OnInit, OnDestroy {
@@ -152,11 +152,11 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	protected addScrollHandler() {
 		this.scrollHandler = this.scroll.bind(this);
-		window.addEventListener('scroll', this.scrollHandler , true);
+		window.addEventListener('scroll', this.scrollHandler, true);
 	}
 
 	protected removeScrollHandler() {
-		window.removeEventListener('scroll', this.scrollHandler , true);
+		window.removeEventListener('scroll', this.scrollHandler, true);
 	}
 
 	protected isEnabled(elementId: string, actionId: string): boolean {
@@ -170,9 +170,9 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	}
 
-	protected isIconEnabled( elementId: string, actionId: string): boolean {
+	protected isIconEnabled(elementId: string, actionId: string): boolean {
 		const option: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actionId);
-		if ( option && option.iconConfig.isIconEnabled !== null && option.iconConfig.isIconEnabled !== undefined ) {
+		if (option && option.iconConfig && option.iconConfig.isIconEnabled !== null && option.iconConfig.isIconEnabled !== undefined) {
 			return option.iconConfig.isIconEnabled(elementId, actionId);
 		}
 		return true;
