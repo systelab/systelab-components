@@ -172,8 +172,8 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	protected isIconEnabled( elementId: string, actionId: string): boolean {
 		const option: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actionId);
-		if ( option && option.isIconEnabled !== null && option.isIconEnabled !== undefined ) {
-			return option.isIconEnabled(elementId, actionId);
+		if ( option && option.iconConfig.isIconEnabled !== null && option.iconConfig.isIconEnabled !== undefined ) {
+			return option.iconConfig.isIconEnabled(elementId, actionId);
 		}
 		return true;
 	}

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ContextMenuOption} from '../../../systelab-components/contextmenu/context-menu-option';
+import {ContextMenuOption, IconConfiguration} from '../../../systelab-components/contextmenu/context-menu-option';
 import {ContextMenuActionData} from '../../../systelab-components/contextmenu/context-menu-action-data';
 
 @Component({
@@ -17,8 +17,9 @@ export class ShowcaseContextMenu implements OnInit {
 
 	private generateContextMenuOptions(): void {
 		this.contextMenuOptions = [
-			new ContextMenuOption('option1', 'Option 1', null, null, false, 'icon-check-circle', 'rgb(0, 255, 0)'),
-			new ContextMenuOption('option2', 'Option 2', null, null, false, 'icon-minus-circle', 'rgb(255, 0, 0)', () => this.isIconEnabled())
+			new ContextMenuOption('option1', 'Option 1', null, null, false, new IconConfiguration('icon-check-circle', 'rgb(0, 255, 0)')),
+			new ContextMenuOption('option2', 'Option 2', null, null, false, new IconConfiguration('icon-minus-circle', 'rgb(255, 0, 0)', null, () => this.isIconEnabled())),
+			new ContextMenuOption('option3', 'Option 3', null, null, false, new IconConfiguration('icon-chevron-circle-up', 'rgb(50, 50, 50)', 'rgb(0, 0, 255)'))
 		];
 
 		this.contextMenuOptions2 = [
