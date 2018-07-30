@@ -12,7 +12,7 @@ export class ContextMenuOption {
 	            public isActionEnabled?: ContextMenuIsEnabledFunction,
 	            public isDivider?: boolean,
 	            public iconClass?: string,
-	            public backgroundColor?: string,
+	            public backgroundIconColor?: string,
 	            public iconColor?: string,
 	            public isIconEnabled?: ContextMenuIsIconEnabledFunction) {
 	}

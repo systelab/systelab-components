@@ -1,15 +1,17 @@
 <div class="d-flex">
-    <systelab-context-menu class="slab-flex-1" [contextMenuOptions]="contextMenuOptions"
-                           [fontSize]="'45px'"
-                           [fontColor]="'rgb(255, 0, 0)'"
-                           [hasIcons]="true"
-                           (action)="executeContextMenuAction($event)">
-        <span>Esta es una prueba de poner algo en el ngContent</span>
-    </systelab-context-menu>
+    <div class="d-inline border" style="width: 50px">
+        <systelab-context-menu [contextMenuOptions]="contextMenuOptions"
+                               [fontSize]="'45px'"
+                               [fontColor]="'rgb(255, 0, 0)'"
+                               (action)="executeContextMenuAction($event)">
+            <span>Esta es una prueba de poner algo en el ngContent</span>
+        </systelab-context-menu>
+    </div>
 
-
-    <systelab-context-menu class="slab-flex-1" [contextMenuOptions]="contextMenuOptions2"
-                           (action)="executeContextMenuAction($event)">
-    </systelab-context-menu>
+    <div class="d-inline border" style="width: 50px">
+        <systelab-context-menu [contextMenuOptions]="contextMenuOptions2"
+                               (action)="executeContextMenuAction($event)">
+        </systelab-context-menu>
+    </div>
 
 </div>

@@ -17,9 +17,9 @@ export class ShowcaseContextMenu implements OnInit {
 
 	private generateContextMenuOptions(): void {
 		this.contextMenuOptions = [
-			new ContextMenuOption('option1', 'Option 1', null, null, false, 'icon-check-circle', 'rgb(0, 255, 0)'),
+			new ContextMenuOption('option1', 'Option 1', null, null, false, 'icon-check-circle', 'rgb(40, 167, 69)'),
 			new ContextMenuOption('option2', 'Option 2', null, null, false, 'icon-minus-circle', 'rgb(255, 0, 0)', null, () => this.isIconEnabled()),
-			new ContextMenuOption('option3', 'Option 3', null, null, false, 'icon-chevron-circle-up', 'rgb(50, 50, 50)', 'rgb(0, 0, 255)')
+			new ContextMenuOption('option3', 'Option 3', null, null, false, 'icon-chevron-circle-up', 'rgb(50, 50, 50)', 'rgb(21, 143, 239)')
 		];
 
 		this.contextMenuOptions2 = [

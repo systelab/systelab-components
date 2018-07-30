@@ -14,7 +14,7 @@
                         *ngIf="isEnabled(elementID, action.actionId)">
                         <div *ngIf="hasIcons && isIconEnabled(elementID, action.actionId)"
                              class="slab-icon-container rounded d-flex text-center justify-content-center align-items-center"
-                             [style.background-color]="action.backgroundColor">
+                             [style.background-color]="action.backgroundIconColor">
                             <i class="slab-flex-1 slab-menu-icon {{action.iconClass}}"
                                [style.color]="action.iconColor" [ngClass]="{'text-white': !action.iconColor}"></i>
                         </div>

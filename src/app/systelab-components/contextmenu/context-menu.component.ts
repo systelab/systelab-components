@@ -21,10 +21,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@Input() public elementID: string;
 	@Input() public fontSize: string;
 	@Input() public fontColor: string;
-	@Input() public hasIcons = false;
 
 	public top = 0;
 	public left = 0;
+	public hasIcons = false;
 
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
@@ -37,6 +37,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	public ngOnInit() {
 		jQuery(this.dropdownParent.nativeElement).on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
+		this.checkIfHasIcons();
 	}
 
 	public isDropDownOpened(): boolean {
@@ -194,6 +195,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	public ngOnDestroy() {
 		this.removeScrollHandler();
+	}
+
+	private checkIfHasIcons(): void {
+		this.hasIcons = this.contextMenuOptions.find(contextMenuOption => contextMenuOption.iconClass !== undefined) !== undefined;
 	}
 }
 
