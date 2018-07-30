@@ -72,6 +72,7 @@ import {ShowcaseSortableListComponent} from './components/sortable-list/showcase
 import {ShowcaseInnerSortableListComponent} from './components/sortable-list/showcase-inner-sortable-list.component';
 import {ShowcaseAddRemoveListComponent} from './components/add-remove-list/showcase-add-remove-list.component';
 import {ShowcaseInnerAddRemoveListComponent} from './components/add-remove-list/showcase-inner-add-remove-list.component';
+import {ShowcaseContextMenu} from './components/context-menu/showcase-context-menu.component';
 
 @NgModule({
 	imports: [
@@ -148,7 +149,8 @@ import {ShowcaseInnerAddRemoveListComponent} from './components/add-remove-list/
 		ShowcaseSortableListComponent,
 		ShowcaseInnerSortableListComponent,
 		ShowcaseAddRemoveListComponent,
-		ShowcaseInnerAddRemoveListComponent
+		ShowcaseInnerAddRemoveListComponent,
+		ShowcaseContextMenu
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

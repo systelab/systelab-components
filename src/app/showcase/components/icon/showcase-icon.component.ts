@@ -102,5 +102,8 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-tree');
 		this.icons.push('icon-sitemap');
 		this.icons.push('icon-refresh');
+		this.icons.push('icon-file-certified');
+		this.icons.push('icon-wifi');
+		this.icons.push('icon-wifi-alert');
 	}
 }

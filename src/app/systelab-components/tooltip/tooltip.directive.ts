@@ -1,41 +1,47 @@
-import {AfterViewInit, Directive, ElementRef, Input, OnDestroy, OnInit, Renderer, Renderer2} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges} from '@angular/core';
 
 declare var jQuery: any;
 
 @Directive({
-    selector: '[systelabTooltip],[systelabTooltipHtml]'
+	selector: '[systelabTooltip],[systelabTooltipHtml]'
 })
-export class TooltipDirective implements OnInit, AfterViewInit, OnDestroy {
+export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 
-    public static DEFAULT_PLACEMENT = 'top';
-    public static DEFAULT_DELAY = 1000;
+	public static DEFAULT_PLACEMENT = 'top';
+	public static DEFAULT_DELAY = 1000;
 
-    @Input() systelabTooltip: string;
-    @Input() systelabTooltipHtml: string;
-    @Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
-    @Input() systelabTooltipDelay: number;
+	@Input() systelabTooltip: string;
+	@Input() systelabTooltipHtml: string;
+	@Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
+	@Input() systelabTooltipDelay: number;
 
-    constructor(private el: ElementRef, private renderer: Renderer2) {
-    }
+	constructor(private el: ElementRef, private renderer: Renderer2) {
+	}
 
-    ngOnInit() {
-        this.renderer.setAttribute(this.el.nativeElement, 'data-toogle', 'tooltip');
-        this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
-        if (this.systelabTooltipHtml) {
-            this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'true');
-        }
-        this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
-            (this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
-        this.renderer.setAttribute(this.el.nativeElement, 'data-delay',
-            (this.systelabTooltipDelay) ? this.systelabTooltipDelay.toString() : TooltipDirective.DEFAULT_DELAY.toString());
-        this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
-    }
+	ngAfterViewInit() {
+		jQuery(this.el.nativeElement).tooltip();
+	}
 
-    ngAfterViewInit() {
-        jQuery(this.el.nativeElement).tooltip();
-    }
+	ngOnDestroy() {
+		jQuery(this.el.nativeElement).tooltip('dispose');
+	}
 
-    ngOnDestroy() {
-        jQuery(this.el.nativeElement).tooltip('dispose');
-    }
+	ngOnChanges(changes: SimpleChanges) {
+		this.ngOnDestroy();
+		this.initializeTooltip();
+		this.ngAfterViewInit();
+	}
+
+	private initializeTooltip(): void {
+		this.renderer.setAttribute(this.el.nativeElement, 'data-toogle', 'tooltip');
+		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
+		if (this.systelabTooltipHtml) {
+			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'true');
+		}
+		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
+			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
+		this.renderer.setAttribute(this.el.nativeElement, 'data-delay',
+			(this.systelabTooltipDelay) ? this.systelabTooltipDelay.toString() : TooltipDirective.DEFAULT_DELAY.toString());
+		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
+	}
 }

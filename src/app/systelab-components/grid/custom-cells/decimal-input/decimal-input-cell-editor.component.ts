@@ -25,7 +25,8 @@ export class DecimalInputCellEditorComponent implements AgEditorComponent {
 	}
 
 	public getValue(): any {
-		return this.decimalFormat.transform(this.decimalValue, '1.1-5').replace(/,/g, '');
+		const transformedValue = this.decimalFormat.transform(this.decimalValue, '1.1-5');
+		return transformedValue ? transformedValue.replace(/,/g, '') : null;
 	}
 
 	public refresh(params: any): boolean {

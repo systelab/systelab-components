@@ -1,16 +1,27 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
-        <i class="icon-context-menu"></i>
+        <i class="icon-context-menu" [style.font-size]="fontSize" [style.color]="fontColor"></i>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown">
             <div *ngIf="isOpened">
+                <div>
+                    <ng-content></ng-content>
+                </div>
                 <ul *ngFor="let action of contextMenuOptions">
-                    <li class="{{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
+                    <li class="d-flex align-items-center {{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
                         (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null"
                         *ngIf="isEnabled(elementID, action.actionId)">
-                        <a>{{action.actionText}}</a>
-                        <div *ngIf="action.isDivider && isEnabled(elementID, action.actionId)" class="dropdown-divider"></div>
+                        <div *ngIf="hasIcons && isIconEnabled(elementID, action.actionId)"
+                             class="slab-icon-container rounded d-flex text-center justify-content-center align-items-center"
+                             [style.background-color]="action.backgroundIconColor">
+                            <i class="slab-flex-1 slab-menu-icon {{action.iconClass}}"
+                               [style.color]="action.iconColor" [ngClass]="{'text-white': !action.iconColor}"></i>
+                        </div>
+                        <a [style.padding-left]="hasIcons && !isIconEnabled(elementID, action.actionId)?'20px':'0'"
+                           [ngClass]="{'ml-2': hasIcons}">{{action.actionText}}</a>
+                        <div *ngIf="action.isDivider && isEnabled(elementID, action.actionId)"
+                             class="dropdown-divider"></div>
                     </li>
                 </ul>
             </div>

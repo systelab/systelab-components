@@ -1,11 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
-import { ContextMenuActionData } from './context-menu-action-data';
-import { ContextMenuOption } from './context-menu-option';
+import {ContextMenuActionData} from './context-menu-action-data';
+import {ContextMenuOption} from './context-menu-option';
 
 declare var jQuery: any;
 
 @Component({
-	selector:    'systelab-context-menu',
+	selector: 'systelab-context-menu',
 	templateUrl: 'context-menu.component.html',
 })
 export class ContextMenuComponent implements OnInit, OnDestroy {
@@ -19,9 +19,12 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@Input() public contextMenuOptions: Array<ContextMenuOption>;
 
 	@Input() public elementID: string;
+	@Input() public fontSize: string;
+	@Input() public fontColor: string;
 
 	public top = 0;
 	public left = 0;
+	public hasIcons = false;
 
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
@@ -34,6 +37,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	public ngOnInit() {
 		jQuery(this.dropdownParent.nativeElement).on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
+		this.checkIfHasIcons();
 	}
 
 	public isDropDownOpened(): boolean {
@@ -149,11 +153,11 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	protected addScrollHandler() {
 		this.scrollHandler = this.scroll.bind(this);
-		window.addEventListener('scroll', this.scrollHandler , true);
+		window.addEventListener('scroll', this.scrollHandler, true);
 	}
 
 	protected removeScrollHandler() {
-		window.removeEventListener('scroll', this.scrollHandler , true);
+		window.removeEventListener('scroll', this.scrollHandler, true);
 	}
 
 	protected isEnabled(elementId: string, actionId: string): boolean {
@@ -165,6 +169,14 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		}
 		return true;
 
+	}
+
+	protected isIconEnabled(elementId: string, actionId: string): boolean {
+		const option: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actionId);
+		if (option && option.isIconEnabled !== null && option.isIconEnabled !== undefined) {
+			return option.isIconEnabled(elementId, actionId);
+		}
+		return true;
 	}
 
 	protected executeAction(elementId: string, actionId: string): void {
@@ -183,6 +195,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	public ngOnDestroy() {
 		this.removeScrollHandler();
+	}
+
+	private checkIfHasIcons(): void {
+		this.hasIcons = this.contextMenuOptions.find(contextMenuOption => contextMenuOption.iconClass !== undefined) !== undefined;
 	}
 }
 
