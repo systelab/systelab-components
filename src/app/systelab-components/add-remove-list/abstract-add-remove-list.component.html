@@ -1,6 +1,6 @@
-<div class="d-flex mb-1" [ngClass]="{'flex-column': buttonsOnBottom}">
+<div class="d-flex mb-1 h-100" [ngClass]="{'flex-column': buttonsOnBottom}">
     <div class="slab-flex-1 text-nowrap border rounded slab-overflow-containers slab-sortable-list" dnd-droppable
-         style="height:150px"
+         style="min-height:150px"
          (onDragEnter)="preventDefault($event)"
          (onDragOver)="preventDefault($event)"
          (onDragLeave)="preventDefault($event)">
@@ -13,7 +13,8 @@
             </li>
         </ul>
     </div>
-    <div *ngIf="!isDisabled" class="d-flex" [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
+    <div *ngIf="!isDisabled" class="d-flex"
+         [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
         <button class="btn" (click)="add()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
         </button>
