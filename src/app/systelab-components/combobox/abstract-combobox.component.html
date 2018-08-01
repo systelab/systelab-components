@@ -17,10 +17,10 @@
                     [style.font-style]="fontStyle">
                     <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
                 </div>
-                <div *ngIf="allValue" class="slab-filter-container mb-2">
-                    <div class="text-center">
-                        <button type="button" class="btn btn-sm  btn-outline-primary mr-2" (click)="selectAll()">{{'COMMON_SELECT_ALL' | translate | async }}</button>
-                        <button type="button" class="btn btn-sm  btn-outline-primary"  (click)="deselectAll()">{{'COMMON_DESELECT_ALL' | translate | async }}</button>
+                <div *ngIf="selectDeselectAll" class="slab-filter-container mb-2">
+                    <div class="w-100 text-center btn-group" role="group">
+                        <button type="button" class="btn btn-sm w-50  btn-outline-primary" (click)="doSelectAll()">{{'COMMON_SELECT_ALL' | translate | async }}</button>
+                        <button type="button" class="btn btn-sm w-50 btn-outline-primary"  (click)="doDeselectAll()">{{'COMMON_DESELECT_ALL' | translate | async }}</button>
                     </div>
                 </div>
                 <div #hidden class="height-hidden"></div>
