@@ -40,6 +40,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Output() public descriptionChange = new EventEmitter();
 	@Input() public allowEditInput = false;
 	@Input() public emptyElement = false;
+	@Input() public allValue = false;
 
 	public _id: number | string;
 	@Input()
@@ -163,6 +164,20 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.rowData = this.values;
+		
+		if (this.multipleSelection === true) {
+			const listSelected = this.values.filter(x => x.selected === true);
+			if (listSelected.length > 0) {
+				this.currentListSelected = listSelected;
+				this.setMultipleDescription();
+			}
+		}
+		else if (this.id) {
+			const selectedItem = this.values.filter(x => x.id === this.id);
+			if (selectedItem.length > 0) {
+				this.description = selectedItem[0].description;
+			}
+		}
 	}
 
 	protected setRowHeight() {
@@ -426,6 +441,13 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	public getCheckboxChecked(): string {
 		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
+	}
+
+	public selectAll() {
+		this.gridOptions.api.selectAll();
+	}
+	public deselectAll() {
+		this.gridOptions.api.deselectAll();
 	}
 
 }

@@ -10,6 +10,7 @@ export class ShowcaseComboboxComponent {
 	public colorValue: any;
 	public listSelectedValues = true;
 	public multiple = true;
+	public allValue = true;
 
 	public comboOptionList: Array<Object> = [];
 
@@ -17,9 +18,9 @@ export class ShowcaseComboboxComponent {
 
 		this.comboOptionList = [
 			{ description: 'New York', id: 1 },
-			{ description: 'Rome', id: 2 },
+			{ description: 'Rome', id: 2, selected: true },
 			{ description: 'London', id: 3 },
-			{ description: 'Barcelona', id: 4 },
+			{ description: 'Barcelona', id: 4, selected: true },
 			{ description: 'París', id: 5 },
 			{ description: 'Berlín', id: 6 },
 			{ description: 'Oslo', id: 7 },
@@ -34,6 +35,5 @@ export class ShowcaseComboboxComponent {
 		console.log('comboValue ', event);
 		console.log(this.colorId);
 		console.log(this.colorValue);
-
 	}
 }
