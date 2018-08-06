@@ -28,7 +28,6 @@ $footer-buttons-offset: ceil(16px * $slab-size-percentage);
 $button-size: ceil(54px * $slab-size-percentage);
 $button-fontsize: ceil(32px * $slab-size-percentage);
 
-
 /**
  * Displays the full-screen overlay and centers its content (the dialog itself)
  */
@@ -163,6 +162,22 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
 
   &:before {
     content: "\F05A";
+    cursor: pointer;
+  }
+}
+
+.slab-dialog-home {
+
+  &:before {
+    content: "\F015";
+    cursor: pointer;
+  }
+}
+
+.slab-dialog-minimize {
+
+  &:before {
+    content: "\F056";
     cursor: pointer;
   }
 }
