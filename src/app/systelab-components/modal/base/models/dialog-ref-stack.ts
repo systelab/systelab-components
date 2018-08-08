@@ -6,7 +6,7 @@ const BASKET_GROUP = {};
  * A dumb stack implementation over an array.
  */
 export class DialogRefStack<T> {
-	private _stack: DialogRef<T>[];
+	_stack: DialogRef<T>[];
 	private _stackMap: Map<DialogRef<T>, any>;
 
 	get length(): number {
@@ -87,5 +87,12 @@ export class DialogRefStack<T> {
 			});
 		}
 		return count;
+	}
+
+	public closeAllDialogs() {
+		this._stack.forEach((dialogRef) => {
+			let dialog = this.pop();
+			dialog.close();
+		});
 	}
 }

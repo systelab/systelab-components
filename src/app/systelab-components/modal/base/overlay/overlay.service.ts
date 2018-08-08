@@ -35,6 +35,10 @@ export class Overlay {
 		return _stack.groupLength(_stack.groupOf(dialogRef));
 	}
 
+	public closeAllDialogs() {
+		_stack.closeAllDialogs();
+	}
+
 	/**
 	 * Creates an overlay and returns a dialog ref.
 	 * @param config instructions how to create the overlay
