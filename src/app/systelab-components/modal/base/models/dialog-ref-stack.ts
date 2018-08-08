@@ -90,9 +90,10 @@ export class DialogRefStack<T> {
 	}
 
 	public closeAllDialogs() {
-		this._stack.forEach((dialogRef) => {
+		const numberOfDialogs = this.length;
+		for (let i = 0; i < numberOfDialogs; i++) {
 			let dialog = this.pop();
 			dialog.close();
-		});
+		}
 	}
 }
