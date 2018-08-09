@@ -16,8 +16,20 @@
   min-width: 0;
 }
 
-.slab-dropdown {
+.slab-dropdown-fixed {
   position: fixed;
+}
+
+.slab-dropdown-absolute {
+  position: absolute;
+}
+
+.slab-dropdown-scroll {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.slab-dropdown {
   background-color: white;
   padding: 4px 15px;
   vertical-align: top;
