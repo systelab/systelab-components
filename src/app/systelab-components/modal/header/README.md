@@ -5,12 +5,12 @@ Component to create a dialog header.
 ## Using the template
 
 ```html
-<systelab-dialog-header #header [withClose]="true" [withInfo]="false" [withProgressBar]="false" (close)="doClose()" (info)="doInfo()">
+<systelab-dialog-header #header [withClose]="true" [withInfo]="false" [withProgressBar]="false" [withMinimize]="false" [withHome]="false" (close)="doClose()" (info)="doInfo()" (minimize)="doMinimize()" (home)="doHome()">
 title
 </systelab-dialog-header>
 ```
 
-By default withClose is true, withInfo is false and withProgressBar is false. If you want the defaults the template will look like:
+By default withClose is true, withInfo is false, withMinimize is false, withHome is false and withProgressBar is false. If you want the defaults the template will look like:
 
 ```html
 <systelab-dialog-header (close)="doClose()">Title</systelab-dialog-header>
