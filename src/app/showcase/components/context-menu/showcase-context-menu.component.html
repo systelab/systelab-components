@@ -1,14 +1,35 @@
-<div class="d-flex">
-    <div class="d-inline border" style="width: 50px">
-        <systelab-context-menu [contextMenuOptions]="contextMenuOptions"
-                               [fontSize]="'45px'"
-                               [fontColor]="'rgb(255, 0, 0)'"
-                               (action)="executeContextMenuAction($event)">
-            <span>Esta es una prueba de poner algo en el ngContent</span>
-        </systelab-context-menu>
+<div class="container-fluid">
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label"> Context Menu with icons and styles</label>
+        <div class="col-md-9">
+            <div class="border" style="width: 50px">
+                <systelab-context-menu [contextMenuOptions]="contextMenuOptions"
+                                       [fontSize]="'45px'"
+                                       [fontColor]="'rgb(255, 0, 0)'"
+                                       (action)="executeContextMenuAction($event)">
+                    <span>Esta es una prueba de poner algo en el ngContent</span>
+                </systelab-context-menu>
+            </div>
+        </div>
     </div>
-    <div class="d-inline border" style="width: 50px">
-        <systelab-context-menu [contextMenuOptions]="contextMenuOptions2" (action)="executeContextMenuAction($event)">
-        </systelab-context-menu>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label"> Context Menu with children</label>
+        <div class="col-md-9">
+            <div class="border" style="width: 25px">
+                <systelab-context-menu [contextMenuOptions]="contextMenuOptions2"
+                                       (action)="executeContextMenuAction($event)">
+                </systelab-context-menu>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label"> Context Menu with scroll</label>
+        <div class="col-md-9">
+            <div class="border" style="width: 25px">
+                <systelab-context-menu [contextMenuOptions]="contextMenuOptions5"
+                                       (action)="executeContextMenuAction($event)">
+                </systelab-context-menu>
+            </div>
+        </div>
     </div>
 </div>

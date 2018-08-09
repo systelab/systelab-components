@@ -7,12 +7,15 @@ Component to show a context menu
 <systelab-context-menu [elementID]="elementID" [contextMenuOptions]="contextMenuOptions" (action)="doSomeAction()" ></systelab-context-menu>
 ```
 
-## systelab-context-menu - List of inputs
+## List of inputs
 
 elementID: ElementID to identify the contextMenu. Default a random auto generated
+
 fontSize: Customize font size. Default undefined
+
 fontColor: Customize font color. Default undefined
-embedded: Hides the three dots button. To use as an embedded context menu in other components, such as textAreas, inputs, etc. Default false.
+
+isEmbedded: Hides the three dots button. To use as an embedded context menu in other components, such as textAreas, inputs, etc. Default false.
 
 contextMenuOptions: Array of ContextMenuOptions
 ```
@@ -21,7 +24,7 @@ this.contextMenuOptions.push(new ContextMenuOption('2','Option 2',() => doAction
 this.contextMenuOptions.push(new ContextMenuOption('3','Option 3',() => doAction3(),true));
 ```
 
-## ContextMenuOptions - List of parameters
+## ContextMenuOption - List of parameters
 
 	constructor(public actionId: string,
 				public actionText: string,
@@ -35,24 +38,34 @@ this.contextMenuOptions.push(new ContextMenuOption('3','Option 3',() => doAction
 				public childrenContextMenuOptions?: Array<ContextMenuOption>)
 
 actionId: Unique ID
+
 actionText: Text to display
+
 action: Function to execute
+
 isActionEnabled: Function returns true is menu option is enabled
+
 isDivider: Display a divider line
+
 iconClass: Icon to display
+
 backgroundIconColor: Icon background color
+
 iconColor: Icon color
+
 isIconEnabled: Function returns true if icon is enabled
+
 childrenContextMenuOptions: Array of ContextMenuOption to display as children for this option
+
 
 ## Embedded mode usage
 
-Set [embedded]="true"
+Set [isEmbedded]="true"
 
 Add the systelab-context-menu next to the component that will display the menu:
 
         <textarea (contextmenu)="openContextMenu($event)" ></textarea>
-        <systelab-context-menu #contextMenu [embedded]="true" [contextMenuOptions]="contextMenuOptions"
+        <systelab-context-menu #contextMenu [isEmbedded]="true" [contextMenuOptions]="contextMenuOptions"
                                (action)="executeContextMenuAction($event)">
         </systelab-context-menu>
 

@@ -36,7 +36,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@Input() public elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 	@Input() public fontSize: string;
 	@Input() public fontColor: string;
-	@Input() public embedded = false;
+	@Input() public isEmbedded = false;
 
 	public top = 0;
 	public left = 0;
@@ -265,43 +265,45 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 			event.stopPropagation();
 			event.preventDefault();
 
-			if (this.previousActionChild && this.previousActionChild !== actionId) {
-				const previousActionChildID = this.previousActionChild + this.elementID;
-				jQuery('#' + previousActionChildID)
+			if (this.previousActionChild !== actionId) {
+				if (this.previousActionChild) {
+					const previousActionChildID = this.previousActionChild + this.elementID;
+					jQuery('#' + previousActionChildID)
+						.toggle();
+				}
+
+				const childID = actionId + this.elementID;
+				jQuery('#' + childID)
 					.toggle();
+
+				this.previousActionChild = actionId;
+
+				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
+					.find((elem) => {
+						return elem.nativeElement.id === childID;
+					});
+
+				const firstChildAbsoluteTop = event.clientY;
+				let firstChildRelativeTop = event.target.offsetTop;
+
+				if (firstChildAbsoluteTop + selectedChild.nativeElement.offsetHeight > window.innerHeight) {
+					firstChildRelativeTop = firstChildRelativeTop - selectedChild.nativeElement.offsetHeight;
+				}
+
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', firstChildRelativeTop + 'px');
+
+				let firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 15;
+				const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
+
+				if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth + selectedChild.nativeElement.offsetWidth > window.innerWidth) {
+					firstChildLeft = -selectedChild.nativeElement.offsetWidth + 10;
+				}
+
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', firstChildLeft + 'px');
 			}
-
-			const childID = actionId + this.elementID;
-			jQuery('#' + childID)
-				.toggle();
-
-			this.previousActionChild = actionId;
-
-			const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
-				.find((elem) => {
-					return elem.nativeElement.id === childID;
-				});
-
-			const firstChildAbsoluteTop = event.clientY;
-			let firstChildRelativeTop = event.target.offsetTop;
-
-			if (firstChildAbsoluteTop + selectedChild.nativeElement.offsetHeight > window.innerHeight) {
-				firstChildRelativeTop = firstChildRelativeTop - selectedChild.nativeElement.offsetHeight;
-			}
-
-			this.myRenderer.setStyle(selectedChild.nativeElement, 'top', firstChildRelativeTop + 'px');
-
-			let firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 15;
-			const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
-
-			if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth + selectedChild.nativeElement.offsetWidth > window.innerWidth) {
-				firstChildLeft = -selectedChild.nativeElement.offsetWidth + 10;
-			}
-
-			this.myRenderer.setStyle(selectedChild.nativeElement, 'left', firstChildLeft + 'px');
 
 		} else {
-			if (this.embedded || parentAction) {
+			if (this.isEmbedded || parentAction) {
 				this.closeDropDown();
 				event.stopPropagation();
 				event.preventDefault();

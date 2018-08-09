@@ -1,6 +1,6 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
-        <i class="icon-context-menu" [ngClass]="{'d-none': embedded}" [style.font-size]="fontSize"
+        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize"
            [style.color]="fontColor"></i>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">

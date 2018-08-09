@@ -12,6 +12,7 @@ export class ShowcaseContextMenu implements OnInit {
 	public contextMenuOptions2: Array<ContextMenuOption> = [];
 	public contextMenuOptions3: Array<ContextMenuOption> = [];
 	public contextMenuOptions4: Array<ContextMenuOption> = [];
+	public contextMenuOptions5: Array<ContextMenuOption> = [];
 
 	public ngOnInit() {
 		this.generateContextMenuOptions();
@@ -45,6 +46,39 @@ export class ShowcaseContextMenu implements OnInit {
 			new ContextMenuOption('option4', 'Option 4', null, null, false, undefined, null, null, null, this.contextMenuOptions4),
 			new ContextMenuOption('option5', 'Option 5', null),
 		];
+
+		this.contextMenuOptions5 = [
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+			new ContextMenuOption('largeOptions', 'Option for scroll', null),
+		];
+
 	}
 
 	public executeContextMenuAction(contextMenuActionData: ContextMenuActionData): void {
