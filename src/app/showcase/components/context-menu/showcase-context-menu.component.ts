@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {ContextMenuOption} from '../../../systelab-components/contextmenu/context-menu-option';
-import {ContextMenuActionData} from '../../../systelab-components/contextmenu/context-menu-action-data';
+import { Component, OnInit } from '@angular/core';
+import { ContextMenuOption } from '../../../systelab-components/contextmenu/context-menu-option';
+import { ContextMenuActionData } from '../../../systelab-components/contextmenu/context-menu-action-data';
 
 @Component({
-	selector: 'showcase-context-menu',
+	selector:    'showcase-context-menu',
 	templateUrl: 'showcase-context-menu.component.html'
 })
 export class ShowcaseContextMenu implements OnInit {
 
 	public contextMenuOptions: Array<ContextMenuOption> = [];
 	public contextMenuOptions2: Array<ContextMenuOption> = [];
+	public contextMenuOptions3: Array<ContextMenuOption> = [];
+	public contextMenuOptions4: Array<ContextMenuOption> = [];
 
 	public ngOnInit() {
 		this.generateContextMenuOptions();
@@ -22,13 +24,31 @@ export class ShowcaseContextMenu implements OnInit {
 			new ContextMenuOption('option3', 'Option 3', null, null, false, 'icon-chevron-circle-up', 'rgb(50, 50, 50)', 'rgb(21, 143, 239)')
 		];
 
+		this.contextMenuOptions3 = [
+			new ContextMenuOption('option6', 'Option 6', null),
+			new ContextMenuOption('option7', 'Option 7', null),
+		];
+
+		this.contextMenuOptions4 = [
+			new ContextMenuOption('option8', 'Option 8', null),
+			new ContextMenuOption('option9', 'Option 9', null),
+			new ContextMenuOption('option10', 'Option 10', null),
+			new ContextMenuOption('option11', 'Option 11', null),
+			new ContextMenuOption('option12', 'Option 12', null),
+			new ContextMenuOption('option13', 'Option 13', null),
+		];
+
 		this.contextMenuOptions2 = [
 			new ContextMenuOption('option1', 'Option 1', null),
-			new ContextMenuOption('option2', 'Option 2', null)
+			new ContextMenuOption('option2', 'Option 2', null),
+			new ContextMenuOption('option3', 'Option 3', null, null, false, undefined, null, null, null, this.contextMenuOptions3),
+			new ContextMenuOption('option4', 'Option 4', null, null, false, undefined, null, null, null, this.contextMenuOptions4),
+			new ContextMenuOption('option5', 'Option 5', null),
 		];
 	}
 
 	public executeContextMenuAction(contextMenuActionData: ContextMenuActionData): void {
+		console.log(contextMenuActionData.actionId);
 		switch (contextMenuActionData.actionId) {
 			case 'option1':
 				console.log('Option 1');
