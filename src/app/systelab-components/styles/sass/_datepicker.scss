@@ -79,7 +79,7 @@ p-calendar {
   .ui-datepicker-header {
     $icon-margin-right: 10px;
     $icon-margin-left: 40px;
-    background: $primary-color;
+    background: $primary;
     padding: 15px;
     margin-bottom: 0;
     line-height: $slab-datepicker-header-navigation-line-height !important;
@@ -139,7 +139,7 @@ p-calendar {
 
     thead {
       background-color: $light-gray;
-      border-bottom: 1px solid $background-hemohub;
+      border-bottom: 1px solid $background-secondary;
       line-height: 34px;
 
       tr {
@@ -155,7 +155,7 @@ p-calendar {
       tr {
         td {
           padding: 0 !important;
-          border-bottom: 1px solid $background-hemohub;
+          border-bottom: 1px solid $background-secondary;
 
           a {
             width: 100%;
@@ -175,7 +175,7 @@ p-calendar {
             }
 
             &.ui-state-active {
-              background-color: $primary-color !important;
+              background-color: $primary !important;
             }
           }
         }
