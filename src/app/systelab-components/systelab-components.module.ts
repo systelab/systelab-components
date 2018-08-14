@@ -73,6 +73,8 @@ import {InputCellEditorComponent} from './grid/custom-cells/input/input-cell-edi
 import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkbox-cell-editor.component';
 import {DecimalInputCellEditorComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-listbox-renderer.component';
+import { NumPadComponent } from './numpad/numpad.component';
+import { NumPadDialog } from './numpad/numpad.dialog.component';
 
 @NgModule({
 	imports: [
@@ -147,7 +149,9 @@ import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-li
 		InputCellEditorComponent,
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
-		AbstractListboxRendererComponent
+		AbstractListboxRendererComponent,
+		NumPadComponent,
+		NumPadDialog
 	],
 	exports: [
 		SliderComponent,
@@ -207,7 +211,9 @@ import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-li
 		InputCellEditorComponent,
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
-		AbstractListboxRendererComponent
+		AbstractListboxRendererComponent,
+		NumPadComponent,
+		NumPadDialog
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -223,7 +229,9 @@ import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-li
 		InputCellEditorComponent,
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
-		AbstractListboxRendererComponent
+		AbstractListboxRendererComponent,
+		NumPadComponent,
+		NumPadDialog
 	],
 	providers: [
 		StylesUtilService,

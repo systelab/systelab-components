@@ -1,0 +1,65 @@
+<systelab-dialog-header [withClose]="showClose" (close)="close()">{{titleForDialog}}
+</systelab-dialog-header>
+<div class="container">
+<form>
+    <div class="bs-callout">
+        <div class="row">
+            <div class="col-md-12 parentPadding">
+                <input *ngIf="!isPassword" id="numpadField" type="text" class="form-control inputNumpad" name="numpadField" [(ngModel)]="containerDialogLabel">
+                <input *ngIf="isPassword" id="numpadFieldPwd" type="password" class="form-control inputNumpad" name="numpadFieldPwd" [(ngModel)]="containerDialogLabel">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="49" (click)="pushButton($event)">1</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="50" (click)="pushButton($event)">2</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="51" (click)="pushButton($event)">3</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="49" (click)="pushButton($event)">4</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="50" (click)="pushButton($event)">5</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="51" (click)="pushButton($event)">6</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="49" (click)="pushButton($event)">7</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="50" (click)="pushButton($event)">8</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="51" (click)="pushButton($event)">9</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="8" (click)="cleanInput()">C</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="48" (click)="pushButton($event)">0</a>
+            </div>
+            <div class="col-md-4 nopadding">
+                <a href="#" class="btn form-control" data-key="51" (click)="deleteNumber()"><</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 nopadding">
+                <a href="#" class="btn form-control" data-key="8" (click)="accept()">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+
