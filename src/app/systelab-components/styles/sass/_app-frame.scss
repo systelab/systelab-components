@@ -5,7 +5,7 @@ $sidebar-width: 200px !default;
 .slab-app-header-bar {
   height: $slab-app-header-height;
   background-color: white;
-  border-bottom: 1px solid $background-hemohub;
+  border-bottom: 1px solid $background-secondary;
 
   > div:first-of-type {
     -webkit-flex-shrink: 0;
@@ -19,7 +19,7 @@ $sidebar-width: 200px !default;
 
     margin: $icon-header-margin;
     font-size: $icon-header-size;
-    color: $primary-color;
+    color: $primary;
   }
 
   .slab-app-header-user-icon {
@@ -64,10 +64,10 @@ $sidebar-width: 200px !default;
 
   .slab-app-header-user-container {
     box-sizing: border-box;
-    border-left: 1px solid $background-hemohub;
+    border-left: 1px solid $background-secondary;
 
     &:hover {
-      background-color: $background-hemohub;
+      background-color: $background-secondary;
     }
 
     .dropdown-toggle {
@@ -88,7 +88,7 @@ $sidebar-width: 200px !default;
 .slab-app-sidebar-menu-container {
   @include position(fixed, $top: $slab-app-header-height);
 
-  background-color: $background-hemohub;
+  background-color: $background-secondary;
   width: $sidebar-width;
   height: calc(100% - #{$slab-app-header-height});
 
@@ -96,7 +96,7 @@ $sidebar-width: 200px !default;
     margin-top: 45px;
     padding-left: 5px;
     width: 100% !important;
-    background-color: $background-hemohub;
+    background-color: $background-secondary;
 
     .slab-app-sidebar-tab {
       @include size(95%, 50px);
@@ -107,9 +107,9 @@ $sidebar-width: 200px !default;
       float: right;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
-      border-right: 1px solid $background-hemohub;
-      border-top: 1px solid $background-hemohub;
-      border-bottom: 1px solid $background-hemohub;
+      border-right: 1px solid $background-secondary;
+      border-top: 1px solid $background-secondary;
+      border-bottom: 1px solid $background-secondary;
 
       .slab-app-sidebar-tab-decoration {
         @include size(15px, 100%);
@@ -133,15 +133,15 @@ $sidebar-width: 200px !default;
       &.selected,
       &:hover {
         border-right: 1px solid white;
-        border-top: 1px solid $primary-color;
-        border-bottom: 1px solid $primary-color;
+        border-top: 1px solid $primary;
+        border-bottom: 1px solid $primary;
 
         .slab-app-sidebar-tab-decoration {
-          background-color: $primary-color;
+          background-color: $primary;
         }
 
         span {
-          color: $primary-color;
+          color: $primary;
         }
       }
     }

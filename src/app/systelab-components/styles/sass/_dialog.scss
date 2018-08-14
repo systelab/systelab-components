@@ -65,7 +65,7 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
 
   border: none;
   border-radius: 0;
-  background-color: $background;
+  background-color: $background-primary;
 
   & > *:first-child { /* [2] */
     flex: 1;
@@ -97,8 +97,8 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
 
   font-size: 20px;
   border-radius: 0;
-  background: $primary-color;
-  color: $background;
+  background: $primary;
+  color: $background-primary;
 }
 
 /**
@@ -107,7 +107,7 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
 .slab-dialog-bottom {
   padding: $footer-buttons-offset;
 
-  border-top: 1px solid $background-hemohub;
+  border-top: 1px solid $background-secondary;
   background-color: $darker-gray;
 
   .square {
@@ -131,22 +131,22 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
   align-items: center;
   justify-content: center;
 
-  background-color: darken($primary-color, 10%);
+  background-color: darken($primary, 10%);
   cursor: pointer;
   text-align: center;
   border-radius: $content-border-width + 1;
-  color: $background;
+  color: $background-primary;
 
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: $background;
+    color: $background-primary;
     font-size: $button-fontsize;
     font-family: icomoon;
   }
 
   &:hover {
-    background-color: darken($primary-color, 20%);
+    background-color: darken($primary, 20%);
   }
 }
 
@@ -199,7 +199,7 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
 
       .slab-dialog-bottom {
         border-radius: 0 0 $content-border-width $content-border-width;
-        background: $background;
+        background: $background-primary;
       }
     }
   }
