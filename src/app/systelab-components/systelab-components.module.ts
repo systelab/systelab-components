@@ -73,6 +73,7 @@ import {InputCellEditorComponent} from './grid/custom-cells/input/input-cell-edi
 import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkbox-cell-editor.component';
 import {DecimalInputCellEditorComponent} from './grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-listbox-renderer.component';
+import { ContextMenuItemComponent } from './contextmenu/context-menu-item.component';
 import { NumPadComponent } from './numpad/numpad.component';
 import { NumPadDialog } from './numpad/numpad.dialog.component';
 
@@ -150,6 +151,7 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
 		AbstractListboxRendererComponent,
+		ContextMenuItemComponent,
 		NumPadComponent,
 		NumPadDialog
 	],
@@ -212,6 +214,7 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
 		AbstractListboxRendererComponent,
+		ContextMenuItemComponent,
 		NumPadComponent,
 		NumPadDialog
 	],
