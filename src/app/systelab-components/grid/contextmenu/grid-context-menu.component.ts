@@ -31,7 +31,7 @@ export class GridContextMenuComponent<T> extends ContextMenuComponent implements
 		return this.container.isContextMenuOptionEnabled(elementId, actionId);
 	}
 
-	protected executeAction(elementId: string, actionId: string): void {
+	protected executeAction($event, elementId: string, actionId: string): void {
 		this.container.executeContextMenuAction(elementId, actionId);
 	}
 
