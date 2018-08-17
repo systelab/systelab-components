@@ -1,14 +1,3 @@
-<div class="container-fluid">
-    <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Tree Multiple Selection</label>
-        <div class="col-md-9">
-            <systelab-select
-                    [multipleSelection]="multiple"
-                    [filter]="true"
-                    [listSelectedValues]="listSelectedValues"
-                    [values]="comboOptionList"
-                    (change)="comboChangeEvent($event)">
-            </systelab-select>
-        </div>
-    </div>
+<div style="height: 150px; max-height: 150px">
+    <systelab-gender-listbox [(selectedIDList)]="selectedID" style="height: 150px"></systelab-gender-listbox>
 </div>

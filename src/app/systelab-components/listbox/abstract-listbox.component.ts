@@ -133,12 +133,21 @@ export abstract class AbstractListBox<T> implements OnInit {
 				}
 			];
 		}
+
+		this.gridOptions.getRowNodeId =
+			(item) => {
+				if (item[this.getIdField()]) {
+					return item[this.getIdField()];
+				} else {
+					return null;
+				}
+			};
+
 		this.gridOptions.columnDefs = this.columnDefs;
 
 	}
 
 	public changeValues(event: any) {
-
 		this.addRemoveToMultipleSelectedItem(event);
 
 		if (this.isTree) {
@@ -223,6 +232,25 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	}
 
+	public onModelUpdated() {
+		if (!this.multipleSelection && this.selectedIDList && this.selectedIDList !== undefined) {
+			this.gridOptions.api.forEachNode(node => {
+				if (node.id === this.selectedIDList) {
+					node.selectThisNode(true);
+				}
+			});
+		}
+	}
+
+	public onSelectionChanged(event: any) {
+		if (!this.multipleSelection) {
+			const selectedRow = this.getSelectedRow()[this.getIdField()];
+			if (selectedRow && selectedRow !== undefined) {
+				this.selectedIDList = selectedRow[this.getIdField()];
+			}
+		}
+	}
+
 	public removeElement(seleccionado: any) {
 
 		for (let i = 0; i < this.multipleSelectedItemList.length; i++) {
@@ -232,6 +260,18 @@ export abstract class AbstractListBox<T> implements OnInit {
 				return;
 			}
 		}
+	}
+
+	public getSelectedRow(): any {
+		if (this.gridOptions && this.gridOptions.api) {
+			const selectedRows: any = this.gridOptions.api.getSelectedRows();
+			if (selectedRows !== null && this.multipleSelection === false) {
+				return selectedRows[0];
+			} else if (selectedRows !== null && this.multipleSelection === true) {
+				return selectedRows;
+			}
+		}
+		return undefined;
 	}
 
 	public containsElement(seleccionado: any) {

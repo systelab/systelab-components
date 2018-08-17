@@ -74,6 +74,7 @@ import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkb
 import { DecimalInputCellEditorComponent } from './grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-listbox-renderer.component';
 import { ContextMenuItemComponent } from './contextmenu/context-menu-item.component';
+import { SystelabGenderListBox } from './listbox/gender-listbox.component';
 import { NumPadComponent } from './numpad/numpad.component';
 import { NumPadDialog } from './numpad/numpad.dialog.component';
 
@@ -153,7 +154,8 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		AbstractListboxRendererComponent,
 		ContextMenuItemComponent,
 		NumPadComponent,
-		NumPadDialog
+		NumPadDialog,
+		SystelabGenderListBox,
 	],
 	exports:         [
 		SliderComponent,
@@ -216,7 +218,8 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		AbstractListboxRendererComponent,
 		ContextMenuItemComponent,
 		NumPadComponent,
-		NumPadDialog
+		NumPadDialog,
+		SystelabGenderListBox,
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
