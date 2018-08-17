@@ -12,27 +12,18 @@ export class NumPadComponent  {
 	@Input()
 	isPassword = false;
 
-	/*set numpadValue(numpadValue: string) {
-		if (this._numpadValue !== numpadValue) {
-			this._numpadValue = numpadValue;
-		}
-	}*/
-
 	constructor(public dialogService: DialogService) {
 
 	}
 
 	public openNumPadDialog() {
 		const parameters: NumPadDialogParameters = NumPadDialog.getParameters();
-		parameters.containerLabel = this.numpadValue;
+		parameters.numpadValue = this.numpadValue;
 		parameters.isPassword =  this.isPassword;
 		this.dialogService.showDialog(NumPadDialog, parameters)
 			.subscribe( response => {
-					this.numpadValue = response;
+					if(response)
+						this.numpadValue = response;
 				});
-	}
-
-	updateContainerLabel(containerLabel: string) {
-		this.numpadValue = containerLabel;
 	}
 }
