@@ -276,6 +276,8 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 				jQuery('#' + childID)
 					.toggle();
 
+				this.cdr.detectChanges();
+
 				this.previousActionChild = actionId;
 
 				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
