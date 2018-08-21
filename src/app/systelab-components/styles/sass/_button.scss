@@ -21,7 +21,18 @@
   &:hover {
     background-color: $primary;
     border-color: $primary;
-
   }
 }
 
+.btn { //Toogle buttons
+  &.btn-outline-primary {
+    color: white;
+    background-color: $dark;
+    border-color: $primary;
+  }
+
+  &.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
