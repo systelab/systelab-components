@@ -22,8 +22,9 @@ export class NumPadComponent  {
 		parameters.isPassword =  this.isPassword;
 		this.dialogService.showDialog(NumPadDialog, parameters)
 			.subscribe( response => {
-					if(response)
+					if ( response != null ) {
 						this.numpadValue = response;
+					}
 				});
 	}
 }

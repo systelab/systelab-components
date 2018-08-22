@@ -33,7 +33,7 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 	}
 
 	public close(): void {
-		this.dialog.close();
+		this.dialog.close(null);
 	}
 
 	public accept() {
@@ -41,7 +41,7 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 	}
 
 	public pushButton($event) {
-		this.numpadValue = this.numpadValue + $event.target.text;
+		this.numpadValue = this.numpadValue + $event;
 	}
 
 	public deleteNumber() {
