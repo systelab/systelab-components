@@ -85,10 +85,11 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	public open(event: MouseEvent) {
 
-		jQuery('#' + this.elementID)
-			.dropdown('toggle');
-
 		if (this.existsAtLeastOneActionEnabled()) {
+
+			jQuery('#' + this.elementID)
+				.dropdown('toggle');
+
 			if (!this.isDropDownOpened()) {
 				this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
 				this.isOpened = true;
@@ -275,8 +276,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 				const childID = actionId + this.elementID;
 				jQuery('#' + childID)
 					.toggle();
-
-				this.cdr.detectChanges();
 
 				this.previousActionChild = actionId;
 
