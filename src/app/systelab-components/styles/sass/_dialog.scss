@@ -24,9 +24,10 @@
  */
 
 $content-border-width: 4px;
-$footer-buttons-offset: ceil(16px * $slab-size-percentage);
-$button-size: ceil(54px * $slab-size-percentage);
-$button-fontsize: ceil(32px * $slab-size-percentage);
+$footer-buttons-offset: ceil(16px * $slab-size-percentage) !default;
+$button-size: ceil(54px * $slab-size-percentage) !default;
+$button-fontsize: ceil(32px * $slab-size-percentage) !default;
+$button-size-fullscreen: $button-size !default;
 
 /**
  * Displays the full-screen overlay and centers its content (the dialog itself)
@@ -200,12 +201,16 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
       .slab-dialog-bottom {
         border-radius: 0 0 $content-border-width $content-border-width;
         background: $background-primary;
+        .btn {
+          height: $button-size;
+        }
       }
     }
   }
 
   &.w-100,
-  &.h-100 {
+  &.h-100,
+  :not(slab-dialog-fixed-size) {
     .slab-dialog-content,
     .slab-dialog-header,
     .slab-dialog-bottom {
@@ -218,6 +223,9 @@ $button-fontsize: ceil(32px * $slab-size-percentage);
 
     .slab-dialog-bottom {
       background-color: $darker-gray;
+      .btn {
+        height: $button-size-fullscreen;
+      }
     }
   }
 }
