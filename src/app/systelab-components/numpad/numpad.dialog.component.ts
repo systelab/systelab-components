@@ -40,8 +40,9 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 		this.dialog.close(this.numpadValue);
 	}
 
-	public pushButton($event) {
-		this.numpadValue = this.numpadValue + $event;
+	public pushButton(value: string) {
+		this.numpadValue = this.numpadValue + value;
+		this.inputElement.nativeElement.focus();
 	}
 
 	public deleteNumber() {
@@ -50,6 +51,12 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 
 	public cleanInput() {
 		this.numpadValue = '';
+	}
+
+	public doKeyPress(event: KeyboardEvent) {
+		if (event.keyCode === 13) {
+			this.dialog.close(this.numpadValue);
+		}
 	}
 }
 
