@@ -6,11 +6,12 @@ import { Component } from '@angular/core';
 })
 export class ShowcaseButtonComponent {
 
+	public customVariable = true;
 
 	constructor() {
 	}
 
 	public doSomething() {
-
+		this.customVariable = !this.customVariable;
 	}
 }
