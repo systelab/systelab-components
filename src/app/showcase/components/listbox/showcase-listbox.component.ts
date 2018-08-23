@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
 })
 export class ShowcaseListBoxComponent {
 
-	public selectedID = 'F';
+	public selectedID;
+	public selectedDescription;
 
 	constructor() {
 	}

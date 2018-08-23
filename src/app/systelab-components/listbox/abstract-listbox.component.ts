@@ -19,6 +19,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	@Input() public isDisabled: boolean;
 	@Input() public multipleSelection = false;
+	@Input() public emptySelection = true;
 	@Input() public prefixID = '';
 	@Input() public values: Array<ListBoxElement | TreeListBoxElement> = [];
 
@@ -52,7 +53,33 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return this._selectedIDList;
 	}
 
+	protected _id: string | number;
+
+	@Input()
+	set id(value: string | number) {
+		this._id = value;
+		this.idChange.emit(this._id);
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	protected _description: string;
+
+	@Input()
+	set description(value: string) {
+		this._description = value;
+		this.descriptionChange.emit(this._description);
+	}
+
+	get description() {
+		return this._description;
+	}
+
 	@Output() public selectedIDListChange = new EventEmitter<string>();
+	@Output() public idChange = new EventEmitter<string | number>();
+	@Output() public descriptionChange = new EventEmitter<string | number>();
 
 	constructor(public isTree: boolean) {
 	}
@@ -233,20 +260,27 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	public onModelUpdated() {
-		if (!this.multipleSelection && this.selectedIDList && this.selectedIDList !== undefined) {
-			this.gridOptions.api.forEachNode(node => {
-				if (node.id === this.selectedIDList) {
-					node.selectThisNode(true);
-				}
-			});
+		if (!this.multipleSelection) {
+			if (this.id && this.id !== undefined) {
+				this.gridOptions.api.forEachNode(node => {
+					if (node.id === this.id) {
+						node.selectThisNode(true);
+						this.description = node.data[this.getDescriptionField()];
+					}
+				});
+			} else if (!this.emptySelection) {
+				this.selectFirstRow();
+			}
 		}
 	}
 
-	public onSelectionChanged(event: any) {
+	public onSelectionChanged() {
 		if (!this.multipleSelection) {
-			const selectedRow = this.getSelectedRow()[this.getIdField()];
+			const selectedRow = this.getSelectedRow();
 			if (selectedRow && selectedRow !== undefined) {
 				this.selectedIDList = selectedRow[this.getIdField()];
+				this.id = selectedRow[this.getIdField()];
+				this.description = selectedRow[this.getDescriptionField()];
 			}
 		}
 	}
@@ -281,5 +315,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 			}
 		}
 		return false;
+	}
+
+	protected selectFirstRow() {
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.selectIndex(0, this.multipleSelection, false);
+		}
 	}
 }
