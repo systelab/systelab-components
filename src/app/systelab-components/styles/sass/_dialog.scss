@@ -30,6 +30,14 @@ $button-fontsize: ceil(32px * $slab-size-percentage) !default;
 $button-size-fullscreen: $button-size !default;
 $button-size-dialog-header: $button-size !default;
 
+@if ($slab-size-percentage == 1) { //Overwrite the sizes to have a proper display
+  $footer-buttons-offset: 4px;
+  $button-size: 35px;
+  $button-size-fullscreen: 46px;
+  $button-fontsize: 22px;
+  $button-size-dialog-header: 38px;
+}
+
 /**
  * Displays the full-screen overlay and centers its content (the dialog itself)
  */

@@ -22,6 +22,10 @@
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
+
+    @if ($slab-size-percentage == 1) {
+      line-height: $form-elements-height - 9px;
+    }
   }
 
   .slab-combo-label {
@@ -144,10 +148,12 @@
   }
 
 }
+
 .slab-combo-badge.badge > .close {
   font-size: 1rem;
-  margin-top:-2px;
+  margin-top: -2px;
 }
+
 .pointer {
   cursor: pointer;
 }

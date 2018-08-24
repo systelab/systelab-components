@@ -59,40 +59,6 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
     cursor: default;
   }
 
-} @else {
-
-  /* Checkbox */
-  input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-  }
-
-  input[type="checkbox"] + label {
-    cursor: pointer;
-    height: $slab-switch-height - 2px;
-    display: block;
-    position: relative;
-    &:before {
-      content: '';
-      font-weight: bold;
-      font-family: icomoon;
-      font-size: $slab-checkbox-height + 10px;
-      color: $primary;
-    }
-  }
-
-  input[type="checkbox"] + label:before {
-    content: "\e926";
-  }
-
-  input[type="checkbox"]:disabled + label:before {
-    opacity: .5;
-  }
-
-  input[type="checkbox"]:checked + label:before {
-    content: "\e927";
-  }
 }
 
 // Only for grid and combobox
