@@ -28,6 +28,7 @@ $footer-buttons-offset: ceil(16px * $slab-size-percentage) !default;
 $button-size: ceil(54px * $slab-size-percentage) !default;
 $button-fontsize: ceil(32px * $slab-size-percentage) !default;
 $button-size-fullscreen: $button-size !default;
+$button-size-dialog-header: $button-size !default;
 
 /**
  * Displays the full-screen overlay and centers its content (the dialog itself)
@@ -127,7 +128,7 @@ $button-size-fullscreen: $button-size !default;
 }
 
 .slab-dialog-header-button {
-  @include size($button-size);
+  @include size($button-size-dialog-header);
   display: flex;
   align-items: center;
   justify-content: center;

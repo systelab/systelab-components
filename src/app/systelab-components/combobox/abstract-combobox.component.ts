@@ -10,8 +10,9 @@ import {
 	Renderer2,
 	ViewChild
 } from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-import {GridOptions} from 'ag-grid';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { GridOptions } from 'ag-grid';
+import { StylesUtilService } from '../utilities/styles.util.service';
 
 declare var jQuery: any;
 
@@ -96,6 +97,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
 	@ViewChild('dropdown') public dropdownElement: ElementRef;
 	@ViewChild('input') public inputElement: ElementRef;
+	@ViewChild('hidden') public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
@@ -140,8 +142,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID: 'id',
-				field: 'description',
+				colID:             'id',
+				field:             'description',
 				checkboxSelection: this.multipleSelection
 			}
 		];
@@ -156,7 +158,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked: this.getCheckboxChecked()
+			checkboxChecked:   this.getCheckboxChecked()
 		};
 
 		this.gridOptions.columnDefs = this.columnDefs;
@@ -166,8 +168,8 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	}
 
 	protected setRowHeight() {
-		// const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
-		AbstractComboBox.ROW_HEIGHT = Number(26);
+		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
+		AbstractComboBox.ROW_HEIGHT = Number(lineHeight);
 	}
 
 	public refresh(params: any): boolean {
