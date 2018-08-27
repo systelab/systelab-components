@@ -79,6 +79,11 @@ $slab-combobox-button-width: $form-elements-height !default;
 // Define the height and the line-height of the checkbox
 $slab-checkbox-height: max(19px, $form-elements-height - 2px) !default;
 $slab-checkbox-grid-height: max(19px, $form-elements-height - 4px) !default;
+@if ($slab-size-percentage == 1) {
+  $slab-checkbox-grid-height: 30px;
+  $slab-checkbox-height: 30px;
+}
+
 $slab-checkbox-border-color: $primary !default;
 $slab-checkbox-color: white !default;
 
@@ -111,8 +116,6 @@ $slab-searcher-button-width: $form-elements-height !default;
 
 // Defines the default width of the spinner
 $slab-spinner-width: 100px !default;
-// Defines the width of the spinner button
-$slab-spinner-button-width: $form-elements-height !default;
 
 // Define the line-height of the datepicker’s navigation bar.*/
 $slab-datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
