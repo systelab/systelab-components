@@ -250,10 +250,10 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		const totalItems: number = Number(this.values ? this.values.length : 0);
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
+			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
+			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT * totalItems;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else {
 			calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;

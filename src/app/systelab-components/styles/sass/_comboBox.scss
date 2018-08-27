@@ -124,7 +124,12 @@
 
             .ag-cell {
               border: none;
-              padding: 0 12px;
+              @if ($slab-size-percentage == 1) {
+                padding: 0 20px;
+              }
+              else {
+                padding: 0 12px;
+              }
             }
 
           }
