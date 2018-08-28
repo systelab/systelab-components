@@ -1,5 +1,5 @@
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
-import { AfterViewInit, ChangeDetectorRef, Component, Input, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, Renderer2} from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 class Element {
@@ -13,7 +13,8 @@ class Element {
 	templateUrl: '../combobox/abstract-combobox.component.html'
 } )
 
-export class TimeUnitSelectComponent extends AbstractComboBox implements AfterViewInit {
+export class TimeUnitSelectComponent extends AbstractComboBox<Element> {
+
 
 	@Input() public showEmptyOption = false;
 	@Input() public showMinutesOption = false;
@@ -21,10 +22,6 @@ export class TimeUnitSelectComponent extends AbstractComboBox implements AfterVi
 
 	constructor( public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService ) {
 		super( myRenderer, chRef );
-
-	}
-
-	public ngAfterViewInit() {
 		this.values = new Array<Element>();
 		if ( this.showEmptyOption ) {
 			this.values.push( new Element( '', '' ) );
@@ -41,10 +38,24 @@ export class TimeUnitSelectComponent extends AbstractComboBox implements AfterVi
 
 		if ( !this.id ) {
 			this._id = '';
-			this._description = '';
 		}
 
-		this.gridOptions.rowData = this.values;
+	}
+
+	getInstance(): Element {
+		return new Element('', '');
+	}
+
+	getDescriptionField(): string {
+		return 'description';
+	}
+
+	getCodeField(): string {
+		return '';
+	}
+
+	getIdField(): string {
+		return 'id';
 	}
 
 }

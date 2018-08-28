@@ -7,24 +7,22 @@
         <button class="btn btn-primary mr-1" (click)="cleanCanvas()">{{ 'SIGN_CLEAN' | translate | async }}</button>
         <button [disabled]="isCanvasEmpty" class="btn btn-success" (click)="finishDrawing()">{{ 'SIGN_FINISH' | translate | async }}</button>
         <a href="#" *ngIf="idsDownloadable" class="btn btn-primary " [attr.download]="downPath" [attr.href]="href" id="btn-download"
-           (click)="downloadImage()">{{ 'SIGN_DOWNLOAD' | translate | async }}</a>
+            (click)="downloadImage()">{{ 'SIGN_DOWNLOAD' | translate | async }}</a>
     </div>
     <div class="align-content-center p-3" *ngIf="verificationActive" [style.width.px]="width" [style.height.px]="height">
         <div [style.width.px]="width - 50" [style.height.px]="height - 50">
             <div class="mb-2">{{ 'SIGN_VERIFICATION_TEXT' | translate | async }}</div>
             <form novalidate class="w-100">
                 <input type="password" class="w-100 form-control" [(ngModel)]="code" [class.slab-error]="inputCode.invalid && inputCode.touched || isIncorrectCode"
-                       id="inputCode" placeholder="{{ 'SIGNATURE_CODE' | translate | async }}" #inputCode="ngModel" name="inputCode" (keyup.enter)="dofinish()"
-                       required autocomplete="off">
+                    id="inputCode" placeholder="{{ 'SIGNATURE_CODE' | translate | async }}" #inputCode="ngModel" name="inputCode"
+                    (keyup.enter)="dofinish()" required autocomplete="off">
                 <button type="button" class="w-100 btn btn-primary mt-4" [disabled]="inputCode.invalid" (click)="dofinish()">{{ 'SIGN_VERIFY' | translate | async }}
                 </button>
                 <div *ngIf="isIncorrectCode" class="alert alert-danger alert-sm text-center mt-3">
                     <a>{{ 'SIGN_ERROR_ENTERED_CODE' | translate | async }}</a>
                 </div>
                 <div class="mt-3 text-center">
-                    <a href="#"  (click)="returnCanvas()">
-                        <small>{{ 'SIGN_RETURN' | translate | async }}</small>
-                    </a>
+                    <button type="button" class="btn btn-link" (click)="returnCanvas()">{{ 'SIGN_RETURN' | translate | async }}</button>
                 </div>
             </form>
         </div>
