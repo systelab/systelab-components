@@ -1,9 +1,10 @@
 import {
-	EventEmitter, Input, OnInit, Output
+	EventEmitter, Input, OnInit, Output, ElementRef, ViewChild
 } from '@angular/core';
 import { GridOptions } from 'ag-grid';
 import { AbstractListboxRendererComponent } from './renderer/abstract-listbox-renderer.component';
 import { Observable } from 'rxjs/Observable';
+import { StylesUtilService } from '../utilities/styles.util.service';
 
 export class ListBoxElement {
 	constructor(public id, public description, public level, public selected) {
@@ -22,6 +23,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Input() public emptySelection = true;
 	@Input() public prefixID = '';
 	@Input() public values: Array<ListBoxElement | TreeListBoxElement> = [];
+	@ViewChild('hidden') public hiddenElement: ElementRef;
 
 	public gridOptions: GridOptions;
 	public columnDefs: Array<any>;
@@ -135,6 +137,12 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions = {};
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.rowSelection = 'single';
+		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
+		if (lineHeight) {
+			this.gridOptions.rowHeight = Number(lineHeight);
+		} else {
+			this.gridOptions.rowHeight = Number(26);
+		}
 		this.gridOptions.suppressCellSelection = true;
 
 		if (this.multipleSelection) {
