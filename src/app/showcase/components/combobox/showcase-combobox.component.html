@@ -22,7 +22,7 @@
         <label class="col-md-3 col-form-label" for="form-h-s">Con valor asignado</label>
         <div class="col-md-9">
             <systelab-select
-                    [id]="2"
+                    [id]="1"
                     [values]="comboOptionList"
                     (change)="comboChangeEvent($event)">
             </systelab-select>
@@ -32,7 +32,6 @@
         <label class="col-md-3 col-form-label" for="form-h-s">Con buscador</label>
         <div class="col-md-9">
             <systelab-select
-                    [description]="'Select City'"
                     [values]="comboOptionList" [filter]="true"
                     (change)="comboChangeEvent($event)">
             </systelab-select>
@@ -65,11 +64,12 @@
         <div class="col-md-9">
             <systelab-select
                     [multipleSelection]="multiple"
+                    [multipleSelectedItemList]="selectedComboOptionList"
                     [filter]="true"
                     [listSelectedValues]="listSelectedValues"
                     [values]="comboOptionList"
-                    (change)="comboChangeEvent($event)"
-                    [selectDeselectAll]="selectDeselectAll">
+                    [selectDeselectAll]="true"
+                    (change)="comboChangeEvent($event)">
             </systelab-select>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { AbstractComboBox } from '../combobox/abstract-combobox.component';
+import {AbstractComboBox} from '../combobox/abstract-combobox.component';
 import {ChangeDetectorRef, Component, Renderer2} from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
@@ -13,7 +13,8 @@ class Element {
 	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 
-export class PeriodSelect extends AbstractComboBox {
+export class PeriodSelect extends AbstractComboBox<Element> {
+
 	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
 		this.values = new Array<Element>();
@@ -28,15 +29,21 @@ export class PeriodSelect extends AbstractComboBox {
 		this.values.push(new Element(this.i18nService.instant('COMMON_THREE_YEARS_AGO'), this.i18nService.instant('COMMON_THREE_YEARS_AGO')));
 		this.values.push(new Element(this.i18nService.instant('COMMON_ALL'), this.i18nService.instant('COMMON_ALL')));
 		this._id = this.i18nService.instant('COMMON_PERIOD_WILL_BE_SPECIFIED');
-		this._description = this.i18nService.instant('COMMON_PERIOD_WILL_BE_SPECIFIED');
 	}
 
-	public afterSettingId(value: number | string) {
-		if (value) {
-			this.description = value + '';
-		} else {
-			this.id = this.i18nService.instant('COMMON_PERIOD_WILL_BE_SPECIFIED');
-			this.description = this.i18nService.instant('COMMON_PERIOD_WILL_BE_SPECIFIED');
-		}
+	getInstance(): Element {
+		return new Element('', '');
+	}
+
+	getDescriptionField(): string {
+		return 'description';
+	}
+
+	getCodeField(): string {
+		return '';
+	}
+
+	getIdField(): string {
+		return 'id';
 	}
 }
