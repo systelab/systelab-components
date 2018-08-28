@@ -13,10 +13,13 @@ export class ApplicationFrameComponent {
 	@Input() public userName: string;
 	@Input() public userFullName: string;
 	@Input() public hospitalName: string;
+	@Input() public menuBars = true;
+	@Input() public logoIcon = '';
 
 	@Input() public menu: ApplicationHeaderMenuEntry[] = [];
 	@Input() public actions: ApplicationSidebarAction[] = [];
 	@Input() public tabs: ApplicationSidebarTab[] = [];
+	@Input() public showSideBar = true;
 
 	@Output() public selected = new EventEmitter();
 

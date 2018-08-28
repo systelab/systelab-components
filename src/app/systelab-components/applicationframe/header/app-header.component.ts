@@ -7,7 +7,7 @@ export class ApplicationHeaderMenuEntry {
 }
 
 @Component({
-	selector:    'systelab-app-header',
+	selector: 'systelab-app-header',
 	templateUrl: 'app-header.component.html'
 })
 export class ApplicationHeaderComponent {
@@ -16,10 +16,11 @@ export class ApplicationHeaderComponent {
 	@Input() public userFullName: string;
 	@Input() public hospitalName: string;
 	@Input() public logoIcon: string;
+	@Input() public menuBars = false;
 	@Input() public menu: ApplicationHeaderMenuEntry[] = [];
 
 	constructor(protected dialogService: DialogService) {
-		if(!this.logoIcon) {
+		if (!this.logoIcon) {
 			this.logoIcon = 'icon-modulab';
 		}
 	}

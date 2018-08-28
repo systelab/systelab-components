@@ -22,13 +22,15 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 	public userName: string;
 	public userFullName: string;
 	public hospitalName: string;
+	public menuBars = false;
+	public logoIcon = 'icon-modulab'
 
 	public menu: ApplicationHeaderMenuEntry[] = [];
 	public sideactions: ApplicationSidebarAction[] = [];
 	public sidetabs: ApplicationSidebarTab[] = [];
 
 	constructor(public dialog: DialogRef<ShowcaseApplicationFrameDialogParameters>, protected messagePopupService: MessagePopupService,
-	            protected dialogService: DialogService) {
+		protected dialogService: DialogService) {
 		this.parameters = dialog.context;
 		this.frameWidth = (window.innerWidth);
 		this.frameHeight = (window.innerHeight);

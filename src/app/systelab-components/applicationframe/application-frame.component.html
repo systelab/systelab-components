@@ -1,9 +1,10 @@
 <div class="slab-application-container d-flex flex-column">
-  <systelab-app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
+  <systelab-app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu" [logoIcon]="logoIcon"
+    [menuBars]="menuBars">
     <ng-content select="[header-content]"></ng-content>
   </systelab-app-header>
   <div class="slab-main-container d-flex h-100">
-    <div class="slab-side-bar-container">
+    <div class="slab-side-bar-container" *ngIf="showSideBar === true">
       <systelab-app-sidebar [tabs]="tabs" [actions]="actions" (selected)="doSelect($event)"></systelab-app-sidebar>
     </div>
     <div class="d-flex h-100 w-100">
