@@ -10,12 +10,17 @@
     </div>
     <div class="dropdown slab-app-header-user-container">
         <div class="dropdown-toggle" data-toggle="dropdown" *ngIf="menu.length > 0 || userName">
-            <button class="slab-app-header-user-icon d-inline-block align-middle">
+            <button *ngIf="menuBars === false" class="slab-app-header-user-icon d-inline-block align-middle">
                 <div class="align-middle h-100">
                     <i class="icon-user align-bottom"></i>
                 </div>
             </button>
-            <label class="text-truncate align-middle">{{userName}}</label>
+            <button *ngIf="menuBars === true" class="slab-app-header-bars-icon d-inline-block align-middle">
+                <div class="align-middle h-100">
+                    <i class="icon-list align-bottom"></i>
+                </div>
+            </button>
+            <label *ngIf="menuBars === false" class="text-truncate align-middle">{{userName}}</label>
             <div class="dropdown-menu dropdown-menu-right slab-dropdown" *ngIf="menu.length > 0">
                 <ul>
                     <li *ngFor="let menuEntry of menu" (click)="menuEntry.action()">{{menuEntry.optionName}}

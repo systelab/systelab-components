@@ -43,6 +43,27 @@ $sidebar-width: 200px !default;
     }
   }
 
+  .slab-app-header-bars-icon {
+    @include size($icon-header-size - 4px);
+    
+    margin: $icon-header-margin;
+    border: none;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+    cursor:pointer;
+    i {
+      position: relative;
+      top: 3px;
+      left: -1px;
+      color: $medium-gray;
+      font-size: $icon-header-size - 10px;
+    }
+
+  }
+
   .slab-app-header-labels-container {
     padding: 5px;
 
@@ -110,6 +131,7 @@ $sidebar-width: 200px !default;
       border-right: 1px solid $background-secondary;
       border-top: 1px solid $background-secondary;
       border-bottom: 1px solid $background-secondary;
+      cursor: pointer;
 
       .slab-app-sidebar-tab-decoration {
         @include size(15px, 100%);
@@ -127,7 +149,6 @@ $sidebar-width: 200px !default;
         margin-left: 15px;
         margin-top: 15px;
         color: black;
-        cursor: default;
       }
 
       &.selected,
