@@ -89,6 +89,7 @@ export class DialogRefStack<T> {
 		return count;
 	}
 
+	/* Feature implemented for Modulab Platform*/
 	public closeAllDialogs() {
 		const numberOfDialogs = this.length;
 		for (let i = 0; i < numberOfDialogs; i++) {

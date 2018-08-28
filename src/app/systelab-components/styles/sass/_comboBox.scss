@@ -1,3 +1,4 @@
+$slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
 .slab-combobox {
 
@@ -124,12 +125,7 @@
 
             .ag-cell {
               border: none;
-              @if ($slab-size-percentage == 1) {
-                padding: 0 20px;
-              }
-              else {
-                padding: 0 12px;
-              }
+              padding: 0 $slab-combo-check-cell-padding;
             }
 
           }

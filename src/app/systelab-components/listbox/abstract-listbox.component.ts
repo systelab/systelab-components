@@ -138,7 +138,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.rowSelection = 'single';
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-		this.gridOptions.rowHeight = Number(lineHeight);
+		if (lineHeight) {
+			this.gridOptions.rowHeight = Number(lineHeight);
+		} else {
+			this.gridOptions.rowHeight = Number(26);
+		}
 		this.gridOptions.suppressCellSelection = true;
 
 		if (this.multipleSelection) {
