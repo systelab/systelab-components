@@ -16,8 +16,20 @@
   min-width: 0;
 }
 
-.slab-dropdown {
+.slab-dropdown-fixed {
   position: fixed;
+}
+
+.slab-dropdown-absolute {
+  position: absolute;
+}
+
+.slab-dropdown-scroll {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.slab-dropdown {
   background-color: white;
   padding: 4px 15px;
   vertical-align: top;
@@ -31,12 +43,13 @@
     padding: 0;
     margin: 0 -15px;
     li {
+      cursor: pointer;
       line-height: $slab-dropdown-line-height;
       padding: 0 15px;
       margin: 0 2px;
 
       &:hover {
-        background-color: $primary-color;
+        background-color: $primary;
         color: white;
       }
 

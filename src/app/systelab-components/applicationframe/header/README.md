@@ -5,12 +5,17 @@ Component to create an application bar.
 ## Using the template
 
 ```html
-<systelab-app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu">
+<systelab-app-header [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu" [logoIcon]="logoIcon"
+    [menuBars]="menuBars">
 </systelab-app-header>
 ```
 A user name (alias), a full name and a Institution name will be rendered in the bar. 
 
 The menu input represents the different menu items that will apear under the user icon.
+
+**logoIcon** will be the css class of the logo.
+
+**menuBars** is a boolean property to replace the user icon and the name by a menu bars icon.
 
 For example:
 

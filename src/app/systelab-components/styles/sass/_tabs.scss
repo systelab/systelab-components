@@ -2,12 +2,12 @@
   padding-left: 25px;
   white-space: nowrap;
   overflow: visible;
-  background-color: $background-hemohub;
+  background-color: $background-secondary;
   &.hideTabBackground {
     background-color: white;
   }
   > .nav-item {
-    background-color: $background-hemohub;
+    background-color: $background-secondary;
     padding-top: 2 * $slab-tab-space;
     margin-right: $slab-tab-space;
     &.hideTabBackground {
@@ -19,7 +19,7 @@
     > .nav-link {
       height: 100%;
       line-height: $slab-tab-height;
-      color: $background;
+      color: $background-primary;
       text-shadow: none;
       background-color: $slab-tab-no-active-bg-color;
       border-top: 3px solid $slab-tab-no-active-bg-color;
@@ -28,17 +28,17 @@
       text-align: center;
       border-radius: 4px 4px 0 0;
       &:hover {
-        color: $background;
-        background-color: $primary-color;
-        border-color: $primary-color;
+        color: $background-primary;
+        background-color: $primary;
+        border-color: $primary;
         padding-bottom: 0;
       }
       &.active {
         color: black;
-        background-color: $background;
-        border-top-color: $primary-color;
+        background-color: $background-primary;
+        border-top-color: $primary;
         &:hover {
-          border-color: $primary-color $form-border $background $form-border;
+          border-color: $primary $form-border $background-primary $form-border;
         }
       }
     }

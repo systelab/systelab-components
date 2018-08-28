@@ -1,9 +1,10 @@
 import {
-	EventEmitter, Input, OnInit, Output
+	EventEmitter, Input, OnInit, Output, ElementRef, ViewChild
 } from '@angular/core';
 import { GridOptions } from 'ag-grid';
 import { AbstractListboxRendererComponent } from './renderer/abstract-listbox-renderer.component';
 import { Observable } from 'rxjs/Observable';
+import { StylesUtilService } from '../utilities/styles.util.service';
 
 export class ListBoxElement {
 	constructor(public id, public description, public level, public selected) {
@@ -19,8 +20,10 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	@Input() public isDisabled: boolean;
 	@Input() public multipleSelection = false;
+	@Input() public emptySelection = true;
 	@Input() public prefixID = '';
 	@Input() public values: Array<ListBoxElement | TreeListBoxElement> = [];
+	@ViewChild('hidden') public hiddenElement: ElementRef;
 
 	public gridOptions: GridOptions;
 	public columnDefs: Array<any>;
@@ -52,7 +55,33 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return this._selectedIDList;
 	}
 
+	protected _id: string | number;
+
+	@Input()
+	set id(value: string | number) {
+		this._id = value;
+		this.idChange.emit(this._id);
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	protected _description: string;
+
+	@Input()
+	set description(value: string) {
+		this._description = value;
+		this.descriptionChange.emit(this._description);
+	}
+
+	get description() {
+		return this._description;
+	}
+
 	@Output() public selectedIDListChange = new EventEmitter<string>();
+	@Output() public idChange = new EventEmitter<string | number>();
+	@Output() public descriptionChange = new EventEmitter<string | number>();
 
 	constructor(public isTree: boolean) {
 	}
@@ -108,6 +137,12 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions = {};
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.rowSelection = 'single';
+		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
+		if (lineHeight) {
+			this.gridOptions.rowHeight = Number(lineHeight);
+		} else {
+			this.gridOptions.rowHeight = Number(26);
+		}
 		this.gridOptions.suppressCellSelection = true;
 
 		if (this.multipleSelection) {
@@ -133,12 +168,21 @@ export abstract class AbstractListBox<T> implements OnInit {
 				}
 			];
 		}
+
+		this.gridOptions.getRowNodeId =
+			(item) => {
+				if (item[this.getIdField()]) {
+					return item[this.getIdField()];
+				} else {
+					return null;
+				}
+			};
+
 		this.gridOptions.columnDefs = this.columnDefs;
 
 	}
 
 	public changeValues(event: any) {
-
 		this.addRemoveToMultipleSelectedItem(event);
 
 		if (this.isTree) {
@@ -223,6 +267,32 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	}
 
+	public onModelUpdated() {
+		if (!this.multipleSelection) {
+			if (this.id && this.id !== undefined) {
+				this.gridOptions.api.forEachNode(node => {
+					if (node.id === this.id) {
+						node.selectThisNode(true);
+						this.description = node.data[this.getDescriptionField()];
+					}
+				});
+			} else if (!this.emptySelection) {
+				this.selectFirstRow();
+			}
+		}
+	}
+
+	public onSelectionChanged() {
+		if (!this.multipleSelection) {
+			const selectedRow = this.getSelectedRow();
+			if (selectedRow && selectedRow !== undefined) {
+				this.selectedIDList = selectedRow[this.getIdField()];
+				this.id = selectedRow[this.getIdField()];
+				this.description = selectedRow[this.getDescriptionField()];
+			}
+		}
+	}
+
 	public removeElement(seleccionado: any) {
 
 		for (let i = 0; i < this.multipleSelectedItemList.length; i++) {
@@ -234,6 +304,18 @@ export abstract class AbstractListBox<T> implements OnInit {
 		}
 	}
 
+	public getSelectedRow(): any {
+		if (this.gridOptions && this.gridOptions.api) {
+			const selectedRows: any = this.gridOptions.api.getSelectedRows();
+			if (selectedRows !== null && this.multipleSelection === false) {
+				return selectedRows[0];
+			} else if (selectedRows !== null && this.multipleSelection === true) {
+				return selectedRows;
+			}
+		}
+		return undefined;
+	}
+
 	public containsElement(seleccionado: any) {
 		for (const element of this.multipleSelectedItemList) {
 			if ((element['id'] === seleccionado['id'] && element['level'] === seleccionado['level'])) {
@@ -241,5 +323,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 			}
 		}
 		return false;
+	}
+
+	protected selectFirstRow() {
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.selectIndex(0, this.multipleSelection, false);
+		}
 	}
 }

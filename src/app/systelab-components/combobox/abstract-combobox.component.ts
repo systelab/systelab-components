@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid';
+import { StylesUtilService } from '../utilities/styles.util.service';
 
 declare var jQuery: any;
 
@@ -132,6 +133,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
 	@ViewChild('dropdown') public dropdownElement: ElementRef;
 	@ViewChild('input') public inputElement: ElementRef;
+	@ViewChild('hidden') public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
@@ -176,6 +178,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = [
 			{
+
 				colID:             'itemDescription',
 				field:             this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection
@@ -219,8 +222,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected setRowHeight() {
-		// const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
-		AbstractComboBox.ROW_HEIGHT = Number(26);
+		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
+		if (lineHeight) {
+			AbstractComboBox.ROW_HEIGHT = Number(lineHeight);
+		} else {
+			AbstractComboBox.ROW_HEIGHT = Number(26);
+		}
 	}
 
 	public abstract getInstance(): T;
@@ -313,10 +320,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		const totalItems: number = this.getTotalItemsForDropdownHeight();
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
+			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
+			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT * totalItems;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else {
 			calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;

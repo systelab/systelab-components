@@ -1,0 +1,63 @@
+<systelab-dialog-header [withClose]="showClose" (close)="close()">{{titleForDialog}}
+</systelab-dialog-header>
+<div class="container slab-numpad-container">
+    <form>
+        <div class="bs-callout">
+            <div class="row">
+                <div class="col-md-12 slab-numpad-parentPadding">
+                    <input [autofocus]="true" #inputElement *ngIf="!isPassword" id="numpadField" type="text" class="form-control slab-numpad-input" name="numpadField" [(ngModel)]="numpadValue">
+                    <input [autofocus]="true" #inputElement *ngIf="isPassword" id="numpadFieldPwd" type="password" class="form-control slab-numpad-input" name="numpadFieldPwd" [(ngModel)]="numpadValue">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('1')">1</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('2')">2</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('3')">3</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('4')">4</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('5')">5</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('6')">6</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('7')">7</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('8')">8</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('9')">9</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="cleanInput()">C</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="pushButton('0')">0</a>
+                </div>
+                <div class="col-md-4 slab-numpad-nopadding">
+                    <a class="btn slab-numpad-btn form-control" (click)="deleteNumber()"><</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 slab-numpad-nopadding">
+                    <button class="btn slab-numpad-btn form-control" (keypress)="doKeyPress($event)" (click)="accept()">{{ 'COMMON_OK' | translate | async }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { AgRendererComponent, ICellRendererAngularComp } from 'ag-grid-angular';
 import { ContextMenuComponent } from '../../contextmenu/context-menu.component';
 import { AbstractGrid } from '../abstract-grid.component';
@@ -11,8 +11,8 @@ export class GridContextMenuComponent<T> extends ContextMenuComponent implements
 
 	protected container: AbstractGrid<T>;
 
-	constructor(protected el: ElementRef, protected myRenderer: Renderer2) {
-		super(el, myRenderer);
+	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
+		super(el, myRenderer, cdr);
 	}
 
 	public refresh(params: any): boolean {
@@ -31,7 +31,7 @@ export class GridContextMenuComponent<T> extends ContextMenuComponent implements
 		return this.container.isContextMenuOptionEnabled(elementId, actionId);
 	}
 
-	protected executeAction(elementId: string, actionId: string): void {
+	protected executeAction($event, elementId: string, actionId: string): void {
 		this.container.executeContextMenuAction(elementId, actionId);
 	}
 

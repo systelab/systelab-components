@@ -1,13 +1,40 @@
-.btn:not(.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-link,
-         .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning,
-         .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link) {
+$slab-button-background-color: $dark !default;
 
-  background-color: $dark;
+.btn:not(.btn-primary),
+.btn:not(.btn-secondary),
+.btn:not(.btn-info),
+.btn:not(.btn-success),
+.btn:not(.btn-warning),
+.btn:not(.btn-danger),
+.btn:not(.btn-light),
+.btn:not(.btn-dark),
+.btn:not(.btn-link),
+.btn:not(.btn-outline-primary),
+.btn:not(.btn-outline-secondary),
+.btn:not(.btn-outline-info),
+.btn:not(.btn-outline-success),
+.btn:not(.btn-outline-warning),
+.btn:not(.btn-outline-danger),
+.btn:not(.btn-outline-light),
+.btn:not(.btn-outline-dark),
+.btn:not(.btn-outline-link) {
+  background-color: $slab-button-background-color;
   color: white;
   &:hover {
-    background-color: $primary-color;
-    border-color: $primary-color;
-
+    background-color: $primary;
+    border-color: $primary;
   }
 }
 
+.btn { //Toogle buttons
+  &.btn-outline-primary {
+    color: white;
+    background-color: $slab-button-background-color;
+    border-color: $primary;
+  }
+
+  &.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}

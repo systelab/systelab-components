@@ -18,14 +18,12 @@ $slab-app-min-height: 375px !default;
 // Defines the ipad
 $slab-ipad-width: 1024px !default;
 
-
 // Defines the primary color
-$primary-color: rgb(21, 143, 239) !default;
-$background-hemohub: rgb(235, 235, 235) !default;
-$background: rgb(255, 255, 255) !default;
+$primary: rgb(21, 143, 239) !default;
+$background-primary: rgb(255, 255, 255) !default;
+$background-secondary: rgb(235, 235, 235) !default;
 // Defines the color for selected elements
 $slab-selected-background-color: rgb(200, 223, 252) !default;
-
 
 // Internal variable to define the height of the elements in a form
 $form-elements-height: ceil(35px * $slab-size-percentage) !default;
@@ -42,12 +40,10 @@ $darker-green: rgb(47, 148, 60) !default;
 
 $table-gray: rgb(149, 149, 149) !default;
 
-
 // Defines the application header height
 $slab-app-header-height: 56px !default;
 // Defines the width of the user area in the application header
 $slab-app-header-user-width: 130px !default;
-
 
 //Translucent grayscale
 $slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
@@ -55,7 +51,6 @@ $slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 $slab-dialog-header-height: max(45px, ceil(60px * $slab-size-percentage)) !default;
 // Defines the minimum width for the button
 $slab-minimum-button-width: 85px !default;
-
 
 // Defines the height of the rows of a table
 $slab-table-min-row-height: $form-elements-height !default;
@@ -69,7 +64,6 @@ $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !defaul
 // Defines the height and the min-height of the ui-grid row and cell
 $grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
 
-
 // Defines the height of the tab
 $slab-tab-height: ceil(38px * $slab-size-percentage) !default;
 // Defines the min-width of the tab
@@ -79,54 +73,49 @@ $slab-tab-space: 5px;
 // Define the color for non active tabs
 $slab-tab-no-active-bg-color: rgb(66, 66, 66) !default;
 
-
 // Defines the width of the combobox button
 $slab-combobox-button-width: $form-elements-height !default;
-
 
 // Define the height and the line-height of the checkbox
 $slab-checkbox-height: max(19px, $form-elements-height - 2px) !default;
 $slab-checkbox-grid-height: max(19px, $form-elements-height - 4px) !default;
-$slab-checkbox-border-color: $primary-color !default;
-$slab-checkbox-color: white !default;
+@if ($slab-size-percentage == 1) {
+  $slab-checkbox-grid-height: 30px;
+  $slab-checkbox-height: 30px;
+}
 
+$slab-checkbox-border-color: $primary !default;
+$slab-checkbox-color: white !default;
 
 $slab-switch-bg-color: transparent !default;
 $slab-switch-circle-color: $dark-gray !default;
-$slab-switch-bg-color-checked: $primary-color !default;
+$slab-switch-bg-color-checked: $primary !default;
 $slab-switch-circle-color-checked: white !default;
 $slab-switch-height: max(22px, $form-elements-height - 6px) !default;
-
 
 // Define the height and the line-height of the radio
 $slab-radio-height: max(19px, $form-elements-height - 4px) !default;
 // Defines the padding-left of the radio
 $slab-radio-text-gap: $slab-radio-height * 1.5 !default;
-$slab-radio-border-color: $primary-color !default;
+$slab-radio-border-color: $primary !default;
 $slab-radio-color: white !default;
-
 
 // Defines the slider height
 $slab-slider-height: $form-elements-height !default;
 // Defines the height of the ui-slider
 $slab-slider-background-line: round($slab-slider-height / 3);
 $slab-slider-circle-color: white !default;
-$slab-slider-circle-border-color: $primary-color !default;
-
+$slab-slider-circle-border-color: $primary !default;
 
 // Defines the row line-height of the dropdown and the row line-height of the tree
 $slab-dropdown-line-height: $form-elements-height !default;
 $slab-dropdown-disabled-fg-color: rgb(192, 192, 192) !default;
-
 
 // Defines the width of the searcher button
 $slab-searcher-button-width: $form-elements-height !default;
 
 // Defines the default width of the spinner
 $slab-spinner-width: 100px !default;
-// Defines the width of the spinner button
-$slab-spinner-button-width: $form-elements-height !default;
-
 
 // Define the line-height of the datepicker’s navigation bar.*/
 $slab-datepicker-header-navigation-line-height: $form-elements-height - 7px !default;

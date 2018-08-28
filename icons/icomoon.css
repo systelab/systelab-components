@@ -435,3 +435,11 @@
 .icon-cube:before {
     content: "\f1b2";
 }
+
+.icon-toggle-off :before {
+    content: "\e926";
+}
+
+.icon-toggle-on:before {
+    content: "\e927";
+}
