@@ -13,7 +13,7 @@ export class ApplicationFrameComponent {
 	@Input() public userName: string;
 	@Input() public userFullName: string;
 	@Input() public hospitalName: string;
-	@Input() public menuBars = true;
+	@Input() public menuBars = false;
 	@Input() public logoIcon = '';
 
 	@Input() public menu: ApplicationHeaderMenuEntry[] = [];

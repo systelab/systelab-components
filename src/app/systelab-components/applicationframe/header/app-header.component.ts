@@ -20,8 +20,6 @@ export class ApplicationHeaderComponent {
 	@Input() public menu: ApplicationHeaderMenuEntry[] = [];
 
 	constructor(protected dialogService: DialogService) {
-		if (!this.logoIcon) {
-			this.logoIcon = 'icon-modulab';
-		}
+		
 	}
 }
