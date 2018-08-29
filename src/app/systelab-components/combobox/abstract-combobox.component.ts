@@ -330,16 +330,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		}
 
-		if (this.filter) {
-			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
-			const agGridHeight = calculatedHeight - 36;
-			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
-		}
-
 	}
 
 	protected getTotalItemsForDropdownHeight(): number {
-		return Number(this.values ? this.values.length : 0);
+		let totalItems = Number( this.values ? this.values.length : 0);
+		if ( this.emptyElement ) {
+			totalItems += 1;
+		}
+		return totalItems;
 	}
 
 	public setDropdownPosition() {
