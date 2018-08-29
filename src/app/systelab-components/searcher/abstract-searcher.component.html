@@ -1,4 +1,4 @@
-<div class="slab-searcher-container d-flex flex-nowrap h-100" [ngClass]="{'disabled': isDisabled}">
+<div class="slab-searcher-container d-flex flex-nowrap" [ngClass]="{'disabled': isDisabled}" [ngStyle]="getInputHeight()">
 
     <div class="input-group" style="width: 120px;">
         <input #valueToSearch type="input" class="form-control"

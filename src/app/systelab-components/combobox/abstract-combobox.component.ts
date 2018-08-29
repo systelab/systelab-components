@@ -25,6 +25,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	@Input() public values: Array<any>;
 	@Input() public isDisabled: boolean;
+	@Input() public expandToParentContainerHeight = false;
 	@Output() public change = new EventEmitter();
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
@@ -246,6 +247,13 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.params = params;
 	}
 
+	public getInputHeight() {
+		if (this.expandToParentContainerHeight) {
+			return {'height': '100%'};
+		}
+		return undefined;
+	}
+
 	public onComboClicked(event: MouseEvent) {
 		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
 			event.stopPropagation();
@@ -333,8 +341,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected getTotalItemsForDropdownHeight(): number {
-		let totalItems = Number( this.values ? this.values.length : 0);
-		if ( this.emptyElement ) {
+		let totalItems = Number(this.values ? this.values.length : 0);
+		if (this.emptyElement) {
 			totalItems += 1;
 		}
 		return totalItems;
