@@ -1,22 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
 
-	constructor(public id: string, public name: string, public isSelected: boolean) {
+	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[]) {
+		subMenu = [];
 	}
 }
 
 export class ApplicationSidebarAction {
-	constructor(public name: string, public action: any) {
+	constructor(public name: string, public action: any, public icon?: string) {
 	}
 }
 
 @Component({
-	selector:    'systelab-app-sidebar',
+	selector: 'systelab-app-sidebar',
 	templateUrl: 'app-sidebar.component.html'
 })
-export class ApplicationSidebarComponent {
+export class ApplicationSidebarComponent implements OnInit {
+
 
 	@Input() public actions: ApplicationSidebarAction[] = [];
 	@Input() public tabs: ApplicationSidebarTab[] = [];
@@ -24,9 +26,35 @@ export class ApplicationSidebarComponent {
 
 	constructor(protected dialogService: DialogService) {
 	}
-
+	ngOnInit(): void {
+		this.checkSubMenuSelected();
+	}
+	private checkSubMenuSelected() {
+		this.tabs.forEach((tab) => {
+			if (tab.subMenu) {
+				tab.subMenu.forEach((subTab) => {
+					if (subTab.isSelected === true) {
+						tab.isSelected = true;
+					}
+				});
+			}
+		});
+	}
 	private selectTab(id: string) {
-		this.tabs.forEach((tab) => tab.isSelected = (tab.id === id));
+		this.tabs.forEach((tab) => {
+			tab.isSelected = (tab.id === id)
+			if (tab.subMenu) {
+				tab.subMenu.forEach((subTab) => {
+					if (subTab.id === id) {
+						subTab.isSelected = true;
+						tab.isSelected = true;
+					}
+					else {
+						subTab.isSelected = false;
+					}
+				});
+			}
+		});
 		this.selected.emit(id);
 	}
 }
