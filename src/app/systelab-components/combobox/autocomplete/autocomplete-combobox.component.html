@@ -1,17 +1,18 @@
 <div #combobox
-     class="dropdown slab-combobox d-flex h-100 w-100"
+     class="dropdown slab-combobox d-flex w-100"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" data-toggle="dropdown">
-        <input #input type="text" class="slab-flex-1 d-flex slab-combo-input"
+        <input #input type="text" class="slab-flex-1 form-control d-flex slab-combo-input"
                [disabled]="isDisabled"
                [(ngModel)]="fieldToShow" (keyup)="doSearch($event)"
+               [ngStyle]="getInputHeight()"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"
                [style.font-weight]="fontWeight"
                [style.font-style]="fontStyle"
                (keydown.Tab)="closeDropDown()"
                 (click)="onInputClicked($event)"/>
-        <button #combobutton type="button" class="slab-combo-button icon-caret-down h-100" [disabled]="isDisabled"
+        <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
                 (click)="onComboClicked($event)"></button>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
