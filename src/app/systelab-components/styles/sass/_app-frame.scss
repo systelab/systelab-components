@@ -166,6 +166,7 @@ $sidebar-width: 200px !default;
         }
 
         .slab-app-sidebar-submenu {
+          margin-top: 55px;
           height: 100%;
           .slab-app-sidebar-tab-decoration {
             background-color: $table-gray !important;
@@ -182,9 +183,7 @@ $sidebar-width: 200px !default;
       .slab-app-sidebar-submenu {
         margin-left: 2%;
         padding-left: 0;
-        margin-top: 55px;
         overflow: hidden;
-        -webkit-transition: all 0.3s ease-out;
         height: 0;
         li {
           height: 0px;
