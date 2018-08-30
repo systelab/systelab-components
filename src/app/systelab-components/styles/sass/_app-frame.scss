@@ -120,8 +120,8 @@ $sidebar-width: 200px !default;
     background-color: $background-secondary;
 
     .slab-app-sidebar-tab {
-      @include size(95%, 50px);
-
+      min-height: 50px;
+      width: 95%;
       display: block;
       background-color: white;
       margin-bottom: 2px;
@@ -134,8 +134,8 @@ $sidebar-width: 200px !default;
       cursor: pointer;
 
       .slab-app-sidebar-tab-decoration {
-        @include size(15px, 100%);
-
+        width: 15px;
+        min-height: 50px;
         display: inline-block;
         background-color: $table-gray;
         border-top-left-radius: 5px;
@@ -163,6 +163,58 @@ $sidebar-width: 200px !default;
 
         span {
           color: $primary;
+        }
+
+        .slab-app-sidebar-submenu {
+          height: 100%;
+          .slab-app-sidebar-tab-decoration {
+            background-color: $table-gray !important;
+          }
+          span {
+            font-size: 15px;
+            color: black !important;
+          }
+          li {
+            height: 52px;
+          }
+        }
+      }
+      .slab-app-sidebar-submenu {
+        margin-left: 2%;
+        padding-left: 0;
+        margin-top: 55px;
+        overflow: hidden;
+        -webkit-transition: all 0.3s ease-out;
+        height: 0;
+        li {
+          height: 0px;
+          width: 95%;
+          display: block;
+          margin-bottom: 2px;
+          float: right;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-right: 1px solid $background-secondary;
+          border-top: 1px solid $background-secondary;
+          border-bottom: 1px solid $background-secondary;
+          cursor: pointer;
+          -webkit-transition: all 0.3s ease-out;
+          span {
+            font-size: 0px;
+          }
+          &.selected,&:hover {
+            border-right: 1px solid white;
+            border-top: 1px solid $primary;
+            border-bottom: 1px solid $primary;
+    
+            .slab-app-sidebar-tab-decoration {
+              background-color: $primary !important;
+            }
+    
+            span {
+              color: $primary !important;
+            }
+          }
         }
       }
     }
