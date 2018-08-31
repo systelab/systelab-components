@@ -47,12 +47,10 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public onInputClicked(event: MouseEvent) {
 		event.stopPropagation();
 		if (!this.isDisabled) {
-			jQuery('#' + this.comboId).dropdown('toggle');
 			if (!this.isDropDownOpen()) {
-				this.isDropdownOpened = true;
 				this.showDropDown();
-				this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
-				this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
+				jQuery('#' + this.comboId).dropdown('toggle');
+				this.isDropdownOpened = true;
 				this.doSearchText(this.description);
 			}
 			this.inputElement.nativeElement.focus();
