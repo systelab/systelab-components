@@ -12,13 +12,13 @@ import {
 	ViewChild,
 	ViewChildren
 } from '@angular/core';
-import { ContextMenuActionData } from './context-menu-action-data';
-import { ContextMenuOption } from './context-menu-option';
+import {ContextMenuActionData} from './context-menu-action-data';
+import {ContextMenuOption} from './context-menu-option';
 
 declare var jQuery: any;
 
 @Component({
-	selector:    'systelab-context-menu',
+	selector: 'systelab-context-menu',
 	templateUrl: 'context-menu.component.html',
 })
 export class ContextMenuComponent implements OnInit, OnDestroy {
@@ -28,6 +28,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
 	@ViewChild('dropdown') public dropdownElement: ElementRef;
 	@ViewChild('scrollableList') public scrollableList: ElementRef;
+	@ViewChild('ngcontent') public ngcontent: ElementRef;
 
 	@Output() public action = new EventEmitter();
 
@@ -207,7 +208,27 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		this.checkTargetAndClose(event.target);
 	}
 
+	public ngContentStopPropagation(event: any): void {
+		event.stopPropagation();
+	}
+
+	private checkIfNgContent(target: any): boolean {
+		let currentElement = target;
+		while (currentElement !== this.dropdownElement) {
+			if (target !== this.ngcontent.nativeElement) {
+				return true;
+			} else {
+				currentElement = target.parentElement;
+			}
+		}
+		return false;
+	}
+
 	protected checkTargetAndClose(target: any) {
+		const isNgContent = this.checkIfNgContent(target);
+		if (isNgContent) {
+			return;
+		}
 		if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
 			if (this.childDropdownMenuElement) {
 				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()

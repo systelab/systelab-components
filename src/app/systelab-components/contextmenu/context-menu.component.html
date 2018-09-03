@@ -6,7 +6,7 @@
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown slab-dropdown-fixed">
             <div *ngIf="isOpened">
-                <div>
+                <div #ngcontent (click)="ngContentStopPropagation($event)">
                     <ng-content></ng-content>
                 </div>
                 <ul #scrollableList class="slab-dropdown-scroll">
@@ -14,7 +14,7 @@
                         class="d-flex align-items-center {{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
                         (click)="isEnabled(elementID, action.actionId) ? executeAction($event,elementID, action.actionId) : null">
                         <div class="slab-flex-1" *ngIf="isEnabled(elementID, action.actionId)">
-                            <systelab-context-menu-item class="d-flex" [action]="action"
+                            <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
                                                         [isEnabled]="isEnabled(elementID, action.actionId)"
                                                         [isIconEnabled]="isIconEnabled(elementID, action.actionId)"
                                                         [hasChildren]="action.childrenContextMenuOptions && action.childrenContextMenuOptions.length>0"
