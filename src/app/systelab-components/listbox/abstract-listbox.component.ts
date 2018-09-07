@@ -1,10 +1,10 @@
 import {
 	EventEmitter, Input, OnInit, Output, ElementRef, ViewChild
 } from '@angular/core';
-import { GridOptions } from 'ag-grid';
-import { AbstractListboxRendererComponent } from './renderer/abstract-listbox-renderer.component';
-import { Observable } from 'rxjs/Observable';
-import { StylesUtilService } from '../utilities/styles.util.service';
+import {GridOptions} from 'ag-grid';
+import {AbstractListboxRendererComponent} from './renderer/abstract-listbox-renderer.component';
+import {Observable} from 'rxjs/Observable';
+import {StylesUtilService} from '../utilities/styles.util.service';
 
 export class ListBoxElement {
 	constructor(public id, public description, public level, public selected) {
@@ -145,18 +145,19 @@ export abstract class AbstractListBox<T> implements OnInit {
 		}
 		this.gridOptions.suppressCellSelection = true;
 
-		if (this.multipleSelection) {
+		if (this.multipleSelection || this.isTree) {
 			this.columnDefs = [
 				{
-					colID:                 'id',
+					colID: 'id',
 					cellRendererFramework: AbstractListboxRendererComponent,
-					cellRendererParams:    {
+					cellRendererParams: {
 						changeFunction: (e) => {
 							this.changeValues(e);
 						},
-						isTree:         this.isTree,
-						prefix:         this.prefixID,
-						isDisabled:     this.isDisabled
+						isTree: this.isTree,
+						prefix: this.prefixID,
+						isDisabled: this.isDisabled,
+						isMultipleSelection: this.multipleSelection
 					}
 				}
 			];
@@ -183,36 +184,47 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	public changeValues(event: any) {
-		this.addRemoveToMultipleSelectedItem(event);
+		if (this.multipleSelection) {
+			this.addRemoveToMultipleSelectedItem(event);
+		}
 
 		if (this.isTree) {
-			if (event.level === 0) {
-				this.values.filter((value: TreeListBoxElement) => {
-					if (value.parentID === event.id) {
-						value.selected = event.selected;
-						this.addRemoveToMultipleSelectedItem(value);
-					}
-				});
-			} else {
-				const parentID = event.parentID;
-				let allChildSelected = true;
-				let anyNode = false;
-				this.values.filter((value: TreeListBoxElement) => {
-					if (value.parentID === parentID) {
-						anyNode = true;
-						if (!value.selected) {
-							allChildSelected = false;
-						}
-					}
-				});
-				if (anyNode) {
+			if (this.multipleSelection) {
+				if (event.level === 0) {
 					this.values.filter((value: TreeListBoxElement) => {
-						if (value.level === 0 && value.id === parentID) {
-							value.selected = allChildSelected;
+						if (value.parentID === event.id) {
+							value.selected = event.selected;
 							this.addRemoveToMultipleSelectedItem(value);
 						}
 					});
+				} else {
+					const parentID = event.parentID;
+					let allChildSelected = true;
+					let anyNode = false;
+					this.values.filter((value: TreeListBoxElement) => {
+						if (value.parentID === parentID) {
+							anyNode = true;
+							if (!value.selected) {
+								allChildSelected = false;
+							}
+						}
+					});
+					if (anyNode) {
+						this.values.filter((value: TreeListBoxElement) => {
+							if (value.level === 0 && value.id === parentID) {
+								value.selected = allChildSelected;
+								this.addRemoveToMultipleSelectedItem(value);
+							}
+						});
+					}
 				}
+			} else {
+				// this.multipleSelectedItemList = new Array();
+				this._multipleSelectedItemList = new Array();
+				this.gridOptions.api.deselectAll();
+				const newElement: TreeListBoxElement = new TreeListBoxElement(event['id'], event['parentID'], event['description'], event['level'], event['selected']);
+				this.multipleSelectedItemList.push(newElement);
+				this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 			}
 		}
 		if (this.gridOptions.api) {

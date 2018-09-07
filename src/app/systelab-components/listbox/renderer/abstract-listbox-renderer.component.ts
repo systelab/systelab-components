@@ -14,6 +14,7 @@ export class AbstractListboxRendererComponent implements AgRendererComponent {
 	public description: string;
 	public level: number;
 	public prefix = '';
+	public isMultipleSelection = false;
 
 	public agInit(params: any): void {
 		this.params = params;
@@ -24,6 +25,7 @@ export class AbstractListboxRendererComponent implements AgRendererComponent {
 			this.isCheckboxActive = listBoxElement.selected;
 			this.description = listBoxElement.description;
 			this.level = listBoxElement.level;
+			this.isMultipleSelection = (<any>params).isMultipleSelection;
 		}
 	}
 
