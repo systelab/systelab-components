@@ -214,11 +214,11 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	private checkIfNgContent(target: any): boolean {
 		let currentElement = target;
-		while (currentElement !== this.dropdownElement) {
-			if (target !== this.ngcontent.nativeElement) {
+		while (currentElement !== this.dropdownElement && currentElement) {
+			if (currentElement === this.ngcontent.nativeElement) {
 				return true;
 			} else {
-				currentElement = target.parentElement;
+				currentElement = currentElement.parentElement;
 			}
 		}
 		return false;
