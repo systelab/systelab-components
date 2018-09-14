@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ContextMenuOption } from '../../../systelab-components/contextmenu/context-menu-option';
-import { ContextMenuActionData } from '../../../systelab-components/contextmenu/context-menu-action-data';
+import {Component, OnInit} from '@angular/core';
+import {ContextMenuOption} from '../../../systelab-components/contextmenu/context-menu-option';
+import {ContextMenuActionData} from '../../../systelab-components/contextmenu/context-menu-action-data';
 
 @Component({
-	selector:    'showcase-context-menu',
+	selector: 'showcase-context-menu',
 	templateUrl: 'showcase-context-menu.component.html'
 })
 export class ShowcaseContextMenu implements OnInit {
@@ -13,6 +13,7 @@ export class ShowcaseContextMenu implements OnInit {
 	public contextMenuOptions3: Array<ContextMenuOption> = [];
 	public contextMenuOptions4: Array<ContextMenuOption> = [];
 	public contextMenuOptions5: Array<ContextMenuOption> = [];
+	public contextMenuOptionsDivider: Array<ContextMenuOption> = [];
 
 	public ngOnInit() {
 		this.generateContextMenuOptions();
@@ -45,6 +46,15 @@ export class ShowcaseContextMenu implements OnInit {
 			new ContextMenuOption('option3', 'Option 3', null, null, false, undefined, null, null, null, this.contextMenuOptions3),
 			new ContextMenuOption('option4', 'Option 4', null, null, false, undefined, null, null, null, this.contextMenuOptions4),
 			new ContextMenuOption('option5', 'Option 5', null),
+		];
+
+		this.contextMenuOptionsDivider = [
+			new ContextMenuOption('option1', 'Option 1', null),
+			new ContextMenuOption('', '', null, null, true),
+			new ContextMenuOption('option2', 'Option 2', null),
+			new ContextMenuOption('', '', null, null, true),
+			new ContextMenuOption('option3', 'Option 3', null),
+			new ContextMenuOption('option4', 'Option 4', null),
 		];
 
 		this.contextMenuOptions5 = [
