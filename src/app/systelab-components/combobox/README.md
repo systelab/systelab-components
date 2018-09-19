@@ -6,7 +6,11 @@ Abstract classes that lets you create a Combobox component.
 
 This is not a component by itself, they are some Abstract classes that lets you define your own comboboxes.
 
-In order define a simple combobox, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, implementing the following methods:
+In order to do that, you must create your own components and extend from the abstract classes AbstractComboBox&lt;T&gt; and AbstractApiComboBox&lt;T&gt;.
+
+## Using AbstractComboBox&lt;T&gt;
+
+In order define a simple combobox, you must create your own component and extend from the abstract class AbstractComboBox&lt;T&gt;, implementing the following methods:
 
 ```
 public abstract getInstance(): T;
@@ -60,6 +64,8 @@ export class MaritalStatusComboBox extends AbstractComboBox<MaritalStatus> {
 }
 
 ```
+
+## Using AbstractApiComboBox&lt;T&gt;
 
 In order to create a combobox with data coming from a Server API, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, implementing the following methods:
 
@@ -131,3 +137,38 @@ Once you have your component, you can use it in your templates.
 <marital-status-combobox #combo [(id)]="value" [(description)]="valueDescription">
 </marital-status-combobox>
 ```
+
+## Properties
+
+| Name          | Type        | Default  | Description |
+| ------------- |:-----------:| --------:| --------    |
+| **id** | string | | Identifier |
+| **description** | string | | Description or name that will be show in the combobox|
+| **code**          | string      |          | Short code |
+| fieldToShow          | string      |          ||
+| multipleSelectedItemList          | string      |          ||
+| customInputRenderer          | string      |          ||
+| initialParams          | string      |          ||
+| filter          | boolean      | false         ||
+| multipleSelection          | boolean      | false         | Enable to select multiple elements. A checkbox will be rendered in front of each element.  |
+| selectDeselectAll          | boolean      | false          | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown. |
+| listSelectedValues          | boolean      | false         ||
+| fontFamily          | string      |          | Font Family |
+| fontSize          | string      |          | Font size in pixels |
+| fontWeight          | string      |          | normal, bold, bolder, lighter, number, initial or inherit |
+| fontStyle          | string      |          | normal, italic, oblique, initial or inherit |
+| values          | Array<any>      |          ||
+| isDisabled          | boolean      | false         | |
+| expandToParentContainerHeight          | boolean      | false          ||
+| allowEditInput          | boolean      | false          ||
+| emptyElement          | boolean      | false          ||
+
+In black the Two-Way Data Binding properties.
+
+## Events
+
+
+| Name          | Parameters        | Description  |
+| ------------- |:-----------:| --------|
+| change            | string      |          ||
+| multipleSelectedIDListChange            | string      |          ||
