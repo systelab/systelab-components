@@ -114,3 +114,23 @@ public doMenuAction(action: GridContextMenuActionData<PatientData>): void {
 }
 
 ```
+
+
+## Properties
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| preferenceName | string || Preference prefix in order to store the columns size|
+| multipleSelection | boolean | false | Set multiple selection|
+| showChecks | boolean | false | Show a column with a checkbox for each element |
+| rowData | Array&lt;T&gt; |||
+| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; |||
+| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; |||
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| action |GridContextMenuActionData&lt;PatientData&gt;|When an action in the popup menu is selected, the event is fired with the selected GridContextMenuActionData |
+| clickRow |T|When a row is selected, the event is fired with the element in the row.|
+| viewportChanged |||

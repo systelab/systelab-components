@@ -156,7 +156,7 @@ Once you have your component, you can use it in your templates.
 ## Properties
 
 | Name | Type | Default | Description |
-| ---- |:----:| -------:| ----------- |
+| ---- |:----:|:-------:| ----------- |
 | **id** | string || Identifier |
 | **description** | string || Description or name that will be show in the combobox |
 | **code** | string || Short code |
@@ -184,7 +184,7 @@ In black the Two-Way Data Binding properties.
 For the Tree-Combobox, consider also the following properties:
 
 | Name | Type | Default | Description |
-| ---- |:----:| -------:| ----------- |
+| ---- |:----:|:-------:| ----------- |
 | isParentSelectable | boolean | false | Set if the root element is selectable. |
 | isAllSelectable | boolean | true | Set if the all elements is selectable. |
 | level | number |||
