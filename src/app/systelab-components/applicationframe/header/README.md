@@ -22,7 +22,7 @@ Component to create an application header.
 | menu | Array<ApplicationHeaderMenuEntry> || An array of menu items that will appear in a menu under the user icon|
 
 ApplicationHeaderMenuEntry is a class to represent a Menu Item. The first parameter is the name of the menu item, the second parameter a boolean to set if the item should be render as a separator,
-and the third parameter is the lambda function to execute once the menu item is selected.
+and the third parameter is the Arrow function to execute once the menu item is selected.
 
 Menu example:
 
