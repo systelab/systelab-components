@@ -50,6 +50,9 @@ For example:
   templateUrl: '../../../../../../node_modules/systelab-components/html/abstract-grid.component.html'
 })
 export class PatientGrid extends AbstractApiGrid<PatientData> {
+
+  private totalItems=0;
+
   constructor(protected api: PatientApi,protected preferencesService: PreferencesService,
     protected i18nService: I18nService, protected dialogService: DialogService) {
     super(preferencesService, i18nService, dialogService);
@@ -64,15 +67,20 @@ export class PatientGrid extends AbstractApiGrid<PatientData> {
     return columnDefs;
   }
   protected getTotalItems() {
-    return this.api.totalItems;
+    return this.totalItems;
   }
 
   protected getData(page: number, itemsPerPage: number): Observable<Array<PatientData>> {
-    return this.api.getPatientList(page, itemsPerPage);
+    return this.api.getPatientList(page, itemsPerPage).pipe(map((value) => {
+        this.totalItems = value.totalElements;
+        return value.content;
+    }));
   }
 }
-
 ```
+
+Be aware that the first page will be page 1.
+
 
 ## Using your component
 Once you have your component, you can use it in your templates.
