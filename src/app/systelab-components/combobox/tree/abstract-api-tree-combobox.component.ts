@@ -27,8 +27,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	public isFirstTime = true;
 	public isTree = true;
 
-	public favouriteDescription = '';
-
 	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
@@ -85,6 +83,10 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	public abstract getAllNodeId(): string | number;
 
 	public abstract getAllNodeDescription(): string;
+
+	protected getFavouriteText(): string {
+		return 'Favourites';
+	}
 
 	public getLabelForLevel(comboTreeNode: ComboTreeNode<T>): string {
 		if (comboTreeNode.level === 0) {
@@ -166,7 +168,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 					if (this.withFavourites && this.favouriteList.length > 0) {
 						const favouriteElement: T = {} as T;
 						favouriteElement[this.getLevelIdField(0)] = AbstractApiTreeComboBox.FAVOURITEID;
-						favouriteElement[this.getLevelDescriptionField(0)] = this.favouriteDescription;
+						favouriteElement[this.getLevelDescriptionField(0)] = this.getFavouriteText();
 						const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
 						nodeVector.push(favouriteComboNode);
 						const favouriteElements = this.getFavouriteElements(dataVector);

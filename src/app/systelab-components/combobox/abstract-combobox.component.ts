@@ -306,11 +306,15 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		return this.preferenceName || this.constructor.name;
 	}
 
+	public dummyName(event: MouseEvent): void {
+		console.log('dummyName');
+		event.stopPropagation();
+		this.addRemoveFavourite();
+	}
+
 	public onComboClicked(event: MouseEvent) {
 		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
 			event.stopPropagation();
-		} else if (event.srcElement.className.indexOf('slab-combo-star') > -1) {
-			this.addRemoveFavourite(event);
 		} else {
 			if (!this.isDropDownOpen()) {
 				this.isDropdownOpened = true;
@@ -322,10 +326,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public addRemoveFavourite(event: MouseEvent): void {
-		event.stopPropagation();
-		jQuery('#' + this.comboId)
-			.dropdown('toggle');
+	public addRemoveFavourite(): void {
 		this.isFavourite = !this.isFavourite;
 		if (this.isFavourite) {
 			this.favouriteList.push(this.id.toString());
