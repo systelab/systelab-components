@@ -306,8 +306,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		return this.preferenceName || this.constructor.name;
 	}
 
-	public dummyName(event: MouseEvent): void {
-		console.log('dummyName');
+	public setFavourite(event: MouseEvent): void {
 		event.stopPropagation();
 		this.addRemoveFavourite();
 	}
