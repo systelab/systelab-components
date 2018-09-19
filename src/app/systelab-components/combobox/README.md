@@ -47,7 +47,7 @@ export class MaritalStatusComboBox extends AbstractComboBox<MaritalStatus> {
     }
 
     getInstance(): MaritalStatus {
-        return new Doctor('0', 'Unknown');
+        return new MaritalStatus('0', 'Unknown');
     }
 
     getDescriptionField(): string {
