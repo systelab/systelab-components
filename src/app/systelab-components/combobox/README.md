@@ -1,12 +1,12 @@
 # systelab-combobox
 
-Abstract class that lets you create a Combobox component.
+Abstract classes that lets you create a Combobox component.
 
-## Using the class
+## Using the classes
 
-This is not a component by itself, they are some Abstract class that lets you define your own comboboxes.
+This is not a component by itself, they are some Abstract classes that lets you define your own comboboxes.
 
-In order define a simple combobox, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, and implement the following methods:
+In order define a simple combobox, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, implementing the following methods:
 
 ```
 public abstract getInstance(): T;
@@ -61,7 +61,7 @@ export class MaritalStatusComboBox extends AbstractComboBox<MaritalStatus> {
 
 ```
 
-In order to create a combobox with data coming from a Server API, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, and implement the following methods:
+In order to create a combobox with data coming from a Server API, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, implementing the following methods:
 
 ```
 public abstract getInstance(): T;
