@@ -6,7 +6,7 @@ Abstract classes that lets you create grid components.
 
 This are not components by itself, they are Abstract classes that lets you define your own grids.
 
-In order to do that, you must create your own components and extend from the abstract classes AbstractGrid&lt;T&gt; and AbstractApiGrid&lt;T&gt;. The following methods have to be implemented:
+In order to do that, you must create your own components and extend from the abstract classes AbstractGrid&lt;T&gt; and AbstractApiGrid&lt;T&gt;.
 
 ## Using AbstractGrid&lt;T&gt;
 
