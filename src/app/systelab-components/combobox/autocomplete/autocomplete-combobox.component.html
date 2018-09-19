@@ -12,6 +12,8 @@
                [style.font-style]="fontStyle"
                (keydown.Tab)="closeDropDown()"
                 (click)="onInputClicked($event)"/>
+        <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0"
+                [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="addRemoveFavourite($event)"></button>
         <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
                 (click)="onComboClicked($event)"></button>
     </div>

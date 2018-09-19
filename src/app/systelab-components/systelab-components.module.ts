@@ -77,6 +77,7 @@ import { ContextMenuItemComponent } from './contextmenu/context-menu-item.compon
 import { SystelabGenderListBox } from './listbox/gender-listbox.component';
 import { NumPadComponent } from './numpad/numpad.component';
 import { NumPadDialog } from './numpad/numpad.dialog.component';
+import {ComboboxFavouriteRendererComponent} from './combobox/renderer/combobox-favourite-renderer.component';
 
 @NgModule({
 	imports:         [
@@ -156,8 +157,9 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		NumPadComponent,
 		NumPadDialog,
 		SystelabGenderListBox,
+		ComboboxFavouriteRendererComponent
 	],
-	exports:         [
+	exports: [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -220,6 +222,7 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		NumPadComponent,
 		NumPadDialog,
 		SystelabGenderListBox,
+		ComboboxFavouriteRendererComponent
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -236,9 +239,10 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
 		AbstractListboxRendererComponent,
-		NumPadDialog
+		NumPadDialog,
+		ComboboxFavouriteRendererComponent
 	],
-	providers:       [
+	providers: [
 		StylesUtilService,
 		ColorUtilService,
 		LoadingService
@@ -247,7 +251,7 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule:  SystelabComponentsModule,
+			ngModule: SystelabComponentsModule,
 			providers: [
 				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
 				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
