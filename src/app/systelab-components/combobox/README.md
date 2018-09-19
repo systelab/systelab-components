@@ -6,7 +6,7 @@ Abstract classes that lets you create a Combobox component.
 
 This is not a component by itself, they are some Abstract classes that lets you define your own comboboxes.
 
-In order to do that, you must create your own components and extend from the abstract classes AbstractComboBox&lt;T&gt; and AbstractApiComboBox&lt;T&gt;.
+In order to do that, you must create your own components and extend from the abstract classes AbstractComboBox&lt;T&gt;, AbstractApiComboBox&lt;T&gt;, AutocompleteApiComboBox&lt;T&gt; and AbstractApiTreeComboBox&lt;T&gt;.
 
 ## Using AbstractComboBox&lt;T&gt;
 
@@ -65,7 +65,8 @@ export class MaritalStatusComboBox extends AbstractComboBox<MaritalStatus> {
 
 ```
 
-## Using AbstractApiComboBox&lt;T&gt;
+
+## Using AbstractApiComboBox&lt;T&gt; and AutocompleteApiComboBox&lt;T&gt;
 
 In order to create a combobox with data coming from a Server API, you must create your own component and extend from the abstract class AbstractApiComboBox&lt;T&gt;, implementing the following methods:
 
@@ -130,6 +131,20 @@ export class LaboratoryComboBox extends AbstractApiComboBox<LaboratoryData> {
 
 Be aware that the first page will be page 1.
 
+## Using AbstractApiTreeComboBox&lt;T&gt;
+
+In order to create a tree-combobox with data coming from a Server API, you must create your own component and extend from the abstract class AbstractApiTreeComboBox&lt;T&gt;, implementing the following methods:
+
+```
+public abstract getData(): Observable<Array<T>>;
+public abstract getTotalItems(): number;
+public abstract getLevelDescriptionField(level: number): string;
+public abstract getLevelIdField(level: number): string;
+public abstract getAllNodeId(): string | number;
+public abstract getAllNodeDescription(): string;
+```
+
+
 ## Using your component
 Once you have your component, you can use it in your templates.
 
@@ -140,35 +155,44 @@ Once you have your component, you can use it in your templates.
 
 ## Properties
 
-| Name          | Type        | Default  | Description |
-| ------------- |:-----------:| --------:| --------    |
-| **id** | string | | Identifier |
-| **description** | string | | Description or name that will be show in the combobox|
-| **code**          | string      |          | Short code |
-| fieldToShow          | string      |          ||
-| multipleSelectedItemList          | string      |          ||
-| customInputRenderer          | string      |          ||
-| initialParams          | string      |          ||
-| filter          | boolean      | false         ||
-| multipleSelection          | boolean      | false         | Enable to select multiple elements. A checkbox will be rendered in front of each element.  |
-| selectDeselectAll          | boolean      | false          | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown. |
-| listSelectedValues          | boolean      | false         ||
-| fontFamily          | string      |          | Font Family |
-| fontSize          | string      |          | Font size in pixels |
-| fontWeight          | string      |          | normal, bold, bolder, lighter, number, initial or inherit |
-| fontStyle          | string      |          | normal, italic, oblique, initial or inherit |
-| values          | Array<any>      |          ||
-| isDisabled          | boolean      | false         | |
-| expandToParentContainerHeight          | boolean      | false          ||
-| allowEditInput          | boolean      | false          ||
-| emptyElement          | boolean      | false          ||
+| Name | Type | Default | Description |
+| ---- |:----:| -------:| ----------- |
+| **id** | string || Identifier |
+| **description** | string || Description or name that will be show in the combobox |
+| **code** | string || Short code |
+| fieldToShow | string |||
+| multipleSelectedItemList | string |||
+| customInputRenderer | string |||
+| initialParams | string |||
+| filter | boolean | false ||
+| multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
+| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown. |
+| listSelectedValues | boolean | false ||
+| fontFamily | string || Font Family |
+| fontSize | string || Font size in pixels |
+| fontWeight | string || normal, bold, bolder, lighter, number, initial or inherit |
+| fontStyle | string || normal, italic, oblique, initial or inherit |
+| values | Array<any> |||
+| isDisabled | boolean | false   ||
+| expandToParentContainerHeight | boolean | false ||
+| allowEditInput | boolean | false ||
+| emptyElement | boolean | false ||
 
 In black the Two-Way Data Binding properties.
 
+
+For the Tree-Combobox, consider also the following properties:
+
+| Name | Type | Default | Description |
+| ---- |:----:| -------:| ----------- |
+| isParentSelectable | boolean | false | Set if the root element is selectable. |
+| isAllSelectable | boolean | true | Set if the all elements is selectable. |
+| level | number |||
+
+
 ## Events
 
-
-| Name          | Parameters        | Description  |
-| ------------- |:-----------:| --------|
-| change            | string      |          ||
-| multipleSelectedIDListChange            | string      |          ||
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| change | string |||
+| multipleSelectedIDListChange | string |||
