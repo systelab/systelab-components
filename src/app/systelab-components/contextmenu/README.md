@@ -70,5 +70,5 @@ and call the method open() inside the systelab-context-menu component. This will
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| action | string |The selected ContextMenuOption Id. See ContextMenuOption Id.|
+| action | string |The selected ContextMenuOption Id. |
 
