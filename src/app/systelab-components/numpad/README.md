@@ -1,12 +1,26 @@
 # systelab-numpad
 
-Component to show numpad in InputText, you can choose if you want an Input type password or text.
+Component to show a Numeric Keyboard dialog for an Input Text.
 
 ## Using the component
 
 ```html
-<systelab-numpad></systelab-numpad>
-<systelab-numpad [isPassword]="true" ></systelab-numpad>
+<systelab-numpad [numpadValue]="value" (numpadValueEmitter)="doSelectValue($event)"></systelab-numpad>
 ```
 
-isPassword input parameter is optional, for default is false.
+
+## Properties
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| numpadValue | string || The value |
+| isPassword | boolean | false | defines if is a password or not.|
+| autofocus | boolean | false ||
+
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| numpadValueEmitter | string | The selected value|
+

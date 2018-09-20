@@ -6,7 +6,7 @@ Abstract classes that lets you create grid components.
 
 This are not components by itself, they are Abstract classes that lets you define your own grids.
 
-In order to do that, you must create your own components and extend from the abstract classes AbstractGrid&lt;T&gt; and AbstractApiGrid&lt;T&gt;. The following methods have to be implemented:
+In order to do that, you must create your own components and extend from the abstract classes AbstractGrid&lt;T&gt; and AbstractApiGrid&lt;T&gt;.
 
 ## Using AbstractGrid&lt;T&gt;
 
@@ -50,6 +50,9 @@ For example:
   templateUrl: '../../../../../../node_modules/systelab-components/html/abstract-grid.component.html'
 })
 export class PatientGrid extends AbstractApiGrid<PatientData> {
+
+  private totalItems=0;
+
   constructor(protected api: PatientApi,protected preferencesService: PreferencesService,
     protected i18nService: I18nService, protected dialogService: DialogService) {
     super(preferencesService, i18nService, dialogService);
@@ -64,15 +67,20 @@ export class PatientGrid extends AbstractApiGrid<PatientData> {
     return columnDefs;
   }
   protected getTotalItems() {
-    return this.api.totalItems;
+    return this.totalItems;
   }
 
   protected getData(page: number, itemsPerPage: number): Observable<Array<PatientData>> {
-    return this.api.getPatientList(page, itemsPerPage);
+    return this.api.getPatientList(page, itemsPerPage).pipe(map((value) => {
+        this.totalItems = value.totalElements;
+        return value.content;
+    }));
   }
 }
-
 ```
+
+Be aware that the first page will be page 1.
+
 
 ## Using your component
 Once you have your component, you can use it in your templates.
@@ -106,3 +114,23 @@ public doMenuAction(action: GridContextMenuActionData<PatientData>): void {
 }
 
 ```
+
+
+## Properties
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| preferenceName | string || Preference prefix in order to store the columns size|
+| multipleSelection | boolean | false | Set multiple selection|
+| showChecks | boolean | false | Show a column with a checkbox for each element |
+| rowData | Array&lt;T&gt; |||
+| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; |||
+| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; |||
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| action |GridContextMenuActionData&lt;PatientData&gt;|When an action in the popup menu is selected, the event is fired with the selected GridContextMenuActionData |
+| clickRow |T|When a row is selected, the event is fired with the element in the row.|
+| viewportChanged |||
