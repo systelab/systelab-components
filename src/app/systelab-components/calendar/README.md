@@ -12,8 +12,21 @@ Components to create a custom calendar
 
 <systelab-calendar-table [currentDate]="currentDate" [days]="days"></systelab-calendar-table>
 ```
-In both cases currentDate is a date in the month to render.
-The days input is used to set a DaySlot array of elements in order to override the standard ones (that is with isHoliday equals false). For example:
+
+
+## Properties
+
+
+The properties for the systelab-calendar-table are:
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| currentDate | Date || A date in the month to render. |
+| days | Array&lt;DaySlot&gt; || An array of DaySlot objects representing each day of the month in order to override the standard ones (that is with isHoliday equals false).|
+
+The currentDate property applies also to systelab-calendar-header.
+
+The days input is used to set a DaySlot array of elements. For example:
 
 ```javascript
 returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});
@@ -35,13 +48,22 @@ The interesting thing here, is that you can specify a custom template for systel
 </systelab-calendar-table>
 ```
 
-As you see, an object satisfaying the DaySlot is provided.
+As you see, an object satisfying the DaySlot is provided.
 
 With this two components you can create your own calendars. A dialog example is provided in the file calendar-dialog.component.ts
 
-In order to show the dialog you could:
+In order to show that dialog you should add:
 
 ```javascript
-const parameters: CalendarDialogParameters = CalendarDialog.getParameters();
-this.dialogService.showDialog(CalendarDialog, parameters);
+this.dialogService.showDialog(CalendarDialog, CalendarDialog.getParameters());
 ```
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| previousYear || User wants to go to the previous year.|
+| nextYear || User wants to go to the next year.|
+| previousMonth || User wants to go to the previous month.|
+| nextMonth || User wants to go to the next month.|
+
