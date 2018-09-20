@@ -46,7 +46,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public emptyElement = false;
 	@Input() public selectDeselectAll = false;
 	@Input() public withFavourites = false;
-	@Input() protected preferenceName: string;
+
+	public preferenceName: string;
 
 	public isFavourite = false;
 	public favouriteList: Array<string | number> = [];
