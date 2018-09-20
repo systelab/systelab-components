@@ -2,7 +2,7 @@
 
 systelab-components is a set of components that use wide accepted and adopted standard technologies like Angular and Bootstrap, as well as other popular libraries. Please read the ATTRIBUTION.md file for a complete list of dependencies.
 
-Bootstrap 4 knowledge will be very useful to understand and use the library, as is founded on it.
+Bootstrap 4 knowledge will be very useful to understand and use the library, as is based on it.
                                                     
 ## Using the library
 
