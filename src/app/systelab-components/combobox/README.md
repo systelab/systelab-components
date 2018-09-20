@@ -82,7 +82,7 @@ public abstract getTotalItems(): number;
 For example:
 
 ```
-class LaboratoryData {
+class Laboratory {
     constructor(public id: string, public description: string) {
     }
 }
@@ -92,7 +92,7 @@ class LaboratoryData {
     templateUrl: '../../../../../node_modules/systelab-components/html/abstract-combobox.component.html'
 })
 
-export class LaboratoryComboBox extends AbstractApiComboBox<LaboratoryData> {
+export class LaboratoryComboBox extends AbstractApiComboBox<Laboratory> {
 
     private totalItems=0;
 
@@ -101,7 +101,7 @@ export class LaboratoryComboBox extends AbstractApiComboBox<LaboratoryData> {
     }
 
     public getInstance() {
-        return new LaboratoryData('','');
+        return new Laboratory('','');
     }
 
     public getDescriptionField(): string {
@@ -116,7 +116,7 @@ export class LaboratoryComboBox extends AbstractApiComboBox<LaboratoryData> {
         return 'id';
     }
 
-    public getData(page: number, itemsPerPage: number): Observable<Array<LaboratoryData>> {
+    public getData(page: number, itemsPerPage: number): Observable<Array<Laboratory>> {
         return this.api.getLaboratoryList(page,itemsPerPage).pipe(map((value) => {
             this.totalItems = value.totalElements;
             return value.content;
@@ -129,7 +129,7 @@ export class LaboratoryComboBox extends AbstractApiComboBox<LaboratoryData> {
 }
 ```
 
-Be aware that the first page will be page 1.
+> Be aware that the first page will be page 1.
 
 ## Using AbstractApiTreeComboBox&lt;T&gt;
 
