@@ -12,6 +12,8 @@ The component will need to export a class in order to get the context. This clas
 
 It is suggested to define the width and height, or the class, in the context in order to make the dialog always have the same dimension. For small devices, the dialog will be fullScreen.
 
+It is also suggested to keep this class in the same file, as it is more readable because the context is not lost.
+
 Here there is an example:
 
 ```javascript
