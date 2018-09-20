@@ -105,5 +105,7 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-file-certified');
 		this.icons.push('icon-wifi');
 		this.icons.push('icon-wifi-alert');
+		this.icons.push('icon-star');
+		this.icons.push('icon-star-o');
 	}
 }

@@ -1,0 +1,4 @@
+<div class="ag-header-cell-label d-flex align-items-center">
+    <i *ngIf="isFavourite" class="icon-star pr-2"></i>
+    <span [ngClass]="{'pl-4': !isFavourite && favouriteList.length > 0}">{{params.data[params.colDef.field]}}</span>
+</div>

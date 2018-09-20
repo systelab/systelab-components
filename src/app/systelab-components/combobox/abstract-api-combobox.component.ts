@@ -3,6 +3,7 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractComboBox } from './abstract-combobox.component';
 import { Observable } from 'rxjs';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
@@ -12,8 +13,8 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	public totalItemsLoaded = false;
 
-	constructor( public myRenderer: Renderer2, public chref: ChangeDetectorRef ) {
-		super( myRenderer, chref );
+	constructor( public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService ) {
+		super(myRenderer, chref, preferencesService);
 	}
 
 	// override

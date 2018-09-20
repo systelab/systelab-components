@@ -3,6 +3,7 @@ import {AgRendererComponent} from 'ag-grid-angular';
 import {IGetRowsParams} from 'ag-grid';
 import {AbstractApiComboBox} from '../abstract-api-combobox.component';
 import {AbstractComboBox} from '../abstract-combobox.component';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
 
 declare var jQuery: any;
 
@@ -10,8 +11,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public startsWith = '';
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
-		super(myRenderer, chref);
+	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+		super(myRenderer, chref, preferencesService);
 	}
 
 	public doSearch(event: any) {

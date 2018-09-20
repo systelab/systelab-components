@@ -1,7 +1,20 @@
-import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
-import { GridOptions } from 'ag-grid';
-import { StylesUtilService } from '../utilities/styles.util.service';
+import {
+	ChangeDetectorRef,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
+import {AgRendererComponent} from 'ag-grid-angular';
+import {GridOptions} from 'ag-grid';
+import {StylesUtilService} from '../utilities/styles.util.service';
+import {ComboboxFavouriteRendererComponent} from './renderer/combobox-favourite-renderer.component';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
 
 declare var jQuery: any;
 
@@ -32,6 +45,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public allowEditInput = false;
 	@Input() public emptyElement = false;
 	@Input() public selectDeselectAll = false;
+	@Input() public withFavourites = false;
+	@Input() public preferenceName: string;
+
+	public isFavourite = false;
+	public favouriteList: Array<string | number> = [];
+	public isTree = false;
 
 	public _id: number | string;
 	@Input()
@@ -39,6 +58,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this._id = value;
 		this.idChange.emit(value);
 		this.setCodeDescriptionById();
+		if (value !== undefined && value !== null) {
+			this.checkIfIsFavourite(value.toString());
+		}
 	}
 
 	get id() {
@@ -62,6 +84,16 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	get description() {
 		return this._description;
+	}
+
+	public _level: number;
+	@Input()
+	set level(value: number) {
+		this._level = value;
+	}
+
+	get level() {
+		return this._level;
 	}
 
 	public _fieldToShow: string;
@@ -106,22 +138,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 	}
 
-	protected setDescriptionAndCodeWhenMultiple(value: Array<T>) {
-		this._description = '';
-		this._code = '';
-		for (const selectedItem of value) {
-			if (this._code !== '') {
-				this._code += '; ';
-			}
-			this._code += selectedItem[this.getCodeField()];
-
-			if (this._description !== '') {
-				this._description += '; ';
-			}
-			this._description += selectedItem[this.getDescriptionField()];
-		}
-	}
-
 	get multipleSelectedItemList() {
 		return this._multipleSelectedItemList;
 	}
@@ -151,7 +167,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public isDropdownOpened = false;
 	public scrollHandler: any;
 
-	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef) {
+	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public preferencesService?: PreferencesService) {
 	}
 
 	public ngOnInit() {
@@ -173,16 +189,53 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		jQuery(this.comboboxElement.nativeElement)
 			.on('hide.bs.dropdown', this.closeDropDown.bind(this));
 
+		this.initializeFavouriteList();
 		this.configGrid();
 	}
 
-	protected configGrid() {
-		this.columnDefs = [
-			{
+	protected setDescriptionAndCodeWhenMultiple(value: Array<T>) {
+		this._description = '';
+		this._code = '';
+		for (const selectedItem of value) {
+			if (this._code !== '') {
+				this._code += '; ';
+			}
+			this._code += selectedItem[this.getCodeField()];
 
-				colID:             'itemDescription',
-				field:             this.getDescriptionField(),
-				checkboxSelection: this.multipleSelection
+			if (this._description !== '') {
+				this._description += '; ';
+			}
+			this._description += selectedItem[this.getDescriptionField()];
+		}
+	}
+
+	private initializeFavouriteList(): void {
+		const favouriteListPreference: Array<string | number> = (this.preferencesService) ? this.preferencesService.get(this.preferenceName + '.favourites') : undefined;
+		if (this.withFavourites && favouriteListPreference && favouriteListPreference.length > 0) {
+			this.favouriteList = favouriteListPreference;
+			if (this.id !== undefined && this.id !== null) {
+				this.checkIfIsFavourite(this.id.toString());
+			}
+		}
+	}
+
+	protected configGrid() {
+		this.columnDefs = (this.withFavourites) ? [
+			{
+				colID: 'itemDescription',
+				id: this.getIdField(),
+				field: this.getDescriptionField(),
+				checkboxSelection: this.multipleSelection,
+				cellRendererFramework: ComboboxFavouriteRendererComponent,
+				cellRendererParams: {
+					favouriteList: this.favouriteList
+				}
+			}
+		] : [
+			{
+				colID: 'itemDescription',
+				field: this.getDescriptionField(),
+				checkboxSelection: this.multipleSelection,
 			}
 		];
 		this.gridOptions = {};
@@ -202,7 +255,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked:   this.getCheckboxChecked()
+			checkboxChecked: this.getCheckboxChecked()
 		};
 
 		this.gridOptions.getRowNodeId =
@@ -254,6 +307,15 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		return undefined;
 	}
 
+	protected getComboPreferencesPrefix(): string {
+		return this.preferenceName || this.constructor.name;
+	}
+
+	public doToggleFavourite(event: MouseEvent): void {
+		event.stopPropagation();
+		this.toggleFavourite();
+	}
+
 	public onComboClicked(event: MouseEvent) {
 		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
 			event.stopPropagation();
@@ -266,6 +328,19 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.checkMultipleSelectionClosed();
 			}
 		}
+	}
+
+	protected toggleFavourite(): void {
+		this.isFavourite = !this.isFavourite;
+		if (this.isFavourite) {
+			this.favouriteList.push(this.id.toString());
+		} else {
+			this.favouriteList.splice(this.favouriteList.map(String).indexOf(this.id.toString()), 1);
+		}
+		this.preferencesService.put(
+			this.getComboPreferencesPrefix() + '.favourites',
+			this.favouriteList.map(String)
+		);
 	}
 
 	public setDropdownWidth() {
@@ -405,10 +480,15 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
 				this.closeDropDown();
+				this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
 			}
 		} else {
 			this.selectionChanged = true;
 		}
+	}
+
+	private checkIfIsFavourite(id: string): void {
+		this.isFavourite = (id !== undefined && id !== null) ? this.favouriteList.map(String).indexOf(id) > -1 : false;
 	}
 
 	public onModelUpdated() {
@@ -417,9 +497,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
 					if (this.multipleSelectedItemList
-						.filter((selectedItem) => {
-							return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
-						}).length > 0) {
+							.filter((selectedItem) => {
+								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+							}).length > 0) {
 						node.selectThisNode(true);
 					}
 				});

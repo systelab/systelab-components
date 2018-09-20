@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-	selector:    'showcase-combobox',
+	selector: 'showcase-combobox',
 	templateUrl: 'showcase-combobox.component.html'
 })
 export class ShowcaseComboboxComponent {
