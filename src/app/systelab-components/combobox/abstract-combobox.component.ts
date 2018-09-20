@@ -46,8 +46,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public emptyElement = false;
 	@Input() public selectDeselectAll = false;
 	@Input() public withFavourites = false;
-
-	public preferenceName: string;
+	@Input() public preferenceName: string;
 
 	public isFavourite = false;
 	public favouriteList: Array<string | number> = [];
@@ -312,9 +311,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		return this.preferenceName || this.constructor.name;
 	}
 
-	public setFavourite(event: MouseEvent): void {
+	public doToggleFavourite(event: MouseEvent): void {
 		event.stopPropagation();
-		this.addRemoveFavourite();
+		this.toggleFavourite();
 	}
 
 	public onComboClicked(event: MouseEvent) {
@@ -331,7 +330,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public addRemoveFavourite(): void {
+	protected toggleFavourite(): void {
 		this.isFavourite = !this.isFavourite;
 		if (this.isFavourite) {
 			this.favouriteList.push(this.id.toString());

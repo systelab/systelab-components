@@ -146,9 +146,8 @@ public abstract getAllNodeDescription(): string;
 
 ## Using a Combo with Favourites
 
-In order to create a combobox with favourites you must set the input property "withFavourites" as true, and in your componen add 
-a new service, "PreferencesService", and set it in the **constructor**, and it's necessary to add a **preferenceName** in your component
-too.
+In order to create a combobox with favourites you must set the input property "withFavourites" as true, and in your component add 
+a new service, "PreferencesService", and set it in the **constructor**, and it's necessary to set a **preferenceName** input.
 
 ## Using AbstractApiTreeComboBox&lt;T&gt; with Favourites
 
@@ -187,7 +186,8 @@ Once you have your component, you can use it in your templates.
 | expandToParentContainerHeight | boolean | false ||
 | allowEditInput | boolean | false ||
 | emptyElement | boolean | false ||
-| withFavourites | boolean | false ||
+| withFavourites | boolean | false | Used to activate and deactivate the favourites || 
+| preferencesName | string | '' | Preference name over will be saved the preferences || 
 
 In black the Two-Way Data Binding properties.
 
