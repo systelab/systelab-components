@@ -18,9 +18,9 @@ Component to show more than one panel.
 The systelab-tabs component has an Output in order to notify that a tab has been selected. In the $event parameter, the selected tab id will be sent.
 
 Consider that:
-> You can add a padding to the tab content adding the class p-1.
-> Sometimes in the content you will need to specify that is 100% width.
-> If you are adding a grid as a content, remember to specify that it will be the element that will grow and that the position is relative. Here you have an example:
+> - You can add a padding to the tab content adding the class p-1.
+> - Sometimes in the content you will need to specify that is 100% width.
+> - If you are adding a grid as a content, remember to specify that it will be the element that will grow and that the position is relative. Here you have an example:
 
 ```html
 <systelab-tabs class="slab-flex-1">
