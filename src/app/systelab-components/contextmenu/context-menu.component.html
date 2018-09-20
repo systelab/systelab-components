@@ -13,7 +13,7 @@
                     <li *ngFor="let action of contextMenuOptions"
                         class="d-flex align-items-center {{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
                         (click)="isEnabled(elementID, action.actionId) ? executeAction($event,elementID, action.actionId) : null">
-                        <div class="slab-flex-1" *ngIf="isEnabled(elementID, action.actionId)">
+                        <div class="slab-flex-1" style="flex:1 1 auto" *ngIf="isEnabled(elementID, action.actionId)">
                             <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
                                                         [isEnabled]="isEnabled(elementID, action.actionId)"
                                                         [isIconEnabled]="isIconEnabled(elementID, action.actionId)"

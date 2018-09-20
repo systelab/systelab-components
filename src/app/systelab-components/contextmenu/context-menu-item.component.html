@@ -4,6 +4,7 @@
     <i class="slab-flex-1 slab-menu-icon {{action.iconClass}}" [style.color]="action.iconColor"
        [ngClass]="{'text-white': !action.iconColor}"></i>
 </div>
-<a class="slab-flex-1" [style.padding-left]="hasIcons && !isIconEnabled?'20px':'0'" [ngClass]="{'ml-2': hasIcons}">{{action.actionText}}</a>
+<a class="slab-flex-1" style="flex:1 1 auto" [style.padding-left]="hasIcons && !isIconEnabled?'20px':'0'"
+   [ngClass]="{'ml-2': hasIcons}">{{action.actionText}}</a>
 <span *ngIf="hasChildren" class="pl-2 slab-menu-caret icon-chevron-right"></span>
 <div *ngIf="action.isDivider && isEnabled" class="dropdown-divider"></div>
