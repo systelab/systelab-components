@@ -23,10 +23,86 @@ protected abstract getIdField(level?: number): string;
 
 For example:
 
-```
+```javascript
+
+@Component({
+	selector:    'marital-status-listbox',
+	templateUrl: '../../../../node_modules/systelab-components/html/abstract-listbox.component.html'
+
+})
+export class MaritalStatusListBox extends AbstractListBox<ListBoxElement> implements OnInit {
+
+	constructor(public i18nService: I18nService) {
+		super(false);
+	}
+
+	public ngOnInit() {
+		super.ngOnInit();
+		this.setSelectionList(this.selectedIDList);
+	}
+
+	protected getData(): Observable<Array<ListBoxElement>> {
+		const data: Array<ListBoxElement> = [];
+		data.push(new ListBoxElement('1', 'Single', 1, false));
+		data.push(new ListBoxElement('2', 'Married', 1, false));
+		data.push(new ListBoxElement('3', 'Widowed', 1, false));
+		data.push(new ListBoxElement('4', 'Divorced', 1, false));
+		data.push(new ListBoxElement('5', 'Separated', 1, false));
+		data.push(new ListBoxElement('6', 'Registered partnership', 1, false));
+		return of(data);
+	}
+
+	public getIdField(): string {
+		return 'id';
+	}
+
+	public getDescriptionField(): string {
+		return 'description';
+
+	}
+
+	public setSelectionList(selectedIDList: string) {
+		this.multipleSelectedItemList = [];
+		if (selectedIDList) {
+			const selectedIDStringList: Array<string> = selectedIDList.split(',');
+			selectedIDStringList.forEach(selectedID => {
+				this.addSelectedItem(new ListBoxElement(selectedID, this.getDescriptionForCultureTypeCode(selectedID), 1, true));
+				this.values.filter(element => {
+					if (element.id === selectedID) {
+						element.selected = true;
+					}
+				});
+			});
+		}
+	}
+
+	public getSelectionList(): string {
+		let selection = '';
+		let first = true;
+		for (const selectedItem of this.multipleSelectedItemList) {
+			if (first) {
+				selection = selectedItem[this.getIdField()];
+				first = false;
+			} else {
+				selection += ',' + selectedItem[this.getIdField()];
+			}
+
+		}
+		return selection;
+	}
+}
 
 
 ```
+
+ListBoxElement is a class with the following properties:
+
+| Name | Type | Description |
+| ---- |:----:| ----------- |
+| **id** | string || Identifier |
+| **description** | string || Description or name that will be show in the listbox |
+| level | number || Level for indentation |
+| selected | boolean || A boolean value to define if the element is selected |
 
 
 ## Using AbstractApiListBox&lt;T&gt;
