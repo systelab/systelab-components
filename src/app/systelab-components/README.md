@@ -6,7 +6,7 @@ Bootstrap 4 knowledge will be very useful to understand and use the library, as 
                                                     
 ## Using the library
 
-In order to use the library, the first thing will be to add it in your package.json
+In order to use the library, the first step will be to add the dependency in your package.json
 
 ```bash
 npm install systelab-components --save
@@ -111,6 +111,28 @@ Anyway, think it twice before you change this settings and think in the value of
 A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples. 
 
 As this components will be placed in a container, in the following sections you will find some tips about how to do it. Please check our [application frame](applicationframe), [dialog](modal/dialog) as a base containers of the layout.
+
+The following table summarizes all the components included in the library.
+
+| Component | Description |
+| --------- | ----------- |
+| [systelab-app-frame](applicationframe) | Application frame, using a header and a sidebar |
+| [systelab-app-header](applicationframe/header) | Application header |
+| [systelab-app-sidebar](applicationframe/sidebar) | Application side bar |
+| [systelab-breadcrumb](breadcrumb) | Component to allows users to keep track and maintain awareness of their locations |
+| [systelab-calendar-header](calendar) | Calendar header with navigation |
+| [systelab-calendar-table](calendar) | Month view custom calendar |
+| [systelab-colorpicker](colorpicker) | Color picker |
+| [systelab-combobox](combobox) | Classes that lets you create a combo box component |
+| [systelab-context-menu](contextmenu) | Context menu |
+| [systelab-datepicker](datepicker) | Date picker |
+| [systelab-date-time](datepicker) | Date and time picker |
+| [systelab-file-selector](file-selector) | File selector |
+| [systelab-grid](grid) | Classes that lets you create a grid component |
+| [systelab-listbox](listbox) | Classes that lets you create a list box component |
+| [systelab-loading](loading) | Widget to show that an action is being performed |
+
+
 
 ### Layout
 
