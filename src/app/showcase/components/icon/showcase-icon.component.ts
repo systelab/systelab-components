@@ -107,5 +107,8 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-wifi-alert');
 		this.icons.push('icon-star');
 		this.icons.push('icon-star-o');
+		this.icons.push('icon-spinner11');
+		this.icons.push('icon-redo2');
+		this.icons.push('icon-ban');
 	}
 }
