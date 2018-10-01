@@ -8,7 +8,8 @@
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
-        <button type="button" *ngIf="(withFavourites && id && !isTree) || (withFavourites && id && isTree && level)" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0"
+        <button type="button" *ngIf="(withFavourites && id && !isTree) || (withFavourites && id && isTree && level)" #favouriteButton
+                class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)"></button>
         <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
     </div>
