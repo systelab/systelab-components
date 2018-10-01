@@ -1,4 +1,5 @@
-import {AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SecurityContext, SimpleChanges } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var jQuery: any;
 
@@ -15,15 +16,17 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 	@Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
 	@Input() systelabTooltipDelay: number;
 
-	constructor(private el: ElementRef, private renderer: Renderer2) {
+	constructor(private el: ElementRef, private renderer: Renderer2, private domSanitizer: DomSanitizer) {
 	}
 
 	ngAfterViewInit() {
-		jQuery(this.el.nativeElement).tooltip();
+		jQuery(this.el.nativeElement)
+			.tooltip();
 	}
 
 	ngOnDestroy() {
-		jQuery(this.el.nativeElement).tooltip('dispose');
+		jQuery(this.el.nativeElement)
+			.tooltip('dispose');
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -33,6 +36,17 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 	}
 
 	private initializeTooltip(): void {
+
+		let sanitizedTooltipText;
+
+		if (this.systelabTooltipHtml) {
+			sanitizedTooltipText = this.domSanitizer.sanitize(SecurityContext.HTML, this.systelabTooltipHtml);
+		} else if (this.systelabTooltip) {
+			sanitizedTooltipText = this.domSanitizer.sanitize(SecurityContext.HTML, this.systelabTooltip);
+		} else {
+			sanitizedTooltipText = '';
+		}
+
 		this.renderer.setAttribute(this.el.nativeElement, 'data-toogle', 'tooltip');
 		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
 		if (this.systelabTooltipHtml) {
@@ -42,6 +56,6 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
 		this.renderer.setAttribute(this.el.nativeElement, 'data-delay',
 			(this.systelabTooltipDelay) ? this.systelabTooltipDelay.toString() : TooltipDirective.DEFAULT_DELAY.toString());
-		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
+		this.renderer.setAttribute(this.el.nativeElement, 'title', sanitizedTooltipText);
 	}
 }
