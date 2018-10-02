@@ -10,29 +10,21 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public startsWith = '';
 
-	private searchTimeout: any;
-
 	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef) {
 		super(myRenderer, chref);
 	}
 
 	public doSearch(event: any) {
-		if (this.searchTimeout) {
-			clearTimeout(this.searchTimeout);
+		if (event.shiftKey || event.ctrlKey) {
+			return;
 		}
-		this.searchTimeout = setTimeout(() => {
-			if (event.shiftKey || event.ctrlKey) {
-				return;
+		if (event.keyCode === 27) {
+			if (this.isDropDownOpen()) {
+				this.closeDropDown();
 			}
-			if (event.keyCode === 27) {
-				if (this.isDropDownOpen()) {
-					this.closeDropDown();
-				}
-			} else {
-				this.doSearchText(event.target.value);
-			}
-		}, 300);
-
+		} else {
+			this.doSearchText(event.target.value);
+		}
 	}
 
 	protected doSearchText(text: string) {
