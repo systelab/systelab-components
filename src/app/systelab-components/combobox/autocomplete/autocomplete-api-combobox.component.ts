@@ -50,22 +50,15 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	public onInputClicked(event: MouseEvent) {
-		const isIE = navigator.userAgent.indexOf('MSIE ') > -1 || navigator.appVersion.indexOf('Trident/') > 0;
-		if (isIE) {
-			event.stopPropagation();
-			if (!this.isDisabled) {
+		event.stopPropagation();
+		if (!this.isDisabled) {
+			if (!this.isDropDownOpen()) {
+				this.showDropDown();
 				jQuery('#' + this.comboId).dropdown('toggle');
-				if (!this.isDropDownOpen()) {
-					this.isDropdownOpened = true;
-					this.showDropDown();
-					this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
-					this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
-					this.doSearchText(this.description);
-				}
-				this.inputElement.nativeElement.focus();
+				this.isDropdownOpened = true;
+				this.doSearchText(this.description);
 			}
-		} else {
-			this.onComboClicked(event);
+			this.inputElement.nativeElement.focus();
 		}
 	}
 
