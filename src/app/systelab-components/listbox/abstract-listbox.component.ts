@@ -22,15 +22,19 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	@Output() selectedItemChange = new EventEmitter<T>();
+	@Output() public multipleSelectedIDListChange = new EventEmitter();
 
 	@Input() public selectFirstItem = false;
 	@Input() public multipleSelection = false;
 	@Input() public showAll = false;
 
+	protected _multipleSelectedItemList: Array<T>;
+
 	@Input()
 	set multipleSelectedItemList(value: Array<T>) {
 		this._multipleSelectedItemList = value;
 		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
+		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 	}
 
 	get multipleSelectedItemList(): Array<T> {
@@ -40,7 +44,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
 
 	protected hideChecks = false;
-	protected _multipleSelectedItemList: Array<T>;
 
 	protected constructor() {
 	}
@@ -255,6 +258,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 				}
 			});
 		}
+	}
+
+	private selectionItemListToIDList(): Array<string | number> {
+		const idList = new Array<string | number>();
+		for (const item of this.multipleSelectedItemList) {
+			idList.push(item[this.getIdField()]);
+		}
+		return idList;
 	}
 
 	private unselectAllNodes() {

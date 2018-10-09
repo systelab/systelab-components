@@ -14,22 +14,19 @@ class Element {
 export class ShowcaseListBoxComponent implements AfterViewInit {
 
 	public selectedItem;
-	public selectedItem2;
+	public selectedTreeItem;
 	public multipleSelectedItemList;
-	public multipleSelectedItemList2;
 	public multipleSelectedItemListTree;
-	public selectedIDList = 'S3';
 
 	constructor() {
 		this.multipleSelectedItemList = [new Element('F', 'COMMON_FEMALE')];
-		this.selectedItem2 = {'genderDescription': 3};
 
 		this.multipleSelectedItemListTree = [];
 		this.multipleSelectedItemListTree.push({
 			'centerID':           1,
-			'centerDescription':  'CENTER1',
+			'centerDescription':  'Center',
 			'serviceID':          '2',
-			'serviceDescription': 'SERVICE2'
+			'serviceDescription': 'Service 2'
 		});
 
 	}
@@ -37,21 +34,14 @@ export class ShowcaseListBoxComponent implements AfterViewInit {
 	public ngAfterViewInit(): void {
 		this.selectedItem = new TreeListBoxElement({
 			'centerID':           1,
-			'centerDescription':  'CENTER1',
+			'centerDescription':  'Center',
 			'serviceID':          3,
-			'serviceDescription': 'SERVICE3'
+			'serviceDescription': 'Service 3'
 		}, 0, true);
 	}
 
 	public onSelectedItemChange(event: any) {
-		console.log('Emit', this.selectedItem);
+		console.log('Emit', event);
 	}
 
-	public onSelectedItemChange2() {
-		console.log('Emit2', this.multipleSelectedItemList2);
-	}
-
-	public selectedIDListChange() {
-		console.log('Emit2', this.selectedIDList);
-	}
 }

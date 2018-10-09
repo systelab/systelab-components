@@ -263,11 +263,6 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	public resizeColumn(event: any) {
-		this.gridOptions.api.doLayout();
-		this.gridOptions.api.sizeColumnsToFit();
-	}
-
 	public addSelectedItem(selected: TreeListBoxElement<T>) {
 		if (this.containsElement(selected)) {
 			this.removeElement(selected);

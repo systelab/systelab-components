@@ -3,22 +3,8 @@ import { Observable, of } from 'rxjs';
 import { AbstractApiTreeListBox, TreeListBoxElement } from '../../../systelab-components/listbox/abstract-api-tree-listbox.component';
 
 @Component({
-	selector: 'showcase-inner-tree-listbox',
-	template: `
-                  <div class="slab-listbox" [ngClass]="{'disabled': isDisabled}">
-                      <div #hidden class="height-hidden"></div>
-                      <ag-grid-angular #grid id="agGrid"
-                                       style="position:absolute; top:0; bottom:0; left:0; right:0; overflow: hidden;"
-                                       class="ag-fresh border rounded" [ngClass]="{'disabled': isDisabled}"
-                                       [gridOptions]="gridOptions"
-                                       (gridReady)="doGridReady($event)"
-                                       (gridSizeChanged)="doGridSizeChanged($event)"
-                                       (cellClicked)="doClick($event)"
-                                       (clickRow)="doClick($event)"
-                                       (rowSelected)="onRowSelected($event)"
-                                       (modelUpdated)="onModelUpdated($event)">
-                      </ag-grid-angular>
-                  </div>`
+	selector:    'showcase-inner-tree-listbox',
+	templateUrl: '../../../systelab-components/listbox/abstract-listbox.component.html'
 })
 
 export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<TreeListBoxElement<any>> {

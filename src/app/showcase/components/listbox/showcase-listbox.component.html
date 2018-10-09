@@ -1,23 +1,19 @@
 <div class="container-fluid mt-2">
     <form class="position-relative" style="height: 200px;">
-        <systelab-gender-listbox [multipleSelection]="true" [isDisabled]="false"
-                                 [(multipleSelectedItemList)]="multipleSelectedItemList"
+        <systelab-gender-listbox [multipleSelection]="true" [(multipleSelectedItemList)]="multipleSelectedItemList"
+                                 (multipleSelectedItemListChange)="onSelectedItemChange($event)"></systelab-gender-listbox>
+    </form>
+</div>
+<div class="container-fluid mt-2">
+    <form class="position-relative" style="height: 200px;">
+        <systelab-gender-listbox [showAll]="true" [(selectedItem)]="selectedItem"
                                  (selectedItemChange)="onSelectedItemChange($event)"
                                  [selectFirstItem]="true"></systelab-gender-listbox>
     </form>
 </div>
 <div class="container-fluid mt-2">
     <form class="position-relative" style="height: 200px;">
-        <systelab-gender-listbox [showAll]="true" [multipleSelection]="false" [isDisabled]="false"
-                                 [(selectedItem)]="selectedItem"
-                                 [selectFirstItem]="true"></systelab-gender-listbox>
-    </form>
-</div>
-<div class="container-fluid mt-2">
-    <form class="position-relative" style="height: 200px;">
-        <showcase-inner-tree-listbox [(selectedTreeItem)]="selectedItem"
-                                     (selectedTreeItemChange)="onSelectedItemChange($event)"
-                                     [isDisabled]="false"
-                                     [multipleSelection]="false"></showcase-inner-tree-listbox>
+        <showcase-inner-tree-listbox [(selectedTreeItem)]="selectedTreeItem"
+                                     (selectedTreeItemChange)="onSelectedItemChange($event)"></showcase-inner-tree-listbox>
     </form>
 </div>

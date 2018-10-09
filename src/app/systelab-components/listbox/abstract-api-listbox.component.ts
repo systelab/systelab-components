@@ -1,30 +1,9 @@
-import { EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { IDatasource, IGetRowsParams } from 'ag-grid';
 import { Observable } from 'rxjs/index';
 import { AbstractListBox } from './abstract-listbox.component';
 
 export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implements IDatasource, OnInit {
-
-	@Input() public selectedItem: T;
-	@Output() selectedItemChange = new EventEmitter<T>();
-	@Output() multipleSelectedIDListChange = new EventEmitter<T>();
-
-	@Input() public selectFirstItem = false;
-	@Input() public multipleSelection = false;
-
-	protected _multipleSelectedItemList: Array<T>;
-
-	@Input()
-	set multipleSelectedItemList(value: Array<T>) {
-		this._multipleSelectedItemList = value;
-		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
-	}
-
-	get multipleSelectedItemList(): Array<T> {
-		return this._multipleSelectedItemList;
-	}
-
-	@Output() public multipleSelectedItemListChange = new EventEmitter();
 
 	public abstract getInstance(): T;
 
@@ -51,8 +30,6 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	public abstract getTotalItems(): number;
 
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
-
-	// Methods can be overrided for show all preferences
 
 	public getRows(params: IGetRowsParams): void {
 
