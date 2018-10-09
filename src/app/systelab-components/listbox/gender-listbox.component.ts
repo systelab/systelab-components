@@ -1,34 +1,32 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { Observable, of } from 'rxjs/index';
-import { AbstractListBox, ListBoxElement } from './abstract-listbox.component';
+import { AbstractListBox } from './abstract-listbox.component';
+
+class Element {
+	constructor(public id: string, public description: string) {
+
+	}
+}
 
 @Component({
 	selector:    'systelab-gender-listbox',
 	templateUrl: 'abstract-listbox.component.html'
 
 })
-export class SystelabGenderListBox extends AbstractListBox<ListBoxElement> implements OnInit, AfterViewInit {
+export class SystelabGenderListBox extends AbstractListBox<Element> implements AfterViewInit {
+
+	@Input() showAll = false;
 
 	constructor(public i18nService: I18nService) {
-		super(false);
+		super();
 	}
 
-	public ngOnInit() {
-		super.ngOnInit();
-		this.setSelectionList(this.selectedIDList);
+	public getAllFieldID(): number | string {
+		return 'A';
 	}
 
-	public ngAfterViewInit() {
-		this.setSelectionList(this.selectedIDList);
-	}
-
-	protected getData(): Observable<Array<ListBoxElement>> {
-		const data: Array<ListBoxElement> = [];
-		data.push(new ListBoxElement('U', this.getDescriptionForGender('U'), 1, false));
-		data.push(new ListBoxElement('F', this.getDescriptionForGender('F'), 1, false));
-		data.push(new ListBoxElement('M', this.getDescriptionForGender('M'), 1, false));
-		return of(data);
+	public getAllFieldDescription(): string {
+		return this.i18nService.instant('COMMON_ALL');
 	}
 
 	public getIdField(): string {
@@ -37,38 +35,21 @@ export class SystelabGenderListBox extends AbstractListBox<ListBoxElement> imple
 
 	public getDescriptionField(): string {
 		return 'description';
-
 	}
 
-	public setSelectionList(selectedIDList: string) {
-		this.multipleSelectedItemList = [];
-		if (selectedIDList) {
-			const selectedIDStringList: Array<string> = selectedIDList.split(',');
-			selectedIDStringList.forEach(selectedID => {
-				this.addSelectedItem(new ListBoxElement(selectedID, this.getDescriptionForGender(selectedID), 1, true));
-				this.values.filter(element => {
-					if (element.id === selectedID) {
-						console.log('element.selected = true');
-						element.selected = true;
-					}
-				});
-			});
-		}
+	public getInstance() {
+		return new Element('', '');
 	}
 
-	public getSelectionList(): string {
-		let selection = '';
-		let first = true;
-		for (const selectedItem of this.multipleSelectedItemList) {
-			if (first) {
-				selection = selectedItem[this.getIdField()];
-				first = false;
-			} else {
-				selection += ',' + selectedItem[this.getIdField()];
-			}
-
+	public ngAfterViewInit() {
+		const data: Array<Element> = [];
+		if (this.showAll) {
+			data.push(new Element('A', this.i18nService.instant('COMMON_ALL')));
 		}
-		return selection;
+		data.push(new Element('U', this.getDescriptionForGender('U')));
+		data.push(new Element('F', this.getDescriptionForGender('F')));
+		data.push(new Element('M', this.getDescriptionForGender('M')));
+		this.gridOptions.api.setRowData(data);
 	}
 
 	public getDescriptionForGender(gender: string): string {

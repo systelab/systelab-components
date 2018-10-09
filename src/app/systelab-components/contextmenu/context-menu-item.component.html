@@ -2,6 +2,7 @@
      class="slab-icon-container rounded d-flex text-center justify-content-center align-items-center"
      [style.background-color]="action.backgroundIconColor">
     <i class="slab-flex-1 slab-menu-icon {{action.iconClass}}" [style.color]="action.iconColor"
+       [style.font-size]="action.iconFontSize"
        [ngClass]="{'text-white': !action.iconColor}"></i>
 </div>
 <a class="slab-flex-1" style="flex:1 1 auto" [style.padding-left]="hasIcons && !isIconEnabled?'20px':'0'"

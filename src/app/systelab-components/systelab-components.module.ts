@@ -64,7 +64,6 @@ import { TimeUnitSelectComponent } from './select/time-unit-combobox.component';
 import { CheckboxCellRendererComponent } from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import { InputCellRendererComponent } from './grid/custom-cells/input/input-cell-renderer.component';
 import { DecimalInputCellRendererComponent } from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
-import { DragAndDropService } from 'ag-grid';
 import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 import { SpinnerCellEditorComponent } from './grid/custom-cells/spinner/spinner-cell-editor.component';
 import { TwoListSortableListComponent } from './twolist/two-list-sortable-list.component';
@@ -72,12 +71,13 @@ import { SpinnerCellRendererComponent } from './grid/custom-cells/spinner/spinne
 import { InputCellEditorComponent } from './grid/custom-cells/input/input-cell-editor.component';
 import { CheckboxCellEditorComponent } from './grid/custom-cells/checkbox/checkbox-cell-editor.component';
 import { DecimalInputCellEditorComponent } from './grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
-import { AbstractListboxRendererComponent } from './listbox/renderer/abstract-listbox-renderer.component';
+import { AbstractTreeListboxRendererComponent } from './listbox/renderer/abstract-tree-listbox-renderer.component';
 import { ContextMenuItemComponent } from './contextmenu/context-menu-item.component';
 import { SystelabGenderListBox } from './listbox/gender-listbox.component';
 import { NumPadComponent } from './numpad/numpad.component';
 import { NumPadDialog } from './numpad/numpad.dialog.component';
-import {ComboboxFavouriteRendererComponent} from './combobox/renderer/combobox-favourite-renderer.component';
+import { ComboboxFavouriteRendererComponent } from './combobox/renderer/combobox-favourite-renderer.component';
+import { ModulabListBox } from './listbox/listbox.component';
 
 @NgModule({
 	imports:         [
@@ -152,14 +152,16 @@ import {ComboboxFavouriteRendererComponent} from './combobox/renderer/combobox-f
 		InputCellEditorComponent,
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
-		AbstractListboxRendererComponent,
+		AbstractTreeListboxRendererComponent,
 		ContextMenuItemComponent,
 		NumPadComponent,
 		NumPadDialog,
 		SystelabGenderListBox,
-		ComboboxFavouriteRendererComponent
+		ComboboxFavouriteRendererComponent,
+		ModulabListBox
+
 	],
-	exports: [
+	exports:         [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -217,12 +219,14 @@ import {ComboboxFavouriteRendererComponent} from './combobox/renderer/combobox-f
 		InputCellEditorComponent,
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
-		AbstractListboxRendererComponent,
+		AbstractTreeListboxRendererComponent,
 		ContextMenuItemComponent,
 		NumPadComponent,
 		NumPadDialog,
 		SystelabGenderListBox,
-		ComboboxFavouriteRendererComponent
+		ComboboxFavouriteRendererComponent,
+		ModulabListBox
+
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -238,11 +242,11 @@ import {ComboboxFavouriteRendererComponent} from './combobox/renderer/combobox-f
 		InputCellEditorComponent,
 		DecimalInputCellEditorComponent,
 		CheckboxCellEditorComponent,
-		AbstractListboxRendererComponent,
+		AbstractTreeListboxRendererComponent,
 		NumPadDialog,
 		ComboboxFavouriteRendererComponent
 	],
-	providers: [
+	providers:       [
 		StylesUtilService,
 		ColorUtilService,
 		LoadingService
@@ -251,7 +255,7 @@ import {ComboboxFavouriteRendererComponent} from './combobox/renderer/combobox-f
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule: SystelabComponentsModule,
+			ngModule:  SystelabComponentsModule,
 			providers: [
 				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
 				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},

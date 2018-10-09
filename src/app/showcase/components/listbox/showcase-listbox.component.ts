@@ -1,15 +1,47 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { TreeListBoxElement } from '../../../systelab-components/listbox/abstract-api-tree-listbox.component';
+
+class Element {
+	constructor(public id: string, public description: string) {
+
+	}
+}
 
 @Component({
 	selector:    'showcase-listbox',
 	templateUrl: 'showcase-listbox.component.html'
 })
-export class ShowcaseListBoxComponent {
+export class ShowcaseListBoxComponent implements AfterViewInit {
 
-	public selectedID;
-	public selectedDescription;
+	public selectedItem;
+	public selectedTreeItem;
+	public multipleSelectedItemList;
+	public multipleSelectedItemListTree;
 
 	constructor() {
+		this.multipleSelectedItemList = [new Element('F', 'COMMON_FEMALE')];
+
+		this.multipleSelectedItemListTree = [];
+		this.multipleSelectedItemListTree.push({
+			'centerID':           1,
+			'centerDescription':  'Center',
+			'serviceID':          '2',
+			'serviceDescription': 'Service 2'
+		});
+
+	}
+
+	public ngAfterViewInit(): void {
+		this.selectedItem = new TreeListBoxElement({
+			'centerID':           1,
+			'centerDescription':  'Center',
+			'serviceID':          3,
+			'serviceDescription': 'Service 3'
+		}, 0, true);
+	}
+
+	public onSelectedItemChange(event: any) {
+		console.log('Emit', event);
 	}
 
 }
