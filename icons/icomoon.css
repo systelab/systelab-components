@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('./icomoon.eot?vvutz5');
-  src:  url('./icomoon.eot?vvutz5#iefix') format('embedded-opentype'),
-    url('./icomoon.ttf?vvutz5') format('truetype'),
-    url('./icomoon.woff?vvutz5') format('woff'),
-    url('./icomoon.svg?vvutz5#icomoon') format('svg');
+  src:  url('./icomoon.eot?lb0da4');
+  src:  url('./icomoon.eot?lb0da4#iefix') format('embedded-opentype'),
+    url('./icomoon.ttf?lb0da4') format('truetype'),
+    url('./icomoon.woff?lb0da4') format('woff'),
+    url('./icomoon.svg?lb0da4#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,7 +26,6 @@
 
 .icon-checkbox:before {
   content: "\e928";
-  color: #d6d6d6;
 }
 .icon-toggle-off:before {
   content: "\e926";
