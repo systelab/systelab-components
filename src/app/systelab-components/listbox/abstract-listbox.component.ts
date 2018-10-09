@@ -1,175 +1,94 @@
-import {
-	EventEmitter, Input, OnInit, Output, ElementRef, ViewChild
-} from '@angular/core';
-import {GridOptions} from 'ag-grid';
-import {AbstractListboxRendererComponent} from './renderer/abstract-listbox-renderer.component';
-import {Observable} from 'rxjs/Observable';
-import {StylesUtilService} from '../utilities/styles.util.service';
-
-export class ListBoxElement {
-	constructor(public id, public description, public level, public selected) {
-	}
-}
-
-export class TreeListBoxElement {
-	constructor(public id, public parentID, public description, public level, public selected) {
-	}
-}
+import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { StylesUtilService } from '../utilities/styles.util.service';
+import { ColDef, GridOptions } from 'ag-grid';
 
 export abstract class AbstractListBox<T> implements OnInit {
 
-	@Input() public isDisabled: boolean;
-	@Input() public multipleSelection = false;
-	@Input() public emptySelection = true;
-	@Input() public prefixID = '';
-	@Input() public values: Array<ListBoxElement | TreeListBoxElement> = [];
-	@ViewChild('hidden') public hiddenElement: ElementRef;
-
 	public gridOptions: GridOptions;
-	public columnDefs: Array<any>;
-	public paddingSingleSelection = 0;
+	@ViewChild('hidden') public hiddenElement: ElementRef;
+	@Input() public rowData: Array<T> = [];
+	@Input() public isDisabled: boolean;
 
-	protected _multipleSelectedItemList: Array<any>;
+	public _selectedItem: T;
 
 	@Input()
-	set multipleSelectedItemList(value: Array<ListBoxElement | TreeListBoxElement>) {
-		this._multipleSelectedItemList = value;
-		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
+	set selectedItem(value: T) {
+		this._selectedItem = value;
+		this.selectItemInGrid();
 	}
 
-	get multipleSelectedItemList(): Array<ListBoxElement | TreeListBoxElement> {
+	get selectedItem() {
+		return this._selectedItem;
+	}
+
+	@Output() selectedItemChange = new EventEmitter<T>();
+	@Output() public multipleSelectedIDListChange = new EventEmitter();
+
+	@Input() public selectFirstItem = false;
+	@Input() public multipleSelection = false;
+	@Input() public showAll = false;
+
+	protected _multipleSelectedItemList: Array<T>;
+
+	@Input()
+	set multipleSelectedItemList(value: Array<T>) {
+		this._multipleSelectedItemList = value;
+		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
+		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
+	}
+
+	get multipleSelectedItemList(): Array<T> {
 		return this._multipleSelectedItemList;
 	}
 
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
 
-	protected _selectedIDList: string;
+	protected hideChecks = false;
 
-	@Input()
-	set selectedIDList(value: string) {
-		this._selectedIDList = value;
-		this.selectedIDListChange.emit(this._selectedIDList);
+	protected constructor() {
 	}
-
-	get selectedIDList() {
-		return this._selectedIDList;
-	}
-
-	protected _id: string | number;
-
-	@Input()
-	set id(value: string | number) {
-		this._id = value;
-		this.idChange.emit(this._id);
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	protected _description: string;
-
-	@Input()
-	set description(value: string) {
-		this._description = value;
-		this.descriptionChange.emit(this._description);
-	}
-
-	get description() {
-		return this._description;
-	}
-
-	@Output() public selectedIDListChange = new EventEmitter<string>();
-	@Output() public idChange = new EventEmitter<string | number>();
-	@Output() public descriptionChange = new EventEmitter<string | number>();
-
-	constructor(public isTree: boolean) {
-	}
-
-	protected abstract getData(): Observable<Array<T>>;
-
-	public abstract setSelectionList(selectedIDList: string);
-
-	public abstract getSelectionList(): string;
-
-	protected abstract getDescriptionField(level?: number): string;
 
 	protected abstract getIdField(level?: number): string;
 
+	protected abstract getDescriptionField(level?: number): string;
+
+	public abstract getInstance(): T;
+
 	public ngOnInit() {
-		this.configGrid();
-		this.getRows();
-	}
 
-	protected getRows(): void {
-		this.getData()
-			.subscribe(
-				(dataVector: Array<T>) => {
-					this.loadValues(dataVector);
+		const rowHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
 
-					if (this.gridOptions.api) {
-						this.gridOptions.api.hideOverlay();
-						this.gridOptions.api.setRowData(this.values);
-						this.gridOptions.api.redrawRows();
-					} else {
-						this.gridOptions.rowData = this.values;
-					}
-
-					this.setSelectionList(this.selectedIDList);
-				},
-				() => {
-					this.gridOptions.api.hideOverlay();
-				}
-			);
-	}
-
-	protected loadValues(dataVector: Array<T>) {
-		this.values = [];
-		dataVector.forEach((element: T) => {
-			const node = new ListBoxElement(element[this.getIdField()].toString(), element[this.getDescriptionField()].toString(), 1, false);
-			this.values.push(node);
-		});
-
-	}
-
-	protected configGrid() {
-		this.paddingSingleSelection = this.multipleSelection ? 0 : 2;
 		this.gridOptions = {};
-		this.gridOptions.headerHeight = 0;
-		this.gridOptions.rowSelection = 'single';
-		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-		if (lineHeight) {
-			this.gridOptions.rowHeight = Number(lineHeight);
-		} else {
-			this.gridOptions.rowHeight = Number(26);
+
+		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
+
+		if (this.multipleSelection && !this.hideChecks) {
+			this.gridOptions.suppressRowClickSelection = true;
+			this.gridOptions.icons = {
+				checkboxUnchecked: this.getCheckboxUnchecked(),
+				checkboxChecked:   this.getCheckboxChecked(),
+
+			};
+
+			this.gridOptions.rowClassRules = {
+				'ag-row-disabled': (params) => {
+					return this.isDisabled;
+				},
+			};
 		}
+
+		this.gridOptions.rowHeight = Number(rowHeight);
+		this.gridOptions.suppressDragLeaveHidesColumns = true;
 		this.gridOptions.suppressCellSelection = true;
+		this.gridOptions.suppressRowClickSelection = this.isDisabled;
+		this.gridOptions.enableRangeSelection = !this.isDisabled;
+		this.gridOptions.enableColResize = false;
+		this.gridOptions.rowSelection = this.multipleSelection ? 'multiple' : 'single';
+		this.gridOptions.rowDeselection = !this.isDisabled;
 
-		if (this.multipleSelection || this.isTree) {
-			this.columnDefs = [
-				{
-					colID: 'id',
-					cellRendererFramework: AbstractListboxRendererComponent,
-					cellRendererParams: {
-						changeFunction: (e) => {
-							this.changeValues(e);
-						},
-						isTree: this.isTree,
-						prefix: this.prefixID,
-						isDisabled: this.isDisabled,
-						isMultipleSelection: this.multipleSelection
-					}
-				}
-			];
-		} else {
-			this.columnDefs = [
-				{
-					colID: 'id',
-					field: 'description',
-				}
-			];
-		}
+		this.gridOptions.context = {componentParent: this};
 
+		this.gridOptions.headerHeight = 0;
 		this.gridOptions.getRowNodeId =
 			(item) => {
 				if (item[this.getIdField()]) {
@@ -178,168 +97,202 @@ export abstract class AbstractListBox<T> implements OnInit {
 					return null;
 				}
 			};
-
-		this.gridOptions.columnDefs = this.columnDefs;
-
 	}
 
-	public changeValues(event: any) {
-		if (this.multipleSelection) {
-			this.addRemoveToMultipleSelectedItem(event);
+	protected getColumnDefsWithOptions(): Array<any> {
+
+		const colDefs: Array<any> = [
+			{
+				colID: this.getIdField(),
+				field: this.getDescriptionField(),
+			}
+		];
+
+		if (this.multipleSelection && !this.hideChecks) {
+			colDefs.unshift({
+				colId:             'selectCol',
+				headerName:        '',
+				checkboxSelection: true,
+				width:             this.getCheckColumnWidth(),
+				suppressSizeToFit: true,
+				suppressResize:    true,
+				suppressMovable:   true
+			});
 		}
 
-		if (this.isTree) {
-			if (this.multipleSelection) {
-				if (event.level === 0) {
-					this.values.filter((value: TreeListBoxElement) => {
-						if (value.parentID === event.id) {
-							value.selected = event.selected;
-							this.addRemoveToMultipleSelectedItem(value);
-						}
-					});
-				} else {
-					const parentID = event.parentID;
-					let allChildSelected = true;
-					let anyNode = false;
-					this.values.filter((value: TreeListBoxElement) => {
-						if (value.parentID === parentID) {
-							anyNode = true;
-							if (!value.selected) {
-								allChildSelected = false;
-							}
-						}
-					});
-					if (anyNode) {
-						this.values.filter((value: TreeListBoxElement) => {
-							if (value.level === 0 && value.id === parentID) {
-								value.selected = allChildSelected;
-								this.addRemoveToMultipleSelectedItem(value);
-							}
-						});
-					}
-				}
-			} else {
-				// this.multipleSelectedItemList = new Array();
-				this._multipleSelectedItemList = new Array();
-				this.gridOptions.api.deselectAll();
-				const newElement: TreeListBoxElement = new TreeListBoxElement(event['id'], event['parentID'], event['description'], event['level'], event['selected']);
-				this.multipleSelectedItemList.push(newElement);
-				this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
+
+		return colDefs;
+	}
+
+	protected getCheckColumnWidth(): number {
+		return 28;
+	}
+
+	public getAllFieldID(): number | string {
+		return 0;
+	}
+
+	public getAllFieldDescription(): string {
+		return 'All';
+	}
+
+	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
+		colDefs.forEach(function(columnDef: ColDef) {
+			if (columnDef.width) {
+				columnDef.suppressSizeToFit = true;
 			}
-		}
+		});
+	}
+
+	public doGridReady(event: any) {
+		this.gridOptions.api.sizeColumnsToFit();
+		this.gridOptions.api.doLayout();
+	}
+
+	public doGridSizeChanged(event: any) {
 		if (this.gridOptions.api) {
 			this.gridOptions.api.sizeColumnsToFit();
 		}
-		this.selectedIDList = this.getSelectionList();
 	}
 
-	private addRemoveToMultipleSelectedItem(event: any) {
-		if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
-			const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-				return (item['id'] === event['id'] && item['level'] === event['level']);
-			});
-			if (elementIndexInSelectedList < 0 && event.selected) {
-				let newElement: ListBoxElement | TreeListBoxElement;
-				if (this.isTree) {
-					newElement = new TreeListBoxElement(event['id'], event['parentID'], event['description'], event['level'], event['selected']);
+	public doClick(row: any) {
+		if (!this.multipleSelection && !this.isDisabled) {
+			this.selectedItem = row.node.data;
+			this.selectedItemChange.emit(row.node.data);
+		}
+	}
+
+	// overrides
+	public onRowSelected(event: any) {
+		if (!this.multipleSelection) {
+		} else if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
+			const newElement: T = this.getInstance();
+			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
+				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+					return item[this.getIdField()] === event.node.data[this.getIdField()];
+				});
+				if (event.node.selected) {
+					if (elementIndexInSelectedList < 0) {
+						if (this.showAll) {
+							if (event.node.data[this.getIdField()] === this.getAllFieldID()) {
+								newElement[this.getIdField()] = this.getAllFieldID();
+								newElement[this.getDescriptionField()] = this.getAllFieldDescription();
+								this.multipleSelectedItemList = [newElement];
+								this.unselectAllNodes();
+							} else {
+								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+									return item[this.getIdField()] === this.getAllFieldID();
+								});
+								if (elementAllInSelectedList !== -1) {
+									this.unselectNodeAll();
+									this.multipleSelectedItemList = [];
+
+								}
+								newElement[this.getIdField()] = event.node.data[this.getIdField()];
+								newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
+								this.multipleSelectedItemList.push(newElement);
+								this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+							}
+						} else {
+							newElement[this.getIdField()] = event.node.data[this.getIdField()];
+							this.multipleSelectedItemList.push(newElement);
+							this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+						}
+					}
 				} else {
-					newElement = new ListBoxElement(event['id'], event['description'], event.level, event.selected);
+					if (elementIndexInSelectedList !== -1) {
+						this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
+						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+					}
 				}
-				this.multipleSelectedItemList.push(newElement);
 			} else {
-				if (elementIndexInSelectedList !== -1 && !event.selected) {
-					this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
+				if (this.showAll && (event.node.data[this.getIdField()] === this.getAllFieldID())) {
+					newElement[this.getIdField()] = this.getAllFieldID();
+					newElement[this.getDescriptionField()] = this.getAllFieldDescription();
+					this.multipleSelectedItemList = [newElement];
+					this.unselectAllNodes();
+				} else {
+					this.multipleSelectedItemList = [];
+					newElement[this.getIdField()] = event.node.data[this.getIdField()];
+					newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
+					this.multipleSelectedItemList.push(newElement);
 					this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 				}
 			}
-		} else {
-			this.multipleSelectedItemList = new Array();
-			let newElement: ListBoxElement | TreeListBoxElement;
-			if (this.isTree) {
-				newElement = new TreeListBoxElement(event['id'], event['parentID'], event['description'], event['level'], event['selected']);
-			} else {
-				newElement = new ListBoxElement(event['id'], event['description'], event['level'], event['selected']);
-			}
-
-			this.multipleSelectedItemList.push(newElement);
 		}
 	}
 
-	public resizeColumn(event: any) {
-		this.gridOptions.api.doLayout();
+	public onModelUpdated(pEvent: any) {
 		this.gridOptions.api.sizeColumnsToFit();
+		this.selectItemInGrid();
+		return pEvent;
 	}
 
-	public addSelectedItem(seleccionado: any) {
-		if (this.containsElement(seleccionado)) {
-			this.removeElement(seleccionado);
-		} else {
-			this.multipleSelectedItemList.push(seleccionado);
-		}
-
-	}
-
-	public onModelUpdated() {
-		if (!this.multipleSelection) {
-			if (this.id && this.id !== undefined) {
-				this.gridOptions.api.forEachNode(node => {
-					if (node.id === this.id) {
-						node.selectThisNode(true);
-						this.description = node.data[this.getDescriptionField()];
+	protected selectItemInGrid() {
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.forEachNode(node => {
+				if (this.multipleSelection) {
+					if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
+						if (this.multipleSelectedItemList
+							.filter((selectedItem) => {
+								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+							}).length > 0) {
+							node.selectThisNode(true);
+						}
 					}
-				});
-			} else if (!this.emptySelection) {
-				this.selectFirstRow();
-			}
+				} else {
+					if (!this.selectedItem && this.selectFirstItem) {
+						if (node.rowIndex === 0) {
+							node.setSelected(true);
+							this.selectedItem = node.data;
+							this.selectedItemChange.emit(node.data);
+							return;
+						}
+					} else if (this.selectedItem) {
+						if (node.data[this.getIdField()] === this.selectedItem[this.getIdField()]) {
+							node.setSelected(true);
+							return;
+						}
+					}
+				}
+			});
 		}
 	}
 
-	public onSelectionChanged() {
-		if (!this.multipleSelection) {
-			const selectedRow = this.getSelectedRow();
-			if (selectedRow && selectedRow !== undefined) {
-				this.selectedIDList = selectedRow[this.getIdField()];
-				this.id = selectedRow[this.getIdField()];
-				this.description = selectedRow[this.getDescriptionField()];
-			}
+	private selectionItemListToIDList(): Array<string | number> {
+		const idList = new Array<string | number>();
+		for (const item of this.multipleSelectedItemList) {
+			idList.push(item[this.getIdField()]);
 		}
+		return idList;
 	}
 
-	public removeElement(seleccionado: any) {
-
-		for (let i = 0; i < this.multipleSelectedItemList.length; i++) {
-			const element = this.multipleSelectedItemList[i];
-			if (element['id'] === seleccionado['id'] && element['level'] === seleccionado['level']) {
-				this.multipleSelectedItemList.splice(i, 1);
-				return;
-			}
-		}
-	}
-
-	public getSelectedRow(): any {
+	private unselectAllNodes() {
 		if (this.gridOptions && this.gridOptions.api) {
-			const selectedRows: any = this.gridOptions.api.getSelectedRows();
-			if (selectedRows !== null && this.multipleSelection === false) {
-				return selectedRows[0];
-			} else if (selectedRows !== null && this.multipleSelection === true) {
-				return selectedRows;
-			}
+			this.gridOptions.api.forEachNode(node => {
+				if (node && node.id !== this.getAllFieldID()) {
+					node.selectThisNode(false);
+				}
+			});
 		}
-		return undefined;
 	}
 
-	public containsElement(seleccionado: any) {
-		for (const element of this.multipleSelectedItemList) {
-			if ((element['id'] === seleccionado['id'] && element['level'] === seleccionado['level'])) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	protected selectFirstRow() {
+	private unselectNodeAll() {
 		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.selectIndex(0, this.multipleSelection, false);
+			this.gridOptions.api.forEachNode(node => {
+				if (node && node.id === this.getAllFieldID()) {
+					node.selectThisNode(false);
+				}
+			});
 		}
+	}
+
+	private getCheckboxUnchecked(): string {
+		return `<span class='slab-grid-checkbox-unchecked'/>`;
+	}
+
+	private getCheckboxChecked(): string {
+		return `<span class='slab-grid-checkbox'/>`;
 	}
 }
