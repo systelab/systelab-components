@@ -15,7 +15,8 @@ export class ContextMenuOption {
 				public backgroundIconColor?: string,
 				public iconColor?: string,
 				public isIconEnabled?: ContextMenuIsIconEnabledFunction,
-				public childrenContextMenuOptions?: Array<ContextMenuOption>) {
+				public childrenContextMenuOptions?: Array<ContextMenuOption>,
+	            public iconFontSize?: string) {
 	}
 
 }

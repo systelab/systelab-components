@@ -110,5 +110,6 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-spinner11');
 		this.icons.push('icon-redo2');
 		this.icons.push('icon-ban');
+		this.icons.push('icon-checkbox');
 	}
 }
