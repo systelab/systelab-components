@@ -1,29 +1,32 @@
 import { Component } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { ListBoxElement } from '../abstract-listbox.component';
+import { TreeListBoxElement } from '../abstract-api-tree-listbox.component';
 
 @Component({
 	selector:    'abstract-listbox-renderer',
-	templateUrl: 'abstract-listbox-renderer.component.html'
+	templateUrl: 'abstract-tree-listbox-renderer.component.html'
 })
-export class AbstractListboxRendererComponent implements AgRendererComponent {
+export class AbstractTreeListboxRendererComponent implements AgRendererComponent {
 	public params: any;
 
 	public isCheckboxActive: boolean;
 	public id: string;
 	public description: string;
 	public level: number;
-	public prefix = '';
 	public isMultipleSelection = false;
 
 	public agInit(params: any): void {
 		this.params = params;
-		this.prefix = params.prefix ? params.prefix : '';
 		if (params.data) {
-			const listBoxElement: ListBoxElement = params.data;
-			this.id = listBoxElement.id;
+			const listBoxElement: TreeListBoxElement<any> = params.data;
+			if (listBoxElement.level === 0) {
+				this.id = listBoxElement.nodeData[params.level0IDField];
+				this.description = listBoxElement.nodeData[params.level0DescriptionField];
+			} else {
+				this.id = listBoxElement.nodeData[params.level1IDField];
+				this.description = listBoxElement.nodeData[params.level1DescriptionField];
+			}
 			this.isCheckboxActive = listBoxElement.selected;
-			this.description = listBoxElement.description;
 			this.level = listBoxElement.level;
 			this.isMultipleSelection = (<any>params).isMultipleSelection;
 		}

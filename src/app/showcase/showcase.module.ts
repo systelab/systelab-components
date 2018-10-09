@@ -74,6 +74,7 @@ import { ShowcaseAddRemoveListComponent } from './components/add-remove-list/sho
 import { ShowcaseInnerAddRemoveListComponent } from './components/add-remove-list/showcase-inner-add-remove-list.component';
 import { ShowcaseContextMenu } from './components/context-menu/showcase-context-menu.component';
 import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.component';
+import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
 
 @NgModule({
 	imports:         [
@@ -152,7 +153,8 @@ import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.
 		ShowcaseAddRemoveListComponent,
 		ShowcaseInnerAddRemoveListComponent,
 		ShowcaseContextMenu,
-		ShowcaseListBoxComponent
+		ShowcaseListBoxComponent,
+		ShowcaseInnerTreeListBox
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,

@@ -22,6 +22,10 @@
             background-color: $slab-selected-background-color;
           }
 
+          &.ag-row-disabled {
+            pointer-events: none;
+          }
+
           &.ag-row-hover {
             background-color: $slab-selected-background-color;
           }
