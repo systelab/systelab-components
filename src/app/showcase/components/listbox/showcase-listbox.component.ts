@@ -43,7 +43,7 @@ export class ShowcaseListBoxComponent implements AfterViewInit {
 		}, 0, true);
 	}
 
-	public onSelectedItemChange() {
+	public onSelectedItemChange(event: any) {
 		console.log('Emit', this.selectedItem);
 	}
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AbstractApiTreeListBox } from '../../../systelab-components/listbox/abstract-api-tree-listbox.component';
+import { AbstractApiTreeListBox, TreeListBoxElement } from '../../../systelab-components/listbox/abstract-api-tree-listbox.component';
 
 @Component({
 	selector: 'showcase-inner-tree-listbox',
@@ -21,7 +21,7 @@ import { AbstractApiTreeListBox } from '../../../systelab-components/listbox/abs
                   </div>`
 })
 
-export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<any> {
+export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<TreeListBoxElement<any>> {
 
 	constructor() {
 		super();

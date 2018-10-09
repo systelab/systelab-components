@@ -2,7 +2,7 @@
     <form class="position-relative" style="height: 200px;">
         <systelab-gender-listbox [multipleSelection]="true" [isDisabled]="false"
                                  [(multipleSelectedItemList)]="multipleSelectedItemList"
-                                 (selectedItemChange)="onSelectedItemChange()"
+                                 (selectedItemChange)="onSelectedItemChange($event)"
                                  [selectFirstItem]="true"></systelab-gender-listbox>
     </form>
 </div>

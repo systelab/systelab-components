@@ -302,7 +302,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	public onModelUpdated() {
+	public onModelUpdated(pEvent: any) {
 	}
 
 	public removeElement(seleccionado: TreeListBoxElement<T>) {
