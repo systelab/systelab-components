@@ -36,7 +36,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
 
-	@Input() public values: Array<any>;
+	public _values: Array<any>;
+	@Input() 
+	set values(newValues: Array<any>) {
+		this._values = newValues;
+		if (this.gridOptions) {
+			this.gridOptions.rowData = this._values;
+		}
+	}
+	get values() {
+		return this._values;
+	}
 	@Input() public isDisabled: boolean;
 	@Input() public expandToParentContainerHeight = false;
 	@Output() public change = new EventEmitter();
