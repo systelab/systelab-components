@@ -28,7 +28,13 @@ protected getColumnDefs(): Array<any> {
 ```
 As the grid is based in Ag Grid, you will find usefull information at https://www.ag-grid.com/best-angular-2-data-grid.
 
-We can add custom-cells as cellRendererFramework in our column definition. At this moment, we have two generic cellRenderers for the table, with an input and a checkbox.
+We can add custom-cells/custom-editors as cellRendererFramework/cellEditorFramework in our column definition. At this moment, we have four generic cellRenderers/cellEditors for the table:
+ 
+ - Input 
+ - Checkbox
+ - Decimal Input
+ - Spinner
+
 To use the checkbox we need to send a parameter that has to be searched in the data to get a unique id. By this way we can have all the checkbox working independent from the other.
 
 Take in mind that if you add a custom-cell that can be clicked by the user (checkboxes, spinners, inputs, ...) we have to avoid the click over the row to open other dialogs or realize some action over the table. For this reason it's needed to rewrite the doClick function in each table detailing the columns that must not execute some kind of action.
@@ -115,17 +121,29 @@ public doMenuAction(action: GridContextMenuActionData<PatientData>): void {
 
 ```
 
+GridContextMenuOption is a class that represent a menu item. The different properties and its meaning are:
+
+
+| Name | Type | Description |
+| ---- |:----------:| ------------|
+| actionId | string | Unique ID |
+| actionText | string | Text to display |
+| action | GridContextMenuActionFunction | Function to execute|
+| isActionEnabled | GridContextMenuIsEnabledFunction | Function returns true is menu option is enabled |
+| isDivider | boolean | Display a divider line |
+
+
 
 ## Properties
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
-| preferenceName | string || Preference prefix in order to store the columns size|
+| preferenceName | string | | Preference prefix in order to store the columns size|
 | multipleSelection | boolean | false | Set multiple selection|
 | showChecks | boolean | false | Show a column with a checkbox for each element |
-| rowData | Array&lt;T&gt; |||
-| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; |||
-| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; |||
+| rowData | Array&lt;T&gt; || Array of the elements of type <T> displayed in the table. Only for components extending from AbstractGrid|
+| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; | | Array with the menu options. Each option is a GridContextMenuOption|
+| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; | | Array with the header column menu options. Each option is a GridContextMenuOption|
 
 ## Events
 
@@ -133,4 +151,3 @@ public doMenuAction(action: GridContextMenuActionData<PatientData>): void {
 | ---- |:----------:| ------------|
 | action |GridContextMenuActionData&lt;PatientData&gt;|When an action in the popup menu is selected, the event is fired with the selected GridContextMenuActionData |
 | clickRow |T|When a row is selected, the event is fired with the element in the row.|
-| viewportChanged |||
