@@ -1,4 +1,4 @@
-# systelab-combobox
+# systelab-add-remove-list
 
 Abstract classes that extends sortable-list with Add/Remove buttons to add or remove elements to the sortable list.
 
@@ -8,7 +8,7 @@ This is not a component by itself, this  is an abstract class that lets you defi
 
 In order to do that, you must create your own component and extend from the abstract class AbstractAddRemoveList&lt;T&gt;.
 
-## Using AbstractComboBox&lt;T&gt;
+## Using AbstractAddRemoveList&lt;T&gt;
 
 In order define an add/remove list, you must create your own component and extend from the abstract class AbstractAddRemoveList&lt;T&gt;, implementing the following methods:
 
