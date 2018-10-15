@@ -8,24 +8,27 @@ Component to show a canvas where the user can draw their signature. Also this co
 <systelab-signature-canvas [withCodeVerification]="withCodeVerification" [height]="height" [width]="width" [isDownloadable]="isDownloadable"
     (finish)="doFinish($event)" [(signature)]="signature" [(code)]="code" [isIncorrectCode]="isIncorrectCode"></systelab-signature-canvas>
 ```
+## Properties
 
-Set **withCodeVerification** to true, to request a second signature.
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| withCodeVerification | boolean | false | Request a second signature |
+| isDownloadable | boolean | false | Provide the option to download the canvas content as a image |
+| code | string | |Field in which is going to be notified the value of the second signature |
+| signature | boolean |  | Field in which is going to be notified the draw made by the users representing their signature |
+| height | number |  | the height of the canvas |
+| width | number | 400 | The width of the canvas |
+| isIncorrectCode | boolean | false | If the second verification fails |
 
-Set **isDownloadable** to true, to provide the option to download the canvas content as a image.
+## Events
 
-**code** is the field in which is going to be notified the value of the second signature.
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| doFinish ||If the second verification is activated this will happen when the user enter the code/password that you requested and press the verification button, else the event will be performed when the user press in the Finish button.
+|
 
-**signature** is the field in which is going to be notified the draw made by the users representing their signature.
 
-**height** is the height of the canvas/component.
-
-**width** is the width of the canvas/component.
-
-Set **isIncorrectCode**  to true, if the second verification fails.
-
-**doFinish($event)** is a method. If the second verification is activated this will happen when the user enter the code/password that you requested and press the verification button, else the event will be performed when the user press in the Finish button.
-
-### Translations
+## Translations
 
 - SIGN_VERIFICATION_TEXT
 - SIGN_RETURN
