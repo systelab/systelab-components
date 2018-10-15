@@ -9,8 +9,6 @@ Component to show a Navbar
         [items]="items" [fontColor]="color" [align]="'center'"></systelab-navbar>
 ```
 
-Here is an example:
-
 ```javascript
     this.items.push(new NavbarItem(3,'Option 1','slab-icon-medium icon-calendar',true,false,true,() => this.showModal()));
     this.items.push(new NavbarItem(5,'Option 2','',false,false,true,null,'_blank','https://werfen.com'));
@@ -36,7 +34,7 @@ Here is an example:
 | fontColor | string |'white' | Color for the text in the NavItem |
 | items | Array<NavbarItem> | false | Array with the elements of the Navbar|
 
-### NavbarItem
+#### NavbarItem
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
