@@ -31,7 +31,7 @@ Use **action** for navigating internally in the application and use the **url** 
 | fontColor | string | | The font color of the text in the breadcrumb |
 | items | Array<BreadcrumbItem> | | An array with the elements to be shownmin the breadcrumb |
 
-### BreadcrumbItem
+#### BreadcrumbItem
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
@@ -43,7 +43,7 @@ Use **action** for navigating internally in the application and use the **url** 
 | subItems | Array<SubItems> |  |An array with the sub-elements to be shownmin the breadcrumb|
 
 
-### SubItems
+#### SubItems
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
