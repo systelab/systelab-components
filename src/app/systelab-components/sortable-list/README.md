@@ -2,7 +2,7 @@
 
 Abstract class that lets you create a Listbox with sortable elements.
 
-## Using the classes
+## Using the class
 
 This is not a component by itself, it is an abstract class that lets you define your own listboxes.
 
@@ -35,7 +35,7 @@ export class ElementsSortableListComponent extends AbstractSortableListComponent
 	}
 
 	public getDescriptionField(element: ElementData): string {
-			return 'description';
+		return 'description';
 	}
 
 	public getSelectionField(): string {
@@ -43,7 +43,7 @@ export class ElementsSortableListComponent extends AbstractSortableListComponent
 	}
 
 	public getIcon(element: IsolationData): string {
-    return 'icon-culture';
+    		return 'icon-culture';
 	}
 }
 
