@@ -24,8 +24,7 @@ Component to show a canvas where the user can draw their signature. Also this co
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| doFinish ||If the second verification is activated this will happen when the user enter the code/password that you requested and press the verification button, else the event will be performed when the user press in the Finish button.
-|
+| doFinish ||If the second verification is activated this will happen when the user enter the code/password that you requested and press the verification button, else the event will be performed when the user press in the Finish button.|
 
 
 ## Translations
