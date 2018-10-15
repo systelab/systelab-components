@@ -43,6 +43,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.gridOptions) {
 			this.gridOptions.rowData = this._values;
 		}
+		this.setCodeDescriptionById();
 	}
 	get values() {
 		return this._values;
@@ -577,7 +578,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public setCodeDescriptionById() {
-		if (this.id && this.values) {
+		if (this.id !== undefined && this.values) {
 			const item: T = this.values.find(it => it[this.getIdField()] === this.id);
 			if (item) {
 				this.description = item[this.getDescriptionField()];
