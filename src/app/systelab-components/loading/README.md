@@ -12,4 +12,4 @@ Component to show a loading wheel.
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
-| isClassic | boolean | false | To change to wheel look and feel. |
+| useClassic | boolean | false | To change the wheel look and feel. |
