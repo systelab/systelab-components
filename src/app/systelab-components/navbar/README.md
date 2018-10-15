@@ -38,18 +38,6 @@ Here is an example:
 
 ### NavbarItem
 
-```javascript
-    public id: number,
-    public text: string,
-    public image: string,
-    public floatImage: boolean,
-    public isActive:boolean,
-    public isEnabled:boolean,
-    public action: any,
-    public target?:string,
-    public url?: string
-
-```
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
 | id | number | | id of the item |
