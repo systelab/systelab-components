@@ -19,7 +19,7 @@ Component to show a Week Selector
 
 In black the Two-Way Data Binding properties.
 
-### Month
+#### Month
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
