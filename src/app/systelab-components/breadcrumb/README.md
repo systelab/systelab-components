@@ -8,48 +8,54 @@ Component to show a Breadcrumb.
 <systelab-breadcrumb [items]="items" [backgroundColor]="backgroundColor" [fontColor]="fontColor"></systelab-breadcrumb>
 ```
 
-It is optional to set a **backgroundColor**, and a **fontColor** for the elements of the Breadcrumb.
+The parameters **backgroundColor**, and a **fontColor** are optionals.
 
-
-### Items
-
-Items is an array with the elements to be shownmin the breadcrumb.
-
-Each item has the following structure (BreadcrumbItem):
-
-```javascript
-    public id: number,
-    public text: string,
-    public isActive:boolean,
-    public action?: any,
-    public subItems?: Array<BreadcrumbSubItem>,
-    public url?: string
-```
-
-Apart from the **id** and **text**, **isActive** defines if the element is selected or not, and **action** is an arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called).
+How to add a breadcrumb item with an action:
 
 ```javascript
 this.items.push(new BreadcrumbItem('2', 'Holidays', false, () => this.showModal()));
 ```
 
-The **subItems** attribute, lets you define a sub menu. It is an array of BreadcrumbSubItem elements, that have the following structure:
-
-```javascript
-    public id: string,
-    public text: string,
-    public action: any,
-    public url?: string
-
-```
-
-Finally, **url** is the url to link to. For example:
+How to add a breadcrumb item with an url redirection:
 
 ```javascript
 this.items.push(new BreadcrumbItem('2', 'Holidays', false, null, null, 'http://www.google.com'));
-
 ```
 
 Use **action** for navigating internally in the application and use the **url** external navigations.
+
+## Properties
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| backgroundColor | string |  | Breadcrumb background color |
+| fontColor | string | | The font color of the text in the breadcrumb |
+| items | Array<BreadcrumbItem> | | An array with the elements to be shownmin the breadcrumb |
+
+### BreadcrumbItem
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| id | number |  | Breadcrumb item id |
+| text | string | | Breadcrumb item label |
+| isActive | boolean | false | Defines if the element is selected or not |
+| action | any |  | An arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called)|
+| url | string |  |Url to redirection|
+| subItems | Array<SubItems> |  |An array with the sub-elements to be shownmin the breadcrumb|
+
+
+### SubItems
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| id | number |  | Breadcrumb sub-item id |
+| text | string | | Breadcrumb sub-item label |
+| action | any |  | An arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called)|
+| url | string |  |Url to redirection|
+
+
+
+
+
 
 
 
