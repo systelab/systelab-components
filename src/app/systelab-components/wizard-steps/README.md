@@ -21,7 +21,7 @@ Component to show a Steps of a wizard
 In black the Two-Way Data Binding properties.
 
 
-The WizardStep class has the following properties:
+### WizardStep
 
 | Name | Type | Description |
 | ---- |:----------:| ------------|
