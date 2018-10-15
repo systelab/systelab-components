@@ -21,6 +21,18 @@ export class SystelabGenderListBox extends AbstractListBox<Element> implements A
 		super();
 	}
 
+	public ngAfterViewInit(): void {
+		const elements = [];
+		if (this.showAll) {
+			elements.push(new Element('A', this.i18nService.instant('COMMON_ALL')));
+		}
+		elements.push(new Element('U', this.getDescriptionForGender('U')));
+		elements.push(new Element('F', this.getDescriptionForGender('F')));
+		elements.push(new Element('M', this.getDescriptionForGender('M')));
+
+		this.values = elements;
+	}
+
 	public getAllFieldID(): number | string {
 		return 'A';
 	}
@@ -39,17 +51,6 @@ export class SystelabGenderListBox extends AbstractListBox<Element> implements A
 
 	public getInstance() {
 		return new Element('', '');
-	}
-
-	public ngAfterViewInit() {
-		const data: Array<Element> = [];
-		if (this.showAll) {
-			data.push(new Element('A', this.i18nService.instant('COMMON_ALL')));
-		}
-		data.push(new Element('U', this.getDescriptionForGender('U')));
-		data.push(new Element('F', this.getDescriptionForGender('F')));
-		data.push(new Element('M', this.getDescriptionForGender('M')));
-		this.gridOptions.api.setRowData(data);
 	}
 
 	public getDescriptionForGender(gender: string): string {

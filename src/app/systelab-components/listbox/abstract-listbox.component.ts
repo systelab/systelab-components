@@ -6,7 +6,17 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	public gridOptions: GridOptions;
 	@ViewChild('hidden') public hiddenElement: ElementRef;
-	@Input() public rowData: Array<T> = [];
+	public _values: Array<T>;
+	@Input()
+	set values(newValues: Array<T>) {
+		this._values = newValues;
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.setRowData(this._values);
+		}
+	}
+	get values() {
+		return this._values;
+	}
 	@Input() public isDisabled: boolean;
 
 	public _selectedItem: T;
@@ -97,6 +107,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 					return null;
 				}
 			};
+
+		this.gridOptions.rowData = this.values;
 	}
 
 	protected getColumnDefsWithOptions(): Array<any> {

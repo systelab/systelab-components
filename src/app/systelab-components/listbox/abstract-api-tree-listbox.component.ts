@@ -21,7 +21,7 @@ export class TreeListBoxElement<T> {
 export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
 
 	public columnDefs: Array<any>;
-	@Input() public values: Array<TreeListBoxElement<T>> = [];
+	public treeValues: Array<TreeListBoxElement<T>> = [];
 	@ViewChild('hidden') public hiddenElement: ElementRef;
 
 	public _selectedTreeItem: TreeListBoxElement<T>;
@@ -36,7 +36,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		return this._selectedTreeItem;
 	}
 
-	@Output() selectedTreeItemChange = new EventEmitter<T>();
+	@Output() selectedTreeItemChange = new EventEmitter<TreeListBoxElement<T>>();
 
 	protected _selectedIDList: string;
 
@@ -137,7 +137,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 				(dataVector: Array<T>) => {
 					this.loadValues(dataVector);
 					this.gridOptions.api.hideOverlay();
-					this.gridOptions.api.setRowData(this.values);
+					this.gridOptions.api.setRowData(this.treeValues);
 					this.gridOptions.api.redrawRows();
 					if (this.multipleSelection) {
 						this.initSelectionList();
@@ -154,17 +154,17 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	protected loadValues(dataVector: Array<T>) {
-		this.values = [];
+		this.treeValues = [];
 		let previousParent: number | string;
 
 		dataVector.forEach(element => {
 			if (!previousParent || element[this.getIdField(0)] !== previousParent) {
 				previousParent = element[this.getIdField(0)];
 				const parentNode = new TreeListBoxElement(element, 0, false);
-				this.values.push(parentNode);
+				this.treeValues.push(parentNode);
 			}
 			const node = new TreeListBoxElement(element, 1, false);
-			this.values.push(node);
+			this.treeValues.push(node);
 		});
 	}
 
@@ -173,7 +173,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			const selectedIDStringList: Array<string> = this._selectedIDList.split(',');
 			selectedIDStringList.forEach(selectedID => {
 				if (selectedID.startsWith(this.getSelectionPrefix(0))) {
-					this.values.forEach(element => {
+					this.treeValues.forEach(element => {
 						if (element.level === 0 && ((element.nodeData[this.getIdField(0)] + '') === selectedID.substring(1, selectedID.length))) {
 							element.selected = true;
 							this.addSelectedItem(element);
@@ -181,7 +181,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					});
 				}
 				if (selectedID.startsWith(this.getSelectionPrefix(1))) {
-					this.values.forEach(element => {
+					this.treeValues.forEach(element => {
 						if (element.level === 1 && ((element.nodeData[this.getIdField(1)] + '') === selectedID.substring(1, selectedID.length))) {
 							element.selected = true;
 							this.addSelectedItem(element);
@@ -204,7 +204,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			this.addRemoveToMultipleSelectedItem(event);
 
 			if (event.level === 0) {
-				this.values.filter((value: TreeListBoxElement<T>) => {
+				this.treeValues.filter((value: TreeListBoxElement<T>) => {
 					if (value.nodeData[this.getIdField(0)] === event.nodeData[this.getIdField(0)]) {
 						value.selected = event.selected;
 						this.addRemoveToMultipleSelectedItem(value);
@@ -214,7 +214,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 				const parentID = event.nodeData[this.getIdField(0)];
 				let allChildSelected = true;
 				let anyNode = false;
-				this.values.filter((value: TreeListBoxElement<T>) => {
+				this.treeValues.filter((value: TreeListBoxElement<T>) => {
 					if (value.nodeData[this.getIdField(0)] === parentID) {
 						anyNode = true;
 						if (!value.selected) {
@@ -223,7 +223,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					}
 				});
 				if (anyNode) {
-					this.values.filter((value: TreeListBoxElement<T>) => {
+					this.treeValues.filter((value: TreeListBoxElement<T>) => {
 						if (value.level === 0 && value.nodeData[this.getIdField(0)] === parentID) {
 							value.selected = allChildSelected;
 							this.addRemoveToMultipleSelectedItem(value);
