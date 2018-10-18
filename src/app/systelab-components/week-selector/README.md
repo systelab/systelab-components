@@ -7,28 +7,30 @@ Component to show a Week Selector
 ```html
 <systelab-week-selector #wselector [disabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate" [currentDate]="currentDate" [(selectedWeek)]="selectedWeek"></systelab-week-selector>
 ```
+## Properties
 
-Set **disabled** to true, if you want to display a disabled week selector, it will displaying the week belonging to the date selected.
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| disabled | boolean | false | Display a active or a disabled week selector |
+| maxDate | Date | | Maximum date that you want to display in the selector |
+| minDate | Date | | Minimum date that you want to display in the selector |
+| currentDate | Date | Current Date | Used to display belongin week to the date set |
+| **selectedWeek** | Week |  | The selected week |
 
-Set **maxDate** with the maximum date that you want to display in the selector.
+In black the Two-Way Data Binding properties.
 
-Set **minDate** with the minimum date that you want to display in the selector.
+#### Month
 
-Set **currentDate** with the date you want, to display the week belonging to this date, if you don't set any current date the selector will choose the actual date.
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| week | number |  | Number of the week |
+| text | string | | Description of range of the days of the week and the number of the week |
+| day | number | | Number of the start day of the week |
+| year | number | | Number of the year |
+| isActive | boolean | false | If the selector is activate or disabled |
 
-**selectedWeek** is an 'Week' object where you can retrieve the information of the selected week.
 
-The Week object has the follow structure:
-
-```javascript
-    public week: number,    //Number of the week
-    public text: string,    //Description of range of the days of the week and the number of the week
-    public day: number,     //Number of the start day of the week
-    public year: number,    //Number of the year
-    public isActive:boolean,//If the selector is activate or disabled
-```
-
-### Translations
+## Translations
 
 The component use the **i18nService** to retrieve the names of the months, but there are no implementation to retrieve the names of the week days and other strings.
 Then you need to include in your translation file the following translations:

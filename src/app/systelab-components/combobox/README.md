@@ -166,26 +166,26 @@ Once you have your component, you can use it in your templates.
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
-| **id** | string || Identifier |
-| **description** | string || Description or name that will be show in the combobox |
-| **code** | string || Short code |
-| fieldToShow | string |||
-| multipleSelectedItemList | string |||
-| customInputRenderer | string |||
-| initialParams | string |||
-| filter | boolean | false ||
+| **id** | string | | Identifier |
+| **description** | string | | Description or name that will be shown in the combobox |
+| **code** | string | | Short code |
+| **fieldToShow** | string | | Description or name for autocomplete combobox|
+| **multipleSelectedItemList** | Array<T> | | Array with selected elements for comboboxes with selection multiple|
+| customInputRenderer | any | | Class of the component with a custom renderer for the combo input field. This class must extend ComboBoxInputRenderer class|
+| initialParams | any | | Class with the initial params of the component defined in customInputRender property |
+| filter | boolean | false | If true adds an input field inside dropdown to search elements. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
-| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown. |
-| listSelectedValues | boolean | false ||
-| fontFamily | string || Font Family |
-| fontSize | string || Font size in pixels |
-| fontWeight | string || normal, bold, bolder, lighter, number, initial or inherit |
-| fontStyle | string || normal, italic, oblique, initial or inherit |
-| values | Array<any> |||
-| isDisabled | boolean | false   ||
-| expandToParentContainerHeight | boolean | false ||
-| allowEditInput | boolean | false ||
-| emptyElement | boolean | false ||
+| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
+| listSelectedValues | boolean | false | Shows the selected values at the bottom of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
+| selectDeselectAll | boolean | false | Shows select All/deselect All buttons inside the dropdpwn of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
+| fontFamily | string | | Font Family |
+| fontSize | string | | Font size in pixels |
+| fontWeight | string | | normal, bold, bolder, lighter, number, initial or inherit |
+| fontStyle | string | | normal, italic, oblique, initial or inherit |
+| values | Array<any> | | Array with the elements of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
+| isDisabled | boolean | false | If true the combo is disabled|
+| expandToParentContainerHeight | boolean | false | If true the combo expands its height to parent container height|
+| emptyElement | boolean | false | If true adds and emtpy element at the first position of the elements list in the dropdown. Use it only in combos that extends from AbstractApiComboBox or AbstractApiTreeComboBox. Never use it with multipleSelection property|
 | withFavourites | boolean | false | Used to activate and deactivate the favourites || 
 | preferencesName | string | '' | Preference name over will be saved the preferences || 
 
@@ -196,14 +196,14 @@ For the Tree-Combobox, consider also the following properties:
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
-| isParentSelectable | boolean | false | Set if the root element is selectable. |
-| isAllSelectable | boolean | true | Set if the all elements is selectable. |
-| level | number |||
+| isParentSelectable | boolean | false | Set if parent nodes are selectable. |
+| isAllSelectable | boolean | true | Set if the All node is selectable. |
 
 
 ## Events
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| change | string |||
-| multipleSelectedIDListChange | string |||
+| change | T | Emits the selected element of type <T>. Only for combos with multipleSelectino=false.|
+| multipleSelectedIDListChange | Array<string &#124; number> | Emits an array with the ids of selected elements.|
+| multipleSelectedItemListChange | Array<T> | Emits an array with selected elements of type <T>.|

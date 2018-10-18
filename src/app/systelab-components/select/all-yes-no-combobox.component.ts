@@ -1,5 +1,5 @@
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
-import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 class Element {
@@ -12,17 +12,21 @@ class Element {
 	templateUrl: '../combobox/abstract-combobox.component.html'
 })
 
-export class AllYesNoSelect extends AbstractComboBox<Element> {
+export class AllYesNoSelect extends AbstractComboBox<Element> implements AfterViewInit {
 
 	constructor(myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
-		this.values = new Array<Element>();
-		this.values.push(new Element('', this.i18nService.instant('COMMON_ALL')));
-		this.values.push(new Element('Y', this.i18nService.instant('COMMON_YES')));
-		this.values.push(new Element('N', this.i18nService.instant('COMMON_NO')));
+	}
+
+	public ngAfterViewInit(): void {
+		const elements = new Array<Element>();
+		elements.push(new Element('', this.i18nService.instant('COMMON_ALL')));
+		elements.push(new Element('Y', this.i18nService.instant('COMMON_YES')));
+		elements.push(new Element('N', this.i18nService.instant('COMMON_NO')));
 		if (!this._id) {
 			this._id = '';
 		}
+		this.values = elements;
 	}
 
 	getInstance(): Element {

@@ -32,6 +32,7 @@ The days input is used to set a DaySlot array of elements. For example:
 returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});
 returnedDays.push({date: new Date(2017, 10, 26), day: 26, isHoliday: true});
 ```
+DaysSlot is an interface with three properties: An attribute date of type Date, an atribute day (that is the day number) and a boolean attribute isHoliday to set if the day is holiday.
 
 The interesting thing here, is that you can specify a custom template for systelab-calendar-table in order to render a component for each day. For example:
 

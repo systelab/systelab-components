@@ -15,7 +15,7 @@ Component to show a context menu
 | fontSize | string | undefined | Font size. |
 | fontColor | string | undefined | Font color. |
 | isEmbedded | boolean | false | Hides the three dots button. To use as an embedded context menu in other components, such as textAreas, inputs, etc. |
-| contextMenuOptions | Array&lt;ContextMenuOption&gt; || An array of ContextMenuOptions objects representing the menu items. |
+| contextMenuOptions | Array&lt;ContextMenuOption&gt; | | An array of ContextMenuOptions objects representing the menu items. |
 
 
 ContextMenuOption is a class that represent a menu item. The different properties and its meaning are:

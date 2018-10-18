@@ -2,11 +2,11 @@
 
 Classes to show a dialog
 
-## Using the class
+## Using the classes
 
-This is not a component by itself, it is an abstract class that will help you define and show a dialog.  
+This is not a component by itself. This is an interface that will help you define a dialog and a service that will shown the dialog. 
 
-In order to do this, you must create your own component and implement the interface **ModalComponent&lt;SystelabModalContext&gt;** (lets say, it must have a 'dialog' property that will be received in the constructor method). 
+To define a dialog you must create your own component and implement the interface **ModalComponent&lt;SystelabModalContext&gt;** (lets say, it must have a 'dialog' property that will be received in the constructor method). 
 
 The component will need to export a class in order to get the context. This class must extend from **SystelabModalContext**. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
 
@@ -79,7 +79,7 @@ An example to show a dialog with a tab control on top could be:
 
 ## Using the new component
 
-In order to show the dialog, you must inject an instance of DialogService and call the method showDialog with the Dialog class and the context:
+In order to show the dialog, you must inject an instance of **DialogService** and call the method showDialog with the Dialog class and the context:
 
 ```javascript
 public showDialog() {

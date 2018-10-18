@@ -44,4 +44,19 @@ Use showYesNoQuestionPopup to show a yes/no popup with a question icon.
 public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any>
 ```
 
+Use showCustomQuestionPopup to show a popup with custom buttons and a question icon.
+
+```javascript
+public showCustomQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[]): Observable<any>
+```
+
+MessagePopupButton is a class that represent a button. The different properties and its meaning are:
+
+
+| Name | Type | Description |
+| ---- |:----------:| ------------|
+| title | string | Text displayed in button |
+| returnValue | any | Returned value after clicking the button and closing popup |
+
+
 The modal class is a css class that lets you define the width and the height as a percentage (w-33 w-50 h-33 h-75 ...)

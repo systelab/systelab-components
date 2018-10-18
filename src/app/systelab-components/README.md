@@ -116,6 +116,7 @@ The following table summarizes all the components included in the library.
 
 | Component | Description |
 | --------- | ----------- |
+| [systelab-add-remove-list](add-remove-list) | A list with elements to add and remove |
 | [systelab-app-frame](applicationframe) | Application frame, using a header and a sidebar |
 | [systelab-app-header](applicationframe/header) | Application header |
 | [systelab-app-sidebar](applicationframe/sidebar) | Application side bar |
@@ -131,6 +132,27 @@ The following table summarizes all the components included in the library.
 | [systelab-grid](grid) | Classes that lets you create a grid component |
 | [systelab-listbox](listbox) | Classes that lets you create a list box component |
 | [systelab-loading](loading) | Widget to show that an action is being performed |
+| [systelab-dialog](modal/dialog) | Classes to show a dialog |
+| [systelab-message-popup](modal/message-popup) | Classes to show a popup |
+| [systelab-month-selector](month-selector) | Component to show a Month Selector |
+| [systelab-navbar](navbar) | Component to show a Navbar |
+| [systelab-numpad](numpad) | Component to show a Numeric Keyboard dialog for an Input Text |
+| [systelab-percentage-circle](percentage-circle) | Component to show a percentage indicator |
+| [systelab-searcher](searcher) | Abstract classes that lets you create a Searcher component |
+| [systelab-select](select) | Component to select a value form a predefined list |
+| [systelab-signature-canvas](signature-canvas) | Component to show a canvas where the user can draw their signature |
+| [systelab-slider](slider) | Component to select a numerical value inside a range |
+| [systelab-sortable-list](sortable-list) | Abstract class that lets you create a Listbox with sortable elements |
+| [systelab-spinner](spinner) | Component to select a numerical value inside a range |
+| [systelab-switch](switch) | Component to select between two values |
+| [systelab-tabs](tabs) | Component to show more than one panel |
+| [systelab-timeline](timeline) | Component to show a vertical timeline |
+| [systelab-toggle-button](toggle-button) | Component to select between two values |
+| [systelab-tooltip](tooltip) | Directive to show tooltip on hover event |
+| [systelab-tree](tree) | Abstract class that lets you create a Tree component |
+| [systelab-twolist](twolist) | Component to select a group of elements from elements list |
+| [systelab-week-selector](week-selector) | Component to show a Week Selector |
+| [systelab-wizard-steps](wizard-steps) | Component to show a Wizard |
 
 
 

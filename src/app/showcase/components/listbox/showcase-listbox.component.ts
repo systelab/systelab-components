@@ -32,12 +32,12 @@ export class ShowcaseListBoxComponent implements AfterViewInit {
 	}
 
 	public ngAfterViewInit(): void {
-		this.selectedItem = new TreeListBoxElement({
+		this.selectedTreeItem = new TreeListBoxElement({
 			'centerID':           1,
 			'centerDescription':  'Center',
 			'serviceID':          3,
 			'serviceDescription': 'Service 3'
-		}, 0, true);
+		}, 1, true);
 	}
 
 	public onSelectedItemChange(event: any) {
