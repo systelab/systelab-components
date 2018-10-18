@@ -62,8 +62,6 @@ import { OverlayRenderer } from './modal/base/models/tokens';
 import { LoadingService } from './loading/loading.service';
 import { TimeUnitSelectComponent } from './select/time-unit-combobox.component';
 import { CheckboxCellRendererComponent } from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
-import { InputCellRendererComponent } from './grid/custom-cells/input/input-cell-renderer.component';
-import { DecimalInputCellRendererComponent } from './grid/custom-cells/decimal-input/decimal-input-cell-renderer.component';
 import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 import { SpinnerCellEditorComponent } from './grid/custom-cells/spinner/spinner-cell-editor.component';
 import { TwoListSortableListComponent } from './twolist/two-list-sortable-list.component';
@@ -142,8 +140,6 @@ import { ModulabListBox } from './listbox/listbox.component';
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
-		InputCellRendererComponent,
-		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
 		WizardStepsComponent,
@@ -208,8 +204,6 @@ import { ModulabListBox } from './listbox/listbox.component';
 		SplitAreaDirective,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
-		InputCellRendererComponent,
-		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
 		WizardStepsComponent,
@@ -234,8 +228,6 @@ import { ModulabListBox } from './listbox/listbox.component';
 		SearcherDialog,
 		CalendarDialog,
 		ColorCellRendererComponent,
-		InputCellRendererComponent,
-		DecimalInputCellRendererComponent,
 		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
 		SpinnerCellRendererComponent,
