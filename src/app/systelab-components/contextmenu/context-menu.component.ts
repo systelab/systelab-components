@@ -350,7 +350,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		this.checkIfHasIcons();
 	}
 
-
 	private checkIfHasIcons(): void {
 		this.hasIcons = this.contextMenuOptions.find(contextMenuOption => contextMenuOption.iconClass !== undefined && contextMenuOption.iconClass !== null) !== undefined;
 	}
