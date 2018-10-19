@@ -345,6 +345,12 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		this.removeScrollHandler();
 	}
 
+	public setContextMenuOptions(contextMenuOptions: Array<ContextMenuOption>): void {
+		this.contextMenuOptions = contextMenuOptions;
+		this.checkIfHasIcons();
+	}
+
+
 	private checkIfHasIcons(): void {
 		this.hasIcons = this.contextMenuOptions.find(contextMenuOption => contextMenuOption.iconClass !== undefined && contextMenuOption.iconClass !== null) !== undefined;
 	}
