@@ -16,7 +16,6 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu.c
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
 import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
 import { AgGridModule, AgGridNg2, BaseComponentFactory, Ng2ComponentFactory } from 'ag-grid-angular';
-import { DndModule } from 'ng2-dnd';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
@@ -76,6 +75,7 @@ import { NumPadComponent } from './numpad/numpad.component';
 import { NumPadDialog } from './numpad/numpad.dialog.component';
 import { ComboboxFavouriteRendererComponent } from './combobox/renderer/combobox-favourite-renderer.component';
 import { ModulabListBox } from './listbox/listbox.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
 	imports:         [
@@ -85,12 +85,12 @@ import { ModulabListBox } from './listbox/listbox.component';
 		SliderModule,
 		CalendarModule,
 		TreeModule,
+		DragDropModule,
 		SystelabModalModule,
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		AgGridModule,
-		DndModule
+		AgGridModule
 	],
 	declarations:    [
 		SliderComponent,
