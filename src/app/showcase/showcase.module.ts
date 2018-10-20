@@ -66,7 +66,6 @@ import { ShowcaseInlineComponent } from './components/inline/showcase-inline.com
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-context-menu.component';
 import { GridHeaderContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-header-context-menu.component';
-import { DndModule } from 'ng2-dnd';
 import { ShowcaseWizardStepsComponent } from './components/wizard-steps/showcase-wizard-steps.component';
 import { ShowcaseSortableListComponent } from './components/sortable-list/showcase-sortable-list.component';
 import { ShowcaseInnerSortableListComponent } from './components/sortable-list/showcase-inner-sortable-list.component';
@@ -75,12 +74,14 @@ import { ShowcaseInnerAddRemoveListComponent } from './components/add-remove-lis
 import { ShowcaseContextMenu } from './components/context-menu/showcase-context-menu.component';
 import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.component';
 import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
 	imports:         [
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
+		DragDropModule,
 		TreeModule,
 		HttpClientModule,
 		SystelabComponentsModule.forRoot(),
@@ -89,8 +90,7 @@ import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tr
 		AgGridModule.withComponents([
 			GridContextMenuComponent,
 			GridHeaderContextMenuComponent
-		]),
-		DndModule.forRoot()
+		])
 	],
 	declarations:    [
 		ShowcaseComponent,
