@@ -29,7 +29,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public inputExpandHeight: boolean;
 	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
-	@Input() public showTodayButton = true;
+	@Input() public showTodayButton = false;
 
 	public previousAfterDate = false;
 

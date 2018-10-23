@@ -19,7 +19,7 @@ All the input parameters are optional.
 | markPreviousAfterDate | boolean | false | If true and currentDate previous than today then the input background color is red |
 | inputExpandHeight | boolean | false | If true the component expands to parent height |
 | fontSize | number | | Font size in pixels |
-| showTodayButton | boolean | true | Show Today button |
+| showTodayButton | boolean | false | Show Today button |
 
 In black the Two-Way Data Binding properties.
 
