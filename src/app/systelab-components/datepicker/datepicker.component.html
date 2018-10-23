@@ -21,6 +21,7 @@
         </div>
     </p-header>
     <p-footer class="p-1 d-flex border-top">
+        <button *ngIf="showTodayButton" class="btn btn-sm mr-auto" (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
         <button class="btn btn-sm ml-auto" (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
     </p-footer>
 </p-calendar>
