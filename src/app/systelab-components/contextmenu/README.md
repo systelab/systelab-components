@@ -14,7 +14,7 @@ Component to show a context menu
 | elementID | string | random | Context Menu Identifier. Default a random auto generated. |
 | fontSize | string | undefined | Font size. |
 | fontColor | string | undefined | Font color. |
-| isEmbedded | boolean | false | Hides the three dots button. To use as an embedded context menu in other components, such as textAreas, inputs, etc. |
+| isEmbedded | boolean | false | Hides the three dots button. To use as an embedded context menu in other components, such as textAreas, inputs, etc. In order to show the context menu with this option, "open", and "openWithOptions" methods must be invoked. (For more info, check API section) |
 | contextMenuOptions | Array&lt;ContextMenuOption&gt; | | An array of ContextMenuOptions objects representing the menu items. |
 
 
@@ -33,7 +33,7 @@ ContextMenuOption is a class that represent a menu item. The different propertie
 | iconColor | string | Icon color |
 | isIconEnabled | ContextMenuIsIconEnabledFunction |  Function should return true if icon is enabled |
 | childrenContextMenuOptions | Array&lt;ContextMenuOption&gt; | Array of ContextMenuOption to display as children for this option |
-| iconFontSize |string | Value of the font |
+| iconFontSize | string | Value of the font |
 
 
 
@@ -73,3 +73,10 @@ and call the method open() inside the systelab-context-menu component. This will
 | ---- |:----------:| ------------|
 | action | string |The selected ContextMenuOption Id. |
 
+
+## API
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| open | MouseEvent | function to show the context menu |
+| openWithOptions | MouseEvent, Array&lt;ContextMenuOption&gt; | function to show the context menu with the options specified as parameters |
