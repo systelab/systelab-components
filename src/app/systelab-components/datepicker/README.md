@@ -4,7 +4,7 @@ The datepicker allows users to enter a date either through text input, or by cho
 
 ## Using the component
 ```
-<systelab-datepicker [(currentDate)]="toDate" [error]="true" [markPreviousAfterDate]="true" [required]="true" [inputExpandHeight]="true" [inputFontSize]="true"></systelab-datepicker>
+<systelab-datepicker [(currentDate)]="toDate" [error]="true" [markPreviousAfterDate]="true" [required]="true" [inputExpandHeight]="true" [inputFontSize]="true" [showTodayButton]="false"></systelab-datepicker>
 ```
 All the input parameters are optional.
 
@@ -19,6 +19,7 @@ All the input parameters are optional.
 | markPreviousAfterDate | boolean | false | If true and currentDate previous than today then the input background color is red |
 | inputExpandHeight | boolean | false | If true the component expands to parent height |
 | fontSize | number | | Font size in pixels |
+| showTodayButton | boolean | false | Show Today button |
 
 In black the Two-Way Data Binding properties.
 
