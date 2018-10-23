@@ -33,6 +33,7 @@ ContextMenuOption is a class that represent a menu item. The different propertie
 | iconColor | string | Icon color |
 | isIconEnabled | ContextMenuIsIconEnabledFunction |  Function should return true if icon is enabled |
 | childrenContextMenuOptions | Array&lt;ContextMenuOption&gt; | Array of ContextMenuOption to display as children for this option |
+| iconFontSize |string | Value of the font |
 
 
 
