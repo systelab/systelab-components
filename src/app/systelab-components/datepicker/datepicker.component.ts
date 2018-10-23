@@ -29,6 +29,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public inputExpandHeight: boolean;
 	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
+	@Input() public showTodayButton = true;
 
 	public previousAfterDate = false;
 
@@ -267,6 +268,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar) {
 			this.currentDate = null;
 			this.currentCalendar.onClearButtonClick(event);
+			this.currentDateChange.emit(this.currentDate);
+			this.somethingChanged = false;
+		}
+	}
+
+	public setTodayDate(event): void {
+		if (this.currentCalendar) {
+			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
 			this.somethingChanged = false;
 		}
