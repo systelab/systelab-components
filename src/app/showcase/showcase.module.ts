@@ -75,6 +75,7 @@ import { ShowcaseContextMenu } from './components/context-menu/showcase-context-
 import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.component';
 import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplete-combobox.component';
 
 @NgModule({
 	imports:         [
@@ -154,7 +155,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		ShowcaseInnerAddRemoveListComponent,
 		ShowcaseContextMenu,
 		ShowcaseListBoxComponent,
-		ShowcaseInnerTreeListBox
+		ShowcaseInnerTreeListBox,
+		ShowcaseAutocomplete
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
