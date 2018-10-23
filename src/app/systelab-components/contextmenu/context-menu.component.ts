@@ -32,7 +32,16 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	@Output() public action = new EventEmitter();
 
-	@Input() public contextMenuOptions: Array<ContextMenuOption>;
+	public _contextMenuOptions: Array<ContextMenuOption>;
+	@Input()
+	set contextMenuOptions(value: Array<ContextMenuOption>) {
+		this._contextMenuOptions = value;
+		this.checkIfHasIcons();
+	}
+
+	get contextMenuOptions() {
+		return this._contextMenuOptions;
+	}
 
 	@Input() public elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 	@Input() public fontSize: string;
@@ -82,6 +91,11 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		} else {
 			event.stopPropagation();
 		}
+	}
+
+	public openWithOptions(event: MouseEvent, newContextMenuOptions: Array<ContextMenuOption>): void {
+		this.contextMenuOptions = newContextMenuOptions;
+		this.open(event);
 	}
 
 	public open(event: MouseEvent) {
@@ -343,11 +357,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
 	public ngOnDestroy() {
 		this.removeScrollHandler();
-	}
-
-	public setContextMenuOptions(contextMenuOptions: Array<ContextMenuOption>): void {
-		this.contextMenuOptions = contextMenuOptions;
-		this.checkIfHasIcons();
 	}
 
 	private checkIfHasIcons(): void {
