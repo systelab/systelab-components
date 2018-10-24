@@ -1,8 +1,13 @@
-<div class="slab-listbox slab-flex-1 d-flex h-100 text-nowrap border rounded slab-overflow-containers" [ngClass]="{'disabled': isDisabled}">
-    <ag-grid-angular #grid id="agGrid"
-                     [style.paddingLeft.px]="paddingSingleSelection"
-                     class="slab-flex-1 ag-fresh"
+<div class="slab-listbox" [ngClass]="{'disabled': isDisabled}">
+    <div #hidden class="height-hidden"></div>
+    <ag-grid-angular #grid id="agGrid" style="position:absolute; top:0; bottom:0; left:0; right:0; overflow: hidden;"
+                     class="ag-fresh border rounded" [ngClass]="{'disabled': isDisabled}"
                      [gridOptions]="gridOptions"
-                     (gridReady)="resizeColumn($event)">
+                     (gridReady)="doGridReady($event)"
+                     (gridSizeChanged)="doGridSizeChanged($event)"
+                     (cellClicked)="doClick($event)"
+                     (clickRow)="doClick($event)"
+                     (rowSelected)="onRowSelected($event)"
+                     (modelUpdated)="onModelUpdated($event)">
     </ag-grid-angular>
 </div>

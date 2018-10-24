@@ -11,15 +11,19 @@
     overflow: hidden;
 
     .ag-body {
-      background-color: $background;
+      background-color: $background-primary;
 
       .ag-body-viewport {
 
         .ag-row {
-          background-color: $background;
+          background-color: $background-primary;
 
           &.ag-row-selected {
             background-color: $slab-selected-background-color;
+          }
+
+          &.ag-row-disabled {
+            pointer-events: none;
           }
 
           &.ag-row-hover {
@@ -28,7 +32,6 @@
 
           .ag-cell {
             border: none;
-            padding: 0 0;
           }
 
         }

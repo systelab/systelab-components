@@ -1,14 +1,19 @@
-<div class="container-fluid">
-    <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Tree Multiple Selection</label>
-        <div class="col-md-9">
-            <systelab-select
-                    [multipleSelection]="multiple"
-                    [filter]="true"
-                    [listSelectedValues]="listSelectedValues"
-                    [values]="comboOptionList"
-                    (change)="comboChangeEvent($event)">
-            </systelab-select>
-        </div>
-    </div>
+<div class="container-fluid mt-2">
+    <form class="position-relative" style="height: 200px;">
+        <systelab-gender-listbox [multipleSelection]="true" [(multipleSelectedItemList)]="multipleSelectedItemList"
+                                 (multipleSelectedItemListChange)="onSelectedItemChange($event)"></systelab-gender-listbox>
+    </form>
+</div>
+<div class="container-fluid mt-2">
+    <form class="position-relative" style="height: 200px;">
+        <systelab-gender-listbox [showAll]="true" [(selectedItem)]="selectedItem"
+                                 (selectedItemChange)="onSelectedItemChange($event)"
+                                 [selectFirstItem]="true"></systelab-gender-listbox>
+    </form>
+</div>
+<div class="container-fluid mt-2">
+    <form class="position-relative" style="height: 200px;">
+        <showcase-inner-tree-listbox [(selectedTreeItem)]="selectedTreeItem"
+                                     (selectedTreeItemChange)="onSelectedItemChange($event)"></showcase-inner-tree-listbox>
+    </form>
 </div>

@@ -1,9 +1,14 @@
 <div class="container-fluid">
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="resize-textarea">Textarea resizable (only vertical)</label>
+        <label class="col-md-3 col-form-label" for="resize-textarea">Textarea resizable (only vertical). Includes a
+            context menu</label>
         <div class="col-md-9">
-            <textarea name="" id="resize-textarea" class="slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
+            <textarea name="" (contextmenu)="openContextMenu($event)" id="resize-textarea"
+                      class="slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
         </div>
+        <systelab-context-menu #contextMenu [isEmbedded]="true" [contextMenuOptions]="contextMenuOptions"
+                               (action)="executeContextMenuAction($event)">
+        </systelab-context-menu>
     </div>
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="noresize-textarea">Textarea no resizable</label>

@@ -1,4 +1,5 @@
 import {Input} from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {polyfill} from 'mobile-drag-drop';
 
 export abstract class AbstractSortableListComponent<T> {
@@ -49,5 +50,9 @@ export abstract class AbstractSortableListComponent<T> {
 		if (this.deleteWithSupr && event.keyCode === 46) {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
 		}
+	}
+
+	public dropped(event: CdkDragDrop<string[]>) {
+		moveItemInArray(this.elementsList, event.previousIndex, event.currentIndex);
 	}
 }

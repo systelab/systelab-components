@@ -5,12 +5,12 @@ Component to create a dialog header.
 ## Using the template
 
 ```html
-<systelab-dialog-header #header [withClose]="true" [withInfo]="false" [withProgressBar]="false" (close)="doClose()" (info)="doInfo()">
+<systelab-dialog-header #header [withClose]="true" [withInfo]="false" [withProgressBar]="false" [withMinimize]="false" [withHome]="false" (close)="doClose()" (info)="doInfo()" (minimize)="doMinimize()" (home)="doHome()">
 title
 </systelab-dialog-header>
 ```
 
-By default withClose is true, withInfo is false and withProgressBar is false. If you want the defaults the template will look like:
+By default withClose is true, withInfo is false, withMinimize is false, withHome is false and withProgressBar is false. If you want the defaults the template will look like:
 
 ```html
 <systelab-dialog-header (close)="doClose()">Title</systelab-dialog-header>
@@ -39,3 +39,23 @@ For example:
 	}
 
 ```
+
+## Properties
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| withClose | boolean | true | Shows X button for closing the Dialog|
+| withInfo | boolean | false | Shows info button for showing Help Dialogs|
+| withProgressBar | boolean | false| Shows a progress bar in the bottom bar for long waiting actions after submiting the Dialog|
+| withMinimize | boolean | false| Shows _ button for minimizing the Dialog|
+| withHome | boolean | false | Shows Home button for going to Home route|
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| close | | Event emitted clicking close button  |
+| info | | Event emitted clicking info button  |
+| minimize | | Event emitted clicking minimize button  |
+| home | | Event emitted after clicking home button  |
+

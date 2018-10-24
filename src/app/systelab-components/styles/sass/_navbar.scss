@@ -15,13 +15,13 @@
       & > .nav-link {
         border-top: none;
         background: transparent;
-        
+
       }
     }
-    & > .nav-item.active{
-      background-color: white !important;
+    & > .nav-item.active {
+      background-color: white;
       & > .nav-link {
-        color: black !important;
+        color: black;
       }
     }
 

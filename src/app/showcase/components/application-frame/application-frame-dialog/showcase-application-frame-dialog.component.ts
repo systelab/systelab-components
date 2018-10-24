@@ -22,13 +22,15 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 	public userName: string;
 	public userFullName: string;
 	public hospitalName: string;
+	public menuBars = false;
+	public logoIcon = 'icon-modulab'
 
 	public menu: ApplicationHeaderMenuEntry[] = [];
 	public sideactions: ApplicationSidebarAction[] = [];
 	public sidetabs: ApplicationSidebarTab[] = [];
 
 	constructor(public dialog: DialogRef<ShowcaseApplicationFrameDialogParameters>, protected messagePopupService: MessagePopupService,
-	            protected dialogService: DialogService) {
+		protected dialogService: DialogService) {
 		this.parameters = dialog.context;
 		this.frameWidth = (window.innerWidth);
 		this.frameHeight = (window.innerHeight);
@@ -50,10 +52,15 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 
 		this.setMenu();
 
+		let subMenu: ApplicationSidebarTab[] = [];
+		subMenu.push(new ApplicationSidebarTab('T4', 'SubTab One', false));
+		subMenu.push(new ApplicationSidebarTab('T5', 'SubTab Two', false));
+
 		this.sidetabs.push(new ApplicationSidebarTab('T1', 'Tab One', true));
+		this.sidetabs.push(new ApplicationSidebarTab('T3', 'Tab Three', false, subMenu));
 		this.sidetabs.push(new ApplicationSidebarTab('T2', 'Tab Two', false));
 
-		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1()));
+		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1(),'icon-home'));
 		this.sideactions.push(new ApplicationSidebarAction('Close', () => this.close()));
 
 	}

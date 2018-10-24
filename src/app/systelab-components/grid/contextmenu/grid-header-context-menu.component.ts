@@ -1,8 +1,9 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { ContextMenuComponent } from '../../contextmenu/context-menu.component';
 import { IHeaderAngularComp } from 'ag-grid-angular';
 import { IHeaderParams } from 'ag-grid';
 import { AbstractGrid } from '../abstract-grid.component';
+
 @Component({
 	selector:    'systelab-grid-header-context-menu',
 	templateUrl: './grid-header-context-menu.component.html'
@@ -13,8 +14,8 @@ export class GridHeaderContextMenuComponent<T> extends ContextMenuComponent impl
 	public headerName: string;
 	public headerData: any;
 
-	constructor(protected el: ElementRef, protected myRenderer: Renderer2) {
-		super(el, myRenderer);
+	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
+		super(el, myRenderer, cdr);
 	}
 
 	public agInit(params: IHeaderParams): void {

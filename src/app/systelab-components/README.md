@@ -2,11 +2,11 @@
 
 systelab-components is a set of components that use wide accepted and adopted standard technologies like Angular and Bootstrap, as well as other popular libraries. Please read the ATTRIBUTION.md file for a complete list of dependencies.
 
-Bootstrap 4 knowledge will be very useful to understand and use the library, as is founded on it.
+Bootstrap 4 knowledge will be very useful to understand and use the library, as is based on it.
                                                     
 ## Using the library
 
-In order to use the library, the first thing will be to add it in your package.json
+In order to use the library, the first step will be to add the dependency in your package.json
 
 ```bash
 npm install systelab-components --save
@@ -82,9 +82,9 @@ export class AppComponent {
 In the sass file app.component.scss, we have imported the Bootstrap and systelab-component sass styles.
 
 ```sass
-@import "../systelab-components/styles/sass/systelab-bootstrap-settings";
+@import "../systelab-components/sass/systelab-bootstrap-settings";
 @import "../../../node_modules/bootstrap/scss/bootstrap";
-@import "../systelab-components/styles/sass/systelab-components";
+@import "../systelab-components/sass/systelab-components";
 ```
 
 Notice that the Bootstrap package is a dependency for systelab-components, and npm will download it.
@@ -111,6 +111,50 @@ Anyway, think it twice before you change this settings and think in the value of
 A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples. 
 
 As this components will be placed in a container, in the following sections you will find some tips about how to do it. Please check our [application frame](applicationframe), [dialog](modal/dialog) as a base containers of the layout.
+
+The following table summarizes all the components included in the library.
+
+| Component | Description |
+| --------- | ----------- |
+| [systelab-add-remove-list](add-remove-list) | A list with elements to add and remove |
+| [systelab-app-frame](applicationframe) | Application frame, using a header and a sidebar |
+| [systelab-app-header](applicationframe/header) | Application header |
+| [systelab-app-sidebar](applicationframe/sidebar) | Application side bar |
+| [systelab-breadcrumb](breadcrumb) | Component to allows users to keep track and maintain awareness of their locations |
+| [systelab-calendar-header](calendar) | Calendar header with navigation |
+| [systelab-calendar-table](calendar) | Month view custom calendar |
+| [systelab-colorpicker](colorpicker) | Color picker |
+| [systelab-combobox](combobox) | Classes that lets you create a combo box component |
+| [systelab-context-menu](contextmenu) | Context menu |
+| [systelab-datepicker](datepicker) | Date picker |
+| [systelab-date-time](datepicker) | Date and time picker |
+| [systelab-file-selector](file-selector) | File selector |
+| [systelab-grid](grid) | Classes that lets you create a grid component |
+| [systelab-listbox](listbox) | Classes that lets you create a list box component |
+| [systelab-loading](loading) | Widget to show that an action is being performed |
+| [systelab-dialog](modal/dialog) | Classes to show a dialog |
+| [systelab-message-popup](modal/message-popup) | Classes to show a popup |
+| [systelab-month-selector](month-selector) | Component to show a Month Selector |
+| [systelab-navbar](navbar) | Component to show a Navbar |
+| [systelab-numpad](numpad) | Component to show a Numeric Keyboard dialog for an Input Text |
+| [systelab-percentage-circle](percentage-circle) | Component to show a percentage indicator |
+| [systelab-searcher](searcher) | Abstract classes that lets you create a Searcher component |
+| [systelab-select](select) | Component to select a value form a predefined list |
+| [systelab-signature-canvas](signature-canvas) | Component to show a canvas where the user can draw their signature |
+| [systelab-slider](slider) | Component to select a numerical value inside a range |
+| [systelab-sortable-list](sortable-list) | Abstract class that lets you create a Listbox with sortable elements |
+| [systelab-spinner](spinner) | Component to select a numerical value inside a range |
+| [systelab-switch](switch) | Component to select between two values |
+| [systelab-tabs](tabs) | Component to show more than one panel |
+| [systelab-timeline](timeline) | Component to show a vertical timeline |
+| [systelab-toggle-button](toggle-button) | Component to select between two values |
+| [systelab-tooltip](tooltip) | Directive to show tooltip on hover event |
+| [systelab-tree](tree) | Abstract class that lets you create a Tree component |
+| [systelab-twolist](twolist) | Component to select a group of elements from elements list |
+| [systelab-week-selector](week-selector) | Component to show a Week Selector |
+| [systelab-wizard-steps](wizard-steps) | Component to show a Wizard |
+
+
 
 ### Layout
 

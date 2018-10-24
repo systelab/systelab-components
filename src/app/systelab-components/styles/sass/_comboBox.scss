@@ -1,3 +1,4 @@
+$slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
 .slab-combobox {
 
@@ -22,6 +23,10 @@
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
+
+    @if ($slab-size-percentage == 1) {
+      line-height: $form-elements-height - 9px;
+    }
   }
 
   .slab-combo-label {
@@ -103,12 +108,12 @@
       overflow: hidden;
 
       .ag-body {
-        background-color: $background;
+        background-color: $background-primary;
 
         .ag-body-viewport {
 
           .ag-row {
-            background-color: $background;
+            background-color: $background-primary;
 
             &.ag-row-selected {
               background-color: $slab-selected-background-color;
@@ -120,7 +125,7 @@
 
             .ag-cell {
               border: none;
-              padding: 0 12px;
+              padding: 0 $slab-combo-check-cell-padding;
             }
 
           }
@@ -144,10 +149,12 @@
   }
 
 }
+
 .slab-combo-badge.badge > .close {
   font-size: 1rem;
-  margin-top:-2px;
+  margin-top: -2px;
 }
+
 .pointer {
   cursor: pointer;
 }

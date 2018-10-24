@@ -17,13 +17,10 @@ Component to show more than one panel.
 
 The systelab-tabs component has an Output in order to notify that a tab has been selected. In the $event parameter, the selected tab id will be sent.
 
-The systelab-tab component has an four Inputs: The id (must be an string), the title, a boolean Input in order to specify the tab that is active, and a boolean Input in order to specify the tab has some warnings. By default the first tab will be considerered as active, and warning is false.
-
-You can add a padding to the tab content adding the class p-1.
-
-Sometimes in the content you will need to specify that is 100% width.
-
-If you are adding a grid as a content, remember to specify that it will be the element that will grow and that the position is relative. Here you have an example:
+Consider that:
+> - You can add a padding to the tab content adding the class p-1.
+> - Sometimes in the content you will need to specify that is 100% width.
+> - If you are adding a grid as a content, remember to specify that it will be the element that will grow and that the position is relative. Here you have an example:
 
 ```html
 <systelab-tabs class="slab-flex-1">
@@ -37,5 +34,31 @@ If you are adding a grid as a content, remember to specify that it will be the e
     </systelab-tab>
 </systelab-tabs>
 ```
+
+
+## Properties
+
+For the tabs parent element:
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| showTabBackground | boolean | true | Set to true to use a background color. Otherwise is transparent |
+
+For each tab element:
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| id | boolean | true | Tab Identifier |
+| title | string | | Tab name to show |
+| active | boolean | true | Set to true to specify that the tab that is active |
+| warning | boolean | true | Set to true to specify the tab content has some warnings. |
+
+
+## Events for Tabs
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| select | string | The selected Tab Id |
+
 
 The styles for the tabs are defined in the tabs.scss Saas file.

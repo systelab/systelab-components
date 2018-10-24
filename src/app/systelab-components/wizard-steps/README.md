@@ -5,23 +5,33 @@ Component to show a Steps of a wizard
 ## Using the component
 
 ```html
-<systelab-wizard-steps class="w-100" [allowNavigation]="allowNavigation" [steps]="steps" [(currentStep)]="'1'" (action)="gotoStep($event)" [roundedStep]="roundedStep"></systelab-wizard-steps>
+<systelab-wizard-steps [allowNavigation]="allowNavigation" [steps]="steps" [(currentStep)]="'1'" (action)="gotoStep($event)" [roundedStep]="roundedStep"></systelab-wizard-steps>
 ```
 
-Set **allowNavigation** to true, if you want to let the user click on a previous step.
 
-Set **currentStep** to define the number of the current step.
+## Properties
 
-**action** is the event when is allowed the navigation and click on the step.
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| **currentStep** | number || The current step number. |
+| allowNavigation | boolean | false | Set to let the user click on a previous step. |
+| roundedStep | boolean | false | Set to change the step style to be rounded.|
+| steps | Array&lt;WizardStep&gt; || An array of steps for the Wizard |
 
-Set **roundedStep** to true if you want a rounded style.
+In black the Two-Way Data Binding properties.
 
-**steps** is a list of 'WizardStep' objects.
 
-The WizardStep object has the following structure:
+#### WizardStep
 
-```javascript
-    public step: number,    //Number of the step
-    public description: string,    //Description of teh step
-    public visited: boolean,     //if the step was visited or not.
-```
+| Name | Type | Description |
+| ---- |:----------:| ------------|
+| step | number |Number of the step|
+| description | string |Description of the step|
+| visited | boolean |True if the step has been visited|
+
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| action | string |The event when is allowed the navigation and click on the step.|

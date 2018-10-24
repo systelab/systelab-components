@@ -12,10 +12,13 @@ import {
 } from '@angular/core';
 import {AgRendererComponent} from 'ag-grid-angular';
 import {GridOptions} from 'ag-grid';
+import {StylesUtilService} from '../utilities/styles.util.service';
+import {ComboboxFavouriteRendererComponent} from './renderer/combobox-favourite-renderer.component';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
 
 declare var jQuery: any;
 
-export abstract class AbstractComboBox implements AgRendererComponent, OnInit, OnDestroy {
+export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static ROW_HEIGHT: number;
 
@@ -23,6 +26,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	@Input() public customInputRenderer: any;
 	@Input() public initialParams: any;
+
 	@Input() public filter = false;
 	@Input() public multipleSelection = false;
 	@Input() public listSelectedValues = false;
@@ -32,20 +36,42 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
 
-	@Input() public values: Array<any>;
+	public _values: Array<any>;
+	@Input() 
+	set values(newValues: Array<any>) {
+		this._values = newValues;
+		if (this.gridOptions) {
+			this.gridOptions.rowData = this._values;
+		}
+		this.setCodeDescriptionById();
+	}
+	get values() {
+		return this._values;
+	}
 	@Input() public isDisabled: boolean;
-	@Input() public inputHeight: number = null;
+	@Input() public expandToParentContainerHeight = false;
 	@Output() public change = new EventEmitter();
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
 	@Input() public allowEditInput = false;
 	@Input() public emptyElement = false;
+	@Input() public selectDeselectAll = false;
+	@Input() public withFavourites = false;
+	@Input() public preferenceName: string;
+
+	public isFavourite = false;
+	public favouriteList: Array<string | number> = [];
+	public isTree = false;
 
 	public _id: number | string;
 	@Input()
 	set id(value: number | string) {
 		this._id = value;
-		this.afterSettingId(value);
+		this.idChange.emit(value);
+		this.setCodeDescriptionById();
+		if (value !== undefined && value !== null) {
+			this.checkIfIsFavourite(value.toString());
+		}
 	}
 
 	get id() {
@@ -57,12 +83,28 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Input()
 	set description(value: string) {
 		this._description = value;
+		if (this.id && this.values) {
+			const item: T = this.values.find(it => it[this.getIdField()] === this.id);
+			if (item) {
+				this._description = item[this.getDescriptionField()];
+			}
+		}
 		this.descriptionChange.emit(this._description);
 		this.fieldToShow = this._description;
 	}
 
 	get description() {
 		return this._description;
+	}
+
+	public _level: number;
+	@Input()
+	set level(value: number) {
+		this._level = value;
+	}
+
+	get level() {
+		return this._level;
 	}
 
 	public _fieldToShow: string;
@@ -82,7 +124,13 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	@Input()
 	set code(value: string) {
 		this._code = value;
-		this.codeChange.emit(this._code);
+		if (this.id && this.values) {
+			const item: T = this.values.find(it => it[this.getIdField()] === this.id);
+			if (item) {
+				this._code = item[this.getCodeField()];
+			}
+		}
+		this.codeChange.emit(this._description);
 	}
 
 	get code() {
@@ -91,15 +139,33 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	@Output() public codeChange = new EventEmitter();
 
+	public _multipleSelectedItemList: Array<T> = [];
+
+	@Input()
+	set multipleSelectedItemList(value: Array<T>) {
+		this._multipleSelectedItemList = value;
+		this.setDescriptionAndCodeWhenMultiple(value);
+		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
+		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
+	}
+
+	get multipleSelectedItemList() {
+		return this._multipleSelectedItemList;
+	}
+
+	@Output() public multipleSelectedItemListChange = new EventEmitter();
+	@Output() public multipleSelectedIDListChange = new EventEmitter();
+
 	@ViewChild('combobox') public comboboxElement: ElementRef;
 	@ViewChild('dropdowntoogle') public dropdownToogleElement: ElementRef;
 	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
 	@ViewChild('dropdown') public dropdownElement: ElementRef;
 	@ViewChild('input') public inputElement: ElementRef;
+	@ViewChild('hidden') public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
-	public currentListSelected: Array<any> = [];
+	public selectionChanged = false;
 
 	public gridOptions: GridOptions;
 	public columnDefs: Array<any>;
@@ -112,7 +178,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 	public isDropdownOpened = false;
 	public scrollHandler: any;
 
-	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef) {
+	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public preferencesService?: PreferencesService) {
 	}
 
 	public ngOnInit() {
@@ -134,18 +200,62 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		jQuery(this.comboboxElement.nativeElement)
 			.on('hide.bs.dropdown', this.closeDropDown.bind(this));
 
+		this.initializeFavouriteList();
 		this.configGrid();
 	}
 
+	protected setDescriptionAndCodeWhenMultiple(value: Array<T>) {
+		this._description = '';
+		this._code = '';
+		for (const selectedItem of value) {
+			if (this._code !== '') {
+				this._code += '; ';
+			}
+			this._code += selectedItem[this.getCodeField()];
+
+			if (this._description !== '') {
+				this._description += '; ';
+			}
+			this._description += selectedItem[this.getDescriptionField()];
+		}
+	}
+
+	private initializeFavouriteList(): void {
+		const favouriteListPreference: Array<string | number> = (this.preferencesService) ? this.preferencesService.get(this.preferenceName + '.favourites') : undefined;
+		if (this.withFavourites && favouriteListPreference && favouriteListPreference.length > 0) {
+			this.favouriteList = favouriteListPreference;
+			if (this.id !== undefined && this.id !== null) {
+				this.checkIfIsFavourite(this.id.toString());
+			}
+		}
+	}
+
 	protected configGrid() {
-		this.columnDefs = [
+		this.columnDefs = (this.withFavourites) ? [
 			{
-				colID: 'id',
-				field: 'description',
-				checkboxSelection: this.multipleSelection
+				colID: 'itemDescription',
+				id: this.getIdField(),
+				field: this.getDescriptionField(),
+				checkboxSelection: this.multipleSelection,
+				cellRendererFramework: ComboboxFavouriteRendererComponent,
+				cellRendererParams: {
+					favouriteList: this.favouriteList
+				}
+			}
+		] : [
+			{
+				colID: 'itemDescription',
+				field: this.getDescriptionField(),
+				checkboxSelection: this.multipleSelection,
 			}
 		];
 		this.gridOptions = {};
+
+		this.gridOptions.columnDefs = this.columnDefs;
+
+		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
+		this.gridOptions.headerHeight = 0;
+		this.gridOptions.suppressCellSelection = true;
 
 		if (this.multipleSelection) {
 			this.gridOptions.rowSelection = 'multiple';
@@ -159,16 +269,39 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 			checkboxChecked: this.getCheckboxChecked()
 		};
 
-		this.gridOptions.columnDefs = this.columnDefs;
-		this.gridOptions.headerHeight = 0;
-		this.gridOptions.suppressCellSelection = true;
+		this.gridOptions.getRowNodeId =
+			(item) => {
+				if (item[this.getIdField()]) {
+					return item[this.getIdField()];
+				} else {
+					return null;
+				}
+			};
+
+		this.configGridData();
+
+	}
+
+	protected configGridData() {
 		this.gridOptions.rowData = this.values;
 	}
 
 	protected setRowHeight() {
-		// const minHeight = StylesUtilService.getStyleValue(this.comboButtonElement, 'min-height');
-		AbstractComboBox.ROW_HEIGHT = Number(26);
+		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
+		if (lineHeight) {
+			AbstractComboBox.ROW_HEIGHT = Number(lineHeight);
+		} else {
+			AbstractComboBox.ROW_HEIGHT = Number(26);
+		}
 	}
+
+	public abstract getInstance(): T;
+
+	public abstract getDescriptionField(): string;
+
+	public abstract getCodeField(): string;
+
+	public abstract getIdField(): string;
 
 	public refresh(params: any): boolean {
 		return true;
@@ -178,6 +311,22 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.params = params;
 	}
 
+	public getInputHeight() {
+		if (this.expandToParentContainerHeight) {
+			return {'height': '100%'};
+		}
+		return undefined;
+	}
+
+	protected getComboPreferencesPrefix(): string {
+		return this.preferenceName || this.constructor.name;
+	}
+
+	public doToggleFavourite(event: MouseEvent): void {
+		event.stopPropagation();
+		this.toggleFavourite();
+	}
+
 	public onComboClicked(event: MouseEvent) {
 		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
 			event.stopPropagation();
@@ -185,8 +334,24 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 			if (!this.isDropDownOpen()) {
 				this.isDropdownOpened = true;
 				this.showDropDown();
+			} else {
+				// close
+				this.checkMultipleSelectionClosed();
 			}
 		}
+	}
+
+	protected toggleFavourite(): void {
+		this.isFavourite = !this.isFavourite;
+		if (this.isFavourite) {
+			this.favouriteList.push(this.id.toString());
+		} else {
+			this.favouriteList.splice(this.favouriteList.map(String).indexOf(this.id.toString()), 1);
+		}
+		this.preferencesService.put(
+			this.getComboPreferencesPrefix() + '.favourites',
+			this.favouriteList.map(String)
+		);
 	}
 
 	public setDropdownWidth() {
@@ -208,6 +373,7 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 			this.myRenderer.removeClass(this.dropdownMenuElement.nativeElement, 'show');
 		}
 		this.chRef.detectChanges();
+		this.checkMultipleSelectionClosed();
 	}
 
 	public resetDropDownPositionAndHeight() {
@@ -245,24 +411,27 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 
 	public setDropdownHeight() {
 		let calculatedHeight = 0;
-		const totalItems: number = Number(this.values ? this.values.length : 0);
+		const totalItems: number = this.getTotalItemsForDropdownHeight();
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
+			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
+			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT * totalItems;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else {
 			calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		}
 
-		if (this.filter) {
-			const agGridElement = this.dropdownElement.nativeElement.getElementsByTagName('ag-grid-angular');
-			const agGridHeight = calculatedHeight - 36;
-			this.myRenderer.setStyle(agGridElement[0], 'height', agGridHeight + 'px');
+	}
+
+	protected getTotalItemsForDropdownHeight(): number {
+		let totalItems = Number(this.values ? this.values.length : 0);
+		if (this.emptyElement) {
+			totalItems += 1;
 		}
+		return totalItems;
 	}
 
 	public setDropdownPosition() {
@@ -283,20 +452,17 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', this.left + 'px');
 	}
 
-	public getSelectedRow(): any {
+	public getSelectedRow(): T {
 		if (this.gridOptions && this.gridOptions.api) {
-			const selectedRow: any = this.gridOptions.api.getSelectedRows();
-			if (selectedRow !== null && this.multipleSelection === false) {
+			const selectedRow: Array<T> = this.gridOptions.api.getSelectedRows();
+			if (selectedRow !== null) {
 				return selectedRow[0];
-			} else if (selectedRow !== null && this.multipleSelection === true) {
-				return selectedRow;
 			}
 		}
 		return undefined;
 	}
 
 	public doSearch(event: any) {
-		// TODO: check when translations are integrated
 		this.filterValue = event.target.value;
 		this.doFilter();
 	}
@@ -307,25 +473,56 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.gridOptions.api.setRowData(auxListArray);
 	}
 
-	public onSelectionChanged(event: any) {
-		const selectedRow = this.getSelectedRow();
+	public doSelectAll() {
+		this.gridOptions.api.selectAll();
+	}
 
-		if (this.multipleSelection === true) {
-			this.currentListSelected = selectedRow;
-			this.setMultipleDescription();
-			this.change.emit(this.currentListSelected);
+	public doDeselectAll() {
+		this.gridOptions.api.deselectAll();
+	}
+
+	public onSelectionChanged(event: any) {
+		if (!this.multipleSelection) {
+			const selectedRow = this.getSelectedRow();
+			if (selectedRow !== null && selectedRow !== undefined) {
+				this.id = selectedRow[this.getIdField()];
+				this.code = selectedRow[this.getCodeField()];
+				this.description = selectedRow[this.getDescriptionField()];
+				this.currentSelected = selectedRow;
+				this.change.emit(selectedRow);
+				this.closeDropDown();
+				this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+			}
 		} else {
-			this.id = selectedRow.id;
-			this.description = selectedRow.description;
-			this.currentSelected = selectedRow;
-			this.change.emit(selectedRow);
-			this.idChange.emit(selectedRow.id);
-			this.closeDropDown();
+			this.selectionChanged = true;
 		}
 	}
 
-	public onModelUpdated(event: any) {
+	private checkIfIsFavourite(id: string): void {
+		this.isFavourite = (id !== undefined && id !== null) ? this.favouriteList.map(String).indexOf(id) > -1 : false;
+	}
+
+	public onModelUpdated() {
 		this.gridOptions.api.sizeColumnsToFit();
+		if (this.multipleSelection) {
+			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
+				this.gridOptions.api.forEachNode(node => {
+					if (this.multipleSelectedItemList
+							.filter((selectedItem) => {
+								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+							}).length > 0) {
+						node.selectThisNode(true);
+					}
+				});
+			}
+		} else if (this._id && this._id !== undefined) {
+			this.gridOptions.api.forEachNode(node => {
+				if (node.id === this._id) {
+					this.currentSelected = node.data;
+					node.selectThisNode(true);
+				}
+			});
+		}
 	}
 
 	public setGridSize() {
@@ -344,11 +541,50 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		}
 	}
 
+	// overrides
 	public onRowSelected(event: any) {
+		if (!this.multipleSelection) {
+		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
+			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
+				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+					return item[this.getIdField()] === event.node.data[this.getIdField()];
+				});
+				if (event.node.selected) {
+					if (elementIndexInSelectedList < 0) {
+						const newElement: T = this.getInstance();
+						newElement[this.getIdField()] = event.node.data[this.getIdField()];
+						newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
+						newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
+						this.multipleSelectedItemList.push(newElement);
+						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+					}
+				} else {
+					if (elementIndexInSelectedList !== -1) {
+						this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
+						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+					}
+				}
+			} else {
+				this.multipleSelectedItemList = new Array<T>();
+				const newElement: T = this.getInstance();
+				newElement[this.getIdField()] = event.node.data[this.getIdField()];
+				newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
+				newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
+				this.multipleSelectedItemList.push(newElement);
+				this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+			}
+			this.setDescriptionAndCodeWhenMultiple(this.multipleSelectedItemList);
+		}
 	}
 
-	public afterSettingId(value: number | string) {
-		this.idChange.emit(value);
+	public setCodeDescriptionById() {
+		if (this.id !== undefined && this.values) {
+			const item: T = this.values.find(it => it[this.getIdField()] === this.id);
+			if (item) {
+				this.description = item[this.getDescriptionField()];
+				this.code = item[this.getCodeField()];
+			}
+		}
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -390,31 +626,32 @@ export abstract class AbstractComboBox implements AgRendererComponent, OnInit, O
 		this.chRef.detach();
 	}
 
-	public removeItem(item) {
-		const index = this.currentListSelected.findIndex(x => x.id === item.id);
+	public removeItem(item: T) {
+		const index = this.multipleSelectedItemList.findIndex(it => it[this.getIdField()] === item[this.getIdField()]);
 		if (index !== -1) {
-			this.currentListSelected.splice(index, 1);
+			this.multipleSelectedItemList.splice(index, 1);
+			this.multipleSelectedItemList = this.multipleSelectedItemList;
 		}
-		this.setMultipleDescription();
 	}
 
-	public setMultipleDescription() {
-		this.description = '';
-		for (let i = 0; i < this.currentListSelected.length; i++) {
-			if (this.description) {
-				this.description += ', ';
-			}
-			this.description += this.currentListSelected[i].description;
+	private selectionItemListToIDList(): Array<string | number> {
+		const idList = new Array<string | number>();
+		for (const item of this.multipleSelectedItemList) {
+			idList.push(item[this.getIdField()]);
+		}
+		return idList;
+	}
+
+	public checkMultipleSelectionClosed() {
+		if (this.selectionChanged) {
+			this.change.emit(this.multipleSelectedItemList);
+			this.multipleSelectedItemListChange.emit(this.multipleSelectedItemList);
+			this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
+
 		}
 	}
 
 	public doGridReady(e) {
-		this.gridOptions.api.forEachNode((node) => {
-			if (this.currentListSelected.find(x => x.id === node.data.id)) {
-				node.setSelected(true);
-			}
-		});
-
 		if (this.filterValue && this.filter === true) {
 			this.doFilter();
 		}

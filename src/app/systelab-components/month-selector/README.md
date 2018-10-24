@@ -10,22 +10,24 @@ Component to show a Month Selector
 </systelab-month-selector>
 ```
 
-Set **disabled** to true, if you want to display a disabled month selector, it will displaying the month belonging to the date selected.
+## Properties
 
-Set **maxDate** with the maximum date that you want to display in the selector.
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| disabled | boolean | false | Display a active or a disabled month selector |
+| maxDate | Date | | Maximum date that you want to display in the selector |
+| minDate | Date | | Minimum date that you want to display in the selector |
+| currentDate | Date | Current Date | Used to display belongin month to the date set |
+| **selectedMonth** | Month |  | The selected month |
 
-Set **minDate** with the minimum date that you want to display in the selector.
+In black the Two-Way Data Binding properties.
 
-Set **currentDate** with the date you want, to display the month belonging to this date, if you don't set any current date the selector will choose the actual date.
+#### Month
 
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| month | number |  | Number of the month |
+| text | string | | Description of month selected |
+| year | number | | Number of the year |
+| isActive | boolean | false | If the selector is activate or disabled |
 
-**selectedMonth** is an 'Month' object where you can retrieve the information of the selected month.
-
-The Month object has the follow structure:
-
-```javascript
-    public month: number,    //Number of the month
-    public text: string,    //Description of month selected
-    public year: number,    //Number of the year
-    public isActive:boolean,//If the selector is activate or disabled
-```

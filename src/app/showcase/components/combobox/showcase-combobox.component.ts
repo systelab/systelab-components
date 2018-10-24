@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
 	selector: 'showcase-combobox',
@@ -13,20 +13,28 @@ export class ShowcaseComboboxComponent {
 
 	public comboOptionList: Array<Object> = [];
 
+	public selectedComboOptionList: Array<Object> = [];
+
 	constructor() {
 
 		this.comboOptionList = [
-			{ description: 'New York', id: 1 },
-			{ description: 'Rome', id: 2 },
-			{ description: 'London', id: 3 },
-			{ description: 'Barcelona', id: 4 },
-			{ description: 'París', id: 5 },
-			{ description: 'Berlín', id: 6 },
-			{ description: 'Oslo', id: 7 },
-			{ description: 'Atenas', id: 8 },
-			{ description: 'Lisboa', id: 9 },
-			{ description: 'Amsterdam', id: 10 },
-			{ description: 'St Petersburgo', id: 11 }
+			{description: 'New York', id: 1},
+			{description: 'Rome', id: 2},
+			{description: 'London', id: 3},
+			{description: 'Barcelona', id: 4},
+			{description: 'París', id: 5},
+			{description: 'Berlín', id: 6},
+			{description: 'Oslo', id: 7},
+			{description: 'Atenas', id: 8},
+			{description: 'Lisboa', id: 9},
+			{description: 'Amsterdam', id: 10},
+			{description: 'St Petersburgo', id: 11}
+		];
+
+		this.selectedComboOptionList = [
+			{description: 'New York', id: 1},
+			{description: 'Rome', id: 2},
+			{description: 'St Petersburgo', id: 11}
 		];
 	}
 

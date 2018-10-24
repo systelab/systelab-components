@@ -1,4 +1,5 @@
-$icon-context-menu-font-size: 20px;
+$slab-icon-context-menu-font-size: ceil(22px * $slab-size-percentage);
+$slab-icon-context-menu-size: ceil(28px * $slab-size-percentage);
 
 .slab-context-menu {
   cursor: pointer;
@@ -9,9 +10,19 @@ $icon-context-menu-font-size: 20px;
   line-height: normal;
 
   .icon-context-menu {
-    font-size: $icon-context-menu-font-size;
-    padding-top: ceil(($grid-cell-height - $icon-context-menu-font-size) / 2);
+    font-size: $slab-icon-context-menu-font-size;
+    padding-top: ceil(($grid-cell-height - $slab-icon-context-menu-font-size) / 2);
     color: grey;
   }
+}
 
+.slab-icon-container {
+  @include size($slab-icon-context-menu-size);
+  .slab-menu-icon {
+    font-size: $slab-icon-context-menu-font-size;
+  }
+}
+
+.slab-menu-caret {
+  margin-top: 5px;
 }
