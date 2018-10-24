@@ -37,7 +37,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public fontStyle: string;
 
 	public _values: Array<any>;
-	@Input() 
+	@Input()
 	set values(newValues: Array<any>) {
 		this._values = newValues;
 		if (this.gridOptions) {
@@ -45,9 +45,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 		this.setCodeDescriptionById();
 	}
+
 	get values() {
 		return this._values;
 	}
+
 	@Input() public isDisabled: boolean;
 	@Input() public expandToParentContainerHeight = false;
 	@Output() public change = new EventEmitter();
@@ -491,7 +493,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
 				this.closeDropDown();
-				this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+				if (selectedRow[this.getIdField()]) {
+					this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+				}
 			}
 		} else {
 			this.selectionChanged = true;
