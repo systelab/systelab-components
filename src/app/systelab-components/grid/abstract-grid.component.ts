@@ -231,12 +231,13 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		if (option && option.action !== null && option.action !== undefined && data !== undefined) {
 			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
-			return option.action(actionData);
+			option.action(actionData);
 
 		} else {
 			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
 			this.action.emit(actionData);
 		}
+		this.popupmenu.closeDropDown();
 	}
 
 	public isContextMenuOptionEnabled(elementId: string, actionId: string): boolean {

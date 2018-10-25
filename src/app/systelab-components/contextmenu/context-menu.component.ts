@@ -48,8 +48,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	@Input() public fontColor: string;
 	@Input() public isEmbedded = false;
 
-	public top = 0;
-	public left = 0;
 	public hasIcons = false;
 
 	public destroyWheelListener: Function;
@@ -83,10 +81,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 	public dotsClicked(event: MouseEvent) {
 		if (this.existsAtLeastOneActionEnabled()) {
 			if (!this.isDropDownOpened()) {
+				// hide the div until is positioned in event x y position to avoid flick
+				this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 				this.isOpened = true;
-				this.top = event.clientY;
-				this.left = event.clientX;
-				this.showDropDown();
+				this.showDropDown(event.clientX, event.clientY);
 			}
 		} else {
 			event.stopPropagation();
@@ -106,11 +104,12 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 				.dropdown('toggle');
 
 			if (!this.isDropDownOpened()) {
+				// Add class manually because is not set when jquery.dropdwon toogle is executed
 				this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
+				// hide the div until is positioned in event x y position to avoid flick
+				this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 				this.isOpened = true;
-				this.top = event.clientY;
-				this.left = event.clientX;
-				this.showDropDown();
+				this.showDropDown(event.clientX, event.clientY);
 			}
 		} else {
 			event.stopPropagation();
@@ -126,30 +125,29 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	protected loop(): void {
-		let result = true;
+	protected loop(x: number, y: number): void {
 		if (this.isDropDownOpened()) {
 			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'position', 'fixed');
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'position', 'absolute');
-			this.top = this.top - this.dropdownParent.nativeElement.offsetHeight;
-			if (this.top + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight) {
-				this.top = this.top - this.dropdownElement.nativeElement.offsetHeight;
+			y = y - this.dropdownParent.nativeElement.offsetHeight;
+			if (y + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight) {
+				y = y - this.dropdownElement.nativeElement.offsetHeight;
 			}
-			if (this.left + this.dropdownElement.nativeElement.offsetWidth > window.innerWidth) {
-				this.left = this.left - this.dropdownElement.nativeElement.offsetWidth;
+			if (x + this.dropdownElement.nativeElement.offsetWidth > window.innerWidth) {
+				x = x - this.dropdownElement.nativeElement.offsetWidth;
 			}
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', this.top + 'px');
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', this.left + 'px');
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', y + 'px');
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', x + 'px');
+			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'visible');
 			this.addListeners();
-			result = false;
-		}
-		if (result) {
-			setTimeout(() => this.loop(), 10);
+
+		} else {
+			setTimeout(() => this.loop(x, y), 10);
 		}
 	}
 
-	public showDropDown() {
-		setTimeout(() => this.loop(), 10);
+	public showDropDown(x: number, y: number) {
+		setTimeout(() => this.loop(x, y), 10);
 	}
 
 	public resetDropDownPositionAndHeight() {
@@ -180,6 +178,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 			this.myRenderer.removeAttribute(this.dropdownParent.nativeElement, 'aria-expanded');
 			this.myRenderer.removeClass(this.dropdownParent.nativeElement, 'show');
 			this.myRenderer.removeClass(this.dropdownMenuElement.nativeElement, 'show');
+			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 		}
 		this.actionsAfterCloseDropDown();
 	}
