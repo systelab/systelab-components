@@ -64,7 +64,6 @@ import { TreeModule } from 'primeng/primeng';
 import { ShowcasePercentageCircleComponent } from './components/percentage-circle/showcase-percentage-circle.component';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { GridContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-context-menu.component';
 import { GridHeaderContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-header-context-menu.component';
 import { ShowcaseWizardStepsComponent } from './components/wizard-steps/showcase-wizard-steps.component';
 import { ShowcaseSortableListComponent } from './components/sortable-list/showcase-sortable-list.component';
@@ -76,6 +75,7 @@ import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.
 import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplete-combobox.component';
+import { GridContextMenuCellRendererComponent } from '../systelab-components/grid/contextmenu/grid-context-menu-cell-renderer.component';
 
 @NgModule({
 	imports:         [
@@ -89,7 +89,7 @@ import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplet
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot(),
 		AgGridModule.withComponents([
-			GridContextMenuComponent,
+			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
 		])
 	],
