@@ -2,7 +2,7 @@ import { Input } from '@angular/core';
 
 export class ComboBoxInputRenderer {
 
-	public _id: number | string;
+	private _id: number | string;
 	@Input()
 	set id( value: number | string ) {
 		this._id = value;
@@ -12,7 +12,7 @@ export class ComboBoxInputRenderer {
 		return this._id;
 	}
 
-	public _description: string;
+	private _description: string;
 	@Input()
 	set description( value: string ) {
 		this._description = value;
