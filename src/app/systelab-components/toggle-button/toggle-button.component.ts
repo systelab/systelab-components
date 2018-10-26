@@ -9,15 +9,15 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from
       }`]
 })
 export class ToggleButtonComponent {
-	private _checked = false;
+	private checked = false;
 
 	@Input() get isChecked() {
-		return this._checked;
+		return this.checked;
 	}
 
 	set isChecked(val: boolean) {
-		this._checked = val;
-		this.isCheckedChange.emit(this._checked);
+		this.checked = val;
+		this.isCheckedChange.emit(this.checked);
 	}
 
 	@Output() public isCheckedChange = new EventEmitter();
