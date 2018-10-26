@@ -1,9 +1,10 @@
-import { ApplicationRef, ComponentRef, Injectable, Injector, ReflectiveInjector, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, ComponentRef, Injectable, Injector, ViewContainerRef } from '@angular/core';
 
 import { createComponent } from '../framework/createComponent';
 import { DialogRef } from '../models/dialog-ref';
 import { OverlayRenderer } from '../models/tokens';
-import { ModalOverlay } from '../overlay/overlay.component';
+import { ModalOverlay } from '../overlay/index';
+import { StaticProvider } from '@angular/core/src/di/provider';
 
 @Injectable()
 export class DOMOverlayRenderer implements OverlayRenderer {
@@ -18,16 +19,17 @@ export class DOMOverlayRenderer implements OverlayRenderer {
 			injector = this.injector;
 		}
 
-		const bindings = ReflectiveInjector.resolve([
-			{provide: DialogRef, useValue: dialog}
-		]);
-
 		const cmpRef = createComponent({
 			component: ModalOverlay,
 			vcRef,
-			injector,
-			bindings
+			injector:  Injector.create({
+				providers: [
+					{provide: DialogRef, useValue: dialog}
+				],
+				parent: injector
+			})
 		});
+
 
 		if (!vcRef) {
 			this.appRef.attachView(cmpRef.hostView);
@@ -45,4 +47,3 @@ export class DOMOverlayRenderer implements OverlayRenderer {
 		return cmpRef;
 	}
 }
-

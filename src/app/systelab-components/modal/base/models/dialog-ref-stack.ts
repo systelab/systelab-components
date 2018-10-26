@@ -6,7 +6,7 @@ const BASKET_GROUP = {};
  * A dumb stack implementation over an array.
  */
 export class DialogRefStack<T> {
-	_stack: DialogRef<T>[];
+	private _stack: DialogRef<T>[];
 	private _stackMap: Map<DialogRef<T>, any>;
 
 	get length(): number {
@@ -16,6 +16,21 @@ export class DialogRefStack<T> {
 	constructor() {
 		this._stack = [];
 		this._stackMap = new Map<DialogRef<T>, any>();
+	}
+
+	closeAll(result: any = null): void {
+		for (let i=0, len=this._stack.length; i<len; i++) {
+			this._stack.pop().close(result);
+		}
+	}
+
+	/* Feature implemented for Modulab Platform*/
+	public closeAllDialogs() {
+		const numberOfDialogs = this.length;
+		for (let i = 0; i < numberOfDialogs; i++) {
+			let dialog = this.pop();
+			dialog.close();
+		}
 	}
 
 	push(dialogRef: DialogRef<T>, group?: any): void {
@@ -46,7 +61,7 @@ export class DialogRefStack<T> {
 	 * @param dialogRef
 	 */
 	remove(dialogRef: DialogRef<T>): void {
-		const idx = this.indexOf(dialogRef);
+		let idx = this.indexOf(dialogRef);
 		if (idx > -1) {
 			this._stack.splice(idx, 1);
 			this._stackMap.delete(dialogRef);
@@ -66,9 +81,9 @@ export class DialogRefStack<T> {
 	}
 
 	groupBy(group: any): DialogRef<T>[] {
-		const arr = [];
+		let arr = [];
 		if (group) {
-			this._stackMap.forEach((value, key) => {
+			this._stackMap.forEach( (value, key) => {
 				if (value === group) {
 					arr.push(key);
 				}
@@ -80,21 +95,12 @@ export class DialogRefStack<T> {
 	groupLength(group: any): number {
 		let count = 0;
 		if (group) {
-			this._stackMap.forEach((value, key) => {
+			this._stackMap.forEach( (value) => {
 				if (value === group) {
 					count++;
 				}
 			});
 		}
 		return count;
-	}
-
-	/* Feature implemented for Modulab Platform*/
-	public closeAllDialogs() {
-		const numberOfDialogs = this.length;
-		for (let i = 0; i < numberOfDialogs; i++) {
-			let dialog = this.pop();
-			dialog.close();
-		}
 	}
 }

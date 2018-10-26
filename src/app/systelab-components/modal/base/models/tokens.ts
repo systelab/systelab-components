@@ -1,9 +1,8 @@
-import { ComponentRef, Injector, ResolvedReflectiveProvider, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Injector, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 
+import { ModalOverlay } from '../overlay/index';
 import { DialogRef } from './dialog-ref';
 import { OverlayContext } from '../models/overlay-context';
-import { Maybe } from '../framework/utils';
-import { ModalOverlay } from '../overlay/overlay.component';
 
 export enum DROP_IN_TYPE {
 	alert,
@@ -16,7 +15,7 @@ export type WideVCRef = ViewContainerRef | string;
 export type ContainerContent = string | TemplateRef<any> | Type<any>;
 
 export interface OverlayPlugin extends Function {
-	<T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): Maybe<DialogRef<any>>;
+	<T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): DialogRef<any>;
 }
 
 export interface OverlayConfig {
@@ -29,13 +28,7 @@ export interface OverlayConfig {
 	injector?: Injector;
 
 	/**
-	 * Resolved providers that will inject into the component provided.
-	 */
-	bindings?: ResolvedReflectiveProvider[];
-
-	/**
-	 *  The element to block using the modal.
-	 *  Default: The value set in defaultViewContainer.
+	 * The element to block using the modal.
 	 */
 	viewContainer?: WideVCRef;
 
@@ -54,17 +47,17 @@ export interface ModalComponent<T> {
 export interface CloseGuard {
 	/**
 	 * Invoked before a modal is dismissed.
-	 * @return true or a promise that resolves to true to cancel dismissal.
 	 */
 	beforeDismiss?(): boolean | Promise<boolean>;
 
 	/**
 	 * Invoked before a modal is closed.
-	 * @return true or a promise that resolves to true to cancel closing.
 	 */
 	beforeClose?(): boolean | Promise<boolean>;
 }
 
 export abstract class OverlayRenderer {
-	public abstract render(dialogRef: DialogRef<any>, vcRef: ViewContainerRef, injector?: Injector): ComponentRef<ModalOverlay>;
+	public abstract render(dialogRef: DialogRef<any>,
+	                       vcRef: ViewContainerRef,
+	                       injector?: Injector): ComponentRef<ModalOverlay>;
 }

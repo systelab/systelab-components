@@ -2,10 +2,11 @@ import { BaseDynamicComponent } from '../components/base-dynamic-component';
 
 declare const clearTimeout: any;
 
-import { Component, ComponentRef, ElementRef, EmbeddedViewRef, Injector, OnDestroy, ReflectiveInjector, Renderer2, ResolvedReflectiveProvider, TemplateRef, Type, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, ComponentRef, ElementRef, EmbeddedViewRef, Injector, Renderer2, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 
 import { PromiseCompleter, supportsKey } from '../framework/utils';
 import { DialogRef } from '../models/dialog-ref';
+import { ContainerContent } from '../models/tokens';
 
 // TODO: use DI factory for this.
 // TODO: consolidate dup code
@@ -13,7 +14,6 @@ const isDoc: boolean = !(typeof document === 'undefined' || !document);
 
 export interface EmbedComponentConfig {
 	component: any;
-	bindings?: ResolvedReflectiveProvider[];
 	projectableNodes?: any[][];
 }
 
@@ -28,12 +28,17 @@ export interface EmbedComponentConfig {
 	encapsulation: ViewEncapsulation.None,
 	templateUrl:   './overlay.component.html'
 })
-export class ModalOverlay extends BaseDynamicComponent implements OnDestroy{
+export class ModalOverlay extends BaseDynamicComponent {
 	private beforeDestroyHandlers: Array<() => Promise<void>>;
+
+	@ViewChild('container', {read: ElementRef}) public container: ElementRef;
 	@ViewChild('innerView', {read: ViewContainerRef}) public innerVcr: ViewContainerRef;
 	@ViewChild('template') public template: TemplateRef<any>;
 
-	constructor(private dialogRef: DialogRef<any>, private vcr: ViewContainerRef, el: ElementRef, renderer: Renderer2) {
+	constructor(private dialogRef: DialogRef<any>,
+	            private vcr: ViewContainerRef,
+	            el: ElementRef,
+	            renderer: Renderer2) {
 		super(el, renderer);
 		this.activateAnimationListener();
 	}
@@ -41,17 +46,15 @@ export class ModalOverlay extends BaseDynamicComponent implements OnDestroy{
 	/**
 	 * @internal
 	 */
-	getProjectables<T>(content: string | TemplateRef<any> | Type<any>, bindings?: ResolvedReflectiveProvider[]): any[][] {
+	getProjectables<T>(content: ContainerContent): any[][] {
 
 		let nodes: any[];
 		if (typeof content === 'string') {
-			// nodes = [[this.renderer.createText(null, `${content}`)]];
 			nodes = [[this.renderer.createText(`${content}`)]];
-
 		} else if (content instanceof TemplateRef) {
-			nodes = [this.vcr.createEmbeddedView(content, {dialogRef: this.dialogRef}).rootNodes];
+			nodes = [this.vcr.createEmbeddedView(content, {$implicit: this.dialogRef.context, dialogRef: this.dialogRef}).rootNodes];
 		} else {
-			nodes = [this.embedComponent({component: content, bindings: bindings}).rootNodes];
+			nodes = [this.embedComponent({component: content}).rootNodes];
 		}
 
 		return nodes;
@@ -60,20 +63,15 @@ export class ModalOverlay extends BaseDynamicComponent implements OnDestroy{
 	embedComponent(config: EmbedComponentConfig): EmbeddedViewRef<EmbedComponentConfig> {
 		const ctx: EmbedComponentConfig & { injector: Injector } = <any>config;
 
-		if (ctx.bindings) {
-			ctx.injector = ReflectiveInjector.fromResolvedProviders(ctx.bindings, this.vcr.parentInjector);
-		}
-
-		return this.vcr.createEmbeddedView(this.template, {
+		return this.vcr.createEmbeddedView(this.template, <any> {
 			$implicit: ctx
 		});
 	}
 
-	addComponent<T>(type: any, bindings: ResolvedReflectiveProvider[] = [], projectableNodes: any[][] = []): ComponentRef<T> {
+	addComponent<T>(type: any, projectableNodes: any[][] = []): ComponentRef<T> {
 		return super._addComponent<T>({
 			component: type,
 			vcRef:     this.innerVcr,
-			bindings,
 			projectableNodes
 		});
 	}
@@ -107,6 +105,30 @@ export class ModalOverlay extends BaseDynamicComponent implements OnDestroy{
 	}
 
 	/**
+	 * Set a specific inline style for the container of the whole dialog component
+	 * The dialog component root element is the host of this component, it contains only 1 direct
+	 * child which is the container.
+	 *
+	 * Structure:
+	 *
+	 * ```html
+	 * <modal-overlay>
+	 *   <div>
+	 *     <!-- BACKDROP ELEMENT -->
+	 *     <!-- DIALOG CONTAINER ELEMENT -->
+	 *   </div>
+	 * </modal-overlay>
+	 * ```
+	 *
+	 * @param prop The style key
+	 * @param value The value, undefined to remove
+	 */
+	setContainerStyle(prop: string, value: string): this {
+		this.renderer.setStyle(this.container.nativeElement, prop, value);
+		return this;
+	}
+
+	/**
 	 * Define an element that click inside it will not trigger modal close.
 	 * Since events bubble, clicking on a dialog will bubble up to the overlay, a plugin
 	 * must define an element that represent the dialog, the overlay will make sure no to close when
@@ -135,7 +157,7 @@ export class ModalOverlay extends BaseDynamicComponent implements OnDestroy{
 				if (current === element) {
 					return;
 				}
-			} while (current.parentNode && ( current = current.parentNode ));
+			} while (current.parentNode && (current = current.parentNode));
 			this.dialogRef.dismiss();
 		};
 
@@ -160,7 +182,6 @@ export class ModalOverlay extends BaseDynamicComponent implements OnDestroy{
 	 * Temp workaround for animation where destruction of the top level component does not
 	 * trigger child animations. Solution should be found either in animation module or in design
 	 * of the modal component tree.
-	 * @returns {Promise<void>}
 	 */
 	canDestroy(): Promise<void> {
 		const completer = new PromiseCompleter<void>();

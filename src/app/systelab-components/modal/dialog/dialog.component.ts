@@ -1,11 +1,8 @@
 import { Component, Type } from '@angular/core';
 import { Modal } from '../plugin/custom';
 import { SystelabModalContext } from '../modal-context';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { overlayConfigFactory } from '../base/models/overlay-context';
-import { DialogRef } from '../base/models/dialog-ref';
-import { from } from 'rxjs';
-
 
 @Component({
 	selector: 'dialog',
@@ -29,10 +26,9 @@ export class DialogComponent {
 		}
 		let p: Promise<any> = new Promise((resolve: any, reject: any) => {
 			this.modal.open(component, overlayConfigFactory(dialogParameters, SystelabModalContext))
-				.then((dialogRef: DialogRef<any>) => {
-					dialogRef.result.then(v => resolve(v))
-						.catch(e => reject(e));
-				});
+				.result
+				.then(v => resolve(v))
+				.catch(e => reject(e));
 		});
 
 		return from(p);

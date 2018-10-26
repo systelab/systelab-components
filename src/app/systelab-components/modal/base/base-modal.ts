@@ -1,6 +1,6 @@
 
 export * from './framework/fluent-assign';
-export { extend, arrayUnion, PromiseCompleter, Maybe } from './framework/utils';
+export { extend, arrayUnion, PromiseCompleter } from './framework/utils';
 export { createComponent, CreateComponentArgs } from './framework/createComponent';
 
 export * from './models/errors';

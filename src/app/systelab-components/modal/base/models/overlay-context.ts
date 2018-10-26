@@ -1,12 +1,12 @@
 import { FluentAssign, FluentAssignMethod } from './../framework/fluent-assign';
-import { arrayUnion, extend } from './../framework/utils';
+import { extend, arrayUnion } from './../framework/utils';
 import { DialogRef } from './dialog-ref';
-import { OverlayConfig, WideVCRef } from './tokens';
+import { WideVCRef, OverlayConfig } from './tokens';
 
 export const DEFAULT_VALUES = {
-	inElement:   false,
-	isBlocking:  true,
-	keyboard:    [27],
+	inElement: false,
+	isBlocking: true,
+	keyboard: [27],
 	supportsKey: function supportsKey(keyCode: number): boolean {
 		return (<Array<number>>this.keyboard).indexOf(keyCode) > -1;
 	}
@@ -42,9 +42,8 @@ export class OverlayContext {
 	keyboard: Array<number> | number;
 
 	normalize(): void {
-		if (this.isBlocking !== false) {
+		if (this.isBlocking !== false)
 			this.isBlocking = true;
-		}
 
 		if (this.keyboard === null) {
 			this.keyboard = [];
@@ -83,7 +82,10 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
 	 */
 	keyboard: FluentAssignMethod<Array<number> | number, this>;
 
-	constructor(defaultValues: T | T[] = undefined, initialSetters: string[] = undefined, baseType: new () => T = undefined) {
+
+	constructor(defaultValues: T | T[] = undefined,
+	            initialSetters: string[] = undefined,
+	            baseType: new () => T = undefined) {
 		super(
 			extend<any>(DEFAULT_VALUES, defaultValues || {}),
 			arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
@@ -94,7 +96,6 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
 	/**
 	 * Returns an new OverlayConfig with a context property representing the data in this builder.
 	 * @param base A base configuration that the result will extend
-	 * @returns OverlayConfig
 	 */
 	toOverlayConfig(base?: OverlayConfig): OverlayConfig {
 		return extend(base || {}, {
@@ -104,7 +105,7 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
 }
 
 export interface ModalControllingContextBuilder<T> {
-	open(viewContainer?: WideVCRef): Promise<DialogRef<T>>;
+	open(viewContainer?: WideVCRef): DialogRef<T>;
 }
 
 /**
@@ -118,7 +119,6 @@ export interface ModalControllingContextBuilder<T> {
  * @param context The context for the modal
  * @param baseContextType Optional. The type/class of the context. This is the class used to init a new instance of the context
  * @param baseConfig A base configuration that the result will extend
- * @returns {OverlayConfig}
  */
 export function overlayConfigFactory<T>(context: T, baseContextType?: any, baseConfig?: OverlayConfig): OverlayConfig {
 	return new OverlayContextBuilder<T & OverlayContext>(<any>context, undefined, baseContextType).toOverlayConfig(baseConfig);

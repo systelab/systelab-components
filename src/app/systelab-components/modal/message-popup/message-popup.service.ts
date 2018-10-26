@@ -93,14 +93,11 @@ export class MessagePopupService {
 						height: height
 					},
 					SystelabModalContext)
-			)
-				.then((dialogRef: DialogRef<any>) => {
-					dialogRef.result.then((v) => {
-						resolve(v);
-					})
-						.catch((e) => {
-							reject(e);
-						});
+			).result.then((v) => {
+				resolve(v);
+			})
+				.catch((e) => {
+					reject(e);
 				});
 		});
 
