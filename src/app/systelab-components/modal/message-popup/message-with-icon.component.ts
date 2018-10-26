@@ -7,10 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class MessageWithIconComponent {
 
-	public static MESSAGE_QUESTION = 1;
-	public static MESSAGE_ERROR = 2;
-	public static MESSAGE_WARNING = 3;
-	public static MESSAGE_INFO = 4;
+	public static readonly MESSAGE_QUESTION = 1;
+	public static readonly MESSAGE_ERROR = 2;
+	public static readonly MESSAGE_WARNING = 3;
+	public static readonly MESSAGE_INFO = 4;
 
 	@Input() public message = '';
 	@Input() public type = 1;

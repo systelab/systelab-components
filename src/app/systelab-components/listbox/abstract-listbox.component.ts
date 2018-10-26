@@ -115,7 +115,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		const colDefs: Array<any> = [
 			{
-				colID: this.getIdField(),
+				colId: this.getIdField(),
 				field: this.getDescriptionField(),
 			}
 		];

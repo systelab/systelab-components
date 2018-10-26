@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
@@ -14,11 +14,10 @@ export class ApplicationSidebarAction {
 }
 
 @Component({
-	selector: 'systelab-app-sidebar',
+	selector:    'systelab-app-sidebar',
 	templateUrl: 'app-sidebar.component.html'
 })
 export class ApplicationSidebarComponent implements OnInit {
-
 
 	@Input() public actions: ApplicationSidebarAction[] = [];
 	@Input() public tabs: ApplicationSidebarTab[] = [];
@@ -26,9 +25,11 @@ export class ApplicationSidebarComponent implements OnInit {
 
 	constructor(protected dialogService: DialogService) {
 	}
-	ngOnInit(): void {
+
+	public ngOnInit(): void {
 		this.checkSubMenuSelected();
 	}
+
 	private checkSubMenuSelected() {
 		this.tabs.forEach((tab) => {
 			if (tab.subMenu) {
@@ -40,16 +41,16 @@ export class ApplicationSidebarComponent implements OnInit {
 			}
 		});
 	}
+
 	private selectTab(id: string) {
 		this.tabs.forEach((tab) => {
-			tab.isSelected = (tab.id === id)
+			tab.isSelected = (tab.id === id);
 			if (tab.subMenu) {
 				tab.subMenu.forEach((subTab) => {
 					if (subTab.id === id) {
 						subTab.isSelected = true;
 						tab.isSelected = true;
-					}
-					else {
+					} else {
 						subTab.isSelected = false;
 					}
 				});

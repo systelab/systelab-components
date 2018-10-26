@@ -22,7 +22,7 @@ export class ColorComboBox extends AbstractComboBox<ComboBoxInputRenderer> imple
 
 		this.columnDefs = [
 			{
-				colID:                 'id',
+				colId:                 'id',
 				field:                 this.getDescriptionField(),
 				cellRendererFramework: ColorCellRendererComponent,
 			}

@@ -15,7 +15,7 @@ import { from } from 'rxjs';
 export class DialogComponent {
 
 	// 768 comes form $breakpoint-medium in Bootstrap. Check forms.scss
-	public static breakpointMedium = 768;
+	public static readonly breakpointMedium = 768;
 
 	constructor(protected modal: Modal) {
 	}

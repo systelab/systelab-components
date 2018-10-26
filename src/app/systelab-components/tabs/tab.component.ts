@@ -16,13 +16,12 @@ import {Component, ElementRef, Input} from '@angular/core';
 	`]
 })
 export class TabComponent {
-	@Input() title: string;
-	@Input() active = false;
-	@Input() id = '';
-	@Input() warning = false;
+	@Input() public title: string;
+	@Input() public active = false;
+	@Input() public id = '';
+	@Input() public warning = false;
 
 	constructor(protected elementRef: ElementRef) {
-
 	}
 
 	public setVisible(visible: boolean) {

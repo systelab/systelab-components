@@ -23,7 +23,8 @@ export class SignatureCanvasComponent implements AfterViewInit {
 	public href = '';
 	public verificationActive = false;
 	public isCanvasEmpty = true;
-	public cx: CanvasRenderingContext2D;
+
+	private cx: CanvasRenderingContext2D;
 
 	@Input() public width = 400;
 	@Input() public height: number;

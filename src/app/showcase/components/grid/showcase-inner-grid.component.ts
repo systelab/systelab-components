@@ -64,8 +64,7 @@ export class ShowcaseInnerGridComponent extends AbstractApiGrid<ShowcaseData> im
 				field:                    'flag',
 				width:                    220,
 				headerComponentFramework: GridHeaderContextMenuComponent,
-				headerComponentParams:    {headerName: 'Flags', headerData: 'flags'},
-				suppressMovable:          true
+				headerComponentParams:    {headerName: 'Flags', headerData: 'flags'}
 			}, {
 				colId:               'input',
 				headerName:          'Cell with Decimal Input',
@@ -91,8 +90,7 @@ export class ShowcaseInnerGridComponent extends AbstractApiGrid<ShowcaseData> im
 				cellEditorFramework:   CheckboxCellEditorComponent,
 				onCellValueChanged:    e => console.log('checkbox', e),
 				editable:              true,
-				elementID:             'checkboxID',
-				supressResize:         true
+				suppressResize:         true
 			}, {
 				colId:                 'spinner',
 				headerName:            'Cell with Spinner',
@@ -102,7 +100,7 @@ export class ShowcaseInnerGridComponent extends AbstractApiGrid<ShowcaseData> im
 				cellRendererFramework: SpinnerCellRendererComponent,
 				cellEditorFramework:   SpinnerCellEditorComponent,
 				onCellValueChanged:    e => console.log('test', e),
-				supressResize:         true
+				suppressResize:         true
 			}];
 		return columnDefs;
 	}

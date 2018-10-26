@@ -16,7 +16,7 @@ export class MessagePopupButton {
 @Injectable()
 export class MessagePopupService {
 
-	public static breakpointMedium = 500;
+	public static readonly breakpointMedium = 500;
 
 	constructor(protected modal: Modal, protected i18nService: I18nService) {
 	}
