@@ -439,7 +439,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.popupmenu.setContainer(this);
 		this.popupmenu.setRowIndex(rowIndex);
 		if (this.existsAtLeastOneActionEnabled(data)) {
-			timer(200).subscribe(() => this.popupmenu.open(event));
+			timer(200).subscribe(() => this.popupmenu.openWithOptions(event, this.menu));
 		} else {
 			event.stopPropagation();
 		}
