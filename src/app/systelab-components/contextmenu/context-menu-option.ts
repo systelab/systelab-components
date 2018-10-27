@@ -1,10 +1,10 @@
 import { ContextMenuActionData } from './context-menu-action-data';
+import { AbstractContextMenuOption } from './abstract-context-menu-option';
 
 export type ContextMenuActionFunction = (data: ContextMenuActionData) => void;
 export type ContextMenuIsEnabledFunction = (elementId: string, actionId: string) => boolean;
-export type ContextMenuIsIconEnabledFunction = (elementId: string, actionId: string) => boolean;
 
-export class ContextMenuOption {
+export class ContextMenuOption extends AbstractContextMenuOption<ContextMenuActionFunction, ContextMenuIsEnabledFunction> {
 
 	constructor(public actionId: string,
 				public actionText: string,
@@ -14,9 +14,10 @@ export class ContextMenuOption {
 				public iconClass?: string,
 				public backgroundIconColor?: string,
 				public iconColor?: string,
-				public isIconEnabled?: ContextMenuIsIconEnabledFunction,
+				public isIconEnabled?: ContextMenuIsEnabledFunction,
 				public childrenContextMenuOptions?: Array<ContextMenuOption>,
-	            public iconFontSize?: string) {
+				public iconFontSize?: string) {
+		super();
 	}
 
 }
