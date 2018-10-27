@@ -24,7 +24,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	@Output() public viewportChanged = new EventEmitter();
 
-	@Input() protected menu: Array<GridContextMenuOption<T>>;
+	@Input() public menu: Array<GridContextMenuOption<T>>;
 
 	@Input() protected headerMenu: Array<GridContextMenuOption<Object>>;
 	@Input() protected preferenceName: string;
