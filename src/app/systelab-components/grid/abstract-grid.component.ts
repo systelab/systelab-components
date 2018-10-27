@@ -85,7 +85,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 			return this.getIsFullWidthCell(rowNode);
 		};
 		this.gridOptions.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
-
 		this.gridOptions.context = {componentParent: this};
 	}
 
@@ -125,7 +124,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			const gridOptions = this.gridOptions;
 			const filteredGridOptionsPreferences: Array<any> = [];
 			gridOptionsPreferences
-				.forEach(function(colPref) {
+				.forEach((colPref) => {
 					if (gridOptions.columnApi.getAllColumns()
 							.find((column: any) => colPref.colId === column.getColId())) {
 						filteredGridOptionsPreferences.push(colPref);
@@ -158,7 +157,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			// Set to null width of preferences of columns without supressSizeToFit
 			// If not set to null these columns are not sizedtofit
 			this.gridOptions.columnApi.getAllColumns()
-				.forEach(function(column) {
+				.forEach((column) => {
 					if (!column.getColDef().suppressSizeToFit) {
 						const columnPref: any = filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId());
 						columnPref.width = null;
@@ -232,7 +231,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 		if (option && option.action !== null && option.action !== undefined && data !== undefined) {
 			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
 			option.action(actionData);
-
 		} else {
 			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
 			this.action.emit(actionData);
@@ -250,7 +248,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 			return option.isActionEnabled(data);
 		}
 		return true;
-
 	}
 
 	protected getHeaderContextMenuOptions(): Array<GridContextMenuOption<Object>> {
@@ -264,7 +261,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 		if (option && option.action !== null && option.action !== undefined) {
 			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			return option.action(actionData);
-
 		} else {
 			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			this.action.emit(actionData);
@@ -328,7 +324,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 		if (event.column.colId !== 'contextMenu' && !event.column.isCellEditable(event.node)) {
 			this.clickRow.emit((event.event.ctrlKey && !this.showChecks) ? event.event : event.data);
 		}
-
 	}
 
 	public doColumnResized(event: any) {
@@ -355,18 +350,17 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		// initial & available
 		this.gridOptions.columnApi.getAllColumns()
-			.forEach(function(column: Column) {
+			.forEach((column) => {
 				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false);
-				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId)
-						.isVisible()) {
+				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId).isVisible()) {
 					options.available.push(item);
 				}
 				options.initialAvailableColumns.push(item);
-			}, this);
+			});
 
 		// visible
 		this.gridOptions.columnApi.getAllDisplayedColumns()
-			.forEach(function(column) {
+			.forEach((column) => {
 				if (column.getColId() !== 'contextMenu') {
 					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true);
 					options.visible.push(item);
@@ -397,21 +391,21 @@ export abstract class AbstractGrid<T> implements OnInit {
 			numberOfFixedInitialColumns = 1;
 		}
 
-		options.visible.forEach(function(tlp, index) {
+		options.visible.forEach((tlp, index) => {
 			const col: Column = this.gridOptions.columnApi.getAllColumns()
 				.find((column: Column) => column.getColDef().colId === tlp.colId);
 			col.setVisible(true);
 			this.gridOptions.columnApi.moveColumn(col.getColId(), index + numberOfFixedInitialColumns);
-		}, this);
+		});
 
 		this.gridOptions.columnApi.getAllColumns()
-			.forEach(function(column) {
+			.forEach((column) => {
 				if (column.getColId() !== 'contextMenu') {
 					if (!options.visible.find(tlp => tlp.colId === column.getColDef().colId)) {
 						this.gridOptions.columnApi.setColumnVisible(column.getColId(), false);
 					}
 				}
-			}, this);
+			});
 
 		this.gridOptions.api.sizeColumnsToFit();
 		this.saveColumnsStateInPreferences();
@@ -445,10 +439,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.popupmenu.setContainer(this);
 		this.popupmenu.setRowIndex(rowIndex);
 		if (this.existsAtLeastOneActionEnabled(data)) {
-			timer(200)
-				.subscribe(
-					() => this.popupmenu.open(event)
-				);
+			timer(200).subscribe(() => this.popupmenu.open(event));
 		} else {
 			event.stopPropagation();
 		}
