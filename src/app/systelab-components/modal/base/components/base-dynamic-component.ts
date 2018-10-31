@@ -1,7 +1,6 @@
-import { ComponentRef, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
-
-import { Observable ,  Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { ComponentRef, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 
 import { createComponent, CreateComponentArgs } from '../framework/createComponent';
 
@@ -52,7 +51,6 @@ export class BaseDynamicComponent implements OnDestroy {
 	 * Set a specific inline style on the overlay host element.
 	 * @param prop The style key
 	 * @param value The value, undefined to remove
-	 * @returns {ModalOverlay}
 	 */
 	setStyle(prop: string, value: string): this {
 		this.renderer.setStyle(this.el.nativeElement, prop, value);
@@ -86,16 +84,14 @@ export class BaseDynamicComponent implements OnDestroy {
 	}
 
 	myAnimationEnd$(): Observable<AnimationEvent | TransitionEvent> {
-		return filter.call(this.animationEnd$, e => e.target === this.el.nativeElement);
+		return this.animationEnd$.pipe(
+			filter(e => e.target === this.el.nativeElement)
+		);
 	}
 
 	/**
 	 * Add a component, supply a view container ref.
 	 * Note: The components vcRef will result in a sibling.
-	 * @param component The component to add
-	 * @param vcRef The container to add to
-	 * @param bindings Bindings to use (added on top of the ViewContainerRef)
-	 * @returns {Promise<ComponentRef<any>>}
 	 */
 	protected _addComponent<T>(instructions: CreateComponentArgs): ComponentRef<T> {
 		const cmpRef = createComponent(instructions);

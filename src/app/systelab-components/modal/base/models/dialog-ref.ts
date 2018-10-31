@@ -1,11 +1,10 @@
+import { Observable, Subject } from 'rxjs';
 import { ComponentRef } from '@angular/core';
-import { Observable ,  Subject } from 'rxjs';
 
 import { PromiseCompleter } from '../framework/utils';
+import { ModalOverlay, Overlay } from '../overlay/index';
 import { CloseGuard } from '../models/tokens';
 import { DialogBailOutError } from '../models/errors';
-import { ModalOverlay } from '../overlay/overlay.component';
-import { Overlay } from '../overlay/overlay.service';
 
 /**
  * API to an open modal window.
@@ -13,7 +12,6 @@ import { Overlay } from '../overlay/overlay.service';
 export class DialogRef<T> {
 	/**
 	 * Reference to the overlay component ref.
-	 * @return {ComponentRef<ModalOverlay>}
 	 */
 	overlayRef: ComponentRef<ModalOverlay>;
 
@@ -42,7 +40,6 @@ export class DialogRef<T> {
 
 	/**
 	 * A Promise that is resolved on a close event and rejected on a dismiss event.
-	 * @returns {Promise<T>|any|*|Promise<any>}
 	 */
 	get result(): Promise<any> {
 		return this._resultDeferred.promise;
@@ -123,7 +120,8 @@ export class DialogRef<T> {
 	}
 
 	private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): Promise<T> {
-		const gurad = this.closeGuard, fn: Function = gurad && typeof gurad[name] === 'function' && gurad[name];
+		const gurad        = this.closeGuard,
+		      fn: Function = gurad && typeof gurad[name] === 'function' && gurad[name];
 
 		return Promise.resolve(fn ? fn.call(gurad) : false);
 	}

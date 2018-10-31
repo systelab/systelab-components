@@ -24,8 +24,7 @@ export class OverlayDialogBoundary {
 	selector: '[overlayTarget]'
 })
 export class OverlayTarget implements OnDestroy {
-	@Input('overlayTarget')
-	set targetKey(value: string) {
+	@Input('overlayTarget') set targetKey(value: string) {
 		this._targetKey = value;
 		if (value) {
 			vcRefStore.setVCRef(value, this.vcRef);

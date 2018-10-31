@@ -10,9 +10,9 @@ import { noop } from '../framework/utils';
 const isDoc: boolean = !(typeof document === 'undefined' || !document);
 
 const eventMap = {
-	clickOutside:     'click',
+	clickOutside: 'click',
 	mousedownOutside: 'mousedown',
-	mouseupOutside:   'mouseup',
+	mouseupOutside: 'mouseup',
 	mousemoveOutside: 'mousemove'
 };
 
@@ -21,7 +21,6 @@ const eventMap = {
  * if the event target is not an ancestor of the given element.
  * @param element
  * @param handler
- * @returns {function(any): undefined}
  */
 function bubbleNonAncestorHandlerFactory(element: HTMLElement, handler: (event) => void) {
 	return (event) => {
@@ -59,7 +58,8 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
 		// is an ancestor of our element.
 		// The event is fired inside the angular zone so change detection can kick into action.
 		const onceOnOutside = () => {
-			const listener = bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)));
+			const listener =
+				      bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)));
 
 			// mimic BrowserDomAdapter.onAndCancel
 			document.addEventListener(eventMap[eventName], listener, false);
@@ -80,11 +80,10 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
 		return zone.runOutsideAngular(() => {
 			let fn: Function;
 			setTimeout(() => fn = onceOnOutside(), 0);
-			return () => fn();
+			return () => {
+				if (fn) fn();
+			};
 		});
 	}
 
-	addGlobalEventListener(target: string, eventName: string, handler: Function): Function {
-		throw 'not supported';
-	}
 }

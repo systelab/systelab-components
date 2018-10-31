@@ -233,7 +233,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = (this.withFavourites) ? [
 			{
-				colID: 'itemDescription',
+				colId: 'itemDescription',
 				id: this.getIdField(),
 				field: this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection,
@@ -244,7 +244,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			}
 		] : [
 			{
-				colID: 'itemDescription',
+				colId: 'itemDescription',
 				field: this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection,
 			}
@@ -491,7 +491,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
 				this.closeDropDown();
-				this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+				if (selectedRow[this.getIdField()]) {
+					this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+				}
 			}
 		} else {
 			this.selectionChanged = true;

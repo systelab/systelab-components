@@ -12,7 +12,6 @@ function validateMethodName(name: string) {
 /**
  * Returns a list of assigned property names (non private)
  * @param subject
- * @returns {string[]}
  */
 function getAssignedPropertyNames(subject: any): string[] {
 	return Object.getOwnPropertyNames(subject)
@@ -102,7 +101,9 @@ export function setAssignMethod<T>(obj: T, propertyName: string, writeOnce: bool
  * console.log(result); //{ myProp: 'someValue' }
  * result.myPropAlias // someValue
  */
-export function setAssignAlias<T>(obj: T, propertyName: string, srcPropertyName: string, hard: boolean = false): void {
+export function setAssignAlias<T>(obj: T, propertyName: string,
+                                  srcPropertyName: string,
+                                  hard: boolean = false): void {
 	validateMethodName.call(obj, propertyName);
 
 	objectDefinePropertyValue(obj, propertyName, (value: any) => {
@@ -111,7 +112,8 @@ export function setAssignAlias<T>(obj: T, propertyName: string, srcPropertyName:
 	});
 
 	if (hard === true) {
-		const key = privateKey(propertyName), srcKey = privateKey(srcPropertyName);
+		const key    = privateKey(propertyName),
+		      srcKey = privateKey(srcPropertyName);
 
 		Object.defineProperty(obj, key, <any>{
 			configurable: false,
@@ -126,7 +128,7 @@ export function setAssignAlias<T>(obj: T, propertyName: string, srcPropertyName:
  * A function that gets a value and returns the instance it works on.
  */
 export interface FluentAssignMethod<T, Z> {
-	// TODO: Setting 'this' instead of Z does not work, this=ConfigSetter here...
+	//TODO: Setting 'this' instead of Z does not work, this=ConfigSetter here...
 	(value: T): Z;
 }
 
@@ -151,9 +153,8 @@ export class FluentAssignFactory<T> {
 	 * Create a setter method on the FluentAssign instance.
 	 * @param name The name of the setter function.
 	 * @param defaultValue If set (not undefined) set's the value on the instance immediately.
-	 * @returns {FluentAssignFactory}
 	 */
-	setMethod(name: string, defaultValue?: any): FluentAssignFactory<T> {
+	setMethod(name: string, defaultValue: any = undefined): FluentAssignFactory<T> {
 		setAssignMethod(this._fluentAssign, name);
 		if (defaultValue !== undefined) {
 			(<any>this._fluentAssign)[name](defaultValue);
@@ -163,7 +164,6 @@ export class FluentAssignFactory<T> {
 
 	/**
 	 * The FluentAssign instance.
-	 * @returns {FluentAssign<T>}
 	 */
 	get fluentAssign(): FluentAssign<T> {
 		return this._fluentAssign;
@@ -189,9 +189,9 @@ export class FluentAssign<T> {
 	 * Returns a FluentAssignFactory<FluentAssign<T>> ready to define a FluentAssign type.
 	 * @param defaultValues An object representing default values for the instance.
 	 * @param initialSetters A list of initial setters for the instance.
-	 * @returns {FluentAssignFactory<T>}
 	 */
-	static compose<T>(defaultValues?: T, initialSetters?: string[]): FluentAssignFactory<T> {
+	static compose<T>(defaultValues: T         = undefined,
+	                  initialSetters: string[] = undefined): FluentAssignFactory<T> {
 
 		return <any>FluentAssign.composeWith<FluentAssign<T>>(
 			new FluentAssign<T>(defaultValues, initialSetters));
@@ -201,7 +201,6 @@ export class FluentAssign<T> {
 	 * Returns a FluentAssignFactory<Z> where Z is an instance of FluentAssign<?> or a derived
 	 * class of it.
 	 * @param fluentAssign An instance of FluentAssign<?> or a derived class of FluentAssign<?>.
-	 * @returns {any}
 	 */
 	static composeWith<Z>(fluentAssign: Z): IFluentAssignFactory<Z> {
 		return <any>new FluentAssignFactory<any>(<any>fluentAssign);
@@ -213,7 +212,9 @@ export class FluentAssign<T> {
 	 * @param initialSetters A list of initial setters for this FluentAssign.
 	 * @param baseType the class/type to create a new base. optional, {} is used if not supplied.
 	 */
-	constructor(defaultValues: T | T[]   = undefined, initialSetters: string[] = undefined, baseType: new () => T    = undefined) {
+	constructor(defaultValues: T | T[]   = undefined,
+	            initialSetters: string[] = undefined,
+	            baseType: new () => T    = undefined) {
 		if (Array.isArray(defaultValues)) {
 			(defaultValues as Array<any>).forEach(d => applyDefaultValues(this, d));
 		} else if (defaultValues) {
@@ -235,7 +236,7 @@ export class FluentAssign<T> {
 			.reduce((obj: T, name: string) => {
 				const key = privateKey(name);
 				// re-define property descriptors (we dont want their value)
-				const propDesc = Object.getOwnPropertyDescriptor(this, key);
+				let propDesc = Object.getOwnPropertyDescriptor(this, key);
 				if (propDesc) {
 					Object.defineProperty(obj, name, propDesc);
 				} else {

@@ -12,7 +12,7 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
-import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu.component';
+import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
 import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
 import { AgGridModule, AgGridNg2, BaseComponentFactory, Ng2ComponentFactory } from 'ag-grid-angular';
@@ -76,6 +76,7 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 import { ComboboxFavouriteRendererComponent } from './combobox/renderer/combobox-favourite-renderer.component';
 import { ModulabListBox } from './listbox/listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-component';
 
 @NgModule({
 	imports:         [
@@ -101,6 +102,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		DataFilterPipe,
 		TwoListComponent,
 		GridContextMenuComponent,
+		GridContextMenuCellRendererComponent,
 		GridHeaderContextMenuComponent,
 		GridOptionsDialog,
 		ColorCellRendererComponent,
@@ -219,7 +221,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		NumPadDialog,
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
-		ModulabListBox
+		ModulabListBox,
+		GridContextMenuComponent
 
 	],
 	entryComponents: [

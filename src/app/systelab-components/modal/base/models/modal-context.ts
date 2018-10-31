@@ -1,4 +1,6 @@
-import { OverlayContext } from './overlay-context';
+import { FluentAssignMethod } from './../framework/fluent-assign';
+import { extend, arrayUnion } from './../framework/utils';
+import { OverlayContext, OverlayContextBuilder } from './overlay-context';
 
 export const DEFAULT_VALUES = {};
 
@@ -13,4 +15,29 @@ export class ModalContext extends OverlayContext {
 	 * all models, at core, convey a message thus message is common to all modals.
 	 */
 	message: string;
+}
+
+/**
+ * A core context builder for a modal window instance, used to define the context upon
+ * a modal choose it's behaviour.
+ */
+export class ModalContextBuilder<T extends ModalContext> extends OverlayContextBuilder<T> {
+	/**
+	 * The core message to display.
+	 * A modal might have an extended message (e.g: HTML message) or other fields (e.g: title) but
+	 * all models, at core, convey a message thus message is common to all modals.
+	 */
+	message: FluentAssignMethod<string, this>;
+
+	constructor(
+		defaultValues: T | T[] = undefined,
+		initialSetters: string[] = undefined,
+		baseType: new () => T = undefined
+	) {
+		super(
+			extend<any>(DEFAULT_VALUES, defaultValues || {}),
+			arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
+			baseType
+		);
+	}
 }

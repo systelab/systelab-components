@@ -1,28 +1,13 @@
-import {
-	AfterViewInit,
-	Component,
-	DoCheck,
-	ElementRef,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	OnInit,
-	Output,
-	Renderer2,
-	ViewChild
-} from '@angular/core';
-import {Calendar} from 'primeng/components/calendar/calendar';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
+import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Calendar } from 'primeng/components/calendar/calendar';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 @Component({
-	selector: 'systelab-datepicker',
+	selector:    'systelab-datepicker',
 	templateUrl: 'datepicker.component.html'
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
-	public somethingChanged = false;
-
-	public _currentDate: Date;
 	@Input() public disabled = false;
 	@Input() public error = false;
 	@Input() public required = false;
@@ -30,8 +15,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
 	@Input() public showTodayButton = false;
-
-	public previousAfterDate = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -44,8 +27,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
-	public language: any;
+
 	@ViewChild('calendar') public currentCalendar: Calendar;
+
+	public somethingChanged = false;
+	protected _currentDate: Date;
+	public previousAfterDate = false;
+	public language: any;
 
 	public currentDocSize: number;
 	public currentLanguage: string;
@@ -56,7 +44,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public isTablet = false;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
 
-	public pHeaderElement: any = document.getElementById(this.datepickerId);
+	private headerElement: any = document.getElementById(this.datepickerId);
 
 	constructor(private myRenderer: Renderer2, private i18nService: I18nService) {
 		this.addListeners();
@@ -92,10 +80,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.closeDatepicker();
 		}
 
-		if (this.pHeaderElement !== document.getElementById(this.datepickerId)) {
-			this.pHeaderElement = document.getElementById(this.datepickerId);
-			if (this.pHeaderElement) {
-				this.repositionateCalendar(new ElementRef(this.pHeaderElement.parentElement.parentElement));
+		if (this.headerElement !== document.getElementById(this.datepickerId)) {
+			this.headerElement = document.getElementById(this.datepickerId);
+			if (this.headerElement) {
+				this.repositionateCalendar(new ElementRef(this.headerElement.parentElement.parentElement));
 			}
 		}
 
@@ -145,7 +133,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			if (dateStr.length >= 2) {
 
 				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
-					let days: number = Number(dateStr.replace('d', '')
+					const days: number = Number(dateStr.replace('d', '')
 						.replace('D', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -154,7 +142,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
-					let weeks: number = Number(dateStr.replace('w', '')
+					const weeks: number = Number(dateStr.replace('w', '')
 						.replace('W', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -163,7 +151,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
-					let weeks: number = Number(dateStr.replace('s', '')
+					const weeks: number = Number(dateStr.replace('s', '')
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -172,7 +160,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
-					let months: number = Number(dateStr.replace('m', '')
+					const months: number = Number(dateStr.replace('m', '')
 						.replace('M', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -181,7 +169,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
-					let years: number = Number(dateStr.replace('a', '')
+					const years: number = Number(dateStr.replace('a', '')
 						.replace('S', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -190,7 +178,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						emit = true;
 					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
-					let years: number = Number(dateStr.replace('y', '')
+					const years: number = Number(dateStr.replace('y', '')
 						.replace('Y', ''));
 					this.currentDate = new Date();
 					emit = false;
@@ -291,32 +279,36 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private getLanguage(): void {
 
-		let weekDaysNames: Array<string> = [];
-		let weekDaysNamesShort: Array<string> = [];
-		let monthNames: Array<string> = [];
-		let monthNamesShort: Array<string> = [];
+		const weekDaysNames: Array<string> = [];
+		const weekDaysNamesShort: Array<string> = [];
+		const monthNames: Array<string> = [];
+		const monthNamesShort: Array<string> = [];
+		// tslint:disable:max-line-length
+		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY'])
+			.subscribe((res) => {
+				weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);
+			});
 
-		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY']).subscribe((res) => {
-			weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);
-		});
+		this.i18nService.get(['COMMON_SEVENTH_DAY', 'COMMON_FIRST_DAY', 'COMMON_SECOND_DAY', 'COMMON_THIRD_DAY', 'COMMON_FOURTH_DAY', 'COMMON_FIFTH_DAY', 'COMMON_SIXTH_DAY'])
+			.subscribe((res) => {
+				weekDaysNamesShort.push(res.COMMON_SEVENTH_DAY, res.COMMON_FIRST_DAY, res.COMMON_SECOND_DAY, res.COMMON_THIRD_DAY, res.COMMON_FOURTH_DAY, res.COMMON_FIFTH_DAY, res.COMMON_SIXTH_DAY);
+			});
 
-		this.i18nService.get(['COMMON_SEVENTH_DAY', 'COMMON_FIRST_DAY', 'COMMON_SECOND_DAY', 'COMMON_THIRD_DAY', 'COMMON_FOURTH_DAY', 'COMMON_FIFTH_DAY', 'COMMON_SIXTH_DAY']).subscribe((res) => {
-			weekDaysNamesShort.push(res.COMMON_SEVENTH_DAY, res.COMMON_FIRST_DAY, res.COMMON_SECOND_DAY, res.COMMON_THIRD_DAY, res.COMMON_FOURTH_DAY, res.COMMON_FIFTH_DAY, res.COMMON_SIXTH_DAY);
-		});
+		this.i18nService.get(['COMMON_JANUARY', 'COMMON_FEBRUARY', 'COMMON_MARCH', 'COMMON_APRIL', 'COMMON_MAY', 'COMMON_JUNE', 'COMMON_JULY', 'COMMON_AUGUST', 'COMMON_SEPTEMBER', 'COMMON_OCTOBER', 'COMMON_NOVEMBER', 'COMMON_DECEMBER'])
+			.subscribe((res) => {
+				monthNames.push(res.COMMON_JANUARY, res.COMMON_FEBRUARY, res.COMMON_MARCH, res.COMMON_APRIL, res.COMMON_MAY, res.COMMON_JUNE, res.COMMON_JULY, res.COMMON_AUGUST, res.COMMON_SEPTEMBER, res.COMMON_OCTOBER, res.COMMON_NOVEMBER, res.COMMON_DECEMBER);
+			});
 
-		this.i18nService.get(['COMMON_JANUARY', 'COMMON_FEBRUARY', 'COMMON_MARCH', 'COMMON_APRIL', 'COMMON_MAY', 'COMMON_JUNE', 'COMMON_JULY', 'COMMON_AUGUST', 'COMMON_SEPTEMBER', 'COMMON_OCTOBER', 'COMMON_NOVEMBER', 'COMMON_DECEMBER']).subscribe((res) => {
-			monthNames.push(res.COMMON_JANUARY, res.COMMON_FEBRUARY, res.COMMON_MARCH, res.COMMON_APRIL, res.COMMON_MAY, res.COMMON_JUNE, res.COMMON_JULY, res.COMMON_AUGUST, res.COMMON_SEPTEMBER, res.COMMON_OCTOBER, res.COMMON_NOVEMBER, res.COMMON_DECEMBER);
-		});
-
-		this.i18nService.get(['JOB_MONTHS_1', 'JOB_MONTHS_2', 'JOB_MONTHS_3', 'JOB_MONTHS_4', 'JOB_MONTHS_5', 'JOB_MONTHS_6', 'JOB_MONTHS_7', 'JOB_MONTHS_8', 'JOB_MONTHS_9', 'JOB_MONTHS_10', 'JOB_MONTHS_11', 'JOB_MONTHS_12']).subscribe((res) => {
-			monthNamesShort.push(res.JOB_MONTHS_1, res.JOB_MONTHS_2, res.JOB_MONTHS_3, res.JOB_MONTHS_4, res.JOB_MONTHS_5, res.JOB_MONTHS_6, res.JOB_MONTHS_7, res.JOB_MONTHS_8, res.JOB_MONTHS_9, res.JOB_MONTHS_10, res.JOB_MONTHS_11, res.JOB_MONTHS_12);
-		});
+		this.i18nService.get(['JOB_MONTHS_1', 'JOB_MONTHS_2', 'JOB_MONTHS_3', 'JOB_MONTHS_4', 'JOB_MONTHS_5', 'JOB_MONTHS_6', 'JOB_MONTHS_7', 'JOB_MONTHS_8', 'JOB_MONTHS_9', 'JOB_MONTHS_10', 'JOB_MONTHS_11', 'JOB_MONTHS_12'])
+			.subscribe((res) => {
+				monthNamesShort.push(res.JOB_MONTHS_1, res.JOB_MONTHS_2, res.JOB_MONTHS_3, res.JOB_MONTHS_4, res.JOB_MONTHS_5, res.JOB_MONTHS_6, res.JOB_MONTHS_7, res.JOB_MONTHS_8, res.JOB_MONTHS_9, res.JOB_MONTHS_10, res.JOB_MONTHS_11, res.JOB_MONTHS_12);
+			});
 
 		this.language = {
-			dayNames: weekDaysNames,
-			dayNamesShort: weekDaysNamesShort,
-			dayNamesMin: weekDaysNamesShort,
-			monthNames: monthNames,
+			dayNames:        weekDaysNames,
+			dayNamesShort:   weekDaysNamesShort,
+			dayNamesMin:     weekDaysNamesShort,
+			monthNames:      monthNames,
 			monthNamesShort: monthNamesShort
 		};
 

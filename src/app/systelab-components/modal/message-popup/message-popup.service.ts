@@ -16,7 +16,7 @@ export class MessagePopupButton {
 @Injectable()
 export class MessagePopupService {
 
-	public static breakpointMedium = 500;
+	public static readonly breakpointMedium = 500;
 
 	constructor(protected modal: Modal, protected i18nService: I18nService) {
 	}
@@ -93,14 +93,11 @@ export class MessagePopupService {
 						height: height
 					},
 					SystelabModalContext)
-			)
-				.then((dialogRef: DialogRef<any>) => {
-					dialogRef.result.then((v) => {
-						resolve(v);
-					})
-						.catch((e) => {
-							reject(e);
-						});
+			).result.then((v) => {
+				resolve(v);
+			})
+				.catch((e) => {
+					reject(e);
 				});
 		});
 

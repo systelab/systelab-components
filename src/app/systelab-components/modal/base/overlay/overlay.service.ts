@@ -21,7 +21,6 @@ export class Overlay {
 	 * Check if a given DialogRef is the top most ref in the stack.
 	 * TODO: distinguish between body modal vs in element modal.
 	 * @param dialogRef
-	 * @returns {boolean}
 	 */
 	isTopMost(dialogRef: DialogRef<any>): boolean {
 		return _stack.indexOf(dialogRef) === _stack.length - 1;
@@ -35,6 +34,10 @@ export class Overlay {
 		return _stack.groupLength(_stack.groupOf(dialogRef));
 	}
 
+	closeAll(result: any = null): void {
+		_stack.closeAll(result);
+	}
+
 	/* Feature implemented for Modulab Platform*/
 	public closeAllDialogs() {
 		_stack.closeAllDialogs();
@@ -44,11 +47,10 @@ export class Overlay {
 	 * Creates an overlay and returns a dialog ref.
 	 * @param config instructions how to create the overlay
 	 * @param group A token to associate the new overlay with, used for reference (stacks usually)
-	 * @returns {DialogRef<T>[]}
 	 */
 	open<T extends OverlayContext>(config: OverlayConfig, group?: any): DialogRef<T>[] {
-		const viewContainer = config.viewContainer;
-		let containers: Array<ViewContainerRef> = [];
+		let viewContainer                       = config.viewContainer,
+		    containers: Array<ViewContainerRef> = [];
 
 		if (typeof viewContainer === 'string') {
 			containers = vcRefStore.getVCRef(viewContainer as string);
@@ -64,7 +66,10 @@ export class Overlay {
 			.map(vc => this.createOverlay(config.renderer || this._modalRenderer, vc, config, group));
 	}
 
-	private createOverlay(renderer: OverlayRenderer, vcRef: ViewContainerRef, config: OverlayConfig, group: any): DialogRef<any> {
+	private createOverlay(renderer: OverlayRenderer,
+	                      vcRef: ViewContainerRef,
+	                      config: OverlayConfig,
+	                      group: any): DialogRef<any> {
 
 		if (config.context) {
 			config.context.normalize();
@@ -74,10 +79,10 @@ export class Overlay {
 			config.injector = this.injector;
 		}
 
-		const dialog = new DialogRef<any>(this, config.context || {});
+		let dialog = new DialogRef<any>(this, config.context || {});
 		dialog.inElement = config.context && !!config.context.inElement;
 
-		const cmpRef = renderer.render(dialog, vcRef, config.injector);
+		let cmpRef = renderer.render(dialog, vcRef, config.injector);
 
 		Object.defineProperty(dialog, 'overlayRef', {value: cmpRef});
 		_stack.pushManaged(dialog, group);

@@ -7,13 +7,13 @@ declare var jQuery: any;
 })
 export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 
-	public static DEFAULT_PLACEMENT = 'top';
-	public static DEFAULT_DELAY = 1000;
+	public static readonly DEFAULT_PLACEMENT = 'top';
+	public static readonly DEFAULT_DELAY = 1000;
 
-	@Input() systelabTooltip: string;
-	@Input() systelabTooltipHtml: string;
-	@Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
-	@Input() systelabTooltipDelay: number;
+	@Input() public systelabTooltip: string;
+	@Input() public systelabTooltipHtml: string;
+	@Input() public systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
+	@Input() public systelabTooltipDelay: number;
 
 	constructor(private el: ElementRef, private renderer: Renderer2) {
 	}

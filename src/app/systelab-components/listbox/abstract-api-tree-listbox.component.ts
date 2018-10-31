@@ -98,7 +98,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		this.columnDefs = [
 			{
-				colID:                 'id',
+				colId:                 'id',
 				cellRendererFramework: AbstractTreeListboxRendererComponent,
 				cellRendererParams:    {
 					changeFunction:         (e) => {

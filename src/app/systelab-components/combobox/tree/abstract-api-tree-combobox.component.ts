@@ -18,7 +18,7 @@ export class ComboTreeNode<T> {
 
 export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboTreeNode<T>> implements AgRendererComponent, OnInit, OnDestroy {
 
-	public static FAVOURITEID = 'favourite';
+	public static readonly FAVOURITEID = 'favourite';
 
 	@Input() public isParentSelectable = false;
 	@Input() public isAllSelectable = true;
@@ -39,7 +39,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colID: 'itemDescription',
+				colId: 'itemDescription',
 				cellRenderer: (params: any) => {
 					return this.getLabelForLevel(params.data);
 				}

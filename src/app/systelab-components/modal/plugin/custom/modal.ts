@@ -1,8 +1,6 @@
+import { Injectable } from '@angular/core';
 
-
-import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
-
-import { ContainerContent, DialogRef, Maybe, Modal as Modal_, Overlay, PromiseCompleter } from '../../base/base-modal';
+import { ContainerContent, DialogRef, Modal as Modal_, Overlay, PromiseCompleter } from '../../base/base-modal';
 
 import { SystelabModalContainer } from './modal-container.component';
 
@@ -12,9 +10,9 @@ export class Modal extends Modal_ {
 		super(overlay);
 	}
 
-	protected create(dialogRef: DialogRef<any>, content: ContainerContent, bindings?: RRP[]): Maybe<DialogRef<any>> {
+	protected create(dialogRef: DialogRef<any>, content: ContainerContent): DialogRef<any> {
 
-		const containerRef = this.createContainer(dialogRef, SystelabModalContainer, content, bindings);
+		const containerRef = this.createContainer(dialogRef, SystelabModalContainer, content);
 
 		const overlay = dialogRef.overlayRef.instance;
 		const container = containerRef.instance;
