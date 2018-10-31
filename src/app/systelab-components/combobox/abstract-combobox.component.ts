@@ -491,7 +491,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
 				this.closeDropDown();
-				this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+				if (selectedRow[this.getIdField()]) {
+					this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
+				}
 			}
 		} else {
 			this.selectionChanged = true;
