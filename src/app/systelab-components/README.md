@@ -45,7 +45,7 @@ NgModule({
         SystelabComponentsModule.forRoot(),
         DndModule.forRoot(),
         AgGridModule.withComponents([
-            GridContextMenuComponent,
+            GridContextMenuCellRendererComponent,
             GridHeaderContextMenuComponent
         ]),
     ...

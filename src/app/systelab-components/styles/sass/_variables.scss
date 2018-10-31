@@ -1,6 +1,6 @@
 @import "mixins";
 @import "systelab-bootstrap-settings";
-@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 // Internal variable to help set the size
 $slab-size-percentage: 0.7 !default;
