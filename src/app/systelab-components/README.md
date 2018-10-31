@@ -82,7 +82,7 @@ export class AppComponent {
 In the sass file app.component.scss, we have imported the Bootstrap and systelab-component sass styles.
 
 ```sass
-@import "../systelab-components/styles/sass/systelab-components";
+@import "~systelab-components/sass/systelab-components";
 ```
 
 Notice that the Bootstrap package is a dependency for systelab-components, and npm will download it.
@@ -95,7 +95,7 @@ To change the default Bootstrap or systelab-components settings like colors, bor
 $slab-size-percentage: 1;
 $primary-color: rgb(0, 154, 181);
 
-@import "../systelab-components/styles/sass/systelab-components";
+@import "~systelab-components/sass/systelab-components";
 ```
 
 All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](styles/sass/_variables.scss) can be overwritten here.
