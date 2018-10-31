@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -50,8 +50,8 @@
     "@angular/platform-browser": "^7.0.0",
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/router": "^7.0.0",
-    "ag-grid": "^18.0.0",
-    "ag-grid-angular": "^18.0.0",
+    "ag-grid": "^18.1.2",
+    "ag-grid-angular": "^18.1.0",
     "angular-split": "^1.0.0-rc.3",
     "bootstrap": "^4.1.1",
     "date-fns": "^1.29.0",

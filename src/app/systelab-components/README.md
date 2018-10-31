@@ -17,7 +17,7 @@ After, you must add the following styles and scripts in the angular.json file,
 ```javascript
 "styles": [
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
-        "../node_modules/ag-grid/dist/styles/theme-fresh.css",
+        "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/systelab-components/icons/icomoon.css"
