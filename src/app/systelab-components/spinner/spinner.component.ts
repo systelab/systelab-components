@@ -70,11 +70,11 @@ export class TouchspinComponent {
 					this.value = this.previousValue;
 				}
 			}
-			this._valueStr = val;
+			this._valueStr = (val.length === 1 && this.fillUnitsWithZero) ? ('0' + val) : val;
 		} else {
 			this._valueStr = this.fillUnitsWithZero ? '00' : '0';
 		}
-		this.valueStrChange.emit(val);
+		this.valueStrChange.emit(this._valueStr);
 	}
 
 	@Output() public valueStrChange = new EventEmitter<string>();
