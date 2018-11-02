@@ -12,7 +12,7 @@ In order to use the library, the first step will be to add the dependency in you
 npm install systelab-components --save
 ```
 
-After, you must add the following styles and scripts in the angular.json file,
+After, you must add the following styles, stylePreprocessorOptions and scripts in the angular.json file,
 
 ```javascript
 "styles": [
@@ -22,6 +22,11 @@ After, you must add the following styles and scripts in the angular.json file,
         "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/systelab-components/icons/icomoon.css"
       ],
+"stylePreprocessorOptions": {
+  "includePaths": [
+    "node_modules"
+  ]
+},      
 "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.js",
@@ -60,7 +65,7 @@ providers: [
 ],
 ```
 
-Finally, you must import the systelab-bootstrap-settings, bootstrap and systelab-components sass files in the styles of your main component, and make them visible for all your components.
+Finally, you must import the systelab-components sass file in the styles of your main component, and make them visible for all your components.
 
 In the following example, for the component AppComponent, we have created and added the sass file app.component.scss. Also we have set the encapsulation as None.
 
@@ -79,15 +84,39 @@ export class AppComponent {
 }
 ```
 
-In the sass file app.component.scss, we have imported the Bootstrap and systelab-component sass styles.
+A better solution is to include app.component.scss in style section of angular.json file
 
-```sass
-@import "~systelab-components/sass/systelab-bootstrap-settings";
-@import "~bootstrap/scss/bootstrap";
-@import "~systelab-components/sass/systelab-components";
+```javascript
+"styles": [
+        "../node_modules/ag-grid/dist/styles/ag-grid.css",
+        "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/systelab-components/icons/icomoon.css",
+        "src/app/app.component.scss"
+      ],
+```
+And then it can be removed from AppComponent and also encapsulation to None 
+
+```javascript
+@Component({
+    selector:      'app-root',
+    templateUrl:   'app.component.html'
+})
+export class AppComponent {
+
+    constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
+        ...
+    }
+}
 ```
 
-Notice that the Bootstrap package is a dependency for systelab-components, and npm will download it.
+In the sass file app.component.scss, we have imported systelab-components sass style.
+
+```sass
+@import "systelab-components/sass/systelab-components";
+```
+Bootstrap package is a dependency for systelab-components, and npm will download it.
 
 ### Changing the default style
 
@@ -97,12 +126,10 @@ To change the default Bootstrap or systelab-components settings like colors, bor
 $slab-size-percentage: 1;
 $primary-color: rgb(0, 154, 181);
 
-@import "~systelab-components/sass/systelab-bootstrap-settings";
-@import "~bootstrap/scss/bootstrap";
-@import "~systelab-components/sass/systelab-components";
+@import "systelab-components/sass/systelab-components";
 ```
 
-All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](styles/sass/_variables.scss) can be overwritten here.
+All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) can be overwritten here.
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
 

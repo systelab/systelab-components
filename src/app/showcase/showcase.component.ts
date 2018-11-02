@@ -5,9 +5,7 @@ import { NavbarItem } from '../systelab-components/navbar/navbar.component';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: 'showcase.component.html',
-	styleUrls: ['showcase.component.scss'],
-	encapsulation: ViewEncapsulation.None
+	templateUrl: 'showcase.component.html'
 })
 export class ShowcaseComponent {
 
