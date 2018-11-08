@@ -65,38 +65,9 @@ providers: [
 ],
 ```
 
-Finally, you must import the systelab-components sass file in the styles of your main component, and make them visible for all your components.
+Finally, you must import the systelab-components sass file in the general styles file in src/styles.scss.
 
-In the following example, for the component AppComponent, we have created and added the sass file app.component.scss. Also we have set the encapsulation as None.
-
-```javascript
-@Component({
-    selector:      'app-root',
-    templateUrl:   'app.component.html',
-    styleUrls:     ['app.component.scss'],
-    encapsulation: ViewEncapsulation.None
-})
-export class AppComponent {
-
-    constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
-        ...
-    }
-}
-```
-
-A better solution is to include app.component.scss in style section of angular.json file
-
-```javascript
-"styles": [
-        "../node_modules/ag-grid/dist/styles/ag-grid.css",
-        "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
-        "../node_modules/primeng/resources/themes/omega/theme.css",
-        "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/systelab-components/icons/icomoon.css",
-        "src/app/app.component.scss"
-      ],
-```
-And then it can be removed from AppComponent and also encapsulation to None 
+In the following example, for the component AppComponent we are not setting styleUrl due to the component will use the styles defined in src/styles.scss.
 
 ```javascript
 @Component({
@@ -111,7 +82,20 @@ export class AppComponent {
 }
 ```
 
-In the sass file app.component.scss, we have imported systelab-components sass style.
+src/styles.scss file is visible to AppComponent because is referenced in styles of angular.json file.
+
+```javascript
+"styles": [
+        "../node_modules/ag-grid/dist/styles/ag-grid.css",
+        "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/systelab-components/icons/icomoon.css",
+        "src/styles.scss"
+      ],
+```
+
+In the sass file src/styles.scss, we have imported systelab-components sass style.
 
 ```sass
 @import "systelab-components/sass/systelab-components";
