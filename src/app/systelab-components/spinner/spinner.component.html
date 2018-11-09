@@ -6,7 +6,7 @@
                     class="icon-minus-thin"></i></button>
         </div>
         <input [class.disabled]="disabled" name="sp" [(ngModel)]="valueStr"
-               class="slab-flex-1 form-control text-center" type="text"
+               class="slab-flex-1 slab-spinner-input form-control text-center" type="text"
                (keydown)="($event.keyCode===13||$event.keyCode===9)?pushEnter($event.keyCode):0"
                (keypress)="checkKey($event)"
                (blur)="checkValue(valueStr)"
