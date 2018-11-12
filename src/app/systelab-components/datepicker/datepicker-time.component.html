@@ -20,9 +20,9 @@
             </div>
         </p-header>
     </p-calendar>
-    <systelab-spinner class="d-flex h-100" [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true"
+    <systelab-spinner class="d-flex h-100" [spinValues]="touchSpinHourValues" [(valueStr)]="currentHours" id="hours" [fillUnitsWithZero]="true" [disabled]="disabled"
                       style="width: 80px;"></systelab-spinner>
     <label class="mx-1 my-0">:</label>
-    <systelab-spinner class="d-flex h-100" [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes" [fillUnitsWithZero]="true"
+    <systelab-spinner class="d-flex h-100" [spinValues]="touchSpinMinuteValues" [(valueStr)]="currentMinutes" id="minutes" [fillUnitsWithZero]="true" [disabled]="disabled"
                       style="width: 80px;"></systelab-spinner>
 </div>
