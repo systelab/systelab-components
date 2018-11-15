@@ -18,8 +18,8 @@ export class DatepickerTime extends Datepicker {
 	constructor(myRenderer: Renderer2, i18nService: I18nService) {
 		super(myRenderer, i18nService);
 
-		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
-		this.touchSpinMinuteValues = new TouchSpinValues(0, 0, 59, 1);
+		this.touchSpinHourValues = new TouchSpinValues(Number( this.currentHours ), 0, 23, 1);
+		this.touchSpinMinuteValues = new TouchSpinValues(Number( this.currentMinutes ), 0, 59, 1);
 	}
 
 	@Input()
@@ -45,6 +45,7 @@ export class DatepickerTime extends Datepicker {
 		if (value) {
 			const numberValue = Number(value);
 			this._currentHours = value;
+			this.touchSpinHourValues.value = numberValue;
 			this.currentHoursChange.emit(this._currentHours);
 			if (this.currentDate) {
 				if (this._currentHours) {
@@ -68,6 +69,7 @@ export class DatepickerTime extends Datepicker {
 		if (value) {
 			const numberValue = Number(value);
 			this._currentMinutes = value;
+			this.touchSpinMinuteValues.value = numberValue;
 			this.currentMinutesChange.emit(this._currentMinutes);
 			if (this.currentDate) {
 				if (this._currentMinutes) {
