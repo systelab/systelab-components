@@ -16,10 +16,10 @@
 //Override
 
 .form-control {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
   height: $form-elements-height;
 }
 
