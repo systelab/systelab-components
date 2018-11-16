@@ -186,8 +186,9 @@ Once you have your component, you can use it in your templates.
 | isDisabled | boolean | false | If true the combo is disabled|
 | expandToParentContainerHeight | boolean | false | If true the combo expands its height to parent container height|
 | emptyElement | boolean | false | If true adds and emtpy element at the first position of the elements list in the dropdown. Use it only in combos that extends from AbstractApiComboBox or AbstractApiTreeComboBox. Never use it with multipleSelection property|
-| withFavourites | boolean | false | Used to activate and deactivate the favourites || 
-| preferencesName | string | '' | Preference name over will be saved the preferences || 
+| allElement | boolean | false | If true adds an element that represents the "all" element at the first position of the elements list in the dropdown (the second if the emptyElement is also set to true). Use it only in combos that extends from AbstractComboBox or AbstractApiComboBox. It can be used with multipleSelection property. In this last case, if the "all" element is selected no other option will remain selected. Reversely, if the "all" element is selected and the user select any other option, then the "all" element is deselected. |																																																																																																																																								
+| withFavourites | boolean | false | Used to activate and deactivate the favourites |
+| preferencesName | string | '' | Preference name over will be saved the preferences |
 
 In black the Two-Way Data Binding properties.
 
