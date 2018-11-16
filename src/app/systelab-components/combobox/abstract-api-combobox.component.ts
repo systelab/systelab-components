@@ -3,7 +3,7 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid';
 import { AbstractComboBox } from './abstract-combobox.component';
 import { Observable } from 'rxjs';
-import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
@@ -13,7 +13,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	public totalItemsLoaded = false;
 
-	constructor( public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService ) {
+	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
@@ -35,83 +35,88 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		this.gridOptions.datasource = null;
 	}
 
-	public abstract getData( page: number, itemsPerPage: number, startsWithParameter: string ): Observable<Array<T>>;
+	public abstract getData(page: number, itemsPerPage: number, startsWithParameter: string): Observable<Array<T>>;
 
 	public abstract getTotalItems(): number;
 
-	public refresh( params: any ): boolean {
-		if ( this.gridOptions && this.gridOptions.api ) {
-			this.gridOptions.api.setDatasource( this );
+	public refresh(params: any): boolean {
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.setDatasource(this);
 		}
 		return true;
 	}
-
 
 	// override
 	public loop(): void {
 		let result = true;
 
-		if ( this.isDropDownOpen() ) {
+		if (this.isDropDownOpen()) {
 			// First time opened we load the table
-			if ( this.gridOptions.datasource === null ) {
+			if (this.gridOptions.datasource === null) {
 				this.gridOptions.datasource = this;
-				this.refresh( null );
+				this.refresh(null);
 			}
-			if ( this.totalItemsLoaded ) {
+			if (this.totalItemsLoaded) {
 				this.setDropdownHeight();
 				this.setDropdownPosition();
 				result = false;
 			}
 		}
-		if ( result && this.isDropdownOpened ) {
-			setTimeout( () => this.loop(), 10 );
+		if (result && this.isDropdownOpened) {
+			setTimeout(() => this.loop(), 10);
 		} else {
 			return;
 		}
 	}
 
-
-	// override
-	protected getTotalItemsForDropdownHeight(): number {
-		let totalItems = Number( this.getTotalItems());
-		if ( this.emptyElement ) {
-			totalItems += 1;
-		}
-		return totalItems;
+	//override
+	protected getTotalItemsInCombo(): number {
+		return this.getTotalItems();
 	}
 
-	public doSearch( event: any ) {
-		if ( event.shiftKey || event.ctrlKey ) {
+	public doSearch(event: any) {
+		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
 		this.startsWith = event.target.value;
-		this.refresh( null );
+		this.refresh(null);
 	}
 
-	public getRows( params: IGetRowsParams ): void {
+	public getRows(params: IGetRowsParams): void {
 
 		const page: number = params.endRow / this.gridOptions.paginationPageSize;
 		const pageSize: number = this.gridOptions.paginationPageSize;
 
 		const emptyElemNumber: number = this.emptyElement ? 1 : 0;
-		const totalItems: number = this.getTotalItems() + emptyElemNumber;
+		const allNumber: number = this.allElement ? 1 : 0;
+		const totalItems: number = this.getTotalItems() + emptyElemNumber + allNumber;
 		const modulus: number = totalItems % pageSize;
 
-		if ( page === 1 || page <= totalItems / pageSize || modulus > 1 || (modulus === 1 && !this.emptyElement) ) {
-			this.getElements( page, pageSize, emptyElemNumber, params );
+		if (page === 1
+			|| page <= totalItems / pageSize
+			|| modulus > 1
+			|| ((modulus === 1 || modulus === 2) && !this.emptyElement && !this.allElement)) {
+			this.getElements(page, pageSize, emptyElemNumber, allNumber, params);
 		} else {
 			this.totalItemsLoaded = false;
-			this.getData( page - 1, this.gridOptions.paginationPageSize, this.startsWith )
+			this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe(
-					( previousPage: Array<T> ) => {
+					(previousPage: Array<T>) => {
 						const itemArray: Array<T> = new Array<T>();
-						const totItems: number = Number( this.getTotalItems() + emptyElemNumber );
+						const totItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
+						if (this.emptyElement === true && this.allElement === true) {
+							const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
+							itemArray.push(lastButOneItemFromPreviousPage);
 
-						const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-						itemArray.push( lastItemFromPreviousPage );
+							const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+							itemArray.push(lastItemFromPreviousPage);
+						} else {
+							const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+							itemArray.push(lastItemFromPreviousPage);
+						}
 
 						this.totalItemsLoaded = true;
-						params.successCallback( itemArray, totItems );
+						params.successCallback(itemArray, totItems);
 
 					},
 					() => {
@@ -121,38 +126,54 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		}
 	}
 
-	private getElements( page: number, pageSize: number, emptyElemNumber: number, params: IGetRowsParams ) {
+	private getElements(page: number, pageSize: number, emptyElemNumber: number, allNumber: number, params: IGetRowsParams) {
 		this.totalItemsLoaded = false;
-		this.getData( page, pageSize, this.startsWith )
+		this.getData(page, pageSize, this.startsWith)
 			.subscribe(
-				( v: Array<T> ) => {
+				(v: Array<T>) => {
 					const itemArray: Array<T> = new Array<T>();
-					const totalItems: number = Number( this.getTotalItems() + emptyElemNumber );
+					const totalItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
 
-					if ( this.emptyElement === true ) {
+					if (this.emptyElement === true || this.allElement === true) {
 
-						if ( page === 1 ) {
-							const newElement: T = this.getInstance();
-							itemArray.push( newElement );
-
-							for ( const originalElement of v ) {
-								itemArray.push( originalElement );
+						if (page === 1) {
+							if (this.emptyElement === true) {
+								const newElement: T = this.getInstance();
+								itemArray.push(newElement);
 							}
-							params.successCallback( itemArray, totalItems );
+
+							if (this.allElement === true) {
+								const allElement: T = this.getAllInstance();
+								itemArray.push(allElement);
+							}
+
+							for (const originalElement of v) {
+								itemArray.push(originalElement);
+							}
+							params.successCallback(itemArray, totalItems);
 							this.totalItemsLoaded = true;
 
 						} else {
-							this.getData( page - 1, this.gridOptions.paginationPageSize, this.startsWith )
+							this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 								.subscribe(
-									( previousPage: Array<T> ) => {
-										const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-										itemArray.push( lastItemFromPreviousPage );
+									(previousPage: Array<T>) => {
 
-										for ( const originalElement of v ) {
-											itemArray.push( originalElement );
+										if (this.emptyElement === true && this.allElement === true) {
+											const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
+											itemArray.push(lastButOneItemFromPreviousPage);
+
+											const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+											itemArray.push(lastItemFromPreviousPage);
+										} else {
+											const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+											itemArray.push(lastItemFromPreviousPage);
+										}
+
+										for (const originalElement of v) {
+											itemArray.push(originalElement);
 										}
 										this.totalItemsLoaded = true;
-										params.successCallback( itemArray, totalItems );
+										params.successCallback(itemArray, totalItems);
 									},
 									() => {
 										params.failCallback();
@@ -160,11 +181,12 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 								);
 						}
 					} else {
-						for ( const originalElement of v ) {
-							itemArray.push( originalElement );
+
+						for (const originalElement of v) {
+							itemArray.push(originalElement);
 						}
 						this.totalItemsLoaded = true;
-						params.successCallback( itemArray, totalItems );
+						params.successCallback(itemArray, totalItems);
 					}
 				},
 				error => {
@@ -172,7 +194,5 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 				}
 			);
 	}
-
-
 
 }
