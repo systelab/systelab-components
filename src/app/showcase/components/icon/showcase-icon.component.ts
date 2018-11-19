@@ -111,5 +111,9 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-redo2');
 		this.icons.push('icon-ban');
 		this.icons.push('icon-checkbox');
+		this.icons.push('icon-microsoft-word');
+		this.icons.push('icon-microsoft-excel');
+		this.icons.push('icon-microsoft-powerpoint');
+		this.icons.push('icon-adobe-acrobat-reader');
 	}
 }
