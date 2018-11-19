@@ -10,11 +10,11 @@ import {
 	Renderer2,
 	ViewChild
 } from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-import {GridOptions} from 'ag-grid';
-import {StylesUtilService} from '../utilities/styles.util.service';
-import {ComboboxFavouriteRendererComponent} from './renderer/combobox-favourite-renderer.component';
-import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { GridOptions } from 'ag-grid';
+import { StylesUtilService } from '../utilities/styles.util.service';
+import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
 declare var jQuery: any;
 
@@ -30,14 +30,37 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public filter = false;
 	@Input() public multipleSelection = false;
 	@Input() public listSelectedValues = false;
+	@Input() public allElement = false;
 
 	@Input() public fontFamily: string;
 	@Input() public fontSize: string;
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
 
+	public getAllFieldIDValue(): string | number {
+		return '0';
+	}
+
+	public getAllFieldDescriptionValue(): string {
+		return '';
+	}
+
+	public getAllCodeFieldValue(): string {
+		return '';
+	}
+
+	public getAllInstance(): T {
+		const instance = this.getInstance();
+
+		instance[this.getIdField()] = this.getAllFieldIDValue();
+		instance[this.getDescriptionField()] = this.getAllFieldDescriptionValue();
+		instance[this.getCodeField()] = this.getAllCodeFieldValue();
+
+		return instance;
+	}
+
 	public _values: Array<any>;
-	@Input() 
+	@Input()
 	set values(newValues: Array<any>) {
 		this._values = newValues;
 		if (this.gridOptions) {
@@ -45,9 +68,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 		this.setCodeDescriptionById();
 	}
+
 	get values() {
 		return this._values;
 	}
+
 	@Input() public isDisabled: boolean;
 	@Input() public expandToParentContainerHeight = false;
 	@Output() public change = new EventEmitter();
@@ -233,19 +258,19 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = (this.withFavourites) ? [
 			{
-				colId: 'itemDescription',
-				id: this.getIdField(),
-				field: this.getDescriptionField(),
-				checkboxSelection: this.multipleSelection,
+				colID:                 'itemDescription',
+				id:                    this.getIdField(),
+				field:                 this.getDescriptionField(),
+				checkboxSelection:     this.multipleSelection,
 				cellRendererFramework: ComboboxFavouriteRendererComponent,
-				cellRendererParams: {
+				cellRendererParams:    {
 					favouriteList: this.favouriteList
 				}
 			}
 		] : [
 			{
-				colId: 'itemDescription',
-				field: this.getDescriptionField(),
+				colID:             'itemDescription',
+				field:             this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection,
 			}
 		];
@@ -266,7 +291,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked: this.getCheckboxChecked()
+			checkboxChecked:   this.getCheckboxChecked()
 		};
 
 		this.gridOptions.getRowNodeId =
@@ -346,7 +371,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.isFavourite) {
 			this.favouriteList.push(this.id.toString());
 		} else {
-			this.favouriteList.splice(this.favouriteList.map(String).indexOf(this.id.toString()), 1);
+			this.favouriteList.splice(this.favouriteList.map(String)
+				.indexOf(this.id.toString()), 1);
 		}
 		this.preferencesService.put(
 			this.getComboPreferencesPrefix() + '.favourites',
@@ -426,9 +452,16 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	}
 
+	protected getTotalItemsInCombo(): number {
+		return Number(this.values ? this.values.length : 0);
+	}
+
 	protected getTotalItemsForDropdownHeight(): number {
-		let totalItems = Number(this.values ? this.values.length : 0);
+		let totalItems = this.getTotalItemsInCombo();
 		if (this.emptyElement) {
+			totalItems += 1;
+		}
+		if (this.allElement) {
 			totalItems += 1;
 		}
 		return totalItems;
@@ -501,7 +534,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	private checkIfIsFavourite(id: string): void {
-		this.isFavourite = (id !== undefined && id !== null) ? this.favouriteList.map(String).indexOf(id) > -1 : false;
+		this.isFavourite = (id !== undefined && id !== null) ? this.favouriteList.map(String)
+			.indexOf(id) > -1 : false;
 	}
 
 	public onModelUpdated() {
@@ -510,9 +544,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
 					if (this.multipleSelectedItemList
-							.filter((selectedItem) => {
-								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
-							}).length > 0) {
+						.filter((selectedItem) => {
+							return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+						}).length > 0) {
 						node.selectThisNode(true);
 					}
 				});
@@ -547,13 +581,31 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public onRowSelected(event: any) {
 		if (!this.multipleSelection) {
 		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
+			const newElement: T = this.getInstance();
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
 				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 					return item[this.getIdField()] === event.node.data[this.getIdField()];
 				});
 				if (event.node.selected) {
 					if (elementIndexInSelectedList < 0) {
-						const newElement: T = this.getInstance();
+						if (this.allElement) {
+							// if the selectedNode is "all"
+							if (event.node.data[this.getIdField()] === this.getAllFieldIDValue()) {
+								this.multipleSelectedItemList = [];
+								this.unselectAllNodesInGridpOptions();
+							} else {
+								// the selectedNode is NOT "all: was "all" node already selected?
+								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+									return item[this.getIdField()] === this.getAllFieldIDValue();
+								});
+								// yes, it was => unselect "all" node and empty the multipleSelectedItemList
+								if (elementAllInSelectedList !== -1) {
+									this.multipleSelectedItemList = [];
+									this.unselectNodeAllInGridOptions();
+								}
+							}
+						}
+						// Regardless the value of allElement, we have to add the newElement using the selectedNode
 						newElement[this.getIdField()] = event.node.data[this.getIdField()];
 						newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 						newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
@@ -567,8 +619,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 					}
 				}
 			} else {
-				this.multipleSelectedItemList = new Array<T>();
-				const newElement: T = this.getInstance();
+				this.multipleSelectedItemList = [];
 				newElement[this.getIdField()] = event.node.data[this.getIdField()];
 				newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 				newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
@@ -576,6 +627,26 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 			}
 			this.setDescriptionAndCodeWhenMultiple(this.multipleSelectedItemList);
+		}
+	}
+
+	private unselectAllNodesInGridpOptions() {
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.forEachNode(node => {
+				if (node && node.id !== this.getAllFieldIDValue()) {
+					node.selectThisNode(false);
+				}
+			});
+		}
+	}
+
+	private unselectNodeAllInGridOptions() {
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.forEachNode(node => {
+				if (node && node.id === this.getAllFieldIDValue()) {
+					node.selectThisNode(false);
+				}
+			});
 		}
 	}
 
