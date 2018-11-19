@@ -10,7 +10,6 @@ export class ShowcaseTwoListComponent {
 
 	public availableColumns: Array<TwoListItem> = [];
 	public visibleColumns: Array<TwoListItem> = [];
-	public sortableList = true;
 
 	constructor(protected preferencesService: PreferencesService) {
 		this.availableColumns = preferencesService.get('showcase.twolist.availablecolumns');

@@ -55,7 +55,6 @@ export class TwoListComponent {
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
 	@Input() public defaultVisibleColumns: Array<TwoListItem>;
 	@Input() public defaultHiddenColumns: Array<TwoListItem>;
-	@Input() public sortableList: boolean = false;
 
 	public firstListSearch: string;
 	public secondListSearch: string;
@@ -218,27 +217,27 @@ export class TwoListComponent {
 		}
 	}
 
-	public selectVisibleItem(element: TwoListItem, ev: KeyboardEvent) {
-		this.setElementNonSelected(this.available);
-		element.selected = !element.selected;
-		if (element.selected) {
-				this.selected.current.push(element);
-		} else {
-				this.selected.current.splice(this.selected.current.indexOf(element), 1);
-				this.setElementNonSelected(this.selected.current);
-		}
-	}
-
 	public moveSelectedAvailableItem(element: TwoListItem, ev: Event) {
 		this.available = this.removeItemsFromList(this.available, [element]);
 		element.visible = true;
 		this.visible = this.visible.concat(element);
 		this.visible = this.sort(this.visible);
 	}
+
 	public moveSelectedVisibleItem(element: TwoListItem, ev: Event) {
 		this.visible = this.removeItemsFromList(this.visible, [element]);
 		element.visible = false;
 		this.available = this.available.concat(element);
 		this.available = this.sort(this.available);
+	}
+	public dbClickVisibleItem(element: TwoListItem) {
+		element.visible = false;
+		this.available = this.available.concat(new DataFilterPipe().transform([element], this.secondListSearch));
+		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform([element], this.secondListSearch));
+		this.firstListSearch = '';
+		this.secondListSearch = '';
+		this.available = this.sort(this.available);
+		this.refreshAvailable();
+
 	}
 }

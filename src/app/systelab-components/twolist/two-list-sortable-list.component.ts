@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {SelectedItem, TwoListItem} from '../twolist/two-list.component';
 import {AbstractSortableListComponent} from '../sortable-list/abstract-sortable-list.component';
 import {DataFilterPipe} from './datafilter.pipe';
@@ -14,6 +14,9 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 	@Input() public available: Array<TwoListItem>;
 	@Input() public visible: Array<TwoListItem>;
 	@Input() public secondListSearch: string;
+
+
+	@Output() public dbClick: EventEmitter<TwoListItem> = new EventEmitter();
 
 	constructor() {
 		super();
@@ -83,5 +86,9 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 
 			}
 		}
+	}
+
+	public dbClickSelectedItem(element: TwoListItem) {
+			this.dbClick.emit(element);
 	}
 }

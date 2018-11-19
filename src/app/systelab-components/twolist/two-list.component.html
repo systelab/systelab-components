@@ -35,20 +35,9 @@
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap" *ngIf="sortableList === false">
-
-            <div class="slab-twolistboxdiv" >
-                <ul class="slab-twolistboxrow list-group">
-                    <li *ngFor="let item of (visible | datafilter:secondListSearch)" [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.selected,'slab-twolistboxrow':!item.selected}"
-                        (click)="selectVisibleItem(item, $event)" (dblclick)="moveSelectedVisibleItem(item, $event)">
-                        {{item.displayName}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap" *ngIf="sortableList === true">
+        <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
             <systelab-two-list-sortable-list class="w-100" [selected]="selected" [available]="available"
-                [(elementsList)]="visible" [secondListSearch]="secondListSearch"></systelab-two-list-sortable-list>
+                [(elementsList)]="visible" [secondListSearch]="secondListSearch"  (dbClick)="dbClickVisibleItem($event)"></systelab-two-list-sortable-list>
         </div>
     </div>
 </div>
