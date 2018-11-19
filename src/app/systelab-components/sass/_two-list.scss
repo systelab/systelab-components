@@ -56,9 +56,10 @@ $twolist-row-height: ceil(35px * $slab-size-percentage) !default;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 60px;
 
     .slab-twolistbutton {
-      margin: 5px;
+      margin: 2px;
       min-width: 0;
     }
   }
