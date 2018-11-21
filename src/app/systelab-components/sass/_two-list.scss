@@ -50,17 +50,10 @@ $twolist-row-height: ceil(35px * $slab-size-percentage) !default;
   }
 
   .slab-twolistbuttondiv {
-    padding: 5px;
-    flex: 0 0 auto;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     margin-top: 60px;
-
-    .slab-twolistbutton {
+    padding:5px;
+    button {
       margin: 2px;
-      min-width: 0;
     }
   }
 }
