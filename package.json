@@ -52,7 +52,7 @@
     "@angular/router": "^7.0.0",
     "ag-grid": "^18.1.2",
     "ag-grid-angular": "^18.1.0",
-    "angular-split": "^1.0.0-rc.3",
+    "angular-split": "^1.0.4",
     "bootstrap": "^4.1.1",
     "date-fns": "^1.29.0",
     "jquery": "^3.3.1",
