@@ -127,7 +127,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			gridOptionsPreferences
 				.forEach((colPref) => {
 					if (gridOptions.columnApi.getAllColumns()
-							.find((column: any) => colPref.colId === column.getColId())) {
+						.find((column: any) => colPref.colId === column.getColId())) {
 						filteredGridOptionsPreferences.push(colPref);
 					}
 				});
@@ -227,7 +227,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 	public executeContextMenuAction(elementId: string, actionId: string): void {
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId: number = Number(elementId.replace('row', ''));
-		const data: T = this.gridOptions.api.getModel().getRow(rowId).data;
+		const data: T = this.gridOptions.api.getModel()
+			.getRow(rowId).data;
 
 		if (option && option.action !== null && option.action !== undefined && data !== undefined) {
 			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
@@ -243,7 +244,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId: number = Number(elementId.replace('row', ''));
-		const data: T = this.gridOptions.api.getModel().getRow(rowId).data;
+		const data: T = this.gridOptions.api.getModel()
+			.getRow(rowId).data;
 
 		if (option && option.isActionEnabled !== null && option.isActionEnabled !== undefined && data !== undefined) {
 			return option.isActionEnabled(data);
@@ -353,7 +355,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.columnApi.getAllColumns()
 			.forEach((column) => {
 				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false);
-				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId).isVisible()) {
+				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId)
+					.isVisible()) {
 					options.available.push(item);
 				}
 				options.initialAvailableColumns.push(item);
@@ -440,7 +443,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.popupmenu.setContainer(this);
 		this.popupmenu.setRowIndex(rowIndex);
 		if (this.existsAtLeastOneActionEnabled(data)) {
-			timer(200).subscribe(() => this.popupmenu.openWithOptions(event, this.menu));
+			timer(200)
+				.subscribe(() => this.popupmenu.openWithOptions(event, this.menu));
 		} else {
 			event.stopPropagation();
 		}
@@ -450,7 +454,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		if (this.menu) {
 			const optionEnabled: GridContextMenuOption<T> = this.menu.find((menuOption: GridContextMenuOption<T>) => {
 				if (menuOption.isActionEnabled) {
-					return menuOption.isActionEnabled.apply(data);
+					return menuOption.isActionEnabled.apply(null, [data]);
 				} else {
 					return true;
 				}
