@@ -20,6 +20,9 @@ export abstract class AbstractSortableListComponent<T> {
 
 	public abstract getIcon(element?: T): string;
 
+	public dbClickSelectedItem(element: T) {
+	}
+
 	public getDescription(element: T): string {
 		return element[this.getDescriptionField(element)];
 	}

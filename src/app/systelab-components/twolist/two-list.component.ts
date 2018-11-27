@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {DataFilterPipe} from './datafilter.pipe';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataFilterPipe } from './datafilter.pipe';
 
 export class TwoListItem {
 	constructor(public displayName: string, public colId: string, public selected: boolean, public visible: boolean) {
@@ -70,6 +70,28 @@ export class TwoListComponent {
 		this.visible = this.visible.concat(new DataFilterPipe().transform(this.selected.available, this.firstListSearch));
 		this.firstListSearch = '';
 		this.secondListSearch = '';
+		this.refreshAvailable();
+	}
+
+	public addAll() {
+		this.visible = this.visible.concat(new DataFilterPipe().transform(this.available, this.firstListSearch));
+		for (const element of this.visible) {
+			element.visible = true;
+		}
+		this.firstListSearch = '';
+		this.secondListSearch = '';
+		this.refreshAvailable();
+	}
+
+	public removeAll() {
+		this.available = this.available.concat(new DataFilterPipe().transform(this.visible, this.secondListSearch));
+		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform(this.visible, this.secondListSearch));
+		for (const element of this.available) {
+			element.visible = false;
+		}
+		this.firstListSearch = '';
+		this.secondListSearch = '';
+		this.available = this.sort(this.available);
 		this.refreshAvailable();
 	}
 
@@ -193,5 +215,29 @@ export class TwoListComponent {
 				this.selected.available = [];
 			}
 		}
+	}
+
+	public moveSelectedAvailableItem(element: TwoListItem, ev: Event) {
+		this.available = this.removeItemsFromList(this.available, [element]);
+		element.visible = true;
+		this.visible = this.visible.concat(element);
+		this.visible = this.sort(this.visible);
+	}
+
+	public moveSelectedVisibleItem(element: TwoListItem, ev: Event) {
+		this.visible = this.removeItemsFromList(this.visible, [element]);
+		element.visible = false;
+		this.available = this.available.concat(element);
+		this.available = this.sort(this.available);
+	}
+	public dbClickVisibleItem(element: TwoListItem) {
+		element.visible = false;
+		this.available = this.available.concat(new DataFilterPipe().transform([element], this.secondListSearch));
+		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform([element], this.secondListSearch));
+		this.firstListSearch = '';
+		this.secondListSearch = '';
+		this.available = this.sort(this.available);
+		this.refreshAvailable();
+
 	}
 }

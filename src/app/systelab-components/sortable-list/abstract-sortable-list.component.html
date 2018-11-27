@@ -7,7 +7,7 @@
             (keydown)="removeElement(listElement, $event)"
             tabindex="-1"
             [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(listElement),'slab-sortable-list-row':!getSelectionFieldValue(listElement)}"
-            (click)="selectVisibleCurrent(listElement,$event)" cdkDrag>
+            (click)="selectVisibleCurrent(listElement,$event)" (dblclick)="dbClickSelectedItem(listElement)" cdkDrag>
             <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(listElement)"></i>{{getDescription(listElement)}}
         </div>
     </div>
