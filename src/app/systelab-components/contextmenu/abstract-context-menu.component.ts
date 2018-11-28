@@ -84,6 +84,7 @@ export abstract class AbstractContextMenuComponent<T> implements OnInit, OnDestr
 				// hide the div until is positioned in event x y position to avoid flick
 				this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 				this.isOpened = true;
+				this.cdr.detectChanges();
 				this.showDropDown(event.clientX, event.clientY);
 			}
 		} else {
@@ -104,6 +105,7 @@ export abstract class AbstractContextMenuComponent<T> implements OnInit, OnDestr
 				// hide the div until is positioned in event x y position to avoid flick
 				this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 				this.isOpened = true;
+				this.cdr.detectChanges();
 				this.showDropDown(event.clientX, event.clientY);
 			}
 		} else {
