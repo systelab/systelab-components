@@ -1,13 +1,13 @@
-import {Component, ElementRef, Input} from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 
 @Component({
 	selector: 'systelab-tab',
 	template: `
-        <div class="d-flex slab-flex-1 slab-overflow-container">
-            <ng-content></ng-content>
-        </div>
-	`,
-	styles: [`
+                  <div class="d-flex slab-flex-1 slab-overflow-container">
+                      <ng-content></ng-content>
+                  </div>
+			  `,
+	styles:   [`
         :host {
             flex: 1;
             display: flex;
@@ -17,6 +17,7 @@ import {Component, ElementRef, Input} from '@angular/core';
 })
 export class TabComponent {
 	@Input() public title: string;
+	@Input() public titleHtml: string;
 	@Input() public active = false;
 	@Input() public id = '';
 	@Input() public warning = false;
