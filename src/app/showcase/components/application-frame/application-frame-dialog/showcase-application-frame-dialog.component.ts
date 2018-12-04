@@ -21,7 +21,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 
 	public userName: string;
 	public userFullName: string;
-	public hospitalName: string;
+	public title: string;
 	public menuBars = false;
 	public logoIcon = 'icon-modulab'
 
@@ -48,7 +48,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 
 		this.userName = 'admin';
 		this.userFullName = 'Administrator';
-		this.hospitalName = 'Customer name';
+		this.title = 'Customer name';
 
 		this.setMenu();
 
