@@ -50,6 +50,7 @@ For each tab element:
 | ---- |:----:|:-------:| ----------- |
 | id | boolean | true | Tab Identifier |
 | title | string | | Tab name to show |
+| titleHtml | string | | Tab name as inner HTML. Consider the HTML must be sanitized |
 | active | boolean | true | Set to true to specify that the tab that is active |
 | warning | boolean | true | Set to true to specify the tab content has some warnings. |
 
