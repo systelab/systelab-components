@@ -229,12 +229,15 @@ export abstract class AbstractGrid<T> implements OnInit {
 		const rowId: number = Number(elementId.replace('row', ''));
 		const data: T = this.gridOptions.api.getModel()
 			.getRow(rowId).data;
+		const rowSelecteds: Array<T> = this.gridOptions.api.getSelectedRows();
 
 		if (option && option.action !== null && option.action !== undefined && data !== undefined) {
-			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
+			// const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
+			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions, rowSelecteds);
 			option.action(actionData);
 		} else {
-			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
+			// const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
+			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions, rowSelecteds);
 			this.action.emit(actionData);
 		}
 		this.popupmenu.closeDropDown();
@@ -324,6 +327,9 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	public doClick(event: any) {
+		if (event.column.colId === 'contextMenu') {
+			event.node.setSelected(true);
+		}
 		if (event.column.colId !== 'contextMenu' && !event.column.isCellEditable(event.node)) {
 			this.clickRow.emit((event.event.ctrlKey && !this.showChecks) ? event.event : event.data);
 		}
@@ -439,7 +445,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		return `<span class='slab-grid-checkbox'/>`;
 	}
 
-	public dotsClicked(rowIndex: number, data: T, event: MouseEvent) {
+	public dotsClicked(rowIndex: number, data: T | Array<T>, event: MouseEvent) {
 		this.popupmenu.setContainer(this);
 		this.popupmenu.setRowIndex(rowIndex);
 		if (this.existsAtLeastOneActionEnabled(data)) {
@@ -450,7 +456,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 		}
 	}
 
-	protected existsAtLeastOneActionEnabled(data: T): boolean {
+	protected existsAtLeastOneActionEnabled(data: T | Array<T>): boolean {
 		if (this.menu) {
 			const optionEnabled: GridContextMenuOption<T> = this.menu.find((menuOption: GridContextMenuOption<T>) => {
 				if (menuOption.isActionEnabled) {

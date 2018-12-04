@@ -28,6 +28,7 @@ export class ShowcaseGridComponent {
 	public doMenuAction(action: GridContextMenuActionData<ShowcaseData>): void {
 		console.log('Here ' + action.actionId);
 		console.log('With ' + action.data);
+		console.log('With ' + action.multipleSelectedData);
 
 	}
 }
