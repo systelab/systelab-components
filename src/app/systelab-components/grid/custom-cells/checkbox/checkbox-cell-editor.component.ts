@@ -10,7 +10,7 @@ export class CheckboxCellEditorComponent implements AgRendererComponent {
 
 	afterGuiAttached(params?: IAfterGuiAttachedParams): void {
 	}
-	private params: any;
+	public params: any;
 
 	public id: string;
 
