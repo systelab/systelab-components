@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { AgEditorComponent, AgRendererComponent } from 'ag-grid-angular';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { IAfterGuiAttachedParams } from 'ag-grid';
 
 @Component( {
 	selector:    'systelab-checkbox-cell',
 	templateUrl: 'checkbox-cell-editor.component.html'
 } )
-export class CheckboxCellEditorComponent implements AgEditorComponent {
+export class CheckboxCellEditorComponent implements AgRendererComponent {
+
+	afterGuiAttached(params?: IAfterGuiAttachedParams): void {
+	}
 	private params: any;
 
-	public isCheckboxActive: boolean;
 	public id: string;
 
 	public agInit( params: any ): void {
@@ -16,12 +19,14 @@ export class CheckboxCellEditorComponent implements AgEditorComponent {
 		if (this.params.column.colDef['elementID']) {
 			this.id = this.params.node.data[this.params.column.colDef['elementID']];
 		}
-		this.isCheckboxActive = this.params.value;
 	}
 
-	public getValue(): any {
-		this.params.value = this.isCheckboxActive;
-		return this.isCheckboxActive;
+	public refresh(params: any): boolean {
+		if (this.params.column.colDef['elementID']) {
+			this.params.node.data.checkboxValue = params.value;
+		}
+		params.api.refreshCells(params);
+		return false;
 	}
 
 

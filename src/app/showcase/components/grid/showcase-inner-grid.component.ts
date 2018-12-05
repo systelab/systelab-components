@@ -86,10 +86,8 @@ export class ShowcaseInnerGridComponent extends AbstractApiGrid<ShowcaseData> im
 				headerName:            'Cell with Checkbox',
 				field:                 'checkboxValue',
 				width:                 200,
-				cellRendererFramework: CheckboxCellRendererComponent,
-				cellEditorFramework:   CheckboxCellEditorComponent,
+				cellRendererFramework: CheckboxCellEditorComponent,
 				onCellValueChanged:    e => console.log('checkbox', e),
-				editable:              true,
 				elementID: 				'checkboxID',
 				suppressResize:         true
 			}, {
