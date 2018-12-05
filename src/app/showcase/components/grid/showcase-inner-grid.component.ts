@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { CheckboxCellRendererComponent } from '../../../systelab-components/grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import { SpinnerCellEditorComponent } from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-editor.component';
 import { TouchSpinValues } from '../../../systelab-components/spinner/touch.spin-values';
 import { SpinnerCellRendererComponent } from '../../../systelab-components/grid/custom-cells/spinner/spinner-cell-renderer.component';
