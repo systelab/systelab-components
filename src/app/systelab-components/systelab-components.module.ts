@@ -60,7 +60,6 @@ import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './modal/base/provider
 import { OverlayRenderer } from './modal/base/models/tokens';
 import { LoadingService } from './loading/loading.service';
 import { TimeUnitSelectComponent } from './select/time-unit-combobox.component';
-import { CheckboxCellRendererComponent } from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
 import { WizardStepsComponent } from './wizard-steps/wizard-steps.component';
 import { SpinnerCellEditorComponent } from './grid/custom-cells/spinner/spinner-cell-editor.component';
 import { TwoListSortableListComponent } from './twolist/two-list-sortable-list.component';
@@ -142,7 +141,6 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
-		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
 		WizardStepsComponent,
 		TwoListSortableListComponent,
@@ -206,7 +204,6 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 		SplitAreaDirective,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
-		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
 		WizardStepsComponent,
 		TwoListSortableListComponent,
@@ -231,7 +228,6 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 		SearcherDialog,
 		CalendarDialog,
 		ColorCellRendererComponent,
-		CheckboxCellRendererComponent,
 		SpinnerCellEditorComponent,
 		SpinnerCellRendererComponent,
 		InputCellEditorComponent,

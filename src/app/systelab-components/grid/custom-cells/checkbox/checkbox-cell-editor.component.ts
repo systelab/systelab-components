@@ -19,7 +19,6 @@ export class CheckboxCellEditorComponent implements AgRendererComponent {
 		if (this.params.column.colDef['elementID']) {
 			this.id = this.params.node.data[this.params.column.colDef['elementID']];
 		}
-		console.log()
 	}
 
 	public refresh(params: any): boolean {
