@@ -27,6 +27,8 @@ export class ShowcaseDialogComponent {
 
 	public showSplitDialog() {
 		const parameters: SplitShowcaseDialogParameters = ShowcaseSplitDialog.getParameters();
+		parameters.heightRelative = '75%';
+		parameters.widthRelative = '75%';
 		this.dialogService.showDialog(ShowcaseSplitDialog, parameters);
 	}
 
@@ -37,8 +39,8 @@ export class ShowcaseDialogComponent {
 
 	public showTwoTabsDialog() {
 		const parameters: ShowcaseTwoTabsDialogParameters = ShowcaseTwoTabsDialog.getParameters();
-		parameters.width = 960;
-		parameters.height = 600;
+		parameters.heightRelative = '95vh';
+		parameters.widthRelative = '60vw';
 		parameters.index = 4;
 		this.dialogService.showDialog(ShowcaseTwoTabsDialog, parameters);
 	}

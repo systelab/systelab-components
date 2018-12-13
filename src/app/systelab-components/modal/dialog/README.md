@@ -11,6 +11,7 @@ To define a dialog you must create your own component and implement the interfac
 The component will need to export a class in order to get the context. This class must extend from **SystelabModalContext**. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
 
 It is suggested to define the width and height, or the class, in the context in order to make the dialog always have the same dimension. For small devices, the dialog will be fullScreen.
+Relative size can be also defined instead of width and height in pixels. Use widthRelative and heightRelative to specify size in terms like '75vh' or '40%'.
 
 It is also suggested to keep this class in the same file, as it is more readable because the context is not lost.
 

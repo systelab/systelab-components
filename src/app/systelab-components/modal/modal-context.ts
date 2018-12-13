@@ -38,6 +38,36 @@ export class SystelabModalContext extends ModalOpenContext {
 	public maxHeight: number = null;
 
 	/**
+	 * Forced width relative
+	 */
+	public widthRelative: string = null;
+
+	/**
+	 * Forced height relative
+	 */
+	public heightRelative: string = null;
+
+	/**
+	 * Forced minWidth relative
+	 */
+	public minWidthRelative: string = null;
+
+	/**
+	 * Forced minHeight relative
+	 */
+	public minHeightRelative: string = null;
+
+	/**
+	 * Forced maxWidth relative
+	 */
+	public maxWidthRelative: string = null;
+
+	/**
+	 * Forced maxHeight relative
+	 */
+	public maxHeightRelative: string = null;
+
+	/**
 	 * Forced fullscreen
 	 */
 	public fullScreen: boolean = false;
@@ -47,11 +77,11 @@ export class SystelabModalContext extends ModalOpenContext {
 	 */
 	public showClose: boolean;
 
-	public setDefaultSize( w: number, h: number ) {
-		if ( !this.width ) {
+	public setDefaultSize(w: number, h: number) {
+		if (!this.width) {
 			this.width = w;
 		}
-		if ( !this.height ) {
+		if (!this.height) {
 			this.height = h;
 		}
 	}
