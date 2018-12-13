@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { SystelabModalContext } from '../modal-context';
 import { MessagePopupButton } from './message-popup.service';
 import { ModalComponent } from '../base/models/tokens';
@@ -17,13 +17,18 @@ export class MessagePopupViewContext extends SystelabModalContext {
 	selector:    'dialog-view',
 	templateUrl: 'message-popup-view.component.html'
 } )
-export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext> {
+export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext>, AfterViewInit {
 
+	@ViewChild('closeBtn') closeBtn:ElementRef;
 	public context: MessagePopupViewContext;
 
 	constructor( public dialog: DialogRef<MessagePopupViewContext> ) {
 		this.context = dialog.context;
 	}
+
+	ngAfterViewInit() {
+		setTimeout(() => this.closeBtn.nativeElement.focus());
+  	}
 
 	public close( value?: any ): void {
 		this.dialog.close( value );
