@@ -109,7 +109,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	public closeDropDown() {
 		if (this.isDropDownOpened()) {
-			debugger;
 			this.myRenderer.removeAttribute(this.dropdownParent.nativeElement, 'aria-expanded');
 			this.myRenderer.removeClass(this.dropdownParent.nativeElement, 'show');
 			this.myRenderer.removeClass(this.dropdownMenuElement.nativeElement, 'show');
