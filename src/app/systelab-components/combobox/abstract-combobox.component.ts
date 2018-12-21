@@ -36,6 +36,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public fontSize: string;
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
+	@Input() public withIcon: boolean;
+	@Input() public iconClass: string;
+	@Input() public inputColor: string;
+	@Input() public iconColor: string;
 
 	public getAllFieldIDValue(): string | number {
 		return '0';
