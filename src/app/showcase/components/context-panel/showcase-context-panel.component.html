@@ -4,13 +4,10 @@
         <div class="col-md-9">
             <systelab-context-panel #contextpanel1 (action)="executeContextMenuAction($event)" [width]="'350px'">
 
-                <div header-content>
-                    <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="contextpanel1.dotsClicked($event)">
-                        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize"
-                           [style.color]="fontColor">Last 30 days</i>
-                    </div>
+                <div class="header-content">
+                        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize" [style.color]="fontColor">Last 30 days</i>
                 </div>
-                <div main-content>
+                <div class="main-content">
                     <form class="p-2">
                         <label class="slab-form-title">Date interval</label>
                         <div class="row mt-1">

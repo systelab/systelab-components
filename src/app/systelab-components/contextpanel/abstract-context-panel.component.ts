@@ -5,13 +5,11 @@ declare var jQuery: any;
 export abstract class AbstractContextPanelComponent<T> extends AbstractContextComponent<T> {
 
 	public dotsClicked(event: MouseEvent) {
-		console.log('dotsClicked');
 		if (!this.isDropDownOpened()) {
 			// hide the div until is positioned in event x y position to avoid flick
-			//this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
+			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 			this.isOpened = true;
 			this.cdr.detectChanges();
-			debugger;
 			this.showDropDown(event.clientX, event.clientY);
 		}
 	}

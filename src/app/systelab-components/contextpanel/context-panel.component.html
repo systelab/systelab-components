@@ -1,16 +1,14 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
-    <!--  <ng-content select="[header-content]"></ng-content>-->
 
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
-        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize"
-           [style.color]="fontColor">Last 30 days</i>
+        <ng-content select=".header-content"></ng-content>
     </div>
 
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown slab-dropdown-fixed"><!--[style.width]="width">-->
             <div *ngIf="isOpened">
                 <div #ngcontent (click)="ngContentStopPropagation($event)">
-                    <ng-content select="[main-content]"></ng-content>
+                    <ng-content select=".main-content"></ng-content>
                 </div>
             </div>
         </div>
