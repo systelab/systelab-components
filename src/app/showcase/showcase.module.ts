@@ -76,6 +76,7 @@ import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tr
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplete-combobox.component';
 import { GridContextMenuCellRendererComponent } from '../systelab-components/grid/contextmenu/grid-context-menu-cell-renderer.component';
+import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
 
 @NgModule({
 	imports:         [
@@ -154,6 +155,7 @@ import { GridContextMenuCellRendererComponent } from '../systelab-components/gri
 		ShowcaseAddRemoveListComponent,
 		ShowcaseInnerAddRemoveListComponent,
 		ShowcaseContextMenu,
+		ShowcaseContextPanel,
 		ShowcaseListBoxComponent,
 		ShowcaseInnerTreeListBox,
 		ShowcaseAutocomplete

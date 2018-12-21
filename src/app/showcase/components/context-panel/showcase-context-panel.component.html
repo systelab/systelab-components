@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label">Context Panel</label>
+        <div class="col-md-9">
+            <systelab-context-panel #contextpanel1 (action)="executeContextMenuAction($event)" [width]="'350px'">
+
+                <div header-content>
+                    <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="contextpanel1.dotsClicked($event)">
+                        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize"
+                           [style.color]="fontColor">Last 30 days</i>
+                    </div>
+                </div>
+                <div main-content>
+                    <form class="p-2">
+                        <label class="slab-form-title">Date interval</label>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                <input name="param-radio" type="radio" id="radio-days" [(ngModel)]="numericDateRadio" value="paramNumber">
+                                <label for="radio-number">Last days</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <systelab-spinner id="spinner" [spinValues]="touchSpinValues1" [disabled]="numericDateRadio === 'paramDate'"></systelab-spinner>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                <input name="param-radio" type="radio" id="radio-date" [(ngModel)]="numericDateRadio" value="paramDate">
+                                <label for="radio-date">From</label>
+                            </div>
+                            <div class="col-md-4">
+                                <systelab-datepicker id="QCGraphsPerformanceFromDate" [(currentDate)]="fromDate"
+                                                     [disabled]="numericDateRadio === 'paramNumber'"></systelab-datepicker>
+                            </div>
+                        </div>
+                        <div class="row mt-1 ml-4">
+                            <label class="col-form-label">To</label>
+                            <div class="col-md-4">
+                                <systelab-datepicker id="QCGraphsPerformanceToDate" [(currentDate)]="toDate"
+                                                     [disabled]="numericDateRadio === 'paramNumber'"></systelab-datepicker>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                <input name="param-radio" type="radio" id="radio-number" [(ngModel)]="numericDateRadio" value="paramNumber">
+                                <label for="radio-number">Last points</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <systelab-spinner id="touch" [spinValues]="touchSpinValues2" [disabled]="numericDateRadio === 'paramDate'"></systelab-spinner>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </systelab-context-panel>
+        </div>
+    </div>
+</div>
