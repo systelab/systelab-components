@@ -91,6 +91,14 @@ Be aware that the first page will be page 1.
 ## Using your component
 Once you have your component, you can use it in your templates.
 
+Property rowData must be added for components that extend  AbstractGrid&lt;T&gt;. The value is an array of type T containing the data to be displayed
+```
+<patient-grid #grid [rowData]="patientList" [menu]="getMenu()" (action)="doMenuAction($event)" (clickRow)="doSelect($event)">
+...
+</patient-grid>
+```
+
+Property rowData is not needed for components extending from AbstractApiGrid&lt;T&gt; because data is loaded inside the component calling getData method
 ```
 <patient-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" (clickRow)="doSelect($event)">
 ...
