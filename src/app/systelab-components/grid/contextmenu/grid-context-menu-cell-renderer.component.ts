@@ -30,7 +30,6 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 			selectedRows = this.container.getSelectedRows();
 		}
 		this.container.dotsClicked(this.rowIndex, selectedRows, event);
-		// this.container.dotsClicked(this.rowIndex, this.data, event);
 	}
 }
 
