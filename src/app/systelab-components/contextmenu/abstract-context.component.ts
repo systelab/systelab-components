@@ -27,7 +27,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	@Input() public elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 	@Input() public fontSize: string;
-	@Input() public width: string;
 	@Input() public fontColor: string;
 	@Input() public isEmbedded = false;
 
