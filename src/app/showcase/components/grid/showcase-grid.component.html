@@ -2,16 +2,17 @@
     <h5>Grid</h5>
     <form class="position-relative" style="height: 200px;">
         <showcase-inner-grid #grid [rowData]="gridData" [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
-                             (clickRow)="doSelect($event)"></showcase-inner-grid>
+                             [multipleSelection]="true" (clickRow)="doSelect($event)"></showcase-inner-grid>
     </form>
     <div class="pt-2">
-        <button type="button" class="btn" (click)="grid.showOptions();"><i class="icon-info-circle mr-1"></i>Options</button>
+        <button type="button" class="btn" (click)="grid.showOptions();"><i class="icon-info-circle mr-1"></i>Options
+        </button>
     </div>
 
     <h5>Api Grid</h5>
     <form class="position-relative" style="height: 200px;">
         <showcase-inner-api-grid #gridapi [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
-                                 (clickRow)="doSelect($event)"></showcase-inner-api-grid>
+                                 [multipleSelection]="true" (clickRow)="doSelect($event)"></showcase-inner-api-grid>
     </form>
     <div class="pt-2">
         <button type="button" class="btn" (click)="gridapi.showOptions();"><i class="icon-info-circle mr-1"></i>Options</button>
