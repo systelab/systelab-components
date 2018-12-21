@@ -27,20 +27,20 @@ protected getColumnDefs(): Array<any> {
 }
 ```
 
-Ag-grid documentation of column properties: https://www.ag-grid.com/javascript-grid-column-properties/
+Ag-grid documentation of column properties: <https://www.ag-grid.com/javascript-grid-column-properties/>
 
 We can add custom-cells/custom-editors as cellRendererFramework/cellEditorFramework in our column definition. At this moment, we have four generic cellRenderers/cellEditors for the table:
  
- - Input 
- - Decimal Input
- - Checkbox
- - Spinner
+- Input 
+- Decimal Input
+- Checkbox
+- Spinner
  
 To use these renderers/editors you need to set the following column properties:
 
- - cellRendererFramework
- - cellEditorFramework
- - editable: true
+- cellRendererFramework
+- cellEditorFramework
+- editable: true
  
 Input
 ```
@@ -107,18 +107,17 @@ You can use your own renderers and editors. Ag-grid documentation about renderin
 
 - Cell rendering: 
 
-    https://www.ag-grid.com/javascript-grid-cell-rendering/
+    <https://www.ag-grid.com/javascript-grid-cell-rendering/>
     
-    https://www.ag-grid.com/javascript-grid-cell-rendering-components/#angular-cell-render-components
+    <https://www.ag-grid.com/javascript-grid-cell-rendering-components/#angular-cell-render-components>
 
 - Cell editing: 
 
-    https://www.ag-grid.com/javascript-grid-cell-editing/
+    <https://www.ag-grid.com/javascript-grid-cell-editing/>
     
-    https://www.ag-grid.com/javascript-grid-cell-editor/#angular-cell-editing
+    <https://www.ag-grid.com/javascript-grid-cell-editor/#angular-cell-editing>
 
-- Consider these performance advices: https://www.ag-grid.com/javascript-grid-performance/
-
+- Consider these performance advices: <https://www.ag-grid.com/javascript-grid-performance/>
 
 ## Using AbstractApiGrid&lt;T&gt;
 
@@ -188,7 +187,7 @@ public ngOnInit() {
 }
 ```
 
-You can change these properties overriding method ngOnInit in your own component. More information in: https://www.ag-grid.com/javascript-grid-infinite-scrolling/ 
+You can change these properties overriding method ngOnInit in your own component. More information in: <https://www.ag-grid.com/javascript-grid-infinite-scrolling/> 
 
 
 ## Using your component
@@ -279,84 +278,84 @@ protected getHeaderContextMenuOptions(): Array<GridContextMenuOption<string>> {
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
-| preferenceName | string | | Preference prefix in order to store the columns size|
-| multipleSelection | boolean | false | Set multiple selection|
+| preferenceName | string | | Preference prefix in order to store the columns size |
+| multipleSelection | boolean | false | Set multiple selection |
 | showChecks | boolean | false | Show a column with a checkbox for each element |
-| rowData | Array&lt;T&gt; | | Array of the elements of type <T> displayed in the table. Only for components extending from AbstractGrid|
-| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; | | Array with the menu options. Each option is a GridContextMenuOption. If used a column is added as the first of the table having three dots button on each row to open the context menu|
-| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; | | Array with the header column menu options. Each option is a GridContextMenuOption. If used a three dots button is added in the header to open the context menu|
+| rowData | Array&lt;T&gt; | | Array of the elements of type <T> displayed in the table. Only for components extending from AbstractGrid |
+| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; | | Array with the menu options. Each option is a GridContextMenuOption. If used a column is added as the first of the table having three dots button on each row to open the context menu |
+| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; | | Array with the header column menu options. Each option is a GridContextMenuOption. If used a three dots button is added in the header to open the context menu |
 
 ## Events
 
 | Name | Parameters | Description |
-| ---- |:----------:| ------------|
-| action |GridContextMenuActionData&lt;T&gt;&#124;GridContextMenuActionData&lt;Object&gt;|When an action in the popup menu (row or header) is selected, the event is fired with the selected GridContextMenuActionData |
-| clickRow |T|When a row is selected, the event is fired with the element in the row.|
+| ---- |:----------:| ----------- |
+| action | GridContextMenuActionData&lt;T&gt;&#124;GridContextMenuActionData&lt;Object&gt; | When an action in the popup menu (row or header) is selected, the event is fired with the selected GridContextMenuActionData |
+| clickRow | T | When a row is selected, the event is fired with the element in the row. |
 
 ## Ag-grid
 
-As the grid is based in Ag Grid, you will find useful information at https://www.ag-grid.com/documentation-main/documentation.php.
+As the grid is based in Ag Grid, you will find useful information at <https://www.ag-grid.com/documentation-main/documentation.php.>
 
 Recommended documentation to be read about properties, events and APIs: 
 
-- Grid properties: https://www.ag-grid.com/javascript-grid-properties/
+- Grid properties: <https://www.ag-grid.com/javascript-grid-properties/>
 
-- Grid events: https://www.ag-grid.com/javascript-grid-events/
+- Grid events: <https://www.ag-grid.com/javascript-grid-events/>
 
-- Grid callbacks: https://www.ag-grid.com/javascript-grid-callbacks/
+- Grid callbacks: <https://www.ag-grid.com/javascript-grid-callbacks/>
 
-- Grid API: https://www.ag-grid.com/javascript-grid-api/
+- Grid API: <https://www.ag-grid.com/javascript-grid-api/>
 
-- Column properties: https://www.ag-grid.com/javascript-grid-column-properties/
+- Column properties: <https://www.ag-grid.com/javascript-grid-column-properties/>
 
-- Column api: https://www.ag-grid.com/javascript-grid-column-api/
+- Column api: <https://www.ag-grid.com/javascript-grid-column-api/>
 
 Recommended documentation to be read about features:
 
-- Column resizing: https://www.ag-grid.com/javascript-grid-resizing/
+- Column resizing: <https://www.ag-grid.com/javascript-grid-resizing/>
 
 - Row sorting: https://www.ag-grid.com/javascript-grid-sorting/
 
 - Row selection: https://www.ag-grid.com/javascript-grid-selection/
 
-- Column spanning: https://www.ag-grid.com/javascript-grid-column-spanning/
+- Column spanning: <https://www.ag-grid.com/javascript-grid-column-spanning/>
 
-- Row spanning: https://www.ag-grid.com/javascript-grid-column-spanning/
+- Row spanning: <https://www.ag-grid.com/javascript-grid-column-spanning/>
 
-- Column pinning: https://www.ag-grid.com/javascript-grid-pinning/
+- Column pinning: <https://www.ag-grid.com/javascript-grid-pinning/>
 
-- Cell styles: https://www.ag-grid.com/javascript-grid-cell-styles/
+- Cell styles: <https://www.ag-grid.com/javascript-grid-cell-styles/>
 
-- Row styles: https://www.ag-grid.com/javascript-grid-row-styles/
+- Row styles: <https://www.ag-grid.com/javascript-grid-row-styles/>
 
-- Cell rendering: https://www.ag-grid.com/javascript-grid-cell-rendering/
+- Cell rendering: <https://www.ag-grid.com/javascript-grid-cell-rendering/>
 
-- Cell editing: https://www.ag-grid.com/javascript-grid-cell-editing/
+- Cell editing: <https://www.ag-grid.com/javascript-grid-cell-editing/>
 
-- Performance: https://www.ag-grid.com/javascript-grid-performance/
+- Performance: <https://www.ag-grid.com/javascript-grid-performance/>
 
-- Accessing data: https://www.ag-grid.com/javascript-grid-accessing-data/
+- Accessing data: <https://www.ag-grid.com/javascript-grid-accessing-data/>
 
-- Updating data: https://www.ag-grid.com/javascript-grid-data-update/
+- Updating data: <https://www.ag-grid.com/javascript-grid-data-update/>
 
-- Full width rows: https://www.ag-grid.com/javascript-grid-full-width-rows/
+- Full width rows: <https://www.ag-grid.com/javascript-grid-full-width-rows/>
 
 Recommended documentation about row models:
 
-- Infinite scroll: https://www.ag-grid.com/javascript-grid-infinite-scrolling/
+- Infinite scroll: <https://www.ag-grid.com/javascript-grid-infinite-scrolling/>
 
 Recommended documentation about components:
 
-- CellRenderer: https://www.ag-grid.com/javascript-grid-cell-rendering-components/
+- CellRenderer: <https://www.ag-grid.com/javascript-grid-cell-rendering-components/>
 
-- Angular CellRenderer (consider performance): https://www.ag-grid.com/javascript-grid-cell-rendering-components/#angular-cell-render-components
+- Angular CellRenderer (consider performance): <https://www.ag-grid.com/javascript-grid-cell-rendering-components/#angular-cell-render-components>
 
-- CellEditor: https://www.ag-grid.com/javascript-grid-cell-editor/
+- CellEditor: <https://www.ag-grid.com/javascript-grid-cell-editor/>
 
-- Angular CellEditor (consider performance) : https://www.ag-grid.com/javascript-grid-cell-editor/#angular-cell-editing
+- Angular CellEditor (consider performance) : <https://www.ag-grid.com/javascript-grid-cell-editor/#angular-cell-editing>
 
-- Header component: https://www.ag-grid.com/javascript-grid-header-rendering/
+- Header component: <https://www.ag-grid.com/javascript-grid-header-rendering/>
 
-- Angular header component (consider performance): https://www.ag-grid.com/javascript-grid-header-rendering/#angular-header-component
+- Angular header component (consider performance): <https://www.ag-grid.com/javascript-grid-header-rendering/#angular-header-component>
 
 
