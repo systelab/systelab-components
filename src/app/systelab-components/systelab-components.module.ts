@@ -78,6 +78,7 @@ import { ModulabListBox } from './listbox/listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-component';
 import { ContextPanelComponent } from './contextpanel/context-panel.component';
+import { DateRangepicker } from './date-range-picker/date-range-picker.component';
 
 @NgModule({
 	imports:         [
@@ -158,7 +159,8 @@ import { ContextPanelComponent } from './contextpanel/context-panel.component';
 		NumPadDialog,
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
-		ModulabListBox
+		ModulabListBox,
+		DateRangepicker
 
 	],
 	exports:         [
@@ -225,7 +227,8 @@ import { ContextPanelComponent } from './contextpanel/context-panel.component';
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
 		ModulabListBox,
-		GridContextMenuComponent
+		GridContextMenuComponent,
+		DateRangepicker
 
 	],
 	entryComponents: [
