@@ -188,9 +188,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
    ========================================================================== */
 
 .slab-dialog {
-  &[class*="h-"],
-  &[class*="w-"],
-  &.slab-dialog-fixed-size { /* [3] */
+  &.slab-dialog-border { /* [3] */
     .slab-dialog-content {
       border: $content-border-width solid $slab-dialog-border-color;
       border-radius: $content-border-width;
@@ -209,9 +207,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     }
   }
 
-  &.w-100,
-  &.h-100,
-  :not(slab-dialog-fixed-size) {
+  :not(slab-dialog-border) {
     .slab-dialog-content,
     .slab-dialog-header,
     .slab-dialog-bottom {
