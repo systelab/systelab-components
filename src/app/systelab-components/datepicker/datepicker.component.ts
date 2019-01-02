@@ -198,6 +198,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public onKeyDown(event: KeyboardEvent) {
+		event.stopPropagation();
 		if (event.keyCode === 13) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
@@ -227,32 +228,37 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public nextMonth(event: Event): void {
+		event.stopPropagation();
 		if (this.currentCalendar) {
 			this.currentCalendar.nextMonth(event);
 		}
 	}
 
 	public prevMonth(event: Event): void {
+		event.stopPropagation();
 		if (this.currentCalendar) {
 			this.currentCalendar.prevMonth(event);
 		}
 	}
 
-	public nextYear(): void {
+	public nextYear(event: Event): void {
+		event.stopPropagation();
 		if (this.currentCalendar) {
 			const currentYear = this.currentCalendar.currentYear + 1;
 			this.currentCalendar.onYearDropdownChange(currentYear.toString());
 		}
 	}
 
-	public prevYear(): void {
+	public prevYear(event: Event): void {
+		event.stopPropagation();
 		if (this.currentCalendar) {
 			const currentYear = this.currentCalendar.currentYear - 1;
 			this.currentCalendar.onYearDropdownChange(currentYear.toString());
 		}
 	}
 
-	public clearDate(event): void {
+	public clearDate(event: Event): void {
+		event.stopPropagation();
 		if (this.currentCalendar) {
 			this.currentDate = null;
 			this.currentCalendar.onClearButtonClick(event);
@@ -261,7 +267,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	public setTodayDate(event): void {
+	public setTodayDate(event: Event): void {
+		event.stopPropagation();
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
@@ -270,6 +277,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public closeDatepicker(): void {
+		console.log('closeDatepicker');
 		if (this.currentCalendar) {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;

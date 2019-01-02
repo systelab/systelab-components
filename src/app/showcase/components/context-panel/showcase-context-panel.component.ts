@@ -9,6 +9,8 @@ import { TouchSpinValues } from '../../../systelab-components/spinner/touch.spin
 export class ShowcaseContextPanel implements OnInit {
 	public touchSpinValues1: TouchSpinValues;
 	public touchSpinValues2: TouchSpinValues;
+	public fromDate: Date = null;
+	public toDate: Date = null;
 
 	constructor() {
 		this.touchSpinValues1 = new TouchSpinValues(0, 1, 1, 999);
@@ -16,20 +18,6 @@ export class ShowcaseContextPanel implements OnInit {
 	}
 
 	public ngOnInit() {
-	}
-
-	public executeContextMenuAction(contextMenuActionData: ContextMenuActionData): void {
-		console.log(contextMenuActionData.actionId);
-		switch (contextMenuActionData.actionId) {
-			case 'option1':
-				console.log('Option 1');
-				break;
-			case 'option2':
-				console.log('Option 2');
-				break;
-			default:
-				break;
-		}
 	}
 
 }
