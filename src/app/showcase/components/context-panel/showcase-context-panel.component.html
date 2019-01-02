@@ -4,54 +4,41 @@
         <div class="col-md-9">
             <systelab-context-panel #contextpanel1 (action)="executeContextMenuAction($event)">
 
+                <div class="d-flex flex-column"></div>
                 <div class="header-content">
                     <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize" [style.color]="fontColor">Last 30 days</i>
                 </div>
-                <div class="main-content">
-                    <form class="p-2" style="width:250px;">
-                        <label class="slab-form-title">Date interval</label>
-                        <div class="row mt-1">
-                            <div class="col-md-5">
-                                <input name="param-radio" type="radio" id="radio-days" [(ngModel)]="numericDateRadio" value="paramNumber">
-                                <label for="radio-number">Last days</label>
+                <div class="main-content d-flex flex-column">
+                    <div>
+                        <label class="slab-form-title">Date interval: {{getInterval()}}</label>
+                    </div>
+                    <div class="mt-2 mb-2">
+                        <form class="form-inline">
+                            <div class="col-md-2">
+                                <input name="param-radio" type="radio" id="radio-calendar" [(ngModel)]="numericDateRadio" value="calendar">
+                                <label for="radio-calendar">Calendar</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-2">
+                                <input name="param-radio" type="radio" id="radio-days" [(ngModel)]="numericDateRadio" value="days">
+                                <label for="radio-days">Last days</label>
+                            </div>
+                            <div class="col-md-2">
                                 <div>
-                                    <systelab-spinner id="spinner" [spinValues]="touchSpinValues1" [disabled]="numericDateRadio === 'paramDate'"></systelab-spinner>
+                                    <systelab-spinner id="spinner" [spinValues]="touchSpinValues1" [disabled]="numericDateRadio !== 'days'"></systelab-spinner>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-md-5">
-                                <input name="param-radio" type="radio" id="radio-date" [(ngModel)]="numericDateRadio" value="paramDate">
-                                <label for="radio-date">From</label>
-                            </div>
-                            <div class="col-md-7">
-                                <systelab-datepicker id="QCGraphsPerformanceFromDate" [(currentDate)]="fromDate"
-                                                     [disabled]="numericDateRadio === 'paramNumber'"></systelab-datepicker>
-                            </div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-md-5">
-                                <label class="col-form-label ml-4 pl-2">To</label>
-                            </div>
-                            <div class="col-md-7">
-                                <systelab-datepicker id="QCGraphsPerformanceToDate" [(currentDate)]="toDate"
-                                                     [disabled]="numericDateRadio === 'paramNumber'"></systelab-datepicker>
-                            </div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-md-5">
-                                <input name="param-radio" type="radio" id="radio-number" [(ngModel)]="numericDateRadio" value="paramNumber">
+                            <div class="col-md-2">
+                                <input name="param-radio" type="radio" id="radio-number" [(ngModel)]="numericDateRadio" value="number">
                                 <label for="radio-number">Last points</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-2">
                                 <div>
-                                    <systelab-spinner id="touch" [spinValues]="touchSpinValues2" [disabled]="numericDateRadio === 'paramDate'"></systelab-spinner>
+                                    <systelab-spinner id="touch" [spinValues]="touchSpinValues2" [disabled]="numericDateRadio !== 'number'"></systelab-spinner>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <systelab-date-range-picker class="mb-2 mt-2" [(fromDate)]="fromDate" [(toDate)]="toDate" [disabled]="numericDateRadio !== 'calendar'"></systelab-date-range-picker>
                 </div>
 
             </systelab-context-panel>
