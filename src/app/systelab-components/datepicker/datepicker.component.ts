@@ -285,7 +285,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public closeDatepicker(): void {
-		console.log('closeDatepicker');
 		if (this.currentCalendar) {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
