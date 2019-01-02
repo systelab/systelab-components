@@ -9,7 +9,9 @@ export class DateRangepicker {
 	private _fromDate: Date;
 	private _toDate: Date;
 
-	public today = new Date();
+	@Input() public minDate: Date;
+	@Input() public maxDate: Date;
+
 
 	@Input() public disabled = false;
 
