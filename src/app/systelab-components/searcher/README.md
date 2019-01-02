@@ -43,7 +43,8 @@ export class ExampleSearcher extends AbstractSearcher<ExampleSearcherData> {
 
 	public getDialogParameters(): SearcherDialogParameters<ExampleSearcherData> {
 		const searcherDialogParameters: SearcherDialogParameters<ExampleSearcherData> = new SearcherDialogParameters<ExampleSearcherData>();
-		searcherDialogParameters.dialogClass = 'w-66 h-66';
+		searcherDialogParameters.widthRelative = '66%';
+		searcherDialogParameters.heightRelative = '66%';
 		return searcherDialogParameters;
 	}
 

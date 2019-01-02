@@ -18,7 +18,8 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 
 	public getDialogParameters(): SearcherDialogParameters<ShowcaseSearcherData> {
 		const searcherDialogParameters: SearcherDialogParameters<ShowcaseSearcherData> = new SearcherDialogParameters<ShowcaseSearcherData>();
-		searcherDialogParameters.dialogClass = 'w-66 h-66';
+		searcherDialogParameters.widthRelative = '66%';
+		searcherDialogParameters.heightRelative = '66%';
 		return searcherDialogParameters;
 	}
 

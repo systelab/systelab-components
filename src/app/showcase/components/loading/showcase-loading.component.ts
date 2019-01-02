@@ -8,13 +8,13 @@ import { ShowcaseLoadingDialog, ShowcaseLoadingDialogParameters } from './loadin
 })
 export class ShowcaseLoadingComponent {
 
-
 	constructor(protected dialogService: DialogService) {
 	}
 
 	public showLoadingDialog() {
 		const parameters: ShowcaseLoadingDialogParameters = ShowcaseLoadingDialog.getParameters();
-		parameters.dialogClass = 'w-50 h-25';
+		parameters.widthRelative = '50%';
+		parameters.heightRelative = '25%';
 		this.dialogService.showDialog(ShowcaseLoadingDialog, parameters);
 	}
 

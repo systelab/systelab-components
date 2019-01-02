@@ -20,7 +20,8 @@ export class ShowcaseDialogComponent {
 	public showLowerFlexDialog() {
 		const parameters: LowerFlexDialogParameters = ShowcaseLowerFlexDialog.getParameters();
 		parameters.width = 960;
-		parameters.height = 600;
+		parameters.heightRelative = '95%';
+		parameters.maxHeight = 900;
 		parameters.index = 4;
 		this.dialogService.showDialog(ShowcaseLowerFlexDialog, parameters);
 	}
@@ -48,7 +49,8 @@ export class ShowcaseDialogComponent {
 	public showFullFlexDialog() {
 		const parameters: ShowcaseFullFlexDialogParameters = ShowcaseFullFlexDialog.getParameters();
 		parameters.index = 4;
-		parameters.dialogClass = 'w-66 h-66';
+		parameters.widthRelative = '66%';
+		parameters.heightRelative = '66%';
 		this.dialogService.showDialog(ShowcaseFullFlexDialog, parameters);
 	}
 

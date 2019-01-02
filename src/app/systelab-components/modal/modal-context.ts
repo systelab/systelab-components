@@ -4,6 +4,7 @@ export class SystelabModalContext extends ModalOpenContext {
 	/**
 	 * A Class for the modal dialog container.
 	 * Default: modal-dialog
+	 * Deprecated
 	 */
 	public dialogClass: string;
 
