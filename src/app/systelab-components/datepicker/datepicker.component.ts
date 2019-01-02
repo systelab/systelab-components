@@ -16,6 +16,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public inputFontSize: number;
 	@Input() public showTodayButton = false;
 	@Input() public inline = false;
+	@Input() public minDate: Date;
 	@Input() public maxDate: Date;
 
 	@Input()

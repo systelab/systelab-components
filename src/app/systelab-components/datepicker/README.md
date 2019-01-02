@@ -20,6 +20,9 @@ All the input parameters are optional.
 | inputExpandHeight | boolean | false | If true the component expands to parent height |
 | fontSize | number | | Font size in pixels |
 | showTodayButton | boolean | false | Show Today button |
+| inline | boolean | false | When enabled, displays the calendar as inline. Default is false for popup mode |
+| minDate | Date | | The minimum selectable date |
+| maxDate | Date | | The maximum selectable date |
 
 In black the Two-Way Data Binding properties.
 
