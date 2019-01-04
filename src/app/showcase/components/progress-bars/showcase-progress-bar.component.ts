@@ -8,13 +8,13 @@ import { DialogService } from '../../../systelab-components/modal/dialog/dialog.
 })
 export class ShowcaseProgressBarComponent {
 
-
 	constructor(protected dialogService: DialogService) {
 	}
 
 	public showProgressBarDialog() {
 		const parameters: ShowcaseProgressBarDialogParameters = ShowcaseProgressBarDialog.getParameters();
-		parameters.dialogClass = 'w-50 h-25';
+		parameters.widthRelative = '50%';
+		parameters.heightRelative = '50%';
 		this.dialogService.showDialog(ShowcaseProgressBarDialog, parameters);
 	}
 

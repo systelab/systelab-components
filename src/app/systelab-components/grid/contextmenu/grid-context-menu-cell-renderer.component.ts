@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
-import { AbstractGrid } from '../abstract-grid.component';
+import {Component} from '@angular/core';
+import {AgRendererComponent} from 'ag-grid-angular';
+import {AbstractGrid} from '../abstract-grid.component';
 
 @Component({
-	selector:    'mp-grid-context-menu',
+	selector: 'mp-grid-context-menu',
 	templateUrl: 'grid-context-menu-cell-renderer.component.html'
 })
 export class GridContextMenuCellRendererComponent<T> implements AgRendererComponent {
@@ -12,7 +12,7 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 	public fontSize: string;
 	public fontColor: string;
 	public rowIndex: number;
-	public data: any;
+	public data: T;
 
 	public refresh(params: any): boolean {
 		return true;
@@ -25,7 +25,12 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 	}
 
 	public dotsClicked(event: MouseEvent) {
-		this.container.dotsClicked(this.rowIndex, this.data, event);
+		let selectedRows: T | Array<T> = this.data;
+		if ( event.ctrlKey ) {
+			selectedRows = this.container.getSelectedRows();
+		}
+		this.container.dotsClicked(this.rowIndex, selectedRows, event);
+		// this.container.dotsClicked(this.rowIndex, this.data, event);
 	}
 }
 

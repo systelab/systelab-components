@@ -35,7 +35,7 @@ import { ShowcaseComboboxComponent } from './components/combobox/showcase-combob
 import { ShowcaseInputComponent } from './components/input/showcase-input.component';
 import { ShowcaseTableComponent } from './components/table/showcase-table.component';
 import { ShowcaseGridComponent } from './components/grid/showcase-grid.component';
-import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
+import { ShowcaseInnerApiGridComponent } from './components/grid/showcase-inner-api-grid.component';
 import { ShowcaseIconComponent } from './components/icon/showcase-icon.component';
 import { ShowcaseTwoListComponent } from './components/two-list/showcase-two-list.component';
 import { ShowcaseApplicationFrameComponent } from './components/application-frame/showcase-application-frame.component';
@@ -76,6 +76,7 @@ import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tr
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplete-combobox.component';
 import { GridContextMenuCellRendererComponent } from '../systelab-components/grid/contextmenu/grid-context-menu-cell-renderer.component';
+import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
 import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
 
 @NgModule({
@@ -133,6 +134,7 @@ import { ShowcaseContextPanel } from './components/context-panel/showcase-contex
 		ShowcaseFullFlexDialog,
 		ShowcaseSplitDialog,
 		ShowcaseInnerGridComponent,
+		ShowcaseInnerApiGridComponent,
 		ShowcaseStandardDialog,
 		SampleRouteComponent,
 		ShowcaseStandardComponent,

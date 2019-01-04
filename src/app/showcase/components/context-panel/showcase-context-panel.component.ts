@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TouchSpinValues } from '../../../systelab-components/spinner/touch.spin-values';
+import { ContextPanelComponent } from '../../../systelab-components/contextpanel/context-panel.component';
 
 @Component({
 	selector:    'showcase-context-panel',
@@ -12,6 +13,7 @@ export class ShowcaseContextPanel implements OnInit {
 	public toDate: Date = new Date();
 
 	public numericDateRadio = 'days';
+	@ViewChild('contextPanel1') public contextPanel: ContextPanelComponent;
 
 	constructor() {
 		this.touchSpinValues1 = new TouchSpinValues(30, 1, 365, 1);
@@ -19,7 +21,7 @@ export class ShowcaseContextPanel implements OnInit {
 	}
 
 	public ngOnInit() {
-		this.fromDate=new Date();
+		this.fromDate = new Date();
 		this.fromDate.setMonth(this.fromDate.getMonth() - 1);
 	}
 
@@ -50,6 +52,10 @@ export class ShowcaseContextPanel implements OnInit {
 		const year = date.getFullYear();
 
 		return day + ' ' + monthNames[monthIndex] + ' ' + year;
+	}
+
+	private close() {
+		this.contextPanel.closeDropDown();
 	}
 
 }

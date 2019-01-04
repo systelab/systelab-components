@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
-import { ShowcaseData } from '../../grid/showcase-inner-grid.component';
 import { GridContextMenuOption } from '../../../../systelab-components/grid/contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from '../../../../systelab-components/grid/contextmenu/grid-context-menu-action-data';
+import { ShowcaseData } from '../../grid/showcase-grid.model';
 
 export class ShowcaseStandardDialogParameters extends SystelabModalContext {
 	public index: number;
@@ -17,6 +17,10 @@ export class ShowcaseStandardDialog implements ModalComponent<ShowcaseStandardDi
 
 	protected parameters: ShowcaseStandardDialogParameters;
 
+	public static getParameters(): ShowcaseStandardDialogParameters {
+		return new ShowcaseStandardDialogParameters();
+	}
+
 	constructor(public dialog: DialogRef<ShowcaseStandardDialogParameters>) {
 		this.parameters = dialog.context;
 	}
@@ -25,12 +29,8 @@ export class ShowcaseStandardDialog implements ModalComponent<ShowcaseStandardDi
 		this.dialog.close('This is a test');
 	}
 
-	public static getParameters(): ShowcaseStandardDialogParameters {
-		return new ShowcaseStandardDialogParameters();
-	}
-
 	public doSelect(compareProfileData: ShowcaseData): void {
-
+		console.log(compareProfileData);
 	}
 
 	public getMenu(): Array<GridContextMenuOption<ShowcaseData>> {
@@ -46,6 +46,15 @@ export class ShowcaseStandardDialog implements ModalComponent<ShowcaseStandardDi
 		} else if (action.actionId === 'action2') {
 		} else if (action.actionId === 'action3') {
 		}
+	}
+
+	public getHeaderContextMenuOptions(): Array<GridContextMenuOption<string>> {
+		return [
+			new GridContextMenuOption('headeraction1', 'Header Action 1'),
+			new GridContextMenuOption('headeraction2', 'Header Action 2'),
+			new GridContextMenuOption('headeraction3', 'Header Action 3'),
+			new GridContextMenuOption('headeraction4', 'Header Action 4')
+		];
 	}
 }
 

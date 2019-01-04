@@ -2,11 +2,10 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label">Context Panel</label>
         <div class="col-md-9">
-            <systelab-context-panel #contextpanel1 (action)="executeContextMenuAction($event)">
-
+            <systelab-context-panel #contextPanel1>
                 <div class="d-flex flex-column"></div>
                 <div class="header-content">
-                    <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize" [style.color]="fontColor">Last 30 days</i>
+                    <p><span class="icon-filter"></span>Last 30 days</p>
                 </div>
                 <div class="main-content d-flex flex-column">
                     <div>
@@ -16,7 +15,7 @@
                         <form class="form-inline">
                             <div class="col-md-2">
                                 <input name="param-radio" type="radio" id="radio-calendar" [(ngModel)]="numericDateRadio" value="calendar">
-                                <label for="radio-calendar">Calendar</label>
+                                <label for="radio-calendar">Date range</label>
                             </div>
                             <div class="col-md-2">
                                 <input name="param-radio" type="radio" id="radio-days" [(ngModel)]="numericDateRadio" value="days">
@@ -38,7 +37,11 @@
                             </div>
                         </form>
                     </div>
-                    <systelab-date-range-picker class="mb-2 mt-2" [(fromDate)]="fromDate" [(toDate)]="toDate" [disabled]="numericDateRadio !== 'calendar'"></systelab-date-range-picker>
+                    <systelab-date-range-picker class="mb-2 mt-2" [(fromDate)]="fromDate" [(toDate)]="toDate"
+                                                [disabled]="numericDateRadio !== 'calendar'"></systelab-date-range-picker>
+                    <div class="d-flex">
+                        <button type="button" class="btn ml-auto" (click)="close()">Submit</button>
+                    </div>
                 </div>
 
             </systelab-context-panel>

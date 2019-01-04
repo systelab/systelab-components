@@ -1,5 +1,5 @@
-import { Input, EventEmitter, Output, OnInit } from '@angular/core';
-import { SearcherDialogParameters, SearcherDialog } from './searcher.dialog.component';
+import { EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SearcherDialog, SearcherDialogParameters } from './searcher.dialog.component';
 import { AbstractSearcher } from './abstract-searcher';
 import { DialogService } from '../modal/dialog/dialog.service';
 
@@ -117,13 +117,14 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	public getInputHeight() {
 		if (this.height) {
-			return { 'height': '100%' };
+			return {'height': '100%'};
 		}
 		return undefined;
 	}
+
 	public getLineHeight() {
 		if (this.height) {
-			return { 'line-height': this.height.toString() + 'px' };
+			return {'line-height': this.height.toString() + 'px'};
 		}
 		return undefined;
 	}
@@ -139,7 +140,8 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 				this.abstractSearcher.multipleSelectedItemList.push(newElement);
 			}
 		}
-		this.searcherDialogParameters.dialogClass = 'w-66 h-66';
+		this.searcherDialogParameters.widthRelative = '66%';
+		this.searcherDialogParameters.heightRelative = '66%';
 		this.searcherDialogParameters.searcher = this.abstractSearcher;
 		this.dialogService.showDialog(SearcherDialog, this.searcherDialogParameters)
 			.subscribe(

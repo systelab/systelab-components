@@ -20,13 +20,16 @@ export class ShowcaseDialogComponent {
 	public showLowerFlexDialog() {
 		const parameters: LowerFlexDialogParameters = ShowcaseLowerFlexDialog.getParameters();
 		parameters.width = 960;
-		parameters.height = 600;
+		parameters.heightRelative = '95%';
+		parameters.maxHeight = 900;
 		parameters.index = 4;
 		this.dialogService.showDialog(ShowcaseLowerFlexDialog, parameters);
 	}
 
 	public showSplitDialog() {
 		const parameters: SplitShowcaseDialogParameters = ShowcaseSplitDialog.getParameters();
+		parameters.heightRelative = '75%';
+		parameters.widthRelative = '75%';
 		this.dialogService.showDialog(ShowcaseSplitDialog, parameters);
 	}
 
@@ -37,8 +40,8 @@ export class ShowcaseDialogComponent {
 
 	public showTwoTabsDialog() {
 		const parameters: ShowcaseTwoTabsDialogParameters = ShowcaseTwoTabsDialog.getParameters();
-		parameters.width = 960;
-		parameters.height = 600;
+		parameters.heightRelative = '95vh';
+		parameters.widthRelative = '60vw';
 		parameters.index = 4;
 		this.dialogService.showDialog(ShowcaseTwoTabsDialog, parameters);
 	}
@@ -46,7 +49,8 @@ export class ShowcaseDialogComponent {
 	public showFullFlexDialog() {
 		const parameters: ShowcaseFullFlexDialogParameters = ShowcaseFullFlexDialog.getParameters();
 		parameters.index = 4;
-		parameters.dialogClass = 'w-66 h-66';
+		parameters.widthRelative = '66%';
+		parameters.heightRelative = '66%';
 		this.dialogService.showDialog(ShowcaseFullFlexDialog, parameters);
 	}
 
