@@ -54,7 +54,7 @@ export class ShowcaseContextPanel implements OnInit {
 		return day + ' ' + monthNames[monthIndex] + ' ' + year;
 	}
 
-	private close() {
+	public close() {
 		this.contextPanel.closeDropDown();
 	}
 

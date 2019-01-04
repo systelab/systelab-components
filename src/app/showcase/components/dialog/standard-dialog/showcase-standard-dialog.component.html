@@ -10,50 +10,6 @@
         <showcase-inner-api-grid #grid2 class="slab-flex-1 position-relative" [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
                                  (clickRow)="doSelect($event)"></showcase-inner-api-grid>
     </systelab-tab>
-    <systelab-tab [title]="'title 4'" [id]="'4'" class="p-1">
-        <form class="p-2">
-            <label class="slab-form-title">Date interval</label>
-            <div class="row mt-1">
-                <div class="col-md-4">
-                    <input name="param-radio" type="radio" id="radio-days" [(ngModel)]="numericDateRadio" value="paramNumber">
-                    <label for="radio-number">Last days</label>
-                </div>
-                <div class="col-md-4">
-                    <div>
-                        <systelab-spinner id="spinner" [disabled]="numericDateRadio === 'paramDate'"></systelab-spinner>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="col-md-4">
-                    <input name="param-radio" type="radio" id="radio-date" [(ngModel)]="numericDateRadio" value="paramDate">
-                    <label for="radio-date">From</label>
-                </div>
-                <div class="col-md-4">
-                    <systelab-datepicker id="QCGraphsPerformanceFromDate" [(currentDate)]="fromDate" [disabled]="numericDateRadio === 'paramNumber'"></systelab-datepicker>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="col-md-4">
-                    <label class="col-form-label ml-4 pl-2">To</label>
-                </div>
-                <div class="col-md-4">
-                    <systelab-datepicker id="QCGraphsPerformanceToDate" [(currentDate)]="toDate" [disabled]="numericDateRadio === 'paramNumber'"></systelab-datepicker>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="col-md-4">
-                    <input name="param-radio" type="radio" id="radio-number" [(ngModel)]="numericDateRadio" value="paramNumber">
-                    <label for="radio-number">Last points</label>
-                </div>
-                <div class="col-md-4">
-                    <div>
-                        <systelab-spinner id="touch" [disabled]="numericDateRadio === 'paramDate'"></systelab-spinner>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </systelab-tab>
 </systelab-tabs>
 
 <systelab-dialog-bottom>
