@@ -1,20 +1,30 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { NumPadDialog, NumPadDialogParameters } from './numpad.dialog.component';
 
 @Component({
-	selector: 'systelab-numpad',
+	selector:    'systelab-numpad',
 	templateUrl: 'numpad.component.html'
 })
-export class NumPadComponent  {
-	@Input()
-	public numpadValue = '';
+export class NumPadComponent {
+	protected _numpadValue: string;
 	@Input()
 	isPassword = false;
 	@Input()
 	public autofocus = false;
 
-	@Output() public numpadValueEmitter = new EventEmitter();
+	@Output() public numpadValueChange = new EventEmitter<string>();
+	@Output() public numpadValueEnter = new EventEmitter<string>();
+
+	@Input()
+	get numpadValue(): string {
+		return this._numpadValue;
+	}
+
+	set numpadValue(value: string) {
+		this._numpadValue = value;
+		this.numpadValueChange.emit(this._numpadValue);
+	}
 
 	constructor(public dialogService: DialogService) {
 
@@ -23,10 +33,10 @@ export class NumPadComponent  {
 	public openNumPadDialog() {
 		const parameters: NumPadDialogParameters = NumPadDialog.getParameters();
 		parameters.numpadValue = this.numpadValue;
-		parameters.isPassword =  this.isPassword;
+		parameters.isPassword = this.isPassword;
 		this.dialogService.showDialog(NumPadDialog, parameters)
-			.subscribe( response => {
-				if ( response != null ) {
+			.subscribe(response => {
+				if (response != null) {
 					this.numpadValue = response;
 					this.doEnter();
 				}
@@ -35,7 +45,7 @@ export class NumPadComponent  {
 
 	public doEnter() {
 		if (this.numpadValue && this.numpadValue.trim() !== '') {
-			this.numpadValueEmitter.emit(this.numpadValue);
+			this.numpadValueEnter.emit(this.numpadValue);
 		}
 	}
 

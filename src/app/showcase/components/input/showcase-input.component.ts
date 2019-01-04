@@ -8,4 +8,8 @@ export class ShowcaseInputComponent {
 
 	constructor() {
 	}
+
+	public doEnter() {
+		console.log('doEnter');
+	}
 }

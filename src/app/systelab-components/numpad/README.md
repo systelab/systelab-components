@@ -5,7 +5,7 @@ Component to show a Numeric Keyboard dialog for an Input Text.
 ## Using the component
 
 ```html
-<systelab-numpad [numpadValue]="value" (numpadValueEmitter)="doSelectValue($event)"></systelab-numpad>
+<systelab-numpad [numpadValue]="value" (numpadValueEnter)="doSelectValue($event)"></systelab-numpad>
 ```
 
 
@@ -22,5 +22,5 @@ Component to show a Numeric Keyboard dialog for an Input Text.
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| numpadValueEmitter | string | The selected value|
+| numpadValueEnter | string | The selected value|
 
