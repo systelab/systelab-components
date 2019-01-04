@@ -19,7 +19,7 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 	public searchingValue: string;
 
 	public titleForDialog: string;
-	public showClose  = true;
+	public showClose = true;
 	public isPassword = false;
 
 	public static getParameters(): NumPadDialogParameters {
@@ -28,8 +28,8 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 
 	constructor(public dialog: DialogRef<NumPadDialogParameters>) {
 		this.dialogParameters = dialog.context;
-		this.isPassword =  this.dialogParameters.isPassword;
-		this.numpadValue  = this.dialogParameters.numpadValue;
+		this.isPassword = this.dialogParameters.isPassword;
+		this.numpadValue = this.dialogParameters.numpadValue;
 	}
 
 	public close(): void {
@@ -41,7 +41,12 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 	}
 
 	public pushButton(value: string) {
-		this.numpadValue = this.numpadValue + value;
+		if (this.numpadValue) {
+			this.numpadValue += value;
+		} else {
+			this.numpadValue = value;
+		}
+
 		this.inputElement.nativeElement.focus();
 	}
 
