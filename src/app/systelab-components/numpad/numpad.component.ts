@@ -7,23 +7,23 @@ import { NumPadDialog, NumPadDialogParameters } from './numpad.dialog.component'
 	templateUrl: 'numpad.component.html'
 })
 export class NumPadComponent {
-	protected _numpadValue: string;
+	protected _value: string;
 	@Input()
 	isPassword = false;
 	@Input()
 	public autofocus = false;
 
-	@Output() public numpadValueChange = new EventEmitter<string>();
-	@Output() public numpadValueEnter = new EventEmitter<string>();
+	@Output() public valueChange = new EventEmitter<string>();
+	@Output() public change = new EventEmitter<string>();
 
 	@Input()
-	get numpadValue(): string {
-		return this._numpadValue;
+	get value(): string {
+		return this._value;
 	}
 
-	set numpadValue(value: string) {
-		this._numpadValue = value;
-		this.numpadValueChange.emit(this._numpadValue);
+	set value(value: string) {
+		this._value = value;
+		this.valueChange.emit(this._value);
 	}
 
 	constructor(public dialogService: DialogService) {
@@ -32,20 +32,20 @@ export class NumPadComponent {
 
 	public openNumPadDialog() {
 		const parameters: NumPadDialogParameters = NumPadDialog.getParameters();
-		parameters.numpadValue = this.numpadValue;
+		parameters.value = this.value;
 		parameters.isPassword = this.isPassword;
 		this.dialogService.showDialog(NumPadDialog, parameters)
 			.subscribe(response => {
 				if (response != null) {
-					this.numpadValue = response;
+					this.value = response;
 					this.doEnter();
 				}
 			});
 	}
 
 	public doEnter() {
-		if (this.numpadValue && this.numpadValue.trim() !== '') {
-			this.numpadValueEnter.emit(this.numpadValue);
+		if (this.value && this.value.trim() !== '') {
+			this.change.emit(this.value);
 		}
 	}
 
