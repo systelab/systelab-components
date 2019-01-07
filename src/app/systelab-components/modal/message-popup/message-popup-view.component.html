@@ -1,4 +1,4 @@
-<systelab-dialog-header (close)="close()">{{context.title}}</systelab-dialog-header>
+<systelab-dialog-header  (close)="close()">{{context.title}}</systelab-dialog-header>
 <div class="slab-flex-1 d-flex align-items-center pl-3">
     <systelab-message-with-icon class="w-100 h-100" [message]="context.msg" [type]="context.type"></systelab-message-with-icon>
 </div>
@@ -7,7 +7,7 @@
         <button *ngFor="let button of context.buttons" type="button" class="btn ml-1" (click)="close(button.returnValue)">{{button.title}}</button>
     </div>
      <div class="ml-auto" *ngIf="context.buttons.length===0">
-            <button type="button" class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}</button>
+            <button type="button" #closeBtn class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}</button>
      </div>
 </systelab-dialog-bottom>
 

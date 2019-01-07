@@ -26,17 +26,18 @@ export class SystelabModalContainer extends BaseDynamicComponent implements OnIn
 		if (this.dialog.context.fullScreen) {
 			this.computedClass = 'w-100 h-100';
 		} else {
+			this.computedClass = 'slab-dialog-border';
 			if (this.dialog.context.dialogClass) {
-				this.computedClass = this.dialog.context.dialogClass;
+				this.computedClass += ' ' + this.dialog.context.dialogClass;
 			} else if (this.dialog.context.height || this.dialog.context.minHeight || this.dialog.context.maxHeight
 				|| this.dialog.context.width || this.dialog.context.minWidth || this.dialog.context.maxWidth
 				|| this.dialog.context.heightRelative || this.dialog.context.minHeightRelative
 				|| this.dialog.context.maxHeightRelative || this.dialog.context.widthRelative
 				|| this.dialog.context.minWidthRelative || this.dialog.context.maxWidthRelative) {
-				this.computedClass = 'slab-dialog-border';
 			} else {
-				this.computedClass = 'w-33 h-33';
+				this.computedClass += ' w-33 h-33';
 			}
+
 		}
 
 		this.computedClass += ' slab-dialog-disabled-animation';
