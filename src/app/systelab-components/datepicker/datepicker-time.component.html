@@ -10,9 +10,9 @@
                 [style.min-width.px]="130"
                 [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'previous-date': previousAfterDate, 'input-expand-height':inputExpandHeight}">
         <p-header id="{{datepickerId}}">
-            <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear($event)"></a>
+            <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
             <a class="icon-angle-left slab-icon-medium" (click)="prevMonth($event)"></a>
-            <a class="icon-angle-double-right slab-icon-medium" (click)="nextYear($event)"></a>
+            <a class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
             <a class="icon-angle-right slab-icon-medium" (click)="nextMonth($event)"></a>
             <div class="ui-datepicker-title">
                 <span class="ui-datepicker-month">{{ currentCalendar.currentMonthText }}</span>

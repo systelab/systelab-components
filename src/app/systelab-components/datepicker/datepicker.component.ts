@@ -203,7 +203,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public onKeyDown(event: KeyboardEvent) {
-		event.stopPropagation();
 		if (event.keyCode === 13) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
@@ -237,37 +236,32 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public nextMonth(event: Event): void {
-		event.stopPropagation();
 		if (this.currentCalendar) {
 			this.currentCalendar.nextMonth(event);
 		}
 	}
 
 	public prevMonth(event: Event): void {
-		event.stopPropagation();
 		if (this.currentCalendar) {
 			this.currentCalendar.prevMonth(event);
 		}
 	}
 
-	public nextYear(event: Event): void {
-		event.stopPropagation();
+	public nextYear(): void {
 		if (this.currentCalendar) {
 			const currentYear = this.currentCalendar.currentYear + 1;
 			this.currentCalendar.onYearDropdownChange(currentYear.toString());
 		}
 	}
 
-	public prevYear(event: Event): void {
-		event.stopPropagation();
+	public prevYear(): void {
 		if (this.currentCalendar) {
 			const currentYear = this.currentCalendar.currentYear - 1;
 			this.currentCalendar.onYearDropdownChange(currentYear.toString());
 		}
 	}
 
-	public clearDate(event: Event): void {
-		event.stopPropagation();
+	public clearDate(event): void {
 		if (this.currentCalendar) {
 			this.currentDate = null;
 			this.currentCalendar.onClearButtonClick(event);
@@ -276,8 +270,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	public setTodayDate(event: Event): void {
-		event.stopPropagation();
+	public setTodayDate(event): void {
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
