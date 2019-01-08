@@ -3,10 +3,10 @@ import { Datepicker } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
-@Component( {
+@Component({
 	selector:    'systelab-date-time',
 	templateUrl: 'datepicker-time.component.html'
-} )
+})
 export class DatepickerTime extends Datepicker {
 
 	public touchSpinHourValues: TouchSpinValues;
@@ -15,11 +15,11 @@ export class DatepickerTime extends Datepicker {
 	protected _currentHours: string;
 	protected _currentMinutes: string;
 
-	constructor( myRenderer: Renderer2, i18nService: I18nService ) {
-		super( myRenderer, i18nService );
+	constructor(myRenderer: Renderer2, i18nService: I18nService) {
+		super(myRenderer, i18nService);
 
-		this.touchSpinHourValues = new TouchSpinValues( Number( this.currentHours ), 0, 23, 1 );
-		this.touchSpinMinuteValues = new TouchSpinValues( Number( this.currentMinutes ), 0, 59, 1 );
+		this.touchSpinHourValues = new TouchSpinValues(Number(this.currentHours), 0, 23, 1);
+		this.touchSpinMinuteValues = new TouchSpinValues(Number(this.currentMinutes), 0, 59, 1);
 	}
 
 	@Input()
@@ -27,12 +27,12 @@ export class DatepickerTime extends Datepicker {
 		return this._currentDate;
 	}
 
-	set currentDate( value: Date ) {
+	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.currentDateChange.emit( this._currentDate );
-		if ( this._currentDate ) {
-			this.currentHours = this.currentHours ? this.currentHours : String( this._currentDate.getHours() );
-			this.currentMinutes = this.currentMinutes ? this.currentMinutes : String( this._currentDate.getMinutes() );
+		this.currentDateChange.emit(this._currentDate);
+		if (this._currentDate) {
+			this.currentHours = this.currentHours ? this.currentHours : String(this._currentDate.getHours());
+			this.currentMinutes = this.currentMinutes ? this.currentMinutes : String(this._currentDate.getMinutes());
 		}
 	}
 
@@ -41,19 +41,19 @@ export class DatepickerTime extends Datepicker {
 		return this._currentHours;
 	}
 
-	set currentHours( value: string ) {
-		if ( value ) {
-			const numberValue = Number( value );
+	set currentHours(value: string) {
+		if (value) {
+			const numberValue = Number(value);
 			this._currentHours = value;
 			this.touchSpinHourValues.value = numberValue;
-			this.currentHoursChange.emit( this._currentHours );
-			if ( this.currentDate ) {
-				if ( this._currentHours ) {
-					this._currentDate.setHours( numberValue );
+			this.currentHoursChange.emit(this._currentHours);
+			if (this.currentDate) {
+				if (this._currentHours) {
+					this._currentDate.setHours(numberValue);
 				} else {
-					this._currentDate.setHours( 0 );
+					this._currentDate.setHours(0);
 				}
-				this.currentDateChange.emit( this._currentDate );
+				this.currentDateChange.emit(this._currentDate);
 			}
 		}
 	}
@@ -65,19 +65,19 @@ export class DatepickerTime extends Datepicker {
 		return this._currentMinutes;
 	}
 
-	set currentMinutes( value: string ) {
-		if ( value ) {
-			const numberValue = Number( value );
+	set currentMinutes(value: string) {
+		if (value) {
+			const numberValue = Number(value);
 			this._currentMinutes = value;
 			this.touchSpinMinuteValues.value = numberValue;
-			this.currentMinutesChange.emit( this._currentMinutes );
-			if ( this.currentDate ) {
-				if ( this._currentMinutes ) {
-					this._currentDate.setMinutes( numberValue );
+			this.currentMinutesChange.emit(this._currentMinutes);
+			if (this.currentDate) {
+				if (this._currentMinutes) {
+					this._currentDate.setMinutes(numberValue);
 				} else {
-					this._currentDate.setMinutes( 0 );
+					this._currentDate.setMinutes(0);
 				}
-				this.currentDateChange.emit( this._currentDate );
+				this.currentDateChange.emit(this._currentDate);
 			}
 		}
 	}
