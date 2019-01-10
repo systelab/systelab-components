@@ -37,6 +37,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
 	@Input() public withIcon: boolean;
+	@Input() public withDeleteOption: boolean;
 	@Input() public iconClass: string;
 	@Input() public inputColor: string;
 	@Input() public iconColor: string;
@@ -354,6 +355,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public doToggleFavourite(event: MouseEvent): void {
 		event.stopPropagation();
 		this.toggleFavourite();
+	}
+
+	public deleteValueSelected(event: MouseEvent): void {
+		event.stopPropagation();
+		this._description = undefined;
+		this._code = undefined;
+		this.id = undefined;
+		if (this.multipleSelection && this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
+			this.multipleSelectedItemList = [];
+		}
+
 	}
 
 	public onComboClicked(event: MouseEvent) {

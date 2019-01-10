@@ -14,8 +14,11 @@ class Element {
 
 export class AllYesNoSelect extends AbstractComboBox<Element> implements AfterViewInit {
 
+	_descriptionAll: string;
+
 	constructor(myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
+		this._descriptionAll = this.i18nService.instant('COMMON_ALL');
 	}
 
 	public ngAfterViewInit(): void {
@@ -43,6 +46,12 @@ export class AllYesNoSelect extends AbstractComboBox<Element> implements AfterVi
 
 	getIdField(): string {
 		return 'id';
+	}
+
+	deleteValueSelected(event: MouseEvent): void {
+		event.stopPropagation();
+		this._description = this._descriptionAll;
+		this.id = '';
 	}
 
 }

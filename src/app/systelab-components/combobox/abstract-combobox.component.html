@@ -8,6 +8,7 @@
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
+        <button *ngIf="withDeleteOption && id" type="button" class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"></button>
         <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}" [style.color]="iconColor"></button>
         <button type="button" *ngIf="(withFavourites && id && !isTree) || (withFavourites && id && isTree && level)" #favouriteButton
                 class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
