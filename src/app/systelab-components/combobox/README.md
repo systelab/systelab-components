@@ -160,9 +160,9 @@ In order to create a combobox with favourites you must set the input property "w
 a new service, "PreferencesService", and set it in the **constructor**, and it's necessary to set a **preferenceName** input.
 
 ## Using a Combo with reset combo option
-In order to put the combo in blank or with the initial value, you must set the property "withDeleteOption" as true. This option will show a X in the combo just in case that a value is selected.
+In order to put the combo in blank or with the initial value, you must set the property "withDeleteOption" as true. This option will show a X in the combo just in case that a value is selected. If is defined the params "defaultIdValue", "defaultDescription" or "defaultCode", the id, description and code will be set to this values.
 If you are using a multiple selection combobox, all items selected will be deleted.
-If you are using a combobox without blank value, the default option will be selected. 
+If you are using a combobox without blank value, the default option will be selected.
 
 ## Using AbstractApiTreeComboBox&lt;T&gt; with Favourites
 
@@ -204,6 +204,9 @@ Once you have your component, you can use it in your templates.
 | allElement | boolean | false | If true adds an element that represents the "all" element at the first position of the elements list in the dropdown (the second if the emptyElement is also set to true). Use it only in combos that extends from AbstractComboBox or AbstractApiComboBox. It can be used with multipleSelection property. In this last case, if the "all" element is selected no other option will remain selected. Reversely, if the "all" element is selected and the user select any other option, then the "all" element is deselected. |																																																																																																																																								
 | withFavourites | boolean | false | Used to activate and deactivate the favourites |
 | withDeleteOption | boolean | false | Used to activate and deactivate the reset combo option |
+| defaultIdValue | string | | Used to define the default id of the combo |
+| defaultDescription | string | | Used to define the default description selected of the combo |
+| defaultCode | string | | Used to define the default code selected of the combo |
 | preferencesName | string | '' | Preference name over will be saved the preferences |
 
 In black the Two-Way Data Binding properties.
