@@ -13,7 +13,7 @@ export class DataFilterPipe implements PipeTransform {
 		}
 
 		for (const element of input) {
-			if (element.displayName.toLowerCase()
+			if (element.colId.toLowerCase()
 					.indexOf(searchString.toLowerCase()) > -1) {
 				result.push(element);
 			}
