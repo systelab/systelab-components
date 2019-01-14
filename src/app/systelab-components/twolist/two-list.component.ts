@@ -51,7 +51,6 @@ export class TwoListComponent {
 
 	@Output() public availableChange = new EventEmitter();
 
-	@Input() public displayAttr: string;
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
 	@Input() public defaultVisibleColumns: Array<TwoListItem>;
 	@Input() public defaultHiddenColumns: Array<TwoListItem>;
