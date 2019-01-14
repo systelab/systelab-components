@@ -461,6 +461,13 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		let calculatedHeight = 0;
 		const totalItems: number = this.getTotalItemsForDropdownHeight();
 
+		if(this.selectDeselectAll === true) {
+			calculatedHeight += AbstractComboBox.ROW_HEIGHT + 10;
+		}
+		if(this.filter === true) {
+			calculatedHeight += AbstractComboBox.ROW_HEIGHT + 5;
+		}
+		
 		if (totalItems === 0) {
 			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');

@@ -3,7 +3,7 @@ import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
 
-	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[]) {
+	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[], public action?: any) {
 		subMenu = [];
 	}
 }
@@ -42,7 +42,7 @@ export class ApplicationSidebarComponent implements OnInit {
 		});
 	}
 
-	private selectTab(id: string) {
+	public selectTab(id: string) {
 		this.tabs.forEach((tab) => {
 			tab.isSelected = (tab.id === id);
 			if (tab.subMenu) {

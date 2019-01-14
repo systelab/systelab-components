@@ -27,7 +27,9 @@ export class MessagePopupViewComponent implements ModalComponent<MessagePopupVie
 	}
 
 	ngAfterViewInit() {
-		setTimeout(() => this.closeBtn.nativeElement.focus());
+		if(parseInt(this.context.type,10) > 1) {
+			setTimeout(() => this.closeBtn.nativeElement.focus());
+		}
   	}
 
 	public close( value?: any ): void {

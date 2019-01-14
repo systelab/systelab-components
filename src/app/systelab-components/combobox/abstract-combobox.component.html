@@ -24,8 +24,8 @@
             </div>
             <div *ngIf="selectDeselectAll" class="slab-filter-container mb-2">
                 <div class="w-100 text-center btn-group" role="group">
-                    <button type="button" class="btn btn-sm w-50  btn-outline-primary" (click)="doSelectAll()">{{'COMMON_SELECT_ALL' | translate | async }}</button>
-                    <button type="button" class="btn btn-sm w-50 btn-outline-primary" (click)="doDeselectAll()">{{'COMMON_DESELECT_ALL' | translate | async }}</button>
+                    <button type="button" class="btn btn-sm w-50" (click)="doSelectAll()">{{'COMMON_SELECT_ALL' | translate | async }}</button>
+                    <button type="button" class="btn btn-sm w-50" (click)="doDeselectAll()">{{'COMMON_DESELECT_ALL' | translate | async }}</button>
                 </div>
             </div>
             <div #hidden class="height-hidden"></div>
