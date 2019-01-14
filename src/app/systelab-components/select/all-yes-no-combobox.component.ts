@@ -14,13 +14,18 @@ class Element {
 
 export class AllYesNoSelect extends AbstractComboBox<Element> implements AfterViewInit {
 
+	private readonly descriptionAll: string;
+
 	constructor(myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
+		this.descriptionAll = this.i18nService.instant('COMMON_ALL');
 	}
 
 	public ngAfterViewInit(): void {
 		const elements = new Array<Element>();
-		elements.push(new Element('', this.i18nService.instant('COMMON_ALL')));
+		this.defaultDescription = this.descriptionAll;
+		this.defaultIdValue = '';
+		elements.push(new Element('', this.descriptionAll));
 		elements.push(new Element('Y', this.i18nService.instant('COMMON_YES')));
 		elements.push(new Element('N', this.i18nService.instant('COMMON_NO')));
 		if (!this._id) {

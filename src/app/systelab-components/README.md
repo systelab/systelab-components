@@ -117,6 +117,14 @@ All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootst
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
 
+### Schematics
+
+In order to generate some components, install [systelab-schematics](https://github.com/systelab/systelab-schematics) 
+
+```bash
+npm install -D systelab-schematics --save
+```
+
 ## Components
 
 A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples. 
