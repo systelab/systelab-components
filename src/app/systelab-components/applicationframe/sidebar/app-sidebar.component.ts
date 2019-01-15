@@ -3,7 +3,7 @@ import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
 
-	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[], public action?: any) {
+	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[], public action?: (id: string) => void) {
 		subMenu = [];
 	}
 }
