@@ -77,6 +77,8 @@ import { ComboboxFavouriteRendererComponent } from './combobox/renderer/combobox
 import { ModulabListBox } from './listbox/listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-component';
+import { ContextPanelComponent } from './contextpanel/context-panel.component';
+import { DateRangepicker } from './date-range-picker/date-range-picker.component';
 
 @NgModule({
 	imports:         [
@@ -97,6 +99,7 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
+		ContextPanelComponent,
 		DialogComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
@@ -156,13 +159,15 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 		NumPadDialog,
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
-		ModulabListBox
+		ModulabListBox,
+		DateRangepicker
 
 	],
 	exports:         [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
+		ContextPanelComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
 		ColorCellRendererComponent,
@@ -222,7 +227,8 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
 		ModulabListBox,
-		GridContextMenuComponent
+		GridContextMenuComponent,
+		DateRangepicker
 
 	],
 	entryComponents: [

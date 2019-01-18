@@ -1,7 +1,7 @@
 <nav class="slab-app-header-bar d-flex align-items-center align-items-stretch">
     <i [ngClass]="logoIcon" class="slab-app-header-modulab-icon"></i>
     <div class="slab-app-header-labels-container slab-flex-1 text-truncate">
-        <label *ngIf="hospitalName" class="slab-app-header-hospital-name text-truncate">{{hospitalName}}</label>
+        <label *ngIf="title" class="slab-app-header-title text-truncate">{{title}}</label>
         <small *ngIf="userFullName" id="username" class="d-block text-truncate">{{userFullName}}
         </small>
     </div>

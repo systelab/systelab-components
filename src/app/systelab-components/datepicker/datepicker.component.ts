@@ -15,6 +15,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
 	@Input() public showTodayButton = false;
+	@Input() public inline = false;
+	@Input() public minDate: Date;
+	@Input() public maxDate: Date;
 
 	@Input()
 	get currentDate(): Date {
@@ -66,10 +69,12 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public ngAfterViewInit() {
 		const newElement = document.createElement('i');
-		newElement.className = 'icon-calendar';
-		if (this.currentCalendar) {
-			this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
-			this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
+		if (!this.inline) {
+			newElement.className = 'icon-calendar';
+			if (this.currentCalendar) {
+				this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
+				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
+			}
 		}
 	}
 
@@ -214,15 +219,19 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public repositionateCalendar(element?: ElementRef): void {
 
-		let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
+		try {
 
-		inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
-		inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
-		datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
+			let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
 
-		if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
-			const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
-			this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
+			inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
+			inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
+			datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
+
+			if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
+				const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
+				this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
+			}
+		} catch (ex) {
 		}
 	}
 
@@ -274,7 +283,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
 		}
-
 	}
 
 	private getLanguage(): void {

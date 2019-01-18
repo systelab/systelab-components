@@ -14,12 +14,12 @@ export class ApplicationHeaderComponent {
 
 	@Input() public userName: string;
 	@Input() public userFullName: string;
-	@Input() public hospitalName: string;
+	@Input() public title: string;
 	@Input() public logoIcon: string;
 	@Input() public menuBars = false;
 	@Input() public menu: ApplicationHeaderMenuEntry[] = [];
 
 	constructor(protected dialogService: DialogService) {
-		
+
 	}
 }

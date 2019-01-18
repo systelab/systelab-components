@@ -51,7 +51,6 @@ export class TwoListComponent {
 
 	@Output() public availableChange = new EventEmitter();
 
-	@Input() public displayAttr: string;
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
 	@Input() public defaultVisibleColumns: Array<TwoListItem>;
 	@Input() public defaultHiddenColumns: Array<TwoListItem>;
@@ -120,7 +119,7 @@ export class TwoListComponent {
 				break;
 			}
 			for (let j = 0; j < length; j++) {
-				if (actual.displayName === list[j].displayName) {
+				if (actual.colId === list[j].colId) {
 					arrayAux.push(j);
 					break;
 				}
@@ -149,7 +148,7 @@ export class TwoListComponent {
 		for (const element of list) {
 			let match = false;
 			for (const item of itemsToRemove) {
-				if (item[this.displayAttr] === element[this.displayAttr]) {
+				if (item.colId === element.colId) {
 					match = true;
 					break;
 				}

@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
 })
 export class ShowcaseInputComponent {
 
+	public value: '';
+
 	constructor() {
+	}
+
+	public doEnter() {
+		console.log('doEnter');
 	}
 }

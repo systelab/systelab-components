@@ -9,8 +9,7 @@ Component to select a group of elements from elements list. Elements to select h
                    [(visible)]="visibleColumns"
                    [initialAvailableColumns]="initialAvailableColumns"
                    [defaultVisibleColumns]="defaultVisibleColumns"
-                   [defaultHiddenColumns]="defaultHiddenColumns"
-                   displayAttr="displayName">
+                   [defaultHiddenColumns]="defaultHiddenColumns">
 </systelab-two-list>
 ```
 

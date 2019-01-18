@@ -60,6 +60,25 @@ p-calendar {
       //opacity: 0.5;
       //}
     }
+    .ui-datepicker-header {
+      background: $medium-gray;
+    }
+
+    .ui-datepicker-calendar {
+
+      tbody {
+        tr {
+          td {
+            a {
+              &.ui-state-active {
+                background-color: $medium-gray !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
   }
 }
 

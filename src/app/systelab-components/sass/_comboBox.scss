@@ -53,6 +53,12 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     }
   }
 
+  input:focus {
+    outline: 0 none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+   }
+
   .slab-color-container {
     border: solid 1px #d6d6d6;
     border-bottom-left-radius: 3px;

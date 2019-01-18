@@ -2,12 +2,14 @@
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown" (click)="onComboClicked($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
                [ngStyle]="getInputHeight()" [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle"
-               [(ngModel)]="description" [disabled]="isDisabled"/>
+               [(ngModel)]="description" [disabled]="isDisabled" [style.color]="inputColor"/>
         <div *ngIf="customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-input" [ngStyle]="getInputHeight()"
-             [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle">
+             [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle" [style.color]="inputColor">
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
+        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button" class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"></button>
+        <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}" [style.color]="iconColor"></button>
         <button type="button" *ngIf="(withFavourites && id && !isTree) || (withFavourites && id && isTree && level)" #favouriteButton
                 class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)"></button>

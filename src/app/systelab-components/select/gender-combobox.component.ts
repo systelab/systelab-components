@@ -16,17 +16,26 @@ class Element {
 export class GenderSelect extends AbstractComboBox<Element> implements AfterViewInit {
 
 	@Input() showAll = false;
+	private readonly descriptionAll;
+	private readonly descriptionUnknown;
+
 
 	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
+		this.descriptionAll =  this.i18nService.instant('COMMON_ALL');
+		this.descriptionUnknown = this.i18nService.instant('COMMON_UNKNOWN');
 	}
 
 	public ngAfterViewInit(): void {
+		this.defaultIdValue = 'U';
+		this.defaultDescription = this.descriptionUnknown;
 		const elements = new Array<Element>();
 		if (this.showAll) {
-			elements.push(new Element('A', this.i18nService.instant('COMMON_ALL')));
+			this.defaultIdValue = 'A';
+			this.defaultDescription = this.descriptionAll;
+			elements.push(new Element('A', this.descriptionAll));
 		}
-		elements.push(new Element('U', this.i18nService.instant('COMMON_UNKNOWN')));
+		elements.push(new Element('U', this.descriptionUnknown));
 		elements.push(new Element('M', this.i18nService.instant('COMMON_MALE')));
 		elements.push(new Element('F', this.i18nService.instant('COMMON_FEMALE')));
 
@@ -55,4 +64,5 @@ export class GenderSelect extends AbstractComboBox<Element> implements AfterView
 	getIdField(): string {
 		return 'id';
 	}
+
 }
