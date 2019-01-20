@@ -44,11 +44,11 @@ NgModule({
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        DragDropModule,
         SystelabTranslateModule.forRoot(),
         SystelabPreferencesModule.forRoot(),
         SystelabLoginModule.forRoot(),
         SystelabComponentsModule.forRoot(),
-        DndModule.forRoot(),
         AgGridModule.withComponents([
             GridContextMenuCellRendererComponent,
             GridHeaderContextMenuComponent
