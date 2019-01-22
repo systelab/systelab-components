@@ -33,14 +33,14 @@
         </div>
         <div class="slab-twolistbox mt-2 slab-flex-1">
             <div class="slab-twolistboxdiv" dnd-droppable
-                 (onDragEnter)="preventDefault($event)"
-                 (onDragOver)="preventDefault($event)"
-                 (onDragLeave)="preventDefault($event)">
+                 (onDragEnter)="handleDragEnter($event)"
+                 (onDragOver)="handleDragOver($event)"
+                 (onDragLeave)="handleDragLeave($event)">
                 <ul class="slab-twolistboxrow list-group" dnd-sortable-container [sortableData]="visible"
                     [dropZones]="['visible-dropZone']">
                     <li *ngFor="let visCol of (visible| datafilter:secondListSearch);let i = index"
                         [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':visCol.selected,'slab-twolistboxrow':!visCol.selected}"
-                        (click)="selectVisibleCurrent(visCol,$event)" dnd-sortable [sortableIndex]="i">
+                        (click)="selectVisibleCurrent(visCol,$event)" dnd-sortable [dragEnabled]="dragAndDropEnabled" [sortableIndex]="i">
                         {{visCol.displayName}}
                     </li>
                 </ul>

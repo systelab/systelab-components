@@ -56,6 +56,7 @@ export class TwoListComponent {
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
 	@Input() public defaultVisibleColumns: Array<TwoListItem>;
 	@Input() public defaultHiddenColumns: Array<TwoListItem>;
+	@Input() public dragAndDropEnabled = true;
 
 	public firstListSearch: string;
 	public secondListSearch: string;
@@ -65,7 +66,31 @@ export class TwoListComponent {
 		polyfill({});
 	}
 
-	public preventDefault(event) {
+	public handleDragEnter(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	public handleDragOver(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	public handleDragLeave(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	private preventDefault(event) {
 		event.mouseEvent.preventDefault();
 		return false;
 	}
