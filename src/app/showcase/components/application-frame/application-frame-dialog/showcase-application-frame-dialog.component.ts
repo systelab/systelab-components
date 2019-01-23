@@ -104,7 +104,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 
 	public action3(id) {
 		this.messagePopupService.showYesNoQuestionPopup('Question','Are you sure you want to continue?').subscribe((res) => {
-			if(res === true) {
+			if(res) {
 				this.appFrame.continueSelect(id);
 			}
 		})
