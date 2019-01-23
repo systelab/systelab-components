@@ -15,7 +15,7 @@ export class ShowcaseIconComponent {
 		this.iconsFontAwesome.push('fab fa-accessible-icon');
 		this.iconsFontAwesome.push('fab fa-android');
 		this.iconsFontAwesome.push('fab fa-bluetooth');
-		this.iconsFontAwesome.push('fab fa-bong');
+		this.iconsFontAwesome.push('fas fa-bong');
 		this.iconsFontAwesome.push('fas fa-diagnoses');
 		this.iconsFontAwesome.push('fas fa-biohazard');
 		this.iconsFontAwesome.push('fas fa-microscope');
