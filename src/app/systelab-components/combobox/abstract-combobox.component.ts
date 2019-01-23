@@ -10,11 +10,11 @@ import {
 	Renderer2,
 	ViewChild
 } from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
-import { GridOptions } from 'ag-grid';
-import { StylesUtilService } from '../utilities/styles.util.service';
-import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
+import {AgRendererComponent} from 'ag-grid-angular';
+import {GridOptions} from 'ag-grid';
+import {StylesUtilService} from '../utilities/styles.util.service';
+import {ComboboxFavouriteRendererComponent} from './renderer/combobox-favourite-renderer.component';
+import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
 
 declare var jQuery: any;
 
@@ -266,19 +266,19 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = (this.withFavourites) ? [
 			{
-				colID:                 'itemDescription',
-				id:                    this.getIdField(),
-				field:                 this.getDescriptionField(),
-				checkboxSelection:     this.multipleSelection,
+				colID: 'itemDescription',
+				id: this.getIdField(),
+				field: this.getDescriptionField(),
+				checkboxSelection: this.multipleSelection,
 				cellRendererFramework: ComboboxFavouriteRendererComponent,
-				cellRendererParams:    {
+				cellRendererParams: {
 					favouriteList: this.favouriteList
 				}
 			}
 		] : [
 			{
-				colID:             'itemDescription',
-				field:             this.getDescriptionField(),
+				colID: 'itemDescription',
+				field: this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection,
 			}
 		];
@@ -299,7 +299,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 		this.gridOptions.icons = {
 			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked:   this.getCheckboxChecked()
+			checkboxChecked: this.getCheckboxChecked()
 		};
 
 		this.gridOptions.getRowNodeId =
@@ -573,9 +573,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
 					if (this.multipleSelectedItemList
-						.filter((selectedItem) => {
-							return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
-						}).length > 0) {
+							.filter((selectedItem) => {
+								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+							}).length > 0) {
 						node.selectThisNode(true);
 					}
 				});
@@ -635,10 +635,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 							}
 						}
 						// Regardless the value of allElement, we have to add the newElement using the selectedNode
-						newElement[this.getIdField()] = event.node.data[this.getIdField()];
+						/*newElement[this.getIdField()] = event.node.data[this.getIdField()];
 						newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
-						newElement[this.getCodeField()] = event.node.data[this.getCodeField()];
-						this.multipleSelectedItemList.push(newElement);
+						newElement[this.getCodeField()] = event.node.data[this.getCodeField()];*/
+						this.multipleSelectedItemList.push(...this.gridOptions.api.getSelectedRows());
 						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 					}
 				} else {

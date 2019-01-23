@@ -226,8 +226,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	public executeContextMenuAction(elementId: string, actionId: string): void {
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
-		const rowId: number = Number(elementId.substr(elementId.indexOf('row'))
-			.replace('row', ''));
+		const rowId: number = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
 		const data: T = this.gridOptions.api.getModel()
 			.getRow(rowId).data;
 		const rowSelecteds: Array<T> = this.gridOptions.api.getSelectedRows();
@@ -247,8 +246,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	public isContextMenuOptionEnabled(elementId: string, actionId: string): boolean {
 
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
-		const rowId: number = Number(elementId.substr(elementId.indexOf('row'))
-			.replace('row', ''));
+		const rowId: number = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
 		const data: T = this.gridOptions.api.getModel()
 			.getRow(rowId).data;
 
@@ -270,7 +268,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			return option.action(actionData);
 		} else {
-			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
+			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			this.action.emit(actionData);
 		}
 	}
