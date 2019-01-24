@@ -37,7 +37,8 @@
         </div>
         <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
             <systelab-two-list-sortable-list class="w-100" [selected]="selected" [available]="available"
-                [(elementsList)]="visible" [secondListSearch]="secondListSearch"  (dbClick)="dbClickVisibleItem($event)"></systelab-two-list-sortable-list>
+                [(elementsList)]="visible" [secondListSearch]="secondListSearch" [dragAndDropEnabled]="dragAndDropEnabled"
+                (dbClick)="dbClickVisibleItem($event)"></systelab-two-list-sortable-list>
         </div>
     </div>
 </div>

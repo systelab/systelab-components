@@ -1,13 +1,13 @@
 <div class="slab-sortable-list text-nowrap"
-     (onDragEnter)="preventDefault($event)"
-     (onDragOver)="preventDefault($event)"
-     (onDragLeave)="preventDefault($event)">
+     (onDragEnter)="handleDragEnter($event)"
+     (onDragOver)="handleDragOver($event)"
+     (onDragLeave)="handleDragLeave($event)">
     <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)">
         <div *ngFor="let listElement of (elementsList| datafilter:secondListSearch);let i = index"
             (keydown)="removeElement(listElement, $event)"
             tabindex="-1"
             [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(listElement),'slab-sortable-list-row':!getSelectionFieldValue(listElement)}"
-            (click)="selectVisibleCurrent(listElement,$event)" (dblclick)="dbClickSelectedItem(listElement)" cdkDrag>
+            (click)="selectVisibleCurrent(listElement,$event)" (dblclick)="dbClickSelectedItem(listElement)" cdkDrag [cdkDragDisabled]="!dragAndDropEnabled">
             <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(listElement)"></i>{{getDescription(listElement)}}
         </div>
     </div>
