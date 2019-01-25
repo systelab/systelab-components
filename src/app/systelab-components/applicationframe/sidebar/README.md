@@ -17,16 +17,22 @@ Component to create an application sidebar (left), with different tabs and some 
 | actions | Array&lt;ApplicationSidebarAction&gt; || An array of ApplicationSidebarAction objects representing the buttons at the left-bottom corner. |
 | tabs | Array&lt;ApplicationSidebarTab&gt; || An array of ApplicationSidebarTab objects representing the tabs to show. |
 
-ApplicationSidebarTab is a class with three properties. The first one is the Tab id (to be received on selected), the second one the Tab name and the third one is a boolean to set if the tab is selected.
+*ApplicationSidebarTab* is a class with three mandatory properties and two optional properties. 
 
-ApplicationSidebarAction is a class with two properties. The first one is the button name and the second one the Arrow function to run when the button is clicked.
+| Name | Type | Mandatory | Description |
+| ---- |:----:|:-------:| ----------- |
+| id | string | yes | Tab id |
+| name | string | yes | Label of teh tab |
+| isSelected | boolean | yes | Define if the tab is selected |
+| subMenu | Array&lt;ApplicationSidebarTab&gt; | no | An array of ApplicationSidebarTab objects representing the sub-tabs to show.  |
+| action | any | yes | Define a action first changing the tab. |
 
 For example:
 ```
 this.tabs.push(new ApplicationSidebarTab('id1', this.i18nService.instant('COMMON_TAB1'), true));
 this.tabs.push(new ApplicationSidebarTab('id2', this.i18nService.instant('COMMON_TAB2'), false));
-this.tabs.push(new ApplicationSidebarTab('id3', this.i18nService.instant('COMMON_TAB3'), false));
-this.tabs.push(new ApplicationSidebarTab('id4', this.i18nService.instant('COMMON_TAB4'), false));
+this.tabs.push(new ApplicationSidebarTab('id3', this.i18nService.instant('COMMON_TAB3'), false, []));
+this.tabs.push(new ApplicationSidebarTab('id4', this.i18nService.instant('COMMON_TAB4'), false, [], () => this.action(id4)));
 ```
 
 

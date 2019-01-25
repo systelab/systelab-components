@@ -21,6 +21,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "../node_modules/primeng/resources/themes/omega/theme.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/systelab-components/icons/icomoon.css"
+        "../node_modules/@fortawesome/fontawesome-free/css/all.css"
       ],
 "stylePreprocessorOptions": {
   "includePaths": [
@@ -35,6 +36,12 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "../node_modules/nanobar/nanobar.js"
       ],
 ```
+
+> Be careful because you will not probably need all fontawesome 5.x. Instead you can add:
+> - brands.css
+> - fontawesome.css
+> - regular.css
+> - solid.css
 
 After, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 
