@@ -44,9 +44,9 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
 			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
 
-		const tooltipShowDelay = '"show":' + ((this.systelabTooltipDelay) ? this.systelabTooltipDelay : TooltipDirective.DEFAULT_DELAY);
-		const tooltipHideDelay = '"hide":' + ((this.systelabTooltipHideDelay) ? this.systelabTooltipHideDelay : TooltipDirective.DEFAULT_DELAY);
-		const tooltipDelay = '{' + tooltipShowDelay + ',' + tooltipHideDelay + '}';
+		const tooltipShowDelay = `"show":${((this.systelabTooltipDelay) ? this.systelabTooltipDelay : TooltipDirective.DEFAULT_DELAY)}`;
+		const tooltipHideDelay = `"hide":${((this.systelabTooltipHideDelay) ? this.systelabTooltipHideDelay : TooltipDirective.DEFAULT_DELAY)}`;
+		const tooltipDelay = `{${tooltipShowDelay}, ${tooltipHideDelay}}`;
 		this.renderer.setAttribute(this.el.nativeElement, 'data-delay', tooltipDelay);
 
 		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
