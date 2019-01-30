@@ -21,3 +21,5 @@ Use systelabTooltipPlacement to indicate the placement of the tooltip. Possible 
 
 Use systelabTooltipDelay to indicate delay showing the combo in ms. Default is 1000 ms.
 
+Use systelabTooltipHideDelay to indicate delay hiding the combo in ms. Default is 1000 ms.
+
