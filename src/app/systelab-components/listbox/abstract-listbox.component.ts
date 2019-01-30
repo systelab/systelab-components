@@ -14,9 +14,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 			this.gridOptions.api.setRowData(this._values);
 		}
 	}
+
 	get values() {
 		return this._values;
 	}
+
 	@Input() public isDisabled: boolean;
 
 	public _selectedItem: T;
@@ -85,12 +87,13 @@ export abstract class AbstractListBox<T> implements OnInit {
 					return this.isDisabled;
 				},
 			};
+		} else {
+			this.gridOptions.suppressRowClickSelection = this.isDisabled;
 		}
 
 		this.gridOptions.rowHeight = Number(rowHeight);
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
 		this.gridOptions.suppressCellSelection = true;
-		this.gridOptions.suppressRowClickSelection = this.isDisabled;
 		this.gridOptions.enableRangeSelection = !this.isDisabled;
 		this.gridOptions.enableColResize = false;
 		this.gridOptions.rowSelection = this.multipleSelection ? 'multiple' : 'single';
