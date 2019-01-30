@@ -190,7 +190,7 @@ Once you have your component, you can use it in your templates.
 | initialParams | any | | Class with the initial params of the component defined in customInputRender property |
 | filter | boolean | false | If true adds an input field inside dropdown to search elements. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
-| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown inside the dropdpwn of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
+| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown inside the dropdown of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | listSelectedValues | boolean | false | Shows the selected values at the bottom of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | fontFamily | string | | Font Family |
 | fontSize | string | | Font size in pixels |
