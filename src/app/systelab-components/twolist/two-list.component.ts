@@ -54,6 +54,7 @@ export class TwoListComponent {
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
 	@Input() public defaultVisibleColumns: Array<TwoListItem>;
 	@Input() public defaultHiddenColumns: Array<TwoListItem>;
+	@Input() public dragAndDropEnabled = true;
 
 	public firstListSearch: string;
 	public secondListSearch: string;

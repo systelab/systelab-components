@@ -6,6 +6,7 @@ export abstract class AbstractSortableListComponent<T> {
 
 	@Input() public elementsList: Array<T> = [];
 	@Input() public secondListSearch: string;
+	@Input() public dragAndDropEnabled = true;
 
 	public deleteWithSupr = false;
 	public showIcon = false;
@@ -29,6 +30,30 @@ export abstract class AbstractSortableListComponent<T> {
 
 	public getSelectionFieldValue(element: T): boolean {
 		return element[this.getSelectionField(element)];
+	}
+
+	public handleDragEnter(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	public handleDragOver(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	public handleDragLeave(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
 	}
 
 	public preventDefault(event) {
