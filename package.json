@@ -61,7 +61,7 @@
     "nanobar": "^0.4.2",
     "popper.js": "^1.14.4",
     "primeng": "^5.2.6",
-    "rxjs-compat": "^6.2.1",
+    "rxjs-compat": "6.3.3",
     "systelab-preferences": "^4.0.0",
     "systelab-translate": "5.0.0",
     "core-js": "^2.5.6",
