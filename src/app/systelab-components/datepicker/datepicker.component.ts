@@ -51,7 +51,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	constructor(private myRenderer: Renderer2, private i18nService: I18nService) {
 		this.addListeners();
-		// TODO: To get the language and modify the values.
+		// TODO: To get the language and modify the values
 	}
 
 	public ngOnInit() {
