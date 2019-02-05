@@ -109,7 +109,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			const today = new Date();
 			const futureDate = new Date();
 			today.setHours(0, 0, 0, 0);
-			futureDate.setTime(futureDate.getTime() + (1000 * 120 * 24 * 30));
+			futureDate.setTime(futureDate.getTime() + (1000 * 60 * 60 * 24 * 30));
 
 			if (this._currentDate.getTime() < today.getTime() || this._currentDate.getTime() > futureDate.getTime()) {
 				this.previousAfterDate = true;
