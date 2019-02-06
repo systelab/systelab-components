@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Calendar } from 'primeng/components/calendar/calendar';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { addDays } from 'date-fns';
 
 @Component({
 	selector:    'systelab-datepicker',
@@ -18,8 +19,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public inline = false;
 	@Input() public minDate: Date;
 	@Input() public maxDate: Date;
-	@Input() public maxDaysBefore: number;
-	@Input() public maxDaysAfter: number;
+	@Input() public warnDaysBefore: number;
+	@Input() public warnDaysAfter: number;
 
 	@Input()
 	get currentDate(): Date {
@@ -28,15 +29,15 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		if (this.markPreviousAfterDate || (this.maxDaysBefore && this.maxDaysBefore > 0)) {
+		if (this.markPreviousAfterDate || (this.warnDaysBefore && this.warnDaysBefore > 0)) {
 
-			if (!this.maxDaysBefore) {
-				this.maxDaysBefore = 1;
+			if (!this.warnDaysBefore) {
+				this.warnDaysBefore = 1;
 			}
 
 			this.checkPreviousAfterDate();
 		}
-		if (this.maxDaysAfter && this.maxDaysAfter > 0) {
+		if (this.warnDaysAfter && this.warnDaysAfter > 0) {
 			this.checkTooFarDate();
 		}
 	}
@@ -120,7 +121,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		if (this._currentDate) {
 			this._currentDate.setHours(0, 0, 0, 0);
-			const pastDate = this.addDaysToDate(new Date(), this.maxDaysBefore * -1, true);
+			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
+			pastDate.setHours(0, 0, 0, 0);
 
 			if (this._currentDate.getTime() <= pastDate.getTime()) {
 				this.previousAfterDate = true;
@@ -136,7 +138,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		if (this._currentDate) {
 			this._currentDate.setHours(0, 0, 0, 0);
-			const futureDate = this.addDaysToDate(new Date(), this.maxDaysAfter, false);
+			const futureDate = addDays(new Date(), this.warnDaysAfter);
 
 			if (this._currentDate.getTime() >= futureDate.getTime()) {
 				this.tooFarDate = true;
@@ -147,16 +149,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		} else {
 			this.tooFarDate = false;
 		}
-	}
-
-	private addDaysToDate(referenceDate: Date, daysToAdd: number, setTimeToMidnight: boolean): Date {
-		referenceDate.setTime(referenceDate.getTime() + (1000 * 60 * 60 * 24 * daysToAdd));
-
-		if (setTimeToMidnight) {
-			referenceDate.setHours(0, 0, 0, 0);
-		}
-
-		return referenceDate;
 	}
 
 	public selectDate(): void {

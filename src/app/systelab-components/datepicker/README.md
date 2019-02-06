@@ -16,13 +16,15 @@ All the input parameters are optional.
 | disabled | boolean | false | If true the component is shown disabled |
 | error | boolean | false | If true the components shows the Date selected in red indicating an erroneous date |
 | required | boolean | false | If true and currentDate is not set the components shows the input border in red |
-| markPreviousAfterDate | boolean | false | If true and currentDate previous than today then the input background color is red |
+| markPreviousAfterDate | boolean | false | (Deprecated, use warnDaysBefore with a value of 1 instead) If true and currentDate previous than today then the input background color is red |
 | inputExpandHeight | boolean | false | If true the component expands to parent height |
 | fontSize | number | | Font size in pixels |
 | showTodayButton | boolean | false | Show Today button |
 | inline | boolean | false | When enabled, displays the calendar as inline. Default is false for popup mode |
 | minDate | Date | | The minimum selectable date |
 | maxDate | Date | | The maximum selectable date |
+| warnDaysBefore | number | | If set, when a date is selected the input background is set to red when that date happens before or it is exactly the same than the system's current date minus the number of days specified. |
+| warnDaysAfter | number | | If set, when a date is selected the input background is set to red when that date happens after than the system's current date plus the number of days specified. |
 
 In black the Two-Way Data Binding properties.
 
