@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Calendar } from 'primeng/components/calendar/calendar';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { addDays } from 'date-fns';
 
 @Component({
 	selector:    'systelab-datepicker',
@@ -18,6 +19,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public inline = false;
 	@Input() public minDate: Date;
 	@Input() public maxDate: Date;
+	@Input() public warnDaysBefore: number;
+	@Input() public warnDaysAfter: number;
 
 	@Input()
 	get currentDate(): Date {
@@ -26,7 +29,17 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.checkPreviousAfterDate();
+		if (this.markPreviousAfterDate || (this.warnDaysBefore && this.warnDaysBefore > 0)) {
+
+			if (!this.warnDaysBefore) {
+				this.warnDaysBefore = 1;
+			}
+
+			this.checkPreviousAfterDate();
+		}
+		if (this.warnDaysAfter && this.warnDaysAfter > 0) {
+			this.checkTooFarDate();
+		}
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
@@ -36,6 +49,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public somethingChanged = false;
 	protected _currentDate: Date;
 	public previousAfterDate = false;
+	public tooFarDate = false;
 	public language: any;
 
 	public currentDocSize: number;
@@ -106,18 +120,34 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	private checkPreviousAfterDate() {
 
 		if (this._currentDate) {
-			const today = new Date();
-			const futureDate = new Date();
-			today.setHours(0, 0, 0, 0);
-			futureDate.setTime(futureDate.getTime() + (1000 * 60 * 60 * 24 * 30));
+			this._currentDate.setHours(0, 0, 0, 0);
+			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
+			pastDate.setHours(0, 0, 0, 0);
 
-			if (this._currentDate.getTime() < today.getTime() || this._currentDate.getTime() > futureDate.getTime()) {
+			if (this._currentDate.getTime() <= pastDate.getTime()) {
 				this.previousAfterDate = true;
 			} else {
 				this.previousAfterDate = false;
 			}
 		} else {
 			this.previousAfterDate = false;
+		}
+	}
+
+	private checkTooFarDate() {
+
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const futureDate = addDays(new Date(), this.warnDaysAfter);
+
+			if (this._currentDate.getTime() >= futureDate.getTime()) {
+				this.tooFarDate = true;
+			} else {
+				this.tooFarDate = false;
+			}
+
+		} else {
+			this.tooFarDate = false;
 		}
 	}
 
