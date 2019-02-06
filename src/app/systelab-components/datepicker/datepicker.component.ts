@@ -18,6 +18,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public inline = false;
 	@Input() public minDate: Date;
 	@Input() public maxDate: Date;
+	@Input() public maxDaysBefore: number;
+	@Input() public maxDaysAfter: number;
 
 	@Input()
 	get currentDate(): Date {
@@ -26,7 +28,17 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.checkPreviousAfterDate();
+		if (this.markPreviousAfterDate || (this.maxDaysBefore && this.maxDaysBefore > 0)) {
+
+			if (!this.maxDaysBefore) {
+				this.maxDaysBefore = 1;
+			}
+
+			this.checkPreviousAfterDate();
+		}
+		if (this.maxDaysAfter && this.maxDaysAfter > 0) {
+			this.checkTooFarDate();
+		}
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
@@ -36,6 +48,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public somethingChanged = false;
 	protected _currentDate: Date;
 	public previousAfterDate = false;
+	public tooFarDate = false;
 	public language: any;
 
 	public currentDocSize: number;
@@ -106,12 +119,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	private checkPreviousAfterDate() {
 
 		if (this._currentDate) {
-			const today = new Date();
-			const futureDate = new Date();
-			today.setHours(0, 0, 0, 0);
-			futureDate.setTime(futureDate.getTime() + (1000 * 60 * 60 * 24 * 30));
+			this._currentDate.setHours(0, 0, 0, 0);
+			const pastDate = this.addDaysToDate(new Date(), this.maxDaysBefore * -1, true);
 
-			if (this._currentDate.getTime() < today.getTime() || this._currentDate.getTime() > futureDate.getTime()) {
+			if (this._currentDate.getTime() <= pastDate.getTime()) {
 				this.previousAfterDate = true;
 			} else {
 				this.previousAfterDate = false;
@@ -119,6 +130,33 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		} else {
 			this.previousAfterDate = false;
 		}
+	}
+
+	private checkTooFarDate() {
+
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const futureDate = this.addDaysToDate(new Date(), this.maxDaysAfter, false);
+
+			if (this._currentDate.getTime() >= futureDate.getTime()) {
+				this.tooFarDate = true;
+			} else {
+				this.tooFarDate = false;
+			}
+
+		} else {
+			this.tooFarDate = false;
+		}
+	}
+
+	private addDaysToDate(referenceDate: Date, daysToAdd: number, setTimeToMidnight: boolean): Date {
+		referenceDate.setTime(referenceDate.getTime() + (1000 * 60 * 60 * 24 * daysToAdd));
+
+		if (setTimeToMidnight) {
+			referenceDate.setHours(0, 0, 0, 0);
+		}
+
+		return referenceDate;
 	}
 
 	public selectDate(): void {
