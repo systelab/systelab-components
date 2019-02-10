@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShowcaseStandardDialog } from '../dialog/standard-dialog/showcase-standard-dialog.component';
-import { DialogService } from '../../../systelab-components/modal/dialog/dialog.service';
+import { DialogService } from '../../../systelab-components/modal';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({

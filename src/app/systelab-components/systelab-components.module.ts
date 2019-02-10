@@ -5,8 +5,6 @@ import { SwitchComponent } from './switch/switch.component';
 import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
-import { SystelabModalModule } from './modal/plugin/custom/systelab-modal.module';
-import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
@@ -56,8 +54,6 @@ import { MonthSelectorComponent } from './month-selector/month-selector.componen
 import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
 import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
-import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './modal/base/providers';
-import { OverlayRenderer } from './modal/base/models/tokens';
 import { LoadingService } from './loading/loading.service';
 import { TimeUnitSelectComponent } from './select/time-unit-combobox.component';
 import { CheckboxCellRendererComponent } from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
@@ -79,6 +75,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-component';
 import { ContextPanelComponent } from './contextpanel/context-panel.component';
 import { DateRangepicker } from './date-range-picker/date-range-picker.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
 	imports:         [
@@ -89,7 +86,7 @@ import { DateRangepicker } from './date-range-picker/date-range-picker.component
 		CalendarModule,
 		TreeModule,
 		DragDropModule,
-		SystelabModalModule,
+		OverlayModule,
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
@@ -100,7 +97,6 @@ import { DateRangepicker } from './date-range-picker/date-range-picker.component
 		SwitchComponent,
 		ContextMenuComponent,
 		ContextPanelComponent,
-		DialogComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
 		TwoListComponent,
@@ -258,8 +254,6 @@ export class SystelabComponentsModule {
 		return {
 			ngModule:  SystelabComponentsModule,
 			providers: [
-				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
-				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
 				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
 				Ng2ComponentFactory,
 				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
