@@ -2,12 +2,9 @@ import { Injectable, Injector, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-import { SystelabModalContext } from './modal-context';
-import { DialogRef } from './dialog-ref';
+import { DialogRef, SystelabModalContext } from './dialog-ref';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class DialogService {
 
 	public static readonly breakpointMedium = 768;

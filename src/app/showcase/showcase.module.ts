@@ -77,6 +77,7 @@ import { GridContextMenuCellRendererComponent } from '../systelab-components/gri
 import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
 import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { DialogService, MessagePopupService } from '../systelab-components/modal';
 
 @NgModule({
 	imports:         [
@@ -174,7 +175,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 		ShowcaseLoadingDialog,
 		ShowcaseTimelineDialog
 	],
-	providers:       [],
+	providers:       [
+		DialogService,
+		MessagePopupService
+	],
 	bootstrap:       [ShowcaseComponent]
 })
 export class ShowcaseModule {

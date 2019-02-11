@@ -35,3 +35,4 @@ export class DialogRef<T extends SystelabModalContext> {
 		return this.subject.asObservable();
 	}
 }
+

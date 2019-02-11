@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { DialogRef, DialogService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
-import { MessagePopupService } from '../../../../systelab-components/modal/message-popup/message-popup.service';
+import { DialogRef, DialogService, MessagePopupService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';
 import { ApplicationFrameComponent } from '../../../../systelab-components/applicationframe/application-frame.component';
@@ -32,7 +31,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 	public sidetabs: ApplicationSidebarTab[] = [];
 
 	constructor(public dialog: DialogRef<ShowcaseApplicationFrameDialogParameters>, protected messagePopupService: MessagePopupService,
-		protected dialogService: DialogService) {
+	            protected dialogService: DialogService) {
 		this.parameters = dialog.context;
 		this.frameWidth = (window.innerWidth);
 		this.frameHeight = (window.innerHeight);
@@ -61,9 +60,9 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 		this.sidetabs.push(new ApplicationSidebarTab('T1', 'Tab One', true));
 		this.sidetabs.push(new ApplicationSidebarTab('T3', 'Tab Three', false, subMenu));
 		this.sidetabs.push(new ApplicationSidebarTab('T2', 'Tab Two', false));
-		this.sidetabs.push(new ApplicationSidebarTab('T6', 'Tab Action first', false,null, () => this.action3('T6')));
+		this.sidetabs.push(new ApplicationSidebarTab('T6', 'Tab Action first', false, null, () => this.action3('T6')));
 
-		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1(),'icon-home'));
+		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1(), 'icon-home'));
 		this.sideactions.push(new ApplicationSidebarAction('Close', () => this.close()));
 
 	}
@@ -103,11 +102,12 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 	}
 
 	public action3(id) {
-		this.messagePopupService.showYesNoQuestionPopup('Question','Are you sure you want to continue?').subscribe((res) => {
-			if(res) {
-				this.appFrame.continueSelect(id);
-			}
-		})
+		this.messagePopupService.showYesNoQuestionPopup('Question', 'Are you sure you want to continue?')
+			.subscribe((res) => {
+				if (res) {
+					this.appFrame.continueSelect(id);
+				}
+			})
 	}
 }
 

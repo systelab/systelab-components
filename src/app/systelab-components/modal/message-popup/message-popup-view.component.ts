@@ -15,7 +15,7 @@ export class MessagePopupViewContext extends SystelabModalContext {
 	public icon: string;
 	public type: number;
 	public color: string;
-	public buttons: MessagePopupButton[]=[];
+	public buttons: MessagePopupButton[] = [];
 }
 
 @Component({

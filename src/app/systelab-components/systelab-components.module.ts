@@ -6,8 +6,6 @@ import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } fro
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
-import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
-import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -76,6 +74,7 @@ import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-c
 import { ContextPanelComponent } from './contextpanel/context-panel.component';
 import { DateRangepicker } from './date-range-picker/date-range-picker.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
 
 @NgModule({
 	imports:         [

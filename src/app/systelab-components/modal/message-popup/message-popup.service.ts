@@ -11,9 +11,7 @@ export class MessagePopupButton {
 	}
 }
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class MessagePopupService {
 
 	public static readonly breakpointMedium = 500;
