@@ -2,7 +2,8 @@ import { Injectable, Injector, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-import { DialogRef, SystelabModalContext } from './dialog-ref';
+import { DialogRef } from './dialog-ref';
+import { SystelabModalContext } from './modal-context';
 
 @Injectable()
 export class DialogService {
