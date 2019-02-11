@@ -22,6 +22,10 @@ export class DialogRef<T extends SystelabModalContext> {
 			});
 	}
 
+	public closeAllDialogs() {
+
+	}
+
 	public close(value?: any): void {
 		this.overlayRef.dispose();
 		this.subject.next(value);
