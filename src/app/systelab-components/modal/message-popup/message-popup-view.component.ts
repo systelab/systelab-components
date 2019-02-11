@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MessagePopupButton } from './message-popup.service';
-import { DialogRef, ModalComponent, SystelabModalContext } from '..';
+import { DialogRef } from '../dialog/dialog-ref';
+import { ModalComponent, SystelabModalContext } from '../dialog/modal-context';
 
 export class MessagePopupViewContext extends SystelabModalContext {
 

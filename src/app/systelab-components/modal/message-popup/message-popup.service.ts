@@ -3,7 +3,7 @@ import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { Observable } from 'rxjs';
 import { MessageWithIconComponent } from './message-with-icon.component';
-import { DialogService } from '..';
+import { DialogService } from '../dialog/dialog.service';
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any) {
