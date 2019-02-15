@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { ShowcaseComponent } from './showcase.component';
 import { SystelabComponentsModule } from '../systelab-components/systelab-components.module';
 import { FormsModule } from '@angular/forms';
-import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
-import { MessagePopupService } from '../systelab-components/modal/message-popup/message-popup.service';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
@@ -78,6 +76,8 @@ import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplet
 import { GridContextMenuCellRendererComponent } from '../systelab-components/grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
 import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { DialogService, MessagePopupService } from '../systelab-components/modal';
 
 @NgModule({
 	imports:         [
@@ -85,6 +85,7 @@ import { ShowcaseContextPanel } from './components/context-panel/showcase-contex
 		BrowserAnimationsModule,
 		FormsModule,
 		DragDropModule,
+		OverlayModule,
 		TreeModule,
 		HttpClientModule,
 		SystelabComponentsModule.forRoot(),
@@ -175,8 +176,8 @@ import { ShowcaseContextPanel } from './components/context-panel/showcase-contex
 		ShowcaseTimelineDialog
 	],
 	providers:       [
-		MessagePopupService,
-		DialogService
+		DialogService,
+		MessagePopupService
 	],
 	bootstrap:       [ShowcaseComponent]
 })

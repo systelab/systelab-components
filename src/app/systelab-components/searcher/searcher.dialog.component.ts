@@ -17,7 +17,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 
 	@ViewChild(SearcherTableComponent)
 	public tableComponent: SearcherTableComponent<T>;
-	public dialogParameters: SearcherDialogParameters<T>;
+	public parameters: SearcherDialogParameters<T>;
 	public searchingValue: string;
 
 	public searchLabel: string;
@@ -28,19 +28,19 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	public searchByContains = false;
 
 	constructor(public dialog: DialogRef<SearcherDialogParameters<T>>, protected i18nService: I18nService) {
-		this.dialogParameters = dialog.context;
-		this.searchingValue = this.dialogParameters.valueToSearch;
+		this.parameters = dialog.context;
+		this.searchingValue = this.parameters.valueToSearch;
 
-		this.showClose = this.dialogParameters.showCloseButton;
-		if (!this.dialogParameters.showCloseButton) {
-			this.dialogParameters.isBlocking = true;
-			this.dialogParameters.keyboard = null;
+		this.showClose = this.parameters.showCloseButton;
+		if (!this.parameters.showCloseButton) {
+			this.parameters.isBlocking = true;
+			this.parameters.keyboard = null;
 		}
 
-		if (this.dialogParameters.searcher) {
-			this.searchLabel = this.dialogParameters.searcher.getTextForSearcherLabel();
-			this.titleForDialog = this.dialogParameters.searcher.getTitleForDialog();
-			this.multipleSelection = this.dialogParameters.searcher.multipleSelection;
+		if (this.parameters.searcher) {
+			this.searchLabel = this.parameters.searcher.getTextForSearcherLabel();
+			this.titleForDialog = this.parameters.searcher.getTitleForDialog();
+			this.multipleSelection = this.parameters.searcher.multipleSelection;
 		}
 
 	}

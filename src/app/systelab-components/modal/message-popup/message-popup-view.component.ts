@@ -1,16 +1,21 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { SystelabModalContext } from '../modal-context';
 import { MessagePopupButton } from './message-popup.service';
-import { ModalComponent } from '../base/models/tokens';
-import { DialogRef } from '../base/models/dialog-ref';
+import { DialogRef } from '../dialog/dialog-ref';
+import { ModalComponent, SystelabModalContext } from '../dialog/modal-context';
 
 export class MessagePopupViewContext extends SystelabModalContext {
+
+	public fullScreen = false;
+	public maxWidth = 700;
+	public minWidth = 499;
+	public maxHeight = 400;
+	public minHeight = 280;
 	public title: string;
 	public msg: string;
 	public icon: string;
-	public type: string;
+	public type: number;
 	public color: string;
-	public buttons: MessagePopupButton[];
+	public buttons: MessagePopupButton[] = [];
 }
 
 @Component({
@@ -20,10 +25,14 @@ export class MessagePopupViewContext extends SystelabModalContext {
 export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext>, AfterViewInit {
 
 	@ViewChild('closeBtn') closeBtn: ElementRef;
-	public context: MessagePopupViewContext;
+	public parameters: MessagePopupViewContext;
 
 	constructor(public dialog: DialogRef<MessagePopupViewContext>) {
-		this.context = dialog.context;
+		this.parameters = dialog.context;
+	}
+
+	public static getParameters(): MessagePopupViewContext {
+		return new MessagePopupViewContext();
 	}
 
 	ngAfterViewInit() {

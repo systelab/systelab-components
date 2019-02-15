@@ -9,7 +9,7 @@ import { ShowcaseData } from './showcase-grid.model';
 @Component({
 	selector:    'showcase-inner-grid',
 	// templateUrl: '../../../../../node_modules/systelab-components/html/abstract-grid.component.html' *This is the template path to be used in your project*
-	templateUrl: '../../..//systelab-components/grid/abstract-grid.component.html'
+	templateUrl: '../../../systelab-components/grid/abstract-grid.component.html'
 })
 export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements OnInit {
 

@@ -30,17 +30,50 @@ $slab-button-fontsize: ceil(32px * $slab-size-percentage) !default;
 $slab-button-size-fullscreen: $slab-button-size !default;
 $slab-button-size-dialog-header: $slab-button-size !default;
 
-/**
- * Displays the full-screen overlay and centers its content (the dialog itself)
- */
-.slab-dialog-overlay {
-  @include position(fixed, $top: 0, $left: 0, $right: 0, $bottom: 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@import '~@angular/cdk/overlay-prebuilt.css';
 
-  background-color: rgba(0, 0, 0, 0.4);
+.cdk-overlay-pane {
+  background-color: $background-primary;
+
+  & > *:first-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
 }
+
+.cdk-overlay-backdrop {
+  transition: none;
+}
+
+
+div [class="cdk-overlay-pane"] {
+  border: 5px solid lightgray;
+  border-radius: 5px;
+
+  .slab-dialog-bottom {
+    background: $background-primary;
+    .btn {
+      height: $slab-button-size;
+    }
+  }
+}
+
+div [class="cdk-overlay-pane fullscreen"] {
+  border: 0px solid lightgray;
+  border-radius: 0px;
+
+  .slab-dialog-bottom {
+    background: $darker-gray;
+    .btn {
+      height: $slab-button-size-fullscreen;
+    }
+  }
+}
+
+
 
 /**
  * 1. Full-screen by default.
@@ -225,11 +258,4 @@ $slab-button-size-dialog-header: $slab-button-size !default;
       }
     }
   }
-}
-
-.slab-dialog.slab-dialog-disabled-animation,
-.slab-dialog.slab-dialog-disabled-animation .slab-dialog-content,
-.slab-dialog.slab-dialog-disabled-animation .slab-dialog-overlay {
-  -webkit-animation: none !important;
-  animation: none !important
 }

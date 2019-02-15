@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from '../../../systelab-components/modal/dialog/dialog.service';
+import { DialogService } from '../../../systelab-components/modal';
 import { ShowcaseLoadingDialog, ShowcaseLoadingDialogParameters } from './loading-dialog/showcase-loading-dialog.component';
 
 @Component({

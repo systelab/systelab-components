@@ -1,8 +1,6 @@
-export { SystelabModalContext } from './modal-context';
 export { DialogService } from './dialog/dialog.service';
-export { MessagePopupService } from './message-popup/message-popup.service';
-export { DialogRef, ModalComponent } from './base/base-modal';
-
-export { DialogBottomComponent } from './bottom/dialog-bottom.component';
+export { DialogRef } from './dialog/dialog-ref';
+export { ModalComponent, SystelabModalContext } from './dialog/modal-context';
 export { DialogHeaderComponent } from './header/dialog-header.component';
-
+export { MessagePopupService } from './message-popup/message-popup.service';
+export { MessagePopupButton } from './message-popup/message-popup.service';

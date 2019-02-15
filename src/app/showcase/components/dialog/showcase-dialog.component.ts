@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DialogService } from '../../../systelab-components/modal/dialog/dialog.service';
 import { LowerFlexDialogParameters, ShowcaseLowerFlexDialog } from './lower-flex/showcase-lower-flex-dialog.component';
 import { ShowcaseSplitDialog, SplitShowcaseDialogParameters } from './split/showcase-split-dialog.component';
 import { CalendarDialog, CalendarDialogParameters } from '../../../systelab-components/calendar/calendar-dialog.component';
@@ -7,6 +6,7 @@ import { ShowcaseFullFlexDialog, ShowcaseFullFlexDialogParameters } from './full
 import { ShowcaseTwoColumnsDialog, ShowcaseTwoColumnsDialogParameters } from './two-columns/showcase-two-columns-dialog.component';
 import { ShowcaseTwoTabsDialog, ShowcaseTwoTabsDialogParameters } from './two-tabs/showcase-two-tabs-dialog.component';
 import { ShowcaseStandardDialog } from './standard-dialog/showcase-standard-dialog.component';
+import { DialogService } from '../../../systelab-components/modal';
 
 @Component({
 	selector:    'showcase-dialog',
