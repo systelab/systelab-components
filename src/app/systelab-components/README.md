@@ -245,3 +245,37 @@ Check the Bootstrap utilities at https://getbootstrap.com/docs/4.0/utilities/bor
 As a super basic summary:
 
 Add **.border** and **.rounded**, and probably some margin classes, if you want a classical gray rounded border.
+
+### Responsiveness:
+
+Use bootstrap utilities to add responsiveness to your layout. Equivalence between versions 3.x and 4.x are:
+
+
+- Show/hide for breakpoint and down:
+
+    - hidden-xs-down (hidden-xs) = d-none d-sm-block
+    - hidden-sm-down (hidden-sm hidden-xs) = d-none d-md-block
+    - hidden-md-down (hidden-md hidden-sm hidden-xs) = d-none d-lg-block
+    - hidden-lg-down = d-none d-xl-block
+    - hidden-xl-down (n/a 3.x) = d-none (same as hidden)
+
+- Show/hide for breakpoint and up:
+
+    - hidden-xs-up = d-none (same as hidden)
+    - hidden-sm-up = d-sm-none
+    - hidden-md-up = d-md-none
+    - hidden-lg-up = d-lg-none
+    - hidden-xl-up (n/a 3.x) = d-xl-none
+
+- Show/hide only for a single breakpoint:
+
+    - hidden-xs (only) = d-none d-sm-block (same as hidden-xs-down)
+    - hidden-sm (only) = d-block d-sm-none d-md-block
+    - hidden-md (only) = d-block d-md-none d-lg-block
+    - hidden-lg (only) = d-block d-lg-none d-xl-block
+    - hidden-xl (n/a 3.x) = d-block d-xl-none
+    - visible-xs (only) = d-block d-sm-none
+    - visible-sm (only) = d-none d-sm-block d-md-none
+    - visible-md (only) = d-none d-md-block d-lg-none
+    - visible-lg (only) = d-none d-lg-block d-xl-none
+    - visible-xl (n/a 3.x) = d-none d-xl-block
