@@ -7,6 +7,8 @@
                  (cellClicked)="doClick($event)"
                  (columnResized)="doColumnResized($event)"
                  (viewportChanged)="doViewportChanged()"
+                 [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+                 [overlayLoadingTemplate]="overlayLoadingTemplate"
                  (modelUpdated)="onModelUpdated($event)" [rowData]="rowData">
 </ag-grid-angular>
 <systelab-grid-context-menu #popupmenu [style.position]="'fixed'" [isEmbedded]="true"></systelab-grid-context-menu>

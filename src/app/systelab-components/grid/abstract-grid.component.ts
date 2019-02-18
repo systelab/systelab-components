@@ -21,6 +21,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	public gridOptions: GridOptions;
 	protected forcedIndexSelection: number;
+	public overlayNoRowsTemplate;
+	public overlayLoadingTemplate;
 
 	@Output() public viewportChanged = new EventEmitter();
 
@@ -31,7 +33,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 	@Input() public multipleSelection = false;
 	@Input() public showChecks = false;
 	@Input() public rowData: Array<T> = [];
-
+	@Input() public noRowsText = 'No Rows To Show';
+	@Input() public loadingText = 'Loading...';
 	@Output() public action = new EventEmitter();
 
 	@Output() public clickRow = new EventEmitter();
@@ -87,7 +90,11 @@ export abstract class AbstractGrid<T> implements OnInit {
 		};
 		this.gridOptions.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
 		this.gridOptions.context = {componentParent: this};
+		this.overlayNoRowsTemplate = this.noRowsText;
+		this.overlayLoadingTemplate = this.loadingText;
 	}
+
+
 
 	public onModelUpdated(event: any) {
 		this.gridOptions.api.sizeColumnsToFit();
