@@ -152,6 +152,10 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return 'All';
 	}
 
+	public cleanSelection() {
+		this.unselectAllNodes();
+	}
+
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
 		colDefs.forEach(function(columnDef: ColDef) {
 			if (columnDef.width) {
@@ -211,6 +215,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 							}
 						} else {
 							newElement[this.getIdField()] = event.node.data[this.getIdField()];
+							newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
 							this.multipleSelectedItemList.push(newElement);
 							this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 						}
