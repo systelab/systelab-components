@@ -47,6 +47,11 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 						this.gridOptions.api.selectIndex(this.forcedIndexSelection, false, false);
 						this.forcedIndexSelection = undefined;
 					}
+
+					if (v.length === 0) {
+						this.gridOptions.api.showNoRowsOverlay();
+					}
+
 					/*
 					 if (!this.firstSizeToFitExecuted) {
 					 this.gridOptions.api.sizeColumnsToFit();
@@ -63,6 +68,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 					 this.firstSizeToFitExecuted = true;
 					 }
 					 */
+					this.gridOptions.api.showNoRowsOverlay();
 				}
 			);
 
