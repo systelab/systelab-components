@@ -38,7 +38,7 @@ export class TabsTestComponent {
 }
 
 describe('Systelab Tabs', () => {
-	let tabsTestFixture: ComponentFixture<TabsTestComponent>;
+	let fixture: ComponentFixture<TabsTestComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
@@ -55,46 +55,61 @@ describe('Systelab Tabs', () => {
 	}));
 
 	beforeEach(() => {
-		tabsTestFixture = TestBed.createComponent(TabsTestComponent);
-		tabsTestFixture.detectChanges();
+		fixture = TestBed.createComponent(TabsTestComponent);
+		fixture.detectChanges();
 	});
 
 	it('should instantiate', () => {
-		expect(tabsTestFixture.componentInstance)
+		expect(fixture.componentInstance)
 			.toBeDefined();
 	});
 
 	it('should show initially the first tab', () => {
-		expect(isTabContentVisible('.tab1', tabsTestFixture))
+		expect(isTabContentVisible('.tab1', fixture))
 			.toBeTruthy();
 	});
 
 	it('should not show initially the other tabs', () => {
-		expect(isTabContentVisible('.tab2', tabsTestFixture))
+		expect(isTabContentVisible('.tab2', fixture))
 			.toBeFalsy();
-		expect(isTabContentVisible('.tab3', tabsTestFixture))
+		expect(isTabContentVisible('.tab3', fixture))
 			.toBeFalsy();
 	});
 
 	it('should show second tab when you click on it', () => {
-		clickTabButton(tabsTestFixture, 'id-2');
-		expect(isTabContentVisible('.tab1', tabsTestFixture))
+		clickTabButton(fixture, 'id-2');
+		expect(isTabContentVisible('.tab1', fixture))
 			.toBeFalsy();
-		expect(isTabContentVisible('.tab2', tabsTestFixture))
+		expect(isTabContentVisible('.tab2', fixture))
 			.toBeTruthy();
-		expect(isTabContentVisible('.tab3', tabsTestFixture))
+		expect(isTabContentVisible('.tab3', fixture))
 			.toBeFalsy();
 	});
 
 	it('should show third tab when you click on it', () => {
-		clickTabButton(tabsTestFixture, 'id-3');
-		expect(isTabContentVisible('.tab1', tabsTestFixture))
+		clickTabButton(fixture, 'id-3');
+		expect(isTabContentVisible('.tab1', fixture))
 			.toBeFalsy();
-		expect(isTabContentVisible('.tab2', tabsTestFixture))
+		expect(isTabContentVisible('.tab2', fixture))
 			.toBeFalsy();
-		expect(isTabContentVisible('.tab3', tabsTestFixture))
+		expect(isTabContentVisible('.tab3', fixture))
 			.toBeTruthy();
 	});
+
+	it('should call method selectedTab when a new tab is selected', () => {
+
+		spyOn(fixture.componentInstance, 'selectedTab');
+		clickTabButton(fixture, 'id-3');
+		expect(fixture.componentInstance.selectedTab).toHaveBeenCalled();
+	});
+
+	it('should call method selectedTab when a new tab is selected and the parameter should be the tab id', () => {
+
+		spyOn(fixture.componentInstance, 'selectedTab');
+		clickTabButton(fixture, 'id-2');
+		expect(fixture.componentInstance.selectedTab).toHaveBeenCalledWith('id-2');
+	});
+
 
 });
 
