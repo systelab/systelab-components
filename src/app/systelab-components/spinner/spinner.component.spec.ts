@@ -14,7 +14,7 @@ import { TouchspinComponent } from './spinner.component';
 	selector: 'systelab-spinner-test',
 	template: `
                 <div>
-                    <systelab-spinner [spinValues]="values"></systelab-spinner>
+                    <systelab-spinner [spinValues]="values" (change)="doValueChange()"></systelab-spinner>
                     <label class="label-value">{{values.value}}</label>
                 </div>
 	          `,
@@ -22,10 +22,13 @@ import { TouchspinComponent } from './spinner.component';
 })
 export class SpinnerTestComponent {
 	public values = new TouchSpinValues(34, 1, 100);
+	
+	public doValueChange() {
+	}
 }
 
 describe('Systelab Spinner', () => {
-	let spinnerTestFixture: ComponentFixture<SpinnerTestComponent>;
+	let fixture: ComponentFixture<SpinnerTestComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
@@ -41,56 +44,76 @@ describe('Systelab Spinner', () => {
 	}));
 
 	beforeEach(() => {
-		spinnerTestFixture = TestBed.createComponent(SpinnerTestComponent);
-		spinnerTestFixture.detectChanges();
+		fixture = TestBed.createComponent(SpinnerTestComponent);
+		fixture.detectChanges();
 	});
 
 	it('should instantiate', () => {
-		expect(spinnerTestFixture.componentInstance).toBeDefined();
+		expect(fixture.componentInstance).toBeDefined();
 	});
 
 	it('should have an initial value', () => {
-		checkHasValue(spinnerTestFixture, 34);
+		checkHasValue(fixture, 34);
 	});
 
 	it('should have the changed value if there is a change', () => {
-		setValue(spinnerTestFixture, 90);
-		checkHasValue(spinnerTestFixture, 90);
+		setValue(fixture, 90);
+		checkHasValue(fixture, 90);
 	});
 
 	it('should increment the value if plus button is clicked (+1)', () => {
-		clickPlusButton(spinnerTestFixture);
-		checkHasValue(spinnerTestFixture, 34 + 1);
+		clickPlusButton(fixture);
+		checkHasValue(fixture, 34 + 1);
 	});
 
 	it('should increment the value n times if plus button is clicked (+11)', () => {
-		setStep(spinnerTestFixture, 11);
-		clickPlusButton(spinnerTestFixture);
-		checkHasValue(spinnerTestFixture, 34 + 11);
+		setStep(fixture, 11);
+		clickPlusButton(fixture);
+		checkHasValue(fixture, 34 + 11);
 	});
 
 	it('should not increment the value if is the maximum', () => {
-		setValue(spinnerTestFixture, 100);
-		clickPlusButton(spinnerTestFixture);
-		checkHasValue(spinnerTestFixture, 100);
+		setValue(fixture, 100);
+		clickPlusButton(fixture);
+		checkHasValue(fixture, 100);
 	});
 
 	it('should decrement the value if minus button is clicked (-1)', () => {
-		clickMinusButton(spinnerTestFixture);
-		checkHasValue(spinnerTestFixture, 34 - 1);
+		clickMinusButton(fixture);
+		checkHasValue(fixture, 34 - 1);
 	});
 
 	it('should decrement the value n times if minus button is clicked (-11)', () => {
-		setStep(spinnerTestFixture, 11);
-		clickMinusButton(spinnerTestFixture);
-		checkHasValue(spinnerTestFixture, 34 - 11);
+		setStep(fixture, 11);
+		clickMinusButton(fixture);
+		checkHasValue(fixture, 34 - 11);
 	});
 
 	it('should not decrement the value if is the minimum', () => {
-		setValue(spinnerTestFixture, 1);
-		clickMinusButton(spinnerTestFixture);
-		checkHasValue(spinnerTestFixture, 1);
+		setValue(fixture, 1);
+		clickMinusButton(fixture);
+		checkHasValue(fixture, 1);
 	});
+
+	it('should call method change when the minus button is clicked', () => {
+		spyOn(fixture.componentInstance, 'doValueChange');
+		clickMinusButton(fixture);
+		expect(fixture.componentInstance.doValueChange).toHaveBeenCalled();
+	});
+
+	it('should call method change when the plus button is clicked', () => {
+		spyOn(fixture.componentInstance, 'doValueChange');
+		clickPlusButton(fixture);
+		expect(fixture.componentInstance.doValueChange).toHaveBeenCalled();
+	});
+
+	it('should not call method change when the value is not changed', () => {
+		spyOn(fixture.componentInstance, 'doValueChange');
+		setValue(fixture, 100);
+		clickPlusButton(fixture);
+		expect(fixture.componentInstance.doValueChange).not.toHaveBeenCalled();
+	});
+
 });
 
 function clickPlusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
