@@ -62,14 +62,14 @@ describe('Systelab Slider', () => {
 	});
 });
 
-function checkHasValue(spinnerTestFixture: ComponentFixture<SliderTestComponent>, value: number) {
-	const label = spinnerTestFixture.debugElement.nativeElement.querySelector('.label-value');
+function checkHasValue(fixture: ComponentFixture<SliderTestComponent>, value: number) {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
 	expect(label.innerHTML).toContain(value);
 }
 
-function setValue(spinnerTestFixture: ComponentFixture<SliderTestComponent>, value: number) {
-	spinnerTestFixture.componentInstance.value = value;
-	spinnerTestFixture.detectChanges();
+function setValue(fixture: ComponentFixture<SliderTestComponent>, value: number) {
+	fixture.componentInstance.value = value;
+	fixture.detectChanges();
 }
 
 

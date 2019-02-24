@@ -93,29 +93,29 @@ describe('Systelab Spinner', () => {
 	});
 });
 
-function clickPlusButton(spinnerTestFixture: ComponentFixture<SpinnerTestComponent>) {
-	const button = spinnerTestFixture.debugElement.nativeElement.querySelector('#plus-button');
+function clickPlusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('#plus-button');
 	button.click();
-	spinnerTestFixture.detectChanges();
+	fixture.detectChanges();
 }
 
-function clickMinusButton(spinnerTestFixture: ComponentFixture<SpinnerTestComponent>) {
-	const button = spinnerTestFixture.debugElement.nativeElement.querySelector('#minus-button');
+function clickMinusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('#minus-button');
 	button.click();
-	spinnerTestFixture.detectChanges();
+	fixture.detectChanges();
 }
 
-function checkHasValue(spinnerTestFixture: ComponentFixture<SpinnerTestComponent>, value: number) {
-	const label = spinnerTestFixture.debugElement.nativeElement.querySelector('.label-value');
+function checkHasValue(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
 	expect(label.innerHTML).toContain(value);
 }
 
-function setValue(spinnerTestFixture: ComponentFixture<SpinnerTestComponent>, value: number) {
-	spinnerTestFixture.componentInstance.values.value = value;
-	spinnerTestFixture.detectChanges();
+function setValue(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+	fixture.componentInstance.values.value = value;
+	fixture.detectChanges();
 }
 
-function setStep(spinnerTestFixture: ComponentFixture<SpinnerTestComponent>, value: number) {
-	spinnerTestFixture.componentInstance.values.step = value;
-	spinnerTestFixture.detectChanges();
+function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+	fixture.componentInstance.values.step = value;
+	fixture.detectChanges();
 }

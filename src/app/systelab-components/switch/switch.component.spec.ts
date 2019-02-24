@@ -66,18 +66,18 @@ describe('Systelab Switch', () => {
 	});
 });
 
-function checkHasValue(switchTestFixture: ComponentFixture<SwitchTestComponent>, value: boolean) {
-	const label = switchTestFixture.debugElement.nativeElement.querySelector('.label-value');
+function checkHasValue(fixture: ComponentFixture<SwitchTestComponent>, value: boolean) {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
 	expect(label.innerHTML).toContain(value);
 }
 
-function setValue(switchTestFixture: ComponentFixture<SwitchTestComponent>, value: boolean) {
-	switchTestFixture.componentInstance.check = value;
-	switchTestFixture.detectChanges();
+function setValue(fixture: ComponentFixture<SwitchTestComponent>, value: boolean) {
+	fixture.componentInstance.check = value;
+	fixture.detectChanges();
 }
 
-function clickSwitch(switchTestFixture: ComponentFixture<SwitchTestComponent>) {
-	const button = switchTestFixture.debugElement.nativeElement.querySelector('.slab-switch');
+function clickSwitch(fixture: ComponentFixture<SwitchTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-switch');
 	button.click();
-	switchTestFixture.detectChanges();
+	fixture.detectChanges();
 }
