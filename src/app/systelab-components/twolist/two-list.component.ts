@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataFilterPipe } from './datafilter.pipe';
 
 export class TwoListItem {
-	constructor(public displayName: string, public colId: string, public selected: boolean, public visible: boolean) {
+	constructor(public displayName: string, public colId: string, public isSelected: boolean, public isVisible: boolean) {
 	}
 }
 
@@ -65,7 +65,7 @@ export class TwoListComponent {
 
 	public add() {
 		for (const element of this.selected.available) {
-			element.visible = true;
+			element.isVisible = true;
 		}
 		this.visible = this.visible.concat(new DataFilterPipe().transform(this.selected.available, this.firstListSearch));
 		this.firstListSearch = '';
@@ -76,7 +76,7 @@ export class TwoListComponent {
 	public addAll() {
 		this.visible = this.visible.concat(new DataFilterPipe().transform(this.available, this.firstListSearch));
 		for (const element of this.visible) {
-			element.visible = true;
+			element.isVisible = true;
 		}
 		this.firstListSearch = '';
 		this.secondListSearch = '';
@@ -87,7 +87,7 @@ export class TwoListComponent {
 		this.available = this.available.concat(new DataFilterPipe().transform(this.visible, this.secondListSearch));
 		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform(this.visible, this.secondListSearch));
 		for (const element of this.available) {
-			element.visible = false;
+			element.isVisible = false;
 		}
 		this.firstListSearch = '';
 		this.secondListSearch = '';
@@ -98,7 +98,7 @@ export class TwoListComponent {
 	public remove() {
 
 		for (const element of this.selected.available) {
-			element.visible = false;
+			element.isVisible = false;
 		}
 
 		this.available = this.available.concat(new DataFilterPipe().transform(this.selected.current, this.secondListSearch));
@@ -134,7 +134,7 @@ export class TwoListComponent {
 
 	public setElementNonSelected(list: Array<TwoListItem>) {
 		for (const element of list) {
-			element.selected = false;
+			element.isSelected = false;
 		}
 	}
 
@@ -184,21 +184,21 @@ export class TwoListComponent {
 			let i;
 			if (indexOfLastSelected < indexOfSelected) {
 				for (i = indexOfLastSelected; i <= indexOfSelected; i++) {
-					availableFilteredList[i].selected = true;
+					availableFilteredList[i].isSelected = true;
 					this.selected.available.push(availableFilteredList[i]);
 				}
 
 			} else {
 				for (i = indexOfLastSelected; i >= indexOfSelected; i--) {
-					availableFilteredList[i].selected = true;
+					availableFilteredList[i].isSelected = true;
 					this.selected.available.push(availableFilteredList[i]);
 				}
 			}
 			return;
 		}
 
-		element.selected = !element.selected;
-		if (element.selected) {
+		element.isSelected = !element.isSelected;
+		if (element.isSelected) {
 			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
 				this.selected.available.push(element);
 			} else {
@@ -219,19 +219,19 @@ export class TwoListComponent {
 
 	public moveSelectedAvailableItem(element: TwoListItem, ev: Event) {
 		this.available = this.removeItemsFromList(this.available, [element]);
-		element.visible = true;
+		element.isVisible = true;
 		this.visible = this.visible.concat(element);
 		this.visible = this.sort(this.visible);
 	}
 
 	public moveSelectedVisibleItem(element: TwoListItem, ev: Event) {
 		this.visible = this.removeItemsFromList(this.visible, [element]);
-		element.visible = false;
+		element.isVisible = false;
 		this.available = this.available.concat(element);
 		this.available = this.sort(this.available);
 	}
 	public dbClickVisibleItem(element: TwoListItem) {
-		element.visible = false;
+		element.isVisible = false;
 		this.available = this.available.concat(new DataFilterPipe().transform([element], this.secondListSearch));
 		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform([element], this.secondListSearch));
 		this.firstListSearch = '';

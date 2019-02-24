@@ -4,10 +4,10 @@
         <div>
             <input type="text" class="form-control" [(ngModel)]="firstListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1">
+        <div id="left-list" class="slab-twolistbox mt-2 slab-flex-1">
             <div class="slab-twolistboxdiv">
                 <ul class="slab-twolistboxrow list-group">
-                    <li *ngFor="let item of (available | datafilter:firstListSearch)" [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.selected,'slab-twolistboxrow':!item.selected}"
+                    <li *ngFor="let item of (available | datafilter:firstListSearch)" [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.isSelected,'slab-twolistboxrow':!item.isSelected}"
                         (click)="selectAvailableItem(item, $event)" (dblclick)="moveSelectedAvailableItem(item, $event)">
                         {{item.displayName}}
                     </li>
@@ -35,7 +35,7 @@
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
+        <div id="right-list" class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
             <systelab-two-list-sortable-list class="w-100" [selected]="selected" [available]="available"
                 [(elementsList)]="visible" [secondListSearch]="secondListSearch" [dragAndDropEnabled]="dragAndDropEnabled"
                 (dbClick)="dbClickVisibleItem($event)"></systelab-two-list-sortable-list>

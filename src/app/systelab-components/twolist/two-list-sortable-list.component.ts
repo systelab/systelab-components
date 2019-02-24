@@ -36,7 +36,7 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 
 	public setElementNonSelected(list: Array<TwoListItem>) {
 		for (const element of list) {
-			element.selected = false;
+			element.isSelected = false;
 		}
 	}
 
@@ -68,8 +68,8 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 			return;
 		}
 
-		element.selected = !element.selected;
-		if (element.selected) {
+		element.isSelected = !element.isSelected;
+		if (element.isSelected) {
 			if (this.selected.current.length === 0 || (this.selected.current.length > 0 && ev.ctrlKey)) {
 				this.selected.current.push(element);
 			} else {
