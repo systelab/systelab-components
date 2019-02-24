@@ -22,7 +22,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - npm run test --watch=false
+  - ng test --watch=false
   - npm run e2e
   - npm run build
 
