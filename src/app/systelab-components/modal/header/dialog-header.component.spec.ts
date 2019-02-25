@@ -40,7 +40,7 @@ export class DialogHeaderTestComponent {
 	}
 }
 
-describe('Systelab Dialog Header', () => {
+fdescribe('Systelab Dialog Header', () => {
 	let fixture: ComponentFixture<DialogHeaderTestComponent>;
 
 	beforeEach(async(() => {
@@ -131,5 +131,5 @@ function showInfoButton(fixture: ComponentFixture<DialogHeaderTestComponent>) {
 }
 
 function isButtonVisible(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
-	return (fixture.debugElement.query(By.css(className)) != null);
+	return (fixture.debugElement.nativeElement.querySelector(className) !== null);
 }
