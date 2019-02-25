@@ -40,7 +40,7 @@ export class DialogHeaderTestComponent {
 	}
 }
 
-fdescribe('Systelab Dialog Header', () => {
+describe('Systelab Dialog Header', () => {
 	let fixture: ComponentFixture<DialogHeaderTestComponent>;
 
 	beforeEach(async(() => {
