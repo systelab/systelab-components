@@ -11,6 +11,7 @@ import { TwoListComponent, TwoListItem } from './two-list.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { DataFilterPipe } from './datafilter.pipe';
 import { TwoListSortableListComponent } from './two-list-sortable-list.component';
+import { SystelabPreferencesModule } from 'systelab-preferences';
 
 @Component({
 	selector: 'systelab-toggle-button-test',
@@ -58,7 +59,8 @@ describe('Systelab Two list', () => {
 				DragDropModule,
 				OverlayModule,
 				TreeModule,
-				SystelabTranslateModule,
+				SystelabTranslateModule.forRoot(),
+				SystelabPreferencesModule.forRoot(),
 				HttpClientModule],
 			declarations: [TwoListComponent, TwoListTestComponent, TwoListSortableListComponent, DataFilterPipe]
 		})
