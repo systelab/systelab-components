@@ -28,7 +28,7 @@ export class TimeLineTestComponent {
 	}
 }
 
-fdescribe('Systelab Timeline', () => {
+describe('Systelab Timeline', () => {
 	let fixture: ComponentFixture<TimeLineTestComponent>;
 
 	beforeEach(async(() => {
@@ -73,6 +73,10 @@ fdescribe('Systelab Timeline', () => {
 		expect(getText(fixture, 2)).toEqual(fixture.componentInstance.events[2].text);
 	});
 
+	it('should have the right icon', () => {
+		expect(getImage(fixture, 0)).toContain(fixture.componentInstance.events[0].icon);
+		expect(getImage(fixture, 2)).toContain(fixture.componentInstance.events[2].icon);
+	});
 });
 
 function checkHasValue(fixture: ComponentFixture<TimeLineTestComponent>, num: number) {
@@ -90,5 +94,12 @@ function getText(fixture: ComponentFixture<TimeLineTestComponent>, i: number) {
 	const element = fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-body p')[i].innerHTML;
 	return element;
 }
+
+function getImage(fixture: ComponentFixture<TimeLineTestComponent>, i: number) {
+	const element = fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-badge')[i].innerHTML;
+	return element;
+}
+
+
 
 
