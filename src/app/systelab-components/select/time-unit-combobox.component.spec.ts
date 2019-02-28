@@ -56,7 +56,7 @@ export class TimeUnitSelectTestComponent {
 class TestModule {
 }
 
-fdescribe('Systelab Time unit selector', () => {
+describe('Systelab Time unit selector', () => {
 	let fixture: ComponentFixture<TimeUnitSelectTestComponent>;
 
 	beforeEach(async(() => {
