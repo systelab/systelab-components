@@ -110,14 +110,6 @@ describe('Systelab Time unit selector', () => {
 		expect(fixture.componentInstance.id)
 			.toEqual('COMMON_YEARS');
 	}));
-
-	it('should select hours', fakeAsync(() => {
-		setShowHours(fixture);
-		clickOnDropDown(fixture);
-		tick();
-		expect(() => clickOnRow(fixture, 'COMMON_HOURS'))
-			.toThrow(new TypeError('Cannot read property \'click\' of null'));
-	}));
 });
 
 function clickOnDropDown(fixture: ComponentFixture<TimeUnitSelectTestComponent>) {
