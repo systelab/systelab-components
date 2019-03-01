@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TouchSpinValues} from './touch.spin-values';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TouchSpinValues } from './touch.spin-values';
 
 @Component({
-	selector: 'systelab-spinner',
+	selector:    'systelab-spinner',
 	templateUrl: 'spinner.component.html',
-	styleUrls: ['spinner.component.scss']
+	styleUrls:   ['spinner.component.scss']
 })
 export class TouchspinComponent {
 
@@ -84,15 +84,21 @@ export class TouchspinComponent {
 		const stepValue: number = this._spinValues.step;
 		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
+		let itHasChanged = false;
 		if (value - stepValue > this._spinValues.min) {
 			this._spinValues.value = Number((value - this._spinValues.step).toFixed(fixedNumber));
+			itHasChanged = true;
 		} else {
-			this._spinValues.value = this._spinValues.min;
+			if (this._spinValues.value !== this._spinValues.min) {
+				this._spinValues.value = this._spinValues.min;
+				itHasChanged = true;
+			}
 		}
-
-		this.previousValue = this._spinValues.value;
-		this.change.emit(this._spinValues.value);
-		this.value = this._spinValues.value;
+		if (itHasChanged) {
+			this.previousValue = this._spinValues.value;
+			this.change.emit(this._spinValues.value);
+			this.value = this._spinValues.value;
+		}
 	}
 
 	public plus() {
@@ -100,15 +106,22 @@ export class TouchspinComponent {
 		const stepValue: number = this._spinValues.step;
 		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
+		let itHasChanged = false;
 		if (value + stepValue < this._spinValues.max) {
-			this._spinValues.value = Number((value + this._spinValues.step).toFixed(2));
+			this._spinValues.value = Number((value + this._spinValues.step).toFixed(fixedNumber));
+			itHasChanged = true;
 		} else {
-			this._spinValues.value = this._spinValues.max;
+			if (this._spinValues.value !== this._spinValues.max) {
+				this._spinValues.value = this._spinValues.max;
+				itHasChanged = true;
+			}
 		}
 
-		this.previousValue = this._spinValues.value;
-		this.change.emit(this._spinValues.value);
-		this.value = this._spinValues.value;
+		if (itHasChanged) {
+			this.previousValue = this._spinValues.value;
+			this.change.emit(this._spinValues.value);
+			this.value = this._spinValues.value;
+		}
 	}
 
 	public checkKey($event: KeyboardEvent): boolean {

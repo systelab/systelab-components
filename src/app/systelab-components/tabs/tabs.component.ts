@@ -9,7 +9,7 @@ import { TabComponent } from './tab.component';
                           (click)="doSelectTab(tab)">
                           <a class="nav-link nav-single-tab d-flex align-items-center justify-content-center"
                              [class.active]="tab.active" href="#" data-toggle="tab"
-                             role="tab" [attr.aria-controls]="tab.id">
+                             role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}">
                               <span *ngIf="tab.titleHtml" [innerHTML]="tab.titleHtml"
                                     class="d-flex align-items-center"></span>
                               <span *ngIf="tab.title" class="d-flex align-items-center">{{tab.title}}</span>

@@ -19,7 +19,7 @@ Component to select a group of elements from elements list. Elements to select h
 | ---- |:----:|:-------:| ----------- |
 | **available** | Array<TwoListItem> | | Array with available items |
 | **visible** | Array<TwoListItem> | | Array ordered with selected items |
-| initialAvailableColumns | Array<TwoListItem> | | Array with all available columns to know the order of the columns|
+| initialAvailableColumns | Array<TwoListItem> | | Array with all available columns to know the order of the columns. It is mandatory to contain all the elements.|
 | defaultVisibleColumns | Array<TwoListItem> | | Array with default visible columns to reset component to default values|
 | defaultHiddenColumns | Array<TwoListItem> | | Array with default available columns to reset component to default values|
 

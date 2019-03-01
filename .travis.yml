@@ -13,6 +13,8 @@ addons:
   chrome: stable
 
 install:
+  - npm install -g codecov
+  - npm install -g codacy-coverage
   - npm install
   - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
 
@@ -22,10 +24,15 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
+  - ng test --watch=false --code-coverage
   - npm run e2e
   - npm run build
 
-after_success: |
+after_success:
+  - cat coverage/lcov.info | codecov
+  - cat ./coverage/lcov.info | codacy-coverage
+
+before_deploy: |
   if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git clone https://github.com/systelab/systelab.github.io.git
     rm -rf systelab.github.io/components/*
