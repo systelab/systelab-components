@@ -29,7 +29,8 @@
   top: -1px;
 
   .slab-tick {
-    @include size($slab-ball-size);
+    width: $slab-ball-size;
+    height: $slab-ball-size;
     background: $slab-switch-circle-color;
     box-shadow: none; /* 1 */
     border-radius: 40px !important;

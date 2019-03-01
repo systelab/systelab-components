@@ -33,7 +33,8 @@ $slab-slider-thumb-cursor: pointer;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    @include size($slab-slider-height !important);
+    width: $slab-slider-size !important;
+    height: $slab-slider-size !important;
     background-color: $slab-slider-circle-color;
     border-radius: $slab-slider-thumb-border-radius;
     border: $slab-slider-thumb-border;
@@ -49,7 +50,8 @@ $slab-slider-thumb-cursor: pointer;
   }
 
   &::-moz-range-thumb {
-    @include size(($slab-slider-height/2) !important);
+    width: ($slab-slider-size/2) !important;
+    height: ($slab-slider-size/2) !important;
     background-color: $slab-slider-circle-color;
     border-radius: $slab-slider-thumb-border-radius;
     border: $slab-slider-thumb-border;
@@ -76,7 +78,8 @@ $slab-slider-thumb-cursor: pointer;
     border-radius: $slab-slider-track-border-radius;
   }
   &::-ms-thumb {
-    @include size(($slab-slider-height/2) !important);
+    width: ($slab-slider-size/2) !important;
+    height: ($slab-slider-size/2) !important;
     background-color: $slab-slider-circle-color;
     border-radius: $slab-slider-thumb-border-radius;
     border: $slab-slider-thumb-border;

@@ -80,7 +80,10 @@ div [class="cdk-overlay-pane fullscreen"] {
  * 2. Preventively hide the 'back' side of a transformed elemenet.
  */
 .slab-dialog {
-  @include size(100%); /* [1] */
+  /* [1] */
+  width: 100%;
+  height: 100%;
+
 
   > * {
     -webkit-backface-visibility: hidden; /* [2] */
@@ -95,7 +98,8 @@ div [class="cdk-overlay-pane fullscreen"] {
  *    we'd need to tweak all the dialogs and place top buttons in the header.
  */
 .slab-dialog-content {
-  @include size(100%);
+  width: 100%;
+  height: 100%;
   display: flex !important; /* [1] */
 
   border: none;
@@ -146,7 +150,8 @@ div [class="cdk-overlay-pane fullscreen"] {
   background-color: $darker-gray;
 
   .square {
-    @include size($slab-button-size);
+    width: $slab-button-size;
+    height: $slab-button-size;
 
     min-width: $slab-button-size; /* [1] */
     min-height: $slab-button-size; /* [1] */
@@ -161,7 +166,8 @@ div [class="cdk-overlay-pane fullscreen"] {
 }
 
 .slab-dialog-header-button {
-  @include size($slab-button-size-dialog-header);
+  width: $slab-button-size-dialog-header;
+  height: $slab-button-size-dialog-header;
   display: flex;
   align-items: center;
   justify-content: center;

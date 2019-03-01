@@ -98,6 +98,7 @@ $slab-switch-height: max(22px, $form-elements-height - 6px) !default;
 
 // Define the height and the line-height of the radio
 $slab-radio-height: max(19px, $form-elements-height - 4px) !default;
+$slab-radio-size: max(19px, $form-elements-height - 4px) !default;
 // Defines the padding-left of the radio
 $slab-radio-text-gap: $slab-radio-height * 1.5 !default;
 $slab-radio-border-color: $primary !default;
@@ -105,6 +106,7 @@ $slab-radio-color: white !default;
 
 // Defines the slider height
 $slab-slider-height: $form-elements-height !default;
+$slab-slider-size: $form-elements-height !default;
 // Defines the height of the ui-slider
 $slab-slider-background-line: round($slab-slider-height / 3);
 $slab-slider-circle-color: white !default;
