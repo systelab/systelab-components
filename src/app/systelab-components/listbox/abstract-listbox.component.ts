@@ -1,6 +1,6 @@
-import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GridOptions } from 'ag-grid';
+import {ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {StylesUtilService} from '../utilities/styles.util.service';
+import {ColDef, GridOptions} from 'ag-grid';
 
 export abstract class AbstractListBox<T> implements OnInit {
 
@@ -78,7 +78,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 			this.gridOptions.suppressRowClickSelection = true;
 			this.gridOptions.icons = {
 				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked(),
+				checkboxChecked: this.getCheckboxChecked(),
 
 			};
 
@@ -125,13 +125,13 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		if (this.multipleSelection && !this.hideChecks) {
 			colDefs.unshift({
-				colId:             'selectCol',
-				headerName:        '',
+				colId: 'selectCol',
+				headerName: '',
 				checkboxSelection: true,
-				width:             this.getCheckColumnWidth(),
+				width: this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
-				suppressResize:    true,
-				suppressMovable:   true
+				suppressResize: true,
+				suppressMovable: true
 			});
 		}
 
@@ -157,7 +157,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(function(columnDef: ColDef) {
+		colDefs.forEach(function (columnDef: ColDef) {
 			if (columnDef.width) {
 				columnDef.suppressSizeToFit = true;
 			}
@@ -195,9 +195,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 					if (elementIndexInSelectedList < 0) {
 						if (this.showAll) {
 							if (event.node.data[this.getIdField()] === this.getAllFieldID()) {
-								newElement[this.getIdField()] = this.getAllFieldID();
-								newElement[this.getDescriptionField()] = this.getAllFieldDescription();
-								this.multipleSelectedItemList = [newElement];
+								this.multipleSelectedItemList.push(event.node.data);
 								this.unselectAllNodes();
 							} else {
 								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
@@ -208,15 +206,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 									this.multipleSelectedItemList = [];
 
 								}
-								newElement[this.getIdField()] = event.node.data[this.getIdField()];
-								newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
-								this.multipleSelectedItemList.push(newElement);
+								this.multipleSelectedItemList.push(event.node.data);
 								this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 							}
 						} else {
-							newElement[this.getIdField()] = event.node.data[this.getIdField()];
-							newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
-							this.multipleSelectedItemList.push(newElement);
+							this.multipleSelectedItemList.push(event.node.data);
 							this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 						}
 					}
@@ -228,15 +222,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 				}
 			} else {
 				if (this.showAll && (event.node.data[this.getIdField()] === this.getAllFieldID())) {
-					newElement[this.getIdField()] = this.getAllFieldID();
-					newElement[this.getDescriptionField()] = this.getAllFieldDescription();
-					this.multipleSelectedItemList = [newElement];
+					this.multipleSelectedItemList.push(event.node.data);
 					this.unselectAllNodes();
 				} else {
 					this.multipleSelectedItemList = [];
-					newElement[this.getIdField()] = event.node.data[this.getIdField()];
-					newElement[this.getDescriptionField()] = event.node.data[this.getDescriptionField()];
-					this.multipleSelectedItemList.push(newElement);
+					this.multipleSelectedItemList.push(event.node.data);
 					this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 				}
 			}
