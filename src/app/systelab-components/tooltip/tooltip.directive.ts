@@ -15,7 +15,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 	@Input() public systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
 	@Input() public systelabTooltipDelay: number;
 	@Input() public systelabTooltipHideDelay: number;
-	@Input() public systelabTooltipOnFocus = false;
+	@Input() public systelabTooltipOnFocus = true;
 
 	constructor(private el: ElementRef, private renderer: Renderer2) {
 	}
@@ -38,7 +38,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 
 	private initializeTooltip(): void {
 		this.renderer.setAttribute(this.el.nativeElement, 'data-toogle', 'tooltip');
-		if ( this.systelabTooltipOnFocus ) {
+		if (!this.systelabTooltipOnFocus) {
 			this.renderer.setAttribute(this.el.nativeElement, 'data-trigger', 'hover');
 		}
 		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
