@@ -25,7 +25,7 @@ export class SwitchTestComponent {
 }
 
 describe('Systelab Switch', () => {
-	let switchTestFixture: ComponentFixture<SwitchTestComponent>;
+	let fixture: ComponentFixture<SwitchTestComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
@@ -41,28 +41,28 @@ describe('Systelab Switch', () => {
 	}));
 
 	beforeEach(() => {
-		switchTestFixture = TestBed.createComponent(SwitchTestComponent);
-		switchTestFixture.detectChanges();
+		fixture = TestBed.createComponent(SwitchTestComponent);
+		fixture.detectChanges();
 	});
 
 	it('should instantiate', () => {
-		expect(switchTestFixture.componentInstance).toBeDefined();
+		expect(fixture.componentInstance).toBeDefined();
 	});
 
 	it('should have an initial value', () => {
-		checkHasValue(switchTestFixture, true);
+		checkHasValue(fixture, true);
 	});
 
 	it('should have the changed value if there is a change', () => {
-		setValue(switchTestFixture, false);
-		checkHasValue(switchTestFixture, false);
+		setValue(fixture, false);
+		checkHasValue(fixture, false);
 	});
 
 	it('should change value if is clicked', () => {
-		clickSwitch(switchTestFixture);
-		checkHasValue(switchTestFixture, false);
-		clickSwitch(switchTestFixture);
-		checkHasValue(switchTestFixture, true);
+		clickSwitch(fixture);
+		checkHasValue(fixture, false);
+		clickSwitch(fixture);
+		checkHasValue(fixture, true);
 	});
 });
 

@@ -27,7 +27,7 @@ export class SliderTestComponent {
 }
 
 describe('Systelab Slider', () => {
-	let sliderTestFixture: ComponentFixture<SliderTestComponent>;
+	let fixture: ComponentFixture<SliderTestComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
@@ -44,21 +44,21 @@ describe('Systelab Slider', () => {
 	}));
 
 	beforeEach(() => {
-		sliderTestFixture = TestBed.createComponent(SliderTestComponent);
-		sliderTestFixture.detectChanges();
+		fixture = TestBed.createComponent(SliderTestComponent);
+		fixture.detectChanges();
 	});
 
 	it('should instantiate', () => {
-		expect(sliderTestFixture.componentInstance).toBeDefined();
+		expect(fixture.componentInstance).toBeDefined();
 	});
 
 	it('should have an initial value', () => {
-		checkHasValue(sliderTestFixture, 30);
+		checkHasValue(fixture, 30);
 	});
 
 	it('should have the changed value if there is a change', () => {
-		setValue(sliderTestFixture, 90);
-		checkHasValue(sliderTestFixture, 90);
+		setValue(fixture, 90);
+		checkHasValue(fixture, 90);
 	});
 });
 

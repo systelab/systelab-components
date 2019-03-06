@@ -37,7 +37,7 @@ export class BreadcrumbTestComponent {
 
 }
 
-fdescribe('Systelab Breadcrumb', () => {
+describe('Systelab Breadcrumb', () => {
 	let fixture: ComponentFixture<BreadcrumbTestComponent>;
 
 	beforeEach(async(() => {
