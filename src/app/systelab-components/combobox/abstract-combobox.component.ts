@@ -152,7 +152,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this._code = item[this.getCodeField()];
 			}
 		}
-		this.codeChange.emit(this._description);
+		this.codeChange.emit(this._code);
 	}
 
 	get code() {
