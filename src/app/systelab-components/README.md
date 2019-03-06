@@ -16,12 +16,12 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
 
 ```javascript
 "styles": [
-        "../node_modules/ag-grid/dist/styles/ag-grid.css",
-        "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
-        "../node_modules/primeng/resources/themes/omega/theme.css",
-        "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/systelab-components/icons/icomoon.css"
-        "../node_modules/@fortawesome/fontawesome-free/css/all.css"
+        "node_modules/ag-grid/dist/styles/ag-grid.css",
+        "node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
+        "node_modules/primeng/resources/themes/omega/theme.css",
+        "node_modules/primeng/resources/primeng.min.css",
+        "node_modules/systelab-components/icons/icomoon.css",
+        "node_modules/@fortawesome/fontawesome-free/css/all.css"
       ],
 "stylePreprocessorOptions": {
   "includePaths": [
@@ -29,11 +29,11 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
   ]
 },      
 "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/popper.js/dist/umd/popper.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/pako/dist/pako.min.js",
-        "../node_modules/nanobar/nanobar.js"
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/popper.js/dist/umd/popper.js",
+        "node_modules/bootstrap/dist/js/bootstrap.js",
+        "node_modules/pako/dist/pako.min.js",
+        "node_modules/nanobar/nanobar.js"
       ],
 ```
 
@@ -93,11 +93,11 @@ src/styles.scss file is visible to AppComponent because is referenced in styles 
 
 ```javascript
 "styles": [
-        "../node_modules/ag-grid/dist/styles/ag-grid.css",
-        "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
-        "../node_modules/primeng/resources/themes/omega/theme.css",
-        "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/systelab-components/icons/icomoon.css",
+        "node_modules/ag-grid/dist/styles/ag-grid.css",
+        "node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
+        "node_modules/primeng/resources/themes/omega/theme.css",
+        "node_modules/primeng/resources/primeng.min.css",
+        "node_modules/systelab-components/icons/icomoon.css",
         "src/styles.scss"
       ],
 ```
