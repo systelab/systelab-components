@@ -23,4 +23,7 @@ export class BreadcrumbComponent {
 
 	constructor() {
 	}
+
+	public noop() {
+	}
 }
