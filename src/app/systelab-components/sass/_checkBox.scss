@@ -25,8 +25,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
     }
 
     &:before {
-      width: $slab-checkbox-size;
-      height: $slab-checkbox-size;
+      @include size($slab-checkbox-height);
 
       @include position(absolute, $top: 1px, $left: 0);
 

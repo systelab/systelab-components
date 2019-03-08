@@ -28,8 +28,7 @@ input[type="radio"] + label {
   }
 
   &:before {
-    width: $slab-radio-size;
-    height: $slab-radio-size;
+    @include size($slab-radio-height);
 
     @include position(absolute, $top: $top-icon, $left: 0);
 

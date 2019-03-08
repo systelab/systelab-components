@@ -15,8 +15,7 @@ $sidebar-width: 200px !default;
   }
 
   .slab-app-header-modulab-icon {
-    width: $icon-header-size;
-    height: $icon-header-size;
+    @include size($icon-header-size);
 
     margin: $icon-header-margin;
     font-size: $icon-header-size;
@@ -24,9 +23,7 @@ $sidebar-width: 200px !default;
   }
 
   .slab-app-header-user-icon {
-    width: $icon-header-size - 4px;
-    height: $icon-header-size - 4px;
-
+    @include size($icon-header-size - 4px);
 
     margin: $icon-header-margin;
     border-radius: 50px;
@@ -47,8 +44,7 @@ $sidebar-width: 200px !default;
   }
 
   .slab-app-header-bars-icon {
-    width: $icon-header-size - 4px;
-    height: $icon-header-size - 4px;
+    @include size($icon-header-size - 4px);
     
     margin: $icon-header-margin;
     border: none;

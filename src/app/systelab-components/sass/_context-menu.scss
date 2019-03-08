@@ -17,8 +17,7 @@ $slab-icon-context-menu-size: ceil(28px * $slab-size-percentage);
 }
 
 .slab-icon-container {
-  width: $slab-icon-context-menu-size;
-  height: $slab-icon-context-menu-size;
+  @include size($slab-icon-context-menu-size);
   .slab-menu-icon {
     font-size: $slab-icon-context-menu-font-size;
   }
