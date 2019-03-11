@@ -4,7 +4,7 @@
     <ng-content select="[header-content]"></ng-content>
   </systelab-app-header>
   <div class="slab-main-container d-flex h-100">
-    <div [ngClass]="{'slab-side-bar-container-large': largeSideBar,'slab-side-bar-container-small': !largeSideBar }" *ngIf="showSideBar === true">
+    <div *ngIf="showSideBar" [ngClass]="{'slab-side-bar-container-large': largeSideBar,'slab-side-bar-container-small': !largeSideBar }">
       <systelab-app-sidebar-large *ngIf="largeSideBar" #sidebarLarge [tabs]="tabs" [actions]="actions" (selected)="doSelect($event)"></systelab-app-sidebar-large>
       <systelab-app-sidebar-small *ngIf="!largeSideBar" #sidebarSmall [tabs]="tabs" [actions]="actions" (selected)="doSelect($event)"></systelab-app-sidebar-small>
     </div>
