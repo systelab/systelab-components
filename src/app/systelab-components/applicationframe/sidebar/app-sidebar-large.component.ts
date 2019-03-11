@@ -3,7 +3,7 @@ import { DialogService } from '../../modal/dialog/dialog.service';
 
 export class ApplicationSidebarTab {
 
-	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[], public action?: (id: string) => void) {
+	constructor(public id: string, public name: string, public isSelected: boolean, public subMenu?: ApplicationSidebarTab[], public action?: (id: string) => void, public icon?: string) {
 		subMenu = [];
 	}
 }
@@ -14,16 +14,16 @@ export class ApplicationSidebarAction {
 }
 
 @Component({
-	selector:    'systelab-app-sidebar',
-	templateUrl: 'app-sidebar.component.html'
+	selector:    'systelab-app-sidebar-large',
+	templateUrl: 'app-sidebar-large.component.html'
 })
-export class ApplicationSidebarComponent implements OnInit {
+export class ApplicationSidebarLargeComponent implements OnInit {
 
 	@Input() public actions: ApplicationSidebarAction[] = [];
 	@Input() public tabs: ApplicationSidebarTab[] = [];
 	@Output() public selected = new EventEmitter();
 
-	constructor(protected dialogService: DialogService) {
+	constructor() {
 	}
 
 	public ngOnInit(): void {
