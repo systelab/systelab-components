@@ -90,3 +90,19 @@ public showDialog() {
   this.dialogService.showDialog(MyDialog, parameters);
 }
 ```
+
+## Enabling / Desabling dialog content
+
+Sometimes when user submits a form or the application is loading is needed to disable the content of the dialog or the whole application in order to avoid user interactions with the UI while the process of the submit or loading ends.
+
+There are two ways of enabling / desabling dialogs:
+
+ * Use [systelab-loading](../../loading) component to disabling/enabling the whole application showing a wheel
+ * Use dialog methods to enable / disable the dialog. In this case only dialog inner components are disabled/enabled. Header component is not disabled in order to allow cancelling the current process. Methods:
+
+ | Name | Description |
+ | ---- | ----------- |
+ | enable() | Sets the component as in loading state |
+ | disable() | Remove the loading state of the component |
+ 
+
