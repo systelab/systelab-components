@@ -21,6 +21,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public maxDate: Date;
 	@Input() public warnDaysBefore: number;
 	@Input() public warnDaysAfter: number;
+	@Input() public autofocus = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -82,10 +83,15 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public ngAfterViewInit() {
+		this.currentCalendar.focus = true;
 		const newElement = document.createElement('i');
 		if (!this.inline) {
 			newElement.className = 'icon-calendar';
 			if (this.currentCalendar) {
+				if (this.autofocus) {
+					this.currentCalendar.el.nativeElement.querySelector('input')
+						.focus();
+				}
 				this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
