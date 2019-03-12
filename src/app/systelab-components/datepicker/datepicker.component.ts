@@ -83,7 +83,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public ngAfterViewInit() {
-		this.currentCalendar.focus = true;
 		const newElement = document.createElement('i');
 		if (!this.inline) {
 			newElement.className = 'icon-calendar';
