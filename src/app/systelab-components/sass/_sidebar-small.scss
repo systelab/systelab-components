@@ -1,0 +1,56 @@
+$sidebar-small-width: 60px !default;
+
+.slab-app-sidebar-small-menu-container {
+  @include position(fixed, $top: $slab-app-header-height);
+
+  background-color: $background-secondary;
+  width: $sidebar-small-width;
+  height: calc(100% - #{$slab-app-header-height});
+
+  .slab-app-sidebar-button-container {
+    margin-top: 35px;
+    margin-bottom: 0px !important;
+    padding-left: 5px;
+    width: 100% !important;
+    background-color: $background-secondary;
+
+    &.slab-bottom {
+      bottom: 0px;
+      position: absolute;
+    }
+
+    .slab-app-sidebar-button {
+      min-height: 60px;
+      width: 95%;
+      display: block;
+      margin-bottom: 2px;
+      float: right;
+      font-size: 26px;
+      cursor: pointer;
+
+      .arrow-left {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+
+        border-right:10px solid white;
+      }
+
+      span {
+        @include user-selection(none);
+
+        position: absolute;
+        margin-left: 11px;
+        margin-top: 7px;
+        color: #c9c9c9;
+      }
+
+      &.selected, &:hover {
+        span {
+          color: $primary;
+        }
+      }
+    }
+  }
+}

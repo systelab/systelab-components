@@ -22,7 +22,7 @@ import { PeriodSelect } from './select/period-combobox.component';
 import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
-import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
+import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
 import { Datepicker } from './datepicker/datepicker.component';
 import { DatepickerTime } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
@@ -75,6 +75,7 @@ import { ContextPanelComponent } from './contextpanel/context-panel.component';
 import { DateRangepicker } from './date-range-picker/date-range-picker.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
+import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
 
 @NgModule({
 	imports:         [
@@ -107,7 +108,8 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 		ColorComboBox,
 		ApplicationFrameComponent,
 		ApplicationHeaderComponent,
-		ApplicationSidebarComponent,
+		ApplicationSidebarLargeComponent,
+		ApplicationSidebarSmallComponent,
 		ToggleButtonComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -168,7 +170,8 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 		ColorCellRendererComponent,
 		ColorComboBox,
 		ApplicationHeaderComponent,
-		ApplicationSidebarComponent,
+		ApplicationSidebarLargeComponent,
+		ApplicationSidebarSmallComponent,
 		ApplicationFrameComponent,
 		AllYesNoSelect,
 		NoYesSelect,

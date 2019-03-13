@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { ApplicationHeaderMenuEntry } from './header/app-header.component';
-import { ApplicationSidebarAction, ApplicationSidebarTab, ApplicationSidebarComponent } from './sidebar/app-sidebar.component';
+import { ApplicationSidebarAction, ApplicationSidebarLargeComponent, ApplicationSidebarTab } from './sidebar/app-sidebar-large.component';
+import { ApplicationSidebarSmallComponent } from './sidebar/app-sidebar-small.component';
 
 @Component({
 	selector:    'systelab-app-frame',
@@ -10,7 +11,9 @@ import { ApplicationSidebarAction, ApplicationSidebarTab, ApplicationSidebarComp
 })
 export class ApplicationFrameComponent {
 
-	@ViewChild('sidebar') sidebar : ApplicationSidebarComponent;
+	@ViewChild('sidebarLarge') sidebar: ApplicationSidebarLargeComponent;
+	@ViewChild('sidebarSmall') sidebarSmall: ApplicationSidebarSmallComponent;
+
 	@Input() public userName: string;
 	@Input() public userFullName: string;
 	@Input() public title: string;
@@ -21,6 +24,7 @@ export class ApplicationFrameComponent {
 	@Input() public actions: ApplicationSidebarAction[] = [];
 	@Input() public tabs: ApplicationSidebarTab[] = [];
 	@Input() public showSideBar = true;
+	@Input() public largeSideBar = true;
 
 	@Output() public selected = new EventEmitter();
 
@@ -32,6 +36,10 @@ export class ApplicationFrameComponent {
 	}
 
 	public continueSelect(id: string) {
-		this.sidebar.selectTab(id);
+		if (this.sidebar) {
+			this.sidebar.selectTab(id);
+		} else if (this.sidebarSmall) {
+			this.sidebarSmall.selectTab(id);
+		}
 	}
 }
