@@ -34,6 +34,29 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
 .cdk-overlay-pane {
   background-color: $background-primary;
+  border: 5px solid lightgray;
+  border-radius: 5px;
+
+  .slab-dialog-bottom {
+    background: $background-primary;
+
+    .btn {
+      height: $slab-button-size;
+    }
+  }
+
+  &.fullscreen {
+    border: 0px solid lightgray;
+    border-radius: 0px;
+
+    .slab-dialog-bottom {
+      background: $darker-gray;
+
+      .btn {
+        height: $slab-button-size-fullscreen;
+      }
+    }
+  }
 
   & > *:first-child {
     flex: 1;
@@ -49,32 +72,6 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 }
 
 
-div [class="cdk-overlay-pane"] {
-  border: 5px solid lightgray;
-  border-radius: 5px;
-
-  .slab-dialog-bottom {
-    background: $background-primary;
-    .btn {
-      height: $slab-button-size;
-    }
-  }
-}
-
-div [class="cdk-overlay-pane fullscreen"] {
-  border: 0px solid lightgray;
-  border-radius: 0px;
-
-  .slab-dialog-bottom {
-    background: $darker-gray;
-    .btn {
-      height: $slab-button-size-fullscreen;
-    }
-  }
-}
-
-
-
 /**
  * 1. Full-screen by default.
  * 2. Preventively hide the 'back' side of a transformed elemenet.
@@ -85,6 +82,48 @@ div [class="cdk-overlay-pane fullscreen"] {
   > * {
     -webkit-backface-visibility: hidden; /* [2] */
   }
+}
+
+.slab-dialog-disabled {
+  pointer-events: none !important;
+
+  * {
+    @extend .disabled;
+  }
+
+  .form-control {
+    @extend .form-control:disabled;
+  }
+
+  input[type="radio"] + label {
+    @extend .disabled;
+  }
+
+  input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
+    @extend .disabled;
+  }
+
+  .slab-switch {
+    @extend .disabled;
+  }
+
+  .slab-combobox {
+    @extend .disabled;
+  }
+
+
+  .slab-dialog-header {
+    pointer-events: auto;
+  }
+
+  /*
+  .slab-dialog-bottom {
+    button {
+      @extend .btn.disabled;
+    }
+  }
+  */
+
 }
 
 /**
@@ -233,6 +272,7 @@ div [class="cdk-overlay-pane fullscreen"] {
       .slab-dialog-bottom {
         border-radius: 0 0 $content-border-width $content-border-width;
         background: $background-primary;
+
         .btn {
           height: $slab-button-size;
         }
@@ -253,6 +293,7 @@ div [class="cdk-overlay-pane fullscreen"] {
 
     .slab-dialog-bottom {
       background-color: $darker-gray;
+
       .btn {
         height: $slab-button-size-fullscreen;
       }
