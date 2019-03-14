@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { ApplicationHeaderMenuEntry } from './header/app-header.component';
-import { ApplicationSidebarAction, ApplicationSidebarLargeComponent, ApplicationSidebarTab } from './sidebar/app-sidebar-large.component';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from './sidebar/app-sidebar.component';
+import { ApplicationSidebarLargeComponent } from './sidebar/app-sidebar-large.component';
 import { ApplicationSidebarSmallComponent } from './sidebar/app-sidebar-small.component';
 
 @Component({
