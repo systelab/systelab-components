@@ -1,6 +1,6 @@
-import {ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {StylesUtilService} from '../utilities/styles.util.service';
-import {ColDef, GridOptions} from 'ag-grid';
+import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { StylesUtilService } from '../utilities/styles.util.service';
+import { ColDef, GridOptions } from 'ag-grid';
 
 export abstract class AbstractListBox<T> implements OnInit {
 
@@ -45,6 +45,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Input()
 	set multipleSelectedItemList(value: Array<T>) {
 		this._multipleSelectedItemList = value;
+		this.selectItemInGrid();
 		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
 		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 	}
@@ -78,7 +79,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 			this.gridOptions.suppressRowClickSelection = true;
 			this.gridOptions.icons = {
 				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked: this.getCheckboxChecked(),
+				checkboxChecked:   this.getCheckboxChecked(),
 
 			};
 
@@ -125,13 +126,13 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		if (this.multipleSelection && !this.hideChecks) {
 			colDefs.unshift({
-				colId: 'selectCol',
-				headerName: '',
+				colId:             'selectCol',
+				headerName:        '',
 				checkboxSelection: true,
-				width: this.getCheckColumnWidth(),
+				width:             this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
-				suppressResize: true,
-				suppressMovable: true
+				suppressResize:    true,
+				suppressMovable:   true
 			});
 		}
 
@@ -157,7 +158,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(function (columnDef: ColDef) {
+		colDefs.forEach(function(columnDef: ColDef) {
 			if (columnDef.width) {
 				columnDef.suppressSizeToFit = true;
 			}
@@ -250,6 +251,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 							}).length > 0) {
 							node.selectThisNode(true);
 						}
+					} else {
+						node.selectThisNode(false);
 					}
 				} else {
 					if (!this.selectedItem && this.selectFirstItem) {
