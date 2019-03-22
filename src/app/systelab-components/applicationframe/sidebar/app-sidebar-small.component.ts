@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar-large.component';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.component';
+
 
 @Component({
 	selector:    'systelab-app-sidebar-small',

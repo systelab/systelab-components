@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { DialogRef, DialogService, MessagePopupService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
 import { ApplicationFrameComponent } from '../../../../systelab-components/applicationframe/application-frame.component';
-import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar-large.component';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';
 
 export class ShowcaseApplicationFrameDialogParameters extends SystelabModalContext {
 	public fullScreen = true;
