@@ -14,12 +14,14 @@ export class DialogRef<T extends SystelabModalContext> {
 				.subscribe(
 					() => this.close());
 		}
-		overlayRef.keydownEvents()
-			.subscribe((k) => {
-				if (k.code === DialogRef.ESCAPE_KEY) {
-					this.close();
-				}
-			});
+		if (context.showClose === undefined || context.showClose) {
+			overlayRef.keydownEvents()
+				.subscribe((k) => {
+					if (k.code === DialogRef.ESCAPE_KEY) {
+						this.close();
+					}
+				});
+		}
 	}
 
 	public closeAllDialogs() {
