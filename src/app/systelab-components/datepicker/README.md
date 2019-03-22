@@ -25,6 +25,7 @@ All the input parameters are optional.
 | maxDate | Date | | The maximum selectable date |
 | warnDaysBefore | number | | If set, when a date is selected the input background is set to red when that date happens before or it is exactly the same than the system's current date minus the number of days specified. |
 | warnDaysAfter | number | | If set, when a date is selected the input background is set to red when that date happens after than the system's current date plus the number of days specified. |
+| autofocus | boolean | false | If true the input is automatically focused |
 
 In black the Two-Way Data Binding properties.
 
