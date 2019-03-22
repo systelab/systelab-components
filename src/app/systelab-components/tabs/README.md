@@ -6,10 +6,10 @@ Component to show more than one panel.
 
 ```html
 <systelab-tabs class="slab-flex-1" (select)="selectedTab($event)">
-  <systelab-tab class="slab-flex-1" [id]="'Tab1'" [title]="'Tab 1'" [active]="true">
+  <systelab-tab [id]="'Tab1'" [title]="'Tab 1'" [active]="true">
     Tab 1 content
   </systelab-tab>
-  <systelab-tab class="slab-flex-1" [id]="'Tab2'" [title]="'Tab 2'" [warning]="true">
+  <systelab-tab [id]="'Tab2'" [title]="'Tab 2'" [warning]="true">
     Tab 2 content
   </systelab-tab>
 </systelab-tabs>

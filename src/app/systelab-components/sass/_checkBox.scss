@@ -55,6 +55,10 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   }
 
   input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
+    @extend .disabled;
+  }
+
+  .disabled {
     opacity: 0.5;
     cursor: default;
   }

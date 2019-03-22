@@ -14,12 +14,14 @@ export class DialogRef<T extends SystelabModalContext> {
 				.subscribe(
 					() => this.close());
 		}
-		overlayRef.keydownEvents()
-			.subscribe((k) => {
-				if (k.code === DialogRef.ESCAPE_KEY) {
-					this.close();
-				}
-			});
+		if (context.showClose) {
+			overlayRef.keydownEvents()
+				.subscribe((k) => {
+					if (k.code === DialogRef.ESCAPE_KEY) {
+						this.close();
+					}
+				});
+		}
 	}
 
 	public closeAllDialogs() {
@@ -34,5 +36,14 @@ export class DialogRef<T extends SystelabModalContext> {
 	public getResult(): Observable<any> {
 		return this.subject.asObservable();
 	}
+
+	public disable() {
+		this.overlayRef.overlayElement.classList.add('slab-dialog-disabled');
+	}
+
+	public enable() {
+		this.overlayRef.overlayElement.classList.remove('slab-dialog-disabled');
+	}
+
 }
 

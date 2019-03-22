@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { DialogRef, DialogService, MessagePopupService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
-import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';
 import { ApplicationFrameComponent } from '../../../../systelab-components/applicationframe/application-frame.component';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';
 
 export class ShowcaseApplicationFrameDialogParameters extends SystelabModalContext {
 	public fullScreen = true;
@@ -57,13 +57,13 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 		subMenu.push(new ApplicationSidebarTab('T4', 'SubTab One', false));
 		subMenu.push(new ApplicationSidebarTab('T5', 'SubTab Two', false));
 
-		this.sidetabs.push(new ApplicationSidebarTab('T1', 'Tab One', true));
-		this.sidetabs.push(new ApplicationSidebarTab('T3', 'Tab Three', false, subMenu));
-		this.sidetabs.push(new ApplicationSidebarTab('T2', 'Tab Two', false));
-		this.sidetabs.push(new ApplicationSidebarTab('T6', 'Tab Action first', false, null, () => this.action3('T6')));
+		this.sidetabs.push(new ApplicationSidebarTab('T1', 'Tab One', true, null, null, 'icon-download'));
+		this.sidetabs.push(new ApplicationSidebarTab('T3', 'Tab Three', false, subMenu, null, 'icon-print'));
+		this.sidetabs.push(new ApplicationSidebarTab('T2', 'Tab Two', false, null, null, 'icon-home'));
+		this.sidetabs.push(new ApplicationSidebarTab('T6', 'Tab Action first', false, null, () => this.action3('T6'),'icon-book'));
 
 		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1(), 'icon-home'));
-		this.sideactions.push(new ApplicationSidebarAction('Close', () => this.close()));
+		this.sideactions.push(new ApplicationSidebarAction('Close', () => this.close(), 'icon-print'));
 
 	}
 
@@ -107,7 +107,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 				if (res) {
 					this.appFrame.continueSelect(id);
 				}
-			})
+			});
 	}
 }
 

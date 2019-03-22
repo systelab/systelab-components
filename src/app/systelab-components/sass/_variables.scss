@@ -1,7 +1,7 @@
-@import "mixins";
-
 @import "systelab-bootstrap-settings";
 @import "bootstrap/scss/bootstrap";
+
+@import "mixins";
 
 // Internal variable to help set the size
 $slab-size-percentage: 0.7 !default;
@@ -24,7 +24,7 @@ $slab-ipad-width: 1024px !default;
 // Defines the primary color
 $primary: rgb(21, 143, 239) !default;
 $background-primary: rgb(255, 255, 255) !default;
-$background-secondary: rgb(235, 235, 235) !default;
+$background-secondary: rgb(238, 238, 238) !default;
 // Defines the color for selected elements
 $slab-selected-background-color: rgb(200, 223, 252) !default;
 
