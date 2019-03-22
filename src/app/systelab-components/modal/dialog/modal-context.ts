@@ -28,7 +28,7 @@ export class SystelabModalContext {
 	public isBlocking = true;
 	public keyboard = null;
 
-	public showClose: boolean;
+	public showClose = true;
 
 	public setDefaultSize(w: number, h: number) {
 		if (!this.width) {

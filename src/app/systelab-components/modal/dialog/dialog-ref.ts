@@ -14,7 +14,7 @@ export class DialogRef<T extends SystelabModalContext> {
 				.subscribe(
 					() => this.close());
 		}
-		if (context.showClose === undefined || context.showClose) {
+		if (context.showClose) {
 			overlayRef.keydownEvents()
 				.subscribe((k) => {
 					if (k.code === DialogRef.ESCAPE_KEY) {
