@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessagePopupService } from '../../../systelab-components/modal/message-popup/message-popup.service';
+import { MessagePopupService, MessagePopupButton, MessagePopupIcon } from '../../../systelab-components/modal/message-popup/message-popup.service';
 
 @Component({
 	selector:    'showcase-message-popup',
@@ -30,6 +30,17 @@ export class ShowcaseMessagePopupComponent {
 
 	public showQuestionYN() {
 		this.messagePopupService.showYesNoQuestionPopup('Test', 'Error message popup example', null, 800, 600)
+			.subscribe((v) => {
+				console.log('Observable returned to showcase', v);
+			});
+	}
+
+	public showCustomized() {
+		const buttons: MessagePopupButton[] = [];
+		buttons.push( new MessagePopupButton('Approve', '', 'btn-primary'));
+		buttons.push( new MessagePopupButton('Reject', '', 'btn-danger'));
+		const icon = new MessagePopupIcon('icon-print', 'text-danger');
+		this.messagePopupService.showCustomQuestionPopup('Test', 'Customized Message popup', null, 800, 600, buttons, icon)
 			.subscribe((v) => {
 				console.log('Observable returned to showcase', v);
 			});

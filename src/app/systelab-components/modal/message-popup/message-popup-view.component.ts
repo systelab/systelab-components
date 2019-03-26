@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { MessagePopupButton } from './message-popup.service';
+import { MessagePopupButton, MessagePopupIcon } from './message-popup.service';
 import { DialogRef } from '../dialog/dialog-ref';
 import { ModalComponent, SystelabModalContext } from '../dialog/modal-context';
 
@@ -12,7 +12,7 @@ export class MessagePopupViewContext extends SystelabModalContext {
 	public minHeight = 280;
 	public title: string;
 	public msg: string;
-	public icon: string;
+	public icon: MessagePopupIcon;
 	public type: number;
 	public color: string;
 	public buttons: MessagePopupButton[] = [];
