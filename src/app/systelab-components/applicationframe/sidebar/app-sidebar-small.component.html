@@ -1,4 +1,4 @@
-<div class="slab-app-sidebar-small-menu-container h-100">
+<div class="slab-app-sidebar-small-menu-container">
     <ul class="slab-app-sidebar-button-container">
         <li class="slab-app-sidebar-button" *ngFor="let tab of tabs" (click)="!tab.subMenu ? tab.action ? tab.action() : selectTab(tab.id) : false"
             [class.selected]="tab.isSelected" systelabTooltip="{{tab.name}}" systelabTooltipPlacement="right" systelabTooltipDelay="0" systelabTooltipHideDelay="0">
