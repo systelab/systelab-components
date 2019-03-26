@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { MessagePopupService, MessagePopupButton, MessagePopupIcon } from '../../../systelab-components/modal/message-popup/message-popup.service';
+import { MessagePopupService, MessagePopupButton } from '../../../systelab-components/modal/message-popup/message-popup.service';
+import { MessagePopupIcon } from '../../../systelab-components/modal/message-popup/message-with-icon.component';
 
 @Component({
 	selector:    'showcase-message-popup',

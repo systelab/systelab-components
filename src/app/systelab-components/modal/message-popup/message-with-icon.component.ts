@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { MessagePopupIcon } from './message-popup.service';
+
+export class MessagePopupIcon {
+	constructor(public cssClass: string, public cssPropertiesClass?: string) {
+
+	}
+}
 
 @Component({
 	selector: 'systelab-message-with-icon',

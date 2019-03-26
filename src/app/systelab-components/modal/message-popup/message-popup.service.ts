@@ -2,17 +2,11 @@ import { Injectable } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { Observable } from 'rxjs';
-import { MessageWithIconComponent } from './message-with-icon.component';
+import { MessageWithIconComponent, MessagePopupIcon } from './message-with-icon.component';
 import { DialogService } from '../dialog/dialog.service';
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any, public cssClass?: string) {
-
-	}
-}
-
-export class MessagePopupIcon {
-	constructor(public cssClass: string, public cssPropertiesClass?: string) {
 
 	}
 }
