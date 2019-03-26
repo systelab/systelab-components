@@ -2,13 +2,13 @@
     <ul class="slab-app-sidebar-button-container">
         <li class="slab-app-sidebar-button" *ngFor="let tab of tabs" (click)="!tab.subMenu ? tab.action ? tab.action() : selectTab(tab.id) : false"
             [class.selected]="tab.isSelected">
-            <span><i [ngClass]="tab.icon"></i></span>
+            <span systelabTooltip="{{tab.name}}" systelabTooltipPlacement="right"><i [ngClass]="tab.icon"></i></span>
             <div *ngIf="tab.isSelected" class="arrow-left w-100 mt-3"></div>
         </li>
     </ul>
     <ul class="slab-app-sidebar-button-container slab-bottom">
         <li *ngFor="let action of actions" class="slab-app-sidebar-button" (click)="action.action()">
-            <span><i class="{{action.icon}}"></i></span>
+            <span systelabTooltip="{{action.name}}" systelabTooltipPlacement="right"><i class="{{action.icon}}"></i></span>
         </li>
     </ul>
 </div>
