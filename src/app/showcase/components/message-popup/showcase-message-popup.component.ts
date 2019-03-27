@@ -3,7 +3,7 @@ import { MessagePopupService, MessagePopupButton } from '../../../systelab-compo
 import { MessagePopupIcon } from '../../../systelab-components/modal/message-popup/message-with-icon.component';
 
 @Component({
-	selector:    'showcase-message-popup',
+	selector: 'showcase-message-popup',
 	templateUrl: 'showcase-message-popup.component.html'
 })
 export class ShowcaseMessagePopupComponent {
@@ -37,9 +37,9 @@ export class ShowcaseMessagePopupComponent {
 	}
 
 	public showCustomized() {
-		const buttons: MessagePopupButton[] = [];
-		buttons.push( new MessagePopupButton('Approve', '', 'btn-primary'));
-		buttons.push( new MessagePopupButton('Reject', '', 'btn-danger'));
+		const buttons: MessagePopupButton[] = [
+			new MessagePopupButton('Approve', '', 'btn-primary'),
+			new MessagePopupButton('Reject', '', 'btn-danger')];
 		const icon = new MessagePopupIcon('icon-print', 'text-danger');
 		this.messagePopupService.showCustomQuestionPopup('Test', 'Customized Message popup', null, 800, 600, buttons, icon)
 			.subscribe((v) => {
