@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LowerFlexDialogParameters, ShowcaseLowerFlexDialog } from './lower-flex/showcase-lower-flex-dialog.component';
 import { ShowcaseSplitDialog, SplitShowcaseDialogParameters } from './split/showcase-split-dialog.component';
 import { CalendarDialog, CalendarDialogParameters } from '../../../systelab-components/calendar/calendar-dialog.component';
@@ -9,10 +9,11 @@ import { ShowcaseStandardDialog } from './standard-dialog/showcase-standard-dial
 import { DialogService } from '../../../systelab-components/modal';
 
 @Component({
-	selector:    'showcase-dialog',
+	selector: 'showcase-dialog',
 	templateUrl: 'showcase-dialog.component.html',
 })
 export class ShowcaseDialogComponent {
+	@ViewChild('btnContextModal') btnContextModal: ElementRef;
 
 	constructor(protected dialogService: DialogService) {
 	}
@@ -33,8 +34,18 @@ export class ShowcaseDialogComponent {
 		this.dialogService.showDialog(ShowcaseSplitDialog, parameters);
 	}
 
-	public showCalendarDialog() {
+	public showCalendarDialog(event) {
 		const parameters: CalendarDialogParameters = CalendarDialog.getParameters();
+		this.dialogService.showDialog(CalendarDialog, parameters);
+	}
+
+	public showCalendarWithPositionDialog(event) {
+		const parameters: CalendarDialogParameters = CalendarDialog.getParameters();
+		parameters.width = 800;
+		parameters.positionX = this.btnContextModal.nativeElement.offsetLeft;
+		parameters.positionY = this.btnContextModal.nativeElement.offsetTop;
+		parameters.isBlocking = false;
+		parameters.isContextDialog = true;
 		this.dialogService.showDialog(CalendarDialog, parameters);
 	}
 
@@ -65,5 +76,4 @@ export class ShowcaseDialogComponent {
 	public showStandardDialog() {
 		this.dialogService.showDialog(ShowcaseStandardDialog, ShowcaseStandardDialog.getParameters());
 	}
-
 }
