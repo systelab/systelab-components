@@ -34,12 +34,12 @@ export class ShowcaseDialogComponent {
 		this.dialogService.showDialog(ShowcaseSplitDialog, parameters);
 	}
 
-	public showCalendarDialog(event) {
+	public showCalendarDialog() {
 		const parameters: CalendarDialogParameters = CalendarDialog.getParameters();
 		this.dialogService.showDialog(CalendarDialog, parameters);
 	}
 
-	public showCalendarWithPositionDialog(event) {
+	public showCalendarWithPositionDialog() {
 		const parameters: CalendarDialogParameters = CalendarDialog.getParameters();
 		parameters.width = 800;
 		parameters.positionX = this.btnContextModal.nativeElement.offsetLeft;
