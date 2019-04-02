@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { Observable } from 'rxjs';
-import { MessageWithIconComponent } from './message-with-icon.component';
+import { MessageWithIconComponent, MessagePopupIcon } from './message-with-icon.component';
 import { DialogService } from '../dialog/dialog.service';
 
 export class MessagePopupButton {
-	constructor(public title: string, public returnValue: any) {
+	constructor(public title: string, public returnValue: any, public cssClass?: string) {
 
 	}
 }
@@ -38,11 +38,11 @@ export class MessagePopupService {
 		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons);
 	}
 
-	public showCustomQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[]): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons);
+	public showCustomQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon): Observable<any> {
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons, icon);
 	}
 
-	protected showPopup(title: string, type: number, message: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[]): Observable<any> {
+	protected showPopup(title: string, type: number, message: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon): Observable<any> {
 
 		const maxWidth = 700;
 		const minWidth = 499;
@@ -62,6 +62,8 @@ export class MessagePopupService {
 
 		parameters.maxHeight = maxHeight;
 		parameters.minHeight = minHeight;
+
+		parameters.icon = icon;
 
 		return this.dialogService.showDialog(MessagePopupViewComponent, parameters);
 	}
