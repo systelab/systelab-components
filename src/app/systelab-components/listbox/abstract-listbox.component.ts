@@ -19,6 +19,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return this._values;
 	}
 
+	@Input() public rowDrag = false;
 	@Input() public isDisabled: boolean;
 
 	public _selectedItem: T;
@@ -119,8 +120,9 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		const colDefs: Array<any> = [
 			{
-				colId: this.getIdField(),
-				field: this.getDescriptionField(),
+				rowDrag: this.rowDrag,
+				colId:   this.getIdField(),
+				field:   this.getDescriptionField(),
 			}
 		];
 

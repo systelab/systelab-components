@@ -3,6 +3,8 @@
     <ag-grid-angular #grid id="agGrid" style="position:absolute; top:0; bottom:0; left:0; right:0; overflow: hidden;"
                      class="ag-theme-fresh border rounded" [ngClass]="{'disabled': isDisabled}"
                      [gridOptions]="gridOptions"
+                     [rowDragManaged]="rowDrag"
+                     [animateRows]="rowDrag"
                      (gridReady)="doGridReady($event)"
                      (gridSizeChanged)="doGridSizeChanged($event)"
                      (cellClicked)="doClick($event)"
