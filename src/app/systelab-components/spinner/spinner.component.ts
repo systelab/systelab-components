@@ -26,7 +26,6 @@ export class TouchspinComponent {
 		if (this._spinValues) {
 			this.previousValue = this._spinValues.value;
 			this._spinValues.value = val;
-			this.valueChange.emit(this._spinValues.value);
 
 			if (val) {
 				const valStr: string = (val <= 9 && this.fillUnitsWithZero) ? '0' + val : String(val);
@@ -97,6 +96,7 @@ export class TouchspinComponent {
 		if (itHasChanged) {
 			this.previousValue = this._spinValues.value;
 			this.change.emit(this._spinValues.value);
+			this.valueChange.emit(this._spinValues.value);
 			this.value = this._spinValues.value;
 		}
 	}
@@ -120,6 +120,7 @@ export class TouchspinComponent {
 		if (itHasChanged) {
 			this.previousValue = this._spinValues.value;
 			this.change.emit(this._spinValues.value);
+			this.valueChange.emit(this._spinValues.value);
 			this.value = this._spinValues.value;
 		}
 	}
@@ -160,6 +161,7 @@ export class TouchspinComponent {
 				this.previousValue = value;
 				this.value = Number(value.toFixed(fixedNumber));
 				this.change.emit(Number(value.toFixed(fixedNumber)));
+				this.valueChange.emit(Number(value.toFixed(fixedNumber)));
 			}
 		}
 	}

@@ -72,6 +72,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	@Input() public isDisabled: boolean;
 	@Input() public expandToParentContainerHeight = false;
+	@Output() public selectedItemChange = new EventEmitter();
 	@Output() public change = new EventEmitter();
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
@@ -541,6 +542,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.description = selectedRow[this.getDescriptionField()];
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
+				this.selectedItemChange.emit(selectedRow);
 				this.closeDropDown();
 				if (selectedRow[this.getIdField()]) {
 					this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
@@ -730,6 +732,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public checkMultipleSelectionClosed() {
 		if (this.selectionChanged) {
 			this.change.emit(this.multipleSelectedItemList);
+			this.selectedItemChange.emit(this.multipleSelectedItemList);
 			this.multipleSelectedItemListChange.emit(this.multipleSelectedItemList);
 			this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 

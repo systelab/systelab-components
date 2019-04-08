@@ -223,6 +223,7 @@ For the Tree-Combobox, consider also the following properties:
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| change | T | Emits the selected element of type <T>. Only for combos with multipleSelectino=false.|
+| selectedItemChange | T | Emits the selected element of type <T>. Only for combos with multipleSelection=false.|
+| change | T | (Deprecated) Emits the selected element of type <T>. Only for combos with multipleSelection=false.|
 | multipleSelectedIDListChange | Array<string &#124; number> | Emits an array with the ids of selected elements.|
 | multipleSelectedItemListChange | Array<T> | Emits an array with selected elements of type <T>.|
