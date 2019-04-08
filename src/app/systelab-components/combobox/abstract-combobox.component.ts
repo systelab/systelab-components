@@ -177,6 +177,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
 	@Output() public multipleSelectedIDListChange = new EventEmitter();
+	@Output() public selectedItemChange = new EventEmitter();
 
 	@ViewChild('combobox') public comboboxElement: ElementRef;
 	@ViewChild('dropdowntoogle') public dropdownToogleElement: ElementRef;
@@ -541,6 +542,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.description = selectedRow[this.getDescriptionField()];
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
+				this.selectedItemChange.emit(selectedRow);
 				this.closeDropDown();
 				if (selectedRow[this.getIdField()]) {
 					this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
@@ -730,6 +732,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public checkMultipleSelectionClosed() {
 		if (this.selectionChanged) {
 			this.change.emit(this.multipleSelectedItemList);
+			this.selectedItemChange.emit(this.multipleSelectedItemList);
 			this.multipleSelectedItemListChange.emit(this.multipleSelectedItemList);
 			this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 
