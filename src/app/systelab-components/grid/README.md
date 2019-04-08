@@ -27,6 +27,8 @@ protected getColumnDefs(): Array<any> {
 }
 ```
 
+Use "rowDrag: true" in a column to allow reorder the table by dragging rows from that column. Only applied to non paginated tables.
+
 Ag-grid documentation of column properties: <https://www.ag-grid.com/javascript-grid-column-properties/>
 
 We can add custom-cells/custom-editors as cellRendererFramework/cellEditorFramework in our column definition. At this moment, we have four generic cellRenderers/cellEditors for the table:
@@ -301,6 +303,7 @@ protected getHeaderContextMenuOptions(): Array<GridContextMenuOption<string>> {
 | ---- |:----------:| ----------- |
 | action | GridContextMenuActionData&lt;T&gt;&#124;GridContextMenuActionData&lt;Object&gt; | When an action in the popup menu (row or header) is selected, the event is fired with the selected GridContextMenuActionData |
 | clickRow | T | When a row is selected, the event is fired with the element in the row. |
+| rowDragEnd | Event | Emits ag grid event after a row drag when a column is defined as rowDrag: true.|
 
 ## Ag-grid
 
