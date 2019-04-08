@@ -5,6 +5,7 @@
                      [gridOptions]="gridOptions"
                      [rowDragManaged]="rowDrag"
                      [animateRows]="rowDrag"
+                     (rowDragEnd)="onRowDragEnd($event)"
                      (gridReady)="doGridReady($event)"
                      (gridSizeChanged)="doGridSizeChanged($event)"
                      (cellClicked)="doClick($event)"

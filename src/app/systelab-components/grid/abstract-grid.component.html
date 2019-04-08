@@ -7,6 +7,7 @@
                  (cellClicked)="doClick($event)"
                  [rowDragManaged]="true"
                  [animateRows]="true"
+                 (rowDragEnd)="onRowDragEnd($event)"
                  (columnResized)="doColumnResized($event)"
                  (viewportChanged)="doViewportChanged()"
                  [overlayNoRowsTemplate]="overlayNoRowsTemplate"
