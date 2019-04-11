@@ -39,6 +39,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Input() public selectFirstItem = false;
 	@Input() public multipleSelection = false;
 	@Input() public showAll = false;
+	@Input() public hideChecks = false;
 
 	protected _multipleSelectedItemList: Array<T>;
 
@@ -55,8 +56,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
-
-	protected hideChecks = false;
 
 	protected constructor() {
 	}

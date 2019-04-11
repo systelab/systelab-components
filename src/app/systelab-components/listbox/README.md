@@ -232,6 +232,7 @@ Once you have your component, you can use it in your templates.
 | **multipleSelectedItemList** | Array&lt;T&gt; | | Array with elements selected. Only when multipleSelection=true |
 | isDisabled | boolean | false | If true the listbox is disabled  |
 | multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
+| hideChecks | boolean | false | Enable to use multiple selection without checkboxes. Selection will be done with ctrl and click.
 | selectFirstItem | boolean | false | If true first item of the list is selected if there are not selected items. Only when multipleSelection=false |
 | showAll | boolean | false | If true adds all element at the beginning of the list |
 
