@@ -38,6 +38,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	@Output() public action = new EventEmitter();
 
 	@Output() public clickRow = new EventEmitter();
+	@Output() public rowDragEnd = new EventEmitter();
 
 	@ViewChild('hidden') public hiddenElement: ElementRef;
 	@ViewChild('popupmenu') public popupmenu: GridContextMenuComponent<T>;
@@ -98,8 +99,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 			this.overlayLoadingTemplate = this.loadingText;
 		}
 	}
-
-
 
 	public onModelUpdated(event: any) {
 		this.gridOptions.api.sizeColumnsToFit();
@@ -238,7 +237,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	public executeContextMenuAction(elementId: string, actionId: string): void {
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
-		const rowId: number = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
+		const rowId: number = Number(elementId.substr(elementId.indexOf('row'))
+			.replace('row', ''));
 		const data: T = this.gridOptions.api.getModel()
 			.getRow(rowId).data;
 		const rowSelecteds: Array<T> = this.gridOptions.api.getSelectedRows();
@@ -258,7 +258,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 	public isContextMenuOptionEnabled(elementId: string, actionId: string): boolean {
 
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
-		const rowId: number = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
+		const rowId: number = Number(elementId.substr(elementId.indexOf('row'))
+			.replace('row', ''));
 		const data: T = this.gridOptions.api.getModel()
 			.getRow(rowId).data;
 
@@ -479,6 +480,10 @@ export abstract class AbstractGrid<T> implements OnInit {
 			});
 			return (optionEnabled != null);
 		}
+	}
+
+	public onRowDragEnd(event: any) {
+		this.rowDragEnd.emit(event);
 	}
 
 }

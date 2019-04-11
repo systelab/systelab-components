@@ -130,3 +130,9 @@ $icon-rowaction-font-size: 20px;
 systelab-spinner-cell {
   display: flex;
 }
+
+.ag-theme-fresh .ag-row-drag {
+  background: none;
+  width: 100%;
+  position: fixed;
+}

@@ -235,6 +235,7 @@ Once you have your component, you can use it in your templates.
 | hideChecks | boolean | false | Enable to use multiple selection without checkboxes. Selection will be done with ctrl and click.
 | selectFirstItem | boolean | false | If true first item of the list is selected if there are not selected items. Only when multipleSelection=false |
 | showAll | boolean | false | If true adds all element at the beginning of the list |
+| rowDrag | boolean | false | If true list can be reordered by dragging rows. Only applied to non paginated listbox. |
 
 In black the Two-Way Data Binding properties.
 
@@ -256,6 +257,7 @@ In black the Two-Way Data Binding properties.
 | selectedItemChange | T | Emits selected element.|
 | multipleSelectedIDListChange | Array<string &#124; number> | Emits an array with the ids of selected elements.|
 | multipleSelectedItemListChange | Array<T> | Emits an array with selected elements of type <T>.|
+| rowDragEnd | Event | Emits ag-grid event after a row drag when rowDrag is true.|
 
 ## Events AbstractApiTreeListBox&lt;TreeListBoxElement&lt;T&gt;&gt;
 

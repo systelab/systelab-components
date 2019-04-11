@@ -19,6 +19,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return this._values;
 	}
 
+	@Input() public rowDrag = false;
 	@Input() public isDisabled: boolean;
 
 	public _selectedItem: T;
@@ -35,6 +36,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	@Output() selectedItemChange = new EventEmitter<T>();
 	@Output() public multipleSelectedIDListChange = new EventEmitter();
+	@Output() public rowDragEnd = new EventEmitter();
 
 	@Input() public selectFirstItem = false;
 	@Input() public multipleSelection = false;
@@ -118,8 +120,9 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		const colDefs: Array<any> = [
 			{
-				colId: this.getIdField(),
-				field: this.getDescriptionField(),
+				rowDrag: this.rowDrag,
+				colId:   this.getIdField(),
+				field:   this.getDescriptionField(),
 			}
 		];
 
@@ -186,7 +189,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 	public onRowSelected(event: any) {
 		if (!this.multipleSelection) {
 		} else if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
-			const newElement: T = this.getInstance();
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
 				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 					return item[this.getIdField()] === event.node.data[this.getIdField()];
@@ -307,4 +309,9 @@ export abstract class AbstractListBox<T> implements OnInit {
 	private getCheckboxChecked(): string {
 		return `<span class='slab-grid-checkbox'/>`;
 	}
+
+	public onRowDragEnd(event: any) {
+		this.rowDragEnd.emit(event);
+	}
+
 }

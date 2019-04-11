@@ -12,7 +12,7 @@ export class ShowcaseGridUtil {
 
 	public static getColumnDefs(): Array<any> {
 		// TODO Translate column names
-		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300},
+		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true},
 			{colId: 'value', headerName: 'Value (%)', field: 'value', width: 120},
 			{
 				colId:                    'flags',
