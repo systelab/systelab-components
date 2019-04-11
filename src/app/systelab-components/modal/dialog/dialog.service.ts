@@ -40,10 +40,32 @@ export class DialogService {
 			config.maxHeight = parameters.maxHeight ? parameters.maxHeight : parameters.maxHeightRelative;
 		}
 		config.hasBackdrop = true;
-		config.positionStrategy = this.overlay.position()
-			.global()
-			.centerHorizontally()
-			.centerVertically();
+
+		if (parameters.isContextDialog && parameters.positionX && parameters.positionY) {
+			config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-center'];
+			const screenWidth = window.innerWidth;
+			let positionX = parameters.positionX - (parameters.width / 2);
+			if ((positionX + parameters.width) > screenWidth) {
+				positionX = screenWidth - parameters.width;
+				config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-right'];
+			} else if (positionX < 0 ) {
+				positionX = parameters.positionX - (parameters.positionX / 2);
+				config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-left'];
+			}
+			const positionY = parameters.positionY + 50;
+			positionX = ((positionX / screenWidth) * 100) + 5;
+
+			config.positionStrategy = this.overlay.position()
+				.global().left(positionX
+				.toString() + '%')
+				.top(positionY.toString() + 'px');
+		} else {
+			config.positionStrategy = this.overlay.position()
+				.global()
+				.centerHorizontally()
+				.centerVertically();
+		}
+
 		config.scrollStrategy = this.overlay.scrollStrategies.block();
 
 		return config;

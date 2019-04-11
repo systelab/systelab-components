@@ -300,3 +300,47 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     }
   }
 }
+
+
+/* Context Modal styles
+   ========================================================================== */
+   .slab-context-modal{
+    .slab-dialog-header {
+      &:after{
+        bottom: 100% !important;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      &:after {
+        border-bottom-color: lightgray;
+        border-width: 20px !important;
+        margin-left: -30px !important;
+      }
+    }
+  }
+
+  .slab-context-modal-arrow-center {
+    .slab-dialog-header {
+      &:after{
+        left: 50%;
+      }
+    }
+  }
+  .slab-context-modal-arrow-right {
+    .slab-dialog-header {
+      &:after{
+        right: 5%;
+      }
+    }
+  }
+  .slab-context-modal-arrow-left {
+    .slab-dialog-header {
+      &:after{
+        left: 5%;
+      }
+    }
+  }
