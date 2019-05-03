@@ -31,6 +31,7 @@ export class GenderSelect extends AbstractComboBox<Element> implements OnInit {
 	}
 
 	public ngOnInit(): void {
+		super.ngOnInit();
 		this.defaultIdValue = 'U';
 		this.defaultDescription = this.descriptionUnknown;
 		const elements = new Array<Element>();

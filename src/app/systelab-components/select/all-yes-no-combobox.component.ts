@@ -26,6 +26,7 @@ export class AllYesNoSelect extends AbstractComboBox<Element> implements OnInit 
 	}
 
 	public ngOnInit(): void {
+		super.ngOnInit();
 		const elements = new Array<Element>();
 		this.defaultDescription = this.descriptionAll;
 		this.defaultIdValue = '';
@@ -37,6 +38,7 @@ export class AllYesNoSelect extends AbstractComboBox<Element> implements OnInit 
 		}
 		this.values = elements;
 	}
+
 
 	getInstance(): Element {
 		return new Element('', '');
