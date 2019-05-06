@@ -21,8 +21,7 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Autocomplete</label>
         <div class="col-md-9">
-            <showcase-autocomplete
-                    (change)="comboChangeEvent($event)">
+            <showcase-autocomplete (selectedItemChange)="comboChangeEvent($event)">
             </showcase-autocomplete>
         </div>
     </div>
