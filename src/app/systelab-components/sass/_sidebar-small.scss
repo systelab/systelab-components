@@ -8,6 +8,11 @@ $sidebar-small-margin-top: 35px !default;
   width: $sidebar-small-width;
   height: calc(100% - #{$slab-app-header-height});
 
+  ul {
+    list-style-type: none;
+  }
+
+
   .slab-app-sidebar-button-container {
     margin-top: $sidebar-small-margin-top;
     margin-bottom: 0px !important;
