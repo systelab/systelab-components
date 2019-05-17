@@ -25,4 +25,11 @@ $slab-textarea-min-height: ceil(170px * $slab-size-percentage) !default;
   &.slab-textarea-horizontal-resize {
     resize: horizontal;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #f4f5f7 !important;
+    color: #b6babe;
+  }
 }
+
