@@ -163,6 +163,7 @@ The following table summarizes all the components included in the library.
 | [systelab-month-selector](month-selector) | Component to show a Month Selector |
 | [systelab-navbar](navbar) | Component to show a Navbar |
 | [systelab-numpad](numpad) | Component to show a Numeric Keyboard dialog for an Input Text |
+| [systelab-paginator](paginator) | Component for page navigation |
 | [systelab-percentage-circle](percentage-circle) | Component to show a percentage indicator |
 | [systelab-searcher](searcher) | Abstract classes that lets you create a Searcher component |
 | [systelab-select](select) | Component to select a value form a predefined list |
