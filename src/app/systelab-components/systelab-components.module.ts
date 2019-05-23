@@ -36,7 +36,7 @@ import { CalendarTableComponent } from './calendar/calendar-table.component';
 import { CalendarDialog } from './calendar/calendar-dialog.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
-import { DialogHeaderComponent } from './modal/header/dialog-header.component';
+import { DialogHeaderComponent } from './modal';
 import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
@@ -76,6 +76,8 @@ import { DateRangepicker } from './date-range-picker/date-range-picker.component
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
 import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { PaginatorPageComponent } from './paginator/paginator-page.component';
 
 @NgModule({
 	imports:         [
@@ -157,7 +159,9 @@ import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
 		ModulabListBox,
-		DateRangepicker
+		DateRangepicker,
+		PaginatorComponent,
+		PaginatorPageComponent
 
 	],
 	exports:         [
@@ -226,7 +230,8 @@ import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app
 		ComboboxFavouriteRendererComponent,
 		ModulabListBox,
 		GridContextMenuComponent,
-		DateRangepicker
+		DateRangepicker,
+		PaginatorComponent
 
 	],
 	entryComponents: [

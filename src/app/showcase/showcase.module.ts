@@ -78,6 +78,7 @@ import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-gri
 import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService, MessagePopupService } from '../systelab-components/modal';
+import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
 
 @NgModule({
 	imports:         [
@@ -161,7 +162,8 @@ import { DialogService, MessagePopupService } from '../systelab-components/modal
 		ShowcaseContextPanel,
 		ShowcaseListBoxComponent,
 		ShowcaseInnerTreeListBox,
-		ShowcaseAutocomplete
+		ShowcaseAutocomplete,
+		ShowcasePaginatorComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
