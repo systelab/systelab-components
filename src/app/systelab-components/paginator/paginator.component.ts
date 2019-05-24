@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
 	selector:    'systelab-paginator',
 	templateUrl: 'paginator.component.html'
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnChanges {
 
 	@Input() totalPages = 1;
 	@Input() page = 1;
@@ -51,16 +51,26 @@ export class PaginatorComponent implements OnInit {
 		this.pages = PaginatorComponent.calculateLinkPages(this.page, this.totalPages, this.pagesToShow);
 	}
 
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (this.page && this.totalPages && this.pagesToShow) {
+			this.pages = PaginatorComponent.calculateLinkPages(this.page, this.totalPages, this.pagesToShow);
+		}
+	}
+
 	public goFirst() {
 		this.goToPage(1);
 	}
 
 	public goPrevious() {
-		this.goToPage(this.page - 1);
+		if (this.page > 1) {
+			this.goToPage(this.page - 1);
+		}
 	}
 
 	public goNext() {
-		this.goToPage(this.page + 1);
+		if (this.page < this.totalPages) {
+			this.goToPage(this.page + 1);
+		}
 	}
 
 	public goLast() {
@@ -68,9 +78,10 @@ export class PaginatorComponent implements OnInit {
 	}
 
 	private goToPage(page: number) {
-		this.page = page;
-		this.pages = PaginatorComponent.calculateLinkPages(this.page, this.totalPages, this.pagesToShow);
-		this.pageChange.emit(this.page);
+		if (this.page !== page) {
+			this.page = page;
+			this.pageChange.emit(this.page);
+		}
 	}
 
 }
