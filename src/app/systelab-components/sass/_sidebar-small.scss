@@ -26,6 +26,7 @@ $sidebar-small-margin-top: 35px !default;
     &.slab-bottom {
       bottom: 0px;
       position: absolute;
+      z-index: -1;
     }
 
     .slab-app-sidebar-button {
