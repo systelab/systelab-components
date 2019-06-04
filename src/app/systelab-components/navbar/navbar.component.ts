@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 export class NavbarItem {
-	constructor(public id: number, public text: string, public image: string, public floatImage: boolean, public isSelected: boolean, public isEnabled: boolean,
-	            public action: any, public target?: string, public url?: string) {
+	constructor(public id: number, public text: string, public image: string, public floatImage: boolean, public isSelected: boolean,
+	            public isEnabled: boolean, public action: any, public target?: string, public url?: string) {
 	}
 }
 
 @Component({
-	selector:    'systelab-navbar',
-	templateUrl: 'navbar.component.html',
+	selector: 'systelab-navbar',
+	templateUrl: '../../../../html/navbar.component.html',
 })
 export class NavbarComponent {
 
