@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {SelectedItem, TwoListItem} from '../twolist/two-list.component';
+import {SelectedItem, TwoListItem} from './two-list.component';
 import {AbstractSortableListComponent} from '../sortable-list/abstract-sortable-list.component';
 import {DataFilterPipe} from './datafilter.pipe';
 
@@ -27,7 +27,7 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 	}
 
 	public getSelectionField(): string {
-		return 'selected';
+		return 'isSelected';
 	}
 
 	public getIcon(): string {
