@@ -47,4 +47,4 @@ Component to show a Navbar
 | target | string | | Two values are possible '_blank' and '_self' |
 | action | any | | The arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called).  |
 | url | string | | Url for the redirection |
-| backgroundColor | string | | Custom color for the **li** element |
+| backgroundColor | string | | Custom color for the NavbarItem |
