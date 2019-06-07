@@ -12,14 +12,17 @@
       margin-right: 0;
       padding: 10px 8px;
       background: transparent;
+
       & > .nav-link {
         border-top: none;
         background: transparent;
 
       }
     }
+
     & > .nav-item.active {
       background-color: white;
+
       & > .nav-link {
         color: black;
       }
@@ -28,14 +31,16 @@
     a.disabled, li.disabled {
       pointer-events: none;
     }
+
     li.disabled {
       background-color: #cccccc;
     }
+
     .slab-icon-float-image {
       display: inline-block;
-      padding-right: 5px;
       vertical-align: middle;
     }
+
     .slab-icon-vertical-image {
       display: block;
     }
