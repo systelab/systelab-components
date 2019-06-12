@@ -70,7 +70,7 @@ describe('Systelab Timeline', () => {
 	});
 
 	it('should add an element if I add an event', () => {
-		fixture.componentInstance.events.push(new TimelineEvent('Title 5', new Date(), 'text 5', true, 'icon-home'));
+		fixture.componentInstance.events.push(new TimelineEvent('Title 5', new Date(), 'text 5'));
 		fixture.detectChanges();
 		checkHasValue(fixture, fixture.componentInstance.events.length);
 	});
