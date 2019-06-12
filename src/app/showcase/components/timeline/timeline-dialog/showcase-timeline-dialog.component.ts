@@ -30,7 +30,6 @@ export class ShowcaseTimelineDialog implements ModalComponent<ShowcaseTimelineDi
 		const timeLineEvent3 = new TimelineEvent('Title 3', new Date(), 'Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.');
 		timeLineEvent3.inverted = false;
 		timeLineEvent3.icon = 'icon-plus';
-		timeLineEvent3.data = new TimelineEvent('80', new Date(), '80');
 		this.events.push(timeLineEvent3);
 		const timeLineEvent4 = new TimelineEvent('Title 4', new Date(), 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?');
 		timeLineEvent4.inverted = true;
