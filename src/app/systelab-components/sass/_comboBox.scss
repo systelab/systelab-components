@@ -57,7 +57,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     outline: 0 none !important;
     -webkit-box-shadow: none;
     box-shadow: none;
-   }
+  }
 
   .slab-color-container {
     border: solid 1px #d6d6d6;
@@ -85,8 +85,10 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 2px;
+
     input {
       padding-left: 5px;
+
       &::-ms-clear {
         display: none;
       }
@@ -139,6 +141,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
       }
     }
+
     &.disabled {
       visibility: hidden;
     }
@@ -146,11 +149,20 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
   &.disabled {
     cursor: not-allowed;
-    .slab-combo-label,
-    .slab-combo-button,
-    .slab-combo-input {
+
+    .slab-combo-label {
       cursor: not-allowed;
-      opacity: 0.5;
+      opacity: 1;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .slab-combo-input,
+    .slab-combo-button {
+      cursor: not-allowed;
+      background-color: #f4f5f7 !important;
     }
   }
 

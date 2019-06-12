@@ -23,10 +23,14 @@ export class SystelabModalContext {
 	public maxWidthRelative: string = null;
 	public maxHeightRelative: string = null;
 
+	public positionX;
+	public positionY;
+
 	public fullScreen = false;
 
 	public isBlocking = true;
 	public keyboard = null;
+	public isContextDialog = false;
 
 	public showClose = true;
 

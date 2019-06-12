@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 export class TimelineEvent {
-	constructor(public title: string, public publishingDate: Date, public text: string, public inverted = false, public icon?) {
+	constructor(public title: string, public publishingDate: Date, public text: string, public inverted = false, public icon?, public color?) {
 
 	}
 
@@ -15,6 +15,9 @@ export class TimelineEvent {
 	}
 
 	public getColor() {
+		if (this.color) {
+			return this.color;
+		}
 		return 'warning';
 	}
 }

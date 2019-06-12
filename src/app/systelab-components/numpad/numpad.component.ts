@@ -27,7 +27,6 @@ export class NumPadComponent {
 	}
 
 	constructor(public dialogService: DialogService) {
-
 	}
 
 	public openNumPadDialog() {
@@ -49,9 +48,10 @@ export class NumPadComponent {
 		}
 	}
 
-	public doKeyPress(event: KeyboardEvent) {
-		if (event.keyCode === 13) {
-			this.doEnter();
+	public focus() {
+		const element: HTMLElement = this.isPassword ? document.getElementById('numpaddialogPwd') : document.getElementById('numpaddialog');
+		if (element) {
+			element.focus();
 		}
 	}
 }

@@ -20,9 +20,10 @@
                 class="nav-item"
                 [class.disabled]="!nav.isEnabled"
                 (click)="nav.isEnabled?nav.action():noop()"
-                [style.background-color]="nav.isSelected? activeColor : (hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': backgroundColor)"
+                [style.background-color]="nav.isSelected? activeColor : (hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': (nav.backgroundColor)?nav.backgroundColor:backgroundColor)"
                 (mouseover)="hovered = nav.id" (mouseout)="hovered = -1" [class.active]="nav.isSelected">
-                <a [id]="'nav-'+nav.id" class="nav-link text-center align-self-stretch align-items-center"
+                <a [id]="'nav-'+nav.id"
+                   class="nav-link text-center align-self-stretch d-flex align-items-center justify-content-center"
                    [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
                    [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null "
                    [style.color]="nav.isSelected?activeFontColor:fontColor"
@@ -30,7 +31,7 @@
                     <i *ngIf="nav.image" [class]="nav.image" [style.color]="nav.isSelected?activeFontColor:fontColor"
                        [class.slab-icon-float-image]="nav.floatImage"
                        [class.slab-icon-vertical-image]="!nav.floatImage"></i>
-                    {{nav.text}}
+                    <span *ngIf="nav.text" [ngClass]="{'ml-2': nav.image}">{{nav.text}}</span>
                 </a>
             </li>
         </ul>

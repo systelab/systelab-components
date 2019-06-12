@@ -30,4 +30,5 @@ In black the Two-Way Data Binding properties.
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| change || Value has been changed.|
+| valueChange || Value has been changed.|
+| change || (DEPRECATED) Value has been changed.|

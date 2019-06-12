@@ -62,4 +62,8 @@ For each tab element:
 | select | string | The selected Tab Id |
 
 
+## Methods.
+
+Call the method doSelectTabById in order to select the Tab that should be visible.
+
 The styles for the tabs are defined in the tabs.scss Saas file.

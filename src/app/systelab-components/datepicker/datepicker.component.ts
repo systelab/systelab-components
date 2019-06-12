@@ -64,7 +64,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(private myRenderer: Renderer2, private i18nService: I18nService) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService) {
 		this.addListeners();
 		// TODO: To get the language and modify the values.
 	}
