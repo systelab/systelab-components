@@ -4,8 +4,8 @@ import { I18nService } from 'systelab-translate/lib/i18n.service';
 export class TimelineEvent {
 
 	public inverted = false;
-	public icon?: string;
-	public extraText?: string;
+	public icon: string;
+	public extraText: string;
 	public data: Object;
 	public color: string;
 
