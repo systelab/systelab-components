@@ -54,5 +54,11 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 		this.renderer.setAttribute(this.el.nativeElement, 'data-delay', tooltipDelay);
 
 		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
+
+		if (!this.systelabTooltipHtml && !this.systelabTooltip) {
+			this.renderer.setAttribute(this.el.nativeElement, 'title', '');
+			this.renderer.setAttribute(this.el.nativeElement, 'data-original-title', '');
+			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'false');
+		}
 	}
 }

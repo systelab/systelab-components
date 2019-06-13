@@ -14,7 +14,7 @@
     margin-left: -1.5px;
   }
 
-  &> li {
+  & > li {
     margin-bottom: 20px;
     position: relative;
 
@@ -28,8 +28,8 @@
       clear: both;
     }
 
-
-    &> .slab-timeline-panel {
+    & > .slab-timeline-panel {
+      cursor: pointer;
       width: 46%;
       float: left;
       border: 1px solid #d4d4d4;
@@ -64,7 +64,7 @@
       }
     }
 
-    &> .slab-timeline-badge {
+    & > .slab-timeline-badge {
       color: #fff;
       width: 50px;
       height: 50px;
@@ -137,7 +137,6 @@
   }
 
 }
-
 
 @media (max-width: 767px) {
   ul.slab-timeline:before {
