@@ -22,36 +22,43 @@ export class CurrentSelectionStatus {
 
 	private select(selectedList: Array<TwoListItem>, element: TwoListItem, filteredList: Array<TwoListItem>, isShiftKey: boolean, isControlKey: boolean) {
 		if (selectedList.length > 0 && isShiftKey) {
-			const indexOfLastSelected = filteredList.indexOf(selectedList[0]);
-			const indexOfSelected = filteredList.indexOf(element);
+			this.selectRange(selectedList, element, filteredList);
+		} else {
+			this.selectSingle(selectedList, element, isControlKey);
+		}
+	}
 
-			this.clear(selectedList);
+	private selectRange(selectedList: Array<TwoListItem>, element: TwoListItem, filteredList: Array<TwoListItem>) {
+		const indexOfLastSelected = filteredList.indexOf(selectedList[0]);
+		const indexOfSelected = filteredList.indexOf(element);
 
-			if (indexOfLastSelected < indexOfSelected) {
-				for (let i = indexOfLastSelected; i <= indexOfSelected; i++) {
-					filteredList[i].isSelected = true;
-					selectedList.push(filteredList[i]);
-				}
+		this.clear(selectedList);
 
-			} else {
-				for (let i = indexOfLastSelected; i >= indexOfSelected; i--) {
-					filteredList[i].isSelected = true;
-					selectedList.push(filteredList[i]);
-				}
+		if (indexOfLastSelected < indexOfSelected) {
+			for (let i = indexOfLastSelected; i <= indexOfSelected; i++) {
+				filteredList[i].isSelected = true;
+				selectedList.push(filteredList[i]);
 			}
 		} else {
-			element.isSelected = !element.isSelected;
-			if (selectedList.length === 0 || (selectedList.length > 0 && isControlKey)) {
-				if (element.isSelected) {
-					selectedList.push(element);
-				} else {
-					selectedList.splice(selectedList.indexOf(element), 1);
-				}
+			for (let i = indexOfLastSelected; i >= indexOfSelected; i--) {
+				filteredList[i].isSelected = true;
+				selectedList.push(filteredList[i]);
+			}
+		}
+	}
+
+	private selectSingle(selectedList: Array<TwoListItem>, element: TwoListItem, isControlKey: boolean) {
+		element.isSelected = !element.isSelected;
+		if (selectedList.length === 0 || (selectedList.length > 0 && isControlKey)) {
+			if (element.isSelected) {
+				selectedList.push(element);
 			} else {
-				this.clear(selectedList);
-				if (element.isSelected) {
-					selectedList.push(element);
-				}
+				selectedList.splice(selectedList.indexOf(element), 1);
+			}
+		} else {
+			this.clear(selectedList);
+			if (element.isSelected) {
+				selectedList.push(element);
 			}
 		}
 	}
