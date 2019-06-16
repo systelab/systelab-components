@@ -10,21 +10,14 @@ export class CurrentSelectionStatus {
 	constructor(public available: Array<TwoListItem>, public visible: Array<TwoListItem>) {
 	}
 
-	public clearAvailable() {
-		this.clear(this.available);
-	}
-
-	public clearVisible() {
-		this.clear(this.visible);
-	}
 
 	public selectAvailable(element: TwoListItem, filteredList: Array<TwoListItem>, isShiftKey: boolean, isControlKey: boolean) {
-		this.clearVisible();
+		this.clear(this.visible);
 		this.select(this.available, element, filteredList, isShiftKey, isControlKey);
 	}
 
 	public selectVisible(element: TwoListItem, filteredList: Array<TwoListItem>, isShiftKey: boolean, isControlKey: boolean) {
-		this.clearAvailable();
+		this.clear(this.available);
 		this.select(this.visible, element, filteredList, isShiftKey, isControlKey);
 	}
 
@@ -64,6 +57,11 @@ export class CurrentSelectionStatus {
 				}
 			}
 		}
+	}
+
+	public clearAll() {
+		this.clear(this.available);
+		this.clear(this.visible);
 	}
 
 	private clear(list: Array<TwoListItem>) {
@@ -129,9 +127,7 @@ export class TwoListComponent {
 			element.isVisible = true;
 		}
 		this.visible = this.visible.concat(new DataFilterPipe().transform(this.currentSelectionStatus.available, this.firstListSearch));
-		this.firstListSearch = '';
-		this.secondListSearch = '';
-		this.refreshAvailable();
+		this.refresh(false);
 	}
 
 	public addAll() {
@@ -139,9 +135,7 @@ export class TwoListComponent {
 		for (const element of this.visible) {
 			element.isVisible = true;
 		}
-		this.firstListSearch = '';
-		this.secondListSearch = '';
-		this.refreshAvailable();
+		this.refresh(false);
 	}
 
 	public removeAll() {
@@ -150,27 +144,28 @@ export class TwoListComponent {
 		for (const element of this.available) {
 			element.isVisible = false;
 		}
-		this.firstListSearch = '';
-		this.secondListSearch = '';
-		this.available = this.sort(this.available);
-		this.refreshAvailable();
+		this.refresh(true);
 	}
 
 	public remove() {
-
 		for (const element of this.currentSelectionStatus.available) {
 			element.isVisible = false;
 		}
-
 		this.available = this.available.concat(new DataFilterPipe().transform(this.currentSelectionStatus.visible, this.secondListSearch));
 		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform(this.currentSelectionStatus.visible, this.secondListSearch));
+		this.refresh(true);
+	}
+
+	private refresh(sort: boolean) {
 		this.firstListSearch = '';
 		this.secondListSearch = '';
-		this.available = this.sort(this.available);
+		if (sort) {
+			this.available = this.sort(this.available);
+		}
 		this.refreshAvailable();
 	}
 
-	public sort(list: Array<TwoListItem>) {
+	private sort(list: Array<TwoListItem>) {
 
 		const arrayAux = [];
 		const theReturn: Array<TwoListItem> = [];
@@ -202,10 +197,9 @@ export class TwoListComponent {
 		return list.filter(element => !itemsToRemove.some(item => item.colId === element.colId));
 	}
 
-	public refreshAvailable() {
+	private refreshAvailable() {
 		this.available = this.removeItemsFromList(new DataFilterPipe().transform(this.available, this.firstListSearch), this.visible);
-		this.currentSelectionStatus.clearAvailable();
-		this.currentSelectionStatus.clearVisible();
+		this.currentSelectionStatus.clearAll();
 	}
 
 	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {
