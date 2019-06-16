@@ -36,7 +36,7 @@
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
         <div id="right-list" class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
-            <systelab-two-list-sortable-list class="w-100" [currentSelectionStatus]="currentSelectionStatus" [available]="available"
+            <systelab-two-list-sortable-list class="w-100" [currentSelectionStatus]="currentSelectionStatus"
                 [(elementsList)]="visible" [secondListSearch]="secondListSearch" [dragAndDropEnabled]="dragAndDropEnabled"
                 (dbClick)="moveSelectedItemsFromVisibleToAvailable($event)"></systelab-two-list-sortable-list>
         </div>
