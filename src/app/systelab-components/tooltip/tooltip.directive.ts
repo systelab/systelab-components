@@ -42,9 +42,10 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 			this.renderer.setAttribute(this.el.nativeElement, 'data-trigger', 'hover');
 		}
 		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
-		if (this.systelabTooltipHtml) {
-			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'true');
-		}
+
+		const hasHtmlTooltip = this.systelabTooltipHtml !== undefined && this.systelabTooltipHtml !== null;
+		this.renderer.setAttribute(this.el.nativeElement, 'data-html', hasHtmlTooltip ? 'true' : 'false');
+
 		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
 			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
 
@@ -54,11 +55,5 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 		this.renderer.setAttribute(this.el.nativeElement, 'data-delay', tooltipDelay);
 
 		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
-
-		if (!this.systelabTooltipHtml && !this.systelabTooltip) {
-			this.renderer.setAttribute(this.el.nativeElement, 'title', '');
-			this.renderer.setAttribute(this.el.nativeElement, 'data-original-title', '');
-			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'false');
-		}
 	}
 }

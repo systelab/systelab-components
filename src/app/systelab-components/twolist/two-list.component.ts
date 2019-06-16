@@ -6,19 +6,24 @@ export class TwoListItem {
 	}
 }
 
-export class SelectedItem {
-	constructor(public available: Array<TwoListItem>, public current: Array<TwoListItem>) {
+export class CurrentSelectionStatus {
+	constructor(public available: Array<TwoListItem>, public visible: Array<TwoListItem>) {
+	}
+
+	public clean() {
+		this.available = [];
+		this.visible = [];
 	}
 }
 
 @Component({
-	selector: 'systelab-two-list',
+	selector:    'systelab-two-list',
 	templateUrl: 'two-list.component.html',
-	styles: [`
-        :host {
-            width: 100%;
-            height: 100%;
-        }
+	styles:      [`
+      :host {
+          width: 100%;
+          height: 100%;
+      }
 	`]
 })
 export class TwoListComponent {
@@ -47,27 +52,27 @@ export class TwoListComponent {
 		this.visibleChange.emit(this._visible);
 	}
 
-	@Output() public visibleChange = new EventEmitter();
-
-	@Output() public availableChange = new EventEmitter();
+	@Output() public visibleChange = new EventEmitter<Array<TwoListItem>>();
+	@Output() public availableChange = new EventEmitter<Array<TwoListItem>>();
 
 	@Input() public initialAvailableColumns: Array<TwoListItem>;
 	@Input() public defaultVisibleColumns: Array<TwoListItem>;
 	@Input() public defaultHiddenColumns: Array<TwoListItem>;
+
 	@Input() public dragAndDropEnabled = true;
 
 	public firstListSearch: string;
 	public secondListSearch: string;
-	public selected: SelectedItem = new SelectedItem([], []);
+	public currentSelectionStatus: CurrentSelectionStatus = new CurrentSelectionStatus([], []);
 
 	constructor() {
 	}
 
 	public add() {
-		for (const element of this.selected.available) {
+		for (const element of this.currentSelectionStatus.available) {
 			element.isVisible = true;
 		}
-		this.visible = this.visible.concat(new DataFilterPipe().transform(this.selected.available, this.firstListSearch));
+		this.visible = this.visible.concat(new DataFilterPipe().transform(this.currentSelectionStatus.available, this.firstListSearch));
 		this.firstListSearch = '';
 		this.secondListSearch = '';
 		this.refreshAvailable();
@@ -97,12 +102,12 @@ export class TwoListComponent {
 
 	public remove() {
 
-		for (const element of this.selected.available) {
+		for (const element of this.currentSelectionStatus.available) {
 			element.isVisible = false;
 		}
 
-		this.available = this.available.concat(new DataFilterPipe().transform(this.selected.current, this.secondListSearch));
-		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform(this.selected.current, this.secondListSearch));
+		this.available = this.available.concat(new DataFilterPipe().transform(this.currentSelectionStatus.visible, this.secondListSearch));
+		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform(this.currentSelectionStatus.visible, this.secondListSearch));
 		this.firstListSearch = '';
 		this.secondListSearch = '';
 		this.available = this.sort(this.available);
@@ -132,10 +137,8 @@ export class TwoListComponent {
 		return theReturn;
 	}
 
-	public setElementNonSelected(list: Array<TwoListItem>) {
-		for (const element of list) {
-			element.isSelected = false;
-		}
+	private unselectAllElementsOf(list: Array<TwoListItem>) {
+		list.forEach(element => element.isSelected = false);
 	}
 
 	public setDefaultColumnValues(): void {
@@ -144,93 +147,70 @@ export class TwoListComponent {
 	}
 
 	public removeItemsFromList(list: Array<any>, itemsToRemove: Array<any>): Array<any> {
-		const resultList: Array<any> = [];
-
-		for (const element of list) {
-			let match = false;
-			for (const item of itemsToRemove) {
-				if (item.colId === element.colId) {
-					match = true;
-					break;
-				}
-			}
-			if (!match) {
-				resultList.push(element);
-			}
-		}
-		return resultList;
+		return list.filter(element => !itemsToRemove.some(item => item.colId === element.colId));
 	}
 
 	public refreshAvailable() {
 		this.available = this.removeItemsFromList(new DataFilterPipe().transform(this.available, this.firstListSearch), this.visible);
-		this.selected.available = [];
-		this.selected.current = [];
-		this.setElementNonSelected(this.available);
-		this.setElementNonSelected(this.visible);
+		this.currentSelectionStatus.clean();
+		this.unselectAllElementsOf(this.available);
+		this.unselectAllElementsOf(this.visible);
 	}
 
 	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {
-		this.selected.current = [];
-		this.setElementNonSelected(this.visible);
-		const availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
+		this.currentSelectionStatus.visible = [];
+		this.unselectAllElementsOf(this.visible);
 
-		if (this.selected.available.length > 0 && ev.shiftKey) {
-			const indexOfLastSelected = availableFilteredList.indexOf(this.selected.available[0]);
+		if (this.currentSelectionStatus.available.length > 0 && ev.shiftKey) {
+			const availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
+
+			const indexOfLastSelected = availableFilteredList.indexOf(this.currentSelectionStatus.available[0]);
 			const indexOfSelected = availableFilteredList.indexOf(element);
 
-			this.setElementNonSelected(this.selected.available);
-			this.selected.available = [];
+			this.unselectAllElementsOf(this.currentSelectionStatus.available);
+			this.currentSelectionStatus.available = [];
 
-			let i;
 			if (indexOfLastSelected < indexOfSelected) {
-				for (i = indexOfLastSelected; i <= indexOfSelected; i++) {
+				for (let i = indexOfLastSelected; i <= indexOfSelected; i++) {
 					availableFilteredList[i].isSelected = true;
-					this.selected.available.push(availableFilteredList[i]);
+					this.currentSelectionStatus.available.push(availableFilteredList[i]);
 				}
 
 			} else {
-				for (i = indexOfLastSelected; i >= indexOfSelected; i--) {
+				for (let i = indexOfLastSelected; i >= indexOfSelected; i--) {
 					availableFilteredList[i].isSelected = true;
-					this.selected.available.push(availableFilteredList[i]);
+					this.currentSelectionStatus.available.push(availableFilteredList[i]);
 				}
 			}
-			return;
-		}
-
-		element.isSelected = !element.isSelected;
-		if (element.isSelected) {
-			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
-				this.selected.available.push(element);
-			} else {
-				this.setElementNonSelected(this.selected.available);
-				this.selected.available = [];
-				this.selected.available.push(element);
-			}
-
 		} else {
-			if (this.selected.available.length === 0 || (this.selected.available.length > 0 && ev.ctrlKey)) {
-				this.selected.available.splice(this.selected.available.indexOf(element), 1);
+			element.isSelected = !element.isSelected;
+			if (element.isSelected) {
+				if (this.currentSelectionStatus.available.length === 0 || (this.currentSelectionStatus.available.length > 0 && ev.ctrlKey)) {
+					this.currentSelectionStatus.available.push(element);
+				} else {
+					this.unselectAllElementsOf(this.currentSelectionStatus.available);
+					this.currentSelectionStatus.available = [element];
+				}
+
 			} else {
-				this.setElementNonSelected(this.selected.available);
-				this.selected.available = [];
+				if (this.currentSelectionStatus.available.length === 0 || (this.currentSelectionStatus.available.length > 0 && ev.ctrlKey)) {
+					this.currentSelectionStatus.available.splice(this.currentSelectionStatus.available.indexOf(element), 1);
+				} else {
+					this.unselectAllElementsOf(this.currentSelectionStatus.available);
+					this.currentSelectionStatus.available = [];
+				}
 			}
 		}
 	}
 
-	public moveSelectedAvailableItem(element: TwoListItem, ev: Event) {
+	public moveSelectedItemsFromAvailableToVisible(element: TwoListItem, ev: Event) {
 		this.available = this.removeItemsFromList(this.available, [element]);
 		element.isVisible = true;
 		this.visible = this.visible.concat(element);
 		this.visible = this.sort(this.visible);
 	}
 
-	public moveSelectedVisibleItem(element: TwoListItem, ev: Event) {
-		this.visible = this.removeItemsFromList(this.visible, [element]);
-		element.isVisible = false;
-		this.available = this.available.concat(element);
-		this.available = this.sort(this.available);
-	}
-	public dbClickVisibleItem(element: TwoListItem) {
+	public moveSelectedItemsFromVisibleToAvailable(element: TwoListItem) {
 		element.isVisible = false;
 		this.available = this.available.concat(new DataFilterPipe().transform([element], this.secondListSearch));
 		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform([element], this.secondListSearch));
@@ -238,6 +218,5 @@ export class TwoListComponent {
 		this.secondListSearch = '';
 		this.available = this.sort(this.available);
 		this.refreshAvailable();
-
 	}
 }
