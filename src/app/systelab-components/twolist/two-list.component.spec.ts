@@ -48,7 +48,7 @@ export class TwoListTestComponent implements OnInit {
 	}
 }
 
-fdescribe('Systelab Two list', () => {
+describe('Systelab Two list', () => {
 	let fixture: ComponentFixture<TwoListTestComponent>;
 
 	beforeEach(async(() => {
