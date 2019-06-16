@@ -10,7 +10,6 @@ export class CurrentSelectionStatus {
 	constructor(public available: Array<TwoListItem>, public visible: Array<TwoListItem>) {
 	}
 
-
 	public selectAvailable(element: TwoListItem, filteredList: Array<TwoListItem>, isShiftKey: boolean, isControlKey: boolean) {
 		this.clear(this.visible);
 		this.select(this.available, element, filteredList, isShiftKey, isControlKey);
@@ -42,18 +41,16 @@ export class CurrentSelectionStatus {
 			}
 		} else {
 			element.isSelected = !element.isSelected;
-			if (element.isSelected) {
-				if (selectedList.length === 0 || (selectedList.length > 0 && isControlKey)) {
+			if (selectedList.length === 0 || (selectedList.length > 0 && isControlKey)) {
+				if (element.isSelected) {
 					selectedList.push(element);
 				} else {
-					this.clear(selectedList);
-					selectedList.push(element);
+					selectedList.splice(selectedList.indexOf(element), 1);
 				}
 			} else {
-				if (selectedList.length === 0 || (selectedList.length > 0 && isControlKey)) {
-					selectedList.splice(selectedList.indexOf(element), 1);
-				} else {
-					this.clear(selectedList);
+				this.clear(selectedList);
+				if (element.isSelected) {
+					selectedList.push(element);
 				}
 			}
 		}
@@ -89,7 +86,6 @@ export class TwoListComponent {
 	}
 
 	set available(list: Array<TwoListItem>) {
-
 		this._available = list;
 		this.availableChange.emit(this._available);
 	}
@@ -101,7 +97,6 @@ export class TwoListComponent {
 	}
 
 	set visible(list: Array<TwoListItem>) {
-
 		this._visible = list;
 		this.visibleChange.emit(this._visible);
 	}
@@ -156,13 +151,14 @@ export class TwoListComponent {
 		this.refresh(true);
 	}
 
-	private refresh(sort: boolean) {
+	private refresh(sortAvailable: boolean) {
 		this.firstListSearch = '';
 		this.secondListSearch = '';
-		if (sort) {
+		if (sortAvailable) {
 			this.available = this.sort(this.available);
 		}
-		this.refreshAvailable();
+		this.available = this.removeItemsFromList(new DataFilterPipe().transform(this.available, this.firstListSearch), this.visible);
+		this.currentSelectionStatus.clearAll();
 	}
 
 	private sort(list: Array<TwoListItem>) {
@@ -197,11 +193,6 @@ export class TwoListComponent {
 		return list.filter(element => !itemsToRemove.some(item => item.colId === element.colId));
 	}
 
-	private refreshAvailable() {
-		this.available = this.removeItemsFromList(new DataFilterPipe().transform(this.available, this.firstListSearch), this.visible);
-		this.currentSelectionStatus.clearAll();
-	}
-
 	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {
 		const availableFilteredList = new DataFilterPipe().transform(this.available, this.firstListSearch);
 		this.currentSelectionStatus.selectAvailable(element, availableFilteredList, ev.shiftKey, ev.ctrlKey);
@@ -218,9 +209,6 @@ export class TwoListComponent {
 		element.isVisible = false;
 		this.available = this.available.concat(new DataFilterPipe().transform([element], this.secondListSearch));
 		this.visible = this.removeItemsFromList(this.visible, new DataFilterPipe().transform([element], this.secondListSearch));
-		this.firstListSearch = '';
-		this.secondListSearch = '';
-		this.available = this.sort(this.available);
-		this.refreshAvailable();
+		this.refresh(true);
 	}
 }
