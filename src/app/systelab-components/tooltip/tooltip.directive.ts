@@ -42,10 +42,9 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 			this.renderer.setAttribute(this.el.nativeElement, 'data-trigger', 'hover');
 		}
 		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
-
-		const hasHtmlTooltip = this.systelabTooltipHtml !== undefined && this.systelabTooltipHtml !== null;
-		this.renderer.setAttribute(this.el.nativeElement, 'data-html', hasHtmlTooltip ? 'true' : 'false');
-
+		if (this.systelabTooltipHtml) {
+			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'true');
+		}
 		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
 			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
 
