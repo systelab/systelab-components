@@ -3,12 +3,12 @@
      (onDragOver)="handleDragOver($event)"
      (onDragLeave)="handleDragLeave($event)">
     <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)">
-        <div *ngFor="let listElement of (elementsList| datafilter:secondListSearch);let i = index"
-            (keydown)="removeElement(listElement, $event)"
+        <div *ngFor="let element of (elementsList| datafilter:secondListSearch)"
+            (keydown)="removeElement(element, $event)"
             tabindex="-1"
-            [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(listElement),'slab-sortable-list-row':!getSelectionFieldValue(listElement)}"
-            (click)="selectVisibleCurrent(listElement,$event)" (dblclick)="dbClickSelectedItem(listElement)" cdkDrag [cdkDragDisabled]="!dragAndDropEnabled">
-            <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(listElement)"></i>{{getDescription(listElement)}}
+            [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(element),'slab-sortable-list-row':!getSelectionFieldValue(element)}"
+            (click)="selectElement(element,$event)" (dblclick)="dbClickSelectedItem(element)" cdkDrag [cdkDragDisabled]="!dragAndDropEnabled">
+            <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(element)"></i>{{getDescription(element)}}
         </div>
     </div>
 </div>

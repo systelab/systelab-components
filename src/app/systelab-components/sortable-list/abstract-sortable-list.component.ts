@@ -61,7 +61,7 @@ export abstract class AbstractSortableListComponent<T> {
 		return false;
 	}
 
-	public selectVisibleCurrent(element: T, ev: KeyboardEvent) {
+	protected selectElement(element: T, ev: KeyboardEvent) {
 		if (!ev.ctrlKey) {
 			this.elementsList.forEach(elementInList => {
 				elementInList[this.getSelectionField(element)] = false;
@@ -74,7 +74,7 @@ export abstract class AbstractSortableListComponent<T> {
 		return this.elementsList.filter(element => element[this.getSelectionField(element)]);
 	}
 
-	public removeElement(element: T, event: KeyboardEvent): void {
+	protected removeElement(element: T, event: KeyboardEvent): void {
 		if (this.deleteWithSupr && event.keyCode === 46) {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
 		}

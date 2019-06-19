@@ -40,12 +40,15 @@ export class TwoListTestComponent implements OnInit {
 		this.initialAvailableColumns.push(new TwoListItem('Element 1', 'id1', false, true));
 		this.initialAvailableColumns.push(new TwoListItem('Element 2', 'id2', false, true));
 		this.initialAvailableColumns.push(new TwoListItem('Element 3', 'id3', false, true));
+		this.initialAvailableColumns.push(new TwoListItem('Element 4', 'id4', false, true));
 
 		this.availableColumns.push(new TwoListItem('Element 1', 'id1', false, true));
 		this.availableColumns.push(new TwoListItem('Element 2', 'id2', false, true));
-		this.visibleColumns.push(new TwoListItem('Element 3', 'id3', false, true));
+		this.availableColumns.push(new TwoListItem('Element 3', 'id3', false, true));
 
+		this.visibleColumns.push(new TwoListItem('Element 4', 'id4', false, true));
 	}
+
 }
 
 describe('Systelab Two list', () => {
@@ -80,7 +83,8 @@ describe('Systelab Two list', () => {
 	it('should have an initial value', () => {
 		checkIfListContains(fixture, 'left-list', 'Element 1');
 		checkIfListContains(fixture, 'left-list', 'Element 2');
-		checkIfListContains(fixture, 'right-list', 'Element 3');
+		checkIfListContains(fixture, 'left-list', 'Element 3');
+		checkIfListContains(fixture, 'right-list', 'Element 4');
 	});
 
 	it('should all elements be visible after clicking button Add All', () => {
@@ -88,9 +92,12 @@ describe('Systelab Two list', () => {
 		checkIfListContains(fixture, 'right-list', 'Element 1');
 		checkIfListContains(fixture, 'right-list', 'Element 2');
 		checkIfListContains(fixture, 'right-list', 'Element 3');
+		checkIfListContains(fixture, 'right-list', 'Element 4');
+
 		checkIfListNotContains(fixture, 'left-list', 'Element 1');
 		checkIfListNotContains(fixture, 'left-list', 'Element 2');
 		checkIfListNotContains(fixture, 'left-list', 'Element 3');
+		checkIfListNotContains(fixture, 'left-list', 'Element 4');
 	});
 
 	it('should none elements be visible after clicking button Remove All', () => {
@@ -98,24 +105,90 @@ describe('Systelab Two list', () => {
 		checkIfListContains(fixture, 'left-list', 'Element 1');
 		checkIfListContains(fixture, 'left-list', 'Element 2');
 		checkIfListContains(fixture, 'left-list', 'Element 3');
+		checkIfListContains(fixture, 'left-list', 'Element 4');
 		checkIfListNotContains(fixture, 'right-list', 'Element 1');
 		checkIfListNotContains(fixture, 'right-list', 'Element 2');
 		checkIfListNotContains(fixture, 'right-list', 'Element 3');
+		checkIfListNotContains(fixture, 'right-list', 'Element 4');
 	});
+
+	it('initially nothing should be selected', () => {
+		const availableSelected = fixture.componentInstance.availableColumns.filter(item => item.isSelected).length;
+		const visibleSelected = fixture.componentInstance.visibleColumns.filter(item => item.isSelected).length;
+		expect(availableSelected + visibleSelected)
+			.toEqual(0);
+	});
+
+	it('should be able to select an element by clicking', () => {
+		clickButton(fixture, '#available0');
+		const availableSelected = fixture.componentInstance.availableColumns.filter(item => item.isSelected).length;
+		expect(availableSelected)
+			.toEqual(1);
+	});
+
+	it('should be deselect an element when a new one is clicked', () => {
+		clickButton(fixture, '#available0');
+		clickButton(fixture, '#available1');
+		const availableSelected = fixture.componentInstance.availableColumns.filter(item => item.isSelected).length;
+		expect(availableSelected)
+			.toEqual(1);
+	});
+
+	it('should be able to select multiple elements by clicking with control button pressed', () => {
+		clickButtonWithControlKey(fixture, '#available0');
+		clickButtonWithControlKey(fixture, '#available1');
+		const availableSelected = fixture.componentInstance.availableColumns.filter(item => item.isSelected).length;
+		expect(availableSelected)
+			.toEqual(2);
+	});
+
+	it('should be able to select a range by clicking with shift button pressed', () => {
+		clickButtonWithShiftKey(fixture, '#available0');
+		clickButtonWithShiftKey(fixture, '#available2');
+		const availableSelected = fixture.componentInstance.availableColumns.filter(item => item.isSelected).length;
+		expect(availableSelected)
+			.toEqual(3);
+	});
+
 });
 
 function checkIfListContains(fixture: ComponentFixture<TwoListTestComponent>, list: string, value: string) {
 	const element = fixture.debugElement.nativeElement.querySelector('#' + list);
-	expect(element.innerHTML).toContain(value);
+	expect(element.innerHTML)
+		.toContain(value);
 }
 
 function checkIfListNotContains(fixture: ComponentFixture<TwoListTestComponent>, list: string, value: string) {
 	const element = fixture.debugElement.nativeElement.querySelector('#' + list);
-	expect(element.innerHTML).not.toContain(value);
+	expect(element.innerHTML)
+		.not
+		.toContain(value);
 }
 
 function clickButton(fixture: ComponentFixture<TwoListTestComponent>, b: string) {
 	const element = fixture.debugElement.nativeElement.querySelector(b);
 	element.click();
+	fixture.detectChanges();
+}
+
+function clickButtonWithControlKey(fixture: ComponentFixture<TwoListTestComponent>, b: string) {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	const event = new MouseEvent('click', {
+		'view':    window,
+		'bubbles': true,
+		'ctrlKey': true
+	});
+	element.dispatchEvent(event);
+	fixture.detectChanges();
+}
+
+function clickButtonWithShiftKey(fixture: ComponentFixture<TwoListTestComponent>, b: string) {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	const event = new MouseEvent('click', {
+		'view':     window,
+		'bubbles':  true,
+		'shiftKey': true
+	});
+	element.dispatchEvent(event);
 	fixture.detectChanges();
 }
