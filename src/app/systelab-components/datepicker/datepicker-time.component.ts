@@ -1,4 +1,4 @@
-import { Component, Renderer2, Input, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { Datepicker } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
@@ -79,14 +79,19 @@ export class DatepickerTime extends Datepicker {
 	@Output() public currentMinutesChange = new EventEmitter<string>();
 
 	private updateCurrentHours(value: string) {
-		this._currentHours = value;
-		this.touchSpinHourValues.value = value ? Number(value) : 0;
-		this.currentHoursChange.emit(this._currentHours);
+		setTimeout(() => {
+			this._currentHours = value;
+			this.touchSpinHourValues.value = value ? Number(value) : 0;
+			this.currentHoursChange.emit(this._currentHours);
+		});
 	}
+
 	private updateCurrentMinutes(value: string) {
-		this._currentMinutes = value;
-		this.touchSpinMinuteValues.value = value ? Number(value) : 0;
-		this.currentMinutesChange.emit(this._currentMinutes);
+		setTimeout(() => {
+			this._currentMinutes = value;
+			this.touchSpinMinuteValues.value = value ? Number(value) : 0;
+			this.currentMinutesChange.emit(this._currentMinutes);
+		});
 	}
 
 }
