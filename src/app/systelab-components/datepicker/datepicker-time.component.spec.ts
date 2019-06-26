@@ -76,16 +76,12 @@ describe('Systelab DatepickerTime', () => {
 
 	it('should have the changed value if there is a change in the hour value', () => {
 		setHourValue(fixture, '16');
-		setTimeout(() => {
-			async(() => expect(fixture.componentInstance.currentDate.getHours()).toEqual(16));
-		});
+		async(() => expect(fixture.componentInstance.currentDate.getHours()).toEqual(16));
 	});
 
 	it('should have the changed value if there is a change in the minutes value', () => {
 		setMinuteValue(fixture, '59');
-		setTimeout(() => {
-			async(() => expect(fixture.componentInstance.currentDate.getMinutes()).toEqual(59));
-		});
+		async(() => expect(fixture.componentInstance.currentDate.getMinutes()).toEqual(59));
 	});
 
 	it('currentDate should be undefined if there is a reset action', () => {
@@ -95,16 +91,12 @@ describe('Systelab DatepickerTime', () => {
 
 	it('currentHours should be "00" if there is a reset action', () => {
 		resetDatepickerTime(fixture);
-		setTimeout(() => {
-			async(() => expect(fixture.componentInstance.currentHoursStr).toEqual('00'));
-		});
+		async(() => expect(fixture.componentInstance.currentHoursStr).toEqual('00'));
 	});
 
 	it('currentMinutes should be "00" if there is a reset action', () => {
 		resetDatepickerTime(fixture);
-		setTimeout(() => {
-			async(() => expect(fixture.componentInstance.currentMinutesStr).toEqual('00'));
-		});
+		async(() => expect(fixture.componentInstance.currentMinutesStr).toEqual('00'));
 	});
 
 });
