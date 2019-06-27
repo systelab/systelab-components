@@ -79,19 +79,15 @@ export class DatepickerTime extends Datepicker {
 	@Output() public currentMinutesChange = new EventEmitter<string>();
 
 	private updateCurrentHours(value: string) {
-		setTimeout(() => {
-			this._currentHours = value;
-			this.touchSpinHourValues.value = value ? Number(value) : 0;
-			this.currentHoursChange.emit(this._currentHours);
-		});
+		this._currentHours = value;
+		this.touchSpinHourValues.value = value ? Number(value) : 0;
+		this.currentHoursChange.emit(this._currentHours);
 	}
 
 	private updateCurrentMinutes(value: string) {
-		setTimeout(() => {
-			this._currentMinutes = value;
-			this.touchSpinMinuteValues.value = value ? Number(value) : 0;
-			this.currentMinutesChange.emit(this._currentMinutes);
-		});
+		this._currentMinutes = value;
+		this.touchSpinMinuteValues.value = value ? Number(value) : 0;
+		this.currentMinutesChange.emit(this._currentMinutes);
 	}
 
 }
