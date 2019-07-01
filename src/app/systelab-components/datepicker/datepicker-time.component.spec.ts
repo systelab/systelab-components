@@ -9,15 +9,13 @@ import { DatepickerTimeComponent } from './datepicker-time.component';
 import { ButtonModule, CalendarModule } from 'primeng/primeng';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
+import { Datepicker } from './datepicker.component';
 
 @Component({
 	selector: 'systelab-datepicker-time-test',
 	template: `
         <div>
-            <systelab-date-time
-                    [(currentDate)]="currentDate"
-                    (currentHoursChange)="changeCurrentHours($event)"
-                    (currentMinutesChange)="changeCurrentMinutes($event)"></systelab-date-time>
+            <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <button type="button" class="btn mt-2 mr-1" (click)="resetDatePickerTime()">Reset value
             </button>
         </div>
@@ -33,25 +31,13 @@ export class DatepickerTimeTestComponent {
 	public defaultMinutes = 5;
 
 	public currentDate: Date;
-	public currentHours: number;
-	public currentMinutes: number;
 
 	constructor() {
 		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
-		this.currentHours = this.currentDate.getHours();
-		this.currentMinutes = this.currentDate.getMinutes();
 	}
 
 	public resetDatePickerTime() {
 		this.currentDate = undefined;
-	}
-
-	public changeCurrentHours(value: number) {
-		this.currentHours = value;
-	}
-
-	public changeCurrentMinutes(value: number) {
-		this.currentMinutes = value;
 	}
 }
 
@@ -68,7 +54,10 @@ describe('Systelab DatepickerTimeComponent', () => {
 				CalendarModule,
 				HttpClientModule,
 				SystelabTranslateModule],
-			declarations: [TouchspinComponent, DatepickerTimeComponent, DatepickerTimeTestComponent]
+			declarations: [TouchspinComponent,
+				Datepicker,
+				DatepickerTimeComponent,
+				DatepickerTimeTestComponent]
 		}).compileComponents();
 	}));
 
@@ -106,42 +95,31 @@ describe('Systelab DatepickerTimeComponent', () => {
 		expect(fixture.componentInstance.currentDate).toBeFalsy();
 	});
 
-	it('currentHours should be "0" if there is a reset action', () => {
-		resetDatepickerTime(fixture);
-		expect(fixture.componentInstance.currentHours).toBe(0);
-	});
-
-	it('currentMinutes should be "0" if there is a reset action', () => {
-		resetDatepickerTime(fixture);
-		expect(fixture.componentInstance.currentMinutes).toBe(0);
-	});
 
 	it('currentHours should decrement the value if hours minus button is clicked (-1)', () => {
 		clickTouchSpinnerButton(fixture, '#hours', '#minus-button');
-		expect(fixture.componentInstance.currentHours).toBe(fixture.componentInstance.defaultHours - 1);
+		expect(fixture.componentInstance.currentDate.getHours()).toBe(fixture.componentInstance.defaultHours - 1);
 	});
 
 	it('currentHours should increment the value if hours plus button is clicked (+1)', () => {
 		clickTouchSpinnerButton(fixture, '#hours', '#plus-button');
-		expect(fixture.componentInstance.currentHours).toBe(fixture.componentInstance.defaultHours + 1);
+		expect(fixture.componentInstance.currentDate.getHours()).toBe(fixture.componentInstance.defaultHours + 1);
 	});
 
 	it('currentMinutes should decrement the value if minutes minus button is clicked (-1)', () => {
 		clickTouchSpinnerButton(fixture, '#minutes', '#minus-button');
-		expect(fixture.componentInstance.currentMinutes).toBe(fixture.componentInstance.defaultMinutes - 1);
+		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes - 1);
 	});
 
 	it('currentMinutes should increment the value if minutes plus button is clicked (+1)', () => {
 		clickTouchSpinnerButton(fixture, '#minutes', '#plus-button');
-		expect(fixture.componentInstance.currentMinutes).toBe(fixture.componentInstance.defaultMinutes + 1);
+		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes + 1);
 	});
 
-	// it('currentDate.minutes should decrement the value if a value is set in the minutes spinner input field', fakeAsync(() => {
+	// it('currentDate.minutes should decrement the value if a value is set in the minutes spinner input field', () => {
 	// 	setTouchSpinnerValue(fixture, '#minutes', fixture.componentInstance.defaultMinutes - 3);
-	// 	tick();
-	// 	fixture.detectChanges();
 	// 	expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes - 3);
-	// }));
+	// });
 
 });
 
@@ -167,8 +145,24 @@ function setMinuteValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, 
 
 // function setTouchSpinnerValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, spinnerID: string, value: number) {
 // 	const inputField = fixture.debugElement.nativeElement.querySelector(spinnerID).querySelector('input');
-// 	inputField.value = String(value);
-// 	inputField.dispatchEvent(new Event('input'));
+//
+// 	inputField.value = value;
+//
+// 	let event = new KeyboardEvent('keypress',
+// 		{
+// 			'key': String(value),
+// 			'code': 'Digit' + value
+// 		});
+//
+// 	inputField.dispatchEvent(event);
+// 	fixture.detectChanges();
+//
+// 	event = new KeyboardEvent('keydown',
+// 		{
+// 			'key': 'Enter'
+// 		});
+//
+// 	inputField.dispatchEvent(event);
 // 	fixture.detectChanges();
 // }
 
