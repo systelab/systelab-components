@@ -116,11 +116,6 @@ describe('Systelab DatepickerTimeComponent', () => {
 		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes + 1);
 	});
 
-	// it('currentDate.minutes should decrement the value if a value is set in the minutes spinner input field', () => {
-	// 	setTouchSpinnerValue(fixture, '#minutes', fixture.componentInstance.defaultMinutes - 3);
-	// 	expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes - 3);
-	// });
-
 });
 
 function resetDatepickerTime(fixture: ComponentFixture<DatepickerTimeTestComponent>) {
@@ -142,29 +137,6 @@ function setMinuteValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, 
 	fixture.componentInstance.currentDate.setMinutes(value);
 	fixture.detectChanges();
 }
-
-// function setTouchSpinnerValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, spinnerID: string, value: number) {
-// 	const inputField = fixture.debugElement.nativeElement.querySelector(spinnerID).querySelector('input');
-//
-// 	inputField.value = value;
-//
-// 	let event = new KeyboardEvent('keypress',
-// 		{
-// 			'key': String(value),
-// 			'code': 'Digit' + value
-// 		});
-//
-// 	inputField.dispatchEvent(event);
-// 	fixture.detectChanges();
-//
-// 	event = new KeyboardEvent('keydown',
-// 		{
-// 			'key': 'Enter'
-// 		});
-//
-// 	inputField.dispatchEvent(event);
-// 	fixture.detectChanges();
-// }
 
 function clickTouchSpinnerButton(fixture: ComponentFixture<DatepickerTimeTestComponent>, spinnerID: string, buttonID: string) {
 	const button = fixture.debugElement.nativeElement.querySelector(spinnerID).querySelector(buttonID);
