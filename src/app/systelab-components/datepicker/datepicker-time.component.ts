@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 import { Datepicker } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
@@ -7,19 +7,16 @@ import { I18nService } from 'systelab-translate/lib/i18n.service';
 	selector: 'systelab-date-time',
 	templateUrl: 'datepicker-time.component.html'
 })
-export class DatepickerTime extends Datepicker {
+export class DatepickerTimeComponent extends Datepicker {
 
 	public touchSpinHourValues: TouchSpinValues;
-	public touchSpinMinuteValues: TouchSpinValues;
-
-	protected _currentHours: string;
-	protected _currentMinutes: string;
+	public touchSpinMinutesValues: TouchSpinValues;
 
 	constructor(myRenderer: Renderer2, i18nService: I18nService) {
 		super(myRenderer, i18nService);
 
-		this.touchSpinHourValues = new TouchSpinValues(Number(this.currentHours), 0, 23, 1);
-		this.touchSpinMinuteValues = new TouchSpinValues(Number(this.currentMinutes), 0, 59, 1);
+		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
+		this.touchSpinMinutesValues = new TouchSpinValues(0, 0, 59, 1);
 	}
 
 	@Input()
@@ -29,65 +26,36 @@ export class DatepickerTime extends Datepicker {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.currentDateChange.emit(this._currentDate);
 		if (this._currentDate) {
-			this.currentHours = this.currentHours ? this.currentHours : String(this._currentDate.getHours());
-			this.currentMinutes = this.currentMinutes ? this.currentMinutes : String(this._currentDate.getMinutes());
+			if (this._currentDate.getHours() === 0 || this.touchSpinHourValues.value !== 0) {
+				this._currentDate.setHours(this.touchSpinHourValues.value);
+			} else {
+				this.touchSpinHourValues.value = this._currentDate.getHours();
+			}
+			if (this._currentDate.getMinutes() === 0 || this.touchSpinMinutesValues.value !== 0) {
+				this._currentDate.setMinutes(this.touchSpinMinutesValues.value);
+			} else {
+				this.touchSpinMinutesValues.value = this._currentDate.getMinutes();
+			}
 		} else {
-			this.updateCurrentHours(undefined);
-			this.updateCurrentMinutes(undefined);
+			this.touchSpinHourValues.value = 0;
+			this.touchSpinMinutesValues.value = 0;
+			this.currentHoursChanged(0);
+			this.currentMinutesChanged(0);
 		}
 	}
 
-	@Input()
-	get currentHours(): string {
-		return this._currentHours;
-	}
-
-	set currentHours(value: string) {
-		this.updateCurrentHours(value);
-		if (value && this.currentDate) {
-			if (this._currentHours) {
-				this._currentDate.setHours(Number(value));
-			} else {
-				this._currentDate.setHours(0);
-			}
+	public currentHoursChanged(value: number) {
+		if (this._currentDate) {
+			this._currentDate.setHours(value);
 			this.currentDateChange.emit(this._currentDate);
 		}
 	}
 
-	@Output() public currentHoursChange = new EventEmitter<string>();
-
-	@Input()
-	get currentMinutes(): string {
-		return this._currentMinutes;
-	}
-
-	set currentMinutes(value: string) {
-		this.updateCurrentMinutes(value);
-
-		if (value && this.currentDate) {
-			if (this._currentMinutes) {
-				this._currentDate.setMinutes(Number(value));
-			} else {
-				this._currentDate.setMinutes(0);
-			}
+	public currentMinutesChanged(value: number) {
+		if (this._currentDate) {
+			this._currentDate.setMinutes(value);
 			this.currentDateChange.emit(this._currentDate);
 		}
 	}
-
-	@Output() public currentMinutesChange = new EventEmitter<string>();
-
-	private updateCurrentHours(value: string) {
-		this._currentHours = value;
-		this.touchSpinHourValues.value = value ? Number(value) : 0;
-		this.currentHoursChange.emit(this._currentHours);
-	}
-
-	private updateCurrentMinutes(value: string) {
-		this._currentMinutes = value;
-		this.touchSpinMinuteValues.value = value ? Number(value) : 0;
-		this.currentMinutesChange.emit(this._currentMinutes);
-	}
-
 }
