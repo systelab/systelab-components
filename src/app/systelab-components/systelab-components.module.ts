@@ -24,7 +24,7 @@ import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.co
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
 import { Datepicker } from './datepicker/datepicker.component';
-import { DatepickerTime } from './datepicker/datepicker-time.component';
+import { DatepickerTimeComponent } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
@@ -80,7 +80,7 @@ import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
 
 @NgModule({
-	imports:         [
+	imports: [
 		CommonModule,
 		FormsModule,
 		SharedModule,
@@ -94,7 +94,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		SystelabTranslateModule,
 		AgGridModule
 	],
-	declarations:    [
+	declarations: [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -121,7 +121,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		TouchspinComponent,
 		ModulabSelect,
 		Datepicker,
-		DatepickerTime,
+		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
 		SearcherTableComponent,
@@ -164,7 +164,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		PaginatorPageComponent
 
 	],
-	exports:         [
+	exports: [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -185,7 +185,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		Datepicker,
 		TouchspinComponent,
 		ModulabSelect,
-		DatepickerTime,
+		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
 		ToggleButtonComponent,
@@ -250,7 +250,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		NumPadDialog,
 		ComboboxFavouriteRendererComponent
 	],
-	providers:       [
+	providers: [
 		StylesUtilService,
 		ColorUtilService,
 		LoadingService
@@ -259,7 +259,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule:  SystelabComponentsModule,
+			ngModule: SystelabComponentsModule,
 			providers: [
 				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
 				Ng2ComponentFactory,

@@ -29,11 +29,7 @@ All the input parameters are optional.
 
 In black the Two-Way Data Binding properties.
 
-For the DatePicker-Time, consider also the following properties:
-
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| **currentHours** | Date | | Hours selected in the component |
-| **currentMinutes** | Date | | Minutes selected in the component |
-
-In black the Two-Way Data Binding properties.
+| |
+| --- |
+| For the **DatePicker-Time** component, the date's *hours* and *minutes* are modified through the spinner components. |
+||
