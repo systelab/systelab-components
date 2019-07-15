@@ -1,7 +1,9 @@
 import { AbstractGrid } from '../abstract-grid.component';
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
-import {AbstractContextMenuComponent} from '../../contextmenu/abstract-context-menu.component';
-import {GridContextMenuOption} from './grid-context-menu-option';
+import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
+import { GridContextMenuOption } from './grid-context-menu-option';
+
+declare var jQuery: any;
 
 @Component({
 	selector:    'systelab-grid-context-menu',
@@ -45,15 +47,75 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		return false;
 	}
 
-	protected executeAction($event, elementId: string, actionId: string): void {
-		this.container.executeContextMenuAction(elementId, actionId);
+	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
+
+		let option: GridContextMenuOption<T>;
+
+		if (parentAction) {
+			const parentMenuOption = this.contextMenuOptions.find(opt => opt.actionId === parentAction);
+			option = parentMenuOption.childrenContextMenuOptions.find(opt => opt.actionId === actionId);
+		} else {
+			option = this.contextMenuOptions.find(opt => opt.actionId === actionId);
+		}
+
+		if (option.childrenContextMenuOptions && option.childrenContextMenuOptions.length > 0) {
+			event.stopPropagation();
+			event.preventDefault();
+
+			if (this.previousActionChild !== actionId) {
+				if (this.previousActionChild) {
+					const previousActionChildID = this.previousActionChild + this.elementID;
+					jQuery('#' + previousActionChildID)
+						.toggle();
+
+				}
+
+				const childID = actionId + this.elementID;
+				jQuery('#' + childID)
+					.toggle();
+
+				this.previousActionChild = actionId;
+
+				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
+					.find((elem) => {
+						return elem.nativeElement.id === childID;
+					});
+
+				const firstChildAbsoluteTop = event.clientY;
+				let firstChildRelativeTop = event.target.offsetTop;
+
+				if (firstChildAbsoluteTop + selectedChild.nativeElement.offsetHeight > window.innerHeight) {
+					firstChildRelativeTop = firstChildRelativeTop - selectedChild.nativeElement.offsetHeight;
+				}
+
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', firstChildRelativeTop + 'px');
+
+				let firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 15;
+				const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
+
+				if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth + selectedChild.nativeElement.offsetWidth
+					> window.innerWidth) {
+					firstChildLeft = -selectedChild.nativeElement.offsetWidth + 10;
+				}
+
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', firstChildLeft + 'px');
+
+			}
+
+		} else {
+			if (this.isEmbedded || parentAction) {
+				this.closeDropDown();
+				event.stopPropagation();
+				event.preventDefault();
+			}
+
+			if (option && option.action !== null && option.action !== undefined) {
+				this.container.executeContextMenuAction(elementId, actionId);
+			}
+		}
+
 	}
 
 	protected checkIfHasIcons(): void {
 	}
-
-
-
-
-
 }
