@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { Observable } from 'rxjs';
-import { MessageWithIconComponent, MessagePopupIcon } from './message-with-icon.component';
+import { MessagePopupIcon, MessageWithIconComponent } from './message-with-icon.component';
 import { DialogService } from '../dialog/dialog.service';
 
 export class MessagePopupButton {
@@ -44,8 +44,10 @@ export class MessagePopupService {
 
 	protected showPopup(title: string, type: number, message: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon): Observable<any> {
 
+		const defaultWidth = 600;
 		const maxWidth = 700;
 		const minWidth = 499;
+		const defaultHeight = 300;
 		const maxHeight = 400;
 		const minHeight = 280;
 
@@ -54,8 +56,8 @@ export class MessagePopupService {
 		parameters.type = type;
 		parameters.msg = message;
 		parameters.buttons = buttons;
-		parameters.width = width;
-		parameters.height = height;
+		parameters.width = width ? width : defaultWidth;
+		parameters.height = height ? height : defaultHeight;
 
 		parameters.maxWidth = maxWidth;
 		parameters.minWidth = minWidth;
