@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "8.7.0",
+  "version": "8.7.2",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -64,8 +64,8 @@
     "primeng": "^5.2.6",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
-    "systelab-preferences": "^4.1.0",
-    "systelab-translate": "^5.3.0",
+    "systelab-preferences": "^4.3.0",
+    "systelab-translate": "^5.4.0",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
