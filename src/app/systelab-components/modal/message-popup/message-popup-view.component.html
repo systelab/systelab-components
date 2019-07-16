@@ -1,13 +1,11 @@
-<systelab-dialog-header  (close)="close()">{{parameters.title}}</systelab-dialog-header>
-<div class="slab-flex-1 d-flex align-items-center pl-3">
-    <systelab-message-with-icon class="w-100 h-100" [message]="parameters.msg" [type]="parameters.type" [icon]="parameters.icon"></systelab-message-with-icon>
-</div>
+<systelab-dialog-header (close)="close()">{{parameters.title}}</systelab-dialog-header>
+<systelab-message-with-icon class="slab-flex-1 d-flex pl-3 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type" [icon]="parameters.icon"></systelab-message-with-icon>
 <systelab-dialog-bottom>
     <div class="ml-auto" *ngIf="parameters.buttons.length>0">
         <button *ngFor="let button of parameters.buttons" type="button" class="btn ml-1 {{button.cssClass}}" (click)="close(button.returnValue)">{{button.title}}</button>
     </div>
-     <div class="ml-auto" *ngIf="parameters.buttons.length===0">
-            <button type="button" #closeBtn class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}</button>
-     </div>
+    <div class="ml-auto" *ngIf="parameters.buttons.length===0">
+        <button type="button" #closeBtn class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}</button>
+    </div>
 </systelab-dialog-bottom>
 
