@@ -13,7 +13,7 @@ export class ShowcaseApplicationFrameDialogParameters extends SystelabModalConte
 })
 export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseApplicationFrameDialogParameters>, OnInit {
 
-	@ViewChild('appFrame') appFrame: ApplicationFrameComponent;
+	@ViewChild('appFrame', {static: false}) appFrame: ApplicationFrameComponent;
 	protected parameters: ShowcaseApplicationFrameDialogParameters;
 	public currentTab = 'T1';
 

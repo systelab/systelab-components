@@ -45,7 +45,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
-	@ViewChild('calendar') public currentCalendar: Calendar;
+	@ViewChild('calendar', {static: false}) public currentCalendar: Calendar;
 
 	public somethingChanged = false;
 	protected _currentDate: Date;

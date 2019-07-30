@@ -1,27 +1,15 @@
-import {
-	ChangeDetectorRef,
-	ElementRef,
-	EventEmitter, HostListener,
-	Input,
-	OnDestroy,
-	OnInit,
-	Output,
-	QueryList,
-	Renderer2,
-	ViewChild,
-	ViewChildren
-} from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 
 declare var jQuery: any;
 
 export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
-	@ViewChild('dropdownparent') public dropdownParent: ElementRef;
-	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
+	@ViewChild('dropdownparent', {static: false}) public dropdownParent: ElementRef;
+	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
 	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
-	@ViewChild('dropdown') public dropdownElement: ElementRef;
-	@ViewChild('scrollableList') public scrollableList: ElementRef;
-	@ViewChild('ngcontent') public ngcontent: ElementRef;
+	@ViewChild('dropdown', {static: false}) public dropdownElement: ElementRef;
+	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
+	@ViewChild('ngcontent', {static: false}) public ngcontent: ElementRef;
 
 	@Output() public action = new EventEmitter();
 

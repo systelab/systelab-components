@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, HostListener, Input, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { timer } from 'rxjs';
 
 export class RouteNode {
@@ -39,7 +39,7 @@ export class Connection {
 })
 export class SampleRouteComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('canvas') public canvas: ElementRef;
+	@ViewChild('canvas', {static: false}) public canvas: ElementRef;
 
 	public mustShowPointer = false;
 

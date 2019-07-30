@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DialogHeaderComponent, DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
-import { interval  } from 'rxjs';
-
+import { interval } from 'rxjs';
 
 export class ShowcaseLoadingDialogParameters extends SystelabModalContext {
 	public index: number;
@@ -12,7 +11,7 @@ export class ShowcaseLoadingDialogParameters extends SystelabModalContext {
 })
 export class ShowcaseLoadingDialog implements ModalComponent<ShowcaseLoadingDialogParameters> {
 
-	@ViewChild('header') header: DialogHeaderComponent;
+	@ViewChild('header', {static: false}) header: DialogHeaderComponent;
 	public isLoading = false;
 
 	public useClassic = false;

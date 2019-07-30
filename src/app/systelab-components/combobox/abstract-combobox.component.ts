@@ -179,12 +179,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Output() public multipleSelectedIDListChange = new EventEmitter();
 	@Output() public selectedItemChange = new EventEmitter();
 
-	@ViewChild('combobox') public comboboxElement: ElementRef;
-	@ViewChild('dropdowntoogle') public dropdownToogleElement: ElementRef;
-	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
-	@ViewChild('dropdown') public dropdownElement: ElementRef;
-	@ViewChild('input') public inputElement: ElementRef;
-	@ViewChild('hidden') public hiddenElement: ElementRef;
+	@ViewChild('combobox', {static: false}) public comboboxElement: ElementRef;
+	@ViewChild('dropdowntoogle', {static: false}) public dropdownToogleElement: ElementRef;
+	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
+	@ViewChild('dropdown', {static: false}) public dropdownElement: ElementRef;
+	@ViewChild('input', {static: false}) public inputElement: ElementRef;
+	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
@@ -365,7 +365,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public onComboClicked(event: MouseEvent) {
-		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
+		// if (this.isDisabled || (this.allowEditInput && event.target.className.indexOf('input') > -1)) {
+		if (this.isDisabled || (this.allowEditInput)) {
 			event.stopPropagation();
 		} else {
 			if (!this.isDropDownOpen()) {

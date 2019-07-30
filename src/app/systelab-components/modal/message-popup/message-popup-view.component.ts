@@ -25,7 +25,7 @@ export class MessagePopupViewContext extends SystelabModalContext {
 })
 export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext>, AfterViewInit {
 
-	@ViewChild('closeBtn') closeBtn: ElementRef;
+	@ViewChild('closeBtn', {static: false}) closeBtn: ElementRef;
 	public parameters: MessagePopupViewContext;
 
 	constructor(public dialog: DialogRef<MessagePopupViewContext>) {

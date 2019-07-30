@@ -40,8 +40,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 	@Output() public clickRow = new EventEmitter();
 	@Output() public rowDragEnd = new EventEmitter();
 
-	@ViewChild('hidden') public hiddenElement: ElementRef;
-	@ViewChild('popupmenu') public popupmenu: GridContextMenuComponent<T>;
+	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
+	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 
 	protected firstSizeToFitExecuted = false;
 

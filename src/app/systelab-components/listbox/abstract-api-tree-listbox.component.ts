@@ -20,7 +20,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	public columnDefs: Array<any>;
 	public treeValues: Array<TreeListBoxElement<T>> = [];
-	@ViewChild('hidden') public hiddenElement: ElementRef;
+	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
 
 	public _selectedTreeItem: TreeListBoxElement<T>;
 
