@@ -1,5 +1,5 @@
 import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridOptions, RowNode } from 'ag-grid';
+import { ColDef, Column, GridOptions, RowNode } from 'ag-grid-community';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
@@ -76,11 +76,13 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.rowHeight = Number(rowHeight);
 		this.gridOptions.headerHeight = Number(headerHeight);
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
+		this.gridOptions.suppressRowDrag = true;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.enableRangeSelection = true;
 		this.gridOptions.stopEditingWhenGridLosesFocus = true;
 		this.gridOptions.singleClickEdit = true;
-		this.gridOptions.enableColResize = this.isColResizeEnabled();
+		this.gridOptions.defaultColDef = {};
+		this.gridOptions.defaultColDef.resizable = this.isColResizeEnabled();
 		this.gridOptions.rowSelection = this.getRowSelectionType();
 		this.gridOptions.rowDeselection = true;
 		if (this.hideHeader()) {
@@ -192,7 +194,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 				headerName:            '',
 				width:                 this.getContextMenuColumnWidth(),
 				suppressSizeToFit:     true,
-				suppressResize:        true,
+				resizable:             false,
 				suppressMovable:       true,
 				cellRendererFramework: GridContextMenuCellRendererComponent
 			});
@@ -205,7 +207,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 				checkboxSelection: true,
 				width:             this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
-				suppressResize:    true,
+				resizable:         false,
 				suppressMovable:   true
 			});
 		}

@@ -1,6 +1,6 @@
 import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GridOptions } from 'ag-grid';
+import { ColDef, GridOptions } from 'ag-grid-community';
 
 export abstract class AbstractListBox<T> implements OnInit {
 
@@ -95,9 +95,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		this.gridOptions.rowHeight = Number(rowHeight);
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
+		this.gridOptions.suppressRowDrag = true;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.enableRangeSelection = !this.isDisabled;
-		this.gridOptions.enableColResize = false;
+		this.gridOptions.defaultColDef = {};
+		this.gridOptions.defaultColDef.resizable = false;
 		this.gridOptions.rowSelection = this.multipleSelection ? 'multiple' : 'single';
 		this.gridOptions.rowDeselection = !this.isDisabled;
 
@@ -133,7 +135,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 				checkboxSelection: true,
 				width:             this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
-				suppressResize:    true,
+				resizable:         false,
 				suppressMovable:   true
 			});
 		}

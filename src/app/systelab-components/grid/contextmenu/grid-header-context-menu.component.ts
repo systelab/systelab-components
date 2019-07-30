@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { IHeaderAngularComp } from 'ag-grid-angular';
-import { IHeaderParams } from 'ag-grid';
+import { IHeaderParams } from 'ag-grid-community';
 import { AbstractGrid } from '../abstract-grid.component';
-import {AbstractContextMenuComponent} from '../../contextmenu/abstract-context-menu.component';
-import {GridContextMenuOption} from './grid-context-menu-option';
+import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
+import { GridContextMenuOption } from './grid-context-menu-option';
 
 @Component({
 	selector:    'systelab-grid-header-context-menu',

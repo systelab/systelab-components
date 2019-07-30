@@ -89,7 +89,7 @@ import { ShowcasePaginatorComponent } from './components/paginator/showcase-pagi
 		OverlayModule,
 		TreeModule,
 		HttpClientModule,
-		SystelabComponentsModule.forRoot(),
+		SystelabComponentsModule,
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot(),
 		AgGridModule.withComponents([

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GridOptions } from 'ag-grid';
+import { GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
@@ -256,7 +256,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = (this.withFavourites) ? [
 			{
-				colID:                 'itemDescription',
+				colId:                 'itemDescription',
 				id:                    this.getIdField(),
 				field:                 this.getDescriptionField(),
 				checkboxSelection:     this.multipleSelection,
@@ -267,7 +267,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			}
 		] : [
 			{
-				colID:             'itemDescription',
+				colId:             'itemDescription',
 				field:             this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection,
 			}

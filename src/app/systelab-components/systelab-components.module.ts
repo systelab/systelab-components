@@ -1,4 +1,4 @@
-import { ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -11,7 +11,7 @@ import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
 import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
-import { AgGridModule, AgGridNg2, BaseComponentFactory, Ng2ComponentFactory } from 'ag-grid-angular';
+import { AgGridModule, AgGridNg2 } from 'ag-grid-angular';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
@@ -256,16 +256,4 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		LoadingService
 	]
 })
-export class SystelabComponentsModule {
-	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
-		return {
-			ngModule: SystelabComponentsModule,
-			providers: [
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
-				Ng2ComponentFactory,
-				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
-			]
-		};
-	}
-}
+export class SystelabComponentsModule {}

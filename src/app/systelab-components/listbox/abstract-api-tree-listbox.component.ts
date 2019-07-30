@@ -1,10 +1,8 @@
-import {
-	EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, AfterViewInit
-} from '@angular/core';
+import { AfterViewInit, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-listbox-renderer.component';
-import { Observable } from 'rxjs/Observable';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
+import { Observable } from 'rxjs';
 
 export class TreeListBoxElement<T> {
 	public nodeData: T;

@@ -10,35 +10,32 @@
     border: none;
     overflow: hidden;
 
-    .ag-body {
+    .ag-body-viewport {
       background-color: $background-primary;
 
-      .ag-body-viewport {
+      .ag-row {
+        background-color: $background-primary;
 
-        .ag-row {
-          background-color: $background-primary;
-
-          &.ag-row-selected {
-            background-color: $slab-selected-background-color;
-          }
-
-          &.ag-row-disabled {
-            pointer-events: none;
-          }
-
-          &.ag-row-hover {
-            background-color: $slab-selected-background-color;
-          }
-
-          .ag-cell {
-            border: none;
-          }
-
+        &.ag-row-selected {
+          background-color: $slab-selected-background-color;
         }
-      }
 
+        &.ag-row-disabled {
+          pointer-events: none;
+        }
+
+        &.ag-row-hover {
+          background-color: $slab-selected-background-color;
+        }
+
+        .ag-cell {
+          border: none;
+        }
+
+      }
     }
   }
+
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;

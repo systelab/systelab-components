@@ -272,13 +272,33 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public nextMonth(event: Event): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.nextMonth(event);
+			let month = this.currentCalendar.currentMonth;
+			if (month < 12) {
+				month++;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+			} else {
+				month = 1;
+				let year = this.currentCalendar.currentYear;
+				year++;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+				this.currentCalendar.onYearDropdownChange(year.toString());
+			}
 		}
 	}
 
 	public prevMonth(event: Event): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.prevMonth(event);
+			let month = this.currentCalendar.currentMonth;
+			if (month > 1) {
+				month--;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+			} else {
+				month = 12;
+				let year = this.currentCalendar.currentYear;
+				year--;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+				this.currentCalendar.onYearDropdownChange(year.toString());
+			}
 		}
 	}
 
