@@ -179,10 +179,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Output() public multipleSelectedIDListChange = new EventEmitter();
 	@Output() public selectedItemChange = new EventEmitter();
 
-	@ViewChild('combobox', {static: false}) public comboboxElement: ElementRef;
+	@ViewChild('combobox', {static: true}) public comboboxElement: ElementRef;
 	@ViewChild('dropdowntoogle', {static: false}) public dropdownToogleElement: ElementRef;
 	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
-	@ViewChild('dropdown', {static: false}) public dropdownElement: ElementRef;
+	@ViewChild('dropdown', {static: true}) public dropdownElement: ElementRef;
 	@ViewChild('input', {static: false}) public inputElement: ElementRef;
 	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
 

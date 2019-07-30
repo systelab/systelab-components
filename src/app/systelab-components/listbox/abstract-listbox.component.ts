@@ -5,7 +5,7 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 export abstract class AbstractListBox<T> implements OnInit {
 
 	public gridOptions: GridOptions;
-	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
+	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	public _values: Array<T>;
 	@Input()
 	set values(newValues: Array<T>) {

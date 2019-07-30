@@ -4,7 +4,7 @@ declare var jQuery: any;
 
 export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
-	@ViewChild('dropdownparent', {static: false}) public dropdownParent: ElementRef;
+	@ViewChild('dropdownparent', {static: true}) public dropdownParent: ElementRef;
 	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
 	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
 	@ViewChild('dropdown', {static: false}) public dropdownElement: ElementRef;

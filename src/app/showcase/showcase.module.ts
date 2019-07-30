@@ -58,7 +58,6 @@ import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-br
 import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/showcase-signature-canvas.component';
 import { ShowcaseInnerTreeComponent } from './components/tree/showcase-inner-tree.component';
 import { ShowcaseTreeComponent } from './components/tree/showcase-tree.component';
-import { TreeModule } from 'primeng/primeng';
 import { ShowcasePercentageCircleComponent } from './components/percentage-circle/showcase-percentage-circle.component';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -79,6 +78,7 @@ import { ShowcaseContextPanel } from './components/context-panel/showcase-contex
 import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService, MessagePopupService } from '../systelab-components/modal';
 import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
+import { TreeModule } from 'primeng/tree';
 
 @NgModule({
 	imports:         [

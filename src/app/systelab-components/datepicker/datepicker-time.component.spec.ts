@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { DatepickerTimeComponent } from './datepicker-time.component';
-import { ButtonModule, CalendarModule } from 'primeng/primeng';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { Datepicker } from './datepicker.component';
+import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
 	selector: 'systelab-datepicker-time-test',
