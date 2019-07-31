@@ -273,11 +273,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public nextMonth(event: Event): void {
 		if (this.currentCalendar) {
 			let month = this.currentCalendar.currentMonth;
-			if (month < 12) {
+			if (month < 11) {
 				month++;
 				this.currentCalendar.onMonthDropdownChange(month.toString());
 			} else {
-				month = 1;
+				month = 0;
 				let year = this.currentCalendar.currentYear;
 				year++;
 				this.currentCalendar.onMonthDropdownChange(month.toString());
@@ -289,11 +289,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public prevMonth(event: Event): void {
 		if (this.currentCalendar) {
 			let month = this.currentCalendar.currentMonth;
-			if (month > 1) {
+			if (month > 0) {
 				month--;
 				this.currentCalendar.onMonthDropdownChange(month.toString());
 			} else {
-				month = 12;
+				month = 11;
 				let year = this.currentCalendar.currentYear;
 				year--;
 				this.currentCalendar.onMonthDropdownChange(month.toString());
