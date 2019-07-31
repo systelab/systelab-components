@@ -364,9 +364,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	}
 
-	public onComboClicked(event: MouseEvent) {
-		// if (this.isDisabled || (this.allowEditInput && event.target.className.indexOf('input') > -1)) {
-		if (this.isDisabled || (this.allowEditInput)) {
+	public onComboClicked(event: any) {
+		if (this.isDisabled || (this.allowEditInput && event.target.className.indexOf('input') > -1)) {
+		// if (this.isDisabled || (this.allowEditInput)) {
 			event.stopPropagation();
 		} else {
 			if (!this.isDropDownOpen()) {
