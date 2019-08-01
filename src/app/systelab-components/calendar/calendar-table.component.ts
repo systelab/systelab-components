@@ -22,7 +22,7 @@ export class CalendarTableComponent implements OnChanges {
 	public daysHeader: string[] = [];
 	public rows: DaySlot[][] = [];
 
-	@ContentChild(TemplateRef) templateRef: TemplateRef<any>;
+	@ContentChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
 
 	constructor(private i18nService: I18nService) {
 	}

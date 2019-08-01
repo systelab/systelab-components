@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { IGetRowsParams } from 'ag-grid';
+import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';

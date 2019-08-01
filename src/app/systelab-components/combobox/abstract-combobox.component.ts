@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GridOptions } from 'ag-grid';
+import { GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
@@ -179,12 +179,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Output() public multipleSelectedIDListChange = new EventEmitter();
 	@Output() public selectedItemChange = new EventEmitter();
 
-	@ViewChild('combobox') public comboboxElement: ElementRef;
-	@ViewChild('dropdowntoogle') public dropdownToogleElement: ElementRef;
-	@ViewChild('dropdownmenu') public dropdownMenuElement: ElementRef;
-	@ViewChild('dropdown') public dropdownElement: ElementRef;
-	@ViewChild('input') public inputElement: ElementRef;
-	@ViewChild('hidden') public hiddenElement: ElementRef;
+	@ViewChild('combobox', {static: true}) public comboboxElement: ElementRef;
+	@ViewChild('dropdowntoogle', {static: false}) public dropdownToogleElement: ElementRef;
+	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
+	@ViewChild('dropdown', {static: true}) public dropdownElement: ElementRef;
+	@ViewChild('input', {static: false}) public inputElement: ElementRef;
+	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
@@ -256,7 +256,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = (this.withFavourites) ? [
 			{
-				colID:                 'itemDescription',
+				colId:                 'itemDescription',
 				id:                    this.getIdField(),
 				field:                 this.getDescriptionField(),
 				checkboxSelection:     this.multipleSelection,
@@ -267,7 +267,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			}
 		] : [
 			{
-				colID:             'itemDescription',
+				colId:             'itemDescription',
 				field:             this.getDescriptionField(),
 				checkboxSelection: this.multipleSelection,
 			}
@@ -364,8 +364,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	}
 
-	public onComboClicked(event: MouseEvent) {
-		if (this.isDisabled || (this.allowEditInput && event.srcElement.className.indexOf('input') > -1)) {
+	public onComboClicked(event: any) {
+		if (this.isDisabled || (this.allowEditInput && event.target.className.indexOf('input') > -1)) {
 			event.stopPropagation();
 		} else {
 			if (!this.isDropDownOpen()) {

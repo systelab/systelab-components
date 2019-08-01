@@ -13,7 +13,7 @@ export class ShowcaseContextPanel implements OnInit {
 	public toDate: Date = new Date();
 
 	public numericDateRadio = 'days';
-	@ViewChild('contextPanel1') public contextPanel: ContextPanelComponent;
+	@ViewChild('contextPanel1', {static: false}) public contextPanel: ContextPanelComponent;
 
 	constructor() {
 		this.touchSpinValues1 = new TouchSpinValues(30, 1, 365, 1);

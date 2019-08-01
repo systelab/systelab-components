@@ -1,8 +1,7 @@
-import { ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
-import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
@@ -11,7 +10,7 @@ import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
 import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
-import { AgGridModule, AgGridNg2, BaseComponentFactory, Ng2ComponentFactory } from 'ag-grid-angular';
+import { AgGridModule } from 'ag-grid-angular';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
@@ -78,13 +77,15 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
+import { CalendarModule } from 'primeng/calendar';
+import { Tree, TreeModule } from 'primeng/tree';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
-	imports: [
+	imports:         [
 		CommonModule,
 		FormsModule,
 		SharedModule,
-		SliderModule,
 		CalendarModule,
 		TreeModule,
 		DragDropModule,
@@ -94,7 +95,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		SystelabTranslateModule,
 		AgGridModule
 	],
-	declarations: [
+	declarations:    [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -164,7 +165,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		PaginatorPageComponent
 
 	],
-	exports: [
+	exports:         [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -207,7 +208,6 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
-		AgGridNg2,
 		Tree,
 		SplitComponent,
 		SplitAreaDirective,
@@ -250,7 +250,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 		NumPadDialog,
 		ComboboxFavouriteRendererComponent
 	],
-	providers: [
+	providers:       [
 		StylesUtilService,
 		ColorUtilService,
 		LoadingService
@@ -259,13 +259,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule: SystelabComponentsModule,
-			providers: [
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
-				Ng2ComponentFactory,
-				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
-			]
+			ngModule: SystelabComponentsModule
 		};
 	}
 }

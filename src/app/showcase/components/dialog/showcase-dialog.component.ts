@@ -13,7 +13,7 @@ import { DialogService } from '../../../systelab-components/modal';
 	templateUrl: 'showcase-dialog.component.html',
 })
 export class ShowcaseDialogComponent {
-	@ViewChild('btnContextModal') btnContextModal: ElementRef;
+	@ViewChild('btnContextModal', {static: false}) btnContextModal: ElementRef;
 
 	constructor(protected dialogService: DialogService) {
 	}

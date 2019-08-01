@@ -1,6 +1,6 @@
 import { SearcherDialogParameters } from './searcher.dialog.component';
 import { Observable } from 'rxjs';
-import { RowNode } from 'ag-grid';
+import { RowNode } from 'ag-grid-community';
 
 export abstract class AbstractSearcher<T> {
 

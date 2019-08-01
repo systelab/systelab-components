@@ -12,8 +12,8 @@ import { ApplicationSidebarSmallComponent } from './sidebar/app-sidebar-small.co
 })
 export class ApplicationFrameComponent {
 
-	@ViewChild('sidebarLarge') sidebar: ApplicationSidebarLargeComponent;
-	@ViewChild('sidebarSmall') sidebarSmall: ApplicationSidebarSmallComponent;
+	@ViewChild('sidebarLarge', {static: false}) sidebar: ApplicationSidebarLargeComponent;
+	@ViewChild('sidebarSmall', {static: false}) sidebarSmall: ApplicationSidebarSmallComponent;
 
 	@Input() public userName: string;
 	@Input() public userFullName: string;

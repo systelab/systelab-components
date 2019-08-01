@@ -22,7 +22,7 @@ export class CalendarDialogParameters extends SystelabModalContext {
 })
 export class CalendarDialog implements ModalComponent<CalendarDialogParameters> {
 
-	@ViewChild('calendar') calendar: CalendarTableComponent;
+	@ViewChild('calendar', {static: false}) calendar: CalendarTableComponent;
 
 	public parameters: CalendarDialogParameters;
 	public currentDate: Date;

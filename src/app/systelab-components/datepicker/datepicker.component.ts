@@ -45,7 +45,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
-	@ViewChild('calendar') public currentCalendar: Calendar;
+	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
 
 	public somethingChanged = false;
 	protected _currentDate: Date;
@@ -272,13 +272,33 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public nextMonth(event: Event): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.nextMonth(event);
+			let month = this.currentCalendar.currentMonth;
+			if (month < 11) {
+				month++;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+			} else {
+				month = 0;
+				let year = this.currentCalendar.currentYear;
+				year++;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+				this.currentCalendar.onYearDropdownChange(year.toString());
+			}
 		}
 	}
 
 	public prevMonth(event: Event): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.prevMonth(event);
+			let month = this.currentCalendar.currentMonth;
+			if (month > 0) {
+				month--;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+			} else {
+				month = 11;
+				let year = this.currentCalendar.currentYear;
+				year--;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+				this.currentCalendar.onYearDropdownChange(year.toString());
+			}
 		}
 	}
 

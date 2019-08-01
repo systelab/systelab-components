@@ -22,6 +22,7 @@ $icon-rowaction-font-size: 20px;
           height: 100%;
           min-width: $grid-cell-height;
           width: $grid-cell-height;
+
           .icon-context-menu {
             color: white;
           }
@@ -31,6 +32,7 @@ $icon-rowaction-font-size: 20px;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          align-items: flex-start;
         }
       }
 
@@ -38,6 +40,7 @@ $icon-rowaction-font-size: 20px;
         padding: 0 5px;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-start;
 
         > span {
           height: auto;
@@ -57,9 +60,11 @@ $icon-rowaction-font-size: 20px;
     &.ag-row-selected {
       background-color: $table-row-selected-background-color;
     }
+
     &.ag-row-odd :not ag-row-selected {
       background-color: $table-row-odd-background-color;
     }
+
     &.ag-row-even :not ag-row-selected {
       background-color: $table-row-even-background-color;
     }
@@ -107,18 +112,16 @@ $icon-rowaction-font-size: 20px;
 
   }
 
-  .ag-body {
-
-    .ag-body-viewport {
-      //overflow: auto !important;
-      @include ag-row()
-    }
-
-    .ag-pinned-left-cols-viewport {
-      @include ag-row()
-    }
-
+  .ag-body-viewport {
+    //overflow: auto !important;
+    @include ag-row()
   }
+
+  .ag-pinned-left-cols-viewport {
+    @include ag-row()
+  }
+
+
 }
 
 .height-hidden { //Style for the hidden element to get the proper height from Typescript

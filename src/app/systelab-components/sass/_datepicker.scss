@@ -6,39 +6,48 @@ $icon-margin-right: 10px;
 $icon-margin-left: 40px;
 
 p-calendar {
+
   .ui-calendar {
     input::-ms-clear {
       display: none;
     }
+
     .icon-calendar {
       height: 100%;
     }
 
   }
+
   &.input-expand-height {
     input {
       height: 100% !important;
     }
   }
+
   &.warning-date {
     input {
       background-color: $danger !important;
     }
+
     &.input-expand-height {
       height: 100% !important;
     }
+
     i {
       color: black !important;
     }
   }
+
   &.date-error {
     input {
       color: $danger !important;
       border: 1px solid $danger !important;
     }
+
     &.input-expand-height {
       height: 100% !important;
     }
+
     i {
       color: $danger !important;
     }
@@ -48,18 +57,22 @@ p-calendar {
     .ui-state-disabled, .ui-widget:disabled {
 
     }
+
     .ui-calendar {
       input {
         opacity: 1;
         cursor: not-allowed !important;
       }
+
       &.input-expand-height {
         height: 100% !important;
       }
+
       //i {
       //opacity: 0.5;
       //}
     }
+
     .ui-datepicker-header {
       background: $medium-gray;
     }
@@ -82,7 +95,7 @@ p-calendar {
   }
 }
 
-.ui-datepicker {
+body .ui-datepicker {
   z-index: 100000 !important;
   max-width: 425px;
   min-width: 420px;
@@ -92,9 +105,11 @@ p-calendar {
   padding: 0;
   width: auto;
   box-shadow: none;
+
   .ui-datepicker-title {
     line-height: $slab-datepicker-header-navigation-line-height !important;
   }
+
   .ui-datepicker-header {
     $icon-margin-right: 10px;
     $icon-margin-left: 40px;
@@ -103,25 +118,31 @@ p-calendar {
     margin-bottom: 0;
     line-height: $slab-datepicker-header-navigation-line-height !important;
     color: white;
+
     .ui-datepicker-prev,
     .ui-datepicker-next,
     .ui-datepicker-title {
       display: none;
     }
+
     p-header {
       color: white;
+
       .ui-datepicker-title {
         display: block;
         margin: 0;
       }
+
       a {
         color: white;
+
         &:hover {
           text-decoration: none;
           background: none;
           color: white;
         }
       }
+
       .icon-angle-double-left {
         float: left;
         margin-left: $icon-margin-right;
@@ -147,12 +168,14 @@ p-calendar {
       }
     }
   }
+
   /**
    * 1. Overrides default browser behaviour
    */
   .ui-datepicker-calendar {
     $datepicker-max-size: 60px;
     border-spacing: 0;
+    margin: 0;
 
     /* 1 */
 
@@ -170,6 +193,7 @@ p-calendar {
         }
       }
     }
+
     tbody {
       tr {
         td {
@@ -182,6 +206,7 @@ p-calendar {
             min-width: $datepicker-max-size;
             max-width: $datepicker-max-size;
             padding: 0 !important;
+            border-radius: 0;
 
             &:hover,
             &:active {
@@ -201,25 +226,38 @@ p-calendar {
       }
     }
   }
+
   p-footer {
     background-color: $light-gray;
   }
 }
 
-.ui-inputtext {
+body .ui-inputtext {
+  padding: .25em;
   padding-top: 1px;
   padding-bottom: 1px;
   width: 100%;
   height: $form-elements-height;
+  border: 1px solid #d6d6d6 !important;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+  &:focus{
+    box-shadow: 0 0 5px #1f89ce !important;
+  }
+
 }
 
 systelab-datepicker {
+  margin-right: 5px;
+
   &.custom-height {
     p-calendar {
       height: 100%;
+
       .ui-calendar {
         height: 100%;
       }
+
       &.input-expand-height {
         input {
           height: 100% !important;
@@ -233,15 +271,18 @@ systelab-date-time {
   &.custom-height {
     p-calendar {
       height: 100%;
+
       .ui-calendar {
         height: 100%;
       }
+
       &.input-expand-height {
         input {
           height: 100% !important;
         }
       }
     }
+
     label {
       margin: auto;
       margin-left: 1px;

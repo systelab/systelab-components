@@ -21,7 +21,7 @@ If you enable a Progress Bar, use the method go() to set the progress as a numbe
 For example:
 
 ```javascript
-	@ViewChild('header') header: DialogHeaderComponent;
+	@ViewChild('header', {static: false}) header: DialogHeaderComponent;
 
 	protected parameters: ShowcaseProgressBarDialogParameters;
 

@@ -83,8 +83,8 @@ To use the checkbox we need to send a parameter that has to be searched in the d
     cellEditorFramework:   CheckboxCellEditorComponent,
     onCellValueChanged:    e => console.log('checkbox', e),
     editable:              true,
-    elementID: 		        'checkboxID',
-    suppressResize:         true
+    elementID: 		       'checkboxID',
+    resizable:             false
 }
 ```
 
@@ -99,7 +99,7 @@ Spinner
     cellRendererFramework: SpinnerCellRendererComponent,
     cellEditorFramework:   SpinnerCellEditorComponent,
     onCellValueChanged:    e => console.log('test', e),
-    suppressResize:         true
+    resizable:             false
 }
 ```
 
