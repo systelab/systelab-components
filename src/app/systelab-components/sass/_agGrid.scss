@@ -32,6 +32,7 @@ $icon-rowaction-font-size: 20px;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          align-items: flex-start;
         }
       }
 
@@ -39,6 +40,7 @@ $icon-rowaction-font-size: 20px;
         padding: 0 5px;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-start;
 
         > span {
           height: auto;
