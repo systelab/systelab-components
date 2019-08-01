@@ -89,7 +89,7 @@ import { TreeModule } from 'primeng/tree';
 		OverlayModule,
 		TreeModule,
 		HttpClientModule,
-		SystelabComponentsModule,
+		SystelabComponentsModule.forRoot(),
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot(),
 		AgGridModule.withComponents([

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -257,4 +257,9 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 	]
 })
 export class SystelabComponentsModule {
+	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
+		return {
+			ngModule: SystelabComponentsModule
+		};
+	}
 }
