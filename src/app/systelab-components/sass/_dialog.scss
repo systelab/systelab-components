@@ -92,7 +92,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   .form-control {
-    @extend .form-control:disabled;
+    @extend .form-control, :disabled;
   }
 
   input[type="radio"] + label {

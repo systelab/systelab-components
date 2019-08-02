@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -10,7 +10,7 @@ import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
 import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
-import { AgGridModule } from 'ag-grid-angular';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
@@ -231,8 +231,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 		ModulabListBox,
 		GridContextMenuComponent,
 		DateRangepicker,
-		PaginatorComponent
-
+		PaginatorComponent,
+		AgGridAngular
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -259,7 +259,10 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule: SystelabComponentsModule
+			ngModule: SystelabComponentsModule,
+			providers: [
+				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true}
+			]
 		};
 	}
 }
