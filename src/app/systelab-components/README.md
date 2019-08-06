@@ -16,10 +16,11 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
 
 ```javascript
 "styles": [
-        "node_modules/ag-grid/dist/styles/ag-grid.css",
-        "node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
-        "node_modules/primeng/resources/themes/omega/theme.css",
+        "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+        "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
+        "node_modules/primeng/resources/themes/nova-light/theme.css",
         "node_modules/primeng/resources/primeng.min.css",
+        "node_modules/primeicons/primeicons.css,
         "node_modules/systelab-components/icons/icomoon.css",
         "node_modules/@fortawesome/fontawesome-free/css/all.css"
       ],
