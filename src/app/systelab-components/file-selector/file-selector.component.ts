@@ -15,7 +15,7 @@ export class FileSelectorComponent {
 	@Output() public fileListChange = new EventEmitter<FileList>();
 
 	@Input() showButtonOnDisable = false;
-	@Input() allowMultipleSelection = false;
+	@Input() multipleSelection = false;
 	@Input() disabled = false;
 
 	@Input()
@@ -50,7 +50,7 @@ export class FileSelectorComponent {
 
 	public selectFile(files: FileList) {
 		if (files.length) {
-			if (this.allowMultipleSelection) {
+			if (this.multipleSelection) {
 				this.fileList = files;
 				this.fileName = '';
 				for (let index = 0; index < files.length; index++) {

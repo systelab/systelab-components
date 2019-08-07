@@ -14,7 +14,7 @@ import { FileSelectorComponent } from './file-selector.component';
         <div>
             <systelab-file-selector [(fileName)]="fileName"
                                     [showButtonOnDisable]="showButtonOnDisable"
-                                    [allowMultipleSelection]="allowMultipleSelection"
+                                    [multipleSelection]="multipleSelection"
                                     [disabled]="disable"
             ></systelab-file-selector>
         </div>
@@ -25,7 +25,7 @@ export class FileSelectorTestComponent {
 
 	public fileName = 'TestFile.txt';
 	public showButtonOnDisable = false;
-	public allowMultipleSelection = false;
+	public multipleSelection = false;
 	public disable = false;
 
 	constructor() {

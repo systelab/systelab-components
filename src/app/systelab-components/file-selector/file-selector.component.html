@@ -3,7 +3,7 @@
            [(ngModel)]="fileName"
            (click)="uploadBtn.click()"
            [disabled]="disabled">
-    <input #uploadBtn type="file" class="d-none" (change)="selectFile($event.target.files)" [multiple]="allowMultipleSelection">
+    <input #uploadBtn type="file" class="d-none" (change)="selectFile($event.target.files)" [multiple]="multipleSelection">
     <div class="input-group-append">
         <button class="btn btn-sm pt-0 pb-0" [disabled]="disabled"
                 [hidden]="disabled && !showButtonOnDisable"

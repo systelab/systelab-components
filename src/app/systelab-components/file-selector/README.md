@@ -10,7 +10,7 @@ Component to select a file.
                         [(fileList)]="fileList"
                         [disabled]="disabled"
                         [showButtonOnDisable]="true"
-                        [allowMultipleSelection]="true">
+                        [multipleSelection]="true">
 </systelab-file-selector>
 ```
 
@@ -20,10 +20,10 @@ Component to select a file.
 | ---- |:----:|:-------:| ----------- |
 | **fileName** | string || The name of the file selected. |
 | **file** | File || Selected File reference. |
-| **fileList** | FileList || Selected list of Files selected. Only when 'allowMultipleSelection' is true |
+| **fileList** | FileList || Selected list of Files selected. Only when 'multipleSelection' is true |
 | disabled | boolean | false | To disable the component. |
 | showButtonOnDisable | boolean | false | Allow to show the selection button when disabled. |
-| allowMultipleSelection | boolean | false | Allow multiple file selection. |
+| multipleSelection | boolean | false | Allow multiple file selection. |
 
 In black the Two-Way Data Binding properties.
 
