@@ -15,6 +15,7 @@
     "build": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
+    "pree2e": "webdriver-manager update",
     "e2e": "ng e2e",
     "update-snapshots": "ng e2e --config protractor-update-snapshot.conf.js",
     "cleardown": "rimraf css sass html build widgets",

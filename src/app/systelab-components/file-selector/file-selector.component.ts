@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
 	selector: 'systelab-file-selector',
-	templateUrl: 'file-selector.component.html',
-	styleUrls: ['file-selector.component.scss']
+	templateUrl: 'file-selector.component.html'
 })
 export class FileSelectorComponent {
 
@@ -16,8 +15,7 @@ export class FileSelectorComponent {
 	@Output() public fileListChange = new EventEmitter<FileList>();
 
 	@Input() showButtonOnDisable = false;
-	@Input() allowMultipleFileSelection = false;
-	@Input() innerSelectorButton = true;
+	@Input() allowMultipleSelection = false;
 	@Input() disabled = false;
 
 	@Input()
@@ -52,7 +50,7 @@ export class FileSelectorComponent {
 
 	public selectFile(files: FileList) {
 		if (files.length) {
-			if (this.allowMultipleFileSelection) {
+			if (this.allowMultipleSelection) {
 				this.fileList = files;
 				this.fileName = '';
 				for (let index = 0; index < files.length; index++) {

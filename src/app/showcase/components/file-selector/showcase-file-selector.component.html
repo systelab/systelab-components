@@ -8,7 +8,7 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="multiple-file-input">Multiple Input File</label>
         <div class="col-md-9">
-            <systelab-file-selector id="multiple-file-input" [(fileName)]="fileNameMultiple" [(fileList)]="fileListMultiple" [allowMultipleFileSelection]="true"></systelab-file-selector>
+            <systelab-file-selector id="multiple-file-input" [(fileName)]="fileNameMultiple" [(fileList)]="fileListMultiple" [allowMultipleSelection]="true"></systelab-file-selector>
         </div>
     </div>
     <div class="row mt-1">
@@ -21,12 +21,6 @@
         <label class="col-md-3 col-form-label" for="disabled-file-input-showing-button">Disabled Input File (showing button)</label>
         <div class="col-md-9">
             <systelab-file-selector id="disabled-file-input-showing-button" [(fileName)]="fileName" [disabled]="true" [showButtonOnDisable]="true"></systelab-file-selector>
-        </div>
-    </div>
-    <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="file-input-no-inner-selector-button">Input File (No Inner Selector Button)</label>
-        <div class="col-md-9">
-            <systelab-file-selector id="file-input-no-inner-selector-button" [(fileName)]="fileNameNoInner" [(file)]="fileNoInner" [innerSelectorButton]="false" [showButtonOnDisable]="true"></systelab-file-selector>
         </div>
     </div>
 </div>
