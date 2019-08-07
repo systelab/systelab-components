@@ -1,7 +1,13 @@
 <div class="input-group">
-    <input class="form-control" id="uploadFile" type="text" name="uploadFile" [(ngModel)]="fileName" (click)="uploadBtn.click()" readonly>
-    <input #uploadBtn type="file" class="d-none" (change)="selectFile($event.target.files)">
+    <input readonly class="form-control" id="uploadFile" type="text" name="uploadFile"
+           [(ngModel)]="fileName"
+           (click)="uploadBtn.click()"
+           [ngClass]="{'rounded-right-border':!innerSelectorButton}"
+           [disabled]="disabled">
+    <input #uploadBtn type="file" class="d-none" (change)="selectFile($event.target.files)" [multiple]="allowMultipleFileSelection">
     <div class="input-group-append">
-        <button class="btn btn-sm pt-0 pb-0" type="button" (click)="uploadBtn.click()">...</button>
+        <button class="btn btn-sm pt-0 pb-0" [disabled]="disabled"
+                [ngClass]="{'d-none': disabled && !showButtonOnDisable, 'rounded-left-border ml-2': !innerSelectorButton }"
+                type="button" (click)="uploadBtn.click()"><b>...</b></button>
     </div>
 </div>
