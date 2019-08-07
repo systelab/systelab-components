@@ -22,8 +22,7 @@
     "copysass": "gulp copysass",
     "copytemplates": "gulp copytemplates",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
-    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copysass && npm run copytemplates",
-    "pree2e": "cd ./node_modules/protractor && npm i -g webdriver-manager@latest && webdriver-manager update"
+    "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copysass && npm run copytemplates"
   },
   "files": [
     "widgets",
@@ -90,6 +89,7 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "node-sass": "^4.9.3",
     "protractor": "^5.4.2",
+    "webdriver-manager": "12.1.6",
     "rimraf": "^2.6.1",
     "snapshot-testing": "^1.0.0",
     "ts-node": "^6.2.0",
