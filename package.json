@@ -23,7 +23,7 @@
     "copytemplates": "gulp copytemplates",
     "ngc-build": "ngc -p ./tsconfig.lib.json",
     "prepublish": "npm run cleardown && npm run inline-build-templates && npm run ngc-build && npm run copysass && npm run copytemplates",
-    "postinstall": "cd ./node_modules/protractor && npm i webdriver-manager@latest && cd ../.. && ./node_modules/.bin/webdriver-manager update"
+    "pree2e": "cd ./node_modules/protractor && npm i -g webdriver-manager@latest && webdriver-manager update"
   },
   "files": [
     "widgets",
