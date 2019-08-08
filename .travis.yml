@@ -4,6 +4,14 @@ language: node_js
 node_js:
   - "9"
 
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+  chrome: stable
+
 install:
   - npm install -g codecov
   - npm install -g codacy-coverage
@@ -17,7 +25,7 @@ before_script:
 
 script:
   - ng test --watch=false --code-coverage
-  - npm run e2e
+  #  - npm run e2e
   - npm run build
 
 after_success:
