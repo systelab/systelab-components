@@ -109,7 +109,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 				event.preventDefault();
 			}
 
-			if (option && option.action !== null && option.action !== undefined) {
+			if (option && option.actionId !== null && option.actionId !== undefined) {
 				this.container.executeContextMenuAction(elementId, actionId);
 			}
 		}
