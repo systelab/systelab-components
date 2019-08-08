@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - 9
+  - "9"
 
 addons:
   apt:
@@ -25,7 +25,7 @@ before_script:
 
 script:
   - ng test --watch=false --code-coverage
-  - npm run e2e
+  #  - npm run e2e
   - npm run build
 
 after_success:
