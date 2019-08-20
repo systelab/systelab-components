@@ -78,10 +78,10 @@ export class CurrentSelectionStatus {
 	selector:    'systelab-two-list',
 	templateUrl: 'two-list.component.html',
 	styles:      [`
-      :host {
-          width: 100%;
-          height: 100%;
-      }
+        :host {
+            width: 100%;
+            height: 100%;
+        }
 	`]
 })
 export class TwoListComponent {
@@ -209,7 +209,6 @@ export class TwoListComponent {
 		this.available = this.removeItemsFromList(this.available, [element]);
 		element.isVisible = true;
 		this.visible = this.visible.concat(element);
-		this.visible = this.sort(this.visible);
 	}
 
 	public moveSelectedItemsFromVisibleToAvailable(element: TwoListItem) {
