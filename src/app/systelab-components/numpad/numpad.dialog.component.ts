@@ -13,7 +13,7 @@ export class NumPadDialogParameters extends SystelabModalContext {
 })
 export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 
-	@ViewChild('inputElement') protected inputElement: ElementRef;
+	@ViewChild('inputElement', {static: false}) protected inputElement: ElementRef;
 	public value = '';
 	public dialogParameters: NumPadDialogParameters;
 	public searchingValue: string;

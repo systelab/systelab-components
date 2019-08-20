@@ -15,7 +15,7 @@ export class SliderComponent {
 	@Input() public value = 0;
 	@Output() public valueChange = new EventEmitter();
 
-	@ViewChild('range') element: ElementRef;
+	@ViewChild('range', {static: false}) element: ElementRef;
 
 
 	public sliderChangeEvent(event: any) {

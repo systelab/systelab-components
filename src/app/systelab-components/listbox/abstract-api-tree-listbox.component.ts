@@ -1,10 +1,8 @@
-import {
-	EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, AfterViewInit
-} from '@angular/core';
+import { AfterViewInit, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-listbox-renderer.component';
-import { Observable } from 'rxjs/Observable';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
+import { Observable } from 'rxjs';
 
 export class TreeListBoxElement<T> {
 	public nodeData: T;
@@ -22,7 +20,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	public columnDefs: Array<any>;
 	public treeValues: Array<TreeListBoxElement<T>> = [];
-	@ViewChild('hidden') public hiddenElement: ElementRef;
+	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 
 	public _selectedTreeItem: TreeListBoxElement<T>;
 

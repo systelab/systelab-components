@@ -5,18 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { DatepickerTime } from './datepicker-time.component';
-import { ButtonModule, CalendarModule } from 'primeng/primeng';
+import { DatepickerTimeComponent } from './datepicker-time.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
+import { Datepicker } from './datepicker.component';
+import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
 	selector: 'systelab-datepicker-time-test',
 	template: `
         <div>
-            <systelab-date-time
-                    [(currentDate)]="currentDate" [(currentHours)]="currentHoursStr"
-                    [(currentMinutes)]="currentMinutesStr"></systelab-date-time>
+            <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <button type="button" class="btn mt-2 mr-1" (click)="resetDatePickerTime()">Reset value
             </button>
         </div>
@@ -24,22 +24,25 @@ import { SystelabTranslateModule } from 'systelab-translate';
 	styles: []
 })
 export class DatepickerTimeTestComponent {
+
+	public defaultYear = 2018;
+	public defaultMonth = 9;
+	public defaultDay = 20;
+	public defaultHours = 14;
+	public defaultMinutes = 5;
+
 	public currentDate: Date;
-	public currentHoursStr: string;
-	public currentMinutesStr: string;
 
 	constructor() {
-		this.currentDate = new Date(2018, 9, 20, 14, 5, 30, 0);
-		this.currentHoursStr = '14';
-		this.currentMinutesStr = '05';
+		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
 	}
 
-	resetDatePickerTime() {
+	public resetDatePickerTime() {
 		this.currentDate = undefined;
 	}
 }
 
-describe('Systelab DatepickerTime', () => {
+describe('Systelab DatepickerTimeComponent', () => {
 	let fixture: ComponentFixture<DatepickerTimeTestComponent>;
 
 	beforeEach(async(() => {
@@ -52,7 +55,10 @@ describe('Systelab DatepickerTime', () => {
 				CalendarModule,
 				HttpClientModule,
 				SystelabTranslateModule],
-			declarations: [TouchspinComponent, DatepickerTime, DatepickerTimeTestComponent]
+			declarations: [TouchspinComponent,
+				Datepicker,
+				DatepickerTimeComponent,
+				DatepickerTimeTestComponent]
 		}).compileComponents();
 	}));
 
@@ -66,22 +72,23 @@ describe('Systelab DatepickerTime', () => {
 	});
 
 	it('should have an initial day value of 20', () => {
-		expect(fixture.componentInstance.currentDate.getDate()).toEqual(20);
+		expect(fixture.componentInstance.currentDate.getDate()).toBe(fixture.componentInstance.defaultDay);
 	});
 
 	it('should have the changed value if there is a change', () => {
-		setValue(fixture, new Date(2018, 9, 21, 14, 15, 30, 0));
-		expect(fixture.componentInstance.currentDate.getDate()).toEqual(21);
+		setValue(fixture, new Date(fixture.componentInstance.defaultYear, fixture.componentInstance.defaultMonth,
+			fixture.componentInstance.defaultDay + 1, fixture.componentInstance.defaultHours, fixture.componentInstance.defaultMinutes));
+		expect(fixture.componentInstance.currentDate.getDate()).toBe(fixture.componentInstance.defaultDay + 1);
 	});
 
 	it('should have the changed value if there is a change in the hour value', () => {
-		setHourValue(fixture, '16');
-		async(() => expect(fixture.componentInstance.currentDate.getHours()).toEqual(16));
+		setHourValue(fixture, 16);
+		expect(fixture.componentInstance.currentDate.getHours()).toBe(16);
 	});
 
 	it('should have the changed value if there is a change in the minutes value', () => {
-		setMinuteValue(fixture, '59');
-		async(() => expect(fixture.componentInstance.currentDate.getMinutes()).toEqual(59));
+		setMinuteValue(fixture, 59);
+		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(59);
 	});
 
 	it('currentDate should be undefined if there is a reset action', () => {
@@ -89,14 +96,25 @@ describe('Systelab DatepickerTime', () => {
 		expect(fixture.componentInstance.currentDate).toBeFalsy();
 	});
 
-	it('currentHours should be "00" if there is a reset action', () => {
-		resetDatepickerTime(fixture);
-		async(() => expect(fixture.componentInstance.currentHoursStr).toEqual('00'));
+
+	it('currentHours should decrement the value if hours minus button is clicked (-1)', () => {
+		clickTouchSpinnerButton(fixture, '#hours', '#minus-button');
+		expect(fixture.componentInstance.currentDate.getHours()).toBe(fixture.componentInstance.defaultHours - 1);
 	});
 
-	it('currentMinutes should be "00" if there is a reset action', () => {
-		resetDatepickerTime(fixture);
-		async(() => expect(fixture.componentInstance.currentMinutesStr).toEqual('00'));
+	it('currentHours should increment the value if hours plus button is clicked (+1)', () => {
+		clickTouchSpinnerButton(fixture, '#hours', '#plus-button');
+		expect(fixture.componentInstance.currentDate.getHours()).toBe(fixture.componentInstance.defaultHours + 1);
+	});
+
+	it('currentMinutes should decrement the value if minutes minus button is clicked (-1)', () => {
+		clickTouchSpinnerButton(fixture, '#minutes', '#minus-button');
+		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes - 1);
+	});
+
+	it('currentMinutes should increment the value if minutes plus button is clicked (+1)', () => {
+		clickTouchSpinnerButton(fixture, '#minutes', '#plus-button');
+		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes + 1);
 	});
 
 });
@@ -111,13 +129,20 @@ function setValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value:
 	fixture.detectChanges();
 }
 
-function setHourValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: string) {
-	fixture.componentInstance.currentHoursStr = value;
+function setHourValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: number) {
+	fixture.componentInstance.currentDate.setHours(value);
 	fixture.detectChanges();
 }
 
-function setMinuteValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: string) {
-	fixture.componentInstance.currentMinutesStr = value;
+function setMinuteValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: number) {
+	fixture.componentInstance.currentDate.setMinutes(value);
 	fixture.detectChanges();
 }
+
+function clickTouchSpinnerButton(fixture: ComponentFixture<DatepickerTimeTestComponent>, spinnerID: string, buttonID: string) {
+	const button = fixture.debugElement.nativeElement.querySelector(spinnerID).querySelector(buttonID);
+	button.click();
+	fixture.detectChanges();
+}
+
 

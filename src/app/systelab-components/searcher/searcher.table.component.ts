@@ -1,12 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
-import {RowNode} from 'ag-grid';
-import {AbstractSearcher} from './abstract-searcher';
-import {AbstractApiGrid} from '../grid/abstract-api-grid.component';
-import {DialogService} from '../modal/dialog/dialog.service';
-import {Observable} from 'rxjs';
-
+import { Component, Input } from '@angular/core';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { RowNode } from 'ag-grid-community';
+import { AbstractSearcher } from './abstract-searcher';
+import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
+import { DialogService } from '../modal/dialog/dialog.service';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'systelab-internal-searcher-table',

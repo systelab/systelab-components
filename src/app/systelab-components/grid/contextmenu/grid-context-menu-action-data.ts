@@ -1,4 +1,4 @@
-import {GridOptions} from 'ag-grid';
+import { GridOptions } from 'ag-grid-community';
 
 export class GridContextMenuActionData<T> {
 

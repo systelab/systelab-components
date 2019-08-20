@@ -12,7 +12,7 @@ export class ShowcaseProgressBarDialogParameters extends SystelabModalContext {
 })
 export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgressBarDialogParameters> {
 
-	@ViewChild('header') header: DialogHeaderComponent;
+	@ViewChild('header', {static: false}) header: DialogHeaderComponent;
 
 	protected parameters: ShowcaseProgressBarDialogParameters;
 	private progress = 0;

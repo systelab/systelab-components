@@ -19,7 +19,7 @@ export class DialogHeaderComponent implements AfterViewInit {
 	@Input() withHome = false;
 	@Input() withMinimize = false;
 
-	@ViewChild('progress') progress: ElementRef;
+	@ViewChild('progress', {static: false}) progress: ElementRef;
 
 	@Output() public close = new EventEmitter();
 	@Output() public info = new EventEmitter();

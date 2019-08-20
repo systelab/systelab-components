@@ -47,7 +47,7 @@ export class ShowcaseGridUtil {
 				onCellValueChanged:    e => console.log('checkbox', e),
 				editable:              true,
 				elementID:             'checkboxID',
-				suppressResize:        true
+				resizable:        	   false
 			}, {
 				colId:                 'spinner',
 				headerName:            'Cell with Spinner',
@@ -57,7 +57,7 @@ export class ShowcaseGridUtil {
 				cellRendererFramework: SpinnerCellRendererComponent,
 				cellEditorFramework:   SpinnerCellEditorComponent,
 				onCellValueChanged:    e => console.log('test', e),
-				suppressResize:        true
+				resizable:        	   false
 			}];
 	}
 
