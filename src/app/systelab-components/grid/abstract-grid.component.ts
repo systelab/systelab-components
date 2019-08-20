@@ -344,7 +344,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			event.node.setSelected(true);
 		}
 		if (event.column.colId !== 'contextMenu' && !event.column.isCellEditable(event.node)) {
-			this.clickRow.emit((event.event.ctrlKey && !this.showChecks) ? event.event : event.data);
+			this.clickRow.emit((event.event.ctrlKey && this.multipleSelection && !this.showChecks) ? event.event : event.data);
 		}
 	}
 
