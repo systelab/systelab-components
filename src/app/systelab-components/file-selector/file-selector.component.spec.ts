@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { ButtonModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/button';
 import { FileSelectorComponent } from './file-selector.component';
 
 @Component({
