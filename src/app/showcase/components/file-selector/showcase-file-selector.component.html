@@ -1,8 +1,26 @@
 <div class="container-fluid">
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="file-input">Input File</label>
+        <label class="col-md-3 col-form-label" for="file-input">Single Input File</label>
         <div class="col-md-9">
-            <systelab-file-selector [(fileName)]="fileName"></systelab-file-selector>
+            <systelab-file-selector id="file-input" [(fileName)]="fileName" [(file)]="file"></systelab-file-selector>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="multiple-file-input">Multiple Input File</label>
+        <div class="col-md-9">
+            <systelab-file-selector id="multiple-file-input" [(fileName)]="fileNameMultiple" [(fileList)]="fileListMultiple" [multipleSelection]="true"></systelab-file-selector>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="disabled-file-input">Disabled Input File</label>
+        <div class="col-md-9">
+            <systelab-file-selector id="disabled-file-input" [(fileName)]="fileName" [disabled]="true"></systelab-file-selector>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="disabled-file-input-showing-button">Disabled Input File (showing button)</label>
+        <div class="col-md-9">
+            <systelab-file-selector id="disabled-file-input-showing-button" [(fileName)]="fileName" [disabled]="true" [showButtonOnDisable]="true"></systelab-file-selector>
         </div>
     </div>
 </div>
