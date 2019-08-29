@@ -105,6 +105,7 @@ body .ui-datepicker {
   padding: 0;
   width: auto;
   box-shadow: none;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
   .ui-datepicker-title {
     line-height: $slab-datepicker-header-navigation-line-height !important;

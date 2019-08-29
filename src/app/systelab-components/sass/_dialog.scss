@@ -46,8 +46,8 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   &.fullscreen {
-    border: 0px solid lightgray;
-    border-radius: 0px;
+    border: 0 solid lightgray;
+    border-radius: 0;
 
     .slab-dialog-bottom {
       background: $darker-gray;
@@ -92,7 +92,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   .form-control {
-    @extend .form-control, :disabled;
+    @extend .form-control:disabled;
   }
 
   input[type="radio"] + label {
