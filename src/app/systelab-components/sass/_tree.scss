@@ -36,12 +36,11 @@ body .ui-tree {
           padding: 0;
 
           span {
-            padding-left: 3.750px;
-            padding-right: 3.750px;
+            padding: 1.5px 3.750px;
           }
 
           label {
-            margin: 0px;
+            margin: 0;
             padding-top: 4px;
             padding-bottom: 4px;
           }
@@ -54,6 +53,7 @@ body .ui-tree {
           &:hover {
             background: $slab-selected-background-color;
           }
+
         }
 
         &:hover {
@@ -63,6 +63,14 @@ body .ui-tree {
         &.ui-treenode-content-selected {
           background: $slab-selected-background-color;
           color: rgb(34, 34, 34);
+        }
+
+        &.ui-treenode-selectable {
+          .ui-treenode-label {
+            &:not(.ui-state-highlight):hover {
+              background: $slab-selected-background-color;
+            }
+          }
         }
       }
     }
