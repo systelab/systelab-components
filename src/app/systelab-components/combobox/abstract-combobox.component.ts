@@ -184,7 +184,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
 	@ViewChild('dropdown', {static: true}) public dropdownElement: ElementRef;
 	@ViewChild('input', {static: false}) public inputElement: ElementRef;
-	@ViewChild('hidden', {static: false}) public hiddenElement: ElementRef;
+	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
