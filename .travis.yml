@@ -4,6 +4,15 @@ language: node_js
 node_js:
 - '10'
 
+addons:
+  apt:
+    update: true
+    sources:
+    - google-chrome
+    packages:
+    - dpkg
+    - google-chrome-stable
+
 install:
 - npm install -g codecov
 - npm install -g codacy-coverage
