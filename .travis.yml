@@ -25,8 +25,9 @@ before_script:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=77.0.3865.75
-
+- npm install -g webdriver-manager
+- webdriver-manager update
+- webdriver-manager start &
 script:
 - ng test --watch=false --code-coverage
 - npm run e2e
