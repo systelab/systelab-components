@@ -15,7 +15,7 @@
     "build": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --no-webdriver-update",
     "update-snapshots": "ng e2e --config protractor-update-snapshot.conf.js",
     "cleardown": "rimraf css sass html build widgets",
     "inline-build-templates": "gulp inline-build-templates",
