@@ -12,6 +12,7 @@ addons:
     packages:
     - dpkg
     - google-chrome-stable
+  chrome: stable
 
 install:
 - npm install -g codecov
