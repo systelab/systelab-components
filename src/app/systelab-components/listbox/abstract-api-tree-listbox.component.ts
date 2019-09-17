@@ -46,14 +46,12 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	get selectedIDList() {
 		this._selectedIDList = '';
-		let first = true;
 		for (const selectedItem of this.multipleSelectedItemList) {
-			if (first) {
-				this._selectedIDList = ((selectedItem['level'] === 0) ? this.getSelectionPrefix(0) : this.getSelectionPrefix(1)) + selectedItem.nodeData[this.getIdField(0)];
-				first = false;
-			} else {
-				this._selectedIDList += ',' + ((selectedItem['level'] === 0) ? this.getSelectionPrefix(0) : this.getSelectionPrefix(1)) + selectedItem.nodeData[this.getIdField(1)];
+			if (this._selectedIDList && this._selectedIDList !== '') {
+				this._selectedIDList += ',';
 			}
+			const level = selectedItem['level'] === 0 ? 0 : 1;
+			this._selectedIDList += this.getSelectionPrefix(level) + selectedItem.nodeData[this.getIdField(level)];
 		}
 		return this._selectedIDList;
 	}
@@ -215,7 +213,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 				this.treeValues.filter((value: TreeListBoxElement<T>) => {
 					if (value.nodeData[this.getIdField(0)] === parentID) {
 						anyNode = true;
-						if (!value.selected) {
+						if (!value.selected && value.level === 1) {
 							allChildSelected = false;
 						}
 					}
