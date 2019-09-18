@@ -16,7 +16,7 @@ import { DialogService, MessagePopupService } from '../modal';
 	template: `
                   <div>
                       <systelab-chip-button [buttonList]="buttonList"
-                                            [showRemoveButton]="showRemoveButton"
+                                            [isRemoveEnabled]="isRemoveEnabled"
                                             [showAddButton]="showAddButton"></systelab-chip-button>
                   </div>
 			  `,
@@ -27,7 +27,7 @@ export class ChipButtonTestComponent {
 		{name: 'New York', id: 1, isChecked: false},
 		{name: 'Rome', id: 2, isChecked: false}
 	];
-	public showRemoveButton: boolean;
+	public isRemoveEnabled: boolean;
 	public showAddButton: boolean;
 }
 
@@ -92,6 +92,12 @@ describe('Systelab Chip Button', () => {
 		clickRemoveLastButton(fixture);
 		checkHasList(fixture, fixture.componentInstance.buttonList.length);
 	});
+
+	it('should have at least 1 button isChecked', () => {
+		setAddValue(fixture, true);
+		clickAddButton(fixture);
+		checkAtListOneChecked(fixture);
+	});
 });
 
 function checkHasList(fixture: ComponentFixture<ChipButtonTestComponent>, num: number) {
@@ -115,7 +121,7 @@ function setAddValue(fixture: ComponentFixture<ChipButtonTestComponent>, value: 
 }
 
 function setRemoveValue(fixture: ComponentFixture<ChipButtonTestComponent>, value: boolean) {
-	fixture.componentInstance.showRemoveButton = value;
+	fixture.componentInstance.isRemoveEnabled = value;
 	fixture.detectChanges();
 }
 
@@ -139,4 +145,11 @@ function checkElementAdded(fixture: ComponentFixture<ChipButtonTestComponent>, n
 		.split(' ')[0];
 	expect(element)
 		.toContain(name);
+}
+
+function checkAtListOneChecked(fixture: ComponentFixture<ChipButtonTestComponent>) {
+	const buttons = fixture.debugElement.nativeElement.getElementsByTagName('systelab-chip-button')[0]
+		.querySelectorAll('.btn-primary');
+	expect(buttons.length)
+		.toEqual(1);
 }

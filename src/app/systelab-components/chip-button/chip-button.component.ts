@@ -14,25 +14,25 @@ export class ChipButtonItem {
 export class ChipButtonComponent {
 
 	@Output() public changeButton = new EventEmitter();
-	@Output() public selectedButton = new EventEmitter();
+	@Output() public selectButton = new EventEmitter();
 
 	@Input()
 	public buttonList: ChipButtonItem[];
 
 	@Input()
-	public titleDescription: string;
+	public deleteConfirmationTitle: string;
 
 	@Input()
-	public messageDescription: string;
+	public deleteConfirmationMessage: string;
 
 	@Input()
 	public showAddButton = true;
 
 	@Input()
-	public showRemoveButton = true;
+	public isRemoveEnabled = true;
 
 	@Input()
-	public isDisabled = false;
+	public disabled = false;
 
 	constructor(protected messagePopupService: MessagePopupService, protected i18nService: I18nService) {
 	}
@@ -47,12 +47,12 @@ export class ChipButtonComponent {
 			.forEach(btn =>
 				btn.isChecked = false
 			);
-		this.selectedButton.emit(item);
+		this.selectButton.emit(item);
 	}
 
 	public removeButtonItem(item: ChipButtonItem) {
-		if (this.messageDescription) {
-			this.messagePopupService.showYesNoQuestionPopup(this.titleDescription, this.messageDescription)
+		if (this.deleteConfirmationMessage) {
+			this.messagePopupService.showYesNoQuestionPopup(this.deleteConfirmationTitle, this.deleteConfirmationMessage)
 				.subscribe((res) => {
 					if (res) {
 						this.removeElement(item);
@@ -70,7 +70,9 @@ export class ChipButtonComponent {
 	}
 
 	public changeButtonItem(item: ChipButtonItem) {
-		this.changeButton.emit(item);
+		if (!this.disabled) {
+			this.changeButton.emit(item);
+		}
 	}
 
 	private removeElement(item: ChipButtonItem) {
