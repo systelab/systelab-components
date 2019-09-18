@@ -41,6 +41,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	@Input()
 	set selectedIDList(value: string) {
 		this._selectedIDList = value;
+		this.initSelectionList();
 		this.selectedIDListChange.emit(this._selectedIDList);
 	}
 
@@ -165,26 +166,42 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	protected initSelectionList(): void {
-		if (this._selectedIDList && this.multipleSelection) {
-			const selectedIDStringList: Array<string> = this._selectedIDList.split(',');
-			selectedIDStringList.forEach(selectedID => {
-				if (selectedID.startsWith(this.getSelectionPrefix(0))) {
-					this.treeValues.forEach(element => {
-						if (element.level === 0 && ((element.nodeData[this.getIdField(0)] + '') === selectedID.substring(1, selectedID.length))) {
-							element.selected = true;
-							this.addSelectedItem(element);
-						}
-					});
-				}
-				if (selectedID.startsWith(this.getSelectionPrefix(1))) {
-					this.treeValues.forEach(element => {
-						if (element.level === 1 && ((element.nodeData[this.getIdField(1)] + '') === selectedID.substring(1, selectedID.length))) {
-							element.selected = true;
-							this.addSelectedItem(element);
-						}
-					});
-				}
-			});
+		if (this.multipleSelection) {
+			if (this._selectedIDList) {
+				const selectedIDStringList: Array<string> = this._selectedIDList.split(',');
+				selectedIDStringList.forEach(selectedID => {
+					if (selectedID.startsWith(this.getSelectionPrefix(0))) {
+						this.treeValues.forEach(element => {
+							if (element.level === 0 && ((element.nodeData[this.getIdField(0)] + '') === selectedID.substring(1, selectedID.length))) {
+								element.selected = true;
+								this.addSelectedItem(element);
+							}
+						});
+					}
+					if (selectedID.startsWith(this.getSelectionPrefix(1))) {
+						this.treeValues.forEach(element => {
+							if (element.level === 1 && ((element.nodeData[this.getIdField(1)] + '') === selectedID.substring(1, selectedID.length))) {
+								element.selected = true;
+								this.addSelectedItem(element);
+							}
+						});
+					}
+				});
+			} else {
+				this.multipleSelectedItemList = [];
+				this.cleanSelection();
+			}
+		}
+	}
+
+	// Override
+	public cleanSelection(): void {
+		this.treeValues = this.treeValues.map(treeValue => {
+			treeValue.selected = false;
+			return treeValue;
+		});
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.redrawRows();
 		}
 	}
 
