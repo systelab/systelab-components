@@ -13,17 +13,17 @@ export class ShowcaseButtonComponent {
 	constructor() {
 
 		this.buttonList = [
-			{name: 'New York', id: 1},
-			{name: 'Rome', id: 2},
-			{name: 'London', id: 3},
-			{name: 'Barcelona', id: 4},
-			{name: 'París', id: 5},
-			{name: 'Berlín', id: 6},
-			{name: 'Oslo', id: 7},
-			{name: 'Atenas', id: 8},
-			{name: 'Lisboa', id: 9},
-			{name: 'Amsterdam', id: 10},
-			{name: 'St Petersburgo', id: 11}
+			{name: 'New York', id: 1, isChecked: false},
+			{name: 'Rome', id: 2, isChecked: false},
+			{name: 'London', id: 3, isChecked: false},
+			{name: 'Barcelona', id: 4, isChecked: false},
+			{name: 'París', id: 5, isChecked: false},
+			{name: 'Berlín', id: 6, isChecked: false},
+			{name: 'Oslo', id: 7, isChecked: false},
+			{name: 'Atenas', id: 8, isChecked: false},
+			{name: 'Lisboa', id: 9, isChecked: false},
+			{name: 'Amsterdam', id: 10, isChecked: false},
+			{name: 'St Petersburgo', id: 11, isChecked: false}
 		];
 	}
 

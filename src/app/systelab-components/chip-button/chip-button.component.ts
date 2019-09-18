@@ -3,7 +3,7 @@ import { MessagePopupService } from '../modal';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 export class ChipButtonItem {
-	constructor(public id: number, public name: string) {
+	constructor(public id: number, public name: string, public isChecked = false) {
 	}
 }
 
@@ -14,7 +14,7 @@ export class ChipButtonItem {
 export class ChipButtonComponent {
 
 	@Output() public changeButton = new EventEmitter();
-	@Output() public addButton = new EventEmitter();
+	@Output() public selectedButton = new EventEmitter();
 
 	@Input()
 	public buttonList: ChipButtonItem[];
@@ -38,15 +38,16 @@ export class ChipButtonComponent {
 	}
 
 	public onClick(item: ChipButtonItem) {
-		document.getElementById(item.id.toString())
-			.classList
-			.add('btn-primary');
+		this.selectItem(item);
+	}
+
+	public selectItem(item: ChipButtonItem) {
+		item.isChecked = true;
 		this.buttonList.filter(btn => btn !== item)
 			.forEach(btn =>
-				document.getElementById(btn.id.toString())
-					.classList
-					.remove('btn-primary')
+				btn.isChecked = false
 			);
+		this.selectedButton.emit(item);
 	}
 
 	public removeButtonItem(item: ChipButtonItem) {
@@ -63,8 +64,9 @@ export class ChipButtonComponent {
 	}
 
 	public addButtonITem() {
-		this.buttonList.push({name: this.i18nService.instant('COMMON_NEW'), id: this.buttonList.length + 1});
-		this.addButton.emit(this.buttonList[this.buttonList.length]);
+		this.buttonList.push({name: this.i18nService.instant('COMMON_NEW'), id: this.buttonList.length + 1, isChecked: false});
+		this.selectItem(this.buttonList[this.buttonList.length - 1]);
+
 	}
 
 	public changeButtonItem(item: ChipButtonItem) {
