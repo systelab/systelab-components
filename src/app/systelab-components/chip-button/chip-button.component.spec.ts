@@ -24,8 +24,8 @@ import { DialogService, MessagePopupService } from '../modal';
 })
 export class ChipButtonTestComponent {
 	public buttonList: Array<ChipButtonItem> = [
-		{name: 'New York', id: 1},
-		{name: 'Rome', id: 2}
+		{name: 'New York', id: 1, isChecked: false},
+		{name: 'Rome', id: 2, isChecked: false}
 	];
 	public showRemoveButton: boolean;
 	public showAddButton: boolean;
