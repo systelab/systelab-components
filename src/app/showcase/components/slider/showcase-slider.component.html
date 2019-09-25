@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="full-width-input">Slider</label>
+        <label class="col-md-3 col-form-label" for="full-width-input">Slider (value: {{sliderValue}})</label>
         <div class="col-md-9">
-            <systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25"
+            <systelab-slider [(value)]="sliderValue" [min]="0" [max]="200" [step]="25" [continuous]="false"
                              name="slider"></systelab-slider>
         </div>
     </div>
