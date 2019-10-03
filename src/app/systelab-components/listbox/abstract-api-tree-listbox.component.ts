@@ -41,7 +41,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	@Input()
 	set selectedIDList(value: string) {
 		this._selectedIDList = value;
-		this.initSelectionList();
+		if (!value) {
+			this.initSelectionList();
+		}
 		this.selectedIDListChange.emit(this._selectedIDList);
 	}
 
@@ -195,6 +197,10 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	// Override
+	public onRowSelected(event: any) {
+	}
+
+	// Override
 	public cleanSelection(): void {
 		this.treeValues = this.treeValues.map(treeValue => {
 			treeValue.selected = false;
@@ -213,6 +219,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	public changeValues(event: any) {
+		console.log('antes', this.multipleSelectedItemList);
 		if (this.multipleSelection) {
 			this.addRemoveToMultipleSelectedItem(event);
 
