@@ -80,6 +80,7 @@ import { PaginatorPageComponent } from './paginator/paginator-page.component';
 import { CalendarModule } from 'primeng/calendar';
 import { Tree, TreeModule } from 'primeng/tree';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { ChipButtonComponent } from './chip-button/chip-button.component';
 
 @NgModule({
 	imports:         [
@@ -162,7 +163,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 		ModulabListBox,
 		DateRangepicker,
 		PaginatorComponent,
-		PaginatorPageComponent
+		PaginatorPageComponent,
+		ChipButtonComponent,
 
 	],
 	exports:         [
@@ -232,7 +234,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 		GridContextMenuComponent,
 		DateRangepicker,
 		PaginatorComponent,
-		AgGridAngular
+		AgGridAngular,
+		ChipButtonComponent
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -259,7 +262,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 export class SystelabComponentsModule {
 	static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
 		return {
-			ngModule: SystelabComponentsModule,
+			ngModule:  SystelabComponentsModule,
 			providers: [
 				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true}
 			]

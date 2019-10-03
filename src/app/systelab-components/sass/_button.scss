@@ -20,6 +20,7 @@ $slab-button-background-color: $dark !default;
 .btn:not(.btn-outline-link) {
   background-color: $slab-button-background-color;
   color: white;
+
   &:hover {
     background-color: $primary;
     border-color: $primary;
