@@ -41,7 +41,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	@Input()
 	set selectedIDList(value: string) {
 		this._selectedIDList = value;
-		this.initSelectionList();
+		if (!value) {
+			this.initSelectionList();
+		}
 		this.selectedIDListChange.emit(this._selectedIDList);
 	}
 
