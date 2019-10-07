@@ -143,6 +143,10 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
           }
         }
       }
+
+      .ag-body-horizontal-scroll {
+        display: none;
+      }
     }
 
     &.disabled {
