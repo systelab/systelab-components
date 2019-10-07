@@ -118,24 +118,34 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
       .ag-body-viewport {
         .ag-center-cols-viewport {
           overflow-x: hidden;
+          background-color: $background-primary;
 
-          .ag-row {
-            background-color: $background-primary;
+          .ag-center-cols-container {
+            width: 100% !important;
 
-            &.ag-row-selected {
-              background-color: $slab-selected-background-color;
+            .ag-row {
+              background-color: $background-primary;
+
+              &.ag-row-selected {
+                background-color: $slab-selected-background-color;
+              }
+
+              &.ag-row-hover {
+                background-color: $slab-selected-background-color;
+              }
+
+              .ag-cell {
+                border: none;
+                padding: 0 $slab-combo-check-cell-padding;
+              }
             }
 
-            &.ag-row-hover {
-              background-color: $slab-selected-background-color;
-            }
-
-            .ag-cell {
-              border: none;
-              padding: 0 $slab-combo-check-cell-padding;
-            }
           }
         }
+      }
+
+      .ag-body-horizontal-scroll {
+        display: none;
       }
     }
 
