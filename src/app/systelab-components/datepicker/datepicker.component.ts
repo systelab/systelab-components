@@ -172,60 +172,65 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 			if (dateStr.length >= 2) {
 
+				let numDays = 0;
+				let numMonths = 0;
+				let numYears = 0;
+
 				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
 					const days: number = Number(dateStr.replace('d', '')
 						.replace('D', ''));
-					this.currentDate = new Date();
-					emit = false;
 					if (!isNaN(days)) {
-						this.currentDate.setDate(today.getDate() - days);
-						emit = true;
+						numDays = days;
 					}
 				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
 					const weeks: number = Number(dateStr.replace('w', '')
 						.replace('W', ''));
-					this.currentDate = new Date();
-					emit = false;
 					if (!isNaN(weeks)) {
-						this.currentDate.setDate(today.getDate() - (weeks * 7));
-						emit = true;
+						numDays = (weeks * 7);
 					}
 				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
 					const weeks: number = Number(dateStr.replace('s', '')
 						.replace('S', ''));
-					this.currentDate = new Date();
-					emit = false;
 					if (!isNaN(weeks)) {
-						this.currentDate.setDate(today.getDate() - (weeks * 7));
-						emit = true;
+						numDays =  (weeks * 7);
 					}
 				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
 					const months: number = Number(dateStr.replace('m', '')
 						.replace('M', ''));
-					this.currentDate = new Date();
-					emit = false;
 					if (!isNaN(months)) {
-						this.currentDate.setMonth(today.getMonth() - months);
-						emit = true;
+						numMonths = months;
 					}
 				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
 					const years: number = Number(dateStr.replace('a', '')
-						.replace('S', ''));
-					this.currentDate = new Date();
-					emit = false;
+						.replace('A', ''));
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
-						emit = true;
+						numYears = years;
 					}
 				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
 					const years: number = Number(dateStr.replace('y', '')
 						.replace('Y', ''));
-					this.currentDate = new Date();
-					emit = false;
 					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
-						emit = true;
+						numYears = years;
 					}
+				}
+
+				emit = false;
+				if (numDays !== 0) {
+					this.currentDate = new Date();
+					this.currentDate.setDate(today.getDate() + numDays);
+					emit = true;
+				} else if (numMonths !== 0) {
+					this.currentDate = new Date();
+					this.currentDate.setMonth(today.getMonth() + numMonths);
+					emit = true;
+				} else if (numYears !== 0) {
+					this.currentDate = new Date();
+					this.currentDate.setFullYear(today.getFullYear() + numYears, today.getMonth(), today.getDate());
+					emit = true;
+				} else {
+					dateStr = this.formatDate(dateStr);
+					this.currentDate = new Date(dateStr);
+					emit = true;
 				}
 			} else if (dateStr === '') {
 				emit = true;
@@ -237,7 +242,30 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	public onKeyDown(event: KeyboardEvent) {
+	public formatDate(date: string ): string {
+		let dateTmp: string = date.trim();
+
+		if (dateTmp != null) {
+			if ((dateTmp.length === 8 || dateTmp.length === 10)
+				&& (dateTmp.lastIndexOf('/')  > 0 || dateTmp.lastIndexOf('-') > 0 || dateTmp.lastIndexOf('.') > 0)) {
+				dateTmp = dateTmp.replace('/', '')
+					.replace('-', '')
+					.replace('.', '');
+			}
+
+			if (dateTmp.length === 6) {
+				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/20'
+					+ dateTmp.substring(4, dateTmp.length);
+			} else if (dateTmp.length === 8) {
+				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/'
+					+ dateTmp.substring(4, dateTmp.length);
+			}
+		}
+
+		return dateTmp;
+	}
+
+public onKeyDown(event: KeyboardEvent) {
 		if (event.keyCode === 13) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
