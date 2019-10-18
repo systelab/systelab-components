@@ -257,11 +257,17 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		let dateTmp: string = date.trim();
 
 		if (dateTmp != null) {
-			if ((dateTmp.length === 8 || dateTmp.length === 10)
-				&& (dateTmp.lastIndexOf('/')  > 0 || dateTmp.lastIndexOf('-') > 0 || dateTmp.lastIndexOf('.') > 0)) {
-				dateTmp = dateTmp.split('/').join('')
-					.split('-').join('')
-					.split('.').join('');
+			let dateSeparator;
+			dateSeparator = this.getSparator(dateTmp);
+
+			if (dateSeparator) {
+				dateTmp = this.manageSeparator ( dateTmp,  dateSeparator);
+
+				// Undefined means not able to manage. Return the initial one.
+				if (dateTmp === undefined) {
+					dateTmp =  date;
+					return dateTmp;
+				}
 			}
 
 			if (dateTmp.length === 6) {
@@ -274,6 +280,45 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 
 		return dateTmp;
+	}
+
+	private manageSeparator (dateTmp: string , dateSeparator: string ): string {
+		let separatorPosition: number;
+		let firstPartValue: string;
+		let secondPartValue: string;
+		separatorPosition = dateTmp.lastIndexOf(dateSeparator);
+		if (separatorPosition > 0) {
+			firstPartValue = dateTmp.substr(0, separatorPosition);
+			dateTmp = dateTmp.substr(separatorPosition);
+			if (firstPartValue.length === 1) {
+				firstPartValue = '0' + firstPartValue;
+			}
+			separatorPosition = dateTmp.lastIndexOf(dateSeparator);
+			if (separatorPosition > 0) {
+				secondPartValue = dateTmp.substr(0, separatorPosition);
+				dateTmp = dateTmp.substr(separatorPosition);
+				if (secondPartValue.length === 1) {
+					secondPartValue = '0' + secondPartValue;
+				}
+				dateTmp = firstPartValue + secondPartValue + dateTmp;
+			} else {
+				// Not acceptable to find only one separator. Return undefined to be managed in caller function
+				return undefined;
+			}
+		}
+		return dateTmp;
+	}
+
+	private getSparator(dateTmp: string) {
+		let dateSeparator: string;
+		if (dateTmp.lastIndexOf('/') > 0) {
+			dateSeparator = '/';
+		} else if (dateTmp.lastIndexOf('-') > 0) {
+			dateSeparator = '-';
+		} else if (dateTmp.lastIndexOf('.') > 0) {
+			dateSeparator = '.';
+		}
+		return dateSeparator;
 	}
 
 	public onKeyDown(event: KeyboardEvent) {
