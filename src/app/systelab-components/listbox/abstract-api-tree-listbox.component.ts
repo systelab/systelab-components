@@ -235,7 +235,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	private selectUnselectChildTree(event: any) {
-		this.treeValues.filter((value: TreeListBoxElement<T>) => {
+		this.treeValues.forEach((value: TreeListBoxElement<T>) => {
 			if (value.nodeData[this.getIdField(0)] === event.nodeData[this.getIdField(0)]) {
 				value.selected = event.selected;
 				this.addRemoveToMultipleSelectedItem(value);
@@ -247,7 +247,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		const parentID = event.nodeData[this.getIdField(0)];
 		let allChildSelected = true;
 		let anyNode = false;
-		this.treeValues.filter((value: TreeListBoxElement<T>) => {
+		this.treeValues.forEach((value: TreeListBoxElement<T>) => {
 			if (value.nodeData[this.getIdField(0)] === parentID) {
 				anyNode = true;
 				if (!value.selected && value.level === 1) {
@@ -256,7 +256,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			}
 		});
 		if (anyNode) {
-			this.treeValues.filter((value: TreeListBoxElement<T>) => {
+			this.treeValues.forEach((value: TreeListBoxElement<T>) => {
 				if (value.level === 0 && value.nodeData[this.getIdField(0)] === parentID) {
 					value.selected = allChildSelected;
 					this.addRemoveToMultipleSelectedItem(value);
