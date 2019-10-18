@@ -270,12 +270,15 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				}
 			}
 
-			if (dateTmp.length === 6) {
+			if (dateTmp.length === 4) {
+				dateTmp = '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/'
+					+ dateTmp.substring(2);
+			} else if (dateTmp.length === 6) {
 				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/'
-					+ dateTmp.substring(4, dateTmp.length);
+					+ dateTmp.substring(4);
 			} else if (dateTmp.length === 8) {
 				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/'
-					+ dateTmp.substring(4, dateTmp.length);
+					+ dateTmp.substring(4);
 			}
 		}
 
