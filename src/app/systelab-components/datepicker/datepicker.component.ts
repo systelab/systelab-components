@@ -167,79 +167,90 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 
-			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim();
-			dateStr = dateStr.toLowerCase();
+			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
 
 			if (dateStr.length >= 2) {
-
-				let numDays = 0;
-				let numMonths = 0;
-				let numYears = 0;
-
-				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
-					const days: number = Number(dateStr.replace('d', '')
-						.replace('D', ''));
-					if (!isNaN(days)) {
-						numDays = days;
-					}
-				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
-					const weeks: number = Number(dateStr.replace('w', '')
-						.replace('W', ''));
-					if (!isNaN(weeks)) {
-						numDays = (weeks * 7);
-					}
-				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
-					const weeks: number = Number(dateStr.replace('s', '')
-						.replace('S', ''));
-					if (!isNaN(weeks)) {
-						numDays =  (weeks * 7);
-					}
-				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
-					const months: number = Number(dateStr.replace('m', '')
-						.replace('M', ''));
-					if (!isNaN(months)) {
-						numMonths = months;
-					}
-				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
-					const years: number = Number(dateStr.replace('a', '')
-						.replace('A', ''));
-					if (!isNaN(years)) {
-						numYears = years;
-					}
-				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
-					const years: number = Number(dateStr.replace('y', '')
-						.replace('Y', ''));
-					if (!isNaN(years)) {
-						numYears = years;
-					}
-				}
-
-				emit = false;
-				if (numDays !== 0) {
-					this.currentDate = new Date();
-					this.currentDate.setDate(today.getDate() + numDays);
-					emit = true;
-				} else if (numMonths !== 0) {
-					this.currentDate = new Date();
-					this.currentDate.setMonth(today.getMonth() + numMonths);
-					emit = true;
-				} else if (numYears !== 0) {
-					this.currentDate = new Date();
-					this.currentDate.setFullYear(today.getFullYear() + numYears, today.getMonth(), today.getDate());
-					emit = true;
+				let numToChange;
+				numToChange = this.getNumberOfDays (dateStr);
+				if (numToChange !== 0) {
+					this.currentDate.setDate(today.getDate() + numToChange);
 				} else {
-					dateStr = this.formatDate(dateStr);
-					this.currentDate = new Date(dateStr);
-					emit = true;
+					numToChange = this.getNumberOfMonths (dateStr);
+					if (numToChange !== 0) {
+						this.currentDate.setMonth(today.getMonth() + numToChange);
+					} else {
+						numToChange = this.getNumberOfYears(dateStr);
+						if (numToChange !== 0) {
+							this.currentDate.setFullYear(today.getFullYear() + numToChange, today.getMonth(), today.getDate());
+						}  else {
+							dateStr = this.formatDate(dateStr);
+							this.currentDate = new Date(dateStr);
+						}
+					}
 				}
-			} else if (dateStr === '') {
-				emit = true;
+			} else if (dateStr !== '') {
+				emit = false;
 			}
 		}
+
 		if (emit && this.somethingChanged) {
 			this.currentDateChange.emit(this.currentDate);
 			this.somethingChanged = false;
 		}
+	}
+
+	private getNumberOfDays (dateStr: string): number {
+		let numDays = 0;
+		if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
+			const days: number = Number(dateStr.replace('d', '')
+				.replace('D', ''));
+			if (!isNaN(days)) {
+				numDays = days;
+			}
+		} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
+			const weeks: number = Number(dateStr.replace('w', '')
+				.replace('W', ''));
+			if (!isNaN(weeks)) {
+				numDays = (weeks * 7);
+			}
+		} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
+			const weeks: number = Number(dateStr.replace('s', '')
+				.replace('S', ''));
+			if (!isNaN(weeks)) {
+				numDays =  (weeks * 7);
+			}
+		}
+		return numDays;
+	}
+
+	private getNumberOfMonths (dateStr: string): number {
+		let numMonths = 0;
+		if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
+			const months: number = Number(dateStr.replace('m', '')
+				.replace('M', ''));
+			if (!isNaN(months)) {
+			numMonths = months;
+			}
+		}
+		return numMonths;
+	}
+
+	private getNumberOfYears (dateStr: string): number {
+		let numYears = 0;
+		if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
+			const years: number = Number(dateStr.replace('a', '')
+				.replace('A', ''));
+			if (!isNaN(years)) {
+			numYears = years;
+			}
+		} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
+			const years: number = Number(dateStr.replace('y', '')
+				.replace('Y', ''));
+			if (!isNaN(years)) {
+				numYears = years;
+			}
+		}
+		return numYears;
 	}
 
 	public formatDate(date: string ): string {
@@ -248,13 +259,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (dateTmp != null) {
 			if ((dateTmp.length === 8 || dateTmp.length === 10)
 				&& (dateTmp.lastIndexOf('/')  > 0 || dateTmp.lastIndexOf('-') > 0 || dateTmp.lastIndexOf('.') > 0)) {
-				dateTmp = dateTmp.replace('/', '')
-					.replace('-', '')
-					.replace('.', '');
+				dateTmp = dateTmp.split('/').join('')
+					.split('-').join('')
+					.split('.').join('');
 			}
 
 			if (dateTmp.length === 6) {
-				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/20'
+				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/'
 					+ dateTmp.substring(4, dateTmp.length);
 			} else if (dateTmp.length === 8) {
 				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/'
@@ -265,7 +276,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		return dateTmp;
 	}
 
-public onKeyDown(event: KeyboardEvent) {
+	public onKeyDown(event: KeyboardEvent) {
 		if (event.keyCode === 13) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
