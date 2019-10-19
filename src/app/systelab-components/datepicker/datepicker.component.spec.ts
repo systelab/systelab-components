@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +11,7 @@ import { Datepicker } from './datepicker.component';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
+import { Tree } from 'primeng/primeng';
 
 @Component({
 	selector: 'systelab-datepicker-test',
@@ -77,39 +78,29 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('should increment by 2 days when entering 2d', () => {
-		fixture.componentInstance.currentDate = new Date();
-		fixture.detectChanges();
 		enterText(fixture, '2d');
+		console.log(fixture.componentInstance.currentDate);
 		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(2);
 	});
 
-	it('should decrement by 2 days when entering -2d', () => {
-		fixture.componentInstance.currentDate = new Date();
-		fixture.detectChanges();
-		enterText(fixture, '-2d');
-		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(-2);
-	});
+		it('should decrement by 2 days when entering -2d', () => {
+			enterText(fixture, '-2d');
+			expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(-2);
+		});
+		it('should increment by 14 days when entering 2w', () => {
+			enterText(fixture, '2w');
+			expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(14);
+		});
 
-	it('should increment by 14 days when entering 2w', () => {
-		fixture.componentInstance.currentDate = new Date();
-		fixture.detectChanges();
-		enterText(fixture, '2w');
-		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(14);
-	});
+		it('should increment by 3 months when entering 3m', () => {
+			enterText(fixture, '3m');
+			expect(differenceInCalendarMonths(fixture.componentInstance.currentDate, new Date())).toBe(3);
+		});
 
-	it('should increment by 3 months when entering 3m', () => {
-		fixture.componentInstance.currentDate = new Date();
-		fixture.detectChanges();
-		enterText(fixture, '3m');
-		expect(differenceInCalendarMonths(fixture.componentInstance.currentDate, new Date())).toBe(3);
-	});
-
-	it('should increment by 3 years when entering 3y', () => {
-		fixture.componentInstance.currentDate = new Date();
-		fixture.detectChanges();
-		enterText(fixture, '3y');
-		expect(differenceInCalendarYears(fixture.componentInstance.currentDate, new Date())).toBe(3);
-	});
+		it('should increment by 3 years when entering 3y', () => {
+			enterText(fixture, '3y');
+			expect(differenceInCalendarYears(fixture.componentInstance.currentDate, new Date())).toBe(3);
+		});
 });
 
 function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
