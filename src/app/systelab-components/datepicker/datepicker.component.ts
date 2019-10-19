@@ -154,21 +154,17 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			if (dateStr.length >= 2) {
 				if (dateStr.toUpperCase().includes('D')) {
 					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
-					this.somethingChanged = true;
 				} else if (dateStr.toUpperCase().includes('W') || dateStr.toUpperCase().includes('S')) {
 					this.currentDate = addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
-					this.somethingChanged = true;
 				} else if (dateStr.toUpperCase().includes('M')) {
 					this.currentDate = addMonths(today, this.getAmount(dateStr, 'M'));
-					this.somethingChanged = true;
 				} else if (dateStr.toUpperCase().includes('Y') || dateStr.toUpperCase().includes('A')) {
 					this.currentDate = addYears(today, this.getAmount(dateStr, 'Y', 'A'));
-					this.somethingChanged = true;
+				} else {
+					this.currentDate = new Date(this.formatDate(dateStr));
 				}
-				if (this.somethingChanged) {
-					this.currentDateChange.emit(this.currentDate);
-					this.somethingChanged = false;
-				}
+				this.currentDateChange.emit(this.currentDate);
+				this.somethingChanged = false;
 			}
 		}
 	}
