@@ -171,7 +171,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private getAmount(dateStr: string, ...symbols: string[]): number {
 		for (const symbol of symbols) {
-			if (dateStr.toUpperCase().includes(symbol.toUpperCase())) {
+			if (dateStr.toUpperCase().endsWith(symbol.toUpperCase())) {
 				const amount = Number(dateStr.toUpperCase().replace(symbol.toUpperCase(), ''));
 				if (!isNaN(amount)) {
 					return amount;
