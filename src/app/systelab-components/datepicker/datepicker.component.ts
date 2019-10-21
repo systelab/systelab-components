@@ -152,13 +152,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
 
 			if (dateStr.length >= 2) {
-				if (dateStr.toUpperCase().endsWith('D')) {
+				if (dateStr.toUpperCase().includes('D')) {
 					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
-				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
+				} else if (dateStr.toUpperCase().includes('W') || dateStr.toUpperCase().includes('S')) {
 					this.currentDate = addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
-				} else if (dateStr.toUpperCase().endsWith('M')) {
+				} else if (dateStr.toUpperCase().includes('M')) {
 					this.currentDate = addMonths(today, this.getAmount(dateStr, 'M'));
-				} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
+				} else if (dateStr.toUpperCase().includes('Y') || dateStr.toUpperCase().includes('A')) {
 					this.currentDate = addYears(today, this.getAmount(dateStr, 'Y', 'A'));
 				} else {
 					this.currentDate = new Date(this.formatDate(dateStr));
@@ -171,7 +171,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private getAmount(dateStr: string, ...symbols: string[]): number {
 		for (const symbol of symbols) {
-			if (dateStr.toUpperCase().endsWith(symbol.toUpperCase())) {
+			if (dateStr.toUpperCase().includes(symbol.toUpperCase())) {
 				const amount = Number(dateStr.toUpperCase().replace(symbol.toUpperCase(), ''));
 				if (!isNaN(amount)) {
 					return amount;
