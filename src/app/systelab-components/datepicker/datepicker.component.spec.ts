@@ -124,6 +124,11 @@ describe('Systelab DatepickerComponent', () => {
 			enterText(fixture, '1-6-19');
 			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/06/2019'));
 		});
+		it('should 1619 be 01/06/2019', () => {
+			enterText(fixture, '1619');
+			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/06/2019'));
+		});
+
 });
 
 function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
