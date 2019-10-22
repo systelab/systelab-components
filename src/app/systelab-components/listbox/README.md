@@ -247,6 +247,7 @@ In black the Two-Way Data Binding properties.
 | **selectedIDList** | string | | Ids of selected elements separated by comma. Each Id contains a prefix to indicate if selected element is parent or child (defined in getSelectionPrefix method). Only when multipleSelection=true |
 | isDisabled | boolean | false | If true the listbox is disabled  |
 | multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
+| updateHierarchy | boolean | true | If true, the parent/child nodes will be updated when selecting a child/parent node |
 
 In black the Two-Way Data Binding properties.
 

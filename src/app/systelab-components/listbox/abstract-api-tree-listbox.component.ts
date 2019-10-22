@@ -22,6 +22,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	public treeValues: Array<TreeListBoxElement<T>> = [];
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 
+	@Input() public updateHierarchy = true;
+
 	public _selectedTreeItem: TreeListBoxElement<T>;
 
 	@Input()
@@ -217,33 +219,11 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	public changeValues(event: any) {
 		if (this.multipleSelection) {
 			this.addRemoveToMultipleSelectedItem(event);
-
-			if (event.level === 0) {
-				this.treeValues.filter((value: TreeListBoxElement<T>) => {
-					if (value.nodeData[this.getIdField(0)] === event.nodeData[this.getIdField(0)]) {
-						value.selected = event.selected;
-						this.addRemoveToMultipleSelectedItem(value);
-					}
-				});
-			} else {
-				const parentID = event.nodeData[this.getIdField(0)];
-				let allChildSelected = true;
-				let anyNode = false;
-				this.treeValues.filter((value: TreeListBoxElement<T>) => {
-					if (value.nodeData[this.getIdField(0)] === parentID) {
-						anyNode = true;
-						if (!value.selected && value.level === 1) {
-							allChildSelected = false;
-						}
-					}
-				});
-				if (anyNode) {
-					this.treeValues.filter((value: TreeListBoxElement<T>) => {
-						if (value.level === 0 && value.nodeData[this.getIdField(0)] === parentID) {
-							value.selected = allChildSelected;
-							this.addRemoveToMultipleSelectedItem(value);
-						}
-					});
+			if (this.updateHierarchy) {
+				if (event.level === 0) {
+					this.selectUnselectChildTree(event);
+				} else {
+					this.selectUnselectParentTree(event);
 				}
 			}
 			this.selectedIDListChange.emit(this.selectedIDList);
@@ -252,7 +232,37 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			this.gridOptions.api.doLayout();
 			this.gridOptions.api.sizeColumnsToFit();
 		}
+	}
 
+	private selectUnselectChildTree(event: any) {
+		this.treeValues.forEach((value: TreeListBoxElement<T>) => {
+			if (value.nodeData[this.getIdField(0)] === event.nodeData[this.getIdField(0)]) {
+				value.selected = event.selected;
+				this.addRemoveToMultipleSelectedItem(value);
+			}
+		});
+	}
+
+	private selectUnselectParentTree(event: any) {
+		const parentID = event.nodeData[this.getIdField(0)];
+		let allChildSelected = true;
+		let anyNode = false;
+		this.treeValues.forEach((value: TreeListBoxElement<T>) => {
+			if (value.nodeData[this.getIdField(0)] === parentID) {
+				anyNode = true;
+				if (!value.selected && value.level === 1) {
+					allChildSelected = false;
+				}
+			}
+		});
+		if (anyNode) {
+			this.treeValues.forEach((value: TreeListBoxElement<T>) => {
+				if (value.level === 0 && value.nodeData[this.getIdField(0)] === parentID) {
+					value.selected = allChildSelected;
+					this.addRemoveToMultipleSelectedItem(value);
+				}
+			});
+		}
 	}
 
 	private addRemoveToMultipleSelectedItem(event: any) {
