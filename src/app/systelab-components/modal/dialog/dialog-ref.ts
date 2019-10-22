@@ -45,5 +45,6 @@ export class DialogRef<T extends SystelabModalContext> {
 		this.overlayRef.overlayElement.classList.remove('slab-dialog-disabled');
 	}
 
+
 }
 
