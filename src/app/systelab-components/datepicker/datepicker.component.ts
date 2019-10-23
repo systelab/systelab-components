@@ -149,9 +149,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const today = new Date();
-			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
+			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
+				.toLowerCase();
 			if (this.inputChanged && dateStr.length >= 2) {
-				if (dateStr.toUpperCase().endsWith('D')) {
+				if (dateStr.toUpperCase()
+					.endsWith('D')) {
 					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
 				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
 					this.currentDate = addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
@@ -182,58 +184,21 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public formatDate(date: string): string {
 		let dateTmp = date.trim();
-		const dateSeparator = this.getSeparator(dateTmp);
 
-		if (dateSeparator) {
-			dateTmp = this.manageSeparator(dateTmp, dateSeparator);
-			if (dateTmp === undefined) {
-				return date;
-			}
-		}
-		if (dateTmp.length === 4) {
-			dateTmp = '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2);
-		} else if (dateTmp.length === 6) {
-			dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4);
-		} else if (dateTmp.length === 8) {
-			dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4);
-		}
-		return dateTmp;
-	}
-
-	private manageSeparator(dateTmp: string, dateSeparator: string): string {
-		let separatorPosition = dateTmp.lastIndexOf(dateSeparator);
-		if (separatorPosition > 0) {
-			let firstPartValue = dateTmp.substr(0, separatorPosition);
-			dateTmp = dateTmp.substr(separatorPosition);
-			if (firstPartValue.length === 1) {
-				firstPartValue = '0' + firstPartValue;
-			}
-			separatorPosition = dateTmp.lastIndexOf(dateSeparator);
-			if (separatorPosition > 0) {
-				let secondPartValue = dateTmp.substr(0, separatorPosition);
-				dateTmp = dateTmp.substr(separatorPosition);
-				if (secondPartValue.length === 1) {
-					secondPartValue = '0' + secondPartValue;
-				}
-				dateTmp = firstPartValue + secondPartValue + dateTmp;
-			} else {
-				// Not acceptable to find only one separator. Return undefined to be managed in caller function
-				return undefined;
+		if (!this.hasSeparator(dateTmp)) {
+			if (dateTmp.length === 4) {
+				dateTmp = '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2);
+			} else if (dateTmp.length === 6) {
+				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4);
+			} else if (dateTmp.length === 8) {
+				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4);
 			}
 		}
 		return dateTmp;
 	}
 
-	private getSeparator(dateTmp: string) {
-		if (dateTmp.lastIndexOf('/') > 0) {
-			return '/';
-		} else if (dateTmp.lastIndexOf('-') > 0) {
-			return '-';
-		} else if (dateTmp.lastIndexOf('.') > 0) {
-			return '.';
-		} else {
-			return undefined;
-		}
+	private hasSeparator(dateTmp: string): boolean {
+		return dateTmp.includes('/') || dateTmp.includes('-') || dateTmp.includes('.');
 	}
 
 	public onInput(event: KeyboardEvent) {
@@ -254,13 +219,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public repositionateCalendar(element?: ElementRef): void {
 
 		try {
-
 			let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
-
 			inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
 			inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
 			datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
-
 			if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
 				const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
 				this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
