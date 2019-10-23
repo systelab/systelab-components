@@ -47,7 +47,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
 
-	public somethingChanged = false;
+	public inputChanged = false;
 	protected _currentDate: Date;
 	public previousAfterDate = false;
 	public tooFarDate = false;
@@ -143,14 +143,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public selectDate(): void {
 		this.currentDateChange.emit(this.currentDate);
-		this.somethingChanged = false;
+		this.inputChanged = false;
 	}
 
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const today = new Date();
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
-			if (dateStr.length >= 2 && dateStr.length <= 8) {
+			if (this.inputChanged && dateStr.length >= 2) {
 				if (dateStr.toUpperCase().endsWith('D')) {
 					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
 				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
@@ -163,7 +163,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentDate = new Date(this.formatDate(dateStr));
 				}
 				this.currentDateChange.emit(this.currentDate);
-				this.somethingChanged = false;
+				this.inputChanged = false;
 			}
 		}
 	}
@@ -242,7 +242,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentCalendar.onBlur.emit(event);
 			this.closeDatepicker();
 		} else {
-			this.somethingChanged = true;
+			this.inputChanged = true;
 		}
 	}
 
@@ -320,7 +320,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentDate = null;
 			this.currentCalendar.onClearButtonClick(event);
 			this.currentDateChange.emit(this.currentDate);
-			this.somethingChanged = false;
+			this.inputChanged = false;
 		}
 	}
 
@@ -328,7 +328,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
-			this.somethingChanged = false;
+			this.inputChanged = false;
 		}
 	}
 
