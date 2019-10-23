@@ -236,7 +236,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	public onKeyDown(event: KeyboardEvent) {
+	public onInput(event: KeyboardEvent) {
 		if (event.keyCode === 13) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { Datepicker } from './datepicker.component';
 	selector: 'systelab-datepicker-test',
 	template: `
                   <div>
-                      <systelab-datepicker #datepicker [(currentDate)]="currentDate"></systelab-datepicker>
+                      <systelab-datepicker [(currentDate)]="currentDate"></systelab-datepicker>
                   </div>
 			  `,
 	styles:   []
@@ -34,8 +34,6 @@ export class DatepickerTestComponent {
 	constructor() {
 		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
 	}
-
-	@ViewChild('datepicker', {static: false}) public datepicker: Datepicker;
 }
 
 describe('Systelab DatepickerComponent', () => {
@@ -153,7 +151,10 @@ function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Dat
 function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
 	const inputComponent = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
 	inputComponent.value = text;
-	fixture.componentInstance.datepicker.onKeyDown(new KeyboardEvent('keydown', {code: 'Key'}));
+	inputComponent.dispatchEvent(new Event('keydown'));
+	inputComponent.dispatchEvent(new Event('input'));
+	inputComponent.dispatchEvent(new Event('keyup'));
+	fixture.detectChanges();
 	inputComponent.dispatchEvent(new Event('blur'));
 	fixture.detectChanges();
 }
