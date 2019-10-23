@@ -24,9 +24,7 @@ $sidebar-small-margin-top: 35px !default;
     color: #c9c9c9;
 
     &.slab-bottom {
-      bottom: 0px;
-      position: absolute;
-      z-index: -1;
+      margin-top: 0;
     }
 
     .slab-app-sidebar-button {
@@ -49,6 +47,7 @@ $sidebar-small-margin-top: 35px !default;
       &:hover {
         background-color: #dedede;
       }
+
       .arrow-left {
         position: absolute;
         top: 18px;
@@ -57,7 +56,7 @@ $sidebar-small-margin-top: 35px !default;
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        border-right:10px solid white;
+        border-right: 10px solid white;
       }
     }
   }

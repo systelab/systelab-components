@@ -23,7 +23,7 @@ If you want the defaults the template will look like:
 | min | number | 0 | Starting value |
 | max | number | 100 | Last value |
 | step | number | 1 | Number of values to step |
-| continuous | boolean | true | A boolean value in order to get changes while dragging the thumb. If it is not true you will get the changes at the end.|
+| continuous | boolean | true | A boolean value in order to get changes while dragging the thumb. If it is not true you will get the changes at the end. On IE11 is always continuous|
 
 
 In black the Two-Way Data Binding properties.

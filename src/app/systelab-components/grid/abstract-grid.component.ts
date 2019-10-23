@@ -76,7 +76,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.rowHeight = Number(rowHeight);
 		this.gridOptions.headerHeight = Number(headerHeight);
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
-		this.gridOptions.suppressRowDrag = true;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.enableRangeSelection = true;
 		this.gridOptions.stopEditingWhenGridLosesFocus = true;

@@ -1,6 +1,6 @@
-import { OverlayRef } from '@angular/cdk/overlay';
-import { Observable, Subject } from 'rxjs';
-import { SystelabModalContext } from './modal-context';
+import {OverlayRef} from '@angular/cdk/overlay';
+import {Observable, Subject} from 'rxjs';
+import {SystelabModalContext} from './modal-context';
 
 export class DialogRef<T extends SystelabModalContext> {
 
@@ -17,7 +17,7 @@ export class DialogRef<T extends SystelabModalContext> {
 		if (context.showClose) {
 			overlayRef.keydownEvents()
 				.subscribe((k) => {
-					if (k.code === DialogRef.ESCAPE_KEY) {
+					if (k.code === DialogRef.ESCAPE_KEY || k.key === DialogRef.ESCAPE_KEY) {
 						this.close();
 					}
 				});
@@ -44,6 +44,7 @@ export class DialogRef<T extends SystelabModalContext> {
 	public enable() {
 		this.overlayRef.overlayElement.classList.remove('slab-dialog-disabled');
 	}
+
 
 }
 
