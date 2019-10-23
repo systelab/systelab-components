@@ -150,8 +150,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const today = new Date();
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
-
-			if (dateStr.length >= 2) {
+			if (dateStr.length >= 2 && dateStr.length <= 8) {
 				if (dateStr.toUpperCase().endsWith('D')) {
 					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
 				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
