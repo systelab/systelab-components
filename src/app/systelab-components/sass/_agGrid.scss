@@ -12,7 +12,7 @@ $icon-rowaction-font-size: 20px;
       border-color: white;
       font-weight: normal;
       text-align: left;
-      padding: 0px;
+      padding: 0;
 
       .slab-grid-header-context-menu {
         display: flex;
@@ -74,7 +74,11 @@ $icon-rowaction-font-size: 20px;
       border: none;
       border-right: 1px solid white;
       padding: 0 5px;
-      outline-width: 0px;
+      outline-width: 0;
+
+      &.ag-cell-last-left-pinned {
+        border-right: 1px solid white;
+      }
 
       @include selection-checkbox;
     }
@@ -89,7 +93,7 @@ $icon-rowaction-font-size: 20px;
   overflow: hidden;
 }
 
-.ag-theme-fresh .ag-root {
+.ag-theme-fresh .ag-ltr .ag-root {
   border: none;
   overflow: hidden;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
@@ -117,8 +121,12 @@ $icon-rowaction-font-size: 20px;
     @include ag-row()
   }
 
-  .ag-pinned-left-cols-viewport {
-    @include ag-row()
+  .ag-body-horizontal-scroll {
+    .ag-horizontal-left-spacer {
+      overflow-x: auto;
+      border-right: none;
+      background-color: #f6f6f6;
+    }
   }
 
 
