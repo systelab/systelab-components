@@ -149,11 +149,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const today = new Date();
-			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
-				.toLowerCase();
+			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
 			if (this.inputChanged && dateStr.length >= 2) {
-				if (dateStr.toUpperCase()
-					.endsWith('D')) {
+				if (dateStr.toUpperCase().endsWith('D')) {
 					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
 				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
 					this.currentDate = addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
@@ -162,7 +160,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
 					this.currentDate = addYears(today, this.getAmount(dateStr, 'Y', 'A'));
 				} else {
-					this.currentDate = new Date(this.formatDate(dateStr));
+					const transformedDate = this.transformDateWithoutSeparator(dateStr);
+					if (transformedDate) {
+						this.currentDate = transformedDate;
+					}
 				}
 				this.currentDateChange.emit(this.currentDate);
 				this.inputChanged = false;
@@ -182,19 +183,17 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		return 0;
 	}
 
-	public formatDate(date: string): string {
-		let dateTmp = date.trim();
+	public transformDateWithoutSeparator(date: string): Date {
+		const dateTmp = date.trim();
 
 		if (!this.hasSeparator(dateTmp)) {
 			if (dateTmp.length === 4) {
-				dateTmp = '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2);
-			} else if (dateTmp.length === 6) {
-				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4);
-			} else if (dateTmp.length === 8) {
-				dateTmp = dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4);
+				return new Date( '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2));
+			} else if (dateTmp.length === 6 || dateTmp.length === 8) {
+				return new Date( dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4));
 			}
 		}
-		return dateTmp;
+		return undefined;
 	}
 
 	private hasSeparator(dateTmp: string): boolean {
