@@ -184,20 +184,27 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public transformDateWithoutSeparator(date: string): Date {
-		const dateTmp = date.trim();
+		let dateTmp = date.trim();
 
-		if (!this.hasSeparator(dateTmp)) {
-			if (dateTmp.length === 4) {
-				return new Date( '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2));
-			} else if (dateTmp.length === 6 || dateTmp.length === 8) {
-				return new Date( dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4));
-			}
+		if (this.hasSeparator(dateTmp)) {
+			dateTmp = this.removeSeparator(dateTmp);
 		}
+
+		if (dateTmp.length === 4) {
+			return new Date( '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2));
+		} else if (dateTmp.length === 6 || dateTmp.length === 8) {
+			return new Date( dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4));
+		}
+
 		return undefined;
 	}
 
 	private hasSeparator(dateTmp: string): boolean {
 		return dateTmp.includes('/') || dateTmp.includes('-') || dateTmp.includes('.');
+	}
+
+	private removeSeparator(dateTmp: string): string {
+		return dateTmp.split('/').join('').split('-').join('').split('.').join('');
 	}
 
 	public onInput(event: KeyboardEvent) {
