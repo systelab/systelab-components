@@ -159,21 +159,17 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	protected checkTargetAndClose(target: any) {
-		const isNgContent = this.checkIfNgContent(target);
-		if (isNgContent) {
-			return;
-		}
-		if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-			if (this.childDropdownMenuElement) {
-				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
-					.find((elem) => {
-						return target === elem.nativeElement;
-					});
-				if (!selectedChild) {
+		if (!this.checkIfNgContent(target)) {
+			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
+				if (this.childDropdownMenuElement) {
+					const selectedChild = this.childDropdownMenuElement.toArray()
+						.find(elem => target === elem.nativeElement);
+					if (!selectedChild) {
+						this.closeDropDown();
+					}
+				} else {
 					this.closeDropDown();
 				}
-			} else {
-				this.closeDropDown();
 			}
 		}
 	}
@@ -193,12 +189,16 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	public dotsClicked(event: MouseEvent) {
 		if (!this.isDropDownOpened()) {
-			// hide the div until is positioned in event x y position to avoid flick
-			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
-			this.isOpened = true;
-			this.cdr.detectChanges();
-			this.showDropDown(event.clientX, event.clientY);
+			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
+	}
+
+	protected hideDivUntilIsPositioned(x: number, y: number) {
+		// hide the div until is positioned in event x y position to avoid flick
+		this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
+		this.isOpened = true;
+		this.cdr.detectChanges();
+		this.showDropDown(x, y);
 	}
 
 	public open(event: MouseEvent) {
@@ -209,13 +209,8 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		if (!this.isDropDownOpened()) {
 			// Add class manually because is not set when jquery.dropdwon toogle is executed
 			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
-			// hide the div until is positioned in event x y position to avoid flick
-			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
-			this.isOpened = true;
-			this.cdr.detectChanges();
-			this.showDropDown(event.clientX, event.clientY);
+			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
 	}
-
 }
 

@@ -1,9 +1,4 @@
-import {
-	ElementRef,
-	EventEmitter,
-	Input,
-	Output
-} from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { AbstractContextComponent } from './abstract-context.component';
 
 declare var jQuery: any;
@@ -13,6 +8,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	@Output() public action = new EventEmitter();
 
 	public _contextMenuOptions: Array<T>;
+
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
 		this._contextMenuOptions = value;
@@ -38,8 +34,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	protected abstract checkIfHasIcons();
 
 	public ngOnInit() {
-		jQuery(this.dropdownParent.nativeElement)
-			.on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
+		super.ngOnInit();
 		this.checkIfHasIcons();
 	}
 
@@ -60,25 +55,4 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	protected checkTargetAndClose(target: any) {
-		const isNgContent = this.checkIfNgContent(target);
-		if (isNgContent) {
-			return;
-		}
-		if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-			if (this.childDropdownMenuElement) {
-				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
-					.find((elem) => {
-						return target === elem.nativeElement;
-					});
-				if (!selectedChild) {
-					this.closeDropDown();
-				}
-			} else {
-				this.closeDropDown();
-			}
-		}
-	}
-
 }
-

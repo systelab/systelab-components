@@ -1,10 +1,4 @@
-import {
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	OnDestroy,
-	OnInit, Renderer2,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AbstractContextPanelComponent } from './abstract-context-panel.component';
 import { ContextMenuOption } from '../contextmenu/context-menu-option';
 
@@ -21,9 +15,7 @@ export class ContextPanelComponent extends AbstractContextPanelComponent<Context
 	}
 
 	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
-
 		console.log('Execute action:');
 	}
-
 }
 
