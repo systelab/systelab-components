@@ -128,12 +128,12 @@ describe('Systelab DatepickerComponent', () => {
 	it('should 1.6.19 be 01/06/2019', () => {
 		enterText(fixture, '1.6.19');
 		expect(fixture.componentInstance.currentDate)
-			.toBeNull();
+			.toEqual(new Date('01/06/2019'));
 	});
 	it('should 1-6-19 be 01/06/2019', () => {
 		enterText(fixture, '1-6-19');
 		expect(fixture.componentInstance.currentDate)
-			.toBeNull();
+			.toEqual(new Date('01/06/2019'));
 	});
 	it('should 1619 be 01/06/2019', () => {
 		enterText(fixture, '1619');
