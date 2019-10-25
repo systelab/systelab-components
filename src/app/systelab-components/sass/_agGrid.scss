@@ -80,6 +80,10 @@ $icon-rowaction-font-size: 20px;
         border-right: 1px solid white;
       }
 
+      .ag-icon {
+        visibility: hidden;
+      }
+
       @include selection-checkbox;
     }
 
@@ -148,7 +152,3 @@ systelab-spinner-cell {
   position: fixed;
 }
 
-
-.ag-theme-fresh .ag-cell .ag-icon {
-  visibility: hidden;
-}

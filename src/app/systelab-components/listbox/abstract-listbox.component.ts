@@ -95,7 +95,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		this.gridOptions.rowHeight = Number(rowHeight);
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
-		this.gridOptions.suppressRowDrag = true;
 		this.gridOptions.suppressCellSelection = true;
 		this.gridOptions.enableRangeSelection = !this.isDisabled;
 		this.gridOptions.defaultColDef = {};
