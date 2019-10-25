@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { DialogRef, ModalComponent, SystelabModalContext } from '../../modal';
 import { TwoListItem } from '../../twolist/two-list.component';
 import { GridColumnsOptions } from '../grid-column-options';
@@ -15,7 +15,7 @@ export class GridOptionsDialogParameters extends SystelabModalContext {
 	selector:    'grid-options-dialog',
 	templateUrl: 'grid-options-dialog.component.html',
 })
-export class GridOptionsDialog implements ModalComponent<GridOptionsDialogParameters> {
+export class GridOptionsDialog implements ModalComponent<GridOptionsDialogParameters>, AfterViewInit {
 
 	public gridOptionsDialogParameters: GridOptionsDialogParameters;
 
@@ -49,4 +49,9 @@ export class GridOptionsDialog implements ModalComponent<GridOptionsDialogParame
 	public getTabTitle(code: string): string {
 		return this.i18nService.instant(code);
 	}
+
+	public ngAfterViewInit(): void {
+		setTimeout(() => document.getElementById('ID_optionsSubmitButton').focus());
+	}
+
 }
