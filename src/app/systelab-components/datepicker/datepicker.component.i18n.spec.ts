@@ -23,11 +23,15 @@ export class USMockI18nService {
 	}
 
 	public getDateFormatForDatePicker() {
-		return 'mm/dd/yy';
+		return 'MM/DD/YY';
 	}
 
 	public getCurrentLanguage() {
 		return 'en-US';
+	}
+
+	public getDateFormat() {
+		return 'MM/DD/YY';
 	}
 }
 
@@ -41,11 +45,15 @@ export class ESMockI18nService {
 	}
 
 	public getDateFormatForDatePicker() {
-		return 'dd/mm/yy';
+		return 'DD/MM/YY';
 	}
 
 	public getCurrentLanguage() {
 		return 'es-ES';
+	}
+
+	public getDateFormat() {
+		return 'DD/MM/YY';
 	}
 }
 
@@ -110,22 +118,40 @@ describe('Systelab US DatepickerComponent', () => {
 			.toEqual(new Date(2019, 11, 25));
 	});
 
-	xit('should 011219 be 12 Jan 2019', () => {
+	it('should 011219 be 12 Jan 2019', () => {
 		enterText(fixture, '011219');
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 0, 12));
 	});
 
-	xit('should 01122019 be 12 Jan 2019', () => {
+	it('should 01122019 be 12 Jan 2019', () => {
 		enterText(fixture, '01122019');
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 0, 12));
 	});
-
-	it('should 1/12/2019 be 01 Dec 2019', () => {
+	it('should 1/12/2019 be 12 Jan 2019', () => {
 		enterText(fixture, '1/12/2019');
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 0, 12));
+	});
+	it('should 1/12/19 be 12 Jan 2019', () => {
+		enterText(fixture, '1/12/19');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 0, 12));
+	});
+	it('should 11/1/19 be 1 Nov 2019', () => {
+		enterText(fixture, '11/1/19');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 10, 1));
+	});
+	it('should 11/1/2019 be 1 Nov 2019', () => {
+		enterText(fixture, '11/1/2019');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 10, 1));
+	});
+	it('should 11/12019 be null', () => {
+		enterText(fixture, '11/12019');
+		expect(fixture.componentInstance.currentDate).toBeNull();
 	});
 	it('should 1.6.19 be null', () => {
 		enterText(fixture, '1.6.19');
@@ -135,7 +161,7 @@ describe('Systelab US DatepickerComponent', () => {
 		enterText(fixture, '1-6-19');
 		expect(fixture.componentInstance.currentDate).toBeNull();
 	});
-	xit('should 2619 be 6 Feb 2019', () => {
+	it('should 2619 be 6 Feb 2019', () => {
 		enterText(fixture, '2619');
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 1, 6));
@@ -180,15 +206,39 @@ describe('Systelab ES DatepickerComponent', () => {
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 11, 25));
 	});
-	xit('should 251219 be 25 Dec 2019', () => {
+	it('should 251219 be 25 Dec 2019', () => {
 		enterText(fixture, '251219');
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 11, 25));
 	});
-	xit('should 01122019 be 01 Dec 2019', () => {
+	it('should 01122019 be 01 Dec 2019', () => {
 		enterText(fixture, '01122019');
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 11, 1));
+	});
+	it('should 1/12/2019 be 1 Dec 2019', () => {
+		enterText(fixture, '1/12/2019');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 11, 1));
+	});
+	it('should 1/12/19 be 1 Dec 2019', () => {
+		enterText(fixture, '1/12/19');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 11, 1));
+	});
+	it('should 11/1/19 be 11 Jan 2019', () => {
+		enterText(fixture, '11/1/19');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 0, 11));
+	});
+	it('should 11/1/2019 be 11 Jan 2019', () => {
+		enterText(fixture, '11/1/2019');
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 0, 11));
+	});
+	it('should 11/12019 be null', () => {
+		enterText(fixture, '11/12019');
+		expect(fixture.componentInstance.currentDate).toBeNull();
 	});
 	it('should 1.6.19 be null', () => {
 		enterText(fixture, '1.6.19');
@@ -198,7 +248,7 @@ describe('Systelab ES DatepickerComponent', () => {
 		enterText(fixture, '1-6-19');
 		expect(fixture.componentInstance.currentDate).toBeNull();
 	});
-	xit('should 1619 be 01 Jun 2019', () => {
+	it('should 1619 be 01 Jun 2019', () => {
 		enterText(fixture, '1619');
 		expect(fixture.componentInstance.currentDate).toEqual(new Date(2019, 5, 1));
 	});
