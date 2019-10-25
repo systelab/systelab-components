@@ -80,6 +80,11 @@ $icon-rowaction-font-size: 20px;
         border-right: 1px solid white;
       }
 
+
+      .ag-icon {
+        visibility: hidden;
+      }
+
       @include selection-checkbox;
     }
 
