@@ -2,7 +2,7 @@
             [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
             (onBlur)="changeDate()"
             (onSelect)="selectDate()"
-            (keydown)="onKeyDown($event)"
+            (onInput)="onInput($event)"
             [showOtherMonths]="true"
             [minDate]="minDate"
             [maxDate]="maxDate"
@@ -16,17 +16,20 @@
             appendTo="body"
             [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'warning-date': tooFarDate || previousAfterDate, 'input-expand-height':inputExpandHeight}">
     <p-header id="{{datepickerId}}">
-        <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
-        <a class="icon-angle-left slab-icon-medium" (click)="prevMonth()"></a>
-        <a class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
-        <a class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
-        <div class="ui-datepicker-title">
-            <span class="ui-datepicker-month">{{ language.monthNames[currentCalendar.currentMonth] }}&nbsp;</span>
-            <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>
+        <div class="slab-datepicker-header">
+            <a id="previousYear" class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
+            <a id="previousMonth" class="icon-angle-left slab-icon-medium" (click)="prevMonth()"></a>
+            <a id="nextYear" class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
+            <a id="nextMonth" class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
+            <div class="ui-datepicker-title">
+                <span class="ui-datepicker-month">{{ language.monthNames[currentCalendar.currentMonth] }}&nbsp;</span>
+                <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>
+            </div>
         </div>
     </p-header>
     <p-footer *ngIf="!inline" class="p-1 d-flex border-top">
-        <button *ngIf="showTodayButton" class="btn btn-sm mr-auto" (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
-        <button class="btn btn-sm ml-auto" (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
+        <button *ngIf="showTodayButton" id="today" class="btn btn-sm mr-auto" (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
+        <button id="clear" class="btn btn-sm ml-auto" (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
     </p-footer>
 </p-calendar>
+
