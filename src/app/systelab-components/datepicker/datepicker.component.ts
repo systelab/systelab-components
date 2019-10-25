@@ -184,60 +184,23 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public transformDateWithoutSeparator(date: string): Date {
-		let dateTmp = date.trim();
+		const dateTmp = date.trim();
 
-		const dateFormat: string = this.i18nService.getDateFormat();
-
-//		const yearPosition: number = dateFormat.lastIndexOf( 'Y');
-		const monthPosition: number = dateFormat.lastIndexOf( 'M');
-		const dayPosition: number = dateFormat.lastIndexOf( 'D');
-
-		let dayInDate: number;
-		let monthInDate: number;
-		let yearInDate: number;
-
-		if (this.hasSeparator(dateTmp)) {
-			dateTmp = this.removeSeparator(dateTmp);
+		// TODO: Dending to support 4 6 and 8 digits in all the languages.
+		/*
+		if (!this.hasSeparator(dateTmp)) {
+			if (dateTmp.length === 4) {
+				return new Date( '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2));
+			} else if (dateTmp.length === 6 || dateTmp.length === 8) {
+				return new Date( dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4));
+			}
 		}
-
-		if (dateTmp.length === 4) {
-			if (dayPosition < monthPosition) {
-				dayInDate = +dateTmp.substring(0, 1);
-				monthInDate = +dateTmp.substring(1, 2) - 1;
-			} else {
-				monthInDate = +dateTmp.substring(0, 1) - 1;
-				dayInDate = +dateTmp.substring(1, 2);
-			}
-			yearInDate = +dateTmp.substring(2);
-			if (yearInDate < 100) {
-				yearInDate = 2000 + yearInDate;
-			}
-			return new Date( yearInDate, monthInDate, dayInDate);
-		} else if (dateTmp.length === 6 || dateTmp.length === 8) {
-
-			if (dayPosition < monthPosition) {
-				dayInDate = +dateTmp.substring(0, 2);
-				monthInDate = +dateTmp.substring(2, 4) - 1;
-			} else {
-				monthInDate = +dateTmp.substring(0, 2) - 1;
-				dayInDate = +dateTmp.substring(2, 4);
-			}
-			yearInDate = +dateTmp.substring(4);
-			if (yearInDate < 100) {
-				yearInDate = 2000 + yearInDate;
-			}
-			return new Date( yearInDate, monthInDate, dayInDate);
-		}
-
+		*/
 		return undefined;
 	}
 
 	private hasSeparator(dateTmp: string): boolean {
 		return dateTmp.includes('/') || dateTmp.includes('-') || dateTmp.includes('.');
-	}
-
-	private removeSeparator(dateTmp: string): string {
-		return dateTmp.split('/').join('').split('-').join('').split('.').join('');
 	}
 
 	public onInput(event: KeyboardEvent) {

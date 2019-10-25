@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { Datepicker } from './datepicker.component';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { of } from 'rxjs';
 
 @Component({
 	selector: 'systelab-datepicker-test',
@@ -107,40 +109,6 @@ describe('Systelab DatepickerComponent', () => {
 		expect(differenceInCalendarYears(fixture.componentInstance.currentDate, new Date()))
 			.toBe(3);
 	});
-
-	it('should 011219 be 01/12/2019', () => {
-		enterText(fixture, '011219');
-		expect(fixture.componentInstance.currentDate)
-			.toEqual(new Date('01/12/2019'));
-	});
-
-	it('should 01122019 be 01/12/2019', () => {
-		enterText(fixture, '01122019');
-		expect(fixture.componentInstance.currentDate)
-			.toEqual(new Date('01/12/2019'));
-	});
-
-	it('should 1/12/2019 be 01/12/2019', () => {
-		enterText(fixture, '1/12/2019');
-		expect(fixture.componentInstance.currentDate)
-			.toEqual(new Date('01/12/2019'));
-	});
-	it('should 1.6.19 be 01/06/2019', () => {
-		enterText(fixture, '1.6.19');
-		expect(fixture.componentInstance.currentDate)
-			.toEqual(new Date('01/06/2019'));
-	});
-	it('should 1-6-19 be 01/06/2019', () => {
-		enterText(fixture, '1-6-19');
-		expect(fixture.componentInstance.currentDate)
-			.toEqual(new Date('01/06/2019'));
-	});
-	it('should 1619 be 01/06/2019', () => {
-		enterText(fixture, '1619');
-		expect(fixture.componentInstance.currentDate)
-			.toEqual(new Date('01/06/2019'));
-	});
-
 });
 
 function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
