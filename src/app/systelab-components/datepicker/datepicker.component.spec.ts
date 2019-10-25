@@ -11,14 +11,12 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { Datepicker } from './datepicker.component';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { of } from 'rxjs';
 
 @Component({
 	selector: 'systelab-datepicker-test',
 	template: `
                 <div>
-                    <systelab-datepicker [(currentDate)]="currentDate"></systelab-datepicker>
+                    <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"></systelab-datepicker>
                 </div>
 	          `,
 	styles:   []
@@ -30,6 +28,8 @@ export class DatepickerTestComponent {
 	public defaultDay = 20;
 	public defaultHours = 14;
 	public defaultMinutes = 5;
+
+	public showTodayButton = true;
 
 	public currentDate: Date;
 
@@ -71,6 +71,53 @@ describe('Systelab DatepickerComponent', () => {
 	it('should have an initial day value of 20', () => {
 		expect(fixture.componentInstance.currentDate.getDate())
 			.toBe(fixture.componentInstance.defaultDay);
+	});
+
+	it('should show a popup when click', () => {
+		clickOnInput(fixture);
+		expect(isVisiblePopupVisible(fixture))
+			.toBeTruthy();
+	});
+
+	it('should set today when click on today button', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#today');
+		expect(fixture.componentInstance.currentDate.getDay())
+			.toEqual(new Date().getDay());
+		expect(fixture.componentInstance.currentDate.getMonth())
+			.toEqual(new Date().getMonth());
+		expect(fixture.componentInstance.currentDate.getFullYear())
+			.toEqual(new Date().getFullYear());
+	});
+
+	it('should set previous year if I click on previous year button', () => {
+		clickOnInput(fixture);
+		const yearBefore = getVisibleYearInPopup(fixture);
+		clickOn(fixture, '#previousYear');
+		const yearAfter = getVisibleYearInPopup(fixture);
+		expect(yearAfter).toEqual(yearBefore - 1);
+	});
+
+	it('should set next year if I click on next year button', () => {
+		clickOnInput(fixture);
+		const yearBefore = getVisibleYearInPopup(fixture);
+		clickOn(fixture, '#nextYear');
+		const yearAfter = getVisibleYearInPopup(fixture);
+		expect(yearAfter).toEqual(yearBefore + 1);
+	});
+
+	xit('should set previous month if I click on previous month button', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#previousMonth');
+		const monthAfter = getVisibleMonthInPopup(fixture);
+		expect(monthAfter).toEqual('COMMON_SEPTEMBER ');
+	});
+
+	xit('should set next month if I click on next month button', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#nextMonth');
+		const monthAfter = getVisibleMonthInPopup(fixture);
+		expect(monthAfter).toEqual('COMMON_NOVEMBER ');
 	});
 
 	it('should have the changed value if there is a change', () => {
@@ -124,5 +171,30 @@ function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: str
 	inputComponent.dispatchEvent(new Event('keyup'));
 	fixture.detectChanges();
 	inputComponent.dispatchEvent(new Event('blur'));
+	fixture.detectChanges();
+}
+
+function clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>) {
+	const button = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+}
+
+function isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>) {
+	return (fixture.debugElement.nativeElement.querySelector('.ui-datepicker-calendar-container') !== null);
+}
+
+function getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
+	return parseInt(fixture.debugElement.nativeElement.querySelector('.ui-datepicker-year').firstChild.nodeValue, 10);
+}
+
+function getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
+	console.log(fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month'));
+	return fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month').firstChild.nodeValue;
+}
+
+function clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string) {
+	const button = fixture.debugElement.query(By.css(id)).nativeElement;
+	button.click();
 	fixture.detectChanges();
 }
