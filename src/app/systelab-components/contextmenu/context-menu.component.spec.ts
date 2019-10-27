@@ -12,7 +12,6 @@ import { ContextMenuComponent } from './context-menu.component';
 import { ContextMenuOption } from './context-menu-option';
 import { ContextMenuActionData } from './context-menu-action-data';
 import { ContextMenuItemComponent } from './context-menu-item.component';
-import { DatepickerTestComponent } from '../datepicker/datepicker.component.spec';
 
 @Component({
 	selector: 'systelab-context-menu-test',
@@ -24,6 +23,7 @@ import { DatepickerTestComponent } from '../datepicker/datepicker.component.spec
 })
 export class ContextMenuTestComponent implements OnInit {
 	public contextMenuOptions: Array<ContextMenuOption> = [];
+	public lastSelectedOption = '';
 
 	public ngOnInit(): void {
 		this.contextMenuOptions = [
@@ -36,7 +36,7 @@ export class ContextMenuTestComponent implements OnInit {
 	}
 
 	public executeContextMenuAction(contextMenuActionData: ContextMenuActionData): void {
-		console.log (contextMenuActionData.actionId);
+		this.lastSelectedOption = contextMenuActionData.actionId;
 	}
 }
 
@@ -68,9 +68,22 @@ describe('Systelab Context Menu', () => {
 			.toBeDefined();
 	});
 
+	it('should show a popup when clicked', () => {
+		clickOnDots(fixture);
+		expect(isPopupVisible(fixture))
+			.toBeTruthy();
+	});
+
 	it('should represent all the menu options', () => {
 		clickOnDots(fixture);
-		expect(isPopupVisible(fixture)).toBeTruthy();
+		expect(getNumberOfElements(fixture, 'systelab-context-menu-item'))
+			.toEqual(5);
+	});
+
+	it('should call to the specific action when an option is selected', () => {
+		clickOnDots(fixture);
+		clickOnOption(fixture, 3);
+		expect(fixture.componentInstance.lastSelectedOption).toEqual('option3');
 	});
 });
 
@@ -80,7 +93,16 @@ function clickOnDots(fixture: ComponentFixture<ContextMenuTestComponent>) {
 	fixture.detectChanges();
 }
 
-
 function isPopupVisible(fixture: ComponentFixture<ContextMenuTestComponent>) {
 	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown-scroll') !== null);
+}
+
+function getNumberOfElements(fixture: ComponentFixture<ContextMenuTestComponent>, className: string) {
+	return fixture.debugElement.nativeElement.querySelectorAll(className).length;
+}
+
+function clickOnOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
+	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
+	button.click();
+	fixture.detectChanges();
 }
