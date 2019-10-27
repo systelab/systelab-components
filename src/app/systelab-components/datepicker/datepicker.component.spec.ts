@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,17 +7,16 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
-import { Datepicker } from './datepicker.component';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
-import { Tree } from 'primeng/primeng';
+import { Datepicker } from './datepicker.component';
 
 @Component({
 	selector: 'systelab-datepicker-test',
 	template: `
                 <div>
-                    <systelab-datepicker [(currentDate)]="currentDate"></systelab-datepicker>
+                    <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"></systelab-datepicker>
                 </div>
 	          `,
 	styles:   []
@@ -29,6 +28,8 @@ export class DatepickerTestComponent {
 	public defaultDay = 20;
 	public defaultHours = 14;
 	public defaultMinutes = 5;
+
+	public showTodayButton = true;
 
 	public currentDate: Date;
 
@@ -63,11 +64,60 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('should instantiate', () => {
-		expect(fixture.componentInstance).toBeDefined();
+		expect(fixture.componentInstance)
+			.toBeDefined();
 	});
 
 	it('should have an initial day value of 20', () => {
-		expect(fixture.componentInstance.currentDate.getDate()).toBe(fixture.componentInstance.defaultDay);
+		expect(fixture.componentInstance.currentDate.getDate())
+			.toBe(fixture.componentInstance.defaultDay);
+	});
+
+	it('should show a popup when click', () => {
+		clickOnInput(fixture);
+		expect(isVisiblePopupVisible(fixture))
+			.toBeTruthy();
+	});
+
+	it('should set today when click on today button', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#today');
+		expect(fixture.componentInstance.currentDate.getDay())
+			.toEqual(new Date().getDay());
+		expect(fixture.componentInstance.currentDate.getMonth())
+			.toEqual(new Date().getMonth());
+		expect(fixture.componentInstance.currentDate.getFullYear())
+			.toEqual(new Date().getFullYear());
+	});
+
+	it('should set previous year if I click on previous year button', () => {
+		clickOnInput(fixture);
+		const yearBefore = getVisibleYearInPopup(fixture);
+		clickOn(fixture, '#previousYear');
+		const yearAfter = getVisibleYearInPopup(fixture);
+		expect(yearAfter).toEqual(yearBefore - 1);
+	});
+
+	it('should set next year if I click on next year button', () => {
+		clickOnInput(fixture);
+		const yearBefore = getVisibleYearInPopup(fixture);
+		clickOn(fixture, '#nextYear');
+		const yearAfter = getVisibleYearInPopup(fixture);
+		expect(yearAfter).toEqual(yearBefore + 1);
+	});
+
+	xit('should set previous month if I click on previous month button', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#previousMonth');
+		const monthAfter = getVisibleMonthInPopup(fixture);
+		expect(monthAfter).toEqual('COMMON_SEPTEMBER ');
+	});
+
+	xit('should set next month if I click on next month button', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#nextMonth');
+		const monthAfter = getVisibleMonthInPopup(fixture);
+		expect(monthAfter).toEqual('COMMON_NOVEMBER ');
 	});
 
 	it('should have the changed value if there is a change', () => {
@@ -80,55 +130,32 @@ describe('Systelab DatepickerComponent', () => {
 	it('should increment by 2 days when entering 2d', () => {
 		enterText(fixture, '2d');
 		console.log(fixture.componentInstance.currentDate);
-		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(2);
+		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
+			.toBe(2);
 	});
 
-		it('should decrement by 2 days when entering -2d', () => {
-			enterText(fixture, '-2d');
-			expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(-2);
-		});
-		it('should increment by 14 days when entering 2w', () => {
-			enterText(fixture, '2w');
-			expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date())).toBe(14);
-		});
+	it('should decrement by 2 days when entering -2d', () => {
+		enterText(fixture, '-2d');
+		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
+			.toBe(-2);
+	});
+	it('should increment by 14 days when entering 2w', () => {
+		enterText(fixture, '2w');
+		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
+			.toBe(14);
+	});
 
-		it('should increment by 3 months when entering 3m', () => {
-			enterText(fixture, '3m');
-			expect(differenceInCalendarMonths(fixture.componentInstance.currentDate, new Date())).toBe(3);
-		});
+	it('should increment by 3 months when entering 3m', () => {
+		enterText(fixture, '3m');
+		expect(differenceInCalendarMonths(fixture.componentInstance.currentDate, new Date()))
+			.toBe(3);
+	});
 
-		it('should increment by 3 years when entering 3y', () => {
-			enterText(fixture, '3y');
-			expect(differenceInCalendarYears(fixture.componentInstance.currentDate, new Date())).toBe(3);
-		});
-
-		it('should 011219 be 01/12/2019', () => {
-			enterText(fixture, '011219');
-			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/12/2019'));
-		});
-
-		it('should 01122019 be 01/12/2019', () => {
-			enterText(fixture, '01122019');
-			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/12/2019'));
-		});
-
-		it('should 1/12/2019 be 01/12/2019', () => {
-			enterText(fixture, '1/12/2019');
-			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/12/2019'));
-		});
-		it('should 1.6.19 be 01/06/2019', () => {
-			enterText(fixture, '1.6.19');
-			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/06/2019'));
-		});
-		it('should 1-6-19 be 01/06/2019', () => {
-			enterText(fixture, '1-6-19');
-			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/06/2019'));
-		});
-		it('should 1619 be 01/06/2019', () => {
-			enterText(fixture, '1619');
-			expect(fixture.componentInstance.currentDate).toEqual(new Date('01/06/2019'));
-		});
-
+	it('should increment by 3 years when entering 3y', () => {
+		enterText(fixture, '3y');
+		expect(differenceInCalendarYears(fixture.componentInstance.currentDate, new Date()))
+			.toBe(3);
+	});
 });
 
 function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
@@ -139,6 +166,35 @@ function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Dat
 function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
 	const inputComponent = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
 	inputComponent.value = text;
+	inputComponent.dispatchEvent(new Event('keydown'));
+	inputComponent.dispatchEvent(new Event('input'));
+	inputComponent.dispatchEvent(new Event('keyup'));
+	fixture.detectChanges();
 	inputComponent.dispatchEvent(new Event('blur'));
+	fixture.detectChanges();
+}
+
+function clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>) {
+	const button = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+}
+
+function isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>) {
+	return (fixture.debugElement.nativeElement.querySelector('.ui-datepicker-calendar-container') !== null);
+}
+
+function getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
+	return parseInt(fixture.debugElement.nativeElement.querySelector('.ui-datepicker-year').firstChild.nodeValue, 10);
+}
+
+function getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
+	console.log(fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month'));
+	return fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month').firstChild.nodeValue;
+}
+
+function clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string) {
+	const button = fixture.debugElement.query(By.css(id)).nativeElement;
+	button.click();
 	fixture.detectChanges();
 }
