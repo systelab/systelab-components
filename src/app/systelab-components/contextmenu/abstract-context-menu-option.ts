@@ -10,4 +10,8 @@ export abstract class AbstractContextMenuOption<T, K> {
 	public isIconEnabled?: K;
 	public childrenContextMenuOptions?: Array<AbstractContextMenuOption<T, K>>;
 	public iconFontSize?: string;
+
+	public hasChildren(): boolean {
+		return this.childrenContextMenuOptions && this.childrenContextMenuOptions.length > 0;
+	}
 }
