@@ -40,7 +40,7 @@ export class ContextMenuTestComponent implements OnInit {
 	}
 }
 
-fdescribe('Systelab Context Menu', () => {
+describe('Systelab Context Menu', () => {
 	let fixture: ComponentFixture<ContextMenuTestComponent>;
 
 	beforeEach(async(() => {

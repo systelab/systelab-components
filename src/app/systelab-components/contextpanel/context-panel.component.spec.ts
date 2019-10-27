@@ -20,7 +20,7 @@ import { ContextPanelComponent } from './context-panel.component';
 export class ContextPanelTestComponent {
 }
 
-fdescribe('Systelab Context Panel', () => {
+describe('Systelab Context Panel', () => {
 	let fixture: ComponentFixture<ContextPanelTestComponent>;
 
 	beforeEach(async(() => {
