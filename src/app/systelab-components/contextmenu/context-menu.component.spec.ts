@@ -23,15 +23,23 @@ import { ContextMenuItemComponent } from './context-menu-item.component';
 })
 export class ContextMenuTestComponent implements OnInit {
 	public contextMenuOptions: Array<ContextMenuOption> = [];
+	public contextSubMenuOptions: Array<ContextMenuOption> = [];
 	public lastSelectedOption = '';
 
 	public ngOnInit(): void {
+
+		this.contextSubMenuOptions = [
+			new ContextMenuOption('suboption1', 'Sub Option 1', null),
+			new ContextMenuOption('suboption2', 'Sub Option 2', null),
+		];
+
 		this.contextMenuOptions = [
 			new ContextMenuOption('option1', 'Option 1', null, null, false, 'icon-check-circle', 'rgb(40, 167, 69)'),
 			new ContextMenuOption('option2', 'Option 2', null, null, false, 'icon-minus-circle', 'rgb(255, 0, 0)', null),
 			new ContextMenuOption('option3', 'Option 3', null, null, false, 'icon-chevron-circle-up', 'rgb(50, 50, 50)', 'rgb(21, 143, 239)'),
 			new ContextMenuOption('option4', 'Option 3', null, null, false, 'icon-close', 'rgb(21, 143, 239)', 'rgb(255, 255, 255)'),
-			new ContextMenuOption('option5', 'Option 5', null, null, false, 'icon-checkbox', 'transparent', 'rgb(214, 214, 214)', () => true, null, '20px')
+			new ContextMenuOption('option5', 'Option 5', null, null, false, 'icon-checkbox', 'transparent', 'rgb(214, 214, 214)', () => true),
+			new ContextMenuOption('option6', 'Option 6', null, null, false, 'icon-checkbox', 'transparent', 'rgb(214, 214, 214)', () => true, this.contextSubMenuOptions)
 		];
 	}
 
@@ -74,10 +82,10 @@ describe('Systelab Context Menu', () => {
 			.toBeTruthy();
 	});
 
-	it('should represent all the menu options', () => {
+	it('should represent all the menu options and suboptions', () => {
 		clickOnDots(fixture);
 		expect(getNumberOfElements(fixture, 'systelab-context-menu-item'))
-			.toEqual(5);
+			.toEqual(8);
 	});
 
 	it('should call to the specific action when an option is selected', () => {
@@ -85,6 +93,21 @@ describe('Systelab Context Menu', () => {
 		clickOnOption(fixture, 3);
 		expect(fixture.componentInstance.lastSelectedOption).toEqual('option3');
 	});
+
+	it('should show a submenu when clicked', () => {
+		clickOnDots(fixture);
+		clickOnOption(fixture, 6);
+		expect(isSubPopupVisible(fixture))
+			.toBeTruthy();
+	});
+
+	it('should call to the specific action when a suboption is selected', () => {
+		clickOnDots(fixture);
+		clickOnOption(fixture, 6);
+		clickOnSubOption(fixture, 2);
+		expect(fixture.componentInstance.lastSelectedOption).toEqual('suboption2');
+	});
+
 });
 
 function clickOnDots(fixture: ComponentFixture<ContextMenuTestComponent>) {
@@ -97,12 +120,22 @@ function isPopupVisible(fixture: ComponentFixture<ContextMenuTestComponent>) {
 	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown-scroll') !== null);
 }
 
+function isSubPopupVisible(fixture: ComponentFixture<ContextMenuTestComponent>) {
+	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown-absolute') !== null);
+}
+
 function getNumberOfElements(fixture: ComponentFixture<ContextMenuTestComponent>, className: string) {
 	return fixture.debugElement.nativeElement.querySelectorAll(className).length;
 }
 
 function clickOnOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
 	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+}
+
+function clickOnSubOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
+	const button = fixture.debugElement.query(By.css('.slab-dropdown-absolute > li:nth-child(' + elementNumber + ')')).nativeElement;
 	button.click();
 	fixture.detectChanges();
 }
