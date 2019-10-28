@@ -23,7 +23,7 @@ export class USMockI18nService {
 	}
 
 	public getDateFormatForDatePicker() {
-		return 'MM/DD/YY';
+		return 'mm/dd/yy';
 	}
 
 	public getCurrentLanguage() {
@@ -45,7 +45,7 @@ export class ESMockI18nService {
 	}
 
 	public getDateFormatForDatePicker() {
-		return 'DD/MM/YY';
+		return 'dd/mm/yy';
 	}
 
 	public getCurrentLanguage() {
@@ -67,7 +67,7 @@ export class ZHMockI18nService {
 	}
 
 	public getDateFormatForDatePicker() {
-		return 'YY-MM-DD';
+		return 'y-m-d';
 	}
 
 	public getCurrentLanguage() {
