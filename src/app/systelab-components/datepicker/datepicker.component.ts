@@ -148,27 +148,37 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
-			const today = new Date();
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
-			if (this.inputChanged && dateStr.length >= 2) {
-				if (dateStr.toUpperCase().endsWith('D')) {
-					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
-				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
-					this.currentDate = addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
-				} else if (dateStr.toUpperCase().endsWith('M')) {
-					this.currentDate = addMonths(today, this.getAmount(dateStr, 'M'));
-				} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
-					this.currentDate = addYears(today, this.getAmount(dateStr, 'Y', 'A'));
-				} else {
-					const transformedDate = this.transformDateWithoutSeparator(dateStr);
-					if (transformedDate) {
-						this.currentDate = transformedDate;
-					}
+			if (this.inputChanged) {
+				const changeDate = this.changeDateAccordingToInput(dateStr);
+				if (changeDate) {
+					this.currentDate = changeDate;
 				}
 				this.currentDateChange.emit(this.currentDate);
 				this.inputChanged = false;
 			}
 		}
+	}
+
+	private changeDateAccordingToInput(dateStr): Date {
+		const today = new Date();
+		if (dateStr.length >= 2) {
+			if (dateStr.toUpperCase().endsWith('D')) {
+				return addDays(today, this.getAmount(dateStr, 'D'));
+			} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
+				return addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
+			} else if (dateStr.toUpperCase().endsWith('M')) {
+				return addMonths(today, this.getAmount(dateStr, 'M'));
+			} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
+				return addYears(today, this.getAmount(dateStr, 'Y', 'A'));
+			} else {
+				const transformedDate = this.transformDateWithoutSeparator(dateStr);
+				if (transformedDate) {
+					return transformedDate;
+				}
+			}
+		}
+		return undefined;
 	}
 
 	private getAmount(dateStr: string, ...symbols: string[]): number {
