@@ -189,7 +189,6 @@ describe('Systelab US DatepickerComponent', () => {
 		expect(fixture.componentInstance.currentDate)
 			.toEqual(new Date(2019, 1, 6));
 	});
-
 });
 
 
@@ -355,7 +354,6 @@ describe('Systelab ZH DatepickerComponent', () => {
 		enterText(fixture, '1961');
 		expect(fixture.componentInstance.currentDate).toEqual(new Date(2019, 5, 1));
 	});
-
 });
 
 function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
