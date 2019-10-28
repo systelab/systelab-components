@@ -74,10 +74,10 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 @Component({
 	selector: 'systelab-grid-test',
 	template: `
-                <form class="position-relative" style="height: 200px;">
+                <div class="position-relative" style="height: 200px;">
                     <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
                                    [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
-                </form>
+                </div>
 	          `
 })
 export class GridTestComponent {
