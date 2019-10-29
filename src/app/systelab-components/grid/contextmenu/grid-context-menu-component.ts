@@ -3,8 +3,6 @@ import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/co
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
 
-declare var jQuery: any;
-
 @Component({
 	selector:    'systelab-grid-context-menu',
 	templateUrl: '../../contextmenu/context-menu.component.html'
@@ -30,16 +28,9 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		this.open(event);
 	}
 
-	protected isEnabled(elementId: string, actionId: string): boolean {
-		return this.container.isContextMenuOptionEnabled(elementId, actionId);
-	}
-
 	protected existsAtLeastOneActionEnabled(): boolean {
 		if (this.contextMenuOptions) {
-			const optionEnabled: GridContextMenuOption<T> = this.contextMenuOptions.find((menuOption: GridContextMenuOption<T>) => {
-				return this.isEnabled(this.elementID, menuOption.actionId);
-			});
-			return (optionEnabled != null);
+			return this.contextMenuOptions.some((menuOption: GridContextMenuOption<T>) => this.isEnabled(this.elementID, menuOption.actionId));
 		}
 	}
 
@@ -47,61 +38,30 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		return false;
 	}
 
+	protected isEnabled(elementId: string, actionId: string): boolean {
+		return this.container.isContextMenuOptionEnabled(elementId, actionId);
+	}
+
 	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
 
-		let option: GridContextMenuOption<T>;
+		const option: GridContextMenuOption<T> = this.getOption(actionId, parentAction);
 
-		if (parentAction) {
-			const parentMenuOption = this.contextMenuOptions.find(opt => opt.actionId === parentAction);
-			option = parentMenuOption.childrenContextMenuOptions.find(opt => opt.actionId === actionId);
-		} else {
-			option = this.contextMenuOptions.find(opt => opt.actionId === actionId);
-		}
-
-		if (option.childrenContextMenuOptions && option.childrenContextMenuOptions.length > 0) {
+		if (option.hasChildren()) {
 			event.stopPropagation();
 			event.preventDefault();
 
 			if (this.previousActionChild !== actionId) {
 				if (this.previousActionChild) {
-					const previousActionChildID = this.previousActionChild + this.elementID;
-					jQuery('#' + previousActionChildID)
-						.toggle();
-
+					this.toggle(this.previousActionChild + this.elementID);
 				}
-
-				const childID = actionId + this.elementID;
-				jQuery('#' + childID)
-					.toggle();
-
 				this.previousActionChild = actionId;
 
-				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
-					.find((elem) => {
-						return elem.nativeElement.id === childID;
-					});
+				this.toggle(actionId + this.elementID);
 
-				const firstChildAbsoluteTop = event.clientY;
-				let firstChildRelativeTop = event.target.offsetTop;
-
-				if (firstChildAbsoluteTop + selectedChild.nativeElement.offsetHeight > window.innerHeight) {
-					firstChildRelativeTop = firstChildRelativeTop - selectedChild.nativeElement.offsetHeight;
-				}
-
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', firstChildRelativeTop + 'px');
-
-				let firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 15;
-				const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
-
-				if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth + selectedChild.nativeElement.offsetWidth
-					> window.innerWidth) {
-					firstChildLeft = -selectedChild.nativeElement.offsetWidth + 10;
-				}
-
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', firstChildLeft + 'px');
-
+				const selectedChild = this.childDropdownMenuElement.toArray().find((elem) => elem.nativeElement.id === (actionId + this.elementID));
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');
 			}
-
 		} else {
 			if (this.isEmbedded || parentAction) {
 				this.closeDropDown();
@@ -113,9 +73,14 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 				this.container.executeContextMenuAction(elementId, actionId);
 			}
 		}
-
 	}
 
-	protected checkIfHasIcons(): void {
+	private getOption(actionId: string, parentAction?: string): GridContextMenuOption<T> {
+		if (parentAction) {
+			const parentMenuOption = this.contextMenuOptions.find(opt => opt.actionId === parentAction);
+			return parentMenuOption.childrenContextMenuOptions.find(opt => opt.actionId === actionId);
+		} else {
+			return this.contextMenuOptions.find(opt => opt.actionId === actionId);
+		}
 	}
 }

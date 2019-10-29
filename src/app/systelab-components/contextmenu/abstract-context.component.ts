@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 
 declare var jQuery: any;
 
@@ -6,9 +6,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	@ViewChild('dropdownparent', {static: true}) public dropdownParent: ElementRef;
 	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
-	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
 	@ViewChild('dropdown', {static: false}) public dropdownElement: ElementRef;
-	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
 	@ViewChild('ngcontent', {static: false}) public ngcontent: ElementRef;
 
 	@Output() public action = new EventEmitter();
@@ -28,11 +26,8 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	protected constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 	}
 
-	protected abstract executeAction(event: any, elementId: string, actionId: string, parentAction?: string);
-
 	public ngOnInit() {
-		jQuery(this.dropdownParent.nativeElement)
-			.on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
+		jQuery(this.dropdownParent.nativeElement).on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -76,6 +71,27 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', null);
 	}
 
+	protected getFirstChildLeft(selectedChild: ElementRef) {
+		let firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 15;
+		const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
+
+		if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth +
+			selectedChild.nativeElement.offsetWidth > window.innerWidth) {
+			firstChildLeft = -selectedChild.nativeElement.offsetWidth + 10;
+		}
+		return firstChildLeft;
+	}
+
+	protected getFirstChildTop(event: any, selectedChild: ElementRef) {
+		const firstChildAbsoluteTop = event.clientY;
+		let firstChildRelativeTop = event.target.offsetTop;
+
+		if (firstChildAbsoluteTop + selectedChild.nativeElement.offsetHeight > window.innerHeight) {
+			firstChildRelativeTop = firstChildRelativeTop - selectedChild.nativeElement.offsetHeight;
+		}
+		return firstChildRelativeTop;
+	}
+
 	public actionsAfterCloseDropDown() {
 		this.previousActionChild = undefined;
 		this.isOpened = false;
@@ -91,7 +107,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 			this.destroyMouseListener();
 		}
 		this.resetDropDownPositionAndHeight();
-
 	}
 
 	public closeDropDown() {
@@ -105,21 +120,16 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	protected addListeners() {
-
 		this.addScrollHandler();
-
 		this.destroyMouseListener = this.myRenderer.listen('window', 'click', (evt: MouseEvent) => {
 			this.handleMouseEvents(evt);
 		});
-
 		this.destroyWheelListener = this.myRenderer.listen('window', 'scroll', (evt: WheelEvent) => {
 			this.handleWheelEvents(evt);
 		});
-
 		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
 			this.handleKeyboardEvents(evt);
 		});
-
 	}
 
 	protected handleKeyboardEvents(event: KeyboardEvent) {
@@ -142,6 +152,14 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		this.checkTargetAndClose(event.target);
 	}
 
+	protected checkTargetAndClose(target: any) {
+		if (!this.checkIfNgContent(target)) {
+			if (this.isDropDownOpened()) {
+				this.closeDropDown();
+			}
+		}
+	}
+
 	public ngContentStopPropagation(event: any): void {
 		event.stopPropagation();
 	}
@@ -156,26 +174,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 			}
 		}
 		return false;
-	}
-
-	protected checkTargetAndClose(target: any) {
-		const isNgContent = this.checkIfNgContent(target);
-		if (isNgContent) {
-			return;
-		}
-		if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-			if (this.childDropdownMenuElement) {
-				const selectedChild: ElementRef = this.childDropdownMenuElement.toArray()
-					.find((elem) => {
-						return target === elem.nativeElement;
-					});
-				if (!selectedChild) {
-					this.closeDropDown();
-				}
-			} else {
-				this.closeDropDown();
-			}
-		}
 	}
 
 	protected addScrollHandler() {
@@ -193,29 +191,30 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	public dotsClicked(event: MouseEvent) {
 		if (!this.isDropDownOpened()) {
-			// hide the div until is positioned in event x y position to avoid flick
-			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
-			this.isOpened = true;
-			this.cdr.detectChanges();
-			this.showDropDown(event.clientX, event.clientY);
+			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
+	}
+
+	protected hideDivUntilIsPositioned(x: number, y: number) {
+		// hide the div until is positioned in event x y position to avoid flick
+		this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
+		this.isOpened = true;
+		this.cdr.detectChanges();
+		this.showDropDown(x, y);
 	}
 
 	public open(event: MouseEvent) {
 
-		jQuery('#' + this.elementID)
-			.dropdown('toggle');
+		jQuery('#' + this.elementID).dropdown('toggle');
 
 		if (!this.isDropDownOpened()) {
 			// Add class manually because is not set when jquery.dropdwon toogle is executed
 			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
-			// hide the div until is positioned in event x y position to avoid flick
-			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
-			this.isOpened = true;
-			this.cdr.detectChanges();
-			this.showDropDown(event.clientX, event.clientY);
+			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
 	}
 
+	public toggle(elementID: string) {
+		jQuery('#' + elementID).toggle();
+	}
 }
-

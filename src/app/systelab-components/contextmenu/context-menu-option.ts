@@ -7,17 +7,16 @@ export type ContextMenuIsEnabledFunction = (elementId: string, actionId: string)
 export class ContextMenuOption extends AbstractContextMenuOption<ContextMenuActionFunction, ContextMenuIsEnabledFunction> {
 
 	constructor(public actionId: string,
-				public actionText: string,
-				public action?: ContextMenuActionFunction,
-				public isActionEnabled?: ContextMenuIsEnabledFunction,
-				public isDivider?: boolean,
-				public iconClass?: string,
-				public backgroundIconColor?: string,
-				public iconColor?: string,
-				public isIconEnabled?: ContextMenuIsEnabledFunction,
-				public childrenContextMenuOptions?: Array<ContextMenuOption>,
-				public iconFontSize?: string) {
+	            public actionText: string,
+	            public action?: ContextMenuActionFunction,
+	            public isActionEnabled?: ContextMenuIsEnabledFunction,
+	            public isDivider?: boolean,
+	            public iconClass?: string,
+	            public backgroundIconColor?: string,
+	            public iconColor?: string,
+	            public isIconEnabled?: ContextMenuIsEnabledFunction,
+	            public childrenContextMenuOptions?: Array<ContextMenuOption>,
+	            public iconFontSize?: string) {
 		super();
 	}
-
 }
