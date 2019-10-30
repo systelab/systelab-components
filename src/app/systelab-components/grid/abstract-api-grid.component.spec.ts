@@ -88,6 +88,7 @@ export class GridTestComponent {
 	public selectedTestData: TestData;
 
 	public doSelect(data: TestData): void {
+		this.selectedTestData = data;
 	}
 
 	public getMenu(): Array<GridContextMenuOption<TestData>> {
@@ -159,6 +160,25 @@ describe('Systelab Grid', () => {
 			.toEqual(3);
 	});
 
+	it('should have the right number of rows', async(() => {
+		fixture.whenStable()
+			.then(() => {
+				expect(getNumberOfRows(fixture)).toEqual(3);
+			});
+	}));
+
+	it('should be possible to select a row', async(() => {
+		fixture.whenStable()
+			.then(() => {
+						const rows = clickOnGridCell(fixture, 5);
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 2');
+						expect(fixture.componentInstance.selectedTestData.field2).toEqual(2);
+					});
+			});
+	}));
+
 	it('should be able to show the menu on a row and select an option', async(() => {
 		fixture.whenStable()
 			.then(() => {
@@ -195,14 +215,18 @@ function clickMenuOnRow(fixture: ComponentFixture<GridTestComponent>, row: numbe
 	fixture.detectChanges();
 }
 
+function clickOnGridCell(fixture: ComponentFixture<GridTestComponent>, cell: number) {
+	fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"]')[cell].click();
+	fixture.detectChanges();
+}
+
 function clickMenuHeaderOnRow(fixture: ComponentFixture<GridTestComponent>) {
 	fixture.debugElement.nativeElement.querySelectorAll('.slab-grid-header-context-menu * .slab-context-menu')[0].click();
 	fixture.detectChanges();
 }
 
 function clickOption(fixture: ComponentFixture<GridTestComponent>, option: number) {
-	const button = fixture.debugElement.nativeElement.querySelectorAll('li')[option];
-	button.click();
+	const button = fixture.debugElement.nativeElement.querySelectorAll('li')[option].click();
 	fixture.detectChanges();
 }
 
