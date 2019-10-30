@@ -26,6 +26,7 @@ export class MessagePopupViewContext extends SystelabModalContext {
 export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext>, AfterViewInit {
 
 	@ViewChild('closeBtn', {static: false}) closeBtn: ElementRef;
+	@ViewChild('arrayBtn', {static: false}) arrayBtn: ElementRef;
 	public parameters: MessagePopupViewContext;
 
 	constructor(public dialog: DialogRef<MessagePopupViewContext>) {
@@ -39,6 +40,8 @@ export class MessagePopupViewComponent implements ModalComponent<MessagePopupVie
 	ngAfterViewInit() {
 		if (this.closeBtn) {
 			setTimeout(() => this.closeBtn.nativeElement.focus());
+		} else if (this.parameters.buttons.length > 0) {
+			setTimeout(() => this.arrayBtn.nativeElement.focus());
 		}
 	}
 
