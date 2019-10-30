@@ -73,12 +73,13 @@
       }
 
       .dropdown-divider {
-        // margin-left: -15px;
-        // margin-right: -15px;
         width: 100%;
         height: 1px;
+
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
-
   }
 }

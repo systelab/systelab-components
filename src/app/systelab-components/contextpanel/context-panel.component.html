@@ -1,9 +1,7 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
-
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
         <ng-content select=".header-content"></ng-content>
     </div>
-
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown slab-dropdown-fixed">
             <div *ngIf="isOpened">
@@ -13,5 +11,4 @@
             </div>
         </div>
     </div>
-
 </div>
