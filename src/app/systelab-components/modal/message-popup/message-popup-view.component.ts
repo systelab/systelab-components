@@ -21,7 +21,8 @@ export class MessagePopupViewContext extends SystelabModalContext {
 
 @Component({
 	selector:    'dialog-view',
-	templateUrl: 'message-popup-view.component.html'
+	templateUrl: 'message-popup-view.component.html',
+	styleUrls:   ['message-popup-view.component.scss']
 })
 export class MessagePopupViewComponent implements ModalComponent<MessagePopupViewContext>, AfterViewInit {
 

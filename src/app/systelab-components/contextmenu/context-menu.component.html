@@ -1,7 +1,6 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
-        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize"
-           [style.color]="fontColor"></i>
+        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize" [style.color]="fontColor"></i>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown slab-dropdown-fixed">
@@ -11,28 +10,24 @@
                 </div>
                 <ul #scrollableList class="slab-dropdown-scroll">
                     <li *ngFor="let action of contextMenuOptions"
-                        class="d-flex align-items-center {{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
-                        (click)="isEnabled(elementID, action.actionId) ? executeAction($event,elementID, action.actionId) : null">
-                        <div class="slab-flex-1" style="flex:1 1 auto" *ngIf="isEnabled(elementID, action.actionId)">
+                        class="d-flex align-items-center" [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
+                        (click)="doClick($event, elementID, action)">
+                        <div *ngIf="isEnabled(elementID, action.actionId)" class="slab-flex-1" style="flex:1 1 auto">
                             <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
                                                         [isEnabled]="isEnabled(elementID, action.actionId)"
                                                         [isIconEnabled]="isIconEnabled(elementID, action.actionId)"
-                                                        [hasChildren]="action.childrenContextMenuOptions && action.childrenContextMenuOptions.length>0"
+                                                        [hasChildren]="action.hasChildren()"
                                                         [hasIcons]="hasIcons"></systelab-context-menu-item>
-                            <ul *ngIf="action.childrenContextMenuOptions && action.childrenContextMenuOptions.length>0"
-                                #childdropdownmenu id="{{action.actionId+elementID}}"
-                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll
-                                slab-dropdown-absolute">
+                            <ul *ngIf="action.hasChildren()" #childdropdownmenu id="{{action.actionId+elementID}}"
+                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
                                 <li *ngFor="let childAction of action.childrenContextMenuOptions"
-                                    class="d-flex align-items-center {{!isEnabled(elementID, childAction.actionId) ? 'disabled': '' }}"
-                                    (click)="isEnabled(elementID, childAction.actionId) ? executeAction($event,elementID, childAction.actionId, action.actionId) : null">
-                                    <div *ngIf="isEnabled(elementID, childAction.actionId)">
-                                        <div *ngIf="!childAction.childrenContextMenuOptions || childAction.childrenContextMenuOptions.length===0">
-                                            <systelab-context-menu-item [action]="childAction"
-                                                                        [isEnabled]="isEnabled(elementID, childAction.actionId)"
-                                                                        [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
-                                                                        [hasIcons]="hasIcons"></systelab-context-menu-item>
-                                        </div>
+                                    class="d-flex align-items-center" [class.disabled]="!isEnabled(elementID, childAction.actionId) || action.isDivider"
+                                    (click)="doClick($event, elementID, childAction, action)">
+                                    <div *ngIf="isEnabled(elementID, childAction.actionId) && !childAction.hasChildren()">
+                                        <systelab-context-menu-item [action]="childAction"
+                                                                    [isEnabled]="isEnabled(elementID, childAction.actionId)"
+                                                                    [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
+                                                                    [hasIcons]="hasIcons"></systelab-context-menu-item>
                                     </div>
                                 </li>
                             </ul>

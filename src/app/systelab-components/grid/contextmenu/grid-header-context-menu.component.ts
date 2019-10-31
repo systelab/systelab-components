@@ -10,8 +10,7 @@ import { GridContextMenuOption } from './grid-context-menu-option';
 	templateUrl: './grid-header-context-menu.component.html'
 })
 
-export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuComponent<GridContextMenuOption<T>>
-	implements IHeaderAngularComp {
+export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuComponent<GridContextMenuOption<T>> implements IHeaderAngularComp {
 
 	public container: AbstractGrid<Object>;
 	public headerName: string;
@@ -22,40 +21,31 @@ export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuCompon
 	}
 
 	public agInit(params: IHeaderParams): void {
-
 		this.container = params.context.componentParent;
 		this.elementID = params.column.getColId();
 		this.contextMenuOptions = params.context.componentParent.headerMenu;
 		this.headerName = params.displayName;
 		this.headerData = params.column.getColDef().headerComponentParams.headerData;
-
 	}
 
 	public openWithOptions(event: MouseEvent, newContextMenuOptions: Array<GridContextMenuOption<T>>): void {
+	}
+
+	protected existsAtLeastOneActionEnabled(): boolean {
+		if (this.contextMenuOptions) {
+			return this.contextMenuOptions.some(option => this.isEnabled(this.elementID, option.actionId));
+		}
 	}
 
 	protected isEnabled(elementId: string, actionId: string): boolean {
 		return this.container.isHeaderContextMenuOptionEnabled(elementId, actionId, this.headerData);
 	}
 
-	protected existsAtLeastOneActionEnabled(): boolean {
-		if (this.contextMenuOptions) {
-			const optionEnabled: GridContextMenuOption<T> = this.contextMenuOptions.find((menuOption: GridContextMenuOption<T>) => {
-				return this.isEnabled(this.elementID, menuOption.actionId);
-			});
-			return (optionEnabled != null);
-		}
-	}
-
 	protected isIconEnabled(elementId: string, actionId: string): boolean {
 		return false;
 	}
 
-	protected executeAction(elementId: string, actionId: string): void {
+	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string) {
 		this.container.executeHeaderContextMenuAction(elementId, actionId, this.headerData);
 	}
-
-	protected checkIfHasIcons(): void {
-	}
-
 }

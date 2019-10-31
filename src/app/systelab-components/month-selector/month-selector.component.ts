@@ -7,7 +7,7 @@ export class Month {
 }
 
 @Component({
-	selector: 'systelab-month-selector',
+	selector:    'systelab-month-selector',
 	templateUrl: './month-selector.component.html'
 })
 export class MonthSelectorComponent implements AfterViewInit {
@@ -52,6 +52,7 @@ export class MonthSelectorComponent implements AfterViewInit {
 
 	public setMonthsNames(year: number) {
 		this.monthNames = [];
+
 		for (let i = 0; i <= 11; i++) {
 			const month = this.i18nService.formatMonthAndYear(new Date(year, i, 1));
 			this.monthNames.push(month);
@@ -95,23 +96,11 @@ export class MonthSelectorComponent implements AfterViewInit {
 
 	public checkDateIntoIntervals(date: Date) {
 		if (this.minDate && this.maxDate) {
-			if (date >= this.minDate && date <= this.maxDate) {
-				return true;
-			} else {
-				return false;
-			}
+			return date >= this.minDate && date <= this.maxDate;
 		} else if (this.minDate) {
-			if (date >= this.minDate) {
-				return true;
-			} else {
-				return false;
-			}
+			return date >= this.minDate;
 		} else if (this.maxDate) {
-			if (date <= this.maxDate) {
-				return true;
-			} else {
-				return false;
-			}
+			return date <= this.maxDate;
 		} else {
 			return true;
 		}

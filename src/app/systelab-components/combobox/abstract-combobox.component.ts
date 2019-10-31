@@ -207,24 +207,22 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public ngOnInit() {
 		this.setRowHeight();
 
-		if (this.fontFamily) {
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-family', this.fontFamily);
-		}
-		if (this.fontSize) {
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-size', this.fontSize);
-		}
-		if (this.fontWeight) {
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-weight', this.fontWeight);
-		}
-		if (this.fontStyle) {
-			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'font-style', this.fontStyle);
-		}
+		this.setStyle('font-family', this.fontFamily);
+		this.setStyle('font-size', this.fontSize);
+		this.setStyle('font-weight', this.fontWeight);
+		this.setStyle('font-style', this.fontStyle);
 
 		jQuery(this.comboboxElement.nativeElement)
 			.on('hide.bs.dropdown', this.closeDropDown.bind(this));
 
 		this.initializeFavouriteList();
 		this.configGrid();
+	}
+
+	private setStyle(styleName: string, styleValue: string): void {
+		if (styleValue) {
+			this.myRenderer.setStyle(this.dropdownElement.nativeElement, styleName, styleValue);
+		}
 	}
 
 	protected setDescriptionAndCodeWhenMultiple(value: Array<T>) {
@@ -292,14 +290,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			checkboxChecked:   this.getCheckboxChecked()
 		};
 
-		this.gridOptions.getRowNodeId =
-			(item) => {
-				if (item[this.getIdField()]) {
-					return item[this.getIdField()];
-				} else {
-					return null;
-				}
-			};
+		this.gridOptions.getRowNodeId = (item) => item[this.getIdField()] ? item[this.getIdField()] : null;
 
 		this.configGridData();
 
@@ -311,11 +302,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected setRowHeight() {
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-		if (lineHeight) {
-			AbstractComboBox.ROW_HEIGHT = Number(lineHeight);
-		} else {
-			AbstractComboBox.ROW_HEIGHT = Number(26);
-		}
+		AbstractComboBox.ROW_HEIGHT = Number(lineHeight ? lineHeight : 26);
 	}
 
 	public abstract getInstance(): T;
@@ -335,10 +322,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getInputHeight() {
-		if (this.expandToParentContainerHeight) {
-			return {'height': '100%'};
-		}
-		return undefined;
+		return this.expandToParentContainerHeight ? {'height': '100%'} : undefined;
 	}
 
 	protected getComboPreferencesPrefix(): string {
@@ -386,10 +370,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			this.favouriteList.splice(this.favouriteList.map(String)
 				.indexOf(this.id.toString()), 1);
 		}
-		this.preferencesService.put(
-			this.getComboPreferencesPrefix() + '.favourites',
-			this.favouriteList.map(String)
-		);
+		this.preferencesService.put(this.getComboPreferencesPrefix() + '.favourites', this.favouriteList.map(String));
 	}
 
 	public setDropdownWidth() {
@@ -563,10 +544,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.multipleSelection) {
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
-					if (this.multipleSelectedItemList
-						.filter((selectedItem) => {
-							return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
-						}).length > 0) {
+					if (this.multipleSelectedItemList.some((item) => (item !== undefined && item[this.getIdField()] === node.id))) {
 						node.selectThisNode(true);
 					}
 				});
@@ -722,11 +700,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {
-		const idList = new Array<string | number>();
-		for (const item of this.multipleSelectedItemList) {
-			idList.push(item[this.getIdField()]);
-		}
-		return idList;
+		return this.multipleSelectedItemList.map(item => item[this.getIdField()]);
 	}
 
 	public checkMultipleSelectionClosed() {
@@ -735,7 +709,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			this.selectedItemChange.emit(this.multipleSelectedItemList);
 			this.multipleSelectedItemListChange.emit(this.multipleSelectedItemList);
 			this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
-
 		}
 	}
 
