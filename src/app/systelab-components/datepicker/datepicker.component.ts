@@ -149,27 +149,37 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
-			const today = new Date();
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
-			if (this.inputChanged && dateStr.length >= 2) {
-				if (dateStr.toUpperCase().endsWith('D')) {
-					this.currentDate = addDays(today, this.getAmount(dateStr, 'D'));
-				} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
-					this.currentDate = addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
-				} else if (dateStr.toUpperCase().endsWith('M')) {
-					this.currentDate = addMonths(today, this.getAmount(dateStr, 'M'));
-				} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
-					this.currentDate = addYears(today, this.getAmount(dateStr, 'Y', 'A'));
-				} else {
-					const transformedDate = this.transformDateWithoutSeparator(dateStr);
-					if (transformedDate) {
-						this.currentDate = transformedDate;
-					}
+			if (this.inputChanged) {
+				const changeDate = this.changeDateAccordingToInput(dateStr);
+				if (changeDate) {
+					this.currentDate = changeDate;
 				}
 				this.currentDateChange.emit(this.currentDate);
 				this.inputChanged = false;
 			}
 		}
+	}
+
+	private changeDateAccordingToInput(dateStr): Date {
+		const today = new Date();
+		if (dateStr.length >= 2) {
+			if (dateStr.toUpperCase().endsWith('D')) {
+				return addDays(today, this.getAmount(dateStr, 'D'));
+			} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
+				return addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
+			} else if (dateStr.toUpperCase().endsWith('M')) {
+				return addMonths(today, this.getAmount(dateStr, 'M'));
+			} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
+				return addYears(today, this.getAmount(dateStr, 'Y', 'A'));
+			} else {
+				const transformedDate = this.transformDateWithoutSeparator(dateStr);
+				if (transformedDate) {
+					return transformedDate;
+				}
+			}
+		}
+		return undefined;
 	}
 
 	private getAmount(dateStr: string, ...symbols: string[]): number {
@@ -187,8 +197,12 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public transformDateWithoutSeparator(date: string): Date {
 		let dateTmp = date.trim();
 
-		const dateFormat: string = this.i18nService.getDateFormat();
-		const dayBefore = dateFormat.toUpperCase().lastIndexOf( 'D') < dateFormat.toUpperCase().lastIndexOf( 'M');
+		const dateFormat: string = this.i18nService.getDateFormatForDatePicker();
+		const dayPosition = dateFormat.toUpperCase().lastIndexOf( 'D');
+		const monthPosition = dateFormat.toUpperCase().lastIndexOf( 'M');
+		const yearPosition = dateFormat.toUpperCase().lastIndexOf( 'Y');
+		const dayBefore = dayPosition < monthPosition;
+		const yearBefore = yearPosition < dayPosition;
 
 		let dateSeparator: string;
 
@@ -209,72 +223,108 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 
 
-		return this.getFormattedDate(dateTmp, dayBefore, firstSeparatorPosition, secondSeparatorPosition);
+		return this.getFormattedDate(dateTmp, dayBefore, yearBefore, firstSeparatorPosition, secondSeparatorPosition);
 	}
 
-	private getFormattedDate(dateTmp: string, dayBefore: boolean,  firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
+	private getFormattedDate(dateTmp: string, dayBefore: boolean,  yearBefore: boolean, firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
 		if (dateTmp.length === 4) {
 			// Manage dates with format d/m/yy or dmyy or m/d/yy or mdyy
-			return this.getFormattedDateFourDigits (dateTmp, dayBefore);
+			return this.getFormattedDateFourDigits (dateTmp, dayBefore, yearBefore);
 		} else if (dateTmp.length === 6 || dateTmp.length === 8) {
 			// Manage dates with format dd/mm/yy or ddmmyy or mm/dd/yy or mmddyy or dd/mm/yyyy or mm/dd/yyyy
-			return this.getFormattedDateSixOrEigthDigits(dateTmp, dayBefore);
+			return this.getFormattedDateSixOrEigthDigits(dateTmp, dayBefore, yearBefore);
 		} else if ((dateTmp.length === 5 || dateTmp.length === 7) && firstSeparatorPosition > 0 && secondSeparatorPosition !== firstSeparatorPosition) {
 			// Manage dates with format dd/m/yy or mm/d/yy or d/mm/yy or m/dd/yy or all before but with year with 4 digits
-			return this.getFormattedDateFiveOrSevenDigits(dateTmp, dayBefore, firstSeparatorPosition);
+			return this.getFormattedDateFiveOrSevenDigits(dateTmp, dayBefore, yearBefore, firstSeparatorPosition, secondSeparatorPosition);
 		}
 
 		return undefined;
 	}
 
-	private getFormattedDateFourDigits (dateTmp, dayBefore): Date {
+	private getFormattedDateFourDigits (dateTmp: string, dayBefore: boolean, yearBefore: boolean): Date {
 		let dayInDate: number;
 		let monthInDate: number;
 		let yearInDate: number;
-		if (dayBefore) {
-			dayInDate = +dateTmp.substring(0, 1);
-			monthInDate = +dateTmp.substring(1, 2) - 1;
+		if (yearBefore) {
+			yearInDate = +dateTmp.substring(0, 2);
+			if (dayBefore) {
+				dayInDate = +dateTmp.substring(2, 3);
+				monthInDate = +dateTmp.substring(3) - 1;
+			} else {
+				monthInDate = +dateTmp.substring(2, 3) - 1;
+				dayInDate = +dateTmp.substring(3);
+			}
 		} else {
-			monthInDate = +dateTmp.substring(0, 1) - 1;
-			dayInDate = +dateTmp.substring(1, 2);
+			if (dayBefore) {
+				dayInDate = +dateTmp.substring(0, 1);
+				monthInDate = +dateTmp.substring(1, 2) - 1;
+			} else {
+				monthInDate = +dateTmp.substring(0, 1) - 1;
+				dayInDate = +dateTmp.substring(1, 2);
+			}
+			yearInDate = +dateTmp.substring(2);
 		}
-		yearInDate = +dateTmp.substring(2);
+
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
 		}
 		return new Date(yearInDate, monthInDate, dayInDate);
 	}
 
-	private getFormattedDateSixOrEigthDigits (dateTmp, dayBefore): Date {
+	private getFormattedDateSixOrEigthDigits (dateTmp: string, dayBefore: boolean, yearBefore: boolean): Date {
 		let dayInDate: number;
 		let monthInDate: number;
 		let yearInDate: number;
-		if (dayBefore) {
-			dayInDate = +dateTmp.substring(0, 2);
-			monthInDate = +dateTmp.substring(2, 4) - 1;
+		const dateLength = dateTmp.length;
+		if (yearBefore) {
+			yearInDate = +dateTmp.substring(0, dateLength - 4);
+			if (dayBefore) {
+				dayInDate = +dateTmp.substring(dateLength - 4, dateLength - 2);
+				monthInDate = +dateTmp.substring(dateLength - 2) - 1;
+			} else {
+				monthInDate = +dateTmp.substring(dateLength - 4, dateLength - 2) - 1;
+				dayInDate = +dateTmp.substring(dateLength - 2);
+			}
 		} else {
-			monthInDate = +dateTmp.substring(0, 2) - 1;
-			dayInDate = +dateTmp.substring(2, 4);
+			if (dayBefore) {
+				dayInDate = +dateTmp.substring(0, 2);
+				monthInDate = +dateTmp.substring(2, 4) - 1;
+			} else {
+				monthInDate = +dateTmp.substring(0, 2) - 1;
+				dayInDate = +dateTmp.substring(2, 4);
+			}
+			yearInDate = +dateTmp.substring(4);
 		}
-		yearInDate = +dateTmp.substring(4);
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
 		}
 		return new Date(yearInDate, monthInDate, dayInDate);
 	}
 
-	private getFormattedDateFiveOrSevenDigits (dateTmp, dayBefore, firstSeparatorPosition): Date {
+	private getFormattedDateFiveOrSevenDigits (dateTmp: string, dayBefore: boolean, yearBefore: boolean,  firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
 		let dayInDate: number;
 		let monthInDate: number;
 		let yearInDate: number;
-		if (dayBefore) {
-			dayInDate = +dateTmp.substring(0, firstSeparatorPosition);
-			monthInDate = +dateTmp.substring(firstSeparatorPosition, 3) - 1;
+		const dateLength = dateTmp.length;
+		if (yearBefore) {
+			yearInDate = +dateTmp.substring(0, dateLength - 3);
+			if (dayBefore) {
+				dayInDate = +dateTmp.substring(dateLength - 3, secondSeparatorPosition - 1);
+				monthInDate = +dateTmp.substring(secondSeparatorPosition) - 1;
+			} else {
+				monthInDate = +dateTmp.substring(dateLength - 3, secondSeparatorPosition - 1) - 1;
+				dayInDate = +dateTmp.substring(secondSeparatorPosition - 1);
+			}
 		} else {
-			monthInDate = +dateTmp.substring(0, firstSeparatorPosition) - 1;
-			dayInDate = +dateTmp.substring(firstSeparatorPosition, 3);
+			if (dayBefore) {
+				dayInDate = +dateTmp.substring(0, firstSeparatorPosition);
+				monthInDate = +dateTmp.substring(firstSeparatorPosition, 3) - 1;
+			} else {
+				monthInDate = +dateTmp.substring(0, firstSeparatorPosition) - 1;
+				dayInDate = +dateTmp.substring(firstSeparatorPosition, 3);
+			}
+			yearInDate = +dateTmp.substring(3);
 		}
-		yearInDate = +dateTmp.substring(3);
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
 		}
