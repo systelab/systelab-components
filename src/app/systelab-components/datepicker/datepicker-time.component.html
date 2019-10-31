@@ -1,28 +1,31 @@
 <div class="d-flex">
-    <p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false" [locale]="language"
-                [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
-                (onBlur)="changeDate()"
-                [showOtherMonths]="true"
-                [required]="required"
-                [disabled]="disabled"
-                appendTo="body"
-                [style.margin-right.px]="5"
-                [style.min-width.px]="130"
-                [ngClass]="{'date-error': error || (required && !currentDate), 'is-disabled': disabled, 'previous-date': previousAfterDate, 'input-expand-height':inputExpandHeight}">
-        <p-header id="{{datepickerId}}">
-            <a class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
-            <a class="icon-angle-left slab-icon-medium" (click)="prevMonth($event)"></a>
-            <a class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
-            <a class="icon-angle-right slab-icon-medium" (click)="nextMonth($event)"></a>
-            <div class="ui-datepicker-title">
-                <span class="ui-datepicker-month">{{ currentCalendar.currentMonthText }}</span>
-                <span class="ui-datepicker-year">{{ currentCalendar.currentYear }}</span>
-            </div>
-        </p-header>
-    </p-calendar>
-    <systelab-spinner class="d-flex h-100" [spinValues]="touchSpinHourValues" id="hours" [fillUnitsWithZero]="true"
-                      style="width: 80px;"></systelab-spinner>
+    <systelab-datepicker [(currentDate)]="currentDate"
+                         (currentDateChange)="currentDateChange.emit($event)"
+                         [disabled]="disabled"
+                         [error]="error"
+                         [markPreviousAfterDate]="markPreviousAfterDate"
+                         [required]="required"
+                         [inputExpandHeight]="inputExpandHeight"
+                         [inputFontSize]="inputFontSize"
+                         [showTodayButton]="showTodayButton"
+                         [maxDate]="maxDate"
+                         [minDate]="minDate"
+                         [warnDaysAfter]="warnDaysAfter"
+                         [warnDaysBefore]="warnDaysBefore"
+                         [autofocus]="autofocus"
+                         [inline]="inline"></systelab-datepicker>
+
+    <systelab-spinner class="d-flex h-100" id="hours" style="width: 80px;"
+                      [spinValues]="touchSpinHourValues"
+                      [(value)]="touchSpinHourValues.value"
+                      [fillUnitsWithZero]="true"
+                      [disabled]="disabled"
+                      (valueChange)="currentHoursChanged($event)"></systelab-spinner>
     <label class="mx-1 my-0">:</label>
-    <systelab-spinner class="d-flex h-100" [spinValues]="touchSpinMinuteValues" id="minutes" [fillUnitsWithZero]="true"
-                      style="width: 80px;"></systelab-spinner>
+    <systelab-spinner class="d-flex h-100" id="minutes" style="width: 80px;"
+                      [spinValues]="touchSpinMinutesValues"
+                      [(value)]="touchSpinMinutesValues.value"
+                      [fillUnitsWithZero]="true"
+                      [disabled]="disabled"
+                      (valueChange)="currentMinutesChanged($event)"></systelab-spinner>
 </div>

@@ -1,47 +1,57 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { NumPadDialog, NumPadDialogParameters } from './numpad.dialog.component';
 
 @Component({
-	selector: 'systelab-numpad',
+	selector:    'systelab-numpad',
 	templateUrl: 'numpad.component.html'
 })
-export class NumPadComponent  {
-	@Input()
-	public numpadValue = '';
+export class NumPadComponent {
+	protected _value: string;
 	@Input()
 	isPassword = false;
 	@Input()
 	public autofocus = false;
 
-	@Output() public numpadValueEmitter = new EventEmitter();
+	@Output() public valueChange = new EventEmitter<string>();
+	@Output() public change = new EventEmitter<string>();
+
+	@Input()
+	get value(): string {
+		return this._value;
+	}
+
+	set value(value: string) {
+		this._value = value;
+		this.valueChange.emit(this._value);
+	}
 
 	constructor(public dialogService: DialogService) {
-
 	}
 
 	public openNumPadDialog() {
 		const parameters: NumPadDialogParameters = NumPadDialog.getParameters();
-		parameters.numpadValue = this.numpadValue;
-		parameters.isPassword =  this.isPassword;
+		parameters.value = this.value;
+		parameters.isPassword = this.isPassword;
 		this.dialogService.showDialog(NumPadDialog, parameters)
-			.subscribe( response => {
-				if ( response != null ) {
-					this.numpadValue = response;
+			.subscribe(response => {
+				if (response != null) {
+					this.value = response;
 					this.doEnter();
 				}
 			});
 	}
 
 	public doEnter() {
-		if (this.numpadValue && this.numpadValue.trim() !== '') {
-			this.numpadValueEmitter.emit(this.numpadValue);
+		if (this.value && this.value.trim() !== '') {
+			this.change.emit(this.value);
 		}
 	}
 
-	public doKeyPress(event: KeyboardEvent) {
-		if (event.keyCode === 13) {
-			this.doEnter();
+	public focus() {
+		const element: HTMLElement = this.isPassword ? document.getElementById('numpaddialogPwd') : document.getElementById('numpaddialog');
+		if (element) {
+			element.focus();
 		}
 	}
 }

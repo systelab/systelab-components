@@ -21,3 +21,7 @@ Use systelabTooltipPlacement to indicate the placement of the tooltip. Possible 
 
 Use systelabTooltipDelay to indicate delay showing the combo in ms. Default is 1000 ms.
 
+Use systelabTooltipHideDelay to indicate delay hiding the combo in ms. Default is 1000 ms.
+
+Use systelabTooltipOnFocus to indicate that the tooltip must be opened only with the hover event. By default the trigger value is with hover and focus. By default, the variable value is true.
+

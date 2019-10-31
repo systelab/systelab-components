@@ -43,7 +43,8 @@ export class ExampleSearcher extends AbstractSearcher<ExampleSearcherData> {
 
 	public getDialogParameters(): SearcherDialogParameters<ExampleSearcherData> {
 		const searcherDialogParameters: SearcherDialogParameters<ExampleSearcherData> = new SearcherDialogParameters<ExampleSearcherData>();
-		searcherDialogParameters.dialogClass = 'w-66 h-66';
+		searcherDialogParameters.widthRelative = '66%';
+		searcherDialogParameters.heightRelative = '66%';
 		return searcherDialogParameters;
 	}
 
@@ -64,13 +65,13 @@ export class ExampleSearcher extends AbstractSearcher<ExampleSearcherData> {
 	public getColumnDefs(): Array<any> {
 		return [
 			{
-				colID:      'code',
+				colId:      'code',
 				headerName: this.i18nService.instant('COMMON_CODE'),
 				field:      'code',
 				width:      300
 			},
 			{
-				colID:      'description',
+				colId:      'description',
 				headerName: this.i18nService.instant('COMMON_DESCRIPTION'),
 				field:      'description',
 			}

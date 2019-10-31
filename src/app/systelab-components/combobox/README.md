@@ -144,10 +144,25 @@ public abstract getAllNodeId(): string | number;
 public abstract getAllNodeDescription(): string;
 ```
 
+## Using a Combo with custom input color
+In order to use a combobox with a custom input text color you must set the input property "inputColor" with a string value that must 
+represent as a rgb code or hex code the color that must be displayed the text.
+
+## Using a Combo with icons
+In order to set an icon at the end of the input text box (similar as favourites), you must use the input property "withIcon" as true 
+and set the property "iconClass" with the icon that you want to show (for example, if we want to show an engine icon: 'icon-gear').
+This icon will be displayed with the color of the input text by default, but you can set a different color using the
+"iconColor" to change the color of the icon.
+
 ## Using a Combo with Favourites
 
 In order to create a combobox with favourites you must set the input property "withFavourites" as true, and in your component add 
 a new service, "PreferencesService", and set it in the **constructor**, and it's necessary to set a **preferenceName** input.
+
+## Using a Combo with reset combo option
+In order to put the combo in blank or with the initial value, you must set the property "withDeleteOption" as true. This option will show a X in the combo just in case that a value is selected. If is defined the params "defaultIdValue", "defaultDescription" or "defaultCode", the id, description and code will be set to this values.
+If you are using a multiple selection combobox, all items selected will be deleted.
+If you are using a combobox without blank value, the default option will be selected.
 
 ## Using AbstractApiTreeComboBox&lt;T&gt; with Favourites
 
@@ -175,9 +190,8 @@ Once you have your component, you can use it in your templates.
 | initialParams | any | | Class with the initial params of the component defined in customInputRender property |
 | filter | boolean | false | If true adds an input field inside dropdown to search elements. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
-| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
+| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown inside the dropdown of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | listSelectedValues | boolean | false | Shows the selected values at the bottom of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
-| selectDeselectAll | boolean | false | Shows select All/deselect All buttons inside the dropdpwn of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
 | fontFamily | string | | Font Family |
 | fontSize | string | | Font size in pixels |
 | fontWeight | string | | normal, bold, bolder, lighter, number, initial or inherit |
@@ -186,8 +200,13 @@ Once you have your component, you can use it in your templates.
 | isDisabled | boolean | false | If true the combo is disabled|
 | expandToParentContainerHeight | boolean | false | If true the combo expands its height to parent container height|
 | emptyElement | boolean | false | If true adds and emtpy element at the first position of the elements list in the dropdown. Use it only in combos that extends from AbstractApiComboBox or AbstractApiTreeComboBox. Never use it with multipleSelection property|
-| withFavourites | boolean | false | Used to activate and deactivate the favourites || 
-| preferencesName | string | '' | Preference name over will be saved the preferences || 
+| allElement | boolean | false | If true adds an element that represents the "all" element at the first position of the elements list in the dropdown (the second if the emptyElement is also set to true). Use it only in combos that extends from AbstractComboBox or AbstractApiComboBox. It can be used with multipleSelection property. In this last case, if the "all" element is selected no other option will remain selected. Reversely, if the "all" element is selected and the user select any other option, then the "all" element is deselected. |																																																																																																																																								
+| withFavourites | boolean | false | Used to activate and deactivate the favourites |
+| withDeleteOption | boolean | false | Used to activate and deactivate the reset combo option |
+| defaultIdValue | string | | Used to define the default id of the combo |
+| defaultDescription | string | | Used to define the default description selected of the combo |
+| defaultCode | string | | Used to define the default code selected of the combo |
+| preferencesName | string | '' | Preference name over will be saved the preferences |
 
 In black the Two-Way Data Binding properties.
 
@@ -204,6 +223,7 @@ For the Tree-Combobox, consider also the following properties:
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| change | T | Emits the selected element of type <T>. Only for combos with multipleSelectino=false.|
+| selectedItemChange | T | Emits the selected element of type <T>. Only for combos with multipleSelection=false.|
+| change | T | (DEPRECATED) Emits the selected element of type <T>. Only for combos with multipleSelection=false.|
 | multipleSelectedIDListChange | Array<string &#124; number> | Emits an array with the ids of selected elements.|
 | multipleSelectedItemListChange | Array<T> | Emits an array with selected elements of type <T>.|

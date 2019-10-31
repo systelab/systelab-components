@@ -1,0 +1,12 @@
+<div class="w-100 h-100 d-flex justify-content-center">
+    <systelab-paginator-page *ngIf="showFirstLastButtons" [icon]="'fas fa-fast-backward'" [disabled]="page===1" (click)="goFirst()"></systelab-paginator-page>
+    <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'fas fa-step-backward'" [disabled]="page===1"
+                             (click)="goPrevious()"></systelab-paginator-page>
+
+    <systelab-paginator-page *ngFor="let p of pages" [pageNumber]="p.toString()" [selected]="page===p" (click)="goToPage(p)" id="page{{p}}"></systelab-paginator-page>
+
+    <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'fas fa-step-forward'" [disabled]="page===totalPages"
+                             (click)="goNext()"></systelab-paginator-page>
+    <systelab-paginator-page *ngIf="showFirstLastButtons" [icon]="'fas fa-fast-forward'" [disabled]="page===totalPages"
+                             (click)="goLast()"></systelab-paginator-page>
+</div>

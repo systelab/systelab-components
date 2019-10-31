@@ -1,28 +1,14 @@
-import {
-	AfterViewInit,
-	Component,
-	DoCheck,
-	ElementRef,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	OnInit,
-	Output,
-	Renderer2,
-	ViewChild
-} from '@angular/core';
-import {Calendar} from 'primeng/components/calendar/calendar';
-import {I18nService} from 'systelab-translate/lib/i18n.service';
+import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Calendar } from 'primeng/components/calendar/calendar';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
 
 @Component({
-	selector: 'systelab-datepicker',
+	selector:    'systelab-datepicker',
 	templateUrl: 'datepicker.component.html'
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
-	public somethingChanged = false;
-
-	public _currentDate: Date;
 	@Input() public disabled = false;
 	@Input() public error = false;
 	@Input() public required = false;
@@ -30,8 +16,12 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public markPreviousAfterDate = false;
 	@Input() public inputFontSize: number;
 	@Input() public showTodayButton = false;
-
-	public previousAfterDate = false;
+	@Input() public inline = false;
+	@Input() public minDate: Date;
+	@Input() public maxDate: Date;
+	@Input() public warnDaysBefore: number;
+	@Input() public warnDaysAfter: number;
+	@Input() public autofocus = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -40,12 +30,28 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
-		this.checkPreviousAfterDate();
+		if (this.markPreviousAfterDate || (this.warnDaysBefore && this.warnDaysBefore > 0)) {
+
+			if (!this.warnDaysBefore) {
+				this.warnDaysBefore = 1;
+			}
+
+			this.checkPreviousAfterDate();
+		}
+		if (this.warnDaysAfter && this.warnDaysAfter > 0) {
+			this.checkTooFarDate();
+		}
 	}
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
+
+	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
+
+	public inputChanged = false;
+	protected _currentDate: Date;
+	public previousAfterDate = false;
+	public tooFarDate = false;
 	public language: any;
-	@ViewChild('calendar') public currentCalendar: Calendar;
 
 	public currentDocSize: number;
 	public currentLanguage: string;
@@ -56,9 +62,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public isTablet = false;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
 
-	public pHeaderElement: any = document.getElementById(this.datepickerId);
+	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(private myRenderer: Renderer2, private i18nService: I18nService) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService) {
 		this.addListeners();
 		// TODO: To get the language and modify the values.
 	}
@@ -70,7 +76,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.currentLanguage = this.i18nService.getCurrentLanguage();
 
 		this.addListeners();
-
 		if (navigator.userAgent.indexOf('iPad') > -1 || navigator.userAgent.indexOf('Android') > -1) {
 			this.isTablet = true;
 		}
@@ -78,10 +83,15 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public ngAfterViewInit() {
 		const newElement = document.createElement('i');
-		newElement.className = 'icon-calendar';
-		if (this.currentCalendar) {
-			this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
-			this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
+		if (!this.inline) {
+			newElement.className = 'icon-calendar';
+			if (this.currentCalendar) {
+				if (this.autofocus) {
+					this.currentCalendar.el.nativeElement.querySelector('input').focus();
+				}
+				this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
+				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
+			}
 		}
 	}
 
@@ -92,10 +102,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.closeDatepicker();
 		}
 
-		if (this.pHeaderElement !== document.getElementById(this.datepickerId)) {
-			this.pHeaderElement = document.getElementById(this.datepickerId);
-			if (this.pHeaderElement) {
-				this.repositionateCalendar(new ElementRef(this.pHeaderElement.parentElement.parentElement));
+		if (this.headerElement !== document.getElementById(this.datepickerId)) {
+			this.headerElement = document.getElementById(this.datepickerId);
+			if (this.headerElement) {
+				this.repositionateCalendar(new ElementRef(this.headerElement.parentElement.parentElement));
 			}
 		}
 
@@ -111,111 +121,105 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	private checkPreviousAfterDate() {
-
 		if (this._currentDate) {
-			const today = new Date();
-			const futureDate = new Date();
-			today.setHours(0, 0, 0, 0);
-			futureDate.setTime(futureDate.getTime() + (1000 * 120 * 24 * 30));
-
-			if (this._currentDate.getTime() < today.getTime() || this._currentDate.getTime() > futureDate.getTime()) {
-				this.previousAfterDate = true;
-			} else {
-				this.previousAfterDate = false;
-			}
+			this._currentDate.setHours(0, 0, 0, 0);
+			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
+			pastDate.setHours(0, 0, 0, 0);
+			return this._currentDate.getTime() <= pastDate.getTime();
 		} else {
 			this.previousAfterDate = false;
 		}
 	}
 
+	private checkTooFarDate() {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const futureDate = addDays(new Date(), this.warnDaysAfter);
+			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
+		} else {
+			this.tooFarDate = false;
+		}
+	}
+
 	public selectDate(): void {
 		this.currentDateChange.emit(this.currentDate);
-		this.somethingChanged = false;
+		this.inputChanged = false;
 	}
 
 	public changeDate(): void {
-		let emit = true;
-		const today: Date = new Date();
-
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
-
-			let dateStr: string = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim();
-			dateStr = dateStr.toLowerCase();
-
-			if (dateStr.length >= 2) {
-
-				if (dateStr.lastIndexOf('d') === dateStr.length - 1) {
-					let days: number = Number(dateStr.replace('d', '')
-						.replace('D', ''));
-					this.currentDate = new Date();
-					emit = false;
-					if (!isNaN(days)) {
-						this.currentDate.setDate(today.getDate() - days);
-						emit = true;
-					}
-				} else if (dateStr.lastIndexOf('w') === dateStr.length - 1) {
-					let weeks: number = Number(dateStr.replace('w', '')
-						.replace('W', ''));
-					this.currentDate = new Date();
-					emit = false;
-					if (!isNaN(weeks)) {
-						this.currentDate.setDate(today.getDate() - (weeks * 7));
-						emit = true;
-					}
-				} else if (dateStr.lastIndexOf('s') === dateStr.length - 1) {
-					let weeks: number = Number(dateStr.replace('s', '')
-						.replace('S', ''));
-					this.currentDate = new Date();
-					emit = false;
-					if (!isNaN(weeks)) {
-						this.currentDate.setDate(today.getDate() - (weeks * 7));
-						emit = true;
-					}
-				} else if (dateStr.lastIndexOf('m') === dateStr.length - 1) {
-					let months: number = Number(dateStr.replace('m', '')
-						.replace('M', ''));
-					this.currentDate = new Date();
-					emit = false;
-					if (!isNaN(months)) {
-						this.currentDate.setMonth(today.getMonth() - months);
-						emit = true;
-					}
-				} else if (dateStr.lastIndexOf('a') === dateStr.length - 1) {
-					let years: number = Number(dateStr.replace('a', '')
-						.replace('S', ''));
-					this.currentDate = new Date();
-					emit = false;
-					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
-						emit = true;
-					}
-				} else if (dateStr.lastIndexOf('y') === dateStr.length - 1) {
-					let years: number = Number(dateStr.replace('y', '')
-						.replace('Y', ''));
-					this.currentDate = new Date();
-					emit = false;
-					if (!isNaN(years)) {
-						this.currentDate.setFullYear(today.getFullYear() - years, today.getMonth(), today.getDate());
-						emit = true;
-					}
+			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
+			if (this.inputChanged) {
+				const changeDate = this.changeDateAccordingToInput(dateStr);
+				if (changeDate) {
+					this.currentDate = changeDate;
 				}
-			} else if (dateStr === '') {
-				emit = true;
+				this.currentDateChange.emit(this.currentDate);
+				this.inputChanged = false;
 			}
-		}
-		if (emit && this.somethingChanged) {
-			this.currentDateChange.emit(this.currentDate);
-			this.somethingChanged = false;
 		}
 	}
 
-	public onKeyDown(event: KeyboardEvent) {
+	private changeDateAccordingToInput(dateStr): Date {
+		const today = new Date();
+		if (dateStr.length >= 2) {
+			if (dateStr.toUpperCase().endsWith('D')) {
+				return addDays(today, this.getAmount(dateStr, 'D'));
+			} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
+				return addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
+			} else if (dateStr.toUpperCase().endsWith('M')) {
+				return addMonths(today, this.getAmount(dateStr, 'M'));
+			} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
+				return addYears(today, this.getAmount(dateStr, 'Y', 'A'));
+			} else {
+				const transformedDate = this.transformDateWithoutSeparator(dateStr);
+				if (transformedDate) {
+					return transformedDate;
+				}
+			}
+		}
+		return undefined;
+	}
+
+	private getAmount(dateStr: string, ...symbols: string[]): number {
+		for (const symbol of symbols) {
+			if (dateStr.toUpperCase().endsWith(symbol.toUpperCase())) {
+				const amount = Number(dateStr.toUpperCase().replace(symbol.toUpperCase(), ''));
+				if (!isNaN(amount)) {
+					return amount;
+				}
+			}
+		}
+		return 0;
+	}
+
+	public transformDateWithoutSeparator(date: string): Date {
+		const dateTmp = date.trim();
+
+		// TODO: Dending to support 4 6 and 8 digits in all the languages.
+		/*
+		if (!this.hasSeparator(dateTmp)) {
+			if (dateTmp.length === 4) {
+				return new Date( '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2));
+			} else if (dateTmp.length === 6 || dateTmp.length === 8) {
+				return new Date( dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4));
+			}
+		}
+		*/
+		return undefined;
+	}
+
+	private hasSeparator(dateTmp: string): boolean {
+		return dateTmp.includes('/') || dateTmp.includes('-') || dateTmp.includes('.');
+	}
+
+	public onInput(event: KeyboardEvent) {
 		if (event.keyCode === 13) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
 			this.closeDatepicker();
 		} else {
-			this.somethingChanged = true;
+			this.inputChanged = true;
 		}
 	}
 
@@ -226,27 +230,48 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public repositionateCalendar(element?: ElementRef): void {
 
-		let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
-
-		inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
-		inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
-		datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
-
-		if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
-			const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
-			this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
+		try {
+			let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
+			inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
+			inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
+			datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
+			if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
+				const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
+				this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
+			}
+		} catch (ex) {
 		}
 	}
 
-	public nextMonth(event: Event): void {
+	public nextMonth(): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.nextMonth(event);
+			let month = this.currentCalendar.currentMonth;
+			if (month < 11) {
+				month++;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+			} else {
+				month = 0;
+				let year = this.currentCalendar.currentYear;
+				year++;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+				this.currentCalendar.onYearDropdownChange(year.toString());
+			}
 		}
 	}
 
-	public prevMonth(event: Event): void {
+	public prevMonth(): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.prevMonth(event);
+			let month = this.currentCalendar.currentMonth;
+			if (month > 0) {
+				month--;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+			} else {
+				month = 11;
+				let year = this.currentCalendar.currentYear;
+				year--;
+				this.currentCalendar.onMonthDropdownChange(month.toString());
+				this.currentCalendar.onYearDropdownChange(year.toString());
+			}
 		}
 	}
 
@@ -269,7 +294,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentDate = null;
 			this.currentCalendar.onClearButtonClick(event);
 			this.currentDateChange.emit(this.currentDate);
-			this.somethingChanged = false;
+			this.inputChanged = false;
 		}
 	}
 
@@ -277,7 +302,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
-			this.somethingChanged = false;
+			this.inputChanged = false;
 		}
 	}
 
@@ -286,37 +311,40 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
 		}
-
 	}
 
 	private getLanguage(): void {
 
-		let weekDaysNames: Array<string> = [];
-		let weekDaysNamesShort: Array<string> = [];
-		let monthNames: Array<string> = [];
-		let monthNamesShort: Array<string> = [];
+		const weekDaysNames: Array<string> = [];
+		const weekDaysNamesShort: Array<string> = [];
+		const monthNames: Array<string> = [];
+		const monthNamesShort: Array<string> = [];
+		// tslint:disable:max-line-length
+		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY'])
+			.subscribe((res) => {
+				weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);
+			});
 
-		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY']).subscribe((res) => {
-			weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);
-		});
+		this.i18nService.get(['COMMON_SEVENTH_DAY', 'COMMON_FIRST_DAY', 'COMMON_SECOND_DAY', 'COMMON_THIRD_DAY', 'COMMON_FOURTH_DAY', 'COMMON_FIFTH_DAY', 'COMMON_SIXTH_DAY'])
+			.subscribe((res) => {
+				weekDaysNamesShort.push(res.COMMON_SEVENTH_DAY, res.COMMON_FIRST_DAY, res.COMMON_SECOND_DAY, res.COMMON_THIRD_DAY, res.COMMON_FOURTH_DAY, res.COMMON_FIFTH_DAY, res.COMMON_SIXTH_DAY);
+			});
 
-		this.i18nService.get(['COMMON_SEVENTH_DAY', 'COMMON_FIRST_DAY', 'COMMON_SECOND_DAY', 'COMMON_THIRD_DAY', 'COMMON_FOURTH_DAY', 'COMMON_FIFTH_DAY', 'COMMON_SIXTH_DAY']).subscribe((res) => {
-			weekDaysNamesShort.push(res.COMMON_SEVENTH_DAY, res.COMMON_FIRST_DAY, res.COMMON_SECOND_DAY, res.COMMON_THIRD_DAY, res.COMMON_FOURTH_DAY, res.COMMON_FIFTH_DAY, res.COMMON_SIXTH_DAY);
-		});
+		this.i18nService.get(['COMMON_JANUARY', 'COMMON_FEBRUARY', 'COMMON_MARCH', 'COMMON_APRIL', 'COMMON_MAY', 'COMMON_JUNE', 'COMMON_JULY', 'COMMON_AUGUST', 'COMMON_SEPTEMBER', 'COMMON_OCTOBER', 'COMMON_NOVEMBER', 'COMMON_DECEMBER'])
+			.subscribe((res) => {
+				monthNames.push(res.COMMON_JANUARY, res.COMMON_FEBRUARY, res.COMMON_MARCH, res.COMMON_APRIL, res.COMMON_MAY, res.COMMON_JUNE, res.COMMON_JULY, res.COMMON_AUGUST, res.COMMON_SEPTEMBER, res.COMMON_OCTOBER, res.COMMON_NOVEMBER, res.COMMON_DECEMBER);
+			});
 
-		this.i18nService.get(['COMMON_JANUARY', 'COMMON_FEBRUARY', 'COMMON_MARCH', 'COMMON_APRIL', 'COMMON_MAY', 'COMMON_JUNE', 'COMMON_JULY', 'COMMON_AUGUST', 'COMMON_SEPTEMBER', 'COMMON_OCTOBER', 'COMMON_NOVEMBER', 'COMMON_DECEMBER']).subscribe((res) => {
-			monthNames.push(res.COMMON_JANUARY, res.COMMON_FEBRUARY, res.COMMON_MARCH, res.COMMON_APRIL, res.COMMON_MAY, res.COMMON_JUNE, res.COMMON_JULY, res.COMMON_AUGUST, res.COMMON_SEPTEMBER, res.COMMON_OCTOBER, res.COMMON_NOVEMBER, res.COMMON_DECEMBER);
-		});
-
-		this.i18nService.get(['JOB_MONTHS_1', 'JOB_MONTHS_2', 'JOB_MONTHS_3', 'JOB_MONTHS_4', 'JOB_MONTHS_5', 'JOB_MONTHS_6', 'JOB_MONTHS_7', 'JOB_MONTHS_8', 'JOB_MONTHS_9', 'JOB_MONTHS_10', 'JOB_MONTHS_11', 'JOB_MONTHS_12']).subscribe((res) => {
-			monthNamesShort.push(res.JOB_MONTHS_1, res.JOB_MONTHS_2, res.JOB_MONTHS_3, res.JOB_MONTHS_4, res.JOB_MONTHS_5, res.JOB_MONTHS_6, res.JOB_MONTHS_7, res.JOB_MONTHS_8, res.JOB_MONTHS_9, res.JOB_MONTHS_10, res.JOB_MONTHS_11, res.JOB_MONTHS_12);
-		});
+		this.i18nService.get(['JOB_MONTHS_1', 'JOB_MONTHS_2', 'JOB_MONTHS_3', 'JOB_MONTHS_4', 'JOB_MONTHS_5', 'JOB_MONTHS_6', 'JOB_MONTHS_7', 'JOB_MONTHS_8', 'JOB_MONTHS_9', 'JOB_MONTHS_10', 'JOB_MONTHS_11', 'JOB_MONTHS_12'])
+			.subscribe((res) => {
+				monthNamesShort.push(res.JOB_MONTHS_1, res.JOB_MONTHS_2, res.JOB_MONTHS_3, res.JOB_MONTHS_4, res.JOB_MONTHS_5, res.JOB_MONTHS_6, res.JOB_MONTHS_7, res.JOB_MONTHS_8, res.JOB_MONTHS_9, res.JOB_MONTHS_10, res.JOB_MONTHS_11, res.JOB_MONTHS_12);
+			});
 
 		this.language = {
-			dayNames: weekDaysNames,
-			dayNamesShort: weekDaysNamesShort,
-			dayNamesMin: weekDaysNamesShort,
-			monthNames: monthNames,
+			dayNames:        weekDaysNames,
+			dayNamesShort:   weekDaysNamesShort,
+			dayNamesMin:     weekDaysNamesShort,
+			monthNames:      monthNames,
 			monthNamesShort: monthNamesShort
 		};
 

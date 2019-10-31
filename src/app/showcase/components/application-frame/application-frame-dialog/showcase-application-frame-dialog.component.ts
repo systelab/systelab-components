@@ -1,7 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { DialogRef, DialogService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
-import { MessagePopupService } from '../../../../systelab-components/modal/message-popup/message-popup.service';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { DialogRef, DialogService, MessagePopupService, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
 import { ApplicationHeaderMenuEntry } from '../../../../systelab-components/applicationframe/header/app-header.component';
+import { ApplicationFrameComponent } from '../../../../systelab-components/applicationframe/application-frame.component';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from '../../../../systelab-components/applicationframe/sidebar/app-sidebar.component';
 
 export class ShowcaseApplicationFrameDialogParameters extends SystelabModalContext {
@@ -13,6 +13,7 @@ export class ShowcaseApplicationFrameDialogParameters extends SystelabModalConte
 })
 export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseApplicationFrameDialogParameters>, OnInit {
 
+	@ViewChild('appFrame', {static: false}) appFrame: ApplicationFrameComponent;
 	protected parameters: ShowcaseApplicationFrameDialogParameters;
 	public currentTab = 'T1';
 
@@ -21,7 +22,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 
 	public userName: string;
 	public userFullName: string;
-	public hospitalName: string;
+	public title: string;
 	public menuBars = false;
 	public logoIcon = 'icon-modulab'
 
@@ -30,7 +31,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 	public sidetabs: ApplicationSidebarTab[] = [];
 
 	constructor(public dialog: DialogRef<ShowcaseApplicationFrameDialogParameters>, protected messagePopupService: MessagePopupService,
-		protected dialogService: DialogService) {
+	            protected dialogService: DialogService) {
 		this.parameters = dialog.context;
 		this.frameWidth = (window.innerWidth);
 		this.frameHeight = (window.innerHeight);
@@ -48,7 +49,7 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 
 		this.userName = 'admin';
 		this.userFullName = 'Administrator';
-		this.hospitalName = 'Customer name';
+		this.title = 'Customer name';
 
 		this.setMenu();
 
@@ -56,12 +57,13 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 		subMenu.push(new ApplicationSidebarTab('T4', 'SubTab One', false));
 		subMenu.push(new ApplicationSidebarTab('T5', 'SubTab Two', false));
 
-		this.sidetabs.push(new ApplicationSidebarTab('T1', 'Tab One', true));
-		this.sidetabs.push(new ApplicationSidebarTab('T3', 'Tab Three', false, subMenu));
-		this.sidetabs.push(new ApplicationSidebarTab('T2', 'Tab Two', false));
+		this.sidetabs.push(new ApplicationSidebarTab('T1', 'Tab One', true, null, null, 'icon-download'));
+		this.sidetabs.push(new ApplicationSidebarTab('T3', 'Tab Three', false, subMenu, null, 'icon-print'));
+		this.sidetabs.push(new ApplicationSidebarTab('T2', 'Tab Two', false, null, null, 'icon-home'));
+		this.sidetabs.push(new ApplicationSidebarTab('T6', 'Tab Action first', false, null, () => this.action3('T6'),'icon-book'));
 
-		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1(),'icon-home'));
-		this.sideactions.push(new ApplicationSidebarAction('Close', () => this.close()));
+		this.sideactions.push(new ApplicationSidebarAction('Button 1', () => this.action1(), 'icon-home'));
+		this.sideactions.push(new ApplicationSidebarAction('Close', () => this.close(), 'icon-print'));
 
 	}
 
@@ -97,6 +99,15 @@ export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseAp
 	}
 
 	public action1() {
+	}
+
+	public action3(id) {
+		this.messagePopupService.showYesNoQuestionPopup('Question', 'Are you sure you want to continue?')
+			.subscribe((res) => {
+				if (res) {
+					this.appFrame.continueSelect(id);
+				}
+			});
 	}
 }
 

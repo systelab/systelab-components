@@ -18,7 +18,8 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 
 	public getDialogParameters(): SearcherDialogParameters<ShowcaseSearcherData> {
 		const searcherDialogParameters: SearcherDialogParameters<ShowcaseSearcherData> = new SearcherDialogParameters<ShowcaseSearcherData>();
-		searcherDialogParameters.dialogClass = 'w-66 h-66';
+		searcherDialogParameters.widthRelative = '66%';
+		searcherDialogParameters.heightRelative = '66%';
 		return searcherDialogParameters;
 	}
 
@@ -54,13 +55,13 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 	public getColumnDefs(): Array<any> {
 		return [
 			{
-				colID:      'code',
+				colId:      'code',
 				headerName: this.i18nService.instant('COMMON_CODE'),
 				field:      'code',
 				width:      300
 			},
 			{
-				colID:      'description',
+				colId:      'description',
 				headerName: this.i18nService.instant('COMMON_DESCRIPTION'),
 				field:      'description',
 			}

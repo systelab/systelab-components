@@ -1,8 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 
 export class TimelineEvent {
-	constructor(public title: string, public publishingDate: Date, public text: string, public inverted = false, public icon?) {
+
+	public inverted = false;
+	public icon: string;
+	public extraText: string;
+	public data: Object;
+	public color: string;
+
+	constructor(public title: string, public publishingDate: Date, public text: string) {
 
 	}
 
@@ -15,6 +22,9 @@ export class TimelineEvent {
 	}
 
 	public getColor() {
+		if (this.color) {
+			return this.color;
+		}
 		return 'warning';
 	}
 }
@@ -26,12 +36,17 @@ export class TimelineEvent {
 export class TimelineComponent {
 
 	@Input() public events: TimelineEvent[] = [];
+	@Output() public timelineClick = new EventEmitter<TimelineEvent>();
 
 	constructor(protected i18nService: I18nService) {
 
 	}
 
 	public getPrintableDate(event: TimelineEvent) {
-		return this.i18nService.formatDateTime(event.publishingDate);
+		return this.i18nService.formatDateTime(event.publishingDate, true);
+	}
+
+	public doClick(timelineEvent: TimelineEvent) {
+		this.timelineClick.emit(timelineEvent);
 	}
 }

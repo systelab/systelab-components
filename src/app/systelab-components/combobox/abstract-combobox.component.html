@@ -2,12 +2,14 @@
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown" (click)="onComboClicked($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
                [ngStyle]="getInputHeight()" [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle"
-               [(ngModel)]="description" [disabled]="isDisabled"/>
+               [(ngModel)]="description" [disabled]="isDisabled" [style.color]="inputColor"/>
         <div *ngIf="customInputRenderer" #input readonly type="text" class="slab-flex-1 form-control slab-combo-input" [ngStyle]="getInputHeight()"
-             [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle">
+             [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle" [style.color]="inputColor">
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
+        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button" class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"></button>
+        <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}" [style.color]="iconColor"></button>
         <button type="button" *ngIf="(withFavourites && id && !isTree) || (withFavourites && id && isTree && level)" #favouriteButton
                 class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)"></button>
@@ -22,14 +24,14 @@
             </div>
             <div *ngIf="selectDeselectAll" class="slab-filter-container mb-2">
                 <div class="w-100 text-center btn-group" role="group">
-                    <button type="button" class="btn btn-sm w-50  btn-outline-primary" (click)="doSelectAll()">{{'COMMON_SELECT_ALL' | translate | async }}</button>
-                    <button type="button" class="btn btn-sm w-50 btn-outline-primary" (click)="doDeselectAll()">{{'COMMON_DESELECT_ALL' | translate | async }}</button>
+                    <button type="button" class="btn btn-sm w-50" (click)="doSelectAll()">{{'COMMON_SELECT_ALL' | translate | async }}</button>
+                    <button type="button" class="btn btn-sm w-50" (click)="doDeselectAll()">{{'COMMON_DESELECT_ALL' | translate | async }}</button>
                 </div>
             </div>
             <div #hidden class="height-hidden"></div>
             <div class="slab-flex-1 position-relative">
                 <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid style="width: 100%; height: 100%;" [style.font-family]="fontFamily"
-                                 [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle" class="ag-fresh"
+                                 [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle" class="ag-theme-fresh"
                                  [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)" (modelUpdated)="onModelUpdated()"
                                  (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady($event)">
                 </ag-grid-angular>

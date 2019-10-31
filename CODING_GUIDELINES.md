@@ -1,6 +1,7 @@
 # Coding guidelines
 
-If you plan on contributing to systelab-components, please make sure you follow these guidelines.
+If you plan on contributing to systelab-components, please start reading the code coventions at https://github.com/systelab/systelab-angular-doc.
+
 We will check each of them during the review process, but knowing about them ahead of time will reduce the number of 
 iterations.
 

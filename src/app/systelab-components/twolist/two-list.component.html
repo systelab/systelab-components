@@ -4,25 +4,29 @@
         <div>
             <input type="text" class="form-control" [(ngModel)]="firstListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1">
+        <div id="left-list" class="slab-twolistbox mt-2 slab-flex-1">
             <div class="slab-twolistboxdiv">
                 <ul class="slab-twolistboxrow list-group">
-                    <li *ngFor="let item of (available | datafilter:firstListSearch)"
-                        [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.selected,'slab-twolistboxrow':!item.selected}"
-                        (click)="selectAvailableItem(item, $event)">
+                    <li *ngFor="let item of (available | datafilter:firstListSearch); let i=index;" [id]="'available'+i" [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.isSelected,'slab-twolistboxrow':!item.isSelected}"
+                        (click)="selectAvailableItem(item, $event)" (dblclick)="moveSelectedItemsFromAvailableToVisible(item, $event)">
                         {{item.displayName}}
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="slab-twolistbuttondiv">
-        <button type="button" class="slab-twolistbutton btn icon-chevron-right" (click)="add()" title="Add selected"
-                [disabled]="selected.available.length == 0">
+    <div class="slab-twolistbuttondiv  d-flex flex-column flex-nowrap justify-content-center">
+        <button type="button" class="btn icon-angle-double-right" (click)="addAll()" title="{{'COMMON_ADD_ALL' | translate | async }}"
+            [disabled]="available.length == 0">
         </button>
-        <button type="button" class="slab-twolistbutton btn icon-chevron-left" (click)="remove()"
-                title="Remove selected"
-                [disabled]="selected.current.length == 0">
+        <button type="button" class="btn icon-chevron-right" (click)="add()" title="{{'COMMON_ADD_SELECTED' | translate | async }}"
+            [disabled]="currentSelectionStatus.available.length == 0">
+        </button>
+        <button type="button" class="btn icon-chevron-left" (click)="remove()" title="{{'COMMON_REMOVE_SELECTED' | translate | async }}"
+            [disabled]="currentSelectionStatus.visible.length == 0">
+        </button>
+        <button type="button" class="btn icon-angle-double-left" (click)="removeAll()" title="{{'COMMON_REMOVE_ALL' | translate | async }}"
+            [disabled]="visible.length == 0">
         </button>
     </div>
 
@@ -31,10 +35,10 @@
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
-        <div class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
-            <systelab-two-list-sortable-list class="w-100" [selected]="selected" [available]="available"
-                                             [(elementsList)]="visible"
-                                             [secondListSearch]="secondListSearch"></systelab-two-list-sortable-list>
+        <div id="right-list" class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
+            <systelab-two-list-sortable-list class="w-100" [currentSelectionStatus]="currentSelectionStatus"
+                [(elementsList)]="visible" [secondListSearch]="secondListSearch" [dragAndDropEnabled]="dragAndDropEnabled"
+                (dbClick)="moveSelectedItemsFromVisibleToAvailable($event)"></systelab-two-list-sortable-list>
         </div>
     </div>
 </div>

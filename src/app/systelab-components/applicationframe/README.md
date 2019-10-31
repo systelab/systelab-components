@@ -6,6 +6,6 @@ The Inputs and Outputs are the same defined in this components.
 ## Using the template
 
 ```html
-<systelab-app-frame [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu" [actions]="actions" [tabs]="tabs" (selected) ="doTabSelected($event)" [logoIcon]="logoIcon" [menuBars]="menuBars" [showSideBar]="showSideBar">
+<systelab-app-frame [userName]="userName" [userFullName]="userFullName" [title]="title" [menu]="menu" [actions]="actions" [tabs]="tabs" (selected) ="doTabSelected($event)" [logoIcon]="logoIcon" [menuBars]="menuBars" [showSideBar]="showSideBar" [largeSideBar]="true">
 </systelab-app-frame>
 ```

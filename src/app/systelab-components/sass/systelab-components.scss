@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+@import "variables";
+@import "dialog";
+@import "icon";
+@import "dropdown";
+@import "form";
+@import "tabs";
+@import "context-menu";
+@import "checkBox";
+@import "agGrid";
+@import "tree";
+@import "two-list";
+@import "table";
+@import "button";
+@import "comboBox";
+@import "listBox";
+@import "datepicker";
+@import "radio";
+@import "slider";
+@import "switch";
+@import "textarea";
+@import "searcher";
+@import "spinner";
+@import "nanobar";
+@import "tooltip";
+@import "timeline";
+@import "breadcrumb";
+@import "navbar";
+@import "week-selector";
+@import "month-selector";
+@import "signature-canvas";
+@import "app-header";
+@import "sidebar-large";
+@import "sidebar-small";
+@import "percentage-circle";
+@import "sortable-list";
+@import "numpad";
+@import "chip-button";
+
+html {
+  width: 100%;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
+  color: $slab-base-body-color;
+
+  body {
+    &:not(.is-login) {
+      min-width: $slab-app-min-width;
+      min-height: $slab-app-min-height;
+    }
+  }
+
+  input,
+  button,
+  a,
+  a:focus {
+    outline: 0 !important;
+  }
+
+  input::-ms-clear {
+    display: none;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+}
+
+.slab-flex-1 {
+  flex: 1;
+}
+
+.slab-overflow-container {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}

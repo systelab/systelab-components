@@ -1,16 +1,16 @@
-<systelab-dialog-header [withInfo]="false" (close)="close();">Options</systelab-dialog-header>
+<systelab-dialog-header [withInfo]="false" (close)="close();">{{ 'COMMON_OPTIONS' | translate | async }}
+</systelab-dialog-header>
 <systelab-tabs class="slab-flex-1 slab-overflow-container">
     <systelab-tab [title]="getTabTitle('COMMON_FIELDS')" class="p-2 slab-overflow-container">
         <systelab-two-list class="slab-flex-1 slab-overflow-container"
                            [(available)]="availableColumns"
                            [(visible)]="visibleColumns"
-                           [initialAvailableColumns]="initialAvailableColumns"
-                           displayAttr="displayName">
+                           [initialAvailableColumns]="initialAvailableColumns">
         </systelab-two-list>
     </systelab-tab>
 </systelab-tabs>
 <systelab-dialog-bottom>
-    <button type="button" class="btn ml-auto" [disabled]="visibleColumns.length === 0" (click)="submit()"> Submit
+    <button type="button" class="btn ml-auto" id="ID_optionsSubmitButton" [disabled]="visibleColumns.length === 0" (click)="submit()"> Submit
     </button>
 </systelab-dialog-bottom>
 

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DialogHeaderComponent, DialogRef, ModalComponent, SystelabModalContext } from '../../../../systelab-components/modal';
 import { interval } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 export class ShowcaseProgressBarDialogParameters extends SystelabModalContext {
 	public index: number;
@@ -11,10 +12,14 @@ export class ShowcaseProgressBarDialogParameters extends SystelabModalContext {
 })
 export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgressBarDialogParameters> {
 
-	@ViewChild('header') header: DialogHeaderComponent;
+	@ViewChild('header', {static: false}) header: DialogHeaderComponent;
 
 	protected parameters: ShowcaseProgressBarDialogParameters;
 	private progress = 0;
+
+	public static getParameters(): ShowcaseProgressBarDialogParameters {
+		return new ShowcaseProgressBarDialogParameters();
+	}
 
 	constructor(public dialog: DialogRef<ShowcaseProgressBarDialogParameters>) {
 		this.parameters = dialog.context;
@@ -25,18 +30,23 @@ export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgres
 	}
 
 	public submit(): void {
+		this.dialog.disable();
 		this.progress = 0;
 		interval(500)
-			.subscribe(data => {
-				if (this.progress < 100) {
-					this.progress = this.progress + 10;
-					this.header.go(this.progress);
+			.pipe(
+				takeWhile(() => this.progress < 100)
+			)
+			.subscribe(() => {
+					if (this.progress < 100) {
+						this.progress = this.progress + 10;
+						this.header.go(this.progress);
+					}
+				}, () => {
+				},
+				() => {
+					this.dialog.enable();
 				}
-			});
-	}
-
-	public static getParameters(): ShowcaseProgressBarDialogParameters {
-		return new ShowcaseProgressBarDialogParameters();
+			);
 	}
 }
 

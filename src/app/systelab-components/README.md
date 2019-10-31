@@ -12,24 +12,37 @@ In order to use the library, the first step will be to add the dependency in you
 npm install systelab-components --save
 ```
 
-After, you must add the following styles and scripts in the angular.json file,
+After, you must add the following styles, stylePreprocessorOptions and scripts in the angular.json file,
 
 ```javascript
 "styles": [
-        "../node_modules/ag-grid/dist/styles/ag-grid.css",
-        "../node_modules/ag-grid/dist/styles/theme-fresh.css",
-        "../node_modules/primeng/resources/themes/omega/theme.css",
-        "../node_modules/primeng/resources/primeng.min.css",
-        "../node_modules/systelab-components/icons/icomoon.css"
+        "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+        "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
+        "node_modules/primeng/resources/themes/nova-light/theme.css",
+        "node_modules/primeng/resources/primeng.min.css",
+        "node_modules/primeicons/primeicons.css,
+        "node_modules/systelab-components/icons/icomoon.css",
+        "node_modules/@fortawesome/fontawesome-free/css/all.css"
       ],
+"stylePreprocessorOptions": {
+  "includePaths": [
+    "node_modules"
+  ]
+},      
 "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/popper.js/dist/umd/popper.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/pako/dist/pako.min.js",
-        "../node_modules/nanobar/nanobar.js"
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/popper.js/dist/umd/popper.js",
+        "node_modules/bootstrap/dist/js/bootstrap.js",
+        "node_modules/pako/dist/pako.min.js",
+        "node_modules/nanobar/nanobar.js"
       ],
 ```
+
+> Be careful because you will not probably need all fontawesome 5.x. Instead you can add:
+> - brands.css
+> - fontawesome.css
+> - regular.css
+> - solid.css
 
 After, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 
@@ -39,13 +52,13 @@ NgModule({
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        DragDropModule,
         SystelabTranslateModule.forRoot(),
         SystelabPreferencesModule.forRoot(),
         SystelabLoginModule.forRoot(),
         SystelabComponentsModule.forRoot(),
-        DndModule.forRoot(),
         AgGridModule.withComponents([
-            GridContextMenuComponent,
+            GridContextMenuCellRendererComponent,
             GridHeaderContextMenuComponent
         ]),
     ...
@@ -60,16 +73,14 @@ providers: [
 ],
 ```
 
-Finally, you must import the systelab-bootstrap-settings, bootstrap and systelab-components sass files in the styles of your main component, and make them visible for all your components.
+Finally, you must import the systelab-components sass file in the general styles file in src/styles.scss.
 
-In the following example, for the component AppComponent, we have created and added the sass file app.component.scss. Also we have set the encapsulation as None.
+In the following example, for the component AppComponent we are not setting styleUrl due to the component will use the styles defined in src/styles.scss.
 
 ```javascript
 @Component({
     selector:      'app-root',
-    templateUrl:   'app.component.html',
-    styleUrls:     ['app.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl:   'app.component.html'
 })
 export class AppComponent {
 
@@ -79,15 +90,25 @@ export class AppComponent {
 }
 ```
 
-In the sass file app.component.scss, we have imported the Bootstrap and systelab-component sass styles.
+src/styles.scss file is visible to AppComponent because is referenced in styles of angular.json file.
 
-```sass
-@import "../systelab-components/sass/systelab-bootstrap-settings";
-@import "../../../node_modules/bootstrap/scss/bootstrap";
-@import "../systelab-components/sass/systelab-components";
+```javascript
+"styles": [
+        "node_modules/ag-grid/dist/styles/ag-grid.css",
+        "node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
+        "node_modules/primeng/resources/themes/omega/theme.css",
+        "node_modules/primeng/resources/primeng.min.css",
+        "node_modules/systelab-components/icons/icomoon.css",
+        "src/styles.scss"
+      ],
 ```
 
-Notice that the Bootstrap package is a dependency for systelab-components, and npm will download it.
+In the sass file src/styles.scss, we have imported systelab-components sass style.
+
+```sass
+@import "systelab-components/sass/systelab-components";
+```
+Bootstrap package is a dependency for systelab-components, and npm will download it.
 
 ### Changing the default style
 
@@ -97,14 +118,20 @@ To change the default Bootstrap or systelab-components settings like colors, bor
 $slab-size-percentage: 1;
 $primary-color: rgb(0, 154, 181);
 
-@import "../systelab-components/styles/sass/systelab-bootstrap-settings";
-@import "../../../node_modules/bootstrap/scss/bootstrap";
-@import "../systelab-components/styles/sass/systelab-components";
+@import "systelab-components/sass/systelab-components";
 ```
 
-All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](styles/sass/_variables.scss) can be overwritten here.
+All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) can be overwritten here.
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
+
+### Schematics
+
+In order to generate some components, install [systelab-schematics](https://github.com/systelab/systelab-schematics) 
+
+```bash
+npm install -D systelab-schematics --save
+```
 
 ## Components
 
@@ -137,6 +164,7 @@ The following table summarizes all the components included in the library.
 | [systelab-month-selector](month-selector) | Component to show a Month Selector |
 | [systelab-navbar](navbar) | Component to show a Navbar |
 | [systelab-numpad](numpad) | Component to show a Numeric Keyboard dialog for an Input Text |
+| [systelab-paginator](paginator) | Component for page navigation |
 | [systelab-percentage-circle](percentage-circle) | Component to show a percentage indicator |
 | [systelab-searcher](searcher) | Abstract classes that lets you create a Searcher component |
 | [systelab-select](select) | Component to select a value form a predefined list |
@@ -219,3 +247,37 @@ Check the Bootstrap utilities at https://getbootstrap.com/docs/4.0/utilities/bor
 As a super basic summary:
 
 Add **.border** and **.rounded**, and probably some margin classes, if you want a classical gray rounded border.
+
+### Responsiveness:
+
+Use bootstrap utilities to add responsiveness to your layout. Equivalence between versions 3.x and 4.x are:
+
+
+- Show/hide for breakpoint and down:
+
+    - hidden-xs-down (hidden-xs) = d-none d-sm-block
+    - hidden-sm-down (hidden-sm hidden-xs) = d-none d-md-block
+    - hidden-md-down (hidden-md hidden-sm hidden-xs) = d-none d-lg-block
+    - hidden-lg-down = d-none d-xl-block
+    - hidden-xl-down (n/a 3.x) = d-none (same as hidden)
+
+- Show/hide for breakpoint and up:
+
+    - hidden-xs-up = d-none (same as hidden)
+    - hidden-sm-up = d-sm-none
+    - hidden-md-up = d-md-none
+    - hidden-lg-up = d-lg-none
+    - hidden-xl-up (n/a 3.x) = d-xl-none
+
+- Show/hide only for a single breakpoint:
+
+    - hidden-xs (only) = d-none d-sm-block (same as hidden-xs-down)
+    - hidden-sm (only) = d-block d-sm-none d-md-block
+    - hidden-md (only) = d-block d-md-none d-lg-block
+    - hidden-lg (only) = d-block d-lg-none d-xl-block
+    - hidden-xl (n/a 3.x) = d-block d-xl-none
+    - visible-xs (only) = d-block d-sm-none
+    - visible-sm (only) = d-none d-sm-block d-md-none
+    - visible-md (only) = d-none d-md-block d-lg-none
+    - visible-lg (only) = d-none d-lg-block d-xl-none
+    - visible-xl (n/a 3.x) = d-none d-xl-block

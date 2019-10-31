@@ -1,9 +1,9 @@
-<systelab-app-frame [userName]="userName" [userFullName]="userFullName" [hospitalName]="hospitalName" [menu]="menu" [tabs]="sidetabs"
-    [actions]="sideactions" [menuBars]="menuBars" [logoIcon]="logoIcon" (selected)="doSelect($event)">
+<systelab-app-frame #appFrame [userName]="userName" [userFullName]="userFullName" [title]="title" [menu]="menu" [tabs]="sidetabs"
+    [actions]="sideactions" [menuBars]="menuBars"  [largeSideBar]="false" [logoIcon]="logoIcon" (selected)="doSelect($event)">
     <div header-content>
         <button type="button" class="btn btn-sm">Button Top</button>
     </div>
-    <div class="h-100 w-100 p-2" style="overflow: auto;" main-content>
+    <div class="slab-flex-1 p-2" style="overflow: auto;" main-content>
         <div *ngIf="currentTab==='T1'"></div>
         <div *ngIf="currentTab==='T2'"></div>
     </div>

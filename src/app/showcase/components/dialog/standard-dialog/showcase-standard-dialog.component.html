@@ -7,14 +7,12 @@
         <div class="slab-flex-1">Second tab</div>
     </systelab-tab>
     <systelab-tab [title]="'title 1'" [id]="'1'" class="p-1">
-        <showcase-inner-grid #grid2 class="slab-flex-1 position-relative" [menu]="getMenu()" (action)="doMenuAction($event)"
-                             (clickRow)="doSelect($event)"></showcase-inner-grid>
+        <showcase-inner-api-grid #grid2 class="slab-flex-1 position-relative" [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
+                                 (clickRow)="doSelect($event)"></showcase-inner-api-grid>
     </systelab-tab>
 </systelab-tabs>
 
 <systelab-dialog-bottom>
-    <div class="dropup slab-button-dropdown ml-auto">
-        <button type="button" class="btn" (click)="close()"> Submit</button>
-    </div>
-    <button type="button" class="btn ml-1" (click)="close()"> Submit</button>
+    <button type="button" class="btn" (click)="grid2.showOptions()"> Options</button>
+    <button type="button" class="btn  ml-auto" (click)="close()"> Submit</button>
 </systelab-dialog-bottom>

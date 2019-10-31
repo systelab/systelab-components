@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DialogRef, ModalComponent, SystelabModalContext } from '../modal';
 
 export class NumPadDialogParameters extends SystelabModalContext {
-	public numpadValue: string;
+	public value: string;
 	public width = 300;
 	public height = 450;
 	public isPassword: boolean;
@@ -13,13 +13,13 @@ export class NumPadDialogParameters extends SystelabModalContext {
 })
 export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 
-	@ViewChild('inputElement') protected inputElement: ElementRef;
-	public numpadValue = '';
+	@ViewChild('inputElement', {static: false}) protected inputElement: ElementRef;
+	public value = '';
 	public dialogParameters: NumPadDialogParameters;
 	public searchingValue: string;
 
 	public titleForDialog: string;
-	public showClose  = true;
+	public showClose = true;
 	public isPassword = false;
 
 	public static getParameters(): NumPadDialogParameters {
@@ -28,8 +28,8 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 
 	constructor(public dialog: DialogRef<NumPadDialogParameters>) {
 		this.dialogParameters = dialog.context;
-		this.isPassword =  this.dialogParameters.isPassword;
-		this.numpadValue  = this.dialogParameters.numpadValue;
+		this.isPassword = this.dialogParameters.isPassword;
+		this.value = this.dialogParameters.value;
 	}
 
 	public close(): void {
@@ -37,25 +37,30 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 	}
 
 	public accept() {
-		this.dialog.close(this.numpadValue);
+		this.dialog.close(this.value);
 	}
 
 	public pushButton(value: string) {
-		this.numpadValue = this.numpadValue + value;
+		if (this.value) {
+			this.value += value;
+		} else {
+			this.value = value;
+		}
+
 		this.inputElement.nativeElement.focus();
 	}
 
 	public deleteNumber() {
-		this.numpadValue = this.numpadValue.substring(0, this.numpadValue.length - 1);
+		this.value = this.value.substring(0, this.value.length - 1);
 	}
 
 	public cleanInput() {
-		this.numpadValue = '';
+		this.value = '';
 	}
 
 	public doKeyPress(event: KeyboardEvent) {
 		if (event.keyCode === 13) {
-			this.dialog.close(this.numpadValue);
+			this.dialog.close(this.value);
 		}
 	}
 }

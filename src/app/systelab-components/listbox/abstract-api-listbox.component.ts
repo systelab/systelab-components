@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { IDatasource, IGetRowsParams } from 'ag-grid';
+import { IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { Observable } from 'rxjs/index';
 import { AbstractListBox } from './abstract-listbox.component';
 

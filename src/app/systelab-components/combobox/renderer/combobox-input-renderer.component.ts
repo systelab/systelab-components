@@ -1,6 +1,4 @@
-import {
-	Component, ViewChild, ViewContainerRef, ComponentRef, Input, AfterViewInit, OnDestroy, OnChanges, ComponentFactoryResolver
-} from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComboBoxInputRenderer } from './combobox-input-renderer';
 
 @Component( {
@@ -10,7 +8,7 @@ import { ComboBoxInputRenderer } from './combobox-input-renderer';
 } )
 
 export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit, OnDestroy {
-	@ViewChild( 'target', { read: ViewContainerRef } ) target;
+	@ViewChild( 'target', { read: ViewContainerRef, static: false } ) target;
 	@Input() componentType: any;
 	@Input() id: number | string;
 	@Input() description: string;

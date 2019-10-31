@@ -7,4 +7,16 @@
             </p>
         </li>
     </ul>
+    <showcase-title>Font Awesome Icons</showcase-title>
+    <p>
+        <label>Some icons of the Font Awesome library, to see more icons access to <a href="https://fontawesome.com/icons?d=gallery&m=free" target="_blank">Font Awesome</a> (more than 1,400 icons)</label>
+    </p>
+    <ul class="showcase-icon-list">
+        <li *ngFor="let iconName of iconsFontAwesome">
+            <span class="slab-fa-medium mt-2 mb-2 {{iconName}}"></span>
+            <p>
+                <small>{{iconName}}</small>
+            </p>
+        </li>
+    </ul>
 </div>

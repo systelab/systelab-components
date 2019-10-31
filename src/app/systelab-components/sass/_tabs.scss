@@ -1,0 +1,55 @@
+.nav {
+  padding-left: 25px;
+  white-space: nowrap;
+  overflow: visible;
+  background-color: $background-secondary;
+  &.hideTabBackground {
+    background-color: white;
+  }
+  > .nav-item {
+    background-color: $background-secondary;
+    padding-top: 2 * $slab-tab-space;
+    margin-right: $slab-tab-space;
+    &.hideTabBackground {
+      padding-top: 0;
+    }
+    > .nav-single-tab {
+      min-width: $slab-tab-min-width;
+    }
+    > .nav-link {
+      @include user-selection(none);
+
+      height: 100%;
+      line-height: $slab-tab-height;
+      color: $background-primary;
+      text-shadow: none;
+      background-color: $slab-tab-no-active-bg-color;
+      border-top: 3px solid $slab-tab-no-active-bg-color;
+      margin-left: 0;
+      padding: 0 12px;
+      text-align: center;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+      &:hover {
+        color: $background-primary;
+        background-color: $primary;
+        border-color: $primary;
+        padding-bottom: 0;
+      }
+      &.active {
+        color: black;
+        background-color: $background-primary;
+        border-top-color: $primary;
+        &:hover {
+          border-color: $primary $form-border $background-primary $form-border;
+        }
+      }
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  systelab-tabs {
+    overflow: auto;
+  }
+}

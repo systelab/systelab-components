@@ -5,8 +5,10 @@
         <div class="bs-callout">
             <div class="row">
                 <div class="col-md-12 slab-numpad-parentPadding">
-                    <input [autofocus]="true" #inputElement *ngIf="!isPassword" id="numpadField" type="text" class="form-control slab-numpad-input" name="numpadField" [(ngModel)]="numpadValue">
-                    <input [autofocus]="true" #inputElement *ngIf="isPassword" id="numpadFieldPwd" type="password" class="form-control slab-numpad-input" name="numpadFieldPwd" [(ngModel)]="numpadValue">
+                    <input [autofocus]="true" #inputElement *ngIf="!isPassword" id="numpadField" type="text" class="form-control slab-numpad-input" name="numpadField"
+                           [(ngModel)]="value">
+                    <input [autofocus]="true" #inputElement *ngIf="isPassword" id="numpadFieldPwd" type="password" class="form-control slab-numpad-input" name="numpadFieldPwd"
+                           [(ngModel)]="value">
                 </div>
             </div>
             <div class="row">

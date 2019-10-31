@@ -1,10 +1,10 @@
-import { OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Tree } from 'primeng/components/tree/tree';
 import { TreeNode } from 'primeng/components/common/api';
 
 export abstract class AbstractTree implements OnInit {
 
-	@ViewChild('expandingTree') protected currentTree: Tree;
+	@ViewChild('expandingTree', {static: false}) protected currentTree: Tree;
 
 	@Input() public withModal: boolean = true;
 	@Output() public nodeSelected = new EventEmitter();

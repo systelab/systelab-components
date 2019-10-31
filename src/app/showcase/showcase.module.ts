@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { ShowcaseComponent } from './showcase.component';
 import { SystelabComponentsModule } from '../systelab-components/systelab-components.module';
 import { FormsModule } from '@angular/forms';
-import { DialogService } from '../systelab-components/modal/dialog/dialog.service';
-import { MessagePopupService } from '../systelab-components/modal/message-popup/message-popup.service';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,7 +33,7 @@ import { ShowcaseComboboxComponent } from './components/combobox/showcase-combob
 import { ShowcaseInputComponent } from './components/input/showcase-input.component';
 import { ShowcaseTableComponent } from './components/table/showcase-table.component';
 import { ShowcaseGridComponent } from './components/grid/showcase-grid.component';
-import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
+import { ShowcaseInnerApiGridComponent } from './components/grid/showcase-inner-api-grid.component';
 import { ShowcaseIconComponent } from './components/icon/showcase-icon.component';
 import { ShowcaseTwoListComponent } from './components/two-list/showcase-two-list.component';
 import { ShowcaseApplicationFrameComponent } from './components/application-frame/showcase-application-frame.component';
@@ -60,11 +58,9 @@ import { ShowcaseBreadcrumbComponent } from './components/breadcrumb/showcase-br
 import { ShowcaseSignatureCanvasComponent } from './components/signature-canvas/showcase-signature-canvas.component';
 import { ShowcaseInnerTreeComponent } from './components/tree/showcase-inner-tree.component';
 import { ShowcaseTreeComponent } from './components/tree/showcase-tree.component';
-import { TreeModule } from 'primeng/primeng';
 import { ShowcasePercentageCircleComponent } from './components/percentage-circle/showcase-percentage-circle.component';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { GridContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-context-menu.component';
 import { GridHeaderContextMenuComponent } from '../systelab-components/grid/contextmenu/grid-header-context-menu.component';
 import { ShowcaseWizardStepsComponent } from './components/wizard-steps/showcase-wizard-steps.component';
 import { ShowcaseSortableListComponent } from './components/sortable-list/showcase-sortable-list.component';
@@ -76,6 +72,13 @@ import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.
 import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplete-combobox.component';
+import { GridContextMenuCellRendererComponent } from '../systelab-components/grid/contextmenu/grid-context-menu-cell-renderer.component';
+import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
+import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { DialogService, MessagePopupService } from '../systelab-components/modal';
+import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
+import { TreeModule } from 'primeng/tree';
 
 @NgModule({
 	imports:         [
@@ -83,13 +86,14 @@ import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplet
 		BrowserAnimationsModule,
 		FormsModule,
 		DragDropModule,
+		OverlayModule,
 		TreeModule,
 		HttpClientModule,
 		SystelabComponentsModule.forRoot(),
 		SystelabTranslateModule.forRoot(),
 		SystelabPreferencesModule.forRoot(),
 		AgGridModule.withComponents([
-			GridContextMenuComponent,
+			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
 		])
 	],
@@ -132,6 +136,7 @@ import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplet
 		ShowcaseFullFlexDialog,
 		ShowcaseSplitDialog,
 		ShowcaseInnerGridComponent,
+		ShowcaseInnerApiGridComponent,
 		ShowcaseStandardDialog,
 		SampleRouteComponent,
 		ShowcaseStandardComponent,
@@ -154,9 +159,11 @@ import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplet
 		ShowcaseAddRemoveListComponent,
 		ShowcaseInnerAddRemoveListComponent,
 		ShowcaseContextMenu,
+		ShowcaseContextPanel,
 		ShowcaseListBoxComponent,
 		ShowcaseInnerTreeListBox,
-		ShowcaseAutocomplete
+		ShowcaseAutocomplete,
+		ShowcasePaginatorComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
@@ -171,8 +178,8 @@ import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplet
 		ShowcaseTimelineDialog
 	],
 	providers:       [
-		MessagePopupService,
-		DialogService
+		DialogService,
+		MessagePopupService
 	],
 	bootstrap:       [ShowcaseComponent]
 })

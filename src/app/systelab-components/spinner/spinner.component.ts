@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TouchSpinValues} from './touch.spin-values';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TouchSpinValues } from './touch.spin-values';
 
 @Component({
-	selector: 'systelab-spinner',
+	selector:    'systelab-spinner',
 	templateUrl: 'spinner.component.html',
-	styleUrls: ['spinner.component.scss']
+	styleUrls:   ['spinner.component.scss']
 })
 export class TouchspinComponent {
 
@@ -26,7 +26,6 @@ export class TouchspinComponent {
 		if (this._spinValues) {
 			this.previousValue = this._spinValues.value;
 			this._spinValues.value = val;
-			this.valueChange.emit(this._spinValues.value);
 
 			if (val) {
 				const valStr: string = (val <= 9 && this.fillUnitsWithZero) ? '0' + val : String(val);
@@ -70,11 +69,11 @@ export class TouchspinComponent {
 					this.value = this.previousValue;
 				}
 			}
-			this._valueStr = val;
+			this._valueStr = (val.length === 1 && this.fillUnitsWithZero) ? ('0' + val) : val;
 		} else {
 			this._valueStr = this.fillUnitsWithZero ? '00' : '0';
 		}
-		this.valueStrChange.emit(val);
+		this.valueStrChange.emit(this._valueStr);
 	}
 
 	@Output() public valueStrChange = new EventEmitter<string>();
@@ -84,15 +83,22 @@ export class TouchspinComponent {
 		const stepValue: number = this._spinValues.step;
 		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
+		let itHasChanged = false;
 		if (value - stepValue > this._spinValues.min) {
 			this._spinValues.value = Number((value - this._spinValues.step).toFixed(fixedNumber));
+			itHasChanged = true;
 		} else {
-			this._spinValues.value = this._spinValues.min;
+			if (this._spinValues.value !== this._spinValues.min) {
+				this._spinValues.value = this._spinValues.min;
+				itHasChanged = true;
+			}
 		}
-
-		this.previousValue = this._spinValues.value;
-		this.change.emit(this._spinValues.value);
-		this.value = this._spinValues.value;
+		if (itHasChanged) {
+			this.previousValue = this._spinValues.value;
+			this.change.emit(this._spinValues.value);
+			this.valueChange.emit(this._spinValues.value);
+			this.value = this._spinValues.value;
+		}
 	}
 
 	public plus() {
@@ -100,15 +106,23 @@ export class TouchspinComponent {
 		const stepValue: number = this._spinValues.step;
 		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
+		let itHasChanged = false;
 		if (value + stepValue < this._spinValues.max) {
-			this._spinValues.value = Number((value + this._spinValues.step).toFixed(2));
+			this._spinValues.value = Number((value + this._spinValues.step).toFixed(fixedNumber));
+			itHasChanged = true;
 		} else {
-			this._spinValues.value = this._spinValues.max;
+			if (this._spinValues.value !== this._spinValues.max) {
+				this._spinValues.value = this._spinValues.max;
+				itHasChanged = true;
+			}
 		}
 
-		this.previousValue = this._spinValues.value;
-		this.change.emit(this._spinValues.value);
-		this.value = this._spinValues.value;
+		if (itHasChanged) {
+			this.previousValue = this._spinValues.value;
+			this.change.emit(this._spinValues.value);
+			this.valueChange.emit(this._spinValues.value);
+			this.value = this._spinValues.value;
+		}
 	}
 
 	public checkKey($event: KeyboardEvent): boolean {
@@ -146,6 +160,7 @@ export class TouchspinComponent {
 			} else {
 				this.previousValue = value;
 				this.value = Number(value.toFixed(fixedNumber));
+				this.valueChange.emit(Number(value.toFixed(fixedNumber)));
 				this.change.emit(Number(value.toFixed(fixedNumber)));
 			}
 		}

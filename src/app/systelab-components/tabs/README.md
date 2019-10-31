@@ -6,10 +6,10 @@ Component to show more than one panel.
 
 ```html
 <systelab-tabs class="slab-flex-1" (select)="selectedTab($event)">
-  <systelab-tab class="slab-flex-1" [id]="'Tab1'" [title]="'Tab 1'" [active]="true">
+  <systelab-tab [id]="'Tab1'" [title]="'Tab 1'" [active]="true">
     Tab 1 content
   </systelab-tab>
-  <systelab-tab class="slab-flex-1" [id]="'Tab2'" [title]="'Tab 2'" [warning]="true">
+  <systelab-tab [id]="'Tab2'" [title]="'Tab 2'" [warning]="true">
     Tab 2 content
   </systelab-tab>
 </systelab-tabs>
@@ -50,6 +50,7 @@ For each tab element:
 | ---- |:----:|:-------:| ----------- |
 | id | boolean | true | Tab Identifier |
 | title | string | | Tab name to show |
+| titleHtml | string | | Tab name as inner HTML. Consider the HTML must be sanitized |
 | active | boolean | true | Set to true to specify that the tab that is active |
 | warning | boolean | true | Set to true to specify the tab content has some warnings. |
 
@@ -60,5 +61,9 @@ For each tab element:
 | ---- |:----------:| ------------|
 | select | string | The selected Tab Id |
 
+
+## Methods.
+
+Call the method doSelectTabById in order to select the Tab that should be visible.
 
 The styles for the tabs are defined in the tabs.scss Saas file.

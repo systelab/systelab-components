@@ -2,20 +2,15 @@ import { ANALYZE_FOR_ENTRY_COMPONENTS, ModuleWithProviders, NgModule, Type } fro
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
-import { CalendarModule, ContextMenuModule, SliderModule, Tree, TreeModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/components/common/shared';
 import { FormsModule } from '@angular/forms';
-import { SystelabModalModule } from './modal/plugin/custom/systelab-modal.module';
-import { DialogComponent } from './modal/dialog/dialog.component';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
-import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
-import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
-import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu.component';
+import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
 import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
-import { AgGridModule, AgGridNg2, BaseComponentFactory, Ng2ComponentFactory } from 'ag-grid-angular';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
 import { ColorUtilService } from './utilities/color.util.service';
@@ -26,9 +21,9 @@ import { PeriodSelect } from './select/period-combobox.component';
 import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
-import { ApplicationSidebarComponent } from './applicationframe/sidebar/app-sidebar.component';
+import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
 import { Datepicker } from './datepicker/datepicker.component';
-import { DatepickerTime } from './datepicker/datepicker-time.component';
+import { DatepickerTimeComponent } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
@@ -40,7 +35,7 @@ import { CalendarTableComponent } from './calendar/calendar-table.component';
 import { CalendarDialog } from './calendar/calendar-dialog.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
-import { DialogHeaderComponent } from './modal/header/dialog-header.component';
+import { DialogHeaderComponent } from './modal';
 import { DialogBottomComponent } from './modal/bottom/dialog-bottom.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
@@ -56,8 +51,6 @@ import { MonthSelectorComponent } from './month-selector/month-selector.componen
 import { SignatureCanvasComponent } from './signature-canvas/signature-canvas.component';
 import { CalendarFooterComponent } from './calendar/calendar-footer.component';
 import { PercentageCircleComponent } from './percentage-circle/percentage-circle.component';
-import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './modal/base/providers';
-import { OverlayRenderer } from './modal/base/models/tokens';
 import { LoadingService } from './loading/loading.service';
 import { TimeUnitSelectComponent } from './select/time-unit-combobox.component';
 import { CheckboxCellRendererComponent } from './grid/custom-cells/checkbox/checkbox-cell-renderer.component';
@@ -76,17 +69,28 @@ import { NumPadDialog } from './numpad/numpad.dialog.component';
 import { ComboboxFavouriteRendererComponent } from './combobox/renderer/combobox-favourite-renderer.component';
 import { ModulabListBox } from './listbox/listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GridContextMenuComponent } from './grid/contextmenu/grid-context-menu-component';
+import { ContextPanelComponent } from './contextpanel/context-panel.component';
+import { DateRangepicker } from './date-range-picker/date-range-picker.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MessagePopupViewComponent } from './modal/message-popup/message-popup-view.component';
+import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { PaginatorPageComponent } from './paginator/paginator-page.component';
+import { CalendarModule } from 'primeng/calendar';
+import { Tree, TreeModule } from 'primeng/tree';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ChipButtonComponent } from './chip-button/chip-button.component';
 
 @NgModule({
 	imports:         [
 		CommonModule,
 		FormsModule,
 		SharedModule,
-		SliderModule,
 		CalendarModule,
 		TreeModule,
 		DragDropModule,
-		SystelabModalModule,
+		OverlayModule,
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
@@ -96,18 +100,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
-		DialogComponent,
+		ContextPanelComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
 		TwoListComponent,
 		GridContextMenuComponent,
+		GridContextMenuCellRendererComponent,
 		GridHeaderContextMenuComponent,
 		GridOptionsDialog,
 		ColorCellRendererComponent,
 		ColorComboBox,
 		ApplicationFrameComponent,
 		ApplicationHeaderComponent,
-		ApplicationSidebarComponent,
+		ApplicationSidebarLargeComponent,
+		ApplicationSidebarSmallComponent,
 		ToggleButtonComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -117,7 +123,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		TouchspinComponent,
 		ModulabSelect,
 		Datepicker,
-		DatepickerTime,
+		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
 		SearcherTableComponent,
@@ -154,19 +160,25 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		NumPadDialog,
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
-		ModulabListBox
+		ModulabListBox,
+		DateRangepicker,
+		PaginatorComponent,
+		PaginatorPageComponent,
+		ChipButtonComponent,
 
 	],
 	exports:         [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
+		ContextPanelComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
 		ColorCellRendererComponent,
 		ColorComboBox,
 		ApplicationHeaderComponent,
-		ApplicationSidebarComponent,
+		ApplicationSidebarLargeComponent,
+		ApplicationSidebarSmallComponent,
 		ApplicationFrameComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -176,7 +188,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		Datepicker,
 		TouchspinComponent,
 		ModulabSelect,
-		DatepickerTime,
+		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
 		ToggleButtonComponent,
@@ -198,7 +210,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
-		AgGridNg2,
 		Tree,
 		SplitComponent,
 		SplitAreaDirective,
@@ -219,8 +230,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		NumPadDialog,
 		SystelabGenderListBox,
 		ComboboxFavouriteRendererComponent,
-		ModulabListBox
-
+		ModulabListBox,
+		GridContextMenuComponent,
+		DateRangepicker,
+		PaginatorComponent,
+		AgGridAngular,
+		ChipButtonComponent
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -249,12 +264,7 @@ export class SystelabComponentsModule {
 		return {
 			ngModule:  SystelabComponentsModule,
 			providers: [
-				{provide: OverlayRenderer, useClass: DOMOverlayRenderer},
-				{provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true},
-				Ng2ComponentFactory,
-				{provide: BaseComponentFactory, useExisting: Ng2ComponentFactory},
-				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
+				{provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true}
 			]
 		};
 	}

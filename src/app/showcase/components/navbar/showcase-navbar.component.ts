@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessagePopupService } from '../../../systelab-components/modal/message-popup/message-popup.service';
+import { MessagePopupService } from '../../../systelab-components/modal';
 import { NavbarItem } from '../../../systelab-components/navbar/navbar.component';
 
 @Component({

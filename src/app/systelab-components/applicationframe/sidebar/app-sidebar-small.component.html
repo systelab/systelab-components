@@ -1,0 +1,19 @@
+<div class="slab-app-sidebar-small-menu-container d-flex flex-column overflow-hidden">
+    <ul class="slab-app-sidebar-button-container slab-flex-1">
+        <li class="slab-app-sidebar-button" *ngFor="let tab of tabs"
+            (click)="!tab.subMenu ? tab.action ? tab.action() : selectTab(tab.id) : false"
+            [class.selected]="tab.isSelected" systelabTooltip="{{tab.name}}" systelabTooltipPlacement="right"
+            systelabTooltipDelay="0" systelabTooltipHideDelay="0">
+            <i [ngClass]="tab.icon"></i>
+            <div *ngIf="tab.isSelected" class="arrow-left w-100"></div>
+
+        </li>
+    </ul>
+    <ul class="slab-app-sidebar-button-container slab-bottom">
+        <li *ngFor="let action of actions" class="slab-app-sidebar-button w-100" (click)="action.action()"
+            systelabTooltip="{{action.name}}" systelabTooltipPlacement="right" systelabTooltipDelay="0"
+            systelabTooltipHideDelay="0">
+            <i class="{{action.icon}}"></i>
+        </li>
+    </ul>
+</div>

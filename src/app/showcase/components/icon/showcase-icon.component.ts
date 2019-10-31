@@ -1,15 +1,50 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-	selector: 'showcase-icon',
+	selector:    'showcase-icon',
 	templateUrl: 'showcase-icon.component.html',
-	styleUrls: ['showcase-icon.component.scss']
+	styleUrls:   ['showcase-icon.component.scss']
 })
 export class ShowcaseIconComponent {
 
 	public icons: string[] = [];
+	public iconsFontAwesome : string[] = [];
 
 	public constructor() {
+
+		this.iconsFontAwesome.push('fab fa-accessible-icon');
+		this.iconsFontAwesome.push('fab fa-android');
+		this.iconsFontAwesome.push('fab fa-bluetooth');
+		this.iconsFontAwesome.push('fas fa-bong');
+		this.iconsFontAwesome.push('fas fa-diagnoses');
+		this.iconsFontAwesome.push('fas fa-biohazard');
+		this.iconsFontAwesome.push('fas fa-microscope');
+		this.iconsFontAwesome.push('fas fa-procedures');
+		this.iconsFontAwesome.push('fas fa-stethoscope');
+		this.iconsFontAwesome.push('fas fa-broadcast-tower');
+		this.iconsFontAwesome.push('far fa-eye-slash');
+		this.iconsFontAwesome.push('far fa-eye');
+		this.iconsFontAwesome.push('far fa-hospital');
+		this.iconsFontAwesome.push('fab fa-jenkins');
+		this.iconsFontAwesome.push('fab fa-java');
+		this.iconsFontAwesome.push('fab fa-pied-piper-alt');
+		this.iconsFontAwesome.push('fas fa-business-time');
+		this.iconsFontAwesome.push('fas fa-capsules');
+		this.iconsFontAwesome.push('fas fa-code');
+		this.iconsFontAwesome.push('fas fa-cloud-upload-alt');
+		this.iconsFontAwesome.push('fas fa-deaf');
+		this.iconsFontAwesome.push('fas fa-dna');
+		this.iconsFontAwesome.push('fas fa-filter');
+		this.iconsFontAwesome.push('fas fa-hospital-symbol');
+		this.iconsFontAwesome.push('fas fa-ambulance');
+		this.iconsFontAwesome.push('fas fa-pills');
+		this.iconsFontAwesome.push('far fa-comments');
+		this.iconsFontAwesome.push('fas fa-notes-medical');
+		this.iconsFontAwesome.push('fas fa-id-card-alt');
+		this.iconsFontAwesome.push('fas fa-brain');
+		this.iconsFontAwesome.push('fas fa-x-ray');
+		this.iconsFontAwesome.push('fas fa-user-md');
+		this.iconsFontAwesome.push('fas fa-weight');
 
 		this.icons.push('icon-context-menu');
 		this.icons.push('icon-numpad');
@@ -111,5 +146,11 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-redo2');
 		this.icons.push('icon-ban');
 		this.icons.push('icon-checkbox');
+		this.icons.push('icon-microsoft-excel');
+		this.icons.push('icon-microsoft-word');
+		this.icons.push('icon-microsoft-powerpoint');
+		this.icons.push('icon-adobe-acrobat-reader');
+		this.icons.push('icon-filter');
+
 	}
 }

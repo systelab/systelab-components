@@ -8,9 +8,10 @@ This is not a component by itself. This is an interface that will help you defin
 
 To define a dialog you must create your own component and implement the interface **ModalComponent&lt;SystelabModalContext&gt;** (lets say, it must have a 'dialog' property that will be received in the constructor method). 
 
-The component will need to export a class in order to get the context. This class must extend from **SystelabModalContext**. SystelabModalContext already has the width, height, dialogClass and fullScreen properties.
+The component will need to export a class in order to get the context. This class must extend from **SystelabModalContext**. SystelabModalContext already has the width, height, dialogClass (deprecated) and fullScreen properties.
 
-It is suggested to define the width and height, or the class, in the context in order to make the dialog always have the same dimension. For small devices, the dialog will be fullScreen.
+For non-responsive dialogs, define the width and height in the context in order to make the dialog always have the same dimension. For small devices, the dialog will be fullScreen.
+For responsive dialogs, use widthRelative and heightRelative to specify size in terms like '75%' or '40vh'. It is suggested also to specify min and max width and height.
 
 It is also suggested to keep this class in the same file, as it is more readable because the context is not lost.
 
@@ -19,8 +20,9 @@ Here there is an example:
 ```javascript
 export class MyDialogParameters extends SystelabModalContext {
   public index: number;
-  public width = 960;
-  public height = 600;
+  public widthRelative = '50%';
+  public heightRelative = '75%';
+  public maxHeight = 900;
 }
 
 @Component({
@@ -88,3 +90,19 @@ public showDialog() {
   this.dialogService.showDialog(MyDialog, parameters);
 }
 ```
+
+## Enabling / Desabling dialog content
+
+Sometimes, when submitting a form or loading information, content should be disabled as no user interaction is allowed.
+
+There are two ways of enabling / desabling the full modal content:
+
+ * Use [systelab-loading](../../loading) component to disabling/enabling the whole application showing a wheel
+ * Use the following dialog methods to enable / disable the modal content. In this case only dialog inner components are disabled/enabled. Header component is not disabled to allow cancelling the current process (useful in dialogs with progress bar)
+
+ | Name | Description |
+ | ---- | ----------- |
+ | enable() | Sets the component as in loading state |
+ | disable() | Remove the loading state of the component |
+ 
+

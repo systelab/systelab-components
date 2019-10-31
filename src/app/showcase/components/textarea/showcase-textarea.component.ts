@@ -9,7 +9,7 @@ import { ContextMenuComponent } from '../../../systelab-components/contextmenu/c
 })
 export class ShowcaseTextareaComponent implements OnInit {
 
-	@ViewChild('contextMenu') contextMenu: ContextMenuComponent;
+	@ViewChild('contextMenu', {static: false}) contextMenu: ContextMenuComponent;
 
 	constructor() {
 	}

@@ -16,14 +16,15 @@ export class SignatureCanvasComponent implements AfterViewInit {
 	private _code: string;
 	private _signature: string;
 
-	@ViewChild('signature') sign: ElementRef;
-	@ViewChild('img') img: ElementRef;
+	@ViewChild('signature', {static: false}) sign: ElementRef;
+	@ViewChild('img', {static: false}) img: ElementRef;
 
 	public downPath = '';
 	public href = '';
 	public verificationActive = false;
 	public isCanvasEmpty = true;
-	public cx: CanvasRenderingContext2D;
+
+	private cx: CanvasRenderingContext2D;
 
 	@Input() public width = 400;
 	@Input() public height: number;

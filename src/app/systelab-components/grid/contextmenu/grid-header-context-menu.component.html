@@ -7,9 +7,9 @@
             <div #dropdown class="slab-dropdown">
                 <div *ngIf="isOpened">
                     <ul *ngFor="let action of contextMenuOptions">
-                        <li class="{{!isEnabled(elementID, action.actionId) ? 'disabled': '' }}"
-                            (click)="isEnabled(elementID, action.actionId) ? executeAction(elementID, action.actionId) : null ">
-                            <a>{{action.actionText}}</a></li>
+                        <li [class.disabled]="!isEnabled(elementID, action.actionId)" (click)="doClick($event, elementID, action)">
+                            <a>{{action.actionText}}</a>
+                        </li>
                         <div *ngIf="action.isDivider" class="dropdown-divider"></div>
                     </ul>
                 </div>

@@ -6,6 +6,7 @@ export abstract class AbstractSortableListComponent<T> {
 
 	@Input() public elementsList: Array<T> = [];
 	@Input() public secondListSearch: string;
+	@Input() public dragAndDropEnabled = true;
 
 	public deleteWithSupr = false;
 	public showIcon = false;
@@ -20,6 +21,9 @@ export abstract class AbstractSortableListComponent<T> {
 
 	public abstract getIcon(element?: T): string;
 
+	public dbClickSelectedItem(element: T) {
+	}
+
 	public getDescription(element: T): string {
 		return element[this.getDescriptionField(element)];
 	}
@@ -28,12 +32,36 @@ export abstract class AbstractSortableListComponent<T> {
 		return element[this.getSelectionField(element)];
 	}
 
+	public handleDragEnter(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	public handleDragOver(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
+	public handleDragLeave(event) {
+		if (this.dragAndDropEnabled) {
+			return this.preventDefault(event);
+		} else {
+			return true;
+		}
+	}
+
 	public preventDefault(event) {
 		event.mouseEvent.preventDefault();
 		return false;
 	}
 
-	public selectVisibleCurrent(element: T, ev: KeyboardEvent) {
+	protected selectElement(element: T, ev: KeyboardEvent) {
 		if (!ev.ctrlKey) {
 			this.elementsList.forEach(elementInList => {
 				elementInList[this.getSelectionField(element)] = false;
@@ -46,7 +74,7 @@ export abstract class AbstractSortableListComponent<T> {
 		return this.elementsList.filter(element => element[this.getSelectionField(element)]);
 	}
 
-	public removeElement(element: T, event: KeyboardEvent): void {
+	protected removeElement(element: T, event: KeyboardEvent): void {
 		if (this.deleteWithSupr && event.keyCode === 46) {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
 		}

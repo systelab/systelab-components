@@ -1,0 +1,346 @@
+/* ==========================================================================
+   DIALOG
+   ========================================================================== */
+
+/**
+ * Name: .slab-dialog
+ *
+ * Displays a Dialog to contain any kind of content. It could be displayed as
+ * a full-size screen or using custom width/height properties.
+ *
+ *
+ * Markup:
+ *
+ *   <div class="slab-dialog-overlay">
+ *     <div class="slab-dialog">
+ *       <div class="slab-dialog-content">
+ *         <div>
+ *
+ *         </div>
+ *       </div>
+ *     </div>
+ *   </div>
+ *
+ */
+
+$content-border-width: 4px;
+$slab-footer-buttons-offset: 4px !default;
+$slab-button-size: 35px !default;
+$slab-button-fontsize: ceil(32px * $slab-size-percentage) !default;
+$slab-button-size-fullscreen: $slab-button-size !default;
+$slab-button-size-dialog-header: $slab-button-size !default;
+
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+.cdk-overlay-pane {
+  background-color: $background-primary;
+  border: 5px solid lightgray;
+  border-radius: 5px;
+
+  .slab-dialog-bottom {
+    background: $background-primary;
+
+    .btn {
+      height: $slab-button-size;
+    }
+  }
+
+  &.fullscreen {
+    border: 0 solid lightgray;
+    border-radius: 0;
+
+    .slab-dialog-bottom {
+      background: $darker-gray;
+
+      .btn {
+        height: $slab-button-size-fullscreen;
+      }
+    }
+  }
+
+  & > *:first-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
+}
+
+.cdk-overlay-backdrop {
+  transition: none;
+}
+
+
+/**
+ * 1. Full-screen by default.
+ * 2. Preventively hide the 'back' side of a transformed elemenet.
+ */
+.slab-dialog {
+  @include size(100%); /* [1] */
+
+  > * {
+    -webkit-backface-visibility: hidden; /* [2] */
+  }
+}
+
+.slab-dialog-disabled {
+  pointer-events: none !important;
+
+  * {
+    @extend .disabled;
+  }
+
+  .form-control {
+    @extend .form-control:disabled;
+  }
+
+  input[type="radio"] + label {
+    @extend .disabled;
+  }
+
+  input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
+    @extend .disabled;
+  }
+
+  .slab-switch {
+    @extend .disabled;
+  }
+
+  .slab-combobox {
+    @extend .disabled;
+  }
+
+
+  .slab-dialog-header {
+    pointer-events: auto;
+  }
+
+  /*
+  .slab-dialog-bottom {
+    button {
+      @extend .btn.disabled;
+    }
+  }
+  */
+
+}
+
+/**
+ * 1. We use !important because it needs to override the default `display:block`
+ *    from the dialog component.
+ * 2. Is there a better way to target wrappers such as grid-options-dialog{} ?
+ * 3. Required to position the top buttons. This could be refactored but then
+ *    we'd need to tweak all the dialogs and place top buttons in the header.
+ */
+.slab-dialog-content {
+  @include size(100%);
+  display: flex !important; /* [1] */
+
+  border: none;
+  border-radius: 0;
+  background-color: $background-primary;
+
+  & > *:first-child { /* [2] */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* [3] */
+    width: 100%;
+
+  }
+}
+
+@-moz-document url-prefix() {
+  .slab-dialog-content {
+    & > *:first-child { /* [2] */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative; /* [3] */
+      overflow: hidden;
+    }
+  }
+}
+
+.slab-dialog-header {
+  display: flex;
+  align-items: center;
+  height: $slab-dialog-header-height;
+  padding-left: 20px;
+
+  font-size: 20px;
+  border-radius: 0;
+  background: $primary;
+  color: $background-primary;
+}
+
+/**
+ * 1. Make sure smaller sizes (such as $slab-size-percentage = 0.7) looks OK.
+ */
+.slab-dialog-bottom {
+  padding: $slab-footer-buttons-offset;
+
+  border-top: 1px solid $background-secondary;
+  background-color: $darker-gray;
+
+  .square {
+    @include size($slab-button-size);
+
+    min-width: $slab-button-size; /* [1] */
+    min-height: $slab-button-size; /* [1] */
+    line-height: 1;
+    padding: 0;
+  }
+
+  .btn {
+    min-width: $slab-minimum-button-width;
+  }
+
+}
+
+.slab-dialog-header-button {
+  @include size($slab-button-size-dialog-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: darken($primary, 10%);
+  cursor: pointer;
+  text-align: center;
+  border-radius: $content-border-width + 1;
+  color: $background-primary;
+
+  i,
+  &:before {
+    @include font-smoothing(antialiased);
+    color: $background-primary;
+    font-size: $slab-button-fontsize;
+    font-family: icomoon;
+  }
+
+  &:hover {
+    background-color: darken($primary, 20%);
+  }
+}
+
+.slab-dialog-close {
+
+  &:before {
+    content: "\F057";
+    cursor: pointer;
+  }
+}
+
+.slab-dialog-info {
+
+  &:before {
+    content: "\F05A";
+    cursor: pointer;
+  }
+}
+
+.slab-dialog-home {
+
+  &:before {
+    content: "\F015";
+    cursor: pointer;
+  }
+}
+
+.slab-dialog-minimize {
+
+  &:before {
+    content: "\F2d1";
+    cursor: pointer;
+  }
+}
+
+/* Style modifies.
+   ========================================================================== */
+
+.slab-dialog {
+  &.slab-dialog-border { /* [3] */
+    .slab-dialog-content {
+      border: $content-border-width solid $slab-dialog-border-color;
+      border-radius: $content-border-width;
+
+      .slab-dialog-header {
+        border-radius: $content-border-width $content-border-width 0 0;
+      }
+
+      .slab-dialog-bottom {
+        border-radius: 0 0 $content-border-width $content-border-width;
+        background: $background-primary;
+
+        .btn {
+          height: $slab-button-size;
+        }
+      }
+    }
+  }
+
+  :not(slab-dialog-border) {
+    .slab-dialog-content,
+    .slab-dialog-header,
+    .slab-dialog-bottom {
+      border-radius: 0;
+    }
+
+    .slab-dialog-content {
+      border: none;
+    }
+
+    .slab-dialog-bottom {
+      background-color: $darker-gray;
+
+      .btn {
+        height: $slab-button-size-fullscreen;
+      }
+    }
+  }
+}
+
+
+/* Context Modal styles
+   ========================================================================== */
+   .slab-context-modal{
+    .slab-dialog-header {
+      &:after{
+        bottom: 100% !important;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      &:after {
+        border-bottom-color: lightgray;
+        border-width: 20px !important;
+        margin-left: -30px !important;
+      }
+    }
+  }
+
+  .slab-context-modal-arrow-center {
+    .slab-dialog-header {
+      &:after{
+        left: 50%;
+      }
+    }
+  }
+  .slab-context-modal-arrow-right {
+    .slab-dialog-header {
+      &:after{
+        right: 5%;
+      }
+    }
+  }
+  .slab-context-modal-arrow-left {
+    .slab-dialog-header {
+      &:after{
+        left: 5%;
+      }
+    }
+  }

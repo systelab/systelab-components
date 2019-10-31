@@ -22,7 +22,7 @@ export class CalendarTableComponent implements OnChanges {
 	public daysHeader: string[] = [];
 	public rows: DaySlot[][] = [];
 
-	@ContentChild(TemplateRef) templateRef: TemplateRef<any>;
+	@ContentChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
 
 	constructor(private i18nService: I18nService) {
 	}
@@ -38,11 +38,11 @@ export class CalendarTableComponent implements OnChanges {
 		this.getLanguage();
 		this.defineHeaderDays();
 		this.rows = [];
-		this.putDaySlotsIntoArray(this.generateDaysArray());
+		this.putDaySlotsIntoArray(this.generateDays());
 	}
 
-	private generateDaysArray(): Date[] {
-		const datesArray: Date[] = [];
+	private generateDays(): Date[] {
+		const dates: Date[] = [];
 
 		const firstDayOfMonth = setDate(this.currentDate, 1);
 		const lastDateOfMonth = lastDayOfMonth(firstDayOfMonth);
@@ -56,16 +56,16 @@ export class CalendarTableComponent implements OnChanges {
 
 		// Push the empty days.
 		for (let i = 0; i < firstDayPosition; i++) {
-			datesArray.push(null);
+			dates.push(null);
 		}
 
 		// put the dates.
 		let date = firstDayOfMonth;
 		for (let i = 1; i <= getDate(lastDateOfMonth); i++) {
-			datesArray.push(date);
+			dates.push(date);
 			date = addDays(date, 1);
 		}
-		return datesArray;
+		return dates;
 	}
 
 	private putDaySlotsIntoArray(datesArray: Date[]) {

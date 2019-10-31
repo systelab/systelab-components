@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-import {IGetRowsParams} from 'ag-grid';
-import {AbstractApiComboBox} from '../abstract-api-combobox.component';
-import {AbstractComboBox} from '../abstract-combobox.component';
-import {PreferencesService} from 'systelab-preferences/lib/preferences.service';
+import { ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { IGetRowsParams } from 'ag-grid-community';
+import { AbstractApiComboBox } from '../abstract-api-combobox.component';
+import { AbstractComboBox } from '../abstract-combobox.component';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
 declare var jQuery: any;
 
@@ -50,7 +50,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (!this.isDisabled) {
 			if (!this.isDropDownOpen()) {
 				this.showDropDown();
-				jQuery('#' + this.comboId).dropdown('toggle');
+				jQuery('#' + this.comboId)
+					.dropdown('toggle');
 				this.isDropdownOpened = true;
 				this.doSearchText(this.description);
 			}
@@ -85,6 +86,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.deselectAll();
 		}
+		this.selectedItemChange.emit(undefined);
 	}
 
 	// Overrides

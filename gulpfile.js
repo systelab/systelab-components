@@ -5,7 +5,7 @@ const sass2 = require('gulp-sass');
 
 const styleProcessor = (stylePath, ext, styleFile, callback) => {
 	if (ext[0] === '.scss') {
-		let sassObj = sass.renderSync({ file: stylePath });
+		let sassObj = sass.renderSync({ file: stylePath, includePaths: ['node_modules', 'src/app']});
 		if (sassObj && sassObj['css']){
 			styleFile = sassObj.css.toString('utf8');
 		}
@@ -37,7 +37,9 @@ gulp.task('copytemplates', function () {
         './src/app/systelab-components/searcher/abstract-searcher.component.html',
         './src/app/systelab-components/searcher/searcher.dialog.component.html',
 		'./src/app/systelab-components/sortable-list/abstract-sortable-list.component.html',
-        './src/app/systelab-components/add-remove-list/abstract-add-remove-list.component.html'
+        './src/app/systelab-components/add-remove-list/abstract-add-remove-list.component.html',
+		'./src/app/systelab-components/datepicker/datepicker.component.html',
+		'./src/app/systelab-components/datepicker/datepicker-time.component.html'
 		])
 		.pipe(gulp.dest('./html'));
 
@@ -46,6 +48,6 @@ gulp.task('copytemplates', function () {
 
 gulp.task('copysass', function() {
 	gulp.src([
-		'./src/app/systelab-components/styles/sass/**/*.scss'])
+		'./src/app/systelab-components/sass/**/*.scss'])
 		.pipe(gulp.dest('./sass'));
 });
