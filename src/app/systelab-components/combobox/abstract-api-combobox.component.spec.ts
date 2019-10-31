@@ -83,7 +83,7 @@ export class ComboboxTestComponent {
 	public description: string;
 }
 
-fdescribe('Systelab Combobox', () => {
+describe('Systelab Combobox', () => {
 	let fixture: ComponentFixture<ComboboxTestComponent>;
 
 	beforeEach(async(() => {
