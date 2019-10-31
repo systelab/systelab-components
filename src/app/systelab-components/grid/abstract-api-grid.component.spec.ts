@@ -50,10 +50,12 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 			field:      'field1',
 			width:      220
 		}, {
-			colId:      'field2',
-			headerName: 'Title Field 2',
-			field:      'field2',
-			width:      200
+			colId:                    'field2',
+			headerName:               'Title Field 2',
+			field:                    'field2',
+			headerComponentFramework: GridHeaderContextMenuComponent,
+			headerComponentParams:    {headerName: 'Field2', headerData: 'field2'},
+			width:                    200
 		}];
 	}
 
@@ -82,7 +84,11 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 })
 export class GridTestComponent {
 
+	public selectedOptionID = '';
+	public selectedTestData: TestData;
+
 	public doSelect(data: TestData): void {
+		this.selectedTestData = data;
 	}
 
 	public getMenu(): Array<GridContextMenuOption<TestData>> {
@@ -93,12 +99,18 @@ export class GridTestComponent {
 	}
 
 	public doMenuAction(action: GridContextMenuActionData<TestData>): void {
+		this.selectedOptionID = action.actionId;
+		this.selectedTestData = action.data;
+	}
+
+	public doHeaderMenuAction(action: GridContextMenuActionData<String>): void {
+		this.selectedOptionID = action.actionId;
 	}
 
 	public getHeaderContextMenuOptions(): Array<GridContextMenuOption<string>> {
 		return [
-			new GridContextMenuOption('headeraction1', 'Header Action 1'),
-			new GridContextMenuOption('headeraction2', 'Header Action 2')
+			new GridContextMenuOption('headeraction1', 'Header Action 1', (data) => this.doHeaderMenuAction(data)),
+			new GridContextMenuOption('headeraction2', 'Header Action 2'),
 		];
 	}
 }
@@ -149,17 +161,73 @@ describe('Systelab Grid', () => {
 	});
 
 	it('should have the right number of rows', async(() => {
-		fixture.whenStable().then(() => {
-			const rows = getNumberOfRows(fixture);
-			expect(rows)
-				.toEqual(3);
-		});
+		fixture.whenStable()
+			.then(() => {
+				expect(getNumberOfRows(fixture)).toEqual(3);
+			});
+	}));
+
+	it('should be possible to select a row', async(() => {
+		fixture.whenStable()
+			.then(() => {
+						const rows = clickOnGridCell(fixture, 5);
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 2');
+						expect(fixture.componentInstance.selectedTestData.field2).toEqual(2);
+					});
+			});
+	}));
+
+	it('should be able to show the menu on a row and select an option', async(() => {
+		fixture.whenStable()
+			.then(() => {
+				const rows = clickMenuOnRow(fixture, 1);
+				fixture.whenStable()
+					.then(() => {
+						clickOption(fixture, 1);
+						expect(fixture.componentInstance.selectedOptionID).toEqual('action2');
+						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 1');
+						expect(fixture.componentInstance.selectedTestData.field2).toEqual(1);
+					});
+			});
+	}));
+
+	it('should be able to show the menu on a header and select an option', async(() => {
+		fixture.whenStable()
+			.then(() => {
+				const rows = clickMenuHeaderOnRow(fixture);
+				fixture.whenStable()
+					.then(() => {
+						clickOption(fixture, 1);
+						expect(fixture.componentInstance.selectedOptionID).toEqual('headeraction2');
+					});
+			});
 	}));
 });
 
 function getNumberOfRows(fixture: ComponentFixture<GridTestComponent>) {
-	console.log(fixture.debugElement.nativeElement);
 	return fixture.debugElement.nativeElement.querySelectorAll('.ag-center-cols-container > .ag-row').length;
+}
+
+function clickMenuOnRow(fixture: ComponentFixture<GridTestComponent>, row: number) {
+	fixture.debugElement.nativeElement.querySelectorAll('div[role="row"] * .slab-context-menu')[row].click();
+	fixture.detectChanges();
+}
+
+function clickOnGridCell(fixture: ComponentFixture<GridTestComponent>, cell: number) {
+	fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"]')[cell].click();
+	fixture.detectChanges();
+}
+
+function clickMenuHeaderOnRow(fixture: ComponentFixture<GridTestComponent>) {
+	fixture.debugElement.nativeElement.querySelectorAll('.slab-grid-header-context-menu * .slab-context-menu')[0].click();
+	fixture.detectChanges();
+}
+
+function clickOption(fixture: ComponentFixture<GridTestComponent>, option: number) {
+	const button = fixture.debugElement.nativeElement.querySelectorAll('li')[option].click();
+	fixture.detectChanges();
 }
 
 function getNumberOfColumns(fixture: ComponentFixture<GridTestComponent>) {
