@@ -15,7 +15,6 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
-import { GridTestComponent } from '../grid/abstract-api-grid.component.spec';
 
 export class TestData {
 	constructor(public id: string, public description: string) {
@@ -114,13 +113,8 @@ describe('Systelab Combobox', () => {
 	}));
 
 	beforeEach(() => {
-		jasmine.clock().install();
 		fixture = TestBed.createComponent(ComboboxTestComponent);
 		fixture.detectChanges();
-	});
-
-	afterEach(function() {
-		jasmine.clock().uninstall();
 	});
 
 	it('should instantiate', () => {
@@ -128,25 +122,36 @@ describe('Systelab Combobox', () => {
 			.toBeDefined();
 	});
 
-	it('should be able to show a popup with the values to chose', () => {
+	it('should be able to show a popup with the values to choose', (done) => {
 		clickButton(fixture);
-		jasmine.clock().tick(10000);
-		const rows = getNumberOfRows(fixture);
-		expect(rows).toEqual(3);
+		fixture.whenStable()
+			.then(() => {
+				expect(getNumberOfRows(fixture))
+					.toEqual(3);
+				done();
+			});
 	});
 
-	it('should be able to select a value in the popup', () => {
+	it('should be able to select a value in the popup', (done) => {
 		clickButton(fixture);
-		jasmine.clock().tick(10000);
-		clickOnGridCell(fixture, 2);
-		jasmine.clock().tick(10000);
-		expect(fixture.componentInstance.id).toEqual('3');
-		expect(fixture.componentInstance.description).toEqual('Description 3');
+		fixture.whenStable()
+			.then(() => {
+				clickOnGridCell(fixture, 2);
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.id)
+							.toEqual('3');
+						expect(fixture.componentInstance.description)
+							.toEqual('Description 3');
+						done();
+					});
+			});
 	});
 });
 
 function clickButton(fixture: ComponentFixture<ComboboxTestComponent>) {
-	fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle').click();
+	fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle')
+		.click();
 	fixture.detectChanges();
 }
 

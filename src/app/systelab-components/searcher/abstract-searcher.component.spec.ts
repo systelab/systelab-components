@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,7 +28,6 @@ export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
 	}
 }
-
 
 @Directive({
 	selector: '[systelabTooltip],[systelabTooltipHtml]'
@@ -127,7 +126,7 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                         <div class="col-md-9">
-                            <systelab-searcher-example  [(code)]="code" [(id)]="id" [(description)]="description"></systelab-searcher-example>
+                            <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"></systelab-searcher-example>
                         </div>
                     </div>
                 </div>
@@ -189,4 +188,31 @@ describe('Systelab Searcher', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 	});
+
+	it('should show a help dialog and should be closed', (done) => {
+		clickHelpButton(fixture);
+		fixture.whenStable()
+			.then(() => {
+				expect(isPopupVisible(fixture)).toBeTruthy();
+				clickCloseButton(fixture);
+				expect(isPopupVisible(fixture)).toBeFalsy();
+				done();
+			});
+	});
 });
+
+function clickHelpButton(fixture: ComponentFixture<SearcherTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('.btn');
+	button.click();
+	fixture.detectChanges();
+}
+
+function isPopupVisible(fixture: ComponentFixture<SearcherTestComponent>) {
+	return (document.querySelector('.cdk-overlay-pane') !== null);
+}
+
+function clickCloseButton(fixture: ComponentFixture<SearcherTestComponent>) {
+	const button: any = document.querySelector('.slab-dialog-header-button.slab-dialog-close');
+	button.click();
+	fixture.detectChanges();
+}

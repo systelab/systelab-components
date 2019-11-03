@@ -160,14 +160,15 @@ describe('Systelab Grid', () => {
 			.toEqual(3);
 	});
 
-	it('should have the right number of rows', async(() => {
+	it('should have the right number of rows', (done) => {
 		fixture.whenStable()
 			.then(() => {
 				expect(getNumberOfRows(fixture)).toEqual(3);
+				done();
 			});
-	}));
+	});
 
-	it('should be possible to select a row', async(() => {
+	it('should be possible to select a row', (done) => {
 		fixture.whenStable()
 			.then(() => {
 						const rows = clickOnGridCell(fixture, 5);
@@ -175,11 +176,12 @@ describe('Systelab Grid', () => {
 					.then(() => {
 						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 2');
 						expect(fixture.componentInstance.selectedTestData.field2).toEqual(2);
+						done();
 					});
 			});
-	}));
+	});
 
-	it('should be able to show the menu on a row and select an option', async(() => {
+	it('should be able to show the menu on a row and select an option', (done) => {
 		fixture.whenStable()
 			.then(() => {
 				const rows = clickMenuOnRow(fixture, 1);
@@ -189,11 +191,12 @@ describe('Systelab Grid', () => {
 						expect(fixture.componentInstance.selectedOptionID).toEqual('action2');
 						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 1');
 						expect(fixture.componentInstance.selectedTestData.field2).toEqual(1);
+						done();
 					});
 			});
-	}));
+	});
 
-	it('should be able to show the menu on a header and select an option', async(() => {
+	it('should be able to show the menu on a header and select an option', (done) => {
 		fixture.whenStable()
 			.then(() => {
 				const rows = clickMenuHeaderOnRow(fixture);
@@ -201,9 +204,10 @@ describe('Systelab Grid', () => {
 					.then(() => {
 						clickOption(fixture, 1);
 						expect(fixture.componentInstance.selectedOptionID).toEqual('headeraction2');
+						done();
 					});
 			});
-	}));
+	});
 });
 
 function getNumberOfRows(fixture: ComponentFixture<GridTestComponent>) {
