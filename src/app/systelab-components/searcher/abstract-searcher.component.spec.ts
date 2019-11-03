@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,9 +18,7 @@ import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { AbstractSearcher } from './abstract-searcher';
 import { SearcherDialog, SearcherDialogParameters } from './searcher.dialog.component';
 import { Observable, of } from 'rxjs';
-import { TooltipDirective } from '../tooltip/tooltip.directive';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { SampleDialog } from '../modal/dialog/dialog.service.spec';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
 import { SearcherTableComponent } from './searcher.table.component';
 import { GridContextMenuComponent } from '../grid/contextmenu/grid-context-menu-component';
@@ -28,6 +26,18 @@ import { ContextMenuItemComponent } from '../contextmenu/context-menu-item.compo
 
 export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
+	}
+}
+
+
+@Directive({
+	selector: '[systelabTooltip],[systelabTooltipHtml]'
+})
+export class MockTooltipDirective {
+	@Input() public systelabTooltip: string;
+	@Input() public systelabTooltipHtml: string;
+
+	constructor(private el: ElementRef, private renderer: Renderer2) {
 	}
 }
 
@@ -73,7 +83,6 @@ export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
 				field:      'description',
 			}
 		];
-
 	}
 
 	public getIdField(): string {
@@ -148,7 +157,7 @@ describe('Systelab Searcher', () => {
 					GridHeaderContextMenuComponent
 				])],
 			declarations: [
-				TooltipDirective,
+				MockTooltipDirective,
 				DialogBottomComponent,
 				DialogHeaderComponent,
 				SearcherDialog,
@@ -176,7 +185,7 @@ describe('Systelab Searcher', () => {
 		fixture.detectChanges();
 	});
 
-	xit('should instantiate', () => {
+	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 	});
