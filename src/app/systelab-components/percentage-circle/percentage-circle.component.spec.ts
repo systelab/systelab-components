@@ -51,38 +51,39 @@ describe('Systelab Percentage Circle', () => {
 	});
 
 	it('should have an initial value', () => {
-		checkHasValue(fixture, 45);
+		expect(getValue(fixture)).toContain(45);
 	});
 
 	it('should have the changed value if there is a change', () => {
 		setValue(fixture, 32);
-		checkHasValue(fixture, 32);
+		expect(getValue(fixture)).toContain(32);
 	});
 
 	it('should have an initial text', () => {
-		checkHasText(fixture, 'initial text');
+		expect(getText(fixture))
+			.toContain('initial text');
 	});
 
 	it('should have the changed text if there is a change', () => {
 		setText(fixture, 'alternative text');
-		checkHasText(fixture, 'alternative text');
+		expect(getText(fixture))
+			.toContain('alternative text');
 	});
 
 	it('should have an initial color', () => {
-		checkIsColor(fixture, 'red');
+		expect(getColor(fixture)).toEqual('red');
 	});
 
 	it('should have the changed color if there is a change', () => {
 		setColor(fixture, 'blue');
-		checkIsColor(fixture, 'blue');
+		expect(getColor(fixture)).toEqual('blue');
 	});
 
 });
 
-function checkHasValue(fixture: ComponentFixture<PercentageCircleTestComponent>, value: number) {
+function getValue(fixture: ComponentFixture<PercentageCircleTestComponent>) {
 	const label = fixture.debugElement.nativeElement.querySelector('.percentage-circle-value');
-	expect(label.innerHTML)
-		.toContain(value);
+	return label.innerHTML;
 }
 
 function setValue(fixture: ComponentFixture<PercentageCircleTestComponent>, value: number) {
@@ -90,10 +91,9 @@ function setValue(fixture: ComponentFixture<PercentageCircleTestComponent>, valu
 	fixture.detectChanges();
 }
 
-function checkHasText(fixture: ComponentFixture<PercentageCircleTestComponent>, text: string) {
+function getText(fixture: ComponentFixture<PercentageCircleTestComponent>) {
 	const label = fixture.debugElement.nativeElement.querySelector('.percentage-circle-value');
-	expect(label.innerHTML)
-		.toContain(text);
+	return label.innerHTML;
 }
 
 function setText(fixture: ComponentFixture<PercentageCircleTestComponent>, text: string) {
@@ -106,8 +106,7 @@ function setColor(fixture: ComponentFixture<PercentageCircleTestComponent>, colo
 	fixture.detectChanges();
 }
 
-function checkIsColor(fixture: ComponentFixture<PercentageCircleTestComponent>, color: string) {
-	console.log(fixture.debugElement.query(By.css('.percentage-circle-bar')).nativeElement.style.borderColor);
-	expect(fixture.debugElement.query(By.css('.percentage-circle-bar')).nativeElement.style.borderColor).toEqual(color);
+function getColor(fixture: ComponentFixture<PercentageCircleTestComponent>) {
+	return fixture.debugElement.query(By.css('.percentage-circle-bar')).nativeElement.style.borderColor;
 }
 
