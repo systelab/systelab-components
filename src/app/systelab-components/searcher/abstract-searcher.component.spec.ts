@@ -1,6 +1,6 @@
 import { Component, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -57,11 +57,17 @@ export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
 		const aCode = (useCode) ? valueToSearch : undefined;
 		const aSearch = (useCode) ? undefined : valueToSearch;
 
-		const array: TestData[] = [];
-		array.push(new TestData('1', '1', '1'));
-		array.push(new TestData('2', '2', '2'));
-		array.push(new TestData('3', '3', '3'));
-		return of(array);
+		if (aCode) {
+			const array: TestData[] = [];
+			array.push(new TestData('1', '1', '1'));
+			return of(array);
+		} else {
+			const array: TestData[] = [];
+			array.push(new TestData('1', '1', '1'));
+			array.push(new TestData('2', '2', '2'));
+			array.push(new TestData('3', '3', '3'));
+			return of(array);
+		}
 	}
 
 	public getTotalItems(): number {
@@ -199,6 +205,15 @@ describe('Systelab Searcher', () => {
 				done();
 			});
 	});
+
+	it('should select a value if code is entered', (done) => {
+		enterText(fixture, '1');
+		fixture.whenStable()
+			.then(() => {
+				expect(getDescription(fixture)).toEqual('1');
+				done();
+			});
+	});
 });
 
 function clickHelpButton(fixture: ComponentFixture<SearcherTestComponent>) {
@@ -215,4 +230,20 @@ function clickCloseButton(fixture: ComponentFixture<SearcherTestComponent>) {
 	const button: any = document.querySelector('.slab-dialog-header-button.slab-dialog-close');
 	button.click();
 	fixture.detectChanges();
+}
+
+function enterText(fixture: ComponentFixture<SearcherTestComponent>, text: string) {
+	const inputComponent = fixture.debugElement.query(By.css('.form-control')).nativeElement;
+	inputComponent.value = text;
+	inputComponent.dispatchEvent(new Event('keydown'));
+	inputComponent.dispatchEvent(new Event('input'));
+	inputComponent.dispatchEvent(new Event('keyup'));
+	fixture.detectChanges();
+	inputComponent.dispatchEvent(new Event('blur'));
+	fixture.detectChanges();
+}
+
+function getDescription(fixture: ComponentFixture<SearcherTestComponent>) {
+	const descriptionComponent = fixture.debugElement.query(By.css('.text-truncate')).nativeElement;
+	return descriptionComponent.innerText;
 }
