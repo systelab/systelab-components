@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -112,34 +112,58 @@ describe('Systelab Color picker', () => {
 			.toBeDefined();
 	});
 
-	it('should select a color', fakeAsync(() => {
+	it('should select a color', (done) => {
 		clickOnDropDown(fixture);
-		clickOnColor(fixture, '#008000');
-		expect(fixture.componentInstance.colorId)
-			.toEqual('#008000');
-	}));
+		fixture.whenStable()
+			.then(() => {
+				clickOnColor(fixture, '#008000');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.colorId)
+							.toEqual('#008000');
+						done();
+					});
+			});
+	});
 
-	it('should select another color', fakeAsync(() => {
+	it('should select another color', (done) => {
 		clickOnDropDown(fixture);
-		clickOnColor(fixture, '#000080');
-		expect(fixture.componentInstance.colorId)
-			.toEqual('#000080');
-	}));
+		fixture.whenStable()
+			.then(() => {
+				clickOnColor(fixture, '#000080');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.colorId)
+							.toEqual('#000080');
+						done();
+					});
+			});
+	});
 
-	it('should call method change when a color is selected', fakeAsync(() => {
+	it('should call method change when a color is selected', (done) => {
 		spyOn(fixture.componentInstance, 'doChange');
 		clickOnDropDown(fixture);
-		clickOnColor(fixture, '#008000');
-		expect(fixture.componentInstance.doChange)
-			.toHaveBeenCalled();
-	}));
+		fixture.whenStable()
+			.then(() => {
+				clickOnColor(fixture, '#008000');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.doChange)
+							.toHaveBeenCalled();
+						done();
+					});
+			});
+	});
 
-	it('should have the show the color set', fakeAsync(() => {
+	it('should have the show the color set', (done) => {
 		fixture.componentInstance.colorId = '#0080FF';
-		flush(); 	// To simulate the passage of time until the macrotask queue is empty. Check the fakeAsync in the test.
 		fixture.detectChanges();
-		checkHasStyle(fixture, 'background-color: rgb(0, 128, 255)');
-	}));
+		fixture.whenStable()
+			.then(() => {
+				checkHasStyle(fixture, 'background-color: rgb(0, 128, 255)');
+				done();
+			});
+	});
 
 });
 
@@ -152,12 +176,13 @@ function clickOnDropDown(fixture: ComponentFixture<ColorpickerTestComponent>) {
 function clickOnColor(fixture: ComponentFixture<ColorpickerTestComponent>, color: string) {
 	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + color + '\']');
 	button.click();
-	flush(); 	// To simulate the passage of time until the macrotask queue is empty. Check the fakeAsync in the test.
 	fixture.detectChanges();
 }
 
 function checkHasStyle(fixture: ComponentFixture<ColorpickerTestComponent>, style: string) {
-	expect(fixture.debugElement.nativeElement.querySelector('.slab-color-tag').getAttribute('style')).toContain(style);
+	expect(fixture.debugElement.nativeElement.querySelector('.slab-color-tag')
+		.getAttribute('style'))
+		.toContain(style);
 }
 
 
