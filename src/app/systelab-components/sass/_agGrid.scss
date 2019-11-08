@@ -80,9 +80,7 @@ $icon-rowaction-font-size: 20px;
         border-right: 1px solid white;
       }
 
-      .ag-cell-wrapper {
-        position: relative;
-      }
+
       .ag-icon {
         visibility: hidden;
       }
@@ -153,5 +151,7 @@ systelab-spinner-cell {
   background: none;
   width: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
