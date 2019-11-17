@@ -6,6 +6,7 @@ import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { Observable } from 'rxjs';
+import { GridColumnOptionsService } from '../grid/options/grid-column-options.service';
 
 @Component({
 	selector:    'systelab-internal-searcher-table',
@@ -18,11 +19,9 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input('contains') public searchForContain: boolean;
 	@Input() public searcher: AbstractSearcher<T>;
 
-	constructor(protected preferencesService: PreferencesService,
-				protected i18nService: I18nService,
-				protected dialogService: DialogService) {
-
-		super(preferencesService, i18nService, dialogService);
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService,
+	            protected gridColumnOptionsService: GridColumnOptionsService) {
+		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
 
 	}
 

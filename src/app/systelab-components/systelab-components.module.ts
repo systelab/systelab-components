@@ -9,7 +9,7 @@ import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
-import { GridOptionsDialog } from './grid/options/grid-options-dialog.component';
+import { GridColumnOptionsDialog } from './grid/options/grid-column-options-dialog.component';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { StylesUtilService } from './utilities/styles.util.service';
@@ -107,7 +107,7 @@ import { ChipButtonComponent } from './chip-button/chip-button.component';
 		GridContextMenuComponent,
 		GridContextMenuCellRendererComponent,
 		GridHeaderContextMenuComponent,
-		GridOptionsDialog,
+		GridColumnOptionsDialog,
 		ColorCellRendererComponent,
 		ColorComboBox,
 		ApplicationFrameComponent,
@@ -239,7 +239,7 @@ import { ChipButtonComponent } from './chip-button/chip-button.component';
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
-		GridOptionsDialog,
+		GridColumnOptionsDialog,
 		SearcherDialog,
 		CalendarDialog,
 		ColorCellRendererComponent,

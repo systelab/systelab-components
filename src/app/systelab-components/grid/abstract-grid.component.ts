@@ -1,104 +1,99 @@
 import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridOptions, RowNode } from 'ag-grid-community';
-import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
+import { ColDef, GridOptions, RowNode } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
-import { TwoListItem } from '../twolist/two-list.component';
 import { DialogService } from '../modal/dialog/dialog.service';
-import { GridOptionsDialog, GridOptionsDialogParameters } from './options/grid-options-dialog.component';
-import { GridColumnsOptions } from './grid-column-options';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { GridContextMenuComponent } from './contextmenu/grid-context-menu-component';
+import { GridContextMenuComponent, GridRowMenuActionHandler } from './contextmenu/grid-context-menu-component';
 import { timer } from 'rxjs/index';
+import { GridColumnOptionsService } from './options/grid-column-options.service';
+import { GridColumnsOptions } from './options/grid-column-options';
+import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './options/grid-column-options-dialog.component';
+import { GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';
 
 export type rowSelectionType = 'single' | 'multiple';
 
-export abstract class AbstractGrid<T> implements OnInit {
-
-	protected static contextMenuColId = 'contextMenu';
+export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandler, GridHeaderMenuActionHandler {
 
 	public gridOptions: GridOptions;
 	protected forcedIndexSelection: number;
 	public overlayNoRowsTemplate;
 	public overlayLoadingTemplate;
 
-	@Output() public viewportChanged = new EventEmitter();
-
-	@Input() public menu: Array<GridContextMenuOption<T>>;
 
 	@Input() protected headerMenu: Array<GridContextMenuOption<Object>>;
+	@Input() public menu: Array<GridContextMenuOption<T>>;
+
 	@Input() protected preferenceName: string;
 	@Input() public multipleSelection = false;
 	@Input() public showChecks = false;
 	@Input() public rowData: Array<T> = [];
 	@Input() public noRowsText;
 	@Input() public loadingText;
-	@Output() public action = new EventEmitter();
 
+	@Output() public action = new EventEmitter();
 	@Output() public clickRow = new EventEmitter();
 	@Output() public rowDragEnd = new EventEmitter();
+	@Output() public viewportChanged = new EventEmitter();
 
-	@ViewChild('hidden', { static: true }) public hiddenElement: ElementRef;
-	@ViewChild('popupmenu', { static: false }) public popupmenu: GridContextMenuComponent<T>;
+
+	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
+	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 
 	protected firstSizeToFitExecuted = false;
 
-	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-						  protected dialogService: DialogService) {
+	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService,
+	                      protected gridColumnOptionsService: GridColumnOptionsService) {
 	}
 
 	public ngOnInit() {
 
-		const rowHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-		const headerHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'height');
-
-		this.gridOptions = {};
-
-		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
-
-		if (this.multipleSelection && this.showChecks) {
-			this.gridOptions.suppressRowClickSelection = true;
-			this.gridOptions.icons = {
-				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked()
-			};
-		} else if (this.showChecks) {
-			this.gridOptions.icons = {
-				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked()
-			};
-		}
-		this.menu = this.getContextMenuOptions();
-		this.headerMenu = this.getHeaderContextMenuOptions();
-
-		this.gridOptions.rowHeight = Number(rowHeight);
-		this.gridOptions.headerHeight = Number(headerHeight);
-		this.gridOptions.suppressDragLeaveHidesColumns = true;
-		this.gridOptions.suppressCellSelection = true;
-		this.gridOptions.enableRangeSelection = true;
-		this.gridOptions.stopEditingWhenGridLosesFocus = true;
-		this.gridOptions.singleClickEdit = true;
-		this.gridOptions.defaultColDef = {};
-		this.gridOptions.defaultColDef.resizable = this.isColResizeEnabled();
-		this.gridOptions.rowSelection = this.getRowSelectionType();
-		this.gridOptions.rowDeselection = true;
-		if (this.hideHeader()) {
-			this.gridOptions.headerHeight = 0;
-		}
-		this.gridOptions.isFullWidthCell = (rowNode: RowNode) => {
-			return this.getIsFullWidthCell(rowNode);
-		};
-		this.gridOptions.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
-		this.gridOptions.context = { componentParent: this };
+		this.gridOptions = this.getInitialGridOptions();
 
 		if (this.noRowsText) {
 			this.overlayNoRowsTemplate = this.noRowsText;
-		}
-		if (this.noRowsText) {
 			this.overlayLoadingTemplate = this.loadingText;
 		}
+	}
+
+	protected getInitialGridOptions(): GridOptions {
+		const rowHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
+		const headerHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'height');
+
+		const options: GridOptions = {};
+
+		options.columnDefs = this.getColumnDefsWithOptions();
+		options.rowHeight = Number(rowHeight);
+		options.headerHeight = Number(headerHeight);
+		options.suppressDragLeaveHidesColumns = true;
+		options.suppressCellSelection = true;
+		options.enableRangeSelection = true;
+		options.stopEditingWhenGridLosesFocus = true;
+		options.singleClickEdit = true;
+		options.defaultColDef = {};
+		options.defaultColDef.resizable = this.isColResizeEnabled();
+		options.rowSelection = this.getRowSelectionType();
+		options.rowDeselection = true;
+
+		if (this.hideHeader()) {
+			options.headerHeight = 0;
+		}
+		if (this.showChecks) {
+			options.icons = {
+				checkboxUnchecked: this.getCheckboxUnchecked(),
+				checkboxChecked:   this.getCheckboxChecked()
+			};
+			if (this.multipleSelection) {
+				options.suppressRowClickSelection = true;
+			}
+		}
+		options.isFullWidthCell = (rowNode: RowNode) => this.getIsFullWidthCell(rowNode);
+		options.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
+		options.context = {componentParent: this};
+
+		return options;
 	}
 
 	public onModelUpdated(event: any) {
@@ -119,69 +114,13 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	protected saveColumnsStateInPreferences() {
-
 		if (this.firstSizeToFitExecuted) {
-			this.preferencesService.put(
-				this.getGridOptionsPreferencesPrefix(),
-				this.gridOptions.columnApi.getColumnState()
-			);
+			this.gridColumnOptionsService.saveColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
 		}
 	}
 
 	protected loadColumnsStateFromPreferences() {
-
-		if (this.preferencesService.get(this.getGridOptionsPreferencesPrefix())) {
-
-			const gridOptionsPreferences: Array<any> = this.preferencesService.get(
-				this.getGridOptionsPreferencesPrefix()
-			);
-
-			// Filtered preferences columns that are not in the current columnDef.
-			const gridOptions = this.gridOptions;
-			const filteredGridOptionsPreferences: Array<any> = [];
-			gridOptionsPreferences
-				.forEach((colPref) => {
-					if (gridOptions.columnApi.getAllColumns()
-						.find((column: any) => colPref.colId === column.getColId())) {
-						filteredGridOptionsPreferences.push(colPref);
-					}
-				});
-
-			// Show new added columns
-			this.gridOptions.columnApi.getAllColumns()
-				.forEach(function(column) {
-					if (!filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId())) {
-
-						const newColumn: any = {
-							'colId':         column.getColId(),
-							'hide':          !column.isVisible(),
-							'aggFunc':       null,
-							'width':         column.getActualWidth(),
-							'pivotIndex':    null,
-							'pinned':        null,
-							'rowGroupIndex': null
-						};
-
-						if (column.getColId() === AbstractGrid.contextMenuColId || column.getColId() === 'selectCol') {
-							filteredGridOptionsPreferences.unshift(newColumn);
-						} else {
-							filteredGridOptionsPreferences.push(newColumn);
-						}
-					}
-				});
-
-			// Set to null width of preferences of columns without supressSizeToFit
-			// If not set to null these columns are not sizedtofit
-			this.gridOptions.columnApi.getAllColumns()
-				.forEach((column) => {
-					if (!column.getColDef().suppressSizeToFit) {
-						const columnPref: any = filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId());
-						columnPref.width = null;
-					}
-				});
-
-			this.gridOptions.columnApi.setColumnState(filteredGridOptionsPreferences);
-		}
+		this.gridColumnOptionsService.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
 	}
 
 	protected abstract getColumnDefs(): Array<any>;
@@ -190,32 +129,13 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 		const colDefs: Array<any> = this.getColumnDefs();
 
-		if (this.getContextMenuOptions() && this.getContextMenuOptions().length > 0) {
-			colDefs.unshift({
-				colId:                 AbstractGrid.contextMenuColId,
-				headerName:            '',
-				width:                 this.getContextMenuColumnWidth(),
-				suppressSizeToFit:     true,
-				resizable:             false,
-				suppressMovable:       true,
-				cellRendererFramework: GridContextMenuCellRendererComponent
-			});
+		if (this.menu && this.menu.length > 0) {
+			colDefs.unshift(this.gridColumnOptionsService.getContextMenuColumnDef());
 		}
 		if (this.showChecks) {
-			// .headerCheckboxSelection is not supported for 'infinite' rowModelType
-			colDefs.unshift({
-				colId:             'selectCol',
-				headerName:        '',
-				checkboxSelection: true,
-				width:             this.getCheckColumnWidth(),
-				suppressSizeToFit: true,
-				resizable:         false,
-				suppressMovable:   true
-			});
+			colDefs.unshift(this.gridColumnOptionsService.getCheckColumnDef());
 		}
-
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
-
 		return colDefs;
 	}
 
@@ -235,25 +155,18 @@ export abstract class AbstractGrid<T> implements OnInit {
 		return this.preferenceName || this.constructor.name;
 	}
 
-	protected getContextMenuOptions(): Array<GridContextMenuOption<T>> {
-		return this.menu;
-	}
-
 	public executeContextMenuAction(elementId: string, actionId: string): void {
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId: number = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
 		const data: T = this.gridOptions.api.getModel()
 			.getRow(rowId).data;
-		const rowSelecteds: Array<T> = this.gridOptions.api.getSelectedRows();
+		const rowsSelected: Array<T> = this.gridOptions.api.getSelectedRows();
 
+		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions, rowsSelected);
 		if (option && option.action !== null && option.action !== undefined && data !== undefined) {
-			// const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
-			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions, rowSelecteds);
 			option.action(actionData);
 		} else {
-			// const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions);
-			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions, rowSelecteds);
 			this.action.emit(actionData);
 		}
 		this.popupmenu.closeDropDown();
@@ -271,10 +184,6 @@ export abstract class AbstractGrid<T> implements OnInit {
 			return option.isActionEnabled(data);
 		}
 		return true;
-	}
-
-	protected getHeaderContextMenuOptions(): Array<GridContextMenuOption<Object>> {
-		return this.headerMenu;
 	}
 
 	public executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: any): void {
@@ -308,16 +217,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 		return true;
 	}
 
-	protected getContextMenuColumnWidth(): number {
-		return 40;
-	}
-
-	protected getCheckColumnWidth(): number {
-		return 35;
-	}
-
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(function(columnDef: ColDef) {
+		colDefs.forEach((columnDef: ColDef) => {
 			if (columnDef.width) {
 				columnDef.suppressSizeToFit = true;
 			}
@@ -366,89 +267,18 @@ export abstract class AbstractGrid<T> implements OnInit {
 		}
 	}
 
-	// --------------------------------
-	// Two List Grid Options Columns
-	// --------------------------------
-
-	public getGridColumnOptions(): GridColumnsOptions {
-
-		const options: GridColumnsOptions = new GridColumnsOptions();
-
-		// initial & available
-		this.gridOptions.columnApi.getAllColumns()
-			.forEach((column) => {
-				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false);
-				if (!this.gridOptions.columnApi.getColumn(column.getColDef().colId)
-					.isVisible()) {
-					options.available.push(item);
-				}
-				options.initialAvailableColumns.push(item);
-			});
-
-		// visible
-		this.gridOptions.columnApi.getAllDisplayedColumns()
-			.forEach((column) => {
-				if (column.getColId() !== 'contextMenu') {
-					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true);
-					options.visible.push(item);
-				}
-			});
-
-		// default columns
-		this.getColumnDefs()
-			.forEach(column => {
-				if (!column.hide) {
-					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, true);
-					options.defaultVisibleColumns.push(item);
-				} else {
-					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, false);
-					options.defaultHiddenColumns.push(item);
-				}
-			});
-
-		return options;
-
-	}
-
-	public applyGridColumnOptions(options: GridColumnsOptions) {
-
-		let numberOfFixedInitialColumns = 0;
-
-		if (this.gridOptions.columnApi.getColumn('contextMenu') !== null) {
-			numberOfFixedInitialColumns = 1;
-		}
-
-		options.visible.forEach((tlp, index) => {
-			const col: Column = this.gridOptions.columnApi.getAllColumns()
-				.find((column: Column) => column.getColDef().colId === tlp.colId);
-			col.setVisible(true);
-			this.gridOptions.columnApi.moveColumn(col.getColId(), index + numberOfFixedInitialColumns);
-		});
-
-		this.gridOptions.columnApi.getAllColumns()
-			.forEach((column) => {
-				if (column.getColId() !== 'contextMenu') {
-					if (!options.visible.find(tlp => tlp.colId === column.getColDef().colId)) {
-						this.gridOptions.columnApi.setColumnVisible(column.getColId(), false);
-					}
-				}
-			});
-
-		this.gridOptions.api.sizeColumnsToFit();
-		this.saveColumnsStateInPreferences();
-
-	}
-
 	public showOptions(): void {
-		const parameters: GridOptionsDialogParameters = GridOptionsDialog.getParameters();
+		const parameters: GridColumnOptionsDialogParameters = GridColumnOptionsDialog.getParameters();
 
-		parameters.columnOptions = this.getGridColumnOptions();
+		parameters.columnOptions = this.gridColumnOptionsService.getGridColumnOptions(this.gridOptions.columnApi, this.getColumnDefs());
 
-		this.dialogService.showDialog(GridOptionsDialog, parameters)
+		this.dialogService.showDialog(GridColumnOptionsDialog, parameters)
 			.subscribe(
-				(response: GridColumnsOptions) => {
-					if (response) {
-						this.applyGridColumnOptions(response);
+				(columnsOptions: GridColumnsOptions) => {
+					if (columnsOptions) {
+						this.gridColumnOptionsService.applyGridColumnOptions(this.gridOptions.columnApi, columnsOptions);
+						this.gridOptions.api.sizeColumnsToFit();
+						this.saveColumnsStateInPreferences();
 					}
 				}
 			);
@@ -463,7 +293,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	public dotsClicked(rowIndex: number, data: T | Array<T>, event: MouseEvent) {
-		this.popupmenu.setContainer(this);
+		this.popupmenu.setActionManager(this);
 		this.popupmenu.setRowIndex(rowIndex);
 		if (this.existsAtLeastOneActionEnabled(data)) {
 			timer(200)
@@ -475,14 +305,15 @@ export abstract class AbstractGrid<T> implements OnInit {
 
 	protected existsAtLeastOneActionEnabled(data: T | Array<T>): boolean {
 		if (this.menu) {
-			const optionEnabled: GridContextMenuOption<T> = this.menu.find((menuOption: GridContextMenuOption<T>) => {
+			return this.menu.some((menuOption: GridContextMenuOption<T>) => {
 				if (menuOption.isActionEnabled) {
 					return menuOption.isActionEnabled.apply(null, [data]);
 				} else {
 					return true;
 				}
 			});
-			return (optionEnabled != null);
+		} else {
+			return false;
 		}
 	}
 
