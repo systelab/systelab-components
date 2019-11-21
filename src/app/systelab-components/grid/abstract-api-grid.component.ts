@@ -44,11 +44,6 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
 			this.gridOptions.api.showNoRowsOverlay();
-		} else {
-			if (this.forcedIndexSelection) {
-				this.gridOptions.api.selectIndex(this.forcedIndexSelection, false, false);
-				this.forcedIndexSelection = undefined;
-			}
 		}
 	}
 

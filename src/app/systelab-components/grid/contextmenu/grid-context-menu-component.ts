@@ -1,4 +1,3 @@
-import { AbstractGrid } from '../abstract-grid.component';
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
