@@ -157,7 +157,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				if (transformedDate) {
 					this.currentDate = transformedDate;
 				} else {
-					const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormat());
+					const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
 					if (inferedDate) {
 						this.currentDate = inferedDate;
 					}
