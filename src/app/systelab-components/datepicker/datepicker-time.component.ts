@@ -2,18 +2,20 @@ import { Component, Input, Renderer2 } from '@angular/core';
 import { Datepicker } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { DataTransformerService } from './date-transformer.service';
 
 @Component({
-	selector: 'systelab-date-time',
-	templateUrl: 'datepicker-time.component.html'
+	selector:    'systelab-date-time',
+	templateUrl: 'datepicker-time.component.html',
+	providers:   [DataTransformerService]
 })
 export class DatepickerTimeComponent extends Datepicker {
 
 	public touchSpinHourValues: TouchSpinValues;
 	public touchSpinMinutesValues: TouchSpinValues;
 
-	constructor(myRenderer: Renderer2, i18nService: I18nService) {
-		super(myRenderer, i18nService);
+	constructor(myRenderer: Renderer2, i18nService: I18nService, dataTransformerService: DataTransformerService) {
+		super(myRenderer, i18nService, dataTransformerService);
 
 		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
 		this.touchSpinMinutesValues = new TouchSpinValues(0, 0, 59, 1);
