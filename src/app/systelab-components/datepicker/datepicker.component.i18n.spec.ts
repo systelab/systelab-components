@@ -9,7 +9,6 @@ import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { Datepicker } from './datepicker.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { of } from 'rxjs';
