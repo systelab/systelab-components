@@ -155,12 +155,12 @@ export class DataTransformerService {
 		} else {
 			if (dayBefore) {
 				dayInDate = +dateTmp.substring(0, firstSeparatorPosition);
-				monthInDate = +dateTmp.substring(firstSeparatorPosition, 3) - 1;
+				monthInDate = +dateTmp.substring(firstSeparatorPosition, secondSeparatorPosition - 1) - 1;
 			} else {
 				monthInDate = +dateTmp.substring(0, firstSeparatorPosition) - 1;
-				dayInDate = +dateTmp.substring(firstSeparatorPosition, 3);
+				dayInDate = +dateTmp.substring(firstSeparatorPosition, secondSeparatorPosition - 1);
 			}
-			yearInDate = +dateTmp.substring(3);
+			yearInDate = +dateTmp.substring(secondSeparatorPosition - 1);
 		}
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
