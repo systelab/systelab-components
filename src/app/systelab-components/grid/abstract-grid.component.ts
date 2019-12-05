@@ -40,8 +40,8 @@ export abstract class AbstractGrid<T> implements OnInit {
 	@Output() public clickRow = new EventEmitter();
 	@Output() public rowDragEnd = new EventEmitter();
 
-	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
-	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
+	@ViewChild('hidden', { static: true }) public hiddenElement: ElementRef;
+	@ViewChild('popupmenu', { static: false }) public popupmenu: GridContextMenuComponent<T>;
 
 	protected firstSizeToFitExecuted = false;
 
@@ -91,7 +91,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 			return this.getIsFullWidthCell(rowNode);
 		};
 		this.gridOptions.fullWidthCellRendererFramework = this.getFullWidthCellRenderer();
-		this.gridOptions.context = {componentParent: this};
+		this.gridOptions.context = { componentParent: this };
 
 		if (this.noRowsText) {
 			this.overlayNoRowsTemplate = this.noRowsText;
@@ -104,6 +104,9 @@ export abstract class AbstractGrid<T> implements OnInit {
 	public onModelUpdated(event: any) {
 		this.gridOptions.api.sizeColumnsToFit();
 		return event;
+	}
+
+	public onRowSelected(event: any) {
 	}
 
 	public doGridReady(event: any) {
@@ -310,7 +313,7 @@ export abstract class AbstractGrid<T> implements OnInit {
 	}
 
 	protected getCheckColumnWidth(): number {
-		return 28;
+		return 35;
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {

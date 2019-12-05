@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { RowNode } from 'ag-grid-community';
@@ -8,11 +8,11 @@ import { DialogService } from '../modal/dialog/dialog.service';
 import { Observable } from 'rxjs';
 
 @Component({
-	selector: 'systelab-internal-searcher-table',
+	selector:    'systelab-internal-searcher-table',
 	templateUrl: '../grid/abstract-grid.component.html'
 
 })
-export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
+export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnInit {
 
 	@Input('valueForSearch') public valueForSearch: string;
 	@Input('contains') public searchForContain: boolean;
@@ -24,6 +24,11 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 
 		super(preferencesService, i18nService, dialogService);
 
+	}
+
+	public ngOnInit(): void {
+		super.ngOnInit();
+		this.gridOptions.enableBrowserTooltips = true;
 	}
 
 	protected getColumnDefs(): Array<any> {
@@ -78,9 +83,9 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
 					if (this.searcher.multipleSelectedItemList
-							.filter((selectedItem) => {
-								return (selectedItem && node.data && selectedItem[this.searcher.getCodeField()] === node.data[this.searcher.getCodeField()]);
-							}).length > 0) {
+						.filter((selectedItem) => {
+							return (selectedItem && node.data && selectedItem[this.searcher.getCodeField()] === node.data[this.searcher.getCodeField()]);
+						}).length > 0) {
 						node.selectThisNode(true);
 					}
 				});
@@ -92,6 +97,36 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> {
 				}
 			});
 		}
+	}
+
+	// overrides
+	public onRowSelected(event: any): void {
+		if (this.multipleSelection) {
+			if (event.node && event.node.data && event.node.data[this.searcher.getIdField()] !== undefined) {
+				if (this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList !== undefined) {
+					const element = this.searcher.multipleSelectedItemList.find((item) => {
+						return item[this.searcher.getCodeField()] === event.node.data[this.searcher.getCodeField()];
+					});
+					if (element) {
+						this.searcher.multipleSelectedItemList = this.searcher.multipleSelectedItemList
+							.filter((item) => item[this.searcher.getCodeField()] !== element[this.searcher.getCodeField()]);
+					} else {
+						this.addElementToMultipleSelectedItemList(event.node.data);
+					}
+
+				} else {
+					this.addElementToMultipleSelectedItemList(event.node.data);
+				}
+			}
+		}
+	}
+
+	private addElementToMultipleSelectedItemList(element: T): void {
+		if (!this.searcher.multipleSelectedItemList) {
+			this.searcher.multipleSelectedItemList = [];
+		}
+		this.searcher.multipleSelectedItemList.push(element);
+		this.searcher.multipleSelectedItemList = this.searcher.multipleSelectedItemList.slice();
 	}
 
 }

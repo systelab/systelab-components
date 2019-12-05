@@ -12,6 +12,7 @@
                  (viewportChanged)="doViewportChanged()"
                  [overlayNoRowsTemplate]="overlayNoRowsTemplate"
                  [overlayLoadingTemplate]="overlayLoadingTemplate"
+                 (rowSelected)="onRowSelected($event)"
                  (modelUpdated)="onModelUpdated($event)" [rowData]="rowData">
 </ag-grid-angular>
 <systelab-grid-context-menu #popupmenu [style.position]="'fixed'" [isEmbedded]="true"></systelab-grid-context-menu>

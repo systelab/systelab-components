@@ -37,7 +37,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 			this._code += selectedItem[this.abstractSearcher.getCodeField()] ? selectedItem[this.abstractSearcher.getCodeField()] : '';
 
 			if (description !== '') {
-				description += ', ';
+				description += '; ';
 			}
 			description += selectedItem[this.abstractSearcher.getDescriptionField()] ? selectedItem[this.abstractSearcher.getDescriptionField()] : '';
 
@@ -117,14 +117,14 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	public getInputHeight() {
 		if (this.height) {
-			return {'height': '100%'};
+			return { 'height': '100%' };
 		}
 		return undefined;
 	}
 
 	public getLineHeight() {
 		if (this.height) {
-			return {'line-height': this.height.toString() + 'px'};
+			return { 'line-height': this.height.toString() + 'px' };
 		}
 		return undefined;
 	}
@@ -133,10 +133,12 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 		if (this.multipleSelection && this.code) {
 			const listOfCodes = this.code.split(',');
+			const listOfDescriptions = this.description.split(';');
 			this.abstractSearcher.multipleSelectedItemList = [];
 			for (const iterCode of listOfCodes) {
 				const newElement: T = {} as T;
 				newElement[this.abstractSearcher.getCodeField()] = iterCode.trim();
+				newElement[this.abstractSearcher.getDescriptionField()] = listOfDescriptions[listOfCodes.indexOf(iterCode)];
 				this.abstractSearcher.multipleSelectedItemList.push(newElement);
 			}
 		}
