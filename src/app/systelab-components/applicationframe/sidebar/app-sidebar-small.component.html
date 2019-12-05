@@ -1,7 +1,7 @@
 <div class="slab-app-sidebar-small-menu-container d-flex flex-column overflow-hidden">
     <ul class="slab-app-sidebar-button-container slab-flex-1">
         <li class="slab-app-sidebar-button" *ngFor="let tab of tabs"
-            (click)="!tab.subMenu ? tab.action ? tab.action() : selectTab(tab.id) : false"
+            (click)="!tab.subMenu ? tab.action ? tab.action(tab.id) : selectTab(tab.id) : false"
             [class.selected]="tab.isSelected" systelabTooltip="{{tab.name}}" systelabTooltipPlacement="right"
             systelabTooltipDelay="0" systelabTooltipHideDelay="0">
             <i [ngClass]="tab.icon"></i>
