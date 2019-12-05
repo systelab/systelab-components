@@ -15,7 +15,7 @@ export class SearcherDialogParameters<T> extends SystelabModalContext {
 })
 export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>> {
 
-	@ViewChild(SearcherTableComponent, {static: false})  public tableComponent: SearcherTableComponent<T>;
+	@ViewChild(SearcherTableComponent, { static: false }) public tableComponent: SearcherTableComponent<T>;
 	public parameters: SearcherDialogParameters<T>;
 	public searchingValue: string;
 
@@ -57,8 +57,11 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	}
 
 	public submit(): void {
-
-		this.dialog.close(this.tableComponent.getSelectedElements());
+		if (this.parameters.searcher.multipleSelection) {
+			this.dialog.close(this.parameters.searcher.multipleSelectedItemList);
+		} else {
+			this.dialog.close(this.tableComponent.getSelectedElements());
+		}
 	}
 
 	public refreshSearch(): void {

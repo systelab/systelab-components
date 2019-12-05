@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -90,39 +90,59 @@ describe('Systelab Time unit selector', () => {
 			.toBeDefined();
 	});
 
-	it('should select days', fakeAsync(() => {
+	it('should select days', (done) => {
 		clickOnDropDown(fixture);
-		clickOnRow(fixture, 'COMMON_DAYS');
-		expect(fixture.componentInstance.id)
-			.toEqual('COMMON_DAYS');
-	}));
+		fixture.whenStable()
+			.then(() => {
+				clickOnRow(fixture, 'COMMON_DAYS');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.id)
+							.toEqual('COMMON_DAYS');
+						done();
+					});
+			});
+	});
 
-	it('should select months', fakeAsync(() => {
+	it('should select months', (done) => {
 		clickOnDropDown(fixture);
-		clickOnRow(fixture, 'COMMON_MONTHS');
-		expect(fixture.componentInstance.id)
-			.toEqual('COMMON_MONTHS');
-	}));
+		fixture.whenStable()
+			.then(() => {
+				clickOnRow(fixture, 'COMMON_MONTHS');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.id)
+							.toEqual('COMMON_MONTHS');
+						done();
 
-	it('should select years', fakeAsync(() => {
+					});
+			});
+	});
+
+	it('should select years', (done) => {
 		clickOnDropDown(fixture);
-		clickOnRow(fixture, 'COMMON_YEARS');
-		expect(fixture.componentInstance.id)
-			.toEqual('COMMON_YEARS');
-	}));
+		fixture.whenStable()
+			.then(() => {
+				clickOnRow(fixture, 'COMMON_YEARS');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.id)
+							.toEqual('COMMON_YEARS');
+						done();
+					});
+			});
+	});
 });
 
 function clickOnDropDown(fixture: ComponentFixture<TimeUnitSelectTestComponent>) {
 	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
 	button.click();
-	flush();
 	fixture.detectChanges();
 }
 
 function clickOnRow(fixture: ComponentFixture<TimeUnitSelectTestComponent>, id: string) {
 	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
 	button.click();
-	flush(); 	// To simulate the passage of time until the macrotask queue is empty. Check the fakeAsync in the test.
 	fixture.detectChanges();
 }
 
