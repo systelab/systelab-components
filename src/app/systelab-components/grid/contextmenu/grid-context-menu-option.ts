@@ -18,5 +18,4 @@ export class GridContextMenuOption<T> extends AbstractContextMenuOption<GridCont
 	            public iconFontSize?: string) {
 		super();
 	}
-
 }

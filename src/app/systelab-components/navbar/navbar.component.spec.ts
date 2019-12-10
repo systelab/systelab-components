@@ -26,7 +26,6 @@ export class NavbarTestComponent {
 		this.items.push(new NavbarItem(1, 'Option 1', 'slab-icon-medium icon-calendar', true, false, true, () => this.doSomething()));
 		this.items.push(new NavbarItem(1, 'Option 2', 'slab-icon-medium icon-calendar', true, false, true, () => this.doSomethingElse()));
 		this.items.push(new NavbarItem(1, 'Option 3', 'slab-icon-medium icon-calendar', true, false, false, () => this.doSomethingElse()));
-
 	}
 
 	public doSomething() {
@@ -34,7 +33,6 @@ export class NavbarTestComponent {
 
 	public doSomethingElse() {
 	}
-
 }
 
 describe('Systelab Navbar', () => {
@@ -65,11 +63,13 @@ describe('Systelab Navbar', () => {
 	});
 
 	it('First element should have the right text', () => {
-		checkHasText(fixture, 1, 'Option 1');
+		expect(getText(fixture, 1))
+			.toContain('Option 1');
 	});
 
 	it('Second element should have the right text', () => {
-		checkHasText(fixture, 2, 'Option 2');
+		expect(getText(fixture, 2))
+			.toContain('Option 2');
 	});
 
 	it('should call first action when first element is clicked', () => {
@@ -93,7 +93,6 @@ describe('Systelab Navbar', () => {
 			.not
 			.toHaveBeenCalled();
 	});
-
 });
 
 function clickTabButton(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
@@ -102,10 +101,9 @@ function clickTabButton(fixture: ComponentFixture<NavbarTestComponent>, children
 	fixture.detectChanges();
 }
 
-function checkHasText(fixture: ComponentFixture<NavbarTestComponent>, children: number, text: string) {
+function getText(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
 	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
-	expect(label.innerHTML)
-		.toContain(text);
+	return label.innerHTML;
 }
 
 

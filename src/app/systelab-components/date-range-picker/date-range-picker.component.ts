@@ -12,7 +12,6 @@ export class DateRangepicker {
 	@Input() public minDate: Date;
 	@Input() public maxDate: Date;
 
-
 	@Input() public disabled = false;
 
 	@Input()
@@ -33,7 +32,6 @@ export class DateRangepicker {
 	set toDate(value: Date) {
 		this._toDate = value;
 		this.toDateChange.emit(value);
-
 	}
 
 	@Output() public toDateChange = new EventEmitter<Date>();

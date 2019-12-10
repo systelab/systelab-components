@@ -150,6 +150,8 @@ systelab-spinner-cell {
 .ag-theme-fresh .ag-row-drag {
   background: none;
   width: 100%;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
