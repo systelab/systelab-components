@@ -1,11 +1,13 @@
 <systelab-dialog-header (close)="close()">{{parameters.title}}</systelab-dialog-header>
-<systelab-message-with-icon class="slab-flex-1 d-flex pl-3 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type" [icon]="parameters.icon"></systelab-message-with-icon>
+<systelab-message-with-icon class="slab-flex-1 d-flex pl-3 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type"
+                            [icon]="parameters.icon"></systelab-message-with-icon>
 <systelab-dialog-bottom>
     <div class="ml-auto" *ngIf="parameters.buttons.length>0">
-        <button *ngFor="let button of parameters.buttons" #arrayBtn type="button" class="btn ml-1 {{button.cssClass}}" (click)="close(button.returnValue)">{{button.title}}</button>
+        <button *ngFor="let button of parameters.buttons; let i=index; let cnt=count;" type="button" class="btn ml-1 {{button.cssClass}}" (click)="close(button.returnValue)"
+                [autoFocus]="button.focus || (!hasAnyButtonFocus && i===cnt-1)">{{button.title}}</button>
     </div>
     <div class="ml-auto" *ngIf="parameters.buttons.length===0">
-        <button type="button" #closeBtn class="btn" (click)="close()">{{ 'COMMON_CLOSE' | translate | async }}</button>
+        <button type="button" class="btn" (click)="close()" [autoFocus]="true">{{ 'COMMON_CLOSE' | translate | async }}</button>
     </div>
 </systelab-dialog-bottom>
 
