@@ -58,6 +58,7 @@ MessagePopupButton is a class that represent a button. The different properties 
 | title | string | Text displayed in button |
 | returnValue | any | Returned value after clicking the button and closing popup |
 | cssClass | string | Css class to apply to the button |
+| focus | boolean | Button has window focus. Default value is false |
 
 
 MessagePopupIcon is a class that represent a icon in the message popup. The different properties and its meaning are:

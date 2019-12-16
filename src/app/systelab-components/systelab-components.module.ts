@@ -81,6 +81,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { Tree, TreeModule } from 'primeng/tree';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
 	imports:         [
@@ -165,6 +166,7 @@ import { ChipButtonComponent } from './chip-button/chip-button.component';
 		PaginatorComponent,
 		PaginatorPageComponent,
 		ChipButtonComponent,
+		AutofocusDirective
 
 	],
 	exports:         [
@@ -235,7 +237,8 @@ import { ChipButtonComponent } from './chip-button/chip-button.component';
 		DateRangepicker,
 		PaginatorComponent,
 		AgGridAngular,
-		ChipButtonComponent
+		ChipButtonComponent,
+		AutofocusDirective
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
