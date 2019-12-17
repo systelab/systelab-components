@@ -27,7 +27,7 @@ export class CalendarFooterTestComponent {
 	}
 }
 
-fdescribe('Systelab Calendar Footer', () => {
+describe('Systelab Calendar Footer', () => {
 	let fixture: ComponentFixture<CalendarFooterTestComponent>;
 
 	beforeEach(async(() => {
