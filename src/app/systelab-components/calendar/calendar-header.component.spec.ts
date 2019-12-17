@@ -45,7 +45,7 @@ export class CalendarHeaderTestComponent {
 
 }
 
-fdescribe('Systelab Calendar Header', () => {
+describe('Systelab Calendar Header', () => {
 	let fixture: ComponentFixture<CalendarHeaderTestComponent>;
 
 	beforeEach(async(() => {
