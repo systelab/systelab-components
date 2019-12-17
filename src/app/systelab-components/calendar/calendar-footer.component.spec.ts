@@ -13,7 +13,7 @@ import {CalendarFooterComponent} from './calendar-footer.component';
 	selector: 'systelab-calendar-footer-test',
 	template: `
         <div>
-            <systelab-calendar-footer [currentDate]="date"></systelab-calendar-footer>
+            <systelab-calendar-footer [currentDate]="date" (onClearDate)="doClearDate($event)"></systelab-calendar-footer>
         </div>
 	`,
 	styles: []
@@ -21,6 +21,10 @@ import {CalendarFooterComponent} from './calendar-footer.component';
 export class CalendarFooterTestComponent {
 
 	public date: Date = new Date();
+
+	public doClearDate(value): void {
+		this.date = value;
+	}
 }
 
 fdescribe('Systelab Calendar Footer', () => {
@@ -53,4 +57,15 @@ fdescribe('Systelab Calendar Footer', () => {
 			.toBeDefined();
 	});
 
+	it('should emit when click clear button', () => {
+		clickClearButton(fixture);
+		expect(fixture.componentInstance.date).toEqual(undefined);
+	});
+
 });
+
+function clickClearButton(fixture: ComponentFixture<CalendarFooterTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('#clear-date-button');
+	button.click();
+	fixture.detectChanges();
+}
