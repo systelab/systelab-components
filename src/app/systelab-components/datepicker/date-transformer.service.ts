@@ -5,39 +5,37 @@ import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
 export class DataTransformerService {
 
 	public processShortcuts(date: string): Date {
-		const today = new Date();
-		if (date.toUpperCase().endsWith('D')) {
-			return addDays(today, this.getAmount(date, 'D'));
-		} else if (date.toUpperCase().endsWith('W') || date.toUpperCase().endsWith('S')) {
-			return addWeeks(today, this.getAmount(date, 'W', 'S'));
-		} else if (date.toUpperCase().endsWith('M')) {
-			return addMonths(today, this.getAmount(date, 'M'));
-		} else if (date.toUpperCase().endsWith('Y') || date.toUpperCase().endsWith('A')) {
-			return addYears(today, this.getAmount(date, 'Y', 'A'));
-		}
-		return undefined;
-	}
-
-	private getAmount(dateStr: string, ...symbols: string[]): number {
-		for (const symbol of symbols) {
-			if (dateStr.toUpperCase()
-				.endsWith(symbol.toUpperCase())) {
-				const amount = Number(dateStr.toUpperCase()
-					.replace(symbol.toUpperCase(), ''));
-				if (!isNaN(amount)) {
-					return amount;
-				}
+		const regExp = new RegExp('^[\-]?[0-9]+[DWSMYA]$', 'i');
+		if (regExp.test(date)) {
+			const shortcut = date.substr(-1)
+				.toUpperCase();
+			const amount = Number(date.slice(0, -1));
+			const today = new Date();
+			switch (shortcut) {
+				case 'D':
+					return addDays(today, amount);
+				case 'W':
+				case 'S':
+					return addWeeks(today, amount);
+				case 'M':
+					return addMonths(today, amount);
+				case 'Y':
+				case 'A':
+					return addYears(today, amount);
 			}
 		}
-		return 0;
+		return undefined;
 	}
 
 	public infereDate(date: string, dateFormat: string): Date {
 		let dateTmp = date.trim();
 
-		const dayPosition = dateFormat.toUpperCase().lastIndexOf( 'D');
-		const monthPosition = dateFormat.toUpperCase().lastIndexOf( 'M');
-		const yearPosition = dateFormat.toUpperCase().lastIndexOf( 'Y');
+		const dayPosition = dateFormat.toUpperCase()
+			.lastIndexOf('D');
+		const monthPosition = dateFormat.toUpperCase()
+			.lastIndexOf('M');
+		const yearPosition = dateFormat.toUpperCase()
+			.lastIndexOf('Y');
 		const dayBefore = dayPosition < monthPosition;
 		const yearBefore = yearPosition < dayPosition;
 
@@ -62,11 +60,10 @@ export class DataTransformerService {
 		return this.getFormattedDate(dateTmp, dayBefore, yearBefore, firstSeparatorPosition, secondSeparatorPosition);
 	}
 
-
-	private getFormattedDate(dateTmp: string, dayBefore: boolean,  yearBefore: boolean, firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
+	private getFormattedDate(dateTmp: string, dayBefore: boolean, yearBefore: boolean, firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
 		if (dateTmp.length === 4) {
 			// Manage dates with format d/m/yy or dmyy or m/d/yy or mdyy
-			return this.getFormattedDateFourDigits (dateTmp, dayBefore, yearBefore);
+			return this.getFormattedDateFourDigits(dateTmp, dayBefore, yearBefore);
 		} else if (dateTmp.length === 6 || dateTmp.length === 8) {
 			// Manage dates with format dd/mm/yy or ddmmyy or mm/dd/yy or mmddyy or dd/mm/yyyy or mm/dd/yyyy
 			return this.getFormattedDateSixOrEigthDigits(dateTmp, dayBefore, yearBefore);
@@ -78,7 +75,7 @@ export class DataTransformerService {
 		return undefined;
 	}
 
-	private getFormattedDateFourDigits (dateTmp: string, dayBefore: boolean, yearBefore: boolean): Date {
+	private getFormattedDateFourDigits(dateTmp: string, dayBefore: boolean, yearBefore: boolean): Date {
 		let dayInDate: number;
 		let monthInDate: number;
 		let yearInDate: number;
@@ -108,7 +105,7 @@ export class DataTransformerService {
 		return new Date(yearInDate, monthInDate, dayInDate);
 	}
 
-	private getFormattedDateSixOrEigthDigits (dateTmp: string, dayBefore: boolean, yearBefore: boolean): Date {
+	private getFormattedDateSixOrEigthDigits(dateTmp: string, dayBefore: boolean, yearBefore: boolean): Date {
 		let dayInDate: number;
 		let monthInDate: number;
 		let yearInDate: number;
@@ -138,7 +135,7 @@ export class DataTransformerService {
 		return new Date(yearInDate, monthInDate, dayInDate);
 	}
 
-	private getFormattedDateFiveOrSevenDigits (dateTmp: string, dayBefore: boolean, yearBefore: boolean,  firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
+	private getFormattedDateFiveOrSevenDigits(dateTmp: string, dayBefore: boolean, yearBefore: boolean, firstSeparatorPosition: number, secondSeparatorPosition: number): Date {
 		let dayInDate: number;
 		let monthInDate: number;
 		let yearInDate: number;
