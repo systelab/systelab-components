@@ -84,6 +84,12 @@ export abstract class AbstractGrid<T> implements OnInit {
 		this.gridOptions.defaultColDef.resizable = this.isColResizeEnabled();
 		this.gridOptions.rowSelection = this.getRowSelectionType();
 		this.gridOptions.rowDeselection = true;
+
+		this.gridOptions.localeText = {
+			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
+			loadingOoo:   this.i18nService.instant('COMMON_LOADING')
+		};
+
 		if (this.hideHeader()) {
 			this.gridOptions.headerHeight = 0;
 		}
