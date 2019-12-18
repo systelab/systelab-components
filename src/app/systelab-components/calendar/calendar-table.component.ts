@@ -17,7 +17,7 @@ export class CalendarTableComponent implements OnChanges {
 
 	@Input() public currentDate: Date;
 	@Input() public days: DaySlot[] = [];
-	@Input() public useLongDaysValue = false;
+	@Input() public useLongDays = false;
 
 	public language: any;
 	public daysHeader: string[] = [];
@@ -104,9 +104,9 @@ export class CalendarTableComponent implements OnChanges {
 	}
 
 	protected defineHeaderDays() {
-		this.daysHeader = this.useLongDaysValue ? this.language.dayNames.slice() : this.language.dayNamesShort.slice();
+		this.daysHeader = this.useLongDays ? this.language.dayNames.slice() : this.language.dayNamesShort.slice();
 		let firstDay: Array<string> = this.daysHeader.slice(0, 1);
-		if (this.language.firstDayOfWeek === 1 && firstDay[0] === (this.useLongDaysValue ? this.language.dayNames[0] : this.language.dayNamesShort[0])) {
+		if (this.language.firstDayOfWeek === 1 && firstDay[0] === (this.useLongDays ? this.language.dayNames[0] : this.language.dayNamesShort[0])) {
 			firstDay = this.daysHeader.splice(0, 1);
 			this.daysHeader.push(firstDay[0]);
 		}
