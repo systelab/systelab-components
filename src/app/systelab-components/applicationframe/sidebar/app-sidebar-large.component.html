@@ -1,11 +1,11 @@
 <div class="slab-app-sidebar-large-menu-container">
     <ul class="slab-app-sidebar-tabs-container">
-        <li class="slab-app-sidebar-tab" *ngFor="let tab of tabs" (click)="!tab.subMenu ? tab.action ? tab.action() : selectTab(tab.id) : false"
+        <li class="slab-app-sidebar-tab" *ngFor="let tab of tabs" (click)="!tab.subMenu ? tab.action ? tab.action(tab.id) : selectTab(tab.id) : false"
             [class.selected]="tab.isSelected">
             <div class="slab-app-sidebar-tab-decoration float-left"></div>
             <span>{{tab.name}}</span>
             <ul *ngIf="tab.subMenu" class="slab-app-sidebar-submenu">
-                <li class="slab-app-sidebar-subtab" *ngFor="let subTab of tab.subMenu;" (click)="subTab.action ? subTab.action() : selectTab(subTab.id)" [class.selected]="subTab.isSelected">
+                <li class="slab-app-sidebar-subtab" *ngFor="let subTab of tab.subMenu;" (click)="subTab.action ? subTab.action(subTab.id) : selectTab(subTab.id)" [class.selected]="subTab.isSelected">
                     <div class="slab-app-sidebar-tab-decoration  float-left"></div>
                     <span>{{subTab.name}}</span>
                 </li>
@@ -13,7 +13,8 @@
         </li>
     </ul>
     <ul class="slab-app-sidebar-actions-container">
-        <button type="button" *ngFor="let action of actions" class="btn" (click)="action.action()"><i *ngIf="action.icon"
-                class="{{action.icon}}"></i> {{action.name}}</button>
+        <button type="button" *ngFor="let action of actions" class="btn" (click)="action.action()">
+            <i *ngIf="action.icon" class="{{action.icon}}"></i> {{action.name}}
+        </button>
     </ul>
 </div>
