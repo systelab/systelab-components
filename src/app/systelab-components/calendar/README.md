@@ -23,6 +23,7 @@ The properties for the systelab-calendar-table are:
 | ---- |:----:|:-------:| ----------- |
 | currentDate | Date || A date in the month to render. |
 | days | Array&lt;DaySlot&gt; || An array of DaySlot objects representing each day of the month in order to override the standard ones (that is with isHoliday equals false).|
+| useLongDays | boolean || A boolean to determine if we have to use long or short values in header cells. By default, we use short values.|
 
 The currentDate property applies also to systelab-calendar-header.
 

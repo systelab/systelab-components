@@ -1,6 +1,6 @@
-import { Component, ContentChild, Input, OnChanges, TemplateRef } from '@angular/core';
-import { addDays, getDate, getISODay, isSameDay, lastDayOfMonth, setDate } from 'date-fns';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
+import {Component, ContentChild, Input, OnChanges, TemplateRef} from '@angular/core';
+import {addDays, getDate, getISODay, isSameDay, lastDayOfMonth, setDate} from 'date-fns';
+import {I18nService} from 'systelab-translate/lib/i18n.service';
 
 export interface DaySlot {
 	date?: Date;
@@ -9,14 +9,15 @@ export interface DaySlot {
 }
 
 @Component({
-	selector:    'systelab-calendar-table',
+	selector: 'systelab-calendar-table',
 	templateUrl: 'calendar-table.component.html',
-	styleUrls:   ['calendar-table.component.scss']
+	styleUrls: ['calendar-table.component.scss']
 })
 export class CalendarTableComponent implements OnChanges {
 
 	@Input() public currentDate: Date;
 	@Input() public days: DaySlot[] = [];
+	@Input() public useLongDays = false;
 
 	public language: any;
 	public daysHeader: string[] = [];
@@ -24,7 +25,7 @@ export class CalendarTableComponent implements OnChanges {
 
 	@ContentChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
 
-	constructor(private i18nService: I18nService) {
+	constructor(protected i18nService: I18nService) {
 	}
 
 	public ngOnChanges() {
@@ -102,10 +103,10 @@ export class CalendarTableComponent implements OnChanges {
 		}
 	}
 
-	private defineHeaderDays() {
-		this.daysHeader = this.language.dayNamesShort.slice();
+	protected defineHeaderDays() {
+		this.daysHeader = this.useLongDays ? this.language.dayNames.slice() : this.language.dayNamesShort.slice();
 		let firstDay: Array<string> = this.daysHeader.slice(0, 1);
-		if (this.language.firstDayOfWeek === 1 && firstDay[0] === this.language.dayNamesShort[0]) {
+		if (this.language.firstDayOfWeek === 1 && firstDay[0] === (this.useLongDays ? this.language.dayNames[0] : this.language.dayNamesShort[0])) {
 			firstDay = this.daysHeader.splice(0, 1);
 			this.daysHeader.push(firstDay[0]);
 		}
@@ -120,9 +121,9 @@ export class CalendarTableComponent implements OnChanges {
 		return null;
 	}
 
-	private getLanguage(): void {
+	protected getLanguage(): void {
 		this.language = {
-			dayNames:        [
+			dayNames: [
 				this.i18nService.instant('COMMON_SUNDAY'),
 				this.i18nService.instant('COMMON_MONDAY'),
 				this.i18nService.instant('COMMON_TUESDAY'),
@@ -131,7 +132,7 @@ export class CalendarTableComponent implements OnChanges {
 				this.i18nService.instant('COMMON_FRIDAY'),
 				this.i18nService.instant('COMMON_SATURDAY')
 			],
-			dayNamesShort:   [
+			dayNamesShort: [
 				this.i18nService.instant('COMMON_SEVENTH_DAY'),
 				this.i18nService.instant('COMMON_FIRST_DAY'),
 				this.i18nService.instant('COMMON_SECOND_DAY'),
@@ -140,7 +141,7 @@ export class CalendarTableComponent implements OnChanges {
 				this.i18nService.instant('COMMON_FIFTH_DAY'),
 				this.i18nService.instant('COMMON_SIXTH_DAY')
 			],
-			dayNamesMin:     [
+			dayNamesMin: [
 				this.i18nService.instant('COMMON_SEVENTH_DAY'),
 				this.i18nService.instant('COMMON_FIRST_DAY'),
 				this.i18nService.instant('COMMON_SECOND_DAY'),
@@ -149,7 +150,7 @@ export class CalendarTableComponent implements OnChanges {
 				this.i18nService.instant('COMMON_FIFTH_DAY'),
 				this.i18nService.instant('COMMON_SIXTH_DAY')
 			],
-			monthNames:      [
+			monthNames: [
 				this.i18nService.instant('COMMON_JANUARY'),
 				this.i18nService.instant('COMMON_FEBRUARY'),
 				this.i18nService.instant('COMMON_MARCH'),
