@@ -21,4 +21,12 @@ export class ApplicationSidebarSmallComponent {
 		});
 		this.selected.emit(id);
 	}
+
+	public executeTabAction(tab: ApplicationSidebarTab): void {
+		if ( !tab.subMenu && tab.action) {
+			tab.action(tab.id);
+		} else if ( !tab.subMenu && !tab.action) {
+			this.selectTab(tab.id);
+		}
+	}
 }
