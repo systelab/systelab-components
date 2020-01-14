@@ -1,6 +1,6 @@
-import {OverlayRef} from '@angular/cdk/overlay';
-import {Observable, Subject} from 'rxjs';
-import {SystelabModalContext} from './modal-context';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { SystelabModalContext } from './modal-context';
 
 export class DialogRef<T extends SystelabModalContext> {
 
@@ -8,19 +8,21 @@ export class DialogRef<T extends SystelabModalContext> {
 
 	private subject: Subject<any> = new Subject<any>();
 
+	private subscription: Subscription = new Subscription();
+
 	constructor(private overlayRef: OverlayRef, public context: T) {
 		if (!context.isBlocking) {
-			overlayRef.backdropClick()
+			this.subscription.add(overlayRef.backdropClick()
 				.subscribe(
-					() => this.close());
+					() => this.close()));
 		}
 		if (context.showClose) {
-			overlayRef.keydownEvents()
+			this.subscription.add(overlayRef.keydownEvents()
 				.subscribe((k) => {
 					if (k.code === DialogRef.ESCAPE_KEY || k.key === DialogRef.ESCAPE_KEY) {
 						this.close();
 					}
-				});
+				}));
 		}
 	}
 
@@ -31,6 +33,10 @@ export class DialogRef<T extends SystelabModalContext> {
 	public close(value?: any): void {
 		this.overlayRef.dispose();
 		this.subject.next(value);
+		this.subject.complete();
+		if (this.subscription) {
+			this.subscription.unsubscribe();
+		}
 	}
 
 	public getResult(): Observable<any> {
@@ -44,7 +50,6 @@ export class DialogRef<T extends SystelabModalContext> {
 	public enable() {
 		this.overlayRef.overlayElement.classList.remove('slab-dialog-disabled');
 	}
-
 
 }
 
