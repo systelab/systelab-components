@@ -36,6 +36,8 @@ export class ChipButtonComponent {
 	@Input()
 	public disabled = false;
 
+	private lastValue: ChipButtonItem;
+
 	constructor(protected messagePopupService: MessagePopupService, protected i18nService: I18nService) {
 	}
 
@@ -50,9 +52,11 @@ export class ChipButtonComponent {
 				btn.isChecked = false
 			);
 		this.selectButton.emit(item);
+		this.lastValue = item;
 	}
 
-	public removeButtonItem(item: ChipButtonItem) {
+	public removeButtonItem(item: ChipButtonItem, event: Event) {
+		event.stopPropagation();
 		if (this.deleteConfirmationMessage) {
 			this.messagePopupService.showYesNoQuestionPopup(this.deleteConfirmationTitle, this.deleteConfirmationMessage)
 				.subscribe((res) => {
@@ -66,12 +70,7 @@ export class ChipButtonComponent {
 	}
 
 	public addButtonITem() {
-		let maxID = 0;
-		if (this.buttonList.length > 0) {
-			maxID = Math.max.apply(Math, this.buttonList.map(function(o) {
-				return o.id;
-			}));
-		}
+		const maxID = Math.max(...this.buttonList.map(o => o.id), 0);
 		this.buttonList.push({name: this.i18nService.instant('COMMON_NEW'), id: maxID + 1, isChecked: false});
 		const item = this.buttonList[this.buttonList.length - 1];
 		this.selectItem(item);
@@ -85,13 +84,21 @@ export class ChipButtonComponent {
 	}
 
 	private removeElement(item: ChipButtonItem) {
-		const index = this.buttonList.findIndex(it => it === item);
+		let index = this.buttonList.findIndex(it => it === item);
 		if (index !== -1) {
 			this.buttonList.splice(index, 1);
-			this.buttonList = this.buttonList;
 		}
 		this.buttonRemoved.emit(item);
-		const last = this.buttonList[this.buttonList.length - 1];
+		let last;
+		if (this.lastValue.id !== item.id) {
+			index = this.buttonList.findIndex(it => it === this.lastValue);
+			last = this.buttonList[index];
+		}
+		if (index === this.buttonList.length) {
+			last = this.buttonList[this.buttonList.length - 1];
+		} else {
+			last = this.buttonList[index];
+		}
 		this.selectItem(last);
 	}
 }
