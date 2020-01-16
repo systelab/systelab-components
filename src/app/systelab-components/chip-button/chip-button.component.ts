@@ -98,7 +98,9 @@ export class ChipButtonComponent {
 		} else {
 			last = this.buttonList[index];
 		}
-		this.selectItem(last);
+		if (last) {
+			this.selectItem(last);
+		}
 	}
 }
 
