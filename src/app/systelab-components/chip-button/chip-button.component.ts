@@ -15,6 +15,8 @@ export class ChipButtonComponent {
 
 	@Output() public changeButton = new EventEmitter();
 	@Output() public selectButton = new EventEmitter();
+	@Output() public buttonRemoved = new EventEmitter();
+	@Output() public buttonAdded = new EventEmitter();
 
 	@Input()
 	public buttonList: ChipButtonItem[];
@@ -64,9 +66,16 @@ export class ChipButtonComponent {
 	}
 
 	public addButtonITem() {
-		this.buttonList.push({name: this.i18nService.instant('COMMON_NEW'), id: this.buttonList.length + 1, isChecked: false});
-		this.selectItem(this.buttonList[this.buttonList.length - 1]);
-
+		let maxID = 0;
+		if (this.buttonList.length > 0) {
+			maxID = Math.max.apply(Math, this.buttonList.map(function(o) {
+				return o.id;
+			}));
+		}
+		this.buttonList.push({name: this.i18nService.instant('COMMON_NEW'), id: maxID + 1, isChecked: false});
+		const item = this.buttonList[this.buttonList.length - 1];
+		this.selectItem(item);
+		this.buttonAdded.emit(item);
 	}
 
 	public changeButtonItem(item: ChipButtonItem) {
@@ -81,6 +90,9 @@ export class ChipButtonComponent {
 			this.buttonList.splice(index, 1);
 			this.buttonList = this.buttonList;
 		}
+		this.buttonRemoved.emit(item);
+		const last = this.buttonList[this.buttonList.length - 1];
+		this.selectItem(last);
 	}
 }
 
