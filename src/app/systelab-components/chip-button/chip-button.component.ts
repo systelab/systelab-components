@@ -71,8 +71,8 @@ export class ChipButtonComponent {
 
 	public addButtonITem() {
 		const maxID = Math.max(...this.buttonList.map(o => o.id), 0);
-		this.buttonList.push({name: this.i18nService.instant('COMMON_NEW'), id: maxID + 1, isChecked: false});
-		const item = this.buttonList[this.buttonList.length - 1];
+		const item = {name: this.i18nService.instant('COMMON_NEW'), id: maxID + 1, isChecked: false};
+		this.buttonList.push(item);
 		this.selectItem(item);
 		this.buttonAdded.emit(item);
 	}
