@@ -93,8 +93,7 @@ export class ChipButtonComponent {
 		if (this.lastValue.id !== item.id) {
 			index = this.buttonList.findIndex(it => it === this.lastValue);
 			last = this.buttonList[index];
-		}
-		if (index === this.buttonList.length) {
+		} else if (index === this.buttonList.length) {
 			last = this.buttonList[this.buttonList.length - 1];
 		} else {
 			last = this.buttonList[index];
