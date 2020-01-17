@@ -152,14 +152,16 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
-			if (this.inputChanged && dateStr.length >= 2) {
-				const transformedDate = this.dataTransformerService.processShortcuts(dateStr);
-				if (transformedDate) {
-					this.currentDate = transformedDate;
-				} else {
-					const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
-					if (inferedDate) {
-						this.currentDate = inferedDate;
+			if (this.inputChanged) {
+				if (dateStr.length >= 2) {
+					const transformedDate = this.dataTransformerService.processShortcuts(dateStr);
+					if (transformedDate) {
+						this.currentDate = transformedDate;
+					} else {
+						const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
+						if (inferedDate) {
+							this.currentDate = inferedDate;
+						}
 					}
 				}
 				this.currentDateChange.emit(this.currentDate);
