@@ -26,7 +26,7 @@ If you want the defaults the template will look like:
 <systelab-chip-button [buttonList]="buttonList"></systelab-chip-button>
 ```
 
-## Properties and Events
+## Properties
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
@@ -36,5 +36,13 @@ If you want the defaults the template will look like:
 | isRemoveEnabled | boolean | true | Set to true if you want to show a remove button. Otherwise set to false |
 | deleteConfirmationTitle and deleteConfirmationMessage | string |  | Set the values if you want to show a confirmation message. Otherwise do not configure them |
 
-The styles are defined in the button.scss Saas file.
+## Events
 
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| changeButton | | Event emitted clicking the button twice  |
+| selectButton | | Event emitted clicking the button  |
+| buttonRemoved | | Event emitted clicking the 'x' icon on the button |
+| buttonAdded | | Event emitted clicking the '+' icon on the button  |
+
+The styles are defined in the button.scss Saas file.
