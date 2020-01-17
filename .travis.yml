@@ -11,8 +11,6 @@ addons:
     - google-chrome
     packages:
     - dpkg
-    - google-chrome-stable
-
   chrome: stable
 
 install:
