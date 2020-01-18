@@ -69,8 +69,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.enableRangeSelection = true;
 		options.stopEditingWhenGridLosesFocus = true;
 		options.singleClickEdit = true;
-		options.defaultColDef = {};
-		options.defaultColDef.resizable = this.isColResizeEnabled();
+		options.defaultColDef = {
+			resizable: this.isColResizeEnabled()
+		};
 		options.rowSelection = this.getRowSelectionType();
 		options.rowDeselection = true;
 		options.localeText = {
@@ -156,11 +157,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public executeContextMenuAction(elementId: string, actionId: string): void {
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
-		const rowId: number = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
+		const rowId = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
 		const data: T = this.gridOptions.api.getModel().getRow(rowId).data;
 		const rowsSelected: Array<T> = this.gridOptions.api.getSelectedRows();
 
-		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData('' + rowId, actionId, data, this.gridOptions, rowsSelected);
+		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(rowId.toString(), actionId, data, this.gridOptions, rowsSelected);
 		if (option && option.action && data !== undefined) {
 			option.action(actionData);
 		} else {
@@ -172,7 +173,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public isContextMenuOptionEnabled(elementId: string, actionId: string): boolean {
 
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
-		const rowId: number = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
+		const rowId = Number(elementId.substr(elementId.indexOf('row')).replace('row', ''));
 		const data: T = this.gridOptions.api.getModel().getRow(rowId).data;
 
 		if (option && option.isActionEnabled && data !== undefined) {
