@@ -6,8 +6,7 @@ import { MessagePopupIcon, MessageWithIconComponent } from './message-with-icon.
 import { DialogService } from '../dialog/dialog.service';
 
 export class MessagePopupButton {
-	constructor(public title: string, public returnValue: any, public cssClass?: string) {
-
+	constructor(public title: string, public returnValue: any, public cssClass?: string, public focus: boolean = false) {
 	}
 }
 

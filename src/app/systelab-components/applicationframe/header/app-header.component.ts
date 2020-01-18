@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DialogService } from '../../modal/dialog/dialog.service';
+import { DialogService } from '../../modal';
 
 export class ApplicationHeaderMenuEntry {
 	constructor(public optionName: string, public isDivider: boolean, public action?: any) {

@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Calendar } from 'primeng/components/calendar/calendar';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
+import { addDays } from 'date-fns';
+import { DataTransformerService } from './date-transformer.service';
 
 @Component({
 	selector:    'systelab-datepicker',
-	templateUrl: 'datepicker.component.html'
+	templateUrl: 'datepicker.component.html',
+	providers:   [DataTransformerService]
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
@@ -64,7 +66,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, private dataTransformerService: DataTransformerService) {
 		this.addListeners();
 		// TODO: To get the language and modify the values.
 	}
@@ -87,7 +89,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			newElement.className = 'icon-calendar';
 			if (this.currentCalendar) {
 				if (this.autofocus) {
-					this.currentCalendar.el.nativeElement.querySelector('input').focus();
+					this.currentCalendar.el.nativeElement.querySelector('input')
+						.focus();
 				}
 				this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
@@ -150,67 +153,21 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
 			if (this.inputChanged) {
-				const changeDate = this.changeDateAccordingToInput(dateStr);
-				if (changeDate) {
-					this.currentDate = changeDate;
+				if (dateStr.length >= 2) {
+					const transformedDate = this.dataTransformerService.processShortcuts(dateStr);
+					if (transformedDate) {
+						this.currentDate = transformedDate;
+					} else {
+						const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
+						if (inferedDate) {
+							this.currentDate = inferedDate;
+						}
+					}
 				}
 				this.currentDateChange.emit(this.currentDate);
 				this.inputChanged = false;
 			}
 		}
-	}
-
-	private changeDateAccordingToInput(dateStr): Date {
-		const today = new Date();
-		if (dateStr.length >= 2) {
-			if (dateStr.toUpperCase().endsWith('D')) {
-				return addDays(today, this.getAmount(dateStr, 'D'));
-			} else if (dateStr.toUpperCase().endsWith('W') || dateStr.toUpperCase().endsWith('S')) {
-				return addWeeks(today, this.getAmount(dateStr, 'W', 'S'));
-			} else if (dateStr.toUpperCase().endsWith('M')) {
-				return addMonths(today, this.getAmount(dateStr, 'M'));
-			} else if (dateStr.toUpperCase().endsWith('Y') || dateStr.toUpperCase().endsWith('A')) {
-				return addYears(today, this.getAmount(dateStr, 'Y', 'A'));
-			} else {
-				const transformedDate = this.transformDateWithoutSeparator(dateStr);
-				if (transformedDate) {
-					return transformedDate;
-				}
-			}
-		}
-		return undefined;
-	}
-
-	private getAmount(dateStr: string, ...symbols: string[]): number {
-		for (const symbol of symbols) {
-			if (dateStr.toUpperCase().endsWith(symbol.toUpperCase())) {
-				const amount = Number(dateStr.toUpperCase().replace(symbol.toUpperCase(), ''));
-				if (!isNaN(amount)) {
-					return amount;
-				}
-			}
-		}
-		return 0;
-	}
-
-	public transformDateWithoutSeparator(date: string): Date {
-		const dateTmp = date.trim();
-
-		// TODO: Dending to support 4 6 and 8 digits in all the languages.
-		/*
-		if (!this.hasSeparator(dateTmp)) {
-			if (dateTmp.length === 4) {
-				return new Date( '0' + dateTmp.substring(0, 1) + '/' + '0' + dateTmp.substring(1, 2) + '/' + dateTmp.substring(2));
-			} else if (dateTmp.length === 6 || dateTmp.length === 8) {
-				return new Date( dateTmp.substring(0, 2) + '/' + dateTmp.substring(2, 4) + '/' + dateTmp.substring(4));
-			}
-		}
-		*/
-		return undefined;
-	}
-
-	private hasSeparator(dateTmp: string): boolean {
-		return dateTmp.includes('/') || dateTmp.includes('-') || dateTmp.includes('.');
 	}
 
 	public onInput(event: KeyboardEvent) {
