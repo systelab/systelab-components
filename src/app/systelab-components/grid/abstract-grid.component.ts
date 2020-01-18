@@ -73,6 +73,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.defaultColDef.resizable = this.isColResizeEnabled();
 		options.rowSelection = this.getRowSelectionType();
 		options.rowDeselection = true;
+		options.localeText = {
+			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
+			loadingOoo:   this.i18nService.instant('COMMON_LOADING')
+		};
 
 		if (this.hideHeader()) {
 			options.headerHeight = 0;
