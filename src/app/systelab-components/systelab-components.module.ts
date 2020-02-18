@@ -82,6 +82,7 @@ import { Tree, TreeModule } from 'primeng/tree';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
 
 @NgModule({
 	imports:         [
@@ -166,8 +167,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 		PaginatorComponent,
 		PaginatorPageComponent,
 		ChipButtonComponent,
-		AutofocusDirective
-
+		AutofocusDirective,
+		StackedBarCellRendererComponent,
 	],
 	exports:         [
 		SliderComponent,
@@ -238,7 +239,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 		PaginatorComponent,
 		AgGridAngular,
 		ChipButtonComponent,
-		AutofocusDirective
+		AutofocusDirective,
+		StackedBarCellRendererComponent,
 	],
 	entryComponents: [
 		MessagePopupViewComponent,
@@ -254,7 +256,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 		CheckboxCellEditorComponent,
 		AbstractTreeListboxRendererComponent,
 		NumPadDialog,
-		ComboboxFavouriteRendererComponent
+		ComboboxFavouriteRendererComponent,
+		StackedBarCellRendererComponent,
 	],
 	providers:       [
 		StylesUtilService,

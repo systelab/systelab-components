@@ -37,6 +37,7 @@ We can add custom-cells/custom-editors as cellRendererFramework/cellEditorFramew
 - Decimal Input
 - Checkbox
 - Spinner
+- Stacked Bar
  
 To use these renderers/editors you need to set the following column properties:
 
@@ -100,6 +101,36 @@ Spinner
     cellEditorFramework:   SpinnerCellEditorComponent,
     onCellValueChanged:    e => console.log('test', e),
     resizable:             false
+}
+```
+
+Stacked Bar
+
+This cell renderer displays an stacked bars chart in the cell, with numbers and colors. To use this renderer valueGetter must be implemented to return an array of IStackedBar.
+IStackedBar interface defines each bar of the graph:
+```
+export interface IStackedBar {
+	id: string | number;  // Unique id
+	value: number;   // Value
+	color?: string;   // RGB or HEX color for background
+	colorClass?: string;   // CSS class for bakcground-color
+	tooltipText?: string;   // Tooltip text
+}
+```
+In order to represent bars with correct ratio method getMaxValue must also be implemented to return a number with the max value of all the totals in the model.
+An optional action can be added to each bar click by adding a barClick method to the cell renderer params. 
+```
+{
+    colId:                 'stackedBar',
+    headerName:            'Cell with Stacked Bar Graph',
+    valueGetter:           (params: any) => {
+            return this.getStackedBarModel(params.data);
+    },
+    getMaxValue:           () => {return this.getMaxValue();},
+    cellRendererFramework: StackedBarCellRendererComponent,
+    cellRendererParams: {
+            barClick: this.doBarClick.bind(this)  // Optional
+    }
 }
 ```
 
