@@ -89,7 +89,6 @@ export class ShowcaseGridUtil {
 			{
 				colId:                 'status',
 				valueGetter:           (params: any) => {
-					console.log(params.data.stackedBarValues);
 					return params.data.stackedBarValues;
 				},
 				headerName:            'Status',
