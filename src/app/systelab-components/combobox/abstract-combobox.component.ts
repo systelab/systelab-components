@@ -575,6 +575,27 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
+	public doClick(row: any) {
+		if (!this.isDisabled) {
+			if (this.multipleSelection) {
+				if (row.node.selected) {
+					row.node.selectThisNode(false);
+					this.multipleSelectedItemList = this.multipleSelectedItemList.filter(item => item[this.getIdField()] !== row.node.data[this.getIdField()]);
+				} else {
+					row.node.selectThisNode(true);
+					if (this.multipleSelectedItemList) {
+						this.multipleSelectedItemList.push(row.node.data);
+					} else {
+						this.multipleSelectedItemList = [row.node.data];
+					}
+					this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+				}
+				this.setDescriptionAndCodeWhenMultiple(this.multipleSelectedItemList);
+			}
+		}
+	}
+
+
 	// overrides
 	public onRowSelected(event: any) {
 		if (!this.multipleSelection) {
