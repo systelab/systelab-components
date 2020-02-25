@@ -180,9 +180,24 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	public doClick(row: any) {
-		if (!this.multipleSelection && !this.isDisabled) {
-			this.selectedItem = row.node.data;
-			this.selectedItemChange.emit(row.node.data);
+		if (!this.isDisabled) {
+			if (this.multipleSelection) {
+				if (row.node.selected) {
+					row.node.selectThisNode(false);
+					this.multipleSelectedItemList = this.multipleSelectedItemList.filter(item => item[this.getIdField()] !== row.node.data[this.getIdField()]);
+				} else {
+					row.node.selectThisNode(true);
+					if (this.multipleSelectedItemList) {
+						this.multipleSelectedItemList.push(row.node.data);
+					} else {
+						this.multipleSelectedItemList = [row.node.data];
+					}
+					this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+				}
+			} else {
+				this.selectedItem = row.node.data;
+				this.selectedItemChange.emit(row.node.data);
+			}
 		}
 	}
 
@@ -207,7 +222,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 								if (elementAllInSelectedList !== -1) {
 									this.unselectNodeAll();
 									this.multipleSelectedItemList = [];
-
 								}
 								this.multipleSelectedItemList.push(event.node.data);
 								this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
@@ -221,12 +235,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 					if (elementIndexInSelectedList !== -1) {
 						this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
 						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
+
 					}
 				}
 			} else {
 				if (this.showAll && (event.node.data[this.getIdField()] === this.getAllFieldID())) {
 					this.multipleSelectedItemList.push(event.node.data);
 					this.unselectAllNodes();
+
 				} else {
 					this.multipleSelectedItemList = [];
 					this.multipleSelectedItemList.push(event.node.data);

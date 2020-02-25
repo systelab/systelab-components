@@ -23,12 +23,12 @@ export class TestData {
 @Component({
 	selector: 'abstract-multiple-listbox-test',
 	template: `
-                  <div class="position-relative" style="height: 200px;">
-                      <systelab-abstract-listbox-example (selectedItemChange)="doSelect($event)" [multipleSelection]="true"
-                                                         (multipleSelectedItemListChange)="doMultipleSelect($event)">
-                      </systelab-abstract-listbox-example>
-                  </div>
-			  `
+                <div class="position-relative" style="height: 200px;">
+                    <systelab-abstract-listbox-example (selectedItemChange)="doSelect($event)" [multipleSelection]="true"
+                                                       (multipleSelectedItemListChange)="doMultipleSelect($event)">
+                    </systelab-abstract-listbox-example>
+                </div>
+	          `
 })
 export class AbstractMultipleListboxTestComponent {
 
@@ -43,9 +43,7 @@ export class AbstractMultipleListboxTestComponent {
 	}
 
 	public doMultipleSelect(dataList: Array<TestData>): void {
-		console.log('doMultipleSelect', dataList);
 		this.selectedTestDataList = dataList;
-		console.log('doMultipleSelect.selectedTestDataList', this.selectedTestDataList);
 	}
 
 }
@@ -106,18 +104,6 @@ describe('Abstract Listbox (multiple selection)', () => {
 			.toBeDefined();
 	});
 
-	it(' should leave selectedItem as undefined when doClick is invoked and multiSelection is true', () => {
-		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
-
-		systelabAbstractListboxComponent.multipleSelection = true;
-		const testData = new TestData('2', 'Description-2');
-		const row = {node: {data: testData}};
-		systelabAbstractListboxComponent.doClick(row);
-
-		expect(systelabAbstractListboxComponent.selectedItem)
-			.toBeUndefined();
-	});
-
 	it(' should leave selectedItem as undefined when doClick is invoked and isDisabled is true', () => {
 		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
 
@@ -169,12 +155,7 @@ function clickOnGridCell(fixture: ComponentFixture<AbstractMultipleListboxTestCo
 }
 
 function selectOnGridRow(fixture: ComponentFixture<AbstractMultipleListboxTestComponent>, row: number) {
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('span[class="ag-selection-checkbox"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('span[class="slab-grid-checkbox"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('span[class="slab-grid-checkbox-unchecked"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('div[role="row"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('div[class="ag-cell-wrapper"]');
-	const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('div[ref="eCellWrapper"]');
+	const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('.ag-cell-not-inline-editing.ag-cell-value');
 	gridRowArray[row].click();
 	fixture.detectChanges();
 }
