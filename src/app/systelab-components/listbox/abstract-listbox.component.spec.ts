@@ -73,32 +73,9 @@ export class AbstractListboxTestComponent {
 
 }
 
-@Component({
-	selector: 'abstract-multiple-listbox-test',
-	template: `
-                  <div class="position-relative" style="height: 200px;">
-                      <systelab-abstract-listbox-example (selectedItemChange)="doSelect($event)" [multipleSelection]="true"
-                                                         (multipleSelectedItemListChange)="doMultipleSelect($event)">
-                      </systelab-abstract-listbox-example>
-                  </div>
-			  `
-})
-export class AbstractMultipleListboxTestComponent extends AbstractListboxTestComponent {
-
-	public selectedTestDataList: Array<TestData>;
-
-	public doMultipleSelect(dataList: Array<TestData>): void {
-		console.log('doMultipleSelect', dataList);
-		this.selectedTestDataList = dataList;
-		console.log('doMultipleSelect.selectedTestDataList', this.selectedTestDataList);
-	}
-
-}
-
 describe('Abstract Listbox', () => {
 
 	let fixture: ComponentFixture<AbstractListboxTestComponent>;
-	let fixtureMultiple: ComponentFixture<AbstractMultipleListboxTestComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
@@ -119,8 +96,7 @@ describe('Abstract Listbox', () => {
 				GridHeaderContextMenuComponent,
 				ComboBoxInputRendererComponent,
 				SystelabAbstractListboxComponent,
-				AbstractListboxTestComponent,
-				AbstractMultipleListboxTestComponent],
+				AbstractListboxTestComponent],
 			providers:    [
 				DialogService,
 				MessagePopupService]
@@ -129,14 +105,11 @@ describe('Abstract Listbox', () => {
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(AbstractListboxTestComponent);
-		fixture.detectChanges();
-
-		fixtureMultiple = TestBed.createComponent(AbstractMultipleListboxTestComponent);
-		fixtureMultiple.detectChanges();
+		// TODO-temporally disabled : to avoid showing the simple selection listbox fixture = TestBed.createComponent(AbstractListboxTestComponent);
+		// TODO-temporally disabled : to avoid showing the simple selection listbox fixture.detectChanges();
 	});
 
-	xit(' AbstractListboxTestComponent and AbstractMultipleListboxTestComponent should instantiate with default values', () => {
+	xit(' AbstractListboxTestComponent should instantiate with default values', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 
@@ -144,15 +117,6 @@ describe('Abstract Listbox', () => {
 			.toEqual('1');
 
 		expect(fixture.componentInstance.description)
-			.toEqual('Description 1');
-
-		expect(fixtureMultiple.componentInstance)
-			.toBeDefined();
-
-		expect(fixtureMultiple.componentInstance.id)
-			.toEqual('1');
-
-		expect(fixtureMultiple.componentInstance.description)
 			.toEqual('Description 1');
 
 	});
@@ -217,65 +181,10 @@ describe('Abstract Listbox', () => {
 					});
 			});
 	});
-
-	xit('should be NO possible to click on a row in a multiple selection list', (done) => {
-		fixtureMultiple.whenStable()
-			.then(() => {
-				clickOnGridCell(fixtureMultiple, 1);
-				fixtureMultiple.whenStable()
-					.then(() => {
-						expect(fixtureMultiple.componentInstance.selectedTestData)
-							.toBeUndefined();
-						done();
-					});
-			});
-	});
-
-	xit('should be possible to click on several rows in a multiple selection list', (done) => {
-		fixtureMultiple.whenStable()
-			.then(() => {
-				selectOnGridRow(fixtureMultiple, 0);
-				fixtureMultiple.whenStable()
-					.then(() => {
-						selectOnGridRow(fixtureMultiple, 1);
-						fixtureMultiple.whenStable()
-							.then(() => {
-								expect(fixtureMultiple.componentInstance.selectedTestDataList)
-									.toBeDefined();
-								// expect(fixtureMultiple.componentInstance.selectedTestDataList.length).toBe(2);
-								done();
-							});
-					});
-			});
-	});
-	it('should be possible to click on several rows in a multiple selection list', (done) => {
-		fixtureMultiple.whenStable()
-			.then(() => {
-				selectOnGridRow(fixtureMultiple, 0);
-				fixtureMultiple.whenStable()
-					.then(() => {
-						expect(fixtureMultiple.componentInstance.selectedTestDataList)
-							.toBeDefined();
-						// expect(fixtureMultiple.componentInstance.selectedTestDataList.length).toBe(2);
-						done();
-					});
-			});
-	});
 });
 
 function clickOnGridCell(fixture: ComponentFixture<AbstractListboxTestComponent>, cell: number) {
 	const gridCellArray = fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"]');
 	gridCellArray[cell].click();
-	fixture.detectChanges();
-}
-
-function selectOnGridRow(fixture: ComponentFixture<AbstractMultipleListboxTestComponent>, row: number) {
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('span[class="ag-selection-checkbox"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('span[class="slab-grid-checkbox"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('span[class="slab-grid-checkbox-unchecked"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('div[role="row"]');
-	// const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('div[class="ag-cell-wrapper"]');
-	const gridRowArray = fixture.debugElement.nativeElement.querySelectorAll('div[ref="eCellWrapper"]');
-	gridRowArray[row].click();
 	fixture.detectChanges();
 }
