@@ -1,0 +1,6 @@
+1 - It looks like the showcase is broken: 
+1.a) the no multiple selection list cannot be used as intended
+1.b) the "rowDragEnd" event is not emitted when using drag and drop
+
+2 - Now we can click on the value cell of a multiple selection list box. But this causes the "doClick" method to be invoked => 
+some conditions of the "onRowSelected" method are not longer possible => the code coverage in the unit testing cannot be increased
