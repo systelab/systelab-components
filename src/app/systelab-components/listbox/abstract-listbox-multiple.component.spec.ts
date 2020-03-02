@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -24,13 +24,15 @@ export class TestData {
 	selector: 'abstract-multiple-listbox-test',
 	template: `
                 <div class="position-relative" style="height: 200px;">
-                    <systelab-abstract-listbox-example (selectedItemChange)="doSelect($event)" [multipleSelection]="true"
+                    <systelab-abstract-listbox-example #multipleListBox (selectedItemChange)="doSelect($event)" [multipleSelection]="true"
                                                        (multipleSelectedItemListChange)="doMultipleSelect($event)">
                     </systelab-abstract-listbox-example>
                 </div>
 	          `
 })
 export class AbstractMultipleListboxTestComponent {
+
+	@ViewChild('multipleListBox', {static: false}) public multipleListBox: SystelabAbstractListboxComponent;
 
 	public id = '1';
 	public description = 'Description 1';
@@ -44,6 +46,10 @@ export class AbstractMultipleListboxTestComponent {
 
 	public doMultipleSelect(dataList: Array<TestData>): void {
 		this.selectedTestDataList = dataList;
+	}
+
+	public doCleanSelection() {
+		this.multipleListBox.cleanSelection();
 	}
 
 }
@@ -93,26 +99,55 @@ describe('Abstract Listbox (multiple selection)', () => {
 
 		expect(fixtureMultiple.componentInstance.description)
 			.toEqual('Description 1');
+		
+		expect(fixtureMultiple.componentInstance.multipleListBox.getAllFieldDescription()).toBe('All');
 
 	});
 
-	it(' AbstractMultipleListboxTestComponent should have an instantiate of AbstractListBox', () => {
+	it(' AbstractMultipleListboxTestComponent should have an instance of a multiple AbstractListBox', () => {
 
 		const systelabAbstractListComponentDEs = fixtureMultiple.debugElement.query(By.directive(SystelabAbstractListboxComponent));
 
 		expect(systelabAbstractListComponentDEs.componentInstance)
 			.toBeDefined();
+
+		expect(systelabAbstractListComponentDEs.componentInstance.multipleSelection)
+			.toBeTruthy();			
 	});
 
 	it(' should leave selectedItem as undefined when doClick is invoked and isDisabled is true', () => {
 		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
-
+		systelabAbstractListboxComponent.multipleSelection = true;
 		systelabAbstractListboxComponent.isDisabled = true;
-		const testData = new TestData('2', 'Description-2');
-		const row = {node: {data: testData}};
+		systelabAbstractListboxComponent.ngOnInit();
+
+		const testData = new TestData('2', 'Description 2');
+		const row = {node: {data: testData, selected: false, selectThisNode: (b: boolean) => {}}};
 		systelabAbstractListboxComponent.doClick(row);
 
-		expect(systelabAbstractListboxComponent.selectedItem)
+		expect(systelabAbstractListboxComponent.multipleSelectedItemList)
+			.toBeUndefined();
+	});
+
+	xit(' should clear the selected rows if cleanSelection is invoked [disabled because gridOptions.api is undefined and we dont know how to fix that]', () => {
+		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
+		systelabAbstractListboxComponent.multipleSelection = true;
+		systelabAbstractListboxComponent.ngOnInit();
+
+		const testData = new TestData('2', 'Description 2');
+		const row = {node: {data: testData, selected: false, selectThisNode: (b: boolean) => {}}};
+		const testData2 = new TestData('3', 'Description 3');
+		const row2 = {node: {data: testData2, selected: false, selectThisNode: (b: boolean) => {}}};
+
+		systelabAbstractListboxComponent.doClick(row);
+		systelabAbstractListboxComponent.doClick(row2);
+
+		expect(systelabAbstractListboxComponent.multipleSelectedItemList)
+			.toBeDefined();
+
+		systelabAbstractListboxComponent.cleanSelection();
+
+		expect(systelabAbstractListboxComponent.multipleSelectedItemList)
 			.toBeUndefined();
 	});
 
@@ -140,8 +175,54 @@ describe('Abstract Listbox (multiple selection)', () => {
 							.then(() => {
 								expect(fixtureMultiple.componentInstance.selectedTestDataList)
 									.toBeDefined();
-								// expect(fixtureMultiple.componentInstance.selectedTestDataList.length).toBe(2);
+								expect(fixtureMultiple.componentInstance.selectedTestDataList.length).toBe(2);
+								expect(fixtureMultiple.componentInstance.selectedTestDataList[0].id).toBe('1');
+								expect(fixtureMultiple.componentInstance.selectedTestDataList[0].description).toBe('Description 1');
+								expect(fixtureMultiple.componentInstance.selectedTestDataList[1].id).toBe('2');
+								expect(fixtureMultiple.componentInstance.selectedTestDataList[1].description).toBe('Description 2');								
 								done();
+							});
+					});
+			});
+	});
+
+	it('should be possible to unselect a row with two clicks in a multiple selection list', (done) => {
+		fixtureMultiple.whenStable()
+			.then(() => {
+				selectOnGridRow(fixtureMultiple, 0);
+				fixtureMultiple.whenStable()
+					.then(() => {
+						selectOnGridRow(fixtureMultiple, 0);
+						fixtureMultiple.whenStable()
+							.then(() => {
+								expect(fixtureMultiple.componentInstance.selectedTestDataList)
+									.toBeDefined();
+								expect(fixtureMultiple.componentInstance.selectedTestDataList.length).toBe(0);
+								done();
+							});
+					});
+			});
+	});
+
+	it('should be possible to click on several rows and then clear the selection in a multiple selection list', (done) => {
+		fixtureMultiple.whenStable()
+			.then(() => {
+				selectOnGridRow(fixtureMultiple, 0);
+				fixtureMultiple.whenStable()
+					.then(() => {
+						selectOnGridRow(fixtureMultiple, 1);
+						fixtureMultiple.whenStable()
+							.then(() => {
+								fixtureMultiple.componentInstance.multipleListBox.cleanSelection();
+								fixtureMultiple.whenStable()
+								.then(() => {								
+									fixtureMultiple.componentInstance.multipleListBox.gridOptions.api.forEachNode(node => {
+										if (node && node.id !== fixtureMultiple.componentInstance.multipleListBox.getAllFieldID()) {
+											expect(node.isSelected()).toBeFalsy();
+										}
+									});
+									done();
+								});
 							});
 					});
 			});

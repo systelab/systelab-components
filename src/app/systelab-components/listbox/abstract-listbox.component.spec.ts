@@ -105,11 +105,11 @@ describe('Abstract Listbox', () => {
 	}));
 
 	beforeEach(() => {
-		// TODO-temporally disabled : to avoid showing the simple selection listbox fixture = TestBed.createComponent(AbstractListboxTestComponent);
-		// TODO-temporally disabled : to avoid showing the simple selection listbox fixture.detectChanges();
+		fixture = TestBed.createComponent(AbstractListboxTestComponent);
+		fixture.detectChanges();
 	});
 
-	xit(' AbstractListboxTestComponent should instantiate with default values', () => {
+	it(' AbstractListboxTestComponent should instantiate with default values', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 
@@ -121,7 +121,7 @@ describe('Abstract Listbox', () => {
 
 	});
 
-	xit(' AbstractListboxTestComponent should have an instantiate of AbstractListBox', () => {
+	it(' AbstractListboxTestComponent should have an instantiate of AbstractListBox', () => {
 
 		const systelabAbstractListComponentDEs = fixture.debugElement.query(By.directive(SystelabAbstractListboxComponent));
 
@@ -129,11 +129,11 @@ describe('Abstract Listbox', () => {
 			.toBeDefined();
 	});
 
-	xit(' should inform selectedItem with the data passed to doClick when multiSelection and isDisabled have their default values', () => {
+	it(' should inform selectedItem with the data passed to doClick when multiSelection and isDisabled have their default values', () => {
 		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
 
 		const testData = new TestData('2', 'Description-2');
-		const row = {node: {data: testData}};
+		const row = {node: {data: testData, selectThisNode: (b: boolean) => {}}};
 		systelabAbstractListboxComponent.doClick(row);
 
 		expect(systelabAbstractListboxComponent.selectedItem.id)
@@ -143,19 +143,7 @@ describe('Abstract Listbox', () => {
 			.toEqual('Description-2');
 	});
 
-	xit(' should leave selectedItem as undefined when doClick is invoked and multiSelection is true', () => {
-		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
-
-		systelabAbstractListboxComponent.multipleSelection = true;
-		const testData = new TestData('2', 'Description-2');
-		const row = {node: {data: testData}};
-		systelabAbstractListboxComponent.doClick(row);
-
-		expect(systelabAbstractListboxComponent.selectedItem)
-			.toBeUndefined();
-	});
-
-	xit(' should leave selectedItem as undefined when doClick is invoked and isDisabled is true', () => {
+	it(' should leave selectedItem as undefined when doClick is invoked and isDisabled is true', () => {
 		const systelabAbstractListboxComponent = new SystelabAbstractListboxComponent();
 
 		systelabAbstractListboxComponent.isDisabled = true;
@@ -167,7 +155,7 @@ describe('Abstract Listbox', () => {
 			.toBeUndefined();
 	});
 
-	xit('should be possible to click on a row in a NOT multiple selection list', (done) => {
+	it('should be possible to click on a row in a NOT multiple selection list', (done) => {
 		fixture.whenStable()
 			.then(() => {
 				clickOnGridCell(fixture, 1);
