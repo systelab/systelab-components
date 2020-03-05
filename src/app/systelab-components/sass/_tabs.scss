@@ -3,19 +3,24 @@
   white-space: nowrap;
   overflow: visible;
   background-color: $background-secondary;
+
   &.hideTabBackground {
     background-color: white;
   }
+
   > .nav-item {
     background-color: $background-secondary;
     padding-top: 2 * $slab-tab-space;
     margin-right: $slab-tab-space;
+
     &.hideTabBackground {
       padding-top: 0;
     }
+
     > .nav-single-tab {
       min-width: $slab-tab-min-width;
     }
+
     > .nav-link {
       @include user-selection(none);
 
@@ -30,22 +35,31 @@
       text-align: center;
       border-radius: 4px 4px 0 0;
       cursor: pointer;
+
       &:hover {
         color: $background-primary;
         background-color: $primary;
         border-color: $primary;
         padding-bottom: 0;
       }
+
       &.active {
         color: black;
         background-color: $background-primary;
         border-top-color: $primary;
+
         &:hover {
           border-color: $primary $form-border $background-primary $form-border;
         }
       }
     }
   }
+}
+
+.slab-tabs-shrink {
+  min-width: 0px !important;
+  padding-left: 5px;
+  padding: 0 4px !important;
 }
 
 @-moz-document url-prefix() {
