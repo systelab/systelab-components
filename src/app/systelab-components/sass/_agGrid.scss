@@ -61,6 +61,10 @@ $icon-rowaction-font-size: 20px;
       background-color: $table-row-selected-background-color;
     }
 
+    &.ag-row-focus {
+     background-color: rgba(21, 143, 239, 0.08);
+    }
+
     &.ag-row-odd :not ag-row-selected {
       background-color: $table-row-odd-background-color;
     }
@@ -78,6 +82,10 @@ $icon-rowaction-font-size: 20px;
 
       &.ag-cell-last-left-pinned {
         border-right: 1px solid white;
+      }
+
+      &.ag-cell-focus {
+        border: 1px dashed rgba(21, 143, 239, 0.4);
       }
 
 

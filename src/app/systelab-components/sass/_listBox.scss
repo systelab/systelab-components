@@ -31,6 +31,10 @@
             background-color: $slab-selected-background-color;
           }
 
+          &.ag-row-focus {
+            background-color: rgba(21, 143, 239, 0.08);
+          }
+
           .ag-cell {
             border: none;
 
