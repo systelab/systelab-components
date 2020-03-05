@@ -42,7 +42,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     border-bottom-right-radius: 0 !important;
     float: left;
     width: calc(100% - #{$slab-combobox-button-width}) !important;
-    //border: 1px solid $medium-gray;
+    border: 1px solid $medium-gray;
     font-family: $slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
