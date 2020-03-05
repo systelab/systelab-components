@@ -239,7 +239,8 @@ body .ui-inputtext {
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
   &:focus {
-    box-shadow: 0 0 5px #1f89ce !important;
+    border-color: #8cc8f7 !important;
+    box-shadow: 0 0 0 3px rgba(21, 143, 239, 0.25) !important;
   }
 
 }

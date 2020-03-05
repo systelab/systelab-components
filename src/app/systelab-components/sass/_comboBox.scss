@@ -42,7 +42,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     border-bottom-right-radius: 0 !important;
     float: left;
     width: calc(100% - #{$slab-combobox-button-width}) !important;
-    border: 1px solid $medium-gray;
+    //border: 1px solid $medium-gray;
     font-family: $slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
@@ -53,10 +53,13 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     }
   }
 
-  input:focus {
-    outline: 0 none !important;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  .icon-caret-down {
+
+    &:focus {
+      border-color: #8cc8f7;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(21, 143, 239, 0.25);
+    }
   }
 
   .slab-color-container {

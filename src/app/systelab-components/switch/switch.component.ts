@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 @Component({
 	selector:    'systelab-switch',
@@ -15,6 +15,7 @@ export class SwitchComponent {
 		this.checked = val;
 		this.isCheckedChange.emit(this.checked);
 	}
+
 	@Output() public isCheckedChange = new EventEmitter();
 
 	@Input() public disabled = false;
@@ -23,6 +24,15 @@ export class SwitchComponent {
 	public onToggle() {
 		if (!this.disabled) {
 			this.isChecked = !this.isChecked;
+		}
+	}
+
+	public doKeyDown(event: KeyboardEvent) {
+		if (event.key === ' ') {
+			if (!this.disabled) {
+				this.isChecked = !this.isChecked;
+			}
+			event.preventDefault();
 		}
 	}
 }
