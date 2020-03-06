@@ -61,6 +61,14 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     }
   }
 
+  .combobox-input-renderer {
+    &:focus {
+      border-color: #8cc8f7;
+      outline: 0;
+      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    }
+  }
+
   .slab-color-container {
     border: solid 1px #d6d6d6;
     border-bottom-left-radius: 3px;
