@@ -8,7 +8,8 @@ import { TabComponent } from './tab.component';
                     <li class="nav-item" [class.hideTabBackground]="!showTabBackground" *ngFor="let tab of tabs"
                         (click)="doSelectTab(tab)">
                         <div class="nav-link nav-single-tab d-flex align-items-center justify-content-center"
-                             [class.active]="tab.active" [class.slab-tabs-shrink]="shrink" data-toggle="tab" role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}">
+                             [class.active]="tab.active" [class.slab-tabs-shrink]="shrink" data-toggle="tab" role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}"
+                             [tabindex]="paintFocus?0:-1" (keydown)="doKeyDown($event,tab)">
                             <span *ngIf="tab.titleHtml" [innerHTML]="tab.titleHtml" class="d-flex align-items-center"></span>
                             <span *ngIf="tab.title" class="d-flex align-items-center">{{tab.title}}</span>
                             <i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i>
@@ -26,7 +27,7 @@ import { TabComponent } from './tab.component';
           display: flex;
           flex-direction: column;
       }
-		
+
 
 	`]
 })
@@ -35,7 +36,9 @@ export class TabsComponent implements AfterContentInit {
 	@ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
 	@Input() public showTabBackground = true;
-	@Input() public shrink = true;
+	@Input() public shrink = false;
+	@Input() public paintFocus = false;
+
 	@Output() public select = new EventEmitter<string>();
 
 	public ngAfterContentInit() {
@@ -77,6 +80,15 @@ export class TabsComponent implements AfterContentInit {
 					t.active = false;
 					t.setVisible(false);
 				});
+		}
+	}
+
+	public doKeyDown(event: KeyboardEvent, tab: TabComponent) {
+		console.log(event.key);
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			this.deactivateAllTabs();
+			this.selectTab(tab);
 		}
 	}
 }
