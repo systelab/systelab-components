@@ -42,7 +42,6 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     border-bottom-right-radius: 0 !important;
     float: left;
     width: calc(100% - #{$slab-combobox-button-width}) !important;
-    border: 1px solid $medium-gray;
     font-family: $slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
@@ -58,7 +57,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     &:focus {
       border-color: #8cc8f7;
       outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(21, 143, 239, 0.25);
+      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
     }
   }
 
@@ -138,7 +137,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
               }
 
               &.ag-row-focus {
-                background-color: rgba(21, 143, 239, 0.08);
+                background-color: scale-color($primary, $alpha: -90%);
               }
 
               .ag-cell {

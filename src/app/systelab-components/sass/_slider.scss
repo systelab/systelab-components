@@ -27,7 +27,7 @@ $slab-slider-thumb-cursor: pointer;
   &:focus {
     border-color: #8cc8f7;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(21, 143, 239, 0.25);
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
     border-radius: $slab-slider-track-border-radius;
   }
 

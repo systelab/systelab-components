@@ -48,7 +48,7 @@ input[type="radio"]:checked + label:before {
 input[type="radio"]:focus + label:before {
   border-color: #8cc8f7;
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(21, 143, 239, 0.25);
+  box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
 }
 
 input[type="radio"]:disabled + label {

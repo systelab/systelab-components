@@ -62,7 +62,7 @@ $icon-rowaction-font-size: 20px;
     }
 
     &.ag-row-focus {
-     background-color: rgba(21, 143, 239, 0.08);
+     background-color: scale-color($primary, $alpha: -90%);
     }
 
     &.ag-row-odd :not ag-row-selected {
@@ -85,7 +85,7 @@ $icon-rowaction-font-size: 20px;
       }
 
       &.ag-cell-focus {
-        border: 1px dashed rgba(21, 143, 239, 0.4);
+        border: 1px dashed scale-color($primary, $alpha: -60%);
       }
 
 

@@ -32,7 +32,7 @@
           }
 
           &.ag-row-focus {
-            background-color: rgba(21, 143, 239, 0.08);
+            background-color: scale-color($primary, $alpha: -90%);
           }
 
           .ag-cell {
