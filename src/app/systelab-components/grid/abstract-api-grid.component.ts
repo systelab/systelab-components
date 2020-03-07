@@ -39,7 +39,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 				error => this.putPage([], 0, params));
 	}
 
-	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams) {
+	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {
 		this.gridOptions.api.hideOverlay();
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
@@ -47,7 +47,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 		}
 	}
 
-	public refresh() {
+	public refresh(): void {
 		this.gridOptions.api.setDatasource(this);
 	}
 }

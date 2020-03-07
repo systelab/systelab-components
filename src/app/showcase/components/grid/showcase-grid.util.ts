@@ -44,7 +44,7 @@ export class ShowcaseGridUtil {
 				headerComponentFramework: GridHeaderContextMenuComponent,
 				headerComponentParams:    {headerName: 'Flags', headerData: 'flags'}
 			}, {
-				colId:               'input',
+				colId:               'decimal-input',
 				headerName:          'Cell with Decimal Input',
 				field:               'decimalValue',
 				width:               200,

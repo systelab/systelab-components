@@ -1,5 +1,5 @@
 import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, GridOptions, RowNode } from 'ag-grid-community';
+import { ColDef, ColumnApi, GridOptions, RowNode } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -42,10 +42,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	protected firstSizeToFitExecuted = false;
 
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	                   protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
+	            protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
 	}
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 
 		this.gridOptions = this.getInitialGridOptions();
 
@@ -103,7 +103,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return event;
 	}
 
-	public doGridReady(event: any) {
+	public doGridReady(event: any): void {
 		this.loadColumnsStateFromPreferences();
 		this.firstSizeToFitExecuted = true;
 		this.gridOptions.api.sizeColumnsToFit();
@@ -112,13 +112,13 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		this.gridOptions.api.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
 	}
 
-	protected saveColumnsStateInPreferences() {
+	protected saveColumnsStateInPreferences(): void {
 		if (this.firstSizeToFitExecuted) {
 			this.gridColumnOptionsService.saveColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
 		}
 	}
 
-	protected loadColumnsStateFromPreferences() {
+	protected loadColumnsStateFromPreferences(): void {
 		this.gridColumnOptionsService.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
 	}
 
@@ -129,10 +129,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const colDefs: Array<any> = this.getColumnDefs();
 
 		if (this.menu && this.menu.length > 0) {
-			colDefs.unshift(this.gridColumnOptionsService.getContextMenuColumnDef());
+			colDefs.unshift(this.gridColumnOptionsService.getContextMenuColumnDef(this.getContextMenuColumnWidth()));
 		}
 		if (this.showChecks) {
-			colDefs.unshift(this.gridColumnOptionsService.getCheckColumnDef());
+			colDefs.unshift(this.gridColumnOptionsService.getCheckColumnDef(this.getCheckColumnWidth()));
 		}
 		colDefs.forEach((colDef: ColDef) => this.suppressColumnSizeToFit(colDef));
 
@@ -208,7 +208,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return true;
 	}
 
-	private suppressColumnSizeToFit(colDef: ColDef) {
+	private suppressColumnSizeToFit(colDef: ColDef): void {
 		if (colDef.width) {
 			colDef.suppressSizeToFit = true;
 		}
@@ -230,12 +230,13 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return selected.length > 0 ? selected[0] : null;
 	}
 
-	public selectRow(index: number) {
+	public selectRow(index: number): void {
 		this.gridOptions.api.ensureIndexVisible(index);
-		timer(300).subscribe(() => this.gridOptions.api.selectIndex(index, false, false));
+		timer(200)
+			.subscribe(() => this.gridOptions.api.selectIndex(index, false, false));
 	}
 
-	public doClick(event: any) {
+	public doClick(event: any): void {
 		if (event.column.colId === 'contextMenu') {
 			event.node.setSelected(true);
 		} else {
@@ -246,15 +247,15 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public doColumnResized(event: any) {
+	public doColumnResized(event: any): void {
 		this.saveColumnsStateInPreferences();
 	}
 
-	public doViewportChanged() {
+	public doViewportChanged(): void {
 		this.viewportChanged.emit();
 	}
 
-	public doGridSizeChanged(event: any) {
+	public doGridSizeChanged(event: any): void {
 		if (this.gridOptions.api) {
 			this.gridOptions.api.sizeColumnsToFit();
 		}
@@ -263,18 +264,26 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public showOptions(): void {
 		const parameters: GridColumnOptionsDialogParameters = GridColumnOptionsDialog.getParameters();
 
-		parameters.columnOptions = this.gridColumnOptionsService.getGridColumnOptions(this.gridOptions.columnApi, this.getColumnDefs());
+		parameters.columnOptions = this.getGridColumnOptions(this.gridOptions.columnApi, this.getColumnDefs());
 
 		this.dialogService.showDialog(GridColumnOptionsDialog, parameters)
 			.subscribe(
 				(columnsOptions: GridColumnsOptions) => {
 					if (columnsOptions) {
-						this.gridColumnOptionsService.applyGridColumnOptions(this.gridOptions.columnApi, columnsOptions);
+						this.applyGridColumnOptions(this.gridOptions.columnApi, columnsOptions);
 						this.gridOptions.api.sizeColumnsToFit();
 						this.saveColumnsStateInPreferences();
 					}
 				}
 			);
+	}
+
+	protected getGridColumnOptions(columnApi: ColumnApi, columnDefs: Array<any>): GridColumnsOptions {
+		return this.gridColumnOptionsService.getGridColumnOptions(columnApi, columnDefs);
+	}
+
+	protected applyGridColumnOptions(columnApi: ColumnApi, columnOptions: GridColumnsOptions): void {
+		this.gridColumnOptionsService.applyGridColumnOptions(columnApi, columnOptions);
 	}
 
 	private getCheckboxUnchecked(): string {
@@ -285,7 +294,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return `<span class='slab-grid-checkbox'/>`;
 	}
 
-	public dotsClicked(rowIndex: number, data: T | Array<T>, event: MouseEvent) {
+	public dotsClicked(rowIndex: number, data: T | Array<T>, event: MouseEvent): void {
 		this.popupmenu.setActionManager(this);
 		this.popupmenu.setRowIndex(rowIndex);
 		if (this.existsAtLeastOneActionEnabled(data)) {
@@ -303,7 +312,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	private isMenuOptionEnabled(menuOption: GridContextMenuOption<T>, data: T | Array<T>) {
+	private isMenuOptionEnabled(menuOption: GridContextMenuOption<T>, data: T | Array<T>): boolean {
 		if (menuOption.isActionEnabled) {
 			return menuOption.isActionEnabled.apply(null, [data]);
 		} else {
@@ -311,8 +320,15 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public onRowDragEnd(event: any) {
+	public onRowDragEnd(event: any): void {
 		this.rowDragEnd.emit(event);
 	}
 
+	protected getContextMenuColumnWidth(): number {
+		return 40;
+	}
+
+	protected getCheckColumnWidth(): number {
+		return 35;
+	}
 }

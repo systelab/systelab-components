@@ -20,7 +20,7 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 		this.data = params.data;
 	}
 
-	public dotsClicked(event: MouseEvent) {
+	public dotsClicked(event: MouseEvent): void {
 		let selectedRows: T | Array<T> = this.data;
 
 		if (event.ctrlKey) {

@@ -18,51 +18,31 @@ export class GridColumnOptionsService {
 
 	public getGridColumnOptions(columnApi: ColumnApi, columnDefs: Array<any>): GridColumnsOptions {
 
-		const options: GridColumnsOptions = new GridColumnsOptions();
+		const options = new GridColumnsOptions();
 
-		// initial & available
-		columnApi.getAllColumns()
-			.forEach((column) => {
-				const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false);
-				if (!columnApi.getColumn(column.getColDef().colId)
-					.isVisible()) {
-					options.available.push(item);
-				}
-				options.initialAvailableColumns.push(item);
-			});
+		options.available = columnApi.getAllColumns()
+			.filter(column => !columnApi.getColumn(column.getColDef().colId)
+				.isVisible())
+			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
-		// visible
-		columnApi.getAllDisplayedColumns()
-			.forEach((column) => {
-				if (column.getColId() !== 'contextMenu') {
-					const item: TwoListItem = new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true);
-					options.visible.push(item);
-				}
-			});
+		options.initialAvailableColumns = columnApi.getAllColumns()
+			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
-		// default columns
-		columnDefs
-			.forEach(column => {
-				if (!column.hide) {
-					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, true);
-					options.defaultVisibleColumns.push(item);
-				} else {
-					const item: TwoListItem = new TwoListItem(column.headerName, column.colId, false, false);
-					options.defaultHiddenColumns.push(item);
-				}
-			});
+		options.visible = columnApi.getAllDisplayedColumns()
+			.filter(column => column.getColId() !== 'contextMenu')
+			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true));
 
+		options.defaultVisibleColumns = columnDefs.filter(column => !column.hide)
+			.map(column => new TwoListItem(column.headerName, column.colId, false, true));
+
+		options.defaultHiddenColumns = columnDefs.filter(column => column.hide)
+			.map(column => new TwoListItem(column.headerName, column.colId, false, false));
 		return options;
-
 	}
 
-	public applyGridColumnOptions(columnApi: ColumnApi, columnOptions: GridColumnsOptions) {
+	public applyGridColumnOptions(columnApi: ColumnApi, columnOptions: GridColumnsOptions): void {
 
-		let numberOfFixedInitialColumns = 0;
-
-		if (columnApi.getColumn('contextMenu') !== null) {
-			numberOfFixedInitialColumns = 1;
-		}
+		const numberOfFixedInitialColumns = (columnApi.getColumn('contextMenu') !== null) ? 1 : 0;
 
 		columnOptions.visible.forEach((tlp, index) => {
 			const col: Column = columnApi.getAllColumns()
@@ -74,18 +54,18 @@ export class GridColumnOptionsService {
 		columnApi.getAllColumns()
 			.forEach((column) => {
 				if (column.getColId() !== 'contextMenu') {
-					if (!columnOptions.visible.find(tlp => tlp.colId === column.getColDef().colId)) {
+					if (!columnOptions.visible.some(tlp => tlp.colId === column.getColDef().colId)) {
 						columnApi.setColumnVisible(column.getColId(), false);
 					}
 				}
 			});
 	}
 
-	public saveColumnsState(prefix: string, columnApi: ColumnApi) {
+	public saveColumnsState(prefix: string, columnApi: ColumnApi): void {
 		this.preferencesService.put(prefix, columnApi.getColumnState());
 	}
 
-	public loadColumnsState(prefix: string, columnApi: ColumnApi) {
+	public loadColumnsState(prefix: string, columnApi: ColumnApi): void {
 
 		if (this.preferencesService.get(prefix)) {
 
@@ -98,54 +78,47 @@ export class GridColumnOptionsService {
 
 			// Show new added columns
 			columnApi.getAllColumns()
-				.forEach((column) => {
-					if (!filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId())) {
+				.filter(column => !filteredGridOptionsPreferences.some(colPref => colPref.colId === column.getColId()))
+				.forEach(column => {
+					const newColumn: any = {
+						'colId':         column.getColId(),
+						'hide':          !column.isVisible(),
+						'aggFunc':       null,
+						'width':         column.getActualWidth(),
+						'pivotIndex':    null,
+						'pinned':        null,
+						'rowGroupIndex': null
+					};
 
-						const newColumn: any = {
-							'colId':         column.getColId(),
-							'hide':          !column.isVisible(),
-							'aggFunc':       null,
-							'width':         column.getActualWidth(),
-							'pivotIndex':    null,
-							'pinned':        null,
-							'rowGroupIndex': null
-						};
-
-						if (column.getColId() === GridColumnOptionsService.contextMenuColId || column.getColId() === GridColumnOptionsService.selectionColId) {
-							filteredGridOptionsPreferences.unshift(newColumn);
-						} else {
-							filteredGridOptionsPreferences.push(newColumn);
-						}
+					if (column.getColId() === GridColumnOptionsService.contextMenuColId || column.getColId() === GridColumnOptionsService.selectionColId) {
+						filteredGridOptionsPreferences.unshift(newColumn);
+					} else {
+						filteredGridOptionsPreferences.push(newColumn);
 					}
 				});
 
-			// Set to null width of preferences of columns without supressSizeToFit
-			// If not set to null these columns are not sizedtofit
-			columnApi.getAllColumns()
-				.forEach((column) => {
-					if (!column.getColDef().suppressSizeToFit) {
-						const columnPref: any = filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId());
-						columnPref.width = null;
-					}
-				});
+			this.setColumnWidthToFitContent(columnApi, filteredGridOptionsPreferences);
 
 			columnApi.setColumnState(filteredGridOptionsPreferences);
 		}
 	}
 
-	public getContextMenuColumnWidth(): number {
-		return 40;
+	private setColumnWidthToFitContent(columnApi: ColumnApi, filteredGridOptionsPreferences: Array<any>) {
+		// Set to null width of preferences of columns without supressSizeToFit
+		// If not set to null these columns are not sizedtofit
+		columnApi.getAllColumns()
+			.filter(column => !column.getColDef().suppressSizeToFit)
+			.forEach(column => {
+				const columnPref: any = filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId());
+				columnPref.width = null;
+			});
 	}
 
-	public getCheckColumnWidth(): number {
-		return 35;
-	}
-
-	public getContextMenuColumnDef() {
+	public getContextMenuColumnDef(width: number) {
 		return {
 			colId:                 GridColumnOptionsService.contextMenuColId,
 			headerName:            '',
-			width:                 this.getContextMenuColumnWidth(),
+			width:                 width,
 			suppressSizeToFit:     true,
 			resizable:             false,
 			suppressMovable:       true,
@@ -153,12 +126,12 @@ export class GridColumnOptionsService {
 		};
 	}
 
-	public getCheckColumnDef() {
+	public getCheckColumnDef(width: number) {
 		return {
 			colId:             GridColumnOptionsService.selectionColId,
 			headerName:        '',
 			checkboxSelection: true,
-			width:             this.getCheckColumnWidth(),
+			width:             width,
 			suppressSizeToFit: true,
 			resizable:         false,
 			suppressMovable:   true

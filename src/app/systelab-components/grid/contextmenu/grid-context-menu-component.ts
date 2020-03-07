@@ -23,7 +23,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		this.actionHandler = actionHandler;
 	}
 
-	public setRowIndex(rowIndex: number) {
+	public setRowIndex(rowIndex: number): void {
 		this.elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString() + 'row' + rowIndex;
 	}
 

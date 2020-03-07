@@ -51,7 +51,7 @@ export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuCompon
 		return false;
 	}
 
-	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string) {
+	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
 		this.actionHandler.executeHeaderContextMenuAction(elementId, actionId, this.headerData);
 	}
 }
