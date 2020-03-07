@@ -27,6 +27,9 @@ import { TwoListSortableListComponent } from '../twolist/two-list-sortable-list.
 import { DataFilterPipe } from '../twolist/datafilter.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GridColumnOptionsDialog } from './options/grid-column-options-dialog.component';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
+import { GridColumnOptionsService } from './options/grid-column-options.service';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -40,6 +43,11 @@ export class TestData {
 export class SystelabGridComponent extends AbstractApiGrid<TestData> implements OnInit {
 
 	private totalItems = 10;
+
+	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	                   protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
+		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
+	}
 
 	public ngOnInit() {
 		super.ngOnInit();
