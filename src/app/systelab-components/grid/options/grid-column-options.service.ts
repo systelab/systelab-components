@@ -13,7 +13,7 @@ export class GridColumnOptionsService {
 	public static readonly contextMenuColId = 'contextMenu';
 	public static readonly selectionColId = 'selectCol';
 
-	constructor(private preferencesService: PreferencesService) {
+	constructor(private readonly preferencesService: PreferencesService) {
 	}
 
 	public getGridColumnOptions(columnApi: ColumnApi, columnDefs: Array<any>): GridColumnsOptions {

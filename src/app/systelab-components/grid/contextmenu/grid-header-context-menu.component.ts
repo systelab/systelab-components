@@ -38,6 +38,8 @@ export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuCompon
 	protected existsAtLeastOneActionEnabled(): boolean {
 		if (this.contextMenuOptions) {
 			return this.contextMenuOptions.some(option => this.isEnabled(this.elementID, option.actionId));
+		} else {
+			return false;
 		}
 	}
 

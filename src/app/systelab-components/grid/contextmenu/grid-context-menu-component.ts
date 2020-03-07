@@ -35,6 +35,8 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 	protected existsAtLeastOneActionEnabled(): boolean {
 		if (this.contextMenuOptions) {
 			return this.contextMenuOptions.some((menuOption: GridContextMenuOption<T>) => this.isEnabled(this.elementID, menuOption.actionId));
+		} else {
+			return false;
 		}
 	}
 
