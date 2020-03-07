@@ -2,40 +2,40 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-- '10'
+  - '10'
 
 addons:
   apt:
     update: true
     sources:
-    - google-chrome
+      - google-chrome
     packages:
-    - dpkg
+      - dpkg
   chrome: stable
 
 install:
-- npm install -g codecov
-- npm install -g codacy-coverage
-- npm install
-- npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
+  - npm install -g codecov
+  - npm install -g codacy-coverage
+  - npm install
+  - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
 
 before_script:
-- export CHROME_BIN=chromium-browser
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- cd node_modules/protractor
-- npm i webdriver-manager@latest --gecko=false
-- cd ../../
-- ./node_modules/protractor/bin/webdriver-manager update --gecko=false
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - cd node_modules/protractor
+  - npm i webdriver-manager@latest --gecko=false
+  - cd ../../
+  - ./node_modules/protractor/bin/webdriver-manager update --gecko=false
 
 script:
-- ng test --watch=false --code-coverage
-- npm run e2e
-- npm run build
+  - ng test --watch=false --code-coverage
+  - npm run e2e
+  - npm run build
 
 after_success:
-- cat coverage/lcov.info | codecov
-- cat ./coverage/lcov.info | codacy-coverage
+  - cat coverage/lcov.info | codecov
+  - cat ./coverage/lcov.info | codacy-coverage
 
 before_deploy: |
   if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
@@ -54,6 +54,7 @@ deploy:
   skip_cleanup: true
   provider: npm
   email: aserra@werfen.com
+  edge: true
   api_key: $NPM_TOKEN
   on:
     tags: true

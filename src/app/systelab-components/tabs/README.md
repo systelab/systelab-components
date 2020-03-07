@@ -43,6 +43,7 @@ For the tabs parent element:
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
 | showTabBackground | boolean | true | Set to true to use a background color. Otherwise is transparent |
+| shrink | boolean | false | Set to true to do not set a minimal width and to make the initial tab separation smaller |
 
 For each tab element:
 

@@ -79,6 +79,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { DialogService, MessagePopupService } from '../systelab-components/modal';
 import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
 import { TreeModule } from 'primeng/tree';
+import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
 
 @NgModule({
 	imports:         [
@@ -163,7 +164,8 @@ import { TreeModule } from 'primeng/tree';
 		ShowcaseListBoxComponent,
 		ShowcaseInnerTreeListBox,
 		ShowcaseAutocomplete,
-		ShowcasePaginatorComponent
+		ShowcasePaginatorComponent,
+		ShowcaseBarsGridComponent
 	],
 	entryComponents: [
 		ShowcaseTwoTabsDialog,
