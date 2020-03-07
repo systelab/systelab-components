@@ -2,8 +2,17 @@ import { OnInit } from '@angular/core';
 import { AbstractGrid } from './abstract-grid.component';
 import { Observable } from 'rxjs';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { DialogService } from '../modal';
+import { GridColumnOptionsService } from './options/grid-column-options.service';
 
 export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
+
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	            protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
+		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
+	}
 
 	protected getInitialGridOptions(): GridOptions {
 		const options = super.getInitialGridOptions();

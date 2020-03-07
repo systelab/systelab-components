@@ -19,6 +19,11 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input('contains') public searchForContain: boolean;
 	@Input() public searcher: AbstractSearcher<T>;
 
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	            protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
+		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
+	}
+
 	public ngOnInit(): void {
 		super.ngOnInit();
 		this.gridOptions.enableBrowserTooltips = true;

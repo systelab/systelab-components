@@ -41,7 +41,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected firstSizeToFitExecuted = false;
 
-	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 	                   protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
 	}
 
