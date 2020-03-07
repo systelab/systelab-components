@@ -3,7 +3,6 @@ import { DialogRef, ModalComponent, SystelabModalContext } from '../../modal';
 import { TwoListItem } from '../../twolist/two-list.component';
 import { GridColumnsOptions } from './grid-column-options';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
 export class GridColumnOptionsDialogParameters extends SystelabModalContext {
 	public width = 800;
@@ -19,12 +18,11 @@ export class GridColumnOptionsDialog implements ModalComponent<GridColumnOptions
 
 	public gridColumnOptionsDialogParameters: GridColumnOptionsDialogParameters;
 
-	public orderType = 'orderDateNumber';
 	public availableColumns: Array<TwoListItem> = [];
 	public visibleColumns: Array<TwoListItem> = [];
 	public initialAvailableColumns: Array<TwoListItem> = [];
 
-	constructor(public dialog: DialogRef<GridColumnOptionsDialogParameters>, protected i18nService: I18nService, protected preferencesService: PreferencesService) {
+	constructor(public dialog: DialogRef<GridColumnOptionsDialogParameters>, protected i18nService: I18nService) {
 		this.gridColumnOptionsDialogParameters = dialog.context;
 
 		this.availableColumns = this.gridColumnOptionsDialogParameters.columnOptions.available;
@@ -33,9 +31,9 @@ export class GridColumnOptionsDialog implements ModalComponent<GridColumnOptions
 	}
 
 	public submit(): void {
-		const tlp: GridColumnsOptions = new GridColumnsOptions();
-		tlp.visible = this.visibleColumns;
-		this.dialog.close(tlp);
+		const options = new GridColumnsOptions();
+		options.visible = this.visibleColumns;
+		this.dialog.close(options);
 	}
 
 	public close(): void {

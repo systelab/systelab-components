@@ -92,14 +92,9 @@ export class GridColumnOptionsService {
 			const gridOptionsPreferences: Array<any> = this.preferencesService.get(prefix);
 
 			// Filtered preferences columns that are not in the current columnDef.
-			const filteredGridOptionsPreferences: Array<any> = [];
-			gridOptionsPreferences
-				.forEach((colPref) => {
-					if (columnApi.getAllColumns()
-						.find((column: any) => colPref.colId === column.getColId())) {
-						filteredGridOptionsPreferences.push(colPref);
-					}
-				});
+			const filteredGridOptionsPreferences: Array<any> = gridOptionsPreferences
+				.filter(colPref => columnApi.getAllColumns()
+					.some(column => colPref.colId === column.getColId()));
 
 			// Show new added columns
 			columnApi.getAllColumns()
@@ -138,7 +133,7 @@ export class GridColumnOptionsService {
 		}
 	}
 
-	public  getContextMenuColumnWidth(): number {
+	public getContextMenuColumnWidth(): number {
 		return 40;
 	}
 

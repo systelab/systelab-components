@@ -8,8 +8,6 @@ import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { AbstractApiGrid } from './abstract-api-grid.component';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { DialogHeaderComponent, DialogService, MessagePopupService } from '../modal';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
@@ -28,9 +26,7 @@ import { TabComponent } from '../tabs/tab.component';
 import { TwoListSortableListComponent } from '../twolist/two-list-sortable-list.component';
 import { DataFilterPipe } from '../twolist/datafilter.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { GridColumnOptionsService } from './options/grid-column-options.service';
 import { GridColumnOptionsDialog } from './options/grid-column-options-dialog.component';
-
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -44,11 +40,6 @@ export class TestData {
 export class SystelabGridComponent extends AbstractApiGrid<TestData> implements OnInit {
 
 	private totalItems = 10;
-
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService,
-	            protected gridColumnOptionsService: GridColumnOptionsService) {
-		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
-	}
 
 	public ngOnInit() {
 		super.ngOnInit();
@@ -263,11 +254,13 @@ describe('Systelab Grid', () => {
 				const rows = clickOnOptionsButton(fixture);
 				fixture.whenStable()
 					.then(() => {
-						expect(isModalVisible(fixture)).toBeTruthy();
+						expect(isModalVisible(fixture))
+							.toBeTruthy();
 						clickCloseButton(fixture, 'ID_optionsSubmitButton');
 						fixture.whenStable()
 							.then(() => {
-								expect(isModalVisible(fixture)).toBeFalsy();
+								expect(isModalVisible(fixture))
+									.toBeFalsy();
 								done();
 							});
 					});
@@ -312,7 +305,6 @@ function clickOnOptionsButton(fixture: ComponentFixture<GridTestComponent>) {
 function isModalVisible(fixture: ComponentFixture<GridTestComponent>) {
 	return (document.querySelector('.cdk-overlay-pane') !== null);
 }
-
 
 function clickCloseButton(fixture: ComponentFixture<GridTestComponent>, buttonId: string) {
 	const button: any = document.querySelector('#' + buttonId);

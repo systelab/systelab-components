@@ -41,8 +41,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected firstSizeToFitExecuted = false;
 
-	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService,
-	                      protected gridColumnOptionsService: GridColumnOptionsService) {
+	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	                   protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
 	}
 
 	public ngOnInit() {

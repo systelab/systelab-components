@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { DialogService } from '../../../systelab-components/modal';
 import { AbstractApiGrid } from '../../../systelab-components/grid/abstract-api-grid.component';
 import { Observable, of } from 'rxjs';
 import { ShowcaseGridUtil } from './showcase-grid.util';
 import { ShowcaseData } from './showcase-grid.model';
-import { GridColumnOptionsService } from '../../../systelab-components/grid/options/grid-column-options.service';
 
 @Component({
 	selector:    'showcase-inner-api-grid',
@@ -16,11 +12,6 @@ import { GridColumnOptionsService } from '../../../systelab-components/grid/opti
 export class ShowcaseInnerApiGridComponent extends AbstractApiGrid<ShowcaseData> implements OnInit {
 
 	private totalItems = 10;
-
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService,
-	            protected gridColumnOptionsService: GridColumnOptionsService) {
-		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
-	}
 
 	public ngOnInit() {
 		super.ngOnInit();
