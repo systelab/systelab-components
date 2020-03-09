@@ -1,5 +1,5 @@
 <div #combobox class="dropdown slab-combobox d-flex w-100" [ngClass]="{'disabled': isDisabled}">
-    <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown" (click)="onComboClicked($event)">
+    <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text" class="slab-flex-1 form-control slab-combo-label slab-combo-input"
                [ngStyle]="getInputHeight()" [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle"
                [(ngModel)]="description" [disabled]="isDisabled" [style.color]="inputColor"/>
@@ -9,12 +9,12 @@
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description" [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
-        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button" class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"></button>
-        <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}" [style.color]="iconColor"></button>
+        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button" class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)" tabindex="-1"></button>
+        <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}" [style.color]="iconColor" tabindex="-1"></button>
         <button type="button" *ngIf="(withFavourites && id && !isTree) || (withFavourites && id && isTree && level)" #favouriteButton
                 class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
-                [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)"></button>
-        <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"></button>
+                [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
+        <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled" tabindex="-1"></button>
     </div>
 
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
@@ -34,23 +34,24 @@
                 <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid style="width: 100%; height: 100%;" [style.font-family]="fontFamily"
                                  [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [style.font-style]="fontStyle" class="ag-theme-fresh"
                                  [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)" (modelUpdated)="onModelUpdated()"
-                                 (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady($event)">
+                                 (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady($event)"
+                                 [suppressKeyboardEvent]="suppressKeyboardEvent" (cellKeyPress)="onCellKeyDown($event)">
                 </ag-grid-angular>
             </div>
         </div>
     </div>
 </div>
 
-<div class="position-absolute" *ngIf="listSelectedValues === true">
-    <ul class="ml-1 mt-2 pl-0" *ngIf="multipleSelection === true && multipleSelectedItemList.length < 8">
+<div *ngIf="listSelectedValues && multipleSelection">
+    <ul class="ml-1 mt-2 mb-0 pl-0" *ngIf="multipleSelectedItemList.length < 8">
         <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge" *ngFor="let item of multipleSelectedItemList"><span
                 class="float-left mr-2">{{item.description}}</span>
-            <button data-dismiss="badge" type="button" class="close" (click)="removeItem(item)" aria-label="Close">
+            <button data-dismiss="badge" type="button" class="close" (click)="removeItem(item)" aria-label="Close" tabindex="-1">
                 <span aria-hidden="true">&times;</span>
             </button>
         </li>
     </ul>
-    <ul class="ml-1 mt-2 pl-0" *ngIf="multipleSelection === true && multipleSelectedItemList.length > 7">
+    <ul class="ml-1 mt-2 pl-0" *ngIf="multipleSelectedItemList.length > 7">
         <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge">{{'COMMON_SELECTED_ITEMS' | translate | async }}
             <span class="badge badge-light">{{multipleSelectedItemList.length}}</span>
         </li>

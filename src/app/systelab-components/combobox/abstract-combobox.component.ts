@@ -11,6 +11,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public static ROW_HEIGHT: number;
 
+	@ViewChild('input',{static: false}) public input: ElementRef;
+
 	public comboId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
 	@Input() public customInputRenderer: any;
@@ -33,6 +35,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public iconClass: string;
 	@Input() public inputColor: string;
 	@Input() public iconColor: string;
+
+	public suppressKeyboardEvent;
 
 	public getAllFieldIDValue(): string | number {
 		return '0';
@@ -205,6 +209,15 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public ngOnInit() {
+		this.suppressKeyboardEvent = function(params) {
+			const KEY_TAB = 9;
+
+			const keysToSuppress = [KEY_TAB];
+			const event = params.event;
+			const key = event.which;
+			const suppress = keysToSuppress.indexOf(key) >= 0;
+			return suppress;
+		};
 		this.setRowHeight();
 
 		this.setStyle('font-family', this.fontFamily);
@@ -362,6 +375,16 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
+	public onComboKeydown(event: any) {
+		if (!this.isDropDownOpen()) {
+			this.isDropdownOpened = true;
+			this.showDropDown();
+		} else {
+			// close
+			this.checkMultipleSelectionClosed();
+		}
+	}
+
 	protected toggleFavourite(): void {
 		this.isFavourite = !this.isFavourite;
 		if (this.isFavourite) {
@@ -393,6 +416,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 		this.chRef.detectChanges();
 		this.checkMultipleSelectionClosed();
+		this.input.nativeElement.focus();
 	}
 
 	public resetDropDownPositionAndHeight() {
@@ -407,12 +431,32 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.isDropDownOpen()) {
 			this.setDropdownHeight();
 			this.setDropdownPosition();
+			this.transferFocusToGrid();
 			result = false;
 		}
 		if (result && this.isDropdownOpened) {
 			setTimeout(() => this.loop(), 10);
 		} else {
 			return;
+		}
+	}
+
+	private transferFocusToGrid(): void {
+		// scrolls to the first row
+		this.gridOptions.api.ensureIndexVisible(0);
+
+		// scrolls to the first column
+		const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
+		this.gridOptions.api.ensureColumnVisible(firstCol);
+
+		// sets focus into the first grid cell
+		this.gridOptions.api.setFocusedCell(0, firstCol);
+	}
+
+	public onCellKeyDown(e: any) {
+		if (e.event.key === 'Enter') {
+			this.gridOptions.api.selectNode(e.node);
+			e.event.preventDefault();
 		}
 	}
 

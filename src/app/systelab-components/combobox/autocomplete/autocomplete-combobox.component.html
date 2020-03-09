@@ -11,11 +11,12 @@
                [style.font-weight]="fontWeight"
                [style.font-style]="fontStyle"
                (keydown.Tab)="closeDropDown()"
+               (keydown.arrowDown)="onInputClicked($event)"
                 (click)="onInputClicked($event)"/>
         <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
-                [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)"></button>
+                [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
         <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
-                (click)="onComboClicked($event)"></button>
+                (click)="onComboClicked($event)" tabindex="-1"></button>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
         <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">
