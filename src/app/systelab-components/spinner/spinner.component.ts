@@ -8,6 +8,10 @@ import { TouchSpinValues } from './touch.spin-values';
 })
 export class TouchspinComponent {
 
+	private static readonly ARROW_DOWN = 40;
+
+	private static readonly ARROW_UP = 38;
+
 	@Input() public disabled = false;
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
@@ -125,17 +129,27 @@ export class TouchspinComponent {
 		}
 	}
 
-	public checkKey($event: KeyboardEvent): boolean {
-		if ($event.charCode >= 44 && $event.charCode <= 57 && $event.charCode !== 47) {
+	public doCheckKey(event: KeyboardEvent): boolean {
+		if (event.charCode >= 44 && event.charCode <= 57 && event.charCode !== 47) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public pushEnter(keyCode: number): void {
-		if (keyCode === 9 && this.isInGrid || keyCode === 13) {
-			this.checkValue(this.valueStr);
+	public doKeyDown(event: KeyboardEvent): void {
+		if (event.keyCode === TouchspinComponent.ARROW_UP) {
+			this.plus();
+			event.preventDefault();
+		} else {
+			if (event.keyCode === TouchspinComponent.ARROW_DOWN) {
+				this.minus();
+				event.preventDefault();
+			} else {
+				if (event.keyCode === 9 && this.isInGrid || event.keyCode === 13) {
+					this.checkValue(this.valueStr);
+				}
+			}
 		}
 	}
 
