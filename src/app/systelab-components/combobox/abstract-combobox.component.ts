@@ -11,7 +11,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public static ROW_HEIGHT: number;
 
-	@ViewChild('input',{static: false}) public input: ElementRef;
+	@ViewChild('input', {static: false}) public input: ElementRef;
 
 	public comboId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
@@ -209,14 +209,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public ngOnInit() {
-		this.suppressKeyboardEvent = function(params) {
+		this.suppressKeyboardEvent = (params) => {
 			const KEY_TAB = 9;
-
-			const keysToSuppress = [KEY_TAB];
-			const event = params.event;
-			const key = event.which;
-			const suppress = keysToSuppress.indexOf(key) >= 0;
-			return suppress;
+			return params.event.which === KEY_TAB;
 		};
 		this.setRowHeight();
 
