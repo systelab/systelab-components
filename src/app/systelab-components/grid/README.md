@@ -173,9 +173,8 @@ export class PatientGrid extends AbstractApiGrid<PatientData> {
   private totalItems=0;
 
   constructor(protected api: PatientApi,protected preferencesService: PreferencesService,
-    protected i18nService: I18nService, protected dialogService: DialogService,
-    protected gridColumnOptionsService: GridColumnOptionsService) {
-    super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
+    protected i18nService: I18nService, protected dialogService: DialogService) {
+    super(preferencesService, i18nService, dialogService);
   }
 
   protected getColumnDefs(): Array<any> {

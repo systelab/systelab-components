@@ -5,7 +5,6 @@ import { ShowcaseData } from './showcase-grid.model';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { DialogService } from '../../../systelab-components/modal';
-import { GridColumnOptionsService } from '../../../systelab-components/grid/options/grid-column-options.service';
 
 @Component({
 	selector:    'showcase-inner-grid',
@@ -15,8 +14,8 @@ import { GridColumnOptionsService } from '../../../systelab-components/grid/opti
 export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements OnInit {
 
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	            protected dialogService: DialogService, protected gridColumnOptionsService: GridColumnOptionsService) {
-		super(preferencesService, i18nService, dialogService, gridColumnOptionsService);
+	            protected dialogService: DialogService) {
+		super(preferencesService, i18nService, dialogService);
 	}
 
 	public ngOnInit() {
