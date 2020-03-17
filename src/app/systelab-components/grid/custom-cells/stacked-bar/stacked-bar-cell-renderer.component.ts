@@ -21,9 +21,6 @@ export class StackedBarCellRendererComponent implements AgRendererComponent {
 	public width: number;
 	public stackedBars: Array<IStackedBar> = [];
 
-	constructor() {
-	}
-
 	public agInit(params: any): void {
 		this.params = params;
 		if (params.data) {

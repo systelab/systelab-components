@@ -1,7 +1,11 @@
-import { AbstractGrid } from '../abstract-grid.component';
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
+
+export interface GridRowMenuActionHandler {
+	isContextMenuOptionEnabled(elementId: string, actionId: string): boolean;
+	executeContextMenuAction(elementId: string, actionId: string): void;
+}
 
 @Component({
 	selector:    'systelab-grid-context-menu',
@@ -9,17 +13,17 @@ import { GridContextMenuOption } from './grid-context-menu-option';
 })
 export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<GridContextMenuOption<T>> {
 
-	protected container: AbstractGrid<T>;
+	protected actionHandler: GridRowMenuActionHandler;
 
 	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
 	}
 
-	public setContainer(container: AbstractGrid<T>): void {
-		this.container = container;
+	public setActionManager(actionHandler: GridRowMenuActionHandler): void {
+		this.actionHandler = actionHandler;
 	}
 
-	public setRowIndex(rowIndex: number) {
+	public setRowIndex(rowIndex: number): void {
 		this.elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString() + 'row' + rowIndex;
 	}
 
@@ -31,6 +35,8 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 	protected existsAtLeastOneActionEnabled(): boolean {
 		if (this.contextMenuOptions) {
 			return this.contextMenuOptions.some((menuOption: GridContextMenuOption<T>) => this.isEnabled(this.elementID, menuOption.actionId));
+		} else {
+			return false;
 		}
 	}
 
@@ -39,7 +45,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 	}
 
 	protected isEnabled(elementId: string, actionId: string): boolean {
-		return this.container.isContextMenuOptionEnabled(elementId, actionId);
+		return this.actionHandler.isContextMenuOptionEnabled(elementId, actionId);
 	}
 
 	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
@@ -70,7 +76,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 			}
 
 			if (option && option.actionId !== null && option.actionId !== undefined) {
-				this.container.executeContextMenuAction(elementId, actionId);
+				this.actionHandler.executeContextMenuAction(elementId, actionId);
 			}
 		}
 	}
