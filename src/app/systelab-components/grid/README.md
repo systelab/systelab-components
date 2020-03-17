@@ -293,26 +293,13 @@ You will have the option to automatize a header column menu adding a headerCompo
 
 headerComponentFramework is a component of type GridHeaderContextMenuComponent, headerComponentParams needs two properties, headerName (string) and headerData (Object).
 
-You can define the options of the menu adding property headerMenu of type Array&lt;GridContextMenuOption&lt;Object&gt;&gt; in the template or overriding method getHeaderContextMenuOptions(): Array&lt;GridContextMenuOption&lt;Object&gt;&gt; in your grid component
+You can define the options of the menu adding property headerMenu of type Array&lt;GridContextMenuOption&lt;Object&gt;&gt; in the template
 
 ```
 <patient-grid #grid [headerMenu]="getHeaderMenu()" ...>
 ...
 </patient-grid>
 ```
-
-```
-protected getHeaderContextMenuOptions(): Array<GridContextMenuOption<string>> {
-    return [
-        new GridContextMenuOption('headeraction1', 'Header Action 1'),
-        new GridContextMenuOption('headeraction2', 'Header Action 2'),
-        new GridContextMenuOption('headeraction3', 'Header Action 3'),
-        new GridContextMenuOption('headeraction4', 'Header Action 4')
-    ];
-}
-```
-
-
 
 
 ## Properties

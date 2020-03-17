@@ -33,32 +33,24 @@ export abstract class AbstractSortableListComponent<T> {
 	}
 
 	public handleDragEnter(event) {
-		if (this.dragAndDropEnabled) {
-			return this.preventDefault(event);
-		} else {
-			return true;
-		}
+		return this.handleDrag(event);
 	}
 
 	public handleDragOver(event) {
-		if (this.dragAndDropEnabled) {
-			return this.preventDefault(event);
-		} else {
-			return true;
-		}
+		return this.handleDrag(event);
 	}
 
 	public handleDragLeave(event) {
+		return this.handleDrag(event);
+	}
+
+	private handleDrag(event): boolean {
 		if (this.dragAndDropEnabled) {
-			return this.preventDefault(event);
+			event.mouseEvent.preventDefault();
+			return false;
 		} else {
 			return true;
 		}
-	}
-
-	public preventDefault(event) {
-		event.mouseEvent.preventDefault();
-		return false;
 	}
 
 	protected selectElement(element: T, ev: KeyboardEvent) {

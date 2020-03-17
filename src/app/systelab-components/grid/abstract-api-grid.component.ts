@@ -1,30 +1,29 @@
 import { OnInit } from '@angular/core';
-import { DialogService } from '../modal/dialog/dialog.service';
 import { AbstractGrid } from './abstract-grid.component';
 import { Observable } from 'rxjs';
-import { IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { DialogService } from '../modal';
 
 export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
 
-	constructor(preferencesService: PreferencesService, i18nService: I18nService, dialogService: DialogService) {
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	            protected dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
-	public ngOnInit() {
-
-		super.ngOnInit();
-
-		this.gridOptions.rowModelType = 'infinite';
-		this.gridOptions.paginationPageSize = 50;
-		this.gridOptions.cacheBlockSize = 50;
-		this.gridOptions.cacheOverflowSize = 2;
-		this.gridOptions.maxConcurrentDatasourceRequests = 4;
-		this.gridOptions.maxBlocksInCache = 15;
-		this.gridOptions.infiniteInitialRowCount = 0;
-
-		this.gridOptions.datasource = this;
+	protected getInitialGridOptions(): GridOptions {
+		const options = super.getInitialGridOptions();
+		options.rowModelType = 'infinite';
+		options.paginationPageSize = 50;
+		options.cacheBlockSize = 50;
+		options.cacheOverflowSize = 2;
+		options.maxConcurrentDatasourceRequests = 4;
+		options.maxBlocksInCache = 15;
+		options.infiniteInitialRowCount = 0;
+		options.datasource = this;
+		return options;
 	}
 
 	public abstract getTotalItems(): number;
@@ -39,20 +38,15 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 				error => this.putPage([], 0, params));
 	}
 
-	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams) {
+	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {
 		this.gridOptions.api.hideOverlay();
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
 			this.gridOptions.api.showNoRowsOverlay();
-		} else {
-			if (this.forcedIndexSelection) {
-				this.gridOptions.api.selectIndex(this.forcedIndexSelection, false, false);
-				this.forcedIndexSelection = undefined;
-			}
 		}
 	}
 
-	public refresh() {
+	public refresh(): void {
 		this.gridOptions.api.setDatasource(this);
 	}
 }

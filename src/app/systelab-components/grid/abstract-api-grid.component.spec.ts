@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -8,9 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { AbstractApiGrid } from './abstract-api-grid.component';
-import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
-import { I18nService } from 'systelab-translate/lib/i18n.service';
-import { DialogService, MessagePopupService } from '../modal';
+import { DialogHeaderComponent, DialogService, MessagePopupService } from '../modal';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
@@ -20,6 +18,17 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './contextmenu/grid-header-context-menu.component';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
+import { TwoListComponent } from '../twolist/two-list.component';
+import { TabsComponent } from '../tabs/tabs.component';
+import { TabComponent } from '../tabs/tab.component';
+import { TwoListSortableListComponent } from '../twolist/two-list-sortable-list.component';
+import { DataFilterPipe } from '../twolist/datafilter.pipe';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GridColumnOptionsDialog } from './options/grid-column-options-dialog.component';
+import { I18nService } from 'systelab-translate/lib/i18n.service';
+import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -34,7 +43,8 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 
 	private totalItems = 10;
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected dialogService: DialogService) {
+	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	                   protected dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
@@ -77,9 +87,10 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 	selector: 'systelab-grid-test',
 	template: `
                 <div class="position-relative" style="height: 200px;">
-                    <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
+                    <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
                                    [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
                 </div>
+                <button type="button" class="btn" (click)="grid.showOptions()">Options</button>
 	          `
 })
 export class GridTestComponent {
@@ -107,7 +118,7 @@ export class GridTestComponent {
 		this.selectedOptionID = action.actionId;
 	}
 
-	public getHeaderContextMenuOptions(): Array<GridContextMenuOption<string>> {
+	public getHeaderMenu(): Array<GridContextMenuOption<string>> {
 		return [
 			new GridContextMenuOption('headeraction1', 'Header Action 1', (data) => this.doHeaderMenuAction(data)),
 			new GridContextMenuOption('headeraction2', 'Header Action 2'),
@@ -123,6 +134,7 @@ describe('Systelab Grid', () => {
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
+				DragDropModule,
 				OverlayModule,
 				ButtonModule,
 				HttpClientModule,
@@ -137,12 +149,24 @@ describe('Systelab Grid', () => {
 				GridContextMenuComponent,
 				ContextMenuItemComponent,
 				SystelabGridComponent,
-				GridTestComponent],
+				GridTestComponent,
+				GridColumnOptionsDialog,
+				DialogHeaderComponent,
+				DialogBottomComponent,
+				TwoListComponent,
+				TwoListSortableListComponent,
+				TabsComponent,
+				TabComponent,
+				DataFilterPipe],
 			providers:    [
 				DialogService,
 				MessagePopupService]
-		})
-			.compileComponents();
+		});
+		TestBed.overrideModule(BrowserDynamicTestingModule, {
+			set: {
+				entryComponents: [GridColumnOptionsDialog]
+			}
+		});
 	}));
 
 	beforeEach(() => {
@@ -163,7 +187,8 @@ describe('Systelab Grid', () => {
 	it('should have the right number of rows', (done) => {
 		fixture.whenStable()
 			.then(() => {
-				expect(getNumberOfRows(fixture)).toEqual(3);
+				expect(getNumberOfRows(fixture))
+					.toEqual(3);
 				done();
 			});
 	});
@@ -171,11 +196,13 @@ describe('Systelab Grid', () => {
 	it('should be possible to select a row', (done) => {
 		fixture.whenStable()
 			.then(() => {
-						const rows = clickOnGridCell(fixture, 5);
+				const rows = clickOnGridCell(fixture, 5);
 				fixture.whenStable()
 					.then(() => {
-						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 2');
-						expect(fixture.componentInstance.selectedTestData.field2).toEqual(2);
+						expect(fixture.componentInstance.selectedTestData.field1)
+							.toEqual('Data 2');
+						expect(fixture.componentInstance.selectedTestData.field2)
+							.toEqual(2);
 						done();
 					});
 			});
@@ -188,9 +215,12 @@ describe('Systelab Grid', () => {
 				fixture.whenStable()
 					.then(() => {
 						clickOption(fixture, 1);
-						expect(fixture.componentInstance.selectedOptionID).toEqual('action2');
-						expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 1');
-						expect(fixture.componentInstance.selectedTestData.field2).toEqual(1);
+						expect(fixture.componentInstance.selectedOptionID)
+							.toEqual('action2');
+						expect(fixture.componentInstance.selectedTestData.field1)
+							.toEqual('Data 1');
+						expect(fixture.componentInstance.selectedTestData.field2)
+							.toEqual(1);
 						done();
 					});
 			});
@@ -203,8 +233,43 @@ describe('Systelab Grid', () => {
 				fixture.whenStable()
 					.then(() => {
 						clickOption(fixture, 1);
-						expect(fixture.componentInstance.selectedOptionID).toEqual('headeraction2');
+						expect(fixture.componentInstance.selectedOptionID)
+							.toEqual('headeraction2');
 						done();
+					});
+			});
+	});
+
+	it('should be possible to select the options', (done) => {
+		fixture.whenStable()
+			.then(() => {
+				const rows = clickOnGridCell(fixture, 5);
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.selectedTestData.field1)
+							.toEqual('Data 2');
+						expect(fixture.componentInstance.selectedTestData.field2)
+							.toEqual(2);
+						done();
+					});
+			});
+	});
+
+	it('should be possible to show a modal with the columns', (done) => {
+		fixture.whenStable()
+			.then(() => {
+				const rows = clickOnOptionsButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						expect(isModalVisible(fixture))
+							.toBeTruthy();
+						clickCloseButton(fixture, 'ID_optionsSubmitButton');
+						fixture.whenStable()
+							.then(() => {
+								expect(isModalVisible(fixture))
+									.toBeFalsy();
+								done();
+							});
 					});
 			});
 	});
@@ -236,4 +301,20 @@ function clickOption(fixture: ComponentFixture<GridTestComponent>, option: numbe
 
 function getNumberOfColumns(fixture: ComponentFixture<GridTestComponent>) {
 	return fixture.debugElement.nativeElement.querySelectorAll('.ag-header-cell').length;
+}
+
+function clickOnOptionsButton(fixture: ComponentFixture<GridTestComponent>) {
+	const button = fixture.debugElement.query(By.css('.btn')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+}
+
+function isModalVisible(fixture: ComponentFixture<GridTestComponent>) {
+	return (document.querySelector('.cdk-overlay-pane') !== null);
+}
+
+function clickCloseButton(fixture: ComponentFixture<GridTestComponent>, buttonId: string) {
+	const button: any = document.querySelector('#' + buttonId);
+	button.click();
+	fixture.detectChanges();
 }
