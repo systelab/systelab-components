@@ -101,7 +101,8 @@ body .ui-datepicker {
   min-width: 420px;
   border: 1px solid $medium-gray;
   margin-top: 5px;
-  border-radius: 0;
+  border-radius: 4px;
+  overflow: hidden;
   padding: 0;
   width: auto;
   box-shadow: none;
@@ -239,7 +240,8 @@ body .ui-inputtext {
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
   &:focus {
-    box-shadow: 0 0 5px #1f89ce !important;
+    border-color: #8cc8f7 !important;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
   }
 
 }

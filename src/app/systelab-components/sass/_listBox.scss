@@ -31,6 +31,10 @@
             background-color: $slab-selected-background-color;
           }
 
+          &.ag-row-focus {
+            background-color: scale-color($primary, $alpha: -90%);
+          }
+
           .ag-cell {
             border: none;
 

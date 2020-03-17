@@ -6,8 +6,9 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   // Hide native checkbox
   input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
     @include position(absolute, $left: -9999px);
-    visibility: hidden;
+    opacity: 0;
   }
+
   // Styles for label after checkbox
   input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
 
@@ -52,6 +53,12 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   input[type="checkbox"]:not(.slab-checkbox-not-show):checked + label:before {
     content: '\F00d';
     background-color: $slab-checkbox-border-color;
+  }
+
+  input[type="checkbox"]:not(.slab-checkbox-not-show):focus + label:before {
+    border-color: #8cc8f7;
+    outline: 0;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
   }
 
   input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {

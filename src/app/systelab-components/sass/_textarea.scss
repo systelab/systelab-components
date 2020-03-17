@@ -1,3 +1,4 @@
+
 // Defines the width of the textarea when the w-* class is not present.
 $slab-textarea-default-width: 100% !default;
 // Defines the min-height of the textarea.
@@ -30,6 +31,12 @@ $slab-textarea-min-height: ceil(170px * $slab-size-percentage) !default;
     cursor: not-allowed;
     background-color: #f4f5f7 !important;
     color: #b6babe;
+  }
+
+  &:focus {
+    border-color: #8cc8f7;
+    outline: 0;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
   }
 }
 

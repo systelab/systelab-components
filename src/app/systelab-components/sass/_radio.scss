@@ -1,8 +1,7 @@
 // Hide native radio
 input[type="radio"]:not(:checked), input[type="radio"]:checked {
   @include position(absolute, $left: -9999px);
-
-  visibility: hidden;
+  opacity: 0;
 }
 
 // Styles for label after radio
@@ -44,6 +43,12 @@ input[type="radio"] + label {
 // Define background color and icon size when checked
 input[type="radio"]:checked + label:before {
   border: solid ($slab-radio-height / 3) $slab-radio-border-color;
+}
+
+input[type="radio"]:focus + label:before {
+  border-color: #8cc8f7;
+  outline: 0;
+  box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
 }
 
 input[type="radio"]:disabled + label {

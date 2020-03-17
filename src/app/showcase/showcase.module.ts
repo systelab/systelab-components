@@ -80,9 +80,11 @@ import { DialogService, MessagePopupService } from '../systelab-components/modal
 import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
 import { TreeModule } from 'primeng/tree';
 import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
 	imports:         [
+		A11yModule,
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
