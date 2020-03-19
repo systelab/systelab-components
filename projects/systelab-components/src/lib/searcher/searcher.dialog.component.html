@@ -1,0 +1,41 @@
+<systelab-dialog-header [withClose]="showClose || multipleSelection" (close)="close()">{{titleForDialog}}
+</systelab-dialog-header>
+
+<div (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
+     class="slab-flex-1 p-2 d-flex flex-column flex-nowrap slab-searcher-dialog-container">
+
+    <form class="form-inline">
+        <div class="input-group ml-auto">
+            <input type="text" class="form-control" #valueToSearch id="valueToSearch"
+                   (keyup)="refreshSearch()"
+                   [attr.placeholder]="getPlaceHolder()"
+                   [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
+
+            <div class="input-group-append">
+                <button type="button" class="btn btn-sm pt-0 pb-0 square dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" [ngClass]="{'font-weight-bold': !searchByContains}" (click)="searchByContains=false;">{{ 'COMMON_STARTS_WITH' | translate |
+						async}}</a>
+                    <a class="dropdown-item" [ngClass]="{'font-weight-bold': searchByContains}" (click)="searchByContains=true">{{ 'COMMON_CONTAINS' |
+						translate | async}}</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="slab-flex-1 mt-2 d-flex slab-table-container">
+        <systelab-internal-searcher-table class="slab-flex-1 position-relative" name="searcherTable"
+                                          [contains]="searchByContains"
+                                          [showChecks]="multipleSelection"
+                                          [multipleSelection]="multipleSelection"
+                                          [valueForSearch]="searchingValue"
+                                          [searcher]="parameters.searcher"
+                                          (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
+    </div>
+</div>
+<systelab-dialog-bottom *ngIf="multipleSelection">
+    <button type="button" class="btn ml-auto" (click)="submit()"> {{ 'COMMON_OK' | translate | async }}</button>
+</systelab-dialog-bottom>
