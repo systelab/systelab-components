@@ -3,35 +3,31 @@ dist: trusty
 language: node_js
 node_js:
   - '10'
-
 addons:
-  apt:
-    update: true
-    sources:
-      - google-chrome
-    packages:
-      - dpkg
   chrome: stable
 
-install:
-  - npm install -g codecov
-  - npm install -g codacy-coverage
-  - npm install
-  - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
-
-before_script:
+before_install:
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+
+install:
+  - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
+  - npm install -g codecov
+  - npm install -g codacy-coverage
+  - npm install
+
+before_script:
   - cd node_modules/protractor
   - npm i webdriver-manager@latest --gecko=false
   - cd ../../
   - ./node_modules/protractor/bin/webdriver-manager update --gecko=false
 
 script:
+  - npm run build-lib
+  - npm run build-showcase
   - ng test --watch=false --code-coverage
   - npm run e2e
-  - npm run build
 
 after_success:
   - cat coverage/lcov.info | codecov
@@ -41,7 +37,7 @@ before_deploy: |
   if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git clone https://github.com/systelab/systelab.github.io.git
     rm -rf systelab.github.io/components/*
-    cp -r dist/* systelab.github.io/components
+    cp -r dist/systelab-components/* systelab.github.io/components
     sed -i -e "s~base href=\"/\"~base href=\"/components/\"~g" ./systelab.github.io/components/index.html
     cd systelab.github.io
     git add .

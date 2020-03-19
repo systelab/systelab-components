@@ -7,7 +7,9 @@
     "start": "ng serve",
     "build-showcase": "ng build showcase --prod",
     "build-lib": "ng build systelab-components --prod",
-    "postbuild-lib": "cp -r ./projects/systelab-components/src/lib/sass ./dist/systelab-components/sass",
+    "postbuild-lib": "npm run copytemplates && npm run copysass",
+    "copytemplates": "gulp copytemplates",
+    "copysass": "gulp copysass",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e --no-webdriver-update",
@@ -70,6 +72,7 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.7.5"
+    "typescript": "~3.7.5",
+    "gulp": "^3.9.1"
   }
 }

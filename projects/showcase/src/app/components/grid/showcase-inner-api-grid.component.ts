@@ -6,7 +6,7 @@ import { ShowcaseData } from './showcase-grid.model';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
 import { DialogService } from 'systelab-components';
-import { GridContextMenuOption } from '../../../../../systelab-components/src/lib/grid/contextmenu/grid-context-menu-option';
+import { GridContextMenuOption } from 'systelab-components';
 
 @Component({
 	selector:    'showcase-inner-api-grid',
