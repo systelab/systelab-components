@@ -101,9 +101,9 @@ body .ui-datepicker {
   min-width: 420px;
   border: 1px solid $medium-gray;
   margin-top: 5px;
-  border-radius: 4px;
+  border-radius: 4px !important;
   overflow: hidden;
-  padding: 0;
+  padding: 0 !important;
   width: auto;
   box-shadow: none;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;

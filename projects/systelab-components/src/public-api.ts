@@ -61,6 +61,8 @@ export * from './lib/week-selector/week-selector.component';
 export * from './lib/month-selector/month-selector.component';
 export * from './lib/signature-canvas/signature-canvas.component';
 export * from './lib/percentage-circle/percentage-circle.component';
+export * from './lib/combobox/abstract-combobox.component';
+export * from './lib/combobox/abstract-api-combobox.component';
 export * from './lib/combobox/autocomplete/autocomplete-api-combobox.component';
 export * from './lib/combobox/renderer/combobox-favourite-renderer.component';
 export * from './lib/combobox/renderer/combobox-input-renderer.component';
