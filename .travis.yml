@@ -26,7 +26,7 @@ before_script:
 script:
   - npm run build-lib
   - npm run build-showcase
-  - ng test --watch=false --code-coverage
+  - ng test systelab-components --watch=false --code-coverage
   - npm run e2e
 
 after_success:
