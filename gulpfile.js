@@ -25,3 +25,10 @@ gulp.task('copysass', function() {
 		'./projects/systelab-components/src/lib/sass/**/*.scss'])
 		.pipe(gulp.dest('./dist/systelab-components/sass'));
 });
+
+gulp.task('copyicons', function() {
+	gulp.src([
+		'./icons/*'])
+		.pipe(gulp.dest('./dist/systelab-components/icons'));
+});
+
