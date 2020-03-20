@@ -7,7 +7,7 @@ import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { GridContextMenuComponent, GridRowMenuActionHandler } from './contextmenu/grid-context-menu-component';
-import { timer } from 'rxjs/index';
+import { timer } from 'rxjs';
 import { GridColumnsOptions } from './options/grid-column-options';
 import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './options/grid-column-options-dialog.component';
 import { GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';

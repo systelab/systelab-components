@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { IDatasource, IGetRowsParams } from 'ag-grid-community';
-import { Observable } from 'rxjs/index';
+import { Observable } from 'rxjs';
 import { AbstractListBox } from './abstract-listbox.component';
 
 export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implements IDatasource, OnInit {
