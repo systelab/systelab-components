@@ -55,8 +55,8 @@ NgModule({
         DragDropModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
-        SystelabLoginModule.forRoot(),
-        SystelabComponentsModule.forRoot(),
+        SystelabLoginModule,
+        SystelabComponentsModule,
         AgGridModule.withComponents([
             GridContextMenuCellRendererComponent,
             GridHeaderContextMenuComponent

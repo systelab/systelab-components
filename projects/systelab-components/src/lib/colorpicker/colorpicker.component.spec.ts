@@ -19,11 +19,11 @@ import { StylesUtilService } from '../utilities/styles.util.service';
 import { ColorUtilService } from '../utilities/color.util.service';
 import { LoadingService } from '../loading/loading.service';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'primeng/shared';
 import { SliderModule } from 'primeng/slider';
 import { AngularSplitModule } from 'angular-split';
 import { CalendarModule } from 'primeng/calendar';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { SharedModule } from 'primeng';
 
 @Component({
 	selector: 'systelab-colorpicker-test',

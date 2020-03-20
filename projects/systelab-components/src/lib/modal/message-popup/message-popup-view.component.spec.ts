@@ -6,9 +6,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupViewComponent, MessagePopupViewContext } from './message-popup-view.component';
-import { DialogRef, MessagePopupButton } from '..';
 import { SystelabComponentsModule } from '../../systelab-components.module';
 import { MessageWithIconComponent } from './message-with-icon.component';
+import { DialogRef } from '../dialog/dialog-ref';
+import { MessagePopupButton } from './message-popup.service';
 
 
 describe('Systelab MessagePopupViewComponent', () => {

@@ -12,8 +12,8 @@ import { DialogService } from './dialog.service';
 import { ModalComponent, SystelabModalContext } from './modal-context';
 import { DialogRef } from './dialog-ref';
 import { DialogBottomComponent } from '../bottom/dialog-bottom.component';
-import { DialogHeaderComponent } from '..';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { DialogHeaderComponent } from '../header/dialog-header.component';
 
 export class SampleDialogParameters extends SystelabModalContext {
 	public parameter1: number;
