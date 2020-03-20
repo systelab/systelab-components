@@ -4,7 +4,7 @@
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/**/*.e2e-spec.ts'
+	  './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
@@ -25,9 +25,9 @@ exports.config = {
 	browser.driver.manage().window().setSize(width, height);
 	browser.manage().timeouts().implicitlyWait(15000);
 
-    require('ts-node').register({
-      project: 'e2e/tsconfig.e2e.json'
-    });
+	  require('ts-node').register({
+		  project: require('path').join(__dirname, './tsconfig.json')
+	  });
 	  var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
 
 	  jasmine.getEnv().addReporter(new SpecReporter({

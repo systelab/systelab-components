@@ -73,6 +73,7 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "snapshot-testing": "^1.0.0"
   }
 }
