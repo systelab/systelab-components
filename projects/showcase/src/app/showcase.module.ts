@@ -169,22 +169,6 @@ import { A11yModule } from '@angular/cdk/a11y';
 		ShowcasePaginatorComponent,
 		ShowcaseBarsGridComponent
 	],
-	entryComponents: [
-		ShowcaseTwoTabsDialog,
-		ShowcaseLowerFlexDialog,
-		ShowcaseTwoColumnsDialog,
-		ShowcaseFullFlexDialog,
-		ShowcaseStandardDialog,
-		ShowcaseSplitDialog,
-		ShowcaseProgressBarDialog,
-		ShowcaseApplicationFrameDialog,
-		ShowcaseLoadingDialog,
-		ShowcaseTimelineDialog
-	],
-	providers:       [
-		DialogService,
-		MessagePopupService
-	],
 	bootstrap:       [ShowcaseComponent]
 })
 export class ShowcaseModule {

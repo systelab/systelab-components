@@ -80,7 +80,6 @@ describe('Systelab App Sidebar Small', () => {
 				ApplicationSidebarSmallComponent,
 				AppSidebarSmallTestComponent],
 			providers: [
-				DialogService,
 				TooltipDirective
 			]
 		})

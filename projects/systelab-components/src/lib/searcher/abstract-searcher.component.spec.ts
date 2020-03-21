@@ -175,15 +175,7 @@ describe('Systelab Searcher', () => {
 				SystelabSearcherComponent,
 				SearcherTestComponent,
 				GridContextMenuComponent,
-				SearcherTableComponent],
-			providers:    [
-				DialogService,
-				MessagePopupService]
-		});
-		TestBed.overrideModule(BrowserDynamicTestingModule, {
-			set: {
-				entryComponents: [SearcherDialog]
-			}
+				SearcherTableComponent]
 		});
 	}));
 

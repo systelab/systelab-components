@@ -45,11 +45,7 @@ describe('Systelab Chip Button', () => {
 				TreeModule,
 				SystelabTranslateModule,
 				HttpClientModule],
-			declarations: [ChipButtonComponent, ChipButtonTestComponent],
-			providers:    [
-				DialogService,
-				MessagePopupService
-			]
+			declarations: [ChipButtonComponent, ChipButtonTestComponent]
 
 		})
 			.compileComponents();

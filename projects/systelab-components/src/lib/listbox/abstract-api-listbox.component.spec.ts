@@ -100,10 +100,7 @@ describe('Systelab Listbox', () => {
 				GridHeaderContextMenuComponent,
 				ComboBoxInputRendererComponent,
 				SystelabListboxComponent,
-				ListboxTestComponent],
-			providers:    [
-				DialogService,
-				MessagePopupService]
+				ListboxTestComponent]
 		})
 			.compileComponents();
 	}));

@@ -46,7 +46,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
 
 After, you must import SystelabComponentsModule, as well as other libraries, in your Application Module:
 
-```javascript
+```typescript
 NgModule({
     imports: [
         BrowserModule,
@@ -64,20 +64,11 @@ NgModule({
     ...
 ```
 
-and add MessagePopupService and DialogService as providers.
-
-```javascript
-providers: [
-    MessagePopupService,
-    DialogService
-],
-```
-
 Finally, you must import the systelab-components sass file in the general styles file in src/styles.scss.
 
 In the following example, for the component AppComponent we are not setting styleUrl due to the component will use the styles defined in src/styles.scss.
 
-```javascript
+```typescript
 @Component({
     selector:      'app-root',
     templateUrl:   'app.component.html'

@@ -6,7 +6,8 @@
 
 # systelab-components
 
-Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components. Read the documentation at https://github.com/systelab/systelab-components/tree/master/src/app/systelab-components
+Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components. 
+Read the documentation at https://github.com/systelab/systelab-components/tree/master/projects/systelab-components
 
 ## Working with the repo
 
@@ -16,7 +17,8 @@ In order to clone the repository and test the library use the following commands
 git clone https://github.com/systelab/systelab-components.git
 cd systelab-components
 npm install
-ng serve (or npm run ng serve)
+npm build-lib
+ng serve
 ```
 
 This will bootstrap a showcase application to test the different components.
@@ -45,7 +47,8 @@ npm run update-snapshots
 In order to publish the library, an authorized npm user is required. Once set, update the version in the package.json, and run the npm publish script:
 
 ```bash
+npm build-lib
+cd dist/systelab-components
 npm publish
 ```
 
-Be careful because temporary folders will be created (build, css, html, widgets,...) and this files should be untracked as it is specified in the gitignore file.

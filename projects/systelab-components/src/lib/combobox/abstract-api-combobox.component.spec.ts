@@ -105,10 +105,7 @@ describe('Systelab Combobox', () => {
 				GridHeaderContextMenuComponent,
 				ComboBoxInputRendererComponent,
 				SystelabComboboxComponent,
-				ComboboxTestComponent],
-			providers:    [
-				DialogService,
-				MessagePopupService]
+				ComboboxTestComponent]
 		})
 			.compileComponents();
 	}));

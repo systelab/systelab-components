@@ -59,8 +59,7 @@ describe('Systelab Calendar Header', () => {
 				HttpClientModule],
 			declarations: [
 				CalendarHeaderComponent,
-				CalendarHeaderTestComponent],
-			providers: []
+				CalendarHeaderTestComponent]
 		})
 			.compileComponents();
 	}));

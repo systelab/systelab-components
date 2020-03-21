@@ -82,15 +82,7 @@ describe('Systelab Modal', () => {
 				ModalTestComponent,
 				SampleDialog,
 				DialogHeaderComponent,
-				DialogBottomComponent],
-			providers:    [
-				DialogService],
-		});
-
-		TestBed.overrideModule(BrowserDynamicTestingModule, {
-			set: {
-				entryComponents: [SampleDialog]
-			}
+				DialogBottomComponent]
 		});
 	}));
 

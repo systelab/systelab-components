@@ -159,15 +159,7 @@ describe('Systelab Grid', () => {
 				TwoListSortableListComponent,
 				TabsComponent,
 				TabComponent,
-				DataFilterPipe],
-			providers:    [
-				DialogService,
-				MessagePopupService]
-		});
-		TestBed.overrideModule(BrowserDynamicTestingModule, {
-			set: {
-				entryComponents: [GridColumnOptionsDialog]
-			}
+				DataFilterPipe]
 		});
 	}));
 

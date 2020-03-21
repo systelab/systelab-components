@@ -64,8 +64,7 @@ describe('Systelab ApplicationFrameComponent', () => {
 				ApplicationFrameComponent,
 				ApplicationFrameTestComponent],
 			providers: [
-				TooltipDirective,
-				DialogService
+				TooltipDirective
 			]
 		}).compileComponents();
 

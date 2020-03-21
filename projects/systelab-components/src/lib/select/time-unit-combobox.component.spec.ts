@@ -49,9 +49,7 @@ export class TimeUnitSelectTestComponent {
 		CommonModule,
 		FormsModule,
 		SystelabTranslateModule,
-		AgGridModule],
-	entryComponents: [],
-	providers:       []
+		AgGridModule]
 })
 class TestModule {
 }

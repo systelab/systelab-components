@@ -97,7 +97,6 @@ describe('Systelab App Sidebar Large', () => {
 				ApplicationSidebarLargeComponent,
 				AppSidebarLargeTestComponent],
 			providers: [
-				DialogService,
 				TooltipDirective
 			]
 		})

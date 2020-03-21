@@ -66,9 +66,6 @@ export class ColorpickerTestComponent {
 		AngularSplitModule,
 		SystelabTranslateModule,
 		AgGridModule],
-	entryComponents: [
-		ColorCellRendererComponent,
-	],
 	providers:       [
 		StylesUtilService,
 		ColorUtilService,

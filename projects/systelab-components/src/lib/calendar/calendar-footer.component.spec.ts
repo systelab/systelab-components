@@ -41,8 +41,7 @@ describe('Systelab Calendar Footer', () => {
 				HttpClientModule],
 			declarations: [
 				CalendarFooterComponent,
-				CalendarFooterTestComponent],
-			providers: []
+				CalendarFooterTestComponent]
 		})
 			.compileComponents();
 	}));

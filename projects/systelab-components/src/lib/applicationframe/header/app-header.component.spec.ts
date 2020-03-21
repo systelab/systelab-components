@@ -62,10 +62,7 @@ describe('Systelab App Header', () => {
 				HttpClientModule],
 			declarations: [
 				ApplicationHeaderComponent,
-				AppHeaderTestComponent],
-			providers: [
-				DialogService
-			]
+				AppHeaderTestComponent]
 		})
 			.compileComponents();
 	}));

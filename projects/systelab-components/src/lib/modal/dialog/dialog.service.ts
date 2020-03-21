@@ -5,7 +5,7 @@ import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { DialogRef } from './dialog-ref';
 import { SystelabModalContext } from './modal-context';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DialogService {
 
 	public static readonly breakpointMedium = 768;
@@ -48,7 +48,7 @@ export class DialogService {
 			if ((positionX + parameters.width) > screenWidth) {
 				positionX = screenWidth - parameters.width;
 				config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-right'];
-			} else if (positionX < 0 ) {
+			} else if (positionX < 0) {
 				positionX = parameters.positionX - (parameters.positionX / 2);
 				config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-left'];
 			}
@@ -56,8 +56,9 @@ export class DialogService {
 			positionX = ((positionX / screenWidth) * 100) + 5;
 
 			config.positionStrategy = this.overlay.position()
-				.global().left(positionX
-				.toString() + '%')
+				.global()
+				.left(positionX
+					.toString() + '%')
 				.top(positionY.toString() + 'px');
 		} else {
 			config.positionStrategy = this.overlay.position()
