@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import {AgRendererComponent} from 'ag-grid-angular';
 import {AbstractComboBox} from '../abstract-combobox.component';
 import {Observable} from 'rxjs';
@@ -16,6 +16,7 @@ export class ComboTreeNode<T> {
 	}
 }
 
+@Directive()
 export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboTreeNode<T>> implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static readonly FAVOURITEID = 'favourite';

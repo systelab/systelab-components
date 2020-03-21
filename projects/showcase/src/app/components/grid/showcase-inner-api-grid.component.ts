@@ -15,10 +15,6 @@ import { GridContextMenuOption } from 'systelab-components';
 })
 export class ShowcaseInnerApiGridComponent extends AbstractApiGrid<ShowcaseData> implements OnInit {
 
-	@Input() public menu: Array<GridContextMenuOption<ShowcaseData>>;
-	@Input() public headerMenu: Array<GridContextMenuOption<Object>>;
-	@Input() public multipleSelection = false;
-
 	private totalItems = 10;
 
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
@@ -7,6 +7,7 @@ import { PreferencesService } from 'systelab-preferences';
 
 declare var jQuery: any;
 
+@Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static ROW_HEIGHT = -1;

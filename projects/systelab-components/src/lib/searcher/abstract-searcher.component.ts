@@ -1,8 +1,9 @@
-import { EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SearcherDialog, SearcherDialogParameters } from './searcher.dialog.component';
 import { AbstractSearcher } from './abstract-searcher';
 import { DialogService } from '../modal/dialog/dialog.service';
 
+@Directive()
 export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	public searcherDialogParameters: SearcherDialogParameters<T>;

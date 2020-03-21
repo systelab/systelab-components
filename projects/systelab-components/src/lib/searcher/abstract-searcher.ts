@@ -1,7 +1,9 @@
 import { SearcherDialogParameters } from './searcher.dialog.component';
 import { Observable } from 'rxjs';
 import { RowNode } from 'ag-grid-community';
+import { Directive } from '@angular/core';
 
+@Directive()
 export abstract class AbstractSearcher<T> {
 
 	public id: number | string;

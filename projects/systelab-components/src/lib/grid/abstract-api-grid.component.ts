@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import { AbstractGrid } from './abstract-grid.component';
 import { Observable } from 'rxjs';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
@@ -6,6 +6,7 @@ import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
 import { DialogService } from '../modal/dialog/dialog.service';
 
+@Directive()
 export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
 
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,

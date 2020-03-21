@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractComboBox } from './abstract-combobox.component';
 import { Observable } from 'rxjs';
 import { PreferencesService } from 'systelab-preferences';
 
+@Directive()
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
 	public startsWith = '';

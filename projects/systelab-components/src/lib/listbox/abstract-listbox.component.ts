@@ -1,7 +1,8 @@
-import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ColDef, GridOptions } from 'ag-grid-community';
 
+@Directive()
 export abstract class AbstractListBox<T> implements OnInit {
 
 	public gridOptions: GridOptions;

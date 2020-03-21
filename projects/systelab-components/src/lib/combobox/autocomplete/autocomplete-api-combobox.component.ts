@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
@@ -7,6 +7,7 @@ import { PreferencesService } from 'systelab-preferences';
 
 declare var jQuery: any;
 
+@Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
 
 	public startsWith = '';

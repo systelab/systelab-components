@@ -1,7 +1,8 @@
-import { ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractContextComponent } from './abstract-context.component';
 import { ContextMenuOption } from './context-menu-option';
 
+@Directive()
 export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> {
 
 	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;

@@ -1,4 +1,4 @@
-import { AfterViewInit, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-listbox-renderer.component';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
@@ -16,6 +16,7 @@ export class TreeListBoxElement<T> {
 	}
 }
 
+@Directive()
 export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
 
 	public columnDefs: Array<any>;

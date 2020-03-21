@@ -1,7 +1,8 @@
-import { EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Tree } from 'primeng';
 import { TreeNode } from 'primeng';
 
+@Directive()
 export abstract class AbstractTree implements OnInit {
 
 	@ViewChild('expandingTree', {static: false}) protected currentTree: Tree;

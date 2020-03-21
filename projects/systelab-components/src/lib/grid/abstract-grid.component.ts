@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ColDef, Column, ColumnApi, GridOptions, RowNode } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
@@ -16,6 +16,7 @@ import { TwoListItem } from '../twolist/two-list.component';
 
 export type rowSelectionType = 'single' | 'multiple';
 
+@Directive()
 export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandler, GridHeaderMenuActionHandler {
 
 	public static readonly contextMenuColId = 'contextMenu';

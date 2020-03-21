@@ -1,7 +1,8 @@
-import {Input} from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {polyfill} from 'mobile-drag-drop';
 
+@Directive()
 export abstract class AbstractSortableListComponent<T> {
 
 	@Input() public elementsList: Array<T> = [];
