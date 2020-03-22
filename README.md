@@ -24,7 +24,15 @@ ng serve
 This will bootstrap a showcase application to test the different components.
 
 ## Test
-For testing purposes, the strategy chosen is Snapshot Testing.
+
+### Unit
+
+```bash
+ng test
+```
+
+### E2E
+For E2E testing purposes, the strategy chosen is Snapshot Testing.
 
 Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
 
@@ -52,3 +60,54 @@ cd dist/systelab-components
 npm publish
 ```
 
+# Breaking changes
+
+## Version 10
+Many changes where introduce in version 10 in order to standardize the library and support Angular 9.
+The following steps should be consider when migrating from version 9.
+
+1. When importing the module do not use .forRoot(); In WebStorm, replace in path:
+```
+- SystelabComponentsModule.forRoot\(\)
+- SystelabComponentsModule
+```
+2. When importing services and modules import them from systelab-components root. In WebStorm, replace in path:
+```
+- from 'systelab-components/lib.+ 
+- from 'systelab-components';
+```
+
+3. DialogService and MessagePopupServices are provided in root, so there is no need to provide them in any module. The option here is with WebStorm manually search for any of those services and remove them.
+
+
+4. entryComponents for Modals or Cell renderers will no longer be needed and could be a problem for future Angular versions. In WebStorm, try to replace in path with the following regular expression (second parameter is nothing):
+
+```
+- ,\n?entryComponents: [^\]]*
+- (blank)
+```
+
+Finally, update your package.json in order to add the peer dependencies:
+
+```
+"@fortawesome/fontawesome-free": "^5.6.3",
+"ag-grid-angular": "^23.0.0",
+"ag-grid-community": "^23.0.1",
+"angular-split": "^3.0.2",
+"bootstrap": "^4.3.1",
+"date-fns": "^1.29.0",
+"jquery": "^3.3.1",
+"mobile-drag-drop": "^2.3.0-rc.0",
+"nanobar": "^0.4.2",
+"popper.js": "^1.14.4",
+"primeicons": "^2.0.0",
+"primeng": "^9.0.0",
+"systelab-preferences": "^6.0.3",
+"systelab-translate": "^7.0.6",
+"pako": "^1.0.6",
+"@ngx-translate/core": "^12.1.1",
+"@ngx-translate/http-loader": "^4.0.0",
+"chart.js": "^2.9.3",
+"quill": "^1.3.7",
+"@fullcalendar/core": "^4.4.0"
+```
