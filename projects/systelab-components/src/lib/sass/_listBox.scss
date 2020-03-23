@@ -4,7 +4,10 @@
   padding: 0;
   border: none;
 
-  @include selection-checkbox;
+  .ag-theme-fresh .ag-header {
+    height: 0px !important;
+    min-height: 0px !important;
+  }
 
   .ag-theme-fresh .ag-root {
     border: none;

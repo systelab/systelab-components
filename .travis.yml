@@ -30,8 +30,8 @@ script:
   - npm run e2e
 
 after_success:
-  - cat coverage/lcov.info | codecov
-  - cat ./coverage/lcov.info | codacy-coverage
+  - cat coverage/systelab-components/lcov.info | codecov
+  - cat ./coverage/systelab-components/lcov.info | codacy-coverage
 
 before_deploy: |
   if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then

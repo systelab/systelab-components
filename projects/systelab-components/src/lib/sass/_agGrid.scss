@@ -88,12 +88,10 @@ $icon-rowaction-font-size: 20px;
         border: 1px dashed scale-color($primary, $alpha: -60%);
       }
 
-
       .ag-icon {
         visibility: hidden;
       }
 
-      @include selection-checkbox;
     }
 
     .ag-cell-inline-editing {
@@ -166,4 +164,3 @@ systelab-spinner-cell {
   top: 0;
   left: 0;
 }
-

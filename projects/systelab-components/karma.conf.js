@@ -16,7 +16,7 @@ module.exports = function(config) {
 			clearContext: false // leave Jasmine Spec Runner output visible in browser
 		},
 		coverageIstanbulReporter: {
-			dir: require('path').join(__dirname, 'coverage'), reports:               ['lcov'],
+			dir: require('path').join(__dirname, '../../coverage/systelab-components'), reports:               ['lcov'],
 			fixWebpackSourcePaths: true
 		},
 		angularCli:               {

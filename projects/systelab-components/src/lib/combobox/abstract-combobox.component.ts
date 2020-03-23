@@ -294,11 +294,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			this.gridOptions.rowSelection = 'single';
 		}
 
-		this.gridOptions.icons = {
-			checkboxUnchecked: this.getCheckboxUnchecked(),
-			checkboxChecked:   this.getCheckboxChecked()
-		};
-
 		this.gridOptions.getRowNodeId = (item) => item[this.getIdField()] ? item[this.getIdField()] : null;
 
 		this.configGridData();
@@ -756,14 +751,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.filterValue && this.filter === true) {
 			this.doFilter();
 		}
-	}
-
-	public getCheckboxUnchecked(): string {
-		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox-unchecked'/></div>`;
-	}
-
-	public getCheckboxChecked(): string {
-		return `<div style='display: inline-block; width: 15px'><span class='slab-grid-checkbox'/></div>`;
 	}
 
 }

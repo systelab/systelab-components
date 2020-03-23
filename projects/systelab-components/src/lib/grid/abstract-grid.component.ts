@@ -88,10 +88,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			options.headerHeight = 0;
 		}
 		if (this.showChecks) {
-			options.icons = {
-				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked()
-			};
 			if (this.multipleSelection) {
 				options.suppressRowClickSelection = true;
 			}
@@ -401,14 +397,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 					}
 				}
 			});
-	}
-
-	private getCheckboxUnchecked(): string {
-		return `<span class='slab-grid-checkbox-unchecked'/>`;
-	}
-
-	private getCheckboxChecked(): string {
-		return `<span class='slab-grid-checkbox'/>`;
 	}
 
 	public dotsClicked(rowIndex: number, data: T | Array<T>, event: MouseEvent): void {

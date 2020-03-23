@@ -131,7 +131,10 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
       background-color: white;
     }
 
-    @include selection-checkbox;
+    .ag-theme-fresh .ag-header {
+      height: 0px !important;
+      min-height: 0px !important;
+    }
 
     .ag-theme-fresh .ag-root {
       border: none;

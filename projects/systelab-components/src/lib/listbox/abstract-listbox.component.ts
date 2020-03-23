@@ -78,13 +78,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
 
 		if (this.multipleSelection && !this.hideChecks) {
-			this.gridOptions.suppressRowClickSelection = true;
-			this.gridOptions.icons = {
-				checkboxUnchecked: this.getCheckboxUnchecked(),
-				checkboxChecked:   this.getCheckboxChecked(),
-
-			};
-
+			this.gridOptions.suppressRowClickSelection = this.isDisabled;
 			this.gridOptions.rowClassRules = {
 				'ag-row-disabled': (params) => {
 					return this.isDisabled;
@@ -124,7 +118,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 			{
 				rowDrag: this.rowDrag,
 				colId:   this.getIdField(),
-				field:   this.getDescriptionField(),
+				field:   this.getDescriptionField()
 			}
 		];
 
@@ -139,14 +133,13 @@ export abstract class AbstractListBox<T> implements OnInit {
 				suppressMovable:   true
 			});
 		}
-
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
 
 		return colDefs;
 	}
 
 	protected getCheckColumnWidth(): number {
-		return 28;
+		return 32;
 	}
 
 	public getAllFieldID(): number | string {
@@ -189,49 +182,50 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	// overrides
 	public onRowSelected(event: any) {
-		if (!this.multipleSelection) {
-		} else if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
-			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
-				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-					return item[this.getIdField()] === event.node.data[this.getIdField()];
-				});
-				if (event.node.selected) {
-					if (elementIndexInSelectedList < 0) {
-						if (this.showAll) {
-							if (event.node.data[this.getIdField()] === this.getAllFieldID()) {
-								this.multipleSelectedItemList.push(event.node.data);
-								this.unselectAllNodes();
-							} else {
-								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-									return item[this.getIdField()] === this.getAllFieldID();
-								});
-								if (elementAllInSelectedList !== -1) {
-									this.unselectNodeAll();
-									this.multipleSelectedItemList = [];
+		if (this.multipleSelection) {
+			if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
+				if (this.multipleSelectedItemList) {
+					const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+						return item[this.getIdField()] === event.node.data[this.getIdField()];
+					});
+					if (event.node.selected) {
+						if (elementIndexInSelectedList < 0) {
+							if (this.showAll) {
+								if (event.node.data[this.getIdField()] === this.getAllFieldID()) {
+									this.multipleSelectedItemList.push(event.node.data);
+									this.unselectAllNodes();
+								} else {
+									const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
+										return item[this.getIdField()] === this.getAllFieldID();
+									});
+									if (elementAllInSelectedList !== -1) {
+										this.unselectNodeAll();
+										this.multipleSelectedItemList = [];
 
+									}
+									this.multipleSelectedItemList.push(event.node.data);
+									this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 								}
+							} else {
 								this.multipleSelectedItemList.push(event.node.data);
 								this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 							}
-						} else {
-							this.multipleSelectedItemList.push(event.node.data);
+						}
+					} else {
+						if (elementIndexInSelectedList !== -1) {
+							this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
 							this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 						}
 					}
 				} else {
-					if (elementIndexInSelectedList !== -1) {
-						this.multipleSelectedItemList.splice(elementIndexInSelectedList, 1);
+					if (this.showAll && (event.node.data[this.getIdField()] === this.getAllFieldID())) {
+						this.multipleSelectedItemList.push(event.node.data);
+						this.unselectAllNodes();
+					} else {
+						this.multipleSelectedItemList = [];
+						this.multipleSelectedItemList.push(event.node.data);
 						this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 					}
-				}
-			} else {
-				if (this.showAll && (event.node.data[this.getIdField()] === this.getAllFieldID())) {
-					this.multipleSelectedItemList.push(event.node.data);
-					this.unselectAllNodes();
-				} else {
-					this.multipleSelectedItemList = [];
-					this.multipleSelectedItemList.push(event.node.data);
-					this.multipleSelectedItemList = this.multipleSelectedItemList.slice();
 				}
 			}
 		}
@@ -244,6 +238,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected selectItemInGrid() {
+
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.forEachNode(node => {
 				if (this.multipleSelection) {
@@ -302,14 +297,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 				}
 			});
 		}
-	}
-
-	private getCheckboxUnchecked(): string {
-		return `<span class='slab-grid-checkbox-unchecked'/>`;
-	}
-
-	private getCheckboxChecked(): string {
-		return `<span class='slab-grid-checkbox'/>`;
 	}
 
 	public onRowDragEnd(event: any) {

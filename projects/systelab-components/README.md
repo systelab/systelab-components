@@ -107,7 +107,7 @@ To change the default Bootstrap or systelab-components settings like colors, bor
 
 ```sass
 $slab-size-percentage: 1;
-$primary-color: rgb(0, 154, 181);
+$primary: rgb(0, 154, 181);
 
 @import "systelab-components/sass/systelab-components";
 ```
