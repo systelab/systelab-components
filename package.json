@@ -12,7 +12,7 @@
     "copysass": "gulp copysass",
     "copyicons": "gulp copyicons",
     "copyreadme": "cp projects/systelab-components/README.md dist/systelab-components",
-    "test": "ng test --watch=false --code-coverage --browsers=ChromeHeadless",
+    "test": "ng test systelab-components --watch=false --code-coverage --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e --no-webdriver-update",
     "update-snapshots": "ng e2e --config ./projects/showcase/e2e/protractor-update-snapshot.conf.js"
