@@ -1,13 +1,15 @@
 /* This styles are used to override the default primeng styles for trees (https://www.primefaces.org/primeng/#/tree).*/
 
+
 body .ui-tree {
   width: 100%;
   height: 100%;
-  padding: 0;
+  padding: 0 !important;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
   .ui-tree-container {
-    padding: 0;
+    padding: 0 !important;
+
 
     .ui-treenode {
       padding: 0 !important;
@@ -15,8 +17,16 @@ body .ui-tree {
       .ui-treenode-content {
         padding-left: 5px;
         color: #222;
-        border: 0;
+        border: 0 !important;
         outline: none;
+
+        &:focus {
+          border-color: transparent !important;
+          border: 0 !important;
+          outline: 0 !important;
+          box-shadow: 0 0 0 0 transparent !important;
+          border-radius: 0px !important;
+        }
 
         span[class*='icon-angle-'] {
           font-weight: bold;
@@ -46,29 +56,29 @@ body .ui-tree {
           }
 
           &.ui-state-highlight {
-            background: $slab-selected-background-color;
-            color: rgb(34, 34, 34);
+            background: $slab-selected-background-color !important;
+            color: rgb(34, 34, 34) !important;
           }
 
           &:hover {
-            background: $slab-selected-background-color;
+            background: $slab-selected-background-color !important;
           }
 
         }
 
         &:hover {
-          background-color: $slab-selected-background-color;
+          background-color: $slab-selected-background-color !important;
         }
 
         &.ui-treenode-content-selected {
-          background: $slab-selected-background-color;
+          background: $slab-selected-background-color !important;
           color: rgb(34, 34, 34);
         }
 
         &.ui-treenode-selectable {
           .ui-treenode-label {
             &:not(.ui-state-highlight):hover {
-              background: $slab-selected-background-color;
+              background: $slab-selected-background-color !important;
             }
           }
         }

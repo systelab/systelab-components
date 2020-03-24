@@ -78,7 +78,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
 
 		if (this.multipleSelection && !this.hideChecks) {
-			this.gridOptions.suppressRowClickSelection = this.isDisabled;
+			this.gridOptions.suppressRowClickSelection = true;
 			this.gridOptions.rowClassRules = {
 				'ag-row-disabled': (params) => {
 					return this.isDisabled;
