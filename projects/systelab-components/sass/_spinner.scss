@@ -20,5 +20,10 @@
     text-align: center;
     height: $form-elements-height !important;
   }
+
+  .btn {
+    background-color: $dark;
+    color: white;
+  }
 }
 

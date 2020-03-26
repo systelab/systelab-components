@@ -29,7 +29,7 @@
             "karmaConfig": "projects/systelab-components/karma.conf.js",
             "styles": [
               "projects/showcase/src/styles.scss",
-              "icons/icomoon.css",
+              "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
@@ -86,7 +86,7 @@
             ],
             "styles": [
               "projects/showcase/src/styles.scss",
-              "icons/icomoon.css",
+              "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
@@ -163,7 +163,7 @@
             ],
             "styles": [
               "projects/showcase/src/styles.scss",
-              "icons/icomoon.css",
+              "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",

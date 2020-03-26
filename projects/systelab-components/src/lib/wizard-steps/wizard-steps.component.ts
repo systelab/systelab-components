@@ -8,8 +8,7 @@ export class WizardStep {
 
 @Component({
 	selector:    'systelab-wizard-steps',
-	templateUrl: './wizard-steps.component.html',
-	styleUrls:   ['./wizard-steps.component.scss']
+	templateUrl: './wizard-steps.component.html'
 })
 export class WizardStepsComponent {
 
