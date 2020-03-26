@@ -3,12 +3,12 @@
         <div class="slab-flex-1" [style.marginLeft.px]="(level*20)+1">
             <input type="checkbox" id="{{level}}-{{id}}" [(ngModel)]="params.data.selected"
                    [disabled]="params.isDisabled"
-                   (change)="changeValue($event)">
+                   (change)="changeValue()">
             <label for="{{level}}-{{id}}">{{description}}</label>
         </div>
     </div>
     <div *ngIf="!isMultipleSelection" class="d-flex slab-flex-1">
-        <div class="slab-flex-1" (click)="changeValue($event)" [style.marginLeft.px]="(level*20)+1">
+        <div class="slab-flex-1" (click)="changeValue()" [style.marginLeft.px]="(level*20)+1">
             <span>{{description}}</span>
         </div>
     </div>

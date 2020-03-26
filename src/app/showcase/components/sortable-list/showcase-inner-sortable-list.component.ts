@@ -33,7 +33,7 @@ export class ShowcaseInnerSortableListComponent extends AbstractSortableListComp
 		return 'isSelected';
 	}
 
-	public getIcon(): string {
+	public getIcon(element: ShowcaseSortableListData): string {
 		return 'icon-bug';
 	}
 }
