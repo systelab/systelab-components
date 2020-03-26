@@ -115,7 +115,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected saveColumnsStateInPreferences(): void {
 		if (this.firstSizeToFitExecuted) {
-			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
+			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi.getColumnState());
 		}
 	}
 
