@@ -40,11 +40,11 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		}
 	}
 
-	protected isIconEnabled(elementId: string, actionId: string): boolean {
+	public isIconEnabled(elementId: string, actionId: string): boolean {
 		return false;
 	}
 
-	protected isEnabled(elementId: string, actionId: string): boolean {
+	public isEnabled(elementId: string, actionId: string): boolean {
 		return this.actionHandler.isContextMenuOptionEnabled(elementId, actionId);
 	}
 

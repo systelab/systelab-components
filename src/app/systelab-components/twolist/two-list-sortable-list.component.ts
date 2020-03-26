@@ -26,7 +26,7 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 		return 'isSelected';
 	}
 
-	public getIcon(): string {
+	public getIcon(element: TwoListItem): string {
 		return '';
 	}
 

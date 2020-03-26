@@ -76,7 +76,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
 		this.goToPage(this.totalPages);
 	}
 
-	private goToPage(page: number) {
+	public goToPage(page: number) {
 		if (this.page !== page) {
 			this.page = page;
 			this.pageChange.emit(this.page);
