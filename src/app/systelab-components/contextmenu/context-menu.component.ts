@@ -26,12 +26,12 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		}
 	}
 
-	protected isEnabled(elementId: string, actionId: string): boolean {
+	public isEnabled(elementId: string, actionId: string): boolean {
 		const option: ContextMenuOption = this.getOption(actionId);
 		return (option && option.isActionEnabled) ? option.isActionEnabled(elementId, actionId) : true;
 	}
 
-	protected isIconEnabled(elementId: string, actionId: string): boolean {
+	public isIconEnabled(elementId: string, actionId: string): boolean {
 		const option: ContextMenuOption = this.getOption(actionId);
 		return (option && option.isIconEnabled) ? option.isIconEnabled(elementId, actionId) : true;
 	}

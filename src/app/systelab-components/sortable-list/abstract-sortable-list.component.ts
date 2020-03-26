@@ -66,7 +66,7 @@ export abstract class AbstractSortableListComponent<T> {
 		return this.elementsList.filter(element => element[this.getSelectionField(element)]);
 	}
 
-	protected removeElement(element: T, event: KeyboardEvent): void {
+	public removeElement(element: T, event: KeyboardEvent): void {
 		if (this.deleteWithSupr && event.keyCode === 46) {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
 		}
