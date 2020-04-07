@@ -5,6 +5,8 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 @if $slab-display-check {
   // Hide native checkbox
   input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
+    position: absolute;
+    left:  -9999px;
     opacity: 0;
   }
 
