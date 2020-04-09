@@ -117,30 +117,22 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	public getInputHeight() {
 		if (this.height) {
-			return { 'height': '100%' };
+			return {'height': '100%'};
 		}
 		return undefined;
 	}
 
 	public getLineHeight() {
 		if (this.height) {
-			return { 'line-height': this.height.toString() + 'px' };
+			return {'line-height': this.height.toString() + 'px'};
 		}
 		return undefined;
 	}
 
 	public openSearchDialog(): void {
-
-		if (this.multipleSelection && this.code) {
-			const listOfCodes = this.code.split(',');
-			const listOfDescriptions = this.description.split(';');
-			this.abstractSearcher.multipleSelectedItemList = [];
-			for (const iterCode of listOfCodes) {
-				const newElement: T = {} as T;
-				newElement[this.abstractSearcher.getCodeField()] = iterCode.trim();
-				newElement[this.abstractSearcher.getDescriptionField()] = listOfDescriptions[listOfCodes.indexOf(iterCode)];
-				this.abstractSearcher.multipleSelectedItemList.push(newElement);
-			}
+		let previousMultipleSelectionItemList: Array<T> = [];
+		if (this.multipleSelection && this._multipleSelectedItemList) {
+			previousMultipleSelectionItemList = [...this._multipleSelectedItemList];
 		}
 		this.searcherDialogParameters.widthRelative = '66%';
 		this.searcherDialogParameters.heightRelative = '66%';
@@ -148,13 +140,17 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 		this.dialogService.showDialog(SearcherDialog, this.searcherDialogParameters)
 			.subscribe(
 				(v: Array<T>) => {
-					if (!this.multipleSelection) {
-						this.id = (v && v[0]) ? v[0][this.abstractSearcher.getIdField()] : undefined;
-						this.description = (v && v[0]) ? v[0][this.abstractSearcher.getDescriptionField()] : undefined;
-						this.code = (v && v[0]) ? v[0][this.abstractSearcher.getCodeField()] : undefined;
-						this.upDateField(v ? v[0] : undefined);
+					if (v) {
+						if (!this.multipleSelection) {
+							this.id = (v && v[0]) ? v[0][this.abstractSearcher.getIdField()] : undefined;
+							this.description = (v && v[0]) ? v[0][this.abstractSearcher.getDescriptionField()] : undefined;
+							this.code = (v && v[0]) ? v[0][this.abstractSearcher.getCodeField()] : undefined;
+							this.upDateField(v ? v[0] : undefined);
+						}
+						this.multipleSelectedItemList = v ? v : new Array<T>();
+					} else if (this.multipleSelection) {
+						this.multipleSelectedItemList = [...previousMultipleSelectionItemList];
 					}
-					this.multipleSelectedItemList = v ? v : new Array<T>();
 				}
 			);
 	}
