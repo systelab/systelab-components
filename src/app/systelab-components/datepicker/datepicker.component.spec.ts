@@ -15,10 +15,12 @@ import { Datepicker } from './datepicker.component';
 @Component({
 	selector: 'systelab-datepicker-test',
 	template: `
-                <div>
-                    <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"></systelab-datepicker>
-                </div>
-	          `,
+                  <div>
+                      <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
+                                           [markPreviousAfterDate]="true"
+                      ></systelab-datepicker>
+                  </div>
+			  `,
 	styles:   []
 })
 export class DatepickerTestComponent {
@@ -95,7 +97,8 @@ describe('Systelab DatepickerComponent', () => {
 		const yearBefore = getVisibleYearInPopup(fixture);
 		clickOn(fixture, '#previousYear');
 		const yearAfter = getVisibleYearInPopup(fixture);
-		expect(yearAfter).toEqual(yearBefore - 1);
+		expect(yearAfter)
+			.toEqual(yearBefore - 1);
 	});
 
 	it('should set next year if I click on next year button', () => {
@@ -103,21 +106,24 @@ describe('Systelab DatepickerComponent', () => {
 		const yearBefore = getVisibleYearInPopup(fixture);
 		clickOn(fixture, '#nextYear');
 		const yearAfter = getVisibleYearInPopup(fixture);
-		expect(yearAfter).toEqual(yearBefore + 1);
+		expect(yearAfter)
+			.toEqual(yearBefore + 1);
 	});
 
 	xit('should set previous month if I click on previous month button', () => {
 		clickOnInput(fixture);
 		clickOn(fixture, '#previousMonth');
 		const monthAfter = getVisibleMonthInPopup(fixture);
-		expect(monthAfter).toEqual('COMMON_SEPTEMBER ');
+		expect(monthAfter)
+			.toEqual('COMMON_SEPTEMBER ');
 	});
 
 	xit('should set next month if I click on next month button', () => {
 		clickOnInput(fixture);
 		clickOn(fixture, '#nextMonth');
 		const monthAfter = getVisibleMonthInPopup(fixture);
-		expect(monthAfter).toEqual('COMMON_NOVEMBER ');
+		expect(monthAfter)
+			.toEqual('COMMON_NOVEMBER ');
 	});
 
 	it('should have the changed value if there is a change', () => {
@@ -156,6 +162,25 @@ describe('Systelab DatepickerComponent', () => {
 		expect(differenceInCalendarYears(fixture.componentInstance.currentDate, new Date()))
 			.toBe(3);
 	});
+
+	it('should show red background when entering a past date', () => {
+		enterText(fixture, '-2d');
+		expect(isRedBackground(fixture))
+			.toBeTruthy();
+	});
+
+	it('should not show red background when entering a future date', () => {
+		enterText(fixture, '2d');
+		expect(isRedBackground(fixture))
+			.toBeFalsy();
+	});
+
+	it('should not show red background when entering today', () => {
+		clickOnInput(fixture);
+		clickOn(fixture, '#today');
+		expect(isRedBackground(fixture))
+			.toBeFalsy();
+	});
 });
 
 function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
@@ -180,7 +205,7 @@ function clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>) {
 	fixture.detectChanges();
 }
 
-function isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>) {
+function isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
 	return (fixture.debugElement.nativeElement.querySelector('.ui-datepicker-calendar-container') !== null);
 }
 
@@ -189,8 +214,11 @@ function getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent
 }
 
 function getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
-	console.log(fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month'));
 	return fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month').firstChild.nodeValue;
+}
+
+function isRedBackground(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	return (fixture.debugElement.nativeElement.querySelector('.warning-date') !== null);
 }
 
 function clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string) {
