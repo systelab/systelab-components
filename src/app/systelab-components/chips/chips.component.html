@@ -2,4 +2,5 @@
                 (keydown.enter)="onBlur($event)"
                 [multiple]="true"
                 [readonly]="readonly"
-                [disabled]="disabled"></p-autoComplete>
+                [disabled]="disabled"
+                [(ngModel)]="filter"></p-autoComplete>

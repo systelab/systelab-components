@@ -31,7 +31,7 @@ If you want the defaults the template will look like:
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
-| suggestionsResult | | Event emitted with the suggestions result  |
+| filtered | | Event emitted with the result  |
 
 
 The styles are defined in the chips.scss Saas file.

@@ -8,7 +8,18 @@ import { of } from 'rxjs';
 })
 export class ChipsComponent {
 
-	@Output() public suggestionsResult = new EventEmitter<Array<string>>();
+	@Output() public filtered = new EventEmitter<Array<string>>();
+
+	private _filter: Array<string> = [];
+
+	get filter() {
+		return this._filter;
+	}
+
+	set filter(event) {
+		this._filter = event;
+		this.filtered.emit(event);
+	}
 
 	@Input()
 	public texts: Array<string> = [];
@@ -43,7 +54,6 @@ export class ChipsComponent {
 						this.newData = null;
 					}
 					this.results = data;
-					this.suggestionsResult.emit(data);
 				}
 			);
 	}
@@ -51,10 +61,12 @@ export class ChipsComponent {
 	public onBlur(event: KeyboardEvent): void {
 		if (this.newData && this.autoComplete && this.autoComplete.value) {
 			this.autoComplete.value = [...this.autoComplete.value, this.newData];
+			this.filter = [...this.filter, this.newData];
 			this.newData = null;
 			this.autoComplete.multiInputEL.nativeElement.value = '';
 		} else if (this.newData) {
 			this.autoComplete.value = [this.newData];
+			this.filter = [this.newData];
 			this.newData = null;
 			this.autoComplete.multiInputEL.nativeElement.value = '';
 		}
