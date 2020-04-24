@@ -81,6 +81,7 @@ import { ShowcasePaginatorComponent } from './components/paginator/showcase-pagi
 import { TreeModule } from 'primeng/tree';
 import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
 import { A11yModule } from '@angular/cdk/a11y';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
 	imports:         [
@@ -98,7 +99,8 @@ import { A11yModule } from '@angular/cdk/a11y';
 		AgGridModule.withComponents([
 			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
-		])
+		]),
+		AutoCompleteModule,
 	],
 	declarations:    [
 		ShowcaseComponent,
