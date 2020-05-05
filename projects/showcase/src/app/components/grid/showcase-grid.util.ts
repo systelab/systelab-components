@@ -1,13 +1,5 @@
-import { GridHeaderContextMenuComponent } from 'systelab-components';
-import { DecimalInputCellEditorComponent } from 'systelab-components';
-import { InputCellEditorComponent } from 'systelab-components';
-import { CheckboxCellRendererComponent } from 'systelab-components';
-import { CheckboxCellEditorComponent } from 'systelab-components';
-import { SpinnerCellRendererComponent } from 'systelab-components';
-import { SpinnerCellEditorComponent } from 'systelab-components';
-import { TouchSpinValues } from 'systelab-components';
+import { CheckboxCellEditorComponent, CheckboxCellRendererComponent, DecimalInputCellEditorComponent, GridHeaderContextMenuComponent, InputCellEditorComponent, IStackedBar, SpinnerCellEditorComponent, SpinnerCellRendererComponent, StackedBarCellRendererComponent, TouchSpinValues } from 'systelab-components';
 import { ShowcaseData } from './showcase-grid.model';
-import { IStackedBar, StackedBarCellRendererComponent } from 'systelab-components';
 
 export class ShowcaseGridUtil {
 
@@ -35,7 +27,7 @@ export class ShowcaseGridUtil {
 
 	public static getColumnDefs(): Array<any> {
 		// TODO Translate column names
-		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true},
+		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true, pinned: 'left'},
 			{
 				colId:                    'flags',
 				headerName:               'Flags',

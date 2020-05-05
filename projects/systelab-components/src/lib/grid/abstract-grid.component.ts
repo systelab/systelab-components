@@ -176,6 +176,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return {
 			colId:                 AbstractGrid.contextMenuColId,
 			headerName:            '',
+			pinned: 'left',
 			width:                 width,
 			suppressSizeToFit:     true,
 			resizable:             false,
@@ -189,6 +190,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			colId:             AbstractGrid.selectionColId,
 			headerName:        '',
 			checkboxSelection: true,
+			pinned: 'left',
 			width:             width,
 			suppressSizeToFit: true,
 			resizable:         false,
@@ -318,9 +320,13 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		if (event.column.colId === 'contextMenu') {
 			event.node.setSelected(true);
 		} else {
-			if (!event.column.isCellEditable(event.node)) {
-				const value = (event.event.ctrlKey && this.multipleSelection && !this.showChecks) ? event.event : event.data;
-				this.clickRow.emit(value);
+			if (event.column.colId === 'selectCol') {
+					event.node.setSelected(!event.node.isSelected());
+			} else {
+				if (!event.column.isCellEditable(event.node)) {
+					const value = (event.event.ctrlKey && this.multipleSelection && !this.showChecks) ? event.event : event.data;
+					this.clickRow.emit(value);
+				}
 			}
 		}
 	}
