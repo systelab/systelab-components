@@ -51,7 +51,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 				this.previousActionChild = actionId;
 
 				this.toggle(actionId + this.elementID);
-				const selectedChild = this.childDropdownMenuElement.toArray()
+				const selectedChild = this.childDropdownMenuElement0.toArray()
 					.find((elem) => elem.nativeElement.id === (actionId + this.elementID));
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');
@@ -71,11 +71,15 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		}
 	}
 
+	protected showSubmenu(event: any, actionId: string) {
+		// TODO: to be implemented
+	}
+
 	protected checkIfHasIcons(): void {
 		this.hasIcons = this.contextMenuOptions.some(opt => opt.iconClass !== undefined && opt.iconClass !== null);
 	}
 
-	private getOption(actionId: string, parentAction?: string): ContextMenuOption {
+	protected getOption(actionId: string, parentAction?: string): ContextMenuOption {
 		if (parentAction) {
 			const parentMenuOption = this.contextMenuOptions.find(opt => opt.actionId === parentAction);
 			return parentMenuOption.childrenContextMenuOptions.find(opt => opt.actionId === actionId);
@@ -83,5 +87,6 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 			return this.contextMenuOptions.find(opt => opt.actionId === actionId);
 		}
 	}
+
 }
 

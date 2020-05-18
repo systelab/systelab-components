@@ -4,12 +4,16 @@ import { ContextMenuOption } from './context-menu-option';
 
 export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> {
 
-	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
+	@ViewChildren('childdropdownmenu0') public childDropdownMenuElement0: QueryList<ElementRef>;
+	@ViewChildren('childdropdownmenu1') public childDropdownMenuElement1: QueryList<ElementRef>;
 	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
 
 	@Output() public action = new EventEmitter();
 
 	public _contextMenuOptions: Array<T>;
+	protected previousShownMenu: Array<string> = new Array<string>();
+	protected lastMenuLevel: number;
+	public readonly levelSeparator = '_|_';
 
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
@@ -31,7 +35,9 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	protected abstract isIconEnabled(elementId: string, actionId: string): boolean;
 
-	protected abstract executeAction(event: any, elementId: string, actionId: string, parentAction?: string);
+	protected abstract executeAction(event: any, elementId: string, actionId: string);
+
+	protected abstract getOption(actionId: string);
 
 	public ngOnInit() {
 		super.ngOnInit();
@@ -60,15 +66,27 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	public doClick(event: any, elementID: string, action: ContextMenuOption, parent?: ContextMenuOption) {
 		if (this.isEnabled(elementID, action.actionId)) {
-			this.executeAction(event, elementID, action.actionId, parent ? parent.actionId : undefined);
+			this.executeAction(event, elementID, action.actionId);
+		}
+	}
+
+	public doClickWithString(event: any, elementID: string, actionId: string) {
+		if (this.isEnabled(elementID, actionId)) {
+			this.executeAction(event, elementID, actionId);
+		}
+	}
+
+	public doMouseOver(event: any, elementID: string, actionId: string) {
+		if (this.isEnabled(elementID, actionId)) {
+			this.showSubmenu(event, actionId);
 		}
 	}
 
 	protected checkTargetAndClose(target: any) {
 		if (!this.checkIfNgContent(target)) {
 			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-				if (this.childDropdownMenuElement) {
-					if (!this.childDropdownMenuElement.toArray().some((elem) => target === elem.nativeElement)) {
+				if (this.childDropdownMenuElement0) {
+					if (!this.childDropdownMenuElement0.toArray().some((elem) => target === elem.nativeElement)) {
 						this.closeDropDown();
 					}
 				} else {
@@ -77,4 +95,72 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 			}
 		}
 	}
+
+	protected hideSubmenus (untilLevel: number) {
+		if (untilLevel < this.lastMenuLevel) {
+			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
+				this.toggle(this.previousShownMenu[i - 1]);
+				this.previousShownMenu.pop();
+				this.lastMenuLevel = i - 1;
+			}
+		}
+	}
+
+	protected getMyLevel(actionId: string): number {
+		const actions: string[] = actionId.split(this.levelSeparator);
+		return actions.length - 1;
+	}
+
+	protected getOptionDetails(actionId: string) {
+		const optionAcitionId: string = this.getOption(actionId).actionId;
+		const optionHasChilder: boolean = this.getOption(actionId).hasChildren();
+
+		return {optionAcitionId, optionHasChildren: optionHasChilder};
+	}
+
+	protected showSubmenu(event: any, actionId: string) {
+		const {optionAcitionId, optionHasChildren} = this.getOptionDetails(actionId);
+		const optionLevel = this.getMyLevel(actionId);
+
+		if (optionHasChildren) {
+			event.stopPropagation();
+			event.preventDefault();
+
+			if (this.previousActionChild !== optionAcitionId ) {
+				this.previousActionChild = optionAcitionId;
+				this.hideSubmenus(optionLevel);
+				this.lastMenuLevel = optionLevel + 1;
+
+				this.previousShownMenu.push(optionAcitionId + this.elementID);
+
+				this.toggle(optionAcitionId + this.elementID);
+
+				let selectedChild;
+				let leftPosition;
+
+				if (optionLevel === 0) {
+					selectedChild = this.childDropdownMenuElement0.toArray()
+						.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
+					leftPosition = this.getFirstChildLeft(selectedChild);
+				} else {
+					selectedChild = this.childDropdownMenuElement1.toArray()
+						.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
+					leftPosition = this.getFirstChildLeft(selectedChild);
+				}
+
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', (leftPosition) + 'px');
+			}
+		} else {
+			this.hideSubmenus(optionLevel);
+			this.lastMenuLevel = optionLevel;
+
+			event.stopPropagation();
+			event.preventDefault();
+			this.previousActionChild = optionAcitionId;
+
+		}
+	}
+
+
 }
