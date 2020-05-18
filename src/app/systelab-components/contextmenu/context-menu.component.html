@@ -20,7 +20,8 @@
                                                         [hasChildren]="action.hasChildren()"
                                                         [hasIcons]="hasIcons"></systelab-context-menu-item>
                             <ul *ngIf="action.hasChildren()" #childdropdownmenu0 id="{{action.actionId+elementID}}"
-                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
+                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute"
+                                style="overflow: initial !important;">
                                 <li *ngFor="let childAction of action.childrenContextMenuOptions"
                                     class="d-flex align-items-center" [class.disabled]="!isEnabled(elementID, childAction.actionId) || action.isDivider"
                                     (click)="doClickWithString($event, elementID, action.actionId + levelSeparator + childAction.actionId)"
@@ -32,7 +33,8 @@
                                                                     [hasChildren]="childAction.hasChildren()"
                                                                     [hasIcons]="hasIcons"></systelab-context-menu-item>
                                         <ul *ngIf="childAction.hasChildren()" #childdropdownmenu1 id="{{childAction.actionId+elementID}}"
-                                            class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
+                                            class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute"
+                                            style="overflow: initial !important;">
                                             <li *ngFor="let grandchildAction of childAction.childrenContextMenuOptions"
                                                 class="d-flex align-items-center" [class.disabled]="!isEnabled(elementID, grandchildAction.actionId) || grandchildAction.isDivider"
                                                 (click)="doClickWithString($event, elementID, action.actionId + levelSeparator + childAction.actionId + levelSeparator + grandchildAction.actionId)"
