@@ -5,7 +5,6 @@ import { ContextMenuOption } from './context-menu-option';
 export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> {
 
 	@ViewChildren('childdropdownmenu0') public childDropdownMenuElement0: QueryList<ElementRef>;
-	@ViewChildren('childdropdownmenu1') public childDropdownMenuElement1: QueryList<ElementRef>;
 	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
 
 	@Output() public action = new EventEmitter();
@@ -35,7 +34,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	protected abstract isIconEnabled(elementId: string, actionId: string): boolean;
 
-	protected abstract executeAction(event: any, elementId: string, actionId: string);
+	public abstract executeAction(event: any, elementId: string, actionId: string);
 
 	protected abstract getOption(actionId: string);
 
@@ -78,8 +77,17 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	public doMouseOver(event: any, elementID: string, actionId: string) {
 		if (this.isEnabled(elementID, actionId)) {
-			this.showSubmenu(event, actionId);
+			const {optionAcitionId} = this.getOptionDetails(actionId);
+
+			const selectedChild = this.childDropdownMenuElement0.toArray()
+				.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
+
+			this.showSubmenu(event, actionId, selectedChild, this.elementID);
 		}
+	}
+
+	public getMyReference() {
+		return this;
 	}
 
 	protected checkTargetAndClose(target: any) {
@@ -111,14 +119,14 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		return actions.length - 1;
 	}
 
-	protected getOptionDetails(actionId: string) {
+	public getOptionDetails(actionId: string) {
 		const optionAcitionId: string = this.getOption(actionId).actionId;
 		const optionHasChilder: boolean = this.getOption(actionId).hasChildren();
 
 		return {optionAcitionId, optionHasChildren: optionHasChilder};
 	}
 
-	protected showSubmenu(event: any, actionId: string) {
+	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string) {
 		const {optionAcitionId, optionHasChildren} = this.getOptionDetails(actionId);
 		const optionLevel = this.getMyLevel(actionId);
 
@@ -131,25 +139,12 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 				this.hideSubmenus(optionLevel);
 				this.lastMenuLevel = optionLevel + 1;
 
-				this.previousShownMenu.push(optionAcitionId + this.elementID);
+				this.previousShownMenu.push(optionAcitionId + elementId);
 
-				this.toggle(optionAcitionId + this.elementID);
-
-				let selectedChild;
-				let leftPosition;
-
-				if (optionLevel === 0) {
-					selectedChild = this.childDropdownMenuElement0.toArray()
-						.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
-					leftPosition = this.getFirstChildLeft(selectedChild);
-				} else {
-					selectedChild = this.childDropdownMenuElement1.toArray()
-						.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
-					leftPosition = this.getFirstChildLeft(selectedChild);
-				}
+				this.toggle(optionAcitionId + elementId);
 
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', (leftPosition) + 'px');
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');
 			}
 		} else {
 			this.hideSubmenus(optionLevel);

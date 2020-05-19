@@ -18,6 +18,10 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.open(event);
 	}
 
+	public getMyReference () {
+		return this;
+	}
+
 	protected existsAtLeastOneActionEnabled(): boolean {
 		if (this.contextMenuOptions) {
 			return this.contextMenuOptions.some(opt => this.isEnabled(this.elementID, opt.actionId));
@@ -36,7 +40,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		return (option && option.isIconEnabled) ? option.isIconEnabled(elementId, actionId) : true;
 	}
 
-	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
+	public executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
 
 		const option: ContextMenuOption = this.getOption(actionId, parentAction);
 
@@ -71,7 +75,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		}
 	}
 
-	protected showSubmenu(event: any, actionId: string) {
+	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string) {
 		// TODO: to be implemented
 	}
 

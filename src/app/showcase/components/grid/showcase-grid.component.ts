@@ -50,7 +50,7 @@ export class ShowcaseGridComponent implements OnInit {
 			new GridContextMenuOption('action2', 'Action 2', (a) => this.doMenuAction(a)),
 			new GridContextMenuOption('', '', (a) => this.doMenuAction(a), null, true),
 			new GridContextMenuOption('action3', 'Action 3', null, () => true, false, undefined, null, null, contextMenuSubOptions),
-			new GridContextMenuOption('option4', 'Action 4', null, () => true, false, undefined, null, null, contextMenuSubOptions2),
+			new GridContextMenuOption('action4', 'Action 4', null, () => true, false, undefined, null, null, contextMenuSubOptions2),
 			new GridContextMenuOption('action5', 'Action 5', (a) => this.doMenuAction(a)),
 			new GridContextMenuOption('action6', 'Action 6', (a) => this.doMenuAction(a), () => false)
 		];

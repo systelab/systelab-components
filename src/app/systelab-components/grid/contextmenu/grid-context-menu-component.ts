@@ -48,7 +48,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		return this.actionHandler.isContextMenuOptionEnabled(elementId, actionId);
 	}
 
-	protected executeAction(event: any, elementId: string, actionId: string): void {
+	public executeAction(event: any, elementId: string, actionId: string): void {
 
 		const option: GridContextMenuOption<T> = this.getOption(actionId);
 
@@ -60,7 +60,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 			}
 
 			if (option && option.actionId !== null && option.actionId !== undefined) {
-				this.actionHandler.executeContextMenuAction(elementId, actionId);
+				this.actionHandler.executeContextMenuAction(elementId, option.actionId);
 			}
 		} else {
 			event.stopPropagation();
@@ -69,7 +69,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 	}
 
 	protected getOption(actionId: string): GridContextMenuOption<T> {
-		const actions: string[] = actionId.split('_|_');
+		const actions: string[] = actionId.split(this.levelSeparator);
 
 		let level = 1;
 		if (actions.length === 1) {
