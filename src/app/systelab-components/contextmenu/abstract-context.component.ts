@@ -82,6 +82,28 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		return firstChildLeft;
 	}
 
+
+	protected getFirstChildLeftWithLevels(selectedChild: ElementRef, optionLevel: number, previousMenuWidth: Array<number>) {
+		let firstChildLeft;
+		let accumulativeLeft = 0;
+		const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
+
+		if (optionLevel < 1) {
+			firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 12;
+		} else {
+			firstChildLeft = previousMenuWidth[optionLevel - 1] + 12;
+			for (let i = 0; i < optionLevel; i++) {
+				accumulativeLeft = accumulativeLeft + previousMenuWidth[i];
+			}
+		}
+
+		if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth + accumulativeLeft +
+			selectedChild.nativeElement.offsetWidth > window.innerWidth) {
+			firstChildLeft = -selectedChild.nativeElement.offsetWidth + 15;
+		}
+		return firstChildLeft;
+	}
+
 	protected getFirstChildTop(event: any, selectedChild: ElementRef) {
 		const firstChildAbsoluteTop = event.clientY;
 		let firstChildRelativeTop = event.target.offsetTop;
