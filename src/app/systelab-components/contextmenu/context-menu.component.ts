@@ -85,19 +85,16 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 
 	protected getOption(actionId: string, parentAction?: string): ContextMenuOption {
 		const actions: string[] = actionId.split(this.levelSeparator);
-
 		let level = 1;
-		if (actions.length === 1) {
-			return this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-		} else {
-			let menuLevel: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+
+		let menuLevel: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+		level ++;
+		while (level <= actions.length) {
+			menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
 			level ++;
-			while (level < actions.length) {
-				menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-				level ++;
-			}
-			return menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
 		}
+
+		return menuLevel;
 	}
 
 }

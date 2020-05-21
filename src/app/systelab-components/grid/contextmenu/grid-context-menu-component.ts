@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
+import { ContextMenuOption } from '../../contextmenu/context-menu-option';
 
 export interface GridRowMenuActionHandler {
 	isContextMenuOptionEnabled(elementId: string, actionId: string): boolean;
@@ -69,19 +70,17 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 
 	protected getOption(actionId: string): GridContextMenuOption<T> {
 		const actions: string[] = actionId.split(this.levelSeparator);
-
 		let level = 1;
-		if (actions.length === 1) {
-			return this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-		} else {
-			let menuLevel: GridContextMenuOption<T> = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+
+		let menuLevel: GridContextMenuOption<T> = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+		level ++;
+		while (level <= actions.length) {
+			menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
 			level ++;
-			while (level < actions.length) {
-				menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-				level ++;
-			}
-			return menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
 		}
+
+		return menuLevel;
+
 	}
 
 }
