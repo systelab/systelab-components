@@ -75,10 +75,6 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		}
 	}
 
-	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string) {
-		// TODO: to be implemented
-	}
-
 	protected checkIfHasIcons(): void {
 		this.hasIcons = this.contextMenuOptions.some(opt => opt.iconClass !== undefined && opt.iconClass !== null);
 	}

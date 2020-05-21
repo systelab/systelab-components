@@ -115,7 +115,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	protected getMyLevel(actionId: string): number {
+	public getMyLevel(actionId: string): number {
 		const actions: string[] = actionId.split(this.levelSeparator);
 		return actions.length - 1;
 	}

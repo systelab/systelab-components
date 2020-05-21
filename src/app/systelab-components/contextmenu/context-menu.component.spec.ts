@@ -111,6 +111,12 @@ describe('Systelab Context Menu', () => {
 		expect(fixture.componentInstance.lastSelectedOption).toEqual('suboption2');
 	});
 
+	it('should show submenu on mouse over', () => {
+		clickOnDots(fixture);
+		mouseOver(fixture, 6);
+		clickOnSubOption(fixture, 2);
+		expect(fixture.componentInstance.lastSelectedOption).toEqual('suboption2');
+	});
 });
 
 function clickOnDots(fixture: ComponentFixture<ContextMenuTestComponent>) {
@@ -137,7 +143,23 @@ function clickOnOption(fixture: ComponentFixture<ContextMenuTestComponent>, elem
 	fixture.detectChanges();
 }
 
+function mouseOver(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
+	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
+	button.dispatchEvent(new MouseEvent('mouseover', {
+		view: window,
+		bubbles: true,
+		cancelable: true
+	}));
+	fixture.detectChanges();
+}
+
 function clickOnSubOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
+	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+}
+
+function verifyLastOpenItem(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
 	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')')).nativeElement;
 	button.click();
 	fixture.detectChanges();
