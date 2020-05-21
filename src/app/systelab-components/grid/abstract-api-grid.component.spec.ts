@@ -29,6 +29,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GridColumnOptionsDialog } from './options/grid-column-options-dialog.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
+import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -148,6 +149,7 @@ describe('Systelab Grid', () => {
 				GridContextMenuCellRendererComponent,
 				GridContextMenuComponent,
 				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
 				SystelabGridComponent,
 				GridTestComponent,
 				GridColumnOptionsDialog,

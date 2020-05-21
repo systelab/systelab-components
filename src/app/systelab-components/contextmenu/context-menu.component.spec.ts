@@ -12,6 +12,7 @@ import { ContextMenuComponent } from './context-menu.component';
 import { ContextMenuOption } from './context-menu-option';
 import { ContextMenuActionData } from './context-menu-action-data';
 import { ContextMenuItemComponent } from './context-menu-item.component';
+import { ContextMenuSubmenuItemComponent } from './context-menu-submenu-item.component';
 
 @Component({
 	selector: 'systelab-context-menu-test',
@@ -44,7 +45,9 @@ export class ContextMenuTestComponent implements OnInit {
 	}
 
 	public executeContextMenuAction(contextMenuActionData: ContextMenuActionData): void {
-		this.lastSelectedOption = contextMenuActionData.actionId;
+		const levelSeparator = '_|_';
+		const actions: string[] = contextMenuActionData.actionId.split(levelSeparator);
+		this.lastSelectedOption = actions[actions.length - 1];
 	}
 }
 
@@ -61,7 +64,7 @@ describe('Systelab Context Menu', () => {
 				CalendarModule,
 				HttpClientModule,
 				SystelabTranslateModule],
-			declarations: [ContextMenuComponent, ContextMenuItemComponent, ContextMenuTestComponent]
+			declarations: [ContextMenuComponent, ContextMenuItemComponent, ContextMenuTestComponent, ContextMenuSubmenuItemComponent]
 		})
 			.compileComponents();
 	}));
@@ -135,7 +138,7 @@ function clickOnOption(fixture: ComponentFixture<ContextMenuTestComponent>, elem
 }
 
 function clickOnSubOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
-	const button = fixture.debugElement.query(By.css('.slab-dropdown-absolute > li:nth-child(' + elementNumber + ')')).nativeElement;
+	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')')).nativeElement;
 	button.click();
 	fixture.detectChanges();
 }

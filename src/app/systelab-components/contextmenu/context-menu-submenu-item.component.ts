@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, QueryList, ViewChildren, } from '@angular/core';
 import { ContextMenuOption } from './context-menu-option';
 import { ContextMenuComponent } from './context-menu.component';
+import { GridContextMenuOption } from '../../../../build/grid/contextmenu/grid-context-menu-option';
 
 @Component({
 	selector:    'systelab-context-menu-submenu-item',
@@ -13,8 +14,6 @@ export class ContextMenuSubmenuItemComponent {
 	@Input() public hasIcons: boolean;
 	@Input() public hasChildren: boolean;
 	public readonly levelSeparator = '_|_';
-	@Input() public isEnabled: boolean;
-	@Input() public isIconEnabled: boolean;
 	@Input() public myContextMenuOriginal: ContextMenuComponent;
 	@Input() public parentId: string;
 
@@ -42,5 +41,13 @@ export class ContextMenuSubmenuItemComponent {
 
 	public getMyAction(childActionId: String): string {
 		return this.myActionName + this.levelSeparator + childActionId;
+	}
+
+	public isEnabled(elementId: string, actionId: string): boolean {
+		return (this.myAction && this.myAction.isActionEnabled) ? this.myAction.isActionEnabled(elementId, actionId) : true;
+	}
+
+	public isIconEnabled(elementId: string, actionId: string): boolean {
+		return (this.myAction && this.myAction.isIconEnabled) ? this.myAction.isIconEnabled(elementId, actionId) : true;
 	}
 }

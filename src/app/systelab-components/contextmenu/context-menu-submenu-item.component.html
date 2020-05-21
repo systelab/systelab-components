@@ -4,8 +4,8 @@
     (mouseover)="doMouseOver($event, elementID, myActionName + levelSeparator + childAction.actionId)">
     <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto">
         <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
-                                    [isEnabled]="true"
-                                    [isIconEnabled]="true"
+                                    [isEnabled]="isEnabled(elementID, childAction.actionId)"
+                                    [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
                                     [hasChildren]="childAction.hasChildren()"
                                     [hasIcons]="hasIcons"></systelab-context-menu-item>
         <ul *ngIf="childAction.hasChildren()" #childdropdownmenu0 id="{{childAction.actionId+elementID}}"
@@ -16,8 +16,6 @@
                                                 [hasChildren]="childAction.hasChildren()"
                                                 [hasIcons]="hasIcons"
                                                 [myContextMenuOriginal]="myContextMenuOriginal"
-                                                [isEnabled]="true"
-                                                [isIconEnabled]="true"
                                                 [parentId]="parentId"
             ></systelab-context-menu-submenu-item>
         </ul>

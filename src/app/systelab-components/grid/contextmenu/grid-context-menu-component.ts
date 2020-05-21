@@ -63,8 +63,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 				this.actionHandler.executeContextMenuAction(elementId, option.actionId);
 			}
 		} else {
-			event.stopPropagation();
-			event.preventDefault();
+			this.doMouseOver(event, elementId, actionId);
 		}
 	}
 
