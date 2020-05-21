@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, QueryList, ViewChildren, } from '@angular/core';
 import { ContextMenuOption } from './context-menu-option';
 import { ContextMenuComponent } from './context-menu.component';
-import { GridContextMenuOption } from '../../../../build/grid/contextmenu/grid-context-menu-option';
 
 @Component({
 	selector:    'systelab-context-menu-submenu-item',
