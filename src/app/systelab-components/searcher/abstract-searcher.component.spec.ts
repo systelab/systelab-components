@@ -23,6 +23,7 @@ import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
 import { SearcherTableComponent } from './searcher.table.component';
 import { GridContextMenuComponent } from '../grid/contextmenu/grid-context-menu-component';
 import { ContextMenuItemComponent } from '../contextmenu/context-menu-item.component';
+import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 
 export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
@@ -169,6 +170,7 @@ describe('Systelab Searcher', () => {
 				GridContextMenuCellRendererComponent,
 				GridHeaderContextMenuComponent,
 				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
 				ComboBoxInputRendererComponent,
 				SystelabSearcherComponent,
 				SearcherTestComponent,

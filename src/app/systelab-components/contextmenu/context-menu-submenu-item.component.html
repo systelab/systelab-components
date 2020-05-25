@@ -1,0 +1,23 @@
+<li *ngFor="let childAction of myAction.childrenContextMenuOptions"
+    class="d-flex align-items-center" [class.disabled]="!true"
+    (click)="doClickWithString($event, parentId, myActionName + levelSeparator + childAction.actionId)"
+    (mouseover)="doMouseOver($event, elementID, myActionName + levelSeparator + childAction.actionId)">
+    <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto">
+        <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
+                                    [isEnabled]="isEnabled(elementID, childAction.actionId)"
+                                    [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
+                                    [hasChildren]="childAction.hasChildren()"
+                                    [hasIcons]="hasIcons"></systelab-context-menu-item>
+        <ul *ngIf="childAction.hasChildren()" #childdropdownmenu0 id="{{childAction.actionId+elementID}}"
+            class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute"
+            style="overflow: initial !important;">
+            <systelab-context-menu-submenu-item [myAction]="childAction"
+                                                [myActionName]="getMyAction(childAction.actionId)"
+                                                [hasChildren]="childAction.hasChildren()"
+                                                [hasIcons]="hasIcons"
+                                                [myContextMenuOriginal]="myContextMenuOriginal"
+                                                [parentId]="parentId"
+            ></systelab-context-menu-submenu-item>
+        </ul>
+    </div>
+</li>

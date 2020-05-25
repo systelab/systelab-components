@@ -85,6 +85,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
 import { ChipsComponent } from './chips/chips.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
 
 @NgModule({
 	imports:         [
@@ -105,6 +106,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
+		ContextMenuSubmenuItemComponent,
 		ContextPanelComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
@@ -178,6 +180,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
+		ContextMenuSubmenuItemComponent,
 		ContextPanelComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
