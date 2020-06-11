@@ -19,7 +19,7 @@
                 [style.padding]="padding"
                 class="nav-item"
                 [class.disabled]="!nav.isEnabled"
-                (click)="nav.isEnabled?nav.action():noop()"
+                (click)="nav.isEnabled&&nav.action?nav.action():noop()"
                 [style.background-color]="nav.isSelected? activeColor : (hovered == nav.id && nav.isEnabled ? backgroundHoverColor : !nav.isEnabled ? '#cccccc': (nav.backgroundColor)?nav.backgroundColor:backgroundColor)"
                 (mouseover)="hovered = nav.id" (mouseout)="hovered = -1" [class.active]="nav.isSelected">
                 <a [id]="'nav-'+nav.id"

@@ -9,7 +9,7 @@
         <ng-content></ng-content>
     </div>
     <div class="dropdown slab-app-header-user-container">
-        <div class="dropdown-toggle" data-toggle="dropdown" *ngIf="menu.length > 0 || userName">
+        <div class="dropdown-toggle" data-toggle="dropdown" data-boundary="window" *ngIf="menu.length > 0 || userName">
             <button *ngIf="!menuBars" class="slab-app-header-user-icon d-inline-block align-middle">
                 <div class="align-middle h-100">
                     <i class="icon-user align-bottom"></i>
