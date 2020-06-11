@@ -75,7 +75,6 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	public onModelUpdated(event: any) {
 		super.onModelUpdated(event);
 		if (this.multipleSelection) {
-
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
 					if (this.searcher.multipleSelectedItemList
@@ -99,17 +98,16 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	public onRowSelected(event: any): void {
 		if (this.multipleSelection) {
 			if (event.node && event.node.data && event.node.data[this.searcher.getIdField()] !== undefined) {
-				if (this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList !== undefined) {
+				if (this.searcher.multipleSelectedItemList) {
 					const element = this.searcher.multipleSelectedItemList.find((item) => {
 						return item[this.searcher.getCodeField()] === event.node.data[this.searcher.getCodeField()];
 					});
-					if (element) {
+					if (event.node.selected && !element) {
+						this.addElementToMultipleSelectedItemList(event.node.data);
+					} else if (!event.node.selected && element) {
 						this.searcher.multipleSelectedItemList = this.searcher.multipleSelectedItemList
 							.filter((item) => item[this.searcher.getCodeField()] !== element[this.searcher.getCodeField()]);
-					} else {
-						this.addElementToMultipleSelectedItemList(event.node.data);
 					}
-
 				} else {
 					this.addElementToMultipleSelectedItemList(event.node.data);
 				}
