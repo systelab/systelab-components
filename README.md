@@ -17,7 +17,7 @@ In order to clone the repository and test the library use the following commands
 git clone https://github.com/systelab/systelab-components.git
 cd systelab-components
 npm install
-npm build-lib
+npm run build-lib
 ng serve
 ```
 
