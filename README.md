@@ -20,8 +20,20 @@ npm install
 npm run build-lib
 ng serve
 ```
-
 This will bootstrap a showcase application to test the different components.
+
+
+Use watch in the library build to detect file changes automatically. Start application in a different terminal:
+
+Terminal 1
+```bash
+ng build systelab-components --watch
+```
+Terminal 2
+```bash
+ng serve
+```
+
 
 ## Test
 
