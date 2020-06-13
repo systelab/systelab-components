@@ -123,12 +123,12 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.destroyWheelListener();
 	}
 
-	private checkPreviousAfterDate() {
+	private checkPreviousAfterDate(): void {
 		if (this._currentDate) {
 			this._currentDate.setHours(0, 0, 0, 0);
 			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
 			pastDate.setHours(0, 0, 0, 0);
-			return this._currentDate.getTime() <= pastDate.getTime();
+			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
 		} else {
 			this.previousAfterDate = false;
 		}
@@ -151,7 +151,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public changeDate(): void {
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
-			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim().toLowerCase();
+			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
+				.toLowerCase();
 			if (this.inputChanged) {
 				if (dateStr.length >= 2) {
 					const transformedDate = this.dataTransformerService.processShortcuts(dateStr);
