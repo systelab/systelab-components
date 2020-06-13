@@ -14,6 +14,7 @@ export class AbstractTreeListboxRendererComponent implements AgRendererComponent
 	public description: string;
 	public level: number;
 	public isMultipleSelection = false;
+	public checkId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
 	public agInit(params: any): void {
 		this.params = params;

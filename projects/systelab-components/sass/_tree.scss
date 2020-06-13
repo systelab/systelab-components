@@ -60,10 +60,18 @@ body .ui-tree {
             color: rgb(34, 34, 34) !important;
           }
 
+          &:focus {
+            background-color: scale-color($primary, $alpha: -90%);
+          }
+
           &:hover {
             background: $slab-selected-background-color !important;
           }
 
+        }
+
+        &:focus {
+          background-color: scale-color($primary, $alpha: -90%);
         }
 
         &:hover {
