@@ -4,39 +4,96 @@
   "newProjectRoot": "projects",
   "projects": {
     "systelab-components": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
+      "projectType": "library",
+      "root": "projects/systelab-components",
+      "sourceRoot": "projects/systelab-components/src",
+      "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
-            "assets": [
-              "src/assets",
-              "src/favicon.png",
-              "src/gh.ico"
-            ],
+            "tsConfig": "projects/systelab-components/tsconfig.lib.json",
+            "project": "projects/systelab-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/systelab-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/systelab-components/src/test.ts",
+            "tsConfig": "projects/systelab-components/tsconfig.spec.json",
+            "karmaConfig": "projects/systelab-components/karma.conf.js",
             "styles": [
+              "projects/showcase/src/styles.scss",
+              "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "icons/icomoon.css",
-              "src/styles.scss"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules",
-                "src/app"
-              ]
-            },
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/pako/dist/pako.min.js",
+              "node_modules/nanobar/nanobar.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/systelab-components/tsconfig.lib.json",
+              "projects/systelab-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "showcase": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/showcase",
+      "sourceRoot": "projects/showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/showcase",
+            "index": "projects/showcase/src/index.html",
+            "main": "projects/showcase/src/main.ts",
+            "polyfills": "projects/showcase/src/polyfills.ts",
+            "tsConfig": "projects/showcase/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/showcase/src/favicon.png",
+              "projects/showcase/src/gh.ico"
+            ],
+            "styles": [
+              "projects/showcase/src/styles.scss",
+              "projects/systelab-components/icons/icomoon.css",
+              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.js",
@@ -47,10 +104,10 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
+              "fileReplacements": [
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "replace": "projects/showcase/src/environments/environment.ts",
+                  "with": "projects/showcase/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -58,14 +115,19 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [
+              "budgets": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
@@ -74,53 +136,47 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "systelab-components:build"
+            "browserTarget": "showcase:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "systelab-components:build:production"
+              "browserTarget": "showcase:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "systelab-components:build"
+            "browserTarget": "showcase:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
+            "main": "projects/showcase/src/test.ts",
+            "polyfills": "projects/showcase/src/polyfills.ts",
+            "tsConfig": "projects/showcase/tsconfig.spec.json",
+            "karmaConfig": "projects/showcase/karma.conf.js",
+            "assets": [
+              "projects/showcase/src/favicon.ico",
+              "projects/showcase/src/assets"
+            ],
+            "styles": [
+              "projects/showcase/src/styles.scss",
+              "projects/systelab-components/icons/icomoon.css",
+              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/pako/dist/pako.min.js",
               "node_modules/nanobar/nanobar.js"
-            ],
-            "styles": [
-              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
-              "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css",
-              "icons/icomoon.css",
-              "src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules",
-                "src/app"
-              ]
-            },
-            "assets": [
-              "src/assets",
-              "src/favicon.png",
-              "src/gh.ico"
             ]
           }
         },
@@ -128,50 +184,29 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "projects/showcase/tsconfig.app.json",
+              "projects/showcase/tsconfig.spec.json",
+              "projects/showcase/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
-        }
-      }
-    },
-    "systelab-components-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
+        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "systelab-components:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "protractorConfig": "projects/showcase/e2e/protractor.conf.js",
+            "devServerTarget": "showcase:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "showcase:serve:production"
+            }
           }
         }
       }
     }
   },
-  "defaultProject": "systelab-components",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "scss"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
-    }
-  }
+  "defaultProject": "systelab-components"
 }

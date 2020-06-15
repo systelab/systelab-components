@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/systelab-components",
+  "assets": [
+    "./README.md",
+    "./icons/*.*",
+    "./sass/**/*.scss"
+  ],
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  }
+}

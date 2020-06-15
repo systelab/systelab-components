@@ -1,0 +1,47 @@
+@import "../../../sass/variables";
+
+
+.slab-calendar-dialog {
+  a {
+    top: 0;
+    display: block;
+
+    padding: 0 !important;
+    text-align: center;
+    color: #444;
+
+    &.ui-state-highlight {
+      background-color: $slab-selected-background-color !important;
+    }
+    &.is-holiday {
+      color: red;
+    }
+    &.disable-link {
+      pointer-events: none;
+    }
+  }
+
+  .slab-calendar-table {
+    width: 100%;
+    flex:1;
+  }
+
+  .slab-calendar-buttons {
+    button {
+      border: 0;
+      background: none;
+      box-shadow: none;
+      border-radius: 0px;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+
+      &.slab-calendar-button1 {
+        top: 2px;
+        right: 2px;
+        padding-top: 5px;
+        background-color: bisque;
+      }
+    }
+  }
+}
