@@ -1,0 +1,6 @@
+<p-autoComplete #autoComplete [suggestions]="results" (completeMethod)="search($event)"
+                (keydown.enter)="onBlur($event)"
+                [multiple]="true"
+                [readonly]="readonly"
+                [disabled]="disabled"
+                [(ngModel)]="filter"></p-autoComplete>
