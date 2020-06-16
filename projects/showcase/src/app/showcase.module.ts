@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ShowcaseComponent } from './showcase.component';
-import { SystelabComponentsModule } from 'systelab-components';
+import { GridContextMenuCellRendererComponent, GridHeaderContextMenuComponent, SystelabComponentsModule } from 'systelab-components';
 import { FormsModule } from '@angular/forms';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -61,7 +61,6 @@ import { ShowcaseTreeComponent } from './components/tree/showcase-tree.component
 import { ShowcasePercentageCircleComponent } from './components/percentage-circle/showcase-percentage-circle.component';
 import { ShowcaseInlineComponent } from './components/inline/showcase-inline.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { GridHeaderContextMenuComponent } from 'systelab-components';
 import { ShowcaseWizardStepsComponent } from './components/wizard-steps/showcase-wizard-steps.component';
 import { ShowcaseSortableListComponent } from './components/sortable-list/showcase-sortable-list.component';
 import { ShowcaseInnerSortableListComponent } from './components/sortable-list/showcase-inner-sortable-list.component';
@@ -72,18 +71,17 @@ import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.
 import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ShowcaseAutocomplete } from './components/combobox/showcase-autocomplete-combobox.component';
-import { GridContextMenuCellRendererComponent } from 'systelab-components';
 import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid.component';
 import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { DialogService, MessagePopupService } from 'systelab-components';
 import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
 import { TreeModule } from 'primeng/tree';
 import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
 import { A11yModule } from '@angular/cdk/a11y';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
-	imports:         [
+	imports:      [
 		A11yModule,
 		BrowserModule,
 		BrowserAnimationsModule,
@@ -98,9 +96,10 @@ import { A11yModule } from '@angular/cdk/a11y';
 		AgGridModule.withComponents([
 			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
-		])
+		]),
+		AutoCompleteModule
 	],
-	declarations:    [
+	declarations: [
 		ShowcaseComponent,
 		ShowcaseTwoTabsComponent,
 		ShowcaseLowerFlexComponent,
@@ -169,7 +168,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 		ShowcasePaginatorComponent,
 		ShowcaseBarsGridComponent
 	],
-	bootstrap:       [ShowcaseComponent]
+	bootstrap:    [ShowcaseComponent]
 })
 export class ShowcaseModule {
 }

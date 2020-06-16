@@ -81,11 +81,12 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
-import { SharedModule } from 'primeng';
+import { AutoCompleteModule, SharedModule } from 'primeng';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
+import { ChipsComponent } from './chips/chips.component';
 
 @NgModule({
-	imports:         [
+	imports:      [
 		CommonModule,
 		FormsModule,
 		SharedModule,
@@ -96,9 +97,10 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		AgGridModule
+		AgGridModule,
+		AutoCompleteModule
 	],
-	declarations:    [
+	declarations: [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -169,8 +171,9 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 		ChipButtonComponent,
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
+		ChipsComponent
 	],
-	exports:         [
+	exports:      [
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
@@ -241,8 +244,9 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 		ChipButtonComponent,
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
+		ChipsComponent
 	],
-	providers:       [
+	providers:    [
 		StylesUtilService,
 		ColorUtilService,
 		LoadingService
