@@ -29,6 +29,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GridColumnOptionsDialog } from './options/grid-column-options-dialog.component';
 import { I18nService } from 'systelab-translate/lib/i18n.service';
 import { PreferencesService } from 'systelab-preferences/lib/preferences.service';
+import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -44,7 +45,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 	private totalItems = 10;
 
 	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	                   protected dialogService: DialogService) {
+					   protected dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
@@ -86,12 +87,12 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 @Component({
 	selector: 'systelab-grid-test',
 	template: `
-                <div class="position-relative" style="height: 200px;">
-                    <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
-                                   [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
-                </div>
-                <button type="button" class="btn" (click)="grid.showOptions()">Options</button>
-	          `
+                  <div class="position-relative" style="height: 200px;">
+                      <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
+                                     [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
+                  </div>
+                  <button type="button" class="btn" (click)="grid.showOptions()">Options</button>
+			  `
 })
 export class GridTestComponent {
 
@@ -148,6 +149,7 @@ describe('Systelab Grid', () => {
 				GridContextMenuCellRendererComponent,
 				GridContextMenuComponent,
 				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
 				SystelabGridComponent,
 				GridTestComponent,
 				GridColumnOptionsDialog,

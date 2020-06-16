@@ -48,45 +48,38 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		return this.actionHandler.isContextMenuOptionEnabled(elementId, actionId);
 	}
 
-	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
+	public executeAction(event: any, elementId: string, actionId: string): void {
 
-		const option: GridContextMenuOption<T> = this.getOption(actionId, parentAction);
+		const option: GridContextMenuOption<T> = this.getOption(actionId);
 
-		if (option.hasChildren()) {
-			event.stopPropagation();
-			event.preventDefault();
-
-			if (this.previousActionChild !== actionId) {
-				if (this.previousActionChild) {
-					this.toggle(this.previousActionChild + this.elementID);
-				}
-				this.previousActionChild = actionId;
-
-				this.toggle(actionId + this.elementID);
-
-				const selectedChild = this.childDropdownMenuElement.toArray().find((elem) => elem.nativeElement.id === (actionId + this.elementID));
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');
-			}
-		} else {
-			if (this.isEmbedded || parentAction) {
+		if (!option.hasChildren()) {
+			if (this.isEmbedded) {
 				this.closeDropDown();
 				event.stopPropagation();
 				event.preventDefault();
 			}
 
 			if (option && option.actionId !== null && option.actionId !== undefined) {
-				this.actionHandler.executeContextMenuAction(elementId, actionId);
+				this.actionHandler.executeContextMenuAction(elementId, option.actionId);
 			}
+		} else {
+			this.doMouseOver(event, elementId, actionId);
 		}
 	}
 
-	private getOption(actionId: string, parentAction?: string): GridContextMenuOption<T> {
-		if (parentAction) {
-			const parentMenuOption = this.contextMenuOptions.find(opt => opt.actionId === parentAction);
-			return parentMenuOption.childrenContextMenuOptions.find(opt => opt.actionId === actionId);
-		} else {
-			return this.contextMenuOptions.find(opt => opt.actionId === actionId);
+	protected getOption(actionId: string): GridContextMenuOption<T> {
+		const actions: string[] = actionId.split(this.levelSeparator);
+		let level = 1;
+
+		let menuLevel: GridContextMenuOption<T> = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+		level ++;
+		while (level <= actions.length) {
+			menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+			level ++;
 		}
+
+		return menuLevel;
+
 	}
+
 }

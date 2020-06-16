@@ -18,6 +18,10 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.open(event);
 	}
 
+	public getMyReference () {
+		return this;
+	}
+
 	protected existsAtLeastOneActionEnabled(): boolean {
 		if (this.contextMenuOptions) {
 			return this.contextMenuOptions.some(opt => this.isEnabled(this.elementID, opt.actionId));
@@ -36,7 +40,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		return (option && option.isIconEnabled) ? option.isIconEnabled(elementId, actionId) : true;
 	}
 
-	protected executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
+	public executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
 
 		const option: ContextMenuOption = this.getOption(actionId, parentAction);
 
@@ -51,7 +55,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 				this.previousActionChild = actionId;
 
 				this.toggle(actionId + this.elementID);
-				const selectedChild = this.childDropdownMenuElement.toArray()
+				const selectedChild = this.childDropdownMenuElement0.toArray()
 					.find((elem) => elem.nativeElement.id === (actionId + this.elementID));
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');
@@ -75,13 +79,18 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.hasIcons = this.contextMenuOptions.some(opt => opt.iconClass !== undefined && opt.iconClass !== null);
 	}
 
-	private getOption(actionId: string, parentAction?: string): ContextMenuOption {
-		if (parentAction) {
-			const parentMenuOption = this.contextMenuOptions.find(opt => opt.actionId === parentAction);
-			return parentMenuOption.childrenContextMenuOptions.find(opt => opt.actionId === actionId);
-		} else {
-			return this.contextMenuOptions.find(opt => opt.actionId === actionId);
-		}
-	}
-}
+	protected getOption(actionId: string, parentAction?: string): ContextMenuOption {
+		const actions: string[] = actionId.split(this.levelSeparator);
+		let level = 1;
 
+		let menuLevel: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+		level ++;
+		while (level <= actions.length) {
+			menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+			level ++;
+		}
+
+		return menuLevel;
+	}
+
+}
