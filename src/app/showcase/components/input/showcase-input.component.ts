@@ -7,8 +7,22 @@ import { Component } from '@angular/core';
 export class ShowcaseInputComponent {
 
 	public value: '';
+	public texts: Array<string> = [];
 
 	constructor() {
+		this.texts = [
+			'New York',
+			'Rome',
+			'London',
+			'Barcelona',
+			'París',
+			'Berlín',
+			'Oslo',
+			'Atenas',
+			'Lisboa',
+			'Amsterdam',
+			'St Petersburgo'
+		];
 	}
 
 	public doEnter() {
