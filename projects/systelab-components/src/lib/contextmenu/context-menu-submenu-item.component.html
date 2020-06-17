@@ -8,7 +8,7 @@
                                     [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
                                     [hasChildren]="childAction.hasChildren()"
                                     [hasIcons]="hasIcons"></systelab-context-menu-item>
-        <ul *ngIf="childAction.hasChildren()" #childdropdownmenu0 id="{{childAction.actionId+elementID}}"
+        <ul *ngIf="childAction.hasChildren()" #childdropdownmenu id="{{childAction.actionId+elementID}}"
             class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute"
             style="overflow: initial !important;">
             <systelab-context-menu-submenu-item [myAction]="childAction"

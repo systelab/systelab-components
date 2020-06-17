@@ -18,7 +18,7 @@ export class ContextMenuSubmenuItemComponent {
 
 	@Input() public elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
-	@ViewChildren('childdropdownmenu0') public childDropdownMenuElement0: QueryList<ElementRef>;
+	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
 
 	constructor() {
 	}
@@ -26,9 +26,9 @@ export class ContextMenuSubmenuItemComponent {
 	public doMouseOver(event: any, elementID: string, actionId: string) {
 		let selectedChild;
 
-		const {optionAcitionId} = this.myContextMenuOriginal.getOptionDetails(actionId);
+		const optionAcitionId = this.myContextMenuOriginal.getOptionDetailsActionId(actionId);
 
-		selectedChild = this.childDropdownMenuElement0.toArray()
+		selectedChild = this.childDropdownMenuElement.toArray()
 			.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
 
 		this.myContextMenuOriginal.showSubmenu(event, actionId, selectedChild, this.elementID);

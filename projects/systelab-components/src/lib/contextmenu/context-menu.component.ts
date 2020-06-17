@@ -18,7 +18,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.open(event);
 	}
 
-	public getMyReference () {
+	public getMyReference (): AbstractContextMenuComponent<ContextMenuOption> {
 		return this;
 	}
 
@@ -55,7 +55,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 				this.previousActionChild = actionId;
 
 				this.toggle(actionId + this.elementID);
-				const selectedChild = this.childDropdownMenuElement0.toArray()
+				const selectedChild = this.childDropdownMenuElement.toArray()
 					.find((elem) => elem.nativeElement.id === (actionId + this.elementID));
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');

@@ -5,7 +5,7 @@ import { ContextMenuOption } from './context-menu-option';
 @Directive()
 export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> {
 
-	@ViewChildren('childdropdownmenu0') public childDropdownMenuElement0: QueryList<ElementRef>;
+	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
 	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
 
 	@Output() public action = new EventEmitter();
@@ -79,24 +79,24 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	public doMouseOver(event: any, elementID: string, actionId: string) {
 		if (this.isEnabled(elementID, actionId)) {
-			const {optionAcitionId} = this.getOptionDetails(actionId);
+			const optionAcitionId = this.getOptionDetailsActionId(actionId);
 
-			const selectedChild = this.childDropdownMenuElement0.toArray()
+			const selectedChild = this.childDropdownMenuElement.toArray()
 				.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
 
 			this.showSubmenu(event, actionId, selectedChild, this.elementID);
 		}
 	}
 
-	public getMyReference() {
+	public getMyReference(): AbstractContextMenuComponent<T> {
 		return this;
 	}
 
 	protected checkTargetAndClose(target: any) {
 		if (!this.checkIfNgContent(target)) {
 			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-				if (this.childDropdownMenuElement0) {
-					if (!this.childDropdownMenuElement0.toArray().some((elem) => target === elem.nativeElement)) {
+				if (this.childDropdownMenuElement) {
+					if (!this.childDropdownMenuElement.toArray().some((elem) => target === elem.nativeElement)) {
 						this.closeDropDown();
 					}
 				} else {
@@ -106,7 +106,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	protected hideSubmenus (untilLevel: number) {
+	protected hideSubmenus (untilLevel: number): void {
 		if (untilLevel < this.lastMenuLevel) {
 			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
 				this.toggle(this.previousShownMenu[i - 1]);
@@ -121,15 +121,18 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		return actions.length - 1;
 	}
 
-	public getOptionDetails(actionId: string) {
-		const optionAcitionId: string = this.getOption(actionId).actionId;
-		const optionHasChilder: boolean = this.getOption(actionId).hasChildren();
-
-		return {optionAcitionId, optionHasChildren: optionHasChilder};
+	public getOptionDetailsActionId(actionId: string): string {
+		return this.getOption(actionId).actionId;
 	}
 
+	public getOptionDetailsHasChildren(actionId: string): boolean {
+		return this.getOption(actionId).hasChildren();
+	}
+
+
 	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string) {
-		const {optionAcitionId, optionHasChildren} = this.getOptionDetails(actionId);
+		const optionAcitionId = this.getOptionDetailsActionId(actionId);
+		const optionHasChildren = this.getOptionDetailsHasChildren(actionId);
 		const optionLevel = this.getMyLevel(actionId);
 
 		if (optionHasChildren) {
