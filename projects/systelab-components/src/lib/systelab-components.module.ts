@@ -84,6 +84,7 @@ import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar
 import { AutoCompleteModule, SharedModule } from 'primeng';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { ChipsComponent } from './chips/chips.component';
+import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
 
 @NgModule({
 	imports:      [
@@ -104,6 +105,7 @@ import { ChipsComponent } from './chips/chips.component';
 		SliderComponent,
 		SwitchComponent,
 		ContextMenuComponent,
+		ContextMenuSubmenuItemComponent,
 		ContextPanelComponent,
 		MessagePopupViewComponent,
 		DataFilterPipe,
@@ -171,7 +173,7 @@ import { ChipsComponent } from './chips/chips.component';
 		ChipButtonComponent,
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
-		ChipsComponent
+		ChipsComponent,
 	],
 	exports:      [
 		SliderComponent,
@@ -244,7 +246,7 @@ import { ChipsComponent } from './chips/chips.component';
 		ChipButtonComponent,
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
-		ChipsComponent
+		ChipsComponent,
 	],
 	providers:    [
 		StylesUtilService,
