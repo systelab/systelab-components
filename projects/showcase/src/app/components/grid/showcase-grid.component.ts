@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowcaseData } from './showcase-grid.model';
 import { ShowcaseGridUtil } from './showcase-grid.util';
-import { GridContextMenuOption } from '../../../../../systelab-components/src/lib/grid/contextmenu/grid-context-menu-option';
-import { GridContextMenuActionData } from '../../../../../systelab-components/src/lib/grid/contextmenu/grid-context-menu-action-data';
+import { GridContextMenuOption } from 'systelab-components';
+import { GridContextMenuActionData } from 'systelab-components';
 
 @Component({
 	selector:    'showcase-grid',

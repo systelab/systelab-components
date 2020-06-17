@@ -8,12 +8,12 @@ import { ContextMenuComponent } from './context-menu.component';
 })
 export class ContextMenuSubmenuItemComponent {
 
-	@Input() public myAction: ContextMenuOption;
-	@Input() public myActionName: string;
+	@Input() public action: ContextMenuOption;
+	@Input() public actionName: string;
 	@Input() public hasIcons: boolean;
 	@Input() public hasChildren: boolean;
 	public readonly levelSeparator = '_|_';
-	@Input() public myContextMenuOriginal: ContextMenuComponent;
+	@Input() public contextMenuOriginal: ContextMenuComponent;
 	@Input() public parentId: string;
 
 	@Input() public elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
@@ -23,30 +23,30 @@ export class ContextMenuSubmenuItemComponent {
 	constructor() {
 	}
 
-	public doMouseOver(event: any, elementID: string, actionId: string) {
+	public doMouseOver(event: any, elementID: string, actionId: string): void {
 		let selectedChild;
 
-		const optionAcitionId = this.myContextMenuOriginal.getOptionDetailsActionId(actionId);
+		const optionAcitionId = this.contextMenuOriginal.getOptionDetailsActionId(actionId);
 
 		selectedChild = this.childDropdownMenuElement.toArray()
 			.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
 
-		this.myContextMenuOriginal.showSubmenu(event, actionId, selectedChild, this.elementID);
+		this.contextMenuOriginal.showSubmenu(event, actionId, selectedChild, this.elementID);
 	}
 
-	public doClickWithString(event: any, elementID: string, actionId: string) {
-		this.myContextMenuOriginal.executeAction(event, elementID, actionId);
+	public doClickWithString(event: any, elementID: string, actionId: string): void {
+		this.contextMenuOriginal.executeAction(event, elementID, actionId);
 	}
 
-	public getMyAction(childActionId: String): string {
-		return this.myActionName + this.levelSeparator + childActionId;
+	public getAction(childActionId: String): string {
+		return this.actionName + this.levelSeparator + childActionId;
 	}
 
 	public isEnabled(elementId: string, actionId: string): boolean {
-		return (this.myAction && this.myAction.isActionEnabled) ? this.myAction.isActionEnabled(elementId, actionId) : true;
+		return (this.action && this.action.isActionEnabled) ? this.action.isActionEnabled(elementId, actionId) : true;
 	}
 
 	public isIconEnabled(elementId: string, actionId: string): boolean {
-		return (this.myAction && this.myAction.isIconEnabled) ? this.myAction.isIconEnabled(elementId, actionId) : true;
+		return (this.action && this.action.isIconEnabled) ? this.action.isIconEnabled(elementId, actionId) : true;
 	}
 }

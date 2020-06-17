@@ -11,7 +11,7 @@
                 <ul #scrollableList class="slab-dropdown-scroll">
                     <li *ngFor="let action of contextMenuOptions"
                         class="d-flex align-items-center" [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
-                        (click)="doClickWithString($event, elementID, action.actionId)"
+                        (click)="doClickWithAction($event, elementID, action.actionId)"
                         (mouseover)="doMouseOver($event, elementID, action.actionId)">
                         <div *ngIf="isEnabled(elementID, action.actionId)" class="slab-flex-1" style="flex:1 1 auto">
                             <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
@@ -22,11 +22,11 @@
                             <ul *ngIf="action.hasChildren()" #childdropdownmenu id="{{action.actionId+elementID}}"
                                 class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute"
                                 style="overflow: initial !important;">
-                                <systelab-context-menu-submenu-item [myAction]="action"
-                                                                    [myActionName]="action.actionId"
+                                <systelab-context-menu-submenu-item [action]="action"
+                                                                    [actionName]="action.actionId"
                                                                     [hasChildren]="action.hasChildren()"
                                                                     [hasIcons]="hasIcons"
-                                                                    [myContextMenuOriginal]="getMyReference()"
+                                                                    [contextMenuOriginal]="getMyReference()"
                                                                     [parentId]="elementID"
                                 ></systelab-context-menu-submenu-item>
                             </ul>

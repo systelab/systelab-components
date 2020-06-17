@@ -10,20 +10,20 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	@Output() public action = new EventEmitter();
 
-	public _contextMenuOptions: Array<T>;
-	protected previousShownMenu: Array<string> = new Array<string>();
-	protected previousMenuWidth: Array<number> = new Array<number>();
+	private contextMenuOptionsArray: Array<T>;
+	protected previousShownMenu: Array<string> = [];
+	protected previousMenuWidth: Array<number> = [];
 	protected lastMenuLevel: number;
 	public readonly levelSeparator = '_|_';
 
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
-		this._contextMenuOptions = value;
+		this.contextMenuOptionsArray = value;
 		this.checkIfHasIcons();
 	}
 
 	get contextMenuOptions() {
-		return this._contextMenuOptions;
+		return this.contextMenuOptionsArray;
 	}
 
 	public hasIcons = false;
@@ -71,7 +71,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public doClickWithString(event: any, elementID: string, actionId: string) {
+	public doClickWithAction(event: any, elementID: string, actionId: string) {
 		if (this.isEnabled(elementID, actionId)) {
 			this.executeAction(event, elementID, actionId);
 		}
@@ -92,7 +92,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		return this;
 	}
 
-	protected checkTargetAndClose(target: any) {
+	protected checkTargetAndClose(target: any): void {
 		if (!this.checkIfNgContent(target)) {
 			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
 				if (this.childDropdownMenuElement) {
@@ -130,7 +130,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	}
 
 
-	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string) {
+	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string): void {
 		const optionAcitionId = this.getOptionDetailsActionId(actionId);
 		const optionHasChildren = this.getOptionDetailsHasChildren(actionId);
 		const optionLevel = this.getMyLevel(actionId);
