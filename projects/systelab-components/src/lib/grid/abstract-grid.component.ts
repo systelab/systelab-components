@@ -47,7 +47,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	protected firstSizeToFitExecuted = false;
 
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	            protected dialogService: DialogService) {
+				protected dialogService: DialogService) {
 	}
 
 	public ngOnInit(): void {
@@ -157,6 +157,12 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 			this.setColumnWidthToFitContent(columnApi, filteredGridOptionsPreferences);
 
+			// Override pinned property saved in preferences
+			const pinnedCol = filteredGridOptionsPreferences.find(column => column.colId === AbstractGrid.contextMenuColId || column.colId === AbstractGrid.selectionColId);
+			if (pinnedCol) {
+				pinnedCol['pinned'] = 'left';
+			}
+
 			columnApi.setColumnState(filteredGridOptionsPreferences);
 		}
 	}
@@ -176,7 +182,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return {
 			colId:                 AbstractGrid.contextMenuColId,
 			headerName:            '',
-			pinned: 'left',
+			pinned:                'left',
 			width:                 width,
 			suppressSizeToFit:     true,
 			resizable:             false,
@@ -190,7 +196,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			colId:             AbstractGrid.selectionColId,
 			headerName:        '',
 			checkboxSelection: true,
-			pinned: 'left',
+			pinned:            'left',
 			width:             width,
 			suppressSizeToFit: true,
 			resizable:         false,
@@ -321,7 +327,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			event.node.setSelected(true);
 		} else {
 			if (event.column.colId === 'selectCol') {
-					event.node.setSelected(!event.node.isSelected());
+				event.node.setSelected(!event.node.isSelected());
 			} else {
 				if (!event.column.isCellEditable(event.node)) {
 					const value = (event.event.ctrlKey && this.multipleSelection && !this.showChecks) ? event.event : event.data;
