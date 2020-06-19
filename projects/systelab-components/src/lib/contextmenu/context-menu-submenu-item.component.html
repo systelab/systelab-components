@@ -1,8 +1,8 @@
 <li *ngFor="let childAction of action.childrenContextMenuOptions"
     class="d-flex align-items-center" [class.disabled]="!true"
-    (click)="doClickWithString($event, parentId, actionName + levelSeparator + childAction.actionId)"
+    (click)="doClickWithAction($event, parentId, actionName + levelSeparator + childAction.actionId)"
     (mouseover)="doMouseOver($event, elementID, actionName + levelSeparator + childAction.actionId)">
-    <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto">
+    <div *ngIf="isEnabled" class="slab-flex-1">
         <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
                                     [isEnabled]="isEnabled(elementID, childAction.actionId)"
                                     [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"

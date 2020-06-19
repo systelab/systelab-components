@@ -10,7 +10,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	@Output() public action = new EventEmitter();
 
-	private contextMenuOptionsArray: Array<T>;
+	private contextMenuOptionsList: Array<T>;
 	protected previousShownMenu: Array<string> = [];
 	protected previousMenuWidth: Array<number> = [];
 	protected lastMenuLevel: number;
@@ -18,12 +18,12 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
-		this.contextMenuOptionsArray = value;
+		this.contextMenuOptionsList = value;
 		this.checkIfHasIcons();
 	}
 
 	get contextMenuOptions() {
-		return this.contextMenuOptionsArray;
+		return this.contextMenuOptionsList;
 	}
 
 	public hasIcons = false;
@@ -40,7 +40,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	protected abstract getOption(actionId: string);
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 		super.ngOnInit();
 		this.checkIfHasIcons();
 	}
@@ -49,7 +49,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		this.hasIcons = false;
 	}
 
-	public dotsClicked(event: MouseEvent) {
+	public dotsClicked(event: MouseEvent): void {
 		if (this.existsAtLeastOneActionEnabled()) {
 			super.dotsClicked(event);
 		} else {
@@ -57,7 +57,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public open(event: MouseEvent) {
+	public open(event: MouseEvent): void {
 		if (this.existsAtLeastOneActionEnabled()) {
 			super.open(event);
 		} else {
@@ -65,19 +65,19 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public doClick(event: any, elementID: string, action: ContextMenuOption, parent?: ContextMenuOption) {
+	public doClick(event: any, elementID: string, action: ContextMenuOption, parent?: ContextMenuOption): void {
 		if (this.isEnabled(elementID, action.actionId)) {
 			this.executeAction(event, elementID, action.actionId);
 		}
 	}
 
-	public doClickWithAction(event: any, elementID: string, actionId: string) {
+	public doClickWithAction(event: any, elementID: string, actionId: string): void {
 		if (this.isEnabled(elementID, actionId)) {
 			this.executeAction(event, elementID, actionId);
 		}
 	}
 
-	public doMouseOver(event: any, elementID: string, actionId: string) {
+	public doMouseOver(event: any, elementID: string, actionId: string): void {
 		if (this.isEnabled(elementID, actionId)) {
 			const optionAcitionId = this.getOptionDetailsActionId(actionId);
 
@@ -88,7 +88,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public getMyReference(): AbstractContextMenuComponent<T> {
+	public getSelfReference(): AbstractContextMenuComponent<T> {
 		return this;
 	}
 
@@ -116,7 +116,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public getMyLevel(actionId: string): number {
+	public getMenuLevel(actionId: string): number {
 		const actions: string[] = actionId.split(this.levelSeparator);
 		return actions.length - 1;
 	}
@@ -131,27 +131,26 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 
 	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string): void {
-		const optionAcitionId = this.getOptionDetailsActionId(actionId);
+		const optionActionId = this.getOptionDetailsActionId(actionId);
 		const optionHasChildren = this.getOptionDetailsHasChildren(actionId);
-		const optionLevel = this.getMyLevel(actionId);
+		const optionLevel = this.getMenuLevel(actionId);
 
 		if (optionHasChildren) {
 			event.stopPropagation();
 			event.preventDefault();
 
-			if (this.previousActionChild !== optionAcitionId ) {
-				this.previousActionChild = optionAcitionId;
+			if (this.previousActionId !== optionActionId ) {
+				this.previousActionId = optionActionId;
 				this.hideSubmenus(optionLevel);
 				this.lastMenuLevel = optionLevel + 1;
 
-				this.previousShownMenu.push(optionAcitionId + elementId);
+				this.previousShownMenu.push(optionActionId + elementId);
 
-				this.toggle(optionAcitionId + elementId);
+				this.toggle(optionActionId + elementId);
 
 				this.previousMenuWidth[this.lastMenuLevel - 1] = selectedChild.nativeElement.offsetWidth;
 
-				let leftPosition: number;
-				leftPosition = this.getFirstChildLeftWithLevels(selectedChild, optionLevel, this.previousMenuWidth);
+				const leftPosition = this.getFirstChildLeftWithLevels(selectedChild, optionLevel, this.previousMenuWidth);
 
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', leftPosition + 'px');
@@ -162,7 +161,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 			event.stopPropagation();
 			event.preventDefault();
-			this.previousActionChild = optionAcitionId;
+			this.previousActionId = optionActionId;
 
 		}
 	}

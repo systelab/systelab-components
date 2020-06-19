@@ -18,7 +18,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.open(event);
 	}
 
-	public getMyReference (): AbstractContextMenuComponent<ContextMenuOption> {
+	public getSelfReference (): AbstractContextMenuComponent<ContextMenuOption> {
 		return this;
 	}
 
@@ -48,11 +48,11 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 			event.stopPropagation();
 			event.preventDefault();
 
-			if (this.previousActionChild !== actionId) {
-				if (this.previousActionChild) {
-					this.toggle(this.previousActionChild + this.elementID);
+			if (this.previousActionId !== actionId) {
+				if (this.previousActionId) {
+					this.toggle(this.previousActionId + this.elementID);
 				}
-				this.previousActionChild = actionId;
+				this.previousActionId = actionId;
 
 				this.toggle(actionId + this.elementID);
 				const selectedChild = this.childDropdownMenuElement.toArray()

@@ -34,7 +34,7 @@ export class ContextMenuSubmenuItemComponent {
 		this.contextMenuOriginal.showSubmenu(event, actionId, selectedChild, this.elementID);
 	}
 
-	public doClickWithString(event: any, elementID: string, actionId: string): void {
+	public doClickWithAction(event: any, elementID: string, actionId: string): void {
 		this.contextMenuOriginal.executeAction(event, elementID, actionId);
 	}
 

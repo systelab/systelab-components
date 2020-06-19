@@ -21,7 +21,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	public destroyKeyListener: Function;
 	public scrollHandler: any;
 	public isOpened = false;
-	protected previousActionChild: string;
+	protected previousActionId: string;
 
 	protected constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 	}
@@ -115,7 +115,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public actionsAfterCloseDropDown(): void {
-		this.previousActionChild = undefined;
+		this.previousActionId = undefined;
 		this.isOpened = false;
 		this.cdr.detectChanges();
 		this.removeScrollHandler();
