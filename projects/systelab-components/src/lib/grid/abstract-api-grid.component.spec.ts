@@ -31,6 +31,7 @@ import { PreferencesService } from 'systelab-preferences';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
+import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -46,7 +47,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 	private totalItems = 10;
 
 	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	                   protected dialogService: DialogService) {
+					   protected dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
@@ -88,12 +89,12 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 @Component({
 	selector: 'systelab-grid-test',
 	template: `
-                <div class="position-relative" style="height: 200px;">
-                    <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
-                                   [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
-                </div>
-                <button type="button" class="btn" (click)="grid.showOptions()">Options</button>
-	          `
+                  <div class="position-relative" style="height: 200px;">
+                      <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
+                                     [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
+                  </div>
+                  <button type="button" class="btn" (click)="grid.showOptions()">Options</button>
+			  `
 })
 export class GridTestComponent {
 
@@ -150,6 +151,7 @@ describe('Systelab Grid', () => {
 				GridContextMenuCellRendererComponent,
 				GridContextMenuComponent,
 				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
 				SystelabGridComponent,
 				GridTestComponent,
 				GridColumnOptionsDialog,
@@ -159,7 +161,15 @@ describe('Systelab Grid', () => {
 				TwoListSortableListComponent,
 				TabsComponent,
 				TabComponent,
-				DataFilterPipe]
+				DataFilterPipe],
+			providers:    [
+				DialogService,
+				MessagePopupService]
+		});
+		TestBed.overrideModule(BrowserDynamicTestingModule, {
+			set: {
+				entryComponents: [GridColumnOptionsDialog]
+			}
 		});
 	}));
 
