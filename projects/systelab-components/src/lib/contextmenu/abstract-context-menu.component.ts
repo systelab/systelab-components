@@ -10,16 +10,20 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	@Output() public action = new EventEmitter();
 
-	public _contextMenuOptions: Array<T>;
+	private contextMenuOptionsList: Array<T>;
+	protected previousShownMenu: Array<string> = [];
+	protected previousMenuWidth: Array<number> = [];
+	protected lastMenuLevel: number;
+	public readonly levelSeparator = '_|_';
 
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
-		this._contextMenuOptions = value;
+		this.contextMenuOptionsList = value;
 		this.checkIfHasIcons();
 	}
 
 	get contextMenuOptions() {
-		return this._contextMenuOptions;
+		return this.contextMenuOptionsList;
 	}
 
 	public hasIcons = false;
@@ -34,7 +38,9 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	protected abstract executeAction(event: any, elementId: string, actionId: string, parentAction?: string);
 
-	public ngOnInit() {
+	protected abstract getOption(actionId: string);
+
+	public ngOnInit(): void {
 		super.ngOnInit();
 		this.checkIfHasIcons();
 	}
@@ -43,7 +49,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		this.hasIcons = false;
 	}
 
-	public dotsClicked(event: MouseEvent) {
+	public dotsClicked(event: MouseEvent): void {
 		if (this.existsAtLeastOneActionEnabled()) {
 			super.dotsClicked(event);
 		} else {
@@ -51,7 +57,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public open(event: MouseEvent) {
+	public open(event: MouseEvent): void {
 		if (this.existsAtLeastOneActionEnabled()) {
 			super.open(event);
 		} else {
@@ -59,13 +65,34 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public doClick(event: any, elementID: string, action: ContextMenuOption, parent?: ContextMenuOption) {
+	public doClick(event: any, elementID: string, action: ContextMenuOption, parent?: ContextMenuOption): void {
 		if (this.isEnabled(elementID, action.actionId)) {
-			this.executeAction(event, elementID, action.actionId, parent ? parent.actionId : undefined);
+			this.executeAction(event, elementID, action.actionId);
 		}
 	}
 
-	protected checkTargetAndClose(target: any) {
+	public doClickWithAction(event: any, elementID: string, actionId: string): void {
+		if (this.isEnabled(elementID, actionId)) {
+			this.executeAction(event, elementID, actionId);
+		}
+	}
+
+	public doMouseOver(event: any, elementID: string, actionId: string): void {
+		if (this.isEnabled(elementID, actionId)) {
+			const optionAcitionId = this.getOptionDetailsActionId(actionId);
+
+			const selectedChild = this.childDropdownMenuElement.toArray()
+				.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
+
+			this.showSubmenu(event, actionId, selectedChild, this.elementID);
+		}
+	}
+
+	public getSelfReference(): AbstractContextMenuComponent<T> {
+		return this;
+	}
+
+	protected checkTargetAndClose(target: any): void {
 		if (!this.checkIfNgContent(target)) {
 			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
 				if (this.childDropdownMenuElement) {
@@ -78,4 +105,66 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 			}
 		}
 	}
+
+	protected hideSubmenus (untilLevel: number): void {
+		if (untilLevel < this.lastMenuLevel) {
+			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
+				this.toggle(this.previousShownMenu[i - 1]);
+				this.previousShownMenu.pop();
+				this.lastMenuLevel = i - 1;
+			}
+		}
+	}
+
+	public getMenuLevel(actionId: string): number {
+		const actions: string[] = actionId.split(this.levelSeparator);
+		return actions.length - 1;
+	}
+
+	public getOptionDetailsActionId(actionId: string): string {
+		return this.getOption(actionId).actionId;
+	}
+
+	public getOptionDetailsHasChildren(actionId: string): boolean {
+		return this.getOption(actionId).hasChildren();
+	}
+
+
+	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string): void {
+		const optionActionId = this.getOptionDetailsActionId(actionId);
+		const optionHasChildren = this.getOptionDetailsHasChildren(actionId);
+		const optionLevel = this.getMenuLevel(actionId);
+
+		if (optionHasChildren) {
+			event.stopPropagation();
+			event.preventDefault();
+
+			if (this.previousActionId !== optionActionId ) {
+				this.previousActionId = optionActionId;
+				this.hideSubmenus(optionLevel);
+				this.lastMenuLevel = optionLevel + 1;
+
+				this.previousShownMenu.push(optionActionId + elementId);
+
+				this.toggle(optionActionId + elementId);
+
+				this.previousMenuWidth[this.lastMenuLevel - 1] = selectedChild.nativeElement.offsetWidth;
+
+				const leftPosition = this.getFirstChildLeftWithLevels(selectedChild, optionLevel, this.previousMenuWidth);
+
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
+				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', leftPosition + 'px');
+			}
+		} else {
+			this.hideSubmenus(optionLevel);
+			this.lastMenuLevel = optionLevel;
+
+			event.stopPropagation();
+			event.preventDefault();
+			this.previousActionId = optionActionId;
+
+		}
+	}
+
+
 }

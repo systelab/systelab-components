@@ -25,6 +25,7 @@ import { ContextMenuItemComponent } from '../contextmenu/context-menu-item.compo
 import { DialogService } from '../modal/dialog/dialog.service';
 import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
+import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 
 export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
@@ -130,15 +131,15 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
 @Component({
 	selector: 'systelab-searcher-test',
 	template: `
-                <div class="container-fluid" style="height: 200px;">
-                    <div class="row mt-1">
-                        <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
-                        <div class="col-md-9">
-                            <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"></systelab-searcher-example>
-                        </div>
-                    </div>
-                </div>
-	          `
+                  <div class="container-fluid" style="height: 200px;">
+                      <div class="row mt-1">
+                          <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
+                          <div class="col-md-9">
+                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"></systelab-searcher-example>
+                          </div>
+                      </div>
+                  </div>
+			  `
 })
 export class SearcherTestComponent {
 	public id: string;
@@ -171,11 +172,20 @@ describe('Systelab Searcher', () => {
 				GridContextMenuCellRendererComponent,
 				GridHeaderContextMenuComponent,
 				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
 				ComboBoxInputRendererComponent,
 				SystelabSearcherComponent,
 				SearcherTestComponent,
 				GridContextMenuComponent,
-				SearcherTableComponent]
+				SearcherTableComponent],
+			providers:    [
+				DialogService,
+				MessagePopupService]
+		});
+		TestBed.overrideModule(BrowserDynamicTestingModule, {
+			set: {
+				entryComponents: [SearcherDialog]
+			}
 		});
 	}));
 

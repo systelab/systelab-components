@@ -97,6 +97,7 @@ export * from './lib/date-range-picker/date-range-picker.component';
 export * from './lib/paginator/paginator.component';
 export * from './lib/chips/chips.component';
 export * from './lib/chip-button/chip-button.component';
+export * from './lib/chips/chips.component';
 export * from './lib/directives/autofocus.directive';
 
 export * from './lib/listbox/renderer/abstract-tree-listbox-renderer.component';

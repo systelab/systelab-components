@@ -21,17 +21,17 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	public destroyKeyListener: Function;
 	public scrollHandler: any;
 	public isOpened = false;
-	protected previousActionChild: string;
+	protected previousActionId: string;
 
 	protected constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 	}
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 		jQuery(this.dropdownParent.nativeElement).on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
 	}
 
 	@HostListener('window:resize', ['$event'])
-	public onResize(event: any) {
+	public onResize(event: any): void {
 		if (this.isDropDownOpened()) {
 			this.closeDropDown();
 		}
@@ -62,16 +62,16 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		}
 	}
 
-	public showDropDown(x: number, y: number) {
+	public showDropDown(x: number, y: number): void {
 		setTimeout(() => this.loop(x, y), 10);
 	}
 
-	public resetDropDownPositionAndHeight() {
+	public resetDropDownPositionAndHeight(): void {
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', null);
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', null);
 	}
 
-	protected getFirstChildLeft(selectedChild: ElementRef) {
+	protected getFirstChildLeft(selectedChild: ElementRef): number {
 		let firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 15;
 		const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
 
@@ -82,7 +82,29 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		return firstChildLeft;
 	}
 
-	protected getFirstChildTop(event: any, selectedChild: ElementRef) {
+
+	protected getFirstChildLeftWithLevels(selectedChild: ElementRef, optionLevel: number, previousMenuWidth: Array<number>): number {
+		let firstChildLeft;
+		let accumulativeLeft = 0;
+		const firstChildAbsoluteLeft = this.dropdownElement.nativeElement.offsetLeft;
+
+		if (optionLevel < 1) {
+			firstChildLeft = this.dropdownElement.nativeElement.offsetWidth + 12;
+		} else {
+			firstChildLeft = previousMenuWidth[optionLevel - 1] + 12;
+			for (let i = 0; i < optionLevel; i++) {
+				accumulativeLeft = accumulativeLeft + previousMenuWidth[i];
+			}
+		}
+
+		if (firstChildAbsoluteLeft + this.dropdownElement.nativeElement.offsetWidth + accumulativeLeft +
+			selectedChild.nativeElement.offsetWidth > window.innerWidth) {
+			firstChildLeft = -selectedChild.nativeElement.offsetWidth + 15;
+		}
+		return firstChildLeft;
+	}
+
+	protected getFirstChildTop(event: any, selectedChild: ElementRef): number {
 		const firstChildAbsoluteTop = event.clientY;
 		let firstChildRelativeTop = event.target.offsetTop;
 
@@ -92,8 +114,8 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		return firstChildRelativeTop;
 	}
 
-	public actionsAfterCloseDropDown() {
-		this.previousActionChild = undefined;
+	public actionsAfterCloseDropDown(): void {
+		this.previousActionId = undefined;
 		this.isOpened = false;
 		this.cdr.detectChanges();
 		this.removeScrollHandler();
@@ -109,7 +131,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		this.resetDropDownPositionAndHeight();
 	}
 
-	public closeDropDown() {
+	public closeDropDown(): void {
 		if (this.isDropDownOpened()) {
 			this.myRenderer.removeAttribute(this.dropdownParent.nativeElement, 'aria-expanded');
 			this.myRenderer.removeClass(this.dropdownParent.nativeElement, 'show');
@@ -119,7 +141,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		this.actionsAfterCloseDropDown();
 	}
 
-	protected addListeners() {
+	protected addListeners(): void {
 		this.addScrollHandler();
 		this.destroyMouseListener = this.myRenderer.listen('window', 'click', (evt: MouseEvent) => {
 			this.handleMouseEvents(evt);
@@ -132,7 +154,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		});
 	}
 
-	protected handleKeyboardEvents(event: KeyboardEvent) {
+	protected handleKeyboardEvents(event: KeyboardEvent): void {
 		if (event.key === 'Escape') {
 			if (this.isDropDownOpened()) {
 				this.closeDropDown();
@@ -140,19 +162,19 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		}
 	}
 
-	protected handleWheelEvents(event: WheelEvent) {
+	protected handleWheelEvents(event: WheelEvent): void {
 		this.checkTargetAndClose(event.target);
 	}
 
-	protected handleMouseEvents(event: MouseEvent) {
+	protected handleMouseEvents(event: MouseEvent): void {
 		this.checkTargetAndClose(event.target);
 	}
 
-	protected scroll(event: any) {
+	protected scroll(event: any): void {
 		this.checkTargetAndClose(event.target);
 	}
 
-	protected checkTargetAndClose(target: any) {
+	protected checkTargetAndClose(target: any): void {
 		if (!this.checkIfNgContent(target)) {
 			if (this.isDropDownOpened()) {
 				this.closeDropDown();
@@ -176,26 +198,26 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		return false;
 	}
 
-	protected addScrollHandler() {
+	protected addScrollHandler(): void {
 		this.scrollHandler = this.scroll.bind(this);
 		window.addEventListener('scroll', this.scrollHandler, true);
 	}
 
-	protected removeScrollHandler() {
+	protected removeScrollHandler(): void {
 		window.removeEventListener('scroll', this.scrollHandler, true);
 	}
 
-	public ngOnDestroy() {
+	public ngOnDestroy(): void {
 		this.removeScrollHandler();
 	}
 
-	public dotsClicked(event: MouseEvent) {
+	public dotsClicked(event: MouseEvent): void {
 		if (!this.isDropDownOpened()) {
 			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
 	}
 
-	protected hideDivUntilIsPositioned(x: number, y: number) {
+	protected hideDivUntilIsPositioned(x: number, y: number): void {
 		// hide the div until is positioned in event x y position to avoid flick
 		this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 		this.isOpened = true;
@@ -203,7 +225,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		this.showDropDown(x, y);
 	}
 
-	public open(event: MouseEvent) {
+	public open(event: MouseEvent): void {
 
 		jQuery('#' + this.elementID).dropdown('toggle');
 
@@ -214,7 +236,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		}
 	}
 
-	public toggle(elementID: string) {
+	public toggle(elementID: string): void {
 		jQuery('#' + elementID).toggle();
 	}
 }
