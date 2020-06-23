@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "10.0.11",
+  "version": "10.0.12",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -23,7 +23,7 @@
     "ag-grid-community": ">=23.0.1 <24.0.0",
     "angular-split": ">=3.0.2 <4.0.0",
     "bootstrap": ">=4.3.1 <5.0.0",
-    "date-fns": ">=1.29.0 <2.0.0",
+    "date-fns": ">=2.0.0 <3.0.0",
     "jquery": ">=3.3.1 <4.0.0",
     "mobile-drag-drop": ">=2.3.0-rc.0 <3.0.0",
     "nanobar": ">=0.4.2 <1.0.0",
