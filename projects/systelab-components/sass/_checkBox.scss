@@ -5,8 +5,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 @if $slab-display-check {
   // Hide native checkbox
   input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
-    //  position: absolute;
-    //  left:  -9999px;
+    @include position(absolute, $left: -9999px);
     opacity: 0;
   }
 
@@ -74,8 +73,12 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 }
 
 
-
 .ag-theme-fresh .ag-checkbox-input-wrapper {
+  input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
+    left: auto;
+    position: relative;
+  }
+
   background: none !important;
   font-family: 'icomoon' !important;
   font-size: 21px !important;

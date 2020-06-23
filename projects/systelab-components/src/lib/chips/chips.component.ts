@@ -39,7 +39,7 @@ export class ChipsComponent {
 	constructor() {
 	}
 
-	public search(event) {
+	public search(event): void {
 		of(this.texts)
 			.toPromise()
 			.then(

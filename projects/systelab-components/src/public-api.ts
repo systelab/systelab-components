@@ -51,6 +51,7 @@ export * from './lib/modal/dialog/modal-context';
 export * from './lib/modal/dialog/dialog.service';
 
 export * from './lib/loading/loading.component';
+export * from './lib/loading/loading.service';
 export * from './lib/spinner/spinner.component';
 
 export * from './lib/file-selector/file-selector.component';
@@ -66,6 +67,8 @@ export * from './lib/combobox/abstract-api-combobox.component';
 export * from './lib/combobox/autocomplete/autocomplete-api-combobox.component';
 export * from './lib/combobox/renderer/combobox-favourite-renderer.component';
 export * from './lib/combobox/renderer/combobox-input-renderer.component';
+export * from './lib/combobox/renderer/combobox-input-renderer';
+export * from './lib/combobox/tree/abstract-api-tree-combobox.component';
 export * from './lib/tooltip/tooltip.directive';
 export * from './lib/grid/abstract-grid.component';
 export * from './lib/grid/abstract-api-grid.component';
@@ -82,6 +85,7 @@ export * from './lib/grid/contextmenu/grid-context-menu-component';
 export * from './lib/grid/contextmenu/grid-context-menu-cell-renderer.component';
 export * from './lib/grid/contextmenu/grid-context-menu-option';
 export * from './lib/grid/contextmenu/grid-context-menu-action-data';
+export * from './lib/grid/options/grid-column-options';
 
 export * from './lib/wizard-steps/wizard-steps.component';
 export * from './lib/twolist/two-list-sortable-list.component';
@@ -91,6 +95,7 @@ export * from './lib/numpad/numpad.dialog.component';
 
 export * from './lib/date-range-picker/date-range-picker.component';
 export * from './lib/paginator/paginator.component';
+export * from './lib/chips/chips.component';
 export * from './lib/chip-button/chip-button.component';
 export * from './lib/chips/chips.component';
 export * from './lib/directives/autofocus.directive';
@@ -100,7 +105,9 @@ export * from './lib/contextmenu/context-menu-item.component';
 export * from './lib/listbox/gender-listbox.component';
 export * from './lib/listbox/listbox.component';
 export * from './lib/listbox/abstract-listbox.component';
+export * from './lib/listbox/abstract-api-listbox.component';
 export * from './lib/listbox/abstract-api-tree-listbox.component';
 export * from './lib/sortable-list/abstract-sortable-list.component';
 export * from './lib/add-remove-list/abstract-add-remove-list.component';
 export * from './lib/tree/abstract-tree.component';
+
