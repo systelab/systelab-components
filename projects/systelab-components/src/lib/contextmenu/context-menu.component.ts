@@ -18,7 +18,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.open(event);
 	}
 
-	public getSelfReference (): AbstractContextMenuComponent<ContextMenuOption> {
+	public getSelfReference(): AbstractContextMenuComponent<ContextMenuOption> {
 		return this;
 	}
 
@@ -44,7 +44,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 
 		const option: ContextMenuOption = this.getOption(actionId, parentAction);
 
-		if (option.hasChildren()) {
+		if (option && option.hasChildren()) {
 			event.stopPropagation();
 			event.preventDefault();
 
@@ -80,17 +80,20 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 	}
 
 	protected getOption(actionId: string, parentAction?: string): ContextMenuOption {
-		const actions: string[] = actionId.split(this.levelSeparator);
-		let level = 1;
+		if (actionId) {
+			const actions: string[] = actionId.split(this.levelSeparator);
+			let level = 1;
 
-		let menuLevel: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-		level ++;
-		while (level <= actions.length) {
-			menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-			level ++;
+			let menuLevel: ContextMenuOption = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+			level++;
+			while (level <= actions.length) {
+				menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
+				level++;
+			}
+			return menuLevel;
+		} else {
+			return undefined;
 		}
-
-		return menuLevel;
 	}
 
 }

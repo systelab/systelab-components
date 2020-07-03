@@ -4,6 +4,7 @@ import { GridContextMenuOption } from './grid-context-menu-option';
 
 export interface GridRowMenuActionHandler {
 	isContextMenuOptionEnabled(elementId: string, actionId: string): boolean;
+
 	executeContextMenuAction(elementId: string, actionId: string): void;
 }
 
@@ -52,7 +53,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 
 		const option: GridContextMenuOption<T> = this.getOption(actionId);
 
-		if (!option.hasChildren()) {
+		if (option && !option.hasChildren()) {
 			if (this.isEmbedded) {
 				this.closeDropDown();
 				event.stopPropagation();
@@ -72,10 +73,10 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 		let level = 1;
 
 		let menuLevel: GridContextMenuOption<T> = this.contextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-		level ++;
+		level++;
 		while (level <= actions.length) {
 			menuLevel = menuLevel.childrenContextMenuOptions.find(opt => opt.actionId === actions[level - 1]);
-			level ++;
+			level++;
 		}
 
 		return menuLevel;
