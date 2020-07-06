@@ -32,6 +32,7 @@ import { DialogService } from '../modal/dialog/dialog.service';
 import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
+import { ShowcaseData } from '../../../../showcase/src/app/components/grid/showcase-grid.model';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -106,9 +107,17 @@ export class GridTestComponent {
 	}
 
 	public getMenu(): Array<GridContextMenuOption<TestData>> {
+		const contextMenuSubOptions22: Array<GridContextMenuOption<TestData>> = [
+			new GridContextMenuOption('action31', 'Action 31 son of 3', (b) => this.doMenuAction(b)),
+			new GridContextMenuOption('action32', 'Action 32 son of 3', (b) => this.doMenuAction(b)),
+			new GridContextMenuOption('action33', 'Action 33 son of 3', (b) => this.doMenuAction(b))
+		];
+
 		return [
 			new GridContextMenuOption('action1', 'Action 1', (a) => this.doMenuAction(a)),
 			new GridContextMenuOption('action2', 'Action 2', (a) => this.doMenuAction(a)),
+			new GridContextMenuOption('action3', 'Action 3', null, () => true, false, undefined, null, null, contextMenuSubOptions22)
+
 		];
 	}
 
@@ -229,6 +238,27 @@ describe('Systelab Grid', () => {
 					});
 			});
 	});
+
+	it('should be able to show the menu on a row and select an option and then a suboption', (done) => {
+		fixture.whenStable()
+			.then(() => {
+				const rows = clickMenuOnRow(fixture, 1);
+				fixture.whenStable()
+					.then(() => {
+						clickOption(fixture, 2);
+						expect(fixture.componentInstance.selectedOptionID)
+							.toEqual('');
+
+						fixture.whenStable().then(() => {
+							clickOption(fixture, 5);
+							expect(fixture.componentInstance.selectedOptionID)
+								.toEqual('action33');
+							done();
+						});
+					});
+			});
+	});
+
 
 	it('should be able to show the menu on a header and select an option', (done) => {
 		fixture.whenStable()

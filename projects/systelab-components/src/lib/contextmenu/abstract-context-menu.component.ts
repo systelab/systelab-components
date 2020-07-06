@@ -136,8 +136,6 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		const optionLevel = this.getMenuLevel(actionId);
 
 		if (optionHasChildren) {
-			console.log('Show Submenu ' + optionActionId + ' - ' + elementId);
-			console.log('Show Submenu Prev' + this.previousActionId  + ' - ' + elementId);
 			event.stopPropagation();
 			event.preventDefault();
 
