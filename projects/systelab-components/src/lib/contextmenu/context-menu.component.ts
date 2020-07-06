@@ -45,22 +45,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		const option: ContextMenuOption = this.getOption(actionId, parentAction);
 
 		if (option.hasChildren()) {
-			event.stopPropagation();
-			event.preventDefault();
-
-			if (this.previousActionId !== actionId) {
-				if (this.previousActionId) {
-					this.toggle(this.previousActionId + this.elementID);
-				}
-				this.previousActionId = actionId;
-
-				this.toggle(actionId + this.elementID);
-				const selectedChild = this.childDropdownMenuElement.toArray()
-					.find((elem) => elem.nativeElement.id === (actionId + this.elementID));
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
-				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', this.getFirstChildLeft(selectedChild) + 'px');
-			}
-
+			this.doMouseOver(event, elementId, actionId);
 		} else {
 			if (this.isEmbedded || parentAction) {
 				this.closeDropDown();

@@ -213,6 +213,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	public dotsClicked(event: MouseEvent): void {
 		if (!this.isDropDownOpened()) {
+			this.elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
 	}
