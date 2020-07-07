@@ -17,7 +17,10 @@ import { CalendarModule } from 'primeng/calendar';
 	template: `
         <div>
             <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
+            <systelab-date-time [(currentDate)]="currentDateWithReset" [resetTimeWhenChangingCurrentDate]="true"></systelab-date-time>
             <button type="button" class="btn mt-2 mr-1" (click)="resetDatePickerTime()">Reset value
+            </button>
+            <button type="button" class="btn mt-2 mr-1" (click)="setCurrentDate()">Set Current Date
             </button>
         </div>
 	`,
@@ -31,14 +34,23 @@ export class DatepickerTimeTestComponent {
 	public defaultHours = 14;
 	public defaultMinutes = 5;
 
-	public currentDate: Date;
+	public updatedHours = 11;
+	public updatedMinutes = 3;
 
+	public currentDate: Date;
+	public currentDateWithReset: Date;
 	constructor() {
 		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
+		this.currentDateWithReset = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
 	}
 
 	public resetDatePickerTime() {
 		this.currentDate = undefined;
+	}
+
+	public setCurrentDate() {
+		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.updatedHours, this.updatedMinutes);
+		this.currentDateWithReset = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.updatedHours, this.updatedMinutes);
 	}
 }
 
@@ -117,12 +129,27 @@ describe('Systelab DatepickerTimeComponent', () => {
 		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes + 1);
 	});
 
+	it('update current date and see different behaviours in hour', () => {
+		setCurrentDate(fixture);
+
+		expect(fixture.componentInstance.currentDate.getHours()).toBe(14);
+		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(5);
+		expect(fixture.componentInstance.currentDateWithReset.getHours()).toBe(11);
+		expect(fixture.componentInstance.currentDateWithReset.getMinutes()).toBe(3);
+	});
+
 });
 
 function resetDatepickerTime(fixture: ComponentFixture<DatepickerTimeTestComponent>) {
 	fixture.componentInstance.resetDatePickerTime();
 	fixture.detectChanges();
 }
+
+function setCurrentDate(fixture: ComponentFixture<DatepickerTimeTestComponent>) {
+	fixture.componentInstance.setCurrentDate();
+	fixture.detectChanges();
+}
+
 
 function setValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: Date) {
 	fixture.componentInstance.currentDate = value;

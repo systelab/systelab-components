@@ -25,19 +25,25 @@ export class DatepickerTimeComponent extends Datepicker {
 	get currentDate(): Date {
 		return this._currentDate;
 	}
+	@Input() public resetTimeWhenChangingCurrentDate = false;
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
 		if (this._currentDate) {
-			if (this._currentDate.getHours() === 0 || this.touchSpinHourValues.value !== 0) {
-				this._currentDate.setHours(this.touchSpinHourValues.value);
-			} else {
+			if (this.resetTimeWhenChangingCurrentDate) {
 				this.touchSpinHourValues.value = this._currentDate.getHours();
-			}
-			if (this._currentDate.getMinutes() === 0 || this.touchSpinMinutesValues.value !== 0) {
-				this._currentDate.setMinutes(this.touchSpinMinutesValues.value);
-			} else {
 				this.touchSpinMinutesValues.value = this._currentDate.getMinutes();
+			} else {
+				if (this._currentDate.getHours() === 0 || this.touchSpinHourValues.value !== 0) {
+					this._currentDate.setHours(this.touchSpinHourValues.value);
+				} else {
+					this.touchSpinHourValues.value = this._currentDate.getHours();
+				}
+				if (this._currentDate.getMinutes() === 0 || this.touchSpinMinutesValues.value !== 0) {
+					this._currentDate.setMinutes(this.touchSpinMinutesValues.value);
+				} else {
+					this.touchSpinMinutesValues.value = this._currentDate.getMinutes();
+				}
 			}
 		} else {
 			this.touchSpinHourValues.value = 0;
