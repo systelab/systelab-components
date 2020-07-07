@@ -9,6 +9,7 @@ import { Week } from 'systelab-components';
 export class ShowcaseDatepickerComponent {
 
 	public myDate;
+	public myDateWithReset;
 	public maxDate: Date;
 	public minDate: Date;
 	public isDisabled: boolean;
@@ -18,6 +19,12 @@ export class ShowcaseDatepickerComponent {
 		this.myDate = new Date(2018, 9, 20, 14, 5, 30, 0);
 		this.maxDate = new Date(2018, 9, 20);	// October 20, 2018
 		this.minDate = new Date(2017, 0, 20);	// January 20, 2017
+		this.myDateWithReset = new Date(2018, 9, 20, 14, 5, 30, 0);
 		this.isDisabled = false;
+	}
+
+	public resetDateAndTime() {
+		this.myDate = new Date();
+		this.myDateWithReset = new Date();
 	}
 }
