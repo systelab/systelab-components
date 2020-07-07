@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { DatepickerTimeComponent, Month } from 'systelab-components';
+import { Component } from '@angular/core';
+import { Month } from 'systelab-components';
 import { Week } from 'systelab-components';
 
 @Component({
@@ -23,7 +23,6 @@ export class ShowcaseDatepickerComponent {
 		this.isDisabled = false;
 	}
 
-	@ViewChild ('dateTimeWithReset', {static: false}) dateTimeWithReset: DatepickerTimeComponent;
 	public resetDateAndTime() {
 		this.myDate = new Date();
 		this.myDateWithReset = new Date();
