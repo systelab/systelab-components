@@ -14,8 +14,6 @@ import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { AbstractApiListBox } from './abstract-api-listbox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
-import { DialogService } from '../modal/dialog/dialog.service';
-import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 
 export class TestData {
 	constructor(public id: string, public description: string) {
