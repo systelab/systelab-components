@@ -6,17 +6,17 @@ import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { TouchspinComponent } from '../spinner/spinner.component';
-import { SystelabTranslateModule } from 'systelab-translate';
+import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { Datepicker } from './datepicker.component';
-import { I18nService } from 'systelab-translate';
 import { of } from 'rxjs';
 
 export class USMockI18nService {
 	public get(key: string) {
 		return of(key);
 	}
+
 	public getFirstDayOfWeek() {
 		return 0;
 	}
@@ -30,7 +30,7 @@ export class USMockI18nService {
 	}
 
 	public getDateFormat() {
-		return 'MM/DD/YY';
+		return 'MM/dd/yy';
 	}
 }
 
@@ -52,7 +52,7 @@ export class ESMockI18nService {
 	}
 
 	public getDateFormat() {
-		return 'DD/MM/YY';
+		return 'dd/MM/yy';
 	}
 }
 
@@ -74,18 +74,17 @@ export class ZHMockI18nService {
 	}
 
 	public getDateFormat() {
-		return 'YY-MM-DD';
+		return 'yy-MM-dd';
 	}
 }
-
 
 @Component({
 	selector: 'systelab-datepicker-test',
 	template: `
-                <div>
-                    <systelab-datepicker [(currentDate)]="currentDate"></systelab-datepicker>
-                </div>
-	          `,
+                  <div>
+                      <systelab-datepicker [(currentDate)]="currentDate"></systelab-datepicker>
+                  </div>
+			  `,
 	styles:   []
 })
 export class DatepickerTestComponent {
@@ -119,7 +118,7 @@ describe('Systelab US DatepickerComponent', () => {
 			declarations: [TouchspinComponent,
 				Datepicker,
 				DatepickerTestComponent],
-			providers: [{provide: I18nService, useClass: USMockI18nService}]
+			providers:    [{provide: I18nService, useClass: USMockI18nService}]
 		})
 			.compileComponents();
 	}));
@@ -173,15 +172,18 @@ describe('Systelab US DatepickerComponent', () => {
 	});
 	it('should 11/12019 be null', () => {
 		enterText(fixture, '11/12019');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 1.6.19 be null', () => {
 		enterText(fixture, '1.6.19');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 1-6-19 be null', () => {
 		enterText(fixture, '1-6-19');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 2619 be 6 Feb 2019', () => {
 		enterText(fixture, '2619');
@@ -189,7 +191,6 @@ describe('Systelab US DatepickerComponent', () => {
 			.toEqual(new Date(2019, 1, 6));
 	});
 });
-
 
 describe('Systelab ES DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
@@ -259,19 +260,23 @@ describe('Systelab ES DatepickerComponent', () => {
 	});
 	it('should 11/12019 be null', () => {
 		enterText(fixture, '11/12019');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 1.6.19 be null', () => {
 		enterText(fixture, '1.6.19');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 1-6-19 be null', () => {
 		enterText(fixture, '1-6-19');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 1619 be 01 Jun 2019', () => {
 		enterText(fixture, '1619');
-		expect(fixture.componentInstance.currentDate).toEqual(new Date(2019, 5, 1));
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 5, 1));
 	});
 });
 
@@ -290,7 +295,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 			declarations: [TouchspinComponent,
 				Datepicker,
 				DatepickerTestComponent],
-			providers: [{provide: I18nService, useClass: ZHMockI18nService}]
+			providers:    [{provide: I18nService, useClass: ZHMockI18nService}]
 		})
 			.compileComponents();
 	}));
@@ -339,19 +344,23 @@ describe('Systelab ZH DatepickerComponent', () => {
 	});
 	it('should 20191-11 be null', () => {
 		enterText(fixture, '20191-11');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 19.1.6 be null', () => {
 		enterText(fixture, '19.1.6');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 19/6/1 be null', () => {
 		enterText(fixture, '19/6/1');
-		expect(fixture.componentInstance.currentDate).toBeNull();
+		expect(fixture.componentInstance.currentDate)
+			.toBeNull();
 	});
 	it('should 1961 be 01 Jun 2019', () => {
 		enterText(fixture, '1961');
-		expect(fixture.componentInstance.currentDate).toEqual(new Date(2019, 5, 1));
+		expect(fixture.componentInstance.currentDate)
+			.toEqual(new Date(2019, 5, 1));
 	});
 });
 

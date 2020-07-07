@@ -5,7 +5,8 @@ import { Component, Input } from '@angular/core';
 	template: `
 	          <div class="pl-2 pt-4 pb-2">
                 <h4 class="d-inline"><ng-content></ng-content></h4>
-                <a href="https://github.com/systelab/systelab-components/tree/master/src/app/showcase/components/{{href}}"
+                projects/showcase/src/app/components
+                <a href="https://github.com/systelab/systelab-components/tree/master/projects/showcase/src/app/components/{{href}}"
                    target="_blank" tabIndex="-1">
                     <img class="d-inline" src="gh.ico" alt="View on GitHub" width="18px" height="18px">
                 </a>
