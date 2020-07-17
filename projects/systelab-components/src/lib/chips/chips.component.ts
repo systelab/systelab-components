@@ -10,16 +10,7 @@ export class ChipsComponent {
 
 	@Output() public filtered = new EventEmitter<Array<string>>();
 
-	private _filter: Array<string> = [];
-
-	get filter() {
-		return this._filter;
-	}
-
-	set filter(event) {
-		this._filter = event;
-		this.filtered.emit(event);
-	}
+	public filter: Array<string> = [];
 
 	@Input()
 	public texts: Array<string> = [];
@@ -34,7 +25,7 @@ export class ChipsComponent {
 
 	private newData: string;
 
-	@ViewChild('autoComplete', {static: false}) autoComplete: AutoComplete;
+	@ViewChild('autoComplete') autoComplete: AutoComplete;
 
 	constructor() {
 	}
@@ -58,17 +49,12 @@ export class ChipsComponent {
 			);
 	}
 
-	public onBlur(event: KeyboardEvent): void {
-		if (this.newData && this.autoComplete && this.autoComplete.value) {
-			this.autoComplete.value = [...this.autoComplete.value, this.newData];
-			this.filter = [...this.filter, this.newData];
-			this.newData = null;
-			this.autoComplete.multiInputEL.nativeElement.value = '';
-		} else if (this.newData) {
-			this.autoComplete.value = [this.newData];
-			this.filter = [this.newData];
-			this.newData = null;
-			this.autoComplete.multiInputEL.nativeElement.value = '';
+	public onKeyEnter(event: KeyboardEvent): void {
+		const input = (<HTMLInputElement>event.target);
+		if (input.value) {
+			this.filter.push(input.value);
+			this.filtered.emit(this.filter);
+			input.value = '';
 		}
 	}
 }
