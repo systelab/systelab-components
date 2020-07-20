@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { AutoComplete } from 'primeng/autocomplete';
 import { of } from 'rxjs';
+import { AutoComplete } from 'primeng';
 
 @Component({
 	selector:    'systelab-chips',
@@ -10,7 +10,16 @@ export class ChipsComponent {
 
 	@Output() public filtered = new EventEmitter<Array<string>>();
 
-	public filter: Array<string> = [];
+	private _filter: Array<string> = [];
+
+	get filter() {
+		return this._filter;
+	}
+
+	set filter(event) {
+		this._filter = event;
+		this.filtered.emit(event);
+	}
 
 	@Input()
 	public texts: Array<string> = [];
@@ -53,9 +62,9 @@ export class ChipsComponent {
 		const input = (<HTMLInputElement>event.target);
 		if (input.value) {
 			this.filter.push(input.value);
-			this.filtered.emit(this.filter);
 			input.value = '';
 		}
+		this.filtered.emit(this.filter);
 	}
 }
 
