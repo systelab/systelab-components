@@ -1,5 +1,5 @@
 <p-autoComplete #autoComplete [suggestions]="results" (completeMethod)="search($event)"
-                (keydown.enter)="onBlur($event)"
+                (keydown.enter)="onKeyEnter($event)"
                 [multiple]="true"
                 [readonly]="readonly"
                 [disabled]="disabled"

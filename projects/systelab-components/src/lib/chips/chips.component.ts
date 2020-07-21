@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { AutoComplete } from 'primeng/autocomplete';
 import { of } from 'rxjs';
+import { AutoComplete } from 'primeng';
 
 @Component({
 	selector:    'systelab-chips',
@@ -34,7 +34,7 @@ export class ChipsComponent {
 
 	private newData: string;
 
-	@ViewChild('autoComplete', {static: false}) autoComplete: AutoComplete;
+	@ViewChild('autoComplete') autoComplete: AutoComplete;
 
 	constructor() {
 	}
@@ -58,18 +58,13 @@ export class ChipsComponent {
 			);
 	}
 
-	public onBlur(event: KeyboardEvent): void {
-		if (this.newData && this.autoComplete && this.autoComplete.value) {
-			this.autoComplete.value = [...this.autoComplete.value, this.newData];
-			this.filter = [...this.filter, this.newData];
-			this.newData = null;
-			this.autoComplete.multiInputEL.nativeElement.value = '';
-		} else if (this.newData) {
-			this.autoComplete.value = [this.newData];
-			this.filter = [this.newData];
-			this.newData = null;
-			this.autoComplete.multiInputEL.nativeElement.value = '';
+	public onKeyEnter(event: KeyboardEvent): void {
+		const input = (<HTMLInputElement>event.target);
+		if (input.value) {
+			this.filter.push(input.value);
+			input.value = '';
 		}
+		this.filtered.emit(this.filter);
 	}
 }
 
