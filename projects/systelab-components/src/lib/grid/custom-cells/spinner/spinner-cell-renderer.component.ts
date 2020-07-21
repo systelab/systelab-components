@@ -1,10 +1,9 @@
-import {Component} from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-
+import { Component } from '@angular/core';
+import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
 	selector: 'systelab-spinner-cell-renderer',
-	template: `<span class="slab-flex-1 text-center">{{params.value.value}}</span>`
+	template: `<span class="slab-flex-1 text-center">{{params.value?.value}}</span>`
 })
 export class SpinnerCellRendererComponent implements AgRendererComponent {
 	public params: any;

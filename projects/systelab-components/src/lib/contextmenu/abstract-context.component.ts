@@ -15,6 +15,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	@Input() public fontSize: string;
 	@Input() public fontColor: string;
 	@Input() public isEmbedded = false;
+	@Input() public overflow = false;
 
 	public destroyWheelListener: Function;
 	public destroyMouseListener: Function;
@@ -27,7 +28,8 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit(): void {
-		jQuery(this.dropdownParent.nativeElement).on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
+		jQuery(this.dropdownParent.nativeElement)
+			.on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -81,7 +83,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		}
 		return firstChildLeft;
 	}
-
 
 	protected getFirstChildLeftWithLevels(selectedChild: ElementRef, optionLevel: number, previousMenuWidth: Array<number>): number {
 		let firstChildLeft;
@@ -227,10 +228,12 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public open(event: MouseEvent): void {
-
-		jQuery('#' + this.elementID).dropdown('toggle');
-
+		jQuery('#' + this.elementID)
+			.dropdown('toggle');
 		if (!this.isDropDownOpened()) {
+			if (!this.elementID) {
+				this.elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
+			}
 			// Add class manually because is not set when jquery.dropdwon toogle is executed
 			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
 			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
@@ -238,6 +241,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public toggle(elementID: string): void {
-		jQuery('#' + elementID).toggle();
+		jQuery('#' + elementID)
+			.toggle();
 	}
 }
