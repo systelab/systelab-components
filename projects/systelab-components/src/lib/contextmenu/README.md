@@ -15,6 +15,7 @@ Component to show a context menu
 | fontSize | string | undefined | Font size. |
 | fontColor | string | undefined | Font color. |
 | isEmbedded | boolean | false | Hides the three dots button. To use as an embedded context menu in other components, such as textAreas, inputs, etc. In order to show the context menu with this option, "open", and "openWithOptions" methods must be invoked. (For more info, check API section) |
+| overflow | boolean | false | Allows vertical scroll in context menu dropdown. Only compatible with single level context menus |
 | contextMenuOptions | Array&lt;ContextMenuOption&gt; | | An array of ContextMenuOptions objects representing the menu items. |
 
 
