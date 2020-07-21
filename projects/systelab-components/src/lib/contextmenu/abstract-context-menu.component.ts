@@ -96,7 +96,8 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		if (!this.checkIfNgContent(target)) {
 			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
 				if (this.childDropdownMenuElement) {
-					if (!this.childDropdownMenuElement.toArray().some((elem) => target === elem.nativeElement)) {
+					if (!this.childDropdownMenuElement.toArray()
+						.some((elem) => target === elem.nativeElement)) {
 						this.closeDropDown();
 					}
 				} else {
@@ -106,7 +107,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	protected hideSubmenus (untilLevel: number): void {
+	protected hideSubmenus(untilLevel: number): void {
 		if (untilLevel < this.lastMenuLevel) {
 			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
 				this.toggle(this.previousShownMenu[i - 1]);
@@ -122,13 +123,14 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	}
 
 	public getOptionDetailsActionId(actionId: string): string {
-		return this.getOption(actionId).actionId;
+		const option = this.getOption(actionId);
+		return option ? option.actionId : undefined;
 	}
 
 	public getOptionDetailsHasChildren(actionId: string): boolean {
-		return this.getOption(actionId).hasChildren();
+		const option = this.getOption(actionId);
+		return option ? option.hasChildren() : false;
 	}
-
 
 	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string): void {
 		const optionActionId = this.getOptionDetailsActionId(actionId);
@@ -139,7 +141,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 			event.stopPropagation();
 			event.preventDefault();
 
-			if (this.previousActionId !== optionActionId ) {
+			if (this.previousActionId !== optionActionId) {
 				this.previousActionId = optionActionId;
 				this.hideSubmenus(optionLevel);
 				this.lastMenuLevel = optionLevel + 1;
@@ -165,6 +167,5 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 		}
 	}
-
 
 }

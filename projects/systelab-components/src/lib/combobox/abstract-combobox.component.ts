@@ -250,7 +250,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	private initializeFavouriteList(): void {
+	protected initializeFavouriteList(): void {
 		const favouriteListPreference: Array<string | number> = (this.preferencesService) ? this.preferencesService.get(this.preferenceName + '.favourites') : undefined;
 		if (this.withFavourites && favouriteListPreference && favouriteListPreference.length > 0) {
 			this.favouriteList = favouriteListPreference;

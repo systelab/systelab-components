@@ -28,8 +28,10 @@
         </div>
     </p-header>
     <p-footer *ngIf="!inline" class="p-1 d-flex border-top">
-        <button *ngIf="showTodayButton" id="today" class="btn btn-sm mr-auto" (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
-        <button id="clear" class="btn btn-sm ml-auto" (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
+        <button *ngIf="showTodayButton" id="today" class="btn btn-sm mr-auto"
+                (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
+        <button id="clear" class="btn btn-sm ml-auto"
+                (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
     </p-footer>
 </p-calendar>
 

@@ -1,4 +1,13 @@
-<div *ngIf="!hideCheckbox" class="text-center d-flex align-items-center">
-    <input type="checkbox" [disabled]="true" id="{{id}}-active" [checked]="isCheckboxActive"/>
-    <label for="{{id}}-active" class="d-inline-block ml-auto mr-auto"></label>
+<div class="h-100 w-100 ag-checkbox-renderer-click-wrapper"></div>
+<div class="ag-selection-checkbox ag-selection-checkbox-cell-renderer w-100">
+    <div class="ag-labeled ag-label-align-right ag-checkbox ag-input-field">
+        <label class="ag-input-field-label ag-label ag-hidden ag-checkbox-label" for="{{id}}-active"></label>
+        <div class="ag-wrapper ag-input-wrapper ag-checkbox-input-wrapper ag-checkbox-input-wrapper-cell-editor"
+             [ngClass]="{'ag-checked': isCheckboxActive}">
+            <input class="ag-input-field-input ag-checkbox-input"
+                   type="checkbox"
+                   id="{{id}}-active" [checked]="isCheckboxActive"
+                   readonly>
+        </div>
+    </div>
 </div>

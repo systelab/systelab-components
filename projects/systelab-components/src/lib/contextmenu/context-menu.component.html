@@ -1,6 +1,7 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
     <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
-        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize" [style.color]="fontColor"></i>
+        <i class="icon-context-menu" [ngClass]="{'d-none': isEmbedded}" [style.font-size]="fontSize"
+           [style.color]="fontColor"></i>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
         <div #dropdown class="slab-dropdown slab-dropdown-fixed">
@@ -8,9 +9,10 @@
                 <div #ngcontent (click)="ngContentStopPropagation($event)">
                     <ng-content></ng-content>
                 </div>
-                <ul #scrollableList class="slab-dropdown-scroll">
+                <ul #scrollableList class="slab-dropdown-scroll" [ngClass]="{'slab-dropdown-overflow': overflow}">
                     <li *ngFor="let action of contextMenuOptions"
-                        class="d-flex align-items-center" [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
+                        class="d-flex align-items-center"
+                        [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
                         (click)="doClickWithAction($event, elementID, action.actionId)"
                         (mouseover)="doMouseOver($event, elementID, action.actionId)">
                         <div *ngIf="isEnabled(elementID, action.actionId)" class="slab-flex-1" style="flex:1 1 auto">
@@ -20,8 +22,7 @@
                                                         [hasChildren]="action.hasChildren()"
                                                         [hasIcons]="hasIcons"></systelab-context-menu-item>
                             <ul *ngIf="action.hasChildren()" #childdropdownmenu id="{{action.actionId+elementID}}"
-                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute"
-                                style="overflow: initial !important;">
+                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
                                 <systelab-context-menu-submenu-item [action]="action"
                                                                     [actionName]="action.actionId"
                                                                     [hasChildren]="action.hasChildren()"

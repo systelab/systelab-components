@@ -23,7 +23,7 @@ ng serve
 This will bootstrap a showcase application to test the different components.
 
 
-Use watch in the library build to detect file changes automatically. Start application in a different terminal:
+Use watch in the library build to detect file changes automatically (except from css). Start application in a different terminal:
 
 Terminal 1
 ```bash
