@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowcaseData } from './showcase-grid.model';
 import { ShowcaseGridUtil } from './showcase-grid.util';
-import { GridContextMenuOption } from 'systelab-components';
-import { GridContextMenuActionData } from 'systelab-components';
+import { GridContextMenuActionData, GridContextMenuOption } from 'systelab-components';
 
 @Component({
 	selector:    'showcase-grid',
@@ -25,7 +24,6 @@ export class ShowcaseGridComponent implements OnInit {
 
 	public getMenu(): Array<GridContextMenuOption<ShowcaseData>> {
 
-
 		const contextMenuSubOptions: Array<GridContextMenuOption<ShowcaseData>> = [
 			new GridContextMenuOption('option1', 'Option 1', (a) => this.doMenuAction(a)),
 			new GridContextMenuOption('option2', 'Option 2', (a) => this.doMenuAction(a)),
@@ -45,7 +43,6 @@ export class ShowcaseGridComponent implements OnInit {
 			new GridContextMenuOption('option84', 'Option 84', null, () => true, false, undefined, null, null, contextMenuSubOptions22),
 		];
 
-
 		const contextMenuSubOptions2: Array<GridContextMenuOption<ShowcaseData>> = [
 			new GridContextMenuOption('option7', 'Option 7', (a) => this.doMenuAction(a)),
 			new GridContextMenuOption('option8', 'Option 8  with a long name', null, () => true, false, undefined, null, null, contextMenuSubOptions21),
@@ -64,6 +61,7 @@ export class ShowcaseGridComponent implements OnInit {
 	}
 
 	public doMenuAction(action: GridContextMenuActionData<ShowcaseData>): void {
+		console.log(action);
 		console.log('Here ' + action.actionId);
 		console.log('With ' + action.multipleSelectedData);
 	}

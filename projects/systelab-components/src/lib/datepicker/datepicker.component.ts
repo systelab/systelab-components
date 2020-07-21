@@ -59,6 +59,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public currentLanguage: string;
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
+	public destroyTabKeyListener: Function;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
@@ -121,6 +122,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public ngOnDestroy() {
 		this.destroyKeyListener();
 		this.destroyWheelListener();
+		this.destroyTabKeyListener();
 	}
 
 	private checkPreviousAfterDate(): void {
@@ -172,7 +174,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public onInput(event: KeyboardEvent) {
-		if (event.keyCode === 13) {
+		if (event.keyCode === 13 || event.keyCode === 9) {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
 			this.closeDatepicker();
@@ -319,7 +321,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		});
 
 		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
-			if (evt.keyCode === 27) {
+			if (evt.keyCode === 27 || evt.key === 'Tab') {
 				this.closeDatepicker();
 			}
 		});

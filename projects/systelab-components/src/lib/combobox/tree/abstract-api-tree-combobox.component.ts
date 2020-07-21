@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular';
-import {AbstractComboBox} from '../abstract-combobox.component';
-import {Observable} from 'rxjs';
-import {PreferencesService} from 'systelab-preferences';
+import { AgRendererComponent } from 'ag-grid-angular';
+import { AbstractComboBox } from '../abstract-combobox.component';
+import { Observable } from 'rxjs';
+import { PreferencesService } from 'systelab-preferences';
 
 declare var jQuery: any;
 
@@ -35,12 +35,13 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	public ngOnInit() {
 		this.setRowHeight();
 		this.configGrid();
+		this.initializeFavouriteList();
 	}
 
 	protected configGrid() {
 		this.columnDefs = [
 			{
-				colId: 'itemDescription',
+				colId:        'itemDescription',
 				cellRenderer: (params: any) => {
 					return this.getLabelForLevel(params.data);
 				}
@@ -208,7 +209,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public getFavouriteElements(dataVector: Array<T>): Array<T> {
-		return dataVector.filter((data: T) => this.favouriteList.map(String).indexOf(data[this.getLevelIdField(1)].toString()) > -1);
+		return dataVector.filter((data: T) => this.favouriteList.map(String)
+			.indexOf(data[this.getLevelIdField(1)].toString()) > -1);
 	}
 
 	// Overrides

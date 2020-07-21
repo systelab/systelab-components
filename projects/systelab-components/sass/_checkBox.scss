@@ -98,6 +98,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   content: '' !important;;
 }
 
+
 .ag-theme-fresh .ag-checkbox-input-wrapper.ag-checked::after {
   content: '\f00d' !important;
   width: 22px !important;
@@ -105,7 +106,6 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   color: $white !important;
   padding-top: 3px !important;
   padding-left: 2px !important;
-
   background-color: $slab-checkbox-border-color;
 }
 
@@ -113,3 +113,20 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   width: 22px !important;
   height: 22px !important;
 }
+
+.ag-checkbox-input-wrapper-cell-editor {
+  margin-top: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ag-checkbox-renderer-click-wrapper {
+  z-index: 10;
+  position: absolute;
+  left: 0;
+}
+
+.ag-selection-checkbox-cell-renderer {
+  margin-right: 0 !important;
+}
+

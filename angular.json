@@ -208,5 +208,8 @@
       }
     }
   },
-  "defaultProject": "systelab-components"
+  "defaultProject": "systelab-components",
+  "cli": {
+    "analytics": false
+  }
 }
