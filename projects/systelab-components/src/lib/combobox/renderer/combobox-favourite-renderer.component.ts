@@ -26,6 +26,6 @@ export class ComboboxFavouriteRendererComponent implements AgRendererComponent {
 
 	private checkIfIsFavourite(params: any): void {
 		this.isFavourite = this.favouriteList.map(String)
-			.indexOf(params.data[params.colDef.id].toString()) > -1;
+			.includes(params.data[params.colDef.id].toString());
 	}
 }
