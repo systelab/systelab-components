@@ -121,8 +121,6 @@ export class TouchspinComponent {
 		}
 
 		if (itHasChanged) {
-			this._spinValues = new TouchSpinValues(this._spinValues.value, this._spinValues.min,
-				this._spinValues.max, this._spinValues.step, this._spinValues.isDecimal);
 			this.previousValue = this._spinValues.value;
 			this.change.emit(this._spinValues.value);
 			this.valueChange.emit(this._spinValues.value);
