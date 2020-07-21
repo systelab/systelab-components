@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
                       <h4 class="d-inline">
                           <ng-content></ng-content>
                       </h4>
-                      <a href="https://github.com/systelab/systelab-components/tree/master/projects/showcase/src/app/components/{{href}}"
+                      <a href="https://github.com/systelab/systelab-components/tree/master/projects/systelab-components/src/lib/{{href}}"
                          target="_blank" tabIndex="-1">
                           <img class="d-inline" src="gh.ico" alt="View on GitHub" width="18px" height="18px">
                       </a>
