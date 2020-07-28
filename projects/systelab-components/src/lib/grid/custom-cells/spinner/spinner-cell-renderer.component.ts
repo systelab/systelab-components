@@ -13,6 +13,6 @@ export class SpinnerCellRendererComponent implements AgRendererComponent {
 	}
 
 	public refresh(params: any): boolean {
-		return true;
+		return false;
 	}
 }

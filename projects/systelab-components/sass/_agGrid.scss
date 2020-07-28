@@ -131,6 +131,10 @@ $icon-rowaction-font-size: 20px;
 
   }
 
+  .ag-header-cell, .ag-header-group-cell {
+    border-right: 1px solid white;
+  }
+
   .ag-body-viewport {
     //overflow: auto !important;
     @include ag-row()

@@ -11,13 +11,8 @@ export class SpinnerCellEditorComponent implements AgEditorComponent {
 
 	public id: string;
 
-	public initialValue: number;
-
 	public agInit(params: any): void {
 		this.params = params;
-		if (this.params && this.params.value) {
-			this.initialValue = (<TouchSpinValues>this.params.value).value;
-		}
 	}
 
 	public getValue(): any {
