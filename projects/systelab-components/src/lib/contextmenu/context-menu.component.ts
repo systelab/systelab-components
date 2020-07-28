@@ -44,7 +44,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 
 		const option: ContextMenuOption = this.getOption(actionId, parentAction);
 
-		if (option.hasChildren()) {
+		if (option && option.hasChildren()) {
 			this.doMouseOver(event, elementId, actionId);
 		} else {
 			if (this.isEmbedded || parentAction) {

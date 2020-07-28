@@ -59,7 +59,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public currentLanguage: string;
 	public destroyWheelListener: Function;
 	public destroyKeyListener: Function;
-	public destroyTabKeyListener: Function;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
@@ -122,7 +121,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public ngOnDestroy() {
 		this.destroyKeyListener();
 		this.destroyWheelListener();
-		this.destroyTabKeyListener();
 	}
 
 	private checkPreviousAfterDate(): void {
