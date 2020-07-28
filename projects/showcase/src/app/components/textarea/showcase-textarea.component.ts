@@ -115,7 +115,6 @@ export class ShowcaseTextareaComponent implements OnInit {
 
 	public openContextMenu(event: any) {
 		event.preventDefault();
-		console.log('lets open');
 		this.contextMenu.open(event);
 	}
 
