@@ -569,7 +569,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	private checkIfIsFavourite(id: string): void {
+	protected checkIfIsFavourite(id: string): void {
 		this.isFavourite = (id !== undefined && id !== null) ? this.favouriteList.map(String)
 			.indexOf(id) > -1 : false;
 	}
