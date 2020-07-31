@@ -46,7 +46,7 @@
         <label class="col-md-3 col-form-label"> Context Menu with scroll</label>
         <div class="col-md-9">
             <div class="border" style="width: 25px">
-                <systelab-context-menu [contextMenuOptions]="contextMenuOptions5"
+                <systelab-context-menu [contextMenuOptions]="contextMenuOptions5" [overflow]="true"
                                        (action)="executeContextMenuAction($event)">
                 </systelab-context-menu>
             </div>

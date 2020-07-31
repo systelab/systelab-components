@@ -231,9 +231,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 		jQuery('#' + this.elementID)
 			.dropdown('toggle');
 		if (!this.isDropDownOpened()) {
-			if (!this.elementID) {
-				this.elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();
-			}
 			// Add class manually because is not set when jquery.dropdwon toogle is executed
 			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
 			this.hideDivUntilIsPositioned(event.clientX, event.clientY);

@@ -96,6 +96,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
 		}
+
 	}
 
 	public ngDoCheck() {
