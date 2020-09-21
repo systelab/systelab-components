@@ -65,6 +65,10 @@ $icon-rowaction-font-size: 20px;
      background-color: scale-color($primary, $alpha: -90%);
     }
 
+    &.ag-row-hover {
+      background-color: scale-color($primary, $alpha: -90%);
+    }
+
     &.ag-row-odd :not ag-row-selected {
       background-color: $table-row-odd-background-color;
     }
