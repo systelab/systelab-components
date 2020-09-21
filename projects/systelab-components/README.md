@@ -128,7 +128,7 @@ npm install -D systelab-schematics --save
 
 A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples. 
 
-As this components will be placed in a container, in the following sections you will find some tips about how to do it. Please check our [application frame](applicationframe), [dialog](modal/dialog) as a base containers of the layout.
+As this components will be placed in a container, in the following sections you will find some tips about how to do it. Please check our [application frame](src/lib/applicationframe), [dialog](src/lib/modal/dialog) as a base containers of the layout.
 
 The following table summarizes all the components included in the library.
 
