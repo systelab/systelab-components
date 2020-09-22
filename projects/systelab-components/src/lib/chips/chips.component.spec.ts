@@ -78,7 +78,7 @@ describe('Systelab Chips', () => {
 		expect(inputMultipleEl.properties.disabled)
 			.toEqual(true);
 		expect(multiContainer.nativeElement.className)
-			.toContain('ui-state-disabled');
+			.toContain('p-state-disabled');
 	});
 
 	it('should be readonly', () => {
@@ -96,9 +96,9 @@ describe('Systelab Chips', () => {
 		const spanEl = fixture.debugElement.query(By.css('span'));
 		const listEl = fixture.debugElement.query(By.css('ul'));
 		expect(spanEl.nativeElement.className)
-			.toContain('ui-autocomplete-multiple');
+			.toContain('p-autocomplete-multiple');
 		expect(listEl.nativeElement.className)
-			.toContain('ui-autocomplete-multiple-container');
+			.toContain('p-autocomplete-multiple-container');
 	});
 
 	it('should select item', fakeAsync(() => {
@@ -147,9 +147,9 @@ describe('Systelab Chips', () => {
 		fixture.detectChanges();
 
 		expect(chips.autoComplete.value[0])
-			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.ui-autocomplete-token-label')[0].textContent);
+			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.p-autocomplete-token-label')[0].textContent);
 		expect(chips.autoComplete.value.length)
-			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.ui-autocomplete-token-label').length);
+			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.p-autocomplete-token-label').length);
 	}));
 
 });

@@ -23,7 +23,7 @@ import { SliderModule } from 'primeng/slider';
 import { AngularSplitModule } from 'angular-split';
 import { CalendarModule } from 'primeng/calendar';
 import { ContextMenuModule } from 'primeng/contextmenu';
-import { SharedModule } from 'primeng';
+import { SharedModule } from 'primeng/api';
 
 @Component({
 	selector: 'systelab-colorpicker-test',

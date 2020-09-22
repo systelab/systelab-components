@@ -1,20 +1,20 @@
 /* This styles are used to override the default primeng styles for trees (https://www.primefaces.org/primeng/#/tree).*/
 
 
-body .ui-tree {
+body .p-tree {
   width: 100%;
   height: 100%;
   padding: 0 !important;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-  .ui-tree-container {
+  .p-tree-container {
     padding: 0 !important;
 
 
-    .ui-treenode {
+    .p-treenode {
       padding: 0 !important;
 
-      .ui-treenode-content {
+      .p-treenode-content {
         padding-left: 5px;
         color: #222;
         border: 0 !important;
@@ -34,15 +34,15 @@ body .ui-tree {
           color: $dark-gray;
         }
 
-        .ui-tree-toggler {
+        .p-tree-toggler {
           color: #222;
         }
 
-        .ui-treenode-icon {
+        .p-treenode-icon {
           margin: 0 5px 0 0;
         }
 
-        .ui-treenode-label {
+        .p-treenode-label {
           padding: 0 !important;
 
           span {
@@ -55,7 +55,7 @@ body .ui-tree {
             padding-bottom: 4px;
           }
 
-          &.ui-state-highlight {
+          &.p-state-highlight {
             background: $slab-selected-background-color !important;
             color: rgb(34, 34, 34) !important;
           }
@@ -78,14 +78,14 @@ body .ui-tree {
           background-color: $slab-selected-background-color !important;
         }
 
-        &.ui-treenode-content-selected {
+        &.p-treenode-content-selected {
           background: $slab-selected-background-color !important;
           color: rgb(34, 34, 34);
         }
 
-        &.ui-treenode-selectable {
-          .ui-treenode-label {
-            &:not(.ui-state-highlight):hover {
+        &.p-treenode-selectable {
+          .p-treenode-label {
+            &:not(.p-state-highlight):hover {
               background: $slab-selected-background-color !important;
             }
           }

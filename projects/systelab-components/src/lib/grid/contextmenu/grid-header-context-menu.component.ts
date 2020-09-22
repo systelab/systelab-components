@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { IHeaderAngularComp } from 'ag-grid-angular';
-import { IHeaderParams } from 'ag-grid-community';
+import { IAfterGuiAttachedParams, IHeaderParams } from 'ag-grid-community';
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
 
 export interface GridHeaderMenuActionHandler {
 	executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: any): void;
+
 	isHeaderContextMenuOptionEnabled(elementId: string, actionId: string, headerData: any): boolean;
 }
 
@@ -22,6 +23,14 @@ export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuCompon
 
 	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
+	}
+
+	public refresh(params: IHeaderParams): boolean {
+		throw new Error('Method not implemented.');
+	}
+
+	public afterGuiAttached?(params?: IAfterGuiAttachedParams): void {
+		throw new Error('Method not implemented.');
 	}
 
 	public agInit(params: IHeaderParams): void {

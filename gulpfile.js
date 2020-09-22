@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 
-gulp.task('copytemplates', function () {
+gulp.task('copytemplates', function (done) {
 	gulp.src([
 		'./projects/systelab-components/src/lib/grid/abstract-grid.component.html',
 		'./projects/systelab-components/src/lib/combobox/abstract-combobox.component.html',
@@ -16,19 +16,22 @@ gulp.task('copytemplates', function () {
 		'./projects/systelab-components/src/lib/datepicker/datepicker-time.component.html'
 	])
 		.pipe(gulp.dest('./dist/systelab-components/html'));
+	done();
 
 
 });
 
-gulp.task('copysass', function() {
+gulp.task('copysass', function(done) {
 	gulp.src([
 		'./projects/systelab-components/src/lib/sass/**/*.scss'])
 		.pipe(gulp.dest('./dist/systelab-components/sass'));
+	done();
 });
 
-gulp.task('copyicons', function() {
+gulp.task('copyicons', function(done) {
 	gulp.src([
 		'./icons/*'])
 		.pipe(gulp.dest('./dist/systelab-components/icons'));
+	done();
 });
 

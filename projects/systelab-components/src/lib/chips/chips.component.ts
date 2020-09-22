@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { of } from 'rxjs';
-import { AutoComplete } from 'primeng';
+import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
 	selector:    'systelab-chips',
