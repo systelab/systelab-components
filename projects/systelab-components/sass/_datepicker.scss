@@ -95,6 +95,10 @@ p-calendar {
   }
 }
 
+.p-datepicker-inline {
+  flex-direction: column;
+}
+
 body .p-datepicker {
   z-index: 100000 !important;
   max-width: 425px;
