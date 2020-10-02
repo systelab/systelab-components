@@ -43,7 +43,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			{
 				colId:        'itemDescription',
 				cellRenderer: (params: any) => {
-					return this.getLabelForLevel(params.data);
+						return this.getLabelForLevel(params.data);
 				}
 			}
 		];
@@ -85,6 +85,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	public abstract getAllNodeId(): string | number;
 
 	public abstract getAllNodeDescription(): string;
+
+	public abstract getSelectionPrefix(level: number): string;
 
 	protected getFavouriteText(): string {
 		return 'Favourites';
@@ -131,7 +133,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	// Override
 	public setDropdownHeight() {
-		let totalItems = Number(this.getTotalItems());
+		let totalItems = Number(this.gridOptions.api.getDisplayedRowCount());
 		let calculatedHeight = 0;
 
 		if (this.emptyElement) {
@@ -167,7 +169,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 						nodeVector.push(emptyElementNode);
 					}
 
-					if (this.withFavourites && this.favouriteList.length > 0) {
+					if (this.withFavourites) {
+						this.initializeFavouriteList();
+						if  (this.favouriteList.length > 0){
 						const favouriteElement: T = {} as T;
 						favouriteElement[this.getLevelIdField(0)] = AbstractApiTreeComboBox.FAVOURITEID;
 						favouriteElement[this.getLevelDescriptionField(0)] = this.getFavouriteText();
@@ -178,7 +182,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 							const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
 							nodeVector.push(currentFavouriteNode);
 						});
-					}
+					}}
 
 					if (this.isAllSelectable) {
 						const allElement: T = {} as T;
@@ -208,9 +212,33 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			);
 	}
 
-	public getFavouriteElements(dataVector: Array<T>): Array<T> {
-		return dataVector.filter((data: T) => this.favouriteList.map(String)
-			.indexOf(data[this.getLevelIdField(1)].toString()) > -1);
+	// Overrides
+	protected checkIfIsFavourite(id: string | number): void {
+		const idString = id ? id.toString() : undefined;
+		if (idString && idString.includes(this.getSelectionPrefix(1))) {
+			super.checkIfIsFavourite(idString.substr(1));
+		} else {
+			super.checkIfIsFavourite(id);
+		}
+	}
+
+	// Overrides
+	protected toggleFavourite(): void {
+		if (this.id.toString()
+			.includes(this.getSelectionPrefix(1))) {
+			this.isFavourite = !this.isFavourite;
+			if (this.isFavourite) {
+				this.favouriteList.push(this.id.toString()
+					.substr(1));
+			} else {
+				this.favouriteList.splice(this.favouriteList.map(String)
+					.indexOf(this.id.toString()
+						.substr(1)), 1);
+			}
+			this.preferencesService.put(this.getComboPreferencesPrefix() + '.favourites', this.favouriteList.map(String));
+		} else {
+			super.toggleFavourite();
+		}
 	}
 
 	// Overrides
@@ -260,5 +288,10 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			this.getRows();
 			return true;
 		}
+	}
+
+	private getFavouriteElements(dataVector: Array<T>): Array<T> {
+		return dataVector.filter((data: T) => this.favouriteList.map(String)
+			.indexOf(data[this.getLevelIdField(1)].toString()) > -1);
 	}
 }

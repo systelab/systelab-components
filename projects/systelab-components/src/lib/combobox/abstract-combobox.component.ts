@@ -80,6 +80,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Output() public change = new EventEmitter();
 	@Output() public idChange = new EventEmitter();
 	@Output() public descriptionChange = new EventEmitter();
+	@Output() public levelChange = new EventEmitter();
 	@Input() public allowEditInput = false;
 	@Input() public emptyElement = false;
 	@Input() public selectDeselectAll = false;
@@ -96,9 +97,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this._id = value;
 		this.idChange.emit(value);
 		this.setCodeDescriptionById();
-		if (value !== undefined && value !== null) {
-			this.checkIfIsFavourite(value.toString());
-		}
+		this.checkIfIsFavourite(value);
 	}
 
 	get id() {
@@ -128,6 +127,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input()
 	set level(value: number) {
 		this._level = value;
+		this.levelChange.emit(this._level);
 	}
 
 	get level() {
@@ -254,7 +254,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		const favouriteListPreference: Array<string | number> = (this.preferencesService) ? this.preferencesService.get(this.preferenceName + '.favourites') : undefined;
 		if (this.withFavourites && favouriteListPreference && favouriteListPreference.length > 0) {
 			this.favouriteList = favouriteListPreference;
-			if (this.id !== undefined && this.id !== null) {
+			if (this.id != null) {
 				this.checkIfIsFavourite(this.id.toString());
 			}
 		}
@@ -569,9 +569,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	protected checkIfIsFavourite(id: string): void {
-		this.isFavourite = (id !== undefined && id !== null) ? this.favouriteList.map(String)
-			.indexOf(id) > -1 : false;
+	protected checkIfIsFavourite(id: string | number): void {
+		if (id != null) {
+			const idString = id.toString();
+			this.isFavourite = this.favouriteList.map(String)
+				.indexOf(idString) > -1;
+		} else {
+			this.isFavourite = false;
+		}
 	}
 
 	public onModelUpdated() {
