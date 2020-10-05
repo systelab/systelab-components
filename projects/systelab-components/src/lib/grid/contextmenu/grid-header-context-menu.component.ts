@@ -34,13 +34,8 @@ export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<
 	}
 
 	protected existsAtLeastOneActionEnabled(): boolean {
-		let value;
-		if (this.contextMenuOptions) {
-			value = this.contextMenuOptions.some(option => this.isEnabled(this.elementID, option.actionId));
-		} else {
-			value = false;
-		}
-		return value;
+		return this.contextMenuOptions ?
+			this.contextMenuOptions.some(option => this.isEnabled(this.elementID, option.actionId)) : false;
 	}
 
 	public isEnabled(elementId: string, actionId: string): boolean {

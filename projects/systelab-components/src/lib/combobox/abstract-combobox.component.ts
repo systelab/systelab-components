@@ -573,7 +573,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (id != null) {
 			const idString = id.toString();
 			this.isFavourite = this.favouriteList.map(String)
-				.indexOf(idString) > -1;
+				.includes(idString);
 		} else {
 			this.isFavourite = false;
 		}

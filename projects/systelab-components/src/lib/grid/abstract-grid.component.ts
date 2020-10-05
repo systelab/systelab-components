@@ -429,18 +429,14 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		this.headerPopupMenu.setHeaderData(headerData);
 		if (this.existsAtLeastOneHeaderActionEnabled(headerData)) {
 			timer(200)
-				.subscribe(() => this.headerPopupMenu.openWithOptions(event, this.headerMenu, ));
+				.subscribe(() => this.headerPopupMenu.openWithOptions(event, this.headerMenu,));
 		} else {
 			event.stopPropagation();
 		}
 	}
 
 	protected existsAtLeastOneHeaderActionEnabled(data: Object | Array<Object>): boolean {
-		if (this.headerMenu) {
-			return this.headerMenu.some(menuOption => this.isMenuOptionEnabled(menuOption, data));
-		} else {
-			return false;
-		}
+		return this.headerMenu ? this.headerMenu.some(menuOption => this.isMenuOptionEnabled(menuOption, data)) : false;
 	}
 
 	protected existsAtLeastOneActionEnabled(data: T | Array<T> | Object | Array<Object>): boolean {

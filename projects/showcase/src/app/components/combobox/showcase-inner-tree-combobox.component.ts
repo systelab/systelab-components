@@ -79,23 +79,4 @@ export class ShowcaseInnerTreeComboBox extends AbstractApiTreeComboBox<any> {
 			return 'S';
 		}
 	}
-	// Overrides
-	protected toggleFavourite(): void {
-		if (this.id.toString()
-			.includes('S')) {
-			this.isFavourite = !this.isFavourite;
-			if (this.isFavourite) {
-				this.favouriteList.push(this.id.toString()
-					.substr(1));
-			} else {
-				this.favouriteList.splice(this.favouriteList.map(String)
-					.indexOf(this.id.toString()
-						.substr(1)), 1);
-			}
-			this.preferencesService.put(this.getComboPreferencesPrefix() + '.favourites', this.favouriteList.map(String));
-		} else {
-			super.toggleFavourite();
-		}
-	}
-
 }

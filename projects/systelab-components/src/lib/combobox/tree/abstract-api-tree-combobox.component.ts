@@ -292,6 +292,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	private getFavouriteElements(dataVector: Array<T>): Array<T> {
 		return dataVector.filter((data: T) => this.favouriteList.map(String)
-			.indexOf(data[this.getLevelIdField(1)].toString()) > -1);
+			.includes(data[this.getLevelIdField(1)].toString()));
 	}
 }
