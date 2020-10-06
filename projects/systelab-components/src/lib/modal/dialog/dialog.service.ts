@@ -45,7 +45,7 @@ export class DialogService {
 		config.hasBackdrop = true;
 
 		if (parameters.isContextDialog && parameters.positionX && parameters.positionY) {
-			config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-center '];
+			config.panelClass = ['slab-context-modal', 'slab-context-modal-arrow-center'];
 			const screenWidth = window.innerWidth;
 			let positionX = parameters.positionX - (parameters.width / 2);
 			if ((positionX + parameters.width) > screenWidth) {
