@@ -1,4 +1,4 @@
-import { Injectable, Injector, Type } from '@angular/core';
+import { Injectable, Injector, Renderer2, RendererFactory2, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
@@ -9,15 +9,18 @@ import { SystelabModalContext } from './modal-context';
 export class DialogService {
 
 	public static readonly breakpointMedium = 768;
+	private renderer: Renderer2;
 
-	constructor(private overlay: Overlay, private injector: Injector) {
+	constructor(private readonly overlay: Overlay, private injector: Injector, private readonly rendererFactory: RendererFactory2) {
+		this.renderer = this.rendererFactory.createRenderer(undefined, undefined);
 	}
 
 	public showDialog(component: Type<any>, parameters: SystelabModalContext): Observable<any> {
 		const overlayRef = this.overlay.create(this.getConfig(parameters));
 		const dialogRef = new DialogRef(overlayRef, parameters);
 		const userProfilePortal = new ComponentPortal(component, null, this.createInjector(dialogRef));
-		overlayRef.attach(userProfilePortal);
+		const componentRef = overlayRef.attach(userProfilePortal);
+		this.renderer.addClass(componentRef.location.nativeElement, 'slab-overflow-container');
 		return dialogRef.getResult();
 	}
 
