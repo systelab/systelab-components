@@ -142,6 +142,7 @@ public abstract getLevelDescriptionField(level: number): string;
 public abstract getLevelIdField(level: number): string;
 public abstract getAllNodeId(): string | number;
 public abstract getAllNodeDescription(): string;
+public abstract getSelectionPrefix(level: number): string;
 ```
 
 ## Using a Combo with custom input color

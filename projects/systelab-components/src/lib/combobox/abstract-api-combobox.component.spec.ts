@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { AbstractApiComboBox } from './abstract-api-combobox.component';
-import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu.component';
+import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
 import { DialogService } from '../modal/dialog/dialog.service';

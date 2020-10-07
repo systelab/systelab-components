@@ -11,9 +11,6 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	@Output() public action = new EventEmitter();
 
 	private contextMenuOptionsList: Array<T>;
-	protected previousShownMenu: Array<string> = [];
-	protected previousMenuWidth: Array<number> = [];
-	protected lastMenuLevel: number;
 	public readonly levelSeparator = '_|_';
 
 	@Input()

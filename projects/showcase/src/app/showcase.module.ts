@@ -79,6 +79,7 @@ import { TreeModule } from 'primeng/tree';
 import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-tree-combobox.component';
 
 @NgModule({
 	imports:      [
@@ -120,6 +121,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		ShowcaseTextareaComponent,
 		ShowcaseTableComponent,
 		ShowcaseGridComponent,
+		ShowcaseInnerTreeComboBox,
 		ShowcaseTwoListComponent,
 		ShowcaseApplicationFrameComponent,
 		ShowcaseMessagePopupComponent,

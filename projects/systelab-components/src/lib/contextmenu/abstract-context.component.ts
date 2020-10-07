@@ -23,6 +23,9 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	public scrollHandler: any;
 	public isOpened = false;
 	protected previousActionId: string;
+	protected previousShownMenu: Array<string> = [];
+	protected previousMenuWidth: Array<number> = [];
+	protected lastMenuLevel = 0;
 
 	protected constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 	}
@@ -116,6 +119,9 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public actionsAfterCloseDropDown(): void {
+		this.previousShownMenu = [];
+		this.previousMenuWidth = [];
+		this.lastMenuLevel = 0;
 		this.previousActionId = undefined;
 		this.isOpened = false;
 		this.cdr.detectChanges();

@@ -1,46 +1,41 @@
 import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
-import { IHeaderAngularComp } from 'ag-grid-angular';
-import { IHeaderParams } from 'ag-grid-community';
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
 
 export interface GridHeaderMenuActionHandler {
-	executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: any): void;
-	isHeaderContextMenuOptionEnabled(elementId: string, actionId: string, headerData: any): boolean;
+	executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: Object): void;
+
+	isHeaderContextMenuOptionEnabled(elementId: string, actionId: string, headerData: Object): boolean;
 }
 
 @Component({
 	selector:    'systelab-grid-header-context-menu',
-	templateUrl: './grid-header-context-menu.component.html'
+	templateUrl: '../../contextmenu/context-menu.component.html'
 })
-
-export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuComponent<GridContextMenuOption<T>> implements IHeaderAngularComp {
-
+export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<GridContextMenuOption<Object>> {
 	public actionHandler: GridHeaderMenuActionHandler;
-	public headerName: string;
-	public headerData: any;
+	public headerData: Object;
 
 	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
 	}
 
-	public agInit(params: IHeaderParams): void {
-		this.actionHandler = params.context.componentParent;
-		this.elementID = params.column.getColId();
-		this.contextMenuOptions = params.context.componentParent.headerMenu;
-		this.headerName = params.displayName;
-		this.headerData = params.column.getColDef().headerComponentParams.headerData;
+	public setActionManager(actionHandler: GridHeaderMenuActionHandler): void {
+		this.actionHandler = actionHandler;
 	}
 
-	public openWithOptions(event: MouseEvent, newContextMenuOptions: Array<GridContextMenuOption<T>>): void {
+	public setHeaderData(headerData: Object): void {
+		this.headerData = headerData;
+	}
+
+	public openWithOptions(event: MouseEvent, newContextMenuOptions: Array<GridContextMenuOption<Object>>): void {
+		this.contextMenuOptions = newContextMenuOptions;
+		this.open(event);
 	}
 
 	protected existsAtLeastOneActionEnabled(): boolean {
-		if (this.contextMenuOptions) {
-			return this.contextMenuOptions.some(option => this.isEnabled(this.elementID, option.actionId));
-		} else {
-			return false;
-		}
+		return this.contextMenuOptions ?
+			this.contextMenuOptions.some(option => this.isEnabled(this.elementID, option.actionId)) : false;
 	}
 
 	public isEnabled(elementId: string, actionId: string): boolean {
@@ -51,7 +46,7 @@ export class GridHeaderContextMenuComponent<T> extends AbstractContextMenuCompon
 		return false;
 	}
 
-	public executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
+	public executeAction(event: any, elementId: string, actionId: string): void {
 		this.actionHandler.executeHeaderContextMenuAction(elementId, actionId, this.headerData);
 	}
 

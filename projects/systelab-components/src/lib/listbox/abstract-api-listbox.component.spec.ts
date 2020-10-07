@@ -10,7 +10,7 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { Observable, of } from 'rxjs';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu.component';
+import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { AbstractApiListBox } from './abstract-api-listbox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';

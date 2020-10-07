@@ -16,7 +16,7 @@ import { ContextMenuItemComponent } from '../contextmenu/context-menu-item.compo
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
-import { GridHeaderContextMenuComponent } from './contextmenu/grid-header-context-menu.component';
+import { GridHeaderContextMenuComponent } from './contextmenu/grid-header-context-menu-renderer.component';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
 import { TwoListComponent } from '../twolist/two-list.component';
@@ -32,7 +32,7 @@ import { DialogService } from '../modal/dialog/dialog.service';
 import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
-import { ShowcaseData } from '../../../../showcase/src/app/components/grid/showcase-grid.model';
+import { GridHeaderContextMenu } from './contextmenu/grid-header-context-menu.component';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -159,6 +159,7 @@ describe('Systelab Grid', () => {
 			declarations: [GridHeaderContextMenuComponent,
 				GridContextMenuCellRendererComponent,
 				GridContextMenuComponent,
+				GridHeaderContextMenu,
 				ContextMenuItemComponent,
 				ContextMenuSubmenuItemComponent,
 				SystelabGridComponent,
@@ -324,12 +325,12 @@ function clickOnGridCell(fixture: ComponentFixture<GridTestComponent>, cell: num
 }
 
 function clickMenuHeaderOnRow(fixture: ComponentFixture<GridTestComponent>) {
-	fixture.debugElement.nativeElement.querySelectorAll('.slab-grid-header-context-menu * .slab-context-menu')[0].click();
+	fixture.debugElement.nativeElement.querySelectorAll('.slab-grid-header-context-menu > .slab-context-menu')[0].click();
 	fixture.detectChanges();
 }
 
 function clickOption(fixture: ComponentFixture<GridTestComponent>, option: number) {
-	const button = fixture.debugElement.nativeElement.querySelectorAll('li')[option].click();
+	fixture.debugElement.nativeElement.querySelectorAll('li')[option].click();
 	fixture.detectChanges();
 }
 

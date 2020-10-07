@@ -10,9 +10,9 @@ import { GridContextMenuComponent, GridRowMenuActionHandler } from './contextmen
 import { timer } from 'rxjs';
 import { GridColumnsOptions } from './options/grid-column-options';
 import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './options/grid-column-options-dialog.component';
-import { GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { TwoListItem } from '../twolist/two-list.component';
+import { GridHeaderContextMenu, GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';
 
 export type rowSelectionType = 'single' | 'multiple';
 
@@ -43,6 +43,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
+	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
 
 	protected firstSizeToFitExecuted = false;
 
@@ -276,9 +277,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			return option.action(actionData);
 		} else {
-			const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
+			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			this.action.emit(actionData);
 		}
+		this.headerPopupMenu.closeDropDown();
 	}
 
 	public isHeaderContextMenuOptionEnabled(elementId: string, actionId: string, headerData: any): boolean {
@@ -422,7 +424,22 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	protected existsAtLeastOneActionEnabled(data: T | Array<T>): boolean {
+	public headerDotsClicked(headerData: Object, event: MouseEvent): void {
+		this.headerPopupMenu.setActionManager(this);
+		this.headerPopupMenu.setHeaderData(headerData);
+		if (this.existsAtLeastOneHeaderActionEnabled(headerData)) {
+			timer(200)
+				.subscribe(() => this.headerPopupMenu.openWithOptions(event, this.headerMenu,));
+		} else {
+			event.stopPropagation();
+		}
+	}
+
+	protected existsAtLeastOneHeaderActionEnabled(data: Object | Array<Object>): boolean {
+		return this.headerMenu ? this.headerMenu.some(menuOption => this.isMenuOptionEnabled(menuOption, data)) : false;
+	}
+
+	protected existsAtLeastOneActionEnabled(data: T | Array<T> | Object | Array<Object>): boolean {
 		if (this.menu) {
 			return this.menu.some(menuOption => this.isMenuOptionEnabled(menuOption, data));
 		} else {
@@ -430,7 +447,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	private isMenuOptionEnabled(menuOption: GridContextMenuOption<T>, data: T | Array<T>): boolean {
+	private isMenuOptionEnabled(menuOption: GridContextMenuOption<T>, data: T | Array<T> | Object | Array<Object>): boolean {
 		if (menuOption.isActionEnabled) {
 			return menuOption.isActionEnabled.apply(null, [data]);
 		} else {
