@@ -15,9 +15,11 @@ body .p-tree {
       padding: 0 !important;
 
       .p-treenode-content {
-        padding-left: 5px;
         color: #222;
         border: 0 !important;
+        border-radius: 0;
+        transition: none;
+        padding: 0 0 0 5px;
         outline: none;
 
         &:focus {
@@ -25,7 +27,7 @@ body .p-tree {
           border: 0 !important;
           outline: 0 !important;
           box-shadow: 0 0 0 0 transparent !important;
-          border-radius: 0px !important;
+          border-radius: 0 !important;
         }
 
         span[class*='icon-angle-'] {
@@ -35,7 +37,6 @@ body .p-tree {
         }
 
         .p-tree-toggler {
-          display: none;
           color: #222;
         }
 
@@ -79,12 +80,18 @@ body .p-tree {
           background-color: $slab-selected-background-color !important;
         }
 
-        &.p-treenode-content-selected {
+        &.p-treenode-content-selected,
+        &.p-highlight {
           background: $slab-selected-background-color !important;
           color: rgb(34, 34, 34);
+
+          .p-treenode-icon {
+            color: gray;
+          }
         }
 
-        &.p-treenode-selectable {
+        &.p-treenode-selectable,
+        &.p-highlight {
           .p-treenode-label {
             &:not(.p-state-highlight):hover {
               background: $slab-selected-background-color !important;
