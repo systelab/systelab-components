@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { IHeaderAngularComp } from 'ag-grid-angular';
-import { IHeaderParams } from 'ag-grid-community';
-import { AbstractGrid } from '../abstract-grid.component';
+import {Component} from '@angular/core';
+import {IHeaderAngularComp} from 'ag-grid-angular';
+import {IHeaderParams} from 'ag-grid-community';
+import {AbstractGrid} from '../abstract-grid.component';
 
 @Component({
-	selector:    'systelab-grid-header-context-menu-cell-renderer',
+	selector: 'systelab-grid-header-context-menu-cell-renderer',
 	templateUrl: 'grid-header-context-menu-renderer.component.html'
 })
 
@@ -18,6 +18,10 @@ export class GridHeaderContextMenuComponent<T> implements IHeaderAngularComp {
 		this.container = params.context.componentParent;
 		this.headerName = params.displayName;
 		this.headerData = params.column.getColDef().headerComponentParams.headerData;
+	}
+
+	public refresh(params: IHeaderParams): boolean {
+		throw new Error('Method not implemented.');
 	}
 
 	public dotsClicked(event: MouseEvent): void {
