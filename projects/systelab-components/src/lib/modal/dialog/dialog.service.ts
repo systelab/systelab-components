@@ -10,7 +10,7 @@ export class DialogService {
 
 	public static readonly breakpointMedium = 768;
 
-	constructor(private overlay: Overlay, private injector: Injector) {
+	constructor(private readonly overlay: Overlay, private injector: Injector) {
 	}
 
 	public showDialog(component: Type<any>, parameters: SystelabModalContext): Observable<any> {

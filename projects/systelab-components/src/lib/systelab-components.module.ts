@@ -7,7 +7,7 @@ import { ContextMenuComponent } from './contextmenu/context-menu.component';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
 import { GridContextMenuCellRendererComponent } from './grid/contextmenu/grid-context-menu-cell-renderer.component';
-import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu.component';
+import { GridHeaderContextMenuComponent } from './grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridColumnOptionsDialog } from './grid/options/grid-column-options-dialog.component';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { SystelabTranslateModule } from 'systelab-translate';
@@ -84,6 +84,7 @@ import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { ChipsComponent } from './chips/chips.component';
 import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
+import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
 import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
@@ -113,6 +114,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		GridContextMenuComponent,
 		GridContextMenuCellRendererComponent,
 		GridHeaderContextMenuComponent,
+		GridHeaderContextMenu,
 		GridColumnOptionsDialog,
 		ColorCellRendererComponent,
 		ColorComboBox,
@@ -182,6 +184,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		ContextPanelComponent,
 		TwoListComponent,
 		GridHeaderContextMenuComponent,
+		GridHeaderContextMenu,
 		ColorCellRendererComponent,
 		ColorComboBox,
 		ApplicationHeaderComponent,

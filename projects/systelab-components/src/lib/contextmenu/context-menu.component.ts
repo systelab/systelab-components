@@ -40,20 +40,18 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		return (option && option.isIconEnabled) ? option.isIconEnabled(elementId, actionId) : true;
 	}
 
-	public executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void {
+	public executeAction(event: any, elementId: string, actionId: string): void {
 
-		const option: ContextMenuOption = this.getOption(actionId, parentAction);
+		const option: ContextMenuOption = this.getOption(actionId);
 
 		if (option && option.hasChildren()) {
 			this.doMouseOver(event, elementId, actionId);
 		} else {
-			if (this.isEmbedded || parentAction) {
 				this.closeDropDown();
 				event.stopPropagation();
 				event.preventDefault();
-			}
 			if (option && option.action) {
-				return option.action(new ContextMenuActionData(elementId, actionId));
+				option.action(new ContextMenuActionData(elementId, actionId));
 			} else {
 				this.action.emit(new ContextMenuActionData(elementId, actionId));
 			}

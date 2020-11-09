@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { PreferencesService } from 'systelab-preferences';
+import { PreferencesService, StorageType } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
 import { NavbarItem } from 'systelab-components';
 
 @Component({
-	selector: 'app-root',
+	selector:    'app-root',
 	templateUrl: 'showcase.component.html'
 })
 export class ShowcaseComponent {
@@ -12,6 +12,7 @@ export class ShowcaseComponent {
 	public currentTab = 1;
 	public itemsNav: NavbarItem[] = [];
 	public currentNav = 0;
+
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService) {
 		this.itemsNav.push(new NavbarItem(0, 'Form Components', '', false, true, true, () => this.selectNav(0)));
 		this.itemsNav.push(new NavbarItem(1, 'Modals', '', false, false, true, () => this.selectNav(1)));
@@ -25,6 +26,7 @@ export class ShowcaseComponent {
 			.subscribe(() => {
 				console.log(i18nService.getCurrentLanguage());
 			});
+		preferencesService.setStorage(StorageType.SESSION_STORAGE);
 	}
 
 	public selectTab(tabNum: number) {

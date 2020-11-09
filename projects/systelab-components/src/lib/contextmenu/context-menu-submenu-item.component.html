@@ -2,7 +2,7 @@
     class="d-flex align-items-center" [class.disabled]="!true"
     (click)="doClickWithAction($event, parentId, actionName + levelSeparator + childAction.actionId)"
     (mouseover)="doMouseOver($event, elementID, actionName + levelSeparator + childAction.actionId)">
-    <div *ngIf="isEnabled" class="slab-flex-1">
+    <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto">
         <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
                                     [isEnabled]="isEnabled(elementID, childAction.actionId)"
                                     [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"

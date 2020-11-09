@@ -13,7 +13,7 @@ import { ColorComboBox } from './colorpicker.component';
 import { ColorCellRendererComponent } from './color-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
-import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu.component';
+import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ColorUtilService } from '../utilities/color.util.service';

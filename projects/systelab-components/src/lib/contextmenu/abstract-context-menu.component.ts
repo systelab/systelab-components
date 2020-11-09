@@ -11,9 +11,6 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	@Output() public action = new EventEmitter();
 
 	private contextMenuOptionsList: Array<T>;
-	protected previousShownMenu: Array<string> = [];
-	protected previousMenuWidth: Array<number> = [];
-	protected lastMenuLevel: number;
 	public readonly levelSeparator = '_|_';
 
 	@Input()
@@ -110,7 +107,9 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 	protected hideSubmenus(untilLevel: number): void {
 		if (untilLevel < this.lastMenuLevel) {
 			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
-				this.toggle(this.previousShownMenu[i - 1]);
+				if (this.previousShownMenu[i - 1]) {
+					this.toggle(this.previousShownMenu[i - 1]);
+				}
 				this.previousShownMenu.pop();
 				this.lastMenuLevel = i - 1;
 			}

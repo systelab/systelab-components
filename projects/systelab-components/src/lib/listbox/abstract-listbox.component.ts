@@ -237,33 +237,34 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return pEvent;
 	}
 
-	protected selectItemInGrid() {
-
+	protected selectItemInGrid(): void {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.forEachNode(node => {
-				if (this.multipleSelection) {
-					if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
-						if (this.multipleSelectedItemList
-							.filter((selectedItem) => {
-								return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
-							}).length > 0) {
-							node.selectThisNode(true);
+				if (node.data) {
+					if (this.multipleSelection) {
+						if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
+							if (this.multipleSelectedItemList
+								.filter((selectedItem) => {
+									return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+								}).length > 0) {
+								node.selectThisNode(true);
+							}
+						} else {
+							node.selectThisNode(false);
 						}
 					} else {
-						node.selectThisNode(false);
-					}
-				} else {
-					if (!this.selectedItem && this.selectFirstItem) {
-						if (node.rowIndex === 0) {
-							node.setSelected(true);
-							this.selectedItem = node.data;
-							this.selectedItemChange.emit(node.data);
-							return;
-						}
-					} else if (this.selectedItem) {
-						if (node.data[this.getIdField()] === this.selectedItem[this.getIdField()]) {
-							node.setSelected(true);
-							return;
+						if (!this.selectedItem && this.selectFirstItem) {
+							if (node.rowIndex === 0) {
+								node.setSelected(true);
+								this.selectedItem = node.data;
+								this.selectedItemChange.emit(node.data);
+								return;
+							}
+						} else if (this.selectedItem) {
+							if (node.data[this.getIdField()] === this.selectedItem[this.getIdField()]) {
+								node.setSelected(true);
+								return;
+							}
 						}
 					}
 				}
