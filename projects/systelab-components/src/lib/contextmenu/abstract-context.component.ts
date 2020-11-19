@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 
 declare var jQuery: any;
 
+@Directive()
 export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	@ViewChild('dropdownparent', {static: true}) public dropdownParent: ElementRef;

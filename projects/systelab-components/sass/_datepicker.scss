@@ -7,7 +7,7 @@ $icon-margin-left: 40px;
 
 p-calendar {
 
-  .ui-calendar {
+  .p-calendar {
     input::-ms-clear {
       display: none;
     }
@@ -54,11 +54,11 @@ p-calendar {
   }
 
   &.is-disabled {
-    .ui-state-disabled, .ui-widget:disabled {
+    .p-state-disabled, .p-widget:disabled {
 
     }
 
-    .ui-calendar {
+    .p-calendar {
       input {
         opacity: 1;
         cursor: not-allowed !important;
@@ -73,17 +73,17 @@ p-calendar {
       //}
     }
 
-    .ui-datepicker-header {
+    .p-datepicker-header {
       background: $medium-gray;
     }
 
-    .ui-datepicker-calendar {
+    .p-datepicker-calendar {
 
       tbody {
         tr {
           td {
-            a {
-              &.ui-state-active {
+            a, span {
+              &.p-state-active {
                 background-color: $medium-gray !important;
               }
             }
@@ -95,7 +95,11 @@ p-calendar {
   }
 }
 
-body .ui-datepicker {
+.p-datepicker-inline {
+  flex-direction: column;
+}
+
+body .p-datepicker {
   z-index: 100000 !important;
   max-width: 425px;
   min-width: 420px;
@@ -108,11 +112,11 @@ body .ui-datepicker {
   box-shadow: none;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-  .ui-datepicker-title {
+  .p-datepicker-title {
     line-height: $slab-datepicker-header-navigation-line-height !important;
   }
 
-  .ui-datepicker-header {
+  .p-datepicker-header {
     display: none;
   }
 
@@ -126,8 +130,7 @@ body .ui-datepicker {
       line-height: $slab-datepicker-header-navigation-line-height !important;
       color: white;
 
-      .ui-datepicker-title {
-        display: block;
+      .p-datepicker-title {
         margin: 0;
       }
 
@@ -170,8 +173,9 @@ body .ui-datepicker {
   /**
    * 1. Overrides default browser behaviour
    */
-  .ui-datepicker-calendar {
+  .p-datepicker-calendar {
     $datepicker-max-size: 60px;
+    $datepicker-height-size: 50px;
     border-spacing: 0;
     margin: 0;
 
@@ -198,11 +202,13 @@ body .ui-datepicker {
           padding: 0 !important;
           border-bottom: 1px solid $background-secondary;
 
-          a {
+          a, span {
             width: 100%;
             line-height: 50px;
             min-width: $datepicker-max-size;
             max-width: $datepicker-max-size;
+            min-height: $datepicker-height-size;
+            max-height: $datepicker-height-size;
             padding: 0 !important;
             border-radius: 0;
 
@@ -212,11 +218,12 @@ body .ui-datepicker {
               background: $medium-gray !important;
             }
 
-            &.ui-state-highlight {
+            &.p-state-highlight {
               background-color: $slab-selected-background-color !important;
             }
 
-            &.ui-state-active {
+            &.p-state-active,
+            &.p-highlight {
               background-color: $primary !important;
             }
           }
@@ -230,7 +237,7 @@ body .ui-datepicker {
   }
 }
 
-body .ui-inputtext {
+body .p-inputtext {
   padding: .25em;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -253,7 +260,7 @@ systelab-datepicker {
     p-calendar {
       height: 100%;
 
-      .ui-calendar {
+      .p-calendar {
         height: 100%;
       }
 
@@ -271,7 +278,7 @@ systelab-date-time {
     p-calendar {
       height: 100%;
 
-      .ui-calendar {
+      .p-calendar {
         height: 100%;
       }
 

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnD
 import { I18nService } from 'systelab-translate';
 import { addDays } from 'date-fns';
 import { DataTransformerService } from './date-transformer.service';
-import { Calendar } from 'primeng';
+import { Calendar } from 'primeng/calendar';
 
 @Component({
 	selector:    'systelab-datepicker',
@@ -92,7 +92,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					this.currentCalendar.el.nativeElement.querySelector('input')
 						.focus();
 				}
-				this.currentCalendar.el.nativeElement.childNodes[0].className = 'ui-calendar slab-form-icon w-100';
+				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-calendar slab-form-icon w-100';
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
 		}

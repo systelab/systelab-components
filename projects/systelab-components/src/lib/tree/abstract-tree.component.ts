@@ -1,17 +1,18 @@
 import { Directive, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Tree } from 'primeng';
-import { TreeNode } from 'primeng';
+import { Tree } from 'primeng/tree';
+import { TreeNode } from 'primeng/api';
+
 
 @Directive()
 export abstract class AbstractTree implements OnInit {
 
 	@ViewChild('expandingTree', {static: false}) protected currentTree: Tree;
 
-	@Input() public withModal: boolean = true;
+	@Input() public withModal = true;
 	@Output() public nodeSelected = new EventEmitter();
 
-	@Input() public isDropabble: boolean = false;
-	@Input() public isDragabble: boolean = false;
+	@Input() public isDropabble = false;
+	@Input() public isDragabble = false;
 
 	public selectedNode: TreeNode;
 

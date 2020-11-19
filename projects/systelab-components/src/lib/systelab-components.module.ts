@@ -81,11 +81,12 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
-import { AutoCompleteModule, SharedModule } from 'primeng';
 import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { ChipsComponent } from './chips/chips.component';
 import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
+import { SharedModule } from 'primeng/api';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
 	imports:      [
@@ -94,14 +95,13 @@ import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-me
 		SharedModule,
 		CalendarModule,
 		TreeModule,
+		AutoCompleteModule,
 		DragDropModule,
 		OverlayModule,
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		AgGridModule,
-		AutoCompleteModule
-	],
+		AgGridModule],
 	declarations: [
 		SliderComponent,
 		SwitchComponent,

@@ -365,7 +365,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 });
 
 function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
-	const inputComponent = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
+	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 	inputComponent.value = text;
 	inputComponent.dispatchEvent(new Event('keydown'));
 	inputComponent.dispatchEvent(new Event('input'));

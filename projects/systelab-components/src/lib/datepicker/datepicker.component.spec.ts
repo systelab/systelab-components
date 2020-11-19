@@ -189,7 +189,7 @@ function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Dat
 }
 
 function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
-	const inputComponent = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
+	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 	inputComponent.value = text;
 	inputComponent.dispatchEvent(new Event('keydown'));
 	inputComponent.dispatchEvent(new Event('input'));
@@ -200,21 +200,21 @@ function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: str
 }
 
 function clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>) {
-	const button = fixture.debugElement.query(By.css('.ui-inputtext')).nativeElement;
+	const button = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 	button.click();
 	fixture.detectChanges();
 }
 
 function isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
-	return (fixture.debugElement.nativeElement.querySelector('.ui-datepicker-calendar-container') !== null);
+	return (fixture.debugElement.nativeElement.querySelector('.p-datepicker-calendar-container') !== null);
 }
 
 function getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
-	return parseInt(fixture.debugElement.nativeElement.querySelector('.ui-datepicker-year').firstChild.nodeValue, 10);
+	return parseInt(fixture.debugElement.nativeElement.querySelector('.p-datepicker-year').firstChild.nodeValue, 10);
 }
 
 function getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
-	return fixture.debugElement.nativeElement.querySelector('.ui-datepicker-month').firstChild.nodeValue;
+	return fixture.debugElement.nativeElement.querySelector('.p-datepicker-month').firstChild.nodeValue;
 }
 
 function isRedBackground(fixture: ComponentFixture<DatepickerTestComponent>): boolean {

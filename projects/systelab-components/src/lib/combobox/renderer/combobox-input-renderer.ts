@@ -1,5 +1,6 @@
-import { Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
+@Directive()
 export class ComboBoxInputRenderer {
 
 	private _id: number | string;

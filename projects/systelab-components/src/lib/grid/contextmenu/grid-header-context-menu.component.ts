@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
-import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
-import { GridContextMenuOption } from './grid-context-menu-option';
+import {ChangeDetectorRef, Component, ElementRef, Renderer2} from '@angular/core';
+import {AbstractContextMenuComponent} from '../../contextmenu/abstract-context-menu.component';
+import {GridContextMenuOption} from './grid-context-menu-option';
+import {IAfterGuiAttachedParams, IHeaderParams} from 'ag-grid-community';
 
 export interface GridHeaderMenuActionHandler {
 	executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: Object): void;
@@ -9,7 +10,7 @@ export interface GridHeaderMenuActionHandler {
 }
 
 @Component({
-	selector:    'systelab-grid-header-context-menu',
+	selector: 'systelab-grid-header-context-menu',
 	templateUrl: '../../contextmenu/context-menu.component.html'
 })
 export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<GridContextMenuOption<Object>> {
@@ -18,6 +19,14 @@ export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<
 
 	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
+	}
+
+	public refresh(params: IHeaderParams): boolean {
+		throw new Error('Method not implemented.');
+	}
+
+	public afterGuiAttached?(params?: IAfterGuiAttachedParams): void {
+		throw new Error('Method not implemented.');
 	}
 
 	public setActionManager(actionHandler: GridHeaderMenuActionHandler): void {
