@@ -192,6 +192,12 @@ body .p-datepicker {
           min-width: $datepicker-max-size;
           max-width: $datepicker-max-size;
           padding: 0 !important;
+
+          span {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+          }
         }
       }
     }

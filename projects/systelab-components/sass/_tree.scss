@@ -38,6 +38,14 @@ body .p-tree {
 
         .p-tree-toggler {
           color: #222;
+
+          &:hover {
+            color: rgb(34, 34, 34) !important;
+          }
+
+          &:focus {
+            box-shadow: none !important;
+          }
         }
 
         .p-treenode-icon {
@@ -84,6 +92,16 @@ body .p-tree {
         &.p-highlight {
           background: $slab-selected-background-color !important;
           color: rgb(34, 34, 34);
+
+          .p-tree-toggler {
+            color: rgb(34, 34, 34) !important;
+          }
+
+          .p-link {
+            &:focus {
+              box-shadow: none !important;
+            }
+          }
 
           .p-treenode-icon {
             color: gray;
