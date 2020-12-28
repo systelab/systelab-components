@@ -94,7 +94,6 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		if (this.multipleSelection) {
 			this.gridOptions.suppressRowClickSelection = true;
 		} else {
-			this.gridOptions.rowDeselection = true;
 			this.gridOptions.suppressRowClickSelection = this.isDisabled;
 		}
 
