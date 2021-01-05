@@ -95,7 +95,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.defaultColDef = {};
 		this.gridOptions.defaultColDef.resizable = false;
 		this.gridOptions.rowSelection = this.multipleSelection ? 'multiple' : 'single';
-		this.gridOptions.rowDeselection = !this.isDisabled;
+		this.gridOptions.suppressRowDeselection = this.isDisabled;
 
 		this.gridOptions.context = {componentParent: this};
 
