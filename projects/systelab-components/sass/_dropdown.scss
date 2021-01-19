@@ -51,17 +51,22 @@
       line-height: $slab-dropdown-line-height;
       padding: 0 15px;
       margin: 0 2px;
+      text-decoration: none;
 
       &:hover {
         background-color: $primary;
         color: white;
+        text-decoration: none;
       }
 
       a {
         padding: 0;
+        color: inherit;
 
         &:hover {
           background-color: initial;
+          text-decoration: none;
+          color: white;
         }
       }
 
