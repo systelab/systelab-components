@@ -99,147 +99,199 @@ p-calendar {
   flex-direction: column;
 }
 
-body .p-datepicker {
-  z-index: 100000 !important;
-  max-width: 425px;
-  min-width: 420px;
-  border: 1px solid $medium-gray;
-  margin-top: 5px;
-  border-radius: 4px !important;
-  overflow: hidden;
-  padding: 0 !important;
-  width: auto;
-  box-shadow: none;
-  font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-  .p-datepicker-title {
+body {
+  .slab-datepicker-header {
+    $icon-margin-right: 10px;
+    $icon-margin-left: 40px;
+    background: $primary;
+    padding: 15px;
+    margin-bottom: 0;
     line-height: $slab-datepicker-header-navigation-line-height !important;
-  }
+    color: white;
 
-  .p-datepicker-header {
-    display: none;
-  }
+    .p-datepicker-title {
+      margin: 0;
+    }
 
-  p-header {
-    .slab-datepicker-header {
-      $icon-margin-right: 10px;
-      $icon-margin-left: 40px;
-      background: $primary;
-      padding: 15px;
-      margin-bottom: 0;
-      line-height: $slab-datepicker-header-navigation-line-height !important;
+    a {
       color: white;
 
-      .p-datepicker-title {
-        margin: 0;
+      &:hover {
+        text-decoration: none;
+        background: none;
+        color: white;
       }
+    }
 
-      a {
+    .icon-angle-double-left {
+      float: left;
+      margin-left: $icon-margin-right;
+      line-height: $slab-datepicker-header-navigation-line-height;
+    }
+
+    .icon-angle-double-right {
+      float: right;
+      margin-right: $icon-margin-right;
+      line-height: $slab-datepicker-header-navigation-line-height;
+    }
+
+    .icon-angle-left {
+      float: left;
+      margin-left: $icon-margin-left;
+      line-height: $slab-datepicker-header-navigation-line-height;
+    }
+
+    .icon-angle-right {
+      float: right;
+      margin-right: $icon-margin-left;
+      line-height: $slab-datepicker-header-navigation-line-height;
+    }
+  }
+}
+
+body {
+  .p-datepicker {
+    z-index: 100000 !important;
+    max-width: 425px;
+    min-width: 420px;
+    border: 1px solid $medium-gray;
+    margin-top: 5px;
+    border-radius: 4px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    width: auto;
+    box-shadow: none;
+    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+    .p-datepicker-title {
+      line-height: $slab-datepicker-header-navigation-line-height !important;
+    }
+
+    .p-datepicker-header {
+      display: none;
+    }
+
+    p-header {
+      .slab-datepicker-header {
+        $icon-margin-right: 10px;
+        $icon-margin-left: 40px;
+        background: $primary;
+        padding: 15px;
+        margin-bottom: 0;
+        line-height: $slab-datepicker-header-navigation-line-height !important;
         color: white;
 
-        &:hover {
-          text-decoration: none;
-          background: none;
-          color: white;
+        .p-datepicker-title {
+          margin: 0;
         }
-      }
 
-      .icon-angle-double-left {
-        float: left;
-        margin-left: $icon-margin-right;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
+        a {
+          color: white;
 
-      .icon-angle-double-right {
-        float: right;
-        margin-right: $icon-margin-right;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-
-      .icon-angle-left {
-        float: left;
-        margin-left: $icon-margin-left;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-
-      .icon-angle-right {
-        float: right;
-        margin-right: $icon-margin-left;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-    }
-  }
-
-  /**
-   * 1. Overrides default browser behaviour
-   */
-  .p-datepicker-calendar {
-    $datepicker-max-size: 60px;
-    $datepicker-height-size: 50px;
-    border-spacing: 0;
-    margin: 0;
-
-    /* 1 */
-
-    thead {
-      background-color: $light-gray;
-      border-bottom: 1px solid $background-secondary;
-      line-height: 34px;
-
-      tr {
-        th {
-          font-weight: normal;
-          min-width: $datepicker-max-size;
-          max-width: $datepicker-max-size;
-          padding: 0 !important;
-
-          span {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+          &:hover {
+            text-decoration: none;
+            background: none;
+            color: white;
           }
         }
+
+        .icon-angle-double-left {
+          float: left;
+          margin-left: $icon-margin-right;
+          line-height: $slab-datepicker-header-navigation-line-height;
+        }
+
+        .icon-angle-double-right {
+          float: right;
+          margin-right: $icon-margin-right;
+          line-height: $slab-datepicker-header-navigation-line-height;
+        }
+
+        .icon-angle-left {
+          float: left;
+          margin-left: $icon-margin-left;
+          line-height: $slab-datepicker-header-navigation-line-height;
+        }
+
+        .icon-angle-right {
+          float: right;
+          margin-right: $icon-margin-left;
+          line-height: $slab-datepicker-header-navigation-line-height;
+        }
       }
     }
 
-    tbody {
-      tr {
-        td {
-          padding: 0 !important;
-          border-bottom: 1px solid $background-secondary;
+    /**
+     * 1. Overrides default browser behaviour
+     */
+    .p-datepicker-calendar {
+      $datepicker-max-size: 60px;
+      $datepicker-height-size: 50px;
+      border-spacing: 0;
+      margin: 0;
 
-          a, span {
-            width: 100%;
-            line-height: 50px;
+      /* 1 */
+
+      thead {
+        background-color: $light-gray;
+        border-bottom: 1px solid $background-secondary;
+        line-height: 34px;
+
+        tr {
+          th {
+            font-weight: normal;
             min-width: $datepicker-max-size;
             max-width: $datepicker-max-size;
-            min-height: $datepicker-height-size;
-            max-height: $datepicker-height-size;
             padding: 0 !important;
-            border-radius: 0;
 
-            &:hover,
-            &:active {
-              background-color: $medium-gray;
-              background: $medium-gray !important;
+            span {
+              width: 100%;
+              display: flex;
+              justify-content: center;
             }
+          }
+        }
+      }
 
-            &.p-state-highlight {
-              background-color: $slab-selected-background-color !important;
-            }
+      tbody {
+        tr {
+          td {
+            padding: 0 !important;
+            border-bottom: 1px solid $background-secondary;
 
-            &.p-state-active,
-            &.p-highlight {
-              background-color: $primary !important;
+            a, span {
+              width: 100%;
+              line-height: 50px;
+              min-width: $datepicker-max-size;
+              max-width: $datepicker-max-size;
+              min-height: $datepicker-height-size;
+              max-height: $datepicker-height-size;
+              padding: 0 !important;
+              border-radius: 0;
+
+              &:hover,
+              &:active {
+                background-color: $medium-gray;
+                background: $medium-gray !important;
+              }
+
+              &.p-state-highlight {
+                background-color: $slab-selected-background-color !important;
+              }
+
+              &.p-state-active,
+              &.p-highlight {
+                background-color: $primary !important;
+              }
             }
           }
         }
       }
     }
-  }
 
-  p-footer {
-    background-color: $light-gray;
+    p-footer {
+      background-color: $light-gray;
+    }
   }
 }
 
