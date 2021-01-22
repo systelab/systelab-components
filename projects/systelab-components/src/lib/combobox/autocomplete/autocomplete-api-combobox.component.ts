@@ -10,7 +10,7 @@ declare var jQuery: any;
 @Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
 
-	public startsWith = '';
+	public _startsWith = '';
 
 	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
@@ -30,8 +30,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	protected doSearchText(text: string) {
-		this.startsWith = text;
-		if (!this.startsWith || this.startsWith.length < 1) {
+		this._startsWith = text;
+		if (!this._startsWith || this._startsWith.length < 1) {
 			this.resetComboSelection();
 		}
 		this.refresh(null);
@@ -68,7 +68,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public closeDropDown() {
-		this.startsWith = '';
+		this._startsWith = '';
 		const selectedRow: T = this.getSelectedRow();
 		if (selectedRow) {
 			this.id = selectedRow[this.getIdField()];
@@ -96,7 +96,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.gridOptions.api.showLoadingOverlay();
 			const page: number = params.endRow / this.gridOptions.paginationPageSize;
 			this.totalItemsLoaded = false;
-			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
+			this.getData(page, this.gridOptions.paginationPageSize, this._startsWith)
 				.subscribe(
 					(v: Array<T>) => {
 						this.gridOptions.api.hideOverlay();
