@@ -80,6 +80,9 @@ import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars
 import { A11yModule } from '@angular/cdk/a11y';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-tree-combobox.component';
+import {NgxBarcodeModule} from 'ngx-barcode';
+import {CodeBarCellRendererComponent} from './components/grid/codebar-cell-renderer.component';
+import {ShowcaseCodeBarGridComponent} from './components/grid/showcase-inner-codebar-grid.component';
 
 @NgModule({
 	imports:      [
@@ -98,7 +101,8 @@ import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-
 			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
 		]),
-		AutoCompleteModule
+		AutoCompleteModule,
+		NgxBarcodeModule
 	],
 	declarations: [
 		ShowcaseComponent,
@@ -168,7 +172,9 @@ import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-
 		ShowcaseInnerTreeListBox,
 		ShowcaseAutocomplete,
 		ShowcasePaginatorComponent,
-		ShowcaseBarsGridComponent
+		ShowcaseBarsGridComponent,
+		CodeBarCellRendererComponent,
+		ShowcaseCodeBarGridComponent
 	],
 	bootstrap:    [ShowcaseComponent]
 })
