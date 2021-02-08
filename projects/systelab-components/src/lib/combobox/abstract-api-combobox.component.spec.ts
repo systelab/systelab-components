@@ -70,8 +70,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                         <div class="col-md-9">
-                            <systelab-combobox-example [(id)]="id" [(description)]="description"
-													   [(startsWith)]="startsWith"></systelab-combobox-example>
+                            <systelab-combobox-example [(id)]="id" [(description)]="description" [(startsWith)]="startsWith"></systelab-combobox-example>
                         </div>
                     </div>
                 </div>
