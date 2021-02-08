@@ -129,9 +129,15 @@ The following steps should be considered when migrating from Angular 10 to 11
 
 1.  Angular now requires TypeScript 4.0. ng update will migrate you automatically.
 2.  Browsers Support
--  Support for IE9, IE10, and IE mobile has been removed. This was announced in the v10 update.
--  Run this command to update the browsers ```npx browserslist@latest --update-db```
+
+Support for IE9, IE10, and IE mobile has been removed. This was announced in the v10 update.
+
+Run this command to update the browsers ```npx browserslist@latest --update-db```
+
 3.  Upgrade Primeng 11
--  PrimeIcons should be upgraded to 4.1.0 as components like table utilize new icons in the library
--  locale property functionality of Datepicker is removed in favor of the new global i18n API. The datepicker components inject PrimeNGConfig
+
+PrimeIcons should be upgraded to 4.1.0 as components like table utilize new icons in the library
+
+locale property functionality of Datepicker is removed in favor of the new global i18n API. The datepicker components inject PrimeNGConfig
+
 4.  Use 'karma-coverage' because 'karma-coverage-istanbul-reporter' usage has been deprecated since version 11
