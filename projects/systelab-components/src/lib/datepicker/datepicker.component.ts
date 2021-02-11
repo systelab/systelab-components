@@ -3,7 +3,6 @@ import { I18nService } from 'systelab-translate';
 import { addDays } from 'date-fns';
 import { DataTransformerService } from './date-transformer.service';
 import { Calendar } from 'primeng/calendar';
-import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
 	selector:    'systelab-datepicker',
@@ -67,8 +66,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService,
-				protected config: PrimeNGConfig) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService) {
 		this.addListeners();
 		// TODO: To get the language and modify the values.
 	}
