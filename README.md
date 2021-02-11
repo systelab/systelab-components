@@ -67,7 +67,7 @@ npm run update-snapshots
 In order to publish the library, an authorized npm user is required. Once set, update the version in the package.json, and run the npm publish script:
 
 ```bash
-npm build-lib
+npm run build-lib
 cd dist/systelab-components
 npm publish
 ```
