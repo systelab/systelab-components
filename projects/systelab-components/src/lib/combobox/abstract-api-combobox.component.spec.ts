@@ -14,8 +14,6 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
-import { DialogService } from '../modal/dialog/dialog.service';
-import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 
 export class TestData {
 	constructor(public id: string, public description: string) {
@@ -72,7 +70,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                         <div class="col-md-9">
-                            <systelab-combobox-example [(id)]="id" [(description)]="description"></systelab-combobox-example>
+                            <systelab-combobox-example [(id)]="id" [(description)]="description" [(startsWith)]="startsWith"></systelab-combobox-example>
                         </div>
                     </div>
                 </div>
@@ -81,6 +79,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 export class ComboboxTestComponent {
 	public id: string;
 	public description: string;
+	public startsWith: string;
 }
 
 describe('Systelab Combobox', () => {
