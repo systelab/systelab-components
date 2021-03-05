@@ -86,10 +86,11 @@ The process described here has several goals:
 
 Please follow these steps to have your contribution considered by the maintainers:
 
-1. This repository is aligned with the feature-branch strategy.
+1. This repository is aligned with the feature-branch strategy. The branch naming convention is "bugfix- or feature-" plus the issue number in github. For example: bugfix_200
 2. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
-3. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you. If we conclude that the failure was a false positive, then we will open an issue to track that problem with our status check suite.</details>
-4. While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
-5. Once it's merged, the author must transition it to the status "Ready to test" in the [project](https://github.com/systelab/systelab-components/projects)
-6. Based upon need, the library will be published into the npm repository. This process must be done by an authorized user.
-
+3. The changes can be tested in your local before publishing. The library can be generated at "..\dist\systelab-components" by running the command "npm run build-lib". Then, you need to replace the systelab-components folder at "your project > node-modules > systelab-components". Please, ensure the package.json matches the version that you need to test.
+4. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you. If we conclude that the failure was a false positive, then we will open an issue to track that problem with our status check suite.</details>
+5. While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
+7. Before merging the pull request, the master branch needs to be merged into current. Then, the version in the package.json needs to be increased.
+6. Once it's merged, the author must transition it to the status "Ready to test" in the [project](https://github.com/systelab/systelab-components/projects)
+7. Based upon need, the library will be published into the npm repository. This process must be done by an authorized user.
