@@ -1,0 +1,53 @@
+$slab-button-background-color: white !default;
+
+.btn:not(.btn-primary),
+.btn:not(.btn-secondary),
+.btn:not(.btn-info),
+.btn:not(.btn-success),
+.btn:not(.btn-warning),
+.btn:not(.btn-danger),
+.btn:not(.btn-light),
+.btn:not(.btn-dark),
+.btn:not(.btn-link),
+.btn:not(.btn-outline-primary),
+.btn:not(.btn-outline-secondary),
+.btn:not(.btn-outline-info),
+.btn:not(.btn-outline-success),
+.btn:not(.btn-outline-warning),
+.btn:not(.btn-outline-danger),
+.btn:not(.btn-outline-light),
+.btn:not(.btn-outline-dark),
+.btn:not(.btn-outline-link) {
+  background-color: $white;
+  color: $primary;
+
+  &:hover {
+    background-color: $white;
+    border-color: $primary;
+  }
+}
+
+.btn { //Toogle buttons
+
+  border: 1px solid $primary !important;
+  border-radius: 50px !important;
+
+  background: $white !important;
+  color: $primary !important;
+
+  transition: all 0.6s ease-out;
+  padding: 3px 22px !important;
+
+  &.disabled {
+    color: #bfbfbf !important;
+    border: 1px solid #bfbfbf !important;
+    cursor: default !important;
+  }
+
+  &:hover {
+    &:not(.disabled) {
+      background: $primary !important;
+      color: $white !important;
+    }
+  }
+}
