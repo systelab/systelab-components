@@ -1,4 +1,4 @@
-<p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false" [locale]="language"
+<p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false"
             [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
             (onBlur)="changeDate()"
             (onSelect)="selectDate()"

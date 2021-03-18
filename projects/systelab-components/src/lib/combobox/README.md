@@ -187,6 +187,7 @@ Once you have your component, you can use it in your templates.
 | **code** | string | | Short code |
 | **fieldToShow** | string | | Description or name for autocomplete combobox|
 | **multipleSelectedItemList** | Array<T> | | Array with selected elements for comboboxes with selection multiple|
+| startsWith| string | | Look up the item in the combo that starts with the entered text
 | customInputRenderer | any | | Class of the component with a custom renderer for the combo input field. This class must extend ComboBoxInputRenderer class|
 | initialParams | any | | Class with the initial params of the component defined in customInputRender property |
 | filter | boolean | false | If true adds an input field inside dropdown to search elements. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|

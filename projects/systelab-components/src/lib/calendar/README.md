@@ -38,7 +38,7 @@ DaysSlot is an interface with three properties: An attribute date of type Date, 
 The interesting thing here, is that you can specify a custom template for systelab-calendar-table in order to render a component for each day. For example:
 
 ```html
-<systelab-calendar-table  #calendar class="h-100" [currentDate]="currentDate" [locale]="locale" [days]="days">
+<systelab-calendar-table  #calendar class="h-100" [currentDate]="currentDate" [days]="days">
         <ng-template let-daySlot="daySlot">
             <a [ngClass]="{'is-holiday': daySlot.isHoliday,'disable-link':daySlot.isDisabled}" (click)="selectDaySlot(daySlot)">
                 {{daySlot.day}}

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractComboBox } from './abstract-combobox.component';
@@ -8,7 +8,12 @@ import { PreferencesService } from 'systelab-preferences';
 @Directive()
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
-	public startsWith = '';
+	public _startsWith = '';
+
+	@Input()
+	set startsWith(value: string) {
+		this._startsWith = value;
+	}
 
 	public params: any;
 
@@ -79,7 +84,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
-		this.startsWith = event.target.value;
+		this._startsWith = event.target.value;
 		this.refresh(null);
 	}
 
@@ -100,7 +105,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 			this.getElements(page, pageSize, emptyElemNumber, allNumber, params);
 		} else {
 			this.totalItemsLoaded = false;
-			this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
+			this.getData(page - 1, this.gridOptions.paginationPageSize, this._startsWith)
 				.subscribe(
 					(previousPage: Array<T>) => {
 						const itemArray: Array<T> = new Array<T>();
@@ -129,7 +134,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	private getElements(page: number, pageSize: number, emptyElemNumber: number, allNumber: number, params: IGetRowsParams) {
 		this.totalItemsLoaded = false;
-		this.getData(page, pageSize, this.startsWith)
+		this.getData(page, pageSize, this._startsWith)
 			.subscribe(
 				(v: Array<T>) => {
 					const itemArray: Array<T> = new Array<T>();
@@ -155,7 +160,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 							this.totalItemsLoaded = true;
 
 						} else {
-							this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
+							this.getData(page - 1, this.gridOptions.paginationPageSize, this._startsWith)
 								.subscribe(
 									(previousPage: Array<T>) => {
 
