@@ -67,7 +67,7 @@ npm run update-snapshots
 In order to publish the library, an authorized npm user is required. Once set, update the version in the package.json, and run the npm publish script:
 
 ```bash
-npm build-lib
+npm run build-lib
 cd dist/systelab-components
 npm publish
 ```
@@ -123,3 +123,21 @@ Finally, update your package.json in order to add the peer dependencies:
 "quill": "^1.3.7",
 "@fullcalendar/core": "^4.4.0"
 ```
+
+## Version 11
+The following steps should be considered when migrating from Angular 10 to 11
+
+1.  Angular now requires TypeScript 4.0. ng update will migrate you automatically.
+2.  Browsers Support
+
+Support for IE9, IE10, and IE mobile has been removed. This was announced in the v10 update.
+
+Run this command to update the browsers ```npx browserslist@latest --update-db```
+
+3.  Upgrade Primeng 11
+
+PrimeIcons should be upgraded to 4.1.0 as components like table utilize new icons in the library
+
+locale property functionality of Datepicker is removed in favor of the new global i18n API. The datepicker components inject PrimeNGConfig
+
+4.  Use 'karma-coverage' because 'karma-coverage-istanbul-reporter' usage has been deprecated since version 11
