@@ -40,7 +40,7 @@ ng serve
 ### Unit
 
 ```bash
-ng test
+ng test systelab-components --watch=false --code-coverage --browsers=ChromeHeadless
 ```
 
 ### E2E

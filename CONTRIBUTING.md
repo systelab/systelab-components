@@ -33,7 +33,8 @@ We have an Angular Task Force to help you. Please, reach out the channel in Team
 
 ### systelab-components
 
-[Read about the library](README.md)
+[Working with the repo](README.md)
+[Read about the library](https://github.com/systelab/systelab-components/tree/master/projects/systelab-components/README.md)
 
 #### Coding Guidelines
 
@@ -86,7 +87,7 @@ The process described here has several goals:
 
 Please follow these steps to have your contribution considered by the maintainers:
 
-1. This repository is aligned with the feature-branch strategy. The branch naming convention is "bugfix- or feature-" plus the issue number in github. For example: bugfix_200
+1. This repository is aligned with the feature-branch strategy. The branch naming convention is "bugfix- or feature-" plus the issue number in github. For example: bugfix-200
 2. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
 3. The changes can be tested in your local before publishing. The library can be generated at "..\dist\systelab-components" by running the command "npm run build-lib". Then, you need to replace the systelab-components folder at "your project > node-modules > systelab-components". Please, ensure the package.json matches the version that you need to test.
 4. After you submit your pull request, verify that all [status checks](https://help.github.com/articles/about-status-checks/) are passing <details><summary>What if the status checks are failing?</summary>If a status check is failing, and you believe that the failure is unrelated to your change, please leave a comment on the pull request explaining why you believe the failure is unrelated. A maintainer will re-run the status check for you. If we conclude that the failure was a false positive, then we will open an issue to track that problem with our status check suite.</details>
