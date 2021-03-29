@@ -6,7 +6,7 @@ export class BreadcrumbSubItem {
 }
 
 export class BreadcrumbItem {
-	// tslint:disable-next-line:max-line-length
+	// eslint-disable-next-line max-len
 	constructor(public id: string, public text: string, public isActive: boolean, public action: any, public subItems?: BreadcrumbSubItem[], public url?: string) {
 	}
 }

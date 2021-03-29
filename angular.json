@@ -47,14 +47,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/systelab-components/tsconfig.lib.json",
-              "projects/systelab-components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/systelab-components/**/*.ts",
+              "projects/systelab-components/**/*.html"
             ]
           }
         }
@@ -181,15 +178,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/showcase/tsconfig.app.json",
-              "projects/showcase/tsconfig.spec.json",
-              "projects/showcase/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/showcase/**/*.ts",
+              "projects/showcase/**/*.html"
             ]
           }
         },
