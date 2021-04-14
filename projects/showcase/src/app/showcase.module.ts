@@ -80,6 +80,8 @@ import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars
 import { A11yModule } from '@angular/cdk/a11y';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-tree-combobox.component';
+import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
+import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
 
 @NgModule({
 	imports:      [
@@ -168,7 +170,9 @@ import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-
 		ShowcaseInnerTreeListBox,
 		ShowcaseAutocomplete,
 		ShowcasePaginatorComponent,
-		ShowcaseBarsGridComponent
+		ShowcaseBarsGridComponent,
+		ShowcaseSpyMenuComponent,
+		ShowcaseSpyMenuDialog,
 	],
 	bootstrap:    [ShowcaseComponent]
 })
