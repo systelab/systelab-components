@@ -66,13 +66,11 @@ describe('Systelab SpyMenuComponent', () => {
 	});
 
 	it('should scroll to selected section', () => {
-		const section3Div = fixture.debugElement.nativeElement.querySelector('#section3');
 		const spyMenuItem3 = fixture.debugElement.nativeElement.querySelectorAll('.spy-menu-item')[2];
-		const initialOffsetY = section3Div.getBoundingClientRect().y;
+		const section3Div = document.querySelector('#section3');
+		spyOn(section3Div, 'scrollIntoView').and.callThrough();
 		spyMenuItem3.click();
-		fixture.detectChanges();
-		const finalOffsetY = section3Div.getBoundingClientRect().y;
-		expect(initialOffsetY - finalOffsetY).toBeGreaterThan(500);
+		expect(section3Div.scrollIntoView).toHaveBeenCalled();
 	});
 
 	it('should highlight selected section menu item', () => {
