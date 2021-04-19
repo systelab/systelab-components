@@ -9,6 +9,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
 import { HttpClientModule } from '@angular/common/http';
 import { TouchspinComponent } from './spinner.component';
+import { DatepickerTestComponent } from '../datepicker/datepicker.component.spec';
 
 @Component({
 	selector: 'systelab-spinner-test',
@@ -21,13 +22,13 @@ import { TouchspinComponent } from './spinner.component';
 	styles:   []
 })
 export class SpinnerTestComponent {
-	public values = new TouchSpinValues(34, 1, 100);
-	
+	public values = new TouchSpinValues(34.12345, 1.00001, 100.001, 1.12345, true, 5);
+
 	public doValueChange() {
 	}
 }
 
-describe('Systelab Spinner', () => {
+describe('Systelab Spinner with decimals', () => {
 	let fixture: ComponentFixture<SpinnerTestComponent>;
 
 	beforeEach(async(() => {
@@ -53,62 +54,69 @@ describe('Systelab Spinner', () => {
 	});
 
 	it('should have an initial value', () => {
-		checkHasValue(fixture, 34);
+		checkHasValue(fixture, 34.12345);
 	});
 
 	it('should have the changed value if there is a change', () => {
-		enterText(fixture, '90');
-		checkHasValue(fixture, 90);
+		enterText(fixture, '90.56564');
+		checkHasValue(fixture, 90.56564);
 	});
 
-	it('should increment the value if plus button is clicked (+1)', () => {
-		clickPlusButton(fixture);
-		checkHasValue(fixture, 34 + 1);
+	it('should have the changed value if there is a change', () => {
+		enterText(fixture, '90.565641');
+		checkHasValue(fixture, 90.56564);
 	});
 
-	it('should increment the value n times if plus button is clicked (+11)', () => {
-		setStep(fixture, 11);
+	it('should have the changed value if there is a change', () => {
+		enterText(fixture, '90.565648');
+		checkHasValue(fixture, 90.56565);
+	});
+
+	it('should increment the value if plus button is clicked (+1.12345)', () => {
 		clickPlusButton(fixture);
-		checkHasValue(fixture, 34 + 11);
+		checkHasValue(fixture, 34.12345 + 1.12345);
+	});
+
+	it('should increment the value n times if plus button is clicked (+11.12345)', () => {
+		setStep(fixture, 11.12345);
+		clickPlusButton(fixture);
+		checkHasValue(fixture, 34.12345 + 11.12345);
 	});
 
 	it('should not increment the value if is the maximum', () => {
-		enterText(fixture, '100');
+		enterText(fixture, '100.001');
 		clickPlusButton(fixture);
-		checkHasValue(fixture, 100);
+		checkHasValue(fixture, 100.001);
 	});
 
 	it('should set the maximum if by clicking the plus button the value is above the maximum', () => {
-		setStep(fixture, 11);
-		enterText(fixture, '99');
+		enterText(fixture, '99.999');
 		clickPlusButton(fixture);
-		checkHasValue(fixture, 100);
+		checkHasValue(fixture, 100.001);
 	});
 
-	it('should decrement the value if minus button is clicked (-1)', () => {
+	it('should decrement the value if minus button is clicked (-1.12345)', () => {
 		clickMinusButton(fixture);
-		checkHasValue(fixture, 34 - 1);
+		checkHasValue(fixture, 34.12345 - 1.12345);
 	});
 
-	it('should decrement the value n times if minus button is clicked (-11)', () => {
-		setStep(fixture, 11);
+	it('should decrement the value n times if minus button is clicked (-11.12345)', () => {
+		setStep(fixture, 11.12345);
 		clickMinusButton(fixture);
-		checkHasValue(fixture, 34 - 11);
+		checkHasValue(fixture, 34.12345 - 11.12345);
 	});
 
 	it('should not decrement the value if is the minimum', () => {
-		enterText(fixture, '1');
+		enterText(fixture, '1.00001');
 		clickMinusButton(fixture);
-		checkHasValue(fixture, 1);
+		checkHasValue(fixture, 1.00001);
 	});
 
 	it('should set the minimum if by clicking the minus button the value is below the minimum', () => {
-		setStep(fixture, 11);
-		enterText(fixture, '2');
+		enterText(fixture, '1.1');
 		clickMinusButton(fixture);
-		checkHasValue(fixture, 1);
+		checkHasValue(fixture, 1.00001);
 	});
-
 
 	it('should call method change when the minus button is clicked', () => {
 		spyOn(fixture.componentInstance, 'doValueChange');
@@ -123,7 +131,7 @@ describe('Systelab Spinner', () => {
 	});
 
 	it('should not call method change when the value is not changed', () => {
-		enterText(fixture, '100');
+		enterText(fixture, '100.001');
 		spyOn(fixture.componentInstance, 'doValueChange');
 		clickPlusButton(fixture);
 		expect(fixture.componentInstance.doValueChange).not.toHaveBeenCalled();
@@ -158,7 +166,6 @@ function enterText(fixture: ComponentFixture<SpinnerTestComponent>, text: string
 	inputComponent.dispatchEvent(new Event('blur'));
 	fixture.detectChanges();
 }
-
 
 function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
 	fixture.componentInstance.values.step = value;
