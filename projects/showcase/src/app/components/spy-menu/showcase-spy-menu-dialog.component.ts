@@ -46,7 +46,7 @@ export class ShowcaseSpyMenuDialog implements ModalComponent<ShowcaseSpyMenuDial
 		this.sectionSelected = 'section1';
 	}
 
-	public onSectionChange(section: string) {
+	public onSectionChange(section: string): void {
 		this.sectionSelected = section;
 	}
 
