@@ -13,6 +13,12 @@ where touchSpinValues is an instance of TouchSpinValues, with the current value,
 this.touchSpinValues = new TouchSpinValues(0, -10, 10, 2);
 ```
 
+It is possible to define if the number is a decimal, and in this case the precision. For example:
+
+```javascript
+this.touchSpinValues = new TouchSpinValues(0, -10, 10, 2, true, 4);
+```
+
 ## Properties
 
 | Name | Type | Default | Description |
