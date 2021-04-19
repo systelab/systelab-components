@@ -89,6 +89,12 @@ describe('Systelab Spinner with decimals', () => {
 		checkHasValue(fixture, 100.001);
 	});
 
+	it('should set the maximum if by clicking the plus button the value is above the maximum', () => {
+		enterText(fixture, '99.999');
+		clickPlusButton(fixture);
+		checkHasValue(fixture, 100.001);
+	});
+
 	it('should decrement the value if minus button is clicked (-1.12345)', () => {
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 34.12345 - 1.12345);
@@ -102,6 +108,12 @@ describe('Systelab Spinner with decimals', () => {
 
 	it('should not decrement the value if is the minimum', () => {
 		enterText(fixture, '1.00001');
+		clickMinusButton(fixture);
+		checkHasValue(fixture, 1.00001);
+	});
+
+	it('should set the minimum if by clicking the minus button the value is below the minimum', () => {
+		enterText(fixture, '1.1');
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 1.00001);
 	});

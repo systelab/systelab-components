@@ -78,6 +78,13 @@ describe('Systelab Spinner', () => {
 		checkHasValue(fixture, 100);
 	});
 
+	it('should set the maximum if by clicking the plus button the value is above the maximum', () => {
+		setStep(fixture, 11);
+		enterText(fixture, '99');
+		clickPlusButton(fixture);
+		checkHasValue(fixture, 100);
+	});
+
 	it('should decrement the value if minus button is clicked (-1)', () => {
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 34 - 1);
@@ -94,6 +101,14 @@ describe('Systelab Spinner', () => {
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 1);
 	});
+
+	it('should set the minimum if by clicking the minus button the value is below the minimum', () => {
+		setStep(fixture, 11);
+		enterText(fixture, '2');
+		clickMinusButton(fixture);
+		checkHasValue(fixture, 1);
+	});
+
 
 	it('should call method change when the minus button is clicked', () => {
 		spyOn(fixture.componentInstance, 'doValueChange');
