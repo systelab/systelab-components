@@ -5,4 +5,8 @@
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
   }
+
+  .btn {
+    border: 1px solid $form-border;
+  }
 }

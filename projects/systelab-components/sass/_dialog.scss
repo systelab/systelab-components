@@ -24,13 +24,13 @@
  */
 
 $content-border-width: 4px;
-$slab-footer-buttons-offset: 4px !default;
+$slab-footer-buttons-offset: 7px !default;
 $slab-button-size: 35px !default;
 $slab-button-fontsize: ceil(32px * $slab-size-percentage) !default;
 $slab-button-size-fullscreen: $slab-button-size !default;
 $slab-button-size-dialog-header: $slab-button-size !default;
 
-@import '~@angular/cdk/overlay-prebuilt.css';
+@import '../../../node_modules/@angular/cdk/overlay-prebuilt.css';
 
 .cdk-overlay-pane {
   background-color: $background-primary;
@@ -116,14 +116,6 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     pointer-events: auto;
   }
 
-  /*
-  .slab-dialog-bottom {
-    button {
-      @extend .btn.disabled;
-    }
-  }
-  */
-
 }
 
 /**
@@ -171,8 +163,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
   font-size: 20px;
   border-radius: 0;
-  background: $primary;
-  color: $background-primary;
+  background: $white;
 }
 
 /**
@@ -205,11 +196,10 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   align-items: center;
   justify-content: center;
 
-  background-color: darken($primary, 10%);
   cursor: pointer;
   text-align: center;
-  border-radius: $content-border-width + 1;
-  color: $background-primary;
+  border-radius: 20px;
+  border: 1px solid $primary;
 
   i,
   &:before {
@@ -220,15 +210,17 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   &:hover {
-    background-color: darken($primary, 20%);
+    color: white;
+    background-color: $primary;
   }
 }
 
 .slab-dialog-close {
 
   &:before {
-    content: "\F057";
+    content: "\f00d";
     cursor: pointer;
+    color: $primary;
   }
 }
 
@@ -237,6 +229,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   &:before {
     content: "\F05A";
     cursor: pointer;
+    color: $primary;
   }
 }
 
@@ -245,6 +238,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   &:before {
     content: "\F015";
     cursor: pointer;
+    color: $primary;
   }
 }
 
@@ -253,6 +247,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   &:before {
     content: "\F2d1";
     cursor: pointer;
+    color: $primary;
   }
 }
 

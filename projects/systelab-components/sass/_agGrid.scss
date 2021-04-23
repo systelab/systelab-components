@@ -20,8 +20,8 @@ $icon-rowaction-font-size: 20px;
 
         .slab-context-menu {
           height: 100%;
-          min-width: $grid-cell-height;
-          width: $grid-cell-height;
+          min-width: 39px;
+          width: 39px;
 
           .icon-context-menu {
             color: white;
@@ -78,7 +78,7 @@ $icon-rowaction-font-size: 20px;
     }
 
     .ag-cell {
-      line-height: $grid-cell-height;
+      line-height: 39px;
       border: none;
       border-right: 1px solid white;
       padding: 0 5px;
@@ -99,7 +99,7 @@ $icon-rowaction-font-size: 20px;
     }
 
     .ag-cell-inline-editing {
-      height: $grid-cell-height;
+      height: 39px;
     }
   }
 }
@@ -108,67 +108,112 @@ $icon-rowaction-font-size: 20px;
   overflow: hidden;
 }
 
-.ag-theme-fresh .ag-root-wrapper {
-  border: none !important;
-}
+.ag-theme-fresh {
+  .ag-root-wrapper {
+    border: none !important;
+  }
 
-.ag-theme-fresh .ag-ltr .ag-root {
-  border: none;
-  overflow: hidden;
-  font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-  .ag-header {
-    border-bottom: none;
+  .ag-ltr .ag-root {
+    border: none;
+    overflow: hidden;
     font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-    .ag-header-viewport, .ag-pinned-left-header {
-      background-color: $table-gray;
+    .ag-header {
+      border-bottom: none;
+      font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-      .ag-header-container {
+      .ag-header-viewport, .ag-pinned-left-header {
+        background-color: white;
+
+        .ag-header-container {
+          @include ag-header-row()
+        }
+      }
+
+      .ag-pinned-left-header {
         @include ag-header-row()
+      }
+
+    }
+
+    .ag-header-cell, .ag-header-group-cell {
+      border-right: 1px solid white;
+    }
+
+    .ag-body-viewport {
+      //overflow: auto !important;
+      @include ag-row()
+    }
+
+    .ag-body-horizontal-scroll {
+      .ag-horizontal-left-spacer {
+        overflow-x: auto;
+        border-right: none;
+        background-color: #f6f6f6;
       }
     }
 
-    .ag-pinned-left-header {
-      @include ag-header-row()
-    }
 
   }
-
-  .ag-header-cell, .ag-header-group-cell {
-    border-right: 1px solid white;
+  .ag-row-drag {
+    background: none;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .ag-pinned-left-header {
+    border-right: solid 1px;
+    border-right-color: white !important;
   }
 
-  .ag-body-viewport {
-    //overflow: auto !important;
-    @include ag-row()
+  .ag-header-cell-text {
+    color: black;
   }
 
-  .ag-body-horizontal-scroll {
-    .ag-horizontal-left-spacer {
-      overflow-x: auto;
-      border-right: none;
-      background-color: #f6f6f6;
-    }
+  .ag-row {
+    border-bottom: solid 1px #dee2e6;
   }
 
+  .ag-cell {
+    border-right: none !important;
+  }
+
+  .ag-header {
+    border-bottom: solid 1px #dee2e6 !important;
+    border-top: solid 1px #dee2e6 !important;
+  }
+
+  .ag-header-cell::after,
+  .ag-header-group-cell::after {
+    background: white;
+  }
+
+  .ag-header-group-cell {
+    border-bottom: solid 1px #dee2e6 !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .ag-header-group-cell-label {
+    justify-content: center !important;
+  }
+
+  .ag-header-cell-label {
+    flex-direction: row !important;
+    justify-content: left !important;
+    align-items: center !important;
+  }
 
 }
 
 .height-hidden { //Style for the hidden element to get the proper height from Typescript
   display: none;
-  line-height: $grid-cell-height; //Table Row Height
-  height: $grid-header-height; //Table Header Height
+  line-height: 39px; //Table Row Height
+  height: 39px; //Table Header Height
 }
 
 systelab-spinner-cell {
   display: flex;
 }
 
-.ag-theme-fresh .ag-row-drag {
-  background: none;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}

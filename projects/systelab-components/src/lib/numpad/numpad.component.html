@@ -1,4 +1,4 @@
-<div class="input-group">
+<div class="input-group slab-numpad-container">
     <input  *ngIf="isPassword" class="form-control" id="numpaddialogPwd" type="password" name="numpaddialog" [autofocus]="autofocus" [(ngModel)]="value" (keyup.enter)="doEnter()">
     <input  *ngIf="!isPassword" class="form-control" id="numpaddialog" type="text" name="numpaddialog" [autofocus]="autofocus" [(ngModel)]="value" (keyup.enter)="doEnter()">
     <div class="input-group-append">

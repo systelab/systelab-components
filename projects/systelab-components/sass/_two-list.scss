@@ -1,4 +1,3 @@
-
 /* $twolist-row-height: define the row height*/
 $twolist-row-height: ceil(35px * $slab-size-percentage) !default;
 
@@ -51,9 +50,15 @@ $twolist-row-height: ceil(35px * $slab-size-percentage) !default;
 
   .slab-twolistbuttondiv {
     margin-top: 60px;
-    padding:5px;
+    padding: 5px;
+
     button {
       margin: 2px;
     }
+  }
+
+  .btn {
+    font-weight: bold;
+    font-size: 24px;
   }
 }

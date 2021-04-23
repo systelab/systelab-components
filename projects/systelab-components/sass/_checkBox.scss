@@ -51,7 +51,9 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
   // Define background color and icon when checked
   input[type="checkbox"]:not(.slab-checkbox-not-show):checked + label:before {
-    content: '\F00d';
+    content: '\F00c';
+    font-size: 16px;
+    padding-top: 2px;
     background-color: $slab-checkbox-border-color;
   }
 
@@ -100,7 +102,9 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
 
 .ag-theme-fresh .ag-checkbox-input-wrapper.ag-checked::after {
-  content: '\f00d' !important;
+  content: '\f00c' !important;
+  font-size: 16px;
+  padding-top: 2px;
   width: 22px !important;
   height: 22px !important;
   color: $white !important;

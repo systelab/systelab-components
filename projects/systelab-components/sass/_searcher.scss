@@ -10,6 +10,12 @@
   label {
     margin-left: 5px;
   }
+
+  .btn {
+    background-color: white;
+    border: 1px solid $form-border;
+    color: $dark;
+  }
 }
 
 .slab-searcher-dialog-container {

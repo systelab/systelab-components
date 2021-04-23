@@ -22,8 +22,9 @@
   }
 
   .btn {
-    background-color: $dark;
-    color: white;
+    background-color: white;
+    border: 1px solid $form-border;
+    color: $dark;
   }
 }
 

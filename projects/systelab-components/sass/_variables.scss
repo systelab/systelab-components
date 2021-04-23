@@ -4,7 +4,7 @@
 @import "mixins";
 
 // Internal variable to help set the size
-$slab-size-percentage: 0.7 !default;
+$slab-size-percentage: 0.8 !default;
 // Internal variable to set the font size
 $slab-base-font-size: 15px !default;
 // Defines the application font size
@@ -74,7 +74,7 @@ $slab-tab-min-width: 120px !default;
 // Define the top margin and the gutter between tab elements
 $slab-tab-space: 5px;
 // Define the color for non active tabs
-$slab-tab-no-active-bg-color: rgb(66, 66, 66) !default;
+$slab-tab-no-active-bg-color: rgb(255, 255, 255) !default;
 
 // Defines the width of the combobox button
 $slab-combobox-button-width: $form-elements-height !default;

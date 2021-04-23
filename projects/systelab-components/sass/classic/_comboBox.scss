@@ -1,0 +1,217 @@
+$slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
+
+.slab-combobox {
+
+  border-radius: $border-radius;
+  border: solid 1px $medium-gray;
+
+  &:focus-within {
+    border-color: #8cc8f7;
+    outline: 0;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+  }
+
+  .slab-dropdown-toogle {
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .slab-combo-button {
+    @include user-selection(none);
+
+    cursor: pointer;
+    padding: 1px 8px;
+    border-radius: 4px;
+    color: #424242;
+    background-color: white;
+    border-color: transparent;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: $slab-combobox-button-width;
+    margin-top: 0;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+
+    @if ($slab-size-percentage == 1) {
+      line-height: $form-elements-height - 9px;
+    }
+  }
+
+  .slab-combo-input {
+    &:focus {
+      border-color: transparent;
+      outline: 0;
+      box-shadow: 0 0 0 3px transparent;
+    }
+  }
+
+  .slab-combo-label {
+    @include user-selection(none);
+  }
+
+  .slab-combo-input {
+    cursor: pointer;
+    text-overflow: ellipsis !important;
+    border-right: none !important;
+    border-radius: $border-radius;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-color: transparent;
+    float: left;
+    width: calc(100% - #{$slab-combobox-button-width}) !important;
+    font-family: $slab-base-body-font-family;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 12px;
+
+    &.form-control[readonly] {
+      background-color: white;
+    }
+
+    &::selection {
+      background-color: white;
+    }
+  }
+
+  input:focus {
+    outline: 0 none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+
+  .slab-color-container {
+    border: solid 1px #d6d6d6;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    height: $form-elements-height;
+  }
+
+  .slab-color-tag {
+    width: 95%;
+    height: 75%;
+  }
+
+  .slab-color-tag-border {
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .slab-combo-caret-down {
+    margin-right: 10px;
+  }
+
+  .slab-filter-container {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+
+    input {
+      padding-left: 5px;
+
+      &::-ms-clear {
+        display: none;
+      }
+    }
+  }
+
+  .slab-combo-dropdown {
+    margin-top: 1px;
+    padding: 0;
+    border: none;
+
+    .slab-combo-dropdown-box {
+      position: fixed;
+      z-index: 3;
+      -webkit-transform: translate3d(0, 0, 0);
+      border: 1px solid $medium-gray;
+      border-radius: 3px;
+      background-color: white;
+    }
+
+    .ag-theme-fresh .ag-header {
+      height: 0px !important;
+      min-height: 0px !important;
+    }
+
+    .ag-theme-fresh .ag-root {
+      border: none;
+      overflow: hidden;
+
+      .ag-body-viewport {
+        .ag-center-cols-viewport {
+          overflow-x: hidden;
+          background-color: $background-primary;
+
+          .ag-center-cols-container {
+            width: 100% !important;
+
+            .ag-row {
+              background-color: $background-primary;
+
+              &.ag-row-selected {
+                background-color: $slab-selected-background-color;
+              }
+
+              &.ag-row-hover {
+                background-color: $slab-selected-background-color;
+              }
+
+              &.ag-row-focus {
+                background-color: scale-color($primary, $alpha: -90%);
+              }
+
+              .ag-cell {
+                border: none;
+                padding: 0 $slab-combo-check-cell-padding;
+              }
+            }
+
+          }
+        }
+      }
+
+      .ag-body-horizontal-scroll {
+        display: none;
+      }
+    }
+
+    &.disabled {
+      visibility: hidden;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .slab-combo-label {
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .slab-combo-input,
+    .slab-combo-button {
+      cursor: not-allowed;
+      background-color: #f4f5f7 !important;
+    }
+  }
+
+}
+
+.slab-combo-badge.badge > .close {
+  font-size: 1rem;
+  margin-top: -2px;
+  text-shadow: none;
+  color: white;
+  opacity: 1;
+}
+
+.pointer {
+  cursor: pointer;
+}
