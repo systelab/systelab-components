@@ -1,9 +1,7 @@
 $slab-button-background-color: $dark !default;
 
 .btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
- {
- // background-color: $slab-button-background-color;
-  // color: white;
+{
 
   &:hover {
     background-color: $primary;
@@ -11,9 +9,9 @@ $slab-button-background-color: $dark !default;
   }
 }
 
-.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link {
-    border-radius: 30px;
-  }
+.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link {
+}
+
 /*
 .btn { //Toogle buttons
   &.btn-outline-primary {
