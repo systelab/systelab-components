@@ -1,25 +1,27 @@
-.slab-paginator-container {
-  .btn {
-    background-color: white;
-    border: 1px solid $primary;
-    color: $primary;
-    border-radius: 2px;
-
-    &:hover {
-      color: white;
-      background-color: $primary;
-    }
-  }
-
-  .btn-primary {
-    background-color: $primary;
-    border: 1px solid $primary;
-    color: white;
-    border-radius: 2px;
-
-    &:hover {
-      color: $primary;
+systelab-paginator {
+  .slab-paginator-container {
+    .btn {
       background-color: white;
+      border: 1px solid $primary;
+      color: $primary;
+      border-radius: 2px;
+
+      &:hover {
+        color: white;
+        background-color: $primary;
+      }
+    }
+
+    .btn-primary {
+      background-color: $primary;
+      border: 1px solid $primary;
+      color: white;
+      border-radius: 2px;
+
+      &:hover {
+        color: $primary;
+        background-color: white;
+      }
     }
   }
 }

@@ -1,31 +1,41 @@
+systelab-numpad {
+  .btn {
+    border: 1px solid $form-border;
+  }
+}
+
 .slab-numpad-container {
   .slab-numpad-nopadding {
     padding: 2px !important;
     margin: 0 !important;
   }
+
   .slab-numpad-parentPadding {
     padding: 15px;
   }
+
   .slab-numpad-btn {
     height: 55px;
     line-height: 50px;
     font-weight: bold;
     font-size: 25px;
-    color:white !important;
+    background-color: $slab-button-background-color;
+    color: white !important;
+    &:hover {
+      background-color: $primary;
+    }
   }
+
   .slab-numpad-container {
     margin-right: auto;
     margin-left: auto;
   }
-  .slab-numpad-input{
+
+  .slab-numpad-input {
     height: 60px;
     font-size: 42px;
     line-height: 35px;
     width: 100%;
   }
-
-  .btn {
-    border: 1px solid $form-border;
-  }
-
 }
+

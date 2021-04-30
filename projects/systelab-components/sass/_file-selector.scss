@@ -1,12 +1,14 @@
-.slab-file-selector {
-  input {
-    border-right: none !important;
-    border-radius: $border-radius !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-  }
+systelab-file-selector {
+  .slab-file-selector {
+    input {
+      border-right: none !important;
+      border-radius: $border-radius !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
 
-  .btn {
-    border: 1px solid $form-border;
+    .btn {
+      border: 1px solid $form-border;
+    }
   }
 }

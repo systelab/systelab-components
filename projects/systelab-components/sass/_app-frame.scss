@@ -1,5 +1,4 @@
-.slab-application-container {
-  height: 100%;
+systelab-app-frame {
 
   .slab-side-bar-container-large {
     background-color: lightgrey;
@@ -13,7 +12,6 @@
     width: 60px;
   }
 
-
   .slab-main-container {
     background-color: white;
   }
@@ -23,5 +21,4 @@
       display: none;
     }
   }
-
 }

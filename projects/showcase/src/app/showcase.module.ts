@@ -82,6 +82,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-tree-combobox.component';
 import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
+import { ShowcaseVerticaldDialog } from './components/dialog/vertical-dialog/showcase-vertical-dialog.component';
+import { ShowcaseVerticalComponent } from './components/dialog/vertical-dialog/showcase-vertical.component';
 
 @NgModule({
 	imports:      [
@@ -173,6 +175,8 @@ import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-d
 		ShowcaseBarsGridComponent,
 		ShowcaseSpyMenuComponent,
 		ShowcaseSpyMenuDialog,
+		ShowcaseVerticalComponent,
+		ShowcaseVerticaldDialog
 	],
 	bootstrap:    [ShowcaseComponent]
 })

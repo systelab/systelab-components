@@ -65,10 +65,10 @@ $grid-header-height: $form-elements-height + ceil(8 * $slab-size-percentage) !de
 // Defines the line-height of the ui-grid-header-cell.
 $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
 // Defines the height and the min-height of the ui-grid row and cell
-$grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
+$grid-cell-height: 39px !default;
 
 // Defines the height of the tab
-$slab-tab-height: ceil(38px * $slab-size-percentage) !default;
+$slab-tab-height: 28px !default;
 // Defines the min-width of the tab
 $slab-tab-min-width: 120px !default;
 // Define the top margin and the gutter between tab elements
@@ -80,31 +80,29 @@ $slab-tab-no-active-bg-color: rgb(255, 255, 255) !default;
 $slab-combobox-button-width: $form-elements-height !default;
 
 // Define the height and the line-height of the checkbox
-$slab-checkbox-height: max(19px, $form-elements-height - 2px) !default;
-$slab-checkbox-grid-height: max(19px, $form-elements-height - 4px) !default;
-@if ($slab-size-percentage == 1) {
-  $slab-checkbox-grid-height: 30px;
-  $slab-checkbox-height: 30px;
-}
+$slab-checkbox-height: 22px !default;
+$slab-checkbox-grid-height: 22px !default;
 
 $slab-checkbox-border-color: $primary !default;
 $slab-checkbox-color: white !default;
+$slab-checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
+
 
 $slab-switch-bg-color: transparent !default;
 $slab-switch-circle-color: $dark-gray !default;
 $slab-switch-bg-color-checked: $primary !default;
 $slab-switch-circle-color-checked: white !default;
-$slab-switch-height: max(22px, $form-elements-height - 6px) !default;
+$slab-switch-height: 22px !default;
 
 // Define the height and the line-height of the radio
-$slab-radio-height: max(19px, $form-elements-height - 4px) !default;
+$slab-radio-height: 22px !default;
 // Defines the padding-left of the radio
 $slab-radio-text-gap: $slab-radio-height * 1.5 !default;
 $slab-radio-border-color: $primary !default;
 $slab-radio-color: white !default;
 
 // Defines the slider height
-$slab-slider-height: $form-elements-height !default;
+$slab-slider-height: 24px !default;
 // Defines the height of the ui-slider
 $slab-slider-background-line: round($slab-slider-height / 3);
 $slab-slider-circle-color: white !default;

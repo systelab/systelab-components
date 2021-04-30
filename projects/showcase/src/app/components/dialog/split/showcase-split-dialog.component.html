@@ -17,10 +17,10 @@
     </as-split>
 </div>
 <systelab-dialog-bottom>
-    <button type="button" class="btn btn-outline-primary mr-1" (click)="setShowDetails()"
-            [class.btn-primary]="isShowDetails">Details
+    <button type="button" class="btn mr-1" (click)="setShowDetails()"
+            [class.btn-primary]="isShowDetails" [class.btn-outline-primary]="!isShowDetails">Details
     </button>
-    <button type="button" class="btn btn-outline-primary" (click)="setShowSelector()"
-            [class.btn-primary]="isShowSelector">Selector
+    <button type="button" class="btn" (click)="setShowSelector()"
+            [class.btn-primary]="isShowSelector" [class.btn-outline-primary]="!isShowSelector">Selector
     </button>
 </systelab-dialog-bottom>

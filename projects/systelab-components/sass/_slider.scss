@@ -1,99 +1,103 @@
-$slab-slider-track-brackground-color: #d3d3d3;
-$slab-slider-track-border-radius: 5px;
-$slab-slider-thumb-border-radius: 50%;
-$slab-slider-thumb-border: 6px solid $slab-slider-circle-border-color;
-$slab-slider-thumb-cursor: pointer;
+systelab-slider {
+  $slab-slider-track-brackground-color: #d3d3d3;
+  $slab-slider-track-border-radius: 5px;
+  $slab-slider-thumb-border-radius: 50%;
+  $slab-slider-thumb-border: 6px solid $slab-slider-circle-border-color;
+  $slab-slider-thumb-cursor: pointer;
 
-.slab-slider {
+  .slab-slider {
 
-  &:not([class*="w-"]) {
-    width: 100%;
-  }
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
+    &:not([class*="w-"]) {
+      width: 100%;
+    }
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
 
-  &:hover {
-    opacity: 1;
-  }
-
-  &:focus {
-    border-color: #8cc8f7;
-    outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
-    border-radius: $slab-slider-track-border-radius;
-  }
-
-  &::-webkit-slider-runnable-track {
-    height: $slab-slider-background-line;
-    background: $slab-slider-track-brackground-color;
-    border-radius: $slab-slider-track-border-radius;
-  }
-
-  &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    @include size($slab-slider-height !important);
-    background-color: $slab-slider-circle-color;
-    border-radius: $slab-slider-thumb-border-radius;
-    border: $slab-slider-thumb-border;
-    cursor: $slab-slider-thumb-cursor;
-    margin-top: -($slab-slider-height - $slab-slider-background-line) / 2;
-  }
+    -moz-appearance: none;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
 
-  &::-moz-range-track {
-    height: $slab-slider-background-line;
-    background: $slab-slider-track-brackground-color;
-    border-radius: $slab-slider-track-border-radius;
-    border: none;
-  }
+    &:hover {
+      opacity: 1;
+    }
 
-  &::-moz-range-thumb {
-    @include size(($slab-slider-height/2) !important);
-    background-color: $slab-slider-circle-color;
-    border-radius: $slab-slider-thumb-border-radius;
-    border: $slab-slider-thumb-border;
-    cursor: $slab-slider-thumb-cursor;
-  }
+    &:focus {
+      border-color: #8cc8f7;
+      outline: 0;
+      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+      border-radius: $slab-slider-track-border-radius;
+    }
 
-  &::-moz-focus-outer {
-    border: 0;
-  }
+    &::-webkit-slider-runnable-track {
+      height: $slab-slider-background-line;
+      background: $slab-slider-track-brackground-color;
+      border-radius: $slab-slider-track-border-radius;
+    }
 
-  &::-ms-track {
-    height: $slab-slider-height;
-    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-    background-color: transparent !important;
-    /*leave room for the larger thumb to overflow with a transparent border */
-    border-color: transparent;
-    //border-width: 6px 0;
-    /*remove default tick marks*/
-    color: transparent;
-  }
-  &::-ms-fill-lower, &::-ms-fill-upper {
-    height: $slab-slider-background-line;
-    background: $slab-slider-track-brackground-color;
-    border-radius: $slab-slider-track-border-radius;
-  }
-  &::-ms-thumb {
-    @include size(($slab-slider-height/2) !important);
-    background-color: $slab-slider-circle-color;
-    border-radius: $slab-slider-thumb-border-radius;
-    border: $slab-slider-thumb-border;
-    cursor: $slab-slider-thumb-cursor;
-    margin-top: ($slab-slider-height - $slab-slider-background-line) / 2;
-    margin-bottom: ($slab-slider-height - $slab-slider-background-line) / 2;
-  }
-  &::-ms-tooltip {
-    display: none;
-  }
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      @include size($slab-slider-height !important);
+      background-color: $slab-slider-circle-color;
+      border-radius: $slab-slider-thumb-border-radius;
+      border: $slab-slider-thumb-border;
+      cursor: $slab-slider-thumb-cursor;
+      margin-top: -($slab-slider-height - $slab-slider-background-line) / 2;
+    }
 
+    &::-moz-range-track {
+      height: $slab-slider-background-line;
+      background: $slab-slider-track-brackground-color;
+      border-radius: $slab-slider-track-border-radius;
+      border: none;
+    }
+
+    &::-moz-range-thumb {
+      @include size(($slab-slider-height/2) !important);
+      background-color: $slab-slider-circle-color;
+      border-radius: $slab-slider-thumb-border-radius;
+      border: $slab-slider-thumb-border;
+      cursor: $slab-slider-thumb-cursor;
+    }
+
+    &::-moz-focus-outer {
+      border: 0;
+    }
+
+    &::-ms-track {
+      height: $slab-slider-height;
+      /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+      background-color: transparent !important;
+      /*leave room for the larger thumb to overflow with a transparent border */
+      border-color: transparent;
+      //border-width: 6px 0;
+      /*remove default tick marks*/
+      color: transparent;
+    }
+
+    &::-ms-fill-lower, &::-ms-fill-upper {
+      height: $slab-slider-background-line;
+      background: $slab-slider-track-brackground-color;
+      border-radius: $slab-slider-track-border-radius;
+    }
+
+    &::-ms-thumb {
+      @include size(($slab-slider-height/2) !important);
+      background-color: $slab-slider-circle-color;
+      border-radius: $slab-slider-thumb-border-radius;
+      border: $slab-slider-thumb-border;
+      cursor: $slab-slider-thumb-cursor;
+      margin-top: ($slab-slider-height - $slab-slider-background-line) / 2;
+      margin-bottom: ($slab-slider-height - $slab-slider-background-line) / 2;
+    }
+
+    &::-ms-tooltip {
+      display: none;
+    }
+
+  }
 }
-
-

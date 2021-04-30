@@ -2,28 +2,35 @@ $slab-button-background-color: $dark !default;
 
 .btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
 {
+  border-color: $form-border;
+  background-color: white;
+  color: black;
 
   &:hover {
     background-color: $primary;
     border-color: $primary;
+    color: white;
   }
 }
 
 .btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link {
+  border-radius: 20px;
 }
 
-/*
-.btn { //Toogle buttons
-  &.btn-outline-primary {
-    color: white;
-    background-color: $slab-button-background-color;
-    border-color: $primary;
-  }
+systelab-toggle-button {
+  .btn { //Toogle buttons
+    &.btn-outline-primary {
+      color: $primary;
+      background-color: transparent;
+      border-color: $primary;
+    }
 
-  &.btn-primary {
-    background-color: $primary;
-    border-color: $primary;
+    &.btn-primary {
+      color: white;
+      background-color: $primary;
+      border-color: $primary;
+    }
   }
 }
 
- */
+

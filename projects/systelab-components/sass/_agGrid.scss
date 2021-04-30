@@ -20,8 +20,8 @@ $icon-rowaction-font-size: 20px;
 
         .slab-context-menu {
           height: 100%;
-          min-width: 39px;
-          width: 39px;
+          min-width: $grid-cell-height;
+          width: $grid-cell-height;
 
           .icon-context-menu {
             color: white;
@@ -78,7 +78,7 @@ $icon-rowaction-font-size: 20px;
     }
 
     .ag-cell {
-      line-height: 39px;
+      line-height: $grid-cell-height;
       border: none;
       border-right: 1px solid white;
       padding: 0 5px;
@@ -99,7 +99,7 @@ $icon-rowaction-font-size: 20px;
     }
 
     .ag-cell-inline-editing {
-      height: 39px;
+      height: $grid-cell-height;
     }
   }
 }
@@ -209,8 +209,8 @@ $icon-rowaction-font-size: 20px;
 
 .height-hidden { //Style for the hidden element to get the proper height from Typescript
   display: none;
-  line-height: 39px; //Table Row Height
-  height: 39px; //Table Header Height
+  line-height: $grid-cell-height; //Table Row Height
+  height: $grid-cell-height; //Table Header Height
 }
 
 systelab-spinner-cell {

@@ -1,13 +1,13 @@
 <div class="slab-flex-1 d-flex flex-column" cdkTrapFocus>
     <systelab-dialog-header (close)="close();">Title</systelab-dialog-header>
     <systelab-tabs class="slab-flex-1 slab-overflow-container">
-        <systelab-tab [title]="'title 3'" [id]="'3'">
+        <systelab-tab [title]="'Title 3'" [id]="'3'">
             <showcase-standard class="w-100"></showcase-standard>
         </systelab-tab>
-        <systelab-tab [title]="'title 2'" [id]="'2'">
+        <systelab-tab [title]="'Title 2'" [id]="'2'">
             <div class="slab-flex-1">Second tab</div>
         </systelab-tab>
-        <systelab-tab [title]="'title 1'" [id]="'1'" class="p-1">
+        <systelab-tab [title]="'Title 1'" [id]="'1'" class="p-1">
             <showcase-inner-api-grid #grid2 class="slab-flex-1 position-relative" [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
                                      (clickRow)="doSelect($event)"></showcase-inner-api-grid>
         </systelab-tab>

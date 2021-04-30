@@ -30,15 +30,16 @@ $slab-button-fontsize: ceil(32px * $slab-size-percentage) !default;
 $slab-button-size-fullscreen: $slab-button-size !default;
 $slab-button-size-dialog-header: $slab-button-size !default;
 
-@import '../../../node_modules/@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 .cdk-overlay-pane {
   background-color: $background-primary;
-  border: 5px solid lightgray;
-  border-radius: 5px;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  overflow: hidden;
 
   .slab-dialog-bottom {
-    background: $background-primary;
+    background: #f3f1f1;
 
     .btn {
       height: $slab-button-size;
@@ -50,7 +51,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     border-radius: 0;
 
     .slab-dialog-bottom {
-      background: $darker-gray;
+      background: #f3f1f1;
 
       .btn {
         height: $slab-button-size-fullscreen;
@@ -86,11 +87,13 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
 .slab-dialog-disabled {
   pointer-events: none !important;
+  opacity: 0.5;
 
-  * {
-    @extend .disabled;
-  }
-
+  /*
+    * {
+      @extend .disabled;
+    }
+  */
   .form-control {
     @extend .form-control, :disabled;
   }
