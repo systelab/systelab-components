@@ -4,7 +4,7 @@
 @import "mixins";
 
 // Internal variable to help set the size
-$slab-size-percentage: 0.8 !default;
+$slab-size-percentage: 1 !default;
 // Internal variable to set the font size
 $slab-base-font-size: 15px !default;
 // Defines the application font size
@@ -29,7 +29,7 @@ $background-secondary: rgb(238, 238, 238) !default;
 $slab-selected-background-color: rgb(200, 223, 252) !default;
 
 // Internal variable to define the height of the elements in a form
-$form-elements-height: ceil(35px * $slab-size-percentage) !default;
+$form-elements-height: floor(28px * $slab-size-percentage) !default;
 $form-border: rgb(221, 221, 221) !default;
 
 //Grayscale
@@ -51,21 +51,21 @@ $slab-app-header-user-width: 130px !default;
 //Translucent grayscale
 $slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 // Defines the height of the dialogs header
-$slab-dialog-header-height: max(45px, ceil(60px * $slab-size-percentage)) !default;
+$slab-dialog-header-height: 65px !default;
 // Defines the minimum width for the button
 $slab-minimum-button-width: 85px !default;
 
 // Defines the height of the rows of a table
-$slab-table-min-row-height: $form-elements-height !default;
 $table-row-odd-background-color: rgb(243, 243, 243) !default;
 $table-row-even-background-color: rgb(253, 253, 253) !default;
 $table-row-selected-background-color: $slab-selected-background-color !default;
 // Defines the height of the ui-grid-header-cell
-$grid-header-height: $form-elements-height + ceil(8 * $slab-size-percentage) !default;
+$grid-header-height: 39px !default;
 // Defines the line-height of the ui-grid-header-cell.
 $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
 // Defines the height and the min-height of the ui-grid row and cell
 $grid-cell-height: 39px !default;
+$slab-table-min-row-height: 39px !default;
 
 // Defines the height of the tab
 $slab-tab-height: 28px !default;
@@ -78,6 +78,8 @@ $slab-tab-no-active-bg-color: rgb(255, 255, 255) !default;
 
 // Defines the width of the combobox button
 $slab-combobox-button-width: $form-elements-height !default;
+$slab-combo-check-cell-padding: 12px !default;
+
 
 // Define the height and the line-height of the checkbox
 $slab-checkbox-height: 22px !default;
@@ -119,6 +121,16 @@ $slab-searcher-button-width: $form-elements-height !default;
 $slab-spinner-width: 100px !default;
 
 // Define the line-height of the datepicker’s navigation bar.*/
-$slab-datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
+$slab-datepicker-header-navigation-line-height: 25px !default;
+
+// Defines the min-height of the textarea.
+$slab-textarea-min-height: 140px !default;
+
+/* $twolist-row-height: define the row height*/
+$slab-twolist-row-height: 31px !default;
+
+
+/* $sort-list-row-height: define the row height*/
+$slab-sort-list-row-height: 39px !default;
 
 

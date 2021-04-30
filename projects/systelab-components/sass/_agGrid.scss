@@ -210,7 +210,7 @@ $icon-rowaction-font-size: 20px;
 .height-hidden { //Style for the hidden element to get the proper height from Typescript
   display: none;
   line-height: $grid-cell-height; //Table Row Height
-  height: $grid-cell-height; //Table Header Height
+  height: $grid-header-height; //Table Header Height
 }
 
 systelab-spinner-cell {

@@ -1,7 +1,4 @@
 
-/* $sort-list-row-height: define the row height*/
-$sort-list-row-height: ceil(35px * $slab-size-percentage) !default;
-
 .slab-sortable-list {
   display: -webkit-flex;
   display: flex;
@@ -9,7 +6,7 @@ $sort-list-row-height: ceil(35px * $slab-size-percentage) !default;
   padding: 5px 0;
 
   .slab-sortable-list-row {
-    line-height: $sort-list-row-height;
+    line-height: $slab-sort-list-row-height;
     padding-left: 5px;
     cursor: pointer;
 

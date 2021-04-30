@@ -1,5 +1,4 @@
-/* $twolist-row-height: define the row height*/
-$twolist-row-height: ceil(35px * $slab-size-percentage) !default;
+
 
 .slab-twolist {
   display: -webkit-flex;
@@ -29,7 +28,7 @@ $twolist-row-height: ceil(35px * $slab-size-percentage) !default;
         flex: 1 0 auto;
 
         .slab-twolistboxrow {
-          line-height: $twolist-row-height;
+          line-height: $slab-twolist-row-height;
           padding-left: 5px;
           cursor: pointer;
 
