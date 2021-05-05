@@ -24,7 +24,6 @@
  */
 
 $content-border-width: 4px;
-$slab-footer-buttons-offset: 7px !default;
 $slab-button-size: 35px !default;
 $slab-button-fontsize: 25px !default;
 $slab-button-size-fullscreen: $slab-button-size !default;
@@ -34,7 +33,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
 .cdk-overlay-pane {
   background-color: $background-primary;
-  border: 1px solid lightgray;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .1);
   border-radius: 7px;
   overflow: hidden;
 
@@ -47,7 +46,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   &.fullscreen {
-    border: 0 solid lightgray;
+    border: 0;
     border-radius: 0;
 
     .slab-dialog-bottom {
@@ -171,7 +170,6 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
 
 .slab-dialog-bottom {
-  padding: $slab-footer-buttons-offset;
 
   border-top: 1px solid $background-secondary;
   background-color: $darker-gray;
@@ -201,57 +199,55 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   text-align: center;
   border-radius: 20px;
   border: 1px solid $primary;
-
+  
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: $background-primary;
+    color: $primary;
     font-size: $slab-button-fontsize;
     font-family: icomoon;
-  }
+  }  
 
   &:hover {
-    color: white;
     background-color: $primary;
   }
 }
 
 .slab-dialog-close {
-
-  &:before {
-    content: "\f00d";
-    cursor: pointer;
-    color: $primary;
+  &::before {
+    content: "\F00D";
   }
 }
 
 .slab-dialog-info {
-
-  &:before {
+  &::before {
     content: "\F05A";
-    cursor: pointer;
-    color: $primary;
   }
 }
 
 .slab-dialog-home {
-
-  &:before {
+  &::before {
     content: "\F015";
-    cursor: pointer;
-    color: $primary;
   }
 }
 
 .slab-dialog-minimize {
-
-  &:before {
-    content: "\F2d1";
-    cursor: pointer;
-    color: $primary;
+  &::before {
+    content: "\F2D1";
+    font-size: 16px;
   }
 }
 
+.slab-dialog-close,
+.slab-dialog-info,
+.slab-dialog-home,
+.slab-dialog-minimize {
+  &:hover {
+    &::before {
+      color: white ;
+    }
+  }
+}
 /* Style modifies.
    ========================================================================== */
 
