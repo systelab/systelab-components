@@ -5,26 +5,23 @@ systelab-tabs {
     border-bottom: 3px solid transparent;
     cursor: pointer;
     transition: all 250ms ease 0s;
-
-
+    outline: 0;
 
     &.active {
       border-bottom: 3px solid $primary;
-      outline: 0;
       box-shadow: 0 2px 3px scale-color($primary, $alpha: -75%);
 
       &:focus {
-        border-bottom: 3px solid red;
+        background-color: scale-color($primary, $alpha: -95%);
       }
     }
 
     &:not(.active) {
       border-bottom: 3px solid transparent;
-      outline: 0;
       box-shadow: none;
 
       &:focus {
-        border-bottom: 3px solid red;
+        background-color: scale-color($primary, $alpha: -95%);
       }
 
       &:hover {
@@ -34,73 +31,7 @@ systelab-tabs {
 
   }
 
-  .slab-tabs-shrink {
-    min-width: 0px !important;
-    padding-left: 5px;
-    padding: 0 4px !important;
+  .nav-tabs .slab-tabs-shrink {
+    padding: 4px 8px !important;
   }
-
-  //   &.hideTabBackground {
-  //     background-color: white;
-  //   }
-
-  //   > .nav-item {
-  //     background-color: white;
-
-  //     > .nav-single-tab {
-
-  //       &:focus {
-  //         outline: 0;
-  //         box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
-  //       }
-  //     }
-
-  //     > .nav-link {
-  //       @include user-selection(none);
-
-  //       color: #979797;
-  //       background-color: $slab-tab-no-active-bg-color;
-  //       border-radius: 0;
-  //       border-bottom: 1px solid #E5E5E5;
-  //       border-top: 0 !important;
-  //       border-left: 0 !important;
-  //       border-right: 0 !important;
-
-
-  //       &:hover {
-  //         color: lighten($primary, 20%);
-  //         border-color: lighten($primary, 20%);;
-  //         background-color: $background-primary;
-  //       }
-
-  //       &.active {
-  //         color: $primary;
-  //         background-color: $background-primary;
-  //         border-top: 0 !important;
-  //         border-bottom: 3px solid $primary;
-
-  //         &:hover {
-  //           color: lighten($primary, 20%);
-  //           border-color: lighten($primary, 20%);;
-  //           border-bottom: 3px solid lighten($primary, 20%);
-
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-
-  // .slab-tabs-shrink {
-  //   min-width: 0px !important;
-  //   padding-left: 5px;
-  //   padding: 0 4px !important;
-  // }
-
-  // @-moz-document url-prefix() {
-  //   systelab-tabs {
-  //     overflow: auto;
-  //   }
-  // }
-
 }
