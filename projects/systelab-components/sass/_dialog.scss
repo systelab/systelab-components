@@ -31,14 +31,21 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
 @import '~@angular/cdk/overlay-prebuilt.css';
 
+.cdk-overlay-dark-backdrop {
+  backdrop-filter: blur(5px);
+  transition: all .3s !important;
+}
+
 .cdk-overlay-pane {
   background-color: $background-primary;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   border-radius: 7px;
   overflow: hidden;
+  transition: all .5s;
+  animation: scaleUp .2s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 
   .slab-dialog-bottom {
-    background: #f3f1f1;
+    background: $light-gray;
 
     .btn {
       height: $slab-button-size;
@@ -50,8 +57,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     border-radius: 0;
 
     .slab-dialog-bottom {
-      background: #f3f1f1;
-
+      background: none;
       .btn {
         height: $slab-button-size-fullscreen;
       }
@@ -65,10 +71,6 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     position: relative;
     width: 100%;
   }
-}
-
-.cdk-overlay-backdrop {
-  transition: none;
 }
 
 
@@ -113,7 +115,6 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     @extend .disabled;
   }
 
-
   .slab-dialog-header {
     pointer-events: auto;
   }
@@ -130,7 +131,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 .slab-dialog-content {
   @include size(100%);
   display: flex !important; /* [1] */
-
+  
   border: none;
   border-radius: 0;
   background-color: $background-primary;
@@ -334,5 +335,19 @@ $slab-button-size-dialog-header: $slab-button-size !default;
       &:after{
         left: 5%;
       }
+    }
+  }
+
+
+  /* Animations
+    ========================================================================== */
+  @keyframes scaleUp {
+    0% {
+      transform:scale(.8) translateY(1000px);
+      opacity:0;
+    }
+    100% {
+      transform:scale(1) translateY(0px);
+      opacity:1;
     }
   }
