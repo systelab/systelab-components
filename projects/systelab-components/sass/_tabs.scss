@@ -6,6 +6,7 @@ systelab-tabs {
     cursor: pointer;
     transition: all 250ms ease 0s;
     outline: 0;
+    border-radius: 0;
 
     &.active {
       border-bottom: 3px solid $primary;
@@ -25,7 +26,7 @@ systelab-tabs {
       }
 
       &:hover {
-        border-bottom: 3px solid lightgrey;
+        border-bottom: 3px solid $light-gray;
       }
     }
 

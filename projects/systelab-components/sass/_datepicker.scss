@@ -99,6 +99,19 @@ p-calendar {
   flex-direction: column;
 }
 
+.slab-custom-calendar {
+  padding: 0 !important;
+}
+
+.slab-custom-calendar-footer {
+  background-color: $light-gray;
+  padding: 1rem !important;
+}
+
+.slab-custom-calendar-header {
+  border-top: 1px solid $light-gray;
+}
+
 body {
   .slab-datepicker-header {
     $icon-margin-right: 10px;
