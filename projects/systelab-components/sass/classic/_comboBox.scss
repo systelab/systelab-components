@@ -36,7 +36,9 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     @if ($slab-size-percentage == 1) {
       line-height: $form-elements-height - 9px;
     }
+  }
 
+  .slab-combo-button-icon {
     font-family: 'icomoon' !important;
     speak: none;
     font-style: normal;

@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!isDisabled" class="d-flex"
+    <div *ngIf="!isDisabled" class="d-flex p-1"
          [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
         <button class="btn btn-outline-primary" (click)="add()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
