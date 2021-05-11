@@ -1,5 +1,5 @@
 <systelab-dialog-header (close)="close()">{{parameters.title}}</systelab-dialog-header>
-<systelab-message-with-icon class="slab-flex-1 d-flex pl-3 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type"
+<systelab-message-with-icon class="d-flex slab-flex-1 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type"
                             [icon]="parameters.icon"></systelab-message-with-icon>
 <systelab-dialog-bottom>
     <div class="ml-auto" *ngIf="parameters.buttons.length>0">
