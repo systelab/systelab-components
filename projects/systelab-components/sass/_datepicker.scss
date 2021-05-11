@@ -147,6 +147,34 @@ body {
     table {
       margin: 0 !important; 
     }
+    .p-datepicker-title {
+      width: 100%;
+      height: 65px;;
+    }
+  
+    .icon-angle-double-right {
+      position: absolute;
+      float: right;
+      right: 15px;
+    }
+  
+    .icon-angle-right {
+      position: absolute;
+      float: right;
+      right: 65px;
+    }
+
+    .icon-angle-double-left {
+      position: absolute;
+      float: left;
+      left: 15px;
+    }
+  
+    .icon-angle-left {
+      position: absolute;
+      float: left;
+      left: 65px;
+    }  
   }
 
   .slab-datepicker-header {
@@ -176,34 +204,6 @@ body {
       }
     }
   }
-  .p-datepicker-title {
-    width: 100%;
-    height: 65px;;
-  }
-
-  .icon-angle-double-right {
-    position: absolute;
-    float: right;
-    right: 15px;
-  }
-
-  .icon-angle-right {
-    position: absolute;
-    float: right;
-    right: 65px;
-  }
-  .icon-angle-double-left {
-    position: absolute;
-    float: left;
-    left: 15px;
-  }
-
-  .icon-angle-left {
-    position: absolute;
-    float: left;
-    left: 65px;
-  }
-
   
   .slab-custom-calendar .slab-custom-calendar-table thead {
     background: white !important;
