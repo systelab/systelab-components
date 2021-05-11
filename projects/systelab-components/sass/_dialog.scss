@@ -33,7 +33,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 @import '~@angular/cdk/overlay-prebuilt.css';
 
 .cdk-overlay-dark-backdrop {
-  backdrop-filter: blur(5px);
+  backdrop-filter: saturate(30%);
   transition: all .3s !important;
 }
 
