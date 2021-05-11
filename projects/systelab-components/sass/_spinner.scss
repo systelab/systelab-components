@@ -6,7 +6,7 @@ systelab-spinner {
       border-color: #8cc8f7;
       outline: 0;
       box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
-      border-radius: 5px;
+      border-radius: $slab-border-radius;
     }
 
     input {

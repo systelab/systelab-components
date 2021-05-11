@@ -9,6 +9,7 @@
     flex: 1 0 $single-list-width;
     min-width: $single-list-width;
     padding: 8px;
+
     @media (max-width: 1024px) {
       input {
         display: none;
@@ -20,7 +21,7 @@
     }
 
     .slab-twolistbox {
-      border-radius: 5px;
+      border-radius:  $slab-border-radius;
       border: 1px solid $medium-gray;
       display: flex;
       overflow: auto;
@@ -45,16 +46,13 @@
       }
     }
   }
-
   .slab-twolistbuttondiv {
-    margin-top: 50px;
-    padding: 10px;
     button {
       height: 35px;
       width: 35px;
-      padding: 0;
       margin: 2px;
       color: $primary;
+      padding: 0;
       border-radius: 30px;
       border: 1px solid $primary;
 
