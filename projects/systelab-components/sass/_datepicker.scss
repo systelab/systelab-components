@@ -142,27 +142,69 @@ p-calendar {
 }
 
 body {
-  .slab-datepicker-header {
-    $icon-margin-right: 0px;
-    $icon-margin-left: 0px;
-    margin-bottom: 0;
-    line-height: $slab-datepicker-header-navigation-line-height !important;
-    color: white;
-
-    .p-datepicker-title {
-      margin: 0;
+  .p-datepicker {
+    width: 450px;
+    table {
+      margin: 0 !important; 
     }
+  }
 
+  .slab-datepicker-header {
+    display: flex;
+    height: 65px;
+    align-items: center;
     a {
-      color: white;
-
+      cursor: pointer;
+      color: $primary !important;
+      border: 1px solid $primary;
+      border-radius: 35px;
+      width: 35px;
+      height: 35px;
+      line-height: 32px !important;
+      text-align: center;
+      margin: 0 !important; 
+      &#next-month{
+        margin-right: 10px !important;
+      }
+      &#previous-month{
+        margin-left: 10px !important;
+      }
       &:hover {
         text-decoration: none;
-        background: none;
-        color: white;
+        background: $primary !important;
+        color: white !important;
       }
     }
   }
+  .p-datepicker-title {
+    width: 100%;
+    height: 65px;;
+  }
+
+  .icon-angle-double-right {
+    position: absolute;
+    float: right;
+    right: 15px;
+  }
+
+  .icon-angle-right {
+    position: absolute;
+    float: right;
+    right: 65px;
+  }
+  .icon-angle-double-left {
+    position: absolute;
+    float: left;
+    left: 15px;
+  }
+
+  .icon-angle-left {
+    position: absolute;
+    float: left;
+    left: 65px;
+  }
+
+  
   .slab-custom-calendar .slab-custom-calendar-table thead {
     background: white !important;
     border-top: 1px solid #eee;
@@ -183,10 +225,13 @@ body {
   padding: 0 !important;
   
   div:nth-child(3) {
-    padding: 10px 15px !important;
+    padding: 15px !important;
+    background-color: $light-gray;
+    border-bottom-right-radius: $slab-border-radius;
+    border-bottom-left-radius: $slab-border-radius;
   }
   
-  .slab-datepicker-header {
+  .p-datepicker-title, .p-datepicker-header {
     display: none;
   }
   
