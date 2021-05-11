@@ -36,6 +36,21 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     @if ($slab-size-percentage == 1) {
       line-height: $form-elements-height - 9px;
     }
+
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &:before {
+      content: "\f0d7";
+    }
   }
 
   .slab-combo-input {
