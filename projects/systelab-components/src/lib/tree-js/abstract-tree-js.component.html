@@ -1,0 +1,11 @@
+<div class="d-flex" [ngClass]="{'flex-column-reverse': buttonsOnBottom, 'flex-column': !buttonsOnBottom}">
+    <div *ngIf="showCollapseExpandButtons" class="slab-button" [ngClass]="{'mt-1': buttonsOnBottom, 'mb-1': !buttonsOnBottom}">
+        <button class="btn mr-2" type="button" (click)="doExpandAllNodes()">{{ 'COMMON_EXPAND_ALL' | translate | async }}</button>
+        <button class="btn" type="button" (click)="doCollapseAllNodes()">{{ 'COMMON_COLLAPSE_ALL' | translate | async }}</button>
+    </div>
+    <div class="slab-flex-1 d-flex flex-column">
+        <div *ngFor="let node of tree" class="d-flex align-items-center mb-1">
+            <tree-node class="slab-flex-1 d-flex" [withCheckboxes]="withCheckboxes" [node]="node" (nodeSelected)="nodeSelect($event)"></tree-node>
+        </div>
+    </div>
+</div>

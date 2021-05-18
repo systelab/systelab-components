@@ -1,0 +1,25 @@
+.slab-tree-node {
+
+  .slab-left-margin {
+    min-width: 30px;
+  }
+  .slab-tree-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .slab-tree-label {
+    height: 30px;
+    user-select: none;
+    &.slab-selected {
+      background-color: #c8dffc;
+    }
+    &:hover {
+      background-color: rgba(200, 223, 252, 0.5);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

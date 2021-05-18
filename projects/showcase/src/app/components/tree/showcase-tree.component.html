@@ -1,3 +1,8 @@
 <div class="container-fluid">
-    <showcase-inner-tree  (nodeSelected)="nodeSelected($event)"></showcase-inner-tree>
+    <h3>PrimeNG Tree</h3>
+    <showcase-inner-tree (nodeSelected)="nodeSelected($event)"></showcase-inner-tree>
+
+    <h3 class="mt-4">New Tree</h3>
+    <showcase-js-tree class="mt-3" [withCheckboxes]="true"
+                      [showCollapseExpandButtons]="true" (nodeSelected)="nodeSelected($event)"></showcase-js-tree>
 </div>
