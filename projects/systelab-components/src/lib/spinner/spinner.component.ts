@@ -84,47 +84,30 @@ export class TouchspinComponent {
 	public minus() {
 		const value: number = Number(this._spinValues.value);
 		const stepValue: number = this._spinValues.step;
-		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
-		let itHasChanged = false;
 		if (value - stepValue > this._spinValues.min) {
-			this._spinValues.value = Number((value - this._spinValues.step).toFixed(fixedNumber));
-			itHasChanged = true;
+			this._spinValues.value = Number((value - this._spinValues.step).toFixed(this._spinValues.getPrecision()));
+			this.saveValueAndEmit(this._spinValues.value);
 		} else {
 			if (this._spinValues.value !== this._spinValues.min) {
 				this._spinValues.value = this._spinValues.min;
-				itHasChanged = true;
+				this.saveValueAndEmit(this._spinValues.value);
 			}
-		}
-		if (itHasChanged) {
-			this.previousValue = this._spinValues.value;
-			this.change.emit(this._spinValues.value);
-			this.valueChange.emit(this._spinValues.value);
-			this.value = this._spinValues.value;
 		}
 	}
 
 	public plus() {
 		const value: number = Number(this._spinValues.value);
 		const stepValue: number = this._spinValues.step;
-		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
-		let itHasChanged = false;
 		if (value + stepValue < this._spinValues.max) {
-			this._spinValues.value = Number((value + this._spinValues.step).toFixed(fixedNumber));
-			itHasChanged = true;
+			this._spinValues.value = Number((value + this._spinValues.step).toFixed(this._spinValues.getPrecision()));
+			this.saveValueAndEmit(this._spinValues.value);
 		} else {
 			if (this._spinValues.value !== this._spinValues.max) {
 				this._spinValues.value = this._spinValues.max;
-				itHasChanged = true;
+				this.saveValueAndEmit(this._spinValues.value);
 			}
-		}
-
-		if (itHasChanged) {
-			this.previousValue = this._spinValues.value;
-			this.change.emit(this._spinValues.value);
-			this.valueChange.emit(this._spinValues.value);
-			this.value = this._spinValues.value;
 		}
 	}
 
@@ -154,7 +137,6 @@ export class TouchspinComponent {
 
 	public checkValue(valueStr: string) {
 		const value: number = Number(valueStr);
-		const fixedNumber: number = (this._spinValues.isDecimal) ? 2 : 0;
 
 		if (isNaN(value)) {
 			this._spinValues.value = this.previousValue;
@@ -171,11 +153,15 @@ export class TouchspinComponent {
 					this.valueStr = this.fillUnitsWithZero ? '00' : '0';
 				}
 			} else {
-				this.previousValue = value;
-				this.value = Number(value.toFixed(fixedNumber));
-				this.valueChange.emit(Number(value.toFixed(fixedNumber)));
-				this.change.emit(Number(value.toFixed(fixedNumber)));
+				this.saveValueAndEmit(value);
 			}
 		}
+	}
+
+	private saveValueAndEmit(value: number): void {
+		this.previousValue = value;
+		this.value = Number(value.toFixed(this._spinValues.getPrecision()));
+		this.valueChange.emit(this.value);
+		this.change.emit(this.value);
 	}
 }

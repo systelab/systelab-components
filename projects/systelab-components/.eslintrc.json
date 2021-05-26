@@ -1,0 +1,20 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "projects/systelab-components/tsconfig.lib.json",
+          "projects/systelab-components/tsconfig.spec.json"
+        ],
+        "createDefaultProgram": true
+      }
+    }
+  ]
+}
