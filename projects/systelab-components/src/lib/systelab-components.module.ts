@@ -87,6 +87,8 @@ import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-subm
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
 import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SpyMenuComponent } from './spy-menu/spy-menu.component';
+import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 
 @NgModule({
 	imports:      [
@@ -176,6 +178,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
+		SpyMenuComponent,
+		ScrollSpyDirective,
 	],
 	exports:      [
 		SliderComponent,
@@ -250,6 +254,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
+		SpyMenuComponent,
+		ScrollSpyDirective
 	],
 	providers:    [
 		StylesUtilService,
