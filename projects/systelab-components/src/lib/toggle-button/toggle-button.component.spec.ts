@@ -12,15 +12,18 @@ import { ToggleButtonComponent } from './toggle-button.component';
 @Component({
 	selector: 'systelab-toggle-button-test',
 	template: `
-                <div>
-                    <systelab-toggle-button [(isChecked)]="check">My Toggle Button</systelab-toggle-button>
-                    <label class="label-value">{{check}}</label>
-                </div>
+        <div>
+            <systelab-toggle-button [(isChecked)]="check" [disabled]="disabled">
+                <i class="icon-plus-circle"></i>My Toggle Button
+            </systelab-toggle-button>
+            <label class="label-value">{{check}}</label>
+        </div>
 	          `,
 	styles:   []
 })
 export class ToggleButtonTestComponent {
 	public check = true;
+	public disabled = false;
 }
 
 describe('Systelab Toggle Button', () => {
@@ -65,6 +68,22 @@ describe('Systelab Toggle Button', () => {
 		clickSwitch(fixture);
 		checkHasValue(fixture, true);
 	});
+
+	it('should not change value if is clicked when is disabled', () => {
+		fixture.componentInstance.disabled = true;
+		clickSwitch(fixture);
+		checkHasValue(fixture, false);
+		clickSwitch(fixture);
+		checkHasValue(fixture, false);
+	});
+
+	it('should not change value if icon is clicked when is disabled', () => {
+		fixture.componentInstance.disabled = true;
+		clickOnIconSwitch(fixture);
+		checkHasValue(fixture, false);
+		clickOnIconSwitch(fixture);
+		checkHasValue(fixture, false);
+	});
 });
 
 function checkHasValue(fixture: ComponentFixture<ToggleButtonTestComponent>, value: boolean) {
@@ -80,6 +99,12 @@ function setValue(fixture: ComponentFixture<ToggleButtonTestComponent>, value: b
 
 function clickSwitch(fixture: ComponentFixture<ToggleButtonTestComponent>) {
 	const button = fixture.debugElement.nativeElement.querySelector('.btn');
+	button.click();
+	fixture.detectChanges();
+}
+
+function clickOnIconSwitch(fixture: ComponentFixture<ToggleButtonTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('.btn i');
 	button.click();
 	fixture.detectChanges();
 }
