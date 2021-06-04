@@ -69,7 +69,7 @@ describe('Systelab Toggle Button', () => {
 		checkHasValue(fixture, true);
 	});
 
-	it('should not change value if is clicked when is disabled', () => {
+	it('should not change value if is clicked when disabled', () => {
 		fixture.componentInstance.disabled = true;
 		clickSwitch(fixture);
 		checkHasValue(fixture, false);
@@ -77,7 +77,7 @@ describe('Systelab Toggle Button', () => {
 		checkHasValue(fixture, false);
 	});
 
-	it('should not change value if icon is clicked when is disabled', () => {
+	it('should not change value if icon is clicked when disabled', () => {
 		fixture.componentInstance.disabled = true;
 		clickOnIconSwitch(fixture);
 		checkHasValue(fixture, false);
