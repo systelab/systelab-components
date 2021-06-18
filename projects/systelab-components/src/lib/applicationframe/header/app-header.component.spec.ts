@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
@@ -8,7 +8,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {SystelabTranslateModule} from 'systelab-translate';
 import {SystelabPreferencesModule} from 'systelab-preferences';
 import {ApplicationHeaderComponent, ApplicationHeaderMenuEntry} from './app-header.component';
-import { DialogService } from '../../modal/dialog/dialog.service';
 
 @Component({
 	selector: 'systelab-app-header-test',
@@ -51,8 +50,8 @@ export class AppHeaderTestComponent implements OnInit {
 describe('Systelab App Header', () => {
 	let fixture: ComponentFixture<AppHeaderTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports: [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -65,7 +64,7 @@ describe('Systelab App Header', () => {
 				AppHeaderTestComponent]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppHeaderTestComponent);
