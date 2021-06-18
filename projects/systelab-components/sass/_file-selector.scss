@@ -1,10 +1,14 @@
 systelab-file-selector {
   .slab-file-selector {
     input {
-      border-right: none !important;
-      border-radius: $border-radius !important;
-      border-top-right-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
+      border-radius: $border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    input[readonly] {
+      border-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
     }
 
     .btn {
