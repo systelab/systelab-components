@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -141,8 +141,8 @@ export class GridTestComponent {
 describe('Systelab Grid', () => {
 	let fixture: ComponentFixture<GridTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -181,7 +181,7 @@ describe('Systelab Grid', () => {
 				entryComponents: [GridColumnOptionsDialog]
 			}
 		});
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(GridTestComponent);

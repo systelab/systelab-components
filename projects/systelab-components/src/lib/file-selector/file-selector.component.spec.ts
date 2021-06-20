@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -34,8 +34,8 @@ export class FileSelectorTestComponent {
 describe('Systelab FileSelectorComponent', () => {
 	let fixture: ComponentFixture<FileSelectorTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports: [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -47,7 +47,7 @@ describe('Systelab FileSelectorComponent', () => {
 				FileSelectorTestComponent]
 		}).compileComponents();
 
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(FileSelectorTestComponent);

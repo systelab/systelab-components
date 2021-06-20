@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -105,8 +105,8 @@ export class DatepickerTestComponent {
 describe('Systelab US DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -121,7 +121,7 @@ describe('Systelab US DatepickerComponent', () => {
 			providers:    [{provide: I18nService, useClass: USMockI18nService}]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DatepickerTestComponent);
@@ -195,8 +195,8 @@ describe('Systelab US DatepickerComponent', () => {
 describe('Systelab ES DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -211,7 +211,7 @@ describe('Systelab ES DatepickerComponent', () => {
 			providers:    [{provide: I18nService, useClass: ESMockI18nService}]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DatepickerTestComponent);
@@ -282,8 +282,8 @@ describe('Systelab ES DatepickerComponent', () => {
 
 describe('Systelab ZH DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -298,7 +298,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 			providers:    [{provide: I18nService, useClass: ZHMockI18nService}]
 		})
 			.compileComponents();
-	}));
+	});
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DatepickerTestComponent);
 		fixture.detectChanges();
