@@ -87,6 +87,8 @@ import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-subm
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
 import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SpyMenuComponent } from './spy-menu/spy-menu.component';
+import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
@@ -177,6 +179,8 @@ import { ToastComponent } from './toast/toast.component';
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
+		SpyMenuComponent,
+		ScrollSpyDirective,
 		ToastComponent,
 	],
 	exports:      [
@@ -252,6 +256,8 @@ import { ToastComponent } from './toast/toast.component';
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
+		SpyMenuComponent,
+		ScrollSpyDirective,
 		ToastComponent
 	],
 	providers:    [
