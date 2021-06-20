@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -9,8 +9,6 @@ import { TreeModule } from 'primeng/tree';
 import { HttpClientModule } from '@angular/common/http';
 import { ChipButtonComponent, ChipButtonItem } from './chip-button.component';
 import { SystelabTranslateModule } from 'systelab-translate';
-import { MessagePopupService } from '../modal/message-popup/message-popup.service';
-import { DialogService } from '../modal/dialog/dialog.service';
 
 @Component({
 	selector: 'systelab-chip-button-test',
@@ -35,8 +33,8 @@ export class ChipButtonTestComponent {
 describe('Systelab Chip Button', () => {
 	let fixture: ComponentFixture<ChipButtonTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -49,7 +47,7 @@ describe('Systelab Chip Button', () => {
 
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ChipButtonTestComponent);

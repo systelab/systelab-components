@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -27,8 +27,8 @@ export class PercentageCircleTestComponent {
 describe('Systelab Percentage Circle', () => {
 	let fixture: ComponentFixture<PercentageCircleTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -39,7 +39,7 @@ describe('Systelab Percentage Circle', () => {
 			declarations: [PercentageCircleComponent, PercentageCircleTestComponent]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(PercentageCircleTestComponent);
