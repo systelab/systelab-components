@@ -1,16 +1,16 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {ButtonModule} from 'primeng/button';
-import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
-import {ChipsComponent} from './chips.component';
-import {AutoComplete} from 'primeng/autocomplete';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { ChipsComponent } from './chips.component';
+import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
 	template: `
-        <systelab-chips [texts]="texts" [disabled]="disabled" [readonly]="readonly"></systelab-chips>`
+                <systelab-chips [texts]="texts" [disabled]="disabled" [readonly]="readonly"></systelab-chips>`
 })
 export class ChipsTestComponent {
 
@@ -42,7 +42,7 @@ describe('Systelab Chips', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 
-			imports: [
+			imports:      [
 				NoopAnimationsModule,
 				FormsModule,
 				BrowserDynamicTestingModule,

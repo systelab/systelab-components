@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -40,8 +40,8 @@ export class TabsTestComponent {
 describe('Systelab Tabs', () => {
 	let fixture: ComponentFixture<TabsTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -52,7 +52,7 @@ describe('Systelab Tabs', () => {
 			declarations: [TabsComponent, TabComponent, TabsTestComponent]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TabsTestComponent);

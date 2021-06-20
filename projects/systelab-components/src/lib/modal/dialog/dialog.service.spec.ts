@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,6 @@ import { DialogService } from './dialog.service';
 import { ModalComponent, SystelabModalContext } from './modal-context';
 import { DialogRef } from './dialog-ref';
 import { DialogBottomComponent } from '../bottom/dialog-bottom.component';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogHeaderComponent } from '../header/dialog-header.component';
 
 export class SampleDialogParameters extends SystelabModalContext {
@@ -68,8 +67,8 @@ export class ModalTestComponent {
 describe('Systelab Modal', () => {
 	let fixture: ComponentFixture<ModalTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -84,7 +83,7 @@ describe('Systelab Modal', () => {
 				DialogHeaderComponent,
 				DialogBottomComponent]
 		});
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ModalTestComponent);
