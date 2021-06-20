@@ -1,0 +1,6 @@
+<div [class]="'slab-toast ' + classType"
+        [@fadeAnimation]="{ value: animationState, params: { fadeIn: 1000, fadeOut: 1000 } }"
+        (@fadeAnimation.done)="onFadeFinished($event)">
+    <i [class]="'fa ' + iconType"></i>
+    <div>{{ data.text }}</div>
+</div>

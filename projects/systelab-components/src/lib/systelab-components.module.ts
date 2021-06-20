@@ -87,6 +87,7 @@ import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-subm
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
 import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
 	imports:      [
@@ -176,6 +177,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
+		ToastComponent,
 	],
 	exports:      [
 		SliderComponent,
@@ -250,6 +252,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 		AutofocusDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
+		ToastComponent
 	],
 	providers:    [
 		StylesUtilService,
