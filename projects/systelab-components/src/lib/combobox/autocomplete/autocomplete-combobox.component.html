@@ -15,7 +15,7 @@
                 (click)="onInputClicked($event)"/>
         <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
-        <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
+        <button #combobutton type="button" class="slab-combo-button slab-combo-button-icon" [disabled]="isDisabled"
                 (click)="onComboClicked($event)" tabindex="-1"></button>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">

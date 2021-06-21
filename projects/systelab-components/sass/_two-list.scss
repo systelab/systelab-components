@@ -1,15 +1,14 @@
 
 
 .slab-twolist {
-  display: -webkit-flex;
   display: flex;
   overflow: auto;
 
   .slab-twolistdiv {
     $single-list-width: calc(50% - 30px);
-
     flex: 1 0 $single-list-width;
     min-width: $single-list-width;
+    padding: 8px;
 
     @media (max-width: 1024px) {
       input {
@@ -17,10 +16,13 @@
       }
     }
 
+    label {
+      margin-bottom: 2px;
+    }
+
     .slab-twolistbox {
-      border-radius: 5px;
+      border-radius:  $slab-border-radius;
       border: 1px solid $medium-gray;
-      padding: 5px 0;
       display: flex;
       overflow: auto;
 
@@ -29,15 +31,13 @@
 
         .slab-twolistboxrow {
           line-height: $slab-twolist-row-height;
-          padding-left: 5px;
           cursor: pointer;
-
+          text-indent: 10px;
           @include user-selection(none);
         }
 
         .slab-twolistboxrowselected {
           background-color: $slab-selected-background-color;
-          padding-left: 5px;
         }
 
         .slab-twolistboxrowdrag {
@@ -46,13 +46,19 @@
       }
     }
   }
-
   .slab-twolistbuttondiv {
-    margin-top: 60px;
-    padding: 5px;
-
     button {
+      height: 35px;
+      width: 35px;
       margin: 2px;
+      color: $primary;
+      padding: 0;
+      border-radius: 30px;
+      border: 1px solid $primary;
+
+      &:disabled{
+        opacity: 0.4 !important;
+      }
     }
   }
 

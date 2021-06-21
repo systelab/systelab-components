@@ -24,22 +24,29 @@
  */
 
 $content-border-width: 4px;
-$slab-footer-buttons-offset: 7px !default;
 $slab-button-size: 35px !default;
 $slab-button-fontsize: 25px !default;
 $slab-button-size-fullscreen: $slab-button-size !default;
 $slab-button-size-dialog-header: $slab-button-size !default;
 
+
 @import '~@angular/cdk/overlay-prebuilt.css';
+
+.cdk-overlay-dark-backdrop {
+  backdrop-filter: saturate(30%);
+  transition: all .3s !important;
+}
 
 .cdk-overlay-pane {
   background-color: $background-primary;
-  border: 1px solid lightgray;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   border-radius: 7px;
   overflow: hidden;
+  transition: all .5s;
+  animation: scaleUp .2s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
 
   .slab-dialog-bottom {
-    background: #f3f1f1;
+    padding: 1rem;
 
     .btn {
       height: $slab-button-size;
@@ -47,15 +54,18 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   &.fullscreen {
-    border: 0 solid lightgray;
+    border: 0;
     border-radius: 0;
 
     .slab-dialog-bottom {
-      background: #f3f1f1;
-
+      background: none;
       .btn {
         height: $slab-button-size-fullscreen;
       }
+    }
+    .slab-dialog-header {
+      background: none;
+      border-bottom: 0;
     }
   }
 
@@ -66,10 +76,6 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     position: relative;
     width: 100%;
   }
-}
-
-.cdk-overlay-backdrop {
-  transition: none;
 }
 
 
@@ -131,7 +137,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 .slab-dialog-content {
   @include size(100%);
   display: flex !important; /* [1] */
-
+  
   border: none;
   border-radius: 0;
   background-color: $background-primary;
@@ -166,15 +172,16 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
   font-size: 20px;
   border-radius: 0;
-  background: $white;
+
+  background: $light-gray;
+  border-bottom: 1px solid $background-secondary;
 }
 
 
 .slab-dialog-bottom {
-  padding: $slab-footer-buttons-offset;
 
   border-top: 1px solid $background-secondary;
-  background-color: $darker-gray;
+  background: none !important;
 
   .square {
     @include size($slab-button-size);
@@ -201,57 +208,55 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   text-align: center;
   border-radius: 20px;
   border: 1px solid $primary;
-
+  
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: $background-primary;
+    color: $primary;
     font-size: $slab-button-fontsize;
     font-family: icomoon;
-  }
+  }  
 
   &:hover {
-    color: white;
     background-color: $primary;
   }
 }
 
 .slab-dialog-close {
-
-  &:before {
-    content: "\f00d";
-    cursor: pointer;
-    color: $primary;
+  &::before {
+    content: "\F00D";
   }
 }
 
 .slab-dialog-info {
-
-  &:before {
+  &::before {
     content: "\F05A";
-    cursor: pointer;
-    color: $primary;
   }
 }
 
 .slab-dialog-home {
-
-  &:before {
+  &::before {
     content: "\F015";
-    cursor: pointer;
-    color: $primary;
   }
 }
 
 .slab-dialog-minimize {
-
-  &:before {
-    content: "\F2d1";
-    cursor: pointer;
-    color: $primary;
+  &::before {
+    content: "\F2D1";
+    font-size: 16px;
   }
 }
 
+.slab-dialog-close,
+.slab-dialog-info,
+.slab-dialog-home,
+.slab-dialog-minimize {
+  &:hover {
+    &::before {
+      color: white ;
+    }
+  }
+}
 /* Style modifies.
    ========================================================================== */
 
@@ -338,5 +343,19 @@ $slab-button-size-dialog-header: $slab-button-size !default;
       &:after{
         left: 5%;
       }
+    }
+  }
+
+
+  /* Animations
+    ========================================================================== */
+  @keyframes scaleUp {
+    0% {
+      transform:scale(.8) translateY(1000px);
+      opacity:0;
+    }
+    100% {
+      transform:scale(1) translateY(0px);
+      opacity:1;
     }
   }
