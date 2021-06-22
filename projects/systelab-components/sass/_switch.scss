@@ -1,62 +1,62 @@
+systelab-switch {
 
+  .slab-switch {
 
+    $slab-ball-size: $slab-switch-height - 8px;
+    $slab-top-icon: ceil(($form-elements-height - $slab-switch-height) / 2);
 
-.slab-switch {
+    background: $slab-switch-bg-color;
+    border-radius: ($slab-switch-height / 2) !important;
 
-  $slab-ball-size: $slab-switch-height - 8px;
-  $slab-top-icon: ceil(($form-elements-height - $slab-switch-height) / 2);
+    border: 1px solid #dfdfdf;
+    position: relative;
+    display: inline-block;
+    box-sizing: content-box;
+    overflow: hidden;
+    width: $slab-switch-height * 2 - 4px;
+    height: $slab-switch-height - 2px;
+    vertical-align: middle;
+    margin-top: $slab-top-icon !important;
 
-  background: $slab-switch-bg-color;
-  border-radius: ($slab-switch-height / 2) !important;
-
-  border: 1px solid #dfdfdf;
-  position: relative;
-  display: inline-block;
-  box-sizing: content-box;
-  overflow: hidden;
-  width: $slab-switch-height * 2 - 4px;
-  height: $slab-switch-height - 2px;
-  vertical-align: middle;
-  margin-top: $slab-top-icon !important;
-
-  padding: 0;
-  margin: 0;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: #dfdfdf 0 0 0 0 inset;
-  transition: .3s ease-out all;
-  -webkit-transition: .3s ease-out all;
-  top: -1px;
-
-  .slab-tick {
-    @include size($slab-ball-size);
-    background: $slab-switch-circle-color;
-    box-shadow: none; /* 1 */
-    border-radius: 40px !important;
-    position: absolute;
-    top: 3px;
-    left: 4px;
-    margin-top: 0px !important;
-  }
-
-  &.checked {
-    background: $slab-switch-bg-color-checked;
-    border-color: $slab-switch-bg-color-checked;
+    padding: 0;
+    margin: 0;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: #dfdfdf 0 0 0 0 inset;
+    transition: .3s ease-out all;
+    -webkit-transition: .3s ease-out all;
+    top: -1px;
 
     .slab-tick {
-      background: $slab-switch-circle-color-checked;
-      left: $slab-switch-height;
+      @include size($slab-ball-size);
+      background: $slab-switch-circle-color;
+      box-shadow: none; /* 1 */
+      border-radius: 40px !important;
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      margin-top: 0px !important;
+    }
+
+    &.checked {
+      background: $slab-switch-bg-color-checked;
+      border-color: $slab-switch-bg-color-checked;
+
+      .slab-tick {
+        background: $slab-switch-circle-color-checked;
+        left: $slab-switch-height;
+      }
+    }
+
+    &.disabled {
+      opacity: .5;
+      cursor: not-allowed
+    }
+
+    &:focus {
+      border-color: #8cc8f7;
+      outline: 0;
+      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
     }
   }
-  &.disabled {
-    opacity: .5;
-    cursor: not-allowed
-  }
-
-  &:focus {
-    border-color: #8cc8f7;
-    outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
-  }
-
 }

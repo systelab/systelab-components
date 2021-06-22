@@ -42,7 +42,7 @@ input[type="radio"] + label {
 
 // Define background color and icon size when checked
 input[type="radio"]:checked + label:before {
-  border: solid ($slab-radio-height / 3) $slab-radio-border-color;
+  border: solid 6px $slab-radio-border-color;
 }
 
 input[type="radio"]:focus + label:before {

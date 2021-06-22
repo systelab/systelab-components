@@ -16,10 +16,7 @@
 //Override
 
 .form-control {
-  padding-top: 1px !important;
-  padding-bottom: 1px !important;
-  padding-left: 5px !important;
-  padding-right: 5px !important;
+  padding: 2px 7px;
   height: $form-elements-height;
 }
 
@@ -30,4 +27,6 @@
   line-height: $form-elements-height !important;
 }
 
-
+.row {
+  margin-bottom: 10px;
+}

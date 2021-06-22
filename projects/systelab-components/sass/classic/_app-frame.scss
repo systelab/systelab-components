@@ -1,0 +1,27 @@
+.slab-application-container {
+  height: 100%;
+
+  .slab-side-bar-container-large {
+    background-color: lightgrey;
+    min-width: 200px;
+    width: 200px;
+  }
+
+  .slab-side-bar-container-small {
+    background-color: lightgrey;
+    min-width: 60px;
+    width: 60px;
+  }
+
+
+  .slab-main-container {
+    background-color: white;
+  }
+
+  @media (max-width: 1024px) {
+    .slab-side-bar-container {
+      display: none;
+    }
+  }
+
+}

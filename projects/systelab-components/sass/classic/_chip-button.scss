@@ -1,0 +1,40 @@
+@import "button";
+
+.chip-button {
+  display: inline-block;
+  @include font-size($badge-font-size);
+  font-weight: $badge-font-weight;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  @include border-radius($badge-border-radius);
+  @include transition($badge-transition);
+
+  @at-root a#{&} {
+    @include hover-focus {
+      text-decoration: none;
+    }
+  }
+
+  // Empty badges collapse automatically
+  &:empty {
+    display: none;
+  }
+}
+
+.li-chip-button {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  margin: 0 0 0 .3em;
+}
+
+.add-chip-button {
+  min-width: auto !important;
+}

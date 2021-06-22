@@ -79,7 +79,17 @@
             "aot": true,
             "assets": [
               "projects/showcase/src/favicon.png",
-              "projects/showcase/src/gh.ico"
+              "projects/showcase/src/gh.ico",
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/src/assets/i18n/error",
+                "output": "/i18n/error"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/src/assets/i18n/language",
+                "output": "/i18n/language"
+              }
             ],
             "styles": [
               "projects/showcase/src/styles.scss",
@@ -156,7 +166,17 @@
             "karmaConfig": "projects/showcase/karma.conf.js",
             "assets": [
               "projects/showcase/src/favicon.ico",
-              "projects/showcase/src/assets"
+              "projects/showcase/src/assets",
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/src/assets/i18n/error",
+                "output": "/i18n/error"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/src/assets/i18n/language",
+                "output": "/i18n/language"
+              }
             ],
             "styles": [
               "projects/showcase/src/styles.scss",

@@ -1,13 +1,13 @@
-<div class="slab-dialog-header d-flex">
-    <div class="slab-flex-1 d-flex text-truncate">
-        <span class="text-truncate">
-            <ng-content></ng-content>
-        </span>
+<div class="slab-dialog-header d-flex justify-content-between px-3">
+    <div class="d-inline-block text-truncate">
+        <ng-content></ng-content>
     </div>
-    <div *ngIf="withHome" class="slab-dialog-header-button slab-dialog-home mr-1" (click)="doHome()"></div>
-    <div *ngIf="withMinimize" class="slab-dialog-header-button slab-dialog-minimize mr-1" (click)="doMinimize()"></div>
-    <div *ngIf="withInfo" class="slab-dialog-header-button slab-dialog-info mr-1" (click)="doInfo()"></div>
-    <div *ngIf="withClose" class="slab-dialog-header-button slab-dialog-close mr-2" (click)="doClose()"></div>
+    <div class="d-flex">
+        <div *ngIf="withHome" class="slab-dialog-header-button slab-dialog-home mr-1" (click)="doHome()"></div>
+        <div *ngIf="withMinimize" class="slab-dialog-header-button slab-dialog-minimize mr-1" (click)="doMinimize()"></div>
+        <div *ngIf="withInfo" class="slab-dialog-header-button slab-dialog-info mr-1" (click)="doInfo()"></div>
+        <div *ngIf="withClose" class="slab-dialog-header-button slab-dialog-close" (click)="doClose()"></div>
+    </div>
 </div>
 
 <div #progress *ngIf="withProgressBar"></div>

@@ -12,12 +12,12 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!isDisabled" class="d-flex"
+    <div *ngIf="!isDisabled" class="d-flex p-1"
          [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
-        <button class="btn" (click)="add()">
+        <button class="btn btn-outline-primary" (click)="add()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
         </button>
-        <button class="btn" [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (click)="remove()">
+        <button class="btn btn-outline-primary" [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (click)="remove()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-minus-circle"></i>{{ 'COMMON_REMOVE' | translate | async }}
         </button>
     </div>

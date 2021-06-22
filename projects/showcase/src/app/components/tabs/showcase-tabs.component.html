@@ -14,6 +14,36 @@
             <div id="tab-3">Tab 4 content</div>
         </systelab-tab>
     </systelab-tabs>
+    <h6><br>Default Tabs style with focus paint</h6>
+    <systelab-tabs id="tabs" [paintFocus]="true">
+        <systelab-tab [titleHtml]="titleHtml" [id]="'1'">
+            <div id="tab-0">Tab 1 content</div>
+        </systelab-tab>
+        <systelab-tab [title]="titleText" [id]="'2'">
+            <div id="tab-1">Tab 2 content</div>
+        </systelab-tab>
+        <systelab-tab [title]="'Tab 3'" [id]="'3'">
+            <div id="tab-2">Tab 3 content</div>
+        </systelab-tab>
+        <systelab-tab [title]="'Tab 4'" [id]="'4'" [warning]="true">
+            <div id="tab-3">Tab 4 content</div>
+        </systelab-tab>
+    </systelab-tabs>
+    <h6><br>Default Tabs style with shrink</h6>
+    <systelab-tabs id="tabs" [shrink]="true">
+        <systelab-tab [titleHtml]="titleHtml" [id]="'1'">
+            <div id="tab-0">Tab 1 content</div>
+        </systelab-tab>
+        <systelab-tab [title]="titleText" [id]="'2'">
+            <div id="tab-1">Tab 2 content</div>
+        </systelab-tab>
+        <systelab-tab [title]="'Tab 3'" [id]="'3'">
+            <div id="tab-2">Tab 3 content</div>
+        </systelab-tab>
+        <systelab-tab [title]="'Tab 4'" [id]="'4'" [warning]="true">
+            <div id="tab-3">Tab 4 content</div>
+        </systelab-tab>
+    </systelab-tabs>
     <h6><br>Tabs without background and padding-top</h6>
     <systelab-tabs id="tabs-without-background" [showTabBackground]="false">
         <systelab-tab [title]="'Tab 1'" [id]="'1'">
@@ -30,6 +60,6 @@
         </systelab-tab>
     </systelab-tabs>
     <div class="pt-2">
-        <button type="button" class="btn" (click)="tabsDialog();"><i class="icon-info-circle mr-1"></i>Dialog</button>
+        <button type="button" class="btn btn-outline-primary" (click)="tabsDialog();"><i class="icon-info-circle mr-1"></i>Dialog</button>
     </div>
 </div>

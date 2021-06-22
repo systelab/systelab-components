@@ -26,14 +26,16 @@
     & > .header-selector {
       display: inline-block;
       width: 100%;
-      height: 50px;
+      height: 68px;
       text-align: center;
+      border-bottom: 1px solid $light-gray;
       & > ul {
         & > li {
           list-style: none;
         }
       }
     }
+
     & > .box {
       width: 50%;
       float: left;
@@ -42,7 +44,8 @@
       & > ul {
         max-height: 280px;
         overflow-y: auto;
-        padding-left: 2px;
+        padding-left: 0;
+        margin-bottom: 0;
         & > li {
           transition: all 0.2s ease-out;
           list-style: none;
@@ -50,12 +53,10 @@
           cursor: pointer;
           &.active {
             background-color: $slab-selected-background-color;
-            color: #ffffff;
           }
         }
         & > li:hover {
           background-color: $medium-gray;
-          color: #ffffff;
         }
       }
     }
