@@ -43,7 +43,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   border-radius: 7px;
   overflow: hidden;
   transition: all .5s;
-  animation: scaleUp .2s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+
 
   .slab-dialog-bottom {
     padding: 1rem;
@@ -58,16 +58,23 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     background: transparent;
   }
 
+  &:not(.fullscreen) {
+    animation: scaleUp .2s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+
+
   &.fullscreen {
     border: 0;
     border-radius: 0;
 
     .slab-dialog-bottom {
       background: none;
+
       .btn {
         height: $slab-button-size-fullscreen;
       }
     }
+
     .slab-dialog-header {
       background: none;
       border-bottom: 0;
@@ -142,7 +149,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 .slab-dialog-content {
   @include size(100%);
   display: flex !important; /* [1] */
-  
+
   border: none;
   border-radius: 0;
   background-color: $background-primary;
@@ -213,14 +220,14 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   text-align: center;
   border-radius: 20px;
   border: 1px solid $primary;
-  
+
   i,
   &:before {
     @include font-smoothing(antialiased);
     color: $primary;
     font-size: $slab-button-fontsize;
     font-family: icomoon;
-  }  
+  }
 
   &:hover {
     background-color: $primary;
@@ -258,10 +265,11 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 .slab-dialog-minimize {
   &:hover {
     &::before {
-      color: white ;
+      color: white;
     }
   }
 }
+
 /* Style modifies.
    ========================================================================== */
 
@@ -310,57 +318,60 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 
 /* Context Modal styles
    ========================================================================== */
-   .slab-context-modal{
-    .slab-dialog-header {
-      &:after{
-        bottom: 100% !important;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      &:after {
-        border-bottom-color: lightgray;
-        border-width: 20px !important;
-        margin-left: -30px !important;
-      }
+.slab-context-modal {
+  .slab-dialog-header {
+    &:after {
+      bottom: 100% !important;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
     }
-  }
 
-  .slab-context-modal-arrow-center {
-    .slab-dialog-header {
-      &:after{
-        left: 50%;
-      }
+    &:after {
+      border-bottom-color: lightgray;
+      border-width: 20px !important;
+      margin-left: -30px !important;
     }
   }
-  .slab-context-modal-arrow-right {
-    .slab-dialog-header {
-      &:after{
-        right: 5%;
-      }
+}
+
+.slab-context-modal-arrow-center {
+  .slab-dialog-header {
+    &:after {
+      left: 50%;
     }
   }
-  .slab-context-modal-arrow-left {
-    .slab-dialog-header {
-      &:after{
-        left: 5%;
-      }
+}
+
+.slab-context-modal-arrow-right {
+  .slab-dialog-header {
+    &:after {
+      right: 5%;
     }
   }
+}
+
+.slab-context-modal-arrow-left {
+  .slab-dialog-header {
+    &:after {
+      left: 5%;
+    }
+  }
+}
 
 
-  /* Animations
-    ========================================================================== */
-  @keyframes scaleUp {
-    0% {
-      transform:scale(.8) translateY(1000px);
-      opacity:0;
-    }
-    100% {
-      transform:scale(1) translateY(0px);
-      opacity:1;
-    }
+/* Animations
+  ========================================================================== */
+@keyframes scaleUp {
+  0% {
+    transform: scale(.8) translateY(1000px);
+    opacity: 0;
   }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}

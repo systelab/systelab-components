@@ -5,6 +5,13 @@ systelab-numpad {
 }
 
 .slab-numpad-container {
+
+  .row:not(:first-child) {
+    margin-bottom: 7px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
   .slab-numpad-nopadding {
     padding: 2px !important;
     margin: 0 !important;
@@ -15,14 +22,17 @@ systelab-numpad {
   }
 
   .slab-numpad-btn {
-    height: 55px;
-    line-height: 50px;
-    font-weight: bold;
+    height: 44px;
+    line-height: 40px;
     font-size: 25px;
-    background-color: $slab-button-background-color;
-    color: white !important;
+
+    border-radius: 40px;
+    border-color: $primary !important;
+    color: $primary !important;
+
     &:hover {
       background-color: $primary;
+      color: white !important;
     }
   }
 
