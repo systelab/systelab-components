@@ -1,7 +1,7 @@
 import { Injectable, Injector, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { DialogRef } from './dialog-ref';
 import { SystelabModalContext } from './modal-context';
 
@@ -72,9 +72,12 @@ export class DialogService {
 		return config;
 	}
 
-	private createInjector(overlayRef: DialogRef<SystelabModalContext>): PortalInjector {
-		const injectorTokens = new WeakMap();
-		injectorTokens.set(DialogRef, overlayRef);
-		return new PortalInjector(this.injector, injectorTokens);
+	private createInjector(overlayRef: DialogRef<SystelabModalContext>): Injector {
+		return Injector.create({
+			parent: this.injector,
+			providers: [
+				{ provide: DialogRef, useValue: overlayRef }
+			]
+		});
 	}
 }

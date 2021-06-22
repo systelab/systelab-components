@@ -89,6 +89,7 @@ import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
 	imports:      [
@@ -180,6 +181,7 @@ import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
+		ToastComponent,
 	],
 	exports:      [
 		SliderComponent,
@@ -255,7 +257,8 @@ import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 		StackedBarCellRendererComponent,
 		ChipsComponent,
 		SpyMenuComponent,
-		ScrollSpyDirective
+		ScrollSpyDirective,
+		ToastComponent
 	],
 	providers:    [
 		StylesUtilService,
