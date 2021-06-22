@@ -112,6 +112,9 @@ export * from './lib/sortable-list/abstract-sortable-list.component';
 export * from './lib/add-remove-list/abstract-add-remove-list.component';
 export * from './lib/tree/abstract-tree.component';
 
+export * from './lib/toast/toast.service';
+export * from './lib/toast/toast.component';
+
 export * from './lib/spy-menu/spy-menu-item';
 export * from './lib/spy-menu/spy-menu.component';
 export * from './lib/spy-menu/scroll-spy.directive';

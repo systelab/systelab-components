@@ -53,6 +53,11 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     }
   }
 
+  &.slab-toast-panel {
+    border: none;
+    background: transparent;
+  }
+
   &.fullscreen {
     border: 0;
     border-radius: 0;
