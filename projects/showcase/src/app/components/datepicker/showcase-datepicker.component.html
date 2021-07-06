@@ -16,12 +16,14 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time reseting time</label>
         <div class="col-md-9">
-            <div class ="row ml-auto">
-                <systelab-date-time
-                        [resetTimeWhenChangingCurrentDate]="true"
-                        [(currentDate)]="myDateWithReset">
-                </systelab-date-time>
-                <button class="ml-2 btn" (click)="resetDateAndTime()">Reset</button>
+            <div class ="row">
+                <div class="d-flex">
+                    <systelab-date-time
+                            [resetTimeWhenChangingCurrentDate]="true"
+                            [(currentDate)]="myDateWithReset">
+                    </systelab-date-time>
+                    <button class="ms-2 btn" (click)="resetDateAndTime()">Reset</button>
+                </div>
             </div>
         </div>
     </div>

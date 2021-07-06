@@ -19,7 +19,7 @@ export class ShowcaseTabsComponent {
 		progressBox += '<div class="slab-flex-1" style="background-color: forestgreen"></div>';
 		progressBox += '<div class="slab-flex-1" style="background-color: red"></div>';
 
-		let titleHtmlContent = '<div class="d-flex flex-column border mr-1" style="width: 20px; height: 20px">' + progressBox + '</div>';
+		let titleHtmlContent = '<div class="d-flex flex-column border me-1" style="width: 20px; height: 20px">' + progressBox + '</div>';
 
 		titleHtmlContent += '<span class="d-flex align-items-center">Tab Html</span>';
 

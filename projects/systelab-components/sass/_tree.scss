@@ -71,7 +71,7 @@ body .p-tree {
           }
 
           &:focus {
-            background-color: scale-color($primary, $alpha: -90%);
+            background-color: shift-color($primary, -90%);
           }
 
           &:hover {
@@ -81,7 +81,7 @@ body .p-tree {
         }
 
         &:focus {
-          background-color: scale-color($primary, $alpha: -90%);
+          background-color: shift-color($primary, -90%);
         }
 
         &:hover {

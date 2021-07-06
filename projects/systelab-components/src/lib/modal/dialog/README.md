@@ -56,7 +56,7 @@ An example could be:
  Your content
 </div>
 <systelab-dialog-bottom>
-    <button type="button" class="btn ml-auto" (click)="close()"> Submit</button>
+    <button type="button" class="btn ms-auto" (click)="close()"> Submit</button>
 </systelab-dialog-bottom>
 ```
 
@@ -75,7 +75,7 @@ An example to show a dialog with a tab control on top could be:
     </systelab-tab>
 </systelab-tabs>
 <systelab-dialog-bottom>
-    <button type="button" class="btn ml-auto" (click)="close()"> Submit</button>
+    <button type="button" class="btn ms-auto" (click)="close()"> Submit</button>
 </systelab-dialog-bottom>
 ```
 

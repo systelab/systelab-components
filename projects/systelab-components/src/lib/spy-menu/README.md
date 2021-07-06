@@ -20,7 +20,7 @@ Component to display a spy menu and a directive to update menu position.
     <div id="section3">
     ...
     </div>
-    <div class="d-flex flex-column ml-2 overflow-hidden d-print-none slab-spy-menu-example" style="width: 300px">
+    <div class="d-flex flex-column ms-2 overflow-hidden d-print-none slab-spy-menu-example" style="width: 300px">
         <systelab-spy-menu [items]="menuItems" [sectionSelected]="sectionSelected"></systelab-spy-menu>
     </div>
 </div>

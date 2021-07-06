@@ -5,8 +5,8 @@
            (click)="uploadBtn.click()"
            [disabled]="disabled">
     <input #uploadBtn type="file" class="d-none" (change)="selectFile($event.target.files)" [multiple]="multipleSelection">
-    <div class="input-group-append">
-        <button class="btn btn-sm pt-0 pb-0" [disabled]="disabled"
+    <div class="d-flex">
+        <button class="btn btn-append btn-sm pt-0 pb-0" [disabled]="disabled"
                 [hidden]="disabled && !showButtonOnDisable"
                 id="selectionButton"
                 type="button" (click)="uploadBtn.click()"><b>...</b></button>

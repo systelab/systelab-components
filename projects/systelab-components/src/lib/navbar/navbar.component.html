@@ -1,5 +1,5 @@
 <div class="slab-navbar navbar-expand-md navbar-light" [style.background-color]="backgroundColor">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" [attr.data-target]="'#' + id"
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" [attr.data-target]="'#' + id"
             [attr.aria-controls]="id"
             aria-expanded="false" aria-label="Toggle navigation"
             [style.background-color]="hovered == -2  ? backgroundHoverColor :  backgroundColor"
@@ -12,9 +12,9 @@
         <ul [class.flex-row]="!isVertical" [class.flex-column]="isVertical"
             class="nav nav-pills slab-navbar-elements align-items-center d-flex">
             <li *ngFor="let nav of items; let last=last"
-                [style.border-right]="hideRightBorder?'none':(!isVertical && !last ?'none': borderColor  ? '1px solid '+borderColor:'none')"
+                [style.border-end]="hideRightBorder?'none':(!isVertical && !last ?'none': borderColor  ? '1px solid '+borderColor:'none')"
                 [style.border-bottom]="hideBottomBorder?'none':(isVertical && !last ?'none': borderColor ? '1px solid '+borderColor:'none')"
-                [style.border-left]="borderColor && !hideLeftBorder? '1px solid '+borderColor:'none'"
+                [style.border-start]="borderColor && !hideLeftBorder? '1px solid '+borderColor:'none'"
                 [style.border-top]="borderColor && !hideTopBorder? '1px solid '+borderColor:'none'"
                 [style.padding]="padding"
                 class="nav-item"
@@ -31,7 +31,7 @@
                     <i *ngIf="nav.image" [class]="nav.image" [style.color]="nav.isSelected?activeFontColor:fontColor"
                        [class.slab-icon-float-image]="nav.floatImage"
                        [class.slab-icon-vertical-image]="!nav.floatImage"></i>
-                    <span *ngIf="nav.text" [ngClass]="{'ml-2': nav.image}">{{nav.text}}</span>
+                    <span *ngIf="nav.text" [ngClass]="{'ms-2': nav.image}">{{nav.text}}</span>
                 </a>
             </li>
         </ul>

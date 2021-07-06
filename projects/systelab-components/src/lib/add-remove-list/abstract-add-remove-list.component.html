@@ -8,17 +8,17 @@
             <div *ngFor="let element of elementsList"
                  [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(element),'slab-sortable-list-row':!getSelectionFieldValue(element)}"
                  (click)="selectElement(element,$event)" cdkDrag>
-                <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(element)"></i>{{getDescription(element)}}
+                <i *ngIf="showIcon" class="me-1 text-primary" [ngClass]="getIcon(element)"></i>{{getDescription(element)}}
             </div>
         </div>
     </div>
     <div *ngIf="!isDisabled" class="d-flex"
-         [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
+         [ngClass]="{'flex-column ms-2': !buttonsOnBottom, 'ms-auto mt-2': buttonsOnBottom}">
         <button class="btn" (click)="add()">
-            <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
+            <i *ngIf="!buttonsOnBottom" class="me-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
         </button>
-        <button class="btn" [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (click)="remove()">
-            <i *ngIf="!buttonsOnBottom" class="mr-2 icon-minus-circle"></i>{{ 'COMMON_REMOVE' | translate | async }}
+        <button class="btn" [ngClass]="{'mt-1': !buttonsOnBottom, 'ms-1':buttonsOnBottom}" (click)="remove()">
+            <i *ngIf="!buttonsOnBottom" class="me-2 icon-minus-circle"></i>{{ 'COMMON_REMOVE' | translate | async }}
         </button>
     </div>
 </div>

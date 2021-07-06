@@ -8,7 +8,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
   &:focus-within {
     border-color: #8cc8f7;
     outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    box-shadow: 0 0 0 3px shift-color($primary, -75%);
   }
 
   .slab-dropdown-toogle {
@@ -21,13 +21,11 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
     cursor: pointer;
     padding: 1px 8px;
-    border-radius: 4px;
     color: #424242;
     background-color: white;
     border-color: transparent;
     border-left: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0 4px 4px 0;
     width: $slab-combobox-button-width;
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
@@ -103,10 +101,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
   }
 
   .slab-filter-container {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 2px;
+    // margin: 5px 5px 2px;
 
     input {
       padding-left: 5px;
@@ -118,7 +113,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
   }
 
   .slab-combo-dropdown {
-    margin-top: 1px;
+    // margin-top: 1px;
     padding: 0;
     border: none;
 
@@ -160,7 +155,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
               }
 
               &.ag-row-focus {
-                background-color: scale-color($primary, $alpha: -90%);
+                background-color: shift-color($primary, -90%);
               }
 
               .ag-cell {
@@ -204,9 +199,8 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
 }
 
-.slab-combo-badge.badge > .close {
-  font-size: 1rem;
-  margin-top: -2px;
+.slab-combo-badge.badge > .btn-close {
+  font-size: 0.5rem;
   text-shadow: none;
   color: white;
   opacity: 1;

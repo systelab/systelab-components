@@ -3,7 +3,7 @@
         <a *ngIf="!bread.isActive" [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null " [style.color]="fontColor">{{bread.text}}</a>
         <label *ngIf="bread.isActive">{{bread.text}}</label>
         <button *ngIf="bread.subItems" class="slab-caret-button" type="button"
-                id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <i class="icon-caret-down" [style.color]="fontColor"></i>
         </button>
         <ul *ngIf="bread.subItems" class="dropdown-menu slab-sub-items" aria-labelledby="dropdownMenu1">

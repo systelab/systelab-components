@@ -1,4 +1,8 @@
 .breadcrumb {
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #e9ecef;
+
   & > li + li:before {
     padding: 0 5px;
     color: #cccccc;
@@ -7,6 +11,7 @@
 
   & > li > a {
     cursor: pointer;
+    text-decoration: none;
 
     &:hover {
       text-decoration: underline;

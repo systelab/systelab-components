@@ -36,7 +36,7 @@ $slab-textarea-min-height: ceil(170px * $slab-size-percentage) !default;
   &:focus {
     border-color: #8cc8f7;
     outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    box-shadow: 0 0 0 3px shift-color($primary, -75%);
   }
 }
 

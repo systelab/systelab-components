@@ -8,7 +8,7 @@
             tabindex="-1"
             [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(element),'slab-sortable-list-row':!getSelectionFieldValue(element)}"
             (click)="selectElement(element,$event)" (dblclick)="dbClickSelectedItem(element)" cdkDrag [cdkDragDisabled]="!dragAndDropEnabled">
-            <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(element)"></i>{{getDescription(element)}}
+            <i *ngIf="showIcon" class="me-1 text-primary" [ngClass]="getIcon(element)"></i>{{getDescription(element)}}
         </div>
     </div>
 </div>

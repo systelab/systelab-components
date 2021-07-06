@@ -62,11 +62,11 @@ $icon-rowaction-font-size: 20px;
     }
 
     &.ag-row-focus {
-     background-color: scale-color($primary, $alpha: -90%);
+     background-color: shift-color($primary, -90%);
     }
 
     &.ag-row-hover {
-      background-color: scale-color($primary, $alpha: -90%);
+      background-color: shift-color($primary, -90%);
     }
 
     &.ag-row-odd :not ag-row-selected {
@@ -89,7 +89,7 @@ $icon-rowaction-font-size: 20px;
       }
 
       &.ag-cell-focus {
-        border: 1px dashed scale-color($primary, $alpha: -60%);
+        border: 1px dashed shift-color($primary, -60%);
       }
 
       .ag-icon {

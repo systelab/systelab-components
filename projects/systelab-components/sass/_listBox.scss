@@ -35,7 +35,7 @@
           }
 
           &.ag-row-focus {
-            background-color: scale-color($primary, $alpha: -90%);
+            background-color: shift-color($primary, -90%);
           }
 
           .ag-cell {

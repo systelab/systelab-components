@@ -11,12 +11,12 @@
                [ngStyle]="getInputHeight()"
                [style.font-style]="fontStyle">
 
-        <div class="input-group-append">
-            <button class="btn btn-sm pt-0 pb-0" type="button" [disabled]="isDisabled" [ngStyle]="getWidth()"
+        <div class="d-flex">
+            <button class="btn btn-append btn-sm pt-0 pb-0" type="button" [disabled]="isDisabled" [ngStyle]="getWidth()"
                     (click)="openSearchDialog()" *ngIf="withButton"><i class="icon-question"></i></button>
         </div>
     </div>
-    <p class="slab-flex-1 text-truncate mb-0 ml-1" style="width: 30px;" [ngStyle]="getLineHeight()"
+    <p class="slab-flex-1 text-truncate mb-0 ms-1" style="width: 30px;" [ngStyle]="getLineHeight()"
        [style.font-family]="fontFamily"
        [style.font-size.px]="fontSize"
        [style.font-weight]="fontWeight"

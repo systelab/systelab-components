@@ -39,3 +39,13 @@ $slab-button-background-color: $dark !default;
     border-color: $primary;
   }
 }
+
+.btn-append {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-prepend {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}

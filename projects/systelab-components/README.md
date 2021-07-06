@@ -224,7 +224,7 @@ Combine as needed. In this case will have elements placed in the north (info), s
 </div>
 ```
 
-Use **.ml-auto** in a flex container if you want to push the item to the left. This will be helpful for example to push a button and place it to the bottom right of a dialog.
+Use **.ms-auto** in a flex container if you want to push the item to the left. This will be helpful for example to push a button and place it to the bottom right of a dialog.
 
 Use **.slab-overflow-container** for the element that could/should scroll. 
 

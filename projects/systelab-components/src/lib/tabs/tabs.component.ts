@@ -8,11 +8,11 @@ import { TabComponent } from './tab.component';
                     <li class="nav-item" [class.hideTabBackground]="!showTabBackground" *ngFor="let tab of tabs"
                         (click)="doSelectTab(tab)">
                         <div class="nav-link nav-single-tab d-flex align-items-center justify-content-center"
-                             [class.active]="tab.active" [class.slab-tabs-shrink]="shrink" data-toggle="tab" role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}"
+                             [class.active]="tab.active" [class.slab-tabs-shrink]="shrink" data-bs-toggle="tab" role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}"
                              [tabindex]="paintFocus?0:-1" (keydown)="doKeyDown($event,tab)">
                             <span *ngIf="tab.titleHtml" [innerHTML]="tab.titleHtml" class="d-flex align-items-center"></span>
                             <span *ngIf="tab.title" class="d-flex align-items-center">{{tab.title}}</span>
-                            <i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i>
+                            <i *ngIf="tab.warning" class="text-warning icon-warning ms-3"></i>
                         </div>
                     </li>
                 </ul>

@@ -306,7 +306,7 @@ body .p-inputtext {
 
   &:focus {
     border-color: #8cc8f7 !important;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
+    box-shadow: 0 0 0 3px shift-color($primary, -75%) !important;
   }
 
 }

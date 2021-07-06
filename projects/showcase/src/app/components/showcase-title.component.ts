@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
 	selector: 'showcase-title',
 	template: `
-                  <div class="pl-2 pt-4 pb-2">
+                  <div class="ps-2 pt-4 pb-2">
                       <h4 class="d-inline">
                           <ng-content></ng-content>
                       </h4>
