@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DialogService } from '../../modal/dialog/dialog.service';
+import {Dropdown} from 'bootstrap';
 
 export class ApplicationHeaderMenuEntry {
 	constructor(public optionName: string, public isDivider: boolean, public action?: any) {
@@ -21,5 +22,22 @@ export class ApplicationHeaderComponent {
 
 	constructor(protected dialogService: DialogService) {
 
+	}
+
+	public toggleDropDown(): void {
+		const dropDownElement = document.getElementById('toggleDropDownAppHeader');
+		const newDropDown = new Dropdown(dropDownElement.children[0], {
+			popperConfig: (defaultBsPopperConfig) => {
+				defaultBsPopperConfig = {
+					placement: 'bottom-end',
+					strategy: 'fixed',
+					modifiers: [
+						{name: 'offset', options: {offset: [75, 10]}}
+					]
+				}
+				return defaultBsPopperConfig;
+			}
+		});
+		newDropDown.toggle();
 	}
 }

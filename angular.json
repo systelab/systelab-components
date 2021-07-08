@@ -13,7 +13,7 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/systelab-components/tsconfig.lib.json",
-            "project": "projects/systelab-components/ng-package.json"
+            "project": "projects/systelab-components/ng-package.json",
           },
           "configurations": {
             "production": {
@@ -39,10 +39,11 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/@popperjs/core/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/pako/dist/pako.min.js",
-              "node_modules/nanobar/nanobar.js"
+              "node_modules/nanobar/nanobar.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           }
         },
@@ -93,10 +94,11 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/@popperjs/core/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/pako/dist/pako.min.js",
-              "node_modules/nanobar/nanobar.js"
+              "node_modules/nanobar/nanobar.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -170,10 +172,11 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/@popperjs/core/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/pako/dist/pako.min.js",
-              "node_modules/nanobar/nanobar.js"
+              "node_modules/nanobar/nanobar.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           }
         },

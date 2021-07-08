@@ -2,13 +2,13 @@
     class="d-flex align-items-center" [class.disabled]="!true"
     (click)="doClickWithAction($event, parentId, actionName + levelSeparator + childAction.actionId)"
     (mouseover)="doMouseOver($event, elementID, actionName + levelSeparator + childAction.actionId)">
-    <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto">
+    <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto" id="{{childAction.actionId+elementID}}">
         <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
                                     [isEnabled]="isEnabled(elementID, childAction.actionId)"
                                     [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
                                     [hasChildren]="childAction.hasChildren()"
                                     [hasIcons]="hasIcons"></systelab-context-menu-item>
-        <ul *ngIf="childAction.hasChildren()" #childdropdownmenu id="{{childAction.actionId+elementID}}"
+        <ul *ngIf="childAction.hasChildren()" #childdropdownmenu
             class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
             <systelab-context-menu-submenu-item [action]="childAction"
                                                 [actionName]="getAction(childAction.actionId)"

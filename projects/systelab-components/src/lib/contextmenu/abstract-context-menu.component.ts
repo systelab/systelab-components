@@ -79,7 +79,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 			const optionAcitionId = this.getOptionDetailsActionId(actionId);
 
 			const selectedChild = this.childDropdownMenuElement.toArray()
-				.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
+				.find((elem: any) => elem.nativeElement.parentElement.id === (optionAcitionId + this.elementID));
 
 			this.showSubmenu(event, actionId, selectedChild, this.elementID);
 		}

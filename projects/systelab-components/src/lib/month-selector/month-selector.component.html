@@ -1,10 +1,9 @@
 <div class="dropdown slab-combobox slab-month-selector d-flex w-100" [ngClass]="{'disabled': disabled}">
-    <div class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle">
-        <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [readOnly]="true" [disabled]="disabled" [(ngModel)]="selectedMonth.text"
-               (click)="onClicked($event)"/>
-        <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="disabled" (click)="onClicked($event)" [tabIndex]="-1"></button>
+    <div class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" data-bs-toggle="dropdown">
+        <input #input type="text" class="slab-flex-1 d-flex form-control slab-combo-input" [readOnly]="true" [disabled]="disabled" [(ngModel)]="selectedMonth.text"/>
+        <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="disabled"  [tabIndex]="-1"></button>
     </div>
-    <div *ngIf="isOpened" class="slab-month-selector-dropdown" [ngClass]="{'disabled': disabled}" (mouseleave)="hideSelector()">
+    <div class="slab-month-selector-dropdown dropdown-menu" [ngClass]="{'disabled': disabled}">
         <div class="header-selector">
             <systelab-calendar-header [currentDate]="currentDate" (previousYear)="addYear(-1)"
                                       (nextYear)="addYear(1)">

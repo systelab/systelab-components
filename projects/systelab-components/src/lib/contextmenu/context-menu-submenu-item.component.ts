@@ -29,7 +29,7 @@ export class ContextMenuSubmenuItemComponent {
 		const optionAcitionId = this.contextMenuOriginal.getOptionDetailsActionId(actionId);
 
 		selectedChild = this.childDropdownMenuElement.toArray()
-			.find((elem) => elem.nativeElement.id === (optionAcitionId + this.elementID));
+			.find((elem: any) => elem.nativeElement.parentElement.id === (optionAcitionId + this.elementID));
 
 		this.contextMenuOriginal.showSubmenu(event, actionId, selectedChild, this.elementID);
 	}

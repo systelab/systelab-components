@@ -5,11 +5,11 @@
         <small *ngIf="userFullName" id="username" class="d-block text-truncate">{{userFullName}}
         </small>
     </div>
-    <div class="d-flex align-items-center mr-2">
+    <div class="d-flex align-items-center me-2">
         <ng-content></ng-content>
     </div>
-    <div class="dropdown slab-app-header-user-container">
-        <div class="dropdown-toggle" data-toggle="dropdown" data-boundary="window" *ngIf="menu.length > 0 || userName">
+    <div class="dropdown slab-app-header-user-container" *ngIf="menu.length > 0 || userName">
+        <div class="dropdown-toggle" (click)="toggleDropDown()" id="toggleDropDownAppHeader">
             <button *ngIf="!menuBars" class="slab-app-header-user-icon d-inline-block align-middle">
                 <div class="align-middle h-100">
                     <i class="icon-user align-bottom"></i>
@@ -21,7 +21,7 @@
                 </div>
             </button>
             <label *ngIf="!menuBars" class="text-truncate align-middle">{{userName}}</label>
-            <div class="dropdown-menu dropdown-menu-right slab-dropdown" *ngIf="menu.length > 0">
+            <div class="dropdown-menu dropdown-menu-end slab-dropdown">
                 <ul>
                     <li *ngFor="let menuEntry of menu" (click)="menuEntry.action()">{{menuEntry.optionName}}
                         <div *ngIf="menuEntry.isDivider" class="dropdown-divider"></div>

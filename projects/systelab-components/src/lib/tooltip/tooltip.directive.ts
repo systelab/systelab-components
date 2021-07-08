@@ -37,15 +37,15 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 	}
 
 	private initializeTooltip(): void {
-		this.renderer.setAttribute(this.el.nativeElement, 'data-toogle', 'tooltip');
+		this.renderer.setAttribute(this.el.nativeElement, 'data-bs-toggle', 'tooltip');
 		if (!this.systelabTooltipOnFocus) {
-			this.renderer.setAttribute(this.el.nativeElement, 'data-trigger', 'hover');
+			this.renderer.setAttribute(this.el.nativeElement, 'data-bs-trigger', 'hover');
 		}
-		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
+		this.renderer.setAttribute(this.el.nativeElement, 'data-bs-boundary', 'viewport');
 		if (this.systelabTooltipHtml) {
-			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'true');
+			this.renderer.setAttribute(this.el.nativeElement, 'data-bs-html', 'true');
 		}
-		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
+		this.renderer.setAttribute(this.el.nativeElement, 'data-bs-placement',
 			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
 
 		const tooltipShowDelay = `"show":${((this.systelabTooltipDelay) ? this.systelabTooltipDelay : TooltipDirective.DEFAULT_DELAY)}`;
@@ -58,7 +58,7 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 		if (!this.systelabTooltipHtml && !this.systelabTooltip) {
 			this.renderer.setAttribute(this.el.nativeElement, 'title', '');
 			this.renderer.setAttribute(this.el.nativeElement, 'data-original-title', '');
-			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'false');
+			this.renderer.setAttribute(this.el.nativeElement, 'data-bs-html', 'false');
 		}
 	}
 }

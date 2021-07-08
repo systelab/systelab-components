@@ -31,7 +31,6 @@ export class MonthSelectorComponent implements AfterViewInit {
 	}
 
 	public months: Array<Month> = [];
-	public isOpened = false;
 	public monthNames = [];
 
 	constructor(private i18nService: I18nService) {
@@ -57,14 +56,6 @@ export class MonthSelectorComponent implements AfterViewInit {
 			const month = this.i18nService.formatMonthAndYear(new Date(year, i, 1));
 			this.monthNames.push(month);
 		}
-	}
-
-	public onClicked(e) {
-		this.isOpened = true;
-	}
-
-	public hideSelector() {
-		this.isOpened = false;
 	}
 
 	public getMonths() {
@@ -108,7 +99,6 @@ export class MonthSelectorComponent implements AfterViewInit {
 
 	public onClickedMonth(month: Month) {
 		this.currentDate = new Date(month.year, month.month, 1);
-		this.hideSelector();
 		this.getMonths();
 	}
 }

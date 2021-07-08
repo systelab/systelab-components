@@ -33,7 +33,6 @@ export class WeekSelectorComponent implements AfterViewInit {
 
 	public weeks: Array<Week> = [];
 	public months: Array<Month> = [];
-	public isOpened = false;
 	public monthNames = [];
 	public daysNames = [];
 
@@ -58,14 +57,6 @@ export class WeekSelectorComponent implements AfterViewInit {
 			this.currentDate = new Date();
 		}
 		this.getMonths();
-	}
-
-	public onClicked(e) {
-		this.isOpened = true;
-	}
-
-	public hideSelector() {
-		this.isOpened = false;
 	}
 
 	public getMonths() {
@@ -109,7 +100,6 @@ export class WeekSelectorComponent implements AfterViewInit {
 
 	public onClickedWeek(week: Week) {
 		this.currentDate = new Date(week.year, week.month, week.day);
-		this.hideSelector();
 		this.getWeeks();
 	}
 

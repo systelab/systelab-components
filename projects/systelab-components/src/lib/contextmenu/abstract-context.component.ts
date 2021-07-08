@@ -1,6 +1,17 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-
-declare var jQuery: any;
+import {
+	ChangeDetectorRef,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
+import {Dropdown} from 'bootstrap';
 
 @Directive()
 export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
@@ -32,8 +43,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit(): void {
-		jQuery(this.dropdownParent.nativeElement)
-			.on('hide.bs.dropdown', this.actionsAfterCloseDropDown.bind(this));
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -197,7 +206,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	protected checkIfNgContent(target: any): boolean {
 		let currentElement = target;
 		while (currentElement !== this.dropdownElement && currentElement) {
-			if (currentElement === this.ngcontent.nativeElement) {
+			if (currentElement === this.ngcontent?.nativeElement) {
 				return true;
 			} else {
 				currentElement = currentElement.parentElement;
@@ -228,15 +237,15 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	protected hideDivUntilIsPositioned(x: number, y: number): void {
 		// hide the div until is positioned in event x y position to avoid flick
-		this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'hidden');
 		this.isOpened = true;
 		this.cdr.detectChanges();
 		this.showDropDown(x, y);
 	}
 
 	public open(event: MouseEvent): void {
-		jQuery('#' + this.elementID)
-			.dropdown('toggle');
+		const dropDownElement = document.getElementById(this.elementID);
+		const newDropDown = new Dropdown(dropDownElement.children[0]);
+		newDropDown.toggle();
 		if (!this.isDropDownOpened()) {
 			// Add class manually because is not set when jquery.dropdwon toogle is executed
 			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
@@ -245,7 +254,18 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	}
 
 	public toggle(elementID: string): void {
-		jQuery('#' + elementID)
-			.toggle();
+		const dropDownElement = document.getElementById(elementID);
+		const newDropDown = new Dropdown(dropDownElement.children[0], {
+			popperConfig: (defaultBsPopperConfig) => {
+				defaultBsPopperConfig = {
+					placement: 'right-end',
+					modifiers: [
+						{name: 'offset', options: {offset: [0, 15]}}
+					]
+				}
+				return defaultBsPopperConfig;
+			}
+		});
+		newDropDown.toggle();
 	}
 }
