@@ -1,6 +1,6 @@
 <div #combobox class="dropdown slab-combobox d-flex w-100" [ngClass]="{'disabled': isDisabled}">
-    <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}"
-         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
+    <div #dropdowntoogle class="dropdown-toggle slab-flex-1 d-flex slab-dropdown-toogle" id="{{comboId}}"
+         data-bs-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text"
                class="slab-flex-1 form-control slab-combo-label slab-combo-input"
                [ngStyle]="getInputHeight()" [style.font-family]="fontFamily" [style.font-size.px]="fontSize"
@@ -16,12 +16,12 @@
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
         <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button"
-                class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"
+                class="slab-combo-button border-end-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"
                 tabindex="-1"></button>
-        <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}"
+        <button *ngIf="withIcon && id" class="slab-combo-button border-end-0 rounded-0 {{iconClass}}"
                 [style.color]="iconColor" tabindex="-1"></button>
         <button type="button" *ngIf="withFavourites && id!=null && (!isTree || (isTree && level))" #favouriteButton
-                class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
+                class="slab-combo-button slab-combo-star border-end-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite }" (click)="doToggleFavourite($event)"
                 tabindex="-1"></button>
         <button type="button" #combobutton class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
@@ -61,20 +61,17 @@
 </div>
 
 <div *ngIf="listSelectedValues && multipleSelection">
-    <ul class="ml-1 mt-2 mb-0 pl-0" *ngIf="multipleSelectedItemList.length < 8">
-        <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge"
+    <ul class="ms-1 mt-2 mb-0 ps-0" *ngIf="multipleSelectedItemList.length < 8">
+        <li class="slab-combo-badge badge bg-primary me-1 p-2" role="badge"
             *ngFor="let item of multipleSelectedItemList"><span
-                class="float-left mr-2">{{item.description}}</span>
-            <button data-dismiss="badge" type="button" class="close" (click)="removeItem(item)" aria-label="Close"
-                    tabindex="-1">
-                <span aria-hidden="true">&times;</span>
-            </button>
+                class="float-start me-2">{{item.description}}</span>
+            <button class="btn-close btn-close-white" type="button" (click)="removeItem(item)" aria-label="Close" tabindex="-1"></button>
         </li>
     </ul>
-    <ul class="ml-1 mt-2 pl-0" *ngIf="multipleSelectedItemList.length > 7">
-        <li class="slab-combo-badge badge badge-primary mr-1 p-2"
+    <ul class="ms-1 mt-2 ps-0" *ngIf="multipleSelectedItemList.length > 7">
+        <li class="slab-combo-badge badge bg-primary me-1 p-2"
             role="badge">{{'COMMON_SELECTED_ITEMS' | translate | async }}
-            <span class="badge badge-light">{{multipleSelectedItemList.length}}</span>
+            <span class="badge bg-light">{{multipleSelectedItemList.length}}</span>
         </li>
     </ul>
 </div>

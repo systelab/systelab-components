@@ -5,8 +5,6 @@ import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 
-declare var jQuery: any;
-
 @Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
@@ -221,9 +219,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.setStyle('font-weight', this.fontWeight);
 		this.setStyle('font-style', this.fontStyle);
 
-		jQuery(this.comboboxElement.nativeElement)
-			.on('hide.bs.dropdown', this.closeDropDown.bind(this));
-
 		this.initializeFavouriteList();
 		this.configGrid();
 	}
@@ -394,7 +389,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public isDropDownOpen(): boolean {
-		return this.comboboxElement.nativeElement.className.includes('show');
+		return this.dropdownToogleElement.nativeElement.className.includes('show');
 	}
 
 	public closeDropDown() {
@@ -403,6 +398,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.resetDropDownPositionAndHeight();
 		if (this.isDropDownOpen()) {
 			this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'show');
+			this.myRenderer.removeClass(this.dropdownToogleElement.nativeElement, 'show');
 			this.myRenderer.removeClass(this.dropdownMenuElement.nativeElement, 'show');
 		}
 		this.chRef.detectChanges();
@@ -418,7 +414,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public loop(): void {
 		let result = true;
-
 		if (this.isDropDownOpen()) {
 			this.setDropdownHeight();
 			this.setDropdownPosition();
@@ -604,12 +599,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.gridOptions.api && this.columnDefs) {
 			if (this.windowResized) {
 				setTimeout(() => {
-					this.gridOptions.api.doLayout();
 					this.gridOptions.api.sizeColumnsToFit();
 					this.windowResized = false;
 				}, 5);
 			} else {
-				this.gridOptions.api.doLayout();
 				this.gridOptions.api.sizeColumnsToFit();
 			}
 		}

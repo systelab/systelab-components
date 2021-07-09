@@ -1,7 +1,7 @@
 <div #combobox
      class="dropdown slab-combobox d-flex w-100"
      [ngClass]="{'disabled': isDisabled}">
-    <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown">
+    <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-bs-toggle="dropdown">
         <input #input type="text" class="slab-flex-1 form-control d-flex slab-combo-input"
                [disabled]="isDisabled"
                [(ngModel)]="fieldToShow" (keyup)="doSearch($event)"
@@ -13,7 +13,7 @@
                (keydown.Tab)="closeDropDown()"
                (keydown.arrowDown)="onInputClicked($event)"
                 (click)="onInputClicked($event)"/>
-        <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
+        <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-end-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
         <button #combobutton type="button" class="slab-combo-button icon-caret-down" [disabled]="isDisabled"
                 (click)="onComboClicked($event)" tabindex="-1"></button>
