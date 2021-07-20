@@ -31,11 +31,11 @@ export class ApplicationFrameComponent {
 	constructor(protected i18nService: I18nService) {
 	}
 
-	public doSelect(id: string) {
+	public doSelect(id: string): void {
 		this.selected.emit(id);
 	}
 
-	public continueSelect(id: string) {
+	public continueSelect(id: string): void {
 		if (this.sidebar) {
 			this.sidebar.selectTab(id);
 		} else if (this.sidebarSmall) {

@@ -10,8 +10,8 @@ import { ModalComponent, SystelabModalContext } from '../modal/dialog/modal-cont
 
 export class CalendarDialogParameters extends SystelabModalContext {
 
-	public width = 800;
-	public height = 600;
+	public override width = 800;
+	public override height = 600;
 	public headerDescription = '';
 }
 
@@ -34,21 +34,21 @@ export class CalendarDialog implements ModalComponent<CalendarDialogParameters> 
 		this.getData();
 	}
 
+	public static getParameters(): CalendarDialogParameters {
+		return new CalendarDialogParameters();
+	}
+
 	public close(): void {
 		this.dialog.close();
 	}
 
-	public selectDaySlot(daySlot: DaySlot) {
+	public selectDaySlot(daySlot: DaySlot): void {
 		if (daySlot.date) {
 			this.close();
 		}
 	}
 
-	public static getParameters(): CalendarDialogParameters {
-		return new CalendarDialogParameters();
-	}
-
-	public doSomething(data: any) {
+	public doSomething(data: any): void {
 		console.log(data);
 	}
 
@@ -68,7 +68,7 @@ export class CalendarDialog implements ModalComponent<CalendarDialogParameters> 
 		of(true)
 			.pipe(delay(1000))
 			.subscribe(
-				(response) => {
+				() => {
 					const returnedDays: DaySlot[] = [];
 					returnedDays.push({date: new Date(2017, 10, 25), day: 25, isHoliday: true});
 					returnedDays.push({date: new Date(2017, 10, 26), day: 26, isHoliday: true});

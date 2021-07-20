@@ -1,6 +1,6 @@
-import {Component, ContentChild, Input, OnChanges, TemplateRef} from '@angular/core';
-import {addDays, getDate, getISODay, isSameDay, lastDayOfMonth, setDate} from 'date-fns';
-import {I18nService} from 'systelab-translate';
+import { Component, ContentChild, Input, OnChanges, TemplateRef } from '@angular/core';
+import { addDays, getDate, getISODay, isSameDay, lastDayOfMonth, setDate } from 'date-fns';
+import { I18nService } from 'systelab-translate';
 
 export interface DaySlot {
 	date?: Date;
@@ -19,20 +19,20 @@ export class CalendarTableComponent implements OnChanges {
 	@Input() public days: DaySlot[] = [];
 	@Input() public useLongDays = false;
 
+	@ContentChild(TemplateRef, { static: false }) templateRef: TemplateRef<any>;
+
 	public language: any;
 	public daysHeader: string[] = [];
 	public rows: DaySlot[][] = [];
 
-	@ContentChild(TemplateRef, {static: false}) templateRef: TemplateRef<any>;
-
 	constructor(protected i18nService: I18nService) {
 	}
 
-	public ngOnChanges() {
+	public ngOnChanges(): void {
 		this.refresh();
 	}
 
-	public refresh() {
+	public refresh(): void {
 		if (!this.currentDate) {
 			this.currentDate = new Date();
 		}
@@ -42,83 +42,14 @@ export class CalendarTableComponent implements OnChanges {
 		this.putDaySlotsIntoArray(this.generateDays());
 	}
 
-	private generateDays(): Date[] {
-		const dates: Date[] = [];
-
-		const firstDayOfMonth = setDate(this.currentDate, 1);
-		const lastDateOfMonth = lastDayOfMonth(firstDayOfMonth);
-
-		// Calculate the days to add at the beginning.
-		let firstDayPosition = getISODay(firstDayOfMonth);
-		if (this.language.firstDayOfWeek === 1) {
-			firstDayPosition = firstDayPosition - 1;
-		}
-		firstDayPosition = firstDayPosition % 7;
-
-		// Push the empty days.
-		for (let i = 0; i < firstDayPosition; i++) {
-			dates.push(null);
-		}
-
-		// put the dates.
-		let date = firstDayOfMonth;
-		for (let i = 1; i <= getDate(lastDateOfMonth); i++) {
-			dates.push(date);
-			date = addDays(date, 1);
-		}
-		return dates;
-	}
-
-	private putDaySlotsIntoArray(datesArray: Date[]) {
-
-		const days: DaySlot[] = [];
-		for (const singleDate of datesArray) {
-			if (singleDate === null) {
-				days.push({day: -1, isHoliday: false});
-			} else {
-				const loadDay = this.getLoadDay(singleDate);
-				if (loadDay) {
-					days.push(loadDay);
-				} else {
-					days.push({date: singleDate, day: getDate(singleDate), isHoliday: false});
-				}
-			}
-		}
-
-		// Split in at maximum 6 rows
-		for (let i = 0; i < 6; i++) {
-			this.rows.push(days.slice(i * 7, (i * 7) + 7));
-		}
-
-		// Remove the last two rows if they are empty.
-		for (let i = this.rows.length - 1; i >= 3; i--) {
-			if (this.rows[i].length === 0) {
-				this.rows.splice(i, 1);
-			}
-		}
-		// The last week should have 7 slots too
-		const lastRow = this.rows.length;
-		for (let j = this.rows[lastRow - 1].length; j < 7; j++) {
-			this.rows[lastRow - 1].push({day: -1, isHoliday: false});
-		}
-	}
-
-	protected defineHeaderDays() {
+	protected defineHeaderDays(): void {
 		this.daysHeader = this.useLongDays ? this.language.dayNames.slice() : this.language.dayNamesShort.slice();
 		let firstDay: Array<string> = this.daysHeader.slice(0, 1);
-		if (this.language.firstDayOfWeek === 1 && firstDay[0] === (this.useLongDays ? this.language.dayNames[0] : this.language.dayNamesShort[0])) {
+		if (this.language.firstDayOfWeek === 1 &&
+			firstDay[0] === (this.useLongDays ? this.language.dayNames[0] : this.language.dayNamesShort[0])) {
 			firstDay = this.daysHeader.splice(0, 1);
 			this.daysHeader.push(firstDay[0]);
 		}
-	}
-
-	private getLoadDay(date: Date): DaySlot {
-		for (const day of this.days) {
-			if (isSameDay(day.date, date)) {
-				return day;
-			}
-		}
-		return null;
 	}
 
 	protected getLanguage(): void {
@@ -184,4 +115,73 @@ export class CalendarTableComponent implements OnChanges {
 		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);
 	}
 
+	private generateDays(): Date[] {
+		const dates: Date[] = [];
+
+		const firstDayOfMonth = setDate(this.currentDate, 1);
+		const lastDateOfMonth = lastDayOfMonth(firstDayOfMonth);
+
+		// Calculate the days to add at the beginning.
+		let firstDayPosition = getISODay(firstDayOfMonth);
+		if (this.language.firstDayOfWeek === 1) {
+			firstDayPosition = firstDayPosition - 1;
+		}
+		firstDayPosition = firstDayPosition % 7;
+
+		// Push the empty days.
+		for (let i = 0; i < firstDayPosition; i++) {
+			dates.push(null);
+		}
+
+		// put the dates.
+		let date = firstDayOfMonth;
+		for (let i = 1; i <= getDate(lastDateOfMonth); i++) {
+			dates.push(date);
+			date = addDays(date, 1);
+		}
+		return dates;
+	}
+
+	private putDaySlotsIntoArray(datesArray: Date[]) {
+
+		const days: DaySlot[] = [];
+		for (const singleDate of datesArray) {
+			if (singleDate === null) {
+				days.push({ day: -1, isHoliday: false });
+			} else {
+				const loadDay = this.getLoadDay(singleDate);
+				if (loadDay) {
+					days.push(loadDay);
+				} else {
+					days.push({ date: singleDate, day: getDate(singleDate), isHoliday: false });
+				}
+			}
+		}
+
+		// Split in at maximum 6 rows
+		for (let i = 0; i < 6; i++) {
+			this.rows.push(days.slice(i * 7, (i * 7) + 7));
+		}
+
+		// Remove the last two rows if they are empty.
+		for (let i = this.rows.length - 1; i >= 3; i--) {
+			if (this.rows[i].length === 0) {
+				this.rows.splice(i, 1);
+			}
+		}
+		// The last week should have 7 slots too
+		const lastRow = this.rows.length;
+		for (let j = this.rows[lastRow - 1].length; j < 7; j++) {
+			this.rows[lastRow - 1].push({ day: -1, isHoliday: false });
+		}
+	}
+
+	private getLoadDay(date: Date): DaySlot {
+		for (const day of this.days) {
+			if (isSameDay(day.date, date)) {
+				return day;
+			}
+		}
+		return null;
+	}
 }

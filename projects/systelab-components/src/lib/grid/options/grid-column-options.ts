@@ -1,4 +1,4 @@
-import { TwoListItem } from '../../twolist/two-list.component';
+import { TwoListItem } from '../../twolist/two-list-utilities';
 
 export class GridColumnsOptions {
 	public available: Array<TwoListItem> = [];

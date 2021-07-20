@@ -9,6 +9,7 @@ export * from './lib/contextmenu/context-menu.component';
 export * from './lib/contextmenu/context-menu-option';
 export * from './lib/contextmenu/context-menu-action-data';
 export * from './lib/twolist/two-list.component';
+export * from './lib/twolist/two-list-utilities';
 export * from './lib/colorpicker/colorpicker.component';
 export * from './lib/colorpicker/color-cell-renderer.component';
 export * from './lib/applicationframe/application-frame.component';
@@ -29,6 +30,7 @@ export * from './lib/datepicker/datepicker.component';
 export * from './lib/datepicker/datepicker-time.component';
 export * from './lib/spinner/touch.spin-values';
 export * from './lib/searcher/searcher.dialog.component';
+export * from './lib/searcher/searcher.dialog.parameters';
 export * from './lib/searcher/abstract-searcher.component';
 export * from './lib/searcher/abstract-searcher';
 
