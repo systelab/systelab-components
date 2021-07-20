@@ -20,16 +20,16 @@ export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit,
 	constructor( public componentFactoryResolver: ComponentFactoryResolver ) {
 	}
 
-	ngOnChanges() {
+	ngOnChanges(): void {
 		this.updateComponent();
 	}
 
-	ngAfterViewInit() {
+	ngAfterViewInit(): void {
 		this.isViewInitialized = true;
 		this.updateComponent();
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy(): void {
 		if ( this.cmpRef ) {
 			this.cmpRef.destroy();
 		}

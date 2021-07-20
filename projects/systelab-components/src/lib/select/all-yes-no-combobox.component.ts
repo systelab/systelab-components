@@ -18,14 +18,14 @@ export class AllYesNoSelect extends AbstractComboBox<Element> implements OnInit 
 	private readonly descriptionYes: string;
 	private readonly descriptionNo: string;
 
-	constructor(myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
+	constructor(myRenderer: Renderer2, public override chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
 		this.descriptionAll = this.i18nService.instant('COMMON_ALL');
 		this.descriptionYes = this.i18nService.instant('COMMON_YES');
 		this.descriptionNo = this.i18nService.instant('COMMON_NO');
 	}
 
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 		const elements = new Array<Element>();
 		this.defaultDescription = this.descriptionAll;

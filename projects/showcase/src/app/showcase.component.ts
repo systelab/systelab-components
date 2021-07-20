@@ -29,16 +29,16 @@ export class ShowcaseComponent {
 		preferencesService.setStorage(StorageType.SESSION_STORAGE);
 	}
 
-	public selectTab(tabNum: number) {
+	public selectTab(tabNum: number): void {
 		this.currentTab = tabNum;
 	}
 
-	public selectNav(navNum: number) {
+	public selectNav(navNum: number): void {
 		this.currentNav = navNum;
 		this.itemsNav[navNum].isSelected = true;
-		for (let i = 0; i < this.itemsNav.length; i++) {
-			if (this.itemsNav[i].id !== navNum) {
-				this.itemsNav[i].isSelected = false;
+		for (const itemNav of this.itemsNav) {
+			if (itemNav.id !== navNum) {
+				itemNav.isSelected = false;
 			}
 		}
 	}

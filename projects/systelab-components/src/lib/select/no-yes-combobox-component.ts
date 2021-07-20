@@ -18,7 +18,7 @@ export class NoYesSelect extends AbstractComboBox<Element> implements AfterViewI
 
 	@Input() public reverseValues = false;
 
-	constructor( public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService ) {
+	constructor( public override myRenderer: Renderer2, public override chRef: ChangeDetectorRef, public i18nService: I18nService ) {
 		super( myRenderer, chRef );
 	}
 

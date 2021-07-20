@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { TreeListBoxElement } from 'systelab-components';
 
 class Element {
@@ -11,7 +11,7 @@ class Element {
 	selector:    'showcase-listbox',
 	templateUrl: 'showcase-listbox.component.html'
 })
-export class ShowcaseListBoxComponent implements AfterViewInit {
+export class ShowcaseListBoxComponent implements OnInit {
 
 	public selectedItem;
 	public selectedTreeItem;
@@ -31,7 +31,7 @@ export class ShowcaseListBoxComponent implements AfterViewInit {
 
 	}
 
-	public ngAfterViewInit(): void {
+	public ngOnInit(): void {
 		this.selectedTreeItem = new TreeListBoxElement({
 			'centerID':           1,
 			'centerDescription':  'Center',

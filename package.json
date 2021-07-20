@@ -15,15 +15,15 @@
     "update-snapshots": "ng e2e --config ./projects/showcase/e2e/protractor-update-snapshot.conf.js"
   },
   "dependencies": {
-    "@angular/animations": "^11.1.1",
-    "@angular/cdk": "^11.1.1",
-    "@angular/common": "^11.1.1",
-    "@angular/compiler": "^11.1.1",
-    "@angular/core": "^11.1.1",
-    "@angular/forms": "^11.1.1",
-    "@angular/platform-browser": "^11.1.1",
-    "@angular/platform-browser-dynamic": "^11.1.1",
-    "@angular/router": "^11.1.1",
+    "@angular/animations": "^12.1.1",
+    "@angular/cdk": "^12.1.1",
+    "@angular/common": "^12.1.1",
+    "@angular/compiler": "^12.1.1",
+    "@angular/core": "^12.1.1",
+    "@angular/forms": "^12.1.1",
+    "@angular/platform-browser": "^12.1.1",
+    "@angular/platform-browser-dynamic": "^12.1.1",
+    "@angular/router": "^12.1.1",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@fullcalendar/core": "^5.3.1",
     "@ngx-translate/core": "^13.0.0",
@@ -47,7 +47,7 @@
     "systelab-preferences": "^8.0.0",
     "systelab-translate": "^10.0.0",
     "tslib": "^2.1.0",
-    "zone.js": "^0.10.3"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1101.2",
@@ -55,11 +55,11 @@
     "@angular-eslint/builder": "1.2.0",
     "@angular-eslint/eslint-plugin": "1.2.0",
     "@angular-eslint/eslint-plugin-template": "1.2.0",
-    "@angular-eslint/schematics": "1.2.0",
+    "@angular-eslint/schematics": "^12.3.0",
     "@angular-eslint/template-parser": "1.2.0",
-    "@angular/cli": "^11.1.2",
-    "@angular/compiler-cli": "^11.1.1",
-    "@angular/language-service": "^11.1.1",
+    "@angular/cli": "^12.1.1",
+    "@angular/compiler-cli": "^12.1.1",
+    "@angular/language-service": "^12.1.1",
     "@types/chart.js": "^2.9.24",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
@@ -82,6 +82,6 @@
     "protractor": "~5.4.4",
     "snapshot-testing": "^1.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.0.3"
+    "typescript": "~4.3.5"
   }
 }

@@ -6,13 +6,13 @@ import { AbstractListBox } from './abstract-listbox.component';
 @Directive()
 export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implements IDatasource, OnInit {
 
-	public abstract getInstance(): T;
+	public abstract override getInstance(): T;
 
 	protected constructor() {
 		super();
 	}
 
-	public ngOnInit() {
+	public override ngOnInit() {
 
 		super.ngOnInit();
 

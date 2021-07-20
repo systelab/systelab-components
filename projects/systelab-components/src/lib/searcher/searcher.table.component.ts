@@ -18,12 +18,12 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input('contains') public searchForContain: boolean;
 	@Input() public searcher: AbstractSearcher<T>;
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	            protected dialogService: DialogService) {
+	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
+	            protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 		this.gridOptions.enableBrowserTooltips = true;
 	}
@@ -32,15 +32,15 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		return this.searcher.getColumnDefs();
 	}
 
-	protected hideHeader(): boolean {
+	protected override hideHeader(): boolean {
 		return this.searcher.hideHeader();
 	}
 
-	protected getIsFullWidthCell(rowNode: RowNode): boolean {
+	protected override getIsFullWidthCell(rowNode: RowNode): boolean {
 		return this.searcher.getIsFullWidthCell(rowNode);
 	}
 
-	public getFullWidthCellRenderer(): any {
+	public override getFullWidthCellRenderer(): any {
 		return this.searcher.getFullWidthCellRenderer();
 	}
 
@@ -68,11 +68,11 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		return this.gridOptions.api.getSelectedRows();
 	}
 
-	protected getGridOptionsPreferencesPrefix(): string {
+	protected override getGridOptionsPreferencesPrefix(): string {
 		return this.searcher.getGridOptionsPreferencesPrefix();
 	}
 
-	public onModelUpdated(event: any) {
+	public override onModelUpdated(event: any) {
 		super.onModelUpdated(event);
 		if (this.multipleSelection) {
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
@@ -95,7 +95,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	}
 
 	// overrides
-	public onRowSelected(event: any): void {
+	public override onRowSelected(event: any): void {
 		if (this.multipleSelection) {
 			if (event.node && event.node.data && event.node.data[this.searcher.getIdField()] !== undefined) {
 				if (this.searcher.multipleSelectedItemList) {

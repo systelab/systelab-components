@@ -21,7 +21,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	public columnDefs: Array<any>;
 	public treeValues: Array<TreeListBoxElement<T>> = [];
-	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
+	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
 
 	@Input() public updateHierarchy = true;
 
@@ -74,7 +74,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	protected abstract getSelectionPrefix(level: number): string;
 
-	public ngOnInit() {
+	public override ngOnInit() {
 		this.configGrid();
 	}
 
@@ -199,7 +199,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	// Override
-	public cleanSelection(): void {
+	public override cleanSelection(): void {
 		this.treeValues = this.treeValues.map(treeValue => {
 			treeValue.selected = false;
 			return treeValue;
@@ -209,7 +209,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	public doClick(row: any) {
+	public override doClick(row: any) {
 		if (!this.multipleSelection && !this.isDisabled) {
 			this.selectedTreeItem = row.node.data;
 			this.selectedTreeItemChange.emit(row.node.data);
@@ -322,7 +322,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	public onModelUpdated(pEvent: any) {
+	public override onModelUpdated(pEvent: any) {
 	}
 
 	public removeElement(seleccionado: TreeListBoxElement<T>) {

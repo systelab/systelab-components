@@ -6,8 +6,8 @@ import { ModalComponent, SystelabModalContext } from '../../modal/dialog/modal-c
 import { DialogRef } from '../../modal/dialog/dialog-ref';
 
 export class GridColumnOptionsDialogParameters extends SystelabModalContext {
-	public width = 800;
-	public height = 500;
+	public override width = 800;
+	public override height = 500;
 	public columnOptions: GridColumnsOptions;
 }
 

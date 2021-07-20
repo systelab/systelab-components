@@ -41,11 +41,11 @@ export class ChipButtonComponent {
 	constructor(protected messagePopupService: MessagePopupService, protected i18nService: I18nService) {
 	}
 
-	public onClick(item: ChipButtonItem) {
+	public onClick(item: ChipButtonItem): void {
 		this.selectItem(item);
 	}
 
-	public selectItem(item: ChipButtonItem) {
+	public selectItem(item: ChipButtonItem): void {
 		item.isChecked = true;
 		this.buttonList.filter(btn => btn !== item)
 			.forEach(btn =>
@@ -55,7 +55,7 @@ export class ChipButtonComponent {
 		this.lastValue = item;
 	}
 
-	public removeButtonItem(item: ChipButtonItem, event: Event) {
+	public removeButtonItem(item: ChipButtonItem, event: Event): void {
 		event.stopPropagation();
 		if (this.deleteConfirmationMessage) {
 			this.messagePopupService.showYesNoQuestionPopup(this.deleteConfirmationTitle, this.deleteConfirmationMessage)
@@ -69,7 +69,7 @@ export class ChipButtonComponent {
 		}
 	}
 
-	public addButtonITem() {
+	public addButtonITem(): void {
 		const maxID = Math.max(...this.buttonList.map(o => o.id), 0);
 		const item = {name: this.i18nService.instant('COMMON_NEW'), id: maxID + 1, isChecked: false};
 		this.buttonList.push(item);
@@ -77,13 +77,13 @@ export class ChipButtonComponent {
 		this.buttonAdded.emit(item);
 	}
 
-	public changeButtonItem(item: ChipButtonItem) {
+	public changeButtonItem(item: ChipButtonItem): void {
 		if (!this.disabled) {
 			this.changeButton.emit(item);
 		}
 	}
 
-	private removeElement(item: ChipButtonItem) {
+	private removeElement(item: ChipButtonItem): void {
 		let index = this.buttonList.findIndex(it => it === item);
 		if (index !== -1) {
 			this.buttonList.splice(index, 1);
