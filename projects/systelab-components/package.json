@@ -24,7 +24,6 @@
     "angular-split": ">=4.0.0 <5.0.0",
     "bootstrap": ">=5.0.2 <6.0.0",
     "date-fns": ">=2.0.0 <3.0.0",
-    "jquery": ">=3.3.1 <4.0.0",
     "mobile-drag-drop": ">=2.3.0-rc.0 <3.0.0",
     "nanobar": ">=0.4.2 <1.0.0",
     "@popperjs/core": ">=2.0.0 <3.0.0",

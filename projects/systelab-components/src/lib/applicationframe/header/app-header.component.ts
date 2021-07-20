@@ -26,7 +26,7 @@ export class ApplicationHeaderComponent {
 
 	public toggleDropDown(): void {
 		const dropDownElement = document.getElementById('toggleDropDownAppHeader');
-		const newDropDown = new Dropdown(dropDownElement.children[0], {
+		const dropdown = new Dropdown(dropDownElement.children[0], {
 			popperConfig: (defaultBsPopperConfig) => {
 				defaultBsPopperConfig = {
 					placement: 'bottom-end',
@@ -38,6 +38,6 @@ export class ApplicationHeaderComponent {
 				return defaultBsPopperConfig;
 			}
 		});
-		newDropDown.toggle();
+		dropdown.toggle();
 	}
 }

@@ -1,4 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges } from '@angular/core';
+import {Tooltip} from 'bootstrap';
 
 declare var jQuery: any;
 
@@ -21,13 +22,12 @@ export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 	}
 
 	ngAfterViewInit() {
-		jQuery(this.el.nativeElement)
-			.tooltip();
+		const tooltip = new Tooltip(this.el.nativeElement);
 	}
 
 	ngOnDestroy() {
-		jQuery(this.el.nativeElement)
-			.tooltip('dispose');
+		const tooltip = new Tooltip(this.el.nativeElement);
+		tooltip.dispose();
 	}
 
 	ngOnChanges(changes: SimpleChanges) {

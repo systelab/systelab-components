@@ -3,8 +3,7 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { Observable } from 'rxjs';
 import { PreferencesService } from 'systelab-preferences';
-
-declare var jQuery: any;
+import {Dropdown} from 'bootstrap';
 
 export class ComboTreeNode<T> {
 	public nodeData: T;
@@ -243,20 +242,19 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	// Overrides
 	public onRowSelected(event: any) {
+		const dropDownElement = document.getElementById(this.comboId);
+		const dropdown = new Dropdown(dropDownElement.children[0]);
 		if (event.node.selected) {
 			if (this.isParentSelectable && event.node.data.nodeData[this.getLevelIdField(0)] !== AbstractApiTreeComboBox.FAVOURITEID) {
-				jQuery('#' + this.comboId)
-					.dropdown('toggle');
+				dropdown.toggle();
 			} else if (this.isAllSelectable && event.node && event.node.data && event.node.data.level === 0) {
 				if (event.node.data.nodeData[this.getLevelIdField(0)] === this.getAllNodeId()) {
-					jQuery('#' + this.comboId)
-						.dropdown('toggle');
+					dropdown.toggle();
 				} else {
 					event.node.setSelected(false);
 				}
 			} else if (event.node && event.node.data && event.node.data.level > 0) {
-				jQuery('#' + this.comboId)
-					.dropdown('toggle');
+				dropdown.toggle();
 			} else {
 				if (event.node) {
 					event.node.setSelected(false);

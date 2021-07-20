@@ -4,8 +4,7 @@ import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
-
-declare var jQuery: any;
+import {Dropdown} from 'bootstrap';
 
 @Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
@@ -51,8 +50,9 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (!this.isDisabled) {
 			if (!this.isDropDownOpen()) {
 				this.showDropDown();
-				jQuery('#' + this.comboId)
-					.dropdown('toggle');
+				const dropDownElement = document.getElementById(this.comboId);
+				const dropdown = new Dropdown(dropDownElement.children[0]);
+				dropdown.toggle();
 				this.isDropdownOpened = true;
 				this.doSearchText(this.description);
 			}

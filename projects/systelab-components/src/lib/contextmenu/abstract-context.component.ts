@@ -244,10 +244,9 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	public open(event: MouseEvent): void {
 		const dropDownElement = document.getElementById(this.elementID);
-		const newDropDown = new Dropdown(dropDownElement.children[0]);
-		newDropDown.toggle();
+		const dropdown = new Dropdown(dropDownElement.children[0]);
+		dropdown.toggle();
 		if (!this.isDropDownOpened()) {
-			// Add class manually because is not set when jquery.dropdwon toogle is executed
 			this.myRenderer.addClass(this.dropdownParent.nativeElement, 'show');
 			this.hideDivUntilIsPositioned(event.clientX, event.clientY);
 		}
@@ -255,7 +254,7 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 
 	public toggle(elementID: string): void {
 		const dropDownElement = document.getElementById(elementID);
-		const newDropDown = new Dropdown(dropDownElement.children[0], {
+		const dropdown = new Dropdown(dropDownElement.children[0], {
 			popperConfig: (defaultBsPopperConfig) => {
 				defaultBsPopperConfig = {
 					placement: 'right-end',
@@ -266,6 +265,6 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 				return defaultBsPopperConfig;
 			}
 		});
-		newDropDown.toggle();
+		dropdown.toggle();
 	}
 }
