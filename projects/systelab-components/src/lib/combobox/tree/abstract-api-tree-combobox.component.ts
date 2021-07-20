@@ -26,19 +26,19 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	public totalItemsLoaded = false;
 	public isFirstTime = true;
-	public isTree = true;
+	public override isTree = true;
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override  preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
-	public ngOnInit() {
+	public override ngOnInit(): void {
 		this.setRowHeight();
 		this.configGrid();
 		this.initializeFavouriteList();
 	}
 
-	protected configGrid() {
+	protected override configGrid() {
 		this.columnDefs = [
 			{
 				colId:        'itemDescription',
@@ -103,13 +103,13 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// override
-	public closeDropDown() {
+	public override closeDropDown() {
 		this.isFirstTime = true;
 		super.closeDropDown();
 	}
 
 	// override
-	public loop(): void {
+	public override  loop(): void {
 		let result = true;
 
 		if (this.isDropDownOpen()) {
@@ -132,7 +132,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// Override
-	public setDropdownHeight() {
+	public override setDropdownHeight() {
 		let totalItems = Number(this.gridOptions.api.getDisplayedRowCount());
 		let calculatedHeight = 0;
 
@@ -213,7 +213,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// Overrides
-	protected checkIfIsFavourite(id: string | number): void {
+	protected override checkIfIsFavourite(id: string | number): void {
 		const idString = id ? id.toString() : undefined;
 		if (idString && idString.includes(this.getSelectionPrefix(1))) {
 			super.checkIfIsFavourite(idString.substr(1));
@@ -223,7 +223,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// Overrides
-	protected toggleFavourite(): void {
+	protected override toggleFavourite(): void {
 		if (this.id.toString()
 			.includes(this.getSelectionPrefix(1))) {
 			this.isFavourite = !this.isFavourite;
@@ -242,7 +242,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// Overrides
-	public onRowSelected(event: any) {
+	public override onRowSelected(event: any) {
 		if (event.node.selected) {
 			if (this.isParentSelectable && event.node.data.nodeData[this.getLevelIdField(0)] !== AbstractApiTreeComboBox.FAVOURITEID) {
 				jQuery('#' + this.comboId)
@@ -266,7 +266,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// Overrides
-	public onSelectionChanged(event: any) {
+	public override onSelectionChanged(event: any) {
 		const selectedRow = this.getSelectedRow();
 		if (selectedRow !== null && selectedRow !== undefined) {
 			this.id = selectedRow.nodeData[this.getLevelIdField(selectedRow.level)];
@@ -283,7 +283,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 		}
 	}
 
-	public refresh(params: any): boolean {
+	public override refresh(params: any): boolean {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.getRows();
 			return true;

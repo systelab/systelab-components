@@ -16,7 +16,7 @@ export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<Gr
 
 	protected actionHandler: GridRowMenuActionHandler;
 
-	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
+	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
 	}
 

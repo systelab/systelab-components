@@ -1,12 +1,25 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/systelab-components",
   "assets": [
     "./README.md",
     "./icons/*.*",
     "./sass/**/*.scss"
   ],
+  "dest": "../../dist/systelab-components",
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "ag-grid-angular": "ag-grid-angular",
+      "angular-split": "angular-split",
+      "date-fns": "date-fns",
+      "mobile-drag-drop": "mobile-drag-drop",
+      "primeng/api": "primeng/api",
+      "primeng/autocomplete": "primeng/autocomplete",
+      "primeng/calendar": "primeng/calendar",
+      "primeng/contextmenu": "primeng/contextmenu",
+      "primeng/tree": "primeng/tree",
+      "systelab-preferences": "systelab-preferences",
+      "systelab-translate": "systelab-translate"
+    }
   }
 }

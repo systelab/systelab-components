@@ -15,16 +15,16 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		this._startsWith = value;
 	}
 
-	public params: any;
+	public override params: any;
 
 	public totalItemsLoaded = false;
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
 	// override
-	protected configGrid() {
+	protected override configGrid() {
 
 		super.configGrid();
 		this.gridOptions.rowModelType = 'infinite';
@@ -37,7 +37,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	}
 
-	protected configGridData() {
+	protected override configGridData() {
 		this.gridOptions.datasource = null;
 	}
 
@@ -45,7 +45,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	public abstract getTotalItems(): number;
 
-	public refresh(params: any): boolean {
+	public override refresh(params: any): boolean {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.setDatasource(this);
 		}
@@ -53,7 +53,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	}
 
 	// override
-	public loop(): void {
+	public override loop(): void {
 		let result = true;
 
 		if (this.isDropDownOpen()) {
@@ -76,11 +76,11 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	}
 
 	//override
-	protected getTotalItemsInCombo(): number {
+	protected override getTotalItemsInCombo(): number {
 		return this.getTotalItems();
 	}
 
-	public doSearch(event: any) {
+	public override doSearch(event: any) {
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}

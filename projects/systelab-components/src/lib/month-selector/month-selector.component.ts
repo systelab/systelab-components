@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { OnInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { I18nService } from 'systelab-translate';
 
 export class Month {
@@ -10,7 +10,7 @@ export class Month {
 	selector:    'systelab-month-selector',
 	templateUrl: './month-selector.component.html'
 })
-export class MonthSelectorComponent implements AfterViewInit {
+export class MonthSelectorComponent implements OnInit {
 
 	@Input() public maxDate: Date;
 	@Input() public minDate: Date;
@@ -43,7 +43,7 @@ export class MonthSelectorComponent implements AfterViewInit {
 		this.selectedMonth = new Month(0, '', 0, false);
 	}
 
-	public ngAfterViewInit(): void {
+	public ngOnInit(): void {
 		if (!this.currentDate) {
 			this.currentDate = new Date();
 		}

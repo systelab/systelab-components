@@ -16,7 +16,7 @@ class Element {
 
 export class ModulabSelect extends AbstractComboBox<Element> {
 
-	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+	constructor(public override myRenderer: Renderer2, public override chRef: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
 		super(myRenderer, chRef, preferencesService);
 	}
 

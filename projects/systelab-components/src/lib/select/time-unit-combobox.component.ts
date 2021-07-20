@@ -19,7 +19,7 @@ export class TimeUnitSelectComponent extends AbstractComboBox<Element> implement
 	@Input() public showMinutesOption = false;
 	@Input() public showHoursOption = false;
 
-	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
+	constructor(public override myRenderer: Renderer2, public override chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
 	}
 
