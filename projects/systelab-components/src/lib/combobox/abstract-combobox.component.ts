@@ -306,7 +306,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected setRowHeight() {
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-		AbstractComboBox.ROW_HEIGHT = Number(lineHeight ? lineHeight : 26);
+		AbstractComboBox.ROW_HEIGHT = Number(lineHeight ? lineHeight : 38);
 	}
 
 	public abstract getInstance(): T;
