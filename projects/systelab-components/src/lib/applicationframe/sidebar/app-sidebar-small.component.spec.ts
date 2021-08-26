@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
@@ -10,7 +10,6 @@ import {SystelabPreferencesModule} from 'systelab-preferences';
 import {ApplicationSidebarSmallComponent} from './app-sidebar-small.component';
 import {TooltipDirective} from '../../tooltip/tooltip.directive';
 import {ApplicationSidebarAction, ApplicationSidebarTab} from './app-sidebar.component';
-import { DialogService } from '../../modal/dialog/dialog.service';
 
 @Component({
 	selector: 'systelab-app-sidebar-small-test',
@@ -66,8 +65,8 @@ export class AppSidebarSmallTestComponent implements OnInit {
 describe('Systelab App Sidebar Small', () => {
 	let fixture: ComponentFixture<AppSidebarSmallTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports: [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -84,7 +83,7 @@ describe('Systelab App Sidebar Small', () => {
 			]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppSidebarSmallTestComponent);

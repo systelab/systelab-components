@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupViewComponent, MessagePopupViewContext } from './message-popup-view.component';
 import { SystelabComponentsModule } from '../../systelab-components.module';
-import { MessageWithIconComponent } from './message-with-icon.component';
 import { DialogRef } from '../dialog/dialog-ref';
 import { MessagePopupButton } from './message-popup.service';
 
@@ -19,9 +18,9 @@ describe('Systelab MessagePopupViewComponent', () => {
 	const parameters: MessagePopupViewContext = new MessagePopupViewContext();
 
 
-	beforeEach(async(() => {
+	beforeEach(async () => {
 		spyDialogRef = jasmine.createSpyObj('DialogRef', ['context']);
-		TestBed.configureTestingModule({
+		await TestBed.configureTestingModule({
 			imports:      [
 				BrowserModule,
 				BrowserAnimationsModule,
@@ -35,11 +34,11 @@ describe('Systelab MessagePopupViewComponent', () => {
 			providers:    [{provide: DialogRef, useValue: spyDialogRef}]
 		})
 			.compileComponents();
-	}));
+	});
 
-	beforeEach(async(() => {
+	beforeEach(async () => {
 		spyDialogRef.context.and.returnValue(parameters);
-	}));
+	});
 
 
 	it('should be instantiated with default parameters', () => {
