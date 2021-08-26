@@ -22,12 +22,12 @@ export class DatepickerTimeComponent extends Datepicker {
 	}
 
 	@Input()
-	get currentDate(): Date {
+	override get currentDate(): Date {
 		return this._currentDate;
 	}
 	@Input() public resetTimeWhenChangingCurrentDate = false;
 
-	set currentDate(value: Date) {
+	override set currentDate(value: Date) {
 		this._currentDate = value;
 		if (this._currentDate) {
 			if (this.resetTimeWhenChangingCurrentDate) {

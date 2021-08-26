@@ -1,15 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { SearcherTableComponent } from './searcher.table.component';
 import { I18nService } from 'systelab-translate';
-import { AbstractSearcher } from './abstract-searcher';
-import { ModalComponent, SystelabModalContext } from '../modal/dialog/modal-context';
+import { ModalComponent } from '../modal/dialog/modal-context';
 import { DialogRef } from '../modal/dialog/dialog-ref';
-
-export class SearcherDialogParameters<T> extends SystelabModalContext {
-	public valueToSearch: string;
-	public searcher: AbstractSearcher<T>;
-	public showCloseButton = true;
-}
+import { SearcherDialogParameters } from './searcher.dialog.parameters';
 
 @Component({
 	templateUrl: 'searcher.dialog.component.html'

@@ -9,7 +9,7 @@ import {ComboBoxInputRenderer} from '../combobox/renderer/combobox-input-rendere
 	templateUrl: '../combobox/abstract-combobox.component.html'
 } )
 export class ColorComboBox extends AbstractComboBox<ComboBoxInputRenderer> implements OnInit {
-	constructor( public myRenderer: Renderer2, chRef: ChangeDetectorRef) {
+	constructor( public override myRenderer: Renderer2, chRef: ChangeDetectorRef) {
 		super( myRenderer, chRef);
 
 		this.customInputRenderer = ColorCellRendererComponent;
@@ -17,7 +17,7 @@ export class ColorComboBox extends AbstractComboBox<ComboBoxInputRenderer> imple
 		this.values = ColorUtilService.generateColorArray( [0, 128, 192, 255], true );
 	}
 
-	public ngOnInit() {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 
 		this.columnDefs = [

@@ -15,7 +15,7 @@ class Element {
 })
 export class SystelabGenderListBox extends AbstractListBox<Element> implements AfterViewInit {
 
-	@Input() showAll = false;
+	@Input() override showAll = false;
 
 	constructor(public i18nService: I18nService) {
 		super();
@@ -33,11 +33,11 @@ export class SystelabGenderListBox extends AbstractListBox<Element> implements A
 		this.values = elements;
 	}
 
-	public getAllFieldID(): number | string {
+	public override getAllFieldID(): number | string {
 		return 'A';
 	}
 
-	public getAllFieldDescription(): string {
+	public override getAllFieldDescription(): string {
 		return this.i18nService.instant('COMMON_ALL');
 	}
 

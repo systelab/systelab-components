@@ -4,8 +4,8 @@ import { DialogRef } from '../modal/dialog/dialog-ref';
 
 export class NumPadDialogParameters extends SystelabModalContext {
 	public value: string;
-	public width = 300;
-	public height = 450;
+	public override width = 300;
+	public override height = 450;
 	public isPassword: boolean;
 }
 

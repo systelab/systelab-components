@@ -15,7 +15,8 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
 import { AbstractSearcherComponent } from './abstract-searcher.component';
 import { I18nService } from 'systelab-translate';
 import { AbstractSearcher } from './abstract-searcher';
-import { SearcherDialog, SearcherDialogParameters } from './searcher.dialog.component';
+import { SearcherDialog } from './searcher.dialog.component';
+import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable, of } from 'rxjs';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
