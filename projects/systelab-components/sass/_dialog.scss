@@ -59,7 +59,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   }
 
   &:not(.fullscreen) {
-    animation: scaleUp .2s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    animation: scaleUp .2s;
   }
 
 
