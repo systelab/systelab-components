@@ -2,6 +2,8 @@ import { Directive, Input } from '@angular/core';
 
 @Directive()
 export class ComboBoxInputRenderer {
+	@Input() selectedData: any;
+	@Input() initialParams: any;
 
 	private _id: number | string;
 	@Input()
@@ -9,7 +11,7 @@ export class ComboBoxInputRenderer {
 		this._id = value;
 	}
 
-	get id() {
+	get id(): number | string {
 		return this._id;
 	}
 
@@ -19,12 +21,9 @@ export class ComboBoxInputRenderer {
 		this._description = value;
 	}
 
-	get description() {
+	get description(): string {
 		return this._description;
 	}
-
-	@Input() selectedData: any;
-	@Input() initialParams: any;
 
 	constructor() {
 	}

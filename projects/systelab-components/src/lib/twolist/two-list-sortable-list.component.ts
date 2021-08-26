@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CurrentSelectionStatus, TwoListItem } from './two-list.component';
+import { CurrentSelectionStatus, TwoListItem } from './two-list-utilities';
 import { AbstractSortableListComponent } from '../sortable-list/abstract-sortable-list.component';
 import { DataFilterPipe } from './datafilter.pipe';
 
@@ -10,7 +10,7 @@ import { DataFilterPipe } from './datafilter.pipe';
 export class TwoListSortableListComponent extends AbstractSortableListComponent<TwoListItem> {
 
 	@Input() public currentSelectionStatus: CurrentSelectionStatus;
-	@Input() public secondListSearch: string;
+	@Input() public override secondListSearch: string;
 
 	@Output() public dbClick: EventEmitter<TwoListItem> = new EventEmitter();
 
@@ -30,12 +30,12 @@ export class TwoListSortableListComponent extends AbstractSortableListComponent<
 		return '';
 	}
 
-	public selectElement(element: TwoListItem, ev: KeyboardEvent) {
+	public override selectElement(element: TwoListItem, ev: KeyboardEvent) {
 		const visibleFilteredList = new DataFilterPipe().transform(this.elementsList, this.secondListSearch);
 		this.currentSelectionStatus.selectVisible(element, visibleFilteredList, ev.shiftKey, ev.ctrlKey);
 	}
 
-	public dbClickSelectedItem(element: TwoListItem) {
+	public override dbClickSelectedItem(element: TwoListItem) {
 		this.dbClick.emit(element);
 	}
 }

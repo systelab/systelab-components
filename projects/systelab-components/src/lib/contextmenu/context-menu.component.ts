@@ -9,7 +9,7 @@ import { AbstractContextMenuComponent } from './abstract-context-menu.component'
 })
 export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMenuOption> implements OnInit, OnDestroy {
 
-	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
+	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
 	}
 
@@ -18,7 +18,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		this.open(event);
 	}
 
-	public getSelfReference(): AbstractContextMenuComponent<ContextMenuOption> {
+	public override getSelfReference(): AbstractContextMenuComponent<ContextMenuOption> {
 		return this;
 	}
 
@@ -58,7 +58,7 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		}
 	}
 
-	protected checkIfHasIcons(): void {
+	protected override checkIfHasIcons(): void {
 		this.hasIcons = this.contextMenuOptions.some(opt => opt.iconClass !== undefined && opt.iconClass !== null);
 	}
 

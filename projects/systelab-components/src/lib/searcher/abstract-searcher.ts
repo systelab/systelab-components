@@ -1,4 +1,4 @@
-import { SearcherDialogParameters } from './searcher.dialog.component';
+import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable } from 'rxjs';
 import { RowNode } from 'ag-grid-community';
 import { Directive } from '@angular/core';

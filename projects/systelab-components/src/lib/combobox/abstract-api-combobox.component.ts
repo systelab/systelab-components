@@ -8,23 +8,18 @@ import { PreferencesService } from 'systelab-preferences';
 @Directive()
 export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
-	public _startsWith = '';
+	public startsWith = '';
 
-	@Input()
-	set startsWith(value: string) {
-		this._startsWith = value;
-	}
-
-	public params: any;
+	public override params: any;
 
 	public totalItemsLoaded = false;
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
 	// override
-	protected configGrid() {
+	protected override configGrid() {
 
 		super.configGrid();
 		this.gridOptions.rowModelType = 'infinite';
@@ -37,7 +32,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	}
 
-	protected configGridData() {
+	protected override configGridData() {
 		this.gridOptions.datasource = null;
 	}
 
@@ -45,7 +40,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	public abstract getTotalItems(): number;
 
-	public refresh(params: any): boolean {
+	public override refresh(params: any): boolean {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.setDatasource(this);
 		}
@@ -53,7 +48,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	}
 
 	// override
-	public loop(): void {
+	public override loop(): void {
 		let result = true;
 
 		if (this.isDropDownOpen()) {
@@ -76,15 +71,15 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	}
 
 	//override
-	protected getTotalItemsInCombo(): number {
+	protected override getTotalItemsInCombo(): number {
 		return this.getTotalItems();
 	}
 
-	public doSearch(event: any) {
+	public override doSearch(event: any) {
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
-		this._startsWith = event.target.value;
+		this.startsWith = event.target.value;
 		this.refresh(null);
 	}
 
@@ -105,7 +100,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 			this.getElements(page, pageSize, emptyElemNumber, allNumber, params);
 		} else {
 			this.totalItemsLoaded = false;
-			this.getData(page - 1, this.gridOptions.paginationPageSize, this._startsWith)
+			this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe(
 					(previousPage: Array<T>) => {
 						const itemArray: Array<T> = new Array<T>();
@@ -134,7 +129,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	private getElements(page: number, pageSize: number, emptyElemNumber: number, allNumber: number, params: IGetRowsParams) {
 		this.totalItemsLoaded = false;
-		this.getData(page, pageSize, this._startsWith)
+		this.getData(page, pageSize, this.startsWith)
 			.subscribe(
 				(v: Array<T>) => {
 					const itemArray: Array<T> = new Array<T>();
@@ -160,7 +155,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 							this.totalItemsLoaded = true;
 
 						} else {
-							this.getData(page - 1, this.gridOptions.paginationPageSize, this._startsWith)
+							this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 								.subscribe(
 									(previousPage: Array<T>) => {
 

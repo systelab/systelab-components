@@ -4,7 +4,7 @@ import {AbstractSortableListComponent} from '../sortable-list/abstract-sortable-
 @Directive()
 export abstract class AbstractAddRemoveList<T> extends AbstractSortableListComponent<T> implements OnInit {
 
-	@Input() public elementsList: Array<T> = [];
+	@Input() public override elementsList: Array<T> = [];
 	@Input() public buttonsOnBottom = false;
 	@Input() public isDisabled = false;
 
@@ -12,7 +12,7 @@ export abstract class AbstractAddRemoveList<T> extends AbstractSortableListCompo
 		super();
 	}
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 	}
 
 	public add(): void {
@@ -21,9 +21,7 @@ export abstract class AbstractAddRemoveList<T> extends AbstractSortableListCompo
 	public remove(): void {
 	}
 
-	public abstract getDescriptionField(element: T): string;
-
-	public getDescription(element: T): string {
+	public override getDescription(element: T): string {
 		return element[this.getDescriptionField(element)];
 	}
 
@@ -31,4 +29,6 @@ export abstract class AbstractAddRemoveList<T> extends AbstractSortableListCompo
 		event.mouseEvent.preventDefault();
 		return false;
 	}
+
+	public abstract override getDescriptionField(element: T): string;
 }

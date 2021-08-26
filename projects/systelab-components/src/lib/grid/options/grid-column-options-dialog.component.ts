@@ -1,13 +1,13 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { TwoListItem } from '../../twolist/two-list.component';
+import { TwoListItem } from '../../twolist/two-list-utilities';
 import { GridColumnsOptions } from './grid-column-options';
 import { I18nService } from 'systelab-translate';
 import { ModalComponent, SystelabModalContext } from '../../modal/dialog/modal-context';
 import { DialogRef } from '../../modal/dialog/dialog-ref';
 
 export class GridColumnOptionsDialogParameters extends SystelabModalContext {
-	public width = 800;
-	public height = 500;
+	public override width = 800;
+	public override height = 500;
 	public columnOptions: GridColumnsOptions;
 }
 

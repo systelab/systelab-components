@@ -19,23 +19,23 @@ export class CalendarHeaderComponent {
 	constructor(private i18nService: I18nService) {
 
 	}
-	public doPreviousYear() {
+	public doPreviousYear(): void {
 		this.previousYear.emit();
 	}
 
-	public doPreviousMonth() {
+	public doPreviousMonth(): void {
 		this.previousMonth.emit();
 	}
 
-	public doNextMonth() {
+	public doNextMonth(): void {
 		this.nextMonth.emit();
 	}
 
-	public doNextYear() {
+	public doNextYear(): void {
 		this.nextYear.emit();
 	}
 
-	public getTitle() {
+	public getTitle(): string {
 		return this.i18nService.formatMonthAndYear(this.currentDate);
 	}
 }

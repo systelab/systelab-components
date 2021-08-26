@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, QueryList, ViewChildren, } from '@angular/core';
+import { AbstractContextMenuComponent } from './abstract-context-menu.component';
 import { ContextMenuOption } from './context-menu-option';
-import { ContextMenuComponent } from './context-menu.component';
 
 @Component({
 	selector:    'systelab-context-menu-submenu-item',
@@ -13,7 +13,7 @@ export class ContextMenuSubmenuItemComponent {
 	@Input() public hasIcons: boolean;
 	@Input() public hasChildren: boolean;
 	public readonly levelSeparator = '_|_';
-	@Input() public contextMenuOriginal: ContextMenuComponent;
+	@Input() public contextMenuOriginal: AbstractContextMenuComponent<ContextMenuOption>;
 	@Input() public parentId: string;
 
 	@Input() public elementID = (Math.floor(Math.random() * (999999999999 - 1))).toString();

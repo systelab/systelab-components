@@ -5,18 +5,22 @@ import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
 
-declare var jQuery: any;
+declare const jQuery: any;
 
 @Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
 
-	public _startsWith = '';
+	public override startsWith = '';
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+	constructor(
+		public override myRenderer: Renderer2,
+		public override chref: ChangeDetectorRef,
+		public override preferencesService?: PreferencesService
+	) {
 		super(myRenderer, chref, preferencesService);
 	}
 
-	public doSearch(event: any) {
+	public override doSearch(event: any): void {
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
@@ -29,24 +33,15 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		}
 	}
 
-	protected doSearchText(text: string) {
-		this._startsWith = text;
-		if (!this._startsWith || this._startsWith.length < 1) {
-			this.resetComboSelection();
-		}
-		this.refresh(null);
-	}
-
 	// Overrides
-	public setDropdownHeight() {
+	public override setDropdownHeight(): void {
 		let calculatedHeight = 0;
 
 		calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
-
 	}
 
-	public onInputClicked(event: MouseEvent) {
+	public onInputClicked(event: MouseEvent): void {
 		event.stopPropagation();
 		if (!this.isDisabled) {
 			if (!this.isDropDownOpen()) {
@@ -61,14 +56,14 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	// Overrides
-	public onComboClicked(event: MouseEvent) {
+	public override onComboClicked(event: MouseEvent): void {
 		super.onComboClicked(event);
 		this.doSearchText(this.description);
 	}
 
 	// Overrides
-	public closeDropDown() {
-		this._startsWith = '';
+	public override closeDropDown(): void {
+		this.startsWith = '';
 		const selectedRow: T = this.getSelectedRow();
 		if (selectedRow) {
 			this.id = selectedRow[this.getIdField()];
@@ -79,24 +74,13 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		super.closeDropDown();
 	}
 
-	protected resetComboSelection() {
-		this.id = undefined;
-		this.code = undefined;
-		this.description = undefined;
-		this.currentSelected = undefined;
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.deselectAll();
-		}
-		this.selectedItemChange.emit(undefined);
-	}
-
 	// Overrides
-	public getRows(params: IGetRowsParams): void {
+	public override getRows(params: IGetRowsParams): void {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.showLoadingOverlay();
 			const page: number = params.endRow / this.gridOptions.paginationPageSize;
 			this.totalItemsLoaded = false;
-			this.getData(page, this.gridOptions.paginationPageSize, this._startsWith)
+			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe(
 					(v: Array<T>) => {
 						this.gridOptions.api.hideOverlay();
@@ -109,6 +93,25 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 					}
 				);
 		}
+	}
+
+	protected doSearchText(text: string): void {
+		this.startsWith = text;
+		if (!this.startsWith || this.startsWith.length < 1) {
+			this.resetComboSelection();
+		}
+		this.refresh(null);
+	}
+
+	protected resetComboSelection(): void {
+		this.id = undefined;
+		this.code = undefined;
+		this.description = undefined;
+		this.currentSelected = undefined;
+		if (this.gridOptions && this.gridOptions.api) {
+			this.gridOptions.api.deselectAll();
+		}
+		this.selectedItemChange.emit(undefined);
 	}
 
 }
