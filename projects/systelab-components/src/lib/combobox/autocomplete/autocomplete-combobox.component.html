@@ -20,6 +20,7 @@
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
         <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">
+            <div #hidden class="height-hidden"></div>
             <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid
                              style="width: 100%; height: 100%;"
                              class="ag-theme-fresh"
