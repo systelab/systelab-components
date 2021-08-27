@@ -1,5 +1,5 @@
 import { Component, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,8 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
 import { AbstractSearcherComponent } from './abstract-searcher.component';
 import { I18nService } from 'systelab-translate';
 import { AbstractSearcher } from './abstract-searcher';
-import { SearcherDialog, SearcherDialogParameters } from './searcher.dialog.component';
+import { SearcherDialog } from './searcher.dialog.component';
+import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable, of } from 'rxjs';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
@@ -151,8 +152,8 @@ export class SearcherTestComponent {
 describe('Systelab Searcher', () => {
 	let fixture: ComponentFixture<SearcherTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -189,7 +190,7 @@ describe('Systelab Searcher', () => {
 				entryComponents: [SearcherDialog]
 			}
 		});
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(SearcherTestComponent);

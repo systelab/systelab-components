@@ -11,7 +11,7 @@ import { timer } from 'rxjs';
 import { GridColumnsOptions } from './options/grid-column-options';
 import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './options/grid-column-options-dialog.component';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
-import { TwoListItem } from '../twolist/two-list.component';
+import { TwoListItem } from '../twolist/two-list-utilities';
 import { GridHeaderContextMenu, GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';
 
 export type rowSelectionType = 'single' | 'multiple';

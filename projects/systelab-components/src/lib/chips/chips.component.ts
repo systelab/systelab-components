@@ -9,10 +9,11 @@ import { AutoComplete } from 'primeng/autocomplete';
 export class ChipsComponent {
 
 	@Output() public filtered = new EventEmitter<Array<string>>();
+	@ViewChild('autoComplete') autoComplete: AutoComplete;
 
 	private _filter: Array<string> = [];
 
-	get filter() {
+	get filter(): Array<string> {
 		return this._filter;
 	}
 
@@ -33,8 +34,6 @@ export class ChipsComponent {
 	public results: Array<string> = [];
 
 	private newData: string;
-
-	@ViewChild('autoComplete') autoComplete: AutoComplete;
 
 	constructor() {
 	}
@@ -59,7 +58,7 @@ export class ChipsComponent {
 	}
 
 	public onKeyEnter(event: KeyboardEvent): void {
-		const input = (<HTMLInputElement>event.target);
+		const input = event.target as HTMLInputElement;
 		if (input.value) {
 			this.filter.push(input.value);
 			input.value = '';

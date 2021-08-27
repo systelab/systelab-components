@@ -6,7 +6,7 @@
 
 # systelab-components
 
-Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components. 
+Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components.
 Read the documentation at https://github.com/systelab/systelab-components/tree/master/projects/systelab-components
 
 ## Working with the repo
@@ -85,7 +85,7 @@ The following steps should be consider when migrating from version 9.
 ```
 2. When importing services and modules import them from systelab-components root. In WebStorm, replace in path:
 ```
-- from 'systelab-components/lib.+ 
+- from 'systelab-components/lib.+
 - from 'systelab-components';
 ```
 
@@ -141,3 +141,11 @@ PrimeIcons should be upgraded to 4.1.0 as components like table utilize new icon
 locale property functionality of Datepicker is removed in favor of the new global i18n API. The datepicker components inject PrimeNGConfig
 
 4.  Use 'karma-coverage' because 'karma-coverage-istanbul-reporter' usage has been deprecated since version 11
+
+## Version 13 Angular 12
+
+IE11 support has been deprecated due to the upgrade to Angular 12
+
+Use of [Ivy](https://angular.io/guide/ivy), applications that uses this library have to use Angular 12 and Ivy rendering.
+
+Added --noImplicitOverride flag to allow override methods and get error for unintentionally overrides https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag

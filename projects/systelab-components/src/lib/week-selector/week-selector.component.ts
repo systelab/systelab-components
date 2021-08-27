@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { OnInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { I18nService } from 'systelab-translate';
 import { Month } from '../month-selector/month-selector.component';
 
@@ -11,7 +11,7 @@ export class Week {
 	selector: 'systelab-week-selector',
 	templateUrl: './week-selector.component.html'
 })
-export class WeekSelectorComponent implements AfterViewInit {
+export class WeekSelectorComponent implements OnInit {
 
 	@Input() public maxDate: Date;
 	@Input() public minDate: Date;
@@ -53,7 +53,7 @@ export class WeekSelectorComponent implements AfterViewInit {
 		this.daysNames.push(this.i18nService.instant('COMMON_SATURDAY'));
 	}
 
-	public ngAfterViewInit(): void {
+	public ngOnInit(): void {
 		if (!this.currentDate) {
 			this.currentDate = new Date();
 		}

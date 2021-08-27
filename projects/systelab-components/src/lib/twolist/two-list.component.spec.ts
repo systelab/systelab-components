@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
 import { HttpClientModule } from '@angular/common/http';
-import { TwoListComponent, TwoListItem } from './two-list.component';
+import { TwoListComponent } from './two-list.component';
+import { TwoListItem } from './two-list-utilities';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { DataFilterPipe } from './datafilter.pipe';
 import { TwoListSortableListComponent } from './two-list-sortable-list.component';
@@ -54,8 +55,8 @@ export class TwoListTestComponent implements OnInit {
 describe('Systelab Two list', () => {
 	let fixture: ComponentFixture<TwoListTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -68,7 +69,7 @@ describe('Systelab Two list', () => {
 			declarations: [TwoListComponent, TwoListTestComponent, TwoListSortableListComponent, DataFilterPipe]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TwoListTestComponent);

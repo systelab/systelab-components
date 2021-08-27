@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -70,7 +70,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                         <div class="col-md-9">
-                            <systelab-combobox-example [(id)]="id" [(description)]="description" [(startsWith)]="startsWith"></systelab-combobox-example>
+                            <systelab-combobox-example [(id)]="id" [(description)]="description"></systelab-combobox-example>
                         </div>
                     </div>
                 </div>
@@ -85,8 +85,8 @@ export class ComboboxTestComponent {
 describe('Systelab Combobox', () => {
 	let fixture: ComponentFixture<ComboboxTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -107,7 +107,7 @@ describe('Systelab Combobox', () => {
 				ComboboxTestComponent]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ComboboxTestComponent);

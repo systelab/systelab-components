@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TouchSpinValues } from './touch.spin-values';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +9,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
 import { HttpClientModule } from '@angular/common/http';
 import { TouchspinComponent } from './spinner.component';
-import { DatepickerTestComponent } from '../datepicker/datepicker.component.spec';
 
 @Component({
 	selector: 'systelab-spinner-test',
@@ -31,8 +30,8 @@ export class SpinnerTestComponent {
 describe('Systelab Spinner with decimals', () => {
 	let fixture: ComponentFixture<SpinnerTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
@@ -42,7 +41,7 @@ describe('Systelab Spinner with decimals', () => {
 				HttpClientModule],
 			declarations: [TouchspinComponent, SpinnerTestComponent]
 		}).compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(SpinnerTestComponent);

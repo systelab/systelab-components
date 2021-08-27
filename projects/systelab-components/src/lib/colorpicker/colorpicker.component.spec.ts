@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,6 @@ import { StylesUtilService } from '../utilities/styles.util.service';
 import { ColorUtilService } from '../utilities/color.util.service';
 import { LoadingService } from '../loading/loading.service';
 import { CommonModule } from '@angular/common';
-import { SliderModule } from 'primeng/slider';
 import { AngularSplitModule } from 'angular-split';
 import { CalendarModule } from 'primeng/calendar';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -57,7 +56,6 @@ export class ColorpickerTestComponent {
 		CommonModule,
 		FormsModule,
 		SharedModule,
-		SliderModule,
 		CalendarModule,
 		TreeModule,
 		DragDropModule,
@@ -78,8 +76,8 @@ class TestModule {
 describe('Systelab Color picker', () => {
 	let fixture: ComponentFixture<ColorpickerTestComponent>;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports: [
 				BrowserModule,
 				BrowserAnimationsModule,
@@ -97,7 +95,7 @@ describe('Systelab Color picker', () => {
 				TestModule]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ColorpickerTestComponent);
