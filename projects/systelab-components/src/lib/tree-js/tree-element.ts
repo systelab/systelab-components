@@ -3,12 +3,10 @@ export class TreeElement<T = any> {
 	id?: number;
 	data?: T;
 	icon?: string;
-	expandedIcon?: any;
-	collapsedIcon?: any;
+	expandedIcon? = 'fas fa-chevron-down';
+	collapsedIcon? = 'fas fa-chevron-right';
 	children?: TreeElement<T>[];
 	expanded?: boolean;
 	textClass?: string;
-	draggable?: boolean;
-	droppable?: boolean;
 	isSelected = false;
 }

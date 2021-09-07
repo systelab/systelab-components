@@ -90,6 +90,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
+import {AbstractTreeObservable} from './tree-js/abstract-tree-js-observable.service';
 
 @NgModule({
 	imports:      [
@@ -263,7 +264,8 @@ import { ToastComponent } from './toast/toast.component';
 	providers:    [
 		StylesUtilService,
 		ColorUtilService,
-		LoadingService
+		LoadingService,
+		AbstractTreeObservable
 	]
 })
 export class SystelabComponentsModule {

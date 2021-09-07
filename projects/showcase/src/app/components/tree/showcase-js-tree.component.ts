@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractTreeJS} from '../../../../../systelab-components/src/lib/tree-js/abstract-tree-js.component';
 import {TreeElement} from '../../../../../systelab-components/src/lib/tree-js/tree-element';
+import {AbstractTreeObservable} from '../../../../../systelab-components/src/lib/tree-js/abstract-tree-js-observable.service';
 
 export class ShowcaseTreeElement extends TreeElement {
 }
@@ -11,23 +12,19 @@ export class ShowcaseTreeElement extends TreeElement {
 })
 export class ShowcaseJSTreeComponent extends AbstractTreeJS {
 
-	constructor() {
-		super();
+	constructor(protected readonly abstractTreeObservable: AbstractTreeObservable) {
+		super(abstractTreeObservable);
 
 		const myTree: ShowcaseTreeElement[] = [];
 
 		const helloTreeElement = new ShowcaseTreeElement();
 		helloTreeElement.id = 1;
 		helloTreeElement.label = 'Hello';
-		helloTreeElement.collapsedIcon = 'fas fa-chevron-right';
-		helloTreeElement.expandedIcon = 'fas fa-chevron-down';
-		helloTreeElement.icon = 'fas fa-square';
+		helloTreeElement.icon = 'fab fa-jedi-order text-primary';
 
 		const helloFirstChild = new ShowcaseTreeElement();
 		helloFirstChild.id = 2;
 		helloFirstChild.label = 'First';
-		helloFirstChild.collapsedIcon = 'fas fa-chevron-right';
-		helloFirstChild.expandedIcon = 'fas fa-chevron-down';
 
 		const helloFirstGrandSon = new ShowcaseTreeElement();
 		helloFirstGrandSon.id = 3;
@@ -43,8 +40,6 @@ export class ShowcaseJSTreeComponent extends AbstractTreeJS {
 		const byeTreeElement = new ShowcaseTreeElement();
 		byeTreeElement.id = 5;
 		byeTreeElement.label = 'Bye Bye';
-		byeTreeElement.collapsedIcon = 'fas fa-chevron-right';
-		byeTreeElement.expandedIcon = 'fas fa-chevron-down';
 
 		const byeFirstChild = new ShowcaseTreeElement();
 		byeFirstChild.id = 6;

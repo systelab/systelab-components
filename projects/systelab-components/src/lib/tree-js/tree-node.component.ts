@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TreeElement} from './tree-element';
+import {AbstractTreeObservable} from './abstract-tree-js-observable.service';
 
 
 
@@ -11,9 +12,9 @@ export class TreeNode {
 
 	@Input() public node: TreeElement;
 	@Input() public withCheckboxes = false;
-	@Output() public nodeSelected = new EventEmitter();
+	@Output() public childChange = new EventEmitter();
 
-	constructor() {
+	constructor(protected readonly abstractTreeObservable: AbstractTreeObservable) {
 	}
 	public doExpand(node: TreeElement): void {
 		node.expanded = true;
@@ -24,11 +25,26 @@ export class TreeNode {
 	}
 
 	public nodeSelect(node: TreeElement) {
-		this.node.isSelected = true;
-		this.nodeSelected.emit(node);
+		node.isSelected = !node.isSelected;
+		this.selectAllChilds(node.children, node.isSelected);
+		console.log('nodeSelect');
+		this.abstractTreeObservable.selectNode(this.node);
+		this.childChange.emit(node.isSelected);
 	}
 
-	public childNodeSelect(node: TreeElement) {
-		this.nodeSelected.emit(node);
+	public doOnChildChange(childNodeValue: boolean): void {
+		if ( !childNodeValue && this.node.isSelected ) {
+			this.node.isSelected = false;
+			this.childChange.emit(childNodeValue);
+		}
+	}
+
+	private selectAllChilds( childList: Array<TreeElement>, value: boolean): void {
+		if ( childList?.length ) {
+			childList.forEach(child => {
+				child.isSelected = value;
+				this.selectAllChilds(child.children, value);
+			});
+		}
 	}
 }

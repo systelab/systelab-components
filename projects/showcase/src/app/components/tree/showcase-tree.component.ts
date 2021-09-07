@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as $ from 'jquery';
 import 'jstree';
 
 @Component({
@@ -12,7 +11,7 @@ export class ShowcaseTreeComponent implements OnInit {
 	}
 
 	public nodeSelected(event: any) {
-		console.log(event);
+		console.log('showcasetreecomponent', event);
 	}
 
 	public ngOnInit(): void {
