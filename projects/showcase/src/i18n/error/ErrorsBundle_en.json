@@ -1,0 +1,5 @@
+{
+	"UNKNOWN_ERROR": "The requested action can not be performed",
+	"ERROR_INCORRECT_USERNAME_OR_PASSWORD": "Incorrect Username or Password",
+	"ERROR_USER_ALREADY_EXIST": "Username in use"
+}

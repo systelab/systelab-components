@@ -9,12 +9,12 @@ import { DialogService } from '../modal/dialog/dialog.service';
 @Directive()
 export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	            protected dialogService: DialogService) {
+	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
+	            protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
-	protected getInitialGridOptions(): GridOptions {
+	protected override getInitialGridOptions(): GridOptions {
 		const options = super.getInitialGridOptions();
 		options.rowModelType = 'infinite';
 		options.paginationPageSize = 50;

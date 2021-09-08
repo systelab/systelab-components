@@ -13,6 +13,7 @@ export class ShowcaseContextMenu implements OnInit {
 	public contextMenuOptions3: Array<ContextMenuOption> = [];
 	public contextMenuOptions4: Array<ContextMenuOption> = [];
 	public contextMenuOptions5: Array<ContextMenuOption> = [];
+	public contextMenuSubOption: Array<ContextMenuOption> = [];
 	public contextMenuOptionsDivider: Array<ContextMenuOption> = [];
 
 	public ngOnInit() {
@@ -28,8 +29,13 @@ export class ShowcaseContextMenu implements OnInit {
 			new ContextMenuOption('option5', 'Option 5', null, null, false, 'icon-checkbox', 'transparent', 'rgb(214, 214, 214)', () => true, null, '20px')
 		];
 
+		this.contextMenuSubOption = [
+			new ContextMenuOption('option61', 'Option 61', null),
+			new ContextMenuOption('option62', 'Option 62', null),
+		];
+
 		this.contextMenuOptions3 = [
-			new ContextMenuOption('option6', 'Option 6', null),
+			new ContextMenuOption('option6', 'Option 6', null, null, false, undefined, null, null, null, this.contextMenuSubOption),
 			new ContextMenuOption('option7', 'Option 7', null),
 		];
 

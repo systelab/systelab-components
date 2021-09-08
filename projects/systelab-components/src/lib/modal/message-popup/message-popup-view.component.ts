@@ -6,11 +6,11 @@ import { MessagePopupIcon } from './message-with-icon.component';
 
 export class MessagePopupViewContext extends SystelabModalContext {
 
-	public fullScreen = false;
-	public maxWidth = 700;
-	public minWidth = 499;
-	public maxHeight = 400;
-	public minHeight = 280;
+	public override fullScreen = false;
+	public override maxWidth = 700;
+	public override minWidth = 499;
+	public override maxHeight = 400;
+	public override minHeight = 280;
 	public title: string;
 	public msg: string;
 	public icon: MessagePopupIcon;

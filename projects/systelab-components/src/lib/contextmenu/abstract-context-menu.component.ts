@@ -1,17 +1,18 @@
-import { Directive, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren, OnInit } from '@angular/core';
 import { AbstractContextComponent } from './abstract-context.component';
 import { ContextMenuOption } from './context-menu-option';
 
 @Directive()
-export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> {
+export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> implements OnInit {
 
 	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
 	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
 
-	@Output() public action = new EventEmitter();
+	@Output() public override action = new EventEmitter();
 
-	private contextMenuOptionsList: Array<T>;
 	public readonly levelSeparator = '_|_';
+	public hasIcons = false;
+	private contextMenuOptionsList: Array<T>;
 
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
@@ -19,34 +20,16 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		this.checkIfHasIcons();
 	}
 
-	get contextMenuOptions() {
+	get contextMenuOptions(): Array<T> {
 		return this.contextMenuOptionsList;
 	}
 
-	public hasIcons = false;
-
-	public abstract openWithOptions(event: MouseEvent, newContextMenuOptions: Array<T>);
-
-	protected abstract existsAtLeastOneActionEnabled(): boolean;
-
-	public abstract isEnabled(elementId: string, actionId: string): boolean;
-
-	public abstract isIconEnabled(elementId: string, actionId: string): boolean;
-
-	protected abstract executeAction(event: any, elementId: string, actionId: string, parentAction?: string);
-
-	protected abstract getOption(actionId: string);
-
-	public ngOnInit(): void {
+	public override ngOnInit(): void {
 		super.ngOnInit();
 		this.checkIfHasIcons();
 	}
 
-	protected checkIfHasIcons(): void {
-		this.hasIcons = false;
-	}
-
-	public dotsClicked(event: MouseEvent): void {
+	public override dotsClicked(event: MouseEvent): void {
 		if (this.existsAtLeastOneActionEnabled()) {
 			super.dotsClicked(event);
 		} else {
@@ -54,7 +37,7 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
-	public open(event: MouseEvent): void {
+	public override open(event: MouseEvent): void {
 		if (this.existsAtLeastOneActionEnabled()) {
 			super.open(event);
 		} else {
@@ -87,33 +70,6 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 
 	public getSelfReference(): AbstractContextMenuComponent<T> {
 		return this;
-	}
-
-	protected checkTargetAndClose(target: any): void {
-		if (!this.checkIfNgContent(target)) {
-			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-				if (this.childDropdownMenuElement) {
-					if (!this.childDropdownMenuElement.toArray()
-						.some((elem) => target === elem.nativeElement)) {
-						this.closeDropDown();
-					}
-				} else {
-					this.closeDropDown();
-				}
-			}
-		}
-	}
-
-	protected hideSubmenus(untilLevel: number): void {
-		if (untilLevel < this.lastMenuLevel) {
-			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
-				if (this.previousShownMenu[i - 1]) {
-					this.toggle(this.previousShownMenu[i - 1]);
-				}
-				this.previousShownMenu.pop();
-				this.lastMenuLevel = i - 1;
-			}
-		}
 	}
 
 	public getMenuLevel(actionId: string): number {
@@ -167,4 +123,46 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		}
 	}
 
+	protected checkIfHasIcons(): void {
+		this.hasIcons = false;
+	}
+
+	protected override checkTargetAndClose(target: any): void {
+		if (!this.checkIfNgContent(target)) {
+			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
+				if (this.childDropdownMenuElement) {
+					if (!this.childDropdownMenuElement.toArray()
+						.some((elem) => target === elem.nativeElement)) {
+						this.closeDropDown();
+					}
+				} else {
+					this.closeDropDown();
+				}
+			}
+		}
+	}
+
+	protected hideSubmenus(untilLevel: number): void {
+		if (untilLevel < this.lastMenuLevel) {
+			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
+				if (this.previousShownMenu[i - 1]) {
+					this.toggle(this.previousShownMenu[i - 1]);
+				}
+				this.previousShownMenu.pop();
+				this.lastMenuLevel = i - 1;
+			}
+		}
+	}
+
+	public abstract openWithOptions(event: MouseEvent, newContextMenuOptions: Array<T>): void;
+
+	public abstract isEnabled(elementId: string, actionId: string): boolean;
+
+	public abstract isIconEnabled(elementId: string, actionId: string): boolean;
+
+	public abstract executeAction(event: any, elementId: string, actionId: string, parentAction?: string): void;
+
+	protected abstract existsAtLeastOneActionEnabled(): boolean;
+
+	protected abstract getOption(actionId: string);
 }

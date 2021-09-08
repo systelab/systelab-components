@@ -17,7 +17,7 @@ export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<
 	public actionHandler: GridHeaderMenuActionHandler;
 	public headerData: Object;
 
-	constructor(protected el: ElementRef, protected myRenderer: Renderer2, protected cdr: ChangeDetectorRef) {
+	constructor(protected override el: ElementRef, protected override  myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
 		super(el, myRenderer, cdr);
 	}
 
@@ -59,7 +59,7 @@ export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<
 		this.actionHandler.executeHeaderContextMenuAction(elementId, actionId, this.headerData);
 	}
 
-	public showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string): void {
+	public override showSubmenu(event: any, actionId: string, selectedChild: ElementRef, elementId: string): void {
 		// TODO : Implement something
 	}
 
