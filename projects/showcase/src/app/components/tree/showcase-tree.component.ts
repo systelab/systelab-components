@@ -5,15 +5,12 @@ import 'jstree';
 	selector:    'showcase-tree',
 	templateUrl: 'showcase-tree.component.html'
 })
-export class ShowcaseTreeComponent implements OnInit {
+export class ShowcaseTreeComponent {
 
 	constructor() {
 	}
 
 	public nodeSelected(event: any) {
 		console.log('showcasetreecomponent', event);
-	}
-
-	public ngOnInit(): void {
 	}
 }

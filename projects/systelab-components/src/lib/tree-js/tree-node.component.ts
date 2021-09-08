@@ -27,7 +27,6 @@ export class TreeNode {
 	public nodeSelect(node: TreeElement) {
 		node.isSelected = !node.isSelected;
 		this.selectAllChilds(node.children, node.isSelected);
-		console.log('nodeSelect');
 		this.abstractTreeObservable.selectNode(this.node);
 		this.childChange.emit(node.isSelected);
 	}

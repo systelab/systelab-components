@@ -91,6 +91,7 @@ import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
 import {AbstractTreeObservable} from './tree-js/abstract-tree-js-observable.service';
+import {TreeNode} from './tree-js/tree-node.component';
 
 @NgModule({
 	imports:      [
@@ -183,6 +184,7 @@ import {AbstractTreeObservable} from './tree-js/abstract-tree-js-observable.serv
 		SpyMenuComponent,
 		ScrollSpyDirective,
 		ToastComponent,
+		TreeNode
 	],
 	exports:      [
 		SliderComponent,
@@ -259,7 +261,8 @@ import {AbstractTreeObservable} from './tree-js/abstract-tree-js-observable.serv
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
-		ToastComponent
+		ToastComponent,
+		TreeNode
 	],
 	providers:    [
 		StylesUtilService,
