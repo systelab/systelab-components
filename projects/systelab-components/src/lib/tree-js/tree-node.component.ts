@@ -16,6 +16,7 @@ export class TreeNode {
 
 	constructor(protected readonly abstractTreeObservable: AbstractTreeObservable) {
 	}
+
 	public doExpand(node: TreeElement): void {
 		node.expanded = true;
 	}

@@ -120,3 +120,8 @@ export * from './lib/toast/toast.component';
 export * from './lib/spy-menu/spy-menu-item';
 export * from './lib/spy-menu/spy-menu.component';
 export * from './lib/spy-menu/scroll-spy.directive';
+
+export * from './lib/tree-js/abstract-tree-js.component';
+export * from './lib/tree-js/abstract-tree-js-observable.service';
+export * from './lib/tree-js/tree-element';
+export * from './lib/tree-js/tree-node.component';

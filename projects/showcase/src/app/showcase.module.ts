@@ -84,7 +84,6 @@ import { ShowcaseToastComponent } from './components/toast/showcase-toast.compon
 import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
 import {ShowcaseJSTreeComponent} from './components/tree/showcase-js-tree.component';
-import {TreeNode} from '../../../systelab-components/src/lib/tree-js/tree-node.component';
 
 @NgModule({
 	imports:      [
@@ -177,8 +176,7 @@ import {TreeNode} from '../../../systelab-components/src/lib/tree-js/tree-node.c
 		ShowcaseSpyMenuComponent,
 		ShowcaseSpyMenuDialog,
 		ShowcaseToastComponent,
-		ShowcaseJSTreeComponent,
-		TreeNode,
+		ShowcaseJSTreeComponent
 	],
 	bootstrap:    [ShowcaseComponent]
 })
