@@ -19,7 +19,7 @@ The abstract component has a bunch of input attributes to configure the tree.
 |buttonsPosition | string | top |To define the position of the collapse-expand buttons. The values could be: top, bottom, left, right.|
 |withCheckboxes | boolean | false |Defines if the tree is shown with checkboxes and has multiple selection.|
 
-##Buttons
+## Buttons
 
 There are the possibility to use two buttons to expand and collapse all the nodes in the tree.
 
