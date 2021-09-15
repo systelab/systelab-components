@@ -10,11 +10,13 @@ export class ShowcaseSpinnerComponent {
 	public touchSpinValues2: TouchSpinValues;
 	public touchSpinValues3: TouchSpinValues;
 	public touchSpinValues4: TouchSpinValues;
+	public touchSpinValues5: TouchSpinValues;
 
 	constructor() {
 		this.touchSpinValues1 = new TouchSpinValues(1, 1, 10);
 		this.touchSpinValues2 = new TouchSpinValues(5, 1, 20, 2);
 		this.touchSpinValues3 = new TouchSpinValues(0, -10, 10, 1);
 		this.touchSpinValues4 = new TouchSpinValues(0, -10, 10, 0.001, true, 3);
+		this.touchSpinValues5 = new TouchSpinValues(0, -1000, 1000, 1);
 	}
 }
