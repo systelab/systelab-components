@@ -85,7 +85,7 @@ import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-men
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
 
 @NgModule({
-	imports:      [
+	imports: [
 		A11yModule,
 		BrowserModule,
 		BrowserAnimationsModule,
@@ -101,7 +101,8 @@ import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-d
 			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
 		]),
-		AutoCompleteModule
+		AutoCompleteModule,
+		SystelabComponentsModule
 	],
 	declarations: [
 		ShowcaseComponent,
