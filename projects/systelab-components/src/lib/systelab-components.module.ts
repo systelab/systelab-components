@@ -90,6 +90,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
+import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 
 @NgModule({
 	imports:      [
@@ -177,6 +178,7 @@ import { ToastComponent } from './toast/toast.component';
 		PaginatorPageComponent,
 		ChipButtonComponent,
 		AutofocusDirective,
+		KeyupDebounceDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
 		SpyMenuComponent,
@@ -254,6 +256,7 @@ import { ToastComponent } from './toast/toast.component';
 		AgGridAngular,
 		ChipButtonComponent,
 		AutofocusDirective,
+		KeyupDebounceDirective,
 		StackedBarCellRendererComponent,
 		ChipsComponent,
 		SpyMenuComponent,
