@@ -7,7 +7,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class KeyupDebounceDirective implements OnInit, OnDestroy {
 
-	@Input() public keyupDebounceTime = 350;
+	@Input() public keyupDebounceTime:number = 350;
 	@Output() public keyupDebounced = new EventEmitter();
 	private debouncer = new Subject();
 	private subscription: Subscription;
