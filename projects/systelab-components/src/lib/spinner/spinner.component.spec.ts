@@ -13,17 +13,17 @@ import { TouchspinComponent } from './spinner.component';
 @Component({
 	selector: 'systelab-spinner-test',
 	template: `
-                <div>
-                    <systelab-spinner [spinValues]="values" (change)="doValueChange()" [fillUnitsWithZero]="fillUnitsWithZero" [(valueStr)]="strValue" ></systelab-spinner>
-                    <label class="label-value">{{values.value}}</label>
-                </div>
-	          `,
+                  <div>
+                      <systelab-spinner [spinValues]="values" (change)="doValueChange()" [fillUnitsWithZero]="fillUnitsWithZero" [(valueStr)]="valueStr"></systelab-spinner>
+                      <label class="label-value">{{values.value}}</label>
+                  </div>
+			  `,
 	styles:   []
 })
 export class SpinnerTestComponent {
 	public values = new TouchSpinValues(34, 1, 100);
 	public fillUnitsWithZero: boolean | number =false;
-	public strValue: string;
+	public valueStr: string;
 	public doValueChange() {
 	}
 }
@@ -135,7 +135,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '3');
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 2);
-		expect(fixture.componentInstance.strValue).toEqual('00002');
+		expect(fixture.componentInstance.valueStr).toEqual('00002');
 	});
 	it('should add 4 zeros to 0', () => {
 		setMin(fixture,0);
@@ -143,7 +143,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '1');
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 0);
-		expect(fixture.componentInstance.strValue).toEqual('00000');
+		expect(fixture.componentInstance.valueStr).toEqual('00000');
 	});
 	it('should add 2 zeros on negative value', () => {
 		setMin(fixture,-100);
@@ -151,7 +151,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '-11');
 		clickMinusButton(fixture);
 		checkHasValue(fixture, -12);
-		expect(fixture.componentInstance.strValue).toEqual('-0012');
+		expect(fixture.componentInstance.valueStr).toEqual('-0012');
 	});
 
 	it('should add 1 zero when true', () => {
@@ -159,7 +159,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '6');
 		clickPlusButton(fixture);
 		checkHasValue(fixture, 7);
-		expect(fixture.componentInstance.strValue).toEqual('07');
+		expect(fixture.componentInstance.valueStr).toEqual('07');
 	});
 
 	it('should add 1 zero qhen true and zero', () => {
@@ -168,7 +168,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '-1');
 		clickPlusButton(fixture);
 		checkHasValue(fixture, 0);
-		expect(fixture.componentInstance.strValue).toEqual('00');
+		expect(fixture.componentInstance.valueStr).toEqual('00');
 	});
 
 	it('should not add zeros when false', () => {
@@ -176,7 +176,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '2');
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 1);
-		expect(fixture.componentInstance.strValue).toEqual('1');
+		expect(fixture.componentInstance.valueStr).toEqual('1');
 	});
 	it('should not add zeros when false and zero', () => {
 		setMin(fixture,0);
@@ -184,7 +184,7 @@ describe('Systelab Spinner', () => {
 		enterText(fixture, '1');
 		clickMinusButton(fixture);
 		checkHasValue(fixture, 0);
-		expect(fixture.componentInstance.strValue).toEqual('0');
+		expect(fixture.componentInstance.valueStr).toEqual('0');
 	});
 
 });
