@@ -61,11 +61,11 @@ $icon-rowaction-font-size: 20px;
       background-color: $table-row-selected-background-color;
     }
 
-    &.ag-row-focus :not ag-row-selected {
+    &.ag-row-focus :not(.ag-row-selected) {
      background-color: scale-color($primary, $alpha: -90%);
     }
 
-    &.ag-row-hover :not ag-row-selected {
+    &.ag-row-hover :not(.ag-row-selected) {
       background-color: scale-color($primary, $alpha: -90%);
     }
 
