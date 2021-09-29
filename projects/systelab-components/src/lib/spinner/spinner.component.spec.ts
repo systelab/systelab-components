@@ -65,12 +65,12 @@ function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number)
 const setFillWithZero = (fixture: ComponentFixture<SpinnerTestComponent>, value: boolean|number) => {
 	fixture.componentInstance.fillUnitsWithZero = value;
 	fixture.detectChanges();
-}
+};
 
 const setMin = (fixture: ComponentFixture<SpinnerTestComponent>, value: number) => {
 	fixture.componentInstance.values.min = value;
 	fixture.detectChanges();
-}
+};
 
 describe('Systelab Spinner', () => {
 	let fixture: ComponentFixture<SpinnerTestComponent>;
