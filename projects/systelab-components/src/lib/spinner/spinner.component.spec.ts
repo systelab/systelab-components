@@ -62,12 +62,12 @@ function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number)
 	fixture.detectChanges();
 }
 
-function setFillWithZero(fixture: ComponentFixture<SpinnerTestComponent>, value: boolean|number): void {
+const setFillWithZero = (fixture: ComponentFixture<SpinnerTestComponent>, value: boolean|number) => {
 	fixture.componentInstance.fillUnitsWithZero = value;
 	fixture.detectChanges();
 }
 
-function setMin(fixture: ComponentFixture<SpinnerTestComponent>, value: number): void {
+const setMin = (fixture: ComponentFixture<SpinnerTestComponent>, value: number) => {
 	fixture.componentInstance.values.min = value;
 	fixture.detectChanges();
 }
