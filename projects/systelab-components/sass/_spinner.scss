@@ -24,10 +24,16 @@ systelab-spinner {
       height: $form-elements-height !important;
     }
 
-    .btn {
+    #minus-button, #plus-button {
       background-color: white;
       border: 1px solid $form-border;
       color: $dark;
+
+      &:hover {
+        background-color: $primary;
+        border-color: $primary;
+        color: white;
+      }
     }
   }
 }
