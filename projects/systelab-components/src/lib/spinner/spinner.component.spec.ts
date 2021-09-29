@@ -14,8 +14,8 @@ import { TouchspinComponent } from './spinner.component';
 	selector: 'systelab-spinner-test',
 	template: `
                   <div>
-                      <systelab-spinner [spinValues]="values" (change)="doValueChange()" 
-										[fillUnitsWithZero]="fillUnitsWithZero" 
+                      <systelab-spinner [spinValues]="values" (change)="doValueChange()"
+										[fillUnitsWithZero]="fillUnitsWithZero"
 										[(valueStr)]="valueStr"></systelab-spinner>
                       <label class="label-value">{{values.value}}</label>
                   </div>
@@ -57,19 +57,17 @@ function enterText(fixture: ComponentFixture<SpinnerTestComponent>, text: string
 	fixture.detectChanges();
 }
 
-
 function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
 	fixture.componentInstance.values.step = value;
 	fixture.detectChanges();
 }
 
-
-function setFillWithZero(fixture: ComponentFixture<SpinnerTestComponent>, value : boolean|number): void {
+function setFillWithZero(fixture: ComponentFixture<SpinnerTestComponent>, value: boolean|number): void {
 	fixture.componentInstance.fillUnitsWithZero = value;
 	fixture.detectChanges();
 }
 
-function setMin(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+function setMin(fixture: ComponentFixture<SpinnerTestComponent>, value: number): void {
 	fixture.componentInstance.values.min = value;
 	fixture.detectChanges();
 }
