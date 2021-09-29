@@ -14,7 +14,9 @@ import { TouchspinComponent } from './spinner.component';
 	selector: 'systelab-spinner-test',
 	template: `
                   <div>
-                      <systelab-spinner [spinValues]="values" (change)="doValueChange()" [fillUnitsWithZero]="fillUnitsWithZero" [(valueStr)]="valueStr"></systelab-spinner>
+                      <systelab-spinner [spinValues]="values" (change)="doValueChange()" 
+										[fillUnitsWithZero]="fillUnitsWithZero" 
+										[(valueStr)]="valueStr"></systelab-spinner>
                       <label class="label-value">{{values.value}}</label>
                   </div>
 			  `,
@@ -26,6 +28,50 @@ export class SpinnerTestComponent {
 	public valueStr: string;
 	public doValueChange() {
 	}
+}
+function clickPlusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('#plus-button');
+	button.click();
+	fixture.detectChanges();
+}
+
+function clickMinusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
+	const button = fixture.debugElement.nativeElement.querySelector('#minus-button');
+	button.click();
+	fixture.detectChanges();
+}
+
+function checkHasValue(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML).toEqual(value.toString());
+}
+
+function enterText(fixture: ComponentFixture<SpinnerTestComponent>, text: string) {
+	const inputComponent = fixture.debugElement.query(By.css('input')).nativeElement;
+	inputComponent.value = text;
+	inputComponent.dispatchEvent(new Event('keydown'));
+	inputComponent.dispatchEvent(new Event('input'));
+	inputComponent.dispatchEvent(new Event('keyup'));
+	fixture.detectChanges();
+	inputComponent.dispatchEvent(new Event('blur'));
+	fixture.detectChanges();
+}
+
+
+function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+	fixture.componentInstance.values.step = value;
+	fixture.detectChanges();
+}
+
+
+function setFillWithZero(fixture: ComponentFixture<SpinnerTestComponent>, value : boolean|number): void {
+	fixture.componentInstance.fillUnitsWithZero = value;
+	fixture.detectChanges();
+}
+
+function setMin(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
+	fixture.componentInstance.values.min = value;
+	fixture.detectChanges();
 }
 
 describe('Systelab Spinner', () => {
@@ -188,48 +234,3 @@ describe('Systelab Spinner', () => {
 	});
 
 });
-
-function clickPlusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('#plus-button');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickMinusButton(fixture: ComponentFixture<SpinnerTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('#minus-button');
-	button.click();
-	fixture.detectChanges();
-}
-
-function checkHasValue(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML).toEqual(value.toString());
-}
-
-function enterText(fixture: ComponentFixture<SpinnerTestComponent>, text: string) {
-	const inputComponent = fixture.debugElement.query(By.css('input')).nativeElement;
-	inputComponent.value = text;
-	inputComponent.dispatchEvent(new Event('keydown'));
-	inputComponent.dispatchEvent(new Event('input'));
-	inputComponent.dispatchEvent(new Event('keyup'));
-	fixture.detectChanges();
-	inputComponent.dispatchEvent(new Event('blur'));
-	fixture.detectChanges();
-}
-
-
-function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
-	fixture.componentInstance.values.step = value;
-	fixture.detectChanges();
-}
-
-
-function setFillWithZero(fixture: ComponentFixture<SpinnerTestComponent>, value :boolean|number): void {
-	fixture.componentInstance.fillUnitsWithZero = value;
-	fixture.detectChanges();
-}
-
-function setMin(fixture: ComponentFixture<SpinnerTestComponent>, value: number) {
-	fixture.componentInstance.values.min = value;
-	fixture.detectChanges();
-}
