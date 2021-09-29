@@ -50,6 +50,9 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 	protected loop(x: number, y: number): void {
 		if (this.isDropDownOpened()) {
 			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'position', 'fixed');
+			if (this.isEmbedded) {
+				this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'transform', 'unset');
+			}
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'position', 'absolute');
 			y = y - this.dropdownParent.nativeElement.offsetHeight;
 			if (y + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight) {
