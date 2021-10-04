@@ -83,6 +83,7 @@ import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-
 import { ShowcaseToastComponent } from './components/toast/showcase-toast.component';
 import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
+import { KeyupDebounceDirective } from '../../../systelab-components/src/lib/directives/keyup-debounce.directive';
 
 @NgModule({
 	imports:      [
@@ -174,7 +175,8 @@ import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-d
 		ShowcaseBarsGridComponent,
 		ShowcaseSpyMenuComponent,
 		ShowcaseSpyMenuDialog,
-		ShowcaseToastComponent
+		ShowcaseToastComponent,
+		KeyupDebounceDirective
 	],
 	bootstrap:    [ShowcaseComponent]
 })

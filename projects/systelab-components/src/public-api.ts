@@ -102,6 +102,7 @@ export * from './lib/chips/chips.component';
 export * from './lib/chip-button/chip-button.component';
 export * from './lib/chips/chips.component';
 export * from './lib/directives/autofocus.directive';
+export * from './lib/directives/keyup-debounce.directive';
 
 export * from './lib/listbox/renderer/abstract-tree-listbox-renderer.component';
 export * from './lib/contextmenu/context-menu-item.component';
