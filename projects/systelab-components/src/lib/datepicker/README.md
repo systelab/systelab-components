@@ -33,3 +33,20 @@ In black the Two-Way Data Binding properties.
 | --- |
 | For the **DatePicker-Time** component, the date's *hours* and *minutes* are modified through the spinner components. |
 ||
+
+## Using the time date picker time
+```
+            <systelab-date-time
+                    [showCalendar]="false"
+                    [(currentDate)]="myDate">
+            </systelab-date-time>
+```
+
+## Properties time date picker time
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| **currentDate** | Date | | Date selected in the component |
+| disabled | boolean | false | If true the component is shown disabled |
+| resetTimeWhenChangingCurrentDate | boolean | false | If true the time is reset when day calendar changes |
+| showCalendar | boolean | true | If true the calendar is showed else only timepicker is showed |

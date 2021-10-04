@@ -16,7 +16,6 @@ export class TouchspinComponent {
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
 
-
 	@Input() public isInGrid = false;
 
 	private previousValue: number;
