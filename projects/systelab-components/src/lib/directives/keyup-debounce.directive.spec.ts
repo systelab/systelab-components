@@ -11,7 +11,7 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
-import { KeyupDebounceDirective } from 'systelab-components';
+import { KeyupDebounceDirective } from './keyup-debounce.directive';
 
 
 @Component({
