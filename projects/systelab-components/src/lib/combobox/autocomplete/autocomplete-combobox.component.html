@@ -2,9 +2,10 @@
      class="dropdown slab-combobox d-flex w-100"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown">
-        <input #input type="text" class="slab-flex-1 d-flex slab-combo-input"
+        <input #input type="text" class="slab-flex-1 d-flex slab-combo-input" keyup-debounce
                [disabled]="isDisabled"
-               [(ngModel)]="fieldToShow" (keyup)="doSearch($event)"
+               [(ngModel)]="fieldToShow"
+               [keyupDebounceTime]="debounceTime" (keyupDebounced)="doSearch($event)"
                [ngStyle]="getInputHeight()"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"
@@ -20,6 +21,7 @@
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
         <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">
+            <div #hidden class="height-hidden"></div>
             <ag-grid-angular *ngIf="isDropdownOpened" #grid id="agGrid" #agGrid
                              style="width: 100%; height: 100%;"
                              class="ag-theme-fresh"

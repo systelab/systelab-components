@@ -1,4 +1,4 @@
 <div class="ag-header-cell-label d-flex align-items-center">
     <i *ngIf="isFavourite" class="icon-star pr-2 text-primary"></i>
-    <span [ngClass]="{'pl-4': !isFavourite && favouriteList.length > 0}">{{label}}</span>
+    <span [class.pl-4]="!isFavourite && favouriteList.length > 0">{{label}}</span>
 </div>

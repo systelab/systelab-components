@@ -85,6 +85,7 @@ import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-men
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
 import { ShowcaseVerticaldDialog } from './components/dialog/vertical-dialog/showcase-vertical-dialog.component';
 import { ShowcaseVerticalComponent } from './components/dialog/vertical-dialog/showcase-vertical.component';
+import { KeyupDebounceDirective } from '../../../systelab-components/src/lib/directives/keyup-debounce.directive';
 
 @NgModule({
 	imports:      [
@@ -178,7 +179,8 @@ import { ShowcaseVerticalComponent } from './components/dialog/vertical-dialog/s
 		ShowcaseSpyMenuDialog,
 		ShowcaseVerticalComponent,
 		ShowcaseVerticaldDialog,
-		ShowcaseToastComponent
+		ShowcaseToastComponent,
+		KeyupDebounceDirective
 	],
 	bootstrap:    [ShowcaseComponent]
 })
