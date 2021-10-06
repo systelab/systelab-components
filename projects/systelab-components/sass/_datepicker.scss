@@ -97,6 +97,7 @@ p-calendar {
 
 .p-datepicker-inline {
   flex-direction: column;
+  border: 1px solid $slab-component-border-color !important;
 }
 
 .slab-custom-calendar {

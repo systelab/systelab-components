@@ -61,23 +61,34 @@ $grid-border-color: #dee2e6;
 
     &.ag-row-selected {
       background-color: $table-row-selected-background-color;
+
+      &.ag-row-focus {
+        opacity: 0.8;
+      }
+
+      &.ag-row-hover {
+        opacity: 0.8;
+      }
     }
 
-    &.ag-row-focus :not(.ag-row-selected) {
-     background-color: scale-color($primary, $alpha: -90%);
+    &:not(.ag-row-selected) {
+      &.ag-row-odd {
+        background-color: $table-row-odd-background-color;
+      }
+
+      &.ag-row-even {
+        background-color: $table-row-even-background-color;
+      }
+
+      &.ag-row-focus {
+        background-color: scale-color($primary, $alpha: -90%);
+      }
+
+      &.ag-row-hover {
+        background-color: scale-color($primary, $alpha: -90%);
+      }
     }
 
-    &.ag-row-hover :not(.ag-row-selected) {
-      background-color: scale-color($primary, $alpha: -90%);
-    }
-
-    &.ag-row-odd :not ag-row-selected {
-      background-color: $table-row-odd-background-color;
-    }
-
-    &.ag-row-even :not ag-row-selected {
-      background-color: $table-row-even-background-color;
-    }
 
     .ag-cell {
       line-height: $grid-cell-height;
