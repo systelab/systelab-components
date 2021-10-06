@@ -2,12 +2,12 @@
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}"
          data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text"
-               class="slab-flex-1 form-control slab-combo-label slab-combo-input"
+               class="slab-flex-1 slab-combo-label slab-combo-input"
                [ngStyle]="getInputHeight()" [style.font-family]="fontFamily" [style.font-size.px]="fontSize"
                [style.font-weight]="fontWeight" [style.font-style]="fontStyle"
                [(ngModel)]="description" [disabled]="isDisabled" [style.color]="inputColor"/>
         <div *ngIf="customInputRenderer" #input readonly type="text"
-             class="slab-flex-1 form-control slab-combo-input combobox-input-renderer" [ngStyle]="getInputHeight()"
+             class="slab-flex-1 slab-combo-input combobox-input-renderer" [ngStyle]="getInputHeight()"
              [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight"
              [style.font-style]="fontStyle" [style.color]="inputColor"
              tabindex="0">

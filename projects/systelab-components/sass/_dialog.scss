@@ -26,8 +26,6 @@
 $content-border-width: 4px;
 $slab-button-size: 35px !default;
 $slab-button-fontsize: 25px !default;
-$slab-button-size-fullscreen: $slab-button-size !default;
-$slab-button-size-dialog-header: $slab-button-size !default;
 
 
 @import '~@angular/cdk/overlay-prebuilt.css';
@@ -56,6 +54,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
   &.slab-toast-panel {
     border: none;
     background: transparent;
+    border-radius: 30px;
   }
 
   &:not(.fullscreen) {
@@ -71,7 +70,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
       background: none;
 
       .btn {
-        height: $slab-button-size-fullscreen;
+        height: $slab-button-size;
       }
     }
 
@@ -210,7 +209,7 @@ $slab-button-size-dialog-header: $slab-button-size !default;
 }
 
 .slab-dialog-header-button {
-  @include size($slab-button-size-dialog-header);
+  @include size($slab-button-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,10 +304,8 @@ $slab-button-size-dialog-header: $slab-button-size !default;
     }
 
     .slab-dialog-bottom {
-      background-color: $darker-gray;
-
       .btn {
-        height: $slab-button-size-fullscreen;
+        height: $slab-button-size;
       }
     }
   }

@@ -3,18 +3,23 @@ systelab-spinner {
   .slab-spinner-container {
 
     &:focus-within {
-      border-color: #8cc8f7;
+      border-color: $slab-focus-component-border-color;
       outline: 0;
-      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+      box-shadow: $slab-focus-component-shadow;
       border-radius: $slab-border-radius;
     }
 
     input {
 
       &:focus {
-        border-color: #8cc8f7 !important;
+        border-color: $slab-focus-component-border-color !important;
         outline: 0;
         box-shadow: 0 0 0 3px transparent !important;;
+      }
+
+      &.disabled {
+        background-color: #e9ecef;
+        opacity: 0.6;
       }
     }
 
@@ -26,13 +31,18 @@ systelab-spinner {
 
     #minus-button, #plus-button {
       background-color: white;
-      border: 1px solid $form-border;
+      border: 1px solid $slab-component-border-color;
       color: $dark;
 
-      &:hover {
+      &:hover:enabled {
         background-color: $primary;
         border-color: $primary;
         color: white;
+      }
+
+      &.disabled {
+        background-color: #e9ecef;
+        opacity: 0.6;
       }
     }
   }

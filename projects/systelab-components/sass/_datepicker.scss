@@ -283,24 +283,31 @@ body {
   }
 
 }
-   
-body .p-inputtext {
-  padding: .25em;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  width: 100%;
-  height: $form-elements-height;
-  border: 1px solid #d6d6d6 !important;
-  font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-  &:focus {
-    border-color: #8cc8f7 !important;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
-  }
-}
 
 systelab-datepicker {
   margin-right: 5px;
+
+
+  .p-inputtext {
+    padding: .25em;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 100%;
+    height: $form-elements-height;
+    border: 1px solid $slab-component-border-color;
+    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+    &:focus {
+      border-color: $slab-focus-component-border-color !important;
+      box-shadow: $slab-focus-component-shadow !important;
+    }
+
+    &:hover:enabled:not(:focus) {
+      border-color:  $slab-component-border-color !important;
+    }
+
+  }
+
 
   &.custom-height {
     p-calendar {

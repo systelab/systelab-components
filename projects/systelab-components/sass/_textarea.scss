@@ -7,7 +7,7 @@ $slab-textarea-default-width: 100% !default;
   display: block;
   min-height: $slab-textarea-min-height;
   border-radius: $border-radius;
-  border: 1px solid $form-border;
+  border: 1px solid $slab-component-border-color;
 
   &:not([class*="w-"]) {
     width: $slab-textarea-default-width;
@@ -32,9 +32,9 @@ $slab-textarea-default-width: 100% !default;
   }
 
   &:focus {
-    border-color: #8cc8f7;
+    border-color: $slab-focus-component-border-color;
     outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    box-shadow: $slab-focus-component-shadow;
   }
 }
 

@@ -30,7 +30,13 @@ $slab-selected-background-color: rgb(200, 223, 252) !default;
 
 // Internal variable to define the height of the elements in a form
 $form-elements-height: floor(28px * $slab-size-percentage) !default;
-$form-border: rgb(221, 221, 221) !default;
+
+
+
+$slab-component-border-color: #ced4da;
+$slab-focus-component-border-color: #8cc8f7;
+$slab-focus-component-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+
 
 //Grayscale
 $light-gray: rgb(248, 248, 248) !default;
@@ -77,7 +83,6 @@ $slab-tab-space: 5px;
 $slab-tab-no-active-bg-color: rgb(255, 255, 255) !default;
 
 // Defines the width of the combobox button
-$slab-combobox-button-width: $form-elements-height !default;
 $slab-combo-check-cell-padding: 12px !default;
 
 

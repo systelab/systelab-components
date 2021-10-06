@@ -1,6 +1,19 @@
 systelab-numpad {
-  .btn {
-    border: 1px solid $form-border;
+  #showDialogButton {
+    background-color: white;
+    border: 1px solid $slab-component-border-color;
+    color: $dark;
+
+    &:hover:enabled {
+      background-color: $primary;
+      border-color: $primary;
+      color: white;
+    }
+
+    &.disabled {
+      background-color: #e9ecef;
+      opacity: 0.6;
+    }
   }
 }
 

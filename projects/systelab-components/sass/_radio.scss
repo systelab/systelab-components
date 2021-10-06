@@ -32,7 +32,7 @@ input[type="radio"] + label {
 
     content: '';
     z-index: 0;
-    border: solid ($slab-radio-height / 8) $medium-gray;
+    border: solid ($slab-radio-height / 8) $slab-component-border-color;
     border-radius: 50%;
     box-sizing: border-box;
     background-color: $slab-radio-color;
@@ -46,9 +46,9 @@ input[type="radio"]:checked + label:before {
 }
 
 input[type="radio"]:focus + label:before {
-  border-color: #8cc8f7;
+  border-color: $slab-focus-component-border-color;
   outline: 0;
-  box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+  box-shadow: $slab-focus-component-shadow;
 }
 
 input[type="radio"]:disabled + label {

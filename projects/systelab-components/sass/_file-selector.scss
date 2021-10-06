@@ -9,10 +9,14 @@ systelab-file-selector {
       border-radius: $border-radius;
       border-top-right-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
+
+      &:enabled {
+        background: white;
+      }
     }
 
     .btn {
-      border: 1px solid $form-border;
+      border: 1px solid $slab-component-border-color;
     }
   }
 }

@@ -33,7 +33,7 @@ export class MessagePopupService {
 	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
 		const buttons: MessagePopupButton[] = [];
 		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true, 'btn-primary'));
-		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-outline-danger'));
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link'));
 		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons);
 	}
 

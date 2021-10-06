@@ -8,7 +8,7 @@ systelab-switch {
     background: $slab-switch-bg-color;
     border-radius: ($slab-switch-height / 2) !important;
 
-    border: 1px solid #dfdfdf;
+    border: 1px solid $slab-component-border-color;
     position: relative;
     display: inline-block;
     box-sizing: content-box;
@@ -54,9 +54,9 @@ systelab-switch {
     }
 
     &:focus {
-      border-color: #8cc8f7;
+      border-color: $slab-focus-component-border-color;
       outline: 0;
-      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+      box-shadow: $slab-focus-component-shadow;
     }
   }
 }

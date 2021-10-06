@@ -13,7 +13,7 @@
 
   .btn {
     background-color: white;
-    border: 1px solid $form-border;
+    border: 1px solid $slab-component-border-color !important;
     color: $dark;
   }
 }

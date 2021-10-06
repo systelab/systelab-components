@@ -2,6 +2,6 @@
     <input  *ngIf="isPassword" class="form-control" id="numpaddialogPwd" type="password" name="numpaddialog" [autofocus]="autofocus" [(ngModel)]="value" (keyup.enter)="doEnter()">
     <input  *ngIf="!isPassword" class="form-control" id="numpaddialog" type="text" name="numpaddialog" [autofocus]="autofocus" [(ngModel)]="value" (keyup.enter)="doEnter()">
     <div class="input-group-append">
-        <button class="btn pt-0 pb-0" type="button"  (click)="openNumPadDialog()"><i class="icon-numpad"></i></button>
+        <button id="showDialogButton" class="btn pt-0 pb-0" type="button"  (click)="openNumPadDialog()"><i class="icon-numpad"></i></button>
     </div>
 </div>

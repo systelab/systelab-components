@@ -81,6 +81,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     white-space: nowrap;
     overflow: hidden;
     padding: 0 12px;
+    height: $form-elements-height - 2px  !important;
 
     &.form-control[readonly] {
       background-color: white;

@@ -2,12 +2,12 @@
 .slab-combobox {
 
   border-radius: $border-radius;
-  border: solid 1px $medium-gray;
+  border: solid 1px $slab-component-border-color;
 
   &:focus-within {
-    border-color: #8cc8f7;
+    border-color: $slab-focus-component-border-color;
     outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    box-shadow: $slab-focus-component-shadow;
   }
 
   .slab-dropdown-toogle {
@@ -27,7 +27,7 @@
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: $slab-combobox-button-width;
+    width: $form-elements-height;
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
@@ -71,11 +71,12 @@
     border-bottom-right-radius: 0 !important;
     border-color: transparent;
     float: left;
-    width: calc(100% - #{$slab-combobox-button-width}) !important;
+    width: calc(100% - #{$form-elements-height}) !important;
     font-family: $slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
-    padding: 0 12px;
+    padding: 0 5px;
+    height: $form-elements-height - 2px;
 
     &.form-control[readonly] {
       background-color: white;
@@ -138,7 +139,7 @@
       position: fixed;
       z-index: 3;
       -webkit-transform: translate3d(0, 0, 0);
-      border: 1px solid $medium-gray;
+      border: 1px solid $slab-component-border-color;
       border-radius: 3px;
       background-color: white;
     }

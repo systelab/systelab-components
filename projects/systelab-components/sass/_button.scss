@@ -1,14 +1,20 @@
 
 .btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
 {
-  border-color: $form-border;
+  border-color: rgb(221, 221, 221);
   background-color: white;
   color: black;
 
-  &:hover {
+  &:hover:enabled {
     background-color: $primary;
     border-color: $primary;
     color: white;
+  }
+}
+
+.btn-link {
+  &:focus {
+    box-shadow: none;
   }
 }
 
