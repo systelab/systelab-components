@@ -5,6 +5,6 @@
         <button *ngIf="isRemoveEnabled && !disabled" class="li-chip-button" aria-hidden="true" (click)="removeButtonItem(button, $event)">×</button>
     </button>
 </li>
-<button *ngIf="showAddButton" [disabled]="disabled" type="button" class="btn btn-ouline-primary add-chip-button align-bottom" (click)="addButtonITem()">
+<button *ngIf="showAddButton" [disabled]="disabled" type="button" class="btn btn-outline-primary add-chip-button" (click)="addButtonITem()">
     <i class="fas fa-plus-square"></i>
 </button>
