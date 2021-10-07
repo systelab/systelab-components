@@ -75,7 +75,7 @@ $slab-button-fontsize: 25px !default;
     }
 
     .slab-dialog-header {
-      background: none;
+      background: $slab-dialog-fullscreen-header-color;
     }
   }
 
@@ -182,7 +182,7 @@ $slab-button-fontsize: 25px !default;
   font-size: 20px;
   border-radius: 0;
 
-  background: $light-gray;
+  background: $slab-dialog-header-color;
   border-bottom: 1px solid $background-secondary;
 }
 

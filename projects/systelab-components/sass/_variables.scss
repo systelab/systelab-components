@@ -54,7 +54,9 @@ $slab-app-header-height: 56px !default;
 // Defines the width of the user area in the application header
 $slab-app-header-user-width: 130px !default;
 
-//Translucent grayscale
+$slab-dialog-header-color: $light-gray;
+$slab-dialog-fullscreen-header-color: none;
+
 $slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 // Defines the height of the dialogs header
 $slab-dialog-header-height: 65px !default;
