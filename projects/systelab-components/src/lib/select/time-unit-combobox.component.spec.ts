@@ -102,6 +102,20 @@ describe('Systelab Time unit selector', () => {
 			});
 	});
 
+	it('should select weeks', (done) => {
+		clickOnDropDown(fixture);
+		fixture.whenStable()
+			.then(() => {
+				clickOnRow(fixture, 'COMMON_WEEKS');
+				fixture.whenStable()
+					.then(() => {
+						expect(fixture.componentInstance.id)
+							.toEqual('COMMON_WEEKS');
+						done();
+					});
+			});
+	});
+
 	it('should select months', (done) => {
 		clickOnDropDown(fixture);
 		fixture.whenStable()
