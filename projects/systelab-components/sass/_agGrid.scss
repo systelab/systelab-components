@@ -2,8 +2,6 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
 $icon-rowaction-font-size: 20px;
 
-$grid-border-color: #dee2e6;
-
 @mixin ag-header-row() {
   .ag-header-row {
     line-height: $grid-header-line-height;
@@ -11,7 +9,7 @@ $grid-border-color: #dee2e6;
     .ag-header-cell {
       overflow: hidden;
       color: white;
-      border-color: white;
+      border-color: $grid-border-color;
       font-weight: normal;
       text-align: left;
       padding: 0;
@@ -93,7 +91,7 @@ $grid-border-color: #dee2e6;
     .ag-cell {
       line-height: $grid-cell-height;
       border: none;
-      border-right: 1px solid white;
+      border-right: 1px solid $grid-border-color;
       padding: 0 5px;
       outline-width: 0;
 
@@ -137,7 +135,7 @@ $grid-border-color: #dee2e6;
       font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
       .ag-header-viewport, .ag-pinned-left-header {
-        background-color: white;
+        background-color: $grid-header-background-color;
 
         .ag-header-container {
           @include ag-header-row()
@@ -182,7 +180,7 @@ $grid-border-color: #dee2e6;
   }
 
   .ag-header-cell-text {
-    color: black;
+    color: $grid-header-text-color;
   }
 
   .ag-row {

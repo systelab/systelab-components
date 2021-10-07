@@ -33,9 +33,9 @@ $form-elements-height: floor(28px * $slab-size-percentage) !default;
 
 
 
-$slab-component-border-color: #ced4da;
-$slab-focus-component-border-color: #8cc8f7;
-$slab-focus-component-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+$slab-component-border-color: #ced4da !default;
+$slab-focus-component-border-color: #8cc8f7 !default;
+$slab-focus-component-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !default;
 
 
 //Grayscale
@@ -54,8 +54,8 @@ $slab-app-header-height: 56px !default;
 // Defines the width of the user area in the application header
 $slab-app-header-user-width: 130px !default;
 
-$slab-dialog-header-color: $light-gray;
-$slab-dialog-fullscreen-header-color: none;
+$slab-dialog-header-color: $light-gray !default;
+$slab-dialog-fullscreen-header-color: none !default;
 
 $slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 // Defines the height of the dialogs header
@@ -71,6 +71,10 @@ $table-row-selected-background-color: $slab-selected-background-color !default;
 $grid-header-height: 39px !default;
 // Defines the line-height of the ui-grid-header-cell.
 $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
+$grid-header-background-color: white !default;
+$grid-header-text-color: black !default;
+$grid-border-color: #dee2e6  !default;
+
 // Defines the height and the min-height of the ui-grid row and cell
 $grid-cell-height: 39px !default;
 $slab-table-min-row-height: 39px !default;
@@ -80,7 +84,7 @@ $slab-tab-height: 28px !default;
 // Defines the min-width of the tab
 $slab-tab-min-width: 120px !default;
 // Define the top margin and the gutter between tab elements
-$slab-tab-space: 5px;
+$slab-tab-space: 5px !default;
 // Define the color for non active tabs
 $slab-tab-no-active-bg-color: rgb(255, 255, 255) !default;
 
