@@ -16,6 +16,7 @@ class Element {
 export class GenderSelect extends AbstractComboBox<Element> implements OnInit {
 
 	@Input() showAll = false;
+	@Input() showUnknown = true;
 	private readonly descriptionAll;
 	private readonly descriptionUnknown;
 	private readonly descriptionMale;
@@ -32,23 +33,29 @@ export class GenderSelect extends AbstractComboBox<Element> implements OnInit {
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
-		this.defaultIdValue = 'U';
-		this.defaultDescription = this.descriptionUnknown;
+		this.defaultIdValue = 'M';
+		this.defaultDescription = this.descriptionMale;
 		const elements = new Array<Element>();
 		if (this.showAll) {
 			this.defaultIdValue = 'A';
 			this.defaultDescription = this.descriptionAll;
 			elements.push(new Element('A', this.descriptionAll));
 		}
-		elements.push(new Element('U', this.descriptionUnknown));
+		if (this.showUnknown) {
+			this.defaultIdValue = 'U';
+			this.defaultDescription = this.descriptionUnknown;
+			elements.push(new Element('U', this.descriptionUnknown));
+		}
 		elements.push(new Element('M', this.descriptionMale));
 		elements.push(new Element('F', this.descriptionFemale));
 
 		if (!this._id) {
 			if (this.showAll) {
 				this._id = 'A';
-			} else {
+			} else if (this.showUnknown) {
 				this._id = 'U';
+			} else {
+				this._id = 'M';
 			}
 		}
 		this.values = elements;
