@@ -18,6 +18,7 @@ import { CalendarModule } from 'primeng/calendar';
         <div>
             <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDateWithReset" [resetTimeWhenChangingCurrentDate]="true"></systelab-date-time>
+            <systelab-date-time [(currentDate)]="currentDate" [showCalendar]="false"></systelab-date-time>
             <button type="button" class="btn mt-2 mr-1" (click)="resetDatePickerTime()">Reset value
             </button>
             <button type="button" class="btn mt-2 mr-1" (click)="setCurrentDate()">Set Current Date
@@ -136,6 +137,10 @@ describe('Systelab DatepickerTimeComponent', () => {
 		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(5);
 		expect(fixture.componentInstance.currentDateWithReset.getHours()).toBe(11);
 		expect(fixture.componentInstance.currentDateWithReset.getMinutes()).toBe(3);
+	});
+
+	it('should be two calendars because one of the datepicker has showCalendar false', () => {
+		expect(fixture.debugElement.nativeElement.querySelectorAll('.p-calendar').length).toEqual(2);
 	});
 
 });
