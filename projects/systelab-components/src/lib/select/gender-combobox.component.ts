@@ -50,13 +50,15 @@ export class GenderSelect extends AbstractComboBox<Element> implements OnInit {
 		elements.push(new Element('F', this.descriptionFemale));
 
 		if (!this._id) {
-			if (this.showAll) {
-				this._id = 'A';
-			} else if (this.showUnknown) {
-				this._id = 'U';
-			} else {
-				this._id = 'M';
-			}
+			setTimeout(() => {
+				if (this.showAll) {
+					this._id = 'A';
+				} else if (this.showUnknown) {
+					this._id = 'U';
+				} else {
+					this._id = 'M';
+				}
+			}, 200);
 		}
 		this.values = elements;
 	}
