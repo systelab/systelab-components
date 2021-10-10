@@ -21,7 +21,9 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
 	template: `
                 <div>
                     <systelab-time-unit-select [(id)]="id" [(description)]="description"
-                                               [showHoursOption]="showHoursOption" (change)="doChange()"></systelab-time-unit-select>
+                                               [showHoursOption]="showHoursOption"
+											   [showWeeksOption]="showWeeksOption"
+											   (change)="doChange()"></systelab-time-unit-select>
                     <p>{{id}}</p>
                     <p>{{description}}</p>
                 </div>
@@ -34,6 +36,7 @@ export class TimeUnitSelectTestComponent {
 	public id;
 	public description;
 	public showHoursOption = false;
+	public showWeeksOption = true;
 
 	public doChange() {
 	}
