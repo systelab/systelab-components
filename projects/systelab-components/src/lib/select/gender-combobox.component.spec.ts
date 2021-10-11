@@ -56,7 +56,7 @@ export class GenderSelectTestComponent {
 class GenderSelectTestModule {
 }
 
-fdescribe('Systelab Gender selector', () => {
+describe('Systelab Gender selector', () => {
 	let fixture: ComponentFixture<GenderSelectTestComponent>;
 
 	beforeEach(async () => {
