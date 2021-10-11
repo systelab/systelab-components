@@ -10,6 +10,12 @@ import { DataTransformerService } from './date-transformer.service';
 	providers:   [DataTransformerService]
 })
 export class DatepickerTimeComponent extends Datepicker {
+	@Input()
+	override get currentDate(): Date {
+		return this._currentDate;
+	}
+	@Input() public resetTimeWhenChangingCurrentDate = false;
+	@Input() public showCalendar = true;
 
 	public touchSpinHourValues: TouchSpinValues;
 	public touchSpinMinutesValues: TouchSpinValues;
@@ -20,12 +26,6 @@ export class DatepickerTimeComponent extends Datepicker {
 		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
 		this.touchSpinMinutesValues = new TouchSpinValues(0, 0, 59, 1);
 	}
-
-	@Input()
-	override get currentDate(): Date {
-		return this._currentDate;
-	}
-	@Input() public resetTimeWhenChangingCurrentDate = false;
 
 	override set currentDate(value: Date) {
 		this._currentDate = value;

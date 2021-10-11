@@ -12,9 +12,9 @@ export class TouchspinComponent {
 	private static readonly ARROW_UP = 38;
 
 	@Input() public disabled = false;
+	@Input() public fillUnitsWithZero: boolean|number = false; //0 if false, and 1 if true
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
-	@Input() fillUnitsWithZero = false;
 
 	@Input() public isInGrid = false;
 
@@ -29,14 +29,15 @@ export class TouchspinComponent {
 		if (this._spinValues) {
 			this.previousValue = this._spinValues.value;
 			this._spinValues.value = val;
-
+			const numberOfZeros = typeof this.fillUnitsWithZero === 'boolean' ? this.fillUnitsWithZero ? 1 : 0 : this.fillUnitsWithZero;
 			if (val) {
-				const valStr: string = (val <= 9 && this.fillUnitsWithZero) ? '0' + val : String(val);
+				const valStr: string = val >0 ? String(val).padStart(numberOfZeros+1, '0'):
+					String(val).substring(0,1)+String(val).substring(1).padStart(numberOfZeros+1, '0');
 				if (valStr !== this.valueStr) {
 					this.valueStr = valStr;
 				}
 			} else {
-				this.valueStr = this.fillUnitsWithZero ? '00' : '0';
+				this.valueStr = '0'.padStart(numberOfZeros+1, '0');
 			}
 		}
 	}
