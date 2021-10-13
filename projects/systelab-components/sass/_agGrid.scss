@@ -57,16 +57,16 @@ $icon-rowaction-font-size: 20px;
 @mixin ag-row() {
   .ag-row {
 
-    &.ag-row-selected {
-      background-color: $table-row-selected-background-color;
-    }
-
-    &.ag-row-focus :not(.ag-row-selected) {
+    &.ag-row-focus {
      background-color: scale-color($primary, $alpha: -90%);
     }
 
-    &.ag-row-hover :not(.ag-row-selected) {
+    &.ag-row-hover {
       background-color: scale-color($primary, $alpha: -90%);
+    }
+
+    &.ag-row-selected {
+      background-color: $table-row-selected-background-color;
     }
 
     &.ag-row-odd :not ag-row-selected {
