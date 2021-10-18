@@ -90,11 +90,12 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
-import {AbstractTreeObservable} from './tree-js/abstract-tree-js-observable.service';
-import {TreeNode} from './tree-js/tree-node.component';
+import {SystelabTree} from './tree-js/systelab-tree.component';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {SystelabTreeConverter} from './tree-js/systelab-tree-converter.service';
 
 @NgModule({
-	imports:      [
+	imports: [
 		CommonModule,
 		FormsModule,
 		SharedModule,
@@ -106,7 +107,9 @@ import {TreeNode} from './tree-js/tree-node.component';
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		AgGridModule],
+		AgGridModule,
+		CdkTreeModule
+	],
 	declarations: [
 		SliderComponent,
 		SwitchComponent,
@@ -184,7 +187,7 @@ import {TreeNode} from './tree-js/tree-node.component';
 		SpyMenuComponent,
 		ScrollSpyDirective,
 		ToastComponent,
-		TreeNode
+		SystelabTree
 	],
 	exports:      [
 		SliderComponent,
@@ -262,13 +265,13 @@ import {TreeNode} from './tree-js/tree-node.component';
 		SpyMenuComponent,
 		ScrollSpyDirective,
 		ToastComponent,
-		TreeNode
+		SystelabTree
 	],
 	providers:    [
 		StylesUtilService,
 		ColorUtilService,
 		LoadingService,
-		AbstractTreeObservable
+		SystelabTreeConverter
 	]
 })
 export class SystelabComponentsModule {

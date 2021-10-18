@@ -13,7 +13,8 @@ gulp.task('copytemplates', function (done) {
 		'./projects/systelab-components/src/lib/sortable-list/abstract-sortable-list.component.html',
 		'./projects/systelab-components/src/lib/add-remove-list/abstract-add-remove-list.component.html',
 		'./projects/systelab-components/src/lib/datepicker/datepicker.component.html',
-		'./projects/systelab-components/src/lib/datepicker/datepicker-time.component.html'
+		'./projects/systelab-components/src/lib/datepicker/datepicker-time.component.html',
+		'./projects/systelab-components/src/lib/tree-js/systelab-tree.html'
 	])
 		.pipe(gulp.dest('./dist/systelab-components/html'));
 	done();

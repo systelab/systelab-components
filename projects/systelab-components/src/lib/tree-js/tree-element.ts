@@ -1,12 +1,13 @@
-export class TreeElement<T = any> {
-	label?: string;
+export interface TreeElementNode<T> {
+	expandable?: boolean;
+	name?: string;
+	level?: number;
+	isExpanded?: boolean;
 	id?: number;
 	data?: T;
 	icon?: string;
-	expandedIcon? = 'fas fa-chevron-down';
-	collapsedIcon? = 'fas fa-chevron-right';
-	children?: TreeElement<T>[];
-	expanded?: boolean;
+	expandedIcon?: string;
+	collapsedIcon?: string;
 	textClass?: string;
-	isSelected = false;
+	isNodeSelected?: boolean;
 }

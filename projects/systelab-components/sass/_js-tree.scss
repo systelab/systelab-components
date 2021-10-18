@@ -23,3 +23,22 @@
     cursor: pointer;
   }
 }
+
+.slab-tree {
+  cdk-tree-node {
+    height: 30px;
+    line-height: 30px;
+    user-select: none;
+    &.slab-selected {
+      background-color: #c8dffc;
+    }
+    button {
+      background-color: transparent;
+      border: none;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(200, 223, 252, 0.5);
+    }
+  }
+}

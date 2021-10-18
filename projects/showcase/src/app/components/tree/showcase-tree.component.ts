@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import 'jstree';
 
 @Component({
@@ -12,5 +12,9 @@ export class ShowcaseTreeComponent {
 
 	public nodeSelected(event: any) {
 		console.log('showcasetreecomponent', event);
+	}
+
+	public doOnNodeSelected(node: any) {
+		console.log('New JS Tree', node);
 	}
 }

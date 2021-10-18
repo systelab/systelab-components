@@ -84,6 +84,7 @@ import { ShowcaseToastComponent } from './components/toast/showcase-toast.compon
 import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
 import {ShowcaseJSTreeComponent} from './components/tree/showcase-js-tree.component';
+import {CdkTreeModule} from '@angular/cdk/tree';
 
 @NgModule({
 	imports:      [
@@ -102,7 +103,8 @@ import {ShowcaseJSTreeComponent} from './components/tree/showcase-js-tree.compon
 			GridContextMenuCellRendererComponent,
 			GridHeaderContextMenuComponent
 		]),
-		AutoCompleteModule
+		AutoCompleteModule,
+		CdkTreeModule
 	],
 	declarations: [
 		ShowcaseComponent,
