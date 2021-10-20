@@ -1,13 +1,14 @@
+$slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
 
 .slab-combobox {
 
   border-radius: $border-radius;
-  border: solid 1px $slab-component-border-color;
+  border: solid 1px $medium-gray;
 
   &:focus-within {
-    border-color: $slab-focus-component-border-color;
+    border-color: #8cc8f7;
     outline: 0;
-    box-shadow: $slab-focus-component-shadow;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
   }
 
   .slab-dropdown-toogle {
@@ -27,10 +28,14 @@
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: $form-elements-height;
+    width: $slab-combobox-button-width;
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
+
+    @if ($slab-size-percentage == 1) {
+      line-height: $form-elements-height - 9px;
+    }
   }
 
   .slab-combo-button-icon {
@@ -46,7 +51,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     &:before {
-      content: "\f107";
+      content: "\f0d7";
     }
   }
 
@@ -71,12 +76,12 @@
     border-bottom-right-radius: 0 !important;
     border-color: transparent;
     float: left;
-    width: calc(100% - #{$form-elements-height}) !important;
+    width: calc(100% - #{$slab-combobox-button-width}) !important;
     font-family: $slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
-    padding: 0 5px;
-    height: $form-elements-height - 2px;
+    padding: 0 12px;
+    height: $form-elements-height - 2px  !important;
 
     &.form-control[readonly] {
       background-color: white;
@@ -139,7 +144,7 @@
       position: fixed;
       z-index: 3;
       -webkit-transform: translate3d(0, 0, 0);
-      border: 1px solid $slab-component-border-color;
+      border: 1px solid $medium-gray;
       border-radius: 3px;
       background-color: white;
     }
@@ -147,8 +152,6 @@
     .ag-theme-fresh .ag-header {
       height: 0px !important;
       min-height: 0px !important;
-      border-bottom: none !important;
-      border-top: none !important;
     }
 
     .ag-theme-fresh .ag-root {
@@ -191,11 +194,6 @@
       .ag-body-horizontal-scroll {
         display: none;
       }
-
-      .ag-row {
-        border-bottom: none;
-      }
-
     }
 
     &.disabled {

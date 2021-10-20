@@ -1,0 +1,38 @@
+systelab-tabs {
+
+  .nav-tabs .nav-link {
+    border: 0;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 250ms ease 0s;
+    outline: 0;
+    border-radius: 0;
+
+    &.active {
+      border-bottom: 3px solid $primary;
+      box-shadow: 0 2px 3px scale-color($primary, $alpha: -75%);
+
+      &:focus {
+        background-color: scale-color($primary, $alpha: -95%);
+      }
+    }
+
+    &:not(.active) {
+      border-bottom: 3px solid transparent;
+      box-shadow: none;
+
+      &:focus {
+        background-color: scale-color($primary, $alpha: -95%);
+      }
+
+      &:hover {
+        border-bottom: 3px solid $light-gray;
+      }
+    }
+
+  }
+
+  .nav-tabs .slab-tabs-shrink {
+    padding: 4px 8px !important;
+  }
+}

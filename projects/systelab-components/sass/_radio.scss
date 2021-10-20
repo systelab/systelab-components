@@ -32,7 +32,7 @@ input[type="radio"] + label {
 
     content: '';
     z-index: 0;
-    border: solid ($slab-radio-height / 8) $slab-component-border-color;
+    border: solid ($slab-radio-height / 8) $medium-gray;
     border-radius: 50%;
     box-sizing: border-box;
     background-color: $slab-radio-color;
@@ -42,13 +42,13 @@ input[type="radio"] + label {
 
 // Define background color and icon size when checked
 input[type="radio"]:checked + label:before {
-  border: solid 6px $slab-radio-border-color;
+  border: solid ($slab-radio-height / 3) $slab-radio-border-color;
 }
 
 input[type="radio"]:focus + label:before {
-  border-color: $slab-focus-component-border-color;
+  border-color: #8cc8f7;
   outline: 0;
-  box-shadow: $slab-focus-component-shadow;
+  box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
 }
 
 input[type="radio"]:disabled + label {

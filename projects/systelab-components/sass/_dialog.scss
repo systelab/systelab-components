@@ -24,58 +24,37 @@
  */
 
 $content-border-width: 4px;
+$slab-footer-buttons-offset: 4px !default;
 $slab-button-size: 35px !default;
-$slab-button-fontsize: 25px !default;
-
+$slab-button-fontsize: ceil(32px * $slab-size-percentage) !default;
+$slab-button-size-fullscreen: $slab-button-size !default;
+$slab-button-size-dialog-header: $slab-button-size !default;
 
 @import '~@angular/cdk/overlay-prebuilt.css';
 
-.cdk-overlay-dark-backdrop {
-  backdrop-filter: saturate(30%);
-  transition: all .3s !important;
-}
-
 .cdk-overlay-pane {
   background-color: $background-primary;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .2);
-  border-radius: 7px;
-  overflow: hidden;
-  transition: all .5s;
-
+  border: 5px solid lightgray;
+  border-radius: 5px;
 
   .slab-dialog-bottom {
-    padding: 1rem;
+    background: $background-primary;
 
     .btn {
       height: $slab-button-size;
     }
   }
 
-  &.slab-toast-panel {
-    border: none;
-    background: transparent;
-    border-radius: 30px;
-  }
-
-  &:not(.fullscreen) {
-    animation: scaleUp .2s;
-  }
-
-
   &.fullscreen {
-    border: 0;
+    border: 0 solid lightgray;
     border-radius: 0;
 
     .slab-dialog-bottom {
-      background: none;
+      background: $darker-gray;
 
       .btn {
-        height: $slab-button-size;
+        height: $slab-button-size-fullscreen;
       }
-    }
-
-    .slab-dialog-header {
-      background: $slab-dialog-fullscreen-header-color;
     }
   }
 
@@ -86,6 +65,10 @@ $slab-button-fontsize: 25px !default;
     position: relative;
     width: 100%;
   }
+}
+
+.cdk-overlay-backdrop {
+  transition: none;
 }
 
 
@@ -104,11 +87,10 @@ $slab-button-fontsize: 25px !default;
 .slab-dialog-disabled {
   pointer-events: none !important;
 
-  /*
-    * {
-      @extend .disabled;
-    }
-  */
+  * {
+    @extend .disabled;
+  }
+
   .form-control {
     @extend .form-control, :disabled;
   }
@@ -133,6 +115,14 @@ $slab-button-fontsize: 25px !default;
   .slab-dialog-header {
     pointer-events: auto;
   }
+
+  /*
+  .slab-dialog-bottom {
+    button {
+      @extend .btn.disabled;
+    }
+  }
+  */
 
 }
 
@@ -181,17 +171,18 @@ $slab-button-fontsize: 25px !default;
 
   font-size: 20px;
   border-radius: 0;
-
-  background: $slab-dialog-header-color;
-  border-bottom: 1px solid $background-secondary;
+  background: $primary;
+  color: $background-primary;
 }
 
-
+/**
+ * 1. Make sure smaller sizes (such as $slab-size-percentage = 0.7) looks OK.
+ */
 .slab-dialog-bottom {
+  padding: $slab-footer-buttons-offset;
 
   border-top: 1px solid $background-secondary;
-  background: none !important;
-  padding: 15px;
+  background-color: $darker-gray;
 
   .square {
     @include size($slab-button-size);
@@ -209,62 +200,59 @@ $slab-button-fontsize: 25px !default;
 }
 
 .slab-dialog-header-button {
-  @include size($slab-button-size);
+  @include size($slab-button-size-dialog-header);
   display: flex;
   align-items: center;
   justify-content: center;
 
+  background-color: darken($primary, 10%);
   cursor: pointer;
   text-align: center;
-  border-radius: 20px;
-  border: 1px solid $primary;
+  border-radius: $content-border-width + 1;
+  color: $background-primary;
 
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: $primary;
+    color: $background-primary;
     font-size: $slab-button-fontsize;
     font-family: icomoon;
   }
 
   &:hover {
-    background-color: $primary;
+    background-color: darken($primary, 20%);
   }
 }
 
 .slab-dialog-close {
-  &::before {
-    content: "\F00D";
+
+  &:before {
+    content: "\F057";
+    cursor: pointer;
   }
 }
 
 .slab-dialog-info {
-  &::before {
+
+  &:before {
     content: "\F05A";
+    cursor: pointer;
   }
 }
 
 .slab-dialog-home {
-  &::before {
+
+  &:before {
     content: "\F015";
+    cursor: pointer;
   }
 }
 
 .slab-dialog-minimize {
-  &::before {
-    content: "\F2D1";
-    font-size: 16px;
-  }
-}
 
-.slab-dialog-close,
-.slab-dialog-info,
-.slab-dialog-home,
-.slab-dialog-minimize {
-  &:hover {
-    &::before {
-      color: white;
-    }
+  &:before {
+    content: "\F2d1";
+    cursor: pointer;
   }
 }
 
@@ -304,8 +292,10 @@ $slab-button-fontsize: 25px !default;
     }
 
     .slab-dialog-bottom {
+      background-color: $darker-gray;
+
       .btn {
-        height: $slab-button-size;
+        height: $slab-button-size-fullscreen;
       }
     }
   }
@@ -314,60 +304,43 @@ $slab-button-fontsize: 25px !default;
 
 /* Context Modal styles
    ========================================================================== */
-.slab-context-modal {
-  .slab-dialog-header {
-    &:after {
-      bottom: 100% !important;
-      border: solid transparent;
-      content: " ";
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
-    }
-
-    &:after {
-      border-bottom-color: lightgray;
-      border-width: 20px !important;
-      margin-left: -30px !important;
-    }
-  }
-}
-
-.slab-context-modal-arrow-center {
-  .slab-dialog-header {
-    &:after {
-      left: 50%;
+   .slab-context-modal{
+    .slab-dialog-header {
+      &:after{
+        bottom: 100% !important;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      &:after {
+        border-bottom-color: lightgray;
+        border-width: 20px !important;
+        margin-left: -30px !important;
+      }
     }
   }
-}
 
-.slab-context-modal-arrow-right {
-  .slab-dialog-header {
-    &:after {
-      right: 5%;
+  .slab-context-modal-arrow-center {
+    .slab-dialog-header {
+      &:after{
+        left: 50%;
+      }
     }
   }
-}
-
-.slab-context-modal-arrow-left {
-  .slab-dialog-header {
-    &:after {
-      left: 5%;
+  .slab-context-modal-arrow-right {
+    .slab-dialog-header {
+      &:after{
+        right: 5%;
+      }
     }
   }
-}
-
-
-/* Animations
-  ========================================================================== */
-@keyframes scaleUp {
-  0% {
-    transform: scale(.8) translateY(1000px);
-    opacity: 0;
+  .slab-context-modal-arrow-left {
+    .slab-dialog-header {
+      &:after{
+        left: 5%;
+      }
+    }
   }
-  100% {
-    transform: scale(1) translateY(0px);
-    opacity: 1;
-  }
-}

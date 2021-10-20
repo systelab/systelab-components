@@ -16,14 +16,11 @@
 //Override
 
 .form-control {
-  padding: 2px 7px;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
   height: $form-elements-height;
-  border: 1px solid $slab-component-border-color;
-  &:focus-within {
-    border-color: $slab-focus-component-border-color;
-    outline: 0;
-    box-shadow: $slab-focus-component-shadow;
-  }
 }
 
 .col-form-label {
@@ -33,6 +30,4 @@
   line-height: $form-elements-height !important;
 }
 
-.row {
-  margin-bottom: 10px;
-}
+

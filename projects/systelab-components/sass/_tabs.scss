@@ -1,38 +1,74 @@
-systelab-tabs {
+.nav {
+  padding-left: 25px;
+  white-space: nowrap;
+  overflow: visible;
+  background-color: $background-secondary;
 
-  .nav-tabs .nav-link {
-    border: 0;
-    border-bottom: 3px solid transparent;
-    cursor: pointer;
-    transition: all 250ms ease 0s;
-    outline: 0;
-    border-radius: 0;
-
-    &.active {
-      border-bottom: 3px solid $primary;
-      box-shadow: 0 2px 3px scale-color($primary, $alpha: -75%);
-
-      &:focus {
-        background-color: scale-color($primary, $alpha: -95%);
-      }
-    }
-
-    &:not(.active) {
-      border-bottom: 3px solid transparent;
-      box-shadow: none;
-
-      &:focus {
-        background-color: scale-color($primary, $alpha: -95%);
-      }
-
-      &:hover {
-        border-bottom: 3px solid $light-gray;
-      }
-    }
-
+  &.hideTabBackground {
+    background-color: white;
   }
 
-  .nav-tabs .slab-tabs-shrink {
-    padding: 4px 8px !important;
+  > .nav-item {
+    background-color: $background-secondary;
+    padding-top: 2 * $slab-tab-space;
+    margin-right: $slab-tab-space;
+
+    &.hideTabBackground {
+      padding-top: 0;
+    }
+
+    > .nav-single-tab {
+      min-width: $slab-tab-min-width;
+
+      &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+      }
+    }
+
+    > .nav-link {
+      @include user-selection(none);
+
+      height: 100%;
+      line-height: $slab-tab-height;
+      color: $background-primary;
+      text-shadow: none;
+      background-color: $slab-tab-no-active-bg-color;
+      border-top: 3px solid $slab-tab-no-active-bg-color;
+      margin-left: 0;
+      padding: 0 12px;
+      text-align: center;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+
+      &:hover {
+        color: $background-primary;
+        background-color: $primary;
+        border-color: $primary;
+        padding-bottom: 0;
+      }
+
+      &.active {
+        color: black;
+        background-color: $background-primary;
+        border-top-color: $primary;
+
+        &:hover {
+          border-color: $primary $form-border $background-primary $form-border;
+        }
+      }
+    }
+  }
+}
+
+.slab-tabs-shrink {
+  min-width: 0px !important;
+  padding-left: 5px;
+  padding: 0 4px !important;
+}
+
+@-moz-document url-prefix() {
+  systelab-tabs {
+    overflow: auto;
   }
 }

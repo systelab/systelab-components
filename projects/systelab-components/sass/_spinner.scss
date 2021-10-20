@@ -1,49 +1,29 @@
-systelab-spinner {
+.slab-spinner-container {
 
-  .slab-spinner-container {
+  &:focus-within {
+    border-color: #8cc8f7;
+    outline: 0;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    border-radius: 5px;
+  }
 
-    &:focus-within {
-      border-color: $slab-focus-component-border-color;
+  input {
+
+    &:focus {
+      border-color: #8cc8f7 !important;
       outline: 0;
-      box-shadow: $slab-focus-component-shadow;
-      border-radius: $slab-border-radius;
-    }
-
-    input {
-
-      &:focus {
-        border-color: $slab-focus-component-border-color !important;
-        outline: 0;
-        box-shadow: 0 0 0 3px transparent !important;;
-      }
-
-      &.disabled {
-        background-color: #e9ecef;
-        opacity: 0.6;
-      }
-    }
-
-    .slab-spinner-input {
-      min-width: 0;
-      text-align: center;
-      height: $form-elements-height !important;
-    }
-
-    #minus-button, #plus-button {
-      background-color: white;
-      border: 1px solid $slab-component-border-color;
-      color: $dark;
-
-      &:hover:enabled {
-        background-color: $primary;
-        border-color: $primary;
-        color: white;
-      }
-
-      &.disabled {
-        background-color: #e9ecef;
-        opacity: 0.6;
-      }
+      box-shadow: 0 0 0 3px transparent !important;;
     }
   }
+  .slab-spinner-input {
+    min-width: 0;
+    text-align: center;
+    height: $form-elements-height !important;
+  }
+
+  .btn {
+    background-color: $dark;
+    color: white;
+  }
 }
+

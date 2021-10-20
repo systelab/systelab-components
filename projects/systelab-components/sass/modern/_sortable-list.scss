@@ -1,0 +1,17 @@
+
+.slab-sortable-list {
+  display: flex;
+  overflow: auto;
+
+  .slab-sortable-list-row {
+    line-height: $slab-sort-list-row-height;
+    text-indent: 10px;
+    cursor: pointer;
+
+    @include user-selection(none);
+  }
+
+  .slab-sortable-list-row-selected {
+    background-color: $slab-selected-background-color;
+  }
+}

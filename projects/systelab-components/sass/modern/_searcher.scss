@@ -1,0 +1,26 @@
+.slab-searcher-container {
+  align-items: center;
+  input {
+    width: 100px;
+    &::-ms-clear {
+      display: none;
+    }
+  }
+
+  label {
+    margin-left: 5px;
+  }
+
+  .btn {
+    background-color: white;
+    border: 1px solid $slab-component-border-color !important;
+    color: $dark;
+  }
+}
+
+.slab-searcher-dialog-container {
+  .slab-table-container {
+    border: 1px solid $medium-gray;
+    border-radius: 3px;
+  }
+}

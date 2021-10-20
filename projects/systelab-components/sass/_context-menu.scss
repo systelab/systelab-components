@@ -1,5 +1,5 @@
-$slab-icon-context-menu-font-size: 15px;
-$slab-icon-context-menu-size: 19px;
+$slab-icon-context-menu-font-size: ceil(22px * $slab-size-percentage);
+$slab-icon-context-menu-size: ceil(28px * $slab-size-percentage);
 
 .slab-context-menu {
   cursor: pointer;

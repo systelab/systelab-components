@@ -1,0 +1,41 @@
+
+.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
+{
+  border-color: rgb(221, 221, 221);
+  background-color: white;
+  color: black;
+
+  &:hover:enabled {
+    background-color: $primary;
+    border-color: $primary;
+    color: white;
+  }
+}
+
+.btn-link {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark {
+  border-radius: 20px;
+}
+
+systelab-toggle-button {
+  .btn { //Toogle buttons
+    &.btn-outline-primary {
+      color: $primary;
+      background-color: transparent;
+      border-color: $primary;
+    }
+
+    &.btn-primary {
+      color: white;
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+}
+
+

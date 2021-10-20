@@ -9,7 +9,7 @@ $icon-rowaction-font-size: 20px;
     .ag-header-cell {
       overflow: hidden;
       color: white;
-      border-color: $grid-border-color;
+      border-color: white;
       font-weight: normal;
       text-align: left;
       padding: 0;
@@ -59,48 +59,37 @@ $icon-rowaction-font-size: 20px;
 
     &.ag-row-selected {
       background-color: $table-row-selected-background-color;
-
-      &.ag-row-focus {
-        opacity: 0.8;
-      }
-
-      &.ag-row-hover {
-        opacity: 0.8;
-      }
     }
 
-    &:not(.ag-row-selected) {
-      &.ag-row-odd {
-        background-color: $table-row-odd-background-color;
-      }
-
-      &.ag-row-even {
-        background-color: $table-row-even-background-color;
-      }
-
-      &.ag-row-focus {
-        background-color: scale-color($primary, $alpha: -90%);
-      }
-
-      &.ag-row-hover {
-        background-color: scale-color($primary, $alpha: -90%);
-      }
+    &.ag-row-focus {
+     background-color: scale-color($primary, $alpha: -90%);
     }
 
+    &.ag-row-hover {
+      background-color: scale-color($primary, $alpha: -90%);
+    }
+
+    &.ag-row-odd :not ag-row-selected {
+      background-color: $table-row-odd-background-color;
+    }
+
+    &.ag-row-even :not ag-row-selected {
+      background-color: $table-row-even-background-color;
+    }
 
     .ag-cell {
       line-height: $grid-cell-height;
       border: none;
-      border-right: 1px solid $grid-border-color;
+      border-right: 1px solid white;
       padding: 0 5px;
       outline-width: 0;
 
       &.ag-cell-last-left-pinned {
-        border-right: 1px solid $grid-border-color;
+        border-right: 1px solid white;
       }
 
       &.ag-cell-focus {
-        border: 1px dashed scale-color($primary, $alpha: -60%) !important;
+        border: 1px dashed scale-color($primary, $alpha: -60%);
       }
 
       .ag-icon {
@@ -111,7 +100,6 @@ $icon-rowaction-font-size: 20px;
 
     .ag-cell-inline-editing {
       height: $grid-cell-height;
-      background: white;
     }
   }
 }
@@ -120,102 +108,50 @@ $icon-rowaction-font-size: 20px;
   overflow: hidden;
 }
 
-.ag-theme-fresh {
-  .ag-root-wrapper {
-    border: none !important;
-  }
+.ag-theme-fresh .ag-root-wrapper {
+  border: none !important;
+}
 
-  .ag-ltr .ag-root {
-    border: none;
-    overflow: hidden;
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-    .ag-header {
-      border-bottom: none;
-      font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-      .ag-header-viewport, .ag-pinned-left-header {
-        background-color: $grid-header-background-color;
-
-        .ag-header-container {
-          @include ag-header-row()
-        }
-      }
-
-      .ag-pinned-left-header {
-        @include ag-header-row()
-      }
-
-    }
-
-    .ag-header-cell, .ag-header-group-cell {
-      border-right: 1px solid $grid-border-color !important;
-    }
-
-    .ag-body-viewport {
-      //overflow: auto !important;
-      @include ag-row()
-    }
-
-    .ag-body-horizontal-scroll {
-      .ag-horizontal-left-spacer {
-        overflow-x: auto;
-        border-right: none;
-        background-color: #f6f6f6;
-      }
-    }
-
-
-  }
-  .ag-row-drag {
-    background: none;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .ag-pinned-left-header {
-    border-right: solid 1px;
-    border-right-color: $grid-border-color !important;
-  }
-
-  .ag-header-cell-text {
-    color: $grid-header-text-color;
-  }
-
-  .ag-row {
-    border-bottom: solid 1px $grid-border-color;
-  }
-
-  .ag-cell {
-    border-right: none !important;
-  }
+.ag-theme-fresh .ag-ltr .ag-root {
+  border: none;
+  overflow: hidden;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
   .ag-header {
-    border-bottom: solid 1px $grid-border-color !important;
-    border-top: solid 1px $grid-border-color !important;
+    border-bottom: none;
+    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+    .ag-header-viewport, .ag-pinned-left-header {
+      background-color: $table-gray;
+
+      .ag-header-container {
+        @include ag-header-row()
+      }
+    }
+
+    .ag-pinned-left-header {
+      @include ag-header-row()
+    }
+
   }
 
-  .ag-header-cell::after,
-  .ag-header-group-cell::after {
-    background: white;
+  .ag-header-cell, .ag-header-group-cell {
+    border-right: 1px solid white;
   }
 
-  .ag-header-group-cell {
-    border-bottom: solid 1px $grid-border-color !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+  .ag-body-viewport {
+    //overflow: auto !important;
+    @include ag-row()
   }
 
-  .ag-header-group-cell-label {
-    justify-content: center !important;
+  .ag-body-horizontal-scroll {
+    .ag-horizontal-left-spacer {
+      overflow-x: auto;
+      border-right: none;
+      background-color: #f6f6f6;
+    }
   }
 
-  .ag-header-cell-label {
-    flex-direction: row !important;
-    justify-content: left !important;
-    align-items: center !important;
-  }
 
 }
 
@@ -229,3 +165,10 @@ systelab-spinner-cell {
   display: flex;
 }
 
+.ag-theme-fresh .ag-row-drag {
+  background: none;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

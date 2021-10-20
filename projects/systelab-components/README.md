@@ -99,6 +99,13 @@ In the sass file src/styles.scss, we have imported systelab-components sass styl
 ```sass
 @import "systelab-components/sass/systelab-components";
 ```
+
+Import the modern styles in order to be in the last version:
+
+```sass
+@import "systelab-components/sass/modern/systelab-components";
+```
+
 Bootstrap package is a dependency for systelab-components, and npm will download it.
 
 ### Changing the default style

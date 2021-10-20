@@ -7,8 +7,6 @@
   .ag-theme-fresh .ag-header {
     height: 0px !important;
     min-height: 0px !important;
-    border-bottom: none !important;
-    border-top: none !important;
   }
 
   .ag-theme-fresh .ag-root {
@@ -23,7 +21,6 @@
 
         .ag-row {
           background-color: $background-primary;
-          border-bottom: none;
 
           &.ag-row-selected {
             background-color: $slab-selected-background-color;

@@ -1,0 +1,38 @@
+
+.slab-form-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 10px;
+  padding-right: 5px;
+}
+
+.slab-mh-ft {
+  max-height: fit-content;
+}
+
+//Override
+
+.form-control {
+  padding: 2px 7px;
+  height: $form-elements-height;
+  border: 1px solid $slab-component-border-color;
+  &:focus-within {
+    border-color: $slab-focus-component-border-color;
+    outline: 0;
+    box-shadow: $slab-focus-component-shadow;
+  }
+}
+
+.col-form-label {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0; // Override the `<label>` default
+  line-height: $form-elements-height !important;
+}
+
+.row {
+  margin-bottom: 10px;
+}

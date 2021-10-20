@@ -1,5 +1,5 @@
+
 .slab-searcher-container {
-  align-items: center;
   input {
     width: 100px;
     &::-ms-clear {
@@ -9,12 +9,6 @@
 
   label {
     margin-left: 5px;
-  }
-
-  .btn {
-    background-color: white;
-    border: 1px solid $slab-component-border-color !important;
-    color: $dark;
   }
 }
 

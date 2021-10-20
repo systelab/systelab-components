@@ -1,41 +1,44 @@
+$slab-button-background-color: $dark !default;
 
-.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
-{
-  border-color: rgb(221, 221, 221);
-  background-color: white;
-  color: black;
+.btn:not(.btn-primary),
+.btn:not(.btn-secondary),
+.btn:not(.btn-info),
+.btn:not(.btn-success),
+.btn:not(.btn-warning),
+.btn:not(.btn-danger),
+.btn:not(.btn-light),
+.btn:not(.btn-dark),
+.btn:not(.btn-link),
+.btn:not(.btn-outline-primary),
+.btn:not(.btn-outline-secondary),
+.btn:not(.btn-outline-info),
+.btn:not(.btn-outline-success),
+.btn:not(.btn-outline-warning),
+.btn:not(.btn-outline-danger),
+.btn:not(.btn-outline-light),
+.btn:not(.btn-outline-dark),
+.btn:not(.btn-outline-link) {
+  background-color: $slab-button-background-color;
+  color: white;
+  border-color: $slab-button-background-color;
 
-  &:hover:enabled {
+  &:hover {
     background-color: $primary;
     border-color: $primary;
-    color: white;
   }
-}
-
-.btn-link {
-  &:focus {
-    box-shadow: none;
-  }
-}
-
-.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark {
-  border-radius: 20px;
 }
 
 systelab-toggle-button {
-  .btn { //Toogle buttons
+  .btn {
     &.btn-outline-primary {
-      color: $primary;
-      background-color: transparent;
-      border-color: $primary;
+      color: white;
+      background-color: $slab-button-background-color;
+      border-color: $slab-button-background-color;
     }
 
     &.btn-primary {
-      color: white;
       background-color: $primary;
       border-color: $primary;
     }
   }
 }
-
-
