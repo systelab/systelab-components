@@ -90,6 +90,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
+import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 
 @NgModule({
 	imports:      [
@@ -182,6 +183,7 @@ import { ToastComponent } from './toast/toast.component';
 		SpyMenuComponent,
 		ScrollSpyDirective,
 		ToastComponent,
+		KeyupDebounceDirective
 	],
 	exports:      [
 		SliderComponent,
@@ -258,7 +260,8 @@ import { ToastComponent } from './toast/toast.component';
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
-		ToastComponent
+		ToastComponent,
+		KeyupDebounceDirective,
 	],
 	providers:    [
 		StylesUtilService,

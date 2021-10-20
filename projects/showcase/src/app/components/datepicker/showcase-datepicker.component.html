@@ -26,6 +26,14 @@
         </div>
     </div>
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time without calendar</label>
+        <div class="col-md-9">
+            <systelab-date-time
+                    [showCalendar]="false"
+                    [(currentDate)]="myDate"></systelab-date-time>
+        </div>
+    </div>
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Date error always</label>
         <div class="col-md-4">
             <systelab-datepicker
