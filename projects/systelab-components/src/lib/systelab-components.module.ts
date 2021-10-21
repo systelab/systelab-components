@@ -91,6 +91,7 @@ import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
+import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 
 @NgModule({
 	imports: [
@@ -184,6 +185,8 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
+		ToastComponent,
+		KeyupDebounceDirective,
 		ToastComponent
 	],
 	exports:      [
@@ -261,7 +264,8 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
-		ToastComponent
+		ToastComponent,
+		KeyupDebounceDirective,
 	],
 	providers:    [
 		StylesUtilService,

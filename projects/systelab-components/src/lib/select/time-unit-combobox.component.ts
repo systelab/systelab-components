@@ -18,6 +18,7 @@ export class TimeUnitSelectComponent extends AbstractComboBox<Element> implement
 	@Input() public showEmptyOption = false;
 	@Input() public showMinutesOption = false;
 	@Input() public showHoursOption = false;
+	@Input() public showWeeksOption = false;
 
 	constructor(public override myRenderer: Renderer2, public override chRef: ChangeDetectorRef, public i18nService: I18nService) {
 		super(myRenderer, chRef);
@@ -35,6 +36,9 @@ export class TimeUnitSelectComponent extends AbstractComboBox<Element> implement
 			elements.push(new Element(this.i18nService.instant('COMMON_HOURS'), this.i18nService.instant('COMMON_HOURS')));
 		}
 		elements.push(new Element(this.i18nService.instant('COMMON_DAYS'), this.i18nService.instant('COMMON_DAYS')));
+		if (this.showWeeksOption) {
+			elements.push(new Element(this.i18nService.instant('COMMON_WEEKS'), this.i18nService.instant('COMMON_WEEKS')));
+		}
 		elements.push(new Element(this.i18nService.instant('COMMON_MONTHS'), this.i18nService.instant('COMMON_MONTHS')));
 		elements.push(new Element(this.i18nService.instant('COMMON_YEARS'), this.i18nService.instant('COMMON_YEARS')));
 

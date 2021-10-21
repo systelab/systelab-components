@@ -3,6 +3,7 @@ import { Datepicker } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
 	selector:    'systelab-date-time',
@@ -10,22 +11,22 @@ import { DataTransformerService } from './date-transformer.service';
 	providers:   [DataTransformerService]
 })
 export class DatepickerTimeComponent extends Datepicker {
-
-	public touchSpinHourValues: TouchSpinValues;
-	public touchSpinMinutesValues: TouchSpinValues;
-
-	constructor(myRenderer: Renderer2, i18nService: I18nService, dataTransformerService: DataTransformerService) {
-		super(myRenderer, i18nService, dataTransformerService);
-
-		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
-		this.touchSpinMinutesValues = new TouchSpinValues(0, 0, 59, 1);
-	}
-
 	@Input()
 	override get currentDate(): Date {
 		return this._currentDate;
 	}
 	@Input() public resetTimeWhenChangingCurrentDate = false;
+	@Input() public showCalendar = true;
+
+	public touchSpinHourValues: TouchSpinValues;
+	public touchSpinMinutesValues: TouchSpinValues;
+
+	constructor(myRenderer: Renderer2, i18nService: I18nService, dataTransformerService: DataTransformerService, config: PrimeNGConfig) {
+		super(myRenderer, i18nService, dataTransformerService, config);
+
+		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
+		this.touchSpinMinutesValues = new TouchSpinValues(0, 0, 59, 1);
+	}
 
 	override set currentDate(value: Date) {
 		this._currentDate = value;

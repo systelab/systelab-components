@@ -13,52 +13,51 @@ import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-c
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { CommonModule } from '@angular/common';
-import { TimeUnitSelectComponent } from './time-unit-combobox.component';
+import { GenderSelect } from './gender-combobox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 
 @Component({
-	selector: 'systelab-time-unit-select-test',
+	selector: 'systelab-gender-select-test',
 	template: `
-                <div>
-                    <systelab-time-unit-select [(id)]="id" [(description)]="description"
-                                               [showHoursOption]="showHoursOption"
-											   [showWeeksOption]="showWeeksOption"
-											   (change)="doChange()"></systelab-time-unit-select>
-                    <p>{{id}}</p>
-                    <p>{{description}}</p>
-                </div>
+                  <div>
+                      <systelab-gender-select [(id)]="id" [(description)]="description"
+                                              [showAll]="showAll"
+                                              (change)="doChange()"></systelab-gender-select>
+                      <p>{{id}}</p>
+                      <p>{{description}}</p>
+                  </div>
 
-	          `,
+			  `,
 	styles:   []
 })
-export class TimeUnitSelectTestComponent {
+export class GenderSelectTestComponent {
 
 	public id;
 	public description;
-	public showHoursOption = false;
-	public showWeeksOption = true;
+
+	public showAll = true;
 
 	public doChange() {
 	}
 }
 
 @NgModule({
-	declarations:    [TimeUnitSelectComponent,
-		TimeUnitSelectTestComponent,
+	declarations: [GenderSelect,
+		GenderSelectTestComponent,
 		GridContextMenuCellRendererComponent,
 		ComboBoxInputRendererComponent,
 		GridHeaderContextMenuComponent],
-	imports:         [
+	imports:      [
 		CommonModule,
 		FormsModule,
 		SystelabTranslateModule,
 		AgGridModule]
 })
-class TestModule {
+class GenderSelectTestModule {
 }
 
-describe('Systelab Time unit selector', () => {
-	let fixture: ComponentFixture<TimeUnitSelectTestComponent>;
+describe('Systelab Gender selector', () => {
+	let fixture: ComponentFixture<GenderSelectTestComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -76,92 +75,88 @@ describe('Systelab Time unit selector', () => {
 					GridContextMenuCellRendererComponent,
 					GridHeaderContextMenuComponent
 				]),
-				TestModule]
+				GenderSelectTestModule]
 		})
 			.compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(TimeUnitSelectTestComponent);
+		fixture = TestBed.createComponent(GenderSelectTestComponent);
 		fixture.detectChanges();
 	});
 
 	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
+
 	});
 
-	it('should select days', (done) => {
+	it('should select all', (done) => {
 		clickOnDropDown(fixture);
 		fixture.whenStable()
 			.then(() => {
-				clickOnRow(fixture, 'COMMON_DAYS');
+				clickOnRow(fixture, 'A');
 				fixture.whenStable()
 					.then(() => {
 						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_DAYS');
+							.toEqual('A');
 						done();
 					});
 			});
 	});
 
-	it('should select weeks', (done) => {
+	it('should select unknown', (done) => {
 		clickOnDropDown(fixture);
 		fixture.whenStable()
 			.then(() => {
-				clickOnRow(fixture, 'COMMON_WEEKS');
+				clickOnRow(fixture, 'U');
 				fixture.whenStable()
 					.then(() => {
 						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_WEEKS');
+							.toEqual('U');
 						done();
 					});
 			});
 	});
 
-	it('should select months', (done) => {
+	it('should select male', (done) => {
 		clickOnDropDown(fixture);
 		fixture.whenStable()
 			.then(() => {
-				clickOnRow(fixture, 'COMMON_MONTHS');
+				clickOnRow(fixture, 'M');
 				fixture.whenStable()
 					.then(() => {
 						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_MONTHS');
+							.toEqual('M');
 						done();
 
 					});
 			});
 	});
 
-	it('should select years', (done) => {
+	it('should select female', (done) => {
 		clickOnDropDown(fixture);
 		fixture.whenStable()
 			.then(() => {
-				clickOnRow(fixture, 'COMMON_YEARS');
+				clickOnRow(fixture, 'F');
 				fixture.whenStable()
 					.then(() => {
 						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_YEARS');
+							.toEqual('F');
 						done();
 					});
 			});
 	});
 });
 
-function clickOnDropDown(fixture: ComponentFixture<TimeUnitSelectTestComponent>) {
+function clickOnDropDown(fixture: ComponentFixture<GenderSelectTestComponent>) {
 	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
 	button.click();
 	fixture.detectChanges();
 }
 
-function clickOnRow(fixture: ComponentFixture<TimeUnitSelectTestComponent>, id: string) {
+function clickOnRow(fixture: ComponentFixture<GenderSelectTestComponent>, id: string) {
 	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
 	button.click();
-	fixture.detectChanges();
-}
-
-function setShowHours(fixture: ComponentFixture<TimeUnitSelectTestComponent>) {
-	fixture.componentInstance.showHoursOption = true;
 	fixture.detectChanges();
 }
