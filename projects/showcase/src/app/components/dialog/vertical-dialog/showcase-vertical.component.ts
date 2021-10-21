@@ -5,13 +5,7 @@ import { timer } from 'rxjs';
 	selector:    'showcase-vertical',
 	templateUrl: 'showcase-vertical.component.html',
 })
-export class ShowcaseVerticalComponent implements OnInit {
+export class ShowcaseVerticalComponent {
 
-	@ViewChild('firstInput', {static: false}) public firstInput: ElementRef;
-
-	public ngOnInit(): void {
-		timer(200)
-			.subscribe(() => this.firstInput.nativeElement.focus());
-	}
 }
 
