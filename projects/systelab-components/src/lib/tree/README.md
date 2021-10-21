@@ -1,5 +1,7 @@
 # systelab-tree
 
+This component will be DEPRECATED in next versions.
+
 Abstract class that lets you create a Tree component
 
 ## Using the class

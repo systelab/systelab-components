@@ -8,24 +8,24 @@ You must create your own components and extend from the class AbstractSystelabTr
 Inside the class you must convert your array of datas to a tree.
 You can do it with some functions inside the abstract component.
 After creating the structure you must call the 'setDataSource' function to generate the tree.
-You must create a method to define the 'data' you will have in your tree. These 'DataInfo' objects have to be defined the id-attribute, the name-attribute and the inner-data-attribute from the data.
+You must create a method to define the 'data' you will have in your tree. These 'TreeDataFieldsName' objects have to be defined the id-attribute, the name-attribute and the inner-data-attribute from the data.
 
 In order define a tree, you must create your own component and extend from the abstract class AbstractSystelabTree, implementing the following methods:
 
 ```
-protected abstract createTree(): void;
-protected abstract setIconInNode(data: any): string;
-protected abstract setTextClassInNode(data: any): string;
-protected abstract getAttributesInData(data: any): TreeDataFieldsName;
+protected abstract getData(): Array<T>;
+protected abstract getNodeIcon(data: any, level: number): string;
+protected abstract getNodeClass(data: any, level: number): string;
+protected abstract getTreeDataFieldsMap(data: any): Map<string, TreeDataFieldsName>;
 ```
-- createTree
-  - It forces the user to define the tree and call the setDataSource function
-- setIconInNode
-  - With this funcion, the node will check if has to define an icon for the current node
-- setTextClassInNode
-  - With this function, the node will check if has to define a class style for the text
-- getAttributesInData
-  - Used to get the attributes that will create the node in each data in the tree. Retrieves an object with the id-attribute, name-attribute and inner-data-attribute.
+- getData
+  - Returns an array with the data that will be represented in the tree
+- getNodeIcon
+  - With this function, the node will check if has to define an icon for the current node
+- getNodeClass
+  - With this function, the node will check if has to define a class style for the node
+- getTreeDataFieldsMap
+  - Creates a map with the className and the attributes that will be used to retrieve the info for each node.
 
 
 
@@ -36,23 +36,25 @@ Example of use:
 	selector: 'example-cdk-tree',
 	templateUrl: '../../../../../systelab-components/src/lib/tree-cdk/abstract-systelab-tree.component.html',
 })
-export class ExampleTreeComponent extends AbstractSystelabTree {
+export class ExampleTreeComponent extends AbstractSystelabTree<FirstLevelData> {
 
-    private dataList: Array<ExampleData>;
+    private exampleTree: Array<FirstLevelData> = [];
 
 	constructor() {
 		super();
 	}
 
-	public ngOnInit(): void {
-		this.createTree();
+	protected getData(): Array<FirstLevelData> {
+		return this.exampleTree;
 	}
 
-	protected createTree(): void {
-	    // function to create an Example Tree for this demo
-		const newTree = this.createExampleTree();
-		this.treeData = this.convertToTreeStructure(newTree, 0);
-		this.setDataSource();
+	protected getTreeDataFieldsMap(): Map<string, TreeDataFieldsName> {
+		const treeDataFieldsMap: Map<string, TreeDataFieldsName> = new Map<string, TreeDataFieldsName>();
+		treeDataFieldsMap.set(FirstLevelData.name, new TreeDataFieldsName('firstLevelID', 'firstLevelName', 'innerSecondLevel'))
+		treeDataFieldsMap.set(SecondLevelData.name, new TreeDataFieldsName('secondLevelID', 'secondLevelName', 'innerThirdLevel'))
+		treeDataFieldsMap.set(ThirdLevelData.name, new TreeDataFieldsName('thirdLevelID', 'thirdLevelName', 'innerFourthLevel'))
+		treeDataFieldsMap.set(FourthLevelData.name, new TreeDataFieldsName('fourthLevelID', 'fourthLevelName'))
+		return treeDataFieldsMap;
 	}
 
 }
@@ -68,7 +70,7 @@ TreeElementNode interface
 |id   | number | | The id of the node. |
 |data | any | | Data represented by the node.|
 |icon | string | | Icon of the node to display next to content. Could be a icon from FontAwesome|
-|textClass	|string | | Style for the text.|
+|nodeClass	|string | | Style for the text.|
 |expanded |boolean | | Whether the node is in an expanded or collapsed state.|
 |isNodeSelected | boolean | | Used to know if the node is selected.|
 

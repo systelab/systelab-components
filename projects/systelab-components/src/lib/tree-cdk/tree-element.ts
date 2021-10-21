@@ -6,7 +6,6 @@ export interface TreeElementNode {
 	id: number;
 	data: any;
 	icon?: string;
-	collapsedIcon?: string;
 	nodeClass?: string;
 	isNodeSelected?: boolean;
 }
