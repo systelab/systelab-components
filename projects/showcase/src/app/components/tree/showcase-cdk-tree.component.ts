@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {TreeDataLevelInfo, SystelabTree, SystelabTreeConverter} from 'systelab-components';
+import {TreeDataFieldsName, AbstractSystelabTree} from 'systelab-components';
 
 export class FirstLevelData {
 	public firstLevelName: string;
@@ -16,41 +16,84 @@ export class SecondLevelData {
 export class ThirdLevelData {
 	public thirdLevelName: string;
 	public thirdLevelID: number;
+	public innerFourthLevel: Array<FourthLevelData>
+}
+export class FourthLevelData {
+	public fourthLevelName: string;
+	public fourthLevelID: number;
 }
 
 @Component({
-	selector: 'showcase-js-tree',
-	templateUrl: '../../../../../systelab-components/src/lib/tree-js/systelab-tree.component.html',
-	providers: [SystelabTreeConverter]
+	selector: 'showcase-cdk-tree',
+	templateUrl: '../../../../../systelab-components/src/lib/tree-cdk/abstract-systelab-tree.component.html'
 })
-export class ShowcaseJSTreeComponent extends SystelabTree<FirstLevelData> {
+export class ShowcaseCdkTreeComponent extends AbstractSystelabTree<FirstLevelData> {
 
-	constructor(private readonly systelabTreeConverter: SystelabTreeConverter) {
+	public ExpandedIcon = 'fas fa-minus-circle';
+
+	private exampleTree: Array<FirstLevelData> = [];
+
+	constructor() {
 		super();
+		this.exampleTree = this.createExampleTree();
 	}
 
-	public ngOnInit(): void {
-		const newTree = this.createTree();
-		const treeDataInfoList = this.createTreeDataInfoList();
-		this.treeData = this.systelabTreeConverter.convertToTreeStructure(newTree, 0, treeDataInfoList);
-		this.treeData[1].icon = 'fas fa-jedi';
-		this.treeData[1].textClass = 'text-danger';
-		this.treeData[2].icon = 'fab fa-empire';
-		this.treeData[2].textClass = 'text-success';
-		this.treeData[4].icon = 'fab fa-old-republic';
-		this.treeData[7].textClass = 'text-warning';
-		this.setDataSource();
+	protected getData(): Array<FirstLevelData> {
+		return this.exampleTree;
 	}
 
-	private createTreeDataInfoList(): Array<TreeDataLevelInfo> {
-		const dataInfoList: Array<TreeDataLevelInfo> = new Array<TreeDataLevelInfo>();
-		dataInfoList.push(this.systelabTreeConverter.createDataLevelInfo('firstLevelName', 'firstLevelID', 'innerSecondLevel'));
-		dataInfoList.push(this.systelabTreeConverter.createDataLevelInfo('secondLevelName', 'secondLevelID', 'innerThirdLevel'));
-		dataInfoList.push(this.systelabTreeConverter.createDataLevelInfo('thirdLevelName', 'thirdLevelID'));
-		return dataInfoList;
+	protected getTreeDataFieldsMap(): Map<string, TreeDataFieldsName> {
+		const treeDataFieldsMap: Map<string, TreeDataFieldsName> = new Map<string, TreeDataFieldsName>();
+		treeDataFieldsMap.set(FirstLevelData.name, new TreeDataFieldsName('firstLevelID', 'firstLevelName', 'innerSecondLevel'))
+		treeDataFieldsMap.set(SecondLevelData.name, new TreeDataFieldsName('secondLevelID', 'secondLevelName', 'innerThirdLevel'))
+		treeDataFieldsMap.set(ThirdLevelData.name, new TreeDataFieldsName('thirdLevelID', 'thirdLevelName', 'innerFourthLevel'))
+		treeDataFieldsMap.set(FourthLevelData.name, new TreeDataFieldsName('fourthLevelID', 'fourthLevelName'))
+		return treeDataFieldsMap;
 	}
 
-	private createTree(): Array<FirstLevelData> {
+	protected getNodeIcon(data: FirstLevelData | SecondLevelData | ThirdLevelData, level: number): string {
+		if (data instanceof SecondLevelData && data.secondLevelID === 0) {
+			return 'fas fa-jedi text-success';
+		} else if (data instanceof SecondLevelData && data.secondLevelID === 1) {
+			return 'fab fa-empire';
+		} else if (data instanceof FirstLevelData && data.firstLevelID === 1) {
+			return 'fab fa-old-republic';
+		}
+		return '';
+	}
+
+	protected getNodeClass(data: FirstLevelData | SecondLevelData | ThirdLevelData, level: number): string {
+		if (data instanceof SecondLevelData && data.secondLevelID === 0) {
+			return 'text-danger';
+		} else if (data instanceof SecondLevelData && data.secondLevelID === 1) {
+			return 'text-success';
+		} else if (data instanceof ThirdLevelData && data.thirdLevelID === 1) {
+			return 'text-warning';
+		}
+		return '';
+	}
+
+
+
+
+	public doAddMoreNodesToTree(): void {
+		const fourthLevelList: Array<FourthLevelData> = [];
+		fourthLevelList.push(this.createFourthLevel(0, 'Coco'));
+		fourthLevelList.push(this.createFourthLevel(1, 'Mango'));
+		this.exampleTree[1].innerSecondLevel[1].innerThirdLevel[1].innerFourthLevel = fourthLevelList;
+		this.refresh();
+	}
+
+	private createFourthLevel(id: number, name: string): FourthLevelData {
+		const fourthLevel: FourthLevelData = new FourthLevelData();
+		fourthLevel.fourthLevelID = id;
+		fourthLevel.fourthLevelName = name;
+		return fourthLevel;
+	}
+
+	// Dummy methods to create ApplicationData to be represented on the tree for the Showcase.
+
+	private createExampleTree(): Array<FirstLevelData> {
 		const showcaseArray: Array<FirstLevelData> = [];
 		showcaseArray.push(this.createFristLevelData(0, 'Fruits', this.createSecondLevelList()));
 		showcaseArray.push(this.createFristLevelData(1, 'Vegetables', this.createSecondVegetableLevel()));

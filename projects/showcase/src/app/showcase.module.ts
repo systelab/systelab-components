@@ -83,7 +83,7 @@ import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-
 import { ShowcaseToastComponent } from './components/toast/showcase-toast.component';
 import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
 import { ShowcaseSpyMenuDialog } from './components/spy-menu/showcase-spy-menu-dialog.component';
-import {ShowcaseJSTreeComponent} from './components/tree/showcase-js-tree.component';
+import {ShowcaseCdkTreeComponent} from './components/tree/showcase-cdk-tree.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
 
 @NgModule({
@@ -178,7 +178,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 		ShowcaseSpyMenuComponent,
 		ShowcaseSpyMenuDialog,
 		ShowcaseToastComponent,
-		ShowcaseJSTreeComponent
+		ShowcaseCdkTreeComponent
 	],
 	bootstrap:    [ShowcaseComponent]
 })

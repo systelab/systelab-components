@@ -3,5 +3,6 @@
     <showcase-inner-tree (nodeSelected)="nodeSelected($event)"></showcase-inner-tree>
 
     <h3 class="mt-4">New Tree</h3>
-    <showcase-js-tree class="mt-3" (nodeSelected)="doOnNodeSelected($event)"></showcase-js-tree>
+    <showcase-cdk-tree #systelabCdkTree class="mt-3" (nodeSelected)="doOnNodeSelected($event)"></showcase-cdk-tree>
+    <button (click)="systelabCdkTree.doAddMoreNodesToTree()">Growing Tree</button>
 </div>

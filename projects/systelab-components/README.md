@@ -170,6 +170,7 @@ The following table summarizes all the components included in the library.
 | [systelab-toggle-button](src/lib/toggle-button) | Component to select between two values |
 | [systelab-tooltip](src/lib/tooltip) | Directive to show tooltip on hover event |
 | [systelab-tree](src/lib/tree) | Abstract class that lets you create a Tree component |
+| [abstract-systelab-tree](src/lib/tree-cdk) | Abstract class that lets you create a Tree component with CDK |
 | [systelab-twolist](src/lib/twolist) | Component to select a group of elements from elements list |
 | [systelab-week-selector](src/lib/week-selector) | Component to show a Week Selector |
 | [systelab-wizard-steps](src/lib/wizard-steps) | Component to show a Wizard |

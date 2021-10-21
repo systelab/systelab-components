@@ -4,23 +4,23 @@
                    [ngClass]="{'slab-selected': node.isNodeSelected}"
                    [style.display]="shouldRender(node) ? 'flex' : 'none'">
         <!-- use a disabled button to provide padding for tree leaf -->
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" [ngClass]="[node.nodeClass]">
             <button disabled></button>
-            <i *ngIf="node.icon" class="{{node.icon}} mr-1"></i><span class="{{node.textClass}}">{{node.name}}</span>
+            <i *ngIf="node.icon" class="{{node.icon}} mr-1"></i><span>{{node.name}}</span>
         </div>
     </cdk-tree-node>
     <!-- This is the tree node template for expandable nodes -->
     <cdk-tree-node *cdkTreeNodeDef="let node; when: hasChild" cdkTreeNodePadding (click)="doClick(node)"
+                   [ngClass]="{'slab-selected': node.isNodeSelected}"
                    [style.display]="shouldRender(node) ? 'flex' : 'none'">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" [ngClass]="[node.nodeClass]">
             <button cdkTreeNodeToggle
                     [attr.aria-label]="'Toggle ' + node.name"
                     (click)="node.isExpanded = !node.isExpanded"
                     [style.visibility]="node.expandable ? 'visible' : 'hidden'">
-                <i *ngIf="treeControl.isExpanded(node)" class="{{node.expandedIcon}}"></i>
-                <i *ngIf="!treeControl.isExpanded(node)" class="{{node.collapsedIcon}}"></i>
+                <i [ngClass]="[treeControl.isExpanded(node) ? ExpandedIcon : CollapsedIcon]"></i>
             </button>
-            <i *ngIf="node.icon" class="{{node.icon}} mr-1"></i><span class="{{node.textClass">{{node.name}}</span>
+            <i *ngIf="node.icon" class="{{node.icon}} mr-1"></i><span>{{node.name}}</span>
         </div>
     </cdk-tree-node>
 </cdk-tree>

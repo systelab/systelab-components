@@ -90,9 +90,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
-import {SystelabTree} from './tree-js/systelab-tree.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
-import {SystelabTreeConverter} from './tree-js/systelab-tree-converter.service';
 
 @NgModule({
 	imports: [
@@ -186,8 +184,7 @@ import {SystelabTreeConverter} from './tree-js/systelab-tree-converter.service';
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
-		ToastComponent,
-		SystelabTree
+		ToastComponent
 	],
 	exports:      [
 		SliderComponent,
@@ -264,14 +261,12 @@ import {SystelabTreeConverter} from './tree-js/systelab-tree-converter.service';
 		ChipsComponent,
 		SpyMenuComponent,
 		ScrollSpyDirective,
-		ToastComponent,
-		SystelabTree
+		ToastComponent
 	],
 	providers:    [
 		StylesUtilService,
 		ColorUtilService,
-		LoadingService,
-		SystelabTreeConverter
+		LoadingService
 	]
 })
 export class SystelabComponentsModule {
