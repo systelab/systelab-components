@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Month } from 'systelab-components';
 import { Week } from 'systelab-components';
+import { I18nService } from 'systelab-translate';
 
 @Component({
 	selector:    'showcase-datepicker',
@@ -15,7 +16,13 @@ export class ShowcaseDatepickerComponent {
 	public isDisabled: boolean;
 	public selectedMonth: Month = new Month(0, '', 0, false);
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
-	constructor() {
+
+	public languageList = [
+		{description: 'es', id: 'es'},
+		{description: 'en', id: 'en'}
+	];
+
+	constructor(public i18nService: I18nService, protected readonly zone: NgZone) {
 		this.myDate = new Date(2018, 9, 20, 14, 5, 30, 0);
 		this.maxDate = new Date(2018, 9, 20);	// October 20, 2018
 		this.minDate = new Date(2017, 0, 20);	// January 20, 2017
@@ -23,8 +30,15 @@ export class ShowcaseDatepickerComponent {
 		this.isDisabled = false;
 	}
 
-	public resetDateAndTime() {
+	public resetDateAndTime(): void {
 		this.myDate = new Date();
 		this.myDateWithReset = new Date();
+	}
+
+
+	public languageChangeEvent(event: any): void {
+		this.zone.run(() => {
+			this.i18nService.use(event.id).subscribe();
+		});
 	}
 }
