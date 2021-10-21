@@ -3,6 +3,7 @@ import { I18nService } from 'systelab-translate';
 import { addDays } from 'date-fns';
 import { DataTransformerService } from './date-transformer.service';
 import { Calendar } from 'primeng/calendar';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
 	selector:    'systelab-datepicker',
@@ -66,7 +67,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNGConfig) {
 		this.addListeners();
 		// TODO: To get the language and modify the values.
 	}
@@ -300,18 +301,21 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			});
 
 		this.language = {
-			dayNames:        weekDaysNames,
-			dayNamesShort:   weekDaysNamesShort,
-			dayNamesMin:     weekDaysNamesShort,
-			monthNames:      monthNames,
-			monthNamesShort: monthNamesShort
-		};
+			translations: {
+				dayNames:        weekDaysNames,
+				dayNamesShort:   weekDaysNamesShort,
+				dayNamesMin:     weekDaysNamesShort,
+				monthNames:      monthNames,
+				monthNamesShort: monthNamesShort
+		}};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
 		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);
 		if (this.currentCalendar) {
 			this.currentCalendar.dateFormat = this.language.dateFormatValue;
 		}
+
+		this.config.setTranslation(this.language.translations);
 	}
 
 	private addListeners(): void {

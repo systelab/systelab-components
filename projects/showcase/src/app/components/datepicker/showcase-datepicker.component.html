@@ -1,5 +1,15 @@
 <div class="container-fluid">
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Datepicker language</label>
+        <div class="col-md-1">
+            <systelab-select
+                [values]="languageList"
+                (change)="languageChangeEvent($event)"
+                [id]="i18nService.getCurrentLanguage()">
+            </systelab-select>
+        </div>
+    </div>
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time</label>
         <div class="col-md-9">
             <systelab-date-time
