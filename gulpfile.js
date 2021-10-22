@@ -14,7 +14,7 @@ gulp.task('copytemplates', function (done) {
 		'./projects/systelab-components/src/lib/add-remove-list/abstract-add-remove-list.component.html',
 		'./projects/systelab-components/src/lib/datepicker/datepicker.component.html',
 		'./projects/systelab-components/src/lib/datepicker/datepicker-time.component.html',
-		'./projects/systelab-components/src/lib/tree-cdk/abstract-systelab-tree.html'
+		'./projects/systelab-components/src/lib/tree-cdk/abstract-systelab-tree.component.html'
 	])
 		.pipe(gulp.dest('./dist/systelab-components/html'));
 	done();
