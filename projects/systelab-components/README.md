@@ -179,6 +179,7 @@ The following table summarizes all the components included in the library.
 | [systelab-timeline](src/lib/timeline) | Component to show a vertical timeline |
 | [systelab-toast](src/lib/toast) | Component to show a small toast |
 | [systelab-toggle-button](src/lib/toggle-button) | Component to select between two values |
+| [systelab-toggle-selector](src/lib/toggle-selector) | Component to select between a list of options |
 | [systelab-tooltip](src/lib/tooltip) | Directive to show tooltip on hover event |
 | [systelab-tree](src/lib/tree) | Abstract class that lets you create a Tree component |
 | [systelab-twolist](src/lib/twolist) | Component to select a group of elements from elements list |
