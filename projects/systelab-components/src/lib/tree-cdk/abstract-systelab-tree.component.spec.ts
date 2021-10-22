@@ -15,13 +15,13 @@ import {FourthLevelData} from '../../../../showcase/src/app/components/tree/show
 export class FirstLevelData {
 	public firstLevelName: string;
 	public firstLevelID: number;
-	public innerSecondLevel: Array<SecondLevelData>
+	public innerSecondLevel: Array<SecondLevelData>;
 }
 
 export class SecondLevelData {
 	public secondLevelName: string;
 	public secondLevelID: number;
-	public innerThirdLevel: Array<ThirdLevelData>
+	public innerThirdLevel: Array<ThirdLevelData>;
 }
 
 export class ThirdLevelData {
@@ -48,10 +48,10 @@ export class TestCdkTreeComponent extends AbstractSystelabTree<FirstLevelData> {
 
 	protected getTreeDataFieldsMap(): Map<string, TreeDataFieldsName> {
 			const treeDataFieldsMap: Map<string, TreeDataFieldsName> = new Map<string, TreeDataFieldsName>();
-		treeDataFieldsMap.set(FirstLevelData.name, new TreeDataFieldsName('firstLevelID', 'firstLevelName', 'innerSecondLevel'))
-		treeDataFieldsMap.set(SecondLevelData.name, new TreeDataFieldsName('secondLevelID', 'secondLevelName', 'innerThirdLevel'))
-		treeDataFieldsMap.set(ThirdLevelData.name, new TreeDataFieldsName('thirdLevelID', 'thirdLevelName', 'innerFourthLevel'))
-		treeDataFieldsMap.set(FourthLevelData.name, new TreeDataFieldsName('fourthLevelID', 'fourthLevelName'))
+		treeDataFieldsMap.set(FirstLevelData.name, new TreeDataFieldsName('firstLevelID', 'firstLevelName', 'innerSecondLevel'));
+		treeDataFieldsMap.set(SecondLevelData.name, new TreeDataFieldsName('secondLevelID', 'secondLevelName', 'innerThirdLevel'));
+		treeDataFieldsMap.set(ThirdLevelData.name, new TreeDataFieldsName('thirdLevelID', 'thirdLevelName', 'innerFourthLevel'));
+		treeDataFieldsMap.set(FourthLevelData.name, new TreeDataFieldsName('fourthLevelID', 'fourthLevelName'));
 		return treeDataFieldsMap;
 	}
 
@@ -194,7 +194,7 @@ describe( 'Systelab Cdk Tree', () => {
 	it('should expand the first node', () => {
 		clickNode(fixture, 0);
 		expect(fixture.componentInstance.testTree.treeData[0].isNodeSelected).toBeTruthy();
-	})
+	});
 });
 
 function clickNode(fixture: ComponentFixture<SystelabCdkTreeTestComponent>, nodeToSelect: number) {

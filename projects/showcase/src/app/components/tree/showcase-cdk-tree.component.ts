@@ -4,19 +4,19 @@ import {TreeDataFieldsName, AbstractSystelabTree} from 'systelab-components';
 export class FirstLevelData {
 	public firstLevelName: string;
 	public firstLevelID: number;
-	public innerSecondLevel: Array<SecondLevelData>
+	public innerSecondLevel: Array<SecondLevelData>;
 }
 
 export class SecondLevelData {
 	public secondLevelName: string;
 	public secondLevelID: number;
-	public innerThirdLevel: Array<ThirdLevelData>
+	public innerThirdLevel: Array<ThirdLevelData>;
 }
 
 export class ThirdLevelData {
 	public thirdLevelName: string;
 	public thirdLevelID: number;
-	public innerFourthLevel: Array<FourthLevelData>
+	public innerFourthLevel: Array<FourthLevelData>;
 }
 export class FourthLevelData {
 	public fourthLevelName: string;
@@ -38,16 +38,24 @@ export class ShowcaseCdkTreeComponent extends AbstractSystelabTree<FirstLevelDat
 		this.exampleTree = this.createExampleTree();
 	}
 
+	public doAddMoreNodesToTree(): void {
+		const fourthLevelList: Array<FourthLevelData> = [];
+		fourthLevelList.push(this.createFourthLevel(0, 'Coco'));
+		fourthLevelList.push(this.createFourthLevel(1, 'Mango'));
+		this.exampleTree[1].innerSecondLevel[1].innerThirdLevel[1].innerFourthLevel = fourthLevelList;
+		this.refresh();
+	}
+
 	protected getData(): Array<FirstLevelData> {
 		return this.exampleTree;
 	}
 
 	protected getTreeDataFieldsMap(): Map<string, TreeDataFieldsName> {
 		const treeDataFieldsMap: Map<string, TreeDataFieldsName> = new Map<string, TreeDataFieldsName>();
-		treeDataFieldsMap.set(FirstLevelData.name, new TreeDataFieldsName('firstLevelID', 'firstLevelName', 'innerSecondLevel'))
-		treeDataFieldsMap.set(SecondLevelData.name, new TreeDataFieldsName('secondLevelID', 'secondLevelName', 'innerThirdLevel'))
-		treeDataFieldsMap.set(ThirdLevelData.name, new TreeDataFieldsName('thirdLevelID', 'thirdLevelName', 'innerFourthLevel'))
-		treeDataFieldsMap.set(FourthLevelData.name, new TreeDataFieldsName('fourthLevelID', 'fourthLevelName'))
+		treeDataFieldsMap.set(FirstLevelData.name, new TreeDataFieldsName('firstLevelID', 'firstLevelName', 'innerSecondLevel'));
+		treeDataFieldsMap.set(SecondLevelData.name, new TreeDataFieldsName('secondLevelID', 'secondLevelName', 'innerThirdLevel'));
+		treeDataFieldsMap.set(ThirdLevelData.name, new TreeDataFieldsName('thirdLevelID', 'thirdLevelName', 'innerFourthLevel'));
+		treeDataFieldsMap.set(FourthLevelData.name, new TreeDataFieldsName('fourthLevelID', 'fourthLevelName'));
 		return treeDataFieldsMap;
 	}
 
@@ -75,14 +83,6 @@ export class ShowcaseCdkTreeComponent extends AbstractSystelabTree<FirstLevelDat
 
 
 
-
-	public doAddMoreNodesToTree(): void {
-		const fourthLevelList: Array<FourthLevelData> = [];
-		fourthLevelList.push(this.createFourthLevel(0, 'Coco'));
-		fourthLevelList.push(this.createFourthLevel(1, 'Mango'));
-		this.exampleTree[1].innerSecondLevel[1].innerThirdLevel[1].innerFourthLevel = fourthLevelList;
-		this.refresh();
-	}
 
 	private createFourthLevel(id: number, name: string): FourthLevelData {
 		const fourthLevel: FourthLevelData = new FourthLevelData();

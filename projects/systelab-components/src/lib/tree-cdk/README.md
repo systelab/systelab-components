@@ -20,12 +20,16 @@ protected abstract getTreeDataFieldsMap(data: any): Map<string, TreeDataFieldsNa
 ```
 - getData
   - Returns an array with the data that will be represented in the tree
+  
 - getNodeIcon
   - With this function, the node will check if has to define an icon for the current node
+  
 - getNodeClass
   - With this function, the node will check if has to define a class style for the node
+  
 - getTreeDataFieldsMap
   - Creates a map with the className and the attributes that will be used to retrieve the info for each node.
+  
 
 
 
@@ -74,12 +78,8 @@ TreeElementNode interface
 |expanded |boolean | | Whether the node is in an expanded or collapsed state.|
 |isNodeSelected | boolean | | Used to know if the node is selected.|
 
-
-
-
 ## Using your component
 Once you have your component, you can use it in your templates.
-
 
 ## Events
 

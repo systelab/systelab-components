@@ -9,11 +9,11 @@ export class ShowcaseTreeComponent {
 	constructor() {
 	}
 
-	public nodeSelected(event: any) {
+	public nodeSelected(event: any): void {
 		console.log('showcasetreecomponent', event);
 	}
 
-	public doOnNodeSelected(node: any) {
+	public doOnNodeSelected(node: any): void {
 		console.log('New JS Tree', node);
 	}
 }
