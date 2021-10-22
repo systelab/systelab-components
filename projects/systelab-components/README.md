@@ -110,16 +110,20 @@ Bootstrap package is a dependency for systelab-components, and npm will download
 
 ### Changing the default style
 
-To change the default Bootstrap or systelab-components settings like colors, border-radius, etc, add or change the value of the property in the scss file before importing the standard. For example:
+Depending on the imported sass file, the style will be the default classic one or the modern one.
+
+> Remember that for the modern style, it is mandatory to specify the modifier classes for the buttons. Please review https://getbootstrap.com/docs/4.0/components/buttons/ for the available class options.
+
+In both options it is possible to change the default Bootstrap or systelab-components settings (like colors, border-radius, etc...) by adding or changing the value of any property defined in the scss file before importing the standard. For example:
 
 ```sass
 $slab-size-percentage: 1;
 $primary: rgb(0, 154, 181);
 
-@import "systelab-components/sass/systelab-components";
+@import "systelab-components/sass/modern/systelab-components";
 ```
 
-All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) can be overwritten here.
+All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) (classic style) or [_variables.scss](sass/modern/_variables.scss) (modern style) can be overwritten.
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
 
