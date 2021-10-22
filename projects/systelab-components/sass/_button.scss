@@ -20,6 +20,7 @@ $slab-button-background-color: $dark !default;
 .btn:not(.btn-outline-link) {
   background-color: $slab-button-background-color;
   color: white;
+  border-color: $slab-button-background-color;
 
   &:hover {
     background-color: $primary;
@@ -27,15 +28,17 @@ $slab-button-background-color: $dark !default;
   }
 }
 
-.btn { //Toogle buttons
-  &.btn-outline-primary {
-    color: white;
-    background-color: $slab-button-background-color;
-    border-color: $primary;
-  }
+systelab-toggle-button {
+  .btn {
+    &.btn-outline-primary {
+      color: white;
+      background-color: $slab-button-background-color;
+      border-color: $slab-button-background-color;
+    }
 
-  &.btn-primary {
-    background-color: $primary;
-    border-color: $primary;
+    &.btn-primary {
+      background-color: $primary;
+      border-color: $primary;
+    }
   }
 }

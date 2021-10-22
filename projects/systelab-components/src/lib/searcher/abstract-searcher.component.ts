@@ -112,6 +112,9 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 			return {
 				'width':     this.height.toString() + 'px',
 				'min-width': this.height.toString() + 'px',
+				'line-height': 1,
+				'padding-left': 0,
+				'padding-right': 0,
 			};
 		}
 		return undefined;

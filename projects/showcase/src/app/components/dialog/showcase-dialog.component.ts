@@ -1,15 +1,15 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LowerFlexDialogParameters, ShowcaseLowerFlexDialog } from './lower-flex/showcase-lower-flex-dialog.component';
 import { ShowcaseSplitDialog, SplitShowcaseDialogParameters } from './split/showcase-split-dialog.component';
-import { CalendarDialog, CalendarDialogParameters } from 'systelab-components';
+import { CalendarDialog, CalendarDialogParameters, DialogService } from 'systelab-components';
 import { ShowcaseFullFlexDialog, ShowcaseFullFlexDialogParameters } from './full-flex/showcase-full-flex-dialog.component';
 import { ShowcaseTwoColumnsDialog, ShowcaseTwoColumnsDialogParameters } from './two-columns/showcase-two-columns-dialog.component';
 import { ShowcaseTwoTabsDialog, ShowcaseTwoTabsDialogParameters } from './two-tabs/showcase-two-tabs-dialog.component';
-import { ShowcaseStandardDialog } from './standard-dialog/showcase-standard-dialog.component';
-import { DialogService } from 'systelab-components';
+import { ShowcaseStandardDialog, ShowcaseStandardDialogParameters } from './standard-dialog/showcase-standard-dialog.component';
+import { ShowcaseVerticaldDialog } from './vertical-dialog/showcase-vertical-dialog.component';
 
 @Component({
-	selector: 'showcase-dialog',
+	selector:    'showcase-dialog',
 	templateUrl: 'showcase-dialog.component.html',
 })
 export class ShowcaseDialogComponent {
@@ -22,7 +22,7 @@ export class ShowcaseDialogComponent {
 		const parameters: LowerFlexDialogParameters = ShowcaseLowerFlexDialog.getParameters();
 		parameters.width = 960;
 		parameters.heightRelative = '95%';
-		parameters.maxHeight = 900;
+		parameters.maxHeight = 600;
 		parameters.index = 4;
 		this.dialogService.showDialog(ShowcaseLowerFlexDialog, parameters);
 	}
@@ -53,6 +53,7 @@ export class ShowcaseDialogComponent {
 		const parameters: ShowcaseTwoTabsDialogParameters = ShowcaseTwoTabsDialog.getParameters();
 		parameters.heightRelative = '95vh';
 		parameters.widthRelative = '60vw';
+		parameters.maxHeight = 500;
 		parameters.index = 4;
 		this.dialogService.showDialog(ShowcaseTwoTabsDialog, parameters);
 	}
@@ -65,6 +66,10 @@ export class ShowcaseDialogComponent {
 		this.dialogService.showDialog(ShowcaseFullFlexDialog, parameters);
 	}
 
+	public showVerticalDialog() {
+		this.dialogService.showDialog(ShowcaseVerticaldDialog, ShowcaseVerticaldDialog.getParameters());
+	}
+
 	public showTwoColumnsDialog() {
 		const parameters: ShowcaseTwoColumnsDialogParameters = ShowcaseTwoColumnsDialog.getParameters();
 		parameters.width = 960;
@@ -75,5 +80,12 @@ export class ShowcaseDialogComponent {
 
 	public showStandardDialog() {
 		this.dialogService.showDialog(ShowcaseStandardDialog, ShowcaseStandardDialog.getParameters());
+	}
+
+	public showFullScreenDialog() {
+		const parameters: ShowcaseStandardDialogParameters = ShowcaseStandardDialog.getParameters();
+		parameters.fullScreen = true;
+		parameters.index = 4;
+		this.dialogService.showDialog(ShowcaseStandardDialog, parameters);
 	}
 }

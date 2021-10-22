@@ -1,4 +1,4 @@
-<div class="w-100 h-100 d-flex justify-content-center">
+<div class="slab-paginator-container w-100 h-100 d-flex justify-content-center">
     <systelab-paginator-page *ngIf="showFirstLastButtons" [icon]="'fas fa-fast-backward'" [disabled]="page===1" (click)="goFirst()"></systelab-paginator-page>
     <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'fas fa-step-backward'" [disabled]="page===1"
                              (click)="goPrevious()"></systelab-paginator-page>

@@ -1,0 +1,231 @@
+$checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
+
+$icon-rowaction-font-size: 20px;
+
+@mixin ag-header-row() {
+  .ag-header-row {
+    line-height: $grid-header-line-height;
+
+    .ag-header-cell {
+      overflow: hidden;
+      color: white;
+      border-color: $grid-border-color;
+      font-weight: normal;
+      text-align: left;
+      padding: 0;
+
+      .slab-grid-header-context-menu {
+        display: flex;
+        height: 100%;
+
+        .slab-context-menu {
+          height: 100%;
+          min-width: $grid-cell-height;
+          width: $grid-cell-height;
+
+          .icon-context-menu {
+            color: white;
+          }
+        }
+
+        .slab-grid-header-context-menu-label {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+        }
+      }
+
+      .ag-header-cell-label {
+        padding: 0 5px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        > span {
+          height: auto;
+        }
+      }
+
+      .ag-header-cell-resize {
+        cursor: ew-resize;
+      }
+    }
+  }
+}
+
+@mixin ag-row() {
+  .ag-row {
+
+    &.ag-row-selected {
+      background-color: $table-row-selected-background-color;
+
+      &.ag-row-focus {
+        opacity: 0.8;
+      }
+
+      &.ag-row-hover {
+        opacity: 0.8;
+      }
+    }
+
+    &:not(.ag-row-selected) {
+      &.ag-row-odd {
+        background-color: $table-row-odd-background-color;
+      }
+
+      &.ag-row-even {
+        background-color: $table-row-even-background-color;
+      }
+
+      &.ag-row-focus {
+        background-color: scale-color($primary, $alpha: -90%);
+      }
+
+      &.ag-row-hover {
+        background-color: scale-color($primary, $alpha: -90%);
+      }
+    }
+
+
+    .ag-cell {
+      line-height: $grid-cell-height;
+      border: none;
+      border-right: 1px solid $grid-border-color;
+      padding: 0 5px;
+      outline-width: 0;
+
+      &.ag-cell-last-left-pinned {
+        border-right: 1px solid $grid-border-color;
+      }
+
+      &.ag-cell-focus {
+        border: 1px dashed scale-color($primary, $alpha: -60%) !important;
+      }
+
+      .ag-icon {
+        visibility: hidden;
+      }
+
+    }
+
+    .ag-cell-inline-editing {
+      height: $grid-cell-height;
+      background: white;
+    }
+  }
+}
+
+.ag-bl-full-height {
+  overflow: hidden;
+}
+
+.ag-theme-fresh {
+  .ag-root-wrapper {
+    border: none !important;
+  }
+
+  .ag-ltr .ag-root {
+    border: none;
+    overflow: hidden;
+    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+    .ag-header {
+      border-bottom: none;
+      font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+      .ag-header-viewport, .ag-pinned-left-header {
+        background-color: $grid-header-background-color;
+
+        .ag-header-container {
+          @include ag-header-row()
+        }
+      }
+
+      .ag-pinned-left-header {
+        @include ag-header-row()
+      }
+
+    }
+
+    .ag-header-cell, .ag-header-group-cell {
+      border-right: 1px solid $grid-border-color !important;
+    }
+
+    .ag-body-viewport {
+      //overflow: auto !important;
+      @include ag-row()
+    }
+
+    .ag-body-horizontal-scroll {
+      .ag-horizontal-left-spacer {
+        overflow-x: auto;
+        border-right: none;
+        background-color: #f6f6f6;
+      }
+    }
+
+
+  }
+  .ag-row-drag {
+    background: none;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .ag-pinned-left-header {
+    border-right: solid 1px;
+    border-right-color: $grid-border-color !important;
+  }
+
+  .ag-header-cell-text {
+    color: $grid-header-text-color;
+  }
+
+  .ag-row {
+    border-bottom: solid 1px $grid-border-color;
+  }
+
+  .ag-cell {
+    border-right: none !important;
+  }
+
+  .ag-header {
+    border-bottom: solid 1px $grid-border-color !important;
+    border-top: solid 1px $grid-border-color !important;
+  }
+
+  .ag-header-cell::after,
+  .ag-header-group-cell::after {
+    background: white;
+  }
+
+  .ag-header-group-cell {
+    border-bottom: solid 1px $grid-border-color !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .ag-header-group-cell-label {
+    justify-content: center !important;
+  }
+
+  .ag-header-cell-label {
+    flex-direction: row !important;
+    justify-content: left !important;
+    align-items: center !important;
+  }
+
+}
+
+.height-hidden { //Style for the hidden element to get the proper height from Typescript
+  display: none;
+  line-height: $grid-cell-height; //Table Row Height
+  height: $grid-header-height; //Table Header Height
+}
+
+systelab-spinner-cell {
+  display: flex;
+}
+

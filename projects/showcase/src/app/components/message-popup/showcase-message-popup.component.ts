@@ -39,7 +39,7 @@ export class ShowcaseMessagePopupComponent {
 	public showCustomized() {
 		const buttons: MessagePopupButton[] = [
 			new MessagePopupButton('Approve', '', 'btn-primary'),
-			new MessagePopupButton('Reject', '', 'btn-danger')];
+			new MessagePopupButton('Reject', '', 'btn-outline-danger')];
 		const icon = new MessagePopupIcon('icon-print', 'text-danger');
 		this.messagePopupService.showCustomQuestionPopup('Test', 'Customized Message popup', null, 800, 600, buttons, icon)
 			.subscribe((v) => {
