@@ -29,7 +29,7 @@ export class FourthLevelData {
 })
 export class ShowcaseCdkTreeComponent extends AbstractSystelabTree<FirstLevelData> {
 
-	public ExpandedIcon = 'fas fa-minus-circle';
+	public expandedIcon = 'fas fa-minus-circle';
 
 	private exampleTree: Array<FirstLevelData> = [];
 

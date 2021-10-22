@@ -18,7 +18,7 @@
                     [attr.aria-label]="'Toggle ' + node.name"
                     (click)="node.isExpanded = !node.isExpanded"
                     [style.visibility]="node.expandable ? 'visible' : 'hidden'">
-                <i [ngClass]="[treeControl.isExpanded(node) ? ExpandedIcon : CollapsedIcon]"></i>
+                <i [ngClass]="[treeControl.isExpanded(node) ? expandedIcon : collapsedIcon]"></i>
             </button>
             <i *ngIf="node.icon" class="{{node.icon}} mr-1"></i><span>{{node.name}}</span>
         </div>

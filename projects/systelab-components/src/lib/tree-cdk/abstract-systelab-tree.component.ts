@@ -12,8 +12,8 @@ export abstract class AbstractSystelabTree<T> implements OnInit {
 
 	@Output() public nodeSelected: EventEmitter<TreeElementNode> = new EventEmitter<TreeElementNode>();
 
-	public ExpandedIcon = 'fas fa-chevron-down';
-	public CollapsedIcon = 'fas fa-chevron-right';
+	public expandedIcon = 'fas fa-chevron-down';
+	public collapsedIcon = 'fas fa-chevron-right';
 
 	public treeData: Array<TreeElementNode> = [];
 
@@ -39,9 +39,9 @@ export abstract class AbstractSystelabTree<T> implements OnInit {
 		this.nodeSelected.emit(node);
 	}
 
-	public hasChild = (_: number, node: TreeElementNode) => node.expandable;
+	public hasChild = (_: number, node: TreeElementNode): boolean => node.expandable;
 
-	protected getParentNode(node: TreeElementNode) {
+	protected getParentNode(node: TreeElementNode): TreeElementNode {
 		const nodeIndex = this.treeData.indexOf(node);
 
 		for (let i = nodeIndex - 1; i >= 0; i--) {
@@ -52,7 +52,7 @@ export abstract class AbstractSystelabTree<T> implements OnInit {
 		return null;
 	}
 
-	public shouldRender(node: TreeElementNode) {
+	public shouldRender(node: TreeElementNode): boolean {
 		let parent = this.getParentNode(node);
 		while (parent) {
 			if (!parent.isExpanded) {
@@ -88,14 +88,6 @@ export abstract class AbstractSystelabTree<T> implements OnInit {
 		return node;
 	}
 
-	protected abstract getData(): Array<T>;
-
-	protected abstract getNodeIcon(data: any, level: number): string;
-
-	protected abstract getNodeClass(data: any, level: number): string;
-
-	protected abstract getTreeDataFieldsMap(): Map<string, TreeDataFieldsName>;
-
 	protected setDataSource(): void {
 		this.dataSource = new ArrayDataSource(this.treeData);
 	}
@@ -104,4 +96,12 @@ export abstract class AbstractSystelabTree<T> implements OnInit {
 		this.treeData = this.convertDataToTreeElementNodes(this.getData(), 0);
 		this.setDataSource();
 	}
+
+	protected abstract getData(): Array<T>;
+
+	protected abstract getNodeIcon(data: any, level: number): string;
+
+	protected abstract getNodeClass(data: any, level: number): string;
+
+	protected abstract getTreeDataFieldsMap(): Map<string, TreeDataFieldsName>;
 }
