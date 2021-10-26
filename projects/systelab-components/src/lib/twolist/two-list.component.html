@@ -19,10 +19,10 @@
         <button type="button" class="btn icon-angle-double-right" (click)="addAll()" title="{{'COMMON_ADD_ALL' | translate | async }}"
             [disabled]="available.length == 0">
         </button>
-        <button type="button" class="btn icon-chevron-right" (click)="add()" title="{{'COMMON_ADD_SELECTED' | translate | async }}"
+        <button type="button" class="btn icon-angle-right" (click)="add()" title="{{'COMMON_ADD_SELECTED' | translate | async }}"
             [disabled]="currentSelectionStatus.available.length == 0">
         </button>
-        <button type="button" class="btn icon-chevron-left" (click)="remove()" title="{{'COMMON_REMOVE_SELECTED' | translate | async }}"
+        <button type="button" class="btn icon-angle-left" (click)="remove()" title="{{'COMMON_REMOVE_SELECTED' | translate | async }}"
             [disabled]="currentSelectionStatus.visible.length == 0">
         </button>
         <button type="button" class="btn icon-angle-double-left" (click)="removeAll()" title="{{'COMMON_REMOVE_ALL' | translate | async }}"

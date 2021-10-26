@@ -1,27 +1,33 @@
 <div class="container-fluid">
-    <button type="button" class="btn mt-2 mr-1"
-            (click)="showLowerFlexDialog()">Form + lower flex textarea
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showStandardDialog()">Horizontal form
     </button>
-    <button type="button" class="btn mt-2 mr-1"
-            (click)="showTwoTabsDialog()">Two tab rows
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showVerticalDialog()">Vertical form
     </button>
-    <button type="button" class="btn mt-2 mr-1"
-            (click)="showTwoColumnsDialog()">Two columns
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showTwoColumnsDialog()">Two columns form
     </button>
-    <button type="button" class="btn mt-2 mr-1"
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showLowerFlexDialog()">Form with growing component
+    </button>
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showTwoTabsDialog()">Two tabs form
+    </button>
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
             (click)="showCalendarDialog()">Calendar
     </button>
-    <button type="button" class="btn mt-2 mr-1"
-            (click)="showFullFlexDialog()">Flex
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showFullFlexDialog()">Flex form
     </button>
-    <button type="button" class="btn mt-2 mr-1"
-            (click)="showSplitDialog()">Split
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+            (click)="showSplitDialog()">Split form
     </button>
-    <button type="button" class="btn mt-2 mr-1"
-            (click)="showStandardDialog()">Standard
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1" #btnContextModal
+            (click)="showCalendarWithPositionDialog()">Position Form
     </button>
-    <button type="button" class="btn mt-2 mr-1" #btnContextModal
-            (click)="showCalendarWithPositionDialog()">Calendar with position
+    <button type="button" class="btn btn-outline-primary mt-2 mr-1"
+                         (click)="showFullScreenDialog()">Full screen
     </button>
 
 </div>

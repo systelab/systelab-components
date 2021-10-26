@@ -18,9 +18,9 @@
 </div>
 <systelab-dialog-bottom>
     <button type="button" class="btn mr-1" (click)="setShowDetails()"
-            [class.btn-primary]="isShowDetails">Details
+            [ngClass]="isShowDetails ? 'btn-primary' : 'btn-outline-primary'">Details
     </button>
     <button type="button" class="btn" (click)="setShowSelector()"
-            [class.btn-primary]="isShowSelector">Selector
+            [ngClass]="isShowSelector ? 'btn-primary' : 'btn-outline-primary'">Selector
     </button>
 </systelab-dialog-bottom>

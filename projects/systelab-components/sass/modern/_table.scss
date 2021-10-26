@@ -1,0 +1,19 @@
+
+.table {
+
+  tr {
+    height: $slab-table-min-row-height;
+  }
+}
+
+/*
+ * This is a custom modifier class extending 
+ * default Bootstrap functionality
+ */
+.table-remove-border {
+  border: 0;
+
+  tr, th, td {
+    border: 0;
+  }
+}

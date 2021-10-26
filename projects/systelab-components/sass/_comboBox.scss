@@ -38,6 +38,23 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     }
   }
 
+  .slab-combo-button-icon {
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &:before {
+      content: "\f0d7";
+    }
+  }
+
   .slab-combo-input {
     &:focus {
       border-color: transparent;
@@ -64,6 +81,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     white-space: nowrap;
     overflow: hidden;
     padding: 0 12px;
+    height: $form-elements-height - 2px  !important;
 
     &.form-control[readonly] {
       background-color: white;

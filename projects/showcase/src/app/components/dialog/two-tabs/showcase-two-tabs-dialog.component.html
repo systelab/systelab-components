@@ -1,6 +1,6 @@
 <systelab-dialog-header (close)="close();">Dialog with two tab row</systelab-dialog-header>
 <systelab-tabs style="height: 120px">
-    <systelab-tab [title]="'title 1'" [id]="'1'">
+    <systelab-tab [title]="'Title 1'" [id]="'1'">
         Fixed height component (120px) 1
         <br>
         <br>
@@ -10,20 +10,20 @@
         <br>
         <br>
     </systelab-tab>
-    <systelab-tab [title]="'title 2'" [id]="'2'">
+    <systelab-tab [title]="'Title 2'" [id]="'2'">
         Fixed height component (120px) 2
     </systelab-tab>
 </systelab-tabs>
 
 <systelab-tabs class="slab-flex-1">
-    <systelab-tab [title]="'title 3'" [id]="'5'">
+    <systelab-tab [title]="'Title 3'" [id]="'5'">
         <showcase-two-tabs>...</showcase-two-tabs>
     </systelab-tab>
-    <systelab-tab [title]="'title 4'" [id]="'6'">
+    <systelab-tab [title]="'Title 4'" [id]="'6'">
         <showcase-two-tabs>...</showcase-two-tabs>
     </systelab-tab>
 </systelab-tabs>
 
 <systelab-dialog-bottom>
-    <button type="button" class="btn ml-auto" (click)="close()"> Submit</button>
+    <button type="button" class="btn btn-primary ml-auto" (click)="close()"> Submit</button>
 </systelab-dialog-bottom>
