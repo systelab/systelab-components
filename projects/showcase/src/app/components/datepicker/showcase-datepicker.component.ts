@@ -17,7 +17,6 @@ export class ShowcaseDatepickerComponent {
 	public selectedMonth: Month = new Month(0, '', 0, false);
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
 	public yesterdayDate;
-	constructor() {
 	public languageList = [
 		{description: 'es', id: 'es'},
 		{description: 'en', id: 'en'}
