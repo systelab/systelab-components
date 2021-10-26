@@ -1,0 +1,148 @@
+@import "systelab-bootstrap-settings";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+@import "mixins";
+
+// Internal variable to help set the size
+$slab-size-percentage: 1 !default;
+// Internal variable to set the font size
+$slab-base-font-size: 15px !default;
+// Defines the application font size
+$slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-font-size * 1.25) !default;
+// Defines the application font family
+$slab-base-body-font-family: $font-family-base;
+// Defines the appication body color
+$slab-base-body-color: rgb(66, 66, 66) !default;
+// Defines the minimum width of the body
+$slab-app-min-width: 367px !default;
+// defines the minimum height of the body
+$slab-app-min-height: 375px !default;
+
+// Defines the ipad
+$slab-ipad-width: 1024px !default;
+
+// Defines the primary color
+$primary: rgb(21, 143, 239) !default;
+$background-primary: rgb(255, 255, 255) !default;
+$background-secondary: rgb(238, 238, 238) !default;
+// Defines the color for selected elements
+$slab-selected-background-color: rgb(200, 223, 252) !default;
+
+// Internal variable to define the height of the elements in a form
+$form-elements-height: floor(28px * $slab-size-percentage) !default;
+
+
+
+$slab-component-border-color: #ced4da !default;
+$slab-focus-component-border-color: #8cc8f7 !default;
+$slab-focus-component-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !default;
+
+
+//Grayscale
+$light-gray: rgb(248, 248, 248) !default;
+$medium-gray: rgb(214, 214, 214) !default;
+$dark-gray: rgb(128, 128, 128) !default;
+$darker-gray: rgb(45, 45, 45) !default;
+
+$dark-green: rgb(4, 123, 87) !default;
+$darker-green: rgb(47, 148, 60) !default;
+
+$table-gray: rgb(149, 149, 149) !default;
+
+// Defines the application header height
+$slab-app-header-height: 56px !default;
+// Defines the width of the user area in the application header
+$slab-app-header-user-width: 130px !default;
+
+$slab-dialog-header-color: $light-gray !default;
+$slab-dialog-fullscreen-header-color: none !default;
+
+$slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
+// Defines the height of the dialogs header
+$slab-dialog-header-height: 65px !default;
+// Defines the minimum width for the button
+$slab-minimum-button-width: 85px !default;
+
+// Defines the height of the rows of a table
+$table-row-odd-background-color: rgb(243, 243, 243) !default;
+$table-row-even-background-color: rgb(253, 253, 253) !default;
+$table-row-selected-background-color: $slab-selected-background-color !default;
+// Defines the height of the ui-grid-header-cell
+$grid-header-height: 39px !default;
+// Defines the line-height of the ui-grid-header-cell.
+$grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
+$grid-header-background-color: white !default;
+$grid-header-text-color: black !default;
+$grid-border-color: #dee2e6  !default;
+
+// Defines the height and the min-height of the ui-grid row and cell
+$grid-cell-height: 39px !default;
+$slab-table-min-row-height: 39px !default;
+
+// Defines the height of the tab
+$slab-tab-height: 28px !default;
+// Defines the min-width of the tab
+$slab-tab-min-width: 120px !default;
+// Define the top margin and the gutter between tab elements
+$slab-tab-space: 5px !default;
+// Define the color for non active tabs
+$slab-tab-no-active-bg-color: rgb(255, 255, 255) !default;
+
+// Defines the width of the combobox button
+$slab-combo-check-cell-padding: 12px !default;
+
+
+// Define the height and the line-height of the checkbox
+$slab-checkbox-height: 22px !default;
+$slab-checkbox-grid-height: 22px !default;
+
+$slab-checkbox-border-color: $primary !default;
+$slab-checkbox-color: white !default;
+$slab-checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
+
+
+$slab-switch-bg-color: transparent !default;
+$slab-switch-circle-color: $dark-gray !default;
+$slab-switch-bg-color-checked: $primary !default;
+$slab-switch-circle-color-checked: white !default;
+$slab-switch-height: 22px !default;
+
+// Define the height and the line-height of the radio
+$slab-radio-height: 22px !default;
+// Defines the padding-left of the radio
+$slab-radio-text-gap: $slab-radio-height * 1.5 !default;
+$slab-radio-border-color: $primary !default;
+$slab-radio-color: white !default;
+
+// Defines the slider height
+$slab-slider-height: 24px !default;
+// Defines the height of the ui-slider
+$slab-slider-background-line: round($slab-slider-height / 3);
+$slab-slider-circle-color: white !default;
+$slab-slider-circle-border-color: $primary !default;
+
+// Defines the row line-height of the dropdown and the row line-height of the tree
+$slab-dropdown-line-height: $form-elements-height !default;
+$slab-dropdown-disabled-fg-color: rgb(192, 192, 192) !default;
+
+// Defines the width of the searcher button
+$slab-searcher-button-width: $form-elements-height !default;
+
+// Defines the default width of the spinner
+$slab-spinner-width: 100px !default;
+
+// Define the line-height of the datepicker’s navigation bar.*/
+$slab-datepicker-header-navigation-line-height: 25px !default;
+
+// Defines the min-height of the textarea.
+$slab-textarea-min-height: 140px !default;
+
+/* $twolist-row-height: define the row height*/
+$slab-twolist-row-height: 36px !default;
+
+
+/* $sort-list-row-height: define the row height*/
+$slab-sort-list-row-height: 36px !default;
+
+/* Input Border radius */
+$slab-border-radius: 5px !default;

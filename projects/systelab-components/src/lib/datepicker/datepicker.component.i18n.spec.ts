@@ -55,6 +55,55 @@ export class ESMockI18nService {
 		return 'dd/MM/yy';
 	}
 }
+export class ESMockI18nService2 {
+	public get(key: string) {
+		const translations = {
+			"COMMON_JANUARY": "Enero",
+			"COMMON_FEBRUARY": "Febrero",
+			"COMMON_MARCH": "Marzo",
+			"COMMON_APRIL": "Abril",
+			"COMMON_MAY": "Mayo",
+			"COMMON_JUNE": "Junio",
+			"COMMON_JULY": "Julio",
+			"COMMON_AUGUST": "Agosto",
+			"COMMON_SEPTEMBER": "Septiembre",
+			"COMMON_OCTOBER": "Octubre",
+			"COMMON_NOVEMBER": "Noviembre",
+			"COMMON_DECEMBER": "Diciembre",
+			"COMMON_MONDAY" : "Lunes",
+			"COMMON_TUESDAY" : "Martes",
+			"COMMON_WEDNESDAY" : "Miércoles",
+			"COMMON_THURSDAY" : "Jueves",
+			"COMMON_FRIDAY" : "Viernes",
+			"COMMON_SATURDAY" : "Sábado",
+			"COMMON_SUNDAY" : "Domingo",
+			"COMMON_FIRST_DAY":"L",
+			"COMMON_SECOND_DAY":"M",
+			"COMMON_THIRD_DAY":"X",
+			"COMMON_FOURTH_DAY":"J",
+			"COMMON_FIFTH_DAY":"V",
+			"COMMON_SIXTH_DAY":"S",
+			"COMMON_SEVENTH_DAY":"D"
+		}
+		return of(translations);
+	}
+
+	public getFirstDayOfWeek() {
+		return 1;
+	}
+
+	public getDateFormatForDatePicker() {
+		return 'dd/mm/yy';
+	}
+
+	public getCurrentLanguage() {
+		return 'es-ES';
+	}
+
+	public getDateFormat() {
+		return 'dd/MM/yy';
+	}
+}
 
 export class ZHMockI18nService {
 	public get(key: string) {
@@ -364,7 +413,69 @@ describe('Systelab ZH DatepickerComponent', () => {
 	});
 });
 
-function enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
+describe('Systelab ES DatepickerComponent, check translations', () => {
+	let fixture: ComponentFixture<Datepicker>;
+
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports:      [BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				CalendarModule,
+				HttpClientModule,
+				SystelabTranslateModule],
+			declarations: [TouchspinComponent,
+				Datepicker],
+			providers:    [{provide: I18nService, useClass: ESMockI18nService2}]
+		})
+			.compileComponents();
+	});
+
+	beforeEach(() => {
+		fixture = TestBed.createComponent(Datepicker);
+		fixture.componentInstance.inline = true;
+		fixture.detectChanges();
+	});
+
+	it('should instantiate', () => {
+		expect(fixture.componentInstance)
+			.toBeDefined();
+	});
+
+	it('monday short should be in spanish translation "L"', () => {
+		fixture.whenStable().then(() => {
+			const daySpan = fixture.debugElement.query(By.css(`table th:first-child span`));
+			expect(daySpan.nativeElement.textContent.trim())
+				.toEqual('L');
+			});
+		});
+
+	it('month should be in spanish translation "Octubre"', () => {
+		fixture.whenStable().then(() => {
+			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
+			expect(monthSpan.nativeElement.textContent.trim())
+				.toEqual('Octubre');
+			});
+		});
+
+	it('after select next month, should be in spanish translation "Noviembre"', () => {
+		fixture.whenStable().then(() => {
+			const nextMonth = fixture.debugElement.query(By.css(`#nextMonth`)).nativeElement;
+			nextMonth.dispatchEvent(new Event('click'));
+			fixture.detectChanges();
+
+			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
+			expect(monthSpan.nativeElement.textContent.trim())
+				.toEqual('Noviembre');
+			});
+		});
+
+});
+
+
+function enterText(fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<Datepicker>, text: string) {
 	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 	inputComponent.value = text;
 	inputComponent.dispatchEvent(new Event('keydown'));

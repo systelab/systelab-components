@@ -1,7 +1,7 @@
 <systelab-app-frame #appFrame [userName]="userName" [userFullName]="userFullName" [title]="title" [menu]="menu" [tabs]="sidetabs"
     [actions]="sideactions" [menuBars]="menuBars"  [largeSideBar]="false" [logoIcon]="logoIcon" (selected)="doSelect($event)">
     <div header-content>
-        <button type="button" class="btn btn-sm">Button Top</button>
+        <button type="button" class="btn btn-outline-primary btn-sm">Button Top</button>
     </div>
     <div class="slab-flex-1 p-2" style="overflow: auto;" main-content>
         <div *ngIf="currentTab==='T1'"></div>

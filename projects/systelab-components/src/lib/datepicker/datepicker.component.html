@@ -1,5 +1,7 @@
 <p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false"
-            [dateFormat]="language.dateFormatValue" (onFocus)="saveEventOnFocus($event)"
+            [dateFormat]="language.dateFormatValue"
+            [firstDayOfWeek]="language.firstDayOfWeek"
+            (onFocus)="saveEventOnFocus($event)"
             (onBlur)="changeDate()"
             (onSelect)="selectDate()"
             (onInput)="onInput($event)"
@@ -23,16 +25,16 @@
             <a id="nextYear" class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
             <a id="nextMonth" class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
             <div class="p-datepicker-title d-flex align-items-center justify-content-center">
-                <span class="p-datepicker-month">{{ language.monthNames[currentCalendar.currentMonth] }}&nbsp;</span>
+                <span class="p-datepicker-month">{{ language.translations.monthNames[currentCalendar.currentMonth] }}&nbsp;</span>
                 <span class="p-datepicker-year">{{ currentCalendar.currentYear }}</span>
             </div>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
         <div *ngIf="!inline" class="p-1 d-flex border-top">
-            <button *ngIf="showTodayButton" id="today" class="btn btn-sm mr-auto"
+            <button *ngIf="showTodayButton" id="today" class="btn btn-sm btn-outline-primary mr-auto"
                     (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
-            <button id="clear" class="btn btn-sm ml-auto"
+            <button id="clear" class="btn btn-sm btn-outline-danger ml-auto"
                     (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
         </div>
     </ng-template>
