@@ -121,3 +121,5 @@ export * from './lib/toast/toast.component';
 export * from './lib/spy-menu/spy-menu-item';
 export * from './lib/spy-menu/spy-menu.component';
 export * from './lib/spy-menu/scroll-spy.directive';
+
+export * from './lib/toggle-selector/toggle-selector.component';
