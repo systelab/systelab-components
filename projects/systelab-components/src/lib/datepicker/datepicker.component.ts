@@ -25,6 +25,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public warnDaysBefore: number;
 	@Input() public warnDaysAfter: number;
 	@Input() public autofocus = false;
+	@Input() public fromDateForRelativeDates;
 
 	@Input()
 	get currentDate(): Date {
@@ -157,7 +158,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				.toLowerCase();
 			if (this.inputChanged) {
 				if (dateStr.length >= 2) {
-					const transformedDate = this.dataTransformerService.processShortcuts(dateStr);
+					const transformedDate = this.dataTransformerService.processShortcuts(dateStr, this.fromDateForRelativeDates);
 					if (transformedDate) {
 						this.currentDate = transformedDate;
 					} else {

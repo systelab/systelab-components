@@ -4,24 +4,24 @@ import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
 @Injectable()
 export class DataTransformerService {
 
-	public processShortcuts(date: string): Date {
+	public processShortcuts(date: string, fromDateForRelative: Date): Date {
 		const regExp = new RegExp('^[\-]?[0-9]+[DWSMYA]$', 'i');
 		if (regExp.test(date)) {
 			const shortcut = date.substr(-1)
 				.toUpperCase();
 			const amount = Number(date.slice(0, -1));
-			const today = new Date();
+			const fromDate = fromDateForRelative ?  fromDateForRelative : new Date();
 			switch (shortcut) {
 				case 'D':
-					return addDays(today, amount);
+					return addDays(fromDate, amount);
 				case 'W':
 				case 'S':
-					return addWeeks(today, amount);
+					return addWeeks(fromDate, amount);
 				case 'M':
-					return addMonths(today, amount);
+					return addMonths(fromDate, amount);
 				case 'Y':
 				case 'A':
-					return addYears(today, amount);
+					return addYears(fromDate, amount);
 			}
 		}
 		return undefined;

@@ -72,6 +72,15 @@
         </div>
     </div>
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Date with relative date yesterday</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [fromDateForRelativeDates]="yesterdayDate"
+                    [(currentDate)]="myDate"
+                    [showTodayButton]="true"></systelab-datepicker>
+        </div>
+    </div>
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Date required bottom</label>
         <div class="col-md-4">
             <systelab-month-selector [disabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate"

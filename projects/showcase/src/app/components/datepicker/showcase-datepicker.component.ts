@@ -16,7 +16,7 @@ export class ShowcaseDatepickerComponent {
 	public isDisabled: boolean;
 	public selectedMonth: Month = new Month(0, '', 0, false);
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
-
+	public yesterdayDate;
 	public languageList = [
 		{description: 'es', id: 'es'},
 		{description: 'en', id: 'en'}
@@ -28,6 +28,7 @@ export class ShowcaseDatepickerComponent {
 		this.minDate = new Date(2017, 0, 20);	// January 20, 2017
 		this.myDateWithReset = new Date(2018, 9, 20, 14, 5, 30, 0);
 		this.isDisabled = false;
+		this.yesterdayDate = new Date().setDate(new Date().getDate() - 1);
 	}
 
 	public resetDateAndTime(): void {
