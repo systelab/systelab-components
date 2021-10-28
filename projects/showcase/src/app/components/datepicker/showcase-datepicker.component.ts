@@ -18,8 +18,9 @@ export class ShowcaseDatepickerComponent {
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
 	public yesterdayDate;
 	public languageList = [
-		{description: 'es', id: 'es'},
-		{description: 'en', id: 'en'}
+		{description: 'Spanish', id: 'es'},
+		{description: 'English', id: 'en'},
+		{description: 'English (USA)', id: 'en-US'}
 	];
 
 	constructor(public i18nService: I18nService, protected readonly zone: NgZone) {
