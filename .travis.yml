@@ -50,6 +50,7 @@ before_deploy: |
     git -c user.name='travis' -c user.email='travis' commit -m 'New deploy from Travis'
     git push -f -q https://systelab:$GITHUB_API_KEY@github.com/systelab/systelab.github.io
     cd ..
+    cd dist/systelab-components
   fi
 
 deploy:
