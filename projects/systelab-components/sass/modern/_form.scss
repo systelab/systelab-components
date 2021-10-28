@@ -36,3 +36,8 @@
 .row {
   margin-bottom: 10px;
 }
+
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}

@@ -27,7 +27,8 @@ export class ShowcaseGridUtil {
 
 	public static getColumnDefs(): Array<any> {
 		// TODO Translate column names
-		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true, pinned: 'left'},
+		return [
+			{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true, pinned: 'left'},
 			{
 				colId:                    'flags',
 				headerName:               'Flags',
@@ -42,6 +43,7 @@ export class ShowcaseGridUtil {
 				width:               200,
 				cellEditorFramework: DecimalInputCellEditorComponent,
 				editable:            true,
+				sortable:            true,
 				onCellValueChanged:  e => console.log('input', e)
 			}, {
 				colId:               'input',
@@ -74,6 +76,51 @@ export class ShowcaseGridUtil {
 				resizable:             false
 			}];
 	}
+
+	public static getGroupColumnDefs(): Array<any> {
+		// TODO Translate column names
+		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true, pinned: 'left'},
+			{
+				colId:                    'group1',
+				headerName:               'Group 1',
+				width:                    220,
+				children: [
+					{
+						colId:               'decimal-input',
+						headerName:          'Column 1a',
+						field:               'decimalValue',
+						width:               200
+					}, {
+						colId:               'input',
+						headerName:          'Column 1b',
+						field:               'inputValue',
+						width:               200
+					}
+				]
+			},
+			{
+				colId:                    'group2',
+				headerName:               'Group 2',
+				width:                    220,
+				children: [
+					{
+						colId:                 'checkbox',
+						headerName:            'Column 2a',
+						field:                 'checkboxValue',
+						width:                 200,
+						elementID:             'checkboxID',
+					}, {
+						colId:                 'spinner',
+						headerName:            'Column 2b',
+						field:                 'checkboxValue',
+						elementID:             'checkboxID',
+						width:                 200,
+					}
+				]
+			}
+			];
+	}
+
 
 	public static getColumnBarsDefs(): Array<any> {
 		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true},

@@ -1,60 +1,62 @@
-.slab-navbar {
+systelab-navbar {
+  .slab-navbar {
 
-  .navbar-toggler {
-    border-color: transparent;
-  }
+    .navbar-toggler {
+      border-color: transparent;
+    }
 
-  .slab-navbar-elements {
-    padding-left: 0px;
+    .slab-navbar-elements {
+      padding-left: 0px;
 
-    & > .nav-item {
-      cursor: pointer;
-      margin-right: 0;
-      padding: 10px 8px;
-      background: transparent;
-
-      & > .nav-link {
-        border-top: none;
+      & > .nav-item {
+        cursor: pointer;
+        margin-right: 0;
+        padding: 10px 8px;
         background: transparent;
 
+        & > .nav-link {
+          border-top: none;
+          background: transparent;
+
+        }
+      }
+
+      & > .nav-item.active {
+        background-color: white;
+
+        & > .nav-link {
+          color: black;
+        }
+      }
+
+      a.disabled, li.disabled {
+        pointer-events: none;
+      }
+
+      li.disabled {
+        background-color: #cccccc;
+      }
+
+      .slab-icon-float-image {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .slab-icon-vertical-image {
+        display: block;
       }
     }
 
-    & > .nav-item.active {
-      background-color: white;
-
-      & > .nav-link {
-        color: black;
-      }
-    }
-
-    a.disabled, li.disabled {
-      pointer-events: none;
-    }
-
-    li.disabled {
-      background-color: #cccccc;
-    }
-
-    .slab-icon-float-image {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .slab-icon-vertical-image {
-      display: block;
-    }
-  }
-
-  .flex-column > .nav-item, .flex-column {
-    width: 100%;
-  }
-
-  @media (max-width: 768px) {
-    .nav-item {
+    .flex-column > .nav-item, .flex-column {
       width: 100%;
     }
-  }
-}
 
+    @media (max-width: 768px) {
+      .nav-item {
+        width: 100%;
+      }
+    }
+  }
+
+}
 

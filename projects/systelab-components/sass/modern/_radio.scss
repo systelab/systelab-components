@@ -52,10 +52,6 @@ input[type="radio"]:focus + label:before {
 }
 
 input[type="radio"]:disabled + label {
-  @extend .disabled
-}
-
-.disabled {
   opacity: 0.5;
   cursor: default;
 }

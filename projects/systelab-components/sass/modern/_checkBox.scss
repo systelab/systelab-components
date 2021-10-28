@@ -59,14 +59,9 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):focus + label:before {
 }
 
 input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
-  @extend .disabled;
-}
-
-.disabled {
   opacity: 0.5;
   cursor: default;
 }
-
 
 .ag-theme-fresh .ag-checkbox-input-wrapper {
   input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {

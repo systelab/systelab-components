@@ -4,7 +4,7 @@
             context menu</label>
         <div class="col-md-9">
             <textarea name="" (contextmenu)="openContextMenu($event)" id="resize-textarea"
-                      class="slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
+                      class="form-control slab-textarea w-100 slab-textarea-vertical-resize"></textarea>
         </div>
         <systelab-context-menu #contextMenu [isEmbedded]="true" [contextMenuOptions]="contextMenuOptions2"
                                (action)="executeContextMenuAction($event)">
@@ -13,13 +13,19 @@
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="noresize-textarea">Textarea no resizable</label>
         <div class="col-md-9">
-            <textarea name="" id="noresize-textarea" class="slab-textarea w-100 slab-textarea-no-resize"></textarea>
+            <textarea name="" id="noresize-textarea" class="form-control slab-textarea w-100 slab-textarea-no-resize"></textarea>
         </div>
     </div>
     <div class="row mt-1">
         <label class="col-md-3 col-form-label disabled" for="noresize-textarea">Textarea disabled</label>
         <div class="col-md-9">
-            <textarea name="" id="disabled-textarea" class="slab-textarea w-100 slab-textarea-no-resize" disabled></textarea>
+            <textarea name="" id="disabled-textarea" class="form-control slab-textarea w-100 slab-textarea-no-resize" disabled></textarea>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="noresize-textarea">Textarea read only</label>
+        <div class="col-md-9">
+            <textarea name="" id="readonly-textarea" class="form-control slab-textarea w-100 slab-textarea-no-resize" readonly>Some content</textarea>
         </div>
     </div>
 </div>

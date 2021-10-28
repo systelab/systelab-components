@@ -4,7 +4,26 @@
   tr {
     height: $slab-table-min-row-height;
   }
+
+  thead th {
+    border-bottom: 1px solid $table-border-color;
+  }
+
 }
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: $table-row-odd-background-color;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: $table-row-even-background-color;
+}
+
+
+.table-hover tbody tr:hover {
+  background-color: scale-color($primary, $alpha: -90%);
+}
+
 
 /*
  * This is a custom modifier class extending 

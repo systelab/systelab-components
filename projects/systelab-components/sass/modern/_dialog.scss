@@ -104,11 +104,6 @@ $slab-button-fontsize: 25px !default;
 .slab-dialog-disabled {
   pointer-events: none !important;
 
-  /*
-    * {
-      @extend .disabled;
-    }
-  */
   .form-control {
     @extend .form-control, :disabled;
   }
@@ -116,6 +111,15 @@ $slab-button-fontsize: 25px !default;
   input[type="radio"] + label {
     @extend .disabled;
   }
+
+  input[type="text"] {
+    @extend .disabled;
+  }
+
+  input[type="input"] {
+    @extend .disabled;
+  }
+
 
   input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
     @extend .disabled;
@@ -132,6 +136,15 @@ $slab-button-fontsize: 25px !default;
 
   .slab-dialog-header {
     pointer-events: auto;
+  }
+
+  .p-inputtext {
+    @extend .disabled;
+    background-color: #f4f5f7;
+  }
+
+  button {
+    @extend .disabled;
   }
 
 }
