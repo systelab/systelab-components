@@ -1,4 +1,7 @@
 systelab-wizard-steps {
+  $button-width: 45px;
+  $button-height: 45px;
+
   .slab-steps-wizard {
     display: table;
     width: 50%;
@@ -10,8 +13,8 @@ systelab-wizard-steps {
       position: relative;
 
       button {
-        width: 45px;
-        height: 45px;
+        width: $button-width;
+        height: $button-height;
         text-align: center;
         padding: 6px 0;
         font-size: 15px;
@@ -36,7 +39,6 @@ systelab-wizard-steps {
         width: 100%;
         height: 1px;
         background-color: #ccc;
-        z-order: 0;
       }
     }
 

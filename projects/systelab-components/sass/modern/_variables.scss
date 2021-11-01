@@ -121,6 +121,11 @@ $slab-slider-background-line: round($slab-slider-height / 3);
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: $primary !default;
 
+
+$slab-nanobar-height: 4px !default;
+$slab-nanobar-color: orange !default;
+
+
 // Defines the row line-height of the dropdown and the row line-height of the tree
 $slab-dropdown-line-height: $form-elements-height !default;
 $slab-dropdown-disabled-fg-color: rgb(192, 192, 192) !default;
