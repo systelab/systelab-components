@@ -452,28 +452,47 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 			});
 		});
 
-	it('month should be in spanish translation "Octubre"', () => {
+	it('month should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
+			let currentDate=new Date();
 			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
-				.toEqual('Octubre');
+				.toEqual(getMonth(currentDate));
 			});
 		});
 
-	it('after select next month, should be in spanish translation "Noviembre"', () => {
+	it('after select next month, should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
+			let currentDate=new Date();
+			let nextMonthDate=new Date(currentDate.setMonth(currentDate.getMonth()+1));
 			const nextMonth = fixture.debugElement.query(By.css(`#nextMonth`)).nativeElement;
 			nextMonth.dispatchEvent(new Event('click'));
 			fixture.detectChanges();
 
 			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
-				.toEqual('Noviembre');
+				.toEqual(getMonth(nextMonthDate));
 			});
 		});
 
 });
 
+function getMonth(date: Date) {
+	const months = new Array();
+	months[0] = "Enero";
+	months[1] = "Febrero";
+	months[2] = "Marzo";
+	months[3] = "Abril";
+	months[4] = "Mayo";
+	months[5] = "Junio";
+	months[6] = "Julio";
+	months[7] = "Agosto";
+	months[8] = "Septiembre";
+	months[9] = "Octubre";
+	months[10] = "Noviembre";
+	months[11] = "Diciembre";
+	return months[date.getMonth()];
+}
 
 function enterText(fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<Datepicker>, text: string) {
 	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
