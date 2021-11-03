@@ -2,7 +2,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
 $icon-rowaction-font-size: 20px;
 
-$header-menu-width: 39px;
+$context-menu-width: 39px;
 
 @mixin ag-header-row() {
   .ag-header-row {
@@ -21,8 +21,8 @@ $header-menu-width: 39px;
 
         .slab-context-menu {
           height: 100%;
-          min-width: $header-menu-width;
-          width: $header-menu-width;
+          min-width: $context-menu-width;
+          width: $context-menu-width;
 
           .icon-context-menu {
             padding-top: ceil(($grid-header-height - $slab-icon-context-menu-font-size) / 2) - 5;
