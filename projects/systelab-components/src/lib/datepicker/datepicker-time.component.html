@@ -19,14 +19,14 @@
 
     </ng-container>
 
-    <systelab-spinner class="d-flex h-100" id="hours" style="width: 81px;"
+    <systelab-spinner class="d-flex h-100" id="hours"
                       [spinValues]="touchSpinHourValues"
                       [fillUnitsWithZero]="true"
                       [(value)]="touchSpinHourValues.value"
                       [disabled]="disabled"
                       (valueChange)="currentHoursChanged($event)"></systelab-spinner>
     <label class="mx-1 my-0">:</label>
-    <systelab-spinner class="d-flex h-100" id="minutes" style="width: 81px;"
+    <systelab-spinner class="d-flex h-100" id="minutes"
                       [spinValues]="touchSpinMinutesValues"
                       [fillUnitsWithZero]="true"
                       [(value)]="touchSpinMinutesValues.value"
