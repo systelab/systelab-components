@@ -1,76 +1,89 @@
-// Toasts colors
-$toast-bg-color: #6a6a6a;
-$toast-text-color: #ffffff;
-$toast-success-icon-color: #c2d95d;
-$toast-warning-icon-color: #ffd24a;
-$toast-info-icon-color: rgb(5, 122, 201);
-$toast-error-icon-color: #ff4944;
+systelab-toast {
+  $toast-bg-color: #6a6a6a;
+  $toast-text-color: #ffffff;
+  $toast-success-icon-color: #c2d95d;
+  $toast-warning-icon-color: #ffd24a;
+  $toast-info-icon-color: rgb(5, 122, 201);
+  $toast-error-icon-color: #ff4944;
 
-.slab-toast {
-  color: $toast-text-color;
+  .slab-toast {
+    color: $toast-text-color;
 
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-  width: 290px;
-  padding: 10px 20px;
+    width: 290px;
+    padding: 10px 20px;
 
-  background: $toast-bg-color;
-  border-radius: 34.5px;
-  > i {
-    position: absolute;
-    left: 16px;
-    border-radius: 20px;
-    font-size: 22px;
-    &:before {
-      z-index: 1;
-      position: relative;
-    }
-    &:after {
-      content: '';
+    background: $toast-bg-color;
+    border-radius: 34.5px;
+
+    > i {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: white;
-    }
-  }
-  &--success {
-    > i {
-      color: $toast-success-icon-color;
+      left: 16px;
+      border-radius: 20px;
+      font-size: 22px;
+
+      &:before {
+        z-index: 1;
+        position: relative;
+      }
+
       &:after {
-        clip-path: circle(30% at 50% 50%);
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: white;
       }
     }
-  }
-  &--warning {
-    > i {
-      color: $toast-warning-icon-color;
-      &:after {
-        clip-path: polygon(50% 0%, 0% 90%, 100% 90%);
+
+    &--success {
+      > i {
+        color: $toast-success-icon-color;
+
+        &:after {
+          clip-path: circle(30% at 50% 50%);
+        }
       }
     }
-  }
-  &--info {
-    > i {
-      color: $toast-info-icon-color;
-      &:after {
-        clip-path: circle(30% at 50% 50%);
+
+    &--warning {
+      > i {
+        color: $toast-warning-icon-color;
+
+        &:after {
+          clip-path: polygon(50% 0%, 0% 90%, 100% 90%);
+        }
       }
     }
-  }
-  &--error {
-    > i {
-      color: $toast-error-icon-color;
-      &:after {
-        clip-path: circle(30% at 50% 50%);
+
+    &--info {
+      > i {
+        color: $toast-info-icon-color;
+
+        &:after {
+          clip-path: circle(30% at 50% 50%);
+        }
       }
     }
-  }
-  div {
-    padding-left: 22px;
+
+    &--error {
+      > i {
+        color: $toast-error-icon-color;
+
+        &:after {
+          clip-path: circle(30% at 50% 50%);
+        }
+      }
+    }
+
+    div {
+      padding-left: 22px;
+    }
   }
 }

@@ -21,8 +21,6 @@ $slab-app-min-height: 375px !default;
 // Defines the ipad
 $slab-ipad-width: 1024px !default;
 
-// Defines the primary color
-$primary: rgb(21, 143, 239) !default;
 $background-primary: rgb(255, 255, 255) !default;
 $background-secondary: rgb(238, 238, 238) !default;
 // Defines the color for selected elements
@@ -67,6 +65,8 @@ $slab-minimum-button-width: 85px !default;
 $table-row-odd-background-color: rgb(243, 243, 243) !default;
 $table-row-even-background-color: rgb(253, 253, 253) !default;
 $table-row-selected-background-color: $slab-selected-background-color !default;
+$table-row-selected-color: black !default;
+
 // Defines the height of the ui-grid-header-cell
 $grid-header-height: 39px !default;
 // Defines the line-height of the ui-grid-header-cell.
@@ -120,6 +120,11 @@ $slab-slider-height: 24px !default;
 $slab-slider-background-line: round($slab-slider-height / 3);
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: $primary !default;
+
+
+$slab-nanobar-height: 4px !default;
+$slab-nanobar-color: orange !default;
+
 
 // Defines the row line-height of the dropdown and the row line-height of the tree
 $slab-dropdown-line-height: $form-elements-height !default;

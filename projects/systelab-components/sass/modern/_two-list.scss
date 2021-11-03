@@ -1,69 +1,71 @@
+systelab-two-list {
 
+  .slab-twolist {
+    display: flex;
+    overflow: auto;
 
-.slab-twolist {
-  display: flex;
-  overflow: auto;
+    .slab-twolistdiv {
+      $single-list-width: calc(50% - 30px);
+      flex: 1 0 $single-list-width;
+      min-width: $single-list-width;
+      padding: 8px;
 
-  .slab-twolistdiv {
-    $single-list-width: calc(50% - 30px);
-    flex: 1 0 $single-list-width;
-    min-width: $single-list-width;
-    padding: 8px;
+      @media (max-width: 1024px) {
+        input {
+          display: none;
+        }
+      }
 
-    @media (max-width: 1024px) {
-      input {
-        display: none;
+      label {
+        margin-bottom: 2px;
+      }
+
+      .slab-twolistbox {
+        border-radius: $slab-border-radius;
+        border: 1px solid $medium-gray;
+        display: flex;
+        overflow: auto;
+
+        .slab-twolistboxdiv {
+          flex: 1 0 auto;
+
+          .slab-twolistboxrow {
+            line-height: $slab-twolist-row-height;
+            cursor: pointer;
+            text-indent: 10px;
+            @include user-selection(none);
+          }
+
+          .slab-twolistboxrowselected {
+            background-color: $slab-selected-background-color;
+          }
+
+          .slab-twolistboxrowdrag {
+            cursor: move;
+          }
+        }
       }
     }
 
-    label {
-      margin-bottom: 2px;
-    }
+    .slab-twolistbuttondiv {
+      button {
+        height: 35px;
+        width: 35px;
+        margin: 2px;
+        color: $primary;
+        padding: 0;
+        border-radius: 30px;
+        border: 1px solid $primary;
 
-    .slab-twolistbox {
-      border-radius:  $slab-border-radius;
-      border: 1px solid $medium-gray;
-      display: flex;
-      overflow: auto;
-
-      .slab-twolistboxdiv {
-        flex: 1 0 auto;
-
-        .slab-twolistboxrow {
-          line-height: $slab-twolist-row-height;
-          cursor: pointer;
-          text-indent: 10px;
-          @include user-selection(none);
-        }
-
-        .slab-twolistboxrowselected {
-          background-color: $slab-selected-background-color;
-        }
-
-        .slab-twolistboxrowdrag {
-          cursor: move;
+        &:disabled {
+          opacity: 0.4 !important;
         }
       }
     }
-  }
-  .slab-twolistbuttondiv {
-    button {
-      height: 35px;
-      width: 35px;
-      margin: 2px;
-      color: $primary;
-      padding: 0;
-      border-radius: 30px;
-      border: 1px solid $primary;
 
-      &:disabled{
-        opacity: 0.4 !important;
-      }
+    .btn {
+      font-weight: bold;
+      font-size: 24px;
     }
-  }
-
-  .btn {
-    font-weight: bold;
-    font-size: 24px;
   }
 }
