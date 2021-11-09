@@ -37,6 +37,10 @@
   margin-bottom: 10px;
 }
 
+.row:last-child {
+  margin-bottom: 0px;
+}
+
 .disabled {
   opacity: 0.5;
   cursor: default;
