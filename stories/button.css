@@ -1,0 +1,46 @@
+.systelab-button {
+  font-family: "Lato", Arial, sans-serif;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  padding: 0 46px;
+}
+.systelab-button--primary {
+  color: white;
+  background-color: #008df2;
+}
+.systelab-button--secondary {
+  color: white;
+  background-color: #868686;
+}
+.systelab-button--ghost {
+  color: #008df2;
+  border: 1px solid #008df2;
+  background-color: transparent;
+}
+.systelab-button--link {
+  color: #008df2;
+  background: transparent;
+}
+.systelab-button--danger {
+  color: white;
+  background-color: #ff4944;
+}
+.systelab-button--small {
+  font-size: 12px;
+  padding: 10px 16px;
+}
+.systelab-button--medium {
+  font-size: 16px;
+  padding: 11px 20px;
+}
+.systelab-button--large {
+  font-size: 18px;
+  padding: 12px 24px;
+}
+.systelab-button--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

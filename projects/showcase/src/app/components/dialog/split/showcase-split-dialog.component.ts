@@ -3,7 +3,7 @@ import { PreferencesService } from 'systelab-preferences';
 import { DialogRef, ModalComponent, SystelabModalContext } from 'systelab-components';
 
 export class SplitShowcaseDialogParameters extends SystelabModalContext {
-	public fullScreen = true;
+	public override fullScreen = true;
 }
 
 @Component({

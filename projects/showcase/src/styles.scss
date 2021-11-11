@@ -4,8 +4,10 @@ body {
   background-color: $background-primary;
 }
 
-input, button, a {
-  outline: none
+input,
+button,
+a {
+  outline: none;
 }
 
 .li {
@@ -13,9 +15,12 @@ input, button, a {
 }
 
 .flex-column {
- overflow: auto;
+  overflow: auto;
 }
 
-.principal-container{
-  top: 0; bottom: 0; left: 0; right: 0;
+.principal-container {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

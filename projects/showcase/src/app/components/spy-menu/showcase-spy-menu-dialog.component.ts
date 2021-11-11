@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DialogRef, ModalComponent, SystelabModalContext,  SpyMenuItem } from 'systelab-components';
 
 export class ShowcaseSpyMenuDialogParameters extends SystelabModalContext {
-	public fullScreen = true;
+	public override fullScreen = true;
 }
 
 @Component({

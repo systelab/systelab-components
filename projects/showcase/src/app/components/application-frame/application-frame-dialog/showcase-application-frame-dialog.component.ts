@@ -5,7 +5,7 @@ import { ApplicationFrameComponent } from 'systelab-components';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from 'systelab-components';
 
 export class ShowcaseApplicationFrameDialogParameters extends SystelabModalContext {
-	public fullScreen = true;
+	public override fullScreen = true;
 }
 
 @Component({

@@ -66,7 +66,7 @@ export class ShowcaseInnerTreeComponent extends AbstractTree {
 		this.tree = myTree;
 	}
 
-	public nodeSelect(evt: any) {
+	public override nodeSelect(evt: any) {
 		this.nodeSelected.emit(evt.node);
 	}
 }

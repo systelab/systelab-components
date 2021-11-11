@@ -10,11 +10,11 @@ import { PreferencesService } from 'systelab-preferences';
 
 export class ShowcaseInnerTreeComboBox extends AbstractApiTreeComboBox<any> {
 
-	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService: PreferencesService) {
+	constructor(public override myRenderer: Renderer2, public override chref: ChangeDetectorRef, public override preferencesService: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
-	public getInstance(): any {
+	public override getInstance(): any {
 		return {};
 	}
 
@@ -41,7 +41,7 @@ export class ShowcaseInnerTreeComboBox extends AbstractApiTreeComboBox<any> {
 		return 'General';
 	}
 
-	protected getFavouriteText(): string {
+	protected override getFavouriteText(): string {
 		return 'Favourites';
 	}
 

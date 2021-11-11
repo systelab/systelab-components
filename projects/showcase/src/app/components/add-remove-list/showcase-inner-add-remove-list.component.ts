@@ -37,11 +37,11 @@ export class ShowcaseInnerAddRemoveListComponent extends AbstractAddRemoveList<S
 		return 'icon-clock';
 	}
 
-	public add(): void {
+	public override add(): void {
 		this.elementsList.push(new ShowcaseAddRemoveListData(9, 'New Added'));
 	}
 
-	public remove(): void {
+	public override remove(): void {
 		const selectedRows = this.getSelectedRows();
 		selectedRows.forEach(selectedElement => {
 			this.elementsList.splice(this.elementsList.indexOf(selectedElement), 1);

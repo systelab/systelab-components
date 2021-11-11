@@ -9,7 +9,7 @@ import { ShowcaseInnerGridComponent } from './showcase-inner-grid.component';
 })
 export class ShowcaseBarsGridComponent extends ShowcaseInnerGridComponent implements OnInit {
 
-	protected getColumnDefs(): Array<any> {
+	protected override getColumnDefs(): Array<any> {
 		return ShowcaseGridUtil.getColumnBarsDefs();
 	}
 

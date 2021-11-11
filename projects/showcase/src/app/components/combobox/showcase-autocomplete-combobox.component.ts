@@ -31,7 +31,7 @@ export class ShowcaseAutocomplete extends AutocompleteApiComboBox<ShowcaseCities
 
 	private totalItems = 11;
 
-	constructor(myRenderer: Renderer2, public chref: ChangeDetectorRef) {
+	constructor(myRenderer: Renderer2, public override chref: ChangeDetectorRef) {
 		super(myRenderer, chref);
 	}
 

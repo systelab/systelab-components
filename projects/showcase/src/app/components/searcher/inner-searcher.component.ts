@@ -11,7 +11,7 @@ import { AbstractSearcherComponent } from 'systelab-components';
 })
 export class InnerSearcherComponent extends AbstractSearcherComponent<ShowcaseSearcherData> {
 
-	constructor(public i18nService: I18nService, public dialogService: DialogService) {
+	constructor(public i18nService: I18nService, public override dialogService: DialogService) {
 		super(dialogService, new InnerSearcher(i18nService));
 	}
 

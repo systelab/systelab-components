@@ -6,8 +6,8 @@ import { ShowcaseData } from '../../grid/showcase-grid.model';
 
 export class ShowcaseStandardDialogParameters extends SystelabModalContext {
 	public index: number;
-	public width = 1000;
-	public height = 600;
+	public override width = 1000;
+	public override height = 600;
 }
 
 @Component({

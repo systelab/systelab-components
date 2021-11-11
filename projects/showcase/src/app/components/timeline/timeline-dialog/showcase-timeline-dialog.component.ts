@@ -3,7 +3,7 @@ import { DialogRef, ModalComponent, SystelabModalContext } from 'systelab-compon
 import { TimelineEvent } from 'systelab-components';
 
 export class ShowcaseTimelineDialogParameters extends SystelabModalContext {
-	public fullScreen = true;
+	public override fullScreen = true;
 }
 
 @Component({

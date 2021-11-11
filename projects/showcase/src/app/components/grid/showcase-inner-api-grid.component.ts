@@ -17,12 +17,12 @@ export class ShowcaseInnerApiGridComponent extends AbstractApiGrid<ShowcaseData>
 
 	private totalItems = 10;
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	            protected dialogService: DialogService) {
+	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
+	            protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
-	public ngOnInit() {
+	public override ngOnInit() {
 		super.ngOnInit();
 		this.gridOptions.suppressCellSelection = false;
 	}
