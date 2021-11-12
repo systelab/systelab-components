@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 
 
 export default {
-	title: 'Navigation/Slider',
+	title: 'Components/Slider',
 	component: SliderComponent,
 	decorators: [
 		moduleMetadata({

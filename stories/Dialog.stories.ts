@@ -50,16 +50,16 @@ class ShowcaseStandardDialog implements ModalComponent<ShowcaseStandardDialogPar
 
 
 @Component({
-  selector: "app-modal-story",
+  selector: 'app-modal-story',
   template: `
 		<button class="btn btn-primary" (click)="openModal()">Open Dialog</button>
 	`
 })
 class ModalStory {
 
-  @Input() modalText = "Hello, World";
+  @Input() modalText = 'Hello, World';
 
-  @Input() size = "default";
+  @Input() size = 'default';
 
   @Input() showCloseButton = true;
 
@@ -74,7 +74,7 @@ class ModalStory {
 
 
 export default {
-  title: 'Navigation/Dialogs',
+  title: 'Components/Dialogs',
   component: ModalStory,
   decorators: [
     moduleMetadata({
