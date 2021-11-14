@@ -61,7 +61,7 @@ class USMockI18nService {
 
 
 export default {
-  title: 'Navigation/Popups',
+  title: 'Components/Modals/Message Popup',
   component: PopupStory,
   decorators: [
     moduleMetadata({

@@ -74,7 +74,7 @@ class ModalStory {
 
 
 export default {
-  title: 'Components/Dialogs',
+  title: 'Components/Modals/Dialog',
   component: ModalStory,
   decorators: [
     moduleMetadata({
