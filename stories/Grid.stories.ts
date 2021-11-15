@@ -7,20 +7,16 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MessagePopupService } from '../projects/systelab-components/src/lib/modal/message-popup/message-popup.service';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { HttpClientModule } from '@angular/common/http';
-import { of } from 'rxjs';
 import { AbstractGrid } from '../projects/systelab-components/src/lib/grid/abstract-grid.component';
 import { DialogService } from '../projects/systelab-components/src/lib/modal/dialog/dialog.service';
 import { PreferencesService } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { GridContextMenuCellRendererComponent, GridHeaderContextMenuComponent, SystelabComponentsModule } from 'systelab-components';
+import { GridContextMenuCellRendererComponent, GridContextMenuComponent, GridHeaderContextMenu, GridHeaderContextMenuComponent } from 'systelab-components';
 
 import $ from 'jquery';
 
-
 window.jQuery = $;
 window.$ = $;
-
-import pako from 'pako';
 
 class ShowcaseData {
 
@@ -34,6 +30,8 @@ class ShowcaseData {
 })
 class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements OnInit {
 
+	@Input() public columns: Array<any>;
+
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 	            protected dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
@@ -45,12 +43,7 @@ class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements O
 	}
 
 	protected getColumnDefs(): Array<any> {
-		return [
-			{colId: 'colOne', headerName: 'Col One', field: 'colOne', width: 300, rowDrag: true, pinned: 'left'},
-			{colId: 'colTwo', headerName: 'Col Two', field: 'colTwo', width: 100, rowDrag: true},
-			{colId: 'colThree', headerName: 'Col Three', field: 'colThree', width: 100, rowDrag: true},
-			{colId: 'colFour', headerName: 'Col Four', field: 'colFour', width: 100, rowDrag: true},
-		];
+		return this.columns;
 	}
 
 }
@@ -58,14 +51,17 @@ class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements O
 @Component({
 	selector: "app-grid-story",
 	template: `
-                <form class="position-relative border rounded slab-remove-top-header" style="width: 600px; height: 200px;">
+                <form class="position-relative border rounded slab-remove-top-header" style="height: 200px;">
                     <showcase-inner-grid #grid [rowData]="gridData"
-                                         [showChecks]="true" [multipleSelection]="true" (clickRow)="doSelect($event)"></showcase-inner-grid>
+                                         [showChecks]="showChecks" [multipleSelection]="multipleSelection" [columns]="columns" (clickRow)="doSelect($event)"></showcase-inner-grid>
                 </form>
 	          `
 })
 class GridStory {
 	@Input() public gridData: ShowcaseData[] = [];
+	@Input() public showChecks: boolean;
+	@Input() public multipleSelection: boolean;
+	@Input() public columns: Array<any> = [];
 
 	constructor(protected messagePopupService: MessagePopupService) {
 	}
@@ -75,34 +71,17 @@ class GridStory {
 	}
 }
 
-class USMockI18nService {
-	public get(key: string) {
-		return of(key);
-	}
-
-	public instant(key: string) {
-		switch (key) {
-			case 'COMMON_YES':
-				return 'Yes';
-			case 'COMMON_NO':
-				return 'No';
-			default:
-				return key;
-		}
-	}
-}
-
 export default {
 	title:      'Components/Grid',
 	component:  GridStory,
 	decorators: [
 		moduleMetadata({
-			declarations: [GridStory, ShowcaseInnerGridComponent],
-			imports:      [CommonModule, OverlayModule, SystelabTranslateModule, SystelabComponentsModule, HttpClientModule, AgGridModule.withComponents([
+			declarations: [GridStory, ShowcaseInnerGridComponent, GridHeaderContextMenu, GridContextMenuComponent],
+			imports:      [CommonModule, OverlayModule, SystelabTranslateModule, HttpClientModule, AgGridModule.withComponents([
 				GridContextMenuCellRendererComponent,
 				GridHeaderContextMenuComponent
 			])],
-			providers:    [{provide: APP_BASE_HREF, useValue: '/'}, {provide: I18nService, useClass: USMockI18nService}]
+			providers:    [{provide: APP_BASE_HREF, useValue: '/'}]
 		}),
 	],
 	parameters: {
@@ -115,17 +94,63 @@ export default {
 const Template: Story<GridStory> = (args: GridStory) => ({
 	props:    args,
 	template: `
-    <div class="container">
-    <app-grid-story [gridData]="gridData"></app-grid-story>
+    <div class="container" style="width: 1200px;">
+    <app-grid-story [gridData]="gridData" [showChecks]="showChecks" [multipleSelection]="multipleSelection" [columns]="columns"></app-grid-story>
     </div>
     `,
 });
 
-export const Default = Template.bind({});
-Default.args = {
-	gridData: [{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
+export const WithSelection = Template.bind({});
+WithSelection.args = {
+	gridData:          [{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
 		{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
-		{colOne:   'a', colTwo:   'b', colThree: 'c', colFour:  'd'
-	}]
+		{
+			colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'
+		}],
+	multipleSelection: true,
+	showChecks:        true,
+	columns:           [
+		{colId: 'colOne', headerName: 'Col One', field: 'colOne', width: 300, rowDrag: true, pinned: 'left'},
+		{colId: 'colTwo', headerName: 'Col Two', field: 'colTwo', width: 100, rowDrag: true},
+		{colId: 'colThree', headerName: 'Col Three', field: 'colThree', width: 100, rowDrag: true},
+		{colId: 'colFour', headerName: 'Col Four', field: 'colFour', width: 100, rowDrag: true},
+	]
+};
+
+export const ColumnGroup = Template.bind({});
+ColumnGroup.args = {
+	gridData:          [{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
+		{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
+		{
+			colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'
+		}],
+	multipleSelection: true,
+	showChecks:        true,
+	columns:           [
+		{colId: 'colOne', headerName: 'Col One', field: 'colOne', width: 300, rowDrag: true, pinned: 'left'},
+		{colId: 'colTwo', headerName: 'Col Two', field: 'colTwo', width: 100, rowDrag: true},
+		{
+			headerName: 'Col Group', width: 200, children: [{colId: 'colThree', headerName: 'Col Three', field: 'colThree', width: 100, rowDrag: true},
+				{colId: 'colFour', headerName: 'Col Four', field: 'colFour', width: 100, rowDrag: true}]
+		},
+		{colId: 'colFour', headerName: 'Col Four', field: 'colFour', width: 100, rowDrag: true},
+	]
+};
+
+export const WithOutSelection = Template.bind({});
+WithOutSelection.args = {
+	gridData:          [{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
+		{colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'},
+		{
+			colOne: 'a', colTwo: 'b', colThree: 'c', colFour: 'd'
+		}],
+	multipleSelection: false,
+	showChecks:        false,
+	columns:           [
+		{colId: 'colOne', headerName: 'Col One', field: 'colOne', width: 300, rowDrag: true, pinned: 'left'},
+		{colId: 'colTwo', headerName: 'Col Two', field: 'colTwo', width: 100, rowDrag: true},
+		{colId: 'colThree', headerName: 'Col Three', field: 'colThree', width: 100, rowDrag: true},
+		{colId: 'colFour', headerName: 'Col Four', field: 'colFour', width: 100, rowDrag: true},
+	]
 };
 
