@@ -21,7 +21,7 @@ export class GridHeaderContextMenuComponent<T> implements IHeaderAngularComp {
 	}
 
 	public refresh(params: IHeaderParams): boolean {
-		throw new Error('Method not implemented.');
+		return true;
 	}
 
 	public dotsClicked(event: MouseEvent): void {

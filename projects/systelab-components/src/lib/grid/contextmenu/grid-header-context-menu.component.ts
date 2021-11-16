@@ -22,11 +22,10 @@ export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<
 	}
 
 	public refresh(params: IHeaderParams): boolean {
-		throw new Error('Method not implemented.');
+		return true;
 	}
 
 	public afterGuiAttached?(params?: IAfterGuiAttachedParams): void {
-		throw new Error('Method not implemented.');
 	}
 
 	public setActionManager(actionHandler: GridHeaderMenuActionHandler): void {
