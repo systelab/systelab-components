@@ -2,51 +2,19 @@ import { Meta, Story } from '@storybook/angular/types-6-0';
 import GridDocumentation from './docs/grid.mdx';
 import { moduleMetadata } from '@storybook/angular';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MessagePopupService } from '../projects/systelab-components/src/lib/modal/message-popup/message-popup.service';
-import { I18nService, SystelabTranslateModule } from 'systelab-translate';
+import { SystelabTranslateModule } from 'systelab-translate';
 import { HttpClientModule } from '@angular/common/http';
-import { AbstractGrid } from '../projects/systelab-components/src/lib/grid/abstract-grid.component';
-import { DialogService } from '../projects/systelab-components/src/lib/modal/dialog/dialog.service';
-import { PreferencesService } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuCellRendererComponent, GridContextMenuComponent, GridHeaderContextMenu, GridHeaderContextMenuComponent } from 'systelab-components';
+import { ShowcaseData, ShowcaseInnerGridComponent } from './components/grid/showcase-inner-grid';
 
 import $ from 'jquery';
-
 window.jQuery = $;
 window.$ = $;
 
-class ShowcaseData {
-
-	constructor(public colOne: string, public colTwo: string, public colThree: string, public colFour: string) {
-	}
-}
-
-@Component({
-	selector:    'showcase-inner-grid',
-	templateUrl: '../projects/systelab-components/src/lib/grid/abstract-grid.component.html'
-})
-class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> implements OnInit {
-
-	@Input() public columns: Array<any>;
-
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-	            protected dialogService: DialogService) {
-		super(preferencesService, i18nService, dialogService);
-	}
-
-	public ngOnInit() {
-		super.ngOnInit();
-		this.gridOptions.suppressCellSelection = false;
-	}
-
-	protected getColumnDefs(): Array<any> {
-		return this.columns;
-	}
-
-}
 
 @Component({
 	selector: "app-grid-story",
@@ -67,13 +35,25 @@ class GridStory {
 	}
 
 	public doSelect(showcaseData: ShowcaseData): void {
-		console.log(showcaseData);
 	}
 }
 
 export default {
 	title:      'Components/Grid',
 	component:  GridStory,
+	argTypes:{
+		doSelect: { action: 'selected' },
+		showChecks:{
+			table:{
+				disable:true
+			}
+		},
+		multipleSelection:{
+			table:{
+				disable:true
+			}
+		}
+	},
 	decorators: [
 		moduleMetadata({
 			declarations: [GridStory, ShowcaseInnerGridComponent, GridHeaderContextMenu, GridContextMenuComponent],
