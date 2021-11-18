@@ -47,6 +47,6 @@
     </div>
 </div>
 <systelab-dialog-bottom>
-    <systelab-button class="mr-2" (click)="disableOption()"> {{(disabledOption ? 'Enable' : 'Disable') + ' Option'}}</systelab-button>
-    <systelab-button (click)="hideOption()"> {{(hiddenOption ? 'Show' : 'Hide') + ' Option'}}</systelab-button>
+    <systelab-button class="mr-2" (action)="disableOption()"> {{(disabledOption ? 'Enable' : 'Disable') + ' Option'}}</systelab-button>
+    <systelab-button (action)="hideOption()"> {{(hiddenOption ? 'Show' : 'Hide') + ' Option'}}</systelab-button>
 </systelab-dialog-bottom>

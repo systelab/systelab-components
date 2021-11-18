@@ -2,7 +2,7 @@
 <systelab-loading *ngIf="isLoading" [useClassic]="useClassic"></systelab-loading>
 <div class="slab-flex-1">Some text</div>
 <systelab-dialog-bottom>
-    <systelab-button class="ml-auto" (click)="modern()">Modern</systelab-button>
-    <systelab-button class="ml-1" (click)="classic()">Classic</systelab-button>
+    <systelab-button class="ml-auto" (action)="modern()">Modern</systelab-button>
+    <systelab-button class="ml-1" (action)="classic()">Classic</systelab-button>
 </systelab-dialog-bottom>
 
