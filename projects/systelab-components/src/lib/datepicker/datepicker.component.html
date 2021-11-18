@@ -32,10 +32,10 @@
     </ng-template>
     <ng-template pTemplate="footer">
         <div *ngIf="!inline" class="p-1 d-flex border-top">
-            <button *ngIf="showTodayButton" id="today" class="btn btn-sm btn-outline-primary mr-auto"
-                    (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</button>
-            <button id="clear" class="btn btn-sm btn-outline-danger ml-auto"
-                    (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</button>
+            <systelab-button *ngIf="showTodayButton" id="today" size="small" class="mr-auto"
+                    (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
+            <systelab-button id="clear" size="small" type="danger" class="ml-auto"
+                    (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</systelab-button>
         </div>
     </ng-template>
 </p-calendar>

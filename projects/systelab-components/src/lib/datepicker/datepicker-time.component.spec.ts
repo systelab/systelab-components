@@ -19,10 +19,8 @@ import { CalendarModule } from 'primeng/calendar';
             <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDateWithReset" [resetTimeWhenChangingCurrentDate]="true"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDate" [showCalendar]="false"></systelab-date-time>
-            <button type="button" class="btn mt-2 mr-1" (click)="resetDatePickerTime()">Reset value
-            </button>
-            <button type="button" class="btn mt-2 mr-1" (click)="setCurrentDate()">Set Current Date
-            </button>
+            <systelab-button class="mt-2 mr-1" (action)="resetDatePickerTime()">Reset value</systelab-button>
+            <systelab-button class="mt-2 mr-1" (action)="setCurrentDate()">Set Current Date</systelab-button>
         </div>
 	`,
 	styles: []

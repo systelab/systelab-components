@@ -5,12 +5,12 @@ Component to trigger an action. You can
 ## Using the template
 
 ```html
-<systelab-button [type]="'primary'" [small]="true" [disabled]="true" (action)="doClick($event)"></systelab-button>
+<systelab-button type="primary" [size]="small" disabled="true" (action)="doClick($event)"></systelab-button>
 ```
 
-The Input type is a string value in order to define the kind of button: primary, danger, success and link .
-The Input small is a boolean value in order to make the component small. By default is false.
-The Input disabled is a boolean value in order to make the component disable. By default is false.
+The Input type is a string value in order to define the kind of button: regular, primary, warning, danger, success and link .
+The Input size is a string value in order to define the component size: slamm, medium, large.
+The Input disabled is a boolean value in order to make the component disabled. By default is false.
 
 If you want the defaults the template will look like:
 
@@ -23,8 +23,14 @@ If you want the defaults the template will look like:
 
 | Name | Type | Default | Description |
 | ---- |:----:|:-------:| ----------- |
-| type | string | regular | Possible values: regular, primary, danger, success and link |
-| small | string | medium | Possible values: small, medium, large |
+| type | string | regular | Possible values: regular, primary, warning danger, success and link |
+| size | string | medium | Possible values: small, medium, large |
 | disabled | boolean | false | Set to true if it could not be pressed. Otherwise set to false |
 
+
+## Events
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| action | Events | Emits an event everytime the element is clicked.|
 

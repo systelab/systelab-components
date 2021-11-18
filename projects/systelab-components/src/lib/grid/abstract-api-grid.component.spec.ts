@@ -94,7 +94,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
                       <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
                                      [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
                   </div>
-                  <button type="button" class="btn" (click)="grid.showOptions()">Options</button>
+                  <systelab-button> (click)="grid.showOptions()">Options</systelab-button>
 			  `
 })
 export class GridTestComponent {
