@@ -7,11 +7,11 @@
             <label for="check_urgent_2" class="col-form-label">Urgent</label>
         </div>
         <systelab-spinner class="mr-2" id="touch2" [spinValues]="touchSpinValues"></systelab-spinner>
-        <button class="btn btn-sm btn-outline-primary">Button</button>
+        <systelab-button [size]="'small'">Button</systelab-button>
     </form>
     <form class="form-inline">
         <label for="datePickerToSearch" class="mr-2">Find by </label>
         <systelab-datepicker id="datePickerToSearch"></systelab-datepicker>
-        <button class="btn btn-sm btn-outline-primary ml-2">Button</button>
+        <systelab-button [size]="'small'" class="ml-2">Button</systelab-button>
     </form>
 </div>

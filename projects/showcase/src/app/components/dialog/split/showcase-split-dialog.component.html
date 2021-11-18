@@ -17,10 +17,6 @@
     </as-split>
 </div>
 <systelab-dialog-bottom>
-    <button type="button" class="btn mr-1" (click)="setShowDetails()"
-            [ngClass]="isShowDetails ? 'btn-primary' : 'btn-outline-primary'">Details
-    </button>
-    <button type="button" class="btn" (click)="setShowSelector()"
-            [ngClass]="isShowSelector ? 'btn-primary' : 'btn-outline-primary'">Selector
-    </button>
+    <systelab-toggle-button class="mr-1" [(isChecked)]="isShowDetails">Details</systelab-toggle-button>
+    <systelab-toggle-button [(isChecked)]="isShowSelector">Selector</systelab-toggle-button>
 </systelab-dialog-bottom>
