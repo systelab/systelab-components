@@ -341,7 +341,7 @@ function getNumberOfColumns(fixture: ComponentFixture<GridTestComponent>) {
 }
 
 function clickOnOptionsButton(fixture: ComponentFixture<GridTestComponent>) {
-	const button = fixture.debugElement.query(By.css('#button-options')).nativeElement;
+	const button = fixture.debugElement.query(By.css('#button-options button')).nativeElement;
 	button.click();
 	fixture.detectChanges();
 }
@@ -351,7 +351,7 @@ function isModalVisible(fixture: ComponentFixture<GridTestComponent>) {
 }
 
 function clickCloseButton(fixture: ComponentFixture<GridTestComponent>, buttonId: string) {
-	const button: any = document.querySelector('#' + buttonId);
+	const button: any = document.querySelector('#' + buttonId+' button');
 	button.click();
 	fixture.detectChanges();
 }

@@ -66,7 +66,7 @@ describe('Systelab Calendar Footer', () => {
 });
 
 function clickClearButton(fixture: ComponentFixture<CalendarFooterTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('#clear-date-button');
+	const button = fixture.debugElement.nativeElement.querySelector('#clear-date-button button');
 	button.click();
 	fixture.detectChanges();
 }
