@@ -7,18 +7,18 @@
             <systelab-button type="danger" class="mr-1">Danger</systelab-button>
             <systelab-button type="success" class="mr-1">Success</systelab-button>
             <systelab-button type="link" class="mr-1">Link</systelab-button>
-            <systelab-button class="mr-1" disabled="true">Disabled</systelab-button>
+            <systelab-button class="mr-1" disabled>Disabled directive</systelab-button>
         </div>
     </div>
     <div class="row mt-1">
         <label class="col-md-3 col-form-label">Button Large </label>
         <div class="col-md-9">
-            <systelab-button size="large" class="mr-1">Default</systelab-button>
-            <systelab-button type="primary" size="large" class="mr-1">Primary</systelab-button>
-            <systelab-button type="danger" size="large" class="mr-1">Danger</systelab-button>
-            <systelab-button type="success" size="large" class="mr-1">Success</systelab-button>
-            <systelab-button type="link" size="large" class="mr-1">Link</systelab-button>
-            <systelab-button class="mr-1" size="large" disabled="true">Disabled</systelab-button>
+            <systelab-button size="large" class="mr-1" (click)="doClick($event)">Default</systelab-button>
+            <systelab-button type="primary" size="large" class="mr-1" (click)="doClick($event)">Primary</systelab-button>
+            <systelab-button type="danger" size="large" class="mr-1" (click)="doClick($event)">Danger</systelab-button>
+            <systelab-button type="success" size="large" class="mr-1" (click)="doClick($event)">Success</systelab-button>
+            <systelab-button type="link" size="large" class="mr-1" (click)="doClick($event)">Link</systelab-button>
+            <systelab-button class="mr-1" size="large" disabled="true" (click)="doClick($event)">Disabled</systelab-button>
         </div>
     </div>
     <div class="row mt-1">

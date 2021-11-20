@@ -142,8 +142,4 @@ systelab-button {
       box-shadow: 0 0 0 3px scale-color($success, $alpha: -75%);;
     }
   }
-  .slab-btn-disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
 }

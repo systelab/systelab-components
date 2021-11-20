@@ -33,6 +33,7 @@ import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from './contextmenu/grid-header-context-menu.component';
+import { ButtonComponent } from '../button/button.component';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -94,7 +95,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
                       <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
                                      [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
                   </div>
-                  <systelab-button> (action)="grid.showOptions()">Options</systelab-button>
+                  <systelab-button id="button-options" (action)="grid.showOptions()">Options</systelab-button>
 			  `
 })
 export class GridTestComponent {
@@ -171,6 +172,7 @@ describe('Systelab Grid', () => {
 				TwoListSortableListComponent,
 				TabsComponent,
 				TabComponent,
+				ButtonComponent,
 				DataFilterPipe],
 			providers:    [
 				DialogService,
@@ -339,7 +341,7 @@ function getNumberOfColumns(fixture: ComponentFixture<GridTestComponent>) {
 }
 
 function clickOnOptionsButton(fixture: ComponentFixture<GridTestComponent>) {
-	const button = fixture.debugElement.query(By.css('.btn')).nativeElement;
+	const button = fixture.debugElement.query(By.css('#button-options')).nativeElement;
 	button.click();
 	fixture.detectChanges();
 }

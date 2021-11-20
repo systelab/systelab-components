@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <h5>Grid</h5>
     <form class="position-relative" style="height: 200px;">
-        <showcase-inner-grid #grid [rowData]="gridData" [menu]="getMenu()" (action)="doMenuAction($event)"
+        <showcase-inner-grid #grid [rowData]="gridData" [menu]="getMenu()" (click)="doMenuAction($event)"
                              [headerMenu]="getHeaderContextMenuOptions()"
                              [showChecks]="true" [multipleSelection]="true"
                              [multipleSelection]="true" (clickRow)="doSelect($event)"></showcase-inner-grid>

@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SystelabTranslateModule} from 'systelab-translate';
 import {SystelabPreferencesModule} from 'systelab-preferences';
 import {CalendarFooterComponent} from './calendar-footer.component';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
 	selector: 'systelab-calendar-footer-test',
@@ -41,6 +42,7 @@ describe('Systelab Calendar Footer', () => {
 				HttpClientModule],
 			declarations: [
 				CalendarFooterComponent,
+				ButtonComponent,
 				CalendarFooterTestComponent]
 		})
 			.compileComponents();

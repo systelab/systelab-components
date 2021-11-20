@@ -11,6 +11,7 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { Datepicker } from './datepicker.component';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
 	selector: 'systelab-datepicker-time-test',
@@ -19,8 +20,8 @@ import { CalendarModule } from 'primeng/calendar';
             <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDateWithReset" [resetTimeWhenChangingCurrentDate]="true"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDate" [showCalendar]="false"></systelab-date-time>
-            <systelab-button class="mt-2 mr-1" (action)="resetDatePickerTime()">Reset value</systelab-button>
-            <systelab-button class="mt-2 mr-1" (action)="setCurrentDate()">Set Current Date</systelab-button>
+            <systelab-button class="mt-2 mr-1" (click)="resetDatePickerTime()">Reset value</systelab-button>
+            <systelab-button class="mt-2 mr-1" (click)="setCurrentDate()">Set Current Date</systelab-button>
         </div>
 	`,
 	styles: []
@@ -68,6 +69,7 @@ describe('Systelab DatepickerTimeComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTimeComponent,
 				DatepickerTimeTestComponent]
 		}).compileComponents();

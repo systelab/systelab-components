@@ -25,7 +25,7 @@ export class SampleDialogParameters extends SystelabModalContext {
                 <systelab-dialog-header [withInfo]="false" (close)="close();">Title</systelab-dialog-header>
                 <div class="slab-flex-1"></div>
                 <systelab-dialog-bottom>
-                    <systelab-button id="closebutton" type="primary" class="ml-auto" (action)="close()"> Close</systelab-button>
+                    <button id="closebutton" type="button" class="btn btn-primary ml-auto" (click)="close()"> Close</button>
                 </systelab-dialog-bottom>
 	          `
 })

@@ -87,13 +87,13 @@ function checkHasValue(fixture: ComponentFixture<ButtonTestComponent>, value: bo
 }
 
 function clickButton(fixture: ComponentFixture<ButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.btn');
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn');
 	button.click();
 	fixture.detectChanges();
 }
 
 function clickOnIcon(fixture: ComponentFixture<ButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.btn i');
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn i');
 	button.click();
 	fixture.detectChanges();
 }
