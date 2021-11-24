@@ -149,6 +149,7 @@ The following table summarizes all the components included in the library.
 | [systelab-app-frame](src/lib/applicationframe) | Application frame, using a header and a sidebar |
 | [systelab-app-header](src/lib/applicationframe/header) | Application header |
 | [systelab-app-sidebar](src/lib/applicationframe/sidebar) | Application side bar |
+| [systelab-button](src/lib/button) | Component to trigger an action |
 | [systelab-breadcrumb](src/lib/breadcrumb) | Component to allows users to keep track and maintain awareness of their locations |
 | [systelab-calendar-header](src/lib/calendar) | Calendar header with navigation |
 | [systelab-calendar-table](src/lib/calendar) | Month view custom calendar |

@@ -1,0 +1,14 @@
+<button type="button" class="slab-btn"
+        [class.slab-btn-regular]="type==='regular'"
+        [class.slab-btn-primary]="type==='primary'"
+        [class.slab-btn-warning]="type==='warning'"
+        [class.slab-btn-danger]="type==='danger'"
+        [class.slab-btn-success]="type==='success'"
+        [class.slab-btn-link]="type==='link'"
+        [class.slab-btn-small]="size==='small'"
+        [class.slab-btn-medium]="size==='medium'"
+        [class.slab-btn-large]="size==='large'"
+        [class.slab-btn-disabled]="disabled"
+        [disabled]="disabled" (click)="doClick($event)">
+    <ng-content></ng-content>
+</button>

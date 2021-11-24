@@ -7,7 +7,7 @@
     </systelab-tabs>
 
     <systelab-dialog-bottom>
-        <button type="button" class="btn btn-outline-primary" (click)="doSomething()"> Options</button>
-        <button type="button" class="btn btn-primary ml-auto" (click)="close()"> Submit</button>
+        <systelab-button (click)="doSomething()"> Options</systelab-button>
+        <systelab-button type="primary" class="ml-auto" (action)="close()"> Submit</systelab-button>
     </systelab-dialog-bottom>
 </div>

@@ -9,6 +9,7 @@ import { MessagePopupViewComponent, MessagePopupViewContext } from './message-po
 import { SystelabComponentsModule } from '../../systelab-components.module';
 import { DialogRef } from '../dialog/dialog-ref';
 import { MessagePopupButton } from './message-popup.service';
+import { ButtonComponent } from '../../button/button.component';
 
 
 describe('Systelab MessagePopupViewComponent', () => {
@@ -30,7 +31,7 @@ describe('Systelab MessagePopupViewComponent', () => {
 				SystelabTranslateModule,
 				SystelabComponentsModule
 			],
-			declarations: [],
+			declarations: [ButtonComponent],
 			providers:    [{provide: DialogRef, useValue: spyDialogRef}]
 		})
 			.compileComponents();

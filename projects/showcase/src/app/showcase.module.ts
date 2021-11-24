@@ -41,7 +41,7 @@ import { ShowcaseApplicationFrameDialog } from './components/application-frame/a
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
-import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
+import { ShowcaseButtonStylesComponent } from './components/button/showcase-button-styles.component';
 import { ShowcaseHeadingsComponent } from './components/headings/showcase-headings.component';
 import { ShowcaseAlertComponent } from './components/alert/showcase-alert.component';
 import { ShowcaseTextComponent } from './components/text/showcase-text.component';
@@ -88,6 +88,7 @@ import { ShowcaseVerticalComponent } from './components/dialog/vertical-dialog/s
 import { KeyupDebounceDirective } from '../../../systelab-components/src/lib/directives/keyup-debounce.directive';
 import { ShowcaseInnerGroupColumnsGridComponent } from './components/grid/showcase-inner-group-columns-grid.component';
 import { ShowcaseToggleSelectorComponent } from './components/toggle-selector/showcase-toggle-selector.component';
+import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
 
 @NgModule({
 	imports:      [
@@ -122,6 +123,7 @@ import { ShowcaseToggleSelectorComponent } from './components/toggle-selector/sh
 		ShowcaseSliderComponent,
 		ShowcaseTooltipComponent,
 		ShowcaseInputComponent,
+		ShowcaseButtonStylesComponent,
 		ShowcaseButtonComponent,
 		ShowcaseIconComponent,
 		ShowcaseComboboxComponent,

@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { Datepicker } from './datepicker.component';
 import { of } from 'rxjs';
+import { ButtonComponent } from '../button/button.component';
 
 export class USMockI18nService {
 	public get(key: string) {
@@ -166,6 +167,7 @@ describe('Systelab US DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: USMockI18nService}]
 		})
@@ -256,6 +258,7 @@ describe('Systelab ES DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: ESMockI18nService}]
 		})
@@ -343,6 +346,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: ZHMockI18nService}]
 		})
@@ -427,6 +431,7 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
+				ButtonComponent,
 				Datepicker],
 			providers:    [{provide: I18nService, useClass: ESMockI18nService2}]
 		})

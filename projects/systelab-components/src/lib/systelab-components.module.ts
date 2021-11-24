@@ -92,6 +92,7 @@ import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
 import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
 	imports:      [
@@ -127,6 +128,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
 		ApplicationHeaderComponent,
 		ApplicationSidebarLargeComponent,
 		ApplicationSidebarSmallComponent,
+		ButtonComponent,
 		ToggleButtonComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -212,6 +214,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
 		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
+		ButtonComponent,
 		ToggleButtonComponent,
 		SearcherTableComponent,
 		CalendarHeaderComponent,

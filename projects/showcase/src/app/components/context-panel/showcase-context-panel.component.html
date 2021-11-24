@@ -42,7 +42,7 @@
                     <systelab-date-range-picker class="mb-2 mt-2" [(fromDate)]="fromDate" [(toDate)]="toDate"
                                                 [disabled]="numericDateRadio !== 'calendar'"></systelab-date-range-picker>
                     <div class="d-flex">
-                        <button type="button" class="btn btn-primary ml-auto" (click)="close()">Submit</button>
+                        <systelab-button type="primary" class="ml-auto" (action)="close()">Submit</systelab-button>
                     </div>
                 </div>
 

@@ -34,6 +34,7 @@ export * from './lib/searcher/searcher.dialog.parameters';
 export * from './lib/searcher/abstract-searcher.component';
 export * from './lib/searcher/abstract-searcher';
 
+export * from './lib/button/button.component';
 export * from './lib/searcher/searcher.table.component';
 export * from './lib/toggle-button/toggle-button.component';
 export * from './lib/calendar/calendar-dialog.component';
