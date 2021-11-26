@@ -5,12 +5,11 @@
 
 * [Collaborators](#collaborators)
   * [Collaborator activities](#collaborator-activities)
+  * [Collaborator nominations](#collaborator-nominations)
 * [Technical steering committee](#technical-steering-committee)
   * [TSC meetings](#tsc-meetings)
-* [Collaborator nominations](#collaborator-nominations)
-* [Consensus seeking process](#consensus-seeking-process)
-* [Library Release](#release)
-* 
+  * [Consensus seeking process](#consensus-seeking-process)
+* [Release Manager](#release-manager)
 
 <!-- /TOC -->
 
@@ -49,6 +48,18 @@ result in collaborators removing their opposition.
 
 The TSC can remove inactive collaborators or provide them with _emeritus_
 status. Emeriti may request that the TSC restore them to active status.
+
+### Collaborator nominations
+
+Existing collaborators can nominate someone to become a collaborator. Nominees
+should have significant and valuable contributions across the Sytelab libraries
+organization.
+
+To nominate a new collaborator, contacts someone with Administrator rights in order to add the new collaborator in the systelab/angular-team.
+Provide a summary of the nominee's contributions. For example:
+
+The nomination passes if no collaborators oppose it after one week. Otherwise,
+the nomination fails.
 
 ## Technical Steering Committee
 
@@ -98,20 +109,15 @@ the issue tracker is:
 * The proposal passes if, after 72 hours, there are two or more TSC approvals
   and no TSC opposition.
 
-## Collaborator nominations
 
-Existing collaborators can nominate someone to become a collaborator. Nominees
-should have significant and valuable contributions across the Sytelab libraries
-organization.
-
-To nominate a new collaborator, contacts someone with Administrator rights in order to add the new collaborator in the systelab/angular-team.
-Provide a summary of the nominee's contributions. For example:
-
-The nomination passes if no collaborators oppose it after one week. Otherwise,
-the nomination fails.
-
-
-## Consensus seeking process
+### Consensus seeking process
 
 The TSC follows a [Consensus Seeking](https://en.wikipedia.org/wiki/Consensus_decision-making) decision-making model .
+
+
+## Release manager
+
+Release manager is responsible for planning and scheduling software delivery all through the release lifecycle.
+
+The aim is to facilitate the process required to move software releases into production while coordinating with different teams to ensure the smooth delivery of software releases with little disruption. 
 
