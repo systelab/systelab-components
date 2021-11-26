@@ -3,7 +3,6 @@
 
 <!-- TOC -->
 
-* [Triagers](#triagers)
 * [Collaborators](#collaborators)
   * [Collaborator activities](#collaborator-activities)
 * [Technical steering committee](#technical-steering-committee)
@@ -14,35 +13,23 @@
 
 <!-- /TOC -->
 
-## Triagers
-
-Triagers assess newly-opened issues in the Systelab libraries repositories. The GitHub team for Systelab libraries triagers is @systelab/angular-team.
-Triagers are given the "Triage" GitHub role and have:
-
-* Ability to label issues and pull requests
-* Ability to comment, close, and reopen issues and pull requests
-
-See:
-
-* [List of triagers](./README.md#triagers)
-* [A guide for triagers](./doc/guides/contributing/issues.md#triaging-a-bug-report)
 
 ## Collaborators
 
 Systelab libraries core collaborators maintain the GitHub repository.
 The GitHub team for Systelab libraries core collaborators is @systelab/anguler-team.
+
 Collaborators have:
 
-* Commit access to the [systelab/systelab-components][] repository
+* Commit access to the repository in any branch different than master.
 * Access to the Systelab libraries continuous integration (CI) jobs
 
 Both collaborators and non-collaborators may propose changes to the Systelab libraries
-source code. The mechanism to propose such a change is a GitHub pull request.
+source code. The mechanism to propose such an implmentation change is a GitHub pull request.
 Collaborators review and merge (_land_) pull requests.
 
-Three collaborators must approve a pull request before the pull request can land.
-(One collaborator approval is enough if the pull request has been open for more
-than 7 days.) Approving a pull request indicates that the collaborator accepts
+Three collaborators must approve a pull request before the pull request can land. 
+Approving a pull request indicates that the collaborator accepts
 responsibility for the change. Approval must be from collaborators who are not
 authors of the change.
 
@@ -50,11 +37,6 @@ If a collaborator opposes a proposed change, then the change cannot land. The
 exception is if the TSC votes to approve the change despite the opposition.
 Usually, involving the TSC is unnecessary. Often, discussions or further changes
 result in collaborators removing their opposition.
-
-See:
-
-* [List of collaborators](./README.md#current-project-team-members)
-* [A guide for collaborators](./doc/guides/collaborator-guide.md)
 
 ### Collaborator activities
 
@@ -81,26 +63,23 @@ The TSC has final authority over this project, including:
 
 The current list of TSC members is:
 
-- Alfons Serra
-- Carles Viñola
-- Olga Puig
-- Daniel Martinez
-- Josep Vila
-- Aritz Peñalver
-
+- Olga Puig @olgapuig
+- Alfons Serra @alfonsserra
+- Carles Viñola. @vinyulis
+- Daniel Martinez. @dmartinezcapilla
+- Josep Vila. @josepvilabadillo
+- Aritz Peñalver. @apenalver2
+- Joaquim Vila. @joaquimvila
 
 ### TSC meetings
 
-The TSC meets in a video conference call. Each year, the TSC elects a chair to
-run the meetings.
+The TSC meets periodically.
 
 The TSC agenda includes issues that are at an impasse. The intention of the
-agenda is not to review or approve all patches. Collaborators review and approve
-patches on GitHub.
+agenda is to review or approve all patches. 
 
 Any community member can create a GitHub issue asking that the TSC review
-something. If consensus-seeking fails for an issue, a collaborator may apply the
-`tsc-agenda` label. That will add it to the TSC meeting agenda.
+something.
 
 Before each TSC meeting, the meeting chair will share the agenda with members of
 the TSC. TSC members can also add items to the agenda at the beginning of each
@@ -108,75 +87,30 @@ meeting. The meeting chair and the TSC cannot veto or remove items.
 
 The TSC may invite people to take part in a non-voting capacity.
 
-During the meeting, the TSC chair ensures that someone takes minutes. After the
-meeting, the TSC chair ensures that someone opens a pull request with the
-minutes.
+During the meeting, the TSC chair updates teh project in GitHub with the decissi0ons taken.
 
 The TSC seeks to resolve as many issues as possible outside meetings using
 [the TSC issue tracker](https://github.com/systelab//issues). The process in
 the issue tracker is:
 
-* A TSC member opens an issue explaining the proposal/issue and @-mentions
-  @nodejs/tsc.
+* A TSC member opens an issue explaining the proposal/issue.
 * The proposal passes if, after 72 hours, there are two or more TSC approvals
   and no TSC opposition.
-* If there is an extended impasse, a TSC member may make a motion for a vote.
 
 ## Collaborator nominations
 
 Existing collaborators can nominate someone to become a collaborator. Nominees
-should have significant and valuable contributions across the Ssytelab libraries
+should have significant and valuable contributions across the Sytelab libraries
 organization.
 
-To nominate a new collaborator, open an issue in the [nodejs/node][] repository.
+To nominate a new collaborator, contacts someone with Administrator rights in order to add the new collaborator in the systelab/angular-team.
 Provide a summary of the nominee's contributions. For example:
-
-* Commits in the [nodejs/node][] repository.
-  * Use the link `https://github.com/nodejs/node/commits?author=GITHUB_ID`
-* Pull requests and issues opened in the [nodejs/node][] repository.
-  * Use the link `https://github.com/nodejs/node/issues?q=author:GITHUB_ID`
-* Comments on pull requests and issues in the [nodejs/node][] repository
-  * Use the link `https://github.com/nodejs/node/issues?q=commenter:GITHUB_ID`
-* Reviews on pull requests in the [nodejs/node][] repository
-  * Use the link `https://github.com/nodejs/node/pulls?q=reviewed-by:GITHUB_ID`
-* Help provided to end-users and novice contributors
-* Pull requests and issues opened throughout the Node.js organization
-  * Use the link  `https://github.com/search?q=author:GITHUB_ID+org:nodejs`
-* Comments on pull requests and issues throughout the Node.js organization
-  * Use the link `https://github.com/search?q=commenter:GITHUB_ID+org:nodejs`
-* Participation in other projects, teams, and working groups of the Node.js
-  organization
-* Other participation in the wider Node.js community
-
-Mention @nodejs/collaborators in the issue to notify other collaborators about
-the nomination.
 
 The nomination passes if no collaborators oppose it after one week. Otherwise,
 the nomination fails.
 
-There are steps a nominator can take in advance to make a nomination as
-frictionless as possible. To request feedback from other collaborators in
-private, use the [collaborators discussion page][]
-(which only collaborators may view). A nominator may also work with the
-nominee to improve their contribution profile.
-
-Collaborators might overlook someone with valuable contributions. In that case,
-the contributor may open an issue or contact a collaborator to request a
-nomination.
-
-### Onboarding
-
-After the nomination passes, a TSC member onboards the new collaborator. See
-[the onboarding guide](./onboarding.md) for details of the onboarding
-process.
 
 ## Consensus seeking process
 
-The TSC follows a [Consensus Seeking][] decision-making model per the
-[TSC Charter][].
+The TSC follows a [Consensus Seeking][] decision-making model .
 
-[Consensus Seeking]: https://en.wikipedia.org/wiki/Consensus-seeking_decision-making
-[TSC Charter]: https://github.com/nodejs/TSC/blob/HEAD/TSC-Charter.md
-[collaborators discussion page]: https://github.com/orgs/nodejs/teams/collaborators/discussions
-[nodejs/help]: https://github.com/nodejs/help
-[nodejs/node]: https://github.com/nodejs/node
