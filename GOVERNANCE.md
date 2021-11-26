@@ -8,7 +8,6 @@
 * [Technical steering committee](#technical-steering-committee)
   * [TSC meetings](#tsc-meetings)
 * [Collaborator nominations](#collaborator-nominations)
-  * [Onboarding](#onboarding)
 * [Consensus seeking process](#consensus-seeking-process)
 
 <!-- /TOC -->
@@ -112,5 +111,5 @@ the nomination fails.
 
 ## Consensus seeking process
 
-The TSC follows a [Consensus Seeking][] decision-making model .
+The TSC follows a [Consensus Seeking][https://en.wikipedia.org/wiki/Consensus_decision-making] decision-making model .
 
