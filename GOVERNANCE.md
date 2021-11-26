@@ -9,6 +9,8 @@
   * [TSC meetings](#tsc-meetings)
 * [Collaborator nominations](#collaborator-nominations)
 * [Consensus seeking process](#consensus-seeking-process)
+* [Library Release](#release)
+* 
 
 <!-- /TOC -->
 
@@ -111,5 +113,5 @@ the nomination fails.
 
 ## Consensus seeking process
 
-The TSC follows a [Consensus Seeking][https://en.wikipedia.org/wiki/Consensus_decision-making] decision-making model .
+The TSC follows a [Consensus Seeking](https://en.wikipedia.org/wiki/Consensus_decision-making) decision-making model .
 
