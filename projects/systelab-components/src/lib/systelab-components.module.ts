@@ -92,6 +92,7 @@ import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
 import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
+import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-range.component';
 
 @NgModule({
 	imports:      [
@@ -109,6 +110,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
 		AgGridModule],
 	declarations: [
 		SliderComponent,
+		SliderDoubleRangeComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		ContextMenuSubmenuItemComponent,
@@ -189,6 +191,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
 	],
 	exports:      [
 		SliderComponent,
+		SliderDoubleRangeComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		ContextPanelComponent,
@@ -264,7 +267,7 @@ import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.compo
 		ScrollSpyDirective,
 		ToastComponent,
 		ToggleSelectorComponent,
-		KeyupDebounceDirective,
+		KeyupDebounceDirective
 	],
 	providers:    [
 		StylesUtilService,

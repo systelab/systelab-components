@@ -1,0 +1,28 @@
+
+<div class="slider-container">
+<input
+  #firstRange  
+  type="range"
+  min="{{ min }}"
+  max="{{ max }}"
+  value="{{ firstValue }}"
+  step="{{ step }}"
+  (input)="firstSliderInputEvent()" 
+  (change)="sliderOneChangeEvent()"
+  class="slab-slider-double"
+  id="firstRange"
+/>
+
+<input
+  #secondRange    
+  type="range"
+  min="{{ min }}"
+  max="{{ max }}"
+  value="{{ secondValue }}"
+  step="{{ step }}"  
+  (input)="secondSliderInputEvent()"
+  (change)="sliderTwoChangeEvent()"
+  class="slab-slider-double"
+  id="secondRange"
+/>
+</div>

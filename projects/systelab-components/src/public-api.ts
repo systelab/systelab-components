@@ -4,6 +4,7 @@
 
 export * from './lib/systelab-components.module';
 export * from './lib/slider/slider.component';
+export * from './lib/slider-double-range/slider-double-range.component';
 export * from './lib/switch/switch.component';
 export * from './lib/contextmenu/context-menu.component';
 export * from './lib/contextmenu/context-menu-option';
