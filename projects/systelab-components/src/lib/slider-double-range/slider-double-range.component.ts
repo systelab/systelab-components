@@ -25,6 +25,7 @@ export class SliderDoubleRangeComponent {
 		const result = Number(this.secondRange.nativeElement.value) - Number(this.firstRange.nativeElement.value);
 		if (result <= this.minGap) {
 			this.firstValue = Number(this.secondRange.nativeElement.value);
+			this.firstRange.nativeElement.value = this.firstValue;
 		}else{
 			this.firstValue = Number(this.firstRange.nativeElement.value);
 		}
@@ -35,6 +36,7 @@ export class SliderDoubleRangeComponent {
 		const result = Number(this.secondRange.nativeElement.value) - Number(this.firstRange.nativeElement.value);
 		if (result <= this.minGap) {
 			this.secondValue = Number(this.firstRange.nativeElement.value);
+			this.secondRange.nativeElement.value = this.secondValue;
 		}else{
 			this.secondValue = Number(this.secondRange.nativeElement.value);
 		}
@@ -43,17 +45,17 @@ export class SliderDoubleRangeComponent {
 
 	public sliderOneChangeEvent(): void {
 		const v = this.firstRange.nativeElement.value;
-		// if (v !== this.firstValue) {
-		// 	this.firstValue = v;
-		// 	this.firstValueChange.emit(this.firstValue);
-		// }
+		if (v !== this.firstValue) {
+			this.firstValue = v;
+			this.firstValueChange.emit(this.firstValue);
+		}
 	}
 
 	public sliderTwoChangeEvent(): void {
 		const v = this.firstRange.nativeElement.value;
-		// if (v !== this.firstValue) {
-		// 	this.firstValue = v;
-		// 	this.secondValueChange.emit(this.firstValue);
-		// }
+		if (v !== this.firstValue) {
+			this.firstValue = v;
+			this.secondValueChange.emit(this.firstValue);
+		}
 	}
 }

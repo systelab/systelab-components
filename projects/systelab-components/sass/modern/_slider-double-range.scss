@@ -10,24 +10,65 @@ systelab-slider-double-range {
     width: 100%;
     height: 100px;
     margin-top: 30px;
+  }
+
+input[first]{
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  pointer-events: none;
 }
+
+input[type="range"]:active::-webkit-slider-thumb{
+}
+
+
+.slider-track{
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  margin: auto;
+  top: -6px;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: $slab-slider-track-brackground-color;
+}
+
+
 
   .slab-slider-double {
 
     &:not([class*="w-"]) {
       width: 100%;
     }
+
+    border:none;
     
     padding: 0;
     box-shadow: none;
     position: absolute;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     outline: none;
-    opacity: 0.7;
     -webkit-transition: .2s;
-    transition: opacity .2s;    
+    -webkit-appearance: none;
+    transition: opacity .2s;
+    -moz-appearance: none; 
+    appearance: none;
+    width: 100%;
+    outline: none;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+    pointer-events: none;
+    
 
     &:hover {
       opacity: 1;
@@ -38,25 +79,28 @@ systelab-slider-double-range {
       outline: 0;
       box-shadow: $slab-focus-component-shadow;
       border-radius: $slab-slider-track-border-radius;
-    }
+    }    
 
     &::-webkit-slider-runnable-track {
-      height: $slab-slider-background-line;
-      background: $slab-slider-track-brackground-color;
-      border-radius: $slab-slider-track-border-radius;
-      appearance: none;
-    }
+      -webkit-appearance: none;      
+      // height: $slab-slider-background-line;
+      // background: $slab-slider-track-brackground-color;
+      // border-radius: $slab-slider-track-border-radius;   
+      // pointer-events: auto;
+    }    
 
     &::-moz-range-track {
+      -webkit-appearance: none;
       height: $slab-slider-background-line;
       background: $slab-slider-track-brackground-color;
       border-radius: $slab-slider-track-border-radius;
-      appearance: none;
       border: none;
+      pointer-events: auto;
     }  
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
+      appearance: none;
       @include size($slab-slider-height !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
@@ -68,6 +112,7 @@ systelab-slider-double-range {
   
     &::-moz-range-thumb {
       -webkit-appearance: none;
+      appearance: none;
       @include size(($slab-slider-height/2) !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
@@ -78,6 +123,7 @@ systelab-slider-double-range {
 
 
     &::-ms-thumb {
+      appearance: none;
       @include size(($slab-slider-height/2) !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
@@ -92,16 +138,20 @@ systelab-slider-double-range {
       border: 0;
     }
 
-    &::-ms-track {
-      height: $slab-slider-height;
-      /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-      background-color: transparent !important;
-      /*leave room for the larger thumb to overflow with a transparent border */
-      border-color: transparent;
-      //border-width: 6px 0;
-      /*remove default tick marks*/
-      color: transparent;
-    }
+    // &::-ms-track {
+    //   height: $slab-slider-height;
+    //   /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    //   background-color: transparent !important;
+    //   /*leave room for the larger thumb to overflow with a transparent border */
+    //   border-color: transparent;
+    //   //border-width: 6px 0;
+    //   /*remove default tick marks*/
+    //   color: transparent;
+    // }
+
+    // &::-ms-track {
+    //   appearance: none;
+    // }
 
     &::-ms-fill-lower, &::-ms-fill-upper {
       height: $slab-slider-background-line;
