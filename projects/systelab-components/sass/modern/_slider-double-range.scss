@@ -8,37 +8,18 @@ systelab-slider-double-range {
   .slider-container{
     position: relative;
     width: 100%;
-    height: 100px;
-    margin-top: 30px;
   }
 
-input[first]::-webkit-slider-runnable-track{
-  -webkit-appearance: none;
-  -moz-appearance: none; 
-  appearance: none;
-  width: 100%;
-  outline: none;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  background-color: transparent;
-  pointer-events: none;
-}
-
-
-.slider-track{
-  width: 100%;
-  height: 5px;
-  position: absolute;
-  margin: auto;
-  top: -6px;
-  bottom: 0;
-  border-radius: 5px;
-  background-color: $slab-slider-track-brackground-color;
-}
-
-
+  .slider-track{
+    width: 100%;
+    height: 6px;
+    position: absolute;
+    margin: auto;
+    top: -6px;
+    bottom: 0;
+    border-radius: 5px;
+    background-color: $slab-slider-track-brackground-color;
+  }
 
   .slab-slider-double {
 
@@ -46,8 +27,7 @@ input[first]::-webkit-slider-runnable-track{
       width: 100%;
     }
 
-    border:none;
-    
+    border:none;    
     padding: 0;
     box-shadow: none;
     position: absolute;
@@ -64,19 +44,16 @@ input[first]::-webkit-slider-runnable-track{
     top: 0;
     bottom: 0;
     background-color: transparent;
-    pointer-events: none;
-    
+    pointer-events: none;    
 
     &:hover {
       opacity: 1;
     }
 
     &:focus {
-      border-color: $slab-focus-component-border-color;
-      outline: 0;
-      box-shadow: $slab-focus-component-shadow;
+      outline: none;
       border-radius: $slab-slider-track-border-radius;
-    }    
+    }   
 
     &::-webkit-slider-runnable-track {
       -webkit-appearance: none;      
@@ -133,12 +110,8 @@ input[first]::-webkit-slider-runnable-track{
 
     &::-ms-track {
       height: $slab-slider-height;
-      /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
       background-color: transparent !important;
-      /*leave room for the larger thumb to overflow with a transparent border */
       border-color: transparent;
-      //border-width: 6px 0;
-      /*remove default tick marks*/
       color: transparent;
     }
 
