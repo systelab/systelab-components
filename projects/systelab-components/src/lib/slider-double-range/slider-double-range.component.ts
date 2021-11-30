@@ -11,10 +11,10 @@ export class SliderDoubleRangeComponent {
 	@Input() public step = 1;
 	@Input() public continuous = true;
 
-	@Input() public firstValue = 0;
-	@Input() public secondValue = 0;
-	@Output() public firstValueChange = new EventEmitter();
-	@Output() public secondValueChange = new EventEmitter();
+	@Input() public minValue = 0;
+	@Input() public maxValue = 0;
+	@Output() public minValueChange = new EventEmitter();
+	@Output() public maxValueChange = new EventEmitter();
 
 	@ViewChild('firstRange', {static: false}) firstRange: ElementRef;
 	@ViewChild('secondRange', {static: false}) secondRange: ElementRef;
@@ -24,38 +24,38 @@ export class SliderDoubleRangeComponent {
 	public firstSliderInputEvent(): void {
 		const result = Number(this.secondRange.nativeElement.value) - Number(this.firstRange.nativeElement.value);
 		if (result <= this.minGap) {
-			this.firstValue = Number(this.secondRange.nativeElement.value);
-			this.firstRange.nativeElement.value = this.firstValue;
+			this.minValue = Number(this.secondRange.nativeElement.value);
+			this.firstRange.nativeElement.value = this.minValue;
 		}else{
-			this.firstValue = Number(this.firstRange.nativeElement.value);
+			this.minValue = Number(this.firstRange.nativeElement.value);
 		}
-		this.firstValueChange.emit(this.firstValue);
+		this.minValueChange.emit(this.minValue);
+	}
+
+	public sliderOneChangeEvent(): void {
+		const value = this.firstRange.nativeElement.value;
+		if (value !== this.minValue) {
+			this.minValue = value;
+			this.minValueChange.emit(this.minValue);
+		}
 	}
 
 	public secondSliderInputEvent(): void {
 		const result = Number(this.secondRange.nativeElement.value) - Number(this.firstRange.nativeElement.value);
 		if (result <= this.minGap) {
-			this.secondValue = Number(this.firstRange.nativeElement.value);
-			this.secondRange.nativeElement.value = this.secondValue;
+			this.maxValue = Number(this.firstRange.nativeElement.value);
+			this.secondRange.nativeElement.value = this.maxValue;
 		}else{
-			this.secondValue = Number(this.secondRange.nativeElement.value);
+			this.maxValue = Number(this.secondRange.nativeElement.value);
 		}
-		this.secondValueChange.emit(this.secondValue);
-	}
-
-	public sliderOneChangeEvent(): void {
-		const value = this.firstRange.nativeElement.value;
-		if (value!== this.firstValue) {
-			this.firstValue = value;
-			this.firstValueChange.emit(this.firstValue);
-		}
+		this.maxValueChange.emit(this.maxValue);
 	}
 
 	public sliderTwoChangeEvent(): void {
-		const value = this.firstRange.nativeElement.value;
-		if (value !== this.firstValue) {
-			this.firstValue = value;
-			this.secondValueChange.emit(this.firstValue);
+		const value = this.secondRange.nativeElement.value;
+		if (value!== this.maxValue) {
+			this.maxValue = value;
+			this.maxValueChange.emit(this.maxValue);
 		}
 	}
 }
