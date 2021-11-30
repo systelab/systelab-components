@@ -33,5 +33,6 @@ Two-Way Data Binding properties:
 
 **maxValue**
 
+The minValue cannot exceed the maxValue and the other way around. This is controlled programmatically in the corresponding component.
 
 The styles for the slider and the thumb are defined in the _slider-double-range.scss file.
