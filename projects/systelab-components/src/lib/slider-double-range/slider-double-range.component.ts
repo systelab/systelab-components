@@ -44,17 +44,17 @@ export class SliderDoubleRangeComponent {
 	}
 
 	public sliderOneChangeEvent(): void {
-		const v = this.firstRange.nativeElement.value;
-		if (v !== this.firstValue) {
-			this.firstValue = v;
+		const value = this.firstRange.nativeElement.value;
+		if (value!== this.firstValue) {
+			this.firstValue = value;
 			this.firstValueChange.emit(this.firstValue);
 		}
 	}
 
 	public sliderTwoChangeEvent(): void {
-		const v = this.firstRange.nativeElement.value;
-		if (v !== this.firstValue) {
-			this.firstValue = v;
+		const value = this.firstRange.nativeElement.value;
+		if (value !== this.firstValue) {
+			this.firstValue = value;
 			this.secondValueChange.emit(this.firstValue);
 		}
 	}
