@@ -14,25 +14,35 @@ import { SliderDoubleRangeComponent } from './slider-double-range.component';
 	selector: 'systelab-slider-double-range-test',
 	template: `
                 <div>
-                    <systelab-slider-double-range [min]="min" [max]="max" [step]="step" [(value)]="value"></systelab-slider-double-range>
-                    <label class="label-value">{{value}}</label>
+                    <systelab-slider-double-range
+						 [min]="min" 
+						 [max]="max" 
+						 [step]="step" 
+						 [(minValue)]="minValue"
+						 [(maxValue)]="minValue">
+					</systelab-slider-double-range>
+                    <label class="min-label-value">{{minValue}}</label>
+					<label class="max-label-value">{{maxValue}}</label>
                 </div>
 	          `,
 	styles:   []
 })
+
 export class SliderDoubleRangeTestComponent {
 	public min = 0;
 	public max = 100;
-	public step = 1;
-	public value = 30;
+	public step = 20;
+	public minValue = 20;
+	public maxValue = 80;
 }
 
-describe('Systelab Slider', () => {
+describe('Systelab Slider-Double-Range', () => {
 	let fixture: ComponentFixture<SliderDoubleRangeTestComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
+			imports:
+			    [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
 				DragDropModule,
@@ -53,24 +63,41 @@ describe('Systelab Slider', () => {
 		expect(fixture.componentInstance).toBeDefined();
 	});
 
-	it('should have an initial value', () => {
-		checkHasValue(fixture, 30);
+	it('should have a minimum value', () => {
+		checkHasMinValue(fixture, 20);
 	});
 
-	it('should have the changed value if there is a change', () => {
-		setValue(fixture, 90);
-		checkHasValue(fixture, 90);
+	it('should have a maximum value', () => {
+		checkHasMaxValue(fixture, 80);
+	});
+
+	it('should have the changed value if there is a change in max value', () => {
+		setMaxValue(fixture, 90);
+		checkHasMaxValue(fixture, 90);
+	});
+
+	it('should have the changed value if there is a change in min value', () => {
+		setMinValue(fixture, 10);
+		checkHasMinValue(fixture, 10);
 	});
 });
 
-function checkHasValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+function checkHasMinValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
+	const label = fixture.debugElement.nativeElement.querySelector('.min-label-value');
 	expect(label.innerHTML).toContain(value);
 }
 
-function setValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
-	fixture.componentInstance.value = value;
+function checkHasMaxValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
+	const label = fixture.debugElement.nativeElement.querySelector('.max-label-value');
+	expect(label.innerHTML).toContain(value);
+}
+
+function setMaxValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
+	fixture.componentInstance.maxValue = value;
 	fixture.detectChanges();
 }
 
-
+function setMinValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
+	fixture.componentInstance.minValue = value;
+	fixture.detectChanges();
+}
