@@ -89,7 +89,7 @@ import { ShowcaseVerticalComponent } from './components/dialog/vertical-dialog/s
 import { KeyupDebounceDirective } from '../../../systelab-components/src/lib/directives/keyup-debounce.directive';
 import { ShowcaseInnerGroupColumnsGridComponent } from './components/grid/showcase-inner-group-columns-grid.component';
 import { ShowcaseToggleSelectorComponent } from './components/toggle-selector/showcase-toggle-selector.component';
-import { SliderDoubleComponent } from './components/slider-double/slider-double.component';
+import { ShowcaseSliderDoubleComponent } from './components/slider-double/slider-double.component';
 
 @NgModule({
 	imports:      [
@@ -188,7 +188,7 @@ import { SliderDoubleComponent } from './components/slider-double/slider-double.
 		ShowcaseToastComponent,
 		ShowcaseToggleSelectorComponent,
 		KeyupDebounceDirective,
-  SliderDoubleComponent
+		ShowcaseSliderDoubleComponent
 	],
 	bootstrap:    [ShowcaseComponent]
 })
