@@ -17,7 +17,7 @@ systelab-slider-double-range {
     margin: auto;
     top: -6px;
     bottom: 0;
-    border-radius: $slab-slider-track-border-radius;
+    border-radius: 5px;
     background-color: $slab-slider-track-brackground-color;
   }
 
@@ -35,8 +35,11 @@ systelab-slider-double-range {
     -webkit-appearance: none;
     transition: opacity .2s;
     -moz-appearance: none; 
+    appearance: none;
     margin: auto;
-    background: transparent;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
     pointer-events: none;    
 
     &:hover {
@@ -45,9 +48,6 @@ systelab-slider-double-range {
 
     &:focus {
       outline: none;
-      border-color: $slab-focus-component-border-color;
-      box-shadow: $slab-focus-component-shadow;
-      border-radius: $slab-slider-track-border-radius;
       border-radius: $slab-slider-track-border-radius;
     }   
 
@@ -66,20 +66,25 @@ systelab-slider-double-range {
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
+      appearance: none;
       @include size($slab-slider-height !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
       border: $slab-slider-thumb-border;
       cursor: $slab-slider-thumb-cursor;
       margin-top: -($slab-slider-height - $slab-slider-background-line) / 2;
+      pointer-events: auto;
     }
   
     &::-moz-range-thumb {
+      -webkit-appearance: none;
+      appearance: none;
       @include size(($slab-slider-height/2) !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
       border: $slab-slider-thumb-border;
       cursor: $slab-slider-thumb-cursor;
+      pointer-events: auto;
     }
 
 
