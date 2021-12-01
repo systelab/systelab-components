@@ -14,11 +14,11 @@
     </div>
     <div *ngIf="!isDisabled" class="d-flex p-1"
          [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
-        <button class="btn btn-outline-primary" (click)="add()">
+        <systelab-button (action)="add()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
-        </button>
-        <button class="btn btn-outline-primary" [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (click)="remove()">
+        </systelab-button>
+        <systelab-button [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (action)="remove()">
             <i *ngIf="!buttonsOnBottom" class="mr-2 icon-minus-circle"></i>{{ 'COMMON_REMOVE' | translate | async }}
-        </button>
+        </systelab-button>
     </div>
 </div>

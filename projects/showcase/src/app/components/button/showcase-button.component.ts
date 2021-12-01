@@ -30,4 +30,8 @@ export class ShowcaseButtonComponent {
 	public doSomething() {
 		this.customVariable = !this.customVariable;
 	}
+
+	public doClick(event:any) {
+		console.log(event);
+	}
 }

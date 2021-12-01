@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { Datepicker } from './datepicker.component';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
 	selector: 'systelab-datepicker-test',
@@ -55,6 +56,7 @@ describe('Systelab DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent]
 		})
 			.compileComponents();

@@ -16,13 +16,13 @@ export class Connection {
 	selector: 'sample-route',
 	template: `
 <div style="padding-bottom: 10px;">
-	<button type="button" class="btn" (click)="setColor('green')">Green</button>
-	<button type="button" class="btn" (click)="setColor('red')">Red</button>
-	<button type="button" class="btn" (click)="setColor('blue')">Blue</button>
+	<systelab-button (action)="setColor('green')">Green</systelab-button>
+	<systelab-button (action)="setColor('red')">Red</systelab-button>
+	<systelab-button (action)="setColor('blue')">Blue</systelab-button>
 
-	<button type="button" class="btn" (click)="save()">Save</button>
-	<button type="button" class="btn" (click)="restore()">Restore</button>
-	<button type="button" class="btn" (click)="clear()">Clear</button>
+	<systelab-button (action)="save()">Save</systelab-button>
+	<systelab-button (action)="restore()">Restore</systelab-button>
+	<systelab-button (action)="clear()">Clear</systelab-button>
 
 </div>
 <div>

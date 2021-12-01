@@ -37,5 +37,5 @@
     </div>
 </div>
 <systelab-dialog-bottom *ngIf="multipleSelection">
-    <button type="button" class="btn btn-primary ml-auto" (click)="submit()"> {{ 'COMMON_OK' | translate | async }}</button>
+    <systelab-button type="primary" class="ml-auto" (action)="submit()"> {{ 'COMMON_OK' | translate | async }}</systelab-button>
 </systelab-dialog-bottom>

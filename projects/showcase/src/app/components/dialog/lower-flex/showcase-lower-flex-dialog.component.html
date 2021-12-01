@@ -3,8 +3,8 @@
 <systelab-dialog-bottom>
     <div class="dropup slab-button-dropdown">
         <!-- This is the element toggling the dropdown -->
-        <button type="button" class="btn btn-outline-primary dropdown-toogle" data-toggle="dropdown">Drop down bottom-left <i
-                class="icon-chevron-up"></i></button>
+        <systelab-button class="dropdown-toogle" data-toggle="dropdown">Drop down bottom-left <i
+                class="icon-chevron-up"></i></systelab-button>
         <!-- This is the dropdown -->
         <div class="dropdown-menu slab-dropdown">
             <ul>
@@ -13,5 +13,5 @@
             </ul>
         </div>
     </div>
-    <button type="button" class="btn btn-primary ml-auto" (click)="close()"> Submit</button>
+    <systelab-button type="primary" class="ml-auto" (action)="close()"> Submit</systelab-button>
 </systelab-dialog-bottom>

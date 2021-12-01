@@ -93,6 +93,7 @@ import { ToastComponent } from './toast/toast.component';
 import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
 import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-range.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
 	imports:      [
@@ -129,6 +130,7 @@ import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-
 		ApplicationHeaderComponent,
 		ApplicationSidebarLargeComponent,
 		ApplicationSidebarSmallComponent,
+		ButtonComponent,
 		ToggleButtonComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -215,6 +217,7 @@ import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-
 		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
+		ButtonComponent,
 		ToggleButtonComponent,
 		SearcherTableComponent,
 		CalendarHeaderComponent,

@@ -31,7 +31,7 @@
                         [resetTimeWhenChangingCurrentDate]="true"
                         [(currentDate)]="myDateWithReset">
                 </systelab-date-time>
-                <button class="ml-2 btn btn-sm btn-outline-primary" (click)="resetDateAndTime()">Reset</button>
+                <systelab-button type="primary" [size]="'small'" class="ml-2" (action)="resetDateAndTime()">Reset</systelab-button>
             </div>
         </div>
     </div>
