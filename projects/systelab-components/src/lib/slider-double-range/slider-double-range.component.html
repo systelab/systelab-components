@@ -1,29 +1,8 @@
-
 <div class="slider-container">
   <div class="slider-track" [ngClass]="clicked ?'focused':''"></div>
-<input
-  #firstRange 
-  type="range"
-  min="{{ min }}"
-  max="{{ max }}"
-  value="{{ minValue }}"
-  step="{{ step }}"
-  (input)="firstSliderInputEvent()" 
-  (change)="sliderOneChangeEvent()"
-  class="slab-slider-double"
-  id="firstRange"
-/>
+  <input #firstRange type="range" min="{{ min }}" max="{{ max }}" value="{{ minValue }}" step="{{ step }}"
+    (input)="firstSliderInputEvent()" (change)="sliderOneChangeEvent()" class="slab-slider-double" id="firstRange" />
 
-<input
-  #secondRange    
-  type="range"
-  min="{{ min }}"
-  max="{{ max }}"
-  value="{{ maxValue }}"
-  step="{{ step }}"  
-  (input)="secondSliderInputEvent()"
-  (change)="sliderTwoChangeEvent()"
-  class="slab-slider-double"
-  id="secondRange"
-/>
+  <input #secondRange type="range" min="{{ min }}" max="{{ max }}" value="{{ maxValue }}" step="{{ step }}"
+    (input)="secondSliderInputEvent()" (change)="sliderTwoChangeEvent()" class="slab-slider-double" id="secondRange" />
 </div>
