@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { emailValidator, phoneValidator, urlValidator } from 'systelab-components';
 
 @Component({
@@ -13,19 +13,19 @@ export class ShowcaseInputReactiveFormsValidationsComponent implements OnInit {
     phone :['', phoneValidator],
     url :['', urlValidator],
 
-  })
+  });
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  get email() {
+  get email(): AbstractControl {
     return this.inputValidationForm.get('email');
   }
-  get phone() {
+  get phone(): AbstractControl {
     return this.inputValidationForm.get('phone');
-  }  
-  get url() {
+  }
+  get url(): AbstractControl {
     return this.inputValidationForm.get('url');
   }    
 

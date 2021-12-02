@@ -10,10 +10,10 @@ export class ShowcaseInputTemplateDrivenFormValidationsComponent {
    public info = new Info('','','');
    public submitted = false;
 
-	constructor() {		
+	constructor() {
 	}
 
-	onFormSubmit(form: NgForm) {
+	onFormSubmit(form: NgForm) : void{
         this.submitted = false;
 
         if (form.invalid) {

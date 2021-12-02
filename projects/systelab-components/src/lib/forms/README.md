@@ -116,4 +116,3 @@ For the moment, but this is something that will be improved, you can indicate in
 To validate for email, phone or url inputs you can use the custom validators created:
 
 [validators](validators) 
-

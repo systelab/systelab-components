@@ -41,9 +41,6 @@ describe('Email validation', () => {
 	].forEach((email) => {
 		it('Check that ' + email + ' is not valid', () => {
 			expect(emailValidator(new FormControl(email))).toEqual({email});
-			var a = true;
-			jasmine.addMatchers
-			expect(a).toBeFalse
 		});
 	});
 });
