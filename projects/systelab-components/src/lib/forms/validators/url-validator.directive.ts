@@ -21,7 +21,7 @@ export const urlValidator = (control: FormControl): ValidationErrors | null => {
 };
 
 @Directive({
-  selector: '[urlValidator]',
+  selector: '[systelab-urlValidator]',
   providers: [{
       provide: NG_VALIDATORS,
       useExisting: UrlValidatorDirective,

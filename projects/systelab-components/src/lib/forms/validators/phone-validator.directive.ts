@@ -10,7 +10,7 @@ export const phoneValidator = (control: FormControl): ValidationErrors | null =>
 };
 
 @Directive({
-  selector: '[phoneValidator]',
+  selector: '[systelab-phoneValidator]',
   providers: [{
       provide: NG_VALIDATORS,
       useExisting: PhoneValidatorDirective,

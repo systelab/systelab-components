@@ -92,6 +92,9 @@ import { KeyupDebounceDirective } from '../../../systelab-components/src/lib/dir
 import { ShowcaseInnerGroupColumnsGridComponent } from './components/grid/showcase-inner-group-columns-grid.component';
 import { ShowcaseToggleSelectorComponent } from './components/toggle-selector/showcase-toggle-selector.component';
 import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
+import { EmailValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/email-validator.directive';
+import { UrlValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/url-validator.directive';
+import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/phone-validator.directive';
 
 @NgModule({
 	imports:      [
@@ -192,7 +195,10 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 		ShowcaseVerticaldDialog,
 		ShowcaseToastComponent,
 		ShowcaseToggleSelectorComponent,
-		KeyupDebounceDirective
+		KeyupDebounceDirective,
+		EmailValidatorDirective,
+		PhoneValidatorDirective,
+		UrlValidatorDirective
 	],
 	bootstrap:    [ShowcaseComponent]
 })

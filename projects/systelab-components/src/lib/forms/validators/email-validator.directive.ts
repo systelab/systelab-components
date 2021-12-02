@@ -10,7 +10,7 @@ export const emailValidator = (control: FormControl): ValidationErrors | null =>
 };
 
 @Directive({
-  selector: '[emailValidator]',
+  selector: '[systelab-emailValidator]',
   providers: [{
       provide: NG_VALIDATORS,
       useExisting: EmailValidatorDirective,
