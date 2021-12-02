@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <form #inputValidationsForm="ngForm" (ngSubmit)="onFormSubmit(inputValidationsForm)">
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="full-width-input">Email validation</label>
+            <div class="col-md-9">
+                <input [(ngModel)]="info.email" name='email' emailValidator
+                    #emailInput="ngModel" class="form-control" placeholder="Email" id="full-width-input">
+                <div *ngIf="emailInput.errors?.email"> 
+                    Email not valid.
+                </div>	
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="full-width-input">Phone validation</label>
+            <div class="col-md-9">
+                <input [(ngModel)]="info.phone" name='phone' phoneValidator
+                    #phoneInput="ngModel" class="form-control" placeholder="Phone" id="full-width-input">
+                <div [hidden]="phoneInput.valid || phoneInput.pristine"> 
+                    Phone not valid.
+                </div>	
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="third-width-input">Url validation</label>
+            <div class="col-md-9">
+                <input [(ngModel)]="info.url" name='url' urlValidator
+                    #urlInput="ngModel" class="form-control" placeholder="Url" id="full-width-input">
+                <div *ngIf="urlInput.errors?.url"> 
+                    Url not valid.
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <button type="submit" [disabled]="!inputValidationsForm.form.valid">Submit</button>
+        </div>        
+      </form>
+</div>
+

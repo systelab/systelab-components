@@ -1,0 +1,41 @@
+
+  <div class="container-fluid">
+    <form [formGroup]="inputValidationForm" (ngSubmit)="onFormSubmit()">
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="full-width-input">Email validation</label>
+            <div class="col-md-9">
+                <input formControlName="email" class="form-control" 
+                placeholder="Email" id="full-width-input">
+                <div *ngIf="email?.errors?.email"> 
+                    Email not valid.
+                </div>	
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="full-width-input">Phone validation</label>
+            <div class="col-md-9">
+              <input formControlName="phone" class="form-control" 
+                placeholder="Phone" id="full-width-input">
+                <div [hidden]="phone.valid || phone.pristine"> 
+                    Phone not valid.
+                </div>	
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="third-width-input">Url validation</label>
+            <div class="col-md-9">
+              <input formControlName="url" class="form-control" 
+                placeholder="Url" id="full-width-input">
+              <div *ngIf="url?.errors?.url">  
+                    Url not valid.
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <button type="submit" [disabled]="!inputValidationForm.valid">Submit</button>
+        </div>        
+      </form>
+</div>
+
+
+  

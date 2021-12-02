@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ShowcaseComponent } from './showcase.component';
 import { GridContextMenuCellRendererComponent, GridHeaderContextMenuComponent, SystelabComponentsModule } from 'systelab-components';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +31,8 @@ import { ShowcaseTextareaComponent } from './components/textarea/showcase-textar
 import { ShowcaseDatepickerComponent } from './components/datepicker/showcase-datepicker.component';
 import { ShowcaseComboboxComponent } from './components/combobox/showcase-combobox.component';
 import { ShowcaseInputComponent } from './components/input/showcase-input.component';
+import { ShowcaseInputTemplateDrivenFormValidationsComponent } from './components/input/showcase-input-template-driven-form-validations.component';
+import { ShowcaseInputReactiveFormsValidationsComponent } from './components/input/showcase-input-reactive-forms-validations.component';
 import { ShowcaseTableComponent } from './components/table/showcase-table.component';
 import { ShowcaseGridComponent } from './components/grid/showcase-grid.component';
 import { ShowcaseInnerApiGridComponent } from './components/grid/showcase-inner-api-grid.component';
@@ -96,6 +98,7 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,
+		ReactiveFormsModule,
 		DragDropModule,
 		OverlayModule,
 		TreeModule,
@@ -123,6 +126,8 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 		ShowcaseSliderComponent,
 		ShowcaseTooltipComponent,
 		ShowcaseInputComponent,
+		ShowcaseInputTemplateDrivenFormValidationsComponent,
+		ShowcaseInputReactiveFormsValidationsComponent,
 		ShowcaseButtonStylesComponent,
 		ShowcaseButtonComponent,
 		ShowcaseIconComponent,
