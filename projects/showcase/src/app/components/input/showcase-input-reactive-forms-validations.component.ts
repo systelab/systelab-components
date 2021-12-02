@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { emailValidator, phoneValidator, urlValidator } from 'systelab-preferences';
+import { emailValidator, phoneValidator, urlValidator } from 'systelab-components';
 
 @Component({
   selector: 'showcase-input-reactive-forms-validations',
