@@ -31,7 +31,7 @@ import { ShowcaseTextareaComponent } from './components/textarea/showcase-textar
 import { ShowcaseDatepickerComponent } from './components/datepicker/showcase-datepicker.component';
 import { ShowcaseComboboxComponent } from './components/combobox/showcase-combobox.component';
 import { ShowcaseInputComponent } from './components/input/showcase-input.component';
-import { ShowcaseInputTemplateDrivenFormValidationsComponent } 
+import { ShowcaseInputTemplateDrivenFormValidationsComponent }
 	from './components/input/showcase-input-template-driven-form-validations.component';
 import { ShowcaseInputReactiveFormsValidationsComponent } from './components/input/showcase-input-reactive-forms-validations.component';
 import { ShowcaseTableComponent } from './components/table/showcase-table.component';

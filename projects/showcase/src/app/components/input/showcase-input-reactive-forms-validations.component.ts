@@ -27,7 +27,7 @@ export class ShowcaseInputReactiveFormsValidationsComponent implements OnInit {
   }
   get url(): AbstractControl {
     return this.inputValidationForm.get('url');
-  }    
+  }
 
   onFormSubmit(): void{
     if (this.inputValidationForm.invalid) {

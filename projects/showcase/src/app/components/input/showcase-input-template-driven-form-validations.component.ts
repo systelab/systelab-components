@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+class Info {
+   constructor(public email: string, public phone: string, public url: string) { }
+}
+
 @Component({
 	selector:    'showcase-input-template-driven-form-validations',
 	templateUrl: 'showcase-input-template-driven-form-validations.component.html'
@@ -13,7 +17,7 @@ export class ShowcaseInputTemplateDrivenFormValidationsComponent {
 	constructor() {
 	}
 
-	onFormSubmit(form: NgForm) : void{
+	onFormSubmit(form: NgForm): void{
         this.submitted = false;
 
         if (form.invalid) {
@@ -24,6 +28,3 @@ export class ShowcaseInputTemplateDrivenFormValidationsComponent {
      }
 }
 
-export class Info {
-   constructor(public email: string, public phone: string, public url: string) { }
-}
