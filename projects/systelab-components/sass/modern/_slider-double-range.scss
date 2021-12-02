@@ -7,53 +7,66 @@ systelab-slider-double-range {
 
   .slider-container{
     position: relative;
-    width: 100%;
+    width: 100%;  
+    &:hover {
+      opacity: 1;
+    }    
   }
 
-  .slider-track{
+  .focused{
+    border-color: $slab-focus-component-border-color;
+      outline: 0;
+      box-shadow: $slab-focus-component-shadow;
+      border-radius: $slab-slider-track-border-radius;
+  }
+ 
+  .slider-track {
     width: 100%;
-    height: 6px;
+    height: 8px;
     position: absolute;
     margin: auto;
     top: -6px;
     bottom: 0;
     border-radius: 5px;
     background-color: $slab-slider-track-brackground-color;
+    opacity: 0.7;
+    transition: opacity .2s;
+
+    &:hover {
+      opacity: 1;
+    }  
   }
 
   .slab-slider-double {
-
     &:not([class*="w-"]) {
       width: 100%;
     }
 
-    border:none;    
+    border: none;
     padding: 0;
     box-shadow: none;
-    position: absolute;    
-    -webkit-transition: .2s;
+    position: absolute;
+    -webkit-transition: 0.2s;
     -webkit-appearance: none;
-    transition: opacity .2s;
-    -moz-appearance: none; 
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    -moz-appearance: none;
     appearance: none;
     margin: auto;
     top: 0;
     bottom: 0;
     background-color: transparent;
-    pointer-events: none;    
+    pointer-events: none;
+    
 
     &:hover {
       opacity: 1;
     }
 
-    &:focus {
-      outline: none;
-      border-radius: $slab-slider-track-border-radius;
-    }   
 
     &::-webkit-slider-runnable-track {
-      -webkit-appearance: none;      
-    }    
+      -webkit-appearance: none;
+    }
 
     &::-moz-range-track {
       -webkit-appearance: none;
@@ -62,7 +75,7 @@ systelab-slider-double-range {
       border-radius: $slab-slider-track-border-radius;
       border: none;
       pointer-events: auto;
-    }  
+    } 
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -75,7 +88,7 @@ systelab-slider-double-range {
       margin-top: -($slab-slider-height - $slab-slider-background-line) / 2;
       pointer-events: auto;
     }
-  
+
     &::-moz-range-thumb {
       -webkit-appearance: none;
       appearance: none;
@@ -86,7 +99,6 @@ systelab-slider-double-range {
       cursor: $slab-slider-thumb-cursor;
       pointer-events: auto;
     }
-
 
     &::-ms-thumb {
       appearance: none;
@@ -115,11 +127,12 @@ systelab-slider-double-range {
       appearance: none;
     }
 
-    &::-ms-fill-lower, &::-ms-fill-upper {
+    &::-ms-fill-lower,
+    &::-ms-fill-upper {
       height: $slab-slider-background-line;
       background: $slab-slider-track-brackground-color;
       border-radius: $slab-slider-track-border-radius;
-    }   
+    }
 
     &::-ms-tooltip {
       display: none;

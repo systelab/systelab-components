@@ -1,9 +1,8 @@
 
 <div class="slider-container">
-  <div class="slider-track"></div>  
+  <div class="slider-track" [ngClass]="clicked ?'focused':''"></div>
 <input
   #firstRange 
-  first 
   type="range"
   min="{{ min }}"
   max="{{ max }}"

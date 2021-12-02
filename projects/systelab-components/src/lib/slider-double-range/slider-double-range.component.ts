@@ -20,9 +20,11 @@ export class SliderDoubleRangeComponent {
 	@ViewChild('secondRange', {static: false}) secondRange: ElementRef;
 
 	minGap = 0;
+	clicked = false;
 
 	public firstSliderInputEvent(): void {
 		const result = Number(this.secondRange.nativeElement.value) - Number(this.firstRange.nativeElement.value);
+		this.clicked = true;
 		if (result <= this.minGap) {
 			this.minValue = Number(this.secondRange.nativeElement.value);
 			this.firstRange.nativeElement.value = this.minValue;
@@ -41,6 +43,7 @@ export class SliderDoubleRangeComponent {
 	}
 
 	public secondSliderInputEvent(): void {
+		this.clicked = true;
 		const result = Number(this.secondRange.nativeElement.value) - Number(this.firstRange.nativeElement.value);
 		if (result <= this.minGap) {
 			this.maxValue = Number(this.firstRange.nativeElement.value);
