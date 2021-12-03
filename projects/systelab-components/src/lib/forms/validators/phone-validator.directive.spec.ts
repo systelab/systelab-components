@@ -5,7 +5,9 @@ describe('Phone validation', () => {
 	beforeEach(() => {
 	});
 
-	[	'900 703 030',
+	[	'93.885.05.00',
+		'(0034) 886708865',
+		'900703030',
 		'111111111111111111111111',
 		'938550500',
 		'886787654',
@@ -16,13 +18,12 @@ describe('Phone validation', () => {
 		});
 	});
 
-	[	'93.885.05.00',
-		'(0034) 886708865',
+	[	'900 703 030',
 		'textphone',
 		'888sometext888',
 		'a12332e323',
 	].forEach((phone) => {
-		it('Check that ' + phone + ' is valid', () => {
+		it('Check that ' + phone + ' is invalid', () => {
 			expect(phoneValidator(new FormControl(phone))).toEqual({
 				phone
 			  });
