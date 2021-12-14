@@ -113,3 +113,6 @@ The styles for the forms are defined in the forms.scss Saas file.
 
 For the moment, but this is something that will be improved, you can indicate invalid and valid form fields with .is-invalid and .is-valid classes.
 
+To validate for email, phone or url inputs you can use the custom validators created:
+
+[validators](validators) 

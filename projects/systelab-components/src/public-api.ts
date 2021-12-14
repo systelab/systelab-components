@@ -125,3 +125,7 @@ export * from './lib/spy-menu/spy-menu.component';
 export * from './lib/spy-menu/scroll-spy.directive';
 
 export * from './lib/toggle-selector/toggle-selector.component';
+
+export * from './lib/forms/validators/email-validator.directive';
+export * from './lib/forms/validators/phone-validator.directive';
+export * from './lib/forms/validators/url-validator.directive';
