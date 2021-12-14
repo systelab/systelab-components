@@ -8,6 +8,10 @@ export class ShowcaseSliderComponent {
 
 	public sliderValue = 100;
 
-	constructor() {
-	}
+	public startValue = 10;
+
+	public endValue = 80;
+
+	constructor() {}
+
 }

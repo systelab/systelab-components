@@ -40,7 +40,8 @@ import { ShowcaseInnerApiGridComponent } from './components/grid/showcase-inner-
 import { ShowcaseIconComponent } from './components/icon/showcase-icon.component';
 import { ShowcaseTwoListComponent } from './components/two-list/showcase-two-list.component';
 import { ShowcaseApplicationFrameComponent } from './components/application-frame/showcase-application-frame.component';
-import { ShowcaseApplicationFrameDialog } from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
+import { ShowcaseApplicationFrameDialog }
+from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
@@ -91,6 +92,7 @@ import { ShowcaseVerticalComponent } from './components/dialog/vertical-dialog/s
 import { KeyupDebounceDirective } from '../../../systelab-components/src/lib/directives/keyup-debounce.directive';
 import { ShowcaseInnerGroupColumnsGridComponent } from './components/grid/showcase-inner-group-columns-grid.component';
 import { ShowcaseToggleSelectorComponent } from './components/toggle-selector/showcase-toggle-selector.component';
+import { ShowcaseSliderDoubleComponent } from './components/slider-double/slider-double.component';
 import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
 import { EmailValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/email-validator.directive';
 import { UrlValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/url-validator.directive';
@@ -127,6 +129,7 @@ import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/fo
 		ShowcaseSpinnerComponent,
 		ShowcaseCheckboxComponent,
 		ShowcaseRadioComponent,
+		ShowcaseSliderComponent,
 		ShowcaseSliderComponent,
 		ShowcaseTooltipComponent,
 		ShowcaseInputComponent,
@@ -196,6 +199,7 @@ import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/fo
 		ShowcaseToastComponent,
 		ShowcaseToggleSelectorComponent,
 		KeyupDebounceDirective,
+		ShowcaseSliderDoubleComponent,
 		EmailValidatorDirective,
 		PhoneValidatorDirective,
 		UrlValidatorDirective
