@@ -23,6 +23,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
     &:empty {
       padding-left: $slab-checkbox-height;
+      height: $form-elements-height;
     }
 
     &:before {
