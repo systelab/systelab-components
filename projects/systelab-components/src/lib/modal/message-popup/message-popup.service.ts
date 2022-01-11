@@ -69,31 +69,16 @@ export class MessagePopupService {
 
 	private getButtonsTemplate(template:string): MessagePopupButton[] {
 		const buttons: MessagePopupButton[] = [];
-		let classTemplate: string;
-		switch (template) {
-			case 'outline-danger':
-				classTemplate = 'btn-outline-danger';
-				break;
-			case 'danger':
-				classTemplate = 'btn-danger';
-				break;
-			case 'outline-warning':
-				classTemplate = 'btn-outline-warning';
-				break;
-			case 'warning':
-				classTemplate = 'btn-warning';
-				break;
-			case 'outline-primary':
-				classTemplate = 'btn-outline-primary';
-				break;
-			case 'primary':
-				classTemplate = 'btn-primary';
-				break;
-			case 'default':
-			default:
-				classTemplate = 'btn-outline-primary';
-				break;
+		const availableTemplates = {
+			'outline-danger': 'btn-outline-danger',
+			'danger': 'btn-danger',
+			'outline-warning': 'btn-outline-warning',
+			'warning': 'btn-warning',
+			'primary':'btn-primary',
+			'outline-primary': 'btn-outline-primary',
 		}
+		const classTemplate: string = availableTemplates[template] || 'btn-outline-primary';
+
 		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link'));
 		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true, classTemplate));
 		return buttons;
