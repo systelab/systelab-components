@@ -41,8 +41,19 @@ public showInformationPopup(titleDescription: string, messageDescription: string
 Use showYesNoQuestionPopup to show a yes/no popup with a question icon.
 
 ```javascript
-public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any>
+public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, template?: string): Observable<any>
 ```
+Current available templates are the following:
+
+| Template | String value | Example |
+| ---- |:----------:| ------------|
+| No template | ```null``` | ![image](https://user-images.githubusercontent.com/5593621/148924691-09aed4e2-ae37-4a07-95a8-a03bfbf479b9.png) |
+| Primary | ```primary``` | ![image](https://user-images.githubusercontent.com/5593621/148924854-bdf0765c-7f55-4782-bad6-9094bf722a6e.png) |
+| Outline primary | ```outline-primary``` | ![image](https://user-images.githubusercontent.com/5593621/148924973-e221d2ca-438d-406c-818d-4d4116092767.png) |
+| Warning | ```warning``` | ![image](https://user-images.githubusercontent.com/5593621/148925148-abb303d1-174a-49d6-a8a0-523151c5e0b0.png) |
+| Outline warning | ```outline-warning```  | ![image](https://user-images.githubusercontent.com/5593621/148925187-87e0be42-4a37-483c-819b-438ca2cef24b.png) |
+| Danger | ```danger``` | ![image](https://user-images.githubusercontent.com/5593621/148925237-7af6c3a0-9769-4bdf-8d28-0affa801587a.png) |
+| Outline Danger | ```outline-danger``` | ![image](https://user-images.githubusercontent.com/5593621/148925269-b9a80e61-acc4-41f8-b9dc-e91ce656dda1.png) |
 
 Use showCustomQuestionPopup to show a popup with custom buttons and a question icon.
 
