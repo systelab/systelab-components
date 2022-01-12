@@ -69,7 +69,7 @@ export class MessagePopupService {
 
 	private getButtonsTemplate(template:string): MessagePopupButton[] {
 		const buttons: MessagePopupButton[] = [];
-		const availableTemplates = {
+		const availableTemplates: any = {
 			'outline-danger': 'btn-outline-danger',
 			'danger': 'btn-danger',
 			'outline-warning': 'btn-outline-warning',
