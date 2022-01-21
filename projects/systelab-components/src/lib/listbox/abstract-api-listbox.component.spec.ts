@@ -1,5 +1,5 @@
-import {AfterViewChecked, Component, ViewChild} from '@angular/core';
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {Component, ViewChild} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
