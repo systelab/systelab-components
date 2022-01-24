@@ -18,6 +18,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
 
   &:empty {
     padding-left: $slab-checkbox-height;
+    height: $form-elements-height;
   }
 
   &:before {
