@@ -584,7 +584,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.multipleSelection) {
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
-					if (this.multipleSelectedItemList.some((item) => (item !== undefined && item[this.getIdField()] === node.id))) {
+					if (this.multipleSelectedItemList.some((item) => (item !== undefined && node.data !== undefined && item[this.getIdField()] === node.data[this.getIdField()]))) {
 						node.selectThisNode(true);
 					}
 				});
