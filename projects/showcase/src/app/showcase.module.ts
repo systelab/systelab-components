@@ -97,6 +97,9 @@ import { ShowcaseButtonComponent } from './components/button/showcase-button.com
 import { EmailValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/email-validator.directive';
 import { UrlValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/url-validator.directive';
 import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/phone-validator.directive';
+import { DraggableDirective } from '../../../systelab-components/src/lib/directives/draggable.directive';
+import { ResizableDirective } from '../../../systelab-components/src/lib/directives/resizable.directive';
+import { ShowcaseInteractive } from './components/dialog/interactive/showcase-interactive.component';
 
 @NgModule({
 	imports:      [
@@ -202,7 +205,8 @@ import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/fo
 		ShowcaseSliderDoubleComponent,
 		EmailValidatorDirective,
 		PhoneValidatorDirective,
-		UrlValidatorDirective
+		UrlValidatorDirective,
+		ShowcaseInteractive
 	],
 	bootstrap:    [ShowcaseComponent]
 })

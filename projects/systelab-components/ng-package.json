@@ -19,7 +19,8 @@
       "primeng/contextmenu": "primeng/contextmenu",
       "primeng/tree": "primeng/tree",
       "systelab-preferences": "systelab-preferences",
-      "systelab-translate": "systelab-translate"
+      "systelab-translate": "systelab-translate",
+      "interactjs/dist/interact": "interactjs/dist/interact"
     }
   }
 }
