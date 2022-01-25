@@ -16,7 +16,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 	@Input() public fontSize: string;
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
-
+	@Input() public tabindex: number;
 	public _id: number | string;
 	protected _multipleSelectedItemList: Array<T>;
 

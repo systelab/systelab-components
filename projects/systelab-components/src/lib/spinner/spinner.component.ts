@@ -13,6 +13,7 @@ export class TouchspinComponent {
 
 	@Input() public disabled = false;
 	@Input() public fillUnitsWithZero: boolean|number = false; //0 if false, and 1 if true
+	@Input() public tabindex: number;
 	private _spinValues: TouchSpinValues;
 	protected _valueStr: string;
 
