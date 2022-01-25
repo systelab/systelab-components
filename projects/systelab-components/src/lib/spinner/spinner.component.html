@@ -6,6 +6,7 @@
                     class="icon-minus-thin"></i></button>
         </div>
         <input [class.disabled]="disabled" name="sp" [(ngModel)]="valueStr"
+               [tabindex]="tabindex"
                class="slab-flex-1 slab-spinner-input form-control text-center" type="text"
                (keydown)="doKeyDown($event)"
                (keypress)="doCheckKey($event)"
