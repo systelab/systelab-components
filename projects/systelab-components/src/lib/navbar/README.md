@@ -26,7 +26,7 @@ Component to show a Navbar
 | borderColor | string | | Border color |
 | activeColor | string | 'white' | Background color for active NavItem|
 | activeFontColor | string | 'black'| Font color for active NavItem |
-| fontHoveColor | string | | Font color for a hovered NavItem |
+| fontHoverColor | string | | Font color for a hovered NavItem |
 | hideBottomBorder | string | | Hide NavItem bottom border |
 | hideTopBorder | boolean | | Hide NavItem top border |
 | hideRightBorder | boolean | | Hide NavItem right border |
