@@ -26,7 +26,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public warnDaysAfter: number;
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
-
+	@Input() public tabindex: number;
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
@@ -97,6 +97,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-calendar slab-form-icon w-100';
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
+		}
+		if(this.tabindex) {
+			this.currentCalendar.el.nativeElement.querySelector('input')
+				.setAttribute('tabindex', this.tabindex);
 		}
 
 	}

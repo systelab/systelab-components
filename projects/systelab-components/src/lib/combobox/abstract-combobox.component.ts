@@ -36,6 +36,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public iconClass: string;
 	@Input() public inputColor: string;
 	@Input() public iconColor: string;
+	@Input() public tabindex: number;
 
 	public suppressKeyboardEvent;
 
