@@ -25,7 +25,7 @@ export class NavbarTestComponent {
 	constructor() {
 		this.items.push(new NavbarItem(1, 'Option 1', 'slab-icon-medium icon-calendar', true, false, true, () => this.doSomething()));
 		this.items.push(new NavbarItem(1, 'Option 2', 'slab-icon-medium icon-calendar', true, false, true, () => this.doSomethingElse()));
-		this.items.push(new NavbarItem(1, 'Option 3', 'slab-icon-medium icon-calendar', true, false, false, () => this.doSomethingElse()));
+		this.items.push(new NavbarItem(1, 'Option 3', 'slab-icon-medium icon-calendar', true, false, false, () => this.doSomethingElse(), undefined,undefined,'red','green'));
 	}
 
 	public doSomething() {
@@ -72,6 +72,11 @@ describe('Systelab Navbar', () => {
 			.toContain('Option 2');
 	});
 
+	it('Second element should have the right forced font color', () => {
+		expect(getBackgroundColor(fixture, 3))
+			.toBe('color: green;');
+	});
+
 	it('should call first action when first element is clicked', () => {
 		spyOn(fixture.componentInstance, 'doSomething');
 		clickTabButton(fixture, 1);
@@ -104,6 +109,10 @@ function clickTabButton(fixture: ComponentFixture<NavbarTestComponent>, children
 function getText(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
 	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
 	return label.innerHTML;
+}
+function getBackgroundColor(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
+	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')').querySelector('a');
+	return label.getAttribute('style');
 }
 
 
