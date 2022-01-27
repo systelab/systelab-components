@@ -245,7 +245,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 						if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 							if (this.multipleSelectedItemList
 								.filter((selectedItem) => {
-									return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+									return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.data[this.getIdField()]);
 								}).length > 0) {
 								node.selectThisNode(true);
 							}
