@@ -56,7 +56,9 @@ systelab-two-list {
         padding: 0;
         border-radius: 30px;
         border: 1px solid $primary;
-
+        &:hover {
+          color:white;
+        }
         &:disabled {
           opacity: 0.4 !important;
         }
