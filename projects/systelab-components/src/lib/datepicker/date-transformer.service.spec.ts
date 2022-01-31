@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {DataTransformerService} from './date-transformer.service';
+import { DataTransformerService } from './date-transformer.service';
 
 describe('DataTransformerService Test', () => {
 	let dataTransformerService: DataTransformerService;
@@ -13,8 +13,8 @@ describe('DataTransformerService Test', () => {
 				expected: new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() + 14)},
 		{description: '2 weeks (as s) and No from date', dateString: '2s', fromDate: undefined,
 				expected: new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() + 14)},
-		{description: '1 month and No from date', dateString: '1m', fromDate: undefined,
-				expected: new Date(todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate())},
+		{description: '1 month from 1st of current month', dateString: '1m', fromDate: new Date(todayDate.getFullYear(), todayDate.getMonth(),1),
+			expected: new Date(todayDate.getFullYear(), todayDate.getMonth() + 1,1)},
 		{description: '1 year and No from date', dateString: '1y', fromDate: undefined,
 				expected: new Date(todayDate.getFullYear() + 1, todayDate.getMonth(), todayDate.getDate())},
 		{description: '2 year (as a) and No from date', dateString: '1a', fromDate: undefined,
