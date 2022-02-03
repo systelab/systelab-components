@@ -75,11 +75,21 @@ systelab-toggle-button {
       color: white;
       background-color: $slab-button-background-color;
       border-color: $slab-button-background-color;
+      &:hover{
+        color: #fff;
+        background-color: $primary;
+        border-color: $primary;
+      }
     }
 
     &.btn-primary {
       background-color: $primary;
       border-color: $primary;
+      &:hover{
+        color: #fff;
+        background-color: $primary;
+        border-color: $primary;
+      }
     }
   }
 }
