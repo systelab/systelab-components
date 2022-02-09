@@ -26,10 +26,9 @@
                    class="nav-link text-center align-self-stretch d-flex align-items-center justify-content-center"
                    [attr.href]="nav.url ? nav.isEnabled ?  nav.url : '' : null "
                    [attr.target]="nav.url ? nav.isEnabled ?  nav.target : '' : null "
-                   [style.color]="nav.isSelected?activeFontColor:fontColor"
+                   [style.color]="nav.fontColor ? nav.fontColor: (hovered == nav.id && nav.isEnabled ? fontHoverColor : (nav.isSelected?activeFontColor:fontColor))"
                    [class.disabled]="!nav.isEnabled" [class.active]="nav.isSelected">
-                    <i *ngIf="nav.image" [class]="nav.image" [style.color]="nav.isSelected?activeFontColor:fontColor"
-                       [class.slab-icon-float-image]="nav.floatImage"
+                    <i *ngIf="nav.image" [class]="nav.image" [class.slab-icon-float-image]="nav.floatImage"
                        [class.slab-icon-vertical-image]="!nav.floatImage"></i>
                     <span *ngIf="nav.text" [ngClass]="{'ml-2': nav.image}">{{nav.text}}</span>
                 </a>

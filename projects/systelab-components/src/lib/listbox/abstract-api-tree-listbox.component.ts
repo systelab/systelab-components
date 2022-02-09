@@ -115,17 +115,19 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			}
 		];
 
-		this.gridOptions.getRowNodeId =
-			(item) => {
-				if (item.nodeData[this.getIdField(1)]) {
-					return item.level + '-' + item.nodeData[this.getIdField(1)];
-				} else {
-					return null;
-				}
-			};
+		this.gridOptions.getRowNodeId = (item) => this.getRowNodeId(item)
+			?.toString();
 
 		this.gridOptions.columnDefs = this.columnDefs;
 
+	}
+
+	protected override getRowNodeId(item:TreeListBoxElement<T>): string | number | undefined {
+		if (item.nodeData[this.getIdField(1)]) {
+			return item.level + '-' + item.nodeData[this.getIdField(1)];
+		} else {
+			return null;
+		}
 	}
 
 	public ngAfterViewInit() {
