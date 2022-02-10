@@ -41,9 +41,8 @@ systelab-numpad {
     border-radius: 40px;
     border-color: $primary !important;
     color: $primary !important;
-
     &:hover {
-      background-color: $primary;
+      background-color: $primary !important;
       color: white !important;
     }
   }

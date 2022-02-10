@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import {ChangeDetectorRef, Component, Renderer2, ViewChild} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +16,7 @@ import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-c
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
 
 export class TestData {
-	constructor(public id: string, public description: string) {
+	constructor(public id: string | number, public description: string) {
 	}
 }
 
@@ -53,7 +53,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 		values.push(new TestData('1', 'Description 1'));
 		values.push(new TestData('2', 'Description 2'));
 		values.push(new TestData('3', 'Description 3'));
-		console.log('getData');
+		values.push(new TestData(4, 'Description 4'));
 		this.totalItems = values.length;
 		return of(values);
 	}
@@ -70,7 +70,10 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                         <div class="col-md-9">
-                            <systelab-combobox-example [(id)]="id" [(description)]="description"></systelab-combobox-example>
+                            <systelab-combobox-example #combobox [(id)]="id" [(description)]="description" 
+													   [multipleSelection]="multipleSelection"
+                                                       [(multipleSelectedItemList)]="multipleSelectedItemList">
+							</systelab-combobox-example>
                         </div>
                     </div>
                 </div>
@@ -79,7 +82,12 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 export class ComboboxTestComponent {
 	public id: string;
 	public description: string;
-	public startsWith: string;
+	public multipleSelection = false;
+	public multipleSelectedItemList = [
+		new TestData('3', 'Description 3'),
+		new TestData(4, 'Description 4')
+	]
+	@ViewChild('combobox') public combobox: SystelabComboboxComponent;
 }
 
 describe('Systelab Combobox', () => {
@@ -124,7 +132,7 @@ describe('Systelab Combobox', () => {
 		fixture.whenStable()
 			.then(() => {
 				expect(getNumberOfRows(fixture))
-					.toEqual(3);
+					.toEqual(4);
 				done();
 			});
 	});
@@ -142,6 +150,20 @@ describe('Systelab Combobox', () => {
 							.toEqual('Description 3');
 						done();
 					});
+			});
+	});
+
+	it('should check selected items', (done) => {
+		fixture.componentInstance.multipleSelection = true;
+		clickButton(fixture);
+		fixture.whenStable()
+			.then(() => {
+				const component = fixture.componentInstance;
+				let listSelectedItems = component.combobox.gridOptions.api.getSelectedNodes().map(node => {
+					return node.data;
+				});
+				expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
+				done();
 			});
 	});
 });

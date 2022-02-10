@@ -21,11 +21,12 @@ Component to show a Navbar
 | ---- |:----:|:-------:| ----------- |
 | isVertical | boolean |false | Define the orientation of the navbar |
 | align | string | | The values can be: 'center', 'left' or 'right' |
-| backgroundColor | string | | Bacground color for the navbar|
+| backgroundColor | string | | Background color for the navbar|
 | backgroundHoverColor | string | | Background color for a hovered navItem|
 | borderColor | string | | Border color |
 | activeColor | string | 'white' | Background color for active NavItem|
 | activeFontColor | string | 'black'| Font color for active NavItem |
+| fontHoverColor | string | | Font color for a hovered NavItem |
 | hideBottomBorder | string | | Hide NavItem bottom border |
 | hideTopBorder | boolean | | Hide NavItem top border |
 | hideRightBorder | boolean | | Hide NavItem right border |
@@ -47,4 +48,5 @@ Component to show a Navbar
 | target | string | | Two values are possible '_blank' and '_self' |
 | action | any | | The arrow function to execute (the url parameter should be set as blank if you want your arrow function to be called).  |
 | url | string | | Url for the redirection |
-| backgroundColor | string | | Custom color for the NavbarItem |
+| backgroundColor | string | | Custom background color for the NavbarItem |
+| fontColor | string | | Custom font color for the NavbarItem |
