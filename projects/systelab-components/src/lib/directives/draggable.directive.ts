@@ -40,17 +40,17 @@ export class DraggableDirective implements OnInit {
 			.draggable(Object.assign({}, this.draggableOptions || {}))
 			.on('dragmove', event => this.doDragMove(event))
 			.on('dragend', event => this.doDragEnd(event))
-			.on('resizemove', event => this.doCurrentlyResizingUpdate(true))
-			.on('resizeend', event => this.doCurrentlyResizingUpdate(false));
+			.on('resizemove', () => this.doCurrentlyResizingUpdate(true))
+			.on('resizeend', () => this.doCurrentlyResizingUpdate(false));
 	}
 
-	private doCurrentlyResizingUpdate(value: boolean):void {
+	private doCurrentlyResizingUpdate(value: boolean): void {
 		setTimeout(() => {
 			this.currentlyResizing = value;
 		});
 	}
 
-	private doDragEnd(event):void {
+	private doDragEnd(event): void {
 		event.target.classList.remove('getting-dragged');
 		const target = event.target;
 		this.finalPosition.emit({x: target.getAttribute('data-x') || 0, y: target.getAttribute('data-y') || 0});
@@ -60,7 +60,7 @@ export class DraggableDirective implements OnInit {
 		});
 	}
 
-	private doDragMove(event):void {
+	private doDragMove(event): void {
 		const target = event.target;
 		const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx / this.zoom;
 		const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy / this.zoom;

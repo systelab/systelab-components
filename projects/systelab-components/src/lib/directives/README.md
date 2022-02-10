@@ -7,14 +7,13 @@
 
 ```
 
-### Properties
+### Draggable Properties
 
 | Name | Value | Default | Description |
 | ---- |:----:|:-------:| ----------- |
 | draggableOptions | {restrictParent: true} | false | indicates if the element can be dragged outside the parent div|
 
-
-### Events
+### Draggable Events
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
@@ -26,15 +25,14 @@
 <div (finalSize)="doUpdateSizeModel($event)"  [resizableOptions]="{edges: { right: true, bottom: true, top: false, left: true } }" resizable></div>
 ```
 
-
-### Properties
+### Resizable Properties
 
 | Name | Value | Default | Description |
 | ---- |:----:|:-------:| ----------- |
 | resizableOptions | {edges: { right: true, bottom: true, top: false, left: true } } | false | indicates the edge resizable |
 
 
-### Events
+### Resizable Events
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|

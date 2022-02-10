@@ -32,8 +32,8 @@ export class ResizableDirective implements OnInit {
 		interact(this.element.nativeElement)
 			.resizable(Object.assign({}, this.resizableOptions || {}))
 			.on('resizemove', (event) => this.doResizeMove(event))
-			.on('dragmove', (event) => this.doCurrentlyDraggedUpdate(true))
-			.on('dragend', (event) => this.doCurrentlyDraggedUpdate(false))
+			.on('dragmove', () => this.doCurrentlyDraggedUpdate(true))
+			.on('dragend', () => this.doCurrentlyDraggedUpdate(false))
 			.on('resizeend', (event) => this.doResizeEnd(event));
 	}
 
@@ -55,8 +55,6 @@ export class ResizableDirective implements OnInit {
 
 	private doResizeMove(event): void {
 		const target = event.target;
-		let incrementH;
-		let incrementW;
 		this.currentlyResizing = true;
 		let x = (parseFloat(target.getAttribute('data-x')) || 0);
 		let y = (parseFloat(target.getAttribute('data-y')) || 0);
