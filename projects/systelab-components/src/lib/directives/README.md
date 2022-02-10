@@ -31,10 +31,8 @@
 | ---- |:----:|:-------:| ----------- |
 | resizableOptions | {edges: { right: true, bottom: true, top: false, left: true } } | false | indicates the edge resizable |
 
-
 ### Resizable Events
 
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
 | finalSize | Events | Emits an event everytime the element is resized.|
-

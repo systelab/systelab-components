@@ -47,7 +47,7 @@ export class ResizableDirective implements OnInit {
 		});
 	}
 
-	private doCurrentlyDraggedUpdate(value:boolean): void {
+	private doCurrentlyDraggedUpdate(value: boolean): void {
 		setTimeout(() => {
 			this.currentlyDragged = value;
 		});
