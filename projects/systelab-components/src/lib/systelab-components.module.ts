@@ -94,6 +94,8 @@ import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
 import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-range.component';
 import { ButtonComponent } from './button/button.component';
+import { DraggableDirective } from './directives/draggable.directive';
+import { ResizableDirective } from './directives/resizable.directive';
 
 @NgModule({
 	imports:      [
@@ -189,7 +191,9 @@ import { ButtonComponent } from './button/button.component';
 		ScrollSpyDirective,
 		ToastComponent,
 		ToggleSelectorComponent,
-		KeyupDebounceDirective
+		KeyupDebounceDirective,
+		DraggableDirective,
+		ResizableDirective
 	],
 	exports:      [
 		SliderComponent,
@@ -270,7 +274,9 @@ import { ButtonComponent } from './button/button.component';
 		ScrollSpyDirective,
 		ToastComponent,
 		ToggleSelectorComponent,
-		KeyupDebounceDirective
+		KeyupDebounceDirective,
+		DraggableDirective,
+		ResizableDirective
 	],
 	providers:    [
 		StylesUtilService,

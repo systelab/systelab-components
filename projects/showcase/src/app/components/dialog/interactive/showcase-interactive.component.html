@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row mt-1" >
+    <div class="col-md-12">
+        <label>Draggable</label>
+        <div class="border rounded mr-1 d-flex justify-content-around align-items-center" style="height: 150px">
+            <div class="text-center border rounded" style="height: 50px;width: 50px; background-color: #dc3545;line-height: 50px; vertical-align: middle;color:white" draggable
+                 [draggableOptions]="{restrictParent: true}">Parent
+            </div>
+            <div class="text-center border rounded" style="height: 50px;width: 50px; background-color: #158fef;line-height: 50px; vertical-align: middle;color:white" draggable
+                 [draggableOptions]="{restrictParent: false}">Free
+            </div>
+        </div>
+    </div>
+    </div>
+        <div class="row mt-1" >
+
+    <div class="col-md-12">
+        <label>Resizable</label>
+        <div class="row border rounded mr-1" style="height: 150px">
+            <div class="col-md-1"></div>
+        <div class="col-md-2" style="margin-top: 50px">
+            <div class="text-truncate text-center d-flex align-items-center justify-content-center border rounded" style="height: 50px;width: 50px; background-color: #158fef;top:50px;color:white" resizable
+                 [resizableOptions]="{edges: { right: true} }"><span>Right</span>
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-top: 50px">
+            <div class="text-truncate text-center d-flex align-items-center justify-content-center border rounded" style="height: 50px;width: 50px; background-color: #158fef;color:white" resizable
+                 [resizableOptions]="{edges: { bottom: true} }"><span>Bottom</span>
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-top: 50px">
+            <div class="text-truncate text-center d-flex align-items-center justify-content-center border rounded" style="height: 50px;width: 50px; background-color: #158fef;color:white" resizable
+                 [resizableOptions]="{edges: { top: true } }"><span>Top</span>
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-top: 50px">
+            <div class="text-truncate text-center d-flex align-items-center justify-content-center border rounded" style="height: 50px;width: 50px; background-color: #158fef;color:white" resizable
+                 [resizableOptions]="{edges: { left:true } }"><span>Left</span>
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-top: 50px">
+            <div class="text-truncate text-center d-flex align-items-center justify-content-center border rounded" style="height: 50px;width: 50px; background-color: #158fef;color:white" resizable
+                 [resizableOptions]="{edges: { right: true, bottom: true, top: true, left:true } }"><span>All</span>
+            </div>
+        </div>
+        </div>
+    </div>
+        </div>
+    <div class="row mt-1" >
+    <div class="col-md-12">
+        <label>Draggable & Resizable</label>
+        <div class="border rounded mr-1" style="height: 150px">
+            <div class="border rounded" style="height: 50px;width: 50px; background-color: #158fef;position: relative;top:50px;left:45% " draggable resizable
+                 [draggableOptions]="{restrictParent: false}"
+                 [resizableOptions]="{edges: { right: true, bottom: true, top: true, left:true } }"></div>
+        </div>
+        </div>
+    </div>
+</div>
