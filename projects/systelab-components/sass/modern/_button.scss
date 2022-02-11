@@ -39,6 +39,10 @@ systelab-toggle-button {
       color: white;
       background-color: $primary;
       border-color: $primary;
+      &:hover {
+        background-color: #0e7ad0;
+        border-color: #0d73c4;
+      }
     }
   }
 }
