@@ -16,16 +16,17 @@
 
 ## Collaborators
 
-Systelab libraries core collaborators maintain the GitHub repository.
-The GitHub team for Systelab libraries core collaborators is @systelab/anguler-team.
+Core collaborators for Systelab libraries are responsible for the GitHub repository maintenance. 
+All members of @systelab/angular-team are potential collaborators to this library.
 
 Collaborators have:
 
-* Commit access to the repository in any branch different than master.
-* Access to the Systelab libraries continuous integration (CI) jobs
+* Commit access to the repository in any branch different from master.
+* Access to the Continuous integration (CI) jobs
 
-Both collaborators and non-collaborators may propose changes to the Systelab libraries
-source code. The mechanism to propose such an implmentation change is a GitHub pull request.
+Both collaborators and non-collaborators may propose changes to the library source code. 
+The mechanism to propose such an implementation change is a GitHub pull request.
+
 Collaborators review and merge (_land_) pull requests.
 
 Three collaborators must approve a pull request before the pull request can land. 
@@ -33,10 +34,10 @@ Approving a pull request indicates that the collaborator accepts
 responsibility for the change. Approval must be from collaborators who are not
 authors of the change.
 
-If a collaborator opposes a proposed change, then the change cannot land. The
-exception is if the TSC votes to approve the change despite the opposition.
-Usually, involving the TSC is unnecessary. Often, discussions or further changes
+If a collaborator opposes a proposed change, then the change cannot land. Often, discussions or further changes
 result in collaborators removing their opposition.
+
+Please see the detailed instructions on [Contribution](https://github.com/systelab/systelab-components/blob/master/CONTRIBUTING.md)
 
 ### Collaborator activities
 
@@ -46,8 +47,7 @@ result in collaborators removing their opposition.
 * Participation in working groups
 * Merging pull requests
 
-The TSC can remove inactive collaborators or provide them with _emeritus_
-status. Emeriti may request that the TSC restore them to active status.
+The TSC can add and remove collaborators to the @systelab/angular-team team.
 
 ### Collaborator nominations
 
@@ -55,11 +55,9 @@ Existing collaborators can nominate someone to become a collaborator. Nominees
 should have significant and valuable contributions across the Sytelab libraries
 organization.
 
-To nominate a new collaborator, contacts someone with Administrator rights in order to add the new collaborator in the systelab/angular-team.
-Provide a summary of the nominee's contributions. For example:
+To nominate a new collaborator, contact someone with GitHub account Administrator rights in order to add the new collaborator to the systelab/angular-team.
 
-The nomination passes if no collaborators oppose it after one week. Otherwise,
-the nomination fails.
+The TSC can remove collaborators from the @systelab/angular-team team by contacting someone with GitHub account Administrator rights.
 
 ## Technical Steering Committee
 
@@ -73,9 +71,9 @@ The TSC has final authority over this project, including:
 * Conduct guidelines
 * Maintaining the list of collaborators
 
-The current list of TSC members is:
+The current list of TSC members for this library is:
 
-- Olga Puig @olgapuig
+- Olga Puig @olgapuig (Meeting Chair)
 - Alfons Serra @alfonsserra
 - Carles Viñola. @vinyulis
 - Daniel Martinez. @dmartinezcapilla
@@ -87,27 +85,31 @@ The current list of TSC members is:
 
 The TSC meets periodically.
 
-The TSC agenda includes issues that are at an impasse. The intention of the
-agenda is to review or approve all patches. 
-
-Any community member can create a GitHub issue asking that the TSC review
-something.
-
 Before each TSC meeting, the meeting chair will share the agenda with members of
 the TSC. TSC members can also add items to the agenda at the beginning of each
 meeting. The meeting chair and the TSC cannot veto or remove items.
 
 The TSC may invite people to take part in a non-voting capacity.
 
-During the meeting, the TSC chair updates teh project in GitHub with the decissi0ons taken.
+During the meeting, the TSC chair updates the projects and issues in GitHub with the decisions taken.
 
-The TSC seeks to resolve as many issues as possible outside meetings using
-[the TSC issue tracker](https://github.com/systelab//issues). The process in
+#### Projects
+
+Projects are milestones where issues are implemented.
+
+The TSC creates, closes and updates projects during the TSC meeting. Decisions are taken by consensus.
+
+Projects are located at https://github.com/systelab/systelab-components/projects
+
+#### Issues
+Any community member can create a GitHub issue asking that the TSC review something or approve to implement a change or new functionality.
+
+Issues are located at https://github.com/systelab/systelab-components/issues. The process in
 the issue tracker is:
 
-* A TSC member opens an issue explaining the proposal/issue.
-* The proposal passes if, after 72 hours, there are two or more TSC approvals
-  and no TSC opposition.
+* Anyone can open an issue.
+* If the issue is accepted by the TSC, it is planned by assign the issue to an specific project. 
+* If it is not, the issue is close and a comment with the rational is added.
 
 
 ### Consensus seeking process
@@ -121,3 +123,4 @@ Release manager is responsible for planning and scheduling software delivery all
 
 The aim is to facilitate the process required to move software releases into production while coordinating with different teams to ensure the smooth delivery of software releases with little disruption. 
 
+The Release Manager for this library is @alfonsserra
