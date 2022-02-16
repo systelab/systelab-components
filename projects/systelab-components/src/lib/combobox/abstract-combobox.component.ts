@@ -303,7 +303,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected getRowNodeId(item:T): string | number | undefined {
-		return item[this.getIdField()] ? item[this.getIdField()] : null;
+		return item && item[this.getIdField()]!==undefined ? item[this.getIdField()] : null;
 	}
 
 	protected configGridData() {
