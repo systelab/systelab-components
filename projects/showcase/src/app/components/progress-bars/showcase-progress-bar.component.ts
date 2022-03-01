@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { ShowcaseProgressBarDialog, ShowcaseProgressBarDialogParameters } from './progressbar-dialog/showcase-progressbar-dialog.component';
+import { ShowcaseProgressBarDialog, ShowcaseProgressBarDialogParameters }
+	from './progressbar-dialog/showcase-progressbar-dialog.component';
 import { DialogService } from 'systelab-components';
-import { ShowcaseProgressBarWithTextDialog, ShowcaseProgressBarWithTextDialogParameters } from './progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
+import { ShowcaseProgressBarWithTextDialog, ShowcaseProgressBarWithTextDialogParameters }
+	from './progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 
 @Component({
 	selector:    'showcase-progress-bar',

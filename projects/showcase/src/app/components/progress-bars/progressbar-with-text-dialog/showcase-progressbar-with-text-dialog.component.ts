@@ -26,7 +26,7 @@ export class ShowcaseProgressBarWithTextDialog implements ModalComponent<Showcas
 	}
 
 	public close(): void {
-		this.dialog.close('This is a test');
+		this.dialog.close();
 	}
 
 	public submit(): void {

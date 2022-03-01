@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component,  EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
 	selector:    'systelab-dialog-header',
 	templateUrl: 'dialog-header.component.html',
 	styles:      [`
-			:host {
-      width: 100%;
-  	}
+        :host {
+            width: 100%;
+        }
 	`]
 })
 export class DialogHeaderComponent implements AfterViewInit {
@@ -23,10 +23,10 @@ export class DialogHeaderComponent implements AfterViewInit {
 	@Output() public home = new EventEmitter();
 	@Output() public minimize = new EventEmitter();
 
-	public textProgress:string;
-	public progress:number;
-	private on:number;
-	private here:number;
+	public textProgress: string;
+	public progress: number;
+	private on: number;
+	private here: number;
 
 	constructor() {
 	}
@@ -50,40 +50,38 @@ export class DialogHeaderComponent implements AfterViewInit {
 		this.minimize.emit();
 	}
 
-	public go(n: number, textProgress?:string) {
+	public go(n: number, textProgress?: string): void {
 		if (this.withProgressBar || this.withTextProgressBar) {
 			if (n > 100) {
 				n = 100;
 			}
 			if (n >= 0) {
-				this.here = n
+				this.here = n;
 				if (!this.on) {
-					this.on = 1
-					this.move(n)
+					this.on = 1;
+					this.move(n);
 				}
 			} else if (this.on) {
-				this.move(n)
-				}
+				this.move(n);
+			}
 			this.textProgress = textProgress ?? `${n}%`;
 		}
 	}
 
 	// animation loop
-	private move (width) {
-		const dist = width - this.here
+	private move(width: number): void {
+		const dist = width - this.here;
 		if (dist < 0.1 && dist > -0.1) {
-			this.place(this.here)
-			this.on = 0
+			this.place(this.here);
+			this.on = 0;
 		} else {
-			this.place(width - dist / 4)
+			this.place(width - dist / 4);
 		}
 	}
 
 	// set bar width
-	private place (num:number) {
+	private place(num: number): void {
 		this.progress = num;
 	}
-
-
 
 }
