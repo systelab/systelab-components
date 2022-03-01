@@ -385,3 +385,40 @@ $slab-button-fontsize: 25px !default;
     opacity: 1;
   }
 }
+
+
+/* Header progress bar
+  ========================================================================== */
+
+.slab-dialog-header-progress {
+  width: 100%;
+  height: $slab-nanobar-height;
+  z-index: 9998;
+  top:0;
+  .slab-dialog-header-progress-bar {
+    width: 0;
+    height: 100%;
+    transition: width .3s;
+    background: $slab-nanobar-color;
+    z-index: 9998;
+  }
+}
+.slab-dialog-header-progress-bar-with-text {
+  height: $slab-nanobar-with-progress-height;
+  position: relative;
+  background-color: #e9ecef;
+
+  .slab-dialog-header-progress-bar {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    top: 0;
+  }
+
+  .slab-dialog-header-progress-bar-text {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    padding-top: 3px
+  }
+}
