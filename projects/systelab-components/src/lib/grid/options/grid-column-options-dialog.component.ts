@@ -9,7 +9,7 @@ export class GridColumnOptionsDialogParameters extends SystelabModalContext {
 	public override width = 800;
 	public override height = 500;
 	public columnOptions: GridColumnsOptions;
-	public canHideAllColumns: boolean = false;
+	public canHideAllColumns = false;
 }
 
 @Component({
