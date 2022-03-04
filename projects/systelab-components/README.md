@@ -33,8 +33,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "node_modules/jquery/dist/jquery.min.js",
         "node_modules/popper.js/dist/umd/popper.js",
         "node_modules/bootstrap/dist/js/bootstrap.js",
-        "node_modules/pako/dist/pako.min.js",
-        "node_modules/nanobar/nanobar.js"
+        "node_modules/pako/dist/pako.min.js"
       ],
 ```
 

@@ -110,7 +110,6 @@ Finally, update your package.json in order to add the peer dependencies:
 "date-fns": "^1.29.0",
 "jquery": "^3.3.1",
 "mobile-drag-drop": "^2.3.0-rc.0",
-"nanobar": "^0.4.2",
 "popper.js": "^1.14.4",
 "primeicons": "^2.0.0",
 "primeng": "^9.0.0",
