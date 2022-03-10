@@ -9,7 +9,7 @@
         <div *ngIf="withClose" class="slab-dialog-header-button slab-dialog-close" (click)="doClose()"></div>
     </div>
 </div>
-<div *ngIf="withProgressBar || withTextProgressBar" class="slab-dialog-header-progress text-center"
+<div *ngIf="(withProgressBar || withTextProgressBar) && progress" class="slab-dialog-header-progress text-center"
     [ngClass]="{'slab-dialog-header-progress-bar-with-text':withTextProgressBar}">
     <div class="slab-dialog-header-progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
          aria-valuemin="0" aria-valuemax="100"></div>
