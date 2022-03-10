@@ -43,7 +43,7 @@ export class DialogHeaderTestComponent {
 	public doInfo() {
 	}
 
-	public go(num:number): void {
+	public go(num: number): void {
 		this.header.progress=num;
 	}
 }
