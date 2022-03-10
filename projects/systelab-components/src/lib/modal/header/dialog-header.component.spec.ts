@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +15,7 @@ import { DialogHeaderComponent } from './dialog-header.component';
 	selector: 'systelab-dialog-header-test',
 	template: `
                 <div>
-                    <systelab-dialog-header [withClose]="withClose" (close)="doClose()"
+                    <systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
                                             [withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
                                             [withTextProgressBar]="withTextProgressBar"
                                             [withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
@@ -24,6 +24,8 @@ import { DialogHeaderComponent } from './dialog-header.component';
 	styles:   []
 })
 export class DialogHeaderTestComponent {
+
+	@ViewChild('header') public header: DialogHeaderComponent;
 
 	public withClose = true;
 	public withInfo = false;
@@ -39,6 +41,10 @@ export class DialogHeaderTestComponent {
 	}
 
 	public doInfo() {
+	}
+
+	public go(num: number): void {
+		this.header.progress=num;
 	}
 }
 
@@ -153,12 +159,14 @@ function showInfoButton(fixture: ComponentFixture<DialogHeaderTestComponent>) {
 
 function showProgressBar(fixture: ComponentFixture<DialogHeaderTestComponent>) {
 	fixture.componentInstance.withProgressBar = true;
-	fixture.detectChanges();
+	fixture.componentInstance.go(50);
+    fixture.detectChanges();
 }
 
 function showTextProgressBar(fixture: ComponentFixture<DialogHeaderTestComponent>) {
 	fixture.componentInstance.withTextProgressBar = true;
-	fixture.detectChanges();
+	fixture.componentInstance.go(50);
+    fixture.detectChanges();
 }
 
 function isComponentVisible(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
