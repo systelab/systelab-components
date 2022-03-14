@@ -9,6 +9,7 @@ export class GridColumnOptionsDialogParameters extends SystelabModalContext {
 	public override width = 800;
 	public override height = 500;
 	public columnOptions: GridColumnsOptions;
+	public canHideAllColumns = false;
 }
 
 @Component({
@@ -23,12 +24,19 @@ export class GridColumnOptionsDialog implements ModalComponent<GridColumnOptions
 	public visibleColumns: Array<TwoListItem> = [];
 	public initialAvailableColumns: Array<TwoListItem> = [];
 
+	private readonly canHideAllColumns: boolean = false;
+
 	constructor(public dialog: DialogRef<GridColumnOptionsDialogParameters>, protected i18nService: I18nService) {
 		this.gridColumnOptionsDialogParameters = dialog.context;
 
 		this.availableColumns = this.gridColumnOptionsDialogParameters.columnOptions.available;
 		this.visibleColumns = this.gridColumnOptionsDialogParameters.columnOptions.visible;
 		this.initialAvailableColumns = this.gridColumnOptionsDialogParameters.columnOptions.initialAvailableColumns;
+		this.canHideAllColumns = this.gridColumnOptionsDialogParameters.canHideAllColumns;
+	}
+
+	public isSubmitDisabled(): boolean {
+		return this.canHideAllColumns ? false : this.visibleColumns.length === 0;
 	}
 
 	public submit(): void {

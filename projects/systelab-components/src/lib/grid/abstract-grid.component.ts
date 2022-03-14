@@ -352,10 +352,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public showOptions(): void {
+	public showOptions(canHideAllColumns?: boolean): void {
 		const parameters: GridColumnOptionsDialogParameters = GridColumnOptionsDialog.getParameters();
 
 		parameters.columnOptions = this.getGridColumnOptions(this.gridOptions.columnApi, this.getColumnDefs());
+		parameters.canHideAllColumns = canHideAllColumns;
 
 		this.dialogService.showDialog(GridColumnOptionsDialog, parameters)
 			.subscribe(
