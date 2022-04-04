@@ -107,7 +107,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected getRowNodeId(item:T): string | number | undefined {
-		return item[this.getIdField()] ? item[this.getIdField()] : null;
+		return item?.[this.getIdField()] ?? '';
 	}
 
 	protected getColumnDefsWithOptions(): Array<any> {
