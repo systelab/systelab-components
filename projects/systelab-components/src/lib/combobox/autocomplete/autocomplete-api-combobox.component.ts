@@ -25,7 +25,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
-		if (event.keyCode === 27) {
+		if (event.key === 'Escape' || event.key === 'Enter' || event.key === 'Tab') {
 			if (this.isDropDownOpen()) {
 				this.closeDropDown();
 			}
@@ -46,14 +46,40 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		event.stopPropagation();
 		if (!this.isDisabled) {
 			if (!this.isDropDownOpen()) {
-				this.showDropDown();
-				jQuery('#' + this.comboId)
-					.dropdown('toggle');
-				this.isDropdownOpened = true;
+				this.openDropDown();
 				this.doSearchText(this.description);
 			}
 			this.inputElement.nativeElement.focus();
 		}
+	}
+
+	public onInputNavigate(event: KeyboardEvent) {
+		if (!this.isDisabled) {
+			if (!this.isDropDownOpen()) {
+				this.openDropDown();
+				this.doSearchText(this.description);
+			}
+			this.chref.detectChanges();
+			// sets focus into the first grid cell
+			const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
+			this.gridOptions.api.setFocusedCell(0, firstCol);
+		}
+	}
+
+	// Overrides
+	public override onCellKeyDown(e: any) {
+		if (e.event.key === 'Enter') {
+			this.gridOptions.api.selectNode(e.node);
+			this.closeDropDown();
+			this.inputElement.nativeElement.focus();
+		} else if (e.event.key === 'Backspace') {
+			this.inputElement.nativeElement.value = this.inputElement.nativeElement.value.slice(0, -1);
+			this.inputElement.nativeElement.focus();
+		} else if (e.event.key.length === 1 && e.event.key.match(/^[a-zA-Z]+|[0-9]/g)) {
+			this.inputElement.nativeElement.value += e.event.key;
+			this.inputElement.nativeElement.focus();
+		}
+		e.event.preventDefault();
 	}
 
 	// Overrides
@@ -97,6 +123,9 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	protected doSearchText(text: string): void {
+		if (!this.isDropDownOpen()) {
+			this.openDropDown();
+		}
 		this.startsWith = text;
 		if (!this.startsWith || this.startsWith.length < 1) {
 			this.resetComboSelection();
@@ -113,6 +142,13 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.gridOptions.api.deselectAll();
 		}
 		this.selectedItemChange.emit(undefined);
+	}
+
+	private openDropDown(): void {
+		this.showDropDown();
+		jQuery('#' + this.comboId)
+			.dropdown('toggle');
+		this.isDropdownOpened = true;
 	}
 
 }
