@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { IGetRowsParams } from 'ag-grid-community';
+import {IGetRowsParams, KeyName} from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -25,7 +25,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
-		if (event.key === 'Escape' || event.key === 'Enter' || event.key === 'Tab') {
+		if (event.key === KeyName.ESCAPE || event.key === KeyName.ENTER || event.key === KeyName.TAB) {
 			if (this.isDropDownOpen()) {
 				this.closeDropDown();
 			}
@@ -68,11 +68,11 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public override onCellKeyDown(e: any) {
-		if (e.event.key === 'Enter') {
+		if (e.event.key === KeyName.ENTER) {
 			this.gridOptions.api.selectNode(e.node);
 			this.closeDropDown();
 			this.inputElement.nativeElement.focus();
-		} else if (e.event.key === 'Backspace') {
+		} else if (e.event.key === KeyName.BACKSPACE) {
 			this.inputElement.nativeElement.value = this.inputElement.nativeElement.value.slice(0, -1);
 			this.inputElement.nativeElement.focus();
 		} else if (e.event.key.length === 1 && e.event.key.match(/^[a-zA-Z]+|[0-9]/g)) {
