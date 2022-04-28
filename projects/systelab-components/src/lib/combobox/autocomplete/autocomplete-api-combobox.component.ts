@@ -53,7 +53,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		}
 	}
 
-	public onInputNavigate(event: KeyboardEvent) {
+	public onInputNavigate(): void {
 		if (!this.isDisabled) {
 			if (!this.isDropDownOpen()) {
 				this.openDropDown();
@@ -67,7 +67,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	// Overrides
-	public override onCellKeyDown(e: any) {
+	public override onCellKeyDown(e: any): void {
 		if (e.event.key === KeyName.ENTER) {
 			this.gridOptions.api.selectNode(e.node);
 			this.closeDropDown();
