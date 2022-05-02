@@ -1,11 +1,18 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import {IGetRowsParams, KeyName} from 'ag-grid-community';
+import {IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
 
 declare const jQuery: any;
+
+export enum KeyName {
+	BACKSPACE = 'Backspace',
+	ENTER = 'Enter',
+	ESCAPE = 'Escape',
+	TAB = 'Tab'
+}
 
 @Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
@@ -69,7 +76,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	// Overrides
 	public override onCellKeyDown(e: any): void {
 		if (e.event.key === KeyName.ENTER) {
-			this.gridOptions.api.selectNode(e.node);
+			e.node.setSelected(true);
 			this.closeDropDown();
 			this.inputElement.nativeElement.focus();
 		} else if (e.event.key === KeyName.BACKSPACE) {
