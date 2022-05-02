@@ -7,11 +7,12 @@ import { PreferencesService } from 'systelab-preferences';
 
 declare const jQuery: any;
 
-export enum KeyName {
-	BACKSPACE = 'Backspace',
-	ENTER = 'Enter',
-	ESCAPE = 'Escape',
-	TAB = 'Tab'
+export class KeyName
+{
+	static readonly BACKSPACE = 'Backspace';
+	static readonly ENTER = 'Enter';
+	static readonly ESCAPE = 'Escape';
+	static readonly TAB = 'Tab';
 }
 
 @Directive()
