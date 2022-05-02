@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { Month } from 'systelab-components';
-import { Week } from 'systelab-components';
+import { Month, Week } from 'systelab-components';
 import { I18nService } from 'systelab-translate';
 
 @Component({
@@ -16,6 +15,7 @@ export class ShowcaseDatepickerComponent {
 	public isDisabled: boolean;
 	public selectedMonth: Month = new Month(0, '', 0, false);
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
+	public showDateFormatOnError: boolean = true;
 	public yesterdayDate;
 	public languageList = [
 		{description: 'Spanish', id: 'es'},

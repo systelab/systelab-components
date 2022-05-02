@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { TouchspinComponent } from '../spinner/spinner.component';
-import { SystelabTranslateModule } from 'systelab-translate';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
-import { Datepicker } from './datepicker.component';
+import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
+import { TouchspinComponent } from '../spinner/spinner.component';
+import { Datepicker } from './datepicker.component';
 
 @Component({
 	selector: 'systelab-datepicker-test',
 	template: `
                   <div>
                       <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
-                                           [markPreviousAfterDate]="true"
+                                           [markPreviousAfterDate]="true" [showDateFormatOnError]="showDateFormatOnError"
                       ></systelab-datepicker>
                   </div>
 			  `,
@@ -31,7 +31,7 @@ export class DatepickerTestComponent {
 	public defaultDay = 20;
 	public defaultHours = 14;
 	public defaultMinutes = 5;
-
+	public showDateFormatOnError = true;
 	public showTodayButton = true;
 
 	public currentDate: Date;
@@ -43,7 +43,6 @@ export class DatepickerTestComponent {
 
 describe('Systelab DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
-
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
@@ -65,6 +64,10 @@ describe('Systelab DatepickerComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(DatepickerTestComponent);
 		fixture.detectChanges();
+	});
+
+	afterEach(() => {
+		fixture.destroy();
 	});
 
 	it('should instantiate', () => {
@@ -137,7 +140,6 @@ describe('Systelab DatepickerComponent', () => {
 
 	it('should increment by 2 days when entering 2d', () => {
 		enterText(fixture, '2d');
-		console.log(fixture.componentInstance.currentDate);
 		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
 			.toBe(2);
 	});
@@ -183,6 +185,23 @@ describe('Systelab DatepickerComponent', () => {
 		expect(isRedBackground(fixture))
 			.toBeFalsy();
 	});
+
+	it('should show date format on error by default', () => {
+		enterText(fixture, '20/02/1986');
+		expect(isPlaceholderEmpty(fixture))
+			.toBeFalsy();
+		expect(isInputBorderRed(fixture))
+			.toBeTruthy();
+	});
+
+	it('should have placeholder to empty', () => {
+		fixture.componentInstance.showDateFormatOnError = false;
+		enterText(fixture, '20/02/1986');
+		expect(isPlaceholderEmpty(fixture))
+			.toBeTruthy();
+		expect(isInputBorderRed(fixture))
+			.toBeTruthy();
+	});
 });
 
 function setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
@@ -221,6 +240,14 @@ function getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponen
 
 function isRedBackground(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
 	return (fixture.debugElement.nativeElement.querySelector('.warning-date') !== null);
+}
+
+function isPlaceholderEmpty(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	return (fixture.debugElement.nativeElement.querySelector('input').placeholder === '');
+}
+
+function isInputBorderRed(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	return (fixture.debugElement.nativeElement.querySelector('.date-error') !== null);
 }
 
 function clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string) {

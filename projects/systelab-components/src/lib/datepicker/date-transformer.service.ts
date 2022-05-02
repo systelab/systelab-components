@@ -119,7 +119,15 @@ export class DataTransformerService {
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
 		}
-		return new Date(yearInDate, monthInDate, dayInDate);
+		return (this.checkMonthNumber(monthInDate) && this.checkDayNumber(dayInDate)) ? new Date(yearInDate, monthInDate, dayInDate) : null;
+	}
+
+	private checkMonthNumber(monthInDate): boolean{
+		return (monthInDate >= 0 && monthInDate <= 11); // Months go from 0 to 11
+	}
+
+	private checkDayNumber(dayInDate): boolean{
+		return (dayInDate >= 1 && dayInDate <= 31); // Days go from 1 to 31
 	}
 
 	private getDateSeparator(dateFormat: string) {
