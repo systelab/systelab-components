@@ -27,7 +27,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
-	@Input() public showDateFormatOnError: boolean = false;
+	@Input() public showDateFormatOnError = false;
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
