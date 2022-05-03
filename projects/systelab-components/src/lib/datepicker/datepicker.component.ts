@@ -28,7 +28,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
 	@Input() public showDateFormatOnError: boolean = false;
-	public errorTextForBadInput: string = "BAD_DATE_FORMAT"
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
@@ -196,7 +195,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private setPlaceholder(): void {
 		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
-			? `${this.i18nService.instant("BAD_DATE_FORMAT")} ${this.i18nService.getDateFormatForDatePicker()}`
+			? `${((this.i18nService.instant("BAD_DATE_FORMAT") === 'BAD_DATE_FORMAT') ? '' : this.i18nService.instant("BAD_DATE_FORMAT")+' ').trim()}${this.i18nService.getDateFormatForDatePicker()}`
 			: '';
 	}
 

@@ -186,12 +186,14 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeFalsy();
 	});
 
-	it('should show date format on error by default', () => {
+	it('should show date format on error if showDateFormatOnError is true', () => {
+		fixture.componentInstance.showDateFormatOnError = true;
 		enterText(fixture, '20/02/1986');
 		expect(isPlaceholderEmpty(fixture))
 			.toBeFalsy();
-		expect(isInputBorderRed(fixture))
-			.toBeTruthy();
+		expect(getPlaceholder(fixture))
+			.toBe('BAD_DATE_FORMAT m/d/y');
+		expect
 	});
 
 	it('should have placeholder to empty', () => {
@@ -244,6 +246,10 @@ function isRedBackground(fixture: ComponentFixture<DatepickerTestComponent>): bo
 
 function isPlaceholderEmpty(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
 	return (fixture.debugElement.nativeElement.querySelector('input').placeholder === '');
+}
+
+function getPlaceholder(fixture: ComponentFixture<DatepickerTestComponent>): string {
+	return fixture.debugElement.nativeElement.querySelector('input').placeholder;
 }
 
 function isInputBorderRed(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
