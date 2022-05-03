@@ -193,7 +193,6 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeFalsy();
 		expect(getPlaceholder(fixture))
 			.toBe('m/d/y');
-		expect
 	});
 
 	it('should have placeholder to empty', () => {
