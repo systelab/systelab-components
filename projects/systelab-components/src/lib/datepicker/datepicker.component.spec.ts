@@ -192,7 +192,7 @@ describe('Systelab DatepickerComponent', () => {
 		expect(isPlaceholderEmpty(fixture))
 			.toBeFalsy();
 		expect(getPlaceholder(fixture))
-			.toBe('BAD_DATE_FORMAT m/d/y');
+			.toBe('m/d/y');
 		expect
 	});
 
