@@ -195,7 +195,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	private setPlaceholder(): void {
 		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
-			? (this.i18nService.instant("BAD_DATE_FORMAT") !== 'BAD_DATE_FORMAT') ? this.i18nService.instant("BAD_DATE_FORMAT")+' ' : ''+this.i18nService.getDateFormatForDatePicker()
+			? (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
+				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
+				: ''+this.i18nService.getDateFormatForDatePicker()
 			: '';
 	}
 
