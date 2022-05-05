@@ -101,7 +101,6 @@ export class AuxFunctionClass {
 
 describe('Systelab DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
-	// let AuxFunctionClass = new AuxFunctionClass();
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
