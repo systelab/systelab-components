@@ -42,12 +42,12 @@ export class DatepickerTestComponent {
 }
 
 export class AuxFunctionClass {
-	public static setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date) {
+	public static setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date): void {
 		fixture.componentInstance.currentDate = value;
 		fixture.detectChanges();
 	}
 
-	public static enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string) {
+	public static enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string): void {
 		const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 		inputComponent.value = text;
 		inputComponent.dispatchEvent(new Event('keydown'));
@@ -58,7 +58,7 @@ export class AuxFunctionClass {
 		fixture.detectChanges();
 	}
 
-	public static clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>) {
+	public static clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>): void {
 		const button = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 		button.click();
 		fixture.detectChanges();
@@ -68,11 +68,11 @@ export class AuxFunctionClass {
 		return (fixture.debugElement.nativeElement.querySelector('.p-datepicker-calendar-container') !== null);
 	}
 
-	public static getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
+	public static getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>): number {
 		return parseInt(fixture.debugElement.nativeElement.querySelector('.p-datepicker-year').firstChild.nodeValue, 10);
 	}
 
-	public static getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>) {
+	public static getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>): string {
 		return fixture.debugElement.nativeElement.querySelector('.p-datepicker-month').firstChild.nodeValue;
 	}
 
@@ -92,7 +92,7 @@ export class AuxFunctionClass {
 		return (fixture.debugElement.nativeElement.querySelector('.date-error') !== null);
 	}
 
-	public static clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string) {
+	public static clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string): void {
 		const button = fixture.debugElement.query(By.css(id)).nativeElement;
 		button.click();
 		fixture.detectChanges();
