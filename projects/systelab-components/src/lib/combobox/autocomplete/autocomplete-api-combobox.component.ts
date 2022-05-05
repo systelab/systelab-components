@@ -7,12 +7,11 @@ import { PreferencesService } from 'systelab-preferences';
 
 declare const jQuery: any;
 
-export class KeyName
-{
-	static readonly BACKSPACE = 'Backspace';
-	static readonly ENTER = 'Enter';
-	static readonly ESCAPE = 'Escape';
-	static readonly TAB = 'Tab';
+export class KeyName {
+	static readonly Backspace = 'Backspace';
+	static readonly Enter = 'Enter';
+	static readonly Escape = 'Escape';
+	static readonly Tab = 'Tab';
 }
 
 @Directive()
@@ -33,7 +32,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
-		if (event.key === KeyName.ESCAPE || event.key === KeyName.ENTER || event.key === KeyName.TAB) {
+		if (event.key === KeyName.Escape || event.key === KeyName.Enter || event.key === KeyName.Tab) {
 			if (this.isDropDownOpen()) {
 				this.closeDropDown();
 			}
@@ -76,12 +75,12 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public override onCellKeyDown(e: any): void {
-		if (e.event.key === KeyName.ENTER) {
+		if (e.event.key === KeyName.Enter) {
 			e.node.setSelected(true);
 			this.selectedItemChange.emit(e.node.data);
 			this.closeDropDown();
 			this.inputElement.nativeElement.focus();
-		} else if (e.event.key === KeyName.BACKSPACE) {
+		} else if (e.event.key === KeyName.Backspace) {
 			this.inputElement.nativeElement.value = this.inputElement.nativeElement.value.slice(0, -1);
 			this.inputElement.nativeElement.focus();
 		} else if (e.event.key.length === 1 && e.event.key.match(/^[a-zA-Z]+|[0-9]/g)) {
