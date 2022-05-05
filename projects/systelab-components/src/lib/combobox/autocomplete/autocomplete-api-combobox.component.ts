@@ -78,6 +78,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public override onCellKeyDown(e: any): void {
 		if (e.event.key === KeyName.ENTER) {
 			e.node.setSelected(true);
+			this.selectedItemChange.emit(e.node.data);
 			this.closeDropDown();
 			this.inputElement.nativeElement.focus();
 		} else if (e.event.key === KeyName.BACKSPACE) {
