@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { I18nService } from 'systelab-translate';
 import { addDays } from 'date-fns';
-import { DataTransformerService } from './date-transformer.service';
-import { Calendar } from 'primeng/calendar';
 import { PrimeNGConfig } from 'primeng/api';
+import { Calendar } from 'primeng/calendar';
+import { I18nService } from 'systelab-translate';
+import { DataTransformerService } from './date-transformer.service';
 
 @Component({
 	selector:    'systelab-datepicker',
@@ -27,6 +27,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
+	@Input() public showDateFormatOnError = false;
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
@@ -106,7 +107,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public ngDoCheck() {
-
 		if (window.innerWidth !== this.currentDocSize) {
 			this.currentDocSize = window.innerWidth;
 			this.closeDatepicker();
@@ -168,8 +168,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					} else {
 						const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
 						if (inferedDate) {
+							this.error = false;
 							this.currentDate = inferedDate;
 						}
+						else {
+							this.error = true;
+						}
+						this.setPlaceholder();
 					}
 				}
 				this.currentDateChange.emit(this.currentDate);
@@ -186,6 +191,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		} else {
 			this.inputChanged = true;
 		}
+	}
+
+	private setPlaceholder(): void {
+		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
+			? (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
+				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
+				: ''+this.i18nService.getDateFormatForDatePicker()
+			: '';
 	}
 
 	public saveEventOnFocus(evt: FocusEvent): void {

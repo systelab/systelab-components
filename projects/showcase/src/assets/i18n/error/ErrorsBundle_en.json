@@ -1,4 +1,5 @@
 {
   "ERR_GEN_004": "General Error",
-  "ERR_ERROR":"Error"
+  "ERR_ERROR":"Error",
+  "BAD_DATE_FORMAT": "Bad date format. Use"
 }

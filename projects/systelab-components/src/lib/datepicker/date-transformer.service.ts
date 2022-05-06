@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
+import { addDays, addMonths, addWeeks, addYears, getDaysInMonth } from 'date-fns';
 
 @Injectable()
 export class DataTransformerService {
@@ -119,7 +119,17 @@ export class DataTransformerService {
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
 		}
-		return new Date(yearInDate, monthInDate, dayInDate);
+		return (this.checkMonthNumber(monthInDate) && this.checkDayNumber(yearInDate,monthInDate,dayInDate))
+			? new Date(yearInDate, monthInDate, dayInDate)
+			: null;
+	}
+
+	private checkMonthNumber(monthInDate: number): boolean {
+		return (monthInDate >= 0 && monthInDate <= 11); // Months go from 0 to 11
+	}
+
+	private checkDayNumber(yearInDate: number, monthInDate: number, dayInDate: number): boolean{
+		return (dayInDate >= 1 && dayInDate <= getDaysInMonth(new Date(yearInDate, monthInDate)));
 	}
 
 	private getDateSeparator(dateFormat: string) {

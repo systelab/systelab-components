@@ -14,6 +14,9 @@ p-calendar {
 
     .icon-calendar {
       height: 100%;
+      color: black;
+      pointer-events: auto;
+      cursor: pointer;
     }
 
   }
@@ -125,7 +128,7 @@ p-calendar {
     height: 35px;
     line-height: 32px !important;
     text-align: center;
-    margin: 0 !important; 
+    margin: 0 !important;
     &#next-month{
       margin-right: 10px !important;
     }
@@ -147,19 +150,19 @@ body {
   .p-datepicker {
     width: 450px;
     table {
-      margin: 0 !important; 
+      margin: 0 !important;
     }
     .p-datepicker-title {
       width: 100%;
       height: 65px;;
     }
-  
+
     .icon-angle-double-right {
       position: absolute;
       float: right;
       right: 15px;
     }
-  
+
     .icon-angle-right {
       position: absolute;
       float: right;
@@ -171,12 +174,12 @@ body {
       float: left;
       left: 15px;
     }
-  
+
     .icon-angle-left {
       position: absolute;
       float: left;
       left: 65px;
-    }  
+    }
   }
 
   .slab-datepicker-header {
@@ -192,7 +195,7 @@ body {
       height: 35px;
       line-height: 32px !important;
       text-align: center;
-      margin: 0 !important; 
+      margin: 0 !important;
       &#next-month{
         margin-right: 10px !important;
       }
@@ -206,7 +209,7 @@ body {
       }
     }
   }
-  
+
   .slab-custom-calendar .slab-custom-calendar-table thead {
     background: white !important;
     border-top: 1px solid #eee;
@@ -225,18 +228,18 @@ body {
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
   border-radius: $slab-border-radius !important;
   padding: 0 !important;
-  
+
   div:nth-child(3) {
     padding: 15px !important;
     background-color: $light-gray;
     border-bottom-right-radius: $slab-border-radius;
     border-bottom-left-radius: $slab-border-radius;
   }
-  
+
   .p-datepicker-title, .p-datepicker-header {
     display: none;
   }
-  
+
   .p-datepicker-header {
     font-weight: normal !important;
     padding: 15px 15px 0 15px !important;
@@ -259,13 +262,13 @@ body {
       font-weight: normal;
     }
   }
-  
+
   td {
     padding: 5px !important;
 
     a, span {
       border-radius: 30px !important;
-      
+
       &:hover,
       &:active {
         border: 1px solid $medium-gray;
