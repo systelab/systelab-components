@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogRef, ModalComponent, SystelabModalContext } from 'systelab-components';
-import { TimelineEvent } from 'systelab-components';
+import { DialogRef, ModalComponent, SystelabModalContext, TimelineEvent } from 'systelab-components';
 
 export class ShowcaseTimelineDialogParameters extends SystelabModalContext {
 	public fullScreen = true;
 }
 
 @Component({
-	templateUrl: 'showcase-timeline-dialog.component.html'
+	templateUrl: 'showcase-timeline-dialog.component.html',
+	styleUrls: ['showcase-timeline-dialog.component.scss']
 })
 export class ShowcaseTimelineDialog implements ModalComponent<ShowcaseTimelineDialogParameters>, OnInit {
 
@@ -35,6 +35,8 @@ export class ShowcaseTimelineDialog implements ModalComponent<ShowcaseTimelineDi
 		timeLineEvent4.inverted = true;
 		timeLineEvent4.color = 'danger';
 		timeLineEvent4.extraText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor.';
+		timeLineEvent4.richExtraText =
+			'<i class="time-line-icon icon-close"></i> Text with rich text styled in the app, not in the component';
 		this.events.push(timeLineEvent4);
 	}
 
