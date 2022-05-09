@@ -1,11 +1,18 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import {IGetRowsParams, KeyName} from 'ag-grid-community';
+import {IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
 
 declare const jQuery: any;
+
+export class KeyName {
+	static readonly backspace = 'Backspace';
+	static readonly enter = 'Enter';
+	static readonly escape = 'Escape';
+	static readonly tab = 'Tab';
+}
 
 @Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
@@ -25,7 +32,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		if (event.shiftKey || event.ctrlKey) {
 			return;
 		}
-		if (event.key === KeyName.ESCAPE || event.key === KeyName.ENTER || event.key === KeyName.TAB) {
+		if (event.key === KeyName.escape || event.key === KeyName.enter || event.key === KeyName.tab) {
 			if (this.isDropDownOpen()) {
 				this.closeDropDown();
 			}
@@ -68,11 +75,12 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public override onCellKeyDown(e: any): void {
-		if (e.event.key === KeyName.ENTER) {
-			this.gridOptions.api.selectNode(e.node);
+		if (e.event.key === KeyName.enter) {
+			e.node.setSelected(true);
+			this.selectedItemChange.emit(e.node.data);
 			this.closeDropDown();
 			this.inputElement.nativeElement.focus();
-		} else if (e.event.key === KeyName.BACKSPACE) {
+		} else if (e.event.key === KeyName.backspace) {
 			this.inputElement.nativeElement.value = this.inputElement.nativeElement.value.slice(0, -1);
 			this.inputElement.nativeElement.focus();
 		} else if (e.event.key.length === 1 && e.event.key.match(/^[a-zA-Z]+|[0-9]/g)) {
