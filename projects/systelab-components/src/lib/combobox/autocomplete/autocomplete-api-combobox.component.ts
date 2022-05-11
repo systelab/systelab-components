@@ -33,7 +33,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			return;
 		}
 		if (event.key === KeyName.escape || event.key === KeyName.enter || event.key === KeyName.tab) {
-			if (this.isDropDownOpen()) {
+			if (this.isDropdownOpened) {
 				this.closeDropDown();
 			}
 		} else {
@@ -52,7 +52,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public onInputClicked(event: MouseEvent): void {
 		event.stopPropagation();
 		if (!this.isDisabled) {
-			if (!this.isDropDownOpen()) {
+			if (!this.isDropdownOpened) {
 				this.openDropDown();
 				this.doSearchText(this.description);
 			}
@@ -62,7 +62,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public onInputNavigate(): void {
 		if (!this.isDisabled) {
-			if (!this.isDropDownOpen()) {
+			if (!this.isDropdownOpened) {
 				this.openDropDown();
 				this.doSearchText(this.description);
 			}
@@ -131,7 +131,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	protected doSearchText(text: string): void {
-		if (!this.isDropDownOpen()) {
+		if (!this.isDropdownOpened) {
 			this.openDropDown();
 		}
 		this.startsWith = text;
