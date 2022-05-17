@@ -17,7 +17,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public error = false;
 	@Input('inputForm')
 	set newIputForm(inputForm: FormControl) {
-		if(inputForm){
+		if(inputForm && inputForm.value instanceof Date){
 			this.currentDate = inputForm.value;
 			this.inputForm = inputForm;
 			this.currentDateChange.subscribe((currentDate)=>{
