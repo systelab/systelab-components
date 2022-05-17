@@ -15,14 +15,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Input() public disabled = false;
 	@Input() public error = false;
-	@Input('inputForm')
-	set newIputForm(inputForm: FormControl) {
+	@Input()
+	set inputForm(inputForm: FormControl) {
 		if(inputForm && inputForm.value instanceof Date){
 			this.currentDate = inputForm.value;
-			this.inputForm = inputForm;
+			this.inputForm$ = inputForm;
 			this.currentDateChange.subscribe((currentDate)=>{
-				if(this.inputForm){
-					this.inputForm.patchValue(currentDate);
+				if(this.inputForm$){
+					this.inputForm$.patchValue(currentDate);
 				}
 			});
 		}
@@ -64,13 +64,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
 	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
-
 	public inputChanged = false;
-	protected _currentDate: Date;
 	public previousAfterDate = false;
 	public tooFarDate = false;
 	public language: any;
-
 	public currentDocSize: number;
 	public currentLanguage: string;
 	public destroyWheelListener: Function;
@@ -78,9 +75,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
-	public inputForm: FormControl;
+	public inputForm$: FormControl;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
 
+	protected _currentDate: Date;
 	private headerElement: any = document.getElementById(this.datepickerId);
 
 	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNGConfig) {
