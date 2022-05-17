@@ -206,14 +206,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	private setPlaceholder(): void {
-		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
-			? (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
-				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
-				: ''+this.i18nService.getDateFormatForDatePicker()
-			: '';
-	}
-
 	public saveEventOnFocus(evt: FocusEvent): void {
 		this.inputElement = new ElementRef(evt.target);
 		this.focusEvt = evt;
@@ -304,6 +296,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
 		}
+	}
+
+	private setPlaceholder(): void {
+		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
+			? (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
+				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
+				: ''+this.i18nService.getDateFormatForDatePicker()
+			: '';
 	}
 
 	private getLanguage(): void {

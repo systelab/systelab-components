@@ -274,7 +274,7 @@ describe('Systelab DatepickerComponent', () => {
 		const inputForm = new FormGroup({
 			date: new FormControl(new Date()),
 		});
-		fixture2.componentInstance.newIputForm = inputForm.get('date') as any;
+		fixture2.componentInstance.inputForm = inputForm.get('date') as any;
 		expect(fixture2.componentInstance.currentDate.getDay())
 			.toEqual(new Date().getDay());
 		expect(fixture2.componentInstance.currentDate.getMonth())
@@ -292,7 +292,7 @@ describe('Systelab DatepickerComponent', () => {
 		const inputForm = new FormGroup({
 			date: new FormControl(new Date()),
 		});
-		fixture2.componentInstance.newIputForm = inputForm.get('date') as any;
+		fixture2.componentInstance.inputForm = inputForm.get('date') as any;
 		AuxFunctionClass.enterText(fixture2, '02/20/1986');
 
 		expect(fixture2.componentInstance.currentDate.getDate())
