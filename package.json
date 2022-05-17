@@ -5,6 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
+    "build-systelab-components": "ng build systelab-components --watch",
+    "serve": "ng serve",
     "build-showcase": "ng build showcase --configuration production",
     "build-lib": "ng build systelab-components --configuration production",
     "postbuild-lib": "npm run copytemplates",

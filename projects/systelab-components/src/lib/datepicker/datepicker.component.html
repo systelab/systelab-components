@@ -3,6 +3,7 @@
             [firstDayOfWeek]="language.firstDayOfWeek"
             (onFocus)="saveEventOnFocus($event)"
             (onBlur)="changeDate()"
+            (keyup.enter)="changeDate()"
             (onSelect)="selectDate()"
             (onInput)="onInput($event)"
             [showOtherMonths]="true"
@@ -33,7 +34,7 @@
     <ng-template pTemplate="footer">
         <div *ngIf="!inline" class="p-1 d-flex border-top">
             <systelab-button *ngIf="showTodayButton" id="today" size="small" class="mr-auto"
-                    (click)="setTodayDate($event)">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
+                    (click)="setTodayDate()">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
             <systelab-button id="clear" size="small" type="danger" class="ml-auto"
                     (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</systelab-button>
         </div>

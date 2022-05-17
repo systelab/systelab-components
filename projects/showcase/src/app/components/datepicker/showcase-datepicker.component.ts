@@ -1,4 +1,5 @@
 import { Component, NgZone } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Month, Week } from 'systelab-components';
 import { I18nService } from 'systelab-translate';
 
@@ -9,6 +10,7 @@ import { I18nService } from 'systelab-translate';
 export class ShowcaseDatepickerComponent {
 
 	public myDate;
+	public dateForm: FormGroup;
 	public myDateWithReset;
 	public maxDate: Date;
 	public minDate: Date;
@@ -30,6 +32,7 @@ export class ShowcaseDatepickerComponent {
 		this.myDateWithReset = new Date(2018, 9, 20, 14, 5, 30, 0);
 		this.isDisabled = false;
 		this.yesterdayDate = new Date().setDate(new Date().getDate() - 1);
+		this.setupForm();
 	}
 
 	public resetDateAndTime(): void {
@@ -41,6 +44,12 @@ export class ShowcaseDatepickerComponent {
 	public languageChangeEvent(event: any): void {
 		this.zone.run(() => {
 			this.i18nService.use(event.id).subscribe();
+		});
+	}
+
+	public setupForm(): void {
+		this.dateForm = new FormGroup({
+			date: new FormControl(new Date()),
 		});
 	}
 }

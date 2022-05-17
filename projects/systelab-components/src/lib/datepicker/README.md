@@ -10,24 +10,25 @@ All the input parameters are optional.
 
 ## Properties
 
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| **currentDate** | Date | | Date selected in the component |
-| disabled | boolean | false | If true the component is shown disabled |
-| error | boolean | false | If true the components shows the Date selected in red indicating an erroneous date |
-| required | boolean | false | If true and currentDate is not set the components shows the input border in red |
-| markPreviousAfterDate | boolean | false | (Deprecated, use warnDaysBefore with a value of 1 instead) If true and currentDate previous than today then the input background color is red |
-| inputExpandHeight | boolean | false | If true the component expands to parent height |
-| fontSize | number | | Font size in pixels |
-| showTodayButton | boolean | false | Show Today button |
-| inline | boolean | false | When enabled, displays the calendar as inline. Default is false for popup mode |
-| minDate | Date | | The minimum selectable date |
-| maxDate | Date | | The maximum selectable date |
-| warnDaysBefore | number | | If set, when a date is selected the input background is set to red when that date happens before or it is exactly the same than the system's current date minus the number of days specified. |
-| warnDaysAfter | number | | If set, when a date is selected the input background is set to red when that date happens after than the system's current date plus the number of days specified. |
-| autofocus | boolean | false | If true the input is automatically focused |
-| fromDateForRelativeDates | date | undefined | Date to be used as from date to calculate the new date when using the shortcuts (ie. 3d)
-| showDateFormatOnError | boolean | false | If true, it will show a error message on placeholder when `error` property is true. Also, you can customize error message by adding `BAD_DATE_FORMAT` bundle key to your translation service file. If there's no `BAD_DATE_FORMAT` key, it only will show expected date format.
+| Name                     |    Type     |  Default  | Description                                                                                                                                                                                                                                                                     |
+|--------------------------|:-----------:|:---------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **inputForm**            | FormControl |           | Date selected in the component                                                                                                                                                                                                                                                  |
+| **currentDate**          |    Date     |           | Date selected in the component (If **inputForm** is set, this will be ignored)                                                                                                                                                                                                  |
+| disabled                 |   boolean   |   false   | If true the component is shown disabled                                                                                                                                                                                                                                         |
+| error                    |   boolean   |   false   | If true the components shows the Date selected in red indicating an erroneous date                                                                                                                                                                                              |
+| required                 |   boolean   |   false   | If true and currentDate is not set the components shows the input border in red                                                                                                                                                                                                 |
+| markPreviousAfterDate    |   boolean   |   false   | (Deprecated, use warnDaysBefore with a value of 1 instead) If true and currentDate previous than today then the input background color is red                                                                                                                                   |
+| inputExpandHeight        |   boolean   |   false   | If true the component expands to parent height                                                                                                                                                                                                                                  |
+| fontSize                 |   number    |           | Font size in pixels                                                                                                                                                                                                                                                             |
+| showTodayButton          |   boolean   |   false   | Show Today button                                                                                                                                                                                                                                                               |
+| inline                   |   boolean   |   false   | When enabled, displays the calendar as inline. Default is false for popup mode                                                                                                                                                                                                  |
+| minDate                  |    Date     |           | The minimum selectable date                                                                                                                                                                                                                                                     |
+| maxDate                  |    Date     |           | The maximum selectable date                                                                                                                                                                                                                                                     |
+| warnDaysBefore           |   number    |           | If set, when a date is selected the input background is set to red when that date happens before or it is exactly the same than the system's current date minus the number of days specified.                                                                                   |
+| warnDaysAfter            |   number    |           | If set, when a date is selected the input background is set to red when that date happens after than the system's current date plus the number of days specified.                                                                                                               |
+| autofocus                |   boolean   |   false   | If true the input is automatically focused                                                                                                                                                                                                                                      |
+| fromDateForRelativeDates |    date     | undefined | Date to be used as from date to calculate the new date when using the shortcuts (ie. 3d)                                                                                                                                                                                        |
+| showDateFormatOnError    |   boolean   |   false   | If true, it will show a error message on placeholder when `error` property is true. Also, you can customize error message by adding `BAD_DATE_FORMAT` bundle key to your translation service file. If there's no `BAD_DATE_FORMAT` key, it only will show expected date format. |
 
 In black the Two-Way Data Binding properties.
 

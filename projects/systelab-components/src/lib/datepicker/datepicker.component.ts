@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { addDays } from 'date-fns';
 import { PrimeNGConfig } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
@@ -14,6 +15,18 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Input() public disabled = false;
 	@Input() public error = false;
+	@Input('inputForm')
+	set newIputForm(inputForm: FormControl) {
+		if(inputForm){
+			this.currentDate = inputForm.value;
+			this.inputForm = inputForm;
+			this.currentDateChange.subscribe((currentDate)=>{
+				if(this.inputForm){
+					this.inputForm.patchValue(currentDate);
+				}
+			});
+		}
+	}
 	@Input() public required = false;
 	@Input() public inputExpandHeight: boolean;
 	@Input() public markPreviousAfterDate = false;
@@ -65,6 +78,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
+	public inputForm: FormControl;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
 
 	private headerElement: any = document.getElementById(this.datepickerId);
@@ -154,6 +168,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public selectDate(): void {
 		this.currentDateChange.emit(this.currentDate);
 		this.inputChanged = false;
+		this.error = false;
 	}
 
 	public changeDate(): void {
@@ -272,14 +287,16 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			this.currentDate = null;
 			this.currentCalendar.onClearButtonClick(event);
 			this.currentDateChange.emit(this.currentDate);
+			this.error = false;
 			this.inputChanged = false;
 		}
 	}
 
-	public setTodayDate(event): void {
+	public setTodayDate(): void {
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
+			this.error = false;
 			this.inputChanged = false;
 		}
 	}

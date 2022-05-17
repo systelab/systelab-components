@@ -2,7 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
@@ -17,8 +17,12 @@ import { Datepicker } from './datepicker.component';
 	selector: 'systelab-datepicker-test',
 	template: `
                   <div>
-                      <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
-                                           [markPreviousAfterDate]="true" [showDateFormatOnError]="showDateFormatOnError"
+                      <systelab-datepicker
+					  	[inputForm]="inputForm"
+					  	[(currentDate)]="currentDate"
+						[showTodayButton]="showTodayButton"
+                        [markPreviousAfterDate]="true"
+						[showDateFormatOnError]="showDateFormatOnError"
                       ></systelab-datepicker>
                   </div>
 			  `,
@@ -32,6 +36,7 @@ export class DatepickerTestComponent {
 	public defaultHours = 14;
 	public defaultMinutes = 5;
 	public showDateFormatOnError = true;
+	public inputForm = null;
 	public showTodayButton = true;
 
 	public currentDate: Date;
@@ -40,14 +45,13 @@ export class DatepickerTestComponent {
 		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
 	}
 }
-
 export class AuxFunctionClass {
 	public static setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date): void {
 		fixture.componentInstance.currentDate = value;
 		fixture.detectChanges();
 	}
 
-	public static enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string): void {
+	public static enterText(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>, text: string): void {
 		const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 		inputComponent.value = text;
 		inputComponent.dispatchEvent(new Event('keydown'));
@@ -101,6 +105,7 @@ export class AuxFunctionClass {
 
 describe('Systelab DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
+	let fixture2: ComponentFixture<Datepicker>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
@@ -260,6 +265,43 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeTruthy();
 		expect(AuxFunctionClass.isInputBorderRed(fixture))
 			.toBeTruthy();
+	});
+
+	it('should set a date passing inputForm variable', ()=> {
+		fixture2 = TestBed.createComponent(Datepicker);
+		fixture2.detectChanges();
+
+		const inputForm = new FormGroup({
+			date: new FormControl(new Date()),
+		});
+		fixture2.componentInstance.newIputForm = <any>inputForm.get('date');
+		expect(fixture2.componentInstance.currentDate.getDay())
+			.toEqual(new Date().getDay());
+		expect(fixture2.componentInstance.currentDate.getMonth())
+			.toEqual(new Date().getMonth());
+		expect(fixture2.componentInstance.currentDate.getFullYear())
+			.toEqual(new Date().getFullYear());
+
+		fixture2.destroy();
+	});
+
+	it('should change form value if date is changed', ()=> {
+		fixture2 = TestBed.createComponent(Datepicker);
+		fixture2.detectChanges();
+
+		const inputForm = new FormGroup({
+			date: new FormControl(new Date()),
+		});
+		fixture2.componentInstance.newIputForm = <any>inputForm.get('date');
+		AuxFunctionClass.enterText(fixture2, '02/20/1986');
+
+		expect(fixture2.componentInstance.currentDate.getDate())
+			.toEqual(20);
+		expect(fixture2.componentInstance.currentDate.getMonth())
+			.toEqual(1); // In JS month starts at 0 (0 -> January, 1 -> February, etc).
+		expect(fixture2.componentInstance.currentDate.getFullYear())
+			.toEqual(1986);
+		fixture2.destroy();
 	});
 });
 
