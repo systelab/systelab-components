@@ -1,13 +1,13 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { Calendar, CalendarModule } from 'primeng/calendar';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
@@ -46,7 +46,7 @@ export class DatepickerTestComponent {
 	}
 }
 export class AuxFunctionClass {
-	public static setValue(fixture: ComponentFixture<DatepickerTestComponent>, value: Date): void {
+	public static setValue(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>, value: Date): void {
 		fixture.componentInstance.currentDate = value;
 		fixture.detectChanges();
 	}
@@ -62,45 +62,50 @@ export class AuxFunctionClass {
 		fixture.detectChanges();
 	}
 
-	public static clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>): void {
+	public static clickOnInput(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): void {
 		const button = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 		button.click();
 		fixture.detectChanges();
 	}
 
-	public static isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	public static isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): boolean {
 		return (fixture.debugElement.nativeElement.querySelector('.p-datepicker-calendar-container') !== null);
 	}
 
-	public static getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>): number {
+	public static getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): number {
 		return parseInt(fixture.debugElement.nativeElement.querySelector('.p-datepicker-year').firstChild.nodeValue, 10);
 	}
 
-	public static getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>): string {
+	public static getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): string {
 		return fixture.debugElement.nativeElement.querySelector('.p-datepicker-month').firstChild.nodeValue;
 	}
 
-	public static isRedBackground(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	public static isRedBackground(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): boolean {
 		return (fixture.debugElement.nativeElement.querySelector('.warning-date') !== null);
 	}
 
-	public static isPlaceholderEmpty(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	public static isPlaceholderEmpty(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): boolean {
 		return (fixture.debugElement.nativeElement.querySelector('input').placeholder === '');
 	}
 
-	public static getPlaceholder(fixture: ComponentFixture<DatepickerTestComponent>): string {
+	public static getPlaceholder(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): string {
 		return fixture.debugElement.nativeElement.querySelector('input').placeholder;
 	}
 
-	public static isInputBorderRed(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
+	public static isInputBorderRed(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): boolean {
 		return (fixture.debugElement.nativeElement.querySelector('.date-error') !== null);
 	}
 
-	public static clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string): void {
+	public static clickOn(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>, id: string): void {
 		const button = fixture.debugElement.query(By.css(id)).nativeElement;
 		button.click();
 		fixture.detectChanges();
 	}
+	public static getWrittenDate(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): Date {
+		const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
+		return new Date(inputComponent.value);
+	}
+
 }
 
 describe('Systelab DatepickerComponent', () => {
@@ -108,14 +113,17 @@ describe('Systelab DatepickerComponent', () => {
 	let fixture2: ComponentFixture<Datepicker>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
+			imports: [
 				FormsModule,
-				OverlayModule,
 				ButtonModule,
+				OverlayModule,
+				BrowserModule,
 				CalendarModule,
 				HttpClientModule,
-				SystelabTranslateModule],
+				ReactiveFormsModule,
+				SystelabTranslateModule,
+				BrowserAnimationsModule,
+			],
 			declarations: [TouchspinComponent,
 				Datepicker,
 				ButtonComponent,
@@ -212,6 +220,7 @@ describe('Systelab DatepickerComponent', () => {
 		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
 			.toBe(-2);
 	});
+
 	it('should increment by 14 days when entering 2w', () => {
 		AuxFunctionClass.enterText(fixture, '2w');
 		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
@@ -267,41 +276,39 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeTruthy();
 	});
 
-	it('should set a date passing inputForm variable', ()=> {
+	it('should change form value if date is changed', fakeAsync(()=> {
 		fixture2 = TestBed.createComponent(Datepicker);
 		fixture2.detectChanges();
+		const compiledPage = fixture2.debugElement.nativeElement;
+		const calendar = fixture.debugElement.query(By.directive(Calendar)).componentInstance;
 
-		const inputForm = new FormGroup({
+		calendar.isKeydown = true;
+		let event = {'target': {'value': ''}};
+		calendar.onUserInput(event);
+		fixture.detectChanges();
+
+		const inputFormGroup = new FormGroup({
 			date: new FormControl(new Date()),
 		});
-		fixture2.componentInstance.inputForm = inputForm.get('date') as any;
-		expect(fixture2.componentInstance.currentDate.getDay())
-			.toEqual(new Date().getDay());
-		expect(fixture2.componentInstance.currentDate.getMonth())
-			.toEqual(new Date().getMonth());
-		expect(fixture2.componentInstance.currentDate.getFullYear())
-			.toEqual(new Date().getFullYear());
+		fixture2.componentInstance.formGroup = inputFormGroup;
+		fixture2.componentInstance.formControlName = 'date';
 
-		fixture2.destroy();
-	});
+		fixture2.whenStable().then(() => {
+			calendar.isKeydown = true;
+			event = {'target': {'value': '03/01/2018'}};
+			calendar.onUserInput(event);
+			fixture2.detectChanges();
 
-	it('should change form value if date is changed', ()=> {
-		fixture2 = TestBed.createComponent(Datepicker);
-		fixture2.detectChanges();
-
-		const inputForm = new FormGroup({
-			date: new FormControl(new Date()),
+			fixture2.whenStable().then(() => {
+				expect(compiledPage.querySelector('#start-date-error')).toBeNull();
+			});
 		});
-		fixture2.componentInstance.inputForm = inputForm.get('date') as any;
-		AuxFunctionClass.enterText(fixture2, '02/20/1986');
-
-		expect(fixture2.componentInstance.currentDate.getDate())
-			.toEqual(20);
-		expect(fixture2.componentInstance.currentDate.getMonth())
-			.toEqual(1); // In JS month starts at 0 (0 -> January, 1 -> February, etc).
-		expect(fixture2.componentInstance.currentDate.getFullYear())
-			.toEqual(1986);
-		fixture2.destroy();
-	});
+		// const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
+		// inputComponent.value = '02/20/1982';
+		// inputComponent.dispatchEvent(new Event('keydown'));
+		// fixture.detectChanges();
+		// fixture2.whenStable().then(() => {
+		// 	expect(inputFormGroup.get('date').value).toBe(2)
+		// });
+	}));
 });
-

@@ -1,5 +1,17 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+	AfterViewInit,
+	Component,
+	DoCheck,
+	ElementRef,
+	EventEmitter,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { addDays } from 'date-fns';
 import { PrimeNGConfig } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
@@ -15,18 +27,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Input() public disabled = false;
 	@Input() public error = false;
-	@Input()
-	set inputForm(inputForm: FormControl) {
-		if(inputForm && inputForm.value instanceof Date){
-			this.currentDate = inputForm.value;
-			this.inputForm$ = inputForm;
-			this.currentDateChange.subscribe((currentDate)=>{
-				if(this.inputForm$){
-					this.inputForm$.patchValue(currentDate);
-				}
-			});
-		}
-	}
+	@Input() public formGroup: FormGroup;
+	@Input() public formControlName: string;
 	@Input() public required = false;
 	@Input() public inputExpandHeight: boolean;
 	@Input() public markPreviousAfterDate = false;
@@ -63,7 +65,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
-	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
+	@ViewChild('calendar') public currentCalendar: Calendar;
 	public inputChanged = false;
 	public previousAfterDate = false;
 	public tooFarDate = false;
@@ -75,7 +77,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
-	public inputForm$: FormControl;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
 
 	protected _currentDate: Date;
@@ -195,13 +196,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 			}
 		}
 	}
+	public changeCurrentDate(): void {
+		this.currentCalendar.inputfieldViewChild.nativeElement.blur();
+		this.currentCalendar.onBlur.emit(event);
+		this.closeDatepicker();
+	}
 
-	public onInput(event: KeyboardEvent) {
-		if (event.keyCode === 13 || event.keyCode === 9) {
-			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
-			this.currentCalendar.onBlur.emit(event);
-			this.closeDatepicker();
-		} else {
+	public onInput(event: KeyboardEvent): void {
+		if (event.keyCode !== 13 && event.keyCode !== 9) {
 			this.inputChanged = true;
 		}
 	}
@@ -212,7 +214,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public repositionateCalendar(element?: ElementRef): void {
-
 		try {
 			let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
 			inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
