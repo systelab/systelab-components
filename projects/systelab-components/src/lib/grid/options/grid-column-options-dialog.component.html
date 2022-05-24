@@ -10,7 +10,8 @@
     </systelab-tab>
 </systelab-tabs>
 <systelab-dialog-bottom>
-    <button type="button" class="btn btn-primary ml-auto" id="ID_optionsSubmitButton" [disabled]="visibleColumns.length === 0" (click)="submit()"> {{'COMMON_SUBMIT' | translate | async}}
-    </button>
+    <systelab-button type="primary" class="ml-auto" id="ID_optionsSubmitButton"
+                     [disabled]="isSubmitDisabled()" (action)="submit()"> {{'COMMON_SUBMIT' | translate | async}}
+    </systelab-button>
 </systelab-dialog-bottom>
 

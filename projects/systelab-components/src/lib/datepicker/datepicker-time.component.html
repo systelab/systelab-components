@@ -10,6 +10,7 @@
                              [inputExpandHeight]="inputExpandHeight"
                              [inputFontSize]="inputFontSize"
                              [showTodayButton]="showTodayButton"
+                             [tabindex]="tabindex"
                              [maxDate]="maxDate"
                              [minDate]="minDate"
                              [warnDaysAfter]="warnDaysAfter"
@@ -19,16 +20,18 @@
 
     </ng-container>
 
-    <systelab-spinner class="d-flex h-100" id="hours" style="width: 80px;"
+    <systelab-spinner class="d-flex h-100" id="hours"
                       [spinValues]="touchSpinHourValues"
                       [fillUnitsWithZero]="true"
                       [(value)]="touchSpinHourValues.value"
                       [disabled]="disabled"
+                      [tabindex]="tabindex"
                       (valueChange)="currentHoursChanged($event)"></systelab-spinner>
     <label class="mx-1 my-0">:</label>
-    <systelab-spinner class="d-flex h-100" id="minutes" style="width: 80px;"
+    <systelab-spinner class="d-flex h-100" id="minutes"
                       [spinValues]="touchSpinMinutesValues"
                       [fillUnitsWithZero]="true"
+                      [tabindex]="tabindex"
                       [(value)]="touchSpinMinutesValues.value"
                       [disabled]="disabled"
                       (valueChange)="currentMinutesChanged($event)"></systelab-spinner>

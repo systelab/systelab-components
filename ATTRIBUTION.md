@@ -9,5 +9,4 @@ The Systelab-Components includes code from the following third parties:
 * [date-fns](https://date-fns.org/) (MIT License)
 * [angular-split](https://bertrandg.github.io/angular-split) (MIT License)
 * [ag-grid](https://www.ag-grid.com/) (MIT License)
-* [nanobar.js](http://nanobar.jacoborus.codes/) (MIT License)
 * [popper.js](https://popper.js.org/) (MIT License)

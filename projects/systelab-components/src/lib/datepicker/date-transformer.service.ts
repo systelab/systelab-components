@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { addDays, addMonths, addWeeks, addYears } from 'date-fns';
+import { addDays, addMonths, addWeeks, addYears, getDaysInMonth } from 'date-fns';
 
 @Injectable()
 export class DataTransformerService {
 
-	public processShortcuts(date: string): Date {
+	public processShortcuts(date: string, fromDateForRelative: Date): Date {
 		const regExp = new RegExp('^[\-]?[0-9]+[DWSMYA]$', 'i');
 		if (regExp.test(date)) {
 			const shortcut = date.substr(-1)
 				.toUpperCase();
 			const amount = Number(date.slice(0, -1));
-			const today = new Date();
+			const fromDate = fromDateForRelative ?  fromDateForRelative : new Date();
 			switch (shortcut) {
 				case 'D':
-					return addDays(today, amount);
+					return addDays(fromDate, amount);
 				case 'W':
 				case 'S':
-					return addWeeks(today, amount);
+					return addWeeks(fromDate, amount);
 				case 'M':
-					return addMonths(today, amount);
+					return addMonths(fromDate, amount);
 				case 'Y':
 				case 'A':
-					return addYears(today, amount);
+					return addYears(fromDate, amount);
 			}
 		}
 		return undefined;
@@ -119,7 +119,17 @@ export class DataTransformerService {
 		if (yearInDate < 100) {
 			yearInDate = 2000 + yearInDate;
 		}
-		return new Date(yearInDate, monthInDate, dayInDate);
+		return (this.checkMonthNumber(monthInDate) && this.checkDayNumber(yearInDate,monthInDate,dayInDate))
+			? new Date(yearInDate, monthInDate, dayInDate)
+			: null;
+	}
+
+	private checkMonthNumber(monthInDate: number): boolean {
+		return (monthInDate >= 0 && monthInDate <= 11); // Months go from 0 to 11
+	}
+
+	private checkDayNumber(yearInDate: number, monthInDate: number, dayInDate: number): boolean{
+		return (dayInDate >= 1 && dayInDate <= getDaysInMonth(new Date(yearInDate, monthInDate)));
 	}
 
 	private getDateSeparator(dateFormat: string) {

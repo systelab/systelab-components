@@ -5,7 +5,7 @@ Component to create a dialog header.
 ## Using the template
 
 ```html
-<systelab-dialog-header #header [withClose]="true" [withInfo]="false" [withProgressBar]="false" [withMinimize]="false" [withHome]="false" (close)="doClose()" (info)="doInfo()" (minimize)="doMinimize()" (home)="doHome()">
+<systelab-dialog-header #header [withClose]="true" [withInfo]="false" [withProgressBar]="false" [withTextProgressBar]="false" [withMinimize]="false" [withHome]="false" (close)="doClose()" (info)="doInfo()" (minimize)="doMinimize()" (home)="doHome()">
 title
 </systelab-dialog-header>
 ```
@@ -16,7 +16,8 @@ By default withClose is true, withInfo is false, withMinimize is false, withHome
 <systelab-dialog-header (close)="doClose()">Title</systelab-dialog-header>
 ```
 
-If you enable a Progress Bar, use the method go() to set the progress as a number between 0 and 100.
+If you enable a Progress Bar, use the method go(number) to set the progress as a number between 0 and 100.
+Optionally you can specify progress text when using Text Progress Bar using go(number,textprogress). If no text is specified it will display percentage text.
 
 For example:
 
@@ -36,6 +37,7 @@ For example:
 	public submit(): void {
         ...
 		this.header.go(100);
+		// this.header.go(100, '100 of 100 total' ); // Optional
 	}
 
 ```

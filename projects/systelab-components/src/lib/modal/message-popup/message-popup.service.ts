@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { I18nService } from 'systelab-translate';
-import { MessagePopupViewComponent } from './message-popup-view.component';
 import { Observable } from 'rxjs';
-import { MessagePopupIcon, MessageWithIconComponent } from './message-with-icon.component';
+import { I18nService } from 'systelab-translate';
 import { DialogService } from '../dialog/dialog.service';
+import { MessagePopupViewComponent } from './message-popup-view.component';
+import { MessagePopupIcon, MessageWithIconComponent } from './message-with-icon.component';
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any, public cssClass?: string, public focus: boolean = false) {
@@ -30,10 +30,8 @@ export class MessagePopupService {
 		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_INFO, messageDescription, modalClass, width, height, []);
 	}
 
-	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		const buttons: MessagePopupButton[] = [];
-		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true, 'btn-primary'));
-		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link'));
+	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, template?: string): Observable<any> {
+		const buttons: MessagePopupButton[] = this.getButtonsTemplate(template);
 		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons);
 	}
 
@@ -67,6 +65,23 @@ export class MessagePopupService {
 		parameters.icon = icon;
 
 		return this.dialogService.showDialog(MessagePopupViewComponent, parameters);
+	}
+
+	private getButtonsTemplate(template:string): MessagePopupButton[] {
+		const buttons: MessagePopupButton[] = [];
+		const availableTemplates: any = {
+			'outline-danger': 'btn-outline-danger',
+			'danger': 'btn-danger',
+			'outline-warning': 'btn-outline-warning',
+			'warning': 'btn-warning',
+			'primary':'btn-primary',
+			'outline-primary': 'btn-outline-primary',
+		}
+		const classTemplate: string = availableTemplates[template] || 'btn-outline-primary';
+
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link'));
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true, classTemplate));
+		return buttons;
 	}
 
 }

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row mt-1">
+    <label class="col-md-3 col-form-label" for="full-width-input"
+      >Slider Double (Min Value: {{ startValue }})</label
+    >
+  </div>
+  <div class="row mt-1">
+    <label class="col-md-3 col-form-label" for="full-width-input"
+      >Slider Double (Max value: {{ endValue }})</label
+    >    
+    <div class="col-md-9">
+      <systelab-slider-double-range
+        [(minValue)]="startValue"
+        [(maxValue)]="endValue"
+        [min]="0"
+        [max]="200"
+        [step]="1"
+        name="sliderDouble"
+      ></systelab-slider-double-range>
+    </div>
+  </div>
+</div>

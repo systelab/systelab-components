@@ -6,6 +6,7 @@ export class TimelineEvent {
 	public inverted = false;
 	public icon: string;
 	public extraText: string;
+	public richExtraText: string;
 	public data: Object;
 	public color: string;
 

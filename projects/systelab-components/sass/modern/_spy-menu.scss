@@ -6,18 +6,21 @@ $spy-menu-disabled-color: #e9ecef;
 
 $spy-menu-text-color-selected: $spy-menu-left-border-color-selected;
 
-.spy-menu {
-  .spy-menu-item {
-    padding: 10px 20px;
-    border-left: 1px solid $spy-menu-left-border-color;
-    cursor: pointer;
+systelab-spy-menu {
+  .spy-menu {
+    .spy-menu-item {
+      padding: 10px 20px;
+      border-left: 1px solid $spy-menu-left-border-color;
+      cursor: pointer;
 
-    &--selected {
-      border-left: 3px solid $spy-menu-left-border-color-selected;
-    }
-    &--disabled {
-      color: $spy-menu-disabled-color;
-      cursor: auto;
+      &--selected {
+        border-left: 3px solid $spy-menu-left-border-color-selected;
+      }
+
+      &--disabled {
+        color: $spy-menu-disabled-color;
+        cursor: auto;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 
-.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
+.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link)
 {
   border-color: rgb(221, 221, 221);
   background-color: white;
@@ -28,14 +28,128 @@ systelab-toggle-button {
       color: $primary;
       background-color: transparent;
       border-color: $primary;
+
+      &:hover {
+        color: #fff;
+        background-color: $primary;
+      }
     }
 
     &.btn-primary {
       color: white;
       background-color: $primary;
       border-color: $primary;
+      &:hover {
+        background-color: #0e7ad0;
+        border-color: #0d73c4;
+      }
     }
   }
 }
 
 
+systelab-button {
+  .slab-btn {
+    order: 0;
+    border-radius: 3em;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    font-size: 1rem;
+    padding: 9px 12px;
+    border: none;
+  }
+
+  .slab-btn-small {
+    font-size: 0.875rem;
+    padding: 7px 11px;
+  }
+  .slab-btn-medium {
+    font-size: 1rem;
+    padding: 9px 12px;
+  }
+  .slab-btn-large {
+    font-size: 1.25rem;
+    padding: 14px 16px;
+  }
+
+
+  .slab-btn-primary {
+    color: white;
+    background-color: $primary;
+
+    &:hover:enabled {
+      color: white;
+      background-color: #0e7ad0;
+    }
+    &:focus {
+      box-shadow: $slab-focus-component-shadow;
+    }
+  }
+  .slab-btn-regular {
+    color: $primary;
+    border: 1px solid $primary;
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: $primary;
+    }
+    &:focus {
+      box-shadow: $slab-focus-component-shadow;
+    }
+  }
+  .slab-btn-link {
+    color: $primary;
+    background: transparent;
+    text-decoration-style: solid;
+
+    &:hover:enabled {
+      text-decoration: underline;
+      text-decoration-style: solid;
+    }
+    &:focus {
+      text-decoration: underline;
+      text-decoration-style: dashed;
+    }
+  }
+  .slab-btn-danger {
+    color: $danger;
+    border: 1px solid $danger;
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: $danger;
+    }
+    &:focus {
+      box-shadow: 0 0 0 3px scale-color($danger, $alpha: -75%);
+    }
+  }
+  .slab-btn-warning {
+    color: $warning;
+    border: 1px solid $warning;
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: $warning;
+    }
+    &:focus {
+      box-shadow: 0 0 0 3px scale-color($warning, $alpha: -75%);
+    }
+  }
+  .slab-btn-success {
+    color: $success;
+    border: 1px solid $success;
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: scale-color($success, $alpha: -10%);
+    }
+    &:focus {
+      box-shadow: 0 0 0 3px scale-color($success, $alpha: -75%);;
+    }
+  }
+}

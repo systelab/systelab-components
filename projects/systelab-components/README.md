@@ -33,8 +33,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "node_modules/jquery/dist/jquery.min.js",
         "node_modules/popper.js/dist/umd/popper.js",
         "node_modules/bootstrap/dist/js/bootstrap.js",
-        "node_modules/pako/dist/pako.min.js",
-        "node_modules/nanobar/nanobar.js"
+        "node_modules/pako/dist/pako.min.js"
       ],
 ```
 
@@ -149,6 +148,7 @@ The following table summarizes all the components included in the library.
 | [systelab-app-frame](src/lib/applicationframe) | Application frame, using a header and a sidebar |
 | [systelab-app-header](src/lib/applicationframe/header) | Application header |
 | [systelab-app-sidebar](src/lib/applicationframe/sidebar) | Application side bar |
+| [systelab-button](src/lib/button) | Component to trigger an action |
 | [systelab-breadcrumb](src/lib/breadcrumb) | Component to allows users to keep track and maintain awareness of their locations |
 | [systelab-calendar-header](src/lib/calendar) | Calendar header with navigation |
 | [systelab-calendar-table](src/lib/calendar) | Month view custom calendar |
@@ -179,6 +179,7 @@ The following table summarizes all the components included in the library.
 | [systelab-timeline](src/lib/timeline) | Component to show a vertical timeline |
 | [systelab-toast](src/lib/toast) | Component to show a small toast |
 | [systelab-toggle-button](src/lib/toggle-button) | Component to select between two values |
+| [systelab-toggle-selector](src/lib/toggle-selector) | Component to select between a list of options |
 | [systelab-tooltip](src/lib/tooltip) | Directive to show tooltip on hover event |
 | [systelab-tree](src/lib/tree) | Abstract class that lets you create a Tree component |
 | [abstract-systelab-tree](src/lib/tree-cdk) | Abstract class that lets you create a Tree component with CDK |

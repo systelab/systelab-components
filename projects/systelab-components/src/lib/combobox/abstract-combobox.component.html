@@ -3,6 +3,7 @@
          data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text"
                class="slab-flex-1 slab-combo-label slab-combo-input"
+               [tabindex]="tabindex"
                [ngStyle]="getInputHeight()" [style.font-family]="fontFamily" [style.font-size.px]="fontSize"
                [style.font-weight]="fontWeight" [style.font-style]="fontStyle"
                [(ngModel)]="description" [disabled]="isDisabled" [style.color]="inputColor"/>
@@ -32,7 +33,7 @@
          [ngClass]="{'disabled': isDisabled}">
         <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box d-flex flex-column">
             <div *ngIf="filter" class="slab-filter-container" [style.font-family]="fontFamily"
-                 [style.font-size.px]="fontSize" [style.font-weight]="fontWeight"
+                 [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [tabindex]="tabindex"
                  [style.font-style]="fontStyle">
                 <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
             </div>

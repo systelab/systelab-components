@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Datepicker language</label>
-        <div class="col-md-1">
+        <div class="col-md-4">
             <systelab-select
                 [values]="languageList"
                 (change)="languageChangeEvent($event)"
@@ -31,7 +31,7 @@
                         [resetTimeWhenChangingCurrentDate]="true"
                         [(currentDate)]="myDateWithReset">
                 </systelab-date-time>
-                <button class="ml-2 btn btn-sm btn-outline-primary" (click)="resetDateAndTime()">Reset</button>
+                <systelab-button type="primary" [size]="'small'" class="ml-2" (action)="resetDateAndTime()">Reset</systelab-button>
             </div>
         </div>
     </div>
@@ -72,6 +72,25 @@
         </div>
     </div>
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Date with showDateFormatOnError true</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [required]="true"
+                    [(currentDate)]="myDate"
+                    [showTodayButton]="true"
+                    [showDateFormatOnError]="showDateFormatOnError"></systelab-datepicker>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Date with relative date yesterday</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [fromDateForRelativeDates]="yesterdayDate"
+                    [(currentDate)]="myDate"
+                    [showTodayButton]="true"></systelab-datepicker>
+        </div>
+    </div>
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Date required bottom</label>
         <div class="col-md-4">
             <systelab-month-selector [disabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate"
@@ -87,5 +106,4 @@
                                     [(selectedWeek)]="selectedWeek"></systelab-week-selector>
         </div>
     </div>
-
 </div>

@@ -7,6 +7,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { TimelineComponent, TimelineEvent } from './timeline.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 
+
+const checkHasValue = (fixture: ComponentFixture<TimeLineTestComponent>, num: number) => {
+	const numElements = fixture.debugElement.nativeElement.querySelectorAll('li').length;
+	expect(numElements)
+		.toEqual(num);
+};
+
+const getTitle = (fixture: ComponentFixture<TimeLineTestComponent>, i: number) =>
+	fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-title')[i].innerHTML;
+
+const getText = (fixture: ComponentFixture<TimeLineTestComponent>, i: number) =>
+	fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-body p:nth-child(1)')[i].innerHTML;
+
+const getExtraText = (fixture: ComponentFixture<TimeLineTestComponent>, i: number) =>
+	fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-body p:nth-child(2)')[i]?.innerHTML;
+
+const getRichExtraText = (fixture: ComponentFixture<TimeLineTestComponent>, i: number) =>
+	fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-body p:nth-child(3)')[i]?.innerHTML;
+
+const getImage= (fixture: ComponentFixture<TimeLineTestComponent>, i: number) =>
+	fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-badge')[i].innerHTML;
+
 @Component({
 	selector: 'systelab-timeline-test',
 	template: `
@@ -24,6 +46,8 @@ export class TimeLineTestComponent {
 		const timeLineEvent1 = new TimelineEvent('Title 1', new Date(), 'Text 1');
 		timeLineEvent1.inverted = false;
 		timeLineEvent1.icon = 'icon-download';
+		timeLineEvent1.extraText = 'Extra Text';
+		timeLineEvent1.richExtraText = '<a href="url">fake anchor for testing</a>';
 		this.events.push(timeLineEvent1);
 		const timeLineEvent2 = new TimelineEvent('Title 2', new Date(), 'Text 2');
 		timeLineEvent2.inverted = true;
@@ -89,6 +113,16 @@ describe('Systelab Timeline', () => {
 			.toEqual(fixture.componentInstance.events[2].text);
 	});
 
+	it('should have the right extra text', () => {
+		expect(getExtraText(fixture, 0))
+			.toEqual(fixture.componentInstance.events[0].extraText);
+	});
+
+	it('should have the right rich extra text', () => {
+		expect(getRichExtraText(fixture, 0))
+			.toEqual(fixture.componentInstance.events[0].richExtraText);
+	});
+
 	it('should have the right icon', () => {
 		expect(getImage(fixture, 0))
 			.toContain(fixture.componentInstance.events[0].icon);
@@ -96,28 +130,4 @@ describe('Systelab Timeline', () => {
 			.toContain(fixture.componentInstance.events[2].icon);
 	});
 });
-
-function checkHasValue(fixture: ComponentFixture<TimeLineTestComponent>, num: number) {
-	const numElements = fixture.debugElement.nativeElement.querySelectorAll('li').length;
-	expect(numElements)
-		.toEqual(num);
-}
-
-function getTitle(fixture: ComponentFixture<TimeLineTestComponent>, i: number) {
-	const element = fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-title')[i].innerHTML;
-	return element;
-}
-
-function getText(fixture: ComponentFixture<TimeLineTestComponent>, i: number) {
-	const element = fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-body p')[i].innerHTML;
-	return element;
-}
-
-function getImage(fixture: ComponentFixture<TimeLineTestComponent>, i: number) {
-	const element = fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-badge')[i].innerHTML;
-	return element;
-}
-
-
-
 

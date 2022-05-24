@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { TouchspinComponent } from '../spinner/spinner.component';
-import { I18nService, SystelabTranslateModule } from 'systelab-translate';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { Datepicker } from './datepicker.component';
 import { of } from 'rxjs';
+import { I18nService, SystelabTranslateModule } from 'systelab-translate';
+import { ButtonComponent } from '../button/button.component';
+import { TouchspinComponent } from '../spinner/spinner.component';
+import { Datepicker } from './datepicker.component';
 
 export class USMockI18nService {
 	public get(key: string) {
@@ -166,6 +167,7 @@ describe('Systelab US DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: USMockI18nService}]
 		})
@@ -256,6 +258,7 @@ describe('Systelab ES DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: ESMockI18nService}]
 		})
@@ -343,6 +346,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				Datepicker,
+				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: ZHMockI18nService}]
 		})
@@ -427,6 +431,7 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
+				ButtonComponent,
 				Datepicker],
 			providers:    [{provide: I18nService, useClass: ESMockI18nService2}]
 		})
@@ -452,28 +457,48 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 			});
 		});
 
-	it('month should be in spanish translation "Octubre"', () => {
+	it('month should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
+			let currentDate=new Date();
 			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
-				.toEqual('Octubre');
+				.toEqual(getMonth(currentDate));
 			});
 		});
 
-	it('after select next month, should be in spanish translation "Noviembre"', () => {
+	it('after select next month, should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
+			const today = new Date();
+			let currentDate=new Date(today.getFullYear(), today.getMonth(), 1);
+			let nextMonthDate=new Date(currentDate.setMonth(currentDate.getMonth()+1));
 			const nextMonth = fixture.debugElement.query(By.css(`#nextMonth`)).nativeElement;
 			nextMonth.dispatchEvent(new Event('click'));
 			fixture.detectChanges();
 
 			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
-				.toEqual('Noviembre');
+				.toEqual(getMonth(nextMonthDate));
 			});
 		});
 
 });
 
+function getMonth(date: Date) {
+	const months = new Array();
+	months[0] = "Enero";
+	months[1] = "Febrero";
+	months[2] = "Marzo";
+	months[3] = "Abril";
+	months[4] = "Mayo";
+	months[5] = "Junio";
+	months[6] = "Julio";
+	months[7] = "Agosto";
+	months[8] = "Septiembre";
+	months[9] = "Octubre";
+	months[10] = "Noviembre";
+	months[11] = "Diciembre";
+	return months[date.getMonth()];
+}
 
 function enterText(fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<Datepicker>, text: string) {
 	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;

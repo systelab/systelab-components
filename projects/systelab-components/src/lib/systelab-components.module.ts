@@ -92,6 +92,11 @@ import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
+import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
+import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-range.component';
+import { ButtonComponent } from './button/button.component';
+import { DraggableDirective } from './directives/draggable.directive';
+import { ResizableDirective } from './directives/resizable.directive';
 
 @NgModule({
 	imports: [
@@ -111,6 +116,7 @@ import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 	],
 	declarations: [
 		SliderComponent,
+		SliderDoubleRangeComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		ContextMenuSubmenuItemComponent,
@@ -129,6 +135,7 @@ import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 		ApplicationHeaderComponent,
 		ApplicationSidebarLargeComponent,
 		ApplicationSidebarSmallComponent,
+		ButtonComponent,
 		ToggleButtonComponent,
 		AllYesNoSelect,
 		NoYesSelect,
@@ -186,11 +193,15 @@ import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 		SpyMenuComponent,
 		ScrollSpyDirective,
 		ToastComponent,
+		ToggleSelectorComponent,
 		KeyupDebounceDirective,
+		DraggableDirective,
+		ResizableDirective,
 		ToastComponent
 	],
 	exports:      [
 		SliderComponent,
+		SliderDoubleRangeComponent,
 		SwitchComponent,
 		ContextMenuComponent,
 		ContextPanelComponent,
@@ -214,6 +225,7 @@ import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
+		ButtonComponent,
 		ToggleButtonComponent,
 		SearcherTableComponent,
 		CalendarHeaderComponent,
@@ -265,7 +277,10 @@ import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 		SpyMenuComponent,
 		ScrollSpyDirective,
 		ToastComponent,
+		ToggleSelectorComponent,
 		KeyupDebounceDirective,
+		DraggableDirective,
+		ResizableDirective
 	],
 	providers:    [
 		StylesUtilService,

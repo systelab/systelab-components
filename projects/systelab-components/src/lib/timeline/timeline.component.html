@@ -11,6 +11,7 @@
             <div class="slab-timeline-body">
                 <p>{{event.text}}</p>
                 <p *ngIf="event.extraText">{{event.extraText}}</p>
+                <p *ngIf="event.richExtraText" [innerHTML]="event.richExtraText"></p>
             </div>
         </div>
     </li>

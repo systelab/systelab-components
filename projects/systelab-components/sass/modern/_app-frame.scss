@@ -1,22 +1,24 @@
 systelab-app-frame {
+  $width-for-small-bar: 60px;
+  $width-for-large-bar: 200px;
 
   .slab-side-bar-container-large {
     background-color: lightgrey;
-    min-width: 200px;
-    width: 200px;
+    min-width: $width-for-large-bar;
+    width: $width-for-large-bar;
   }
 
   .slab-side-bar-container-small {
     background-color: lightgrey;
-    min-width: 60px;
-    width: 60px;
+    min-width: $width-for-small-bar;
+    width: $width-for-small-bar;
   }
 
   .slab-main-container {
     background-color: white;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: $slab-ipad-width) {
     .slab-side-bar-container {
       display: none;
     }
