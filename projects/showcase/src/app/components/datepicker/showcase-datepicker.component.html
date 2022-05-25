@@ -118,7 +118,8 @@
             <div class="col-md-7">
                 <systelab-datepicker
                     id="dp-inputform"
-                    [inputForm]="dateForm.get('date')"
+                    [formGroup]="dateForm"
+                    [formControlName]="'date'"
                 ></systelab-datepicker>
             </div>
         </div>
