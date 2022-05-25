@@ -1,7 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +18,6 @@ import { Datepicker } from './datepicker.component';
 	template: `
                   <div>
                       <systelab-datepicker
-					  	[inputForm]="inputForm"
 					  	[(currentDate)]="currentDate"
 						[showTodayButton]="showTodayButton"
                         [markPreviousAfterDate]="true"
@@ -101,16 +100,26 @@ export class AuxFunctionClass {
 		button.click();
 		fixture.detectChanges();
 	}
-	public static getWrittenDate(fixture: ComponentFixture<DatepickerTestComponent|Datepicker>): Date {
-		const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
-		return new Date(inputComponent.value);
-	}
 
+	public static setFormControlDate(fixture: ComponentFixture<Datepicker>, dateToTest: String, calendar: Calendar){
+		const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
+		const focusEvent = new Event('focus');
+		inputEl.click();
+		calendar.isKeydown = true;
+		inputEl.dispatchEvent(focusEvent);
+		fixture.detectChanges();
+
+		const event = { 'target': { 'value': dateToTest } };
+		calendar.onUserInput(event);
+		fixture.detectChanges();
+
+		calendar.cd.detectChanges();
+	}
 }
 
 describe('Systelab DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
-	let fixture2: ComponentFixture<Datepicker>;
+	let realFixture: ComponentFixture<Datepicker>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
@@ -276,39 +285,15 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeTruthy();
 	});
 
-	it('should change form value if date is changed', fakeAsync(()=> {
-		fixture2 = TestBed.createComponent(Datepicker);
-		fixture2.detectChanges();
-		const compiledPage = fixture2.debugElement.nativeElement;
-		const calendar = fixture.debugElement.query(By.directive(Calendar)).componentInstance;
-
-		calendar.isKeydown = true;
-		let event = {'target': {'value': ''}};
-		calendar.onUserInput(event);
-		fixture.detectChanges();
-
-		const inputFormGroup = new FormGroup({
-			date: new FormControl(new Date()),
+	it('should change form value if date is changed', ()=> {
+		realFixture = TestBed.createComponent(Datepicker);
+		realFixture.detectChanges();
+		const calendar = realFixture.componentInstance.currentCalendar;
+		const dateToTest = '06/17/1982';
+		realFixture.componentInstance.formGroup = new FormGroup({
+			date: new FormControl(''),
 		});
-		fixture2.componentInstance.formGroup = inputFormGroup;
-		fixture2.componentInstance.formControlName = 'date';
-
-		fixture2.whenStable().then(() => {
-			calendar.isKeydown = true;
-			event = {'target': {'value': '03/01/2018'}};
-			calendar.onUserInput(event);
-			fixture2.detectChanges();
-
-			fixture2.whenStable().then(() => {
-				expect(compiledPage.querySelector('#start-date-error')).toBeNull();
-			});
-		});
-		// const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
-		// inputComponent.value = '02/20/1982';
-		// inputComponent.dispatchEvent(new Event('keydown'));
-		// fixture.detectChanges();
-		// fixture2.whenStable().then(() => {
-		// 	expect(inputFormGroup.get('date').value).toBe(2)
-		// });
-	}));
+		AuxFunctionClass.setFormControlDate(realFixture, dateToTest, calendar);
+		expect(calendar.value).toEqual(new Date(dateToTest));
+	});
 });

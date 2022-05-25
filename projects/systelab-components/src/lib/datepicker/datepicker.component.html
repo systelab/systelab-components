@@ -39,7 +39,7 @@
         </ng-template>
     </p-calendar>
 </ng-container>
-<ng-container #noFormGroupCalendar>
+<ng-container *ngIf="!formGroup || !formControlName">
     <p-calendar #calendar
                 [(ngModel)]="currentDate" [showIcon]="false"
                 [dateFormat]="language.dateFormatValue"
