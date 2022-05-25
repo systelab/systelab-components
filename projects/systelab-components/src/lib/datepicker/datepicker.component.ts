@@ -24,6 +24,7 @@ import { DataTransformerService } from './date-transformer.service';
 	providers:   [DataTransformerService]
 })
 export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+	@ViewChild('calendar') public currentCalendar: Calendar;
 
 	@Input() public disabled = false;
 	@Input() public error = false;
@@ -65,7 +66,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
-	@ViewChild('calendar') public currentCalendar: Calendar;
+
 	public inputChanged = false;
 	public previousAfterDate = false;
 	public tooFarDate = false;
@@ -141,27 +142,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public ngOnDestroy() {
 		this.destroyKeyListener();
 		this.destroyWheelListener();
-	}
-
-	private checkPreviousAfterDate(): void {
-		if (this._currentDate) {
-			this._currentDate.setHours(0, 0, 0, 0);
-			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
-			pastDate.setHours(0, 0, 0, 0);
-			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
-		} else {
-			this.previousAfterDate = false;
-		}
-	}
-
-	private checkTooFarDate() {
-		if (this._currentDate) {
-			this._currentDate.setHours(0, 0, 0, 0);
-			const futureDate = addDays(new Date(), this.warnDaysAfter);
-			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
-		} else {
-			this.tooFarDate = false;
-		}
 	}
 
 	public selectDate(): void {
@@ -299,18 +279,39 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
+	private checkPreviousAfterDate(): void {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
+			pastDate.setHours(0, 0, 0, 0);
+			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
+		} else {
+			this.previousAfterDate = false;
+		}
+	}
+
+	private checkTooFarDate() {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const futureDate = addDays(new Date(), this.warnDaysAfter);
+			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
+		} else {
+			this.tooFarDate = false;
+		}
+	}
+
 	private setPlaceholder(): void {
 		if(this.showDateFormatOnError){
-			this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
-				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
-				: ''+this.i18nService.getDateFormatForDatePicker();
+			this.currentCalendar.el.nativeElement.querySelector('input').placeholder =
+				(this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
+					? this.i18nService.instant('BAD_DATE_FORMAT')+' '
+					: ''+this.i18nService.getDateFormatForDatePicker();
 		} else {
-			this.currentCalendar.el.nativeElement.querySelector('input').placeholder = "";
+			this.currentCalendar.el.nativeElement.querySelector('input').placeholder = '';
 		}
 	}
 
 	private getLanguage(): void {
-
 		const weekDaysNames: Array<string> = [];
 		const weekDaysNamesShort: Array<string> = [];
 		const monthNames: Array<string> = [];

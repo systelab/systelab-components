@@ -101,7 +101,7 @@ export class AuxFunctionClass {
 		fixture.detectChanges();
 	}
 
-	public static setFormControlDate(fixture: ComponentFixture<Datepicker>, dateToTest: String, calendar: Calendar){
+	public static setFormControlDate(fixture: ComponentFixture<Datepicker>, dateToTest: string, calendar: Calendar): void {
 		const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
 		const focusEvent = new Event('focus');
 		inputEl.click();
@@ -109,7 +109,7 @@ export class AuxFunctionClass {
 		inputEl.dispatchEvent(focusEvent);
 		fixture.detectChanges();
 
-		const event = { 'target': { 'value': dateToTest } };
+		const event = { target: { 'value': dateToTest } };
 		calendar.onUserInput(event);
 		fixture.detectChanges();
 
