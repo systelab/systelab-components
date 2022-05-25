@@ -109,7 +109,7 @@ export class AuxFunctionClass {
 		inputEl.dispatchEvent(focusEvent);
 		fixture.detectChanges();
 
-		const event = { target: { 'value': dateToTest } };
+		const event = { target: { value: dateToTest } };
 		calendar.onUserInput(event);
 		fixture.detectChanges();
 
