@@ -77,9 +77,14 @@ The current list of TSC members for this library is:
 - Alfons Serra @alfonsserra
 - Carles Viñola. @vinyulis
 - Daniel Martinez. @dmartinezcapilla
-- Josep Vila. @josepvilabadillo
-- Aritz Peñalver. @apenalver2
+- Alex Arnaiz. @xxxx
+- Abel Capdevila. @abeliuss
 - Joaquim Vila. @joaquimvila
+- Jordi Serra. @xxxxxx
+- Toni Lainez. @tlainez
+- Oscar de dios. @OscarDeDios
+- Oscar Galcerán. @oGalceran1
+- Ernest Hernandez. @xxxxx
 
 ### TSC meetings
 
