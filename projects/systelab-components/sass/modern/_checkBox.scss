@@ -18,6 +18,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
 
   &:empty {
     padding-left: $slab-checkbox-height;
+    height: $form-elements-height;
   }
 
   &:before {
@@ -90,6 +91,9 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     }
   }
 
+  .ag-checkbox-input-wrapper::after {
+    color: transparent !important;
+  }
 
   .ag-checkbox-input-wrapper.ag-checked::after {
     content: '\f00c' !important;

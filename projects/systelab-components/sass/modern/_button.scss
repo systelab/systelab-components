@@ -1,5 +1,5 @@
 
-.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link),
+.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link)
 {
   border-color: rgb(221, 221, 221);
   background-color: white;
@@ -28,15 +28,25 @@ systelab-toggle-button {
       color: $primary;
       background-color: transparent;
       border-color: $primary;
+
+      &:hover {
+        color: #fff;
+        background-color: $primary;
+      }
     }
 
     &.btn-primary {
       color: white;
       background-color: $primary;
       border-color: $primary;
+      &:hover {
+        background-color: #0e7ad0;
+        border-color: #0d73c4;
+      }
     }
   }
 }
+
 
 systelab-button {
   .slab-btn {

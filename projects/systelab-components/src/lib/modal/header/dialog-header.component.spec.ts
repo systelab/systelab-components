@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,8 +15,9 @@ import { DialogHeaderComponent } from './dialog-header.component';
 	selector: 'systelab-dialog-header-test',
 	template: `
                 <div>
-                    <systelab-dialog-header [withClose]="withClose" (close)="doClose()"
-                                            [withHome]="withHome" (home)="doHome()"
+                    <systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
+                                            [withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
+                                            [withTextProgressBar]="withTextProgressBar"
                                             [withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
                 </div>
 	          `,
@@ -24,9 +25,12 @@ import { DialogHeaderComponent } from './dialog-header.component';
 })
 export class DialogHeaderTestComponent {
 
+	@ViewChild('header') public header: DialogHeaderComponent;
+
 	public withClose = true;
 	public withInfo = false;
 	public withProgressBar = false;
+	public withTextProgressBar = false;
 	public withHome = false;
 	public withMinimize = false;
 
@@ -37,6 +41,10 @@ export class DialogHeaderTestComponent {
 	}
 
 	public doInfo() {
+	}
+
+	public go(num: number): void {
+		this.header.progress=num;
 	}
 }
 
@@ -70,15 +78,18 @@ describe('Systelab Dialog Header', () => {
 	});
 
 	it('should show the initial values', () => {
-		expect(isButtonVisible(fixture, '.slab-dialog-close'))
+		expect(isComponentVisible(fixture, '.slab-dialog-close'))
 			.toBeTruthy();
-		expect(isButtonVisible(fixture, '.slab-dialog-home'))
+		expect(isComponentVisible(fixture, '.slab-dialog-home'))
 			.toBeFalsy();
-		expect(isButtonVisible(fixture, '.slab-dialog-minimize'))
+		expect(isComponentVisible(fixture, '.slab-dialog-minimize'))
 			.toBeFalsy();
-		expect(isButtonVisible(fixture, '.slab-dialog-info'))
+		expect(isComponentVisible(fixture, '.slab-dialog-info'))
 			.toBeFalsy();
-
+		expect(isComponentVisible(fixture, '.slab-dialog-header-progress'))
+			.toBeFalsy();
+		expect(isComponentVisible(fixture, '.slab-dialog-header-progress-bar-with-text'))
+			.toBeFalsy();
 	});
 
 	it('should call method close if click on close', () => {
@@ -89,10 +100,10 @@ describe('Systelab Dialog Header', () => {
 	});
 
 	it('should have button home if is set, and call appropriate method if clicked', () => {
-		expect(isButtonVisible(fixture, '.slab-dialog-home'))
+		expect(isComponentVisible(fixture, '.slab-dialog-home'))
 			.toBeFalsy();
 		showHomeButton(fixture);
-		expect(isButtonVisible(fixture, '.slab-dialog-home'))
+		expect(isComponentVisible(fixture, '.slab-dialog-home'))
 			.toBeTruthy();
 		spyOn(fixture.componentInstance, 'doHome');
 		clickButton(fixture, '.slab-dialog-home');
@@ -101,15 +112,31 @@ describe('Systelab Dialog Header', () => {
 	});
 
 	it('should have button info if is set, and call appropriate method if clicked', () => {
-		expect(isButtonVisible(fixture, '.slab-dialog-info'))
+		expect(isComponentVisible(fixture, '.slab-dialog-info'))
 			.toBeFalsy();
 		showInfoButton(fixture);
-		expect(isButtonVisible(fixture, '.slab-dialog-info'))
+		expect(isComponentVisible(fixture, '.slab-dialog-info'))
 			.toBeTruthy();
 		spyOn(fixture.componentInstance, 'doInfo');
 		clickButton(fixture, '.slab-dialog-info');
 		expect(fixture.componentInstance.doInfo)
 			.toHaveBeenCalled();
+	});
+
+	it('should have progress bar if withProgressBar', () => {
+		expect(isComponentVisible(fixture, '.slab-dialog-header-progress'))
+			.toBeFalsy();
+		showProgressBar(fixture);
+		expect(isComponentVisible(fixture, '.slab-dialog-header-progress'))
+			.toBeTruthy();
+	});
+
+	it('should have text progress bar if withTextProgressBar', () => {
+		expect(isComponentVisible(fixture, '.slab-dialog-header-progress-bar-with-text'))
+			.toBeFalsy();
+		showTextProgressBar(fixture);
+		expect(isComponentVisible(fixture, '.slab-dialog-header-progress-bar-with-text'))
+			.toBeTruthy();
 	});
 
 });
@@ -130,6 +157,18 @@ function showInfoButton(fixture: ComponentFixture<DialogHeaderTestComponent>) {
 	fixture.detectChanges();
 }
 
-function isButtonVisible(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
+function showProgressBar(fixture: ComponentFixture<DialogHeaderTestComponent>) {
+	fixture.componentInstance.withProgressBar = true;
+	fixture.componentInstance.go(50);
+    fixture.detectChanges();
+}
+
+function showTextProgressBar(fixture: ComponentFixture<DialogHeaderTestComponent>) {
+	fixture.componentInstance.withTextProgressBar = true;
+	fixture.componentInstance.go(50);
+    fixture.detectChanges();
+}
+
+function isComponentVisible(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
 	return (fixture.debugElement.nativeElement.querySelector(className) !== null);
 }

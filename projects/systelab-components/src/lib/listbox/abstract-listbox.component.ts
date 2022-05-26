@@ -100,16 +100,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.context = {componentParent: this};
 
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.getRowNodeId =
-			(item) => {
-				if (item[this.getIdField()]) {
-					return item[this.getIdField()];
-				} else {
-					return null;
-				}
-			};
+		this.gridOptions.getRowNodeId = (item) => this.getRowNodeId(item)
+			?.toString();
 
 		this.gridOptions.rowData = this.values;
+	}
+
+	protected getRowNodeId(item:T): string | number | undefined {
+		return item?.[this.getIdField()] ?? '';
 	}
 
 	protected getColumnDefsWithOptions(): Array<any> {
@@ -245,7 +243,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 						if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 							if (this.multipleSelectedItemList
 								.filter((selectedItem) => {
-									return (selectedItem !== undefined && selectedItem[this.getIdField()] === node.id);
+									return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
 								}).length > 0) {
 								node.selectThisNode(true);
 							}
@@ -261,7 +259,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 								return;
 							}
 						} else if (this.selectedItem) {
-							if (node.data[this.getIdField()] === this.selectedItem[this.getIdField()]) {
+							if (this.getRowNodeId(node.data) === this.selectedItem[this.getIdField()]) {
 								node.setSelected(true);
 								return;
 							}
@@ -283,7 +281,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	private unselectAllNodes() {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.forEachNode(node => {
-				if (node && node.id !== this.getAllFieldID()) {
+				if (node && this.getRowNodeId(node.data) !== this.getAllFieldID()) {
 					node.selectThisNode(false);
 				}
 			});
@@ -293,7 +291,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	private unselectNodeAll() {
 		if (this.gridOptions && this.gridOptions.api) {
 			this.gridOptions.api.forEachNode(node => {
-				if (node && node.id === this.getAllFieldID()) {
+				if (node && this.getRowNodeId(node.data) === this.getAllFieldID()) {
 					node.selectThisNode(false);
 				}
 			});

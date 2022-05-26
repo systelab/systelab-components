@@ -38,14 +38,20 @@ systelab-numpad {
     height: 44px;
     line-height: 40px;
     font-size: 25px;
-
     border-radius: 40px;
     border-color: $primary !important;
     color: $primary !important;
+    &:hover {
+      background-color: $primary !important;
+      color: white !important;
+    }
+  }
+
+  .slab-numpad-btn.btn-primary {
+    color: white !important;
 
     &:hover {
-      background-color: $primary;
-      color: white !important;
+      background-color: #0e7ad0;
     }
   }
 

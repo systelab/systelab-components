@@ -301,6 +301,14 @@ You can define the options of the menu adding property headerMenu of type Array&
 </patient-grid>
 ```
 
+### Using column options dialog
+The dialog will be displayed with the **showOptions()** function, to change the parameters you will need to edit the function:
+```
+public showOptions(): void {
+  super.showOptions(true);
+}
+```
+With the **canHideAllColumns** parameter you can control if the dialog allows hide all columns or not.
 
 ## Properties
 

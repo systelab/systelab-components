@@ -1,0 +1,11 @@
+// ng-deep is used to style an inner component with encapsulated style. ng-deep is deprecated, but actually there is not any other alternative to do this.
+// it's to be expected angular offers an alternative before removes it
+:host ::ng-deep i.time-line-icon {
+  &.icon-close {
+    font-size: 25px;
+    color: #d7382d;
+    font-weight: bold;
+    position: relative;
+    top: 4px;
+  }
+}

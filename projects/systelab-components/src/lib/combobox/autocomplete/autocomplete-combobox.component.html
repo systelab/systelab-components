@@ -11,8 +11,10 @@
                [style.font-size.px]="fontSize"
                [style.font-weight]="fontWeight"
                [style.font-style]="fontStyle"
+               [tabindex]="tabindex"
                (keydown.Tab)="closeDropDown()"
-               (keydown.arrowDown)="onInputClicked($event)"
+               (keydown.arrowDown)="onInputNavigate()"
+               (keydown.arrowUp)="onInputNavigate()"
                 (click)="onInputClicked($event)"/>
         <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
@@ -32,7 +34,7 @@
                              [gridOptions]="gridOptions"
                              (selectionChanged)="onSelectionChanged($event)"
                              (rowSelected)="onRowSelected($event)"
-                             (modelUpdated)="onModelUpdated()">
+                             (modelUpdated)="onModelUpdated()" (cellKeyDown)="onCellKeyDown($event)">
             </ag-grid-angular>
         </div>
 

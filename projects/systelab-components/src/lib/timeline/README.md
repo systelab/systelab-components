@@ -36,9 +36,10 @@ TimelineEvent model object
  | icon | string | no| Class for the icon to show (Default icon-download)
  | color | string | no | Class for color (Default warning)
  | extraText | string | no| Additional text to show in second line
+ | richExtraText | string | no| Additional text to show in second line with HTML content
  | data | Object | no| Data object related to the event
-    
-    
+
+
 ## Events
 
 | Name | Parameters | Description |
