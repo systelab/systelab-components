@@ -80,8 +80,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 	          `
 })
 export class ComboboxTestComponent {
-	public id: string;
-	public description: string;
+	public id = '1';
+	public description = 'Description 2';
 	public multipleSelection = false;
 	public multipleSelectedItemList = [
 		new TestData('3', 'Description 3'),
@@ -166,6 +166,23 @@ describe('Systelab Combobox', () => {
 				done();
 			});
 	});
+
+	it('should check clear id', (done) => {
+		clickButton(fixture);
+		fixture.whenStable()
+			.then(() => {
+				fixture.componentInstance.id = undefined;
+				clickButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						const component = fixture.componentInstance;
+						const id = component.combobox.id;
+						expect(id).toEqual(component.id);
+						done();
+					});
+			});
+	});
+
 });
 
 function clickButton(fixture: ComponentFixture<ComboboxTestComponent>) {
