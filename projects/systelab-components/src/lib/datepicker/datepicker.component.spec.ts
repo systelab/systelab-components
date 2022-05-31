@@ -80,14 +80,6 @@ export class AuxFunctionClass {
 		return (fixture.debugElement.nativeElement.querySelector('.warning-date') !== null);
 	}
 
-	public static isPlaceholderEmpty(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
-		return (fixture.debugElement.nativeElement.querySelector('input').placeholder === '');
-	}
-
-	public static getPlaceholder(fixture: ComponentFixture<DatepickerTestComponent>): string {
-		return fixture.debugElement.nativeElement.querySelector('input').placeholder;
-	}
-
 	public static isInputBorderRed(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
 		return (fixture.debugElement.nativeElement.querySelector('.date-error') !== null);
 	}
@@ -247,17 +239,6 @@ describe('Systelab DatepickerComponent', () => {
 	it('should show date format on error if showDateFormatOnError is true', () => {
 		fixture.componentInstance.showDateFormatOnError = true;
 		AuxFunctionClass.enterText(fixture, '20/02/1986');
-		expect(AuxFunctionClass.isPlaceholderEmpty(fixture))
-			.toBeFalsy();
-		expect(AuxFunctionClass.getPlaceholder(fixture))
-			.toBe('m/d/y');
-	});
-
-	it('should have placeholder to empty', () => {
-		fixture.componentInstance.showDateFormatOnError = false;
-		AuxFunctionClass.enterText(fixture, '20/02/1986');
-		expect(AuxFunctionClass.isPlaceholderEmpty(fixture))
-			.toBeTruthy();
 		expect(AuxFunctionClass.isInputBorderRed(fixture))
 			.toBeTruthy();
 	});
