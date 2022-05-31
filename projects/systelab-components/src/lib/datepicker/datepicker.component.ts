@@ -152,11 +152,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public selectDate(): void {
+		this.error = false;
 		this.currentDateChange.emit(this.currentDate);
 		this.inputChanged = false;
 	}
 
 	public changeDate(): void {
+		this.error = false;
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
 				.toLowerCase();
@@ -168,13 +170,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					} else {
 						const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
 						if (inferedDate) {
-							this.error = false;
 							this.currentDate = inferedDate;
 						}
 						else {
 							this.error = true;
 						}
-						this.setPlaceholder();
 					}
 				}
 				this.currentDateChange.emit(this.currentDate);
@@ -191,14 +191,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		} else {
 			this.inputChanged = true;
 		}
-	}
-
-	private setPlaceholder(): void {
-		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
-			? (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
-				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
-				: ''+this.i18nService.getDateFormatForDatePicker()
-			: '';
 	}
 
 	public saveEventOnFocus(evt: FocusEvent): void {
