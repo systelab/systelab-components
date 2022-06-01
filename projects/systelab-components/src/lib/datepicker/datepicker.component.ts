@@ -27,7 +27,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
-	@Input() public showDateFormatOnError = false;
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
@@ -268,7 +267,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	public setTodayDate(event): void {
+	public setTodayDate(): void {
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);

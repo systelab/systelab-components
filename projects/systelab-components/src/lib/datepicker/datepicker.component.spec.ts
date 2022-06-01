@@ -18,7 +18,7 @@ import { Datepicker } from './datepicker.component';
 	template: `
                   <div>
                       <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
-                                           [markPreviousAfterDate]="true" [showDateFormatOnError]="showDateFormatOnError"
+                                           [markPreviousAfterDate]="true"
                       ></systelab-datepicker>
                   </div>
 			  `,
@@ -31,7 +31,7 @@ export class DatepickerTestComponent {
 	public defaultDay = 20;
 	public defaultHours = 14;
 	public defaultMinutes = 5;
-	public showDateFormatOnError = true;
+	public error = true;
 	public showTodayButton = true;
 
 	public currentDate: Date;
@@ -89,10 +89,16 @@ export class AuxFunctionClass {
 		button.click();
 		fixture.detectChanges();
 	}
+	public static clickOnFirstDayOfCurrentMonth(fixture: ComponentFixture<DatepickerTestComponent>): void {
+		const firstDayOfMonth = fixture.debugElement.query(By.css('span:not(.p-disabled).p-ripple')).nativeElement;
+		firstDayOfMonth.click();
+		fixture.detectChanges();
+	}
 }
 
 describe('Systelab DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
+	let fixture2: ComponentFixture<Datepicker>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
@@ -236,11 +242,21 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeFalsy();
 	});
 
-	it('should show date format on error if showDateFormatOnError is true', () => {
-		fixture.componentInstance.showDateFormatOnError = true;
+	it('should show red border if error property is true', () => {
+		fixture.componentInstance.error = true;
 		AuxFunctionClass.enterText(fixture, '20/02/1986');
 		expect(AuxFunctionClass.isInputBorderRed(fixture))
 			.toBeTruthy();
+	});
+
+	it('should set error property on false if a date is selected', () => {
+		fixture2 = TestBed.createComponent(Datepicker);
+		fixture2.detectChanges();
+		fixture2.componentInstance.error = true;
+		fixture2.componentInstance.currentDate = new Date('02/20/1986');
+		fixture2.componentInstance.selectDate();
+		expect(fixture2.componentInstance.error)
+			.toBeFalsy();
 	});
 });
 

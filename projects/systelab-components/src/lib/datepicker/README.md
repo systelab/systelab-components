@@ -27,7 +27,6 @@ All the input parameters are optional.
 | warnDaysAfter | number | | If set, when a date is selected the input background is set to red when that date happens after than the system's current date plus the number of days specified. |
 | autofocus | boolean | false | If true the input is automatically focused |
 | fromDateForRelativeDates | date | undefined | Date to be used as from date to calculate the new date when using the shortcuts (ie. 3d)
-| showDateFormatOnError | boolean | false | If true, it will show a error message on placeholder when `error` property is true.
 
 In black the Two-Way Data Binding properties.
 
