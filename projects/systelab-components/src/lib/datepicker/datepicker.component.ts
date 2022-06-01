@@ -27,7 +27,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
-	@Input() public showDateFormatOnError = false;
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
@@ -130,33 +129,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.destroyWheelListener();
 	}
 
-	private checkPreviousAfterDate(): void {
-		if (this._currentDate) {
-			this._currentDate.setHours(0, 0, 0, 0);
-			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
-			pastDate.setHours(0, 0, 0, 0);
-			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
-		} else {
-			this.previousAfterDate = false;
-		}
-	}
-
-	private checkTooFarDate() {
-		if (this._currentDate) {
-			this._currentDate.setHours(0, 0, 0, 0);
-			const futureDate = addDays(new Date(), this.warnDaysAfter);
-			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
-		} else {
-			this.tooFarDate = false;
-		}
-	}
-
 	public selectDate(): void {
+		this.error = false;
 		this.currentDateChange.emit(this.currentDate);
 		this.inputChanged = false;
 	}
 
 	public changeDate(): void {
+		this.error = false;
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
 				.toLowerCase();
@@ -168,13 +148,11 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					} else {
 						const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
 						if (inferedDate) {
-							this.error = false;
 							this.currentDate = inferedDate;
 						}
 						else {
 							this.error = true;
 						}
-						this.setPlaceholder();
 					}
 				}
 				this.currentDateChange.emit(this.currentDate);
@@ -191,14 +169,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		} else {
 			this.inputChanged = true;
 		}
-	}
-
-	private setPlaceholder(): void {
-		this.currentCalendar.el.nativeElement.querySelector('input').placeholder = (this.showDateFormatOnError)
-			? (this.i18nService.instant('BAD_DATE_FORMAT') !== 'BAD_DATE_FORMAT')
-				? this.i18nService.instant('BAD_DATE_FORMAT')+' '
-				: ''+this.i18nService.getDateFormatForDatePicker()
-			: '';
 	}
 
 	public saveEventOnFocus(evt: FocusEvent): void {
@@ -276,7 +246,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	public setTodayDate(event): void {
+	public setTodayDate(): void {
 		if (this.currentCalendar) {
 			this.currentDate = new Date();
 			this.currentDateChange.emit(this.currentDate);
@@ -288,6 +258,27 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar) {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
+		}
+	}
+
+	private checkPreviousAfterDate(): void {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
+			pastDate.setHours(0, 0, 0, 0);
+			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
+		} else {
+			this.previousAfterDate = false;
+		}
+	}
+
+	private checkTooFarDate() {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const futureDate = addDays(new Date(), this.warnDaysAfter);
+			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
+		} else {
+			this.tooFarDate = false;
 		}
 	}
 
