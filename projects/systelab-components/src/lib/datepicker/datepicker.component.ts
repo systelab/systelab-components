@@ -129,27 +129,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.destroyWheelListener();
 	}
 
-	private checkPreviousAfterDate(): void {
-		if (this._currentDate) {
-			this._currentDate.setHours(0, 0, 0, 0);
-			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
-			pastDate.setHours(0, 0, 0, 0);
-			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
-		} else {
-			this.previousAfterDate = false;
-		}
-	}
-
-	private checkTooFarDate() {
-		if (this._currentDate) {
-			this._currentDate.setHours(0, 0, 0, 0);
-			const futureDate = addDays(new Date(), this.warnDaysAfter);
-			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
-		} else {
-			this.tooFarDate = false;
-		}
-	}
-
 	public selectDate(): void {
 		this.error = false;
 		this.currentDateChange.emit(this.currentDate);
@@ -279,6 +258,27 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		if (this.currentCalendar) {
 			this.currentCalendar.focus = false;
 			this.currentCalendar.overlayVisible = false;
+		}
+	}
+
+	private checkPreviousAfterDate(): void {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const pastDate = addDays(new Date(), this.warnDaysBefore * -1);
+			pastDate.setHours(0, 0, 0, 0);
+			this.previousAfterDate = this._currentDate.getTime() <= pastDate.getTime();
+		} else {
+			this.previousAfterDate = false;
+		}
+	}
+
+	private checkTooFarDate() {
+		if (this._currentDate) {
+			this._currentDate.setHours(0, 0, 0, 0);
+			const futureDate = addDays(new Date(), this.warnDaysAfter);
+			this.tooFarDate = this._currentDate.getTime() >= futureDate.getTime();
+		} else {
+			this.tooFarDate = false;
 		}
 	}
 
