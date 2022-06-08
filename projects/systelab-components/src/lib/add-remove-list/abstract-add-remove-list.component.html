@@ -8,7 +8,8 @@
             <div *ngFor="let element of elementsList"
                  [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(element),'slab-sortable-list-row':!getSelectionFieldValue(element)}"
                  (click)="selectElement(element,$event)" cdkDrag>
-                <i *ngIf="showIcon" class="mr-1 text-primary" [ngClass]="getIcon(element)"></i>{{getDescription(element)}}
+                <i *ngIf="showIcon" class="mr-1" [ngClass]="[getIcon(element), isDisabled ? 'text-black-50' : 'text-primary']"></i>
+                <span [ngClass]="{'text-black-50': isDisabled}">{{getDescription(element)}}</span>
             </div>
         </div>
     </div>
