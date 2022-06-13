@@ -131,4 +131,20 @@ describe('Systelab Listbox', () => {
 			done();
 		})
 	});
+
+	it('should check deselected items', (done) => {
+		fixture.whenStable().then(() => {
+			fixture.componentInstance.multipleSelectedItemList = fixture.componentInstance.multipleSelectedItemList.slice(0, -1);
+			fixture.detectChanges();
+			fixture.whenStable().then(() => {
+				const component = fixture.componentInstance;
+				let listboxComponent = component.listbox;
+				let listSelectedItems = listboxComponent.gridOptions.api.getSelectedNodes().map(node => {
+					return node.data;
+				});
+				expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
+				done();
+			});
+		});
+	});
 });

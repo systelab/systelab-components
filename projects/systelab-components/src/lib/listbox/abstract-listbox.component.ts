@@ -246,6 +246,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 									return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
 								}).length > 0) {
 								node.selectThisNode(true);
+							} else {
+								node.selectThisNode(false);
 							}
 						} else {
 							node.selectThisNode(false);

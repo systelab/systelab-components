@@ -15,7 +15,6 @@ export class ShowcaseDatepickerComponent {
 	public isDisabled: boolean;
 	public selectedMonth: Month = new Month(0, '', 0, false);
 	public selectedWeek: Week = new Week(0, '', 0, 0, 0, false);
-	public showDateFormatOnError = true;
 	public yesterdayDate;
 	public languageList = [
 		{description: 'Spanish', id: 'es'},
