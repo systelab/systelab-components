@@ -367,4 +367,8 @@ export class ImageViewerComponent {
 	public getImageFiltersHtml(): SafeHtml {
 		return this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
 	}
+
+	public getFilterUrl(): string {
+		return this.imgParams.filter ? `url(#${this.imgParams.filter})` : '';
+	}
 }

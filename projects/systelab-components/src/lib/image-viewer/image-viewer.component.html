@@ -62,7 +62,7 @@
          [src]="imageSrc"
          (load)="setInitialValues()"
          [ngStyle]="{
-            'filter':'url(#'+imgParams.filter+')',
+            'filter':getFilterUrl(),
             'width':getWidth(),
             'cursor':zoomSelector.visible && !zoomSelector.allow ? 'not-allowed' : 'inherit'}"
          alt="{{imageDescription}}"/>
