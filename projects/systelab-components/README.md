@@ -142,49 +142,50 @@ As this components will be placed in a container, in the following sections you 
 
 The following table summarizes all the components included in the library.
 
-| Component | Description |
-| --------- | ----------- |
-| [systelab-add-remove-list](src/lib/add-remove-list) | A list with elements to add and remove |
-| [systelab-app-frame](src/lib/applicationframe) | Application frame, using a header and a sidebar |
-| [systelab-app-header](src/lib/applicationframe/header) | Application header |
-| [systelab-app-sidebar](src/lib/applicationframe/sidebar) | Application side bar |
-| [systelab-button](src/lib/button) | Component to trigger an action |
-| [systelab-breadcrumb](src/lib/breadcrumb) | Component to allows users to keep track and maintain awareness of their locations |
-| [systelab-calendar-header](src/lib/calendar) | Calendar header with navigation |
-| [systelab-calendar-table](src/lib/calendar) | Month view custom calendar |
-| [systelab-colorpicker](src/lib/colorpicker) | Color picker |
-| [systelab-combobox](src/lib/combobox) | Classes that lets you create a combo box component |
-| [systelab-context-menu](src/lib/contextmenu) | Context menu |
-| [systelab-datepicker](src/lib/datepicker) | Date picker |
-| [systelab-date-time](src/lib/datepicker) | Date and time picker |
-| [systelab-file-selector](src/lib/file-selector) | File selector |
-| [systelab-grid](src/lib/grid) | Classes that lets you create a grid component |
-| [systelab-listbox](src/lib/listbox) | Classes that lets you create a list box component |
-| [systelab-loading](src/lib/loading) | Widget to show that an action is being performed |
-| [systelab-dialog](src/lib/modal/dialog) | Classes to show a dialog |
-| [systelab-message-popup](src/lib/modal/message-popup) | Classes to show a popup |
-| [systelab-month-selector](src/lib/month-selector) | Component to show a Month Selector |
-| [systelab-navbar](src/lib/navbar) | Component to show a Navbar |
-| [systelab-numpad](src/lib/numpad) | Component to show a Numeric Keyboard dialog for an Input Text |
-| [systelab-paginator](src/lib/paginator) | Component for page navigation |
-| [systelab-percentage-circle](src/lib/percentage-circle) | Component to show a percentage indicator |
-| [systelab-searcher](src/lib/searcher) | Abstract classes that lets you create a Searcher component |
-| [systelab-select](src/lib/select) | Component to select a value form a predefined list |
-| [systelab-signature-canvas](src/lib/signature-canvas) | Component to show a canvas where the user can draw their signature |
-| [systelab-slider](src/lib/slider) | Component to select a numerical value inside a range |
-| [systelab-sortable-list](src/lib/sortable-list) | Abstract class that lets you create a Listbox with sortable elements |
-| [systelab-spinner](src/lib/spinner) | Component to select a numerical value inside a range |
-| [systelab-switch](src/lib/switch) | Component to select between two values |
-| [systelab-tabs](src/lib/tabs) | Component to show more than one panel |
-| [systelab-timeline](src/lib/timeline) | Component to show a vertical timeline |
-| [systelab-toast](src/lib/toast) | Component to show a small toast |
-| [systelab-toggle-button](src/lib/toggle-button) | Component to select between two values |
-| [systelab-toggle-selector](src/lib/toggle-selector) | Component to select between a list of options |
-| [systelab-tooltip](src/lib/tooltip) | Directive to show tooltip on hover event |
-| [systelab-tree](src/lib/tree) | Abstract class that lets you create a Tree component |
-| [systelab-twolist](src/lib/twolist) | Component to select a group of elements from elements list |
-| [systelab-week-selector](src/lib/week-selector) | Component to show a Week Selector |
-| [systelab-wizard-steps](src/lib/wizard-steps) | Component to show a Wizard |
+| Component                                                | Description                                                                       |
+|----------------------------------------------------------|-----------------------------------------------------------------------------------|
+| [systelab-add-remove-list](src/lib/add-remove-list)      | A list with elements to add and remove                                            |
+| [systelab-app-frame](src/lib/applicationframe)           | Application frame, using a header and a sidebar                                   |
+| [systelab-app-header](src/lib/applicationframe/header)   | Application header                                                                |
+| [systelab-app-sidebar](src/lib/applicationframe/sidebar) | Application side bar                                                              |
+| [systelab-button](src/lib/button)                        | Component to trigger an action                                                    |
+| [systelab-breadcrumb](src/lib/breadcrumb)                | Component to allows users to keep track and maintain awareness of their locations |
+| [systelab-calendar-header](src/lib/calendar)             | Calendar header with navigation                                                   |
+| [systelab-calendar-table](src/lib/calendar)              | Month view custom calendar                                                        |
+| [systelab-colorpicker](src/lib/colorpicker)              | Color picker                                                                      |
+| [systelab-combobox](src/lib/combobox)                    | Classes that lets you create a combo box component                                |
+| [systelab-context-menu](src/lib/contextmenu)             | Context menu                                                                      |
+| [systelab-datepicker](src/lib/datepicker)                | Date picker                                                                       |
+| [systelab-date-time](src/lib/datepicker)                 | Date and time picker                                                              |
+| [systelab-file-selector](src/lib/file-selector)          | File selector                                                                     |
+| [systelab-grid](src/lib/grid)                            | Classes that lets you create a grid component                                     |
+| [systelab-image-viewer](src/lib/image-viewer)            | Component to display and manipulate images                                        |
+| [systelab-listbox](src/lib/listbox)                      | Classes that lets you create a list box component                                 |
+| [systelab-loading](src/lib/loading)                      | Widget to show that an action is being performed                                  |
+| [systelab-dialog](src/lib/modal/dialog)                  | Classes to show a dialog                                                          |
+| [systelab-message-popup](src/lib/modal/message-popup)    | Classes to show a popup                                                           |
+| [systelab-month-selector](src/lib/month-selector)        | Component to show a Month Selector                                                |
+| [systelab-navbar](src/lib/navbar)                        | Component to show a Navbar                                                        |
+| [systelab-numpad](src/lib/numpad)                        | Component to show a Numeric Keyboard dialog for an Input Text                     |
+| [systelab-paginator](src/lib/paginator)                  | Component for page navigation                                                     |
+| [systelab-percentage-circle](src/lib/percentage-circle)  | Component to show a percentage indicator                                          |
+| [systelab-searcher](src/lib/searcher)                    | Abstract classes that lets you create a Searcher component                        |
+| [systelab-select](src/lib/select)                        | Component to select a value form a predefined list                                |
+| [systelab-signature-canvas](src/lib/signature-canvas)    | Component to show a canvas where the user can draw their signature                |
+| [systelab-slider](src/lib/slider)                        | Component to select a numerical value inside a range                              |
+| [systelab-sortable-list](src/lib/sortable-list)          | Abstract class that lets you create a Listbox with sortable elements              |
+| [systelab-spinner](src/lib/spinner)                      | Component to select a numerical value inside a range                              |
+| [systelab-switch](src/lib/switch)                        | Component to select between two values                                            |
+| [systelab-tabs](src/lib/tabs)                            | Component to show more than one panel                                             |
+| [systelab-timeline](src/lib/timeline)                    | Component to show a vertical timeline                                             |
+| [systelab-toast](src/lib/toast)                          | Component to show a small toast                                                   |
+| [systelab-toggle-button](src/lib/toggle-button)          | Component to select between two values                                            |
+| [systelab-toggle-selector](src/lib/toggle-selector)      | Component to select between a list of options                                     |
+| [systelab-tooltip](src/lib/tooltip)                      | Directive to show tooltip on hover event                                          |
+| [systelab-tree](src/lib/tree)                            | Abstract class that lets you create a Tree component                              |
+| [systelab-twolist](src/lib/twolist)                      | Component to select a group of elements from elements list                        |
+| [systelab-week-selector](src/lib/week-selector)          | Component to show a Week Selector                                                 |
+| [systelab-wizard-steps](src/lib/wizard-steps)            | Component to show a Wizard                                                        |
 
 
 

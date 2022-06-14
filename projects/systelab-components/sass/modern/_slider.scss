@@ -100,4 +100,15 @@ systelab-slider {
     }
 
   }
+
+}
+
+/* Apply primary color to slider track */
+systelab-slider.bg-primary-track {
+
+  .slab-slider {
+    &::-webkit-slider-runnable-track {
+      background: $primary;
+    }
+  }
 }
