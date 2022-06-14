@@ -65,6 +65,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public focusEvt: FocusEvent;
 	public isTablet = false;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
+	public formatError: boolean;
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
@@ -130,13 +131,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public selectDate(): void {
-		this.error = false;
+		this.formatError = false;
 		this.currentDateChange.emit(this.currentDate);
 		this.inputChanged = false;
 	}
 
 	public changeDate(): void {
-		this.error = false;
+		this.formatError = false;
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
 				.toLowerCase();
@@ -151,7 +152,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 							this.currentDate = inferedDate;
 						}
 						else {
-							this.error = true;
+							this.formatError = true;
 						}
 					}
 				}

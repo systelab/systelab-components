@@ -18,7 +18,7 @@ import { Datepicker } from './datepicker.component';
 	template: `
                   <div>
                       <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
-                                           [markPreviousAfterDate]="true"
+                                           [markPreviousAfterDate]="true" [formatError]="false"
                       ></systelab-datepicker>
                   </div>
 			  `,
@@ -32,6 +32,7 @@ export class DatepickerTestComponent {
 	public defaultHours = 14;
 	public defaultMinutes = 5;
 	public error = true;
+	public formatError = false;
 	public showTodayButton = true;
 
 	public currentDate: Date;
@@ -87,11 +88,6 @@ export class AuxFunctionClass {
 	public static clickOn(fixture: ComponentFixture<DatepickerTestComponent>, id: string): void {
 		const button = fixture.debugElement.query(By.css(id)).nativeElement;
 		button.click();
-		fixture.detectChanges();
-	}
-	public static clickOnFirstDayOfCurrentMonth(fixture: ComponentFixture<DatepickerTestComponent>): void {
-		const firstDayOfMonth = fixture.debugElement.query(By.css('span:not(.p-disabled).p-ripple')).nativeElement;
-		firstDayOfMonth.click();
 		fixture.detectChanges();
 	}
 }
@@ -243,7 +239,7 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('should show red border if error property is true', () => {
-		fixture.componentInstance.error = true;
+		fixture.componentInstance.formatError = true;
 		AuxFunctionClass.enterText(fixture, '20/02/1986');
 		expect(AuxFunctionClass.isInputBorderRed(fixture))
 			.toBeTruthy();
@@ -252,11 +248,12 @@ describe('Systelab DatepickerComponent', () => {
 	it('should set error property on false if a date is selected', () => {
 		fixture2 = TestBed.createComponent(Datepicker);
 		fixture2.detectChanges();
-		fixture2.componentInstance.error = true;
+		fixture2.componentInstance.formatError = true;
 		fixture2.componentInstance.currentDate = new Date('02/20/1986');
 		fixture2.componentInstance.selectDate();
-		expect(fixture2.componentInstance.error)
+		expect(fixture2.componentInstance.formatError)
 			.toBeFalsy();
+		fixture2.destroy();
 	});
 });
 
