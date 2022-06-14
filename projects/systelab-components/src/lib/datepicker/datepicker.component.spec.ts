@@ -18,7 +18,7 @@ import { Datepicker } from './datepicker.component';
 	template: `
                   <div>
                       <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
-                                           [markPreviousAfterDate]="true" [formatError]="false"
+                                           [markPreviousAfterDate]="true"
                       ></systelab-datepicker>
                   </div>
 			  `,
