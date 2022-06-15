@@ -47,9 +47,9 @@ The properties for the image-viewer are:
 
 The standard buttons that can be displayed optionally are:
 
-  - Button for downloading the image
-  - Toggle Button for enable/disable the zoom by area tool
-  - Button to reset the image to its initial size (fills all the available space in the container)
+- Button for downloading the image
+- Toggle Button for enable/disable the zoom by area tool
+- Button to reset the image to its initial size (fills all the available space in the container)
 
 Next to the standard buttons, a range slider allows to control the zoom factor of the image.
 Bellow this slider, a scale ruler can be displayed to indicate the current zoom factor.
@@ -95,11 +95,12 @@ public imageFilters = `
 In order to apply these filters we will need also the corresponding custom action buttons:
 
 ```typescript
-public actionButtons: ActionButton[] = [
+const actionButtons: Array<ActionButton> = [
     {action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON},
     {action: 'red', label: 'Apply red', type: ActionButtonType.TOGGLE_BUTTON}
 ];
 ```
+
 Pay attention that the _action_ attribute of the buttons matches with the _id_ attribute of each filter.
 This is only an example with colour filters using _feColorMatrix_, which allows the manipulation of each colour layer of the image according to its RGBA representation.
 

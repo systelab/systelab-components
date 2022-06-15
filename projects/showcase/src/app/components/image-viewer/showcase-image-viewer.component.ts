@@ -11,7 +11,7 @@ export class ShowcaseImageViewerComponent {
 
 	public imageSrc = '/images/map.jpg';
 	public description = 'Barcelona Eixample District';
-	public actionButtons: ActionButton[] = [
+	public actionButtons: Array<ActionButton> = [
 		{action: 'Action 1', label: 'Action 1', type: ActionButtonType.BUTTON},
 		{action: 'contrast', label: 'High contrast', type: ActionButtonType.TOGGLE_BUTTON},
 		{action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON},
@@ -43,7 +43,7 @@ export class ShowcaseImageViewerComponent {
 	constructor() {
 	}
 
-	public doClickActionButton($event: any): void {
+	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
 			alert('Click on '+$event);
 		} else {
