@@ -7,6 +7,8 @@ import {ActionButton, ActionButtonType, ImageViewerComponent} from 'systelab-com
 })
 
 export class ShowcaseImageViewerComponent {
+	@ViewChild('imageViewer') public imageViewer: ImageViewerComponent;
+
 	public imageSrc = '/images/map.jpg';
 	public description = 'Barcelona Eixample District';
 	public actionButtons: ActionButton[] = [
@@ -38,12 +40,10 @@ export class ShowcaseImageViewerComponent {
 									0 0 0 1 0"/>
 	   </filter>`;
 
-	@ViewChild('imageViewer') public imageViewer: ImageViewerComponent;
-
 	constructor() {
 	}
 
-	public doClickActionButton($event: any) {
+	public doClickActionButton($event: any): void {
 		if ($event === 'Action 1') {
 			alert('Click on '+$event);
 		} else {
@@ -51,7 +51,7 @@ export class ShowcaseImageViewerComponent {
 		}
 	}
 
-	public doClickOverlayText($event: any) {
+	public doClickOverlayText(): void {
 		alert('Text over image clicked');
 	}
 

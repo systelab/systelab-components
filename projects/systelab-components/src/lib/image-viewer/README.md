@@ -36,22 +36,20 @@ The properties for the image-viewer are:
 | showAdjustButton     |    boolean     |  false  | Show adjust button                        |
 | showZoomScale        |    boolean     |  false  | Show zoom scale below the slider          |
 
-#### Events
+## Events
 
 | Name               |        Parameters         | Description                                           |
 |--------------------|:-------------------------:|-------------------------------------------------------|
 | clickActionButton  | event with the action key | Emits an event everytime an action button is clicked. |
 | clickOverlayText   |                           | Emits an event everytime the overlay text is clicked. |
 
-
-
 ## Standard buttons for basic image manipulation
 
 The standard buttons that can be displayed optionally are:
 
-- Button for downloading the image
-- Toggle Button for enable/disable the zoom by area tool
-- Button to reset the image to its initial size (fills all the available space in the container)
+  - Button for downloading the image
+  - Toggle Button for enable/disable the zoom by area tool
+  - Button to reset the image to its initial size (fills all the available space in the container)
 
 Next to the standard buttons, a range slider allows to control the zoom factor of the image.
 Bellow this slider, a scale ruler can be displayed to indicate the current zoom factor.
@@ -76,7 +74,7 @@ Through the _imageFilters_ property, the component accepts any type of SVG filte
 These filters can then be applied to the image with a custom button where the key must match with the filter ID attribute.
 For example, with the following code we provide two filters to 'colorize' the image in red and green based on changes colors based on a transformation matrix.
 
-```
+```html
 public imageFilters = `
     <filter id="red">
         <feColorMatrix type="matrix"
@@ -96,7 +94,7 @@ public imageFilters = `
 
 In order to apply these filters we will need also the corresponding custom action buttons:
 
-```
+```typescript
 public actionButtons: ActionButton[] = [
     {action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON},
     {action: 'red', label: 'Apply red', type: ActionButtonType.TOGGLE_BUTTON}

@@ -4,16 +4,16 @@
     <div class="d-flex">
         <div class="ml-1">
             <ng-container *ngFor="let actionButton of actionButtons">
-                <systelab-toggle-button *ngIf="actionButton.type===ActionButtonType.TOGGLE_BUTTON" class="mr-2"
+                <systelab-toggle-button *ngIf="actionButton.type===actionButtonType.TOGGLE_BUTTON" class="mr-2"
                                         [isChecked]="isFilterEnabled(actionButton.action)"
                                         (click)="clickActionButton.emit(actionButton.action)">
                     {{actionButton.label}}
                 </systelab-toggle-button>
-                <systelab-button *ngIf="actionButton.type===ActionButtonType.BUTTON" type="primary" class="mr-2"
-                        (click)="clickActionButton.emit(actionButton.action)">
+                <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" type="primary" class="mr-2"
+                                 (click)="clickActionButton.emit(actionButton.action)">
                     {{actionButton.label}}
                 </systelab-button>
-                <div *ngIf="actionButton.type===ActionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
+                <div *ngIf="actionButton.type===actionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
                     <button id="ADDropDownButton" type="button" class="btn btn-outline-primary dropdown-toogle"
                             data-toggle="dropdown">{{getDropMainDownLabel(actionButton.label)}}
                         <i class="ml-1 icon-chevron-up"></i>

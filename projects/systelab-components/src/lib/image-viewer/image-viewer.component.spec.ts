@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import {ActionButton, ActionButtonType, ImageViewerComponent} from './image-viewer.component';
 import {Component} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {ButtonComponent} from '../button/button.component';
 import {SliderComponent} from '../slider/slider.component';
 import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
+import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-components';
 
 @Component({
 	selector: 'systelab-image-viewer-test',
@@ -18,7 +17,7 @@ import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
 			   [imageDescription]="description"
 			   [overlayText]="description"
 			   [actionButtons]="actionButtons"
-			   (clickActionButton)="doClickActionButton($event)"							   
+			   (clickActionButton)="doClickActionButton($event)"
 			   [showZoomByAreaButton]="true"
 			   [showAdjustButton]="true"
 			   [showZoomScale]="true">
@@ -35,14 +34,13 @@ export class ImageViewerTestComponent {
 	];
 	private buttonActionClicked: string;
 
-	doClickActionButton($event: string) {
+	doClickActionButton($event: string): void {
 		this.buttonActionClicked = $event;
 	}
 }
 
 describe('ImageViewerComponent', () => {
 	let fixture: ComponentFixture<ImageViewerTestComponent>;
-	let imageViewer: ImageViewerComponent;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -54,7 +52,6 @@ describe('ImageViewerComponent', () => {
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ImageViewerTestComponent);
-		imageViewer = fixture.debugElement.children[0].componentInstance;
 		fixture.detectChanges();
 	});
 

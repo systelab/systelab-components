@@ -20,7 +20,8 @@
   /* Allow click on the image also below the header area */
   pointer-events: none;
 
-  div > div:not(#overImageArea), #ImageViewerSlider {
+  div > div:not(#overImageArea),
+  #ImageViewerSlider {
     pointer-events: initial;
   }
 
@@ -50,7 +51,7 @@
     .zoomLevelMark:nth-of-type(2) {
       text-indent: -6px;
 
-      &:after {
+      &::after {
         content: "0.5";
       }
     }
@@ -60,7 +61,7 @@
       height: 6px;
     }
 
-    .zoomLevelMark:nth-of-type(4):after {
+    .zoomLevelMark:nth-of-type(4)::after {
       content: "1";
     }
 
@@ -72,7 +73,7 @@
     .zoomLevelMark:nth-of-type(6) {
       text-indent: -6px;
 
-      &:after {
+      &::after {
         content: "1.5";
       }
     }
@@ -82,16 +83,11 @@
       height: 6px;
     }
 
-    .zoomLevelMark:nth-of-type(8):after {
+    .zoomLevelMark:nth-of-type(8)::after {
       content: "2";
     }
   }
 
-  systelab-slider .slab-slider {
-    &::-webkit-slider-runnable-track {
-      background: $primary !important;
-    }
-  }
 }
 
 #imageViewerWrapper {
@@ -104,7 +100,7 @@
   #selector {
     display: none;
     position: absolute;
-    border: 1px solid #999999;
+    border: 1px solid #999;
     background-color: rgba(255, 255, 255, 0.3);
 
     &.deny {

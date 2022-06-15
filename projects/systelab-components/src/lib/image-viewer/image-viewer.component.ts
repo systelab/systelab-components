@@ -48,6 +48,9 @@ export class ImageViewerComponent {
 	@ViewChild('imageViewerWrapper') public imageViewerWrapper: ElementRef;
 	@ViewChild('imageViewerImg') public imageViewerImg: ElementRef;
 
+	@HostBinding('class.zooming') zoomEnabled = false;
+	@HostBinding('class.dragging') dragEnabled = false;
+
 	public imgParams = {
 		sliderZoomPct: null,
 		filter:        undefined,
@@ -55,7 +58,7 @@ export class ImageViewerComponent {
 		left:          0,
 		width:         null,
 		height:        null
-	}
+	};
 
 	public zoomSelector = {
 		visible: false,
@@ -64,16 +67,16 @@ export class ImageViewerComponent {
 		left:    null,
 		width:   null,
 		height:  null
-	}
+	};
 
 	public zoomScale = {
 		zoomScaleLength: null,
 		sliderThumb:     14,
 		zoomScaleChunk:  null,
 		sliderMarkLeft:  0
-	}
+	};
 
-	public ActionButtonType: any = ActionButtonType;
+	public actionButtonType: any = ActionButtonType;
 
 	private zoomArea = {
 		top:          null,
@@ -88,7 +91,7 @@ export class ImageViewerComponent {
 		maxDragLeft:  null,
 		minDragTop:   null,
 		maxDragTop:   null
-	}
+	};
 
 	private viewPort: any;
 	private image: any;
@@ -96,15 +99,13 @@ export class ImageViewerComponent {
 
 	private imageClicked = false;
 
-	constructor(private readonly chref: ChangeDetectorRef, private readonly elementRef: ElementRef, private readonly sanitizer: DomSanitizer) {
+	constructor(private readonly chref: ChangeDetectorRef, private readonly elementRef: ElementRef,
+				private readonly sanitizer: DomSanitizer) {
 	}
-
-	@HostBinding('class.zooming') zoomEnabled = false;
-	@HostBinding('class.dragging') dragEnabled = false;
 
 	@HostListener('mousedown', ['$event'])
 	public doMouseDown(event: any): void {
-		if (event.target.id == 'imageViewerImg') {
+		if (event.target.id === 'imageViewerImg') {
 			event.preventDefault();
 
 			this.initializeCommonParameters(event.clientX, event.clientY);
@@ -119,7 +120,7 @@ export class ImageViewerComponent {
 	}
 
 	@HostListener('mousemove', ['$event'])
-	public doMouseMove(event: any): void {
+	public doMouseMove(event: MouseEvent): void {
 		if (this.imageClicked) {
 			if (this.dragEnabled) {
 
@@ -194,8 +195,53 @@ export class ImageViewerComponent {
 		this.scaleImage(1);
 	}
 
+	public setInitialValues(): void {
+		this.viewPort = this.elementRef.nativeElement;
+		this.image = this.imageViewerImg.nativeElement;
+		this.wrapper = this.imageViewerWrapper.nativeElement;
+
+		// Set zoom scale width and marks
+		this.zoomScale.zoomScaleLength = this.viewPort.querySelector('input[type="range"]').offsetWidth;
+		this.zoomScale.zoomScaleChunk = Math.round(this.zoomScale.zoomScaleLength / 6);
+		// Set zoom to fit the image
+		this.imgParams.sliderZoomPct = this.getInitialZoom();
+		// Min zoom 10% smaller than initial zoom
+		this.sliderZoomMin = this.imgParams.sliderZoomPct - 10;
+		// Max zoom to double the real size of the image
+		this.sliderZoomMax = 200;
+		// Calculate the mark matching the real size of the image (x1 scale)
+		this.zoomScale.sliderMarkLeft = (100 - this.sliderZoomMin) / (this.sliderZoomMax - this.sliderZoomMin)
+			* (this.zoomScale.zoomScaleLength - this.zoomScale.sliderThumb) + this.zoomScale.sliderThumb;
+
+	}
+
+	public isFilterEnabled(action: string): boolean {
+		return this.imgParams.filter === action;
+	}
+
+	public getDropMainDownLabel(dropDownLabel: string): string {
+		return dropDownLabel.substring(0, dropDownLabel.indexOf('|'));
+	}
+
+	public getDropDownLabels(dropDownLabel: string): string[] {
+		return dropDownLabel.slice(dropDownLabel.indexOf('|') + 1)
+			.split(';');
+	}
+
+	public getDropDownAction(dropDownActions: string, i: number): string {
+		return dropDownActions.split(';')[i];
+	}
+
+	public getImageFiltersHtml(): SafeHtml {
+		return this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
+	}
+
+	public getFilterUrl(): string {
+		return this.imgParams.filter ? `url(#${this.imgParams.filter})` : '';
+	}
+
 	private initializeCommonParameters(xCoord: number, yCoord: number): void {
-		let viewportOffset =  this.viewPort.getBoundingClientRect();
+		const viewportOffset =  this.viewPort.getBoundingClientRect();
 		this.imageClicked = true;
 		//store zoomArea left&top
 		this.zoomArea.left = viewportOffset.left;
@@ -322,53 +368,10 @@ export class ImageViewerComponent {
 
 	private getInitialZoom(): number {
 		// Calculate initial zoom of the image to fit the window
-		const availableSize = this.viewPort.offsetWidth < this.viewPort.offsetHeight ? this.viewPort.offsetWidth : this.viewPort.offsetHeight;
+		const availableSize = this.viewPort.offsetWidth < this.viewPort.offsetHeight ? this.viewPort.offsetWidth
+			: this.viewPort.offsetHeight;
 		const imageSize = this.image.naturalWidth < this.image.naturalHeight ? this.image.naturalWidth : this.image.naturalHeight;
 		return availableSize / imageSize * 100;
 	}
 
-	public setInitialValues(): void {
-		this.viewPort = this.elementRef.nativeElement;
-		this.image = this.imageViewerImg.nativeElement;
-		this.wrapper = this.imageViewerWrapper.nativeElement;
-
-		// Set zoom scale width and marks
-		this.zoomScale.zoomScaleLength = this.viewPort.querySelector('input[type="range"]').offsetWidth;
-		this.zoomScale.zoomScaleChunk = Math.round(this.zoomScale.zoomScaleLength / 6);
-		// Set zoom to fit the image
-		this.imgParams.sliderZoomPct = this.getInitialZoom();
-		// Min zoom 10% smaller than initial zoom
-		this.sliderZoomMin = this.imgParams.sliderZoomPct - 10;
-		// Max zoom to double the real size of the image
-		this.sliderZoomMax = 200;
-		// Calculate the mark matching the real size of the image (x1 scale)
-		this.zoomScale.sliderMarkLeft = (100 - this.sliderZoomMin) / (this.sliderZoomMax - this.sliderZoomMin)
-			* (this.zoomScale.zoomScaleLength - this.zoomScale.sliderThumb) + this.zoomScale.sliderThumb;
-
-	}
-
-	public isFilterEnabled(action: string): boolean {
-		return this.imgParams.filter === action;
-	}
-
-	public getDropMainDownLabel(dropDownLabel: string): string {
-		return dropDownLabel.substring(0, dropDownLabel.indexOf('|'));
-	}
-
-	public getDropDownLabels(dropDownLabel: string): string[] {
-		return dropDownLabel.slice(dropDownLabel.indexOf('|') + 1)
-			.split(';');
-	}
-
-	public getDropDownAction(dropDownActions: string, i: number): string {
-		return dropDownActions.split(';')[i];
-	}
-
-	public getImageFiltersHtml(): SafeHtml {
-		return this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
-	}
-
-	public getFilterUrl(): string {
-		return this.imgParams.filter ? `url(#${this.imgParams.filter})` : '';
-	}
 }
