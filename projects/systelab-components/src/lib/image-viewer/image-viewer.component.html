@@ -42,6 +42,7 @@
             </systelab-button>
         </div>
         <systelab-slider class="m-2 pl-2 bg-primary-track" id="ImageViewerSlider" data-test-id="ImageViewerSlider"
+                         [systelabTooltip]="showSliderToolTip ? (imgParams.sliderZoomPct/100 | number:'1.0-1')+'x' : ''"
                          [(value)]="imgParams.sliderZoomPct" (valueChange)="sliderZoomChanged()"
                          [min]="sliderZoomMin"
                          [max]="sliderZoomMax"
@@ -49,9 +50,11 @@
 
     </div>
     <div class="d-flex justify-content-end" *ngIf="showZoomScale">
-        <div id="zoomLevelScale" class="m-2" [style.width]="zoomScale.zoomScaleLength+'px'">
-            <div class='zoomLevelMark' *ngFor="let i of [-3,-2,-1,0,1,2,3,4,5]"
-                 [style.left.px]="zoomScale.sliderMarkLeft+zoomScale.zoomScaleChunk*i"></div>
+        <div id="zoomScale" class="m-2" [style.width]="zoomScale.totalWidth+'px'">
+            <div class='zoomScaleMark' *ngFor="let mark of zoomScale.marks"
+                 [style.left.px]="mark.marginLeft"
+                 [style.height.px]="mark.label !== ''? 10:6"
+            >{{mark.label | number:'1.0-1'}}</div>
         </div>
     </div>
 </div>

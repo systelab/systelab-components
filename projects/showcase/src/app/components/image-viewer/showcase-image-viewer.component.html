@@ -5,9 +5,11 @@
               [overlayText]="description"
               [actionButtons]="actionButtons"
               [imageFilters]="imageFilters"
+              [sliderZoomMax]="200"
               [showZoomByAreaButton]="true"
               [showAdjustButton]="true"
               [showZoomScale]="true"
+              [showSliderToolTip]="false"
               (clickActionButton)="doClickActionButton($event)"
               (clickOverlayText)="doClickOverlayText()">
     </systelab-image-viewer>

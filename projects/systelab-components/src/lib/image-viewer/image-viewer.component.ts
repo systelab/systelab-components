@@ -38,6 +38,7 @@ export class ImageViewerComponent {
 	@Input() public showZoomByAreaButton = false;
 	@Input() public showAdjustButton = false;
 	@Input() public showZoomScale = false;
+	@Input() public showSliderToolTip = false;
 	@Input() public sliderZoomMin = 100;
 	@Input() public sliderZoomMax = 200;
 	@Input() public sliderZoomStep = 1;
@@ -70,10 +71,10 @@ export class ImageViewerComponent {
 	};
 
 	public zoomScale = {
-		zoomScaleLength: null,
+		totalWidth: null,
 		sliderThumb:     14,
-		zoomScaleChunk:  null,
-		sliderMarkLeft:  0
+		chunks: 8,
+		marks: [{marginLeft: 0, label: ''}],
 	};
 
 	public actionButtonType: any = ActionButtonType;
@@ -201,18 +202,21 @@ export class ImageViewerComponent {
 		this.wrapper = this.imageViewerWrapper.nativeElement;
 
 		// Set zoom scale width and marks
-		this.zoomScale.zoomScaleLength = this.viewPort.querySelector('input[type="range"]').offsetWidth;
-		this.zoomScale.zoomScaleChunk = Math.round(this.zoomScale.zoomScaleLength / 6);
+		this.zoomScale.totalWidth = this.viewPort.querySelector('input[type="range"]').offsetWidth;
+
 		// Set zoom to fit the image
 		this.imgParams.sliderZoomPct = this.getInitialZoom();
-		// Min zoom 10% smaller than initial zoom
-		this.sliderZoomMin = this.imgParams.sliderZoomPct - 10;
-		// Max zoom to double the real size of the image
-		this.sliderZoomMax = 200;
-		// Calculate the mark matching the real size of the image (x1 scale)
-		this.zoomScale.sliderMarkLeft = (100 - this.sliderZoomMin) / (this.sliderZoomMax - this.sliderZoomMin)
-			* (this.zoomScale.zoomScaleLength - this.zoomScale.sliderThumb) + this.zoomScale.sliderThumb;
+		// Min zoom 5% smaller than initial zoom
+		this.sliderZoomMin = this.imgParams.sliderZoomPct - 5;
 
+		// Calculate ruler marks (100x matches the real size of the image)
+		const zoomMarkLength = this.sliderZoomMax / this.zoomScale.chunks;
+		this.zoomScale.marks.pop();
+
+		for (let i = 1; i <= this.zoomScale.chunks; i += 1) {
+			const label = i % 2 ? '' : zoomMarkLength*i/100 + '';
+			this.zoomScale.marks.push({marginLeft: this.getSliderMarkMarginByZoomFactor(zoomMarkLength*i)-1, label: label});
+		}
 	}
 
 	public isFilterEnabled(action: string): boolean {
@@ -301,8 +305,8 @@ export class ImageViewerComponent {
 			this.zoomSelector.top = this.zoomArea.cursorStartY - Math.abs(height);
 		}
 
-		// Prevent zoom factor above 2x of the real size image
-		this.zoomSelector.allow = this.imgParams.width * this.getTargetMagnification() <= this.image.naturalWidth * 2;
+		// Prevent zoom factor above the maximum allowed
+		this.zoomSelector.allow = this.imgParams.width * this.getTargetMagnification() <= this.image.naturalWidth * this.sliderZoomMax / 100;
 	}
 
 	private resizeZoomSelectorAndImage(): void {
@@ -330,6 +334,11 @@ export class ImageViewerComponent {
 		return this.zoomSelector.width < this.zoomSelector.height ?
 			this.wrapper.offsetWidth / this.zoomSelector.width
 			: this.wrapper.offsetHeight / this.zoomSelector.height; //go for the highest magnification
+	}
+
+	private getSliderMarkMarginByZoomFactor(zoomFactor: number): number {
+		return ((zoomFactor) - this.sliderZoomMin) / (this.sliderZoomMax - this.sliderZoomMin)
+		* (this.zoomScale.totalWidth - this.zoomScale.sliderThumb) + this.zoomScale.sliderThumb;
 	}
 
 	private scrollViewport(scrollLeft: number, scrollTop: number): void {
