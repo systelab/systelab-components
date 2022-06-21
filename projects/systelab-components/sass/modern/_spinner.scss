@@ -27,6 +27,12 @@ systelab-spinner {
       min-width: 0;
       text-align: center;
       height: $form-elements-height !important;
+
+      &.slab-spinner-error {
+        border-color: $danger;
+        color: $danger;
+      }
+
     }
 
     #minus-button, #plus-button {
@@ -43,6 +49,10 @@ systelab-spinner {
       &.disabled {
         background-color: #e9ecef;
         opacity: 0.6;
+      }
+      &.slab-spinner-error {
+        border-color: $danger;
+        color: $danger;
       }
     }
   }
