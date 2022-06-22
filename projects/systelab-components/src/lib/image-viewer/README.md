@@ -32,7 +32,7 @@ The properties for the image-viewer are:
 | overlayText          |     string     |         | Text to be displayed overlaying the image |
 | actionButtons        | ActionButton[] |         | Custom buttons and callback actions       |
 | imageFilters         |     string     |         | Html defining custom SVG filters          |
-| sliderZoomMax        |     number     |         | Specifies the maximum allowed zoom        |
+| sliderZoomMax        |     number     |   200   | Specifies the maximum allowed zoom        |
 | showZoomByAreaButton |    boolean     |  false  | Show zoom by area button                  |
 | showAdjustButton     |    boolean     |  false  | Show adjust button                        |
 | showZoomScale        |    boolean     |  false  | Show zoom scale below the slider          |
