@@ -96,6 +96,7 @@ import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-
 import { ButtonComponent } from './button/button.component';
 import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
+import {ImageViewerComponent} from './image-viewer/image-viewer.component';
 
 @NgModule({
 	imports:      [
@@ -193,7 +194,8 @@ import { ResizableDirective } from './directives/resizable.directive';
 		ToggleSelectorComponent,
 		KeyupDebounceDirective,
 		DraggableDirective,
-		ResizableDirective
+		ResizableDirective,
+		ImageViewerComponent
 	],
 	exports:      [
 		SliderComponent,
@@ -276,7 +278,8 @@ import { ResizableDirective } from './directives/resizable.directive';
 		ToggleSelectorComponent,
 		KeyupDebounceDirective,
 		DraggableDirective,
-		ResizableDirective
+		ResizableDirective,
+		ImageViewerComponent
 	],
 	providers:    [
 		StylesUtilService,
