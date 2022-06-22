@@ -1,20 +1,20 @@
 <div class="slab-spinner-container d-flex">
     <div class="input-group">
         <div class="input-group-prepend">
-            <button type="button" id="minus-button" class="btn pt-0 pb-0 pl-1 pr-1" [disabled]="disabled" [tabIndex]="-1"
-                    [class.disabled]="disabled" (click)="minus()"><i
+            <button type="button" id="minus-button" class="btn pt-0 pb-0 pl-1 pr-1"  [disabled]="disabled" [tabIndex]="-1"
+                    [class.disabled]="disabled" [class.slab-spinner-error]="error" (click)="minus()"><i
                     class="icon-minus-thin"></i></button>
         </div>
         <input [class.disabled]="disabled" name="sp" [(ngModel)]="valueStr"
                [tabindex]="tabindex"
-               class="slab-flex-1 slab-spinner-input form-control text-center" type="text"
+               class="slab-flex-1 slab-spinner-input form-control text-center" [class.slab-spinner-error]="error" type="text"
                (keydown)="doKeyDown($event)"
                (keypress)="doCheckKey($event)"
                (blur)="checkValue(valueStr)"
                autocomplete="off" [disabled]="disabled">
         <div class="input-group-append">
             <button type="button" id="plus-button" class="btn pt-0 pb-0 pl-1 pr-1" [disabled]="disabled" [tabIndex]="-1"
-                    [class.disabled]="disabled" (click)="plus()"><i
+                    [class.disabled]="disabled" [class.slab-spinner-error]="error" (click)="plus()"><i
                     class="icon-plus-thin"></i></button>
         </div>
     </div>

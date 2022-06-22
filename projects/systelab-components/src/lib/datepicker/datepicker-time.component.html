@@ -25,14 +25,16 @@
                       [fillUnitsWithZero]="true"
                       [(value)]="touchSpinHourValues.value"
                       [disabled]="disabled"
+                      [error]="error"
                       [tabindex]="tabindex"
                       (valueChange)="currentHoursChanged($event)"></systelab-spinner>
-    <label class="mx-1 my-0">:</label>
+    <label class="mx-1 my-0" [class.text-danger]="error">:</label>
     <systelab-spinner class="d-flex h-100" id="minutes"
                       [spinValues]="touchSpinMinutesValues"
                       [fillUnitsWithZero]="true"
                       [tabindex]="tabindex"
                       [(value)]="touchSpinMinutesValues.value"
                       [disabled]="disabled"
+                      [error]="error"
                       (valueChange)="currentMinutesChanged($event)"></systelab-spinner>
 </div>
