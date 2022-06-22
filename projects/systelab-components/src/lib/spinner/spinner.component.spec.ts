@@ -25,6 +25,7 @@ import { TouchspinComponent } from './spinner.component';
 export class SpinnerTestComponent {
 	public values = new TouchSpinValues(34, 1, 100);
 	public fillUnitsWithZero: boolean | number =false;
+	public error=false;
 	public valueStr: string;
 	public doValueChange() {
 	}
@@ -64,6 +65,11 @@ function setStep(fixture: ComponentFixture<SpinnerTestComponent>, value: number)
 
 const setFillWithZero = (fixture: ComponentFixture<SpinnerTestComponent>, value: boolean|number) => {
 	fixture.componentInstance.fillUnitsWithZero = value;
+	fixture.detectChanges();
+};
+
+const setError = (fixture: ComponentFixture<SpinnerTestComponent>, value: boolean) => {
+	fixture.componentInstance.error = value;
 	fixture.detectChanges();
 };
 
@@ -230,5 +236,14 @@ describe('Systelab Spinner', () => {
 		checkHasValue(fixture, 0);
 		expect(fixture.componentInstance.valueStr).toEqual('0');
 	});
-
+	it('should mark in red when error is true', () => {
+		setError(fixture, true);
+		const element = fixture.debugElement.nativeElement.querySelector('slab-spinner-error');
+		expect(element).toBeDefined();
+	});
+	it('should not mark in red when error is false', () => {
+		setError(fixture, false);
+		const element = fixture.debugElement.nativeElement.querySelector('slab-spinner-error');
+		expect(element).toBeNull();
+	});
 });
