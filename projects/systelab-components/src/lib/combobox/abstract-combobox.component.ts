@@ -13,6 +13,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public static ROW_HEIGHT = -1;
 
 	@ViewChild('input', {static: false}) public input: ElementRef;
+	@ViewChild('filterInput', {static: false}) public filterInput: ElementRef;
 
 	public comboId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
@@ -434,6 +435,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (result && this.isDropdownOpened) {
 			setTimeout(() => this.loop(), 10);
 		} else {
+			if(this.filter === true){
+				this.filterInput.nativeElement.focus();
+			}
 			return;
 		}
 	}
