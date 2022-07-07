@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,49 +12,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
-import { AbstractComboBox } from 'systelab-components';
+import { ModulabSelect } from '../select/select.component';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
-	}
-}
-
-@Component({
-	selector:    'systelab-select-example',
-	templateUrl: 'abstract-combobox.component.html'
-})
-export class SystelabSelectComponent extends AbstractComboBox<TestData> implements OnInit {
-
-	constructor(myRenderer: Renderer2, public chref: ChangeDetectorRef) {
-		super(myRenderer, chref);
-		const values: TestData[] = [];
-		values.push(new TestData('1', 'Description 1'));
-		values.push(new TestData('2', 'Description 2'));
-		values.push(new TestData('3', 'Description 3'));
-		values.push(new TestData('4', 'Description 4'));
-		this.values = values;
-	}
-
-	public ngOnInit() {
-		super.ngOnInit();
-
-
-	}
-
-	public getInstance() {
-		return new TestData('', '');
-	}
-
-	public getDescriptionField(): string {
-		return 'description';
-	}
-
-	public getCodeField(): string {
-		return null;
-	}
-
-	public getIdField(): string {
-		return 'id';
 	}
 }
 
@@ -65,8 +26,7 @@ export class SystelabSelectComponent extends AbstractComboBox<TestData> implemen
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-                              <systelab-select-example #combobox [filter]="filter">
-                              </systelab-select-example>
+							  <systelab-select #combobox [values]="valuesList" [filter]="filter"></systelab-select>
                           </div>
                       </div>
                   </div>
@@ -74,10 +34,11 @@ export class SystelabSelectComponent extends AbstractComboBox<TestData> implemen
 })
 export class ComboboxTestComponent {
 	public filter = false;
-	@ViewChild('combobox') public combobox: SystelabSelectComponent;
+	@ViewChild('combobox') public combobox: ModulabSelect;
+	public valuesList: TestData[] = [new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
 }
 
-describe('Systelab Combobox', () => {
+describe('Systelab Select Combobox', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -97,10 +58,14 @@ describe('Systelab Combobox', () => {
 				GridContextMenuCellRendererComponent,
 				GridHeaderContextMenuComponent,
 				ComboBoxInputRendererComponent,
-				SystelabSelectComponent,
+				ModulabSelect,
 				ComboboxTestComponent]
 		})
 			.compileComponents();
+	});
+
+	afterEach(() => {
+		TestBed.resetTestingModule();
 	});
 
 	function setup() {
