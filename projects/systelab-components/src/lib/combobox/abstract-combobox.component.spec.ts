@@ -33,8 +33,8 @@ export class TestData {
 			  `
 })
 export class ComboboxTestComponent {
-	public filter = false;
 	@ViewChild('combobox') public combobox: ModulabSelect;
+	public filter = false;
 	public valuesList: TestData[] = [new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
 }
 
@@ -68,19 +68,27 @@ describe('Systelab Select Combobox', () => {
 		TestBed.resetTestingModule();
 	});
 
-	function setup() {
+	const setup = () => {
 		const fixture = TestBed.createComponent(ComboboxTestComponent);
 		fixture.componentInstance.filter = false;
 		fixture.detectChanges();
 		return fixture;
-	}
+	};
 
-	function setupWithFilter() {
+	const setupWithFilter = () => {
 		const fixture = TestBed.createComponent(ComboboxTestComponent);
 		fixture.componentInstance.filter = true;
 		fixture.detectChanges();
 		return fixture;
-	}
+	};
+
+
+	const clickButton = (fixture: ComponentFixture<ComboboxTestComponent>) => {
+		fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle')
+			.click();
+		fixture.detectChanges();
+	};
+
 
 	it('should instantiate', () => {
 		const fixture = setup();
@@ -114,9 +122,3 @@ describe('Systelab Select Combobox', () => {
 	});
 
 });
-
-function clickButton(fixture: ComponentFixture<ComboboxTestComponent>) {
-	fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle')
-		.click();
-	fixture.detectChanges();
-}
