@@ -27,13 +27,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
+	@Input() public withIntegratedTime = false;
+	@Input() public onlyTime = false;
+
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
 	}
-
-	@Input() public withIntegratedTime = false;
-	@Input() public onlyTime = false;
 
 	set currentDate(value: Date) {
 		this._currentDate = value;
@@ -151,14 +151,14 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 						this.currentDate = transformedDate;
 					} else {
 						if (this.onlyTime || this.withIntegratedTime) {
-							let splitDateByHours = dateStr.split(':');
+							const splitDateByHours = dateStr.split(':');
 							if (!this.onlyTime) {
 								switch (splitDateByHours.length) {
 									case 1:
 										this.infereDate(dateStr);
 										break;
 									case 2:
-										let hourPosition = splitDateByHours[0].length-2;
+										const hourPosition = splitDateByHours[0].length-2;
 										const dateString = splitDateByHours[0].substring(0, hourPosition);
 										this.infereDate(dateString);
 										this.parseTime(+splitDateByHours[0].substring(hourPosition), +splitDateByHours[1]);
@@ -195,7 +195,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		}
 	}
 
-	private infereDate(dateStr: string) : void {
+	private infereDate(dateStr: string): void {
 		const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
 		if (inferedDate) {
 			this.currentDate = inferedDate;

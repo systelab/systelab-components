@@ -280,7 +280,7 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	describe('Set of specs for datepicker with inputs withIntegratedTime and timeOnly active', () => {
-		function setup(isTimeOnly?: boolean){
+		const setup = (isTimeOnly?: boolean) => {
 			const fixtureDatepicker = TestBed.createComponent(Datepicker);
 			const datepickerComponent = fixtureDatepicker.componentInstance;
 			datepickerComponent.withIntegratedTime = true;
@@ -289,11 +289,11 @@ describe('Systelab DatepickerComponent', () => {
 
 
 			return {fixtureDatepicker, datepickerComponent};
-		}
+		};
 
 		it('Datepicker component parse date and hour', () => {
 			const {datepickerComponent} = setup();
-			let dateString = '3/30/2020 21:20';
+			const dateString = '3/30/2020 21:20';
 			const expectedDate = new Date(dateString);
 			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = dateString;
 			datepickerComponent.inputChanged = true;
@@ -307,7 +307,7 @@ describe('Systelab DatepickerComponent', () => {
 
 		it('Datepicker component parse only date', () => {
 			const {datepickerComponent} = setup();
-			let dateString = '3/30/2020';
+			const dateString = '3/30/2020';
 			const expectedDate = new Date(dateString);
 			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = dateString;
 			datepickerComponent.inputChanged = true;
