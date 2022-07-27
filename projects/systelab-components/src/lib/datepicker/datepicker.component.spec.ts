@@ -90,6 +90,29 @@ export class AuxFunctionClass {
 		button.click();
 		fixture.detectChanges();
 	}
+
+	public static isSameDate(dateOne: Date, dateTwo: Date): boolean {
+		if(!dateOne || !dateTwo){
+			return false;
+		}
+		if (dateOne.getDate() !== dateTwo.getDate()) {
+			return false;
+		}
+		if (dateOne.getMonth() !== dateTwo.getMonth()) {
+			return false;
+		}
+		return dateOne.getFullYear() === dateTwo.getFullYear();
+	}
+
+	public static isSameHourAndMinute(dateOne: Date, dateTwo: Date): boolean {
+		if(!dateOne || !dateTwo){
+			return false;
+		}
+		if (dateOne.getHours() !== dateTwo.getHours()) {
+			return false;
+		}
+		return dateOne.getMinutes() === dateTwo.getMinutes();
+	}
 }
 
 describe('Systelab DatepickerComponent', () => {
@@ -254,6 +277,89 @@ describe('Systelab DatepickerComponent', () => {
 		expect(fixture2.componentInstance.formatError)
 			.toBeFalsy();
 		fixture2.destroy();
+	});
+
+	describe('Set of specs for datepicker with inputs withIntegratedTime and timeOnly active', () => {
+		const setup = (isTimeOnly?: boolean) => {
+			const fixtureDatepicker = TestBed.createComponent(Datepicker);
+			const datepickerComponent = fixtureDatepicker.componentInstance;
+			datepickerComponent.withIntegratedTime = true;
+			datepickerComponent.onlyTime = isTimeOnly;
+			fixtureDatepicker.detectChanges();
+
+
+			return {fixtureDatepicker, datepickerComponent};
+		};
+
+		it('Datepicker component parse date and hour', () => {
+			const {datepickerComponent} = setup();
+			const dateString = '3/30/2020 21:20';
+			const expectedDate = new Date(dateString);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = dateString;
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			const isSameDateAndHour = AuxFunctionClass.isSameDate(expectedDate, datepickerComponent.currentDate) &&
+				AuxFunctionClass.isSameHourAndMinute(expectedDate, datepickerComponent.currentDate);
+			expect(datepickerComponent.formatError).toBeFalsy();
+			expect(isSameDateAndHour).toBeTruthy();
+
+		});
+
+		it('Datepicker component parse only date', () => {
+			const {datepickerComponent} = setup();
+			const dateString = '3/30/2020';
+			const expectedDate = new Date(dateString);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = dateString;
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			const isSameDate = AuxFunctionClass.isSameDate(expectedDate, datepickerComponent.currentDate);
+			expect(datepickerComponent.formatError).toBeFalsy();
+			expect(isSameDate).toBeTruthy();
+
+		});
+
+		it('Datepicker parsing incorrect format, format error', () => {
+			const {datepickerComponent} = setup();
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '3/30/2020 : 5:11';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.formatError).toBeTruthy();
+
+		});
+
+		it('Datepicker only time, parsing incorrect hour, format error', () => {
+			const {datepickerComponent} = setup(true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '24:11';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.formatError).toBeTruthy();
+
+		});
+
+		it('Datepicker only time, parsing incorrect minute, format error', () => {
+			const {datepickerComponent} = setup(true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '4:66';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.formatError).toBeTruthy();
+
+		});
+
+		it('Datepicker only time, parsing correct time', () => {
+			const {datepickerComponent} = setup(true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '4:6';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			const expectedDate = new Date();
+			expectedDate.setHours(4, 6);
+			const isSameDate = AuxFunctionClass.isSameHourAndMinute(expectedDate, datepickerComponent.currentDate);
+			expect(isSameDate).toBeTruthy();
+			expect(datepickerComponent.formatError).toBeFalsy();
+
+		});
+
+
+
 	});
 });
 
