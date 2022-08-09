@@ -35,7 +35,7 @@
             <div *ngIf="filter" class="slab-filter-container" [style.font-family]="fontFamily"
                  [style.font-size.px]="fontSize" [style.font-weight]="fontWeight" [tabindex]="tabindex"
                  [style.font-style]="fontStyle">
-                <input class="w-100 border rounded" [value]="filterValue" (keyup)="doSearch($event)">
+                <input class="w-100 border rounded" [value]="filterValue" #filterInput (keyup)="doSearch($event)">
             </div>
             <div *ngIf="selectDeselectAll" class="slab-filter-container mb-2">
                 <div class="w-100 text-center btn-group" role="group">

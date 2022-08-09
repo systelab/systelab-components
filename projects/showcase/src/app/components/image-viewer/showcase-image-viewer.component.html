@@ -1,0 +1,16 @@
+<div class="position-relative d-flex slab-flex-1 border" style="height:600px;width:900px">
+    <systelab-image-viewer class="slab-overflow-container" #imageViewer
+              [imageSrc]="imageSrc"
+              [imageDescription]="description"
+              [overlayText]="description"
+              [actionButtons]="actionButtons"
+              [imageFilters]="imageFilters"
+              [sliderZoomMax]="200"
+              [showZoomByAreaButton]="true"
+              [showAdjustButton]="true"
+              [showZoomScale]="true"
+              [showSliderToolTip]="false"
+              (clickActionButton)="doClickActionButton($event)"
+              (clickOverlayText)="doClickOverlayText()">
+    </systelab-image-viewer>
+</div>

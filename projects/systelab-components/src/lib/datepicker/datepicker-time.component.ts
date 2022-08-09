@@ -30,7 +30,9 @@ export class DatepickerTimeComponent extends Datepicker {
 
 	override set currentDate(value: Date) {
 		this._currentDate = value;
-		if (this._currentDate) {
+		if(this.withIntegratedTime){
+			this.currentDateChange.emit(this._currentDate);
+		} else if (this._currentDate) {
 			if (this.resetTimeWhenChangingCurrentDate) {
 				this.touchSpinHourValues.value = this._currentDate.getHours();
 				this.touchSpinMinutesValues.value = this._currentDate.getMinutes();

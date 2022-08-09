@@ -99,7 +99,7 @@ import { UrlValidatorDirective } from 'projects/systelab-components/src/lib/form
 import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/phone-validator.directive';
 import { ShowcaseInteractiveComponent } from './components/dialog/interactive/showcase-interactive.component';
 import { ShowcaseProgressBarWithTextDialog } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
-import {ShowcaseCdkTreeComponent} from './components/tree/showcase-cdk-tree.component';
+import {ShowcaseImageViewerComponent} from './components/image-viewer/showcase-image-viewer.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
 
 @NgModule({
@@ -210,8 +210,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 		UrlValidatorDirective,
 		ShowcaseInteractiveComponent,
 		ShowcaseProgressBarWithTextDialog,
-		ShowcaseToastComponent,
-		ShowcaseCdkTreeComponent
+		ShowcaseImageViewerComponent,
 	],
 	bootstrap:    [ShowcaseComponent]
 })

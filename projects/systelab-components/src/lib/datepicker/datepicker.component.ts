@@ -27,6 +27,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public autofocus = false;
 	@Input() public fromDateForRelativeDates;
 	@Input() public tabindex: number;
+	@Input() public withIntegratedTime = false;
+	@Input() public onlyTime = false;
+
 	@Input()
 	get currentDate(): Date {
 		return this._currentDate;
@@ -65,6 +68,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public focusEvt: FocusEvent;
 	public isTablet = false;
 	public datepickerId: string = (Math.random() * (999999999999 - 1)).toString();
+	public formatError: boolean;
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
@@ -88,7 +92,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public ngAfterViewInit() {
 		const newElement = document.createElement('i');
 		if (!this.inline) {
-			newElement.className = 'icon-calendar';
+			newElement.className = this.onlyTime ? 'icon-clock' : 'icon-calendar';
 			if (this.currentCalendar) {
 				if (this.autofocus) {
 					this.currentCalendar.el.nativeElement.querySelector('input')
@@ -98,7 +102,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
 		}
-		if(this.tabindex) {
+		if (this.tabindex) {
 			this.currentCalendar.el.nativeElement.querySelector('input')
 				.setAttribute('tabindex', this.tabindex);
 		}
@@ -130,13 +134,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public selectDate(): void {
-		this.error = false;
+		this.formatError = false;
 		this.currentDateChange.emit(this.currentDate);
 		this.inputChanged = false;
 	}
 
 	public changeDate(): void {
-		this.error = false;
+		this.formatError = false;
 		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
 				.toLowerCase();
@@ -146,18 +150,57 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 					if (transformedDate) {
 						this.currentDate = transformedDate;
 					} else {
-						const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
-						if (inferedDate) {
-							this.currentDate = inferedDate;
-						}
-						else {
-							this.error = true;
+						if (this.onlyTime || this.withIntegratedTime) {
+							const splitDateByHours = dateStr.split(':');
+							if (!this.onlyTime) {
+								switch (splitDateByHours.length) {
+									case 1:
+										this.infereDate(dateStr);
+										break;
+									case 2:
+										const hourPosition = splitDateByHours[0].length-2;
+										const dateString = splitDateByHours[0].substring(0, hourPosition);
+										this.infereDate(dateString);
+										this.parseTime(+splitDateByHours[0].substring(hourPosition), +splitDateByHours[1]);
+										break;
+									default:
+										this.formatError = true;
+										break;
+								}
+							} else {
+								const hour = +splitDateByHours[0];
+								const minute = +splitDateByHours[1];
+								this.currentDate = new Date();
+								this.parseTime(hour, minute);
+
+							}
+						} else {
+							this.infereDate(dateStr);
 						}
 					}
 				}
 				this.currentDateChange.emit(this.currentDate);
 				this.inputChanged = false;
 			}
+		}
+	}
+
+	private parseTime(hour: number, minute: number): void {
+		const isValidHour = hour >= 0 && hour <= 23;
+		const isValidMinute = minute >= 0 && minute <= 59;
+		if (!isValidHour || !isValidMinute) {
+			this.formatError = true;
+		} else {
+			this.currentDate.setHours(hour, minute);
+		}
+	}
+
+	private infereDate(dateStr: string): void {
+		const inferedDate = this.dataTransformerService.infereDate(dateStr, this.i18nService.getDateFormatForDatePicker());
+		if (inferedDate) {
+			this.currentDate = inferedDate;
+		} else {
+			this.formatError = true;
 		}
 	}
 
@@ -316,7 +359,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 				dayNamesMin:     weekDaysNamesShort,
 				monthNames:      monthNames,
 				monthNamesShort: monthNamesShort
-		}};
+			}
+		};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
 		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);

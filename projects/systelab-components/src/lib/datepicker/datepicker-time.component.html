@@ -1,38 +1,44 @@
 <div class="d-flex">
-    <ng-container *ngIf="showCalendar">
+    <ng-container *ngIf="showCalendar || withIntegratedTime">
         <systelab-datepicker
-                            [(currentDate)]="currentDate"
-                             (currentDateChange)="currentDateChange.emit($event)"
-                             [disabled]="disabled"
-                             [error]="error"
-                             [markPreviousAfterDate]="markPreviousAfterDate"
-                             [required]="required"
-                             [inputExpandHeight]="inputExpandHeight"
-                             [inputFontSize]="inputFontSize"
-                             [showTodayButton]="showTodayButton"
-                             [tabindex]="tabindex"
-                             [maxDate]="maxDate"
-                             [minDate]="minDate"
-                             [warnDaysAfter]="warnDaysAfter"
-                             [warnDaysBefore]="warnDaysBefore"
-                             [autofocus]="autofocus"
-                             [inline]="inline"></systelab-datepicker>
+                [(currentDate)]="currentDate"
+                (currentDateChange)="currentDateChange.emit($event)"
+                [disabled]="disabled"
+                [error]="error"
+                [markPreviousAfterDate]="markPreviousAfterDate"
+                [required]="required"
+                [inputExpandHeight]="inputExpandHeight"
+                [inputFontSize]="inputFontSize"
+                [showTodayButton]="showTodayButton"
+                [tabindex]="tabindex"
+                [maxDate]="maxDate"
+                [minDate]="minDate"
+                [warnDaysAfter]="warnDaysAfter"
+                [warnDaysBefore]="warnDaysBefore"
+                [autofocus]="autofocus"
+                [onlyTime]="!showCalendar"
+                [withIntegratedTime]="withIntegratedTime"
+                [inline]="inline"></systelab-datepicker>
 
     </ng-container>
 
-    <systelab-spinner class="d-flex h-100" id="hours"
-                      [spinValues]="touchSpinHourValues"
-                      [fillUnitsWithZero]="true"
-                      [(value)]="touchSpinHourValues.value"
-                      [disabled]="disabled"
-                      [tabindex]="tabindex"
-                      (valueChange)="currentHoursChanged($event)"></systelab-spinner>
-    <label class="mx-1 my-0">:</label>
-    <systelab-spinner class="d-flex h-100" id="minutes"
-                      [spinValues]="touchSpinMinutesValues"
-                      [fillUnitsWithZero]="true"
-                      [tabindex]="tabindex"
-                      [(value)]="touchSpinMinutesValues.value"
-                      [disabled]="disabled"
-                      (valueChange)="currentMinutesChanged($event)"></systelab-spinner>
+    <ng-container *ngIf="!withIntegratedTime">
+        <systelab-spinner class="d-flex h-100" id="hours"
+                          [spinValues]="touchSpinHourValues"
+                          [fillUnitsWithZero]="true"
+                          [(value)]="touchSpinHourValues.value"
+                          [disabled]="disabled"
+                          [error]="error"
+                          [tabindex]="tabindex"
+                          (valueChange)="currentHoursChanged($event)"></systelab-spinner>
+        <label class="mx-1 my-0" [class.text-danger]="error">:</label>
+        <systelab-spinner class="d-flex h-100" id="minutes"
+                          [spinValues]="touchSpinMinutesValues"
+                          [fillUnitsWithZero]="true"
+                          [tabindex]="tabindex"
+                          [(value)]="touchSpinMinutesValues.value"
+                          [disabled]="disabled"
+                          [error]="error"
+                          (valueChange)="currentMinutesChanged($event)"></systelab-spinner>
+    </ng-container>
 </div>

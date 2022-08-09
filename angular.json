@@ -87,6 +87,11 @@
                 "glob": "**/*",
                 "input": "projects/showcase/src/assets/i18n/language",
                 "output": "/i18n/language"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/showcase/src/assets/images",
+                "output": "/images"
               }
             ],
             "styles": [

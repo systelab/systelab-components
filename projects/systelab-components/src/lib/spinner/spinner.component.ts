@@ -11,6 +11,7 @@ export class TouchspinComponent {
 
 	private static readonly ARROW_UP = 38;
 
+	@Input() public error = false;
 	@Input() public disabled = false;
 	@Input() public fillUnitsWithZero: boolean|number = false; //0 if false, and 1 if true
 	@Input() public tabindex: number;
