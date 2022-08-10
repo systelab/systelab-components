@@ -1,122 +1,26 @@
-/* This styles are used to override the default primeng styles for trees (https://www.primefaces.org/primeng/#/tree).*/
+.slab-tree {
+  cdk-nested-tree-node {
+    line-height: 30px;
+    user-select: none;
 
-
-body .p-tree {
-  width: 100%;
-  height: 100%;
-  padding: 0 !important;
-  font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-  .p-tree-container {
-    padding: 0 !important;
-
-
-    .p-treenode {
-      padding: 0 !important;
-
-      .p-treenode-content {
-        color: #222;
-        border: 0 !important;
-        border-radius: 0;
-        transition: none;
-        padding: 0 0 0 5px;
-        outline: none;
-
-        &:focus {
-          border-color: transparent !important;
-          border: 0 !important;
-          outline: 0 !important;
-          box-shadow: 0 0 0 0 transparent !important;
-          border-radius: 0 !important;
-        }
-
-        span[class*='icon-angle-'] {
-          font-weight: bold;
-          font-size: 18px;
-          color: $dark-gray;
-        }
-
-        .p-tree-toggler {
-          color: #222;
-
-          &:hover {
-            color: rgb(34, 34, 34) !important;
-          }
-
-          &:focus {
-            box-shadow: none !important;
-          }
-        }
-
-        .p-treenode-icon {
-          margin: 0 5px 0 0;
-        }
-
-        .p-treenode-label {
-          padding: 0 !important;
-
-          span {
-            padding: 1.5px 3.750px;
-          }
-
-          label {
-            margin: 0;
-            padding-top: 4px;
-            padding-bottom: 4px;
-          }
-
-          &.p-state-highlight {
-            background: $slab-selected-background-color !important;
-            color: rgb(34, 34, 34) !important;
-          }
-
-          &:focus {
-            background-color: scale-color($primary, $alpha: -90%);
-          }
-
-          &:hover {
-            background: $slab-selected-background-color !important;
-          }
-
-        }
-
-        &:focus {
-          background-color: scale-color($primary, $alpha: -90%);
-        }
-
-        &:hover {
-          background-color: $slab-selected-background-color !important;
-        }
-
-        &.p-treenode-content-selected,
-        &.p-highlight {
-          background: $slab-selected-background-color !important;
-          color: rgb(34, 34, 34);
-
-          .p-tree-toggler {
-            color: rgb(34, 34, 34) !important;
-          }
-
-          .p-link {
-            &:focus {
-              box-shadow: none !important;
-            }
-          }
-
-          .p-treenode-icon {
-            color: gray;
-          }
-        }
-
-        &.p-treenode-selectable,
-        &.p-highlight {
-          .p-treenode-label {
-            &:not(.p-state-highlight):hover {
-              background: $slab-selected-background-color !important;
-            }
-          }
-        }
+    .slab-tree-node {
+      &.slab-selected {
+        background-color: #c8dffc;
       }
+
+      button {
+        background-color: transparent;
+        border: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(200, 223, 252, 0.5);
+      }
+
     }
+  }
+  .slab-tree-invisible{
+    display: none;
   }
 }

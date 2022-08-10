@@ -1,8 +1,5 @@
 <div class="container-fluid">
-    <h3>PrimeNG Tree [DEPRECATED]</h3>
-    <showcase-inner-tree (nodeSelected)="nodeSelected($event)"></showcase-inner-tree>
-
-    <h3 class="mt-4">New Tree</h3>
-    <showcase-cdk-tree #systelabCdkTree class="mt-3" (nodeSelected)="doOnNodeSelected($event)"></showcase-cdk-tree>
-    <button (click)="systelabCdkTree.doAddMoreNodesToTree()">Growing Tree</button>
+    <showcase-inner-tree #showcaseTree (nodeSelected)="nodeSelected($event)" class="border rounded"></showcase-inner-tree>
+    <button (click)="populateTree()">Populate tree</button>
+    <button (click)="selectNode()">Select node</button>
 </div>

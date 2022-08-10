@@ -1,31 +1,72 @@
-import { Directive, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Tree } from 'primeng/tree';
-import { TreeNode } from 'primeng/api';
-
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { ArrayDataSource } from '@angular/cdk/collections';
+import { TreeNode } from './tree-node';
 
 @Directive()
 export abstract class AbstractTree implements OnInit {
 
-	@ViewChild('expandingTree', {static: false}) protected currentTree: Tree;
+	@Input()
+	public get tree() {
+		return this._tree
+	}
 
-	@Input() public withModal = true;
-	@Output() public nodeSelected = new EventEmitter();
+	public set tree(newTree: Array<TreeNode>) {
+		this._tree = newTree;
+		this.dataSource = new ArrayDataSource(this._processData(this._tree, null));
+	}
 
-	@Input() public isDropabble = false;
-	@Input() public isDragabble = false;
+	@Output() public nodeSelected = new EventEmitter<TreeNode>();
+
+	public defaultExpandedIcon = 'fas fa-chevron-down';
+	public defaultCollapsedIcon = 'fas fa-chevron-right';
+
+	public _tree: TreeNode[] = [];
+	public dataSource = new ArrayDataSource(this._tree);
+
+	public treeControl = new NestedTreeControl<TreeNode>(node => node.children);
 
 	public selectedNode: TreeNode;
 
-	public tree: TreeNode[] = [];
-
 	constructor() {
+		this.treeControl.isExpanded = (node) => {
+			return node.expanded;
+		}
+		this.treeControl.toggle = (node) => {
+			node.expanded = !node.expanded;
+		}
 	}
 
 	public ngOnInit() {
+		if (this._tree) {
+			this.dataSource = new ArrayDataSource(this._processData(this._tree, null));
+		}
 	}
 
-	public nodeSelect(evt: any) {
-		evt.node.expanded = !evt.node.expanded;
-		this.nodeSelected.emit(evt.node);
+	public hasChild = (_: number, node: TreeNode): boolean => !!node.children?.length;
+
+	public doClick(node: TreeNode): void {
+		if (node.selectable !== false) {
+			if (this.selectedNode) {
+				this.selectedNode.isNodeSelected = false;
+			}
+			this.selectedNode = node;
+			node.isNodeSelected = !node.isNodeSelected;
+			this.nodeSelected.emit(node);
+		}
+	}
+
+	private _processData(data, parent = null) {
+		data.forEach(item => {
+			if (parent !== null) {
+				item.parent = parent;
+			} else {
+				item.parent = null;
+			}
+			if (item.children?.length) {
+				this._processData(item.children, item);
+			}
+		});
+		return data;
 	}
 }

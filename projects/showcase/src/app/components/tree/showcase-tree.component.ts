@@ -1,10 +1,13 @@
-import {Component} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ShowcaseInnerTreeComponent } from './showcase-inner-tree.component';
 
 @Component({
 	selector:    'showcase-tree',
 	templateUrl: 'showcase-tree.component.html'
 })
 export class ShowcaseTreeComponent {
+
+	@ViewChild('showcaseTree') showcaseTree: ShowcaseInnerTreeComponent;
 
 	constructor() {
 	}
@@ -13,7 +16,10 @@ export class ShowcaseTreeComponent {
 		console.log('showcasetreecomponent', event);
 	}
 
-	public doOnNodeSelected(node: any): void {
-		console.log('New JS Tree', node);
+	public populateTree(): void {
+		this.showcaseTree.populateTree();
+	}
+	public selectNode(): void {
+		this.showcaseTree.selectRandomNode();
 	}
 }

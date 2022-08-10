@@ -100,7 +100,7 @@ import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/fo
 import { ShowcaseInteractiveComponent } from './components/dialog/interactive/showcase-interactive.component';
 import { ShowcaseProgressBarWithTextDialog } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 import {ShowcaseImageViewerComponent} from './components/image-viewer/showcase-image-viewer.component';
-import {CdkTreeModule} from '@angular/cdk/tree';
+import { CdkTreeModule } from '@angular/cdk/tree';
 
 @NgModule({
 	imports:      [

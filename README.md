@@ -148,3 +148,24 @@ IE11 support has been deprecated due to the upgrade to Angular 12
 Use of [Ivy](https://angular.io/guide/ivy), applications that uses this library have to use Angular 12 and Ivy rendering.
 
 Added --noImplicitOverride flag to allow override methods and get error for unintentionally overrides https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag
+
+## Version 14 Angular X
+
+Tree component migrated to use Angular CDK Tree
+
+1. Add CdkTreeModule to modules using Tree components
+
+2. Replace abstract-tree-status.component.html for abstract-tree.component.html
+
+3. Replace 
+
+   import { TreeNode } from 'primeng/api'; 
+
+   for 
+
+   import { TreeNode } from 'systelab-components';
+
+4. Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
+ 
+
+
