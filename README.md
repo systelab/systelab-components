@@ -153,11 +153,11 @@ Added --noImplicitOverride flag to allow override methods and get error for unin
 
 Tree component migrated to use Angular CDK Tree
 
-1. Add CdkTreeModule to modules using Tree components
+1.  Add CdkTreeModule to modules using Tree components
 
-2. Replace abstract-tree-status.component.html for abstract-tree.component.html
+2.  Replace abstract-tree-status.component.html for abstract-tree.component.html
 
-3. Replace 
+3.  Replace 
 
    import { TreeNode } from 'primeng/api'; 
 
@@ -165,7 +165,4 @@ Tree component migrated to use Angular CDK Tree
 
    import { TreeNode } from 'systelab-components';
 
-4. Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
- 
-
-
+4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)

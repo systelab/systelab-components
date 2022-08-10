@@ -6,16 +6,6 @@ import { TreeNode } from './tree-node';
 @Directive()
 export abstract class AbstractTree implements OnInit {
 
-	@Input()
-	public get tree() {
-		return this._tree
-	}
-
-	public set tree(newTree: Array<TreeNode>) {
-		this._tree = newTree;
-		this.dataSource = new ArrayDataSource(this._processData(this._tree, null));
-	}
-
 	@Output() public nodeSelected = new EventEmitter<TreeNode>();
 
 	public defaultExpandedIcon = 'fas fa-chevron-down';
@@ -28,13 +18,21 @@ export abstract class AbstractTree implements OnInit {
 
 	public selectedNode: TreeNode;
 
+	@Input()
+	public get tree(): TreeNode[]  {
+		return this._tree;
+	}
+
+	public set tree(newTree: Array<TreeNode>) {
+		this._tree = newTree;
+		this.dataSource = new ArrayDataSource(this._processData(this._tree, null));
+	}
+
 	constructor() {
-		this.treeControl.isExpanded = (node) => {
-			return node.expanded;
-		}
+		this.treeControl.isExpanded = (node) => node.expanded;
 		this.treeControl.toggle = (node) => {
 			node.expanded = !node.expanded;
-		}
+		};
 	}
 
 	public ngOnInit() {

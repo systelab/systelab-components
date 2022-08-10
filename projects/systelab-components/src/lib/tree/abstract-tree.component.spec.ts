@@ -11,10 +11,10 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { AbstractTree } from './abstract-tree.component';
 
 @Component({
-	selector:    'abstract-tree-test',
+	selector:    'systelab-abstract-tree-test',
 	templateUrl: 'abstract-tree.component.html'
 })
-export class AbstractTreeTest extends AbstractTree {
+export class AbstractTreeTestComponent extends AbstractTree {
 
 	constructor() {
 		super();
@@ -83,24 +83,24 @@ export class AbstractTreeTest extends AbstractTree {
 }
 
 @Component({
-	selector: 'abstract-tree-test-panel',
+	selector: 'systelab-abstract-tree-test-panel',
 	template: `
                   <div class="container-fluid" style="height: 200px;">
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-                              <abstract-tree-test #testTree></abstract-tree-test>
+                              <systelab-abstract-tree-test #testTree></systelab-abstract-tree-test>
                           </div>
                       </div>
                   </div>
 			  `
 })
-export class AbstractTreeTestComponent {
-	@ViewChild('testTree') public testTree: AbstractTreeTest;
+export class AbstractTreeTestPanelComponent {
+	@ViewChild('testTree') public testTree: AbstractTreeTestComponent;
 }
 
 describe('Abstract Tree', () => {
-	let fixture: ComponentFixture<AbstractTreeTestComponent>;
+	let fixture: ComponentFixture<AbstractTreeTestPanelComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -114,15 +114,15 @@ describe('Abstract Tree', () => {
 				CdkTreeModule
 			],
 			declarations: [
-				AbstractTreeTest,
-				AbstractTreeTestComponent
+				AbstractTreeTestComponent,
+				AbstractTreeTestPanelComponent
 			]
 		})
 			.compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(AbstractTreeTestComponent);
+		fixture = TestBed.createComponent(AbstractTreeTestPanelComponent);
 		fixture.detectChanges();
 	});
 
@@ -168,7 +168,7 @@ describe('Abstract Tree', () => {
 
 		fixture.debugElement.nativeElement.getElementsByClassName('slab-tree-node')[5].click();
 		fixture.detectChanges();
-		expect(fixture.componentInstance.testTree.nodeSelected.emit).not.toHaveBeenCalled()
+		expect(fixture.componentInstance.testTree.nodeSelected.emit).not.toHaveBeenCalled();
 	});
 
 });

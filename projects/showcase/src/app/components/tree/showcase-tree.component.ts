@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ShowcaseInnerTreeComponent } from './showcase-inner-tree.component';
+import { TreeNode } from 'systelab-components';
 
 @Component({
 	selector:    'showcase-tree',
@@ -12,14 +13,7 @@ export class ShowcaseTreeComponent {
 	constructor() {
 	}
 
-	public nodeSelected(event: any): void {
-		console.log('showcasetreecomponent', event);
-	}
-
-	public populateTree(): void {
-		this.showcaseTree.populateTree();
-	}
-	public selectNode(): void {
-		this.showcaseTree.selectRandomNode();
+	public nodeSelected(node: TreeNode): void {
+		console.log('Tree node selected', node);
 	}
 }
