@@ -24,3 +24,9 @@ Component to show a Numeric Keyboard dialog for an Input Text.
 | ---- |:----------:| ------------|
 | change | string | The selected value|
 
+## Methods
+
+| Name | Parameters | Description |
+| ---- |:----------:| ------------|
+| focus |  | Put the focus on the numpad input|
+| blur |  | Remove the focus on the numpad input|
