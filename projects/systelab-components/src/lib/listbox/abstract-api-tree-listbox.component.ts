@@ -18,9 +18,10 @@ export class TreeListBoxElement<T> {
 
 @Directive()
 export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
-
 	public columnDefs: Array<any>;
 	public treeValues: Array<TreeListBoxElement<T>> = [];
+	@Input() public isParentSelectable = true;
+
 	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
 
 	@Input() public updateHierarchy = true;
@@ -213,8 +214,11 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	public override doClick(row: any) {
 		if (!this.multipleSelection && !this.isDisabled) {
-			this.selectedTreeItem = row.node.data;
-			this.selectedTreeItemChange.emit(row.node.data);
+			const selectionLevel = row.node.data.level;
+			if((selectionLevel === 0 && this.isParentSelectable) || selectionLevel > 0){
+				this.selectedTreeItem = row.node.data;
+				this.selectedTreeItemChange.emit(row.node.data);
+			}
 		}
 	}
 
