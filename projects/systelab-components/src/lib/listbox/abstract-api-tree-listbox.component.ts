@@ -18,35 +18,35 @@ export class TreeListBoxElement<T> {
 
 @Directive()
 export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
+	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
+
 	@Input() public isParentSelectable = true;
 	@Input() public updateHierarchy = true;
-	@Input() set selectedTreeItem(value: TreeListBoxElement<T>) {
-		this._selectedTreeItem = value;
-		this.selectTreeItemInGrid();
-	}
-	@Input() set selectedIDList(value: string) {
-		this._selectedIDList = value;
-		if (!value) {
-			this.initSelectionList();
-		}
-		this.selectedIDListChange.emit(this._selectedIDList);
-	}
-	@Output() selectedTreeItemChange = new EventEmitter<TreeListBoxElement<T>>();
-	@Output() public selectedIDListChange = new EventEmitter<string>();
 
-	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
+	protected _selectedIDList: string;
 
 	public columnDefs: Array<any>;
 	public treeValues: Array<TreeListBoxElement<T>> = [];
 	public _selectedTreeItem: TreeListBoxElement<T>;
 	public paddingSingleSelection = 0;
 
-	protected _selectedIDList: string;
-
-	get selectedTreeItem() {
+	@Input()
+	public set selectedTreeItem(value: TreeListBoxElement<T>) {
+		this._selectedTreeItem = value;
+		this.selectTreeItemInGrid();
+	}
+	public get selectedTreeItem() {
 		return this._selectedTreeItem;
 	}
 
+	@Input()
+	public set selectedIDList(value: string) {
+		this._selectedIDList = value;
+		if (!value) {
+			this.initSelectionList();
+		}
+		this.selectedIDListChange.emit(this._selectedIDList);
+	}
 	get selectedIDList() {
 		this._selectedIDList = '';
 		for (const selectedItem of this.multipleSelectedItemList) {
@@ -58,6 +58,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 		return this._selectedIDList;
 	}
+
+	@Output() public selectedTreeItemChange = new EventEmitter<TreeListBoxElement<T>>();
+	@Output() public selectedIDListChange = new EventEmitter<string>();
 
 	protected constructor() {
 		super();
