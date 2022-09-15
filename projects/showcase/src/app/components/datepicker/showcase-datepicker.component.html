@@ -116,4 +116,23 @@
                                     [(selectedWeek)]="selectedWeek"></systelab-week-selector>
         </div>
     </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Do not display dates in other months in the calendar</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [showOtherMonths]="false"
+                    [(currentDate)]="myNewDate"
+            ></systelab-datepicker>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Show dates in other months as selectable in the calendar</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [showOtherMonths]="true"
+                    [selectOtherMonths]="true"
+                    [(currentDate)]="myNewDate"
+            ></systelab-datepicker>
+        </div>
+    </div>
 </div>
