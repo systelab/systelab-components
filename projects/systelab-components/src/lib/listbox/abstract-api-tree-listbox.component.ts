@@ -31,16 +31,16 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	public paddingSingleSelection = 0;
 
 	@Input()
-	public set selectedTreeItem(value: TreeListBoxElement<T>) {
+	set selectedTreeItem(value: TreeListBoxElement<T>) {
 		this._selectedTreeItem = value;
 		this.selectTreeItemInGrid();
 	}
-	public get selectedTreeItem(): TreeListBoxElement<T> {
+	get selectedTreeItem(): TreeListBoxElement<T> {
 		return this._selectedTreeItem;
 	}
 
 	@Input()
-	public set selectedIDList(value: string) {
+	set selectedIDList(value: string) {
 		this._selectedIDList = value;
 		if (!value) {
 			this.initSelectionList();
@@ -84,6 +84,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	public override doClick(row: any): void {
 		if (!this.multipleSelection && !this.isDisabled) {
 			const selectionLevel = row.node.data.level;
@@ -94,6 +95,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	public changeValues(event: any): void {
 		if (this.multipleSelection) {
 			this.addRemoveToMultipleSelectedItem(event);
@@ -147,6 +149,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		return false;
 	}
 
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	public override onModelUpdated(pEvent: any): void {
 	}
 
