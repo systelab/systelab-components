@@ -18,37 +18,33 @@ export class TreeListBoxElement<T> {
 
 @Directive()
 export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
-	public columnDefs: Array<any>;
-	public treeValues: Array<TreeListBoxElement<T>> = [];
 	@Input() public isParentSelectable = true;
-
-	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
-
 	@Input() public updateHierarchy = true;
-
-	public _selectedTreeItem: TreeListBoxElement<T>;
-
-	@Input()
-	set selectedTreeItem(value: TreeListBoxElement<T>) {
+	@Input() set selectedTreeItem(value: TreeListBoxElement<T>) {
 		this._selectedTreeItem = value;
 		this.selectTreeItemInGrid();
 	}
-
-	get selectedTreeItem() {
-		return this._selectedTreeItem;
-	}
-
-	@Output() selectedTreeItemChange = new EventEmitter<TreeListBoxElement<T>>();
-
-	protected _selectedIDList: string;
-
-	@Input()
-	set selectedIDList(value: string) {
+	@Input() set selectedIDList(value: string) {
 		this._selectedIDList = value;
 		if (!value) {
 			this.initSelectionList();
 		}
 		this.selectedIDListChange.emit(this._selectedIDList);
+	}
+	@Output() selectedTreeItemChange = new EventEmitter<TreeListBoxElement<T>>();
+	@Output() public selectedIDListChange = new EventEmitter<string>();
+
+	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
+
+	public columnDefs: Array<any>;
+	public treeValues: Array<TreeListBoxElement<T>> = [];
+	public _selectedTreeItem: TreeListBoxElement<T>;
+	public paddingSingleSelection = 0;
+
+	protected _selectedIDList: string;
+
+	get selectedTreeItem() {
+		return this._selectedTreeItem;
 	}
 
 	get selectedIDList() {
@@ -62,10 +58,6 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 		return this._selectedIDList;
 	}
-
-	@Output() public selectedIDListChange = new EventEmitter<string>();
-
-	public paddingSingleSelection = 0;
 
 	protected constructor() {
 		super();
@@ -272,7 +264,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	private addRemoveToMultipleSelectedItem(event: any) {
-		if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
+		if (this.multipleSelectedItemList) {
 			const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 				return (item.nodeData[this.getIdField(1)] === event.nodeData[this.getIdField(1)] && item['level'] === event['level']);
 			});
