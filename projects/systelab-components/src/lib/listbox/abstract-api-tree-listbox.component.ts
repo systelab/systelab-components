@@ -23,8 +23,6 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	@Input() public isParentSelectable = true;
 	@Input() public updateHierarchy = true;
 
-	protected _selectedIDList: string;
-
 	public columnDefs: Array<any>;
 	public treeValues: Array<TreeListBoxElement<T>> = [];
 	public _selectedTreeItem: TreeListBoxElement<T>;
@@ -35,7 +33,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this._selectedTreeItem = value;
 		this.selectTreeItemInGrid();
 	}
-	public get selectedTreeItem() {
+	public get selectedTreeItem(): TreeListBoxElement<T> {
 		return this._selectedTreeItem;
 	}
 
@@ -47,7 +45,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 		this.selectedIDListChange.emit(this._selectedIDList);
 	}
-	get selectedIDList() {
+	get selectedIDList(): string {
 		this._selectedIDList = '';
 		for (const selectedItem of this.multipleSelectedItemList) {
 			if (this._selectedIDList && this._selectedIDList !== '') {
@@ -61,6 +59,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	@Output() public selectedTreeItemChange = new EventEmitter<TreeListBoxElement<T>>();
 	@Output() public selectedIDListChange = new EventEmitter<string>();
+
+	protected _selectedIDList: string;
 
 	protected constructor() {
 		super();
