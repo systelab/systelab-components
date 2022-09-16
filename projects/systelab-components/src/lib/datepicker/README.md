@@ -32,7 +32,6 @@ All the input parameters are optional.
 | showOtherMonths          | boolean  |   true    |	Whether to display dates in other months (non-selectable) at the start or end of the current month. To make these days selectable use the selectOtherMonths option.
 | selectOtherMonths        | boolean  |   false   |	Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
 
-
 In black the Two-Way Data Binding properties.
 
 | |

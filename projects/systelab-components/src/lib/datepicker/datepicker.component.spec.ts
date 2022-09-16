@@ -379,24 +379,23 @@ describe('Systelab DatepickerComponent', () => {
 
 		it('Datepicker calendar display other months days but non selectable', () => {
 			const {datepickerComponent} = setup( false);
-
 			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '10/20/2022';
 			datepickerComponent.inputChanged = true;
 			datepickerComponent.changeDate();
-			expect(datepickerComponent.currentCalendar.isDateDisabled(30, 9, 2022))
-				.toBeFalsy();
-			expect(datepickerComponent.currentCalendar.isSelectable(30, 9, 2022, true))
-				.toBeFalsy();
+
 			expect(datepickerComponent.currentCalendar.isDateDisabled(4, 10, 2022))
 				.toBeFalsy();
 			expect(datepickerComponent.currentCalendar.isSelectable(4, 10, 2022, true))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isDateDisabled(30, 9, 2022))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isSelectable(30, 9, 2022, true))
 				.toBeFalsy();
 
 		});
 
 		it('Datepicker calendar display other months days and are selectable', () => {
 			const {datepickerComponent} = setup( true);
-
 			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '10/20/2022';
 			datepickerComponent.inputChanged = true;
 			datepickerComponent.changeDate();
@@ -436,7 +435,7 @@ describe('Systelab DatepickerComponent', () => {
 		it('Calendar show other months days', () => {
 			const {otherMonthDates} = setup(true);
 
-			for (let otherMonthDate of otherMonthDates) {
+			for (const otherMonthDate of otherMonthDates) {
 				expect(otherMonthDate.children.length)
 					.toEqual(1);
 				expect(otherMonthDate.children[0].name)
@@ -448,7 +447,7 @@ describe('Systelab DatepickerComponent', () => {
 		it('Calendar do not show other months days', () => {
 			const {otherMonthDates} = setup(false);
 
-			for (let otherMonthDate of otherMonthDates) {
+			for (const otherMonthDate of otherMonthDates) {
 				expect(otherMonthDate.children.length)
 					.toEqual(0);
 				expect(otherMonthDate.children)
