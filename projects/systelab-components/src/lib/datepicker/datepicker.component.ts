@@ -29,6 +29,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public tabindex: number;
 	@Input() public withIntegratedTime = false;
 	@Input() public onlyTime = false;
+	@Input() public showOtherMonths = true;
+	@Input() public selectOtherMonths = false;
 
 	@Input()
 	get currentDate(): Date {
