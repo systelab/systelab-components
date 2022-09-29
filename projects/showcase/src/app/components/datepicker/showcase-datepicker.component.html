@@ -17,6 +17,15 @@
         </div>
     </div>
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time (Time integrated)</label>
+        <div class="col-md-9">
+            <systelab-date-time
+                    [(currentDate)]="myNewDate"
+                    [withIntegratedTime]="true"
+            ></systelab-date-time>
+        </div>
+    </div>
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time (Disabled)</label>
         <div class="col-md-9">
             <systelab-date-time [disabled]="true"
@@ -41,6 +50,17 @@
             <systelab-date-time
                     [showCalendar]="false"
                     [(currentDate)]="myDate"></systelab-date-time>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time without calendar (time only mode)</label>
+        <div class="col-md-9">
+            <systelab-date-time
+                    [showCalendar]="false"
+                    [(currentDate)]="myNewDate"
+                    [withIntegratedTime]="true"
+                    [onlyTime]="true"
+            ></systelab-date-time>
         </div>
     </div>
     <div class="row mt-1">
@@ -94,6 +114,25 @@
             <systelab-week-selector [disabled]="isDisabled" [maxDate]="maxDate" [minDate]="minDate"
                                     [currentDate]="myDate"
                                     [(selectedWeek)]="selectedWeek"></systelab-week-selector>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Do not display dates in other months in the calendar</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [showOtherMonths]="false"
+                    [(currentDate)]="myNewDate"
+            ></systelab-datepicker>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="form-h-s">Show dates in other months as selectable in the calendar</label>
+        <div class="col-md-4">
+            <systelab-datepicker
+                    [showOtherMonths]="true"
+                    [selectOtherMonths]="true"
+                    [(currentDate)]="myNewDate"
+            ></systelab-datepicker>
         </div>
     </div>
 </div>

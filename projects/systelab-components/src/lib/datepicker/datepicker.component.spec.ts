@@ -7,7 +7,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { Calendar, CalendarModule } from 'primeng/calendar';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
@@ -89,6 +89,29 @@ export class AuxFunctionClass {
 		const button = fixture.debugElement.query(By.css(id)).nativeElement;
 		button.click();
 		fixture.detectChanges();
+	}
+
+	public static isSameDate(dateOne: Date, dateTwo: Date): boolean {
+		if (!dateOne || !dateTwo) {
+			return false;
+		}
+		if (dateOne.getDate() !== dateTwo.getDate()) {
+			return false;
+		}
+		if (dateOne.getMonth() !== dateTwo.getMonth()) {
+			return false;
+		}
+		return dateOne.getFullYear() === dateTwo.getFullYear();
+	}
+
+	public static isSameHourAndMinute(dateOne: Date, dateTwo: Date): boolean {
+		if (!dateOne || !dateTwo) {
+			return false;
+		}
+		if (dateOne.getHours() !== dateTwo.getHours()) {
+			return false;
+		}
+		return dateOne.getMinutes() === dateTwo.getMinutes();
 	}
 }
 
@@ -255,5 +278,185 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeFalsy();
 		fixture2.destroy();
 	});
+
+	describe('Set of specs for datepicker with inputs withIntegratedTime and timeOnly active', () => {
+		const setup = (isTimeOnly?: boolean) => {
+			const fixtureDatepicker = TestBed.createComponent(Datepicker);
+			const datepickerComponent = fixtureDatepicker.componentInstance;
+			datepickerComponent.withIntegratedTime = true;
+			datepickerComponent.onlyTime = isTimeOnly;
+			fixtureDatepicker.detectChanges();
+
+			return {fixtureDatepicker, datepickerComponent};
+		};
+
+		it('Datepicker component parse date and hour', () => {
+			const {datepickerComponent} = setup();
+			const dateString = '3/30/2020 21:20';
+			const expectedDate = new Date(dateString);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = dateString;
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			const isSameDateAndHour = AuxFunctionClass.isSameDate(expectedDate, datepickerComponent.currentDate) &&
+				AuxFunctionClass.isSameHourAndMinute(expectedDate, datepickerComponent.currentDate);
+			expect(datepickerComponent.formatError)
+				.toBeFalsy();
+			expect(isSameDateAndHour)
+				.toBeTruthy();
+
+		});
+
+		it('Datepicker component parse only date', () => {
+			const {datepickerComponent} = setup();
+			const dateString = '3/30/2020';
+			const expectedDate = new Date(dateString);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = dateString;
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			const isSameDate = AuxFunctionClass.isSameDate(expectedDate, datepickerComponent.currentDate);
+			expect(datepickerComponent.formatError)
+				.toBeFalsy();
+			expect(isSameDate)
+				.toBeTruthy();
+
+		});
+
+		it('Datepicker parsing incorrect format, format error', () => {
+			const {datepickerComponent} = setup();
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '3/30/2020 : 5:11';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.formatError)
+				.toBeTruthy();
+
+		});
+
+		it('Datepicker only time, parsing incorrect hour, format error', () => {
+			const {datepickerComponent} = setup(true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '24:11';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.formatError)
+				.toBeTruthy();
+
+		});
+
+		it('Datepicker only time, parsing incorrect minute, format error', () => {
+			const {datepickerComponent} = setup(true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '4:66';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.formatError)
+				.toBeTruthy();
+
+		});
+
+		it('Datepicker only time, parsing correct time', () => {
+			const {datepickerComponent} = setup(true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '4:6';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			const expectedDate = new Date();
+			expectedDate.setHours(4, 6);
+			const isSameDate = AuxFunctionClass.isSameHourAndMinute(expectedDate, datepickerComponent.currentDate);
+			expect(isSameDate)
+				.toBeTruthy();
+			expect(datepickerComponent.formatError)
+				.toBeFalsy();
+
+		});
+
+	});
+
+	describe('Set of specs for datepicker with inputs selectOtherMonths active', () => {
+		const setup = (selectOtherMonths = false) => {
+			const fixtureDatepicker = TestBed.createComponent(Datepicker);
+			const datepickerComponent = fixtureDatepicker.componentInstance;
+			datepickerComponent.selectOtherMonths = selectOtherMonths;
+			fixtureDatepicker.detectChanges();
+			return {fixtureDatepicker, datepickerComponent};
+		};
+
+		it('Datepicker calendar display other months days but non selectable', () => {
+			const {datepickerComponent} = setup( false);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '10/20/2022';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+
+			expect(datepickerComponent.currentCalendar.isDateDisabled(4, 10, 2022))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isSelectable(4, 10, 2022, true))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isDateDisabled(30, 9, 2022))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isSelectable(30, 9, 2022, true))
+				.toBeFalsy();
+
+		});
+
+		it('Datepicker calendar display other months days and are selectable', () => {
+			const {datepickerComponent} = setup( true);
+			datepickerComponent.currentCalendar.inputfieldViewChild.nativeElement.value = '10/20/2022';
+			datepickerComponent.inputChanged = true;
+			datepickerComponent.changeDate();
+			expect(datepickerComponent.currentCalendar.isDateDisabled(30, 9, 2022))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isSelectable(30, 9, 2022, true))
+				.toBeTruthy();
+			expect(datepickerComponent.currentCalendar.isDateDisabled(4, 10, 2022))
+				.toBeFalsy();
+			expect(datepickerComponent.currentCalendar.isSelectable(4, 10, 2022, true))
+				.toBeTruthy();
+
+		});
+
+	});
+
+	describe('Set of specs for calendar with inputs showOtherMonths', () => {
+		const setup = (showOtherMonths = true) => {
+
+			const fixtureDatePicker = TestBed.createComponent(Calendar);
+			const calendarComponent = fixtureDatePicker.componentInstance;
+
+			 calendarComponent.showOtherMonths = showOtherMonths;
+			fixtureDatePicker.detectChanges();
+
+			const button = fixtureDatePicker.debugElement.query(By.css('.p-inputtext')).nativeElement;
+			button.click();
+			fixtureDatePicker.detectChanges();
+
+			const datesContainer = fixtureDatePicker.debugElement.query(By.css('.p-datepicker-calendar-container'));
+			const otherMonthDates = datesContainer.queryAll(By.css('.p-datepicker-other-month'));
+
+			return {otherMonthDates};
+		};
+
+
+		it('Calendar show other months days', () => {
+			const {otherMonthDates} = setup(true);
+
+			for (const otherMonthDate of otherMonthDates) {
+				expect(otherMonthDate.children.length)
+					.toEqual(1);
+				expect(otherMonthDate.children[0].name)
+					.toEqual('span');
+			}
+
+		});
+
+		it('Calendar do not show other months days', () => {
+			const {otherMonthDates} = setup(false);
+
+			for (const otherMonthDate of otherMonthDates) {
+				expect(otherMonthDate.children.length)
+					.toEqual(0);
+				expect(otherMonthDate.children)
+					.toEqual([]);
+			}
+
+		});
+
+	});
+
 });
 
