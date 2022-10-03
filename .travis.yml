@@ -23,7 +23,7 @@ install:
   - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
   - npm install -g codecov
   - npm install -g codacy-coverage
-  - npm install
+  - npm ci
 
 before_script:
   - cd node_modules/protractor
