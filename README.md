@@ -76,8 +76,6 @@ npm publish
 
 ## Version 14.x.x - Angular 14
 
-## Version 14.x.x - Angular 14
-
 [Angular 13 news](https://blog.angular.io/angular-v13-is-now-available-cce66f7bc296)
 
 -   **View Engine** is no longer available
