@@ -2,7 +2,7 @@ sudo: required
 dist: jammy
 language: node_js
 node_js:
-  - '14.20.1'
+  - '16.13.0'
 addons:
   apt:
     update: true
