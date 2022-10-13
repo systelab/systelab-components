@@ -9,9 +9,9 @@
     "build-lib": "ng build systelab-components --configuration production",
     "postbuild-lib": "npm run copytemplates",
     "copytemplates": "gulp copytemplates",
-    "test": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng test systelab-components --watch=false --code-coverage --browsers=ChromeHeadless",
+    "test": "ng test systelab-components --watch=false --code-coverage --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "e2e": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng e2e --no-webdriver-update",
+    "e2e": "ng e2e --no-webdriver-update",
     "update-snapshots": "ng e2e --config ./projects/showcase/e2e/protractor-update-snapshot.conf.js"
   },
   "dependencies": {

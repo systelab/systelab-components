@@ -26,6 +26,7 @@ install:
   - npm ci
 
 before_script:
+  - export NODE_OPTIONS="--max-old-space-size=8192"
   - cd node_modules/protractor
   - npm i webdriver-manager@latest --gecko=false
   - cd ../../
