@@ -45,6 +45,7 @@ export class ShowcaseIconComponent {
 		this.iconsFontAwesome.push('fas fa-x-ray');
 		this.iconsFontAwesome.push('fas fa-user-md');
 		this.iconsFontAwesome.push('fas fa-weight');
+		this.iconsFontAwesome.push('fas fa-trash');
 
 		this.icons.push('icon-context-menu');
 		this.icons.push('icon-numpad');
