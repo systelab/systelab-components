@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { phoneValidator } from './phone-validator.directive';
 
 describe('Phone validation', () => {
@@ -37,7 +37,7 @@ describe('Phone validation', () => {
 		
 	].forEach((test) => {
 		it(test.description + ' "' + test.text + '" is valid', () => {
-			expect(phoneValidator(new FormControl(test.text))).toBeNull();
+			expect(phoneValidator(new UntypedFormControl(test.text))).toBeNull();
 		});
 	});
 
@@ -49,7 +49,7 @@ describe('Phone validation', () => {
 		{description: 'Alphanumeric phone', text: '888sometext888', expected: false},
 	].forEach((test) => {
 		it(test.description + '"' + test.text + '" is not valid', () => {
-			expect(phoneValidator(new FormControl(test.text))).not.toBeNull();
+			expect(phoneValidator(new UntypedFormControl(test.text))).not.toBeNull();
 		});
 	});
 });
