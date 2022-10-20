@@ -69,8 +69,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input()
 	set values(newValues: Array<any>) {
 		if (newValues) {
+			console.log("values1");
 			if (this.withEmptyValue) {
-				newValues.push({description: '', id: undefined});
+				newValues.unshift({description: '', id: undefined});
+				console.log(newValues);
 			}
 		}
 		this._values = newValues;
