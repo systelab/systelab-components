@@ -16,7 +16,7 @@
                                      [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
-        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button"
+        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button" #deleteButton
                 class="slab-combo-button border-right-0 rounded-0 {{deleteIconClass}}" (click)="deleteValueSelected($event)"
                 tabindex="-1"></button>
         <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}"
