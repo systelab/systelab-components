@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { urlValidator } from './url-validator.directive';
 
 describe('Url validation', () => {
@@ -19,7 +19,7 @@ describe('Url validation', () => {
 		'ftp://foo:host.com:21',
 	].forEach((url) => {
 		it('Check that ' + url + ' is valid', () => {
-			expect(urlValidator(new FormControl(url))).toEqual(null);
+			expect(urlValidator(new UntypedFormControl(url))).toEqual(null);
 		});
 	});
 
@@ -40,7 +40,7 @@ describe('Url validation', () => {
 		'ftp:/foo:host.com',
 	].forEach((url) => {
 		it('Check that ' + url + ' is not valid', () => {
-			expect(urlValidator(new FormControl(url))).toEqual({
+			expect(urlValidator(new UntypedFormControl(url))).toEqual({
 				url
 			  });
 		});

@@ -106,7 +106,7 @@ $slab-radio-color: white !default;
 // Defines the slider height
 $slab-slider-height: $form-elements-height !default;
 // Defines the height of the ui-slider
-$slab-slider-background-line: round($slab-slider-height / 3);
+$slab-slider-background-line: round(calc($slab-slider-height / 3));
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: $primary !default;
 

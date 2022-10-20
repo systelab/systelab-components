@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder } from '@angular/forms';
 import { emailValidator, phoneValidator, urlValidator } from 'systelab-components';
 
 @Component({
@@ -14,7 +14,7 @@ export class ShowcaseInputReactiveFormsValidationsComponent implements OnInit {
     url :['', urlValidator],
 
   });
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit(): void {
   }
