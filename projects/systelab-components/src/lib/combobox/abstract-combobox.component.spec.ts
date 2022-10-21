@@ -26,8 +26,13 @@ export class TestData {
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-                              <systelab-select #combobox [withDeleteOption]="withDeleteOption" [defaultIdValue]="defaultIdValue" [withEmptyValue]="withEmptyValue"
-                                               [values]="valuesList" [filter]="filter" [deleteIconClass]="deleteIconClass"></systelab-select>
+                              <systelab-select #combobox [withDeleteOption]="withDeleteOption"
+                                               [defaultIdValue]="defaultIdValue"
+                                               [withEmptyValue]="withEmptyValue"
+                                               [values]="valuesList"
+                                               [filter]="filter"
+                                               [deleteIconClass]="deleteIconClass">
+                              </systelab-select>
                           </div>
                       </div>
                   </div>
@@ -42,7 +47,7 @@ export class ComboboxTestComponent {
 	public defaultIdValue = undefined;
 	public withDeleteOption = false;
 
-	public selectValue(id: string) {
+	public selectValue(id: string): void {
 		this.combobox.id = id;
 	}
 
@@ -162,7 +167,7 @@ describe('Systelab Select Combobox', () => {
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = 1;
 		fixture.componentInstance.withDeleteOption = true;
-		fixture.componentInstance.deleteIconClass = "fas fa-trash";
+		fixture.componentInstance.deleteIconClass = 'fas fa-trash';
 		fixture.detectChanges();
 		clickButton(fixture);
 		fixture.componentInstance.selectValue('1');
