@@ -1,6 +1,6 @@
 <div #combobox class="dropdown slab-combobox d-flex w-100" [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}"
-         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
+         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown()">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text"
                class="slab-flex-1 slab-combo-label slab-combo-input"
                [tabindex]="tabindex"
@@ -16,12 +16,12 @@
                                      [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
         </div>
-        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button"
-                class="slab-combo-button border-right-0 rounded-0 icon-close" (click)="deleteValueSelected($event)"
+        <button *ngIf="withDeleteOption && id && (id !== defaultIdValue)" type="button" #deleteButton
+                class="slab-combo-button border-right-0 rounded-0 {{deleteIconClass}}" (click)="deleteValueSelected($event)"
                 tabindex="-1"></button>
         <button *ngIf="withIcon && id" class="slab-combo-button border-right-0 rounded-0 {{iconClass}}"
                 [style.color]="iconColor" tabindex="-1"></button>
-        <button type="button" *ngIf="withFavourites && id!=null && (!isTree || (isTree && level))" #favouriteButton
+        <button type="button" *ngIf="withFavourites && id!==null && (!isTree || (isTree && level))" #favouriteButton
                 class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite }" (click)="doToggleFavourite($event)"
                 tabindex="-1"></button>
@@ -53,7 +53,7 @@
                                  [style.font-style]="fontStyle" class="ag-theme-fresh"
                                  [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)"
                                  (modelUpdated)="onModelUpdated()"
-                                 (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady($event)"
+                                 (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady()"
                                  [suppressKeyboardEvent]="suppressKeyboardEvent" (cellKeyPress)="onCellKeyDown($event)">
                 </ag-grid-angular>
             </div>
