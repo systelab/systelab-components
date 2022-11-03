@@ -38,6 +38,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public inputColor: string;
 	@Input() public iconColor: string;
 	@Input() public tabindex: number;
+	@Input() public deleteIconClass = 'icon-close';
+	@Input() public withEmptyValue: boolean;
 
 	public suppressKeyboardEvent;
 
@@ -66,6 +68,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public _values: Array<any>;
 	@Input()
 	set values(newValues: Array<any>) {
+		if (newValues) {
+			if (this.withEmptyValue) {
+				newValues.unshift({description: '', id: undefined});
+			}
+		}
 		this._values = newValues;
 		if (this.gridOptions) {
 			this.gridOptions.rowData = this._values;
@@ -373,7 +380,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public onComboKeydown(event: any) {
+	public onComboKeydown() {
 		if (!this.isDropDownOpen()) {
 			this.isDropdownOpened = true;
 			this.showDropDown();
@@ -599,7 +606,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 					}
 				});
 			}
-		} else if (this._id && this._id !== undefined) {
+		} else if (this._id) {
 			this.gridOptions.api.forEachNode(node => {
 				if (this.getRowNodeId(node.data) === this._id) {
 					this.currentSelected = node.data;
@@ -629,8 +636,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public onRowSelected(event: any) {
 		if (!this.multipleSelection) {
 		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
-			const newElement: T = this.getInstance();
-			if (this.multipleSelectedItemList && this.multipleSelectedItemList !== undefined) {
+			if (this.multipleSelectedItemList) {
 				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 					return item[this.getIdField()] === event.node.data[this.getIdField()];
 				});
@@ -706,7 +712,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	@HostListener('window:resize', ['$event'])
-	public onResize(event: any) {
+	public onResize() {
 		if (this.isDropDownOpen()) {
 			this.closeDropDown();
 		}
@@ -765,7 +771,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public doGridReady(e) {
+	public doGridReady() {
 		if (this.filterValue && this.filter === true) {
 			this.doFilter();
 		}

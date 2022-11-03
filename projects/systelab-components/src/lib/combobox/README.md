@@ -161,9 +161,23 @@ In order to create a combobox with favourites you must set the input property "w
 a new service, "PreferencesService", and set it in the **constructor**, and it's necessary to set a **preferenceName** input.
 
 ## Using a Combo with reset combo option
-In order to put the combo in blank or with the initial value, you must set the property "withDeleteOption" as true. This option will show a X in the combo just in case that a value is selected. If is defined the params "defaultIdValue", "defaultDescription" or "defaultCode", the id, description and code will be set to this values.
+In order to put the combo in blank or with the initial value, you must set the property "withDeleteOption" as true. 
+This option will show, by default, a X in the combo just in case that a value is selected. If is defined the params "defaultIdValue", "defaultDescription" or "defaultCode", the id, description and code will be set to this values.
+In case you want to change the X for another icon, you have to set the property "deleteIconClass". i.e: \[deleteIconClass]="'fas fa-trash'" --> it will show a rubbish icon instead of the X.
 If you are using a multiple selection combobox, all items selected will be deleted.
 If you are using a combobox without blank value, the default option will be selected.
+In case you want to have the empty option available in the list of elements, you have to set the property "withEmptyValue" to true. This property must be set before the "values" property, otherwise the empty value will not appear in the list of elements. 
+I.e:
+```
+            <systelab-select                    
+                    [withEmptyValue]="true"
+                    [values]="comboOptionList"
+                    [withDeleteOption]="true"
+                    [deleteIconClass]="'fas fa-trash'"
+                    (change)="comboChangeEvent($event)">
+            </systelab-select>
+```
+
 
 ## Using AbstractApiTreeComboBox&lt;T&gt; with Favourites
 

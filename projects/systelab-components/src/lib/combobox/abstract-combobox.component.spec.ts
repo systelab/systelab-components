@@ -26,7 +26,13 @@ export class TestData {
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-							  <systelab-select #combobox [values]="valuesList" [filter]="filter"></systelab-select>
+                              <systelab-select #combobox [withDeleteOption]="withDeleteOption"
+                                               [defaultIdValue]="defaultIdValue"
+                                               [withEmptyValue]="withEmptyValue"
+                                               [values]="valuesList"
+                                               [filter]="filter"
+                                               [deleteIconClass]="deleteIconClass">
+                              </systelab-select>
                           </div>
                       </div>
                   </div>
@@ -36,6 +42,15 @@ export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: ModulabSelect;
 	public filter = false;
 	public valuesList: TestData[] = [new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
+	public withEmptyValue = false;
+	public deleteIconClass = 'icon-close';
+	public defaultIdValue = undefined;
+	public withDeleteOption = false;
+
+	public selectValue(id: string): void {
+		this.combobox.id = id;
+	}
+
 }
 
 describe('Systelab Select Combobox', () => {
@@ -82,13 +97,11 @@ describe('Systelab Select Combobox', () => {
 		return fixture;
 	};
 
-
 	const clickButton = (fixture: ComponentFixture<ComboboxTestComponent>) => {
 		fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle')
 			.click();
 		fixture.detectChanges();
 	};
-
 
 	it('should instantiate', () => {
 		const fixture = setup();
@@ -117,6 +130,52 @@ describe('Systelab Select Combobox', () => {
 			.then(() => {
 				expect(fixture.componentInstance.combobox.filterInput)
 					.toBeUndefined();
+				done();
+			});
+	});
+
+	it('should include an empty option when property withEmptyValue is set to true', (done) => {
+		const fixture = setup();
+		fixture.componentInstance.withEmptyValue = true;
+		fixture.detectChanges();
+		fixture.componentInstance.combobox.values = fixture.componentInstance.valuesList;
+		fixture.detectChanges();
+		clickButton(fixture);
+		fixture.whenStable()
+			.then(() => {
+				fixture.detectChanges();
+				expect(fixture.componentInstance.combobox._values.length)
+					.toEqual(3);
+				done();
+			});
+	});
+
+	it('should not include an empty option when property withEmptyValue is set to false', (done) => {
+		const fixture = setup();
+		clickButton(fixture);
+		fixture.detectChanges();
+		fixture.whenStable()
+			.then(() => {
+				expect(fixture.componentInstance.combobox._values.length)
+					.toEqual(2);
+				done();
+			});
+	});
+
+	it('should set delete icon to rubbish icon', (done) => {
+		const fixture = setup();
+		fixture.componentInstance.withEmptyValue = true;
+		fixture.componentInstance.defaultIdValue = 1;
+		fixture.componentInstance.withDeleteOption = true;
+		fixture.componentInstance.deleteIconClass = 'fas fa-trash';
+		fixture.detectChanges();
+		clickButton(fixture);
+		fixture.componentInstance.selectValue('1');
+		fixture.detectChanges();
+		fixture.whenStable()
+			.then(() => {
+				expect(fixture.debugElement.nativeElement.querySelectorAll('.fa-trash').length)
+					.toEqual(1);
 				done();
 			});
 	});
