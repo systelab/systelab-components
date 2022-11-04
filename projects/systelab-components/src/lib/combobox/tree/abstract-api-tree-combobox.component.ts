@@ -54,7 +54,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.suppressCellSelection = true;
+		this.gridOptions.suppressCellFocus = true;
 		this.gridOptions.rowSelection = 'single';
 	}
 
@@ -156,58 +156,60 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 		this.totalItemsLoaded = false;
 		this.isFirstTime = false;
 		this.getData()
-			.subscribe(
-				(dataVector: Array<T>) => {
-					const nodeVector: Array<ComboTreeNode<T>> = [];
-					let previousParent: number | string;
+			.subscribe({
+					next:  (dataVector: Array<T>) => {
+						const nodeVector: Array<ComboTreeNode<T>> = [];
+						let previousParent: number | string;
 
-					if (this.emptyElement) {
-						const emptyElement: T = {} as T;
-						emptyElement[this.getLevelIdField(0)] = '';
-						emptyElement[this.getLevelDescriptionField(0)] = '';
-						const emptyElementNode: ComboTreeNode<T> = new ComboTreeNode<T>(emptyElement, 0);
-						nodeVector.push(emptyElementNode);
-					}
-
-					if (this.withFavourites) {
-						this.initializeFavouriteList();
-						if  (this.favouriteList.length > 0){
-						const favouriteElement: T = {} as T;
-						favouriteElement[this.getLevelIdField(0)] = AbstractApiTreeComboBox.FAVOURITEID;
-						favouriteElement[this.getLevelDescriptionField(0)] = this.getFavouriteText();
-						const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
-						nodeVector.push(favouriteComboNode);
-						const favouriteElements = this.getFavouriteElements(dataVector);
-						favouriteElements.forEach(currentFavouriteElement => {
-							const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
-							nodeVector.push(currentFavouriteNode);
-						});
-					}}
-
-					if (this.isAllSelectable) {
-						const allElement: T = {} as T;
-						allElement[this.getLevelIdField(0)] = this.getAllNodeId();
-						allElement[this.getLevelDescriptionField(0)] = this.getAllNodeDescription();
-						const allComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(allElement, 0);
-						nodeVector.push(allComboNode);
-					}
-
-					dataVector.forEach((element: T) => {
-						if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
-							previousParent = element[this.getLevelIdField(0)];
-							const parentComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 0);
-							nodeVector.push(parentComboNode);
+						if (this.emptyElement) {
+							const emptyElement: T = {} as T;
+							emptyElement[this.getLevelIdField(0)] = '';
+							emptyElement[this.getLevelDescriptionField(0)] = '';
+							const emptyElementNode: ComboTreeNode<T> = new ComboTreeNode<T>(emptyElement, 0);
+							nodeVector.push(emptyElementNode);
 						}
-						const comboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 1);
-						nodeVector.push(comboNode);
-					});
-					this.totalItemsLoaded = true;
-					this.gridOptions.api.hideOverlay();
-					this.gridOptions.api.setRowData(nodeVector);
-					this.gridOptions.api.redrawRows();
-				},
-				() => {
-					this.gridOptions.api.hideOverlay();
+
+						if (this.withFavourites) {
+							this.initializeFavouriteList();
+							if (this.favouriteList.length > 0) {
+								const favouriteElement: T = {} as T;
+								favouriteElement[this.getLevelIdField(0)] = AbstractApiTreeComboBox.FAVOURITEID;
+								favouriteElement[this.getLevelDescriptionField(0)] = this.getFavouriteText();
+								const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
+								nodeVector.push(favouriteComboNode);
+								const favouriteElements = this.getFavouriteElements(dataVector);
+								favouriteElements.forEach(currentFavouriteElement => {
+									const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
+									nodeVector.push(currentFavouriteNode);
+								});
+							}
+						}
+
+						if (this.isAllSelectable) {
+							const allElement: T = {} as T;
+							allElement[this.getLevelIdField(0)] = this.getAllNodeId();
+							allElement[this.getLevelDescriptionField(0)] = this.getAllNodeDescription();
+							const allComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(allElement, 0);
+							nodeVector.push(allComboNode);
+						}
+
+						dataVector.forEach((element: T) => {
+							if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
+								previousParent = element[this.getLevelIdField(0)];
+								const parentComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 0);
+								nodeVector.push(parentComboNode);
+							}
+							const comboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 1);
+							nodeVector.push(comboNode);
+						});
+						this.totalItemsLoaded = true;
+						this.gridOptions.api.hideOverlay();
+						this.gridOptions.api.setRowData(nodeVector);
+						this.gridOptions.api.redrawRows();
+					},
+					error: () => {
+						this.gridOptions.api.hideOverlay();
+					}
 				}
 			);
 	}

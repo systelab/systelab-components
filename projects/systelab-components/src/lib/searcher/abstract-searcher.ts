@@ -1,6 +1,6 @@
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable } from 'rxjs';
-import { RowNode } from 'ag-grid-community';
+import { IsFullWidthRowParams } from 'ag-grid-community';
 import { Directive } from '@angular/core';
 
 @Directive()
@@ -10,7 +10,7 @@ export abstract class AbstractSearcher<T> {
 	public multipleSelectedItemList: Array<T>;
 	public multipleSelection: boolean = false;
 
-	constructor() {
+	protected constructor() {
 
 	}
 
@@ -20,14 +20,13 @@ export abstract class AbstractSearcher<T> {
 
 	public abstract getTotalItems(): number;
 
-
 	public abstract getColumnDefs(): Array<any>;
 
 	public hideHeader(): boolean {
 		return false;
 	}
 
-	public  getPropertyToShow(): string {
+	public getPropertyToShow(): string {
 		return this.getDescriptionField();
 	}
 
@@ -43,7 +42,7 @@ export abstract class AbstractSearcher<T> {
 
 	public abstract getGridOptionsPreferencesPrefix(): string;
 
-	public getIsFullWidthCell(rowNode: RowNode): boolean {
+	public getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
 		return false;
 	}
 

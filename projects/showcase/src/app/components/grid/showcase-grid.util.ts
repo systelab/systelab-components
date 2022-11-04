@@ -34,7 +34,7 @@ export class ShowcaseGridUtil {
 				headerName:               'Flags',
 				field:                    'flag',
 				width:                    220,
-				headerComponentFramework: GridHeaderContextMenuComponent,
+				headerComponent: GridHeaderContextMenuComponent,
 				headerComponentParams:    {headerName: 'Flags', headerData: 'flags'}
 			}, {
 				colId:               'decimal-input',
@@ -58,7 +58,7 @@ export class ShowcaseGridUtil {
 				headerName:            'Cell with Checkbox',
 				field:                 'checkboxValue',
 				width:                 200,
-				cellRendererFramework: CheckboxCellRendererComponent,
+				cellRenderer: CheckboxCellRendererComponent,
 				cellEditorFramework:   CheckboxCellEditorComponent,
 				onCellValueChanged:    e => console.log('checkbox', e),
 				editable:              true,
@@ -70,7 +70,7 @@ export class ShowcaseGridUtil {
 				field:                 'spinnerValues',
 				width:                 200,
 				editable:              true,
-				cellRendererFramework: SpinnerCellRendererComponent,
+				cellRenderer: SpinnerCellRendererComponent,
 				cellEditorFramework:   SpinnerCellEditorComponent,
 				onCellValueChanged:    e => console.log('test', e),
 				resizable:             false
@@ -134,7 +134,7 @@ export class ShowcaseGridUtil {
 				getMaxValue:           () => {
 					return ShowcaseGridUtil.getMaxValue();
 				},
-				cellRendererFramework: StackedBarCellRendererComponent,
+				cellRenderer: StackedBarCellRendererComponent,
 				cellRendererParams:    {
 					barClick: ShowcaseGridUtil.doBarClick,
 				},

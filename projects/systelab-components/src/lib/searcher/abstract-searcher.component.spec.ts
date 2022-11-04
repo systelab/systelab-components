@@ -6,14 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
-import { SystelabTranslateModule } from 'systelab-translate';
+import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 import { AbstractSearcherComponent } from './abstract-searcher.component';
-import { I18nService } from 'systelab-translate';
 import { AbstractSearcher } from './abstract-searcher';
 import { SearcherDialog } from './searcher.dialog.component';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
@@ -162,10 +161,7 @@ describe('Systelab Searcher', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				])],
+				AgGridModule],
 			declarations: [
 				MockTooltipDirective,
 				DialogBottomComponent,
@@ -206,9 +202,11 @@ describe('Systelab Searcher', () => {
 		clickHelpButton(fixture);
 		fixture.whenStable()
 			.then(() => {
-				expect(isPopupVisible(fixture)).toBeTruthy();
+				expect(isPopupVisible(fixture))
+					.toBeTruthy();
 				clickCloseButton(fixture);
-				expect(isPopupVisible(fixture)).toBeFalsy();
+				expect(isPopupVisible(fixture))
+					.toBeFalsy();
 				done();
 			});
 	});
@@ -217,7 +215,8 @@ describe('Systelab Searcher', () => {
 		enterText(fixture, '1');
 		fixture.whenStable()
 			.then(() => {
-				expect(getDescription(fixture)).toEqual('1');
+				expect(getDescription(fixture))
+					.toEqual('1');
 				done();
 			});
 	});
