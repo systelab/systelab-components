@@ -116,15 +116,16 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			const page: number = params.endRow / this.gridOptions.paginationPageSize;
 			this.totalItemsLoaded = false;
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
-				.subscribe(
-					(v: Array<T>) => {
-						this.gridOptions.api.hideOverlay();
-						this.totalItemsLoaded = true;
-						params.successCallback(v, this.getTotalItems());
-					},
-					() => {
-						this.gridOptions.api.hideOverlay();
-						params.failCallback();
+				.subscribe({
+						next:  (v: Array<T>) => {
+							this.gridOptions.api.hideOverlay();
+							this.totalItemsLoaded = true;
+							params.successCallback(v, this.getTotalItems());
+						},
+						error: () => {
+							this.gridOptions.api.hideOverlay();
+							params.failCallback();
+						}
 					}
 				);
 		}

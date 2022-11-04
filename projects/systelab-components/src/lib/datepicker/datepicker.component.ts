@@ -207,7 +207,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public onInput(event: KeyboardEvent) {
-		if (event.keyCode === 13 || event.keyCode === 9) {
+		if (event.code === 'Enter' || event.code === 'Tab') {
 			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
 			this.currentCalendar.onBlur.emit(event);
 			this.closeDatepicker();
@@ -379,7 +379,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		});
 
 		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
-			if (evt.keyCode === 27 || evt.key === 'Tab') {
+			if (evt.key === 'Escape' || evt.key === 'Tab') {
 				this.closeDatepicker();
 			}
 		});

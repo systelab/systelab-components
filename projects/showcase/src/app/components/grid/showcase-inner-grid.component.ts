@@ -20,7 +20,7 @@ export class ShowcaseInnerGridComponent extends AbstractGrid<ShowcaseData> imple
 
 	public ngOnInit() {
 		super.ngOnInit();
-		this.gridOptions.suppressCellSelection = false;
+		this.gridOptions.suppressCellFocus = false;
 	}
 
 	protected getColumnDefs(): Array<any> {
