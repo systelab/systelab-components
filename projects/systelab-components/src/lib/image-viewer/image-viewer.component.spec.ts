@@ -14,7 +14,7 @@ import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-com
 	template: `
         <systelab-image-viewer class="slab-overflow-container"
 			   [imageSrc]="imageSrc"
-			   [imageDescription]="description"
+			   [imageTitle]="description"
 			   [overlayText]="description"
 			   [actionButtons]="actionButtons"
 			   (clickActionButton)="doClickActionButton($event)"

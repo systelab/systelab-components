@@ -31,7 +31,7 @@ export interface ActionButton {
 export class ImageViewerComponent {
 
 	@Input() public imageSrc: string;
-	@Input() public imageDescription: string;
+	@Input() public imageTitle: string;
 	@Input() public overlayText: string;
 	@Input() public actionButtons: ActionButton[];
 	@Input() public imageFilters = '';
@@ -211,12 +211,16 @@ export class ImageViewerComponent {
 
 		// Calculate ruler marks (100x matches the real size of the image)
 		const zoomMarkLength = this.sliderZoomMax / this.zoomScale.chunks;
-		this.zoomScale.marks.pop();
+		this.zoomScale.marks = [];
 
 		for (let i = 1; i <= this.zoomScale.chunks; i += 1) {
 			const label = i % 2 ? '' : zoomMarkLength*i/100 + '';
-			this.zoomScale.marks.push({marginLeft: this.getSliderMarkMarginByZoomFactor(zoomMarkLength*i)-1, label: label});
+			const marginLeftValue = this.getSliderMarkMarginByZoomFactor(zoomMarkLength*i)-1;
+			if (marginLeftValue > 0) {
+				this.zoomScale.marks.push({marginLeft: marginLeftValue, label: label});
+			}
 		}
+		this.doAdjust();
 	}
 
 	public isFilterEnabled(action: string): boolean {
