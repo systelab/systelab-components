@@ -27,7 +27,8 @@ export interface ActionButton {
 @Component({
 	selector:    'systelab-image-viewer',
 	templateUrl: 'image-viewer.component.html',
-	styleUrls:   ['image-viewer.component.scss']
+	styleUrls:   ['image-viewer.component.scss'],
+	providers: 	 [I18nService]
 })
 export class ImageViewerComponent {
 
