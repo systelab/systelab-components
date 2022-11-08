@@ -10,7 +10,6 @@ import {
 	ViewChild
 } from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import { I18nService } from 'systelab-translate';
 
 export enum ActionButtonType {
 	BUTTON,
@@ -27,8 +26,7 @@ export interface ActionButton {
 @Component({
 	selector:    'systelab-image-viewer',
 	templateUrl: 'image-viewer.component.html',
-	styleUrls:   ['image-viewer.component.scss'],
-	providers: 	 [I18nService]
+	styleUrls:   ['image-viewer.component.scss']
 })
 export class ImageViewerComponent {
 
@@ -102,15 +100,8 @@ export class ImageViewerComponent {
 
 	private imageClicked = false;
 
-	public tooltips = {
-		save: '',
-		zoomDrag: '',
-		adjust: ''
-	};
-
 	constructor(private readonly chref: ChangeDetectorRef, private readonly elementRef: ElementRef,
-				private readonly sanitizer: DomSanitizer, private readonly i18nService: I18nService) {
-		this.setTooltips();
+				private readonly sanitizer: DomSanitizer) {
 	}
 
 	@HostListener('mousedown', ['$event'])
@@ -394,11 +385,5 @@ export class ImageViewerComponent {
 			: this.viewPort.offsetHeight;
 		const imageSize = this.image.naturalWidth < this.image.naturalHeight ? this.image.naturalWidth : this.image.naturalHeight;
 		return availableSize / imageSize * 100;
-	}
-
-	private setTooltips(): void {
-		this.tooltips.save = this.i18nService.instant('COMMON_SAVE');
-		this.tooltips.zoomDrag = this.i18nService.instant('COMMON_ZOOM_DRAG');
-		this.tooltips.adjust = this.i18nService.instant('COMMON_ADJUST');
 	}
 }
