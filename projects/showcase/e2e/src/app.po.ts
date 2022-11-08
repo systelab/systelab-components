@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 import * as path from 'path';
-import { compareScreenshot } from 'snapshot-testing/dist';
+// import { compareScreenshot } from 'snapshot-testing/dist';
 
 export class ShowcasePage {
 
