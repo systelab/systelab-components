@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractGrid } from 'systelab-components';
+import { AbstractGrid, DialogService } from 'systelab-components';
 import { ShowcaseGridUtil } from './showcase-grid.util';
 import { ShowcaseData } from './showcase-grid.model';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { DialogService } from 'systelab-components';
 
 @Component({
 	selector:    'showcase-inner-grid',
