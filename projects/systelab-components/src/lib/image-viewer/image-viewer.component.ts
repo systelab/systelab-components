@@ -10,6 +10,7 @@ import {
 	ViewChild
 } from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import { I18nService } from 'systelab-translate';
 
 export enum ActionButtonType {
 	BUTTON,
@@ -100,8 +101,15 @@ export class ImageViewerComponent {
 
 	private imageClicked = false;
 
+	public tooltips = {
+		save: '',
+		zoomDrag: '',
+		adjust: ''
+	};
+
 	constructor(private readonly chref: ChangeDetectorRef, private readonly elementRef: ElementRef,
-				private readonly sanitizer: DomSanitizer) {
+				private readonly sanitizer: DomSanitizer, private readonly i18nService: I18nService) {
+		this.setTooltips();
 	}
 
 	@HostListener('mousedown', ['$event'])
@@ -387,4 +395,9 @@ export class ImageViewerComponent {
 		return availableSize / imageSize * 100;
 	}
 
+	private setTooltips(): void {
+		this.tooltips.save = this.i18nService.instant('COMMON_SAVE');
+		this.tooltips.zoomDrag = this.i18nService.instant('COMMON_ZOOM_DRAG');
+		this.tooltips.adjust = this.i18nService.instant('COMMON_ADJUST');
+	}
 }
