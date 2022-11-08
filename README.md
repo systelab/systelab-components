@@ -109,7 +109,7 @@ IE11 support has been deprecated due to the upgrade to Angular 12
 
 Use of [Ivy](https://angular.io/guide/ivy), applications that uses this library have to use Angular 12 and Ivy rendering.
 
-Added --noImplicitOverride flag to allow override methods and get error for unintentionally overrides 
+Added --noImplicitOverride flag to allow override methods and get error for unintentionally overrides
 https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag
 
 ## Version 11.x.x
@@ -175,6 +175,5 @@ Finally, update your package.json in order to add the peer dependencies:
 "@ngx-translate/core": "^12.1.1",
 "@ngx-translate/http-loader": "^4.0.0",
 "chart.js": "^2.9.3",
-"quill": "^1.3.7",
 "@fullcalendar/core": "^4.4.0"
 ```
