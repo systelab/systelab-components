@@ -97,7 +97,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	@Input() public height;
 
-	constructor(public dialogService: DialogService, public abstractSearcher: AbstractSearcher<T>) {
+	protected constructor(public dialogService: DialogService, public abstractSearcher: AbstractSearcher<T>) {
 		this.searcherDialogParameters = this.abstractSearcher.getDialogParameters();
 		this.abstractSearcher = abstractSearcher;
 
@@ -110,10 +110,10 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 	public getWidth() {
 		if (this.height) {
 			return {
-				'width':     this.height.toString() + 'px',
-				'min-width': this.height.toString() + 'px',
-				'line-height': 1,
-				'padding-left': 0,
+				'width':         this.height.toString() + 'px',
+				'min-width':     this.height.toString() + 'px',
+				'line-height':   1,
+				'padding-left':  0,
 				'padding-right': 0,
 			};
 		}
