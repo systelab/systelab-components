@@ -214,9 +214,9 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "systelab-wdio-builder:test",
           "options": {
-            "protractorConfig": "projects/showcase/e2e/protractor.conf.js",
+            "wdioConfig": "./projects/showcase/e2e/wdio.conf.js",
             "devServerTarget": "showcase:serve"
           },
           "configurations": {
