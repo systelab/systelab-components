@@ -36,6 +36,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this._selectedTreeItem = value;
 		this.selectTreeItemInGrid();
 	}
+
 	get selectedTreeItem(): TreeListBoxElement<T> {
 		return this._selectedTreeItem;
 	}
@@ -48,6 +49,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 		this.selectedIDListChange.emit(this._selectedIDList);
 	}
+
 	get selectedIDList(): string {
 		this._selectedIDList = '';
 		for (const selectedItem of this.multipleSelectedItemList) {
@@ -89,7 +91,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	public override doClick(row: any): void {
 		if (!this.multipleSelection && !this.isDisabled) {
 			const selectionLevel = row.node.data.level;
-			if((selectionLevel === 0 && this.isParentSelectable) || selectionLevel > 0){
+			if ((selectionLevel === 0 && this.isParentSelectable) || selectionLevel > 0) {
 				this.selectedTreeItem = row.node.data;
 				this.selectedTreeItemChange.emit(row.node.data);
 			}
@@ -174,9 +176,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		this.columnDefs = [
 			{
-				colId:                 'id',
-				cellRenderer: AbstractTreeListboxRendererComponent,
-				cellRendererParams:    {
+				colId:              'id',
+				cellRenderer:       AbstractTreeListboxRendererComponent,
+				cellRendererParams: {
 					changeFunction:         (e) => {
 						this.changeValues(e);
 					},
@@ -287,8 +289,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 						const level = this.getIdField(this.selectedTreeItem.level);
 						if (node.data.nodeData[level] === this.selectedTreeItem.nodeData[level]
 							&& node.data.level === this.selectedTreeItem.level) {
-								node.setSelected(true);
-								return;
+							node.setSelected(true);
+							return;
 						}
 					}
 				}
