@@ -28,7 +28,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	public isFirstTime = true;
 	public override isTree = true;
 
-	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override  preferencesService?: PreferencesService) {
+	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
@@ -43,7 +43,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			{
 				colId:        'itemDescription',
 				cellRenderer: (params: any) => {
-						return this.getLabelForLevel(params.data);
+					return this.getLabelForLevel(params.data);
 				}
 			}
 		];
@@ -109,7 +109,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	// override
-	public override  loop(): void {
+	public override loop(): void {
 		let result = true;
 
 		if (this.isDropDownOpen()) {
