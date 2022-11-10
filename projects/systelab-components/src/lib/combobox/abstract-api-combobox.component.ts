@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractComboBox } from './abstract-combobox.component';
@@ -101,27 +101,28 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		} else {
 			this.totalItemsLoaded = false;
 			this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
-				.subscribe(
-					(previousPage: Array<T>) => {
-						const itemArray: Array<T> = new Array<T>();
-						const totItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
-						if (this.emptyElement === true && this.allElement === true) {
-							const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
-							itemArray.push(lastButOneItemFromPreviousPage);
+				.subscribe({
+						next:  (previousPage: Array<T>) => {
+							const itemArray: Array<T> = new Array<T>();
+							const totItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
+							if (this.emptyElement === true && this.allElement === true) {
+								const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
+								itemArray.push(lastButOneItemFromPreviousPage);
 
-							const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-							itemArray.push(lastItemFromPreviousPage);
-						} else {
-							const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-							itemArray.push(lastItemFromPreviousPage);
+								const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+								itemArray.push(lastItemFromPreviousPage);
+							} else {
+								const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+								itemArray.push(lastItemFromPreviousPage);
+							}
+
+							this.totalItemsLoaded = true;
+							params.successCallback(itemArray, totItems);
+
+						},
+						error: () => {
+							params.failCallback();
 						}
-
-						this.totalItemsLoaded = true;
-						params.successCallback(itemArray, totItems);
-
-					},
-					() => {
-						params.failCallback();
 					}
 				);
 		}
@@ -130,68 +131,70 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	private getElements(page: number, pageSize: number, emptyElemNumber: number, allNumber: number, params: IGetRowsParams) {
 		this.totalItemsLoaded = false;
 		this.getData(page, pageSize, this.startsWith)
-			.subscribe(
-				(v: Array<T>) => {
-					const itemArray: Array<T> = new Array<T>();
-					const totalItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
+			.subscribe({
+					next:  (v: Array<T>) => {
+						const itemArray: Array<T> = new Array<T>();
+						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
 
-					if (this.emptyElement === true || this.allElement === true) {
+						if (this.emptyElement === true || this.allElement === true) {
 
-						if (page === 1) {
-							if (this.emptyElement === true) {
-								const newElement: T = this.getInstance();
-								itemArray.push(newElement);
+							if (page === 1) {
+								if (this.emptyElement === true) {
+									const newElement: T = this.getInstance();
+									itemArray.push(newElement);
+								}
+
+								if (this.allElement === true) {
+									const allElement: T = this.getAllInstance();
+									itemArray.push(allElement);
+								}
+
+								for (const originalElement of v) {
+									itemArray.push(originalElement);
+								}
+								params.successCallback(itemArray, totalItems);
+								this.totalItemsLoaded = true;
+
+							} else {
+								this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
+									.subscribe({
+											next:  (previousPage: Array<T>) => {
+
+												if (this.emptyElement === true && this.allElement === true) {
+													const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
+													itemArray.push(lastButOneItemFromPreviousPage);
+
+													const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+													itemArray.push(lastItemFromPreviousPage);
+												} else {
+													const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+													itemArray.push(lastItemFromPreviousPage);
+												}
+
+												for (const originalElement of v) {
+													itemArray.push(originalElement);
+												}
+												this.totalItemsLoaded = true;
+												params.successCallback(itemArray, totalItems);
+											},
+											error: () => {
+												params.failCallback();
+											}
+										}
+									);
 							}
-
-							if (this.allElement === true) {
-								const allElement: T = this.getAllInstance();
-								itemArray.push(allElement);
-							}
+						} else {
 
 							for (const originalElement of v) {
 								itemArray.push(originalElement);
 							}
-							params.successCallback(itemArray, totalItems);
 							this.totalItemsLoaded = true;
-
-						} else {
-							this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
-								.subscribe(
-									(previousPage: Array<T>) => {
-
-										if (this.emptyElement === true && this.allElement === true) {
-											const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
-											itemArray.push(lastButOneItemFromPreviousPage);
-
-											const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-											itemArray.push(lastItemFromPreviousPage);
-										} else {
-											const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-											itemArray.push(lastItemFromPreviousPage);
-										}
-
-										for (const originalElement of v) {
-											itemArray.push(originalElement);
-										}
-										this.totalItemsLoaded = true;
-										params.successCallback(itemArray, totalItems);
-									},
-									() => {
-										params.failCallback();
-									}
-								);
+							params.successCallback(itemArray, totalItems);
 						}
-					} else {
-
-						for (const originalElement of v) {
-							itemArray.push(originalElement);
-						}
-						this.totalItemsLoaded = true;
-						params.successCallback(itemArray, totalItems);
+					},
+					error: () => {
+						params.failCallback();
 					}
-				},
-				error => {
-					params.failCallback();
 				}
 			);
 	}

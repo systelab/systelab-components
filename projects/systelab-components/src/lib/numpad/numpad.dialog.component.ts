@@ -60,7 +60,7 @@ export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 	}
 
 	public doKeyPress(event: KeyboardEvent) {
-		if (event.keyCode === 13) {
+		if (event.code === 'Enter') {
 			this.dialog.close(this.value);
 		}
 	}

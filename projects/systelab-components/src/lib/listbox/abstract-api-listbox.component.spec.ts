@@ -97,10 +97,7 @@ describe('Systelab Listbox', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				])],
+				AgGridModule],
 			declarations: [
 				GridContextMenuCellRendererComponent,
 				GridHeaderContextMenuComponent,

@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GridOptions } from 'ag-grid-community';
+import { ColDef, GetRowIdParams, GridOptions } from 'ag-grid-community';
 
 @Directive()
 export abstract class AbstractListBox<T> implements OnInit {
@@ -61,6 +61,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Output() public multipleSelectedItemListChange = new EventEmitter();
 
 	protected constructor() {
+		// This is intentional
 	}
 
 	protected abstract getIdField(level?: number): string;
@@ -90,7 +91,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		this.gridOptions.rowHeight = Number(rowHeight);
 		this.gridOptions.suppressDragLeaveHidesColumns = true;
-		this.gridOptions.suppressCellSelection = true;
+		this.gridOptions.suppressCellFocus = true;
 		this.gridOptions.enableRangeSelection = !this.isDisabled;
 		this.gridOptions.defaultColDef = {};
 		this.gridOptions.defaultColDef.resizable = false;
@@ -100,14 +101,20 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.context = {componentParent: this};
 
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.getRowNodeId = (item) => this.getRowNodeId(item)
+		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
 
 		this.gridOptions.rowData = this.values;
 	}
 
-	protected getRowNodeId(item:T): string | number | undefined {
-		return item?.[this.getIdField()] ?? '';
+	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
+		if (item) {
+			if (item[this.getIdField()]) {
+				return item[this.getIdField()];
+			}
+			return item?.data[this.getIdField()] ?? '';
+		}
+		return '';
 	}
 
 	protected getColumnDefsWithOptions(): Array<any> {
@@ -162,7 +169,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	public doGridReady(event: any) {
 		this.gridOptions.api.sizeColumnsToFit();
-		this.gridOptions.api.doLayout();
 	}
 
 	public doGridSizeChanged(event: any) {
