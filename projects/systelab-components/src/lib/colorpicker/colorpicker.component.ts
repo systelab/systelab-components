@@ -1,20 +1,20 @@
-import {ChangeDetectorRef, Component, OnInit, Renderer2} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { AbstractComboBox } from '../combobox/abstract-combobox.component';
 import { ColorCellRendererComponent } from './color-cell-renderer.component';
 import { ColorUtilService } from '../utilities/color.util.service';
-import {ComboBoxInputRenderer} from '../combobox/renderer/combobox-input-renderer';
+import { ComboBoxInputRenderer } from '../combobox/renderer/combobox-input-renderer';
 
-@Component( {
+@Component({
 	selector:    'systelab-colorpicker',
 	templateUrl: '../combobox/abstract-combobox.component.html'
-} )
+})
 export class ColorComboBox extends AbstractComboBox<ComboBoxInputRenderer> implements OnInit {
-	constructor( public override myRenderer: Renderer2, chRef: ChangeDetectorRef) {
-		super( myRenderer, chRef);
+	constructor(public override myRenderer: Renderer2, chRef: ChangeDetectorRef) {
+		super(myRenderer, chRef);
 
 		this.customInputRenderer = ColorCellRendererComponent;
 
-		this.values = ColorUtilService.generateColorArray( [0, 128, 192, 255], true );
+		this.values = ColorUtilService.generateColorArray([0, 128, 192, 255], true);
 	}
 
 	public override ngOnInit(): void {
@@ -22,9 +22,9 @@ export class ColorComboBox extends AbstractComboBox<ComboBoxInputRenderer> imple
 
 		this.columnDefs = [
 			{
-				colId:                 'id',
-				field:                 this.getDescriptionField(),
-				cellRendererFramework: ColorCellRendererComponent,
+				colId:        'id',
+				field:        this.getDescriptionField(),
+				cellRenderer: ColorCellRendererComponent,
 			}
 		];
 

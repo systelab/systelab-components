@@ -55,7 +55,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 
 	public ngOnInit() {
 		super.ngOnInit();
-		this.gridOptions.suppressCellSelection = false;
+		this.gridOptions.suppressCellFocus = false;
 	}
 
 	protected getColumnDefs(): Array<any> {
@@ -68,7 +68,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 			colId:                    'field2',
 			headerName:               'Title Field 2',
 			field:                    'field2',
-			headerComponentFramework: GridHeaderContextMenuComponent,
+			headerComponent: GridHeaderContextMenuComponent,
 			headerComponentParams:    {headerName: 'Field2', headerData: 'field2'},
 			width:                    200
 		}];
@@ -153,10 +153,7 @@ describe('Systelab Grid', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				])],
+				AgGridModule],
 			declarations: [GridHeaderContextMenuComponent,
 				GridContextMenuCellRendererComponent,
 				GridContextMenuComponent,

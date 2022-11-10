@@ -72,10 +72,7 @@ describe('Systelab Time unit selector', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				]),
+				AgGridModule,
 				TestModule]
 		})
 			.compileComponents();
