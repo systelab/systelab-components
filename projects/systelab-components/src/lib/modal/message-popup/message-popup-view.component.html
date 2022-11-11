@@ -1,6 +1,10 @@
 <systelab-dialog-header (close)="close()">{{parameters.title}}</systelab-dialog-header>
 <systelab-message-with-icon class="d-flex slab-flex-1 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type"
                             [icon]="parameters.icon"></systelab-message-with-icon>
+<div *ngIf="parameters.askAgain" class="d-flex slab-flex-1 align-items-center pl-5">
+    <systelab-switch [(isChecked)]="checkAskAgain"></systelab-switch>
+    <label class="col-form-label ml-2">{{parameters.msgAskAgain}}</label>
+</div>
 <systelab-dialog-bottom>
     <div class="ml-auto" *ngIf="parameters.buttons.length>0">
         <button *ngFor="let button of parameters.buttons; let i=index; let cnt=count;" type="button" class="btn ml-1 {{button.cssClass}}" (click)="close(button.returnValue)"

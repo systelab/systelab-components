@@ -20,7 +20,7 @@ describe('Systelab MessagePopupViewComponent', () => {
 
 
 	beforeEach(async () => {
-		spyDialogRef = jasmine.createSpyObj('DialogRef', ['context']);
+		spyDialogRef = jasmine.createSpyObj('DialogRef', ['context', 'close']);
 		await TestBed.configureTestingModule({
 			imports:      [
 				BrowserModule,
@@ -65,6 +65,38 @@ describe('Systelab MessagePopupViewComponent', () => {
 
 		expect(component)
 			.toBeTruthy();
+	});
+
+	it('Closing the AskAgainPopup', () => {
+		parameters.askAgain = true;
+
+		spyDialogRef.context = parameters;
+		fixture = TestBed.createComponent(MessagePopupViewComponent);
+		component = fixture.componentInstance;
+		component.parameters = parameters;
+		fixture.detectChanges();
+
+		expect(component)
+			.toBeTruthy();
+
+		component.close();
+		expect(spyDialogRef.close).toHaveBeenCalledWith(false);
+	});
+
+	it('Closing different popup from AskAgainPopup', () => {
+		parameters.askAgain = false;
+
+		spyDialogRef.context = parameters;
+		fixture = TestBed.createComponent(MessagePopupViewComponent);
+		component = fixture.componentInstance;
+		component.parameters = parameters;
+		fixture.detectChanges();
+
+		expect(component)
+			.toBeTruthy();
+
+		component.close();
+		expect(spyDialogRef.close).toHaveBeenCalledWith(undefined);
 	});
 
 });
