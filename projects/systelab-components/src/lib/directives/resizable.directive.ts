@@ -1,6 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import * as interact_ from 'interactjs/dist/interact';
-const interact = interact_;
+import interact from 'interactjs';
 
 @Directive({
 	selector: '[resizable]'
@@ -29,6 +28,7 @@ export class ResizableDirective implements OnInit {
 	}
 
 	public ngOnInit(): void {
+
 		interact(this.element.nativeElement)
 			.resizable(Object.assign({}, this.resizableOptions || {}))
 			.on('resizemove', (event) => this.doResizeMove(event))

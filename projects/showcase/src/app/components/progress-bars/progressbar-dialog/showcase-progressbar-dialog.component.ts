@@ -36,15 +36,17 @@ export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgres
 			.pipe(
 				takeWhile(() => this.progress < 100)
 			)
-			.subscribe(() => {
-					if (this.progress < 100) {
-						this.progress = this.progress + 10;
-						this.header.go(this.progress);
+			.subscribe({
+					next:     () => {
+						if (this.progress < 100) {
+							this.progress = this.progress + 10;
+							this.header.go(this.progress);
+						}
+					}, error: () => {
+					},
+					complete: () => {
+						this.dialog.enable();
 					}
-				}, () => {
-				},
-				() => {
-					this.dialog.enable();
 				}
 			);
 	}

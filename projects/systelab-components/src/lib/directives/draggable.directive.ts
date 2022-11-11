@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import * as interact_ from 'interactjs/dist/interact';
-const interact = interact_;
+import interact from 'interactjs';
+
 @Directive({
 	selector: '[draggable]'
 })
