@@ -19,15 +19,15 @@ export class MessagePopupService {
 	}
 
 	public showErrorPopup(titleDescription: string, errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_ERROR, errorDescription, modalClass, width, height, []);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_ERROR, errorDescription, modalClass, width, height);
 	}
 
 	public showWarningPopup(titleDescription: string, warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_WARNING, warningDescription, modalClass, width, height, []);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_WARNING, warningDescription, modalClass, width, height);
 	}
 
 	public showInformationPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_INFO, messageDescription, modalClass, width, height, []);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_INFO, messageDescription, modalClass, width, height);
 	}
 
 	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, template?: string): Observable<any> {
@@ -39,7 +39,11 @@ export class MessagePopupService {
 		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons, icon);
 	}
 
-	protected showPopup(title: string, type: number, message: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon): Observable<any> {
+	public showAskAgainPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon, messageAskAgain?: string): Observable<any> {
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_QUESTION, messageDescription, modalClass, width, height, buttons, icon, messageAskAgain);
+	}
+
+	protected showPopup(title: string, type: number, message: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon, messageAskAgain?: string): Observable<any> {
 
 		const defaultWidth = 600;
 		const maxWidth = 700;
@@ -63,6 +67,9 @@ export class MessagePopupService {
 		parameters.minHeight = minHeight;
 
 		parameters.icon = icon;
+
+		parameters.askAgain = messageAskAgain !== undefined && messageAskAgain.length > 0;
+		parameters.msgAskAgain = messageAskAgain;
 
 		return this.dialogService.showDialog(MessagePopupViewComponent, parameters);
 	}

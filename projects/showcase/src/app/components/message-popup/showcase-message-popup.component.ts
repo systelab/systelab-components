@@ -45,4 +45,10 @@ export class ShowcaseMessagePopupComponent {
 				console.log('Observable returned to showcase', v);
 			});
 	}
+
+	public showAskAgain() {
+		const buttons: MessagePopupButton[] = [
+			new MessagePopupButton('Approve', '', 'btn-primary')];
+		this.messagePopupService.showAskAgainPopup('Test', 'Are you sure?', null, 800, 400, buttons, null, 'Don\'t ask again');
+	}
 }
