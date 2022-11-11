@@ -2,6 +2,8 @@
  * Public API Surface of systelab-preferences
  */
 
+import { NumpadDecimalNumericDirective } from './lib/directives/numpad-decimal-numeric.directive';
+
 export * from './lib/systelab-components.module';
 export * from './lib/slider/slider.component';
 export * from './lib/slider-double-range/slider-double-range.component';
@@ -108,6 +110,8 @@ export * from './lib/directives/autofocus.directive';
 export * from './lib/directives/keyup-debounce.directive';
 export * from './lib/directives/draggable.directive';
 export * from './lib/directives/resizable.directive';
+export * from './lib/directives/numpad-decimal-numeric.directive';
+
 
 export * from './lib/listbox/renderer/abstract-tree-listbox-renderer.component';
 export * from './lib/contextmenu/context-menu-item.component';
