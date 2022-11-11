@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { RowNode } from 'ag-grid-community';
+import { IsFullWidthRowParams } from 'ag-grid-community';
 import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -19,7 +19,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input() public searcher: AbstractSearcher<T>;
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
-	            protected override dialogService: DialogService) {
+				protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
@@ -36,8 +36,8 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		return this.searcher.hideHeader();
 	}
 
-	protected override getIsFullWidthCell(rowNode: RowNode): boolean {
-		return this.searcher.getIsFullWidthCell(rowNode);
+	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
+		return this.searcher.getIsFullWidthRow(isFullWidthRowParams);
 	}
 
 	public override getFullWidthCellRenderer(): any {

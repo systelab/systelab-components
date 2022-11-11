@@ -46,21 +46,22 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 			this.getElements(page, pageSize, showAllElementNumber, params);
 		} else {
 			this.getData(page - 1, this.gridOptions.paginationPageSize)
-				.subscribe(
-					(previousPage: Array<T>) => {
-						this.gridOptions.api.hideOverlay();
-						const itemArray: Array<T> = [];
-						const totItems: number = Number(this.getTotalItems() + showAllElementNumber);
+				.subscribe({
+						next:  (previousPage: Array<T>) => {
+							this.gridOptions.api.hideOverlay();
+							const itemArray: Array<T> = [];
+							const totItems: number = Number(this.getTotalItems() + showAllElementNumber);
 
-						const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-						itemArray.push(lastItemFromPreviousPage);
+							const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+							itemArray.push(lastItemFromPreviousPage);
 
-						params.successCallback(itemArray, totItems);
+							params.successCallback(itemArray, totItems);
 
-					},
-					() => {
-						this.gridOptions.api.hideOverlay();
-						params.failCallback();
+						},
+						error: () => {
+							this.gridOptions.api.hideOverlay();
+							params.failCallback();
+						}
 					}
 				);
 		}
@@ -69,51 +70,53 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	private getElements(page: number, pageSize: number, emptyElemNumber: number, params: IGetRowsParams) {
 		this.getData(page, pageSize)
 			.subscribe(
-				(v: Array<T>) => {
-					this.gridOptions.api.hideOverlay();
-					const itemArray: Array<T> = [];
-					const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
+				{
+					next:  (v: Array<T>) => {
+						this.gridOptions.api.hideOverlay();
+						const itemArray: Array<T> = [];
+						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
 
-					if (this.showAll === true) {
+						if (this.showAll === true) {
 
-						if (page === 1) {
-							const newElement: T = this.getInstance();
-							newElement[this.getIdField()] = this.getAllFieldID();
-							newElement[this.getDescriptionField()] = this.getAllFieldDescription();
-							itemArray.push(newElement);
+							if (page === 1) {
+								const newElement: T = this.getInstance();
+								newElement[this.getIdField()] = this.getAllFieldID();
+								newElement[this.getDescriptionField()] = this.getAllFieldDescription();
+								itemArray.push(newElement);
 
+								for (const originalElement of v) {
+									itemArray.push(originalElement);
+								}
+								params.successCallback(itemArray, totalItems);
+
+							} else {
+								this.getData(page - 1, this.gridOptions.paginationPageSize)
+									.subscribe(
+										(previousPage: Array<T>) => {
+											const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+											itemArray.push(lastItemFromPreviousPage);
+
+											for (const originalElement of v) {
+												itemArray.push(originalElement);
+											}
+											params.successCallback(itemArray, totalItems);
+										},
+										() => {
+											params.failCallback();
+										}
+									);
+							}
+						} else {
 							for (const originalElement of v) {
 								itemArray.push(originalElement);
 							}
 							params.successCallback(itemArray, totalItems);
-
-						} else {
-							this.getData(page - 1, this.gridOptions.paginationPageSize)
-								.subscribe(
-									(previousPage: Array<T>) => {
-										const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-										itemArray.push(lastItemFromPreviousPage);
-
-										for (const originalElement of v) {
-											itemArray.push(originalElement);
-										}
-										params.successCallback(itemArray, totalItems);
-									},
-									() => {
-										params.failCallback();
-									}
-								);
 						}
-					} else {
-						for (const originalElement of v) {
-							itemArray.push(originalElement);
-						}
-						params.successCallback(itemArray, totalItems);
+					},
+					error: () => {
+						this.gridOptions.api.hideOverlay();
+						params.failCallback();
 					}
-				},
-				() => {
-					this.gridOptions.api.hideOverlay();
-					params.failCallback();
 				}
 			);
 	}
