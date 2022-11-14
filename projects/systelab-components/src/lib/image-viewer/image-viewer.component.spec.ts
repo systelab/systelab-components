@@ -15,8 +15,8 @@ import {SystelabTranslateModule} from 'systelab-translate';
 	template: `
         <systelab-image-viewer class="slab-overflow-container"
 			   [imageSrc]="imageSrc"
-			   [imageTitle]="description"
-			   [overlayText]="description"
+			   [imageTitle]="imageTitle"
+			   [overlayText]="imageTitle"
 			   [actionButtons]="actionButtons"
 			   (clickActionButton)="doClickActionButton($event)"
 			   [showZoomByAreaButton]="true"
@@ -26,8 +26,8 @@ import {SystelabTranslateModule} from 'systelab-translate';
 	styles:   []
 })
 export class ImageViewerTestComponent {
-	public imageSrc = '/map.jpg';
-	public description = 'Barcelona Eixample District';
+	public imageSrc = 'images/map.jpg';
+	public imageTitle = 'Barcelona Eixample District';
 	public actionButtons: ActionButton[] = [
 		{action: 'Action 1', label: 'Action 1', type: ActionButtonType.BUTTON},
 		{action: 'blue', label: 'Apply blue', type: ActionButtonType.TOGGLE_BUTTON},
@@ -74,12 +74,24 @@ describe('ImageViewerComponent', () => {
 
 	it('should render description parameter as overlay text', () => {
 		const overlayText = fixture.debugElement.nativeElement.querySelector('#imageViewerOverlayText').innerHTML;
-		expect(overlayText).toEqual(fixture.componentInstance.description);
+		expect(overlayText).toEqual(fixture.componentInstance.imageTitle);
 	});
 
 	it('should call  overlay text', () => {
 		const overlayText = fixture.debugElement.nativeElement.querySelector('#imageViewerOverlayText').innerHTML;
-		expect(overlayText).toEqual(fixture.componentInstance.description);
+		expect(overlayText).toEqual(fixture.componentInstance.imageTitle);
 	});
 
+	it('should call action when action button is clicked', () => {
+		spyOn(fixture.componentInstance, 'doClickActionButton');
+		clickActionButton(fixture, 1);
+		expect(fixture.componentInstance.doClickActionButton)
+			.toHaveBeenCalled();
+	});
+
+	function clickActionButton(fixture: ComponentFixture<ImageViewerTestComponent>, children: number) {
+		const button = fixture.debugElement.nativeElement.querySelector('#imageViewerHeader > div:nth-child('+ children +') > div.ml-1 > systelab-button > button');
+		button.click();
+		fixture.detectChanges();
+	}
 });
