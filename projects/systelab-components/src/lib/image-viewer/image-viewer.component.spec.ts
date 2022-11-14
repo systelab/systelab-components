@@ -8,6 +8,7 @@ import {ButtonComponent} from '../button/button.component';
 import {SliderComponent} from '../slider/slider.component';
 import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
 import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-components';
+import {SystelabTranslateModule} from 'systelab-translate';
 
 @Component({
 	selector: 'systelab-image-viewer-test',
@@ -47,7 +48,9 @@ describe('ImageViewerComponent', () => {
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
-				HttpClientModule],
+				HttpClientModule,
+				SystelabTranslateModule
+			],
 			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent]
 		}).compileComponents();
 
