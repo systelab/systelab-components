@@ -40,6 +40,13 @@ export class ImageViewerTestComponent {
 	}
 }
 
+const clickActionButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>, children: number) => {
+	const button = imageViewer.debugElement.nativeElement.querySelector('#imageViewerHeader > div:nth-child('
+		+ children +') > div.ml-1 > systelab-button > button');
+	button.click();
+	imageViewer.detectChanges();
+};
+
 describe('ImageViewerComponent', () => {
 	let fixture: ComponentFixture<ImageViewerTestComponent>;
 
@@ -89,9 +96,4 @@ describe('ImageViewerComponent', () => {
 			.toHaveBeenCalled();
 	});
 
-	function clickActionButton(fixture: ComponentFixture<ImageViewerTestComponent>, children: number) {
-		const button = fixture.debugElement.nativeElement.querySelector('#imageViewerHeader > div:nth-child('+ children +') > div.ml-1 > systelab-button > button');
-		button.click();
-		fixture.detectChanges();
-	}
 });
