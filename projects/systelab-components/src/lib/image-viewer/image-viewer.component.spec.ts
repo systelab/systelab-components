@@ -8,14 +8,15 @@ import {ButtonComponent} from '../button/button.component';
 import {SliderComponent} from '../slider/slider.component';
 import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
 import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-components';
+import {SystelabTranslateModule} from 'systelab-translate';
 
 @Component({
 	selector: 'systelab-image-viewer-test',
 	template: `
         <systelab-image-viewer class="slab-overflow-container"
 			   [imageSrc]="imageSrc"
-			   [imageDescription]="description"
-			   [overlayText]="description"
+			   [imageTitle]="imageTitle"
+			   [overlayText]="imageTitle"
 			   [actionButtons]="actionButtons"
 			   (clickActionButton)="doClickActionButton($event)"
 			   [showZoomByAreaButton]="true"
@@ -25,8 +26,8 @@ import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-com
 	styles:   []
 })
 export class ImageViewerTestComponent {
-	public imageSrc = '/map.jpg';
-	public description = 'Barcelona Eixample District';
+	public imageSrc = 'images/map.jpg';
+	public imageTitle = 'Barcelona Eixample District';
 	public actionButtons: ActionButton[] = [
 		{action: 'Action 1', label: 'Action 1', type: ActionButtonType.BUTTON},
 		{action: 'blue', label: 'Apply blue', type: ActionButtonType.TOGGLE_BUTTON},
@@ -39,6 +40,13 @@ export class ImageViewerTestComponent {
 	}
 }
 
+const clickActionButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>, children: number) => {
+	const button = imageViewer.debugElement.nativeElement.querySelector('#imageViewerHeader > div:nth-child('
+		+ children +') > div.ml-1 > systelab-button > button');
+	button.click();
+	imageViewer.detectChanges();
+};
+
 describe('ImageViewerComponent', () => {
 	let fixture: ComponentFixture<ImageViewerTestComponent>;
 
@@ -47,7 +55,9 @@ describe('ImageViewerComponent', () => {
 			imports:      [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
-				HttpClientModule],
+				HttpClientModule,
+				SystelabTranslateModule
+			],
 			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent]
 		}).compileComponents();
 
@@ -71,12 +81,19 @@ describe('ImageViewerComponent', () => {
 
 	it('should render description parameter as overlay text', () => {
 		const overlayText = fixture.debugElement.nativeElement.querySelector('#imageViewerOverlayText').innerHTML;
-		expect(overlayText).toEqual(fixture.componentInstance.description);
+		expect(overlayText).toEqual(fixture.componentInstance.imageTitle);
 	});
 
 	it('should call  overlay text', () => {
 		const overlayText = fixture.debugElement.nativeElement.querySelector('#imageViewerOverlayText').innerHTML;
-		expect(overlayText).toEqual(fixture.componentInstance.description);
+		expect(overlayText).toEqual(fixture.componentInstance.imageTitle);
+	});
+
+	it('should call action when action button is clicked', () => {
+		spyOn(fixture.componentInstance, 'doClickActionButton');
+		clickActionButton(fixture, 1);
+		expect(fixture.componentInstance.doClickActionButton)
+			.toHaveBeenCalled();
 	});
 
 });
