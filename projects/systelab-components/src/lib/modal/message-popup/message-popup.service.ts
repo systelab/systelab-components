@@ -19,15 +19,15 @@ export class MessagePopupService {
 	}
 
 	public showErrorPopup(titleDescription: string, errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_ERROR, errorDescription, modalClass, width, height);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_ERROR, errorDescription, modalClass, width, height, []);
 	}
 
 	public showWarningPopup(titleDescription: string, warningDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_WARNING, warningDescription, modalClass, width, height);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_WARNING, warningDescription, modalClass, width, height, []);
 	}
 
 	public showInformationPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
-		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_INFO, messageDescription, modalClass, width, height);
+		return this.showPopup(titleDescription, MessageWithIconComponent.MESSAGE_INFO, messageDescription, modalClass, width, height, []);
 	}
 
 	public showYesNoQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, template?: string): Observable<any> {
