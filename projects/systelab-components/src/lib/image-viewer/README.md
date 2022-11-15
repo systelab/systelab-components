@@ -9,7 +9,7 @@ Over the image the component displays a top bar with some buttons that enable th
 ```html
     <systelab-image-viewer
         [imageSrc]="imageSrc"
-        [imageDescription]="imageDescription"
+        [imageTitle]="imageDescription"
         [overlayText]="overlayText"
         [actionButtons]="actionButtons"
         [imageFilters]="imageFilters"        
