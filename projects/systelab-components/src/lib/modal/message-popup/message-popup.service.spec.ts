@@ -101,7 +101,8 @@ describe('MessagePopupService', () => {
 			commonParams.messageDescription,
 			commonParams.modalClass,
 			commonParams.width,
-			commonParams.height
+			commonParams.height,
+			[]
 		);
 	});
 
@@ -114,7 +115,8 @@ describe('MessagePopupService', () => {
 			commonParams.messageDescription,
 			commonParams.modalClass,
 			commonParams.width,
-			commonParams.height
+			commonParams.height,
+			[]
 		);
 	});
 
@@ -127,7 +129,8 @@ describe('MessagePopupService', () => {
 			commonParams.messageDescription,
 			commonParams.modalClass,
 			commonParams.width,
-			commonParams.height
+			commonParams.height,
+			[]
 		);
 	});
 
