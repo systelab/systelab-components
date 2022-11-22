@@ -2,7 +2,6 @@
   "name": "systelab-components",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
@@ -67,7 +66,7 @@
     "@types/chart.js": "^2.9.24",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.12.62",
+    "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "@wdio/cli": "^7.25.4",
@@ -87,8 +86,7 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "1.5.4",
     "ng-packagr": "^14.2.1",
-    "snapshot-testing": "^1.0.0",
-    "ts-node": "~8.3.0",
+    "ts-node": "~10.9.1",
     "typescript": "~4.6.4",
     "wdio-chromedriver-service": "7.2.2"
   }

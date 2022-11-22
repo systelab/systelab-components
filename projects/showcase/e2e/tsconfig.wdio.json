@@ -4,6 +4,7 @@
     "sourceMap": false,
     "target": "es2015",
     "module": "commonjs",
+    "moduleResolution": "node",
     "removeComments": true,
     "noImplicitAny": true,
     "strictPropertyInitialization": true,
