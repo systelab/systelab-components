@@ -10,7 +10,7 @@ import { DialogService } from '../modal/dialog/dialog.service';
 export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
-	            protected override dialogService: DialogService) {
+				protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 	}
 
@@ -34,9 +34,10 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	public getRows(params: IGetRowsParams): void {
 		this.gridOptions.api.showLoadingOverlay();
 		this.getData(params.endRow / this.gridOptions.paginationPageSize, this.gridOptions.paginationPageSize)
-			.subscribe(
-				(page: Array<T>) => this.putPage(page, this.getTotalItems(), params),
-				error => this.putPage([], 0, params));
+			.subscribe({
+				next:  (page: Array<T>) => this.putPage(page, this.getTotalItems(), params),
+				error: () => this.putPage([], 0, params)
+			});
 	}
 
 	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {

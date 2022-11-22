@@ -3,6 +3,7 @@ import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-l
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
 import { Observable } from 'rxjs';
+import { GetRowIdParams } from 'ag-grid-community';
 
 export class TreeListBoxElement<T> {
 	public nodeData: T;
@@ -35,6 +36,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this._selectedTreeItem = value;
 		this.selectTreeItemInGrid();
 	}
+
 	get selectedTreeItem(): TreeListBoxElement<T> {
 		return this._selectedTreeItem;
 	}
@@ -47,6 +49,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 		this.selectedIDListChange.emit(this._selectedIDList);
 	}
+
 	get selectedIDList(): string {
 		this._selectedIDList = '';
 		for (const selectedItem of this.multipleSelectedItemList) {
@@ -88,7 +91,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	public override doClick(row: any): void {
 		if (!this.multipleSelection && !this.isDisabled) {
 			const selectionLevel = row.node.data.level;
-			if((selectionLevel === 0 && this.isParentSelectable) || selectionLevel > 0){
+			if ((selectionLevel === 0 && this.isParentSelectable) || selectionLevel > 0) {
 				this.selectedTreeItem = row.node.data;
 				this.selectedTreeItemChange.emit(row.node.data);
 			}
@@ -109,7 +112,6 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			this.selectedIDListChange.emit(this.selectedIDList);
 		}
 		if (this.gridOptions.api) {
-			this.gridOptions.api.doLayout();
 			this.gridOptions.api.sizeColumnsToFit();
 		}
 	}
@@ -164,7 +166,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		} else {
 			this.gridOptions.rowHeight = Number(26);
 		}
-		this.gridOptions.suppressCellSelection = true;
+		this.gridOptions.suppressCellFocus = true;
 
 		if (this.multipleSelection) {
 			this.gridOptions.suppressRowClickSelection = true;
@@ -174,9 +176,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		this.columnDefs = [
 			{
-				colId:                 'id',
-				cellRendererFramework: AbstractTreeListboxRendererComponent,
-				cellRendererParams:    {
+				colId:              'id',
+				cellRenderer:       AbstractTreeListboxRendererComponent,
+				cellRendererParams: {
 					changeFunction:         (e) => {
 						this.changeValues(e);
 					},
@@ -190,16 +192,16 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			}
 		];
 
-		this.gridOptions.getRowNodeId = (item) => this.getRowNodeId(item)
+		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
 
 		this.gridOptions.columnDefs = this.columnDefs;
 
 	}
 
-	protected override getRowNodeId(item: TreeListBoxElement<T>): string | number | undefined {
-		if (item.nodeData[this.getIdField(1)]) {
-			return item.level + '-' + item.nodeData[this.getIdField(1)];
+	protected override getRowNodeId(item: GetRowIdParams): string | number | undefined {
+		if (item?.data?.nodeData[this.getIdField(1)]) {
+			return item.level + '-' + item.data.nodeData[this.getIdField(1)];
 		} else {
 			return null;
 		}
@@ -207,8 +209,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 	protected getRows(): void {
 		this.getData()
-			.subscribe(
-				(dataVector: Array<T>) => {
+			.subscribe({
+				next:  (dataVector: Array<T>) => {
 					this.loadValues(dataVector);
 					this.gridOptions.api.hideOverlay();
 					this.gridOptions.api.setRowData(this.treeValues);
@@ -218,13 +220,12 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					} else if (this.selectedTreeItem) {
 						this.selectTreeItemInGrid();
 					}
-					this.gridOptions.api.doLayout();
 					this.gridOptions.api.sizeColumnsToFit();
 				},
-				() => {
+				error: () => {
 					this.gridOptions.api.hideOverlay();
 				}
-			);
+			});
 	}
 
 	protected loadValues(dataVector: Array<T>): void {
@@ -288,8 +289,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 						const level = this.getIdField(this.selectedTreeItem.level);
 						if (node.data.nodeData[level] === this.selectedTreeItem.nodeData[level]
 							&& node.data.level === this.selectedTreeItem.level) {
-								node.setSelected(true);
-								return;
+							node.setSelected(true);
+							return;
 						}
 					}
 				}

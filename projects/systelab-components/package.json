@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "14.1.1",
+  "version": "14.3.1",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -19,8 +19,8 @@
     "@angular/common": ">=14.0.0 <15.0.0",
     "@angular/core": ">=14.0.0 <15.0.0",
     "@fortawesome/fontawesome-free": ">=5.14.0 <6.0.0",
-    "ag-grid-angular": ">=25.0.0 <26.0.0",
-    "ag-grid-community": ">=25.0.0 <26.0.0",
+    "ag-grid-angular": ">=28.0.0 <29.0.0",
+    "ag-grid-community": ">=28.0.0 <29.0.0",
     "angular-split": ">=4.0.0 <5.0.0",
     "bootstrap": ">=4.5.2 <5.0.0",
     "date-fns": ">=2.0.0 <3.0.0",

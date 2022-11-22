@@ -24,6 +24,17 @@ const yesNoNoOutlineWarningTemplate = {
     template: 'outline-warning',
 }
 
+const commonParams = {
+	titleDescription: 'Test',
+	messageDescription: 'Are you sure?',
+	modalClass: null,
+	width: 600,
+	height: 500,
+	button: null,
+	icon: null,
+	msgAskAgain: 'Don\'t ask again'
+}
+
 const expectedButtonsWithNoTemplate = [
     new MessagePopupButton('COMMON_NO', false, 'btn-link'),
     new MessagePopupButton('COMMON_YES', true, 'btn-outline-primary')
@@ -80,4 +91,77 @@ describe('MessagePopupService', () => {
             buttons
         );
     });
+
+	it('it should show an Error dialog', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+		service.showErrorPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height)
+		expect(service['showPopup']).toHaveBeenCalledWith(
+			commonParams.titleDescription,
+			MessageWithIconComponent.MESSAGE_ERROR,
+			commonParams.messageDescription,
+			commonParams.modalClass,
+			commonParams.width,
+			commonParams.height,
+			[]
+		);
+	});
+
+	it('it should show a warning dialog', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+		service.showWarningPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height)
+		expect(service['showPopup']).toHaveBeenCalledWith(
+			commonParams.titleDescription,
+			MessageWithIconComponent.MESSAGE_WARNING,
+			commonParams.messageDescription,
+			commonParams.modalClass,
+			commonParams.width,
+			commonParams.height,
+			[]
+		);
+	});
+
+	it('it should show an Information dialog', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+		service.showInformationPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height)
+		expect(service['showPopup']).toHaveBeenCalledWith(
+			commonParams.titleDescription,
+			MessageWithIconComponent.MESSAGE_INFO,
+			commonParams.messageDescription,
+			commonParams.modalClass,
+			commonParams.width,
+			commonParams.height,
+			[]
+		);
+	});
+
+	it('it should show an CustomQuestion dialog', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+		service.showCustomQuestionPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height, commonParams.button, commonParams.icon)
+		expect(service['showPopup']).toHaveBeenCalledWith(
+			commonParams.titleDescription,
+			MessageWithIconComponent.MESSAGE_QUESTION,
+			commonParams.messageDescription,
+			commonParams.modalClass,
+			commonParams.width,
+			commonParams.height,
+			commonParams.button,
+			commonParams.icon
+		);
+	});
+
+	it('it should show an AskAgain dialog', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+		service.showAskAgainPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height, commonParams.button, commonParams.icon, commonParams.msgAskAgain)
+		expect(service['showPopup']).toHaveBeenCalledWith(
+				commonParams.titleDescription,
+				MessageWithIconComponent.MESSAGE_QUESTION,
+				commonParams.messageDescription,
+				commonParams.modalClass,
+				commonParams.width,
+				commonParams.height,
+				commonParams.button,
+				commonParams.icon,
+				commonParams.msgAskAgain
+			);
+	});
 });

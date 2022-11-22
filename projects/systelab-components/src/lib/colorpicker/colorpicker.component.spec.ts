@@ -88,10 +88,7 @@ describe('Systelab Color picker', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				]),
+				AgGridModule,
 				TestModule]
 		})
 			.compileComponents();

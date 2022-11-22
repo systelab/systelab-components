@@ -30,12 +30,12 @@ export class ShowcaseGridUtil {
 		return [
 			{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true, pinned: 'left'},
 			{
-				colId:                    'flags',
-				headerName:               'Flags',
-				field:                    'flag',
-				width:                    220,
-				headerComponentFramework: GridHeaderContextMenuComponent,
-				headerComponentParams:    {headerName: 'Flags', headerData: 'flags'}
+				colId:                 'flags',
+				headerName:            'Flags',
+				field:                 'flag',
+				width:                 220,
+				headerComponent:       GridHeaderContextMenuComponent,
+				headerComponentParams: {headerName: 'Flags', headerData: 'flags'}
 			}, {
 				colId:               'decimal-input',
 				headerName:          'Cell with Decimal Input',
@@ -54,26 +54,26 @@ export class ShowcaseGridUtil {
 				editable:            true,
 				onCellValueChanged:  e => console.log('input', e)
 			}, {
-				colId:                 'checkbox',
-				headerName:            'Cell with Checkbox',
-				field:                 'checkboxValue',
-				width:                 200,
-				cellRendererFramework: CheckboxCellRendererComponent,
-				cellEditorFramework:   CheckboxCellEditorComponent,
-				onCellValueChanged:    e => console.log('checkbox', e),
-				editable:              true,
-				elementID:             'checkboxID',
-				resizable:             false
+				colId:               'checkbox',
+				headerName:          'Cell with Checkbox',
+				field:               'checkboxValue',
+				width:               200,
+				cellRenderer:        CheckboxCellRendererComponent,
+				cellEditorFramework: CheckboxCellEditorComponent,
+				onCellValueChanged:  e => console.log('checkbox', e),
+				editable:            true,
+				elementID:           'checkboxID',
+				resizable:           false
 			}, {
-				colId:                 'spinner',
-				headerName:            'Cell with Spinner',
-				field:                 'spinnerValues',
-				width:                 200,
-				editable:              true,
-				cellRendererFramework: SpinnerCellRendererComponent,
-				cellEditorFramework:   SpinnerCellEditorComponent,
-				onCellValueChanged:    e => console.log('test', e),
-				resizable:             false
+				colId:               'spinner',
+				headerName:          'Cell with Spinner',
+				field:               'spinnerValues',
+				width:               200,
+				editable:            true,
+				cellRenderer:        SpinnerCellRendererComponent,
+				cellEditorFramework: SpinnerCellEditorComponent,
+				onCellValueChanged:  e => console.log('test', e),
+				resizable:           false
 			}];
 	}
 
@@ -81,61 +81,60 @@ export class ShowcaseGridUtil {
 		// TODO Translate column names
 		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true, pinned: 'left'},
 			{
-				colId:                    'group1',
-				headerName:               'Group 1',
-				width:                    220,
-				children: [
+				colId:      'group1',
+				headerName: 'Group 1',
+				width:      220,
+				children:   [
 					{
-						colId:               'decimal-input',
-						headerName:          'Column 1a',
-						field:               'decimalValue',
-						width:               200
+						colId:      'decimal-input',
+						headerName: 'Column 1a',
+						field:      'decimalValue',
+						width:      200
 					}, {
-						colId:               'input',
-						headerName:          'Column 1b',
-						field:               'inputValue',
-						width:               200
+						colId:      'input',
+						headerName: 'Column 1b',
+						field:      'inputValue',
+						width:      200
 					}
 				]
 			},
 			{
-				colId:                    'group2',
-				headerName:               'Group 2',
-				width:                    220,
-				children: [
+				colId:      'group2',
+				headerName: 'Group 2',
+				width:      220,
+				children:   [
 					{
-						colId:                 'checkbox',
-						headerName:            'Column 2a',
-						field:                 'checkboxValue',
-						width:                 200,
-						elementID:             'checkboxID',
+						colId:      'checkbox',
+						headerName: 'Column 2a',
+						field:      'checkboxValue',
+						width:      200,
+						elementID:  'checkboxID',
 					}, {
-						colId:                 'spinner',
-						headerName:            'Column 2b',
-						field:                 'checkboxValue',
-						elementID:             'checkboxID',
-						width:                 200,
+						colId:      'spinner',
+						headerName: 'Column 2b',
+						field:      'checkboxValue',
+						elementID:  'checkboxID',
+						width:      200,
 					}
 				]
 			}
-			];
+		];
 	}
-
 
 	public static getColumnBarsDefs(): Array<any> {
 		return [{colId: 'date', headerName: 'Date', field: 'eventDate', width: 300, rowDrag: true},
 			{colId: 'value', headerName: 'Value (%)', field: 'value', width: 120},
 			{
-				colId:                 'status',
-				valueGetter:           (params: any) => {
+				colId:              'status',
+				valueGetter:        (params: any) => {
 					return params.data.stackedBarValues;
 				},
-				headerName:            'Status',
-				getMaxValue:           () => {
+				headerName:         'Status',
+				getMaxValue:        () => {
 					return ShowcaseGridUtil.getMaxValue();
 				},
-				cellRendererFramework: StackedBarCellRendererComponent,
-				cellRendererParams:    {
+				cellRenderer:       StackedBarCellRendererComponent,
+				cellRendererParams: {
 					barClick: ShowcaseGridUtil.doBarClick,
 				},
 			}];

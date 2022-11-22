@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import {polyfill} from 'mobile-drag-drop';
+import { polyfill } from 'mobile-drag-drop';
 
 @Directive()
 export abstract class AbstractSortableListComponent<T> {
@@ -68,7 +68,7 @@ export abstract class AbstractSortableListComponent<T> {
 	}
 
 	public removeElement(element: T, event: KeyboardEvent): void {
-		if (this.deleteWithSupr && event.keyCode === 46) {
+		if (this.deleteWithSupr && event.code === 'Delete') {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
 		}
 	}

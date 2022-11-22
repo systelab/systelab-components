@@ -97,7 +97,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	@Input() public height;
 
-	constructor(public dialogService: DialogService, public abstractSearcher: AbstractSearcher<T>) {
+	protected constructor(public dialogService: DialogService, public abstractSearcher: AbstractSearcher<T>) {
 		this.searcherDialogParameters = this.abstractSearcher.getDialogParameters();
 		this.abstractSearcher = abstractSearcher;
 
@@ -110,10 +110,10 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 	public getWidth() {
 		if (this.height) {
 			return {
-				'width':     this.height.toString() + 'px',
-				'min-width': this.height.toString() + 'px',
-				'line-height': 1,
-				'padding-left': 0,
+				'width':         this.height.toString() + 'px',
+				'min-width':     this.height.toString() + 'px',
+				'line-height':   1,
+				'padding-left':  0,
 				'padding-right': 0,
 			};
 		}
@@ -163,26 +163,27 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 	public doSearch(): void {
 		if (this.code) {
 			this.abstractSearcher.getData(this.code, 1, this.multipleSelection ? 0 : 1, true)
-				.subscribe(
-					response => {
-						if (response !== undefined) {
-							if (this.multipleSelection) {
-								this.multipleSelectedItemList = response;
-							} else {
-								if (response.length === 1) {
-									this.id = response[0][this.abstractSearcher.getIdField()];
-									this.description = response[0][this.abstractSearcher.getDescriptionField()];
-									this.code = response[0][this.abstractSearcher.getCodeField()];
-									this.upDateField(response[0]);
+				.subscribe({
+						next:  (response) => {
+							if (response !== undefined) {
+								if (this.multipleSelection) {
+									this.multipleSelectedItemList = response;
 								} else {
-									this.openSearchDialog();
+									if (response.length === 1) {
+										this.id = response[0][this.abstractSearcher.getIdField()];
+										this.description = response[0][this.abstractSearcher.getDescriptionField()];
+										this.code = response[0][this.abstractSearcher.getCodeField()];
+										this.upDateField(response[0]);
+									} else {
+										this.openSearchDialog();
+									}
 								}
 							}
-						}
-					},
-					error => {
-						console.error('Communication error');
+						},
+						error: (error) => {
+							console.error(`Communication error: ${error}`);
 
+						}
 					}
 				);
 		} else {
