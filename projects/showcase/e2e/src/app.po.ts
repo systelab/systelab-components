@@ -1,4 +1,4 @@
-import {BasePage} from "systelab-components-wdio-test";
+import {BasePage} from 'systelab-components-wdio-test';
 
 export class ShowcasePage extends BasePage {
 
