@@ -212,18 +212,6 @@
               "projects/showcase/**/*.html"
             ]
           }
-        },
-        "e2e": {
-          "builder": "systelab-wdio-builder:test",
-          "options": {
-            "wdioConfig": "./projects/showcase/e2e/wdio.conf.js",
-            "devServerTarget": "showcase:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "showcase:serve:production"
-            }
-          }
         }
       }
     }
