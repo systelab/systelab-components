@@ -9,10 +9,10 @@ Over the image the component displays a top bar with some buttons that enable th
 ```html
     <systelab-image-viewer
         [imageSrc]="imageSrc"
-        [imageDescription]="imageDescription"
+        [imageTitle]="imageDescription"
         [overlayText]="overlayText"
         [actionButtons]="actionButtons"
-        [imageFilters]="imageFilters"        
+        [imageFilters]="imageFilters"
         [showZoomByAreaButton]="true"
         [showAdjustButton]="true"
         [showZoomScale]="true"
@@ -28,7 +28,7 @@ The properties for the image-viewer are:
 | Name                 |      Type      | Default | Description                               |
 |----------------------|:--------------:|:-------:|-------------------------------------------|
 | imageSrc             |     string     |         | Specifies the path to the image           |
-| imageDescription     |     string     |         | Specifies an alternate text for the image |
+| imageTitle     |     string     |         | Specifies an alternate text for the image |
 | overlayText          |     string     |         | Text to be displayed overlaying the image |
 | actionButtons        | ActionButton[] |         | Custom buttons and callback actions       |
 | imageFilters         |     string     |         | Html defining custom SVG filters          |
