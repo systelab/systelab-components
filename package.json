@@ -46,7 +46,7 @@
     "systelab-preferences": "~14.0.1",
     "systelab-translate": "~14.0.0",
     "tslib": "^2.1.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.12.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.6",
