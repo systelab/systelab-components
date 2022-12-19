@@ -4,7 +4,7 @@
          (onDragEnter)="preventDefault($event)"
          (onDragOver)="preventDefault($event)"
          (onDragLeave)="preventDefault($event)">
-        <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)">
+        <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)" [cdkDropListDisabled]="!dragAndDropEnabled">
             <div *ngFor="let element of elementsList"
                  [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(element),'slab-sortable-list-row':!getSelectionFieldValue(element)}"
                  (click)="selectElement(element,$event)" cdkDrag>

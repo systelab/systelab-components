@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { emailValidator } from './email-validator.directive';
 
 describe('Email validation', () => {
@@ -23,7 +23,7 @@ describe('Email validation', () => {
 		'firstname-lastname@example.com'
 	].forEach((email) => {
 		it('Check that ' + email + ' is valid', () => {
-			expect(emailValidator(new FormControl(email))).toEqual(null);
+			expect(emailValidator(new UntypedFormControl(email))).toEqual(null);
 		});
 	});
 
@@ -40,7 +40,7 @@ describe('Email validation', () => {
 		'email@example..com',
 	].forEach((email) => {
 		it('Check that ' + email + ' is not valid', () => {
-			expect(emailValidator(new FormControl(email))).toEqual({email});
+			expect(emailValidator(new UntypedFormControl(email))).toEqual({email});
 		});
 	});
 });

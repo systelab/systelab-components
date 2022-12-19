@@ -2,11 +2,11 @@ import {Component} from '@angular/core';
 import {AbstractSortableListComponent} from 'systelab-components';
 
 export class ShowcaseSortableListData {
-	public id: number;
+	public id: string;
 	public description: string;
 	public isSelected: boolean;
 
-	constructor(id: number, description: string) {
+	constructor(id: string, description: string) {
 		this.id = id;
 		this.description = description;
 		this.isSelected = false;

@@ -14,12 +14,9 @@ export class ShowcaseSortableListComponent {
 	}
 
 	private populateList(): void {
-		this.dataList.push(new ShowcaseSortableListData(0, 'Elemento 0'));
-		this.dataList.push(new ShowcaseSortableListData(1, 'Elemento 1'));
-		this.dataList.push(new ShowcaseSortableListData(2, 'Elemento 2'));
-		this.dataList.push(new ShowcaseSortableListData(3, 'Elemento 3'));
-		this.dataList.push(new ShowcaseSortableListData(4, 'Elemento 4'));
-		this.dataList.push(new ShowcaseSortableListData(5, 'Elemento 5'));
-		this.dataList.push(new ShowcaseSortableListData(5, 'Elemento 5'));
+
+		for (let index = 0; index < 7; index++) {
+			this.dataList.push(new ShowcaseSortableListData(`Sortable List ${index}`, `Element ${index}`));
+		}
 	}
 }

@@ -103,10 +103,7 @@ describe('Systelab Combobox', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				])],
+				AgGridModule],
 			declarations: [
 				GridContextMenuCellRendererComponent,
 				GridHeaderContextMenuComponent,

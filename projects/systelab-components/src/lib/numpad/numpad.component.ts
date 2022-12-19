@@ -48,10 +48,22 @@ export class NumPadComponent {
 		}
 	}
 
-	public focus() {
-		const element: HTMLElement = this.isPassword ? document.getElementById('numpaddialogPwd') : document.getElementById('numpaddialog');
+	public focus(): void {
+		const element: HTMLElement = this.getNumPadElement();
 		if (element) {
 			element.focus();
 		}
+	}
+
+
+	public blur(): void {
+		const element: HTMLElement = this.getNumPadElement();
+		if (element) {
+			element.blur();
+		}
+	}
+
+	private getNumPadElement(): HTMLElement {
+		return this.isPassword ? document.getElementById('numpaddialogPwd') : document.getElementById('numpaddialog');
 	}
 }

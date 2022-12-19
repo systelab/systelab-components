@@ -9,8 +9,8 @@ import {ActionButton, ActionButtonType, ImageViewerComponent} from 'systelab-com
 export class ShowcaseImageViewerComponent {
 	@ViewChild('imageViewer') public imageViewer: ImageViewerComponent;
 
-	public imageSrc = '/images/map.jpg';
-	public description = 'Barcelona Eixample District';
+	public imageSrc = 'images/map.jpg';
+	public imageTitle = 'Barcelona Eixample District';
 	public actionButtons: Array<ActionButton> = [
 		{action: 'Action 1', label: 'Action 1', type: ActionButtonType.BUTTON},
 		{action: 'contrast', label: 'High contrast', type: ActionButtonType.TOGGLE_BUTTON},
@@ -31,9 +31,9 @@ export class ShowcaseImageViewerComponent {
 								   0 1 0 0 0
 								   0 0 0 0 0
 								   0 0 0 1 0"/>
-		</filter>	
+		</filter>
 		<filter id="contrast">
-		  <feColorMatrix type="matrix" 
+		  <feColorMatrix type="matrix"
 							values="1.2 0 0 0 -0.2
 									0 1.2 0 0 -0.2
 									0 0 1.2 0 -0.2

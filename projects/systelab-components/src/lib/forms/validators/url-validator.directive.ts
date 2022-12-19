@@ -1,7 +1,7 @@
-import {FormControl, NG_VALIDATORS,ValidationErrors, Validator} from '@angular/forms';
+import {UntypedFormControl, NG_VALIDATORS,ValidationErrors, Validator} from '@angular/forms';
 import {Directive} from '@angular/core';
 
-export const urlValidator = (control: FormControl): ValidationErrors | null => {
+export const urlValidator = (control: UntypedFormControl): ValidationErrors | null => {
   const urlPattern: string = '^((https|http|ftp|rtsp|mms)?://)'
     + '?(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp user@
     + '(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP URL- 199.194.52.184'
@@ -30,7 +30,7 @@ export const urlValidator = (control: FormControl): ValidationErrors | null => {
 })
 export class UrlValidatorDirective implements Validator {
 
-  validate(control: FormControl): ValidationErrors | null {
+  validate(control: UntypedFormControl): ValidationErrors | null {
       return urlValidator(control);
   }
 }

@@ -1,8 +1,8 @@
 sudo: required
-dist: trusty
+dist: jammy
 language: node_js
 node_js:
-  - '12'
+  - '14.20.1'
 addons:
   apt:
     update: true
@@ -12,18 +12,21 @@ addons:
       - dpkg
   chrome: stable
 
+services:
+  - xvfb
+
 before_install:
-  - export CHROME_BIN=chromium-browser
+  - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 
 install:
   - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
   - npm install -g codecov
   - npm install -g codacy-coverage
-  - npm install
+  - npm ci
 
 before_script:
+  - export NODE_OPTIONS="--max-old-space-size=8192"
   - cd node_modules/protractor
   - npm i webdriver-manager@latest --gecko=false
   - cd ../../
@@ -40,18 +43,18 @@ after_success:
   - cat ./coverage/systelab-components/lcov.info | codacy-coverage
 
 before_deploy: |
-  if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    git clone https://github.com/systelab/systelab.github.io.git
-    rm -rf systelab.github.io/components/*
-    cp -r dist/systelab-components/* systelab.github.io/components
-    sed -i -e "s~base href=\"/\"~base href=\"/components/\"~g" ./systelab.github.io/components/index.html
-    cd systelab.github.io
-    git add .
-    git -c user.name='travis' -c user.email='travis' commit -m 'New deploy from Travis'
-    git push -f -q https://systelab:$GITHUB_API_KEY@github.com/systelab/systelab.github.io
-    cd ..
-    cd dist/systelab-components
-  fi
+  - if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+      git clone https://github.com/systelab/systelab.github.io.git
+      rm -rf systelab.github.io/components/*
+      cp -r dist/systelab-components/* systelab.github.io/components
+      sed -i -e "s~base href=\"/\"~base href=\"/components/\"~g" ./systelab.github.io/components/index.html
+      cd systelab.github.io
+      git add .
+      git -c user.name='travis' -c user.email='travis' commit -m 'New deploy from Travis'
+      git push -f -q https://systelab:$GITHUB_API_KEY@github.com/systelab/systelab.github.io
+      cd ..
+    fi
+  - cd dist/systelab-components
 
 deploy:
   skip_cleanup: true

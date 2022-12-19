@@ -17,6 +17,8 @@ export class MessagePopupViewContext extends SystelabModalContext {
 	public type: number;
 	public color: string;
 	public buttons: MessagePopupButton[] = [];
+	public askAgain = false;
+	public msgAskAgain: string;
 }
 
 @Component({
@@ -28,6 +30,7 @@ export class MessagePopupViewComponent implements ModalComponent<MessagePopupVie
 
 	public parameters: MessagePopupViewContext;
 	public hasAnyButtonFocus = false;
+	public checkAskAgain = false;
 
 	constructor(public dialog: DialogRef<MessagePopupViewContext>) {
 		this.parameters = dialog.context;
@@ -41,6 +44,10 @@ export class MessagePopupViewComponent implements ModalComponent<MessagePopupVie
 	}
 
 	public close(value?: any): void {
-		this.dialog.close(value);
+		if (this.parameters.askAgain) {
+			this.dialog.close(this.checkAskAgain);
+		} else {
+			this.dialog.close(value);
+		}
 	}
 }

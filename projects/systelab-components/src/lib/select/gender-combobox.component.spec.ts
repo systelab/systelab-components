@@ -71,10 +71,7 @@ describe('Systelab Gender selector', () => {
 				HttpClientModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
-				AgGridModule.withComponents([
-					GridContextMenuCellRendererComponent,
-					GridHeaderContextMenuComponent
-				]),
+				AgGridModule,
 				GenderSelectTestModule]
 		})
 			.compileComponents();

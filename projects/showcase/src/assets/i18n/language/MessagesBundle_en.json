@@ -51,5 +51,8 @@
   "SIGN_DOWNLOAD": "Download",
   "SIGN_FINISH": "Finish",
   "SIGN_TEXT_EXPLANATION": "Your signature here",
-  "COMMON_OK": "OK"
+  "COMMON_OK": "OK",
+  "COMMON_SAVE": "Save",
+  "COMMON_ZOOM_DRAG": "Zoom by area / dragging",
+  "COMMON_ADJUST": "Adjust"
 }
