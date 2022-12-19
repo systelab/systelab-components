@@ -28,6 +28,14 @@
     content: "\e92d";
 }
 
+.icon-enlarge:before {
+    content: "\e989";
+}
+
+.icon-download1:before {
+    content: "\e960";
+}
+
 .icon-sitemap:before {
     content: "\f0e8";
 }

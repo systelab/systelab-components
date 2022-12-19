@@ -118,19 +118,19 @@ function checkHasValue(fixture: ComponentFixture<PaginatorTestComponent>, value:
 }
 
 function clickPrevious(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.fa-step-backward');
+	clickButton(fixture, '.icon-angle-left');
 }
 
 function clickNext(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.fa-step-forward');
+	clickButton(fixture, '.icon-angle-right');
 }
 
 function clickFirst(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.fa-fast-backward');
+	clickButton(fixture, '.icon-angle-double-left');
 }
 
 function clickLast(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.fa-fast-forward');
+	clickButton(fixture, '.icon-angle-double-right');
 }
 
 function clickPage(fixture: ComponentFixture<PaginatorTestComponent>, page: number) {

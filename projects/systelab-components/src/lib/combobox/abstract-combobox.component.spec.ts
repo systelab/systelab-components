@@ -164,14 +164,14 @@ describe('Systelab Select Combobox', () => {
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = 1;
 		fixture.componentInstance.withDeleteOption = true;
-		fixture.componentInstance.deleteIconClass = 'fas fa-trash';
+		fixture.componentInstance.deleteIconClass = 'icon-trash';
 		fixture.detectChanges();
 		clickButton(fixture);
 		fixture.componentInstance.selectValue('1');
 		fixture.detectChanges();
 		fixture.whenStable()
 			.then(() => {
-				expect(fixture.debugElement.nativeElement.querySelectorAll('.fa-trash').length)
+				expect(fixture.debugElement.nativeElement.querySelectorAll('.icon-trash').length)
 					.toEqual(1);
 				done();
 			});
