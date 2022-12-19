@@ -90,13 +90,14 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
+import { CdkTreeModule } from '@angular/cdk/tree';
 import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
 import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-range.component';
 import { ButtonComponent } from './button/button.component';
 import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
-import {ImageViewerComponent} from './image-viewer/image-viewer.component';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 @NgModule({
 	imports:      [
@@ -111,7 +112,9 @@ import {ImageViewerComponent} from './image-viewer/image-viewer.component';
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		AgGridModule],
+		AgGridModule,
+		CdkTreeModule
+	],
 	declarations: [
 		SliderComponent,
 		SliderDoubleRangeComponent,
