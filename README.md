@@ -190,7 +190,6 @@ The following steps should be considered when migrating from version 9.
 Finally, update your package.json in order to add the peer dependencies:
 
 ```
-"@fortawesome/fontawesome-free": "^5.6.3",
 "ag-grid-angular": "^28.2.0",
 "ag-grid-community": "^28.2.0",
 "angular-split": "^4.0.0",
@@ -206,6 +205,4 @@ Finally, update your package.json in order to add the peer dependencies:
 "pako": "^1.0.6",
 "@ngx-translate/core": "^13.0.0",
 "@ngx-translate/http-loader": "^6.0.0",
-"chart.js": "^2.9.3",
-"@fullcalendar/core": "^5.3.1"
 ```

@@ -32,7 +32,7 @@ export class ApplicationFrameTestComponent {
 	public menu: ApplicationHeaderMenuEntry[] = [];
 	public largeSideBar = true;
 	public sideTabs: ApplicationSidebarTab[] = [];
-	public logoIcon = 'fas fa-rebel';
+	public logoIcon = 'icon-line-chart';
 	public sideActions: ApplicationSidebarAction[] = [];
 
 	public selectedTab;
