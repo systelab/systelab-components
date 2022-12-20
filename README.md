@@ -83,9 +83,7 @@ npm publish
 Tree component migrated to use Angular CDK Tree
 
 1.  Add CdkTreeModule to modules using Tree components
-
 2.  Replace abstract-tree-status.component.html for abstract-tree.component.html
-
 3.  Replace
 
 import { TreeNode } from 'primeng/api';
@@ -96,7 +94,6 @@ import { TreeNode } from 'systelab-components';
 
 4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
 
-## Version 15.x.x - Angular 15
 
 [Angular 15 news](https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8)
 
