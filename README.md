@@ -94,7 +94,6 @@ import { TreeNode } from 'systelab-components';
 
 4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
 
-
 [Angular 15 news](https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8)
 
 -   Router and HttpClient tree-shakable standalone APIs

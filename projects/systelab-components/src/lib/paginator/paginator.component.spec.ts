@@ -117,6 +117,12 @@ function checkHasValue(fixture: ComponentFixture<PaginatorTestComponent>, value:
 		.toContain(value);
 }
 
+function clickButton(fixture: ComponentFixture<PaginatorTestComponent>, selector: string) {
+	const button = fixture.debugElement.nativeElement.querySelector(selector);
+	button.click();
+	fixture.detectChanges();
+}
+
 function clickPrevious(fixture: ComponentFixture<PaginatorTestComponent>) {
 	clickButton(fixture, '.icon-angle-left');
 }
@@ -137,13 +143,6 @@ function clickPage(fixture: ComponentFixture<PaginatorTestComponent>, page: numb
 	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
 	button.click();
 	fixture.detectChanges();
-}
-
-function clickButton(fixture: ComponentFixture<PaginatorTestComponent>, selector: string) {
-	const button = fixture.debugElement.nativeElement.querySelector(selector);
-	button.click();
-	fixture.detectChanges();
-
 }
 
 function checkHasPage(fixture: ComponentFixture<PaginatorTestComponent>, page: number) {
