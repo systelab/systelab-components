@@ -84,7 +84,6 @@ export class TabsComponent implements AfterContentInit {
 	}
 
 	public doKeyDown(event: KeyboardEvent, tab: TabComponent) {
-		console.log(event.key);
 		if (event.key === 'Enter') {
 			event.preventDefault();
 			this.deactivateAllTabs();

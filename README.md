@@ -78,6 +78,24 @@ npm publish
 
 # Breaking changes
 
+## Version 15.x.x - Angular 15
+
+Tree component migrated to use Angular CDK Tree
+
+1.  Add CdkTreeModule to modules using Tree components
+
+2.  Replace abstract-tree-status.component.html for abstract-tree.component.html
+
+3.  Replace
+
+import { TreeNode } from 'primeng/api';
+
+for
+
+import { TreeNode } from 'systelab-components';
+
+4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
+
 ## Version 14.x.x - Angular 14
 
 [Angular 13 news](https://blog.angular.io/angular-v13-is-now-available-cce66f7bc296)

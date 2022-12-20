@@ -1,5 +1,7 @@
 # systelab-tree
 
+This component will be DEPRECATED in next versions.
+
 Abstract class that lets you create a Tree component
 
 ## Using the class
@@ -15,7 +17,7 @@ For example:
 ```
 @Component({
 	selector: 'example-tree',
-	templateUrl: '../../../systelab-components/tree/abstract-tree-status.component.html'
+	templateUrl: '../../../systelab-components/tree/abstract-tree.component.html'
 })
 export class ExampleTreeComponent extends AbstractTree  {
 
@@ -74,8 +76,6 @@ TreeNode interface
 |expandedIcon | string | | Icon to use in expanded state.|
 |collapsedIcon | string | | Icon to use in collapsed state.|
 |children |	TreeNode[] | | An array of treenodes as children.|
-|leaf | boolean | | Specifies if the node has children. Used in lazy loading.|
-|style | string	| | Inline style of the node.|
 |styleClass	|string | | Style class of the node.|
 |expanded |boolean | | Whether the node is in an expanded or collapsed state.|
 |parent	|TreeNode | |Parent of the node.|

@@ -25,6 +25,9 @@ module.exports = function(config) {
 			],
 			fixWebpackSourcePaths: true
 		},
+		files: [
+			{ pattern: './testAssets/**', watched: false, included:false, nocache:false, served:true }
+		],
 		angularCli:               {
 			environment: 'dev'
 		},

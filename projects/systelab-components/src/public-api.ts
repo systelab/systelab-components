@@ -120,6 +120,7 @@ export * from './lib/listbox/abstract-api-listbox.component';
 export * from './lib/listbox/abstract-api-tree-listbox.component';
 export * from './lib/sortable-list/abstract-sortable-list.component';
 export * from './lib/add-remove-list/abstract-add-remove-list.component';
+export * from './lib/tree/tree-node';
 export * from './lib/tree/abstract-tree.component';
 
 export * from './lib/toast/toast.service';
@@ -134,3 +135,4 @@ export * from './lib/toggle-selector/toggle-selector.component';
 export * from './lib/forms/validators/email-validator.directive';
 export * from './lib/forms/validators/phone-validator.directive';
 export * from './lib/forms/validators/url-validator.directive';
+

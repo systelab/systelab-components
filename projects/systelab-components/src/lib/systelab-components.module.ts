@@ -90,6 +90,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
+import { CdkTreeModule } from '@angular/cdk/tree';
 import { KeyupDebounceDirective } from './directives/keyup-debounce.directive';
 import { ToggleSelectorComponent } from './toggle-selector/toggle-selector.component';
 import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-range.component';
@@ -112,7 +113,9 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
-		AgGridModule],
+		AgGridModule,
+		CdkTreeModule
+	],
 	declarations: [
 		SliderComponent,
 		SliderDoubleRangeComponent,
