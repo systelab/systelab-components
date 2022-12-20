@@ -96,6 +96,19 @@ import { TreeNode } from 'systelab-components';
 
 4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
 
+## Version 15.x.x - Angular 15
+
+[Angular 15 news](https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8)
+
+-   Router and HttpClient tree-shakable standalone APIs
+-   Directive composition API
+-   Image directive is now stable
+-   Functional router guards
+-   Router unwraps default imports
+-   Better stack traces
+-   Release MDC-based components to stable
+-   Improvements in the experimental esbuild support
+
 ## Version 14.x.x - Angular 14
 
 [Angular 13 news](https://blog.angular.io/angular-v13-is-now-available-cce66f7bc296)
