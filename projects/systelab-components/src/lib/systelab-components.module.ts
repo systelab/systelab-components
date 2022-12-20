@@ -97,7 +97,8 @@ import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-
 import { ButtonComponent } from './button/button.component';
 import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
-import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import {ImageViewerComponent} from './image-viewer/image-viewer.component';
+import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
 
 @NgModule({
 	imports:      [
@@ -198,7 +199,8 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 		KeyupDebounceDirective,
 		DraggableDirective,
 		ResizableDirective,
-		ImageViewerComponent
+		ImageViewerComponent,
+		NumpadDecimalNumericDirective
 	],
 	exports:      [
 		SliderComponent,
@@ -282,7 +284,8 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 		KeyupDebounceDirective,
 		DraggableDirective,
 		ResizableDirective,
-		ImageViewerComponent
+		ImageViewerComponent,
+		NumpadDecimalNumericDirective
 	],
 	providers:    [
 		StylesUtilService,
