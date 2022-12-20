@@ -28,8 +28,8 @@
     "popper.js": ">=1.16.1 <2.0.0",
     "primeicons": ">=6.0.0 <7.0.0",
     "primeng": ">=14.0.0 <15.0.0",
-    "systelab-preferences": ">=14.0.0 <15.0.0",
-    "systelab-translate": ">=14.0.0 <15.0.0",
+    "systelab-preferences": ">=15.0.0 <16.0.0",
+    "systelab-translate": ">=15.0.0 <16.0.0",
     "interactjs": ">=1.10.11 <2.0.0"
   }
 }
