@@ -8,8 +8,8 @@ export abstract class AbstractTree implements OnInit {
 
 	@Output() public nodeSelected = new EventEmitter<TreeNode>();
 
-	public defaultExpandedIcon = 'fas fa-chevron-down';
-	public defaultCollapsedIcon = 'fas fa-chevron-right';
+	public defaultExpandedIcon = 'icon-angle-down';
+	public defaultCollapsedIcon = 'icon-angle-right';
 
 	public _tree: TreeNode[] = [];
 	public dataSource = new ArrayDataSource(this._tree);

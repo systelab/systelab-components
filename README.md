@@ -83,9 +83,7 @@ npm publish
 Tree component migrated to use Angular CDK Tree
 
 1.  Add CdkTreeModule to modules using Tree components
-
 2.  Replace abstract-tree-status.component.html for abstract-tree.component.html
-
 3.  Replace
 
 import { TreeNode } from 'primeng/api';
@@ -95,6 +93,17 @@ for
 import { TreeNode } from 'systelab-components';
 
 4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
+
+[Angular 15 news](https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8)
+
+-   Router and HttpClient tree-shakable standalone APIs
+-   Directive composition API
+-   Image directive is now stable
+-   Functional router guards
+-   Router unwraps default imports
+-   Better stack traces
+-   Release MDC-based components to stable
+-   Improvements in the experimental esbuild support
 
 ## Version 14.x.x - Angular 14
 
@@ -190,7 +199,6 @@ The following steps should be considered when migrating from version 9.
 Finally, update your package.json in order to add the peer dependencies:
 
 ```
-"@fortawesome/fontawesome-free": "^5.6.3",
 "ag-grid-angular": "^28.2.0",
 "ag-grid-community": "^28.2.0",
 "angular-split": "^4.0.0",
@@ -206,6 +214,4 @@ Finally, update your package.json in order to add the peer dependencies:
 "pako": "^1.0.6",
 "@ngx-translate/core": "^13.0.0",
 "@ngx-translate/http-loader": "^6.0.0",
-"chart.js": "^2.9.3",
-"@fullcalendar/core": "^5.3.1"
 ```

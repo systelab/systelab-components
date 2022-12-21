@@ -17,58 +17,58 @@ export class ShowcaseInnerTreeComponent extends AbstractTree {
 
 		myTree.push({
 			label:         'One Node',
-			collapsedIcon: 'text-primary fas fa-folder',
-			expandedIcon:  'text-primary fas fa-folder',
+			collapsedIcon: 'text-primary icon-cube',
+			expandedIcon:  'text-primary icon-cube',
 			children:      [
 				{
 					label:         'Level 2 One Child',
-					collapsedIcon: 'text-primary fas fa-folder',
-					expandedIcon:  'text-primary fas fa-folder',
+					collapsedIcon: 'text-primary icon-cube',
+					expandedIcon:  'text-primary icon-cube',
 					children:      [
 						{
 							label:         'Level 3 With Status',
-							collapsedIcon: 'text-primary far fa-file far-important',
-							expandedIcon:  'text-primary far fa-file far-important',
-							status:        'text-primary far fa-address-book',
+							collapsedIcon: 'text-primary icon-tag',
+							expandedIcon:  'text-primary icon-tag',
+							status:        'text-primary icon-square',
 						},
 						{
 							label:         'Level 3 Another Child With Status',
-							collapsedIcon: 'text-primary far fa-file far-important',
-							expandedIcon:  'text-primary far fa-file far-important',
-							status:        'text-primary far fa-address-book',
+							collapsedIcon: 'text-primary icon-tag',
+							expandedIcon:  'text-primary icon-tag',
+							status:        'text-primary icon-square',
 						}
 					]
 
 				},
 				{
 					label:         'Level 2 Another Child',
-					collapsedIcon: 'text-primary far fa-file far-important',
-					expandedIcon:  'text-primary far fa-file far-important',
+					collapsedIcon: 'text-primary icon-tag',
+					expandedIcon:  'text-primary icon-tag',
 				}
 			]
 		});
 
 		myTree.push({
 			label:         'Not selectable',
-			collapsedIcon: 'text-primary far fa-file far-important',
-			expandedIcon:  'text-primary far fa-file far-important',
+			collapsedIcon: 'text-primary icon-tag',
+			expandedIcon:  'text-primary icon-tag',
 			selectable:    false,
 		});
 		myTree.push({
 			label:         'Expanded Node',
-			collapsedIcon: 'text-primary fas fa-folder',
-			expandedIcon:  'text-primary fas fa-folder',
+			collapsedIcon: 'text-primary icon-cube',
+			expandedIcon:  'text-primary icon-cube',
 			expanded:      true,
 			children:      [
 				{
 					label:         'First child',
-					collapsedIcon: 'text-primary far fa-file far-important',
-					expandedIcon:  'text-primary far fa-file far-important',
+					collapsedIcon: 'text-primary icon-tag',
+					expandedIcon:  'text-primary icon-tag',
 				},
 				{
 					label:         'Second child',
-					collapsedIcon: 'text-primary far fa-file far-important',
-					expandedIcon:  'text-primary far fa-file far-important',
+					collapsedIcon: 'text-primary icon-tag',
+					expandedIcon:  'text-primary icon-tag',
 				}
 			]
 		});

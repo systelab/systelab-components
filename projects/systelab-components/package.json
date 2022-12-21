@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "14.4.0",
+  "version": "15.0.0",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -16,9 +16,8 @@
   },
   "private": false,
   "peerDependencies": {
-    "@angular/common": ">=14.0.0 <15.0.0",
-    "@angular/core": ">=14.0.0 <15.0.0",
-    "@fortawesome/fontawesome-free": ">=5.14.0 <6.0.0",
+    "@angular/common": ">=15.0.0 <16.0.0",
+    "@angular/core": ">=15.0.0 <16.0.0",
     "ag-grid-angular": ">=28.0.0 <29.0.0",
     "ag-grid-community": ">=28.0.0 <29.0.0",
     "angular-split": ">=4.0.0 <5.0.0",
@@ -29,11 +28,8 @@
     "popper.js": ">=1.16.1 <2.0.0",
     "primeicons": ">=6.0.0 <7.0.0",
     "primeng": ">=14.0.0 <15.0.0",
-    "systelab-preferences": ">=14.0.0 <15.0.0",
-    "systelab-translate": ">=14.0.0 <15.0.0",
-    "chart.js": ">=2.9.3 <3.0.0",
-    "quill": ">=1.3.7 <2.0.0",
-    "@fullcalendar/core": ">=5.3.1 <6.0.0",
+    "systelab-preferences": ">=15.0.0 <16.0.0",
+    "systelab-translate": ">=15.0.0 <16.0.0",
     "interactjs": ">=1.10.11 <2.0.0"
   }
 }

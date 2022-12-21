@@ -34,7 +34,7 @@
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
-        <div *ngIf="!inline" class="p-1 d-flex border-top">
+        <div *ngIf="!inline" class="p-3 d-flex border-top">
             <systelab-button *ngIf="showTodayButton" id="today" size="small" class="mr-auto"
                     (click)="setTodayDate()">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
             <systelab-button id="clear" size="small" type="danger" class="ml-auto"

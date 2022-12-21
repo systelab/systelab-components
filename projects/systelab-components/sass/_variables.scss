@@ -1,5 +1,5 @@
 @import "systelab-bootstrap-settings";
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 @import "mixins";
 
@@ -22,7 +22,7 @@ $slab-app-min-height: 375px !default;
 $slab-ipad-width: 1024px !default;
 
 // Defines the primary color
-$primary: rgb(21, 143, 239) !default;
+$primary: #0064D1 !default;
 $background-primary: rgb(255, 255, 255) !default;
 $background-secondary: rgb(238, 238, 238) !default;
 // Defines the color for selected elements

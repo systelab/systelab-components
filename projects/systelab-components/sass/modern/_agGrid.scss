@@ -4,6 +4,11 @@ $icon-rowaction-font-size: 20px;
 
 $context-menu-width: 39px;
 
+
+.ag-theme-fresh .ag-row-selected::before {
+  background-color: $table-row-selected-background-color !important;
+}
+
 @mixin ag-header-row() {
   .ag-header-row {
     line-height: $grid-header-line-height;
@@ -56,195 +61,196 @@ $context-menu-width: 39px;
   }
 }
 
+
 @mixin ag-row() {
-  .ag-row {
+.ag-row {
 
-    .icon-context-menu {
-      padding-top: ceil(($grid-cell-height - $slab-icon-context-menu-font-size) / 2);
-    }
+.icon-context-menu {
+  padding-top: ceil(($grid-cell-height - $slab-icon-context-menu-font-size) / 2);
+}
 
-    &.ag-row-selected {
-      background-color: $table-row-selected-background-color;
-      color: $table-row-selected-color;
+&.ag-row-selected {
+  background-color: $table-row-selected-background-color !important;
+  color: $table-row-selected-color;
 
-      .icon-context-menu {
-        color: $table-row-selected-color;
-      }
-
-      &.ag-row-focus {
-        opacity: 0.8;
-      }
-
-      &.ag-row-hover {
-        opacity: 0.8;
-      }
-    }
-
-    &:not(.ag-row-selected) {
-      &.ag-row-odd {
-        background-color: $table-row-odd-background-color;
-      }
-
-      &.ag-row-even {
-        background-color: $table-row-even-background-color;
-      }
-
-      &.ag-row-focus {
-        background-color: scale-color($primary, $alpha: -90%);
-      }
-
-      &.ag-row-hover {
-     //   background-color: scale-color($primary, $alpha: -90%);
-      }
-    }
-
-
-    .ag-cell {
-      display: grid;
-      line-height: $grid-cell-height;
-      border: none;
-      //  border-right: 1px solid $grid-border-color;
-      padding: 0 5px;
-      outline-width: 0;
-
-      &.ag-cell-last-left-pinned {
-        border-right: 1px solid $grid-border-color !important;
-      }
-
-      &.ag-cell-focus {
-        border: 1px dashed scale-color($primary, $alpha: -60%) !important;
-      }
-
-      .ag-icon {
-        visibility: hidden;
-      }
-
-    }
-
-    .ag-cell-inline-editing {
-      height: $grid-cell-height;
-      background: white;
-    }
+  .icon-context-menu {
+    color: $table-row-selected-color;
   }
+
+  &.ag-row-focus {
+    opacity: 0.8;
+  }
+
+  &.ag-row-hover {
+    opacity: 0.8;
+  }
+}
+
+&:not(.ag-row-selected) {
+  &.ag-row-odd {
+    background-color: $table-row-odd-background-color;
+  }
+
+  &.ag-row-even {
+    background-color: $table-row-even-background-color;
+  }
+
+  &.ag-row-focus {
+    background-color: scale-color($primary, $alpha: -90%);
+  }
+
+  &.ag-row-hover {
+ //   background-color: scale-color($primary, $alpha: -90%);
+  }
+}
+
+
+.ag-cell {
+  display: grid;
+  line-height: $grid-cell-height;
+  border: none;
+  //  border-right: 1px solid $grid-border-color;
+  padding: 0 5px;
+  outline-width: 0;
+
+  &.ag-cell-last-left-pinned {
+    border-right: 1px solid $grid-border-color !important;
+  }
+
+  &.ag-cell-focus {
+    border: 1px dashed scale-color($primary, $alpha: -60%) !important;
+  }
+
+  .ag-icon {
+    visibility: hidden;
+  }
+
+}
+
+.ag-cell-inline-editing {
+  height: $grid-cell-height;
+  background: white;
+}
+}
 }
 
 .ag-bl-full-height {
-  overflow: hidden;
+overflow: hidden;
 }
 
 .ag-theme-fresh {
-  .ag-root-wrapper {
-    border: none !important;
-  }
+.ag-root-wrapper {
+border: none !important;
+}
 
-  .ag-ltr .ag-root {
-    border: none;
-    overflow: hidden;
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+.ag-ltr .ag-root {
+border: none;
+overflow: hidden;
+font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-    .ag-header {
-      border-bottom: none;
-      font: normal $slab-base-body-font-size $slab-base-body-font-family;
+.ag-header {
+  border-bottom: none;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-      .ag-header-viewport, .ag-pinned-left-header {
-        background-color: white !important;
+  .ag-header-viewport, .ag-pinned-left-header {
+    background-color: white !important;
 
-        .ag-header-container {
-          @include ag-header-row()
-        }
-      }
-
-      .ag-pinned-left-header {
-        @include ag-header-row()
-      }
-
-    }
-
-    .ag-body-viewport {
-      //overflow: auto !important;
-      @include ag-row()
-    }
-
-    .ag-body-horizontal-scroll {
-      .ag-horizontal-left-spacer {
-        overflow-x: auto;
-        border-right: none;
-        background-color: #f6f6f6;
-      }
-    }
-
-    .ag-horizontal-left-spacer {
-      background: transparent !important;
+    .ag-header-container {
+      @include ag-header-row()
     }
   }
-  .ag-row-drag {
-    background: none;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+
   .ag-pinned-left-header {
-    border-right: solid 1px;
-    border-right-color: $grid-border-color !important;
+    @include ag-header-row()
   }
 
-  .ag-header-cell-text {
-    color: $grid-header-text-color;
-  }
+}
 
-  .ag-row {
-    border-bottom: solid 1px $grid-border-color;
-  }
+.ag-body-viewport {
+  //overflow: auto !important;
+  @include ag-row()
+}
 
-  .ag-cell {
-    border-right: none !important;
+.ag-body-horizontal-scroll {
+  .ag-horizontal-left-spacer {
+    overflow-x: auto;
+    border-right: none;
+    background-color: #f6f6f6;
   }
+}
 
-  .ag-header {
-    border-bottom: solid 1px $grid-border-color !important;
-    border-top: solid 1px $grid-border-color !important;
-  }
+.ag-horizontal-left-spacer {
+  background: transparent !important;
+}
+}
+.ag-row-drag {
+background: none;
+width: 100%;
+position: absolute;
+top: 0;
+left: 0;
+}
+.ag-pinned-left-header {
+border-right: solid 1px;
+border-right-color: $grid-border-color !important;
+}
 
-  .ag-header-cell::after,
-  .ag-header-group-cell::after {
-    background: white !important;
-  }
+.ag-header-cell-text {
+color: $grid-header-text-color;
+}
 
-  .ag-header-group-cell {
-    border-bottom: solid 1px white !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-  }
+.ag-row {
+border-bottom: solid 1px $grid-border-color;
+}
 
-  .ag-header-group-cell-no-group {
-    border-top: solid 1px white !important;
-  }
+.ag-cell {
+border-right: none !important;
+}
 
-  .ag-header-group-cell-label {
-    justify-content: center !important;
-  }
+.ag-header {
+border-bottom: solid 1px $grid-border-color !important;
+border-top: solid 1px $grid-border-color !important;
+}
 
-  .ag-header-cell-label {
-    flex-direction: row !important;
-    justify-content: left !important;
-    align-items: center !important;
-  }
+.ag-header-cell::after,
+.ag-header-group-cell::after {
+background: white !important;
+}
+
+.ag-header-group-cell {
+border-bottom: solid 1px white !important;
+padding-left: 5px !important;
+padding-right: 5px !important;
+}
+
+.ag-header-group-cell-no-group {
+border-top: solid 1px white !important;
+}
+
+.ag-header-group-cell-label {
+justify-content: center !important;
+}
+
+.ag-header-cell-label {
+flex-direction: row !important;
+justify-content: left !important;
+align-items: center !important;
+}
 
 }
 
 .slab-remove-top-header {
-  .ag-header {
-    border-top: solid 1px white !important;
-  }
+.ag-header {
+border-top: solid 1px white !important;
+}
 }
 
 .height-hidden { //Style for the hidden element to get the proper height from Typescript
-  display: none;
-  line-height: $grid-cell-height; //Table Row Height
-  height: $grid-header-height; //Table Header Height
+display: none;
+line-height: $grid-cell-height; //Table Row Height
+height: $grid-header-height; //Table Header Height
 }
 
 systelab-spinner-cell {
-  display: flex;
+display: flex;
 }

@@ -161,7 +161,7 @@ describe('ImageViewerTestComponent', () => {
 	it('should setInitialValues create zoom scales chunks', () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
 		imageViewerComponent.setInitialValues();
-		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThan(0);
+		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThanOrEqual(0);
 	});
 
 });

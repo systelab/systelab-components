@@ -8,44 +8,11 @@ import { Component } from '@angular/core';
 export class ShowcaseIconComponent {
 
 	public icons: string[] = [];
-	public iconsFontAwesome : string[] = [];
 
 	public constructor() {
 
-		this.iconsFontAwesome.push('fab fa-accessible-icon');
-		this.iconsFontAwesome.push('fab fa-android');
-		this.iconsFontAwesome.push('fab fa-bluetooth');
-		this.iconsFontAwesome.push('fas fa-bong');
-		this.iconsFontAwesome.push('fas fa-diagnoses');
-		this.iconsFontAwesome.push('fas fa-biohazard');
-		this.iconsFontAwesome.push('fas fa-microscope');
-		this.iconsFontAwesome.push('fas fa-procedures');
-		this.iconsFontAwesome.push('fas fa-stethoscope');
-		this.iconsFontAwesome.push('fas fa-broadcast-tower');
-		this.iconsFontAwesome.push('far fa-eye-slash');
-		this.iconsFontAwesome.push('far fa-eye');
-		this.iconsFontAwesome.push('far fa-hospital');
-		this.iconsFontAwesome.push('fab fa-jenkins');
-		this.iconsFontAwesome.push('fab fa-java');
-		this.iconsFontAwesome.push('fab fa-pied-piper-alt');
-		this.iconsFontAwesome.push('fas fa-business-time');
-		this.iconsFontAwesome.push('fas fa-capsules');
-		this.iconsFontAwesome.push('fas fa-code');
-		this.iconsFontAwesome.push('fas fa-cloud-upload-alt');
-		this.iconsFontAwesome.push('fas fa-deaf');
-		this.iconsFontAwesome.push('fas fa-dna');
-		this.iconsFontAwesome.push('fas fa-filter');
-		this.iconsFontAwesome.push('fas fa-hospital-symbol');
-		this.iconsFontAwesome.push('fas fa-ambulance');
-		this.iconsFontAwesome.push('fas fa-pills');
-		this.iconsFontAwesome.push('far fa-comments');
-		this.iconsFontAwesome.push('fas fa-notes-medical');
-		this.iconsFontAwesome.push('fas fa-id-card-alt');
-		this.iconsFontAwesome.push('fas fa-brain');
-		this.iconsFontAwesome.push('fas fa-x-ray');
-		this.iconsFontAwesome.push('fas fa-user-md');
-		this.iconsFontAwesome.push('fas fa-weight');
-		this.iconsFontAwesome.push('fas fa-trash');
+		this.icons.push('icon-enlarge');
+		this.icons.push('icon-download1');
 
 		this.icons.push('icon-context-menu');
 		this.icons.push('icon-numpad');
@@ -59,7 +26,6 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-check');
 		this.icons.push('icon-close');
 		this.icons.push('icon-gear');
-		this.icons.push('icon-cog');
 		this.icons.push('icon-home');
 		this.icons.push('icon-download');
 		this.icons.push('icon-refresh');
@@ -67,7 +33,6 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-book');
 		this.icons.push('icon-print');
 		this.icons.push('icon-list');
-		this.icons.push('icon-list2');
 		this.icons.push('icon-chevron-left');
 		this.icons.push('icon-chevron-right');
 		this.icons.push('icon-plus-circle');
@@ -83,18 +48,13 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-chevron-up');
 		this.icons.push('icon-chevron-down');
 		this.icons.push('icon-square-o');
-		this.icons.push('icon-unlock');
-		this.icons.push('icon-certificate');
+		this.icons.push('icon-file-certified');
 		this.icons.push('icon-tool');
-		this.icons.push('icon-copy');
 		this.icons.push('icon-square');
 		this.icons.push('icon-caret-down');
 		this.icons.push('icon-caret-up');
 		this.icons.push('icon-caret-left');
 		this.icons.push('icon-caret-right');
-		this.icons.push('icon-cloud-download');
-		this.icons.push('icon-cloud-upload');
-		this.icons.push('icon-file-text-o');
 		this.icons.push('icon-angle-double-left');
 		this.icons.push('icon-angle-double-right');
 		this.icons.push('icon-angle-double-up');
@@ -109,7 +69,6 @@ export class ShowcaseIconComponent {
 		this.icons.push('icon-chevron-circle-right');
 		this.icons.push('icon-chevron-circle-up');
 		this.icons.push('icon-chevron-circle-down');
-		this.icons.push('icon-child');
 		this.icons.push('icon-trash');
 		this.icons.push('icon-line-chart');
 		this.icons.push('icon-female');
