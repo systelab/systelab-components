@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,7 +40,7 @@ export class MockTooltipDirective {
 	@Input() public systelabTooltip: string;
 	@Input() public systelabTooltipHtml: string;
 
-	constructor(private el: ElementRef, private renderer: Renderer2) {
+	constructor() {
 	}
 }
 
@@ -59,7 +59,6 @@ export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
 
 	public getData(valueToSearch: string, page: number, pageNumber: number, useCode?: boolean): Observable<Array<TestData>> {
 		const aCode = (useCode) ? valueToSearch : undefined;
-		const aSearch = (useCode) ? undefined : valueToSearch;
 
 		if (aCode) {
 			const array: TestData[] = [];
@@ -136,7 +135,8 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"></systelab-searcher-example>
+                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description">
+							  </systelab-searcher-example>
                           </div>
                       </div>
                   </div>
@@ -147,6 +147,37 @@ export class SearcherTestComponent {
 	public code: string;
 	public description: string;
 }
+
+
+const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.btn');
+	button.click();
+	fixture.detectChanges();
+};
+
+const isPopupVisible = () => (document.querySelector('.cdk-overlay-pane') !== null);
+
+const clickCloseButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
+	const button: any = document.querySelector('.slab-dialog-header-button.slab-dialog-close');
+	button.click();
+	fixture.detectChanges();
+};
+
+const enterText = (fixture: ComponentFixture<SearcherTestComponent>, text: string) => {
+	const inputComponent = fixture.debugElement.query(By.css('.form-control')).nativeElement;
+	inputComponent.value = text;
+	inputComponent.dispatchEvent(new Event('keydown'));
+	inputComponent.dispatchEvent(new Event('input'));
+	inputComponent.dispatchEvent(new Event('keyup'));
+	fixture.detectChanges();
+	inputComponent.dispatchEvent(new Event('blur'));
+	fixture.detectChanges();
+};
+
+const getDescription = (fixture: ComponentFixture<SearcherTestComponent>) => {
+	const descriptionComponent = fixture.debugElement.query(By.css('.text-truncate')).nativeElement;
+	return descriptionComponent.innerText;
+};
 
 describe('Systelab Searcher', () => {
 	let fixture: ComponentFixture<SearcherTestComponent>;
@@ -202,10 +233,10 @@ describe('Systelab Searcher', () => {
 		clickHelpButton(fixture);
 		fixture.whenStable()
 			.then(() => {
-				expect(isPopupVisible(fixture))
+				expect(isPopupVisible())
 					.toBeTruthy();
 				clickCloseButton(fixture);
-				expect(isPopupVisible(fixture))
+				expect(isPopupVisible())
 					.toBeFalsy();
 				done();
 			});
@@ -221,35 +252,3 @@ describe('Systelab Searcher', () => {
 			});
 	});
 });
-
-function clickHelpButton(fixture: ComponentFixture<SearcherTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.btn');
-	button.click();
-	fixture.detectChanges();
-}
-
-function isPopupVisible(fixture: ComponentFixture<SearcherTestComponent>) {
-	return (document.querySelector('.cdk-overlay-pane') !== null);
-}
-
-function clickCloseButton(fixture: ComponentFixture<SearcherTestComponent>) {
-	const button: any = document.querySelector('.slab-dialog-header-button.slab-dialog-close');
-	button.click();
-	fixture.detectChanges();
-}
-
-function enterText(fixture: ComponentFixture<SearcherTestComponent>, text: string) {
-	const inputComponent = fixture.debugElement.query(By.css('.form-control')).nativeElement;
-	inputComponent.value = text;
-	inputComponent.dispatchEvent(new Event('keydown'));
-	inputComponent.dispatchEvent(new Event('input'));
-	inputComponent.dispatchEvent(new Event('keyup'));
-	fixture.detectChanges();
-	inputComponent.dispatchEvent(new Event('blur'));
-	fixture.detectChanges();
-}
-
-function getDescription(fixture: ComponentFixture<SearcherTestComponent>) {
-	const descriptionComponent = fixture.debugElement.query(By.css('.text-truncate')).nativeElement;
-	return descriptionComponent.innerText;
-}

@@ -73,6 +73,24 @@ export class ColorpickerTestComponent {
 class TestModule {
 }
 
+const clickOnDropDown = (fixture: ComponentFixture<ColorpickerTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-color-tag');
+	button.click();
+	fixture.detectChanges();
+};
+
+const clickOnColor = (fixture: ComponentFixture<ColorpickerTestComponent>, color: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + color + '\']');
+	button.click();
+	fixture.detectChanges();
+};
+
+const checkHasStyle = (fixture: ComponentFixture<ColorpickerTestComponent>, style: string) => {
+	expect(fixture.debugElement.nativeElement.querySelector('.slab-color-tag')
+		.getAttribute('style'))
+		.toContain(style);
+};
+
 describe('Systelab Color picker', () => {
 	let fixture: ComponentFixture<ColorpickerTestComponent>;
 
@@ -158,23 +176,3 @@ describe('Systelab Color picker', () => {
 	});
 
 });
-
-function clickOnDropDown(fixture: ComponentFixture<ColorpickerTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-color-tag');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickOnColor(fixture: ComponentFixture<ColorpickerTestComponent>, color: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + color + '\']');
-	button.click();
-	fixture.detectChanges();
-}
-
-function checkHasStyle(fixture: ComponentFixture<ColorpickerTestComponent>, style: string) {
-	expect(fixture.debugElement.nativeElement.querySelector('.slab-color-tag')
-		.getAttribute('style'))
-		.toContain(style);
-}
-
-

@@ -54,6 +54,39 @@ export class DatepickerTimeTestComponent {
 	}
 }
 
+
+const resetDatepickerTime = (fixture: ComponentFixture<DatepickerTimeTestComponent>) => {
+	fixture.componentInstance.resetDatePickerTime();
+	fixture.detectChanges();
+};
+
+const setCurrentDate = (fixture: ComponentFixture<DatepickerTimeTestComponent>) => {
+	fixture.componentInstance.setCurrentDate();
+	fixture.detectChanges();
+};
+
+
+const setValue = (fixture: ComponentFixture<DatepickerTimeTestComponent>, value: Date) => {
+	fixture.componentInstance.currentDate = value;
+	fixture.detectChanges();
+};
+
+const setHourValue = (fixture: ComponentFixture<DatepickerTimeTestComponent>, value: number) => {
+	fixture.componentInstance.currentDate.setHours(value);
+	fixture.detectChanges();
+};
+
+const setMinuteValue = (fixture: ComponentFixture<DatepickerTimeTestComponent>, value: number) => {
+	fixture.componentInstance.currentDate.setMinutes(value);
+	fixture.detectChanges();
+};
+
+const clickTouchSpinnerButton = (fixture: ComponentFixture<DatepickerTimeTestComponent>, spinnerID: string, buttonID: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector(spinnerID).querySelector(buttonID);
+	button.click();
+	fixture.detectChanges();
+};
+
 describe('Systelab DatepickerTimeComponent', () => {
 	let fixture: ComponentFixture<DatepickerTimeTestComponent>;
 
@@ -144,37 +177,3 @@ describe('Systelab DatepickerTimeComponent', () => {
 	});
 
 });
-
-function resetDatepickerTime(fixture: ComponentFixture<DatepickerTimeTestComponent>) {
-	fixture.componentInstance.resetDatePickerTime();
-	fixture.detectChanges();
-}
-
-function setCurrentDate(fixture: ComponentFixture<DatepickerTimeTestComponent>) {
-	fixture.componentInstance.setCurrentDate();
-	fixture.detectChanges();
-}
-
-
-function setValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: Date) {
-	fixture.componentInstance.currentDate = value;
-	fixture.detectChanges();
-}
-
-function setHourValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: number) {
-	fixture.componentInstance.currentDate.setHours(value);
-	fixture.detectChanges();
-}
-
-function setMinuteValue(fixture: ComponentFixture<DatepickerTimeTestComponent>, value: number) {
-	fixture.componentInstance.currentDate.setMinutes(value);
-	fixture.detectChanges();
-}
-
-function clickTouchSpinnerButton(fixture: ComponentFixture<DatepickerTimeTestComponent>, spinnerID: string, buttonID: string) {
-	const button = fixture.debugElement.nativeElement.querySelector(spinnerID).querySelector(buttonID);
-	button.click();
-	fixture.detectChanges();
-}
-
-

@@ -57,35 +57,36 @@ export class ESMockI18nService {
 	}
 }
 export class ESMockI18nService2 {
-	public get(key: string) {
+	public get() {
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const translations = {
-			"COMMON_JANUARY": "Enero",
-			"COMMON_FEBRUARY": "Febrero",
-			"COMMON_MARCH": "Marzo",
-			"COMMON_APRIL": "Abril",
-			"COMMON_MAY": "Mayo",
-			"COMMON_JUNE": "Junio",
-			"COMMON_JULY": "Julio",
-			"COMMON_AUGUST": "Agosto",
-			"COMMON_SEPTEMBER": "Septiembre",
-			"COMMON_OCTOBER": "Octubre",
-			"COMMON_NOVEMBER": "Noviembre",
-			"COMMON_DECEMBER": "Diciembre",
-			"COMMON_MONDAY" : "Lunes",
-			"COMMON_TUESDAY" : "Martes",
-			"COMMON_WEDNESDAY" : "Miércoles",
-			"COMMON_THURSDAY" : "Jueves",
-			"COMMON_FRIDAY" : "Viernes",
-			"COMMON_SATURDAY" : "Sábado",
-			"COMMON_SUNDAY" : "Domingo",
-			"COMMON_FIRST_DAY":"L",
-			"COMMON_SECOND_DAY":"M",
-			"COMMON_THIRD_DAY":"X",
-			"COMMON_FOURTH_DAY":"J",
-			"COMMON_FIFTH_DAY":"V",
-			"COMMON_SIXTH_DAY":"S",
-			"COMMON_SEVENTH_DAY":"D"
-		}
+			COMMON_JANUARY: 'Enero',
+			COMMON_FEBRUARY: 'Febrero',
+			COMMON_MARCH: 'Marzo',
+			COMMON_APRIL: 'Abril',
+			COMMON_MAY: 'Mayo',
+			COMMON_JUNE: 'Junio',
+			COMMON_JULY: 'Julio',
+			COMMON_AUGUST: 'Agosto',
+			COMMON_SEPTEMBER: 'Septiembre',
+			COMMON_OCTOBER: 'Octubre',
+			COMMON_NOVEMBER: 'Noviembre',
+			COMMON_DECEMBER: 'Diciembre',
+			COMMON_MONDAY : 'Lunes',
+			COMMON_TUESDAY : 'Martes',
+			COMMON_WEDNESDAY : 'Miércoles',
+			COMMON_THURSDAY : 'Jueves',
+			COMMON_FRIDAY : 'Viernes',
+			COMMON_SATURDAY : 'Sábado',
+			COMMON_SUNDAY : 'Domingo',
+			COMMON_FIRST_DAY:'L',
+			COMMON_SECOND_DAY:'M',
+			COMMON_THIRD_DAY:'X',
+			COMMON_FOURTH_DAY:'J',
+			COMMON_FIFTH_DAY:'V',
+			COMMON_SIXTH_DAY:'S',
+			COMMON_SEVENTH_DAY:'D'
+		};
 		return of(translations);
 	}
 
@@ -132,7 +133,7 @@ export class ZHMockI18nService {
 	selector: 'systelab-datepicker-test',
 	template: `
                   <div>
-                      <systelab-datepicker [(currentDate)]="currentDate"></systelab-datepicker>
+                      <systelab-datepicker [(currentDate)]='currentDate'></systelab-datepicker>
                   </div>
 			  `,
 	styles:   []
@@ -151,6 +152,34 @@ export class DatepickerTestComponent {
 		this.currentDate = new Date(this.defaultYear, this.defaultMonth, this.defaultDay, this.defaultHours, this.defaultMinutes);
 	}
 }
+
+const getMonth = (date: Date) => {
+	const months = [];
+	months[0] = 'Enero';
+	months[1] = 'Febrero';
+	months[2] = 'Marzo';
+	months[3] = 'Abril';
+	months[4] = 'Mayo';
+	months[5] = 'Junio';
+	months[6] = 'Julio';
+	months[7] = 'Agosto';
+	months[8] = 'Septiembre';
+	months[9] = 'Octubre';
+	months[10] = 'Noviembre';
+	months[11] = 'Diciembre';
+	return months[date.getMonth()];
+};
+
+const enterText = (fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<Datepicker>, text: string) => {
+	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
+	inputComponent.value = text;
+	inputComponent.dispatchEvent(new Event('keydown'));
+	inputComponent.dispatchEvent(new Event('input'));
+	inputComponent.dispatchEvent(new Event('keyup'));
+	fixture.detectChanges();
+	inputComponent.dispatchEvent(new Event('blur'));
+	fixture.detectChanges();
+};
 
 describe('Systelab US DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
@@ -459,7 +488,7 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 
 	it('month should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
-			let currentDate=new Date();
+			const currentDate=new Date();
 			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
 				.toEqual(getMonth(currentDate));
@@ -469,8 +498,8 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 	it('after select next month, should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
 			const today = new Date();
-			let currentDate=new Date(today.getFullYear(), today.getMonth(), 1);
-			let nextMonthDate=new Date(currentDate.setMonth(currentDate.getMonth()+1));
+			const currentDate=new Date(today.getFullYear(), today.getMonth(), 1);
+			const nextMonthDate=new Date(currentDate.setMonth(currentDate.getMonth()+1));
 			const nextMonth = fixture.debugElement.query(By.css(`#nextMonth`)).nativeElement;
 			nextMonth.dispatchEvent(new Event('click'));
 			fixture.detectChanges();
@@ -482,31 +511,3 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 		});
 
 });
-
-function getMonth(date: Date) {
-	const months = new Array();
-	months[0] = "Enero";
-	months[1] = "Febrero";
-	months[2] = "Marzo";
-	months[3] = "Abril";
-	months[4] = "Mayo";
-	months[5] = "Junio";
-	months[6] = "Julio";
-	months[7] = "Agosto";
-	months[8] = "Septiembre";
-	months[9] = "Octubre";
-	months[10] = "Noviembre";
-	months[11] = "Diciembre";
-	return months[date.getMonth()];
-}
-
-function enterText(fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<Datepicker>, text: string) {
-	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
-	inputComponent.value = text;
-	inputComponent.dispatchEvent(new Event('keydown'));
-	inputComponent.dispatchEvent(new Event('input'));
-	inputComponent.dispatchEvent(new Event('keyup'));
-	fixture.detectChanges();
-	inputComponent.dispatchEvent(new Event('blur'));
-	fixture.detectChanges();
-}

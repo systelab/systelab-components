@@ -1,18 +1,17 @@
-import {Component} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
-import {ApplicationFrameComponent} from './application-frame.component';
-import {ApplicationHeaderComponent, ApplicationHeaderMenuEntry} from './header/app-header.component';
-import {ApplicationSidebarLargeComponent} from './sidebar/app-sidebar-large.component';
-import {ApplicationSidebarSmallComponent} from './sidebar/app-sidebar-small.component';
-import {ApplicationSidebarAction, ApplicationSidebarTab} from './sidebar/app-sidebar.component';
-import {TooltipDirective} from '../tooltip/tooltip.directive';
-import {SystelabTranslateModule} from 'systelab-translate';
-import {HttpClientModule} from '@angular/common/http';
-import {OverlayModule} from '@angular/cdk/overlay';
-import { DialogService } from '../modal/dialog/dialog.service';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ApplicationFrameComponent } from './application-frame.component';
+import { ApplicationHeaderComponent, ApplicationHeaderMenuEntry } from './header/app-header.component';
+import { ApplicationSidebarLargeComponent } from './sidebar/app-sidebar-large.component';
+import { ApplicationSidebarSmallComponent } from './sidebar/app-sidebar-small.component';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from './sidebar/app-sidebar.component';
+import { TooltipDirective } from '../tooltip/tooltip.directive';
+import { SystelabTranslateModule } from 'systelab-translate';
+import { HttpClientModule } from '@angular/common/http';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
 	selector: 'systelab-application-frame-test',

@@ -13,8 +13,8 @@ import { WizardStep, WizardStepsComponent } from './wizard-steps.component';
 	selector: 'systelab-wizard-steps-test',
 	template: `
                 <div>
-                    <systelab-wizard-steps [allowNavigation]="allowNavigation" [steps]="steps" [(currentStep)]="currentStep" (action)="gotoStep($event)"
-                                           [roundedStep]="roundedStep"></systelab-wizard-steps>
+                    <systelab-wizard-steps [allowNavigation]="allowNavigation" [steps]="steps"
+										   [(currentStep)]="currentStep" [roundedStep]="roundedStep"></systelab-wizard-steps>
                 </div>
 	          `,
 	styles:   []

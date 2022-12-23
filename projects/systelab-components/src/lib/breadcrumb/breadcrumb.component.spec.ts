@@ -37,6 +37,18 @@ export class BreadcrumbTestComponent {
 
 }
 
+const clickTabButton = (fixture: ComponentFixture<BreadcrumbTestComponent>, children: number) => {
+	const button = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
+	button.click();
+	fixture.detectChanges();
+};
+
+const checkHasText = (fixture: ComponentFixture<BreadcrumbTestComponent>, children: number, text: string) => {
+	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
+	expect(label.innerHTML)
+		.toContain(text);
+};
+
 describe('Systelab Breadcrumb', () => {
 	let fixture: ComponentFixture<BreadcrumbTestComponent>;
 
@@ -95,18 +107,3 @@ describe('Systelab Breadcrumb', () => {
 	});
 
 });
-
-function clickTabButton(fixture: ComponentFixture<BreadcrumbTestComponent>, children: number) {
-	const button = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
-	button.click();
-	fixture.detectChanges();
-}
-
-function checkHasText(fixture: ComponentFixture<BreadcrumbTestComponent>, children: number, text: string) {
-	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
-	expect(label.innerHTML)
-		.toContain(text);
-}
-
-
-

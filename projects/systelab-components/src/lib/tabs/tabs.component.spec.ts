@@ -14,7 +14,7 @@ import { TabComponent } from './tab.component';
 	selector: 'systelab-tabs-test',
 	template: `
                 <div>
-                    <systelab-tabs class="slab-flex-1" (select)="selectedTab($event)">
+                    <systelab-tabs class="slab-flex-1" (select)="selectedTab()">
                         <systelab-tab class="tab1 slab-flex-1" [id]="'id-1'" [title]="'Tab 1'">
                             <div>Tab 1 content</div>
                         </systelab-tab>
@@ -30,12 +30,17 @@ import { TabComponent } from './tab.component';
 	styles:   []
 })
 export class TabsTestComponent {
-
-	public selectedTab(event) {
-
-	}
-
+	public selectedTab() {}
 }
+
+const isTabContentVisible = (className: string, fixture: ComponentFixture<TabsTestComponent>): boolean =>
+	fixture.debugElement.query(By.css(className)).nativeElement.style.display !== 'none';
+
+const clickTabButton = (fixture: ComponentFixture<TabsTestComponent>, tabId: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#tab-' + tabId);
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Tabs', () => {
 	let fixture: ComponentFixture<TabsTestComponent>;
@@ -107,18 +112,8 @@ describe('Systelab Tabs', () => {
 
 		spyOn(fixture.componentInstance, 'selectedTab');
 		clickTabButton(fixture, 'id-2');
-		expect(fixture.componentInstance.selectedTab).toHaveBeenCalledWith('id-2');
+		expect(fixture.componentInstance.selectedTab).toHaveBeenCalledWith();
 	});
 
 
 });
-
-function isTabContentVisible(className: string, fixture: ComponentFixture<TabsTestComponent>): boolean {
-	return fixture.debugElement.query(By.css(className)).nativeElement.style.display !== 'none';
-}
-
-function clickTabButton(fixture: ComponentFixture<TabsTestComponent>, tabId: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('#tab-' + tabId);
-	button.click();
-	fixture.detectChanges();
-}

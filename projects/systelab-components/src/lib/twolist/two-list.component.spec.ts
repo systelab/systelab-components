@@ -52,6 +52,47 @@ export class TwoListTestComponent implements OnInit {
 
 }
 
+const checkIfListContains = (fixture: ComponentFixture<TwoListTestComponent>, list: string, value: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector('#' + list);
+	expect(element.innerHTML)
+		.toContain(value);
+};
+
+const checkIfListNotContains = (fixture: ComponentFixture<TwoListTestComponent>, list: string, value: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector('#' + list);
+	expect(element.innerHTML)
+		.not
+		.toContain(value);
+};
+
+const clickButton = (fixture: ComponentFixture<TwoListTestComponent>, b: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	element.click();
+	fixture.detectChanges();
+};
+
+const clickButtonWithControlKey = (fixture: ComponentFixture<TwoListTestComponent>, b: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	const event = new MouseEvent('click', {
+		view:    window,
+		bubbles: true,
+		ctrlKey: true
+	});
+	element.dispatchEvent(event);
+	fixture.detectChanges();
+};
+
+const clickButtonWithShiftKey = (fixture: ComponentFixture<TwoListTestComponent>, b: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	const event = new MouseEvent('click', {
+		view:     window,
+		bubbles:  true,
+		shiftKey: true
+	});
+	element.dispatchEvent(event);
+	fixture.detectChanges();
+};
+
 describe('Systelab Two list', () => {
 	let fixture: ComponentFixture<TwoListTestComponent>;
 
@@ -152,44 +193,3 @@ describe('Systelab Two list', () => {
 	});
 
 });
-
-function checkIfListContains(fixture: ComponentFixture<TwoListTestComponent>, list: string, value: string) {
-	const element = fixture.debugElement.nativeElement.querySelector('#' + list);
-	expect(element.innerHTML)
-		.toContain(value);
-}
-
-function checkIfListNotContains(fixture: ComponentFixture<TwoListTestComponent>, list: string, value: string) {
-	const element = fixture.debugElement.nativeElement.querySelector('#' + list);
-	expect(element.innerHTML)
-		.not
-		.toContain(value);
-}
-
-function clickButton(fixture: ComponentFixture<TwoListTestComponent>, b: string) {
-	const element = fixture.debugElement.nativeElement.querySelector(b);
-	element.click();
-	fixture.detectChanges();
-}
-
-function clickButtonWithControlKey(fixture: ComponentFixture<TwoListTestComponent>, b: string) {
-	const element = fixture.debugElement.nativeElement.querySelector(b);
-	const event = new MouseEvent('click', {
-		'view':    window,
-		'bubbles': true,
-		'ctrlKey': true
-	});
-	element.dispatchEvent(event);
-	fixture.detectChanges();
-}
-
-function clickButtonWithShiftKey(fixture: ComponentFixture<TwoListTestComponent>, b: string) {
-	const element = fixture.debugElement.nativeElement.querySelector(b);
-	const event = new MouseEvent('click', {
-		'view':     window,
-		'bubbles':  true,
-		'shiftKey': true
-	});
-	element.dispatchEvent(event);
-	fixture.detectChanges();
-}

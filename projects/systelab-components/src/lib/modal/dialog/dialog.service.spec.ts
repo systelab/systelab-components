@@ -14,10 +14,7 @@ import { DialogRef } from './dialog-ref';
 import { DialogBottomComponent } from '../bottom/dialog-bottom.component';
 import { DialogHeaderComponent } from '../header/dialog-header.component';
 
-export class SampleDialogParameters extends SystelabModalContext {
-	public parameter1: number;
-	public parameter2: string;
-}
+export class SampleDialogParameters extends SystelabModalContext {}
 
 @Component({
 	selector: 'sample-dialog',
@@ -64,6 +61,20 @@ export class ModalTestComponent {
 	}
 }
 
+const clickButton = (fixture: ComponentFixture<ModalTestComponent>, buttonId: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#' + buttonId);
+	button.click();
+	fixture.detectChanges();
+};
+
+const isPopupVisible = () => (document.querySelector('.cdk-overlay-pane') !== null);
+
+const clickCloseButton = (fixture: ComponentFixture<ModalTestComponent>, buttonId: string) => {
+	const button: any = document.querySelector('#' + buttonId);
+	button.click();
+	fixture.detectChanges();
+};
+
 describe('Systelab Modal', () => {
 	let fixture: ComponentFixture<ModalTestComponent>;
 
@@ -97,24 +108,8 @@ describe('Systelab Modal', () => {
 
 	it('should be able to show a modal and close it when click on close button.', () => {
 		clickButton(fixture, 'openbutton');
-		expect(isPopupVisible(fixture)).toBeTruthy();
+		expect(isPopupVisible()).toBeTruthy();
 		clickCloseButton(fixture, 'closebutton');
-		expect(isPopupVisible(fixture)).toBeFalsy();
+		expect(isPopupVisible()).toBeFalsy();
 	});
 });
-
-function clickButton(fixture: ComponentFixture<ModalTestComponent>, buttonId: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('#' + buttonId);
-	button.click();
-	fixture.detectChanges();
-}
-
-function isPopupVisible(fixture: ComponentFixture<ModalTestComponent>) {
-	return (document.querySelector('.cdk-overlay-pane') !== null);
-}
-
-function clickCloseButton(fixture: ComponentFixture<ModalTestComponent>, buttonId: string) {
-	const button: any = document.querySelector('#' + buttonId);
-	button.click();
-	fixture.detectChanges();
-}

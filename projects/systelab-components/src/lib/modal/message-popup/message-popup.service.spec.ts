@@ -1,7 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { DialogRef, DialogService } from "systelab-components";
+import { DialogRef, DialogService } from 'systelab-components';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupButton, MessagePopupService } from './message-popup.service';
 import { MessageWithIconComponent } from './message-with-icon.component';
@@ -13,7 +13,7 @@ const yesNoNoTemplate = {
     width: 600,
     height: 500,
     template: null,
-}
+};
 
 const yesNoNoOutlineWarningTemplate = {
     titleDescription: 'Test',
@@ -22,7 +22,7 @@ const yesNoNoOutlineWarningTemplate = {
     width: 600,
     height: 500,
     template: 'outline-warning',
-}
+};
 
 const commonParams = {
 	titleDescription: 'Test',
@@ -33,7 +33,7 @@ const commonParams = {
 	button: null,
 	icon: null,
 	msgAskAgain: 'Don\'t ask again'
-}
+};
 
 const expectedButtonsWithNoTemplate = [
     new MessagePopupButton('COMMON_NO', false, 'btn-link'),
@@ -79,7 +79,8 @@ describe('MessagePopupService', () => {
 
     it('it should show a YesNo dialog',()=>{
         spyOn<any>(service, 'showPopup').and.callThrough();
-        service.showYesNoQuestionPopup(yesNoNoTemplate.titleDescription, yesNoNoTemplate.messageDescription, yesNoNoTemplate.modalClass, yesNoNoTemplate.width , yesNoNoTemplate.height, yesNoNoTemplate.template)
+        service.showYesNoQuestionPopup(yesNoNoTemplate.titleDescription, yesNoNoTemplate.messageDescription, yesNoNoTemplate.modalClass,
+			yesNoNoTemplate.width , yesNoNoTemplate.height, yesNoNoTemplate.template);
         const buttons: MessagePopupButton[] = service['getButtonsTemplate'](yesNoNoTemplate.template);
         expect(service['showPopup']).toHaveBeenCalledWith(
             yesNoNoTemplate.titleDescription,
@@ -94,7 +95,8 @@ describe('MessagePopupService', () => {
 
 	it('it should show an Error dialog', () => {
 		spyOn<any>(service, 'showPopup').and.callThrough();
-		service.showErrorPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height)
+		service.showErrorPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+			commonParams.width, commonParams.height);
 		expect(service['showPopup']).toHaveBeenCalledWith(
 			commonParams.titleDescription,
 			MessageWithIconComponent.MESSAGE_ERROR,
@@ -108,7 +110,8 @@ describe('MessagePopupService', () => {
 
 	it('it should show a warning dialog', () => {
 		spyOn<any>(service, 'showPopup').and.callThrough();
-		service.showWarningPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height)
+		service.showWarningPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+			commonParams.width, commonParams.height);
 		expect(service['showPopup']).toHaveBeenCalledWith(
 			commonParams.titleDescription,
 			MessageWithIconComponent.MESSAGE_WARNING,
@@ -122,7 +125,8 @@ describe('MessagePopupService', () => {
 
 	it('it should show an Information dialog', () => {
 		spyOn<any>(service, 'showPopup').and.callThrough();
-		service.showInformationPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height)
+		service.showInformationPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+			commonParams.width, commonParams.height);
 		expect(service['showPopup']).toHaveBeenCalledWith(
 			commonParams.titleDescription,
 			MessageWithIconComponent.MESSAGE_INFO,
@@ -136,7 +140,8 @@ describe('MessagePopupService', () => {
 
 	it('it should show an CustomQuestion dialog', () => {
 		spyOn<any>(service, 'showPopup').and.callThrough();
-		service.showCustomQuestionPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height, commonParams.button, commonParams.icon)
+		service.showCustomQuestionPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+			commonParams.width, commonParams.height, commonParams.button, commonParams.icon);
 		expect(service['showPopup']).toHaveBeenCalledWith(
 			commonParams.titleDescription,
 			MessageWithIconComponent.MESSAGE_QUESTION,
@@ -151,7 +156,8 @@ describe('MessagePopupService', () => {
 
 	it('it should show an AskAgain dialog', () => {
 		spyOn<any>(service, 'showPopup').and.callThrough();
-		service.showAskAgainPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass, commonParams.width, commonParams.height, commonParams.button, commonParams.icon, commonParams.msgAskAgain)
+		service.showAskAgainPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+			commonParams.width, commonParams.height, commonParams.button, commonParams.icon, commonParams.msgAskAgain);
 		expect(service['showPopup']).toHaveBeenCalledWith(
 				commonParams.titleDescription,
 				MessageWithIconComponent.MESSAGE_QUESTION,

@@ -33,11 +33,15 @@ export class ChipsTestComponent {
 	];
 }
 
+const setArrayValue = (fixture: ComponentFixture<ChipsTestComponent>, array: Array<string>) => {
+	fixture.componentInstance.texts = array;
+	fixture.detectChanges();
+};
+
 describe('Systelab Chips', () => {
 
 	let fixture: ComponentFixture<ChipsTestComponent>;
 	let chips: ChipsComponent;
-	let testComponent: ChipsTestComponent;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -57,7 +61,6 @@ describe('Systelab Chips', () => {
 
 		fixture = TestBed.createComponent(ChipsTestComponent);
 		chips = fixture.debugElement.children[0].componentInstance;
-		testComponent = fixture.debugElement.componentInstance;
 	});
 
 	it('should be disabled', () => {
@@ -139,9 +142,9 @@ describe('Systelab Chips', () => {
 		inputEl.nativeElement.click();
 		fixture.detectChanges();
 		chips.autoComplete.value = ['NewItem'];
+		const preventDefault = () => {};
 		const event = {
-			'which': 13, preventDefault() {
-			}
+			which: 13, preventDefault
 		};
 		chips.autoComplete.onKeydown(event);
 		fixture.detectChanges();
@@ -153,8 +156,3 @@ describe('Systelab Chips', () => {
 	}));
 
 });
-
-function setArrayValue(fixture: ComponentFixture<ChipsTestComponent>, array: Array<string>) {
-	fixture.componentInstance.texts = array;
-	fixture.detectChanges();
-}

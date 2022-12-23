@@ -25,7 +25,8 @@ export class NavbarTestComponent {
 	constructor() {
 		this.items.push(new NavbarItem(1, 'Option 1', 'slab-icon-medium icon-calendar', true, false, true, () => this.doSomething()));
 		this.items.push(new NavbarItem(1, 'Option 2', 'slab-icon-medium icon-calendar', true, false, true, () => this.doSomethingElse()));
-		this.items.push(new NavbarItem(1, 'Option 3', 'slab-icon-medium icon-calendar', true, false, false, () => this.doSomethingElse(), undefined,undefined,'red','green'));
+		this.items.push(new NavbarItem(1, 'Option 3', 'slab-icon-medium icon-calendar', true, false, false,
+			() => this.doSomethingElse(), undefined,undefined,'red','green'));
 	}
 
 	public doSomething() {
@@ -34,6 +35,21 @@ export class NavbarTestComponent {
 	public doSomethingElse() {
 	}
 }
+
+const clickTabButton = (fixture: ComponentFixture<NavbarTestComponent>, children: number) => {
+	const button = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
+	button.click();
+	fixture.detectChanges();
+};
+
+const getText = (fixture: ComponentFixture<NavbarTestComponent>, children: number) => {
+	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
+	return label.innerHTML;
+};
+const getBackgroundColor = (fixture: ComponentFixture<NavbarTestComponent>, children: number) => {
+	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')').querySelector('a');
+	return label.getAttribute('style');
+};
 
 describe('Systelab Navbar', () => {
 	let fixture: ComponentFixture<NavbarTestComponent>;
@@ -99,21 +115,3 @@ describe('Systelab Navbar', () => {
 			.toHaveBeenCalled();
 	});
 });
-
-function clickTabButton(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
-	const button = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
-	button.click();
-	fixture.detectChanges();
-}
-
-function getText(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')');
-	return label.innerHTML;
-}
-function getBackgroundColor(fixture: ComponentFixture<NavbarTestComponent>, children: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('li:nth-of-type(' + children + ')').querySelector('a');
-	return label.getAttribute('style');
-}
-
-
-
