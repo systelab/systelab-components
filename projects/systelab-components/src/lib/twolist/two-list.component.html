@@ -1,10 +1,10 @@
 <div class="slab-twolist h-100">
-    <div class="slab-twolistdiv d-flex flex-column flex-nowrap">
+    <div class="slab-twolistdiv">
         <label>{{'COMMON_AVAILABLE_FIELDS' | translate | async }} ({{ available.length }})</label>
         <div>
             <input type="text" class="form-control" [(ngModel)]="firstListSearch">
         </div>
-        <div id="left-list" class="slab-twolistbox mt-2 slab-flex-1">
+        <div id="left-list" class="slab-twolistbox">
             <div class="slab-twolistboxdiv">
                 <ul class="slab-twolistboxrow list-group">
                     <li *ngFor="let item of (available | datafilter:firstListSearch); let i=index;" [id]="'available'+i" [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.isSelected,'slab-twolistboxrow':!item.isSelected}"
@@ -14,31 +14,27 @@
                 </ul>
             </div>
         </div>
+        <systelab-button type="link" [disabled]="available.length == 0" (click)="addAll()">{{'COMMON_ADD_ALL' | translate | async }} ({{ available.length }})</systelab-button>
     </div>
-    <div class="slab-twolistbuttondiv d-flex flex-column flex-nowrap justify-content-center">
-        <button type="button" class="btn icon-angle-double-right" (click)="addAll()" title="{{'COMMON_ADD_ALL' | translate | async }}"
-            [disabled]="available.length == 0">
-        </button>
+    <div class="slab-twolistbuttondiv">
         <button type="button" class="btn icon-angle-right" (click)="add()" title="{{'COMMON_ADD_SELECTED' | translate | async }}"
             [disabled]="currentSelectionStatus.available.length == 0">
         </button>
         <button type="button" class="btn icon-angle-left" (click)="remove()" title="{{'COMMON_REMOVE_SELECTED' | translate | async }}"
             [disabled]="currentSelectionStatus.visible.length == 0">
         </button>
-        <button type="button" class="btn icon-angle-double-left" (click)="removeAll()" title="{{'COMMON_REMOVE_ALL' | translate | async }}"
-            [disabled]="visible.length == 0">
-        </button>
     </div>
 
-    <div class="slab-twolistdiv d-flex flex-column flex-nowrap">
+    <div class="slab-twolistdiv">
         <label>{{'COMMON_FIELDS_TO_SHOW' | translate | async }} ({{ visible.length }})</label>
         <div>
             <input type="text" class="form-control" [(ngModel)]="secondListSearch">
         </div>
-        <div id="right-list" class="slab-twolistbox mt-2 slab-flex-1 text-nowrap">
+        <div id="right-list" class="slab-twolistbox text-nowrap">
             <systelab-two-list-sortable-list class="w-100" [currentSelectionStatus]="currentSelectionStatus"
                 [(elementsList)]="visible" [secondListSearch]="secondListSearch" [dragAndDropEnabled]="dragAndDropEnabled"
                 (dbClick)="moveSelectedItemsFromVisibleToAvailable($event)"></systelab-two-list-sortable-list>
         </div>
+        <systelab-button type="link" [disabled]="visible.length == 0" (click)="removeAll()">{{'COMMON_REMOVE_ALL' | translate | async }} ({{ visible.length }})</systelab-button>
     </div>
 </div>

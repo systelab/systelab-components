@@ -1,40 +1,87 @@
 @import "button";
 
-.chip-button {
-  display: inline-block;
-  @include font-size($badge-font-size);
-  font-weight: $badge-font-weight;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  @include border-radius($badge-border-radius);
-  @include transition($badge-transition);
 
-  @at-root a#{&} {
-    @include hover-focus {
-      text-decoration: none;
+systelab-chip-button {
+
+  .slab-chip-button {
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    margin-right: 3px;
+    margin-bottom: 3px;
+
+    button {
+      color: $primary;
+      border: 1px solid $primary;
+      background-color: transparent;
+      font-size: 0.875rem;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      padding-left: 10px;
+      padding-right: 4px;
+      border-radius: 50px;
+      min-height: 27px;
+
+      .slab-chip-text {
+        margin-right: 7px;
+      }
+
+
+      .slab-chip-button-remove {
+        background: transparent;
+        -webkit-appearance: none;
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0 0 0 0;
+        border: 1px solid $primary;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: inherit;
+      }
+
+      &.slab-is-selected {
+        color: white;
+        background-color: $primary;
+        border: 1px solid white;
+
+        .slab-chip-button-remove {
+          border: 1px solid white;
+        }
+      }
+
+      &:hover {
+        color: white;
+        background-color: $primary;
+        border: 1px solid white;
+
+        .slab-chip-button-remove {
+          border: 1px solid white;
+        }
+      }
+
     }
+
+    // Empty badges collapse automatically
+    &:empty {
+      display: none;
+    }
+
+
+
   }
 
-  // Empty badges collapse automatically
-  &:empty {
-    display: none;
+  .slab-chip-button-add {
+    min-width: auto !important;
+    color: #0064D1;
+    border: 1px solid #0064D1;
+    background-color: transparent;
+    border-radius: 50%;
+    vertical-align: top;
+    margin-top: 1px;
+    padding-top: 0;
+    width: 26px;
   }
-}
-
-.li-chip-button {
-  padding: 0;
-  background: transparent;
-  border: 0;
-  -webkit-appearance: none;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #ffffff;
-  margin: 0 0 0 .3em;
-}
-
-.add-chip-button {
-  min-width: auto !important;
 }

@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class WizardStep {
 	step: number;
 	description: string;
+	optionalText?: string;
 	visited: boolean;
 }
 
@@ -13,7 +14,7 @@ export class WizardStep {
 export class WizardStepsComponent {
 
 	@Input() steps: Array<WizardStep> = [];
-	@Input() roundedStep = false;
+	@Input() roundedStep = true;
 	@Input() allowNavigation = false;
 	private _currentStep = 1;
 	@Input()

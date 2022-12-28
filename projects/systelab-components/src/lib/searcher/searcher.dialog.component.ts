@@ -40,11 +40,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	}
 
 	public getPlaceHolder() {
-		if (this.searchByContains) {
-			return this.i18nService.instant('COMMON_CONTAINS');
-		} else {
-			return this.i18nService.instant('COMMON_STARTS_WITH');
-		}
+		return this.i18nService.instant('COMMON_SEARCH');
 	}
 
 	public close(): void {
