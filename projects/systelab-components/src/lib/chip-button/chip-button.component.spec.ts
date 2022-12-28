@@ -66,12 +66,12 @@ describe('Systelab Chip Button', () => {
 
 	it('should have a add button', () => {
 		setAddValue(fixture, true);
-		expect(isButtonVisible(fixture, '.add-chip-button')).toBeTruthy();
+		expect(isButtonVisible(fixture, '.slab-chip-button-add')).toBeTruthy();
 	});
 
 	it('should have a remove button', () => {
 		setRemoveValue(fixture, true);
-		expect(isButtonVisible(fixture, '.li-chip-button')).toBeTruthy();
+		expect(isButtonVisible(fixture, '.slab-chip-button-remove')).toBeTruthy();
 	});
 
 	it('should add a button if is clicked', () => {
@@ -96,7 +96,7 @@ describe('Systelab Chip Button', () => {
 });
 
 function checkHasList(fixture: ComponentFixture<ChipButtonTestComponent>, num: number) {
-	const numElements = fixture.debugElement.nativeElement.querySelectorAll('.chip-button').length;
+	const numElements = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button').length;
 	expect(numElements)
 		.toEqual(num);
 }
@@ -121,21 +121,21 @@ function setRemoveValue(fixture: ComponentFixture<ChipButtonTestComponent>, valu
 }
 
 function clickAddButton(fixture: ComponentFixture<ChipButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.add-chip-button');
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-chip-button-add');
 	button.click();
 	fixture.detectChanges();
 }
 
 function clickRemoveLastButton(fixture: ComponentFixture<ChipButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelectorAll('.chip-button')[document.querySelectorAll('.chip-button').length - 1]
-		.querySelector('.li-chip-button');
+	const button = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
+		.querySelector('.slab-chip-button-remove');
 	button.click();
 	fixture.detectChanges();
 }
 
 function checkElementAdded(fixture: ComponentFixture<ChipButtonTestComponent>, name: string) {
-	const element = fixture.debugElement.nativeElement.querySelectorAll('.chip-button')[document.querySelectorAll('.chip-button').length - 1]
-		.querySelector('.btn')
+	const element = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
+		.querySelector('button')
 		.textContent
 		.split(' ')[0];
 	expect(element)
@@ -144,7 +144,7 @@ function checkElementAdded(fixture: ComponentFixture<ChipButtonTestComponent>, n
 
 function checkAtListOneChecked(fixture: ComponentFixture<ChipButtonTestComponent>) {
 	const buttons = fixture.debugElement.nativeElement.getElementsByTagName('systelab-chip-button')[0]
-		.querySelectorAll('.btn-primary');
+		.querySelectorAll('.slab-is-selected');
 	expect(buttons.length)
 		.toEqual(1);
 }

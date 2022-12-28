@@ -14,7 +14,7 @@
                 </ul>
             </div>
         </div>
-        <systelab-button type="link" [disabled]="available.length == 0" (click)="addAll()">{{'COMMON_ADD_ALL' | translate | async }} ({{ available.length }})</systelab-button>
+        <systelab-button type="link" id="slab-add-all" [disabled]="available.length == 0" (click)="addAll()">{{'COMMON_ADD_ALL' | translate | async }} ({{ available.length }})</systelab-button>
     </div>
     <div class="slab-twolistbuttondiv">
         <button type="button" class="btn icon-angle-right" (click)="add()" title="{{'COMMON_ADD_SELECTED' | translate | async }}"
@@ -35,6 +35,6 @@
                 [(elementsList)]="visible" [secondListSearch]="secondListSearch" [dragAndDropEnabled]="dragAndDropEnabled"
                 (dbClick)="moveSelectedItemsFromVisibleToAvailable($event)"></systelab-two-list-sortable-list>
         </div>
-        <systelab-button type="link" [disabled]="visible.length == 0" (click)="removeAll()">{{'COMMON_REMOVE_ALL' | translate | async }} ({{ visible.length }})</systelab-button>
+        <systelab-button type="link" id="slab-remove-all" [disabled]="visible.length == 0" (click)="removeAll()">{{'COMMON_REMOVE_ALL' | translate | async }} ({{ visible.length }})</systelab-button>
     </div>
 </div>
