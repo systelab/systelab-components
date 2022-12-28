@@ -11,7 +11,7 @@ export class ShowcaseWizardStepsComponent {
 	public steps: Array<WizardStep> = [];
 	public roundedStep = true;
 	constructor() {
-		this.steps.push({ step: 1, description: 'Step 1', visited: true }, { step: 2, description: 'Step 2', visited: true, optionalText: 'Este es  a mas a mas' }, { step: 3, description: 'Step 3', visited: false }, { step: 4, description: 'Step 4', visited: false }, { step: 5, description: 'Step 5', visited: false });
+		this.steps.push({ step: 1, description: 'Step 1', visited: true }, { step: 2, description: 'Step 2', visited: true, optionalText: 'Additional optional text' }, { step: 3, description: 'Step 3', visited: false }, { step: 4, description: 'Step 4', visited: false }, { step: 5, description: 'Step 5', visited: false });
 	}
 	public gotoStep(e) {
 		console.log(e)

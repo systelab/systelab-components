@@ -75,8 +75,8 @@ systelab-chip-button {
 
   .slab-chip-button-add {
     min-width: auto !important;
-    color: #0064D1;
-    border: 1px solid #0064D1;
+    color: $primary;
+    border: 1px solid $primary;
     background-color: transparent;
     border-radius: 50%;
     vertical-align: top;
