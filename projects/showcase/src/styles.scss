@@ -1,7 +1,7 @@
 @import "dist/systelab-components/sass/modern/systelab-components";
 
 body {
-  background-color: $background-primary;
+  background-color: var(--slab_background_primary, white);
 }
 
 input, button, a {
@@ -9,7 +9,7 @@ input, button, a {
 }
 
 .li {
-  color: $background-primary;
+  color: var(--slab_background_primary, black);
 }
 
 .flex-column {
