@@ -46,13 +46,14 @@
 @import "spy-menu";
 @import "toggle-selector";
 
-
 html {
   width: 100%;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
   color: $slab-base-body-color;
 
   body {
+    color: $slab-base-body-color;
+
     &:not(.is-login) {
       min-width: $slab-app-min-width;
       min-height: $slab-app-min-height;
