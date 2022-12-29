@@ -5,7 +5,7 @@ systelab-app-header {
 
   .slab-app-header-bar {
     height: $slab-app-header-height;
-    background-color: white;
+    background-color: $background_primary;
     border-bottom: 1px solid $background-secondary;
 
     > div:first-of-type {
