@@ -1,64 +1,124 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges } from '@angular/core';
-
-declare var jQuery: any;
+import { ApplicationRef, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Input, ViewContainerRef } from '@angular/core';
+import { TooltipComponent } from "./tooltip.component";
 
 @Directive({
 	selector: '[systelabTooltip],[systelabTooltipHtml]'
 })
-export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
+export class TooltipDirective {
 
-	public static readonly DEFAULT_PLACEMENT = 'top';
-	public static readonly DEFAULT_DELAY = 1000;
+	public static readonly DEFAULT_DELAY = 200;
 
 	@Input() public systelabTooltip: string;
 	@Input() public systelabTooltipHtml: string;
-	@Input() public systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
-	@Input() public systelabTooltipDelay: number;
-	@Input() public systelabTooltipHideDelay: number;
-	@Input() public systelabTooltipOnFocus = true;
+	@Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
+	@Input() systelabTooltipDelay = TooltipDirective.DEFAULT_DELAY;
+	@Input() systelabTooltipHideDelay = TooltipDirective.DEFAULT_DELAY;
 
-	constructor(private el: ElementRef, private renderer: Renderer2) {
+	private componentRef: ComponentRef<any> | null = null;
+	private showTimeout?: number;
+	private hideTimeout?: number;
+	private touchTimeout?: number;
+
+	constructor(private elementRef: ElementRef, private appRef: ApplicationRef, private viewContainerRef: ViewContainerRef) {
 	}
 
-	ngAfterViewInit() {
-		jQuery(this.el.nativeElement)
-			.tooltip();
-	}
-
-	ngOnDestroy() {
-		jQuery(this.el.nativeElement)
-			.tooltip('dispose');
-	}
-
-	ngOnChanges(changes: SimpleChanges) {
-		this.ngOnDestroy();
+	@HostListener('mouseenter')
+	onMouseEnter(): void {
 		this.initializeTooltip();
-		this.ngAfterViewInit();
 	}
 
-	private initializeTooltip(): void {
-		this.renderer.setAttribute(this.el.nativeElement, 'data-toogle', 'tooltip');
-		if (!this.systelabTooltipOnFocus) {
-			this.renderer.setAttribute(this.el.nativeElement, 'data-trigger', 'hover');
+	@HostListener('mouseleave')
+	onMouseLeave(): void {
+		this.setHideTooltipTimeout();
+	}
+
+	@HostListener('touchstart', ['$event'])
+	onTouchStart($event: TouchEvent): void {
+		$event.preventDefault();
+		window.clearTimeout(this.touchTimeout);
+		this.touchTimeout = window.setTimeout(this.initializeTooltip.bind(this), 500);
+	}
+
+	@HostListener('touchend')
+	onTouchEnd(): void {
+		window.clearTimeout(this.touchTimeout);
+		this.setHideTooltipTimeout();
+	}
+
+	private initializeTooltip() {
+		if (this.componentRef === null) {
+			window.clearInterval(this.systelabTooltipHideDelay);
+
+			this.componentRef = this.viewContainerRef.createComponent(TooltipComponent)
+
+			const [tooltipDOMElement] = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes;
+
+			this.setTooltipComponentProperties();
+
+			document.body.appendChild(tooltipDOMElement);
+			this.showTimeout = window.setTimeout(this.showTooltip.bind(this), this.systelabTooltipDelay);
 		}
-		this.renderer.setAttribute(this.el.nativeElement, 'data-boundary', 'viewport');
-		if (this.systelabTooltipHtml) {
-			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'true');
+	}
+
+	private setTooltipComponentProperties() {
+		if (this.componentRef !== null) {
+			this.componentRef.instance.tooltip = this.systelabTooltip ?? this.systelabTooltipHtml;
+
+			if (!this.systelabTooltipPlacement) {
+				this.systelabTooltipPlacement = 'top';
+			}
+			this.componentRef.instance.position = this.systelabTooltipPlacement;
+
+			const {left, right, top, bottom} = this.elementRef.nativeElement.getBoundingClientRect();
+
+			switch (this.systelabTooltipPlacement) {
+				case 'bottom': {
+					this.componentRef.instance.left = Math.round((right - left) / 2 + left);
+					this.componentRef.instance.top = Math.round(bottom);
+					break;
+				}
+				case 'top': {
+					this.componentRef.instance.left = Math.round((right - left) / 2 + left);
+					this.componentRef.instance.top = Math.round(top - 10);
+					break;
+				}
+				case 'right': {
+					this.componentRef.instance.left = Math.round(right);
+					this.componentRef.instance.top = Math.round(top + (bottom - top) / 2);
+					break;
+				}
+				case 'left': {
+					this.componentRef.instance.left = Math.round(left);
+					this.componentRef.instance.top = Math.round(top + (bottom - top) / 2);
+					break;
+				}
+				default: {
+					break;
+				}
+			}
 		}
-		this.renderer.setAttribute(this.el.nativeElement, 'data-placement',
-			(this.systelabTooltipPlacement) ? this.systelabTooltipPlacement : TooltipDirective.DEFAULT_PLACEMENT);
+	}
 
-		const tooltipShowDelay = `"show":${((this.systelabTooltipDelay) ? this.systelabTooltipDelay : TooltipDirective.DEFAULT_DELAY)}`;
-		const tooltipHideDelay = `"hide":${((this.systelabTooltipHideDelay) ? this.systelabTooltipHideDelay : TooltipDirective.DEFAULT_DELAY)}`;
-		const tooltipDelay = `{${tooltipShowDelay}, ${tooltipHideDelay}}`;
-		this.renderer.setAttribute(this.el.nativeElement, 'data-delay', tooltipDelay);
+	private showTooltip() {
+		if (this.componentRef !== null) {
+			this.componentRef.instance.visible = true;
+		}
+	}
 
-		this.renderer.setAttribute(this.el.nativeElement, 'title', (this.systelabTooltipHtml) ? this.systelabTooltipHtml : (this.systelabTooltip ? this.systelabTooltip : ''));
+	private setHideTooltipTimeout() {
+		this.hideTimeout = window.setTimeout(this.destroy.bind(this), this.systelabTooltipHideDelay);
+	}
 
-		if (!this.systelabTooltipHtml && !this.systelabTooltip) {
-			this.renderer.setAttribute(this.el.nativeElement, 'title', '');
-			this.renderer.setAttribute(this.el.nativeElement, 'data-original-title', '');
-			this.renderer.setAttribute(this.el.nativeElement, 'data-html', 'false');
+	ngOnDestroy(): void {
+		this.destroy();
+	}
+
+	destroy(): void {
+		if (this.componentRef !== null) {
+			window.clearInterval(this.showTimeout);
+			window.clearInterval(this.systelabTooltipHideDelay);
+			this.componentRef.destroy();
+			this.componentRef = null;
 		}
 	}
 }

@@ -99,6 +99,7 @@ import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
 import {ImageViewerComponent} from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
 	imports:      [
@@ -200,7 +201,8 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+		TooltipComponent
 	],
 	exports:      [
 		SliderComponent,
