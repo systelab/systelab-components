@@ -46,15 +46,12 @@ export class ShowcaseComponent {
 		}
 	}
 
-
-
 	public changeTheme() {
 		if (this.currentTheme === 'default') {
-			this.themeService.setTheme('dark');
 			this.currentTheme='dark';
 		} else {
-			this.themeService.setTheme('default');
 			this.currentTheme='default';
 		}
+		this.themeService.setTheme(this.currentTheme);
 	}
 }
