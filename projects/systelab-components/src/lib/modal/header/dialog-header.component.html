@@ -10,8 +10,8 @@
     </div>
 </ng-template>
 
-<div *ngIf="withDrag" class="slab-dialog-header d-flex justify-content-between px-3" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle
-style="cursor: move; cursor: grab;cursor: -moz-grab; cursor: -webkit-grab;">
+<div *ngIf="withDrag" class="slab-dialog-header slab-draggable d-flex justify-content-between px-3"
+     cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
     <ng-container *ngTemplateOutlet="headerContent"></ng-container>
 </div>
 <div *ngIf="!withDrag" class="slab-dialog-header d-flex justify-content-between px-3">

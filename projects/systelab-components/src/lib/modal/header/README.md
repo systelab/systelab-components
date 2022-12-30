@@ -51,6 +51,7 @@ For example:
 | withProgressBar | boolean | false| Shows a progress bar in the bottom bar for long waiting actions after submiting the Dialog|
 | withMinimize | boolean | false| Shows _ button for minimizing the Dialog|
 | withHome | boolean | false | Shows Home button for going to Home route|
+| withDrag | boolean | true | Allows the dialog to be draggable |
 
 ## Events
 
