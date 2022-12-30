@@ -17,6 +17,7 @@ export class DialogHeaderComponent implements AfterViewInit {
 	@Input() withTextProgressBar = false;
 	@Input() withHome = false;
 	@Input() withMinimize = false;
+	@Input() withDrag = true;
 
 	@Output() public close = new EventEmitter();
 	@Output() public info = new EventEmitter();

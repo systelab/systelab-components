@@ -1,4 +1,4 @@
-<div class="slab-dialog-header d-flex justify-content-between px-3">
+<ng-template #headerContent>
     <div class="d-inline-block text-truncate">
         <ng-content></ng-content>
     </div>
@@ -8,9 +8,18 @@
         <div *ngIf="withInfo" class="slab-dialog-header-button slab-dialog-info mr-1" (click)="doInfo()"></div>
         <div *ngIf="withClose" class="slab-dialog-header-button slab-dialog-close" (click)="doClose()"></div>
     </div>
+</ng-template>
+
+<div *ngIf="withDrag" class="slab-dialog-header d-flex justify-content-between px-3" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle
+style="cursor: move; cursor: grab;cursor: -moz-grab; cursor: -webkit-grab;">
+    <ng-container *ngTemplateOutlet="headerContent"></ng-container>
 </div>
+<div *ngIf="!withDrag" class="slab-dialog-header d-flex justify-content-between px-3">
+    <ng-container *ngTemplateOutlet="headerContent"></ng-container>
+</div>
+
 <div *ngIf="(withProgressBar || withTextProgressBar) && progress" class="slab-dialog-header-progress text-center"
-    [ngClass]="{'slab-dialog-header-progress-bar-with-text':withTextProgressBar}">
+     [ngClass]="{'slab-dialog-header-progress-bar-with-text':withTextProgressBar}">
     <div class="slab-dialog-header-progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
          aria-valuemin="0" aria-valuemax="100"></div>
     <span *ngIf="withTextProgressBar" class="slab-dialog-header-progress-bar-text h-100 d-flex align-items-center justify-content-center">{{textProgress}}</span>
