@@ -9,11 +9,21 @@ import { CalendarModule } from 'primeng/calendar';
 import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextPanelComponent } from './context-panel.component';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 @Component({
 	selector: 'systelab-context-panel-test',
 	template: `
                 <systelab-context-panel>
+                    <div class="d-flex flex-column"></div>
+                    <div class="header-content">
+                        <p class="text-left">
+                            <span class="icon-filter"></span> Last 30 days
+                        </p>
+                    </div>
+                    <div class="main-content d-flex flex-column mb-2">
+											<div class="internal-content">Internal content</div>
+                    </div>
                 </systelab-context-panel>
 	          `
 })
@@ -32,6 +42,7 @@ describe('Systelab Context Panel', () => {
 				ButtonModule,
 				CalendarModule,
 				HttpClientModule,
+				CdkMenuModule,
 				SystelabTranslateModule],
 			declarations: [ContextPanelComponent, ContextPanelTestComponent]
 		})
@@ -56,11 +67,11 @@ describe('Systelab Context Panel', () => {
 });
 
 function clickOnDots(fixture: ComponentFixture<ContextPanelTestComponent>) {
-	const button = fixture.debugElement.query(By.css('.dropdown-toggle')).nativeElement;
+	const button = fixture.debugElement.query(By.css('.slab-context-menu')).nativeElement;
 	button.click();
 	fixture.detectChanges();
 }
 
 function isPopupVisible(fixture: ComponentFixture<ContextPanelTestComponent>) {
-	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown') !== null);
+	return fixture.debugElement.query(By.css('.internal-content')).nativeElement!=null;
 }
