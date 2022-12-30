@@ -39,7 +39,7 @@
     "popper.js": "^1.16.1",
     "primeicons": "^6.0.1",
     "primeng": "^14.1.2",
-    "rxjs": "^7.5.7",
+    "rxjs": "^7.6.0",
     "systelab-preferences": "~15.0.0",
     "systelab-translate": "~15.0.0",
     "tslib": "^2.1.0",
