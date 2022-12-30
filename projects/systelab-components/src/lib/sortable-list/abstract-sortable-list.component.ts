@@ -1,6 +1,6 @@
-import { Directive, Input } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { polyfill } from 'mobile-drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Directive()
 export abstract class AbstractSortableListComponent<T> {
@@ -8,6 +8,8 @@ export abstract class AbstractSortableListComponent<T> {
 	@Input() public elementsList: Array<T> = [];
 	@Input() public secondListSearch: string;
 	@Input() public dragAndDropEnabled = true;
+
+	@Output() elementsListChange = new EventEmitter<Array<T>>();
 
 	public deleteWithSupr = false;
 	public showIcon = false;
@@ -70,10 +72,12 @@ export abstract class AbstractSortableListComponent<T> {
 	public removeElement(element: T, event: KeyboardEvent): void {
 		if (this.deleteWithSupr && event.code === 'Delete') {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
+			this.elementsListChange.emit(this.elementsList);
 		}
 	}
 
 	public dropped(event: CdkDragDrop<string[]>) {
 		moveItemInArray(this.elementsList, event.previousIndex, event.currentIndex);
+		this.elementsListChange.emit(this.elementsList);
 	}
 }
