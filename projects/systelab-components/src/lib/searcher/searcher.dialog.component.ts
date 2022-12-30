@@ -36,11 +36,6 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 			this.titleForDialog = this.parameters.searcher.getTitleForDialog();
 			this.multipleSelection = this.parameters.searcher.multipleSelection;
 		}
-
-	}
-
-	public getPlaceHolder() {
-		return this.i18nService.instant('COMMON_SEARCH');
 	}
 
 	public close(): void {

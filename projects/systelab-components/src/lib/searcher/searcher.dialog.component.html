@@ -17,9 +17,9 @@
                 </div>
             </div>
             <div class="slab-input d-flex slab-flex-1 ml-2">
-                <input type="text" class="slab-flex-1" #valueToSearch id="valueToSearch" style="border: 0px solid white;"
+                <input type="text" class="slab-flex-1" #valueToSearch id="valueToSearch" style="border: 0 solid white;"
                        (keyup)="refreshSearch()"
-                       [attr.placeholder]="getPlaceHolder()"
+                       placeholder="{{'COMMON_SEARCH' | translate | async}}"
                        [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
             </div>
         </div>
