@@ -1,48 +1,38 @@
-import { ApplicationRef, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Input, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from "./tooltip.component";
 
 @Directive({
 	selector: '[systelabTooltip],[systelabTooltipHtml]'
 })
-export class TooltipDirective {
+export class TooltipDirective implements OnDestroy {
 
 	public static readonly DEFAULT_DELAY = 200;
 
 	@Input() public systelabTooltip: string;
 	@Input() public systelabTooltipHtml: string;
-	@Input() systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
-	@Input() systelabTooltipDelay = TooltipDirective.DEFAULT_DELAY;
-	@Input() systelabTooltipHideDelay = TooltipDirective.DEFAULT_DELAY;
+	@Input() public systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
+	@Input() public systelabTooltipDelay = TooltipDirective.DEFAULT_DELAY;
+	@Input() public systelabTooltipHideDelay = TooltipDirective.DEFAULT_DELAY;
 
 	private componentRef: ComponentRef<any> | null = null;
 	private showTimeout?: number;
 	private hideTimeout?: number;
-	private touchTimeout?: number;
 
 	constructor(private elementRef: ElementRef, private appRef: ApplicationRef, private viewContainerRef: ViewContainerRef) {
 	}
 
 	@HostListener('mouseenter')
-	onMouseEnter(): void {
+	public  onMouseEnter(): void {
 		this.initializeTooltip();
 	}
 
 	@HostListener('mouseleave')
-	onMouseLeave(): void {
-		this.setHideTooltipTimeout();
-	}
-
-	@HostListener('touchstart', ['$event'])
-	onTouchStart($event: TouchEvent): void {
-		$event.preventDefault();
-		window.clearTimeout(this.touchTimeout);
-		this.touchTimeout = window.setTimeout(this.initializeTooltip.bind(this), 500);
-	}
-
-	@HostListener('touchend')
-	onTouchEnd(): void {
-		window.clearTimeout(this.touchTimeout);
-		this.setHideTooltipTimeout();
+	public onMouseLeave(): void {
+		if (this.systelabTooltipHideDelay) {
+			this.hideTimeout = this.setHideTooltipTimeout();
+		} else {
+			this.destroy();
+		}
 	}
 
 	private initializeTooltip() {
@@ -105,15 +95,15 @@ export class TooltipDirective {
 		}
 	}
 
-	private setHideTooltipTimeout() {
-		this.hideTimeout = window.setTimeout(this.destroy.bind(this), this.systelabTooltipHideDelay);
+	private setHideTooltipTimeout():number {
+		return window.setTimeout(this.destroy.bind(this), this.systelabTooltipHideDelay);
 	}
 
-	ngOnDestroy(): void {
+	public ngOnDestroy(): void {
 		this.destroy();
 	}
 
-	destroy(): void {
+	public destroy(): void {
 		if (this.componentRef !== null) {
 			window.clearInterval(this.showTimeout);
 			window.clearInterval(this.systelabTooltipHideDelay);

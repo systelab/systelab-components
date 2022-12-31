@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
 	selector: 'tooltip',
@@ -11,5 +11,4 @@ export class TooltipComponent {
 	public left = 0;
 	public top = 0;
 	public visible = false;
-
 }
