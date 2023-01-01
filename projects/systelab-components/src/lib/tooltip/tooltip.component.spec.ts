@@ -14,16 +14,13 @@ import { TooltipDirective } from './tooltip.directive';
 	selector: 'systelab-tabs-test',
 	template: `
 			<div class="m-4">
-          <systelab-button id="my-component" (action)="doSomething()" systelabTooltip="Tooltip on top"
+          <systelab-button id="my-component" systelabTooltip="Tooltip on top"
                 [systelabTooltipDelay]="0" [systelabTooltipHideDelay]="0">Tooltip on top</systelab-button>
       </div>
 	          `,
 	styles:   []
 })
 export class TooltipTestComponent {
-		public doSomething() {
-			console.log('Button clicked');
-		}
 }
 
 describe('Systelab Tooltip', () => {
@@ -55,22 +52,22 @@ describe('Systelab Tooltip', () => {
 
 	it('should show and hide the tooltip', async () => {
 		await fixture.whenStable();
-		let button = fixture.debugElement.query(By.css('#my-component'));
+		const button = fixture.debugElement.query(By.css('#my-component'));
 
-		expect(isPopupVisible(fixture)).toBeFalsy();
+		expect(isPopupVisible()).toBeFalsy();
 
 		button.triggerEventHandler('mouseenter', {});
 		fixture.detectChanges();
 
-		expect(isPopupVisible(fixture)).toBeTruthy();
+		expect(isPopupVisible()).toBeTruthy();
 
 		button.triggerEventHandler('mouseleave', {});
 		fixture.detectChanges();
 
-		expect(isPopupVisible(fixture)).toBeFalsy();
-	})
+		expect(isPopupVisible()).toBeFalsy();
+	});
 });
 
-function isPopupVisible(fixture: ComponentFixture<TooltipTestComponent>) {
-	return (document.querySelector('tooltip') !== null);
+function isPopupVisible() {
+	return (document.querySelector('systelab-tooltip') !== null);
 }

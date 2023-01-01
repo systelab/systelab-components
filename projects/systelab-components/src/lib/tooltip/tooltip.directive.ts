@@ -1,18 +1,19 @@
-import { ApplicationRef, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
-import { TooltipComponent } from "./tooltip.component";
+import { ApplicationRef, ComponentRef, Directive, ElementRef, EmbeddedViewRef } from '@angular/core';
+import { HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
+import { TooltipComponent } from './tooltip.component';
 
 @Directive({
 	selector: '[systelabTooltip],[systelabTooltipHtml]'
 })
 export class TooltipDirective implements OnDestroy {
 
-	public static readonly DEFAULT_DELAY = 200;
+	public static readonly defaultDelay = 200;
 
 	@Input() public systelabTooltip: string;
 	@Input() public systelabTooltipHtml: string;
 	@Input() public systelabTooltipPlacement: undefined | 'top' | 'right' | 'bottom' | 'left';
-	@Input() public systelabTooltipDelay = TooltipDirective.DEFAULT_DELAY;
-	@Input() public systelabTooltipHideDelay = TooltipDirective.DEFAULT_DELAY;
+	@Input() public systelabTooltipDelay = TooltipDirective.defaultDelay;
+	@Input() public systelabTooltipHideDelay = TooltipDirective.defaultDelay;
 
 	private componentRef: ComponentRef<any> | null = null;
 	private showTimeout?: number;
@@ -22,7 +23,7 @@ export class TooltipDirective implements OnDestroy {
 	}
 
 	@HostListener('mouseenter')
-	public  onMouseEnter(): void {
+	public onMouseEnter(): void {
 		this.initializeTooltip();
 	}
 
@@ -35,11 +36,24 @@ export class TooltipDirective implements OnDestroy {
 		}
 	}
 
-	private initializeTooltip() {
+	public ngOnDestroy(): void {
+		this.destroy();
+	}
+
+	private destroy(): void {
+		if (this.componentRef !== null) {
+			window.clearInterval(this.showTimeout);
+			window.clearInterval(this.systelabTooltipHideDelay);
+			this.componentRef.destroy();
+			this.componentRef = null;
+		}
+	}
+
+	private initializeTooltip(): void {
 		if (this.componentRef === null) {
 			window.clearInterval(this.systelabTooltipHideDelay);
 
-			this.componentRef = this.viewContainerRef.createComponent(TooltipComponent)
+			this.componentRef = this.viewContainerRef.createComponent(TooltipComponent);
 
 			const [tooltipDOMElement] = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes;
 
@@ -50,7 +64,7 @@ export class TooltipDirective implements OnDestroy {
 		}
 	}
 
-	private setTooltipComponentProperties() {
+	private setTooltipComponentProperties(): void {
 		if (this.componentRef !== null) {
 			this.componentRef.instance.tooltip = this.systelabTooltip ?? this.systelabTooltipHtml;
 
@@ -89,26 +103,13 @@ export class TooltipDirective implements OnDestroy {
 		}
 	}
 
-	private showTooltip() {
+	private showTooltip(): void {
 		if (this.componentRef !== null) {
 			this.componentRef.instance.visible = true;
 		}
 	}
 
-	private setHideTooltipTimeout():number {
+	private setHideTooltipTimeout(): number {
 		return window.setTimeout(this.destroy.bind(this), this.systelabTooltipHideDelay);
-	}
-
-	public ngOnDestroy(): void {
-		this.destroy();
-	}
-
-	public destroy(): void {
-		if (this.componentRef !== null) {
-			window.clearInterval(this.showTimeout);
-			window.clearInterval(this.systelabTooltipHideDelay);
-			this.componentRef.destroy();
-			this.componentRef = null;
-		}
 	}
 }

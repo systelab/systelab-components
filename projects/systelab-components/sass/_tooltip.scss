@@ -13,14 +13,11 @@ $slab-tooltip-font-size: 13px !default;
   opacity: 0;
 
   &::before {
-    border: 5px solid $slab-tooltip-background-color;
-  }
-
-  &::before {
     content: '';
     width: 0;
     height: 0;
     position: absolute;
+    border: 5px solid $slab-tooltip-background-color;
   }
 
   &--visible {
