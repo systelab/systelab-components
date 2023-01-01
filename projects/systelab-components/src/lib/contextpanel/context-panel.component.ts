@@ -8,11 +8,11 @@ export class ContextPanelComponent {
 
 	public isOpen = false;
 
-	public closeDropDown() {
+	public closeDropDown(): void {
 		this.isOpen = false;
 	}
 
-	public doClick() {
+	public doClick():  void {
 		this.isOpen = !this.isOpen;
 	}
 }
