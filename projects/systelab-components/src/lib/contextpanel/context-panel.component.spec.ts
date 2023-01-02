@@ -42,7 +42,6 @@ describe('Systelab Context Panel', () => {
 				ButtonModule,
 				CalendarModule,
 				HttpClientModule,
-				CdkMenuModule,
 				SystelabTranslateModule],
 			declarations: [ContextPanelComponent, ContextPanelTestComponent]
 		})
@@ -61,9 +60,11 @@ describe('Systelab Context Panel', () => {
 
 	it('should show a popup when clicked', () => {
 		clickOnDots(fixture);
-		expect(isPopupVisible(fixture))
-			.toBeTruthy();
+		expect(isPopupVisible(fixture)).toBeTruthy();
+		clickOnBackdrop(fixture);
+		expect(isPopupVisible(fixture)).toBeFalsy();
 	});
+
 });
 
 function clickOnDots(fixture: ComponentFixture<ContextPanelTestComponent>) {
@@ -71,6 +72,13 @@ function clickOnDots(fixture: ComponentFixture<ContextPanelTestComponent>) {
 	button.click();
 	fixture.detectChanges();
 }
+
+function clickOnBackdrop(fixture: ComponentFixture<ContextPanelTestComponent>) {
+	const button = fixture.debugElement.query(By.css('.cdk-overlay-transparent-backdrop')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+}
+
 
 function isPopupVisible(fixture: ComponentFixture<ContextPanelTestComponent>) {
 	return fixture.debugElement.query(By.css('.internal-content')).nativeElement!=null;
