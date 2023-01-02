@@ -57,7 +57,15 @@ describe('Systelab Context Panel', () => {
 			.toBeDefined();
 	});
 
-	it('should show a popup when clicked', () => {
+	it('should show a popup when clicked and hide when click again', () => {
+		clickOnDots(fixture);
+		expect(isPopupVisible(fixture)).toBeTruthy();
+		clickOnDots(fixture);
+		expect(isPopupVisible(fixture)).toBeFalsy();
+	});
+
+
+	it('should show a popup when clicked and hide when click outside', () => {
 		clickOnDots(fixture);
 		expect(isPopupVisible(fixture)).toBeTruthy();
 		clickOnBackdrop(fixture);
