@@ -9,7 +9,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextPanelComponent } from './context-panel.component';
-import { CdkMenuModule } from '@angular/cdk/menu';
 
 @Component({
 	selector: 'systelab-context-panel-test',
@@ -74,12 +73,12 @@ function clickOnDots(fixture: ComponentFixture<ContextPanelTestComponent>) {
 }
 
 function clickOnBackdrop(fixture: ComponentFixture<ContextPanelTestComponent>) {
-	const button = fixture.debugElement.query(By.css('.cdk-overlay-transparent-backdrop')).nativeElement;
-	button.click();
+	const backdrop:any = document.querySelector('.cdk-overlay-transparent-backdrop');
+	backdrop.click();
 	fixture.detectChanges();
 }
 
 
 function isPopupVisible(fixture: ComponentFixture<ContextPanelTestComponent>) {
-	return fixture.debugElement.query(By.css('.internal-content')).nativeElement!=null;
+	return fixture.debugElement.query(By.css('.internal-content'))!=null;
 }
