@@ -76,7 +76,7 @@ export abstract class AbstractSortableListComponent<T> {
 		}
 	}
 
-	public dropped(event: CdkDragDrop<string[]>) {
+	public dropped(event: CdkDragDrop<T[]>) {
 		moveItemInArray(this.elementsList, event.previousIndex, event.currentIndex);
 		this.elementsListChange.emit(this.elementsList);
 	}
