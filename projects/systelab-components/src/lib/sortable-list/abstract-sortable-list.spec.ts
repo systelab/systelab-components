@@ -16,7 +16,7 @@ const clickWithNoKey = (fixture: ComponentFixture<SortableListTestComponent>, b:
 	const element = fixture.debugElement.nativeElement.querySelector(b);
 	element.click();
 	fixture.detectChanges();
-}
+};
 
 const clickWithControlKey = (fixture: ComponentFixture<SortableListTestComponent>, b: string) => {
 	const element = fixture.debugElement.nativeElement.querySelector(b);
@@ -27,17 +27,17 @@ const clickWithControlKey = (fixture: ComponentFixture<SortableListTestComponent
 	});
 	element.dispatchEvent(event);
 	fixture.detectChanges();
-}
+};
 
 const pressDeleteKey = (fixture: ComponentFixture<SortableListTestComponent>, b: string) => {
 	const element = fixture.debugElement.nativeElement.querySelector(b);
 	const event = new KeyboardEvent('keydown', {code: 'Delete'});
 	element.dispatchEvent(event);
 	fixture.detectChanges();
-}
+};
 
-const createEvent = (previousIndex: number, currentIndex: number): CdkDragDrop<TestData[], TestData[]> => {
-	return {
+const createEvent = (previousIndex: number, currentIndex: number): CdkDragDrop<TestData[], TestData[]> => (
+	{
 		previousIndex,
 		currentIndex,
 		item:                   undefined,
@@ -47,8 +47,8 @@ const createEvent = (previousIndex: number, currentIndex: number): CdkDragDrop<T
 		distance:               {x: 0, y: 0},
 		dropPoint:              undefined,
 		event:                  new MouseEvent(null)
-	};
-}
+	}
+);
 
 const createInContainerEvent = (containerId: string, data: TestData[], fromIndex: number,
 								toIndex: number): CdkDragDrop<TestData[], TestData[]> => {
@@ -58,13 +58,13 @@ const createInContainerEvent = (containerId: string, data: TestData[], fromIndex
 	event.previousContainer = event.container;
 	event.item = {data: data[fromIndex]} as CdkDrag<TestData>;
 	return event;
-}
+};
 
 const dragAndDropElement = (fixture: ComponentFixture<SortableListTestComponent>, fromIndex: number, toIndex: number) => {
 	const dragDropEvent = createInContainerEvent('elements', fixture.componentInstance.elementsList, fromIndex, toIndex);
 	fixture.componentInstance.dropped(dragDropEvent);
 	fixture.detectChanges();
-}
+};
 
 export class TestData {
 	constructor(public id: string | number, public description: string, public isSelected = false) {

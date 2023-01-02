@@ -41,15 +41,6 @@ export abstract class AbstractSortableListComponent<T> {
 		return this.handleDrag(event);
 	}
 
-	private handleDrag(event): boolean {
-		if (this.dragAndDropEnabled) {
-			event.mouseEvent.preventDefault();
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	public selectElement(element: T, ev: KeyboardEvent) {
 		if (!ev.ctrlKey) {
 			this.elementsList.forEach(elementInList => {
@@ -81,4 +72,13 @@ export abstract class AbstractSortableListComponent<T> {
 	public abstract getSelectionField(element?: T): string;
 
 	public abstract getIcon(element?: T): string;
+
+	private handleDrag(event): boolean {
+		if (this.dragAndDropEnabled) {
+			event.mouseEvent.preventDefault();
+			return false;
+		} else {
+			return true;
+		}
+	}
 }
