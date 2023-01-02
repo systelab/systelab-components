@@ -12,13 +12,67 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
 import { CdkDrag, CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { DataFilterPipe } from '../twolist/datafilter.pipe';
 
+const clickWithNoKey = (fixture: ComponentFixture<SortableListTestComponent>, b: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	element.click();
+	fixture.detectChanges();
+}
+
+const clickWithControlKey = (fixture: ComponentFixture<SortableListTestComponent>, b: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	const event = new MouseEvent('click', {
+		view:    window,
+		bubbles: true,
+		ctrlKey: true
+	});
+	element.dispatchEvent(event);
+	fixture.detectChanges();
+}
+
+const pressDeleteKey = (fixture: ComponentFixture<SortableListTestComponent>, b: string) => {
+	const element = fixture.debugElement.nativeElement.querySelector(b);
+	const event = new KeyboardEvent('keydown', {code: 'Delete'});
+	element.dispatchEvent(event);
+	fixture.detectChanges();
+}
+
+const createEvent = (previousIndex: number, currentIndex: number): CdkDragDrop<TestData[], TestData[]> => {
+	return {
+		previousIndex,
+		currentIndex,
+		item:                   undefined,
+		container:              undefined,
+		previousContainer:      undefined,
+		isPointerOverContainer: true,
+		distance:               {x: 0, y: 0},
+		dropPoint:              undefined,
+		event:                  new MouseEvent(null)
+	};
+}
+
+const createInContainerEvent = (containerId: string, data: TestData[], fromIndex: number,
+								toIndex: number): CdkDragDrop<TestData[], TestData[]> => {
+	const event = createEvent(fromIndex, toIndex);
+	const container: any = {id: containerId, data};
+	event.container = container;
+	event.previousContainer = event.container;
+	event.item = {data: data[fromIndex]} as CdkDrag<TestData>;
+	return event;
+}
+
+const dragAndDropElement = (fixture: ComponentFixture<SortableListTestComponent>, fromIndex: number, toIndex: number) => {
+	const dragDropEvent = createInContainerEvent('elements', fixture.componentInstance.elementsList, fromIndex, toIndex);
+	fixture.componentInstance.dropped(dragDropEvent);
+	fixture.detectChanges();
+}
+
 export class TestData {
 	constructor(public id: string | number, public description: string, public isSelected = false) {
 	}
 }
 
 @Component({
-	selector:    'sortable-list-test',
+	selector:    'systelab-sortable-list-test',
 	templateUrl: 'abstract-sortable-list.component.html'
 })
 export class SortableListTestComponent extends AbstractSortableListComponent<TestData> {
@@ -28,7 +82,7 @@ export class SortableListTestComponent extends AbstractSortableListComponent<Tes
 		this.deleteWithSupr = true;
 	}
 
-	public getDescriptionField(element: TestData): string {
+	public getDescriptionField(): string {
 		return 'description';
 	}
 
@@ -36,7 +90,7 @@ export class SortableListTestComponent extends AbstractSortableListComponent<Tes
 		return 'isSelected';
 	}
 
-	public getIcon(element: TestData | undefined): string {
+	public getIcon(): string {
 		return '';
 	}
 
@@ -123,57 +177,5 @@ describe('Systelab abstract sortable list', () => {
 			.toEqual(2);
 	});
 
-})
+});
 
-function clickWithNoKey(fixture: ComponentFixture<SortableListTestComponent>, b: string) {
-	const element = fixture.debugElement.nativeElement.querySelector(b);
-	element.click();
-	fixture.detectChanges();
-}
-
-function clickWithControlKey(fixture: ComponentFixture<SortableListTestComponent>, b: string) {
-	const element = fixture.debugElement.nativeElement.querySelector(b);
-	const event = new MouseEvent('click', {
-		'view':    window,
-		'bubbles': true,
-		'ctrlKey': true
-	});
-	element.dispatchEvent(event);
-	fixture.detectChanges();
-}
-
-function pressDeleteKey(fixture: ComponentFixture<SortableListTestComponent>, b: string) {
-	const element = fixture.debugElement.nativeElement.querySelector(b);
-	const event = new KeyboardEvent('keydown', {code: 'Delete'});
-	element.dispatchEvent(event);
-	fixture.detectChanges();
-}
-
-function dragAndDropElement(fixture: ComponentFixture<SortableListTestComponent>, fromIndex: number, toIndex: number) {
-	const dragDropEvent = createInContainerEvent('elements', fixture.componentInstance.elementsList, fromIndex, toIndex);
-	fixture.componentInstance.dropped(dragDropEvent);
-	fixture.detectChanges();
-}
-
-function createInContainerEvent(containerId: string, data: TestData[], fromIndex: number, toIndex: number): CdkDragDrop<TestData[], TestData[]> {
-	const event = createEvent(fromIndex, toIndex);
-	const container: any = {id: containerId, data: data};
-	event.container = container;
-	event.previousContainer = event.container;
-	event.item = {data: data[fromIndex]} as CdkDrag<TestData>;
-	return event;
-}
-
-function createEvent(previousIndex: number, currentIndex: number): CdkDragDrop<TestData[], TestData[]> {
-	return {
-		previousIndex:          previousIndex,
-		currentIndex:           currentIndex,
-		item:                   undefined,
-		container:              undefined,
-		previousContainer:      undefined,
-		isPointerOverContainer: true,
-		distance:               {x: 0, y: 0},
-		dropPoint:              undefined,
-		event:                  new MouseEvent(null)
-	};
-}

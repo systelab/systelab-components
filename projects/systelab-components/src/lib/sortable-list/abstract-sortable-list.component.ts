@@ -18,12 +18,6 @@ export abstract class AbstractSortableListComponent<T> {
 		polyfill({});
 	}
 
-	public abstract getDescriptionField(element?: T): string;
-
-	public abstract getSelectionField(element?: T): string;
-
-	public abstract getIcon(element?: T): string;
-
 	public dbClickSelectedItem(element: T) {
 	}
 
@@ -76,8 +70,15 @@ export abstract class AbstractSortableListComponent<T> {
 		}
 	}
 
-	public dropped(event: CdkDragDrop<T[]>) {
+	public dropped(event: CdkDragDrop<T[]>): void {
 		moveItemInArray(this.elementsList, event.previousIndex, event.currentIndex);
 		this.elementsListChange.emit(this.elementsList);
 	}
+
+
+	public abstract getDescriptionField(element?: T): string;
+
+	public abstract getSelectionField(element?: T): string;
+
+	public abstract getIcon(element?: T): string;
 }
