@@ -57,3 +57,9 @@ export class ElementsSortableListComponent extends AbstractSortableListComponent
 | secondListSearch | string |  | Filter for the elements |
 
 
+## Events
+
+| Name | Parameters | Description                                                                     |
+| ---- |:----------:|---------------------------------------------------------------------------------|
+| elementsListChange | T | Emits elements list of type &lt;T&gt; when list elements are removed or ordered |
+
