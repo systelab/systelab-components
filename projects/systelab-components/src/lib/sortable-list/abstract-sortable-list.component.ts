@@ -75,7 +75,7 @@ export abstract class AbstractSortableListComponent<T> {
 
 	private handleDrag(event): boolean {
 		if (this.dragAndDropEnabled) {
-			event.mouseEvent.preventDefault();
+			event.preventDefault();
 			return false;
 		} else {
 			return true;

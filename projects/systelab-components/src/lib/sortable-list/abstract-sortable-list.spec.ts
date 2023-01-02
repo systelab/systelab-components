@@ -170,6 +170,16 @@ describe('Systelab abstract sortable list', () => {
 			.toEqual('3');
 	});
 
+	it('should be able to drag if dragAndDropEnabled is true ', () => {
+		fixture.componentInstance.dragAndDropEnabled= true;
+		expect(fixture.componentInstance.handleDragEnter(new DragEvent('dragover'))).toBeFalse();
+	});
+
+	it('should not be able to drag if dragAndDropEnabled is false ', () => {
+		fixture.componentInstance.dragAndDropEnabled= false;
+		expect(fixture.componentInstance.handleDragEnter(new DragEvent('dragover'))).toBeTrue();
+	});
+
 	it('should be able to remove an element when Delete key is pressed', () => {
 		pressDeleteKey(fixture, '#element0');
 		const totalElements = fixture.componentInstance.elementsList.length;
