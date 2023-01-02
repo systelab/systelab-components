@@ -55,6 +55,6 @@ export class ElementsSortableListComponent extends AbstractSortableListComponent
 | elementsList     | Array&lt;T&gt; |         | The elements of the list |
 | secondListSearch |     string     |         | Filter for the elements  |
 ## Events
-| Name               | Parameters | Description                                                                     |
-|--------------------|:----------:|---------------------------------------------------------------------------------|
-| elementsListChange |     T      | Emits elements list of type &lt;T&gt; when list elements are removed or ordered |
+| Name               |   Parameters   | Description                                                                     |
+|--------------------|:--------------:|---------------------------------------------------------------------------------|
+| elementsListChange | Array&lt;T&gt; | Emits elements list of type &lt;T&gt; when list elements are removed or ordered |
