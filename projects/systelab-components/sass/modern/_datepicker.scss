@@ -154,9 +154,10 @@ p-calendar {
 body {
   .p-datepicker {
     width: 450px !important;
+    margin-top: 10px;
     table {
-      margin: 0 !important;
-    }
+        margin: 0 !important;
+      }
     .p-datepicker-title {
       width: 100%;
       height: 65px;;

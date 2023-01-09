@@ -11,7 +11,7 @@
                 </div>
                 <ul #scrollableList class="slab-dropdown-scroll" [ngClass]="{'slab-dropdown-overflow': overflow}">
                     <li *ngFor="let action of contextMenuOptions"
-                        class="d-flex align-items-center"
+                        class="d-flex align-items-center m-0"
                         [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
                         (click)="doClickWithAction($event, elementID, action.actionId)"
                         (mouseover)="doMouseOver($event, elementID, action.actionId)">
