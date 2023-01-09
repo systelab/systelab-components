@@ -1,11 +1,11 @@
 .slab-tree {
   cdk-nested-tree-node {
-    line-height: 30px;
+    line-height: $slab-tree-row-height;
     user-select: none;
 
     .slab-tree-node {
       &.slab-selected {
-        background-color: #c8dffc;
+        background-color: $table-row-selected-background-color;
       }
 
       button {
@@ -15,7 +15,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: rgba(200, 223, 252, 0.5);
+        background-color: scale-color($primary, $alpha: -90%);
       }
 
     }

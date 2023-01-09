@@ -7,8 +7,8 @@
         <systelab-tab [title]="'Title 2'" [id]="'2'">
             <div class="slab-flex-1">Second tab</div>
         </systelab-tab>
-        <systelab-tab [title]="'Title 1'" [id]="'1'" class="p-1">
-            <showcase-inner-api-grid #grid2 class="slab-flex-1 position-relative" [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
+        <systelab-tab [title]="'Title 1'" [id]="'1'">
+            <showcase-inner-api-grid #grid2 class="slab-flex-1 slab-remove-top-header position-relative" [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderContextMenuOptions()"
                                      (clickRow)="doSelect($event)"></showcase-inner-api-grid>
         </systelab-tab>
     </systelab-tabs>

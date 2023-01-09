@@ -49,7 +49,9 @@ systelab-toggle-button {
 
 
 systelab-button {
+
   .slab-btn {
+    width: 100%;
     order: 0;
     border-radius: 3em;
     cursor: pointer;
@@ -58,6 +60,11 @@ systelab-button {
     font-size: 1rem;
     padding: 9px 12px;
     border: none;
+  }
+
+  .slab-btn-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 
   .slab-btn-small {

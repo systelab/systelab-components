@@ -2,6 +2,11 @@
 
 
 .slab-calendar-dialog {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+
   a {
     top: 0;
     display: block;

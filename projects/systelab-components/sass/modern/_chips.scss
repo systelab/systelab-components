@@ -16,6 +16,10 @@ systelab-chips {
 
   .p-autocomplete-multiple {
     width: 100% !important;
+
+    .pi {
+      font-size: 15px;
+    }
   }
 
   .p-autocomplete-multiple-container {
@@ -35,5 +39,9 @@ systelab-chips {
     background-color: $primary;
     border-radius: 20px;
     padding: 2px 5px;
+  }
+
+  .p-autocomplete-token-label {
+    margin-left: 10px;
   }
 }

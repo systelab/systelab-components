@@ -54,5 +54,8 @@
   "COMMON_OK": "OK",
   "COMMON_SAVE": "Save",
   "COMMON_ZOOM_DRAG": "Zoom by area / dragging",
-  "COMMON_ADJUST": "Adjust"
+  "COMMON_ADJUST": "Adjust",
+  "COMMON_ADD_ALL": "Add all",
+  "COMMON_REMOVE_ALL": "Remove all",
+  "COMMON_SEARCH": "Search"
 }
