@@ -7,6 +7,12 @@ import { AfterViewInit, Component,  EventEmitter, Input, Output } from '@angular
         :host {
             width: 100%;
         }
+        .slab-draggable {
+            cursor: move;
+            cursor: grab;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+        }
 	`]
 })
 export class DialogHeaderComponent implements AfterViewInit {
@@ -17,6 +23,7 @@ export class DialogHeaderComponent implements AfterViewInit {
 	@Input() withTextProgressBar = false;
 	@Input() withHome = false;
 	@Input() withMinimize = false;
+	@Input() withDrag = true;
 
 	@Output() public close = new EventEmitter();
 	@Output() public info = new EventEmitter();

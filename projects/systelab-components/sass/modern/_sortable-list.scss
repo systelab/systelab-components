@@ -11,7 +11,21 @@
     @include user-selection(none);
   }
 
-  .slab-sortable-list-row-selected {
-    background-color: $slab-selected-background-color;
+
+  .slab-sortable-list-even-row {
+    background-color: $table-row-even-background-color;
+
+    &.slab-sortable-list-row-selected {
+      background-color: $slab-selected-background-color;
+    }
   }
+
+  .slab-sortable-list-odd-row {
+    background-color: $table-row-odd-background-color;
+
+    &.slab-sortable-list-row-selected {
+      background-color: $slab-selected-background-color;
+    }
+  }
+
 }

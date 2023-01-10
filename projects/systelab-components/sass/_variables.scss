@@ -123,4 +123,10 @@ $slab-spinner-width: 100px !default;
 // Define the line-height of the datepicker’s navigation bar.*/
 $slab-datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
 
+/* $sort-list-row-height: define the row height*/
+$slab-sort-list-row-height: $slab-table-min-row-height;
+$slab-twolist-row-height: $slab-table-min-row-height;
+
+/* Input Border radius */
+$slab-border-radius: 5px !default;
 

@@ -1,59 +1,96 @@
+systelab-two-list {
 
-/* $twolist-row-height: define the row height*/
-$twolist-row-height: ceil(35px * $slab-size-percentage) !default;
+  .slab-twolist {
+    display: flex;
+    overflow: auto;
 
-.slab-twolist {
-  display: -webkit-flex;
-  display: flex;
-  overflow: auto;
-
-  .slab-twolistdiv {
-    $single-list-width: calc(50% - 30px);
-
-    flex: 1 0 $single-list-width;
-    min-width: $single-list-width;
-
-    @media (max-width: 1024px) {
-      input {
-        display: none;
-      }
-    }
-
-    .slab-twolistbox {
-      border-radius: 5px;
-      border: 1px solid $medium-gray;
-      padding: 5px 0;
+    .slab-twolistdiv {
       display: flex;
-      overflow: auto;
+      flex-direction: column;
+      flex-wrap: nowrap !important;
 
-      .slab-twolistboxdiv {
-        flex: 1 0 auto;
+      $single-list-width: calc(50% - 30px);
+      flex: 1 0 $single-list-width;
+      min-width: $single-list-width;
+      padding: 8px;
 
-        .slab-twolistboxrow {
-          line-height: $twolist-row-height;
-          padding-left: 5px;
-          cursor: pointer;
-
-          @include user-selection(none);
+      @media (max-width: 1024px) {
+        input {
+          display: none;
         }
+      }
 
-        .slab-twolistboxrowselected {
-          background-color: $slab-selected-background-color;
-          padding-left: 5px;
+      label {
+        margin-bottom: 2px;
+      }
+
+      systelab-button {
+        width: 100%;
+
+        button {
+          width: 100%;
         }
+      }
 
-        .slab-twolistboxrowdrag {
-          cursor: move;
+      .slab-twolistbox {
+        flex: 1;
+        margin-top: 7px;
+
+        border-radius: 5px;
+        border: 1px solid $medium-gray;
+        display: flex;
+        overflow: auto;
+
+        .slab-twolistboxdiv {
+          flex: 1 0 auto;
+
+          .slab-twolistboxrow {
+            line-height: $slab-twolist-row-height;
+            cursor: pointer;
+            text-indent: 10px;
+            @include user-selection(none);
+          }
+
+          .slab-twolistboxrowselected {
+            background-color: $slab-selected-background-color;
+          }
+
+          .slab-twolistboxrowdrag {
+            cursor: move;
+          }
         }
       }
     }
-  }
 
-  .slab-twolistbuttondiv {
-    margin-top: 60px;
-    padding:5px;
-    button {
-      margin: 2px;
+    .slab-twolistbuttondiv {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap !important;
+      justify-content: center !important;
+      margin-left: 10px;
+      margin-right: 10px;
+
+      button {
+        height: 35px;
+        width: 35px;
+        margin: 2px;
+        color: white;
+        padding: 0;
+        border: 1px solid white;
+
+        &:hover {
+          color: white;
+          background-color: $primary;
+        }
+        &:disabled {
+          opacity: 0.4 !important;
+        }
+      }
+    }
+
+    .btn {
+      font-weight: bold;
+      font-size: 24px;
     }
   }
 }

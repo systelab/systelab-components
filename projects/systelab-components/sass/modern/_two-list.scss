@@ -5,6 +5,10 @@ systelab-two-list {
     overflow: auto;
 
     .slab-twolistdiv {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap !important;
+
       $single-list-width: calc(50% - 30px);
       flex: 1 0 $single-list-width;
       min-width: $single-list-width;
@@ -20,7 +24,18 @@ systelab-two-list {
         margin-bottom: 2px;
       }
 
+      systelab-button {
+        width: 100%;
+
+        button {
+          width: 100%;
+        }
+      }
+
       .slab-twolistbox {
+        flex: 1;
+        margin-top: 7px;
+
         border-radius: $slab-border-radius;
         border: 1px solid $medium-gray;
         display: flex;
@@ -48,11 +63,18 @@ systelab-two-list {
     }
 
     .slab-twolistbuttondiv {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap !important;
+      justify-content: center !important;
+      margin-left: 10px;
+      margin-right: 10px;
+
       button {
         height: 35px;
         width: 35px;
         margin: 2px;
-        color: $primary !important;
+        color: $primary;
         padding: 0;
         border-radius: 30px;
         border: 1px solid $primary;
