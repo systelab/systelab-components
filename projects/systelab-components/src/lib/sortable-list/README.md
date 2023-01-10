@@ -50,10 +50,7 @@ export class ElementsSortableListComponent extends AbstractSortableListComponent
 ```
 
 ## Properties AbstractSortableListComponent&lt;T&gt;
-
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| elementsList | Array&lt;T&gt; |  | The elements of the list |
-| secondListSearch | string |  | Filter for the elements |
-
-
+| Name             |      Type      | Default | Description              |
+|------------------|:--------------:|:-------:|--------------------------|
+| **elementsList** | Array&lt;T&gt; |         | The elements of the list |
+| secondListSearch |     string     |         | Filter for the elements  |

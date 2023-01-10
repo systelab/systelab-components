@@ -1,5 +1,12 @@
 systelab-tabs {
 
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: $slab-base-body-color !important;
+    background-color: transparent !important;
+    border-color: $nav-tabs-link-active-border-color;
+  }
+
   .nav-tabs .nav-link {
     border: 0;
     border-bottom: 3px solid transparent;

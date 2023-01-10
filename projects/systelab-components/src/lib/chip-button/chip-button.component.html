@@ -1,10 +1,9 @@
-<li class="chip-button mr-1 mb-1" role="badge" *ngFor="let button of buttonList">
-    <button type="button" class="btn" id="{{button.id}}" (click)="onClick(button)"
-            [class.btn-outline-primary]="!button.isChecked" [class.btn-primary]="button.isChecked"
-            (dblclick)="changeButtonItem(button)">{{button.name}}
-        <button *ngIf="isRemoveEnabled && !disabled" class="li-chip-button" aria-hidden="true" (click)="removeButtonItem(button, $event)">×</button>
+<li class="slab-chip-button" role="badge" *ngFor="let button of buttonList">
+    <button type="button" id="{{button.id}}" (click)="onClick(button)"
+            [class.slab-is-selected]="button.isChecked"
+            (dblclick)="changeButtonItem(button)">
+        <span class="slab-chip-text">{{button.name}}</span>
+        <span *ngIf="isRemoveEnabled && !disabled" class="slab-chip-button-remove" aria-hidden="true" (click)="removeButtonItem(button, $event)">×</span>
     </button>
 </li>
-<button *ngIf="showAddButton" [disabled]="disabled" type="button" class="btn btn-outline-primary add-chip-button" (click)="addButtonITem()">
-    <i class="icon-plus"></i>
-</button>
+<button *ngIf="showAddButton" [disabled]="disabled" type="button" class="slab-chip-button-add" (click)="addButtonITem()">+</button>
