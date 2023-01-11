@@ -13,6 +13,12 @@ export class ThemeService {
 		Object.keys(theme).forEach((key) => {
 			this.document.documentElement.style.setProperty(`--${key}`, theme[key]);
 		});
+
+		if (name==='default') {
+			this.document.styleSheets[0].deleteRule(1)
+		} else {
+			this.document.styleSheets[0].insertRule('::-webkit-scrollbar { width: var(--slab_scrollbar_width); height: var(--slab_scrollbar_height);}',1);
+		}
 	}
 
 	public getThemes():Array<string> {

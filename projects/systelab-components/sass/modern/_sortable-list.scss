@@ -13,18 +13,20 @@
 
 
   .slab-sortable-list-even-row {
-    background-color: $table-row-even-background-color;
+    background-color: var(--slab_table_row_even_background);
 
     &.slab-sortable-list-row-selected {
-      background-color: $slab-selected-background-color;
+      background-color: var(--slab_table_row_selection_background);
+      color: var(--slab_table_row_selection_foreground);
     }
   }
 
   .slab-sortable-list-odd-row {
-    background-color: $table-row-odd-background-color;
+    background-color: var(--slab_table_row_odd_background);
 
     &.slab-sortable-list-row-selected {
-      background-color: $slab-selected-background-color;
+      background-color: var(--slab_table_row_selection_background);
+      color: var(--slab_table_row_selection_foreground);
     }
   }
 

@@ -32,7 +32,7 @@ input[type="radio"] + label {
 
     content: '';
     z-index: 0;
-    border: solid ($slab-radio-height / 8) $slab-component-border-color;
+    border: solid ($slab-radio-height / 8) var(--slab_component_border_color);
     border-radius: 50%;
     box-sizing: border-box;
     background-color: $slab-radio-color;

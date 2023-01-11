@@ -15,7 +15,7 @@ systelab-app-frame {
   }
 
   .slab-main-container {
-    background-color: $background_primary;
+    background-color: var(--slab_background_primary);
   }
 
   @media (max-width: $slab-ipad-width) {

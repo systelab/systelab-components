@@ -16,13 +16,13 @@
     overflow: hidden;
 
     .ag-body-viewport {
-      background-color: $background-primary;
+      background-color: var(--slab_background_primary);
 
       .ag-center-cols-viewport {
         overflow-x: hidden;
 
         .ag-row {
-          background-color: $background-primary;
+          background-color: var(--slab_background_primary);
           border-bottom: none;
 
           &.ag-row-selected {
