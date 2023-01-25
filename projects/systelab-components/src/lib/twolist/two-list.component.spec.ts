@@ -130,7 +130,7 @@ describe('Systelab Two list', () => {
 	});
 
 	it('should all elements be visible after clicking button Add All', () => {
-		clickButton(fixture, '.icon-angle-double-right');
+		clickButton(fixture, '#slab-add-all');
 		checkIfListContains(fixture, 'right-list', 'Element 1');
 		checkIfListContains(fixture, 'right-list', 'Element 2');
 		checkIfListContains(fixture, 'right-list', 'Element 3');
@@ -143,7 +143,7 @@ describe('Systelab Two list', () => {
 	});
 
 	it('should none elements be visible after clicking button Remove All', () => {
-		clickButton(fixture, '.icon-angle-double-left');
+		clickButton(fixture, '#slab-remove-all');
 		checkIfListContains(fixture, 'left-list', 'Element 1');
 		checkIfListContains(fixture, 'left-list', 'Element 2');
 		checkIfListContains(fixture, 'left-list', 'Element 3');

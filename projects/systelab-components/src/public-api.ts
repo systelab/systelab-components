@@ -108,6 +108,8 @@ export * from './lib/directives/autofocus.directive';
 export * from './lib/directives/keyup-debounce.directive';
 export * from './lib/directives/draggable.directive';
 export * from './lib/directives/resizable.directive';
+export * from './lib/directives/numpad-decimal-numeric.directive';
+
 
 export * from './lib/listbox/renderer/abstract-tree-listbox-renderer.component';
 export * from './lib/contextmenu/context-menu-item.component';
@@ -118,6 +120,7 @@ export * from './lib/listbox/abstract-api-listbox.component';
 export * from './lib/listbox/abstract-api-tree-listbox.component';
 export * from './lib/sortable-list/abstract-sortable-list.component';
 export * from './lib/add-remove-list/abstract-add-remove-list.component';
+export * from './lib/tree/tree-node';
 export * from './lib/tree/abstract-tree.component';
 
 export * from './lib/toast/toast.service';
@@ -132,3 +135,4 @@ export * from './lib/toggle-selector/toggle-selector.component';
 export * from './lib/forms/validators/email-validator.directive';
 export * from './lib/forms/validators/phone-validator.directive';
 export * from './lib/forms/validators/url-validator.directive';
+

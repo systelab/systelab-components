@@ -18,6 +18,7 @@ import { DialogHeaderComponent } from './dialog-header.component';
                     <systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
                                             [withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
                                             [withTextProgressBar]="withTextProgressBar"
+                                            [withDrag]="withDrag"
                                             [withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
                 </div>
 	          `,
@@ -33,6 +34,7 @@ export class DialogHeaderTestComponent {
 	public withTextProgressBar = false;
 	public withHome = false;
 	public withMinimize = false;
+	public withDrag = true;
 
 	public doClose() {
 	}
@@ -120,6 +122,17 @@ describe('Systelab Dialog Header', () => {
 		expect(isComponentVisible(fixture, '.slab-dialog-header-progress'))
 			.toBeFalsy();
 		expect(isComponentVisible(fixture, '.slab-dialog-header-progress-bar-with-text'))
+			.toBeFalsy();
+	});
+
+	it('should be draggable', () => {
+		expect(isComponentDraggable(fixture, '.slab-dialog-header'))
+			.toBeTruthy();
+	});
+
+	it('should not  be draggable', () => {
+		setNoDraggable(fixture);
+		expect(isComponentDraggable(fixture, '.slab-dialog-header'))
 			.toBeFalsy();
 	});
 

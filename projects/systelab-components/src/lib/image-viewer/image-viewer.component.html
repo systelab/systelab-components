@@ -30,15 +30,15 @@
         </div>
         <div class="d-flex slab-flex-1" id="OverImageArea"></div>
         <div class="ml-auto">
-            <systelab-button type="primary">
-            <a [href]="imageSrc" download><i class="far fa-save text-white"></i></a>
+            <systelab-button systelabTooltip="{{ 'COMMON_SAVE' | translate | async }}">
+            <a [href]="imageSrc" download="{{imageTitle}}"><i class="icon-download1"></i></a>
             </systelab-button>
-            <systelab-toggle-button *ngIf="showZoomByAreaButton" class="ml-2" data-test-id="ZoomByAreaBtn"
+            <systelab-toggle-button *ngIf="showZoomByAreaButton" class="ml-2" data-test-id="ZoomByAreaBtn" systelabTooltip="{{ 'COMMON_ZOOM_DRAG' | translate | async }}"
                                     (click)="toggleZoomByArea()" [isChecked]="this.zoomEnabled">
-                <i class="fas fa-search"></i>
+                <i class="icon-search"></i>
             </systelab-toggle-button>
-            <systelab-button *ngIf="showAdjustButton" type="primary" class="ml-2" data-test-id="AdjustBtn" (click)="doAdjust()">
-                <i class="fas fa-expand"></i>
+            <systelab-button *ngIf="showAdjustButton" class="ml-2" data-test-id="AdjustBtn" (click)="doAdjust()" systelabTooltip="{{ 'COMMON_ADJUST' | translate | async }}">
+                <i class="icon-enlarge"></i>
             </systelab-button>
         </div>
         <systelab-slider class="m-2 pl-2 bg-primary-track" id="ImageViewerSlider" data-test-id="ImageViewerSlider"
@@ -68,7 +68,7 @@
             'filter':getFilterUrl(),
             'width':getWidth(),
             'cursor':zoomSelector.visible && !zoomSelector.allow ? 'not-allowed' : 'inherit'}"
-         alt="{{imageDescription}}"/>
+         alt="{{imageTitle}}"/>
 
     <div id="selector" data-test-id="ZoomSelector"
          [style.display]="zoomSelector.visible ? 'block' : 'none'"
@@ -83,6 +83,6 @@
 
 <ng-template #noImage>
     <span class="slab-flex-1 d-flex justify-content-center align-items-center " style="font-size: 5em; color: lightgrey;">
-        <i class="fal fa-images"></i>
+        <i class="icon-exclamation"></i>
     </span>
 </ng-template>

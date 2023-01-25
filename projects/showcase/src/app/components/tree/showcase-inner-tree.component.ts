@@ -1,64 +1,74 @@
-import {Component} from '@angular/core';
-import {AbstractTree} from 'systelab-components';
+import { Component } from '@angular/core';
+import { AbstractTree } from 'systelab-components';
 
 @Component({
-	selector: 'showcase-inner-tree',
-	templateUrl: '../../../../../systelab-components/src/lib/tree/abstract-tree-status.component.html'
+	selector:    'showcase-inner-tree',
+	templateUrl: '../../../../../systelab-components/src/lib/tree/abstract-tree.component.html'
 })
 export class ShowcaseInnerTreeComponent extends AbstractTree {
 
 	constructor() {
 		super();
+		this.populateTree();
+	}
 
+	public populateTree(): void {
 		const myTree: any[] = [];
 
 		myTree.push({
-			label: 'Hello',
-			collapsedIcon: 'icon-angle-right',
-			expandedIcon: 'icon-angle-down',
-			status: 'mlab-qc-status mlab-qc-status-ko',
-			children: [
+			label:         'One Node',
+			collapsedIcon: 'text-primary icon-cube',
+			expandedIcon:  'text-primary icon-cube',
+			children:      [
 				{
-					label: 'First',
-					collapsedIcon: 'icon-angle-right',
-					expandedIcon: 'icon-angle-down',
-					status: 'mlab-qc-status mlab-qc-status-ko'
+					label:         'Level 2 One Child',
+					collapsedIcon: 'text-primary icon-cube',
+					expandedIcon:  'text-primary icon-cube',
+					children:      [
+						{
+							label:         'Level 3 With Status',
+							collapsedIcon: 'text-primary icon-tag',
+							expandedIcon:  'text-primary icon-tag',
+							status:        'text-primary icon-square',
+						},
+						{
+							label:         'Level 3 Another Child With Status',
+							collapsedIcon: 'text-primary icon-tag',
+							expandedIcon:  'text-primary icon-tag',
+							status:        'text-primary icon-square',
+						}
+					]
+
 				},
 				{
-					label: 'Second',
-					collapsedIcon: 'icon-angle-right',
-					expandedIcon: 'icon-angle-down',
-					status: 'mlab-qc-status mlab-qc-status-ko'
+					label:         'Level 2 Another Child',
+					collapsedIcon: 'text-primary icon-tag',
+					expandedIcon:  'text-primary icon-tag',
 				}
 			]
 		});
 
-
 		myTree.push({
-			label: 'Bye',
-			collapsedIcon: 'icon-angle-right',
-			expandedIcon: 'icon-angle-down',
-			status: 'mlab-qc-status mlab-qc-status-ko',
-			expanded: true
+			label:         'Not selectable',
+			collapsedIcon: 'text-primary icon-tag',
+			expandedIcon:  'text-primary icon-tag',
+			selectable:    false,
 		});
 		myTree.push({
-			label: 'Bye',
-			collapsedIcon: 'icon-angle-right',
-			expandedIcon: 'icon-angle-down',
-			status: 'mlab-qc-status mlab-qc-status-ko',
-			expanded: true,
-			children: [
+			label:         'Expanded Node',
+			collapsedIcon: 'text-primary icon-cube',
+			expandedIcon:  'text-primary icon-cube',
+			expanded:      true,
+			children:      [
 				{
-					label: 'First',
-					collapsedIcon: 'icon-angle-right',
-					expandedIcon: 'icon-angle-down',
-					status: 'mlab-qc-status mlab-qc-status-ko'
+					label:         'First child',
+					collapsedIcon: 'text-primary icon-tag',
+					expandedIcon:  'text-primary icon-tag',
 				},
 				{
-					label: 'Second',
-					collapsedIcon: 'icon-angle-right',
-					expandedIcon: 'icon-angle-down',
-					status: 'mlab-qc-status mlab-qc-status-ko'
+					label:         'Second child',
+					collapsedIcon: 'text-primary icon-tag',
+					expandedIcon:  'text-primary icon-tag',
 				}
 			]
 		});
@@ -68,5 +78,9 @@ export class ShowcaseInnerTreeComponent extends AbstractTree {
 
 	public nodeSelect(evt: any) {
 		this.nodeSelected.emit(evt.node);
+	}
+
+	public selectRandomNode(): void {
+		this.selectedNode = this.tree[1];
 	}
 }

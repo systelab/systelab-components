@@ -1,5 +1,5 @@
 @import "systelab-bootstrap-settings";
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 @import "mixins";
 
@@ -22,7 +22,7 @@ $slab-app-min-height: 375px !default;
 $slab-ipad-width: 1024px !default;
 
 // Defines the primary color
-$primary: rgb(21, 143, 239) !default;
+$primary: #0064D1 !default;
 $background-primary: rgb(255, 255, 255) !default;
 $background-secondary: rgb(238, 238, 238) !default;
 // Defines the color for selected elements
@@ -123,4 +123,10 @@ $slab-spinner-width: 100px !default;
 // Define the line-height of the datepicker’s navigation bar.*/
 $slab-datepicker-header-navigation-line-height: $form-elements-height - 7px !default;
 
+/* $sort-list-row-height: define the row height*/
+$slab-sort-list-row-height: $slab-table-min-row-height;
+$slab-twolist-row-height: $slab-table-min-row-height;
+
+/* Input Border radius */
+$slab-border-radius: 5px !default;
 

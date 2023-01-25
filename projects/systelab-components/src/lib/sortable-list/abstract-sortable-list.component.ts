@@ -1,6 +1,6 @@
-import { Directive, Input } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { polyfill } from 'mobile-drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Directive()
 export abstract class AbstractSortableListComponent<T> {
@@ -9,18 +9,14 @@ export abstract class AbstractSortableListComponent<T> {
 	@Input() public secondListSearch: string;
 	@Input() public dragAndDropEnabled = true;
 
+	@Output() elementsListChange = new EventEmitter<Array<T>>();
+
 	public deleteWithSupr = false;
 	public showIcon = false;
 
 	constructor() {
 		polyfill({});
 	}
-
-	public abstract getDescriptionField(element?: T): string;
-
-	public abstract getSelectionField(element?: T): string;
-
-	public abstract getIcon(element?: T): string;
 
 	public dbClickSelectedItem(element: T) {
 	}
@@ -45,15 +41,6 @@ export abstract class AbstractSortableListComponent<T> {
 		return this.handleDrag(event);
 	}
 
-	private handleDrag(event): boolean {
-		if (this.dragAndDropEnabled) {
-			event.mouseEvent.preventDefault();
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	public selectElement(element: T, ev: KeyboardEvent) {
 		if (!ev.ctrlKey) {
 			this.elementsList.forEach(elementInList => {
@@ -70,10 +57,28 @@ export abstract class AbstractSortableListComponent<T> {
 	public removeElement(element: T, event: KeyboardEvent): void {
 		if (this.deleteWithSupr && event.code === 'Delete') {
 			this.elementsList.splice(this.elementsList.indexOf(element), 1);
+			this.elementsListChange.emit(this.elementsList);
 		}
 	}
 
-	public dropped(event: CdkDragDrop<string[]>) {
+	public dropped(event: CdkDragDrop<T[]>): void {
 		moveItemInArray(this.elementsList, event.previousIndex, event.currentIndex);
+		this.elementsListChange.emit(this.elementsList);
+	}
+
+
+	public abstract getDescriptionField(element?: T): string;
+
+	public abstract getSelectionField(element?: T): string;
+
+	public abstract getIcon(element?: T): string;
+
+	private handleDrag(event): boolean {
+		if (this.dragAndDropEnabled) {
+			event.preventDefault();
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

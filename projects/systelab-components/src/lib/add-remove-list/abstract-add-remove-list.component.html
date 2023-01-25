@@ -5,8 +5,10 @@
          (onDragOver)="preventDefault($event)"
          (onDragLeave)="preventDefault($event)">
         <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)" [cdkDropListDisabled]="!dragAndDropEnabled">
-            <div *ngFor="let element of elementsList"
+            <div *ngFor="let element of elementsList; let index = index"
                  [ngClass]="{'slab-sortable-list-row slab-sortable-list-row-selected':getSelectionFieldValue(element),'slab-sortable-list-row':!getSelectionFieldValue(element)}"
+                 [class.slab-sortable-list-even-row]="0 === index % 2"
+                 [class.slab-sortable-list-odd-row]="1 === index % 2"
                  (click)="selectElement(element,$event)" cdkDrag>
                 <i *ngIf="showIcon" class="mr-1" [ngClass]="[getIcon(element), isDisabled ? 'text-black-50' : 'text-primary']"></i>
                 <span [ngClass]="{'text-black-50': isDisabled}">{{getDescription(element)}}</span>

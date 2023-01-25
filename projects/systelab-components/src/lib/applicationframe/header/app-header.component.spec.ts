@@ -24,7 +24,7 @@ export class AppHeaderTestComponent implements OnInit {
 	public userName = 'test username';
 	public userFullName = 'test user full name';
 	public title = 'test title';
-	public logoIcon = 'fas fa-rebel';
+	public logoIcon = 'icon-line-chart';
 	public menu: ApplicationHeaderMenuEntry[] = [];
 	public menuBars = false;
 

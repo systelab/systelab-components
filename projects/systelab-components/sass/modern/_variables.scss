@@ -1,10 +1,10 @@
 @import "systelab-bootstrap-settings";
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 @import "mixins";
 
 // Internal variable to help set the size
-$slab-size-percentage: 1 !default;
+$slab-size-percentage: 1.2 !default;
 // Internal variable to set the font size
 $slab-base-font-size: 15px !default;
 // Defines the application font size
@@ -12,7 +12,7 @@ $slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-fon
 // Defines the application font family
 $slab-base-body-font-family: $font-family-base;
 // Defines the appication body color
-$slab-base-body-color: rgb(66, 66, 66) !default;
+$slab-base-body-color: #3F3F3F !default;
 // Defines the minimum width of the body
 $slab-app-min-width: 367px !default;
 // defines the minimum height of the body
@@ -31,7 +31,7 @@ $form-elements-height: floor(28px * $slab-size-percentage) !default;
 
 
 
-$slab-component-border-color: #ced4da !default;
+$slab-component-border-color: #b9bdbe !default;
 $slab-focus-component-border-color: #8cc8f7 !default;
 $slab-focus-component-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !default;
 
@@ -62,8 +62,8 @@ $slab-dialog-header-height: 65px !default;
 $slab-minimum-button-width: 85px !default;
 
 // Defines the height of the rows of a table
-$table-row-odd-background-color: rgb(243, 243, 243) !default;
-$table-row-even-background-color: rgb(253, 253, 253) !default;
+$table-row-even-background-color: #F4F4F4 !default;
+$table-row-odd-background-color: rgb(253, 253, 253) !default;
 $table-row-selected-background-color: $slab-selected-background-color !default;
 $table-row-selected-color: black !default;
 
@@ -78,6 +78,9 @@ $grid-border-color: #dee2e6  !default;
 // Defines the height and the min-height of the ui-grid row and cell
 $grid-cell-height: 39px !default;
 $slab-table-min-row-height: 39px !default;
+
+$slab-tree-row-height: $slab-table-min-row-height;
+
 
 // Defines the height of the tab
 $slab-tab-height: 28px !default;
@@ -124,7 +127,7 @@ $slab-slider-circle-border-color: $primary !default;
 
 $slab-nanobar-height: 4px !default;
 $slab-nanobar-with-progress-height: 28px !default;
-$slab-nanobar-color: orange !default;
+$slab-nanobar-color: $warning !default;
 
 
 // Defines the row line-height of the dropdown and the row line-height of the tree
@@ -144,11 +147,11 @@ $slab-datepicker-header-navigation-line-height: 25px !default;
 $slab-textarea-min-height: 140px !default;
 
 /* $twolist-row-height: define the row height*/
-$slab-twolist-row-height: 36px !default;
+$slab-twolist-row-height: $slab-table-min-row-height;
 
 
 /* $sort-list-row-height: define the row height*/
-$slab-sort-list-row-height: 36px !default;
+$slab-sort-list-row-height: $slab-table-min-row-height;
 
 /* Input Border radius */
 $slab-border-radius: 5px !default;

@@ -13,6 +13,10 @@ $slab-icon-context-menu-size: 19px;
     font-size: $slab-icon-context-menu-font-size;
     color: grey;
   }
+
+  systelab-context-menu-item {
+    height: $form-elements-height;
+  }
 }
 
 .slab-icon-container {

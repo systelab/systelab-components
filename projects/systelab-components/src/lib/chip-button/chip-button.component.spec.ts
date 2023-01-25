@@ -120,12 +120,12 @@ describe('Systelab Chip Button', () => {
 
 	it('should have a add button', () => {
 		setAddValue(fixture, true);
-		expect(isButtonVisible(fixture, '.add-chip-button')).toBeTruthy();
+		expect(isButtonVisible(fixture, '.slab-chip-button-add')).toBeTruthy();
 	});
 
 	it('should have a remove button', () => {
 		setRemoveValue(fixture, true);
-		expect(isButtonVisible(fixture, '.li-chip-button')).toBeTruthy();
+		expect(isButtonVisible(fixture, '.slab-chip-button-remove')).toBeTruthy();
 	});
 
 	it('should add a button if is clicked', () => {

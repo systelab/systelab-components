@@ -31,8 +31,10 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-1">
-            <button type="submit" [disabled]="!inputValidationForm.valid">Submit</button>
+        <div class="row">
+            <div class="ml-auto">
+            <systelab-button [disabled]="!inputValidationForm.valid">Submit</systelab-button>
+            </div>
         </div>        
       </form>
 </div>

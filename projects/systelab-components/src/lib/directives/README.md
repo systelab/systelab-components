@@ -36,3 +36,13 @@
 | Name | Parameters | Description |
 | ---- |:----------:| ------------|
 | finalSize | Events | Emits an event everytime the element is resized.|
+
+
+## numpadDecimalNumeric
+
+In an input field, if we use this directive, when clicking on the '.' key in the numpad, it will change the '.' to the localized decimal character.
+i.e: when locale is spanish, if we click the '.' key it translates the '.' to ','.
+
+```html
+<input type="text" id="ID_DOSE"  systelabNumPadDecimalNumericDirective/>
+```
