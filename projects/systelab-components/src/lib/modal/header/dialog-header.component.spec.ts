@@ -81,6 +81,16 @@ const showTextProgressBar = (fixture: ComponentFixture<DialogHeaderTestComponent
 const isComponentVisible = (fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) =>
 	(fixture.debugElement.nativeElement.querySelector(className) !== null);
 
+const setNoDraggable = (fixture: ComponentFixture<DialogHeaderTestComponent>) => {
+	fixture.componentInstance.withDrag = false;
+	fixture.detectChanges();
+};
+
+const isComponentDraggable = (fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) => {
+	const element=fixture.debugElement.nativeElement.querySelector(className);
+	return element.hasAttribute('cdkdrag') && element.hasAttribute('cdkdragrootelement');
+};
+
 describe('Systelab Dialog Header', () => {
 	let fixture: ComponentFixture<DialogHeaderTestComponent>;
 
