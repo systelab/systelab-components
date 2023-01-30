@@ -14,13 +14,13 @@ import { DialogHeaderComponent } from './dialog-header.component';
 @Component({
 	selector: 'systelab-dialog-header-test',
 	template: `
-                <div>
-                    <systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
-                                            [withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
-                                            [withTextProgressBar]="withTextProgressBar"
-                                            [withDrag]="withDrag"
-                                            [withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
-                </div>
+		<div>
+			<systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
+									[withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
+									[withTextProgressBar]="withTextProgressBar"
+									[withDrag]="withDrag"
+									[withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
+		</div>
 	          `,
 	styles:   []
 })
