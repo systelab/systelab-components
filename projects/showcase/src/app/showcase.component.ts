@@ -16,7 +16,8 @@ export class ShowcaseComponent {
 	private currentTheme = 'default';
 
 
-	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService, protected themeService: ThemeService) {
+	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
+	            protected themeService: ThemeService) {
 		this.itemsNav.push(new NavbarItem(0, 'Form Components', '', false, true, true, () => this.selectNav(0)));
 		this.itemsNav.push(new NavbarItem(1, 'Modals', '', false, false, true, () => this.selectNav(1)));
 		this.itemsNav.push(new NavbarItem(2, 'Navigation', '', false, false, true, () => this.selectNav(2)));
@@ -46,7 +47,7 @@ export class ShowcaseComponent {
 		}
 	}
 
-	public changeTheme() {
+	public changeTheme(): void {
 		if (this.currentTheme === 'default') {
 			this.currentTheme='dark';
 		} else {
