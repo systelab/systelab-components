@@ -1,14 +1,18 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { ContextMenuOption } from '../contextmenu/context-menu-option';
-import { AbstractContextComponent } from '../contextmenu/abstract-context.component';
+import { Component } from '@angular/core';
 
 @Component({
 	selector:    'systelab-context-panel',
 	templateUrl: 'context-panel.component.html',
 })
-export class ContextPanelComponent extends AbstractContextComponent<ContextMenuOption> implements OnInit, OnDestroy {
+export class ContextPanelComponent {
 
-	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
-		super(el, myRenderer, cdr);
+	public isOpen = false;
+
+	public closeDropDown(): void {
+		this.isOpen = false;
+	}
+
+	public doClick():  void {
+		this.isOpen = !this.isOpen;
 	}
 }
