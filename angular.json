@@ -74,6 +74,10 @@
             "main": "projects/showcase/src/main.ts",
             "polyfills": "projects/showcase/src/polyfills.ts",
             "tsConfig": "projects/showcase/tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "interactjs",
+              "mobile-drag-drop"
+            ],
             "assets": [
               "projects/showcase/src/favicon.png",
               "projects/showcase/src/gh.ico",
