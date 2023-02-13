@@ -38,19 +38,19 @@ const checkHasValue = (fixture: ComponentFixture<PaginatorTestComponent>, value:
 };
 
 const clickPrevious = (fixture: ComponentFixture<PaginatorTestComponent>) => {
-	clickButton(fixture, '.fa-step-backward');
+	clickButton(fixture, '.icon-angle-right');
 };
 
 const clickNext = (fixture: ComponentFixture<PaginatorTestComponent>) => {
-	clickButton(fixture, '.fa-step-forward');
+	clickButton(fixture, '.icon-angle-right');
 };
 
 const clickFirst = (fixture: ComponentFixture<PaginatorTestComponent>) => {
-	clickButton(fixture, '.fa-fast-backward');
+	clickButton(fixture, '.icon-angle-double-right');
 };
 
 const clickLast = (fixture: ComponentFixture<PaginatorTestComponent>) => {
-	clickButton(fixture, '.fa-fast-forward');
+	clickButton(fixture, '.icon-angle-double-right');
 };
 
 const clickPage = (fixture: ComponentFixture<PaginatorTestComponent>, page: number) => {

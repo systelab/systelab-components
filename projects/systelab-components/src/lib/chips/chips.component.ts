@@ -11,7 +11,16 @@ export class ChipsComponent {
 	@Output() public filtered = new EventEmitter<Array<string>>();
 	@ViewChild('autoComplete') autoComplete: AutoComplete;
 
+	@Input() public texts: Array<string> = [];
+	@Input() public disabled = false;
+	@Input() public readonly = false;
+
+	public results: Array<string> = [];
+
+	private newData: string;
 	private _filter: Array<string> = [];
+
+	constructor() {}
 
 	get filter(): Array<string> {
 		return this._filter;
@@ -20,22 +29,6 @@ export class ChipsComponent {
 	set filter(event) {
 		this._filter = event;
 		this.filtered.emit(event);
-	}
-
-	@Input()
-	public texts: Array<string> = [];
-
-	@Input()
-	public disabled = false;
-
-	@Input()
-	public readonly = false;
-
-	public results: Array<string> = [];
-
-	private newData: string;
-
-	constructor() {
 	}
 
 	public search(event): void {

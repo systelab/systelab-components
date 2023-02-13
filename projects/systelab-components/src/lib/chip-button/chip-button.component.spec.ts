@@ -55,7 +55,7 @@ const setRemoveValue = (fixture: ComponentFixture<ChipButtonTestComponent>, valu
 };
 
 const clickAddButton = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelector('.add-chip-button');
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-chip-button-add');
 	button.click();
 	fixture.detectChanges();
 };
