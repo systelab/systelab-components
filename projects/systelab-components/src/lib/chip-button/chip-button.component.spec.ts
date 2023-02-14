@@ -31,7 +31,7 @@ export class ChipButtonTestComponent {
 }
 
 const checkHasList = (fixture: ComponentFixture<ChipButtonTestComponent>, num: number) => {
-	const numElements = fixture.debugElement.nativeElement.querySelectorAll('.chip-button').length;
+	const numElements = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button').length;
 	expect(numElements)
 		.toEqual(num);
 };
@@ -61,16 +61,17 @@ const clickAddButton = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
 };
 
 const clickRemoveLastButton = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelectorAll('.chip-button')[document.querySelectorAll('.chip-button').length - 1]
-		.querySelector('.li-chip-button');
+	const button = fixture.debugElement.nativeElement
+        .querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
+		.querySelector('.slab-chip-button-remove');
 	button.click();
 	fixture.detectChanges();
 };
 
 const checkElementAdded = (fixture: ComponentFixture<ChipButtonTestComponent>, name: string) => {
 	const element =
-		fixture.debugElement.nativeElement.querySelectorAll('.chip-button')[document.querySelectorAll('.chip-button').length - 1]
-		.querySelector('.btn')
+		fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
+		.querySelector('button')
 		.textContent
 		.split(' ')[0];
 	expect(element)
@@ -79,7 +80,7 @@ const checkElementAdded = (fixture: ComponentFixture<ChipButtonTestComponent>, n
 
 const checkAtListOneChecked = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
 	const buttons = fixture.debugElement.nativeElement.getElementsByTagName('systelab-chip-button')[0]
-		.querySelectorAll('.btn-primary');
+		.querySelectorAll('.slab-is-selected');
 	expect(buttons.length)
 		.toEqual(1);
 };

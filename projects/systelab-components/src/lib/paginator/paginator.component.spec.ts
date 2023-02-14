@@ -38,7 +38,7 @@ const checkHasValue = (fixture: ComponentFixture<PaginatorTestComponent>, value:
 };
 
 const clickPrevious = (fixture: ComponentFixture<PaginatorTestComponent>) => {
-	clickButton(fixture, '.icon-angle-right');
+	clickButton(fixture, '.icon-angle-left');
 };
 
 const clickNext = (fixture: ComponentFixture<PaginatorTestComponent>) => {
@@ -46,7 +46,7 @@ const clickNext = (fixture: ComponentFixture<PaginatorTestComponent>) => {
 };
 
 const clickFirst = (fixture: ComponentFixture<PaginatorTestComponent>) => {
-	clickButton(fixture, '.icon-angle-double-right');
+	clickButton(fixture, '.icon-angle-double-left');
 };
 
 const clickLast = (fixture: ComponentFixture<PaginatorTestComponent>) => {
