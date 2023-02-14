@@ -1,9 +1,9 @@
-import { Injectable, Injector } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { ToastRef } from './toast-ref';
-import { ToastData } from './toast-config';
-import { ToastComponent } from './toast.component';
+import {Injectable, Injector} from '@angular/core';
+import {Overlay} from '@angular/cdk/overlay';
+import {ComponentPortal} from '@angular/cdk/portal';
+import {ToastRef} from './toast-ref';
+import {ToastData} from './toast-config';
+import {ToastComponent} from './toast.component';
 
 @Injectable({
   providedIn: 'root',
@@ -14,19 +14,19 @@ export class ToastService {
   constructor(private overlay: Overlay, private parentInjector: Injector) {}
 
   public showError(text: string) {
-    this.show({text: text, type: 'error' });
+    this.show({text, type: 'error' });
   }
 
   public showWarning(text: string) {
-    this.show({text: text, type: 'warning' });
+    this.show({text, type: 'warning' });
   }
 
   public showInformation(text: string) {
-    this.show({text: text, type: 'info' });
+    this.show({text, type: 'info' });
   }
 
   public showSuccess(text: string) {
-    this.show({text: text, type: 'success' });
+    this.show({text, type: 'success' });
   }
 
   private show(data: ToastData) {

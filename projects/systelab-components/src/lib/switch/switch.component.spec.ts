@@ -8,7 +8,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
 import { HttpClientModule } from '@angular/common/http';
 import { SwitchComponent } from './switch.component';
-import { SpinnerTestComponent } from '../spinner/spinner.component.spec';
 
 @Component({
 	selector: 'systelab-switch-test',
@@ -21,8 +20,24 @@ import { SpinnerTestComponent } from '../spinner/spinner.component.spec';
 	styles:   []
 })
 export class SwitchTestComponent {
-	public check= true;
+	public check = true;
 }
+
+const checkHasValue = (fixture: ComponentFixture<SwitchTestComponent>, value: boolean) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML).toContain(value);
+};
+
+const setValue = (fixture: ComponentFixture<SwitchTestComponent>, value: boolean) => {
+	fixture.componentInstance.check = value;
+	fixture.detectChanges();
+};
+
+const clickSwitch = (fixture: ComponentFixture<SwitchTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-switch');
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Switch', () => {
 	let fixture: ComponentFixture<SwitchTestComponent>;
@@ -64,20 +79,11 @@ describe('Systelab Switch', () => {
 		clickSwitch(fixture);
 		checkHasValue(fixture, true);
 	});
+
+	it('should maintain the same value', () => {
+		setValue(fixture, false);
+		checkHasValue(fixture, false);
+		setValue(fixture, false);
+		checkHasValue(fixture, false);
+	});
 });
-
-function checkHasValue(fixture: ComponentFixture<SwitchTestComponent>, value: boolean) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML).toContain(value);
-}
-
-function setValue(fixture: ComponentFixture<SwitchTestComponent>, value: boolean) {
-	fixture.componentInstance.check = value;
-	fixture.detectChanges();
-}
-
-function clickSwitch(fixture: ComponentFixture<SwitchTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-switch');
-	button.click();
-	fixture.detectChanges();
-}

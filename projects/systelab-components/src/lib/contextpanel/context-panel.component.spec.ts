@@ -20,6 +20,16 @@ import { ContextPanelComponent } from './context-panel.component';
 export class ContextPanelTestComponent {
 }
 
+
+const clickOnDots = (fixture: ComponentFixture<ContextPanelTestComponent>) => {
+	const button = fixture.debugElement.query(By.css('.dropdown-toggle')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+};
+
+const isPopupVisible = (fixture: ComponentFixture<ContextPanelTestComponent>) =>
+	(fixture.debugElement.nativeElement.querySelector('.slab-dropdown') !== null);
+
 describe('Systelab Context Panel', () => {
 	let fixture: ComponentFixture<ContextPanelTestComponent>;
 
@@ -54,13 +64,3 @@ describe('Systelab Context Panel', () => {
 			.toBeTruthy();
 	});
 });
-
-function clickOnDots(fixture: ComponentFixture<ContextPanelTestComponent>) {
-	const button = fixture.debugElement.query(By.css('.dropdown-toggle')).nativeElement;
-	button.click();
-	fixture.detectChanges();
-}
-
-function isPopupVisible(fixture: ComponentFixture<ContextPanelTestComponent>) {
-	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown') !== null);
-}

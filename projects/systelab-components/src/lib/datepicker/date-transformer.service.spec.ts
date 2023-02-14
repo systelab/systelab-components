@@ -26,7 +26,7 @@ describe('DataTransformerService Test', () => {
 				expected: new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() + 2)},
 	];
 
- 	function isSameDate(date1: Date, date2: Date): boolean {
+ 	const isSameDate = (date1: Date, date2: Date): boolean => {
 		if (date1.getDate() !== date2.getDate()) {
 			return false;
 		}
@@ -34,7 +34,7 @@ describe('DataTransformerService Test', () => {
 			return false;
 		}
 		return date1.getFullYear() === date2.getFullYear();
-	}
+	};
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({

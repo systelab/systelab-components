@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +14,8 @@ import { ToggleSelectorComponent } from 'systelab-components';
 	selector: 'systelab-toggle-selector-test',
 	template: `
                 <div>
-                    <systelab-toggle-selector [options]="options" [currentOption]="currentOption" (select)="doSomething($event)"></systelab-toggle-selector>
+                    <systelab-toggle-selector [options]="options" [currentOption]="currentOption"
+											  (select)="doSomething($event)"></systelab-toggle-selector>
                     <label class="label-value">{{currentOption}}</label>
                 </div>
 	          `,
@@ -28,6 +29,19 @@ export class ToggleSelectorTestComponent {
 		this.currentOption = option.id;
 	}
 }
+
+const checkHasValue = (fixture: ComponentFixture<ToggleSelectorTestComponent>, value: string) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML)
+		.toContain(value);
+};
+
+
+const clickOption = (fixture: ComponentFixture<ToggleSelectorTestComponent>, id: string) => {
+	const button = fixture.debugElement.query(By.css('#id'+id)).nativeElement;
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Toggle Selector', () => {
 	let fixture: ComponentFixture<ToggleSelectorTestComponent>;
@@ -71,17 +85,4 @@ describe('Systelab Toggle Selector', () => {
 	});
 
 });
-
-function checkHasValue(fixture: ComponentFixture<ToggleSelectorTestComponent>, value: string) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML)
-		.toContain(value);
-}
-
-
-function clickOption(fixture: ComponentFixture<ToggleSelectorTestComponent>, id: string) {
-	const button = fixture.debugElement.query(By.css('#id'+id)).nativeElement;
-	button.click();
-	fixture.detectChanges();
-}
 

@@ -13,7 +13,7 @@ import { ButtonComponent } from './button.component';
 	selector: 'systelab-button-test',
 	template: `
                 <div>
-                    <systelab-button (action)="doClick($event)" [disabled]="disabled" [type]="'primary'">
+                    <systelab-button (action)="doClick()" [disabled]="disabled" [type]="'primary'">
                         <i class="icon-plus-circle"></i>My Button</systelab-button>
                     <label class="label-value">{{isClicked}}</label>
                 </div>
@@ -25,10 +25,28 @@ export class ButtonTestComponent {
 	public isClicked = false;
 	public disabled = false;
 
-	public doClick(event: any) {
+	public doClick() {
 		this.isClicked = true;
 	}
 }
+
+const checkHasValue = (fixture: ComponentFixture<ButtonTestComponent>, value: boolean) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML)
+		.toContain(value);
+};
+
+const clickButton = (fixture: ComponentFixture<ButtonTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn');
+	button.click();
+	fixture.detectChanges();
+};
+
+const clickOnIcon = (fixture: ComponentFixture<ButtonTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn i');
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Button', () => {
 	let fixture: ComponentFixture<ButtonTestComponent>;
@@ -79,21 +97,3 @@ describe('Systelab Button', () => {
 		checkHasValue(fixture, false);
 	});
 });
-
-function checkHasValue(fixture: ComponentFixture<ButtonTestComponent>, value: boolean) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML)
-		.toContain(value);
-}
-
-function clickButton(fixture: ComponentFixture<ButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickOnIcon(fixture: ComponentFixture<ButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn i');
-	button.click();
-	fixture.detectChanges();
-}

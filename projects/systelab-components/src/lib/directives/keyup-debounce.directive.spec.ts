@@ -13,21 +13,20 @@ import { KeyupDebounceDirective } from './keyup-debounce.directive';
 
 @Component({
 	template: `
-                  <input keyup-debounce #input type="text" [keyupDebounceTime]="debounceTime" (keyupDebounced)="doKeyUpDebounced($event)"/>
+                  <input keyup-debounce #input type="text" [keyupDebounceTime]="debounceTime" (keyupDebounced)="doKeyUpDebounced()"/>
 			  `
 })
 export class KeyupDebounceDirectiveTest {
 	public debounceTime = 350;
 	public keyupDebouncedCalled = false;
 
-	public doKeyUpDebounced(event: KeyboardEvent): void {
+	public doKeyUpDebounced(): void {
 		this.keyupDebouncedCalled = true;
 	}
 }
 
 describe('Systelab KeyupDebounce Directive', () => {
 	let fixture: ComponentFixture<KeyupDebounceDirectiveTest>;
-	let component: KeyupDebounceDirectiveTest;
 	let inputEl: DebugElement;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({

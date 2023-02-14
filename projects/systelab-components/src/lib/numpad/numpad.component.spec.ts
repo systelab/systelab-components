@@ -18,7 +18,7 @@ import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 	selector: 'systelab-numpad-test',
 	template: `
                 <div>
-                    <systelab-numpad #numpad [value]="value" (change)="doSearch($event)" [isPassword]="isPassword"></systelab-numpad>
+                    <systelab-numpad #numpad [value]="value" (change)="doSearch()" [isPassword]="isPassword"></systelab-numpad>
                 </div>
 	          `,
 	styles:   []
@@ -44,12 +44,10 @@ const clickShowDialogButton = (fixture: ComponentFixture<NumpadTestComponent>) =
 	const button = fixture.debugElement.nativeElement.querySelector('.btn');
 	button.click();
 	fixture.detectChanges();
-}
+};
 
 
-const isPopupVisible = () => {
-	return (document.querySelector('.cdk-overlay-pane') !== null);
-}
+const isPopupVisible = () => (document.querySelector('.cdk-overlay-pane') !== null);
 
 
 describe('Systelab Numpad', () => {

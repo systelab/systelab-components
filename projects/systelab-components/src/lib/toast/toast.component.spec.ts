@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +24,14 @@ export class ToastTestComponent {
 		this.toastService.showInformation('Text to show');
 	}
 }
+
+const clickButton = (fixture: ComponentFixture<ToastTestComponent>, buttonId: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#' + buttonId);
+	button.click();
+	fixture.detectChanges();
+};
+
+const isToastVisible = () => document.querySelector('.cdk-overlay-pane') !== null;
 
 describe('Systelab Toast', () => {
 	let fixture: ComponentFixture<ToastTestComponent>;
@@ -55,18 +63,8 @@ describe('Systelab Toast', () => {
 
 	it('should be able to show a toast.', () => {
 		clickButton(fixture, 'openbutton');
-		expect(isToastVisible(fixture))
+		expect(isToastVisible())
 			.toBeTruthy();
 	});
 });
-
-function clickButton(fixture: ComponentFixture<ToastTestComponent>, buttonId: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('#' + buttonId);
-	button.click();
-	fixture.detectChanges();
-}
-
-function isToastVisible(fixture: ComponentFixture<ToastTestComponent>) {
-	return (document.querySelector('.cdk-overlay-pane') !== null);
-}
 

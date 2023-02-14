@@ -15,9 +15,9 @@ import { SliderDoubleRangeComponent } from './slider-double-range.component';
 	template: `
                 <div>
                     <systelab-slider-double-range
-						 [min]="min" 
-						 [max]="max" 
-						 [step]="step" 
+						 [min]="min"
+						 [max]="max"
+						 [step]="step"
 						 [(minValue)]="minValue"
 						 [(maxValue)]="minValue">
 					</systelab-slider-double-range>
@@ -35,6 +35,27 @@ export class SliderDoubleRangeTestComponent {
 	public minValue = 20;
 	public maxValue = 80;
 }
+
+
+const checkHasMinValue = (fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.min-label-value');
+	expect(label.innerHTML).toContain(value);
+};
+
+const checkHasMaxValue = (fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.max-label-value');
+	expect(label.innerHTML).toContain(value);
+};
+
+const setMaxValue = (fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) => {
+	fixture.componentInstance.maxValue = value;
+	fixture.detectChanges();
+};
+
+const setMinValue = (fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) => {
+	fixture.componentInstance.minValue = value;
+	fixture.detectChanges();
+};
 
 describe('Systelab Slider-Double-Range', () => {
 	let fixture: ComponentFixture<SliderDoubleRangeTestComponent>;
@@ -81,23 +102,3 @@ describe('Systelab Slider-Double-Range', () => {
 		checkHasMinValue(fixture, 10);
 	});
 });
-
-function checkHasMinValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('.min-label-value');
-	expect(label.innerHTML).toContain(value);
-}
-
-function checkHasMaxValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('.max-label-value');
-	expect(label.innerHTML).toContain(value);
-}
-
-function setMaxValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
-	fixture.componentInstance.maxValue = value;
-	fixture.detectChanges();
-}
-
-function setMinValue(fixture: ComponentFixture<SliderDoubleRangeTestComponent>, value: number) {
-	fixture.componentInstance.minValue = value;
-	fixture.detectChanges();
-}

@@ -57,6 +57,19 @@ export class TimeUnitSelectTestComponent {
 class TestModule {
 }
 
+const clickOnDropDown = (fixture: ComponentFixture<TimeUnitSelectTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
+	button.click();
+	fixture.detectChanges();
+};
+
+const clickOnRow = (fixture: ComponentFixture<TimeUnitSelectTestComponent>, id: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+	button.click();
+	fixture.detectChanges();
+};
+
+
 describe('Systelab Time unit selector', () => {
 	let fixture: ComponentFixture<TimeUnitSelectTestComponent>;
 
@@ -145,20 +158,3 @@ describe('Systelab Time unit selector', () => {
 			});
 	});
 });
-
-function clickOnDropDown(fixture: ComponentFixture<TimeUnitSelectTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickOnRow(fixture: ComponentFixture<TimeUnitSelectTestComponent>, id: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
-	button.click();
-	fixture.detectChanges();
-}
-
-function setShowHours(fixture: ComponentFixture<TimeUnitSelectTestComponent>) {
-	fixture.componentInstance.showHoursOption = true;
-	fixture.detectChanges();
-}
