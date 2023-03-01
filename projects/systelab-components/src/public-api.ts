@@ -136,3 +136,5 @@ export * from './lib/forms/validators/email-validator.directive';
 export * from './lib/forms/validators/phone-validator.directive';
 export * from './lib/forms/validators/url-validator.directive';
 
+export * from './lib/p-calendar/p-calendar.component';
+
