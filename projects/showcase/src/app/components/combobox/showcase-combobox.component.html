@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Sin buscador</label>
+        <label class="col-md-3 col-form-label">Sin buscador</label>
         <div class="col-md-9">
             <systelab-select
                     [values]="comboOptionList"
@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">With restore default option</label>
+        <label class="col-md-3 col-form-label">With restore default option</label>
         <div class="col-md-9">
             <systelab-select
                     [values]="comboOptionList"
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">With restore default option (rubbish icon instead of X) and empty element in the list</label>
+        <label class="col-md-3 col-form-label">With restore default option (rubbish icon instead of X) and empty element in the list</label>
         <div class="col-md-9">
             <systelab-select
                     [withEmptyValue]="true"
@@ -31,14 +31,14 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Autocomplete</label>
+        <label class="col-md-3 col-form-label">Autocomplete</label>
         <div class="col-md-9">
             <showcase-autocomplete (selectedItemChange)="comboChangeEvent($event)">
             </showcase-autocomplete>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Editable input</label>
+        <label class="col-md-3 col-form-label">Editable input</label>
         <div class="col-md-9">
             <systelab-select
                     [allowEditInput]="true"
@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Combo with Icon and color</label>
+        <label class="col-md-3 col-form-label">Combo with Icon and color</label>
         <div class="col-md-9">
             <systelab-select
                     [withIcon]="true"
@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Favoritos</label>
+        <label class="col-md-3 col-form-label">Favoritos</label>
         <div class="col-md-9">
             <systelab-select
                     [values]="comboOptionList"
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Disabled</label>
+        <label class="col-md-3 col-form-label">Disabled</label>
         <div class="col-md-9">
             <systelab-select
                     [values]="comboOptionList"
@@ -82,7 +82,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Con valor asignado</label>
+        <label class="col-md-3 col-form-label">Con valor asignado</label>
         <div class="col-md-9">
             <systelab-select
                     [id]="1"
@@ -92,7 +92,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Con buscador</label>
+        <label class="col-md-3 col-form-label">Con buscador</label>
         <div class="col-md-9">
             <systelab-select
                     [values]="comboOptionList" [filter]="true"
@@ -101,7 +101,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Color Picker</label>
+        <label class="col-md-3 col-form-label">Color Picker</label>
         <div class="col-md-9">
             <systelab-colorpicker
                     [(id)]="colorId">
@@ -109,28 +109,28 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">All Yes-No</label>
+        <label class="col-md-3 col-form-label">All Yes-No</label>
         <div class="col-md-9">
             <systelab-all-yes-no-select>
             </systelab-all-yes-no-select>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Gender</label>
+        <label class="col-md-3 col-form-label">Gender</label>
         <div class="col-md-9">
             <systelab-gender-select>
             </systelab-gender-select>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Time unit</label>
+        <label class="col-md-3 col-form-label">Time unit</label>
         <div class="col-md-9">
             <systelab-time-unit-select>
             </systelab-time-unit-select>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Multiple Selection</label>
+        <label class="col-md-3 col-form-label">Multiple Selection</label>
         <div class="col-md-9">
             <systelab-select
                     [multipleSelection]="multiple"
@@ -144,7 +144,7 @@
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label" for="form-h-s">Tree Combobox with favourites</label>
+        <label class="col-md-3 col-form-label">Tree Combobox with favourites</label>
         <div class="col-md-9">
             <showcase-inner-tree-combobox [withFavourites]="true"
                                           [preferenceName]="'favourites.section-laboratory-combobox'"></showcase-inner-tree-combobox>

@@ -14,9 +14,14 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
+import { ComboboxOption } from './combobox-option.interface';
 
-export class TestData {
-	constructor(public id: string | number, public description: string) {
+class TestData {
+	public static getOption<T>(id: T, description: string): ComboboxOption<T> {
+		return {
+			id,
+			description,
+		};
 	}
 }
 
@@ -32,8 +37,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 		super(myRenderer, chref);
 	}
 
-	public getInstance() {
-		return new TestData('', '');
+	public getInstance(): ComboboxOption<string> {
+		return TestData.getOption<string>('', '');
 	}
 
 	public getDescriptionField(): string {
@@ -49,11 +54,11 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 	}
 
 	public getData(): Observable<Array<TestData>> {
-		const values: TestData[] = [];
-		values.push(new TestData('1', 'Description 1'));
-		values.push(new TestData('2', 'Description 2'));
-		values.push(new TestData('3', 'Description 3'));
-		values.push(new TestData(4, 'Description 4'));
+		const values: ComboboxOption<number | string>[] = [];
+		values.push(TestData.getOption<string>('1', 'Description 1'));
+		values.push(TestData.getOption<string>('2', 'Description 2'));
+		values.push(TestData.getOption<string>('3', 'Description 3'));
+		values.push(TestData.getOption<number>(4, 'Description 4'));
 		this.totalItems = values.length;
 		return of(values);
 	}
@@ -84,9 +89,9 @@ export class ComboboxTestComponent {
 	public id = '1';
 	public description = 'Description 2';
 	public multipleSelection = false;
-	public multipleSelectedItemList = [
-		new TestData('3', 'Description 3'),
-		new TestData(4, 'Description 4')
+	public multipleSelectedItemList: ComboboxOption<number | string>[] = [
+		TestData.getOption<string>('3', 'Description 3'),
+		TestData.getOption<number>(4, 'Description 4')
 	];
 }
 

@@ -14,31 +14,10 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	public totalItemsLoaded = false;
 
-	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
+	protected constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef,
+						  public override preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
-
-	// override
-	protected override configGrid() {
-
-		super.configGrid();
-		this.gridOptions.rowModelType = 'infinite';
-		this.gridOptions.paginationPageSize = 20;
-		this.gridOptions.cacheBlockSize = 20;
-		this.gridOptions.cacheOverflowSize = 2;
-		this.gridOptions.maxConcurrentDatasourceRequests = 1;
-		this.gridOptions.infiniteInitialRowCount = 0;
-		this.gridOptions.maxBlocksInCache = 100;
-
-	}
-
-	protected override configGridData() {
-		this.gridOptions.datasource = null;
-	}
-
-	public abstract getData(page: number, itemsPerPage: number, startsWithParameter: string): Observable<Array<T>>;
-
-	public abstract getTotalItems(): number;
 
 	public override refresh(params: any): boolean {
 		if (this.gridOptions && this.gridOptions.api) {
@@ -70,11 +49,6 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		}
 	}
 
-	//override
-	protected override getTotalItemsInCombo(): number {
-		return this.getTotalItems();
-	}
-
 	public override doSearch(event: any) {
 		if (event.shiftKey || event.ctrlKey) {
 			return;
@@ -104,7 +78,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 				.subscribe({
 						next:  (previousPage: Array<T>) => {
 							const itemArray: Array<T> = new Array<T>();
-							const totItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
+							const totItems = Number(this.getTotalItems() + emptyElemNumber + allNumber);
 							if (this.emptyElement === true && this.allElement === true) {
 								const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
 								itemArray.push(lastButOneItemFromPreviousPage);
@@ -128,13 +102,36 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		}
 	}
 
+	// override
+	protected override configGrid() {
+
+		super.configGrid();
+		this.gridOptions.rowModelType = 'infinite';
+		this.gridOptions.paginationPageSize = 20;
+		this.gridOptions.cacheBlockSize = 20;
+		this.gridOptions.cacheOverflowSize = 2;
+		this.gridOptions.maxConcurrentDatasourceRequests = 1;
+		this.gridOptions.infiniteInitialRowCount = 0;
+		this.gridOptions.maxBlocksInCache = 100;
+
+	}
+
+	protected override configGridData() {
+		this.gridOptions.datasource = null;
+	}
+
+	//override
+	protected override getTotalItemsInCombo(): number {
+		return this.getTotalItems();
+	}
+
 	private getElements(page: number, pageSize: number, emptyElemNumber: number, allNumber: number, params: IGetRowsParams) {
 		this.totalItemsLoaded = false;
 		this.getData(page, pageSize, this.startsWith)
 			.subscribe({
 					next:  (v: Array<T>) => {
 						const itemArray: Array<T> = new Array<T>();
-						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber + allNumber);
+						const totalItems = Number(this.getTotalItems() + emptyElemNumber + allNumber);
 
 						if (this.emptyElement === true || this.allElement === true) {
 
@@ -158,30 +155,29 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 							} else {
 								this.getData(page - 1, this.gridOptions.paginationPageSize, this.startsWith)
 									.subscribe({
-											next:  (previousPage: Array<T>) => {
+										next:  (previousPage: Array<T>) => {
 
-												if (this.emptyElement === true && this.allElement === true) {
-													const lastButOneItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 2];
-													itemArray.push(lastButOneItemFromPreviousPage);
+											if (this.emptyElement === true && this.allElement === true) {
+												const lastButOneItemFromPrevPage = previousPage[this.gridOptions.paginationPageSize - 2];
+												itemArray.push(lastButOneItemFromPrevPage);
 
-													const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-													itemArray.push(lastItemFromPreviousPage);
-												} else {
-													const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
-													itemArray.push(lastItemFromPreviousPage);
-												}
-
-												for (const originalElement of v) {
-													itemArray.push(originalElement);
-												}
-												this.totalItemsLoaded = true;
-												params.successCallback(itemArray, totalItems);
-											},
-											error: () => {
-												params.failCallback();
+												const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+												itemArray.push(lastItemFromPreviousPage);
+											} else {
+												const lastItemFromPreviousPage = previousPage[this.gridOptions.paginationPageSize - 1];
+												itemArray.push(lastItemFromPreviousPage);
 											}
+
+											for (const originalElement of v) {
+												itemArray.push(originalElement);
+											}
+											this.totalItemsLoaded = true;
+											params.successCallback(itemArray, totalItems);
+										},
+										error: () => {
+											params.failCallback();
 										}
-									);
+									});
 							}
 						} else {
 
@@ -198,5 +194,9 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 				}
 			);
 	}
+
+	public abstract getData(page: number, itemsPerPage: number, startsWithParameter: string): Observable<Array<T>>;
+
+	public abstract getTotalItems(): number;
 
 }

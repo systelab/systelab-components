@@ -1,11 +1,23 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GetRowIdParams, GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 
-declare var jQuery: any;
+declare let jQuery: any;
 
 @Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
@@ -346,7 +358,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getInputHeight() {
-		return this.expandToParentContainerHeight ? {'height': '100%'} : undefined;
+		return this.expandToParentContainerHeight ? {height: '100%'} : undefined;
 	}
 
 	protected getComboPreferencesPrefix(): string {
@@ -642,9 +654,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (!this.multipleSelection) {
 		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
 			if (this.multipleSelectedItemList) {
-				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-					return item[this.getIdField()] === event.node.data[this.getIdField()];
-				});
+				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => item[this.getIdField()] === event.node.data[this.getIdField()]);
 				if (event.node.selected) {
 					if (elementIndexInSelectedList < 0) {
 						if (this.allElement) {
@@ -654,9 +664,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 								this.unselectAllNodesInGridOptions();
 							} else {
 								// the selectedNode is NOT "all: was "all" node already selected?
-								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-									return item[this.getIdField()] === this.getAllFieldIDValue();
-								});
+								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => item[this.getIdField()] === this.getAllFieldIDValue());
 								// yes, it was => unselect "all" node and empty the multipleSelectedItemList
 								if (elementAllInSelectedList !== -1) {
 									this.multipleSelectedItemList = [];
