@@ -1,15 +1,5 @@
 @import "../../../sass/modern/variables";
 
-:host {
-  &.zooming {
-    cursor: crosshair;
-  }
-
-  &.dragging {
-    cursor: move;
-  }
-}
-
 #imageViewerHeader {
   position: absolute;
   z-index: 100;
@@ -47,8 +37,16 @@
 #imageViewerWrapper {
   position: relative;
 
+  &.zooming {
+    cursor: crosshair !important;
+  }
+  &.dragging {
+    cursor: move;
+  }
+
   img {
     position: relative;
+
   }
 
   #selector {
