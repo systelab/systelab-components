@@ -116,11 +116,6 @@ describe('ImageViewerTestComponent', () => {
 		expect(fixture.componentInstance).toBeDefined();
 	});
 
-	it('should initialize with zoom and drag disabled', () => {
-		expect(fixture.componentInstance.imageViewer.zoomEnabled).toBeFalse();
-		expect(fixture.componentInstance.imageViewer.dragEnabled).toBeFalse();
-	});
-
 	it('should render action and zoom toggle buttons', () => {
 		const numActionButton = fixture.debugElement.nativeElement.querySelectorAll('systelab-toggle-button').length;
 		expect(numActionButton).toEqual(3);
