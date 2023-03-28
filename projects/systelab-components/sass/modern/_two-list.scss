@@ -51,8 +51,20 @@ systelab-two-list {
             @include user-selection(none);
           }
 
-          .slab-twolistboxrowselected {
-            background-color: $slab-selected-background-color;
+          .slab-twolistboxrow-even-row {
+            background-color: $table-row-even-background-color;
+
+            &.slab-twolistboxrowselected {
+              background-color: $slab-selected-background-color;
+            }
+          }
+
+          .slab-twolistboxrow-odd-row {
+            background-color: $table-row-odd-background-color;
+
+            &.slab-twolistboxrowselected {
+              background-color: $slab-selected-background-color;
+            }
           }
 
           .slab-twolistboxrowdrag {
