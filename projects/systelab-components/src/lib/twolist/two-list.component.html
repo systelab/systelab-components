@@ -7,7 +7,10 @@
         <div id="left-list" class="slab-twolistbox">
             <div class="slab-twolistboxdiv">
                 <ul class="slab-twolistboxrow list-group">
-                    <li *ngFor="let item of (available | datafilter:firstListSearch); let i=index;" [id]="'available'+i" [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.isSelected,'slab-twolistboxrow':!item.isSelected}"
+                    <li *ngFor="let item of (available | datafilter:firstListSearch); let i=index;" [id]="'available'+i"
+                        [ngClass]="{'slab-twolistboxrow slab-twolistboxrowselected':item.isSelected,'slab-twolistboxrow':!item.isSelected}"
+                        [class.slab-twolistboxrow-even-row]="0 === i % 2"
+                        [class.slab-twolistboxrow-odd-row]="1 === i % 2"
                         (click)="selectAvailableItem(item, $event)" (dblclick)="moveSelectedItemsFromAvailableToVisible(item, $event)">
                         {{item.displayName}}
                     </li>
