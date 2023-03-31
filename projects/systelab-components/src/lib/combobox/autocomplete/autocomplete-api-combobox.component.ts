@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import {IGetRowsParams } from 'ag-grid-community';
+import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -18,7 +18,7 @@ export class KeyName {
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
 
 	public override startsWith = '';
-	@Input() public debounceTime: number = 350;
+	@Input() public debounceTime = 350;
 
 	constructor(
 		public override myRenderer: Renderer2,
@@ -45,7 +45,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public override setDropdownHeight(): void {
 		let calculatedHeight = 0;
 
-		calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;
+		calculatedHeight += AbstractComboBox.rowHeight * 10;
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 	}
 

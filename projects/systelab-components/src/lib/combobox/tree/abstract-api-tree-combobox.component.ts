@@ -105,12 +105,12 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 		}
 
 		if (totalItems === 0) {
-			calculatedHeight += 6 + AbstractComboBox.ROW_HEIGHT;
+			calculatedHeight += 6 + AbstractComboBox.rowHeight;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
-			calculatedHeight = 6 + AbstractComboBox.ROW_HEIGHT * totalItems;
+			calculatedHeight = 6 + AbstractComboBox.rowHeight * totalItems;
 		} else {
-			calculatedHeight = AbstractComboBox.ROW_HEIGHT * 10;
+			calculatedHeight = AbstractComboBox.rowHeight * 10;
 		}
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 
@@ -239,7 +239,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 		this.gridOptions.columnDefs = this.columnDefs;
 
-		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
+		this.gridOptions.rowHeight = AbstractComboBox.rowHeight;
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellFocus = true;
 		this.gridOptions.rowSelection = 'single';
