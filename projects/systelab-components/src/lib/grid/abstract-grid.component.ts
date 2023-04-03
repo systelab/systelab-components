@@ -161,7 +161,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			if (pinnedCol) {
 				pinnedCol['pinned'] = 'left';
 			}
-			columnApi.applyColumnState({state: filteredGridOptionsPreferences});
+			columnApi.applyColumnState({state: filteredGridOptionsPreferences, applyOrder: true});
 		}
 	}
 
