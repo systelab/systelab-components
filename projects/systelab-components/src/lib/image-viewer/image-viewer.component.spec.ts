@@ -52,7 +52,6 @@ export class ImageViewerTestComponent {
 								 0 0 0 0 0
 								 0 0 0 1 0"/>
 	</filter>`;
-	private buttonActionClicked: string;
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -115,6 +114,11 @@ describe('ImageViewerTestComponent', () => {
 
 	it('should instantiate', () => {
 		expect(fixture.componentInstance).toBeDefined();
+	});
+
+	it('should initialize with zoom and drag disabled', () => {
+		expect(fixture.componentInstance.imageViewer.zoomEnabled).toBeFalse();
+		expect(fixture.componentInstance.imageViewer.dragEnabled).toBeFalse();
 	});
 
 	it('should render action and zoom toggle buttons', () => {
