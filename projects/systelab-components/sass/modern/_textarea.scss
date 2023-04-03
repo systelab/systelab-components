@@ -7,7 +7,7 @@ $slab-textarea-default-width: 100% !default;
   display: block;
   min-height: $slab-textarea-min-height;
   border-radius: $border-radius;
-  border: 1px solid $slab-component-border-color;
+  border: 1px solid var(--slab_component_border_color);
 
   &:not([class*="w-"]) {
     width: $slab-textarea-default-width;

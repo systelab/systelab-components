@@ -2,7 +2,7 @@
 .slab-combobox {
 
   border-radius: $border-radius;
-  border: solid 1px $slab-component-border-color;
+  border: solid 1px var(--slab_component_border_color);
 
   &:focus-within {
     border-color: $slab-focus-component-border-color;
@@ -139,7 +139,7 @@
       position: fixed;
       z-index: 3;
       -webkit-transform: translate3d(0, 0, 0);
-      border: 1px solid $slab-component-border-color;
+      border: 1px solid var(--slab_component_border_color);
       border-radius: 3px;
       background-color: white;
     }
@@ -158,13 +158,13 @@
       .ag-body-viewport {
         .ag-center-cols-viewport {
           overflow-x: hidden;
-          background-color: $background-primary;
+          background-color: var(--slab_background_primary);
 
           .ag-center-cols-container {
             width: 100% !important;
 
             .ag-row {
-              background-color: $background-primary;
+              background-color: var(--slab_background_primary);
 
               &.ag-row-selected {
                 background-color: $slab-selected-background-color;

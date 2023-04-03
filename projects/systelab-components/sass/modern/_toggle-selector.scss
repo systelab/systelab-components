@@ -1,6 +1,6 @@
 systelab-toggle-selector {
 
-  $border-color: $slab-component-border-color;
+  $border-color: var(--slab_component_border_color);
   $option-color: black;
   $selected-option-color: white;
   $selected-option-background-color: $primary;
