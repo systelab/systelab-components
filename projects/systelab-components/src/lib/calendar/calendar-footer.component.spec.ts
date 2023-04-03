@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from '@angular/common/http';
-import {SystelabTranslateModule} from 'systelab-translate';
-import {SystelabPreferencesModule} from 'systelab-preferences';
-import {CalendarFooterComponent} from './calendar-footer.component';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
+import { SystelabTranslateModule } from 'systelab-translate';
+import { SystelabPreferencesModule } from 'systelab-preferences';
+import { CalendarFooterComponent } from './calendar-footer.component';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -27,6 +27,12 @@ export class CalendarFooterTestComponent {
 		this.date = value;
 	}
 }
+
+const clickClearButton = (fixture: ComponentFixture<CalendarFooterTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#clear-date-button button');
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Calendar Footer', () => {
 	let fixture: ComponentFixture<CalendarFooterTestComponent>;
@@ -64,9 +70,3 @@ describe('Systelab Calendar Footer', () => {
 	});
 
 });
-
-function clickClearButton(fixture: ComponentFixture<CalendarFooterTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('#clear-date-button button');
-	button.click();
-	fixture.detectChanges();
-}

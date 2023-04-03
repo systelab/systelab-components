@@ -1,4 +1,4 @@
-const gulp = require('gulp');
+import gulp from 'gulp';
 
 gulp.task('copytemplates', function (done) {
 	gulp.src([

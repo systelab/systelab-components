@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -14,13 +14,13 @@ import { DialogHeaderComponent } from './dialog-header.component';
 @Component({
 	selector: 'systelab-dialog-header-test',
 	template: `
-                <div>
-                    <systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
-                                            [withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
-                                            [withTextProgressBar]="withTextProgressBar"
-                                            [withDrag]="withDrag"
-                                            [withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
-                </div>
+		<div>
+			<systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
+									[withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
+									[withTextProgressBar]="withTextProgressBar"
+									[withDrag]="withDrag"
+									[withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
+		</div>
 	          `,
 	styles:   []
 })
@@ -49,6 +49,47 @@ export class DialogHeaderTestComponent {
 		this.header.progress=num;
 	}
 }
+
+const clickButton = (fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector(className);
+	button.click();
+	fixture.detectChanges();
+};
+
+const showHomeButton = (fixture: ComponentFixture<DialogHeaderTestComponent>) => {
+	fixture.componentInstance.withHome = true;
+	fixture.detectChanges();
+};
+
+const showInfoButton = (fixture: ComponentFixture<DialogHeaderTestComponent>) => {
+	fixture.componentInstance.withInfo = true;
+	fixture.detectChanges();
+};
+
+const showProgressBar = (fixture: ComponentFixture<DialogHeaderTestComponent>) => {
+	fixture.componentInstance.withProgressBar = true;
+	fixture.componentInstance.go(50);
+	fixture.detectChanges();
+};
+
+const showTextProgressBar = (fixture: ComponentFixture<DialogHeaderTestComponent>) => {
+	fixture.componentInstance.withTextProgressBar = true;
+	fixture.componentInstance.go(50);
+	fixture.detectChanges();
+};
+
+const isComponentVisible = (fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) =>
+	(fixture.debugElement.nativeElement.querySelector(className) !== null);
+
+const setNoDraggable = (fixture: ComponentFixture<DialogHeaderTestComponent>) => {
+	fixture.componentInstance.withDrag = false;
+	fixture.detectChanges();
+};
+
+const isComponentDraggable = (fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) => {
+	const element=fixture.debugElement.nativeElement.querySelector(className);
+	return element.hasAttribute('cdkdrag') && element.hasAttribute('cdkdragrootelement');
+};
 
 describe('Systelab Dialog Header', () => {
 	let fixture: ComponentFixture<DialogHeaderTestComponent>;
@@ -153,46 +194,3 @@ describe('Systelab Dialog Header', () => {
 	});
 
 });
-
-function clickButton(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
-	const button = fixture.debugElement.nativeElement.querySelector(className);
-	button.click();
-	fixture.detectChanges();
-}
-
-function showHomeButton(fixture: ComponentFixture<DialogHeaderTestComponent>) {
-	fixture.componentInstance.withHome = true;
-	fixture.detectChanges();
-}
-
-
-function setNoDraggable(fixture: ComponentFixture<DialogHeaderTestComponent>) {
-	fixture.componentInstance.withDrag = false;
-	fixture.detectChanges();
-}
-
-function showInfoButton(fixture: ComponentFixture<DialogHeaderTestComponent>) {
-	fixture.componentInstance.withInfo = true;
-	fixture.detectChanges();
-}
-
-function showProgressBar(fixture: ComponentFixture<DialogHeaderTestComponent>) {
-	fixture.componentInstance.withProgressBar = true;
-	fixture.componentInstance.go(50);
-    fixture.detectChanges();
-}
-
-function showTextProgressBar(fixture: ComponentFixture<DialogHeaderTestComponent>) {
-	fixture.componentInstance.withTextProgressBar = true;
-	fixture.componentInstance.go(50);
-    fixture.detectChanges();
-}
-
-function isComponentVisible(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
-	return (fixture.debugElement.nativeElement.querySelector(className) !== null);
-}
-
-function isComponentDraggable(fixture: ComponentFixture<DialogHeaderTestComponent>, className: string) {
-	const element=fixture.debugElement.nativeElement.querySelector(className);
-	return element.hasAttribute('cdkdrag') && element.hasAttribute('cdkdragrootelement');
-}

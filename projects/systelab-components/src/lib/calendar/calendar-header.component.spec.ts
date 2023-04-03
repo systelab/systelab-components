@@ -1,20 +1,20 @@
-import {Component} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from '@angular/common/http';
-import {SystelabTranslateModule} from 'systelab-translate';
-import {SystelabPreferencesModule} from 'systelab-preferences';
-import {CalendarHeaderComponent} from './calendar-header.component';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
+import { SystelabTranslateModule } from 'systelab-translate';
+import { SystelabPreferencesModule } from 'systelab-preferences';
+import { CalendarHeaderComponent } from './calendar-header.component';
 
 @Component({
 	selector: 'systelab-calendar-header-test',
 	template: `
         <div>
-            <systelab-calendar-header [currentDate]="date" (previousYear)="doPreviousYear($event)" (previousMonth)="doPreviousMonth($event)"
-                                      (nextMonth)="doNextMonth($event)" (nextYear)="doNextYear($event)"></systelab-calendar-header>
+            <systelab-calendar-header [currentDate]="date" (previousYear)="doPreviousYear()" (previousMonth)="doPreviousMonth()"
+                                      (nextMonth)="doNextMonth()" (nextYear)="doNextYear()"></systelab-calendar-header>
         </div>
 	`,
 	styles: []
@@ -27,23 +27,29 @@ export class CalendarHeaderTestComponent {
 	public previousYearActivated = false;
 	public previousMonthActivated = false;
 
-	public doPreviousYear(newValue): void {
+	public doPreviousYear(): void {
 		this.previousYearActivated = true;
 	}
 
-	public doPreviousMonth(newValue): void {
+	public doPreviousMonth(): void {
 		this.previousMonthActivated = true;
 	}
 
-	public doNextMonth(newValue): void {
+	public doNextMonth(): void {
 		this.nextMonthActivated = true;
 	}
 
-	public doNextYear(newValue): void {
+	public doNextYear(): void {
 		this.nextYearActivated = true;
 	}
 
 }
+
+const clickButton = (fixture: ComponentFixture<CalendarHeaderTestComponent>, buttonId: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#' + buttonId);
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Calendar Header', () => {
 	let fixture: ComponentFixture<CalendarHeaderTestComponent>;
@@ -95,9 +101,3 @@ describe('Systelab Calendar Header', () => {
 	});
 
 });
-
-function clickButton(fixture: ComponentFixture<CalendarHeaderTestComponent>, buttonId: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('#' + buttonId);
-	button.click();
-	fixture.detectChanges();
-}

@@ -37,10 +37,13 @@ export class ContextMenuTestComponent implements OnInit {
 		this.contextMenuOptions = [
 			new ContextMenuOption('option1', 'Option 1', null, null, false, 'icon-check-circle', 'rgb(40, 167, 69)'),
 			new ContextMenuOption('option2', 'Option 2', null, null, false, 'icon-minus-circle', 'rgb(255, 0, 0)', null),
-			new ContextMenuOption('option3', 'Option 3', null, null, false, 'icon-chevron-circle-up', 'rgb(50, 50, 50)', 'rgb(21, 143, 239)'),
+			new ContextMenuOption('option3', 'Option 3', null, null, false, 'icon-chevron-circle-up',
+				'rgb(50, 50, 50)', 'rgb(21, 143, 239)'),
 			new ContextMenuOption('option4', 'Option 3', null, null, false, 'icon-close', 'rgb(21, 143, 239)', 'rgb(255, 255, 255)'),
-			new ContextMenuOption('option5', 'Option 5', null, null, false, 'icon-checkbox', 'transparent', 'rgb(214, 214, 214)', () => true),
-			new ContextMenuOption('option6', 'Option 6', null, null, false, 'icon-checkbox', 'transparent', 'rgb(214, 214, 214)', () => true, this.contextSubMenuOptions)
+			new ContextMenuOption('option5', 'Option 5', null, null, false, 'icon-checkbox', 'transparent',
+				'rgb(214, 214, 214)', () => true),
+			new ContextMenuOption('option6', 'Option 6', null, null, false, 'icon-checkbox', 'transparent',
+				'rgb(214, 214, 214)', () => true, this.contextSubMenuOptions)
 		];
 	}
 
@@ -50,6 +53,44 @@ export class ContextMenuTestComponent implements OnInit {
 		this.lastSelectedOption = actions[actions.length - 1];
 	}
 }
+
+const clickOnDots = (fixture: ComponentFixture<ContextMenuTestComponent>) => {
+	const button = fixture.debugElement.query(By.css('.dropdown-toggle')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+};
+
+const isPopupVisible = (fixture: ComponentFixture<ContextMenuTestComponent>) => (fixture.debugElement.nativeElement
+	.querySelector('.slab-dropdown-scroll') !== null);
+
+const isSubPopupVisible = (fixture: ComponentFixture<ContextMenuTestComponent>) => (fixture.debugElement.nativeElement
+	.querySelector('.slab-dropdown-absolute') !== null);
+
+const getNumberOfElements = (fixture: ComponentFixture<ContextMenuTestComponent>, className: string) => fixture.debugElement.nativeElement
+	.querySelectorAll(className).length;
+
+const clickOnOption = (fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) => {
+	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
+	button.click();
+	fixture.detectChanges();
+};
+
+const mouseOver = (fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) => {
+	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
+	button.dispatchEvent(new MouseEvent('mouseover', {
+		view: window,
+		bubbles: true,
+		cancelable: true
+	}));
+	fixture.detectChanges();
+};
+
+const clickOnSubOption = (fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) => {
+	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')'))
+		.nativeElement;
+	button.click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Context Menu', () => {
 	let fixture: ComponentFixture<ContextMenuTestComponent>;
@@ -118,49 +159,3 @@ describe('Systelab Context Menu', () => {
 		expect(fixture.componentInstance.lastSelectedOption).toEqual('suboption2');
 	});
 });
-
-function clickOnDots(fixture: ComponentFixture<ContextMenuTestComponent>) {
-	const button = fixture.debugElement.query(By.css('.dropdown-toggle')).nativeElement;
-	button.click();
-	fixture.detectChanges();
-}
-
-function isPopupVisible(fixture: ComponentFixture<ContextMenuTestComponent>) {
-	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown-scroll') !== null);
-}
-
-function isSubPopupVisible(fixture: ComponentFixture<ContextMenuTestComponent>) {
-	return (fixture.debugElement.nativeElement.querySelector('.slab-dropdown-absolute') !== null);
-}
-
-function getNumberOfElements(fixture: ComponentFixture<ContextMenuTestComponent>, className: string) {
-	return fixture.debugElement.nativeElement.querySelectorAll(className).length;
-}
-
-function clickOnOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
-	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
-	button.click();
-	fixture.detectChanges();
-}
-
-function mouseOver(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
-	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
-	button.dispatchEvent(new MouseEvent('mouseover', {
-		view: window,
-		bubbles: true,
-		cancelable: true
-	}));
-	fixture.detectChanges();
-}
-
-function clickOnSubOption(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
-	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')')).nativeElement;
-	button.click();
-	fixture.detectChanges();
-}
-
-function verifyLastOpenItem(fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) {
-	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')')).nativeElement;
-	button.click();
-	fixture.detectChanges();
-}

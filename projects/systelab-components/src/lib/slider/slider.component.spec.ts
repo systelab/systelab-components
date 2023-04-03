@@ -26,6 +26,17 @@ export class SliderTestComponent {
 	public value = 30;
 }
 
+
+const checkHasValue = (fixture: ComponentFixture<SliderTestComponent>, value: number) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML).toContain(value);
+};
+
+const setValue = (fixture: ComponentFixture<SliderTestComponent>, value: number) => {
+	fixture.componentInstance.value = value;
+	fixture.detectChanges();
+};
+
 describe('Systelab Slider', () => {
 	let fixture: ComponentFixture<SliderTestComponent>;
 
@@ -61,15 +72,3 @@ describe('Systelab Slider', () => {
 		checkHasValue(fixture, 90);
 	});
 });
-
-function checkHasValue(fixture: ComponentFixture<SliderTestComponent>, value: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML).toContain(value);
-}
-
-function setValue(fixture: ComponentFixture<SliderTestComponent>, value: number) {
-	fixture.componentInstance.value = value;
-	fixture.detectChanges();
-}
-
-

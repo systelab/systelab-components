@@ -33,8 +33,6 @@ describe('Phone validation', () => {
 		{description: 'International with three number', text: '(351) 93 393 66 26', expected: true},
 		{description: 'International with three number and +', text: '+351 93 393 66 26', expected: true},
 		{description: 'International with three number and 00', text: '00351 93 393 66 26', expected: true},
-		,//
-		
 	].forEach((test) => {
 		it(test.description + ' "' + test.text + '" is valid', () => {
 			expect(phoneValidator(new UntypedFormControl(test.text))).toBeNull();

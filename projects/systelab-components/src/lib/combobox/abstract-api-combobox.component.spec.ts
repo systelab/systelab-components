@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Renderer2, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, Renderer2, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,7 +48,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 		return 'id';
 	}
 
-	public getData(page: number, itemsPerPage: number, startsWithParameter: string): Observable<Array<TestData>> {
+	public getData(): Observable<Array<TestData>> {
 		const values: TestData[] = [];
 		values.push(new TestData('1', 'Description 1'));
 		values.push(new TestData('2', 'Description 2'));
@@ -70,7 +70,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                         <div class="col-md-9">
-                            <systelab-combobox-example #combobox [(id)]="id" [(description)]="description" 
+                            <systelab-combobox-example #combobox [(id)]="id" [(description)]="description"
 													   [multipleSelection]="multipleSelection"
                                                        [(multipleSelectedItemList)]="multipleSelectedItemList">
 							</systelab-combobox-example>
@@ -80,15 +80,29 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 	          `
 })
 export class ComboboxTestComponent {
+	@ViewChild('combobox') public combobox: SystelabComboboxComponent;
 	public id = '1';
 	public description = 'Description 2';
 	public multipleSelection = false;
 	public multipleSelectedItemList = [
 		new TestData('3', 'Description 3'),
 		new TestData(4, 'Description 4')
-	]
-	@ViewChild('combobox') public combobox: SystelabComboboxComponent;
+	];
 }
+
+const clickButton = (fixture: ComponentFixture<ComboboxTestComponent>) => {
+	fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle')
+		.click();
+	fixture.detectChanges();
+};
+
+const getNumberOfRows = (fixture: ComponentFixture<ComboboxTestComponent>) =>
+	fixture.debugElement.nativeElement.querySelectorAll('.ag-center-cols-container > .ag-row').length;
+
+const clickOnGridCell = (fixture: ComponentFixture<ComboboxTestComponent>, cell: number) => {
+	fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"]')[cell].click();
+	fixture.detectChanges();
+};
 
 describe('Systelab Combobox', () => {
 	let fixture: ComponentFixture<ComboboxTestComponent>;
@@ -156,9 +170,7 @@ describe('Systelab Combobox', () => {
 		fixture.whenStable()
 			.then(() => {
 				const component = fixture.componentInstance;
-				let listSelectedItems = component.combobox.gridOptions.api.getSelectedNodes().map(node => {
-					return node.data;
-				});
+				const listSelectedItems = component.combobox.gridOptions.api.getSelectedNodes().map(node => node.data);
 				expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 				done();
 			});
@@ -181,18 +193,3 @@ describe('Systelab Combobox', () => {
 	});
 
 });
-
-function clickButton(fixture: ComponentFixture<ComboboxTestComponent>) {
-	fixture.debugElement.nativeElement.querySelector('.slab-dropdown-toogle')
-		.click();
-	fixture.detectChanges();
-}
-
-function getNumberOfRows(fixture: ComponentFixture<ComboboxTestComponent>) {
-	return fixture.debugElement.nativeElement.querySelectorAll('.ag-center-cols-container > .ag-row').length;
-}
-
-function clickOnGridCell(fixture: ComponentFixture<ComboboxTestComponent>, cell: number) {
-	fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"]')[cell].click();
-	fixture.detectChanges();
-}

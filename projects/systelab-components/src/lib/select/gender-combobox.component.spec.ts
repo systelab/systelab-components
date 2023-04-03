@@ -56,6 +56,19 @@ export class GenderSelectTestComponent {
 class GenderSelectTestModule {
 }
 
+
+const clickOnDropDown = (fixture: ComponentFixture<GenderSelectTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
+	button.click();
+	fixture.detectChanges();
+};
+
+const clickOnRow = (fixture: ComponentFixture<GenderSelectTestComponent>, id: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+	button.click();
+	fixture.detectChanges();
+};
+
 describe('Systelab Gender selector', () => {
 	let fixture: ComponentFixture<GenderSelectTestComponent>;
 
@@ -145,15 +158,3 @@ describe('Systelab Gender selector', () => {
 			});
 	});
 });
-
-function clickOnDropDown(fixture: ComponentFixture<GenderSelectTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickOnRow(fixture: ComponentFixture<GenderSelectTestComponent>, id: string) {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
-	button.click();
-	fixture.detectChanges();
-}

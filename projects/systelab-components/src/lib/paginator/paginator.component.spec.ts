@@ -23,6 +23,55 @@ export class PaginatorTestComponent {
 	public page = 8;
 }
 
+const clickButton = (fixture: ComponentFixture<PaginatorTestComponent>, selector: string) => {
+	const button = fixture.debugElement.nativeElement.querySelector(selector);
+	button.click();
+	fixture.detectChanges();
+
+};
+
+
+const checkHasValue = (fixture: ComponentFixture<PaginatorTestComponent>, value: number) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML)
+		.toContain(value);
+};
+
+const clickPrevious = (fixture: ComponentFixture<PaginatorTestComponent>) => {
+	clickButton(fixture, '.icon-angle-left');
+};
+
+const clickNext = (fixture: ComponentFixture<PaginatorTestComponent>) => {
+	clickButton(fixture, '.icon-angle-right');
+};
+
+const clickFirst = (fixture: ComponentFixture<PaginatorTestComponent>) => {
+	clickButton(fixture, '.icon-angle-double-left');
+};
+
+const clickLast = (fixture: ComponentFixture<PaginatorTestComponent>) => {
+	clickButton(fixture, '.icon-angle-double-right');
+};
+
+const clickPage = (fixture: ComponentFixture<PaginatorTestComponent>, page: number) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
+	button.click();
+	fixture.detectChanges();
+};
+
+const checkHasPage = (fixture: ComponentFixture<PaginatorTestComponent>, page: number) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
+	expect(button)
+		.not
+		.toBeNull();
+};
+
+const checkNoHasPage = (fixture: ComponentFixture<PaginatorTestComponent>, page: number) => {
+	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
+	expect(button)
+		.toBeNull();
+};
+
 describe('Systelab Paginator', () => {
 	let fixture: ComponentFixture<PaginatorTestComponent>;
 
@@ -110,54 +159,3 @@ describe('Systelab Paginator', () => {
 	});
 
 });
-
-function checkHasValue(fixture: ComponentFixture<PaginatorTestComponent>, value: number) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML)
-		.toContain(value);
-}
-
-function clickButton(fixture: ComponentFixture<PaginatorTestComponent>, selector: string) {
-	const button = fixture.debugElement.nativeElement.querySelector(selector);
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickPrevious(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.icon-angle-left');
-}
-
-function clickNext(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.icon-angle-right');
-}
-
-function clickFirst(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.icon-angle-double-left');
-}
-
-function clickLast(fixture: ComponentFixture<PaginatorTestComponent>) {
-	clickButton(fixture, '.icon-angle-double-right');
-}
-
-function clickPage(fixture: ComponentFixture<PaginatorTestComponent>, page: number) {
-	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
-	button.click();
-	fixture.detectChanges();
-}
-
-function checkHasPage(fixture: ComponentFixture<PaginatorTestComponent>, page: number) {
-	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
-	expect(button)
-		.not
-		.toBeNull();
-}
-
-function checkNoHasPage(fixture: ComponentFixture<PaginatorTestComponent>, page: number) {
-	const button = fixture.debugElement.nativeElement.querySelector('#page' + page);
-	expect(button)
-		.toBeNull();
-}
-
-
-
-

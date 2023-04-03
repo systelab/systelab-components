@@ -22,13 +22,68 @@ import { SystelabTranslateModule } from 'systelab-translate';
 	styles:   []
 })
 export class ChipButtonTestComponent {
-	public buttonList: Array<ChipButtonItem> = [
+	public buttonList: ChipButtonItem[] = [
 		{name: 'New York', id: 1, isChecked: false},
 		{name: 'Rome', id: 2, isChecked: false}
 	];
 	public isRemoveEnabled: boolean;
 	public showAddButton: boolean;
 }
+
+const checkHasList = (fixture: ComponentFixture<ChipButtonTestComponent>, num: number) => {
+	const numElements = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button').length;
+	expect(numElements)
+		.toEqual(num);
+};
+
+const isButtonVisible = (fixture: ComponentFixture<ChipButtonTestComponent>, className: string) =>
+	(fixture.debugElement.nativeElement.querySelector(className) !== null);
+
+const setArrayValue = (fixture: ComponentFixture<ChipButtonTestComponent>, array: Array<ChipButtonItem>) => {
+	fixture.componentInstance.buttonList = array;
+	fixture.detectChanges();
+};
+
+const setAddValue = (fixture: ComponentFixture<ChipButtonTestComponent>, value: boolean) => {
+	fixture.componentInstance.showAddButton = value;
+	fixture.detectChanges();
+};
+
+const setRemoveValue = (fixture: ComponentFixture<ChipButtonTestComponent>, value: boolean) => {
+	fixture.componentInstance.isRemoveEnabled = value;
+	fixture.detectChanges();
+};
+
+const clickAddButton = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.slab-chip-button-add');
+	button.click();
+	fixture.detectChanges();
+};
+
+const clickRemoveLastButton = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
+	const button = fixture.debugElement.nativeElement
+        .querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
+		.querySelector('.slab-chip-button-remove');
+	button.click();
+	fixture.detectChanges();
+};
+
+const checkElementAdded = (fixture: ComponentFixture<ChipButtonTestComponent>, name: string) => {
+	const element =
+		fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
+		.querySelector('button')
+		.textContent
+		.split(' ')[0];
+	expect(element)
+		.toContain(name);
+};
+
+const checkAtListOneChecked = (fixture: ComponentFixture<ChipButtonTestComponent>) => {
+	const buttons = fixture.debugElement.nativeElement.getElementsByTagName('systelab-chip-button')[0]
+		.querySelectorAll('.slab-is-selected');
+	expect(buttons.length)
+		.toEqual(1);
+};
 
 describe('Systelab Chip Button', () => {
 	let fixture: ComponentFixture<ChipButtonTestComponent>;
@@ -94,57 +149,3 @@ describe('Systelab Chip Button', () => {
 		checkAtListOneChecked(fixture);
 	});
 });
-
-function checkHasList(fixture: ComponentFixture<ChipButtonTestComponent>, num: number) {
-	const numElements = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button').length;
-	expect(numElements)
-		.toEqual(num);
-}
-
-function isButtonVisible(fixture: ComponentFixture<ChipButtonTestComponent>, className: string) {
-	return (fixture.debugElement.nativeElement.querySelector(className) !== null);
-}
-
-function setArrayValue(fixture: ComponentFixture<ChipButtonTestComponent>, array: Array<ChipButtonItem>) {
-	fixture.componentInstance.buttonList = array;
-	fixture.detectChanges();
-}
-
-function setAddValue(fixture: ComponentFixture<ChipButtonTestComponent>, value: boolean) {
-	fixture.componentInstance.showAddButton = value;
-	fixture.detectChanges();
-}
-
-function setRemoveValue(fixture: ComponentFixture<ChipButtonTestComponent>, value: boolean) {
-	fixture.componentInstance.isRemoveEnabled = value;
-	fixture.detectChanges();
-}
-
-function clickAddButton(fixture: ComponentFixture<ChipButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-chip-button-add');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickRemoveLastButton(fixture: ComponentFixture<ChipButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
-		.querySelector('.slab-chip-button-remove');
-	button.click();
-	fixture.detectChanges();
-}
-
-function checkElementAdded(fixture: ComponentFixture<ChipButtonTestComponent>, name: string) {
-	const element = fixture.debugElement.nativeElement.querySelectorAll('.slab-chip-button')[document.querySelectorAll('.slab-chip-button').length - 1]
-		.querySelector('button')
-		.textContent
-		.split(' ')[0];
-	expect(element)
-		.toContain(name);
-}
-
-function checkAtListOneChecked(fixture: ComponentFixture<ChipButtonTestComponent>) {
-	const buttons = fixture.debugElement.nativeElement.getElementsByTagName('systelab-chip-button')[0]
-		.querySelectorAll('.slab-is-selected');
-	expect(buttons.length)
-		.toEqual(1);
-}

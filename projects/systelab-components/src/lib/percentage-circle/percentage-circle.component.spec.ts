@@ -24,6 +24,34 @@ export class PercentageCircleTestComponent {
 	public color = 'red';
 }
 
+
+const getValue = (fixture: ComponentFixture<PercentageCircleTestComponent>) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.percentage-circle-value');
+	return label.innerHTML;
+};
+
+const setValue = (fixture: ComponentFixture<PercentageCircleTestComponent>, value: number) => {
+	fixture.componentInstance.value = value;
+	fixture.detectChanges();
+};
+
+const getText = (fixture: ComponentFixture<PercentageCircleTestComponent>) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.percentage-circle-value');
+	return label.innerHTML;
+};
+
+const setText = (fixture: ComponentFixture<PercentageCircleTestComponent>, text: string) => {
+	fixture.componentInstance.text = text;
+	fixture.detectChanges();
+};
+
+const setColor = (fixture: ComponentFixture<PercentageCircleTestComponent>, color: string) => {
+	fixture.componentInstance.color = color;
+	fixture.detectChanges();
+};
+
+const getColor = (fixture: ComponentFixture<PercentageCircleTestComponent>) => fixture.debugElement.query(By.css('.percentage-circle-bar')).nativeElement.style.borderColor;
+
 describe('Systelab Percentage Circle', () => {
 	let fixture: ComponentFixture<PercentageCircleTestComponent>;
 
@@ -80,33 +108,3 @@ describe('Systelab Percentage Circle', () => {
 	});
 
 });
-
-function getValue(fixture: ComponentFixture<PercentageCircleTestComponent>) {
-	const label = fixture.debugElement.nativeElement.querySelector('.percentage-circle-value');
-	return label.innerHTML;
-}
-
-function setValue(fixture: ComponentFixture<PercentageCircleTestComponent>, value: number) {
-	fixture.componentInstance.value = value;
-	fixture.detectChanges();
-}
-
-function getText(fixture: ComponentFixture<PercentageCircleTestComponent>) {
-	const label = fixture.debugElement.nativeElement.querySelector('.percentage-circle-value');
-	return label.innerHTML;
-}
-
-function setText(fixture: ComponentFixture<PercentageCircleTestComponent>, text: string) {
-	fixture.componentInstance.text = text;
-	fixture.detectChanges();
-}
-
-function setColor(fixture: ComponentFixture<PercentageCircleTestComponent>, color: string) {
-	fixture.componentInstance.color = color;
-	fixture.detectChanges();
-}
-
-function getColor(fixture: ComponentFixture<PercentageCircleTestComponent>) {
-	return fixture.debugElement.query(By.css('.percentage-circle-bar')).nativeElement.style.borderColor;
-}
-

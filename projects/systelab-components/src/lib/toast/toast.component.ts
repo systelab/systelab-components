@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AnimationEvent } from '@angular/animations';
-import { toastAnimations, ToastAnimationState } from './toast-animation';
-import { ToastData } from './toast-config';
-import { ToastRef } from './toast-ref';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AnimationEvent} from '@angular/animations';
+import {toastAnimations, ToastAnimationState} from './toast-animation';
+import {ToastData} from './toast-config';
+import {ToastRef} from './toast-ref';
 
 const ICONS = {
   success: 'icon-check-circle',
