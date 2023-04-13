@@ -110,7 +110,7 @@ export class MessagePopupService {
 		}
 		const classTemplate: string = availableTemplates[template] || 'btn-outline-primary';
 
-		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link'));
+		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link', template.includes('danger')));
 		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true, classTemplate));
 		return buttons;
 	}
