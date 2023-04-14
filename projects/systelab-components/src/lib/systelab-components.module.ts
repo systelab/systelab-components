@@ -203,7 +203,7 @@ import { TestIdDirective } from './directives/test-id.directive';
 		ResizableDirective,
 		ImageViewerComponent,
 		NumpadDecimalNumericDirective,
-  TestIdDirective
+  		TestIdDirective,
 	],
 	exports:      [
 		SliderComponent,
@@ -288,7 +288,8 @@ import { TestIdDirective } from './directives/test-id.directive';
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+		TestIdDirective,
 	],
 	providers:    [
 		StylesUtilService,
