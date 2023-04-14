@@ -5,7 +5,7 @@
 
     .slab-tree-node {
       &.slab-selected {
-        background-color: $table-row-selected-background-color;
+        background-color: var(--slab_table_row_selection_background);
       }
 
       button {

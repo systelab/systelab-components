@@ -37,7 +37,7 @@ systelab-spinner {
 
     #minus-button, #plus-button {
       background-color: white;
-      border: 1px solid $slab-component-border-color;
+      border: 1px solid var(--slab_component_border_color);
       color: $dark;
 
       &:hover:enabled {

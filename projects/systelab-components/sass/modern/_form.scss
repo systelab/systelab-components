@@ -18,7 +18,7 @@
 .form-control {
   padding: 2px 7px;
   height: $form-elements-height;
-  border: 1px solid $slab-component-border-color;
+  border: 1px solid var(--slab_component_border_color);
   &:focus-within {
     border-color: $slab-focus-component-border-color;
     outline: 0;

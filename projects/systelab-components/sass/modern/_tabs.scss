@@ -2,7 +2,7 @@ systelab-tabs {
 
   .nav-link.active,
   .nav-item.show .nav-link {
-    color: $slab-base-body-color !important;
+    color: var(--slab_foreground_primary) !important;
     background-color: transparent !important;
     border-color: $nav-tabs-link-active-border-color;
   }

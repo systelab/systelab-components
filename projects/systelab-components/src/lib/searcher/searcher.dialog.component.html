@@ -16,8 +16,8 @@
                     <label for="status-searchby-contains">{{ 'COMMON_CONTAINS' | translate | async}}</label>
                 </div>
             </div>
-            <div class="slab-input d-flex slab-flex-1 ml-2">
-                <input type="text" class="slab-flex-1" #valueToSearch id="valueToSearch" style="border: 0 solid white;"
+            <div class="slab-input d-flex slab-flex-1">
+                <input type="text" class="slab-flex-1 slab-searcher-dialog-search-text" #valueToSearch id="valueToSearch"
                        (keyup)="refreshSearch()"
                        placeholder="{{'COMMON_SEARCH' | translate | async}}"
                        [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">

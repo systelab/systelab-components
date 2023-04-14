@@ -5,7 +5,7 @@
   }
 }
 .dropdown-menu {
-  color: $slab-base-body-color;
+  color: var(--slab_foreground_primary);
 }
 
 .slab-button-dropdown {
@@ -36,11 +36,11 @@
 }
 
 .slab-dropdown {
-  background-color: $background_primary;
+  background-color: var(--slab_background_primary);
   padding: 4px 15px;
   vertical-align: top;
   border: 1px solid;
-  border-color: $slab-component-border-color;
+  border-color: var(--slab_component_border_color);
   border-radius: 4px;
   white-space: nowrap;
 

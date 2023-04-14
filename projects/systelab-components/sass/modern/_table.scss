@@ -1,23 +1,23 @@
 
 .table {
-  color: $slab-base-body-color;
+  color: var(--slab_foreground_primary);
 
   tr {
     height: $slab-table-min-row-height;
   }
 
   thead th {
-    border-bottom: 1px solid $table-border-color;
+    border-bottom: 1px solid var(--slab_table_border_color);
   }
 
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: $table-row-odd-background-color;
+  background-color: var(--slab_table_row_odd_background);
 }
 
 .table-striped tbody tr:nth-of-type(even) {
-  background-color: $table-row-even-background-color;
+  background-color: var(--slab_table_row_even_background);
 }
 
 
