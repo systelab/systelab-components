@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -97,8 +97,10 @@ import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-
 import { ButtonComponent } from './button/button.component';
 import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
-import {ImageViewerComponent} from './image-viewer/image-viewer.component';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
+import { APP_CONFIG, AppConfig } from './config';
+import { TestIdDirective } from './directives/test-id.directive';
 
 @NgModule({
 	imports:      [
@@ -200,7 +202,8 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+  TestIdDirective
 	],
 	exports:      [
 		SliderComponent,
@@ -294,4 +297,21 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 	]
 })
 export class SystelabComponentsModule {
+
+	constructor(@Optional() @SkipSelf() parentModule: SystelabComponentsModule) {
+		if(parentModule) {
+			throw new Error('SystelabComponentsModule is already loaded. Please add it in AppModule only.');
+		}
+	}
+
+	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
+		return {
+			ngModule: SystelabComponentsModule,
+			providers: [
+				{
+					provide: APP_CONFIG, useValue: conf
+				}
+			]
+		};
+	}
 }
