@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {ButtonComponent} from '../button/button.component';
-import {SliderComponent} from '../slider/slider.component';
-import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
-import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-components';
-import {SystelabTranslateModule} from 'systelab-translate';
+import { ButtonComponent } from '../button/button.component';
+import { SliderComponent } from '../slider/slider.component';
+import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
+import { ActionButton, ActionButtonType, ImageViewerComponent } from 'systelab-components';
+import { SystelabTranslateModule } from 'systelab-translate';
 
 @Component({
 	selector: 'systelab-image-viewer-test',
@@ -68,7 +68,7 @@ export class ImageViewerTestComponent {
 
 	public applyImageFilter(action: string): void {
 		if (this.imageViewer.getFilter() === action) {
-				this.imageViewer.setFilter(undefined);
+			this.imageViewer.setFilter(undefined);
 		} else {
 			this.imageViewer.setFilter(action);
 		}

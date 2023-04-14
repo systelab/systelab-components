@@ -9,7 +9,7 @@ import {
 	Output,
 	ViewChild
 } from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 export enum ActionButtonType {
 	BUTTON,
@@ -58,7 +58,7 @@ export class ImageViewerComponent {
 		top:           0,
 		left:          0,
 		width:         null,
-		height:        null
+		height:        null,
 	};
 
 	public zoomSelector = {
@@ -67,7 +67,7 @@ export class ImageViewerComponent {
 		top:     null,
 		left:    null,
 		width:   null,
-		height:  null
+		height:  null,
 	};
 
 	public zoomScale = {
@@ -91,7 +91,7 @@ export class ImageViewerComponent {
 		minDragLeft:  null,
 		maxDragLeft:  null,
 		minDragTop:   null,
-		maxDragTop:   null
+		maxDragTop:   null,
 	};
 
 	private viewPort: any;
