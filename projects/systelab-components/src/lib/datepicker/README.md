@@ -31,8 +31,30 @@ All the input parameters are optional.
 | onlyTime                 | boolean  |   false   | If true, only the timepicker integrated is shown instead of calendar, else is shown the calendar with the time
 | showOtherMonths          | boolean  |   true    |	Whether to display dates in other months (non-selectable) at the start or end of the current month. To make these days selectable use the selectOtherMonths option.
 | selectOtherMonths        | boolean  |   false   |	Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
+| dateFormat               | string   |           |	Format of the date which can also be defined at locale settings.
 
 In black the Two-Way Data Binding properties.
+
+
+### dateFormat
+The default value is retrieved from the translation system (language). In case of entering a format, it gives priority to this value and ignores that of the translation system. Following options can be a part of the format.
+- d - day of month (no leading zero)
+- dd - day of month (two digit)
+- o - day of the year (no leading zeros)
+- oo - day of the year (three digit)
+- D - day name short
+- DD - day name long
+- m - month of year (no leading zero)
+- mm - month of year (two digit)
+- M - month name short
+- MM - month name long
+- y - year (two digit)
+- yy - year (four digit)
+- @ - Unix timestamp (ms since 01/01/1970)
+- ! - Windows ticks (100ns since 01/01/0001)
+- '...' - literal text
+- '' - single quote
+- anything else - literal text
 
 | |
 | --- |
