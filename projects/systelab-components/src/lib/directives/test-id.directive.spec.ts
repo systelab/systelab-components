@@ -1,6 +1,6 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { TestIdDirective } from './test-id.directive';
 
 @Component({
@@ -8,20 +8,23 @@ import { TestIdDirective } from './test-id.directive';
     <div systelabTestId='test'></div>
   `
 })
-class TestComponent {}
+class SystelabTestIdDirectiveTestComponent {}
 
 describe('SystelabTestId Directive', () => {
-  let fixture: ComponentFixture<TestComponent>;
-  beforeEach(() => {
-    fixture = TestBed.configureTestingModule({
-      declarations: [ TestComponent, TestIdDirective ],
+  let fixture: ComponentFixture<SystelabTestIdDirectiveTestComponent>;
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [BrowserModule],
+      declarations: [ SystelabTestIdDirectiveTestComponent, TestIdDirective ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-    }).createComponent(TestComponent);
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SystelabTestIdDirectiveTestComponent);
     fixture.detectChanges();
   });
 
-  it('should create an instance', () => {
-    const div: HTMLElement = fixture.nativeElement.query(By.css('div[data-test-is="test"]'));
+  it('should create an instance', fakeAsync(() => {
+    const div: DebugElement = fixture.debugElement.query(By.css('div[data-test-id="test"]'));
     expect(div).toBeTruthy();
-  });
+  }));
 });
