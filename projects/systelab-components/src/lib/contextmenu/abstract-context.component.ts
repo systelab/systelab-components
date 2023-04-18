@@ -57,6 +57,9 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 			y = y - this.dropdownParent.nativeElement.offsetHeight;
 			if (y + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight) {
 				y = y - this.dropdownElement.nativeElement.offsetHeight;
+				if (y < 0) {
+					y = 0;
+				}
 			}
 			if (x + this.dropdownElement.nativeElement.offsetWidth > window.innerWidth) {
 				x = x - this.dropdownElement.nativeElement.offsetWidth;
