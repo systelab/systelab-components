@@ -268,6 +268,16 @@ describe('Systelab DatepickerComponent', () => {
 			.toBeTruthy();
 	});
 
+	it('yy-mm-dd format', () => {
+		fixture2 = TestBed.createComponent(Datepicker);
+		fixture2.componentInstance.dateFormat = 'yy-mm-dd';
+		fixture2.componentInstance.currentDate = new Date(1990, 10, 30);
+		fixture2.detectChanges();
+
+		expect(fixture2.componentInstance.language.dateFormatValue).toBe('yy-mm-dd');
+		expect(fixture2.componentInstance.currentCalendar.dateFormat).toBe('yy-mm-dd');
+	});
+
 	it('should set error property on false if a date is selected', () => {
 		fixture2 = TestBed.createComponent(Datepicker);
 		fixture2.detectChanges();
@@ -458,5 +468,16 @@ describe('Systelab DatepickerComponent', () => {
 
 	});
 
+	describe('Datepicker display with a specific format', () => {
+		it('yy-mm-dd format', () => {
+			fixture2 = TestBed.createComponent(Datepicker);
+			fixture2.componentInstance.dateFormat = 'yy-mm-dd';
+			fixture2.componentInstance.currentDate = new Date(1990, 10, 30);
+			fixture2.detectChanges();
+	
+			expect(fixture2.componentInstance.language.dateFormatValue).toBe('yy-mm-dd');
+			expect(fixture2.componentInstance.currentCalendar.dateFormat).toBe('yy-mm-dd');
+		});
+	});
 });
 
