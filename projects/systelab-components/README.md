@@ -37,7 +37,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
       ],
 ```
 
-> Be careful because you will not probably need all fontawesome 5.x. Instead you can add:
+> Be careful because you will not probably need all fontawesome 5.x. Instead, you can add:
 > - brands.css
 > - fontawesome.css
 > - regular.css
@@ -55,13 +55,15 @@ NgModule({
         SystelabTranslateModule,
         SystelabPreferencesModule,
         SystelabLoginModule,
-        SystelabComponentsModule,
+        SystelabComponentsModule.forRoot({productionMode: false}),
         AgGridModule.withComponents([
             GridContextMenuCellRendererComponent,
             GridHeaderContextMenuComponent
         ]),
     ...
 ```
+
+You can config the productionMode for the library to true or false using the forRoot method.
 
 Finally, you must import the systelab-components sass file in the general styles file in src/styles.scss.
 
