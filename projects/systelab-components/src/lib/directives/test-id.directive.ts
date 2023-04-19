@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Inject, Input, OnInit, Optional, Renderer2 } from '@angular/core';
 import { APP_CONFIG } from '../config';
 
+const DEFAULT_PRODUCTION_MODE = true;
 @Directive({
   selector: '[systelabTestId]'
 })
@@ -9,7 +10,7 @@ export class TestIdDirective implements OnInit {
   private readonly productionMode: boolean;
 
   constructor(@Optional() @Inject(APP_CONFIG) private config, private renderer: Renderer2, private el: ElementRef) {
-    this.productionMode = (config) ? config.productionMode : false;
+    this.productionMode = (config) ? config.productionMode : DEFAULT_PRODUCTION_MODE;
   }
 
   ngOnInit() {
