@@ -49,10 +49,10 @@ i.e: when locale is spanish, if we click the '.' key it translates the '.' to ',
 
 ## testId
 
-This directives adds a HTML data-test-id attribute if the configuration is not set to production. This data field can be used
+This directive adds an HTML data-test-id attribute if the configuration is not set to production. This data field can be used
 to select the element for testing purpose.
 
-This directive also avoid to have non needed code when the
+This directive also avoids to have non needed code when the
 application is in production.
 
 ```html
