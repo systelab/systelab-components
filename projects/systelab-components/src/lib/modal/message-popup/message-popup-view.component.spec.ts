@@ -80,7 +80,7 @@ describe('Systelab MessagePopupViewComponent', () => {
 			.toBeTruthy();
 
 		component.close();
-		expect(spyDialogRef.close).toHaveBeenCalledWith(false);
+		expect(spyDialogRef.close).toHaveBeenCalledWith([undefined, false]);
 	});
 
 	it('Closing different popup from AskAgainPopup', () => {
