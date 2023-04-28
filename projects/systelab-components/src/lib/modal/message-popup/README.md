@@ -61,7 +61,7 @@ Use showCustomQuestionPopup to show a popup with custom buttons and a question i
 public showCustomQuestionPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon): Observable<any>
 ```
 
-Use showAskAgainPopup to show a popup with a check. Closing the popup will send the check status.
+Use showAskAgainPopup to show a popup with a check. Closing the popup will send an array with the button value and the check status.
 
 ```javascript
 public showAskAgainPopup(titleDescription: string, messageDescription: string, modalClass?: string, width?: number, height?: number, buttons?: MessagePopupButton[], icon?: MessagePopupIcon, messageAskAgain?: string): Observable<any>
