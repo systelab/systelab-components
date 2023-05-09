@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -101,6 +101,20 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
 import { APP_CONFIG, AppConfig } from './config';
 import { TestIdDirective } from './directives/test-id.directive';
+
+export const factory = () => {
+	const platformModuleCreated = (factory as any)._platformModuleCreated || false;
+	if (platformModuleCreated) {
+		throw new Error('PlatformModule.forRoot imported to many times');
+	}
+	(factory as any)._platformModuleCreated = true;
+};
+
+const providers = [
+	StylesUtilService,
+	ColorUtilService,
+	LoadingService
+];
 
 @NgModule({
 	imports:      [
@@ -205,7 +219,7 @@ import { TestIdDirective } from './directives/test-id.directive';
 		NumpadDecimalNumericDirective,
   		TestIdDirective,
 	],
-	exports:      [
+	exports: [
 		SliderComponent,
 		SliderDoubleRangeComponent,
 		SwitchComponent,
@@ -291,28 +305,32 @@ import { TestIdDirective } from './directives/test-id.directive';
 		NumpadDecimalNumericDirective,
 		TestIdDirective,
 	],
-	providers:    [
-		StylesUtilService,
-		ColorUtilService,
-		LoadingService
-	]
 })
 export class SystelabComponentsModule {
 
-	constructor(@Optional() @SkipSelf() parentModule: SystelabComponentsModule) {
-		if(parentModule) {
-			throw new Error('SystelabComponentsModule is already loaded. Please add it in AppModule only.');
-		}
+	constructor(@Inject('PlatformModuleInstance') instance: any) {
 	}
 
 	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
 		return {
 			ngModule: SystelabComponentsModule,
 			providers: [
+				...providers,
+				{
+					provide: 'PlatformModuleInstance',
+					useFactory: factory
+				},
 				{
 					provide: APP_CONFIG, useValue: conf
 				}
 			]
+		};
+	}
+
+	public static forChild(): ModuleWithProviders<SystelabComponentsModule> {
+		return {
+			ngModule: SystelabComponentsModule,
+			providers: [],
 		};
 	}
 }
