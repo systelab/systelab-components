@@ -103,11 +103,11 @@ import { APP_CONFIG, AppConfig } from './config';
 import { TestIdDirective } from './directives/test-id.directive';
 
 export const factory = () => {
-	const platformModuleCreated = (factory as any)._platformModuleCreated || false;
-	if (platformModuleCreated) {
-		throw new Error('PlatformModule.forRoot imported to many times');
+	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
+	if (systelabComponentsModuleCreated) {
+		throw new Error('SystelabComponentsModuleCreated.forRoot imported to many times');
 	}
-	(factory as any)._platformModuleCreated = true;
+	(factory as any)._systelabComponentsModuleCreated = true;
 };
 
 const providers = [
@@ -308,7 +308,7 @@ const providers = [
 })
 export class SystelabComponentsModule {
 
-	constructor(@Inject('PlatformModuleInstance') instance: any) {
+	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {
 	}
 
 	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
@@ -317,7 +317,7 @@ export class SystelabComponentsModule {
 			providers: [
 				...providers,
 				{
-					provide: 'PlatformModuleInstance',
+					provide: 'SystelabComponentsModuleInstance',
 					useFactory: factory
 				},
 				{
