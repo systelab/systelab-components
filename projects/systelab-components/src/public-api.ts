@@ -109,6 +109,7 @@ export * from './lib/directives/keyup-debounce.directive';
 export * from './lib/directives/draggable.directive';
 export * from './lib/directives/resizable.directive';
 export * from './lib/directives/numpad-decimal-numeric.directive';
+export * from './lib/directives/test-id.directive';
 
 
 export * from './lib/listbox/renderer/abstract-tree-listbox-renderer.component';

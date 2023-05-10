@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -7,7 +7,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class KeyupDebounceDirective implements OnInit, OnDestroy {
 
-	@Input() public keyupDebounceTime:number = 350;
+	@Input() public keyupDebounceTime = 350;
 	@Output() public keyupDebounced = new EventEmitter();
 	private debouncer = new Subject();
 	private subscription: Subscription;
