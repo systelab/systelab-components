@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -29,7 +29,7 @@ describe('Systelab MessagePopupViewComponent', () => {
 				OverlayModule,
 				HttpClientModule,
 				SystelabTranslateModule,
-				SystelabComponentsModule
+				SystelabComponentsModule.forRoot({productionMode: true}),
 			],
 			declarations: [ButtonComponent],
 			providers:    [{provide: DialogRef, useValue: spyDialogRef}]
