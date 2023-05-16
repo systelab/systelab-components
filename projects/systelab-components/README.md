@@ -63,7 +63,19 @@ NgModule({
     ...
 ```
 
-You can config the productionMode for the library to true or false using the forRoot method.
+You can config the productionMode for the library to true or false using the *forRoot* method. The *forRoot* method is optional. By default, the module is configured 
+with the *productionMode* flag to true.
+
+If you need to import SystelabComonentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
+receive an error in your console.
+
+```typescript
+NgModule({
+    imports: [
+        SystelabComponentsModule
+    ]
+})
+```
 
 Finally, you must import the systelab-components sass file in the general styles file in src/styles.scss.
 
