@@ -15,7 +15,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: scale-color($primary, $alpha: -90%);
+        background-color: var(--primary_lighter);
       }
 
     }

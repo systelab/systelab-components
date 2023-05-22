@@ -3,6 +3,45 @@
 
 @import "mixins";
 
+
+:root {
+  --ag-header-background-color: white;
+  --ag-data-color: black;
+  --ag-header-foreground-color: black;
+
+  --slab_background_primary: white;
+  --slab_foreground_primary: black;
+
+  --slab_modal_header_background: rgb(248, 248, 248);
+  --slab_component_border_color: #b9bdbe;
+
+  --slab_table_border_color: rgb(216, 216, 216);
+  --slab_table_row_even_background: #F4F4F4;
+  --slab_table_row_odd_background: rgb(253, 253, 253);
+  --slab_table_row_selection_background: rgb(200, 223, 252);
+  --slab_table_row_selection_foreground: black;
+  --slab_scrollbar_thumb_background: rgb(220, 220, 220);
+  --slab_scrollbar_width: 10px;
+  --slab_scrollbar_height: 10px;
+
+  --primary: rgb(0, 100, 209);
+  --success: rgb(194, 217, 93);
+  --warning: rgb(255, 210, 54);
+  --danger: rgb(255, 73, 68);
+  --info: rgb(178, 140, 232);
+  --secondary: rgb(170, 170, 170);
+
+  --primary_light: rgb(0, 100, 209, 0.25);
+  --primary_lighter: rgb(0, 100, 209, 0.1);
+  --success_light: rgb(194, 217, 93, 0.25);
+  --success_lighter: rgb(194, 217, 93, 0.1);
+  --warning_light: rgb(255, 210, 54, 0.25);
+  --warning_lighter: rgb(255, 210, 54, 0.1);
+  --danger_light: rgb(255, 73, 68, 0.25);
+  --danger_lighter: rgb(255, 73, 68, 0.1);
+}
+
+
 // Internal variable to help set the size
 $slab-size-percentage: 1.2 !default;
 // Internal variable to set the font size
@@ -30,12 +69,11 @@ $slab-selected-background-color: rgb(200, 223, 252) !default;
 $form-elements-height: floor(28px * $slab-size-percentage) !default;
 
 
-
 $slab-component-border-color: #b9bdbe !default;
 $slab-focus-component-border-color: #8cc8f7 !default;
-$slab-focus-component-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !default;
+$slab-focus-component-shadow: 0 0 0 3px var(--primary_light) !default;
 
-
+´
 //Grayscale
 $light-gray: rgb(248, 248, 248) !default;
 $medium-gray: rgb(214, 214, 214) !default;
@@ -73,7 +111,7 @@ $grid-header-height: 39px !default;
 $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
 $grid-header-background-color: white !default;
 $grid-header-text-color: black !default;
-$grid-border-color: #dee2e6  !default;
+$grid-border-color: #dee2e6 !default;
 
 // Defines the height and the min-height of the ui-grid row and cell
 $grid-cell-height: 39px !default;
@@ -99,14 +137,14 @@ $slab-combo-check-cell-padding: 12px !default;
 $slab-checkbox-height: 22px !default;
 $slab-checkbox-grid-height: 22px !default;
 
-$slab-checkbox-border-color: $primary !default;
+$slab-checkbox-border-color: var(--primary) !default;
 $slab-checkbox-color: white !default;
 $slab-checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 
 
 $slab-switch-bg-color: transparent !default;
 $slab-switch-circle-color: $dark-gray !default;
-$slab-switch-bg-color-checked: $primary !default;
+$slab-switch-bg-color-checked: var(--primary) !default;
 $slab-switch-circle-color-checked: white !default;
 $slab-switch-height: 22px !default;
 
@@ -114,7 +152,7 @@ $slab-switch-height: 22px !default;
 $slab-radio-height: 22px !default;
 // Defines the padding-left of the radio
 $slab-radio-text-gap: $slab-radio-height * 1.5 !default;
-$slab-radio-border-color: $primary !default;
+$slab-radio-border-color: var(--primary) !default;
 $slab-radio-color: white !default;
 
 // Defines the slider height
@@ -122,12 +160,12 @@ $slab-slider-height: 24px !default;
 // Defines the height of the ui-slider
 $slab-slider-background-line: round(calc($slab-slider-height / 3));
 $slab-slider-circle-color: white !default;
-$slab-slider-circle-border-color: $primary !default;
+$slab-slider-circle-border-color: var(--primary) !default;
 
 
 $slab-nanobar-height: 4px !default;
 $slab-nanobar-with-progress-height: 28px !default;
-$slab-nanobar-color: $warning !default;
+$slab-nanobar-color: var(--warning) !default;
 
 
 // Defines the row line-height of the dropdown and the row line-height of the tree
@@ -156,24 +194,3 @@ $slab-sort-list-row-height: $slab-table-min-row-height;
 /* Input Border radius */
 $slab-border-radius: 5px !default;
 
-
-:root {
-  --ag-header-background-color: white;
-  --ag-data-color: black;
-  --ag-header-foreground-color: black;
-
-  --slab_background_primary: white;
-  --slab_foreground_primary: black;
-
-  --slab_modal_header_background: rgb(248, 248, 248);
-  --slab_component_border_color: #b9bdbe;
-
-  --slab_table_border_color: rgb(216,216,216);
-  --slab_table_row_even_background: #F4F4F4;
-  --slab_table_row_odd_background: rgb(253, 253, 253);
-  --slab_table_row_selection_background: rgb(200, 223, 252);
-  --slab_table_row_selection_foreground: black;
-  --slab_scrollbar_thumb_background: rgb(220, 220, 220);
-  --slab_scrollbar_width: 10px;
-  --slab_scrollbar_height: 10px;
-}

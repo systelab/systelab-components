@@ -29,8 +29,8 @@ systelab-spinner {
       height: $form-elements-height !important;
 
       &.slab-spinner-error {
-        border-color: $danger;
-        color: $danger;
+        border-color: var(--danger);
+        color: var(--danger);
       }
 
     }
@@ -41,8 +41,8 @@ systelab-spinner {
       color: $dark;
 
       &:hover:enabled {
-        background-color: $primary;
-        border-color: $primary;
+        background-color: var(--primary);
+        border-color: var(--primary);
         color: white;
       }
 
@@ -52,8 +52,8 @@ systelab-spinner {
       }
 
       &.slab-spinner-error {
-        border-color: $danger;
-        color: $danger;
+        border-color: var(--danger);
+        color: var(--danger);
       }
     }
   }

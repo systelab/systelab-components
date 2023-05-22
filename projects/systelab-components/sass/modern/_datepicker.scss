@@ -34,7 +34,7 @@ p-calendar {
 
   &.warning-date {
     input {
-      background-color: $danger !important;
+      background-color: var(--danger) !important;
     }
 
     &.input-expand-height {
@@ -48,8 +48,8 @@ p-calendar {
 
   &.date-error {
     input {
-      color: $danger !important;
-      border: 1px solid $danger !important;
+      color: var(--danger) !important;
+      border: 1px solid var(--danger) !important;
     }
 
     &.input-expand-height {
@@ -57,7 +57,7 @@ p-calendar {
     }
 
     i {
-      color: $danger !important;
+      color: var(--danger) !important;
     }
   }
 
@@ -126,8 +126,8 @@ p-calendar {
   height: 65px !important;
   a {
     cursor: pointer;
-    color: $primary !important;
-    border: 1px solid $primary;
+    color: var(--primary) !important;
+    border: 1px solid var(--primary);
     border-radius: 35px;
     width: 35px;
     height: 35px;
@@ -142,7 +142,7 @@ p-calendar {
     }
     &:hover {
       text-decoration: none;
-      background: $primary !important;
+      background: var(--primary) !important;
       color: white !important;
     }
   }
@@ -194,8 +194,8 @@ body {
     align-items: center;
     a {
       cursor: pointer;
-      color: $primary !important;
-      border: 1px solid $primary;
+      color: var(--primary) !important;
+      border: 1px solid var(--primary);
       border-radius: 35px;
       width: 35px;
       height: 35px;
@@ -210,7 +210,7 @@ body {
       }
       &:hover {
         text-decoration: none;
-        background: $primary !important;
+        background: var(--primary) !important;
         color: white !important;
       }
     }
@@ -251,11 +251,11 @@ body {
     padding: 15px 15px 0 15px !important;
   }
   .p-datepicker-prev, .p-datepicker-next {
-    border: 1px solid $primary !important;
-    color: $primary !important;
+    border: 1px solid var(--primary) !important;
+    color: var(--primary) !important;
     &:hover {
       text-decoration: none;
-      background: $primary !important;
+      background: var(--primary) !important;
       color: white !important;
     }
   }
@@ -287,8 +287,8 @@ body {
 
       &.p-state-active,
       &.p-highlight {
-        background-color: $primary !important;
-        border: 1px solid $primary;
+        background-color: var(--primary) !important;
+        border: 1px solid var(--primary);
       }
     }
   }

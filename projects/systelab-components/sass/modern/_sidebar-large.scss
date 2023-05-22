@@ -48,15 +48,15 @@ systelab-app-sidebar-large {
 
         &.selected, &:hover {
           border-right: 1px solid white;
-          border-top: 1px solid $primary;
-          border-bottom: 1px solid $primary;
+          border-top: 1px solid var(--primary);
+          border-bottom: 1px solid var(--primary);
 
           .slab-app-sidebar-tab-decoration {
-            background-color: $primary;
+            background-color: var(--primary);
           }
 
           span {
-            color: $primary;
+            color: var(--primary);
           }
 
           .slab-app-sidebar-submenu {
@@ -104,15 +104,15 @@ systelab-app-sidebar-large {
 
             &.selected, &:hover {
               border-right: 1px solid white;
-              border-top: 1px solid $primary;
-              border-bottom: 1px solid $primary;
+              border-top: 1px solid var(--primary);
+              border-bottom: 1px solid var(--primary);
 
               .slab-app-sidebar-tab-decoration {
-                background-color: $primary !important;
+                background-color: var(--primary) !important;
               }
 
               span {
-                color: $primary !important;
+                color: var(--primary) !important;
               }
             }
           }

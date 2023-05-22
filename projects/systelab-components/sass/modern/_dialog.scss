@@ -231,18 +231,18 @@ $slab-button-fontsize: 25px !default;
   cursor: pointer;
   text-align: center;
   border-radius: 20px;
-  border: 1px solid $primary;
+  border: 1px solid var(--primary);
 
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: $primary;
+    color: var(--primary);
     font-size: $slab-button-fontsize;
     font-family: icomoon;
   }
 
   &:hover {
-    background-color: $primary;
+    background-color: var(--primary);
   }
 }
 

@@ -6,8 +6,8 @@
   color: black;
 
   &:hover:enabled {
-    background-color: $primary;
-    border-color: $primary;
+    background-color: var(--primary);
+    border-color: var(--primary);
     color: white;
   }
 }
@@ -25,20 +25,20 @@
 systelab-toggle-button {
   .btn { //Toogle buttons
     &.btn-outline-primary {
-      color: $primary;
+      color: var(--primary);
       background-color: transparent;
-      border-color: $primary;
+      border-color: var(--primary);
 
       &:hover {
         color: #fff;
-        background-color: $primary;
+        background-color: var(--primary);
       }
     }
 
     &.btn-primary {
       color: white;
-      background-color: $primary;
-      border-color: $primary;
+      background-color: var(--primary);
+      border-color: var(--primary);
       &:hover {
         background-color: #0e7ad0;
         border-color: #0d73c4;
@@ -83,7 +83,7 @@ systelab-button {
 
   .slab-btn-primary {
     color: white;
-    background-color: $primary;
+    background-color: var(--primary);
 
     &:hover:enabled {
       color: white;
@@ -94,20 +94,20 @@ systelab-button {
     }
   }
   .slab-btn-regular {
-    color: $primary;
-    border: 1px solid $primary;
+    color: var(--primary);
+    border: 1px solid var(--primary);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: $primary;
+      background-color: var(--primary);
     }
     &:focus {
       box-shadow: $slab-focus-component-shadow;
     }
   }
   .slab-btn-link {
-    color: $primary;
+    color: var(--primary);
     background: transparent;
     text-decoration-style: solid;
 
@@ -121,42 +121,42 @@ systelab-button {
     }
   }
   .slab-btn-danger {
-    color: $danger;
-    border: 1px solid $danger;
+    color: var(--danger);
+    border: 1px solid var(--danger);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: $danger;
+      background-color: var(--danger);
     }
     &:focus {
-      box-shadow: 0 0 0 3px scale-color($danger, $alpha: -75%);
+      box-shadow: 0 0 0 3px var(--danger_light);
     }
   }
   .slab-btn-warning {
-    color: $warning;
-    border: 1px solid $warning;
+    color: var(--warning);
+    border: 1px solid var(--warning);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: $warning;
+      background-color: var(--warning);
     }
     &:focus {
-      box-shadow: 0 0 0 3px scale-color($warning, $alpha: -75%);
+      box-shadow: 0 0 0 3px var(--warning_light);
     }
   }
   .slab-btn-success {
-    color: $success;
-    border: 1px solid $success;
+    color: var(--success);
+    border: 1px solid var(--success);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: scale-color($success, $alpha: -10%);
+      background-color: var(--success);
     }
     &:focus {
-      box-shadow: 0 0 0 3px scale-color($success, $alpha: -75%);;
+      box-shadow: 0 0 0 3px var(--success_light);
     }
   }
 }

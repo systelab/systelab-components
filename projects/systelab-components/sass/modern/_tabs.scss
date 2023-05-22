@@ -16,11 +16,11 @@ systelab-tabs {
     border-radius: 0;
 
     &.active {
-      border-bottom: 3px solid $primary;
-      box-shadow: 0 2px 3px scale-color($primary, $alpha: -75%);
+      border-bottom: 3px solid var(--primary);
+      box-shadow: 0 2px 3px var(--primary_light);
 
       &:focus {
-        background-color: scale-color($primary, $alpha: -95%);
+        background-color: var(--primary_lighter);
       }
     }
 
@@ -29,7 +29,7 @@ systelab-tabs {
       box-shadow: none;
 
       &:focus {
-        background-color: scale-color($primary, $alpha: -95%);
+        background-color: var(--primary_lighter);
       }
 
       &:hover {
