@@ -5,7 +5,8 @@
   tr {
     height: $slab-table-min-row-height;
 
-    th, td {
+    th,
+    td {
       border-color: var(--slab_table_border_color) !important;
     }
   }

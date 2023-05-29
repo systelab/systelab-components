@@ -29,7 +29,8 @@
 }
 
 .btn {
-  &.btn-outline-primary, &:active {
+  &.btn-outline-primary,
+  &:active {
     color: var(--text-color);
     background-color: var(--slab_background_primary) !important;
     border-color: var(--primary) !important;
