@@ -1,13 +1,17 @@
 systelab-numpad {
   #showDialogButton {
-    background-color: white;
+    background-color: var(--slab_background_primary);
     border: 1px solid var(--slab_component_border_color);
-    color: $dark;
+    color: var(--text-color);
 
     &:hover:enabled {
       background-color: var(--primary);
       border-color: var(--primary);
       color: white;
+
+      [class*='icon-'] {
+        color: white !important;
+      }
     }
 
     &.disabled {

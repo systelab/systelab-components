@@ -197,13 +197,13 @@ $slab-button-fontsize: 25px !default;
   border-radius: 0;
 
   background: var(--slab_modal_header_background);
-  border-bottom: 1px solid $background-secondary;
+  border-bottom: 1px solid var(--slab_table_border_color);
 }
 
 
 .slab-dialog-bottom {
 
-  border-top: 1px solid $background-secondary;
+  border-top: 1px solid var(--slab_table_border_color);
   background: none !important;
   padding: 15px;
 
@@ -236,7 +236,7 @@ $slab-button-fontsize: 25px !default;
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: var(--primary);
+    color: var(--text-color);
     font-size: $slab-button-fontsize;
     font-family: icomoon;
   }
@@ -277,7 +277,7 @@ $slab-button-fontsize: 25px !default;
 .slab-dialog-minimize {
   &:hover {
     &::before {
-      color: white;
+      color: var(--text-color-secondary);
     }
   }
 }

@@ -225,7 +225,7 @@ border-top: solid 1px var(--slab_table_border_color) !important;
 
 .ag-header-cell::after,
 .ag-header-group-cell::after {
-background: white !important;
+background: var(--slab_background_primary) !important;
 }
 
 .ag-header-group-cell {

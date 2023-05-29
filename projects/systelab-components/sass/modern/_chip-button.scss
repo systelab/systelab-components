@@ -13,7 +13,7 @@ systelab-chip-button {
     margin-bottom: 3px;
 
     button {
-      color: var(--primary);
+      color: var(--text-color);
       border: 1px solid var(--primary);
       background-color: transparent;
       font-size: 0.875rem;
@@ -45,7 +45,7 @@ systelab-chip-button {
       &.slab-is-selected {
         color: white;
         background-color: var(--primary);
-        border: 1px solid white;
+        border: 1px solid var(--primary);
 
         .slab-chip-button-remove {
           border: 1px solid white;
@@ -55,7 +55,7 @@ systelab-chip-button {
       &:hover {
         color: white;
         background-color: var(--primary);
-        border: 1px solid white;
+        border: 1px solid var(--primary);
 
         .slab-chip-button-remove {
           border: 1px solid white;
@@ -75,7 +75,7 @@ systelab-chip-button {
 
   .slab-chip-button-add {
     min-width: auto !important;
-    color: var(--primary);
+    color: var(--text-color);
     border: 1px solid var(--primary);
     background-color: transparent;
     border-radius: 50%;

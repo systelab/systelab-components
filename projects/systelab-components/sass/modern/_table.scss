@@ -4,6 +4,10 @@
 
   tr {
     height: $slab-table-min-row-height;
+
+    th, td {
+      border-color: var(--slab_table_border_color) !important;
+    }
   }
 
   thead th {
@@ -22,7 +26,8 @@
 
 
 .table-hover tbody tr:hover {
-  background-color: var(--primary_lighter);
+  color: var(--ag-data-color);
+  background-color: var(--slab_table_row_hover_background) !important;
 }
 
 

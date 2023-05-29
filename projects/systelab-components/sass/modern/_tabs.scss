@@ -16,8 +16,10 @@ systelab-tabs {
     border-radius: 0;
 
     &.active {
-      border-bottom: 3px solid var(--primary);
-      box-shadow: 0 2px 3px var(--primary_light);
+      border-bottom: 3px solid var(--slab_tab_selection_background);
+      border-right: 1px solid var(--slab_table_border_color);
+      border-left: 1px solid var(--slab_table_border_color);
+      box-shadow: 0 1px 1px var(--slab_tab_selection_background);
 
       &:focus {
         background-color: var(--primary_lighter);
@@ -33,7 +35,7 @@ systelab-tabs {
       }
 
       &:hover {
-        border-bottom: 3px solid $light-gray;
+        border-bottom: 3px solid var(--primary_lighter);
       }
     }
 
