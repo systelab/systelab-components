@@ -6,13 +6,19 @@
   color: black;
 
   &:hover:enabled {
-    background-color: $primary;
-    border-color: $primary;
+    background-color: var(--primary);
+    border-color: var(--primary);
     color: white;
+
+    [class*='icon-'] {
+      color: white !important;
+    }
   }
 }
 
 .btn-link {
+  color: var(--text-color);
+
   &:focus {
     box-shadow: none;
   }
@@ -22,28 +28,32 @@
   border-radius: 20px;
 }
 
-systelab-toggle-button {
-  .btn { //Toogle buttons
-    &.btn-outline-primary {
-      color: $primary;
-      background-color: transparent;
-      border-color: $primary;
+.btn {
+  &.btn-outline-primary,
+  &:active {
+    color: var(--text-color);
+    background-color: var(--slab_background_primary) !important;
+    border-color: var(--primary) !important;
 
-      &:hover {
-        color: #fff;
-        background-color: $primary;
-      }
+    &:hover {
+      color: var(--text-color-secondary);
+      background-color: var(--primary) !important;
+    }
+  }
+
+  &.btn-primary {
+    color: var(--text-color-secondary);
+    background-color: var(--primary);
+    border-color: var(--primary);
+    &:hover {
+      background-color: var(--primary_light);
+      border-color: var(--primary_light);
     }
 
-    &.btn-primary {
-      color: white;
-      background-color: $primary;
-      border-color: $primary;
-      &:hover {
-        background-color: #0e7ad0;
-        border-color: #0d73c4;
-      }
-    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem var(--primary_lighter);
   }
 }
 
@@ -83,31 +93,40 @@ systelab-button {
 
   .slab-btn-primary {
     color: white;
-    background-color: $primary;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
 
     &:hover:enabled {
       color: white;
-      background-color: #0e7ad0;
+      background-color: var(--primary_light);
     }
     &:focus {
-      box-shadow: $slab-focus-component-shadow;
+      box-shadow: var(--primary_lighter);
     }
   }
   .slab-btn-regular {
-    color: $primary;
-    border: 1px solid $primary;
+    color: var(--text-color);
+    border: 1px solid var(--primary);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: $primary;
+      background-color: var(--primary);
+
+      [class*='icon-'] {
+        color: white !important;
+      }
     }
     &:focus {
-      box-shadow: $slab-focus-component-shadow;
+      box-shadow: var(--primary_lighter);
+    }
+
+    [class*='icon-'] {
+      color: var(--text-color) !important;
     }
   }
   .slab-btn-link {
-    color: $primary;
+    color: var(--text-color);
     background: transparent;
     text-decoration-style: solid;
 
@@ -121,42 +140,42 @@ systelab-button {
     }
   }
   .slab-btn-danger {
-    color: $danger;
-    border: 1px solid $danger;
+    color: var(--danger);
+    border: 1px solid var(--danger);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: $danger;
+      background-color: var(--danger);
     }
     &:focus {
-      box-shadow: 0 0 0 3px scale-color($danger, $alpha: -75%);
+      box-shadow: 0 0 0 3px var(--danger_light);
     }
   }
   .slab-btn-warning {
-    color: $warning;
-    border: 1px solid $warning;
+    color: var(--warning);
+    border: 1px solid var(--warning);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: $warning;
+      background-color: var(--warning);
     }
     &:focus {
-      box-shadow: 0 0 0 3px scale-color($warning, $alpha: -75%);
+      box-shadow: 0 0 0 3px var(--warning_light);
     }
   }
   .slab-btn-success {
-    color: $success;
-    border: 1px solid $success;
+    color: var(--success);
+    border: 1px solid var(--success);
     background-color: transparent;
 
     &:hover:enabled {
       color: white;
-      background-color: scale-color($success, $alpha: -10%);
+      background-color: var(--success);
     }
     &:focus {
-      box-shadow: 0 0 0 3px scale-color($success, $alpha: -75%);;
+      box-shadow: 0 0 0 3px var(--success_light);
     }
   }
 }

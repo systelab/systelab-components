@@ -111,7 +111,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 		OverlayModule,
 		TreeModule,
 		HttpClientModule,
-		SystelabComponentsModule,
+		SystelabComponentsModule.forRoot(),
 		SystelabTranslateModule,
 		SystelabPreferencesModule,
 		AgGridModule,

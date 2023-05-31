@@ -20,7 +20,7 @@ systelab-app-header {
 
       margin: $icon-header-margin;
       font-size: $icon-header-size;
-      color: $primary;
+      color: var(--primary);
     }
 
     .slab-app-header-user-icon {

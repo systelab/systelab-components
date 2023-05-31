@@ -2,24 +2,24 @@ systelab-paginator {
   .slab-paginator-container {
     .btn {
       background-color: white;
-      border: 1px solid $primary;
-      color: $primary;
+      border: 1px solid var(--primary);
+      color: var(--primary);
       border-radius: 2px;
 
       &:hover {
         color: white;
-        background-color: $primary;
+        background-color: var(--primary);
       }
     }
 
     .btn-primary {
-      background-color: $primary;
-      border: 1px solid $primary;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
       color: white;
       border-radius: 2px;
 
       &:hover {
-        color: $primary;
+        color: var(--primary);
         background-color: white;
       }
     }
