@@ -5,10 +5,10 @@ Component to show a Breadcrumb.
 ## Using the component
 
 ```html
-<systelab-breadcrumb [items]="items" [backgroundColor]="backgroundColor" [fontColor]="fontColor"></systelab-breadcrumb>
+<systelab-breadcrumb [items]="items" [backgroundColor]="backgroundColor" [fontColor]="fontColor" [itemMaxWidth]="'90px'" [subItemMaxWidth]="'120px'"></systelab-breadcrumb>
 ```
 
-The parameters **backgroundColor**, and a **fontColor** are optionals.
+The parameters **backgroundColor**, **fontColor**, **itemMaxWidth** and **subItemMaxWidth** are optionals.
 
 How to add a breadcrumb item with an action:
 
@@ -25,10 +25,12 @@ this.items.push(new BreadcrumbItem('2', 'Holidays', false, null, null, 'http://w
 Use **action** for navigating internally in the application and use the **url** external navigations.
 
 ## Properties
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| backgroundColor | string |  | Breadcrumb background color |
-| fontColor | string | | The font color of the text in the breadcrumb |
+| Name | Type | Default | Description                                              |
+| ---- |:----:|:-------:|----------------------------------------------------------|
+| backgroundColor | string |  | Breadcrumb background color                              |
+| fontColor | string | | The font color of the text in the breadcrumb             |
+| itemMaxWidth | string | | The max width of the item text in the breadcrumb         |
+| subItemMaxWidth | string | | The max width of the sub-item text in the breadcrumb     |
 | items | Array<BreadcrumbItem> | | An array with the elements to be shownmin the breadcrumb |
 
 #### BreadcrumbItem
