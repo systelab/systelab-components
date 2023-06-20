@@ -32,6 +32,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public preferenceName: string;
 	@Input() public multipleSelection = false;
 	@Input() public showChecks = false;
+	@Input() public headerCheckboxSelection = false;
 	@Input() public rowData: Array<T> = [];
 	@Input() public noRowsText;
 	@Input() public loadingText;
@@ -40,6 +41,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Output() public clickRow = new EventEmitter();
 	@Output() public rowDragEnd = new EventEmitter();
 	@Output() public viewportChanged = new EventEmitter();
+	@Output() public rowSelected = new EventEmitter();
 
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
@@ -193,6 +195,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return {
 			colId:             AbstractGrid.selectionColId,
 			headerName:        '',
+			headerCheckboxSelection: this.headerCheckboxSelection,
 			checkboxSelection: true,
 			pinned:            'left',
 			width:             width,
@@ -299,7 +302,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public onRowSelected(event: any) {
+	public onRowSelected(event: any): void {
+		this.rowSelected.emit(event.data);
 	}
 
 	protected getRowSelectionType(): rowSelectionType {
