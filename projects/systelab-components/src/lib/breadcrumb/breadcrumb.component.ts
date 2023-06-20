@@ -20,6 +20,7 @@ export class BreadcrumbComponent {
 	@Input() public items: BreadcrumbItem[];
 	@Input() public backgroundColor: string;
 	@Input() public fontColor: string;
+	@Input() public itemMaxWidth: '9999px';
 
 	constructor() {
 	}

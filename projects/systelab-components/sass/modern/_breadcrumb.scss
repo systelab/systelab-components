@@ -9,6 +9,11 @@ systelab-breadcrumb {
     & > li > a {
       cursor: pointer;
 
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline flow-root list-item;
+
       &:hover {
         text-decoration: underline;
       }
