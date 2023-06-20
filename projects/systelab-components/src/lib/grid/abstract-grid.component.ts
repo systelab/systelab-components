@@ -302,8 +302,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public onRowSelected(event: any) {
-		this.rowSelected.emit(event);
+	public onRowSelected(event: any): void {
+		this.rowSelected.emit(event.data);
 	}
 
 	protected getRowSelectionType(): rowSelectionType {
