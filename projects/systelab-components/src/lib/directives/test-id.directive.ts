@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Inject, Input, OnInit, Optional, Renderer2 } from '@angular/core';
-import { APP_CONFIG } from '../config';
+import { APP_CONFIG } from '../systelab-components.module.config';
 
 const DEFAULT_PRODUCTION_MODE = true;
 @Directive({
