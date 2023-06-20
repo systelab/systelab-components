@@ -1,53 +1,58 @@
-.breadcrumb {
-  & > li + li:before {
-    padding: 0 5px;
-    color: #cccccc;
-    content: "/\00a0";
-  }
-
-  & > li > a {
-    cursor: pointer;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline flow-root list-item;
-
-    &:hover {
-      text-decoration: underline;
+systelab-breadcrumb {
+  .breadcrumb {
+    & > li + li:before {
+      padding: 0 5px;
+      color: #cccccc;
+      content: "/\00a0";
     }
-  }
 
-  .slab-caret-button {
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    cursor: pointer;
-  }
-
-  .slab-sub-items {
-    padding-top: 0px;
-    padding-bottom: 0px;
-
-    .slab-items {
-      padding: 5px;
+    & > li > a {
       cursor: pointer;
 
-      & > a {
-        width: 100%;
-        display: block;
-      }
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline flow-root list-item;
 
       &:hover {
-        background-color: $slab-selected-background-color;
+        text-decoration: underline;
+      }
+    }
+
+    .slab-caret-button {
+      border: 0;
+      padding: 0;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    .slab-sub-items {
+      padding-top: 0px;
+      padding-bottom: 0px;
+
+      min-width: 2rem !important;
+
+      .slab-items {
+        padding: 5px;
+        cursor: pointer;
+
         & > a {
-          text-decoration: underline;
+          //width: 100%;
+          //display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: inline flow-root list-item
+        }
+
+        &:hover {
+          background-color: $slab-selected-background-color;
+
+          & > a {
+            text-decoration: underline;
+          }
         }
       }
     }
   }
-
 }
-
-
-

@@ -1,7 +1,6 @@
 <ol class="breadcrumb" [style.background-color]="backgroundColor">
     <li *ngFor="let bread of items" [class.active]="bread.isActive" (click)="bread.isActive?bread.action():noop()">
-        <a *ngIf="!bread.isActive"
-           [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null "
+        <a *ngIf="!bread.isActive" [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null "
            [style.color]="fontColor" [style.width]="itemMaxWidth">{{bread.text}}</a>
         <label *ngIf="bread.isActive">{{bread.text}}</label>
         <button *ngIf="bread.subItems" class="slab-caret-button" type="button"
@@ -11,7 +10,7 @@
         <ul *ngIf="bread.subItems" class="dropdown-menu slab-sub-items" aria-labelledby="dropdownMenu1">
             <li *ngFor="let subBread of bread.subItems" (click)="subBread.action()" class="slab-items">
                 <a [attr.target]="subBread.url ? '_self' : null " [attr.href]="subBread.url ?  subBread.url  : null "
-                   [style.color]="fontColor">{{subBread.text}}</a>
+                   [style.color]="fontColor" [style.width]="subItemMaxWidth">{{subBread.text}}</a>
             </li>
         </ul>
     </li>
