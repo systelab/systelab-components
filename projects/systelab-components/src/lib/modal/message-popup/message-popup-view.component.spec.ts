@@ -80,7 +80,7 @@ describe('Systelab MessagePopupViewComponent', () => {
 			.toBeTruthy();
 
 		component.close();
-		expect(spyDialogRef.close).toHaveBeenCalledWith(false);
+		expect(spyDialogRef.close).toHaveBeenCalledWith([undefined, false]);
 	});
 
 	it('Closing different popup from AskAgainPopup', () => {
@@ -97,6 +97,23 @@ describe('Systelab MessagePopupViewComponent', () => {
 
 		component.close();
 		expect(spyDialogRef.close).toHaveBeenCalledWith(undefined);
+	});
+
+	it('Closing the AskAgainPopup returns an array', () => {
+		parameters.askAgain = true;
+
+		spyDialogRef.context = parameters;
+		fixture = TestBed.createComponent(MessagePopupViewComponent);
+		component = fixture.componentInstance;
+		component.parameters = parameters;
+		fixture.detectChanges();
+
+		expect(component)
+			.toBeTruthy();
+
+		component.checkAskAgain = true;
+		component.close('value');
+		expect(spyDialogRef.close).toHaveBeenCalledWith(['value', true]);
 	});
 
 });
