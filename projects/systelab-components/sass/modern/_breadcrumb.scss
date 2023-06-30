@@ -1,5 +1,10 @@
 systelab-breadcrumb {
   .breadcrumb {
+
+    & > li {
+      display: inline-flex;
+    }
+
     & > li + li:before {
       padding: 0 5px;
       color: #cccccc;
@@ -12,11 +17,22 @@ systelab-breadcrumb {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: inline flow-root list-item;
+      display: inline-block;
 
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    & > li > label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+    & > li > button {
+      min-width: 15px;
     }
 
     .slab-caret-button {
@@ -40,7 +56,7 @@ systelab-breadcrumb {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          display: inline flow-root list-item
+          display: inline-block;
         }
 
         &:hover {
