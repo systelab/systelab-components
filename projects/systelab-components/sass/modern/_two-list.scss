@@ -86,14 +86,14 @@ systelab-two-list {
         height: 35px;
         width: 35px;
         margin: 2px;
-        color: $primary;
+        color: var(--primary);
         padding: 0;
         border-radius: 30px;
-        border: 1px solid $primary;
+        border: 1px solid var(--primary);
 
         &:hover {
           color: white;
-          background-color: $primary;
+          background-color: var(--primary);
         }
         &:disabled {
           opacity: 0.4 !important;

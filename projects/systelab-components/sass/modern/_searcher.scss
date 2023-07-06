@@ -15,8 +15,8 @@
     border: 1px solid var(--slab_component_border_color) !important;
 
     &:enabled {
-      background-color: white;
-      color: $dark;
+      background-color: var(--slab_background_primary);
+      color: var(--ag-data-color);
     }
 
     &:disabled {

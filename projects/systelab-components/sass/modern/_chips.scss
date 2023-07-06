@@ -36,7 +36,7 @@ systelab-chips {
   }
 
   .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-token {
-    background-color: $primary;
+    background-color: var(--primary);
     border-radius: 20px;
     padding: 2px 5px;
   }

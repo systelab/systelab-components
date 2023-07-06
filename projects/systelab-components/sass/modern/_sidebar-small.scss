@@ -43,7 +43,7 @@ systelab-app-sidebar-small {
         }
 
         &.selected, &:hover {
-          color: $primary;
+          color: var(--primary);
         }
 
         &:hover {

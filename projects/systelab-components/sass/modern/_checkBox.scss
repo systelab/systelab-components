@@ -75,7 +75,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     background: none !important;
     font-family: 'icomoon' !important;
     font-size: 21px !important;
-    border: solid 1px var(--slab_component_border_color) !important;
+    border: solid 1px var(--slab_table_border_color) !important;
     width: $slab-checkbox-grid-height !important;
     height: $slab-checkbox-grid-height !important;
     border-radius: 2px !important;

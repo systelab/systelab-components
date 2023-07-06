@@ -8,6 +8,14 @@
     text-indent: 10px;
     cursor: pointer;
 
+    [class*='icon-'] {
+      color: var(--text-color) !important;
+
+      &.text-black-50 {
+        color: rgba(0, 0, 0, 0.5) !important;
+      }
+    }
+
     @include user-selection(none);
   }
 

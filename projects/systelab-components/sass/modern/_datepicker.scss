@@ -34,7 +34,7 @@ p-calendar {
 
   &.warning-date {
     input {
-      background-color: $danger !important;
+      background-color: var(--danger) !important;
     }
 
     &.input-expand-height {
@@ -48,8 +48,8 @@ p-calendar {
 
   &.date-error {
     input {
-      color: $danger !important;
-      border: 1px solid $danger !important;
+      color: var(--danger) !important;
+      border: 1px solid var(--danger) !important;
     }
 
     &.input-expand-height {
@@ -57,7 +57,7 @@ p-calendar {
     }
 
     i {
-      color: $danger !important;
+      color: var(--danger) !important;
     }
   }
 
@@ -126,8 +126,8 @@ p-calendar {
   height: 65px !important;
   a {
     cursor: pointer;
-    color: $primary !important;
-    border: 1px solid $primary;
+    color: var(--primary) !important;
+    border: 1px solid var(--primary);
     border-radius: 35px;
     width: 35px;
     height: 35px;
@@ -142,7 +142,7 @@ p-calendar {
     }
     &:hover {
       text-decoration: none;
-      background: $primary !important;
+      background: var(--primary) !important;
       color: white !important;
     }
   }
@@ -194,8 +194,8 @@ body {
     align-items: center;
     a {
       cursor: pointer;
-      color: $primary !important;
-      border: 1px solid $primary;
+      color: var(--text-color) !important;
+      border: 1px solid var(--primary);
       border-radius: 35px;
       width: 35px;
       height: 35px;
@@ -210,7 +210,7 @@ body {
       }
       &:hover {
         text-decoration: none;
-        background: $primary !important;
+        background: var(--primary) !important;
         color: white !important;
       }
     }
@@ -230,14 +230,18 @@ body {
 }
 
 .p-datepicker {
+  color: var(--ag-data-color);
+  background-color: var(--slab_background_primary) !important;
   z-index: 100000 !important;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
+  border-color: var(--slab_component_border_color) !important;
   border-radius: $slab-border-radius !important;
   padding: 0 !important;
 
   div:nth-child(3) {
     padding: 15px !important;
-    background-color: $light-gray;
+    background-color: var(--slab_modal_bottom_background);
+    border-color: var(--slab_component_border_color) !important;
     border-bottom-right-radius: $slab-border-radius;
     border-bottom-left-radius: $slab-border-radius;
   }
@@ -251,19 +255,19 @@ body {
     padding: 15px 15px 0 15px !important;
   }
   .p-datepicker-prev, .p-datepicker-next {
-    border: 1px solid $primary !important;
-    color: $primary !important;
+    border: 1px solid var(--primary) !important;
+    color: var(--text-color) !important;
     &:hover {
       text-decoration: none;
-      background: $primary !important;
+      background: var(--primary) !important;
       color: white !important;
     }
   }
 
   thead {
     text-align: center;
-    border-top: 1px solid $light-gray;
-    border-bottom: 1px solid $light-gray;
+    border-top: 1px solid var(--slab_component_border_color);
+    border-bottom: 1px solid var(--slab_component_border_color);
     th {
       font-weight: normal;
     }
@@ -277,6 +281,7 @@ body {
 
       &:hover,
       &:active {
+        color: black;
         border: 1px solid $medium-gray;
         background-color: $medium-gray !important;
       }
@@ -287,8 +292,8 @@ body {
 
       &.p-state-active,
       &.p-highlight {
-        background-color: $primary !important;
-        border: 1px solid $primary;
+        background-color: var(--primary) !important;
+        border: 1px solid var(--primary);
       }
     }
   }

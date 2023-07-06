@@ -3,21 +3,20 @@ systelab-toggle-selector {
   $border-color: var(--slab_component_border_color);
   $option-color: black;
   $selected-option-color: white;
-  $selected-option-background-color: $primary;
+  $selected-option-background-color: var(--primary);
 
   .slab-toggle-selector {
-    border: 1px solid $border-color !important;
+    border: 1px solid var(--slab_table_border_color) !important;
     border-radius: 50px !important;
-    background: white !important;
+    background: var(--slab_background_primary) !important;
     transition: all 0.6s ease-out;
     padding: 3px 3px !important;
     display: flex;
 
     .slab-option {
       background: transparent;
-      color: $option-color;
+      color: var(--ag-data-color);
       border: solid 1px transparent;
-      cursor: pointer;
       cursor: hand;
 
       span {

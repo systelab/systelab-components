@@ -106,23 +106,23 @@ systelab-timeline {
     }
 
     .slab-timeline-badge.primary {
-      background-color: $primary !important;
+      background-color: var(--primary) !important;
     }
 
     .slab-timeline-badge.success {
-      background-color: $success !important;
+      background-color: var(--success) !important;
     }
 
     .slab-timeline-badge.warning {
-      background-color: $warning !important;
+      background-color: var(--warning) !important;
     }
 
     .slab-timeline-badge.danger {
-      background-color: $danger !important;
+      background-color: var(--danger) !important;
     }
 
     .slab-timeline-badge.info {
-      background-color: $info !important;
+      background-color: var(--info) !important;
     }
 
     .slab-timeline-title {

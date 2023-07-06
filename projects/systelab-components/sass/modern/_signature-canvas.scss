@@ -6,6 +6,6 @@ systelab-signature-canvas {
     padding: 0.5rem 0.3rem;
   }
   .slab-error {
-    border-left: 3px solid $danger !important;
+    border-left: 3px solid var(--danger) !important;
   }
 }

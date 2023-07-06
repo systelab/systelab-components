@@ -4,7 +4,7 @@ import { fakeAsync, TestBed } from '@angular/core/testing';
 describe('Systelab Components', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SystelabComponentsModule],
+            imports: [SystelabComponentsModule.forRoot({productionMode: true})],
         });
     });
 

@@ -26,7 +26,7 @@
           border-bottom: none;
 
           &.ag-row-selected {
-            background-color: $slab-selected-background-color;
+            background-color: var(--slab_table_row_selection_background);
           }
 
           &.ag-row-disabled {
@@ -34,11 +34,11 @@
           }
 
           &.ag-row-hover {
-            background-color: $slab-selected-background-color;
+            background-color: var(--slab_table_row_hover_background);
           }
 
           &.ag-row-focus {
-            background-color: scale-color($primary, $alpha: -90%);
+            background-color: var(--primary_lighter);
           }
 
           .ag-cell {
