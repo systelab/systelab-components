@@ -368,7 +368,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
 
 		this.language.dateFormatValue = this.dateFormat ? this.dateFormat : this.i18nService.getDateFormatForDatePicker(true);
-		this.currentCalendar.dateFormat = !this.dateFormat && this.currentCalendar ? this.language.dateFormatValue : this.dateFormat;
+		if (this.currentCalendar) {
+			this.currentCalendar.dateFormat = !this.dateFormat ? this.language.dateFormatValue : this.dateFormat;
+		}
 
 		this.config.setTranslation(this.language.translations);
 	}
