@@ -369,7 +369,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 		this.language.dateFormatValue = this.dateFormat ? this.dateFormat : this.i18nService.getDateFormatForDatePicker(true);
 		if (this.currentCalendar) {
-			this.currentCalendar.dateFormat = !this.dateFormat ? this.language.dateFormatValue : this.dateFormat;
+			this.currentCalendar.dateFormat = this.dateFormat || this.language.dateFormatValue;
 		}
 
 		this.config.setTranslation(this.language.translations);
