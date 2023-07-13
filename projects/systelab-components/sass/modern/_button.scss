@@ -22,6 +22,11 @@
   &:focus {
     box-shadow: none;
   }
+
+  &:hover {
+    color: var(--primary_light);
+    text-decoration: underline;
+  }
 }
 
 .btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark {

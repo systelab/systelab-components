@@ -52,18 +52,18 @@ systelab-two-list {
           }
 
           .slab-twolistboxrow-even-row {
-            background-color: $table-row-even-background-color;
+            background-color: var(--slab_table_row_even_background);
 
             &.slab-twolistboxrowselected {
-              background-color: $slab-selected-background-color;
+              background-color: var(--slab_table_row_selection_background);
             }
           }
 
           .slab-twolistboxrow-odd-row {
-            background-color: $table-row-odd-background-color;
+            background-color: var(--slab_table_row_odd_background);
 
             &.slab-twolistboxrowselected {
-              background-color: $slab-selected-background-color;
+              background-color: var(--slab_table_row_selection_background);
             }
           }
 
