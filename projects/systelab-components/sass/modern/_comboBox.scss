@@ -167,11 +167,11 @@
               background-color: var(--slab_background_primary);
 
               &.ag-row-selected {
-                background-color: $slab-selected-background-color;
+                background-color: var(--slab_table_row_selection_background);
               }
 
               &.ag-row-hover {
-                background-color: $slab-selected-background-color;
+                background-color: var(--slab_table_row_hover_background);
               }
 
               &.ag-row-focus {

@@ -16,10 +16,11 @@ systelab-tabs {
     border-radius: 0;
 
     &.active {
-      border-bottom: 3px solid var(--slab_tab_selection_background);
+      border-bottom: 3px solid var(--primary_light);
       border-right: 1px solid var(--slab_table_border_color);
       border-left: 1px solid var(--slab_table_border_color);
       box-shadow: 0 1px 1px var(--slab_tab_selection_background);
+      background-color: var(--slab_tab_selection_background) !important;
 
       &:focus {
         background-color: var(--primary_lighter);

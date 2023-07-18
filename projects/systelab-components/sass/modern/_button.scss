@@ -1,9 +1,9 @@
 
 .btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link)
 {
-  border-color: rgb(221, 221, 221);
-  background-color: white;
-  color: black;
+  border-color: var(--slab_component_border_color);
+  background-color: var(--slab_background_primary);
+  color: var(--slab_foreground_primary);
 
   &:hover:enabled {
     background-color: var(--primary);
@@ -24,7 +24,7 @@
   }
 
   &:hover {
-    color: var(--primary_light);
+    color: var(--text-color);
     text-decoration: underline;
   }
 }
@@ -34,10 +34,8 @@
 }
 
 .btn {
-  &.btn-outline-primary,
-  &:active {
+  &.btn-outline-primary {
     color: var(--text-color);
-    background-color: var(--slab_background_primary) !important;
     border-color: var(--primary) !important;
 
     &:hover {
@@ -57,9 +55,14 @@
 
   }
 
-  &:focus {
+  &:focus:not(.btn-link) {
     box-shadow: 0 0 0 0.2rem var(--primary_lighter);
   }
+
+  &:disabled {
+    opacity: 0.45;
+  }
+
 }
 
 

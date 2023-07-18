@@ -6,6 +6,20 @@
 }
 .dropdown-menu {
   color: var(--slab_foreground_primary);
+  background-color: var(--slab_background_primary);
+  border-color: var(--slab_component_border_color);
+
+  .dropdown-item {
+    color: var(--slab_foreground_primary);
+
+    &:hover {
+      background-color: var(--slab_table_row_hover_background);
+    }
+  }
+
+  .dropdown-divider {
+    border-color: var(--slab_component_border_color);
+  }
 }
 
 .slab-button-dropdown {
@@ -87,7 +101,7 @@
         height: 1px;
 
         &:hover {
-          background-color: transparent;
+          background-color: var(--slab_component_border_color) !important;
         }
       }
     }
