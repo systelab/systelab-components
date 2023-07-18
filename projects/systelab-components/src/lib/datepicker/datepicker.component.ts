@@ -31,6 +31,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public onlyTime = false;
 	@Input() public showOtherMonths = true;
 	@Input() public selectOtherMonths = false;
+	@Input() public dateFormat: string;
 
 	@Input()
 	get currentDate(): Date {
@@ -365,9 +366,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
-		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);
+
+		this.language.dateFormatValue = this.dateFormat ? this.dateFormat : this.i18nService.getDateFormatForDatePicker(true);
 		if (this.currentCalendar) {
-			this.currentCalendar.dateFormat = this.language.dateFormatValue;
+			this.currentCalendar.dateFormat = this.dateFormat || this.language.dateFormatValue;
 		}
 
 		this.config.setTranslation(this.language.translations);
