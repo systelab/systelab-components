@@ -86,18 +86,18 @@ describe('Systelab Breadcrumb With Max Width', () => {
 	});
 
 	it('-First item should have the right text', () => {
-		checkActiveItemTextStyleWidth(fixture, 1, 'width: 40px;');
+		checkActiveItemTextStyleWidth(fixture, 1, 'max-width: 40px;');
 	});
 
 	it('-Second item should have the right text', () => {
-		checkActiveItemTextStyleWidth(fixture, 2, 'width: 40px;');
+		checkActiveItemTextStyleWidth(fixture, 2, 'max-width: 40px;');
 	});
 
 	it('-Third item should have the right text', () => {
-		checkInactiveItemTextStyleWidth(fixture, 3, 'width: 40px;');
+		checkInactiveItemTextStyleWidth(fixture, 3, 'max-width: 40px;');
 	});
 
 	it('-First sub item should have the right text', () => {
-		checkSubItemTextStyleWidth(fixture, 2, 1, 'width: 60px;');
+		checkSubItemTextStyleWidth(fixture, 2, 1, 'max-width: 60px;');
 	});
 });
