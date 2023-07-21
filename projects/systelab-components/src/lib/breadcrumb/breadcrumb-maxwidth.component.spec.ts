@@ -33,7 +33,8 @@ export class BreadcrumbMaxWidthTestComponent {
 		this.items.push(new BreadcrumbItem('1', 'ItemItem 1', true,  () => this.doSomething()));
 		this.items.push(new BreadcrumbItem('2', 'ItemItem 2', true, () => this.doSomethingElse(), subItems));
 		this.items.push(new BreadcrumbItem('3', 'ItemItem 3', false, () => this.doSomethingElse()));
-		this.items.push(new BreadcrumbItem('3', 'ItemItem 4', true, () => this.doSomethingElse()));
+		this.items.push(new BreadcrumbItem('4', 'ItemItem 4', true, () => this.doSomethingElse()));
+		this.items.push(new BreadcrumbItem('5', 'ItemItem 5', true, () => this.doSomethingElse()));
 	}
 
 	public doSomething() {
@@ -96,6 +97,10 @@ describe('Systelab Breadcrumb With Max Width', () => {
 
 	it('-Four item should have the right text', () => {
 		checkActiveItemTextStyleWidth(fixture, 4, 'max-width: 40px;');
+	});
+
+	it('-Four item should have the right text', () => {
+		checkActiveItemTextStyleWidth(fixture, 5, 'max-width: 40px;');
 	});
 
 	it('-Third item should have the right text', () => {
