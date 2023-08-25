@@ -157,6 +157,8 @@ const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 
 const isPopupVisible = () => (document.querySelector('.cdk-overlay-pane') !== null);
 
+const isSearchInputFocused = () => document.getElementById('valueToSearch') === document.activeElement;
+
 const clickCloseButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const button: any = document.querySelector('.slab-dialog-header-button.slab-dialog-close');
 	button.click();
@@ -248,6 +250,16 @@ describe('Systelab Searcher', () => {
 			.then(() => {
 				expect(getDescription(fixture))
 					.toEqual('1');
+				done();
+			});
+	});
+
+	it('should focus input when showing help dialog', (done) => {
+		clickHelpButton(fixture);
+		fixture.whenStable()
+			.then(() => {
+				expect(isSearchInputFocused())
+					.toBeTruthy();
 				done();
 			});
 	});

@@ -12,6 +12,8 @@ export class ShowcaseSearcherData {
 
 export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 
+	private dataModel:Array<ShowcaseSearcherData> = [];
+
 	constructor(public i18nService: I18nService) {
 		super();
 	}
@@ -27,29 +29,14 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 		const aCode = (useCode) ? valueToSearch : undefined;
 		const aSearch = (useCode) ? undefined : valueToSearch;
 
-		const array: ShowcaseSearcherData[] = [];
+		this.dataModel = this.getDataModel(valueToSearch);
 
-		array.push(new ShowcaseSearcherData('1', '1', '1'));
-		array.push(new ShowcaseSearcherData('2', '2', '2'));
-		array.push(new ShowcaseSearcherData('3', '3', '3'));
-		array.push(new ShowcaseSearcherData('4', '4', '4'));
-		array.push(new ShowcaseSearcherData('5', '5', '5'));
-		array.push(new ShowcaseSearcherData('6', '6', '6'));
-		array.push(new ShowcaseSearcherData('7', '7', '7'));
-		array.push(new ShowcaseSearcherData('8', '8', '8'));
-		array.push(new ShowcaseSearcherData('9', '9', '9'));
-		array.push(new ShowcaseSearcherData('10', '10', 'This is a large description for the element number 10'));
-		array.push(new ShowcaseSearcherData('11', '11', '11'));
-		array.push(new ShowcaseSearcherData('12', '12', '12'));
-		array.push(new ShowcaseSearcherData('13', '13', '13'));
-		array.push(new ShowcaseSearcherData('14', '14', '14'));
-		array.push(new ShowcaseSearcherData('15', '15', '15'));
-
-		return of(array);
+		return of(this.dataModel);
 	}
 
+
 	public getTotalItems(): number {
-		return 15;
+		return this.dataModel.length ?? 0;
 	}
 
 	public getColumnDefs(): Array<any> {
@@ -91,5 +78,35 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 
 	public getGridOptionsPreferencesPrefix(): string {
 		return 'ShowcaseGridSearcher';
+	}
+
+	private getDataModel(valueToSearch: string): Array<ShowcaseSearcherData> {
+		const array: ShowcaseSearcherData[] = [];
+
+		array.push(new ShowcaseSearcherData('1', '1', '1'));
+		array.push(new ShowcaseSearcherData('2', '2', '2'));
+		array.push(new ShowcaseSearcherData('3', '3', '3'));
+		array.push(new ShowcaseSearcherData('4', '4', '4'));
+		array.push(new ShowcaseSearcherData('5', '5', '5'));
+		array.push(new ShowcaseSearcherData('6', '6', '6'));
+		array.push(new ShowcaseSearcherData('7', '7', '7'));
+		array.push(new ShowcaseSearcherData('8', '8', '8'));
+		array.push(new ShowcaseSearcherData('9', '9', '9'));
+		array.push(new ShowcaseSearcherData('10', '10', 'This is a large description for the element number 10'));
+		array.push(new ShowcaseSearcherData('11', '11', '11'));
+		array.push(new ShowcaseSearcherData('12', '12', '12'));
+		array.push(new ShowcaseSearcherData('13', '13', '13'));
+		array.push(new ShowcaseSearcherData('14', '14', '14'));
+		array.push(new ShowcaseSearcherData('15', '15', '15'));
+
+		if (valueToSearch != null) {
+			if (valueToSearch.startsWith(('%'))) {
+				return array.filter(item => item.description.includes(valueToSearch.substring(1)));
+			} else {
+				return array.filter(item => item.description.startsWith(valueToSearch));
+			}
+		} else {
+			return array;
+		}
 	}
 }

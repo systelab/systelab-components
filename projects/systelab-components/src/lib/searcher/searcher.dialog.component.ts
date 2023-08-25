@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { SearcherTableComponent } from './searcher.table.component';
 import { I18nService } from 'systelab-translate';
 import { ModalComponent } from '../modal/dialog/modal-context';
@@ -8,9 +8,11 @@ import { SearcherDialogParameters } from './searcher.dialog.parameters';
 @Component({
 	templateUrl: 'searcher.dialog.component.html'
 })
-export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>> {
+export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>>, AfterViewInit {
 
 	@ViewChild(SearcherTableComponent, {static: false}) public tableComponent: SearcherTableComponent<T>;
+	@ViewChild('valueToSearchInput') public valueToSearchInput: ElementRef;
+
 	public parameters: SearcherDialogParameters<T>;
 	public searchingValue: string;
 
@@ -36,6 +38,14 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 			this.titleForDialog = this.parameters.searcher.getTitleForDialog();
 			this.multipleSelection = this.parameters.searcher.multipleSelection;
 		}
+	}
+
+	public ngAfterViewInit(): void {
+		this.setFocusToInput();
+	}
+
+	public setFocusToInput(): void {
+		setTimeout(() => this.valueToSearchInput?.nativeElement.focus(), 100);
 	}
 
 	public close(): void {
