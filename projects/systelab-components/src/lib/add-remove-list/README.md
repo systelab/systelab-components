@@ -84,11 +84,13 @@ Once you have your component, you can use it in your templates.
 
 ## Properties
 
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| elementsList | Array<T> | | Array list with the elements of the list |
+| Name | Type | Default | Description                                                                                                               |
+| ---- |:----:|:-------:|---------------------------------------------------------------------------------------------------------------------------|
+| elementsList | Array<T> | | Array list with the elements of the list                                                                                  |
 | buttonsOnBottom | boolean | false | If true Add/Remove buttons are shown in the bottom of the list. If false buttons are shown in the right side of the list. |
-| isDisabled | boolean | false | If true Add/Remove buttons are not shown |
+| isDisabled | boolean | false | If true Add/Remove buttons are not shown                                                                                  |
+| showChecks | boolean | false | If true checkboxes are shown and multiple selection with ctrl key is disabled                                             |
+| showSelectedRowsInRemoveButton | boolean | false | If true a counter with selected items number is shown                                                               |
 
 In black the Two-Way Data Binding properties.
 

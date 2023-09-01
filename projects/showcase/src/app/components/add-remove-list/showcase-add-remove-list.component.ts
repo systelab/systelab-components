@@ -9,6 +9,7 @@ export class ShowcaseAddRemoveListComponent {
 
 	public dataListButtonsRightSide: Array<ShowcaseAddRemoveListData> = [];
 	public dataListButtonsBottomSide: Array<ShowcaseAddRemoveListData> = [];
+	public dataListButtonsCheckbox: Array<ShowcaseAddRemoveListData> = [];
 	public dataListDisabled: Array<ShowcaseAddRemoveListData> = [];
 
 	constructor() {
@@ -18,6 +19,7 @@ export class ShowcaseAddRemoveListComponent {
 	private populateList(): void {
 		this.dataListButtonsRightSide.push(...this.generateDataList('ButtonsRightSide'));
 		this.dataListButtonsBottomSide.push(...this.generateDataList('ButtonsBottomSide'));
+		this.dataListButtonsCheckbox.push(...this.generateDataList('ButtonsBottomSide'));
 		this.dataListDisabled.push(...this.generateDataList('Disabled'));
 	}
 
