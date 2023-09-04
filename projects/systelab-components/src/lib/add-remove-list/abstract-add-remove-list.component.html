@@ -6,11 +6,11 @@
          (onDragLeave)="preventDefault($event)">
         <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)" [cdkDropListDisabled]="!dragAndDropEnabled">
             <div *ngFor="let element of elementsList; let index = index"
-                 class="slab-flex-1 slab-sortable-list-row"
+                 class="d-flex slab-flex-1 slab-sortable-list-row"
                  [ngClass]="{'slab-sortable-list-row-selected':getSelectionFieldValue(element)}"
                  [class.slab-sortable-list-even-row]="0 === index % 2"
                  [class.slab-sortable-list-odd-row]="1 === index % 2"
-                 (click)="selectElement(element,$event)" cdkDrag style="display: flex; ">
+                 (click)="selectElement(element,$event)" cdkDrag>
 
                  <div class="slab-sortable-checkbox" *ngIf="showChecks">
                      <input type="checkbox" id="{{index}}-check" (change)="selectCheckbox(element)">
