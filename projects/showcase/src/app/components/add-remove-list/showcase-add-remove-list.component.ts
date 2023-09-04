@@ -19,7 +19,7 @@ export class ShowcaseAddRemoveListComponent {
 	private populateList(): void {
 		this.dataListButtonsRightSide.push(...this.generateDataList('ButtonsRightSide'));
 		this.dataListButtonsBottomSide.push(...this.generateDataList('ButtonsBottomSide'));
-		this.dataListButtonsCheckbox.push(...this.generateDataList('ButtonsBottomSide'));
+		this.dataListButtonsCheckbox.push(...this.generateDataList('ButtonsCheckbox'));
 		this.dataListDisabled.push(...this.generateDataList('Disabled'));
 	}
 
