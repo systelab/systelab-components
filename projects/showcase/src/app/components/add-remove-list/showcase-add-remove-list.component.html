@@ -7,3 +7,11 @@
 <h6>Add Remove List with disabled value</h6>
 <systelab-inner-add-remove-list [elementsList]="dataListDisabled" [buttonsOnBottom]="true"
                                 [isDisabled]="true"></systelab-inner-add-remove-list>
+
+<h6>Add Remove List with checkboxes and counter in button remove</h6>
+<systelab-inner-add-remove-list
+        [elementsList]="dataListButtonsCheckbox"
+        [buttonsOnBottom]="true"
+        [showChecks]="true"
+        [showSelectedRowsInRemoveButton]="true"
+></systelab-inner-add-remove-list>
