@@ -219,10 +219,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public ngOnInit() {
-		this.suppressKeyboardEvent = (params) => {
-			const KEY_TAB = 9;
-			return params.event.which === KEY_TAB;
-		};
+
 		this.setRowHeight();
 
 		this.setStyle('font-family', this.fontFamily);
@@ -294,7 +291,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.suppressCellFocus = true;
+		this.gridOptions.suppressCellFocus = false;
 
 		if (this.multipleSelection) {
 			this.gridOptions.rowSelection = 'multiple';
@@ -307,7 +304,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			?.toString();
 
 		this.configGridData();
-
 	}
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
@@ -386,7 +382,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public onComboKeydown() {
+	public onComboKeydown(event: any) {
 		if (!this.isDropDownOpen()) {
 			this.isDropdownOpened = true;
 			this.showDropDown();
@@ -455,7 +451,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	private transferFocusToGrid(): void {
+	protected transferFocusToGrid(): void {
 		// scrolls to the first row
 		this.gridOptions.api.ensureIndexVisible(0);
 
@@ -469,9 +465,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public onCellKeyDown(e: any) {
 		if (e.event.key === 'Enter') {
-			e.node.setSelected(true);
-			this.gridOptions.api.selectNode(e.node);
+			if (this.multipleSelection && e.node.selected) {
+				e.node.setSelected(false);
+			} else {
+				e.node.setSelected(true);
+			}
 			e.event.preventDefault();
+		}
+		if (e.event.key === 'Tab') {
+			this.closeDropDown();
+			e.event.preventDefault();
+			e.event.stopPropagation();
 		}
 	}
 

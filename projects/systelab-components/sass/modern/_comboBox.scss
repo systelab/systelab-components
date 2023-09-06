@@ -81,10 +81,6 @@
     &.form-control[readonly] {
       background-color: white;
     }
-
-    &::selection {
-      background-color: white;
-    }
   }
 
   input:focus {
@@ -181,6 +177,11 @@
               .ag-cell {
                 border: none;
                 padding: 0 $slab-combo-check-cell-padding;
+
+                &.ag-cell-focus {
+                  border: none !important;
+                }
+
               }
             }
 
