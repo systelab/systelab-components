@@ -7,13 +7,11 @@ $context-menu-width: 39px;
 
 .ag-theme-fresh .ag-row-selected::before {
   background-color: var(--slab_table_row_selection_background) !important;
-  color: black;
 }
 
 
 .ag-theme-fresh .ag-header, .ag-theme-fresh .ag-column-drop-cell {
   background-image: none !important;
-  color: black;
 }
 
 .ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus {

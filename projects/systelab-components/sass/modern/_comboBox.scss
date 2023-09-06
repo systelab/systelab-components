@@ -81,10 +81,6 @@
     &.form-control[readonly] {
       background-color: white;
     }
-
-    &::selection {
-      // background-color: white;
-    }
   }
 
   input:focus {
