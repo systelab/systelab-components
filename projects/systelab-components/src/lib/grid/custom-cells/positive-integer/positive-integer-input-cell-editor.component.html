@@ -1,0 +1,4 @@
+<input title="input-cell" type="number" step="any" class="w-100 h-100 border-0 bg-transparent"
+       [disabled]="!isEditable"
+       [(ngModel)]="value"
+       (keydown)="onKeyDown($event)">
