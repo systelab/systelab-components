@@ -50,4 +50,8 @@ describe('PositiveIntegerInputCellEditorComponent', () => {
         expect(event2.preventDefault).toHaveBeenCalled();
         expect(event3.preventDefault).not.toHaveBeenCalled();
     });
+
+    it ('refresh should return true', () => {
+        expect(component.refresh({})).toBeTrue();
+    });
 });
