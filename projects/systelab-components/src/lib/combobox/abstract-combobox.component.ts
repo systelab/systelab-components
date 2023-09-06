@@ -304,17 +304,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			?.toString();
 
 		this.configGridData();
-
-		// this.gridOptions.onCellKeyDown= this.onCellKeyDown2();
-
 	}
 
-	onCellKeyDown2() {
-		return (e) => {
-			console.log(e);
-		}
-	}
-protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
+	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
 		if (item) {
 			if (item[this.getIdField()]) {
 				return item[this.getIdField()];
@@ -481,7 +473,6 @@ protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
 			e.event.preventDefault();
 		}
 		if (e.event.key === 'Tab') {
-			console.log('ola');
 			this.closeDropDown();
 			e.event.preventDefault();
 			e.event.stopPropagation();
