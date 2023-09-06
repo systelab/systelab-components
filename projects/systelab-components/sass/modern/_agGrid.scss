@@ -7,13 +7,22 @@ $context-menu-width: 39px;
 
 .ag-theme-fresh .ag-row-selected::before {
   background-color: var(--slab_table_row_selection_background) !important;
+  color: black;
 }
 
 
 .ag-theme-fresh .ag-header, .ag-theme-fresh .ag-column-drop-cell {
   background-image: none !important;
+  color: black;
 }
 
+.ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus {
+  border: 1px dashed var(--primary_light) !important;
+}
+.ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus::after {
+  border: 1px dashed var(--primary_light) !important;
+  content: inherit;
+}
 
 .ag-root.ag-layout-normal {
   background: var(--slab_background_primary);
@@ -159,6 +168,7 @@ overflow: hidden;
 font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
 .ag-header {
+
   border-bottom: none;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 

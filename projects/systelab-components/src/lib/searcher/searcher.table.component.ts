@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { IsFullWidthRowParams } from 'ag-grid-community';
+import { CellKeyDownEvent, IsFullWidthRowParams } from 'ag-grid-community';
 import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -26,6 +26,8 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	public override ngOnInit(): void {
 		super.ngOnInit();
 		this.gridOptions.enableBrowserTooltips = true;
+		this.gridOptions.suppressCellFocus = false;
+		this.gridOptions.onCellKeyDown = this.onEnterPressedCallback()
 	}
 
 	protected getColumnDefs(): Array<any> {
@@ -35,6 +37,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	protected override hideHeader(): boolean {
 		return this.searcher.hideHeader();
 	}
+
 
 	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
 		return this.searcher.getIsFullWidthRow(isFullWidthRowParams);
@@ -64,6 +67,10 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		this.refresh();
 	}
 
+	public focusFirstRow(): void {
+		this.gridOptions.api.setFocusedCell(0, this.gridOptions.columnApi.getColumns()[0].getColId());
+	}
+
 	public getSelectedElements(): Array<T> {
 		return this.gridOptions.api.getSelectedRows();
 	}
@@ -89,6 +96,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 			this.gridOptions.api.forEachNode(node => {
 				if (node.data && node.data[this.searcher.getIdField()] === this.searcher.id) {
 					node.selectThisNode(true);
+					this.gridOptions.api.ensureNodeVisible(node);
 				}
 			});
 		}
@@ -121,6 +129,17 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		}
 		this.searcher.multipleSelectedItemList.push(element);
 		this.searcher.multipleSelectedItemList = this.searcher.multipleSelectedItemList.slice();
+	}
+
+	private onEnterPressedCallback() {
+		return (e) => {
+			if (e.event instanceof KeyboardEvent) {
+				const keyEvent = e.event;
+				if (keyEvent.key === 'Enter') {
+					this.clickRow.emit(e.data);
+				}
+			}
+		};
 	}
 
 }

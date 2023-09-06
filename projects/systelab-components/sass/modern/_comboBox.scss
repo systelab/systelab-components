@@ -83,7 +83,7 @@
     }
 
     &::selection {
-      background-color: white;
+      // background-color: white;
     }
   }
 
@@ -181,6 +181,11 @@
               .ag-cell {
                 border: none;
                 padding: 0 $slab-combo-check-cell-padding;
+
+                &.ag-cell-focus {
+                  border: none !important;
+                }
+
               }
             }
 

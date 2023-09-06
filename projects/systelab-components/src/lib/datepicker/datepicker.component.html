@@ -20,6 +20,7 @@
             [showTransitionOptions]="'1ms linear'"
             [hideTransitionOptions]="'1ms linear'"
             appendTo="body"
+            [tabindex]="tabindex"
             [ngClass]="{'date-error': formatError || error || (required && !currentDate), 'is-disabled': disabled, 'warning-date': tooFarDate || previousAfterDate, 'input-expand-height':inputExpandHeight}">
     <ng-template pTemplate="header" *ngIf="!onlyTime">
         <div id="{{datepickerId}}" class="slab-datepicker-header">

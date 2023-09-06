@@ -54,7 +54,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.suppressCellFocus = true;
 		this.gridOptions.rowSelection = 'single';
 	}
 
@@ -119,6 +118,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			}
 
 			if (this.totalItemsLoaded) {
+				this.transferFocusToGrid();
 				this.setDropdownHeight();
 				this.setDropdownPosition();
 				result = false;

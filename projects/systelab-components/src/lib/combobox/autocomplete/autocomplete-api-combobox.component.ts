@@ -60,7 +60,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		}
 	}
 
-	public onInputNavigate(): void {
+	public onInputNavigate(event): void {
 		if (!this.isDisabled) {
 			if (!this.isDropdownOpened) {
 				this.openDropDown();

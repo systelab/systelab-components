@@ -60,6 +60,12 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 		}
 	}
 
+	public setFocusToGrid(event:KeyboardEvent): void {
+		event.preventDefault();
+		this.valueToSearchInput?.nativeElement.blur();
+		this.tableComponent.focusFirstRow()
+	}
+
 	public refreshSearch(): void {
 		this.tableComponent.refreshTable();
 	}
