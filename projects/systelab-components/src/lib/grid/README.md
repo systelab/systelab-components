@@ -71,6 +71,20 @@ Decimal Input
 }
 ```
 
+Positive Integer Input
+```
+{
+    colId:               'positive-integer-input',
+    headerName:          'Cell with Positive Integer',
+    field:               'positiveIntegerValue',
+    width:               200,
+    cellEditorFramework: PositiveIntegerInputCellEditorComponent,
+    editable:            true,
+    onCellValueChanged:  e => console.log('input', e)
+}
+```
+
+
 CheckBox
 
 To use the checkbox we need to send a parameter that has to be searched in the data to get a unique id. By this way we can have all the checkbox working independent from the other.

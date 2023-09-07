@@ -99,6 +99,9 @@ import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
 import {ImageViewerComponent} from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
+import {
+	PositiveIntegerInputCellEditorComponent
+} from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
 
 @NgModule({
 	imports:      [
@@ -200,7 +203,8 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent
 	],
 	exports:      [
 		SliderComponent,
@@ -285,7 +289,8 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent
 	],
 	providers:    [
 		StylesUtilService,
