@@ -1,4 +1,6 @@
-import { CheckboxCellEditorComponent, CheckboxCellRendererComponent, DecimalInputCellEditorComponent, GridHeaderContextMenuComponent, InputCellEditorComponent, IStackedBar, SpinnerCellEditorComponent, SpinnerCellRendererComponent, StackedBarCellRendererComponent, TouchSpinValues } from 'systelab-components';
+import { CheckboxCellEditorComponent, CheckboxCellRendererComponent, DecimalInputCellEditorComponent,
+	GridHeaderContextMenuComponent, InputCellEditorComponent, IStackedBar, SpinnerCellEditorComponent, SpinnerCellRendererComponent,
+	StackedBarCellRendererComponent, TouchSpinValues, PositiveIntegerInputCellEditorComponent } from 'systelab-components';
 import { ShowcaseData } from './showcase-grid.model';
 
 export class ShowcaseGridUtil {
@@ -42,6 +44,15 @@ export class ShowcaseGridUtil {
 				field:               'decimalValue',
 				width:               200,
 				cellEditorFramework: DecimalInputCellEditorComponent,
+				editable:            true,
+				sortable:            true,
+				onCellValueChanged:  e => console.log('input', e)
+			}, {
+				colId:               'positive-integer-input',
+				headerName:          'Cell with Positive Integer',
+				field:               'positiveIntegerValue',
+				width:               200,
+				cellEditorFramework: PositiveIntegerInputCellEditorComponent,
 				editable:            true,
 				sortable:            true,
 				onCellValueChanged:  e => console.log('input', e)
@@ -143,7 +154,7 @@ export class ShowcaseGridUtil {
 	public static getGridData(): ShowcaseData[] {
 		const values: ShowcaseData[] = [];
 		for (let i = 0; i < 10; i++) {
-			values.push(new ShowcaseData('12/12/2017', i + '', '10x', 26, 10,
+			values.push(new ShowcaseData('12/12/2017', i + '', '10x', 26, 24,10,
 				false, i, new TouchSpinValues(5, 0, 100, 1), this.stackedBars[i % 4]));
 		}
 		return values;

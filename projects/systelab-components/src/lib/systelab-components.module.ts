@@ -1,4 +1,4 @@
-import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -99,6 +99,9 @@ import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
+import {
+	PositiveIntegerInputCellEditorComponent
+} from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
 import { APP_CONFIG, AppConfig } from './config';
 import { TestIdDirective } from './directives/test-id.directive';
 
@@ -217,6 +220,8 @@ const providers = [
 		ResizableDirective,
 		ImageViewerComponent,
 		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent
+		NumpadDecimalNumericDirective,
   		TestIdDirective,
 	],
 	exports: [
@@ -304,6 +309,8 @@ const providers = [
 		ImageViewerComponent,
 		NumpadDecimalNumericDirective,
 		TestIdDirective,
+		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent
 	],
 })
 export class SystelabComponentsModule {
