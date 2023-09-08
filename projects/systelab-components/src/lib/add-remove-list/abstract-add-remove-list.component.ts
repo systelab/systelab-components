@@ -9,6 +9,7 @@ export abstract class AbstractAddRemoveList<T> extends AbstractSortableListCompo
 	@Input() public isDisabled = false;
 	@Input() public showChecks = false;
 	@Input() public showSelectedRowsInRemoveButton = false;
+	public checkId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
 	constructor() {
 		super();
