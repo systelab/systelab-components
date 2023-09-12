@@ -13,8 +13,8 @@
                  (click)="selectElement(element,$event)" cdkDrag>
 
                  <div class="slab-sortable-checkbox" *ngIf="showChecks">
-                     <input type="checkbox" id="{{index}}-check" (change)="selectCheckbox(element)">
-                     <label for="{{index}}-check" class="col-form-label"></label>
+                     <input type="checkbox" id="{{checkId}}-{{index}}-check" (change)="selectCheckbox(element)">
+                     <label for="{{checkId}}-{{index}}-check" class="col-form-label"></label>
                  </div>
 
                 <i *ngIf="showIcon" class="mr-1 d-flex align-items-center" [ngClass]="[getIcon(element), isDisabled ? 'text-black-50' : 'text-primary']"></i>
