@@ -131,6 +131,15 @@ describe('ImageViewerTestComponent', () => {
 		expect(numActionButton).toEqual(3);
 	});
 
+	it('should render action buttons with the correct state (enabled and non-primary look&feel)', () => {
+		const toggleButtons = fixture.debugElement.nativeElement.querySelectorAll('systelab-toggle-button');
+
+		toggleButtons.forEach(toggleButton => {
+			expect(toggleButton.querySelector('button').disabled).toBe(false);
+			expect(toggleButton.querySelector('button').classList.contains('btn-outline-primary')).toBe(true);
+		});
+	});
+
 	it('should render description parameter as overlay text', () => {
 		const overlayText = fixture.debugElement.nativeElement.querySelector('#imageViewerOverlayText').innerHTML;
 		expect(overlayText).toEqual(fixture.componentInstance.imageTitle);
