@@ -34,8 +34,8 @@ export class ImageViewerTestComponent {
 	public imageTitle = 'Barcelona Eixample District';
 	public actionButtons: ActionButton[] = [
 		{action: 'Action 1', label: 'Action 1', type: ActionButtonType.BUTTON},
-		{action: 'red', label: 'Apply red', type: ActionButtonType.TOGGLE_BUTTON},
-		{action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON}
+		{action: 'red', label: 'Apply red', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}},
+		{action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}}
 	];
 	public imageFilters = `
 	<filter id="red">
