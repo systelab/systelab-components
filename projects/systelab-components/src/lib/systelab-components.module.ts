@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {Inject, ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -220,7 +220,7 @@ const providers = [
 		ResizableDirective,
 		ImageViewerComponent,
 		NumpadDecimalNumericDirective,
-		PositiveIntegerInputCellEditorComponent
+		PositiveIntegerInputCellEditorComponent,
 		NumpadDecimalNumericDirective,
   		TestIdDirective,
 	],
