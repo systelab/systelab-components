@@ -15,7 +15,7 @@ export class ShowcaseImageViewerComponent {
 		{action: 'Action 1', label: 'Action 1', tooltip: 'Action 1 tooltip', type: ActionButtonType.BUTTON},
 		{action: 'contrast', label: 'High contrast', tooltip: 'High contrast tooltip', type: ActionButtonType.TOGGLE_BUTTON},
 		{action: 'green', label: 'Apply green', tooltip: 'Apply green tooltip', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}},
-		{action: 'red', label: 'Apply red', tooltip: 'Apply red tooltip', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: true, disabled: true}}
+		{action: 'red', label: 'Apply red', tooltip: 'Apply red tooltip', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}}
 	];
 	public imageFilters = `
 		<filter id="red">

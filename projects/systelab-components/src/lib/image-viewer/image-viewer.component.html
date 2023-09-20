@@ -11,7 +11,9 @@
                     {{actionButton.label}}
                 </systelab-toggle-button>
                 <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" class="mr-2"
-                                 (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
+                                 [systelabTooltip]="actionButton.tooltip"
+                                 [disabled]="actionButton.state?.disabled"
+                                 (click)="clickActionButton.emit(actionButton.action)">
                     {{actionButton.label}}
                 </systelab-button>
                 <div *ngIf="actionButton.type===actionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
