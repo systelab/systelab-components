@@ -75,12 +75,12 @@ Positive Integer Input
 ```
 {
     colId:               'positive-integer-input',
-    headerName:          'Cell with Positive Integer',
+    headerName:          'Cell with positive integer',
     field:               'positiveIntegerValue',
     width:               200,
     cellEditorFramework: PositiveIntegerInputCellEditorComponent,
     editable:            true,
-    onCellValueChanged:  e => console.log('input', e)
+    onCellValueChanged:  event => console.log('input', e)
 }
 ```
 
