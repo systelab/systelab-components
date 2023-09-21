@@ -160,7 +160,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input()
 	set code(value: string) {
 		this._code = value;
-		if (this.id && this.values) {
+		if (this.id != null && this.values) {
 			const item: T = this.values.find(it => it[this.getIdField()] === this.id);
 			if (item) {
 				this._code = item[this.getCodeField()];
@@ -308,7 +308,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
 		if (item) {
-			if (item[this.getIdField()]) {
+			if (item[this.getIdField()] != null) {
 				return item[this.getIdField()];
 			}
 			return item.data[this.getIdField()] ?? '';

@@ -109,7 +109,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
 		if (item) {
-			if (item[this.getIdField()]) {
+			if (item[this.getIdField()] != null) {
 				return item[this.getIdField()];
 			}
 			return item?.data[this.getIdField()] ?? '';
@@ -187,7 +187,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	// overrides
 	public onRowSelected(event: any) {
 		if (this.multipleSelection) {
-			if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
+			if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] != null) {
 				if (this.multipleSelectedItemList) {
 					const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 						return item[this.getIdField()] === event.node.data[this.getIdField()];
