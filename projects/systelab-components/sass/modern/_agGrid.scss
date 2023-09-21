@@ -37,6 +37,10 @@ $context-menu-width: 39px;
       text-align: left;
       padding: 0;
 
+      .ag-header-select-all {
+        margin-left: 5px;
+      }
+
       .slab-grid-header-context-menu {
         display: flex;
         height: 100%;

@@ -7,7 +7,8 @@
 # systelab-components
 
 Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components.
-Read the documentation at https://github.com/systelab/systelab-components/tree/master/projects/systelab-components
+
+Please, read the documentation at https://github.com/systelab/systelab-components/tree/master/projects/systelab-components
 
 ## Working with the repo
 
