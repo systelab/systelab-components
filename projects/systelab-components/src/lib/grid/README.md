@@ -75,7 +75,7 @@ Positive Integer Input
 ```
 {
     colId:               'positive-integer-input',
-    headerName:          'Cell with a positive integer',
+    headerName:          'Cell with positive integer',
     field:               'positiveIntegerValue',
     width:               200,
     cellEditorFramework: PositiveIntegerInputCellEditorComponent,
