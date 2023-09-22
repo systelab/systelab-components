@@ -64,12 +64,13 @@ an event with the corresponding action. The parent component must implement the 
 
 The _actionButtons_ input parameter must be an array of ActionButton, an interface defined in the image-viewer with the following attributes:
 
-| Name    |         Type          | Description                                                                |
-|---------|:---------------------:|----------------------------------------------------------------------------|
-| action  |        string         | Key that identifies the action.                                            |
-| label   |        string         | Label of the button.                                                       |
-| tooltip |        string         | Tooltip of the button.                                                     |
-| type    | enum ActionButtonType | Type of the button: ActionButtonType.BUTTON, ActionButtonType.TOGGLEBUTTON |
+| Name    |         Type          | Description                                                                  |
+|---------|:---------------------:|------------------------------------------------------------------------------|
+| action  |        string         | Key that identifies the action.                                              |
+| label   |        string         | Label of the button.                                                         |
+| tooltip |        string         | Tooltip of the button.                                                       |
+| type    | enum ActionButtonType | Type of the button: ActionButtonType.BUTTON, ActionButtonType.TOGGLEBUTTON   |
+| state   |        object         | Object with two attributes representing the button state: checked & disabled |
 
 ## Applying SVG filters to the image
 
@@ -99,8 +100,8 @@ In order to apply these filters we will need also the corresponding custom actio
 
 ```typescript
 const actionButtons: Array<ActionButton> = [
-    {action: 'green', label: 'Apply green', tooltip: 'Apply green tooltip', type: ActionButtonType.TOGGLE_BUTTON},
-    {action: 'red', label: 'Apply red', tooltip: 'Apply red tooltip', type: ActionButtonType.TOGGLE_BUTTON}
+    {action: 'green', label: 'Apply green', tooltip: 'Apply green tooltip', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}},
+    {action: 'red', label: 'Apply red', tooltip: 'Apply red tooltip', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}}
 ];
 ```
 
