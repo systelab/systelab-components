@@ -12,6 +12,9 @@ export class KeyName {
 	static readonly enter = 'Enter';
 	static readonly escape = 'Escape';
 	static readonly tab = 'Tab';
+	static readonly arrowUp = 'ArrowUp';
+	static readonly arrowDown = 'ArrowDown';
+	static readonly shift = 'Shift';
 }
 
 @Directive()
@@ -29,7 +32,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	public override doSearch(event: any): void {
-		if (event.shiftKey || event.ctrlKey) {
+		if (event.shiftKey || event.ctrlKey || event.key === KeyName.arrowUp || event.key === KeyName.arrowDown || event.key === KeyName.shift) {
 			return;
 		}
 		if (event.key === KeyName.escape || event.key === KeyName.enter || event.key === KeyName.tab) {

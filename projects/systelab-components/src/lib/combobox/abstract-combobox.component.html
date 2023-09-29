@@ -1,6 +1,7 @@
 <div #combobox class="dropdown slab-combobox d-flex w-100" [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}"
-         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown($event)">
+         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeyArrowDown($event)"
+         (keydown.arrowUp)="onComboKeyArrowUp($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text"
                class="slab-flex-1 slab-combo-label slab-combo-input"
                [tabindex]="tabindex"
