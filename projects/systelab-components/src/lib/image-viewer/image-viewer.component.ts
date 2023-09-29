@@ -21,6 +21,7 @@ export interface ActionButton {
 	label: string;
 	tooltip?: string;
 	type: ActionButtonType;
+	state?: { checked?: boolean, disabled: boolean };
 }
 
 @Component({

@@ -5,12 +5,15 @@
         <div class="ml-1">
             <ng-container *ngFor="let actionButton of actionButtons">
                 <systelab-toggle-button *ngIf="actionButton.type===actionButtonType.TOGGLE_BUTTON" class="mr-2"
-                                        [isChecked]="isFilterEnabled(actionButton.action)"
+                                        [isChecked]="actionButton.state?.checked"
+                                        [disabled]="actionButton.state?.disabled"
                                         (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
                     {{actionButton.label}}
                 </systelab-toggle-button>
-                <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" type="primary" class="mr-2"
-                                 (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
+                <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" class="mr-2"
+                                 [systelabTooltip]="actionButton.tooltip"
+                                 [disabled]="actionButton.state?.disabled"
+                                 (click)="clickActionButton.emit(actionButton.action)">
                     {{actionButton.label}}
                 </systelab-button>
                 <div *ngIf="actionButton.type===actionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
