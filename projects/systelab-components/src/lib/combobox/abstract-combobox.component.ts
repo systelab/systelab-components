@@ -382,7 +382,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public onComboKeydown(event: any) {
+	public onComboKeyArrowDown(event: any) {
 		if (!this.isDropDownOpen()) {
 			this.isDropdownOpened = true;
 			this.showDropDown();
@@ -390,6 +390,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			// close
 			this.checkMultipleSelectionClosed();
 		}
+	}
+
+
+	public onComboKeyArrowUp(event: any) {
+		event.preventDefault();
+		event.stopPropagation();
 	}
 
 	protected toggleFavourite(): void {

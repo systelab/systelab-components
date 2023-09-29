@@ -14,7 +14,7 @@
                [tabindex]="tabindex"
                (keydown.Tab)="closeDropDown()"
                (keydown.arrowDown)="onInputNavigate($event)"
-               (keydown.arrowUp)="onInputNavigate($event)"
+               (keydown.arrowUp)="onComboKeyArrowUp($event)"
                 (click)="onInputClicked($event)"/>
         <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
