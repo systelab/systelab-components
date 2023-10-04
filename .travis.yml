@@ -42,7 +42,7 @@ after_success:
   - cat ./coverage/systelab-components/lcov.info | codacy-coverage
 
 before_deploy: |
-  - if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  if [ -n "$GITHUB_API_KEY" ] && [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
       git clone https://github.com/systelab/systelab.github.io.git
       rm -rf systelab.github.io/components/*
       cp -r dist/systelab-components/* systelab.github.io/components
@@ -53,7 +53,7 @@ before_deploy: |
       git push -f -q https://systelab:$GITHUB_API_KEY@github.com/systelab/systelab.github.io
       cd ..
     fi
-  - cd dist/systelab-components
+  cd dist/systelab-components
 
 deploy:
   skip_cleanup: true
