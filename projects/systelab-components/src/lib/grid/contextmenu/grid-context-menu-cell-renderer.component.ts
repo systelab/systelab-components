@@ -25,6 +25,8 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 
 		if (event.ctrlKey) {
 			selectedRows = this.container.getSelectedRows();
+		} else if (this.container.removeSelectionOnOpenContextMenu) {
+			this.container.gridOptions.api.deselectAll();
 		}
 		this.container.dotsClicked(this.rowIndex, selectedRows, event);
 	}

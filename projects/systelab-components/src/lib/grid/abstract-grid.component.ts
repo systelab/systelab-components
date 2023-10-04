@@ -36,6 +36,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public rowData: Array<T> = [];
 	@Input() public noRowsText;
 	@Input() public loadingText;
+	@Input() public removeSelectionOnOpenContextMenu = false;
 
 	@Output() public action = new EventEmitter();
 	@Output() public clickRow = new EventEmitter();
