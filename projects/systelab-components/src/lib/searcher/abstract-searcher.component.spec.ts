@@ -54,6 +54,7 @@ export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
 		const searcherDialogParameters: SearcherDialogParameters<TestData> = new SearcherDialogParameters<TestData>();
 		searcherDialogParameters.widthRelative = '66%';
 		searcherDialogParameters.heightRelative = '66%';
+		searcherDialogParameters.showSelectedRowsInSubmitButton = true;
 		return searcherDialogParameters;
 	}
 
@@ -135,7 +136,8 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description">
+                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"
+														 [multipleSelection]="true">
 							  </systelab-searcher-example>
                           </div>
                       </div>
@@ -147,7 +149,6 @@ export class SearcherTestComponent {
 	public code: string;
 	public description: string;
 }
-
 
 const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const button = fixture.debugElement.nativeElement.querySelector('.btn');
@@ -177,6 +178,11 @@ const enterText = (fixture: ComponentFixture<SearcherTestComponent>, text: strin
 const getDescription = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const descriptionComponent = fixture.debugElement.query(By.css('.text-truncate')).nativeElement;
 	return descriptionComponent.innerText;
+};
+
+const getSubmitButtonText = () => {
+	const button = document.querySelector('.slab-dialog-bottom');
+	return button ? button['innerText'] : '';
 };
 
 describe('Systelab Searcher', () => {
@@ -250,5 +256,14 @@ describe('Systelab Searcher', () => {
 					.toEqual('1');
 				done();
 			});
+	});
+
+	it('should show counter with the selected items number in the submit button', async (done) => {
+		enterText(fixture, '1');
+		await fixture.whenStable();
+		clickHelpButton(fixture);
+		await fixture.whenStable();
+		expect(getSubmitButtonText()).toContain('(1)');
+		done();
 	});
 });
