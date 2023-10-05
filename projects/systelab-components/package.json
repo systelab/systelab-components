@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "16.0.2",
+  "version": "15.3.7",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -16,20 +16,20 @@
   },
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0",
-    "ag-grid-angular": "^28.0.0",
-    "ag-grid-community": "^28.0.0",
-    "angular-split": "^4.0.0",
-    "bootstrap": "^4.5.2",
-    "date-fns": "^2.0.0",
-    "jquery": "^3.3.1",
-    "mobile-drag-drop": "^2.3.0-rc.0",
-    "popper.js": "^1.16.1",
-    "primeicons": "^6.0.1",
-    "primeng": "^16.5.0",
-    "systelab-preferences": "^16.0.1",
-    "systelab-translate": "^16.0.1",
-    "interactjs": "^1.10.11"
+    "@angular/common": ">=15.0.0 <16.0.0",
+    "@angular/core": ">=15.0.0 <16.0.0",
+    "ag-grid-angular": ">=28.0.0 <29.0.0",
+    "ag-grid-community": ">=28.0.0 <29.0.0",
+    "angular-split": ">=4.0.0 <5.0.0",
+    "bootstrap": ">=4.5.2 <5.0.0",
+    "date-fns": ">=2.0.0 <3.0.0",
+    "jquery": ">=3.3.1 <4.0.0",
+    "mobile-drag-drop": ">=2.3.0-rc.0 <3.0.0",
+    "popper.js": ">=1.16.1 <2.0.0",
+    "primeicons": ">=6.0.0 <7.0.0",
+    "primeng": ">=14.0.0 <15.0.0",
+    "systelab-preferences": ">=15.0.0 <16.0.0",
+    "systelab-translate": ">=15.0.0 <16.0.0",
+    "interactjs": ">=1.10.11 <2.0.0"
   }
 }
