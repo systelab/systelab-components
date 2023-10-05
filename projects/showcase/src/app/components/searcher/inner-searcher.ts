@@ -20,6 +20,7 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 		const searcherDialogParameters: SearcherDialogParameters<ShowcaseSearcherData> = new SearcherDialogParameters<ShowcaseSearcherData>();
 		searcherDialogParameters.widthRelative = '66%';
 		searcherDialogParameters.heightRelative = '66%';
+		searcherDialogParameters.showSelectedRowsInSubmitButton = true;
 		return searcherDialogParameters;
 	}
 

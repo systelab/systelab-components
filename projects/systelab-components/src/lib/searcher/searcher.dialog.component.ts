@@ -63,6 +63,11 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 			}
 		}
 	}
+
+	public getSelectedElements(): string {
+		return this.parameters.showSelectedRowsInSubmitButton && this.parameters.searcher.multipleSelectedItemList?.length > 0 ?
+			` (${this.parameters.searcher.multipleSelectedItemList.length})` : '';
+	}
 }
 
 
