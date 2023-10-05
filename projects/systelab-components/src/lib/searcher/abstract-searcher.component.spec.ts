@@ -185,11 +185,6 @@ const getSubmitButtonText = () => {
 	return button ? button['innerText'] : '';
 };
 
-// const selectRow = (rowNumber: number) => {
-// 	const checkbox = document.querySelectorAll('ag-checkbox-input');
-// 	checkbox[rowNumber]?.click();
-// };
-
 describe('Systelab Searcher', () => {
 	let fixture: ComponentFixture<SearcherTestComponent>;
 
