@@ -4,6 +4,7 @@
         <showcase-inner-grid #grid [rowData]="gridData" [menu]="getMenu()" (action)="doMenuAction($event)"
                              [headerMenu]="getHeaderContextMenuOptions()"
                              [showChecks]="true"
+                             [removeSelectionOnOpenContextMenu]="true"
                              [multipleSelection]="true" (clickRow)="doSelect($event)"></showcase-inner-grid>
     </form>
     <div class="pt-2">
