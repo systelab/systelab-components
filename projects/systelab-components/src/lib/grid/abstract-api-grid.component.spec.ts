@@ -155,7 +155,6 @@ const selectRow = (fixture: ComponentFixture<GridTestComponent>, row: number) =>
 
 const clickOnGridCell = (fixture: ComponentFixture<GridTestComponent>, cell: number) => {
 	fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"]')[cell].click();
-	// fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"] .ag-checkbox-input')[cell].click();
 	fixture.detectChanges();
 };
 
