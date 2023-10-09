@@ -34,7 +34,7 @@
                              [gridOptions]="gridOptions"
                              (selectionChanged)="onSelectionChanged($event)"
                              (rowSelected)="onRowSelected($event)"
-                             (modelUpdated)="onModelUpdated()" [suppressKeyboardEvent]="suppressKeyboardEvent" (cellKeyDown)="onCellKeyDown($event)">
+                             (modelUpdated)="onModelUpdated()" (cellKeyDown)="onCellKeyDown($event)">
             </ag-grid-angular>
         </div>
 

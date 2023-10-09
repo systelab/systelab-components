@@ -89,6 +89,9 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		} else if (e.event.key.length === 1 && e.event.key.match(/^[a-zA-Z]+|[0-9]/g)) {
 			this.inputElement.nativeElement.value += e.event.key;
 			this.inputElement.nativeElement.focus();
+		} else if (e.event.key === KeyName.tab) {
+			this.closeDropDown();
+			e.event.stopPropagation();
 		}
 		e.event.preventDefault();
 	}
