@@ -41,8 +41,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public deleteIconClass = 'icon-close';
 	@Input() public withEmptyValue: boolean;
 
-	public suppressKeyboardEvent;
-
 	public getAllFieldIDValue(): string | number {
 		return '0';
 	}
