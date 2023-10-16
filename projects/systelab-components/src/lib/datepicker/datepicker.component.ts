@@ -239,9 +239,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	public repositionateCalendar(element?: ElementRef): void {
 
 		try {
-			const inputElementTop: number = this.inputElement.nativeElement.getBoundingClientRect().top;
-			const inputElementHeight: number = this.inputElement.nativeElement.getBoundingClientRect().height;
-			const datepickerElementHeight: number = element.nativeElement.getBoundingClientRect().height;
+			const { inputElementTop, inputElementHeight, datepickerElementHeight } = this.inputElement.nativeElement.getBoundingClientRect();
 			if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
 				const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
 				this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
