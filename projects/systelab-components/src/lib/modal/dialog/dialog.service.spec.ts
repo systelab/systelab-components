@@ -17,6 +17,7 @@ import { DialogHeaderComponent } from '../header/dialog-header.component';
 export class SampleDialogParameters extends SystelabModalContext {}
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'sample-dialog',
 	template: `
                 <systelab-dialog-header [withInfo]="false" (close)="close();">Title</systelab-dialog-header>
@@ -26,6 +27,7 @@ export class SampleDialogParameters extends SystelabModalContext {}
                 </systelab-dialog-bottom>
 	          `
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SampleDialog implements ModalComponent<SampleDialogParameters> {
 
 	public parameters: SampleDialogParameters;

@@ -1,4 +1,4 @@
-import {Inject, ModuleWithProviders, NgModule} from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -21,7 +21,7 @@ import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
-import { Datepicker } from './datepicker/datepicker.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 import { DatepickerTimeComponent } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
@@ -165,7 +165,7 @@ const providers = [
 		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
-		Datepicker,
+		DatepickerComponent,
 		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
@@ -244,7 +244,7 @@ const providers = [
 		PeriodSelect,
 		TimeUnitSelectComponent,
 		GenderSelect,
-		Datepicker,
+		DatepickerComponent,
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTimeComponent,

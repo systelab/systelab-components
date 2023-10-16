@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatepickerTimeComponent } from './datepicker-time.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
-import { Datepicker } from './datepicker.component';
+import { DatepickerComponent } from './datepicker.component';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonComponent } from '../button/button.component';
@@ -101,7 +101,7 @@ describe('Systelab DatepickerTimeComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
-				Datepicker,
+				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTimeComponent,
 				DatepickerTimeTestComponent]

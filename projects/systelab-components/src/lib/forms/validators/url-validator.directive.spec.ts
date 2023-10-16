@@ -2,8 +2,8 @@ import { UntypedFormControl } from '@angular/forms';
 import { urlValidator } from './url-validator.directive';
 
 describe('Url validation', () => {
-	beforeEach(() => {
-	});
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	beforeEach(() => {});
 
 	[	'plainUrl',
 		'https://myDomain.com',

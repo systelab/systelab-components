@@ -133,26 +133,4 @@ describe('Systelab Chips', () => {
 		expect(selectItemSpy)
 			.toHaveBeenCalled();
 	}));
-
-	xit('should select new item', fakeAsync(() => {
-		setArrayValue(fixture, fixture.componentInstance.texts);
-
-		const inputEl = fixture.debugElement.query(By.css('input'));
-		inputEl.nativeElement.dispatchEvent(new Event('focus'));
-		inputEl.nativeElement.click();
-		fixture.detectChanges();
-		chips.autoComplete.value = ['NewItem'];
-		const preventDefault = () => {};
-		const event = {
-			which: 13, preventDefault
-		};
-		chips.autoComplete.onKeydown(event);
-		fixture.detectChanges();
-
-		expect(chips.autoComplete.value[0])
-			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.p-autocomplete-token-label')[0].textContent);
-		expect(chips.autoComplete.value.length)
-			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.p-autocomplete-token-label').length);
-	}));
-
 });

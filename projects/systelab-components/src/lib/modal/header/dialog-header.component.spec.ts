@@ -33,16 +33,18 @@ export class DialogHeaderTestComponent {
 	public withProgressBar = false;
 	public withTextProgressBar = false;
 	public withHome = false;
-	public withMinimize = false;
 	public withDrag = true;
 
 	public doClose() {
+		console.log('Do Close');
 	}
 
 	public doHome() {
+		console.log('Do Home');
 	}
 
 	public doInfo() {
+		console.log('Do Info');
 	}
 
 	public go(num: number): void {

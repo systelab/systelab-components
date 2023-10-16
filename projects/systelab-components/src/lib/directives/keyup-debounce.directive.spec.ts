@@ -16,6 +16,7 @@ import { KeyupDebounceDirective } from './keyup-debounce.directive';
                   <input keyup-debounce #input type="text" [keyupDebounceTime]="debounceTime" (keyupDebounced)="doKeyUpDebounced()"/>
 			  `
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class KeyupDebounceDirectiveTest {
 	public debounceTime = 350;
 	public keyupDebouncedCalled = false;

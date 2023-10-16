@@ -30,7 +30,9 @@ import { TabComponent } from './tab.component';
 	styles:   []
 })
 export class TabsTestComponent {
-	public selectedTab() {}
+	public selectedTab() {
+		console.log('Selected Tab');
+	}
 }
 
 const isTabContentVisible = (className: string, fixture: ComponentFixture<TabsTestComponent>): boolean =>

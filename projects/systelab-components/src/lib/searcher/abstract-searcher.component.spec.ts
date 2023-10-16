@@ -17,7 +17,6 @@ import { AbstractSearcher } from './abstract-searcher';
 import { SearcherDialog } from './searcher.dialog.component';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable, of } from 'rxjs';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
 import { SearcherTableComponent } from './searcher.table.component';
 import { GridContextMenuComponent } from '../grid/contextmenu/grid-context-menu-component';
@@ -39,9 +38,6 @@ export class TestData {
 export class MockTooltipDirective {
 	@Input() public systelabTooltip: string;
 	@Input() public systelabTooltipHtml: string;
-
-	constructor() {
-	}
 }
 
 export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
@@ -185,8 +181,8 @@ describe('Systelab Searcher', () => {
 	let fixture: ComponentFixture<SearcherTestComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
+		TestBed.configureTestingModule({
+			imports: [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
@@ -209,15 +205,12 @@ describe('Systelab Searcher', () => {
 				SearcherTestComponent,
 				GridContextMenuComponent,
 				GridHeaderContextMenu,
-				SearcherTableComponent],
-			providers:    [
+				SearcherTableComponent
+			],
+			providers: [
 				DialogService,
-				MessagePopupService]
-		});
-		TestBed.overrideModule(BrowserDynamicTestingModule, {
-			set: {
-				entryComponents: [SearcherDialog]
-			}
+				MessagePopupService
+			]
 		});
 	});
 

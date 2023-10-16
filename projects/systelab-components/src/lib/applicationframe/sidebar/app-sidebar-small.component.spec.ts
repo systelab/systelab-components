@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from '@angular/common/http';
-import {SystelabTranslateModule} from 'systelab-translate';
-import {SystelabPreferencesModule} from 'systelab-preferences';
-import {ApplicationSidebarSmallComponent} from './app-sidebar-small.component';
-import {TooltipDirective} from '../../tooltip/tooltip.directive';
-import {ApplicationSidebarAction, ApplicationSidebarTab} from './app-sidebar.component';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
+import { SystelabTranslateModule } from 'systelab-translate';
+import { SystelabPreferencesModule } from 'systelab-preferences';
+import { ApplicationSidebarSmallComponent } from './app-sidebar-small.component';
+import { TooltipDirective } from '../../tooltip/tooltip.directive';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.component';
 
 @Component({
 	selector: 'systelab-app-sidebar-small-test',
@@ -21,15 +21,10 @@ import {ApplicationSidebarAction, ApplicationSidebarTab} from './app-sidebar.com
 	`,
 	styles: []
 })
-export class AppSidebarSmallTestComponent implements OnInit {
+export class AppSidebarSmallTestComponent {
 
 	public actions: Array<ApplicationSidebarAction> = [];
 	public tabs: Array<ApplicationSidebarTab> = [];
-
-	public ngOnInit(): void {
-		// this.setActions();
-		// this.setTabs();
-	}
 
 	public updateSelectedTab(newTabID: string): void {
 	}

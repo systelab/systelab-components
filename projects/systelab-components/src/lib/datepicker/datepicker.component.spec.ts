@@ -11,7 +11,7 @@ import { Calendar, CalendarModule } from 'primeng/calendar';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
-import { Datepicker } from './datepicker.component';
+import { DatepickerComponent } from './datepicker.component';
 
 @Component({
 	selector: 'systelab-datepicker-test',
@@ -117,7 +117,7 @@ export class AuxFunctionClass {
 
 describe('Systelab DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
-	let fixture2: ComponentFixture<Datepicker>;
+	let fixture2: ComponentFixture<DatepickerComponent>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports:      [BrowserModule,
@@ -129,7 +129,7 @@ describe('Systelab DatepickerComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
-				Datepicker,
+				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTestComponent]
 		})
@@ -269,7 +269,7 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('yy-mm-dd format', () => {
-		fixture2 = TestBed.createComponent(Datepicker);
+		fixture2 = TestBed.createComponent(DatepickerComponent);
 		fixture2.componentInstance.dateFormat = 'yy-mm-dd';
 		fixture2.componentInstance.currentDate = new Date(1990, 10, 30);
 		fixture2.detectChanges();
@@ -279,7 +279,7 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('should set error property on false if a date is selected', () => {
-		fixture2 = TestBed.createComponent(Datepicker);
+		fixture2 = TestBed.createComponent(DatepickerComponent);
 		fixture2.detectChanges();
 		fixture2.componentInstance.formatError = true;
 		fixture2.componentInstance.currentDate = new Date('02/20/1986');
@@ -291,7 +291,7 @@ describe('Systelab DatepickerComponent', () => {
 
 	describe('Set of specs for datepicker with inputs withIntegratedTime and timeOnly active', () => {
 		const setup = (isTimeOnly?: boolean) => {
-			const fixtureDatepicker = TestBed.createComponent(Datepicker);
+			const fixtureDatepicker = TestBed.createComponent(DatepickerComponent);
 			const datepickerComponent = fixtureDatepicker.componentInstance;
 			datepickerComponent.withIntegratedTime = true;
 			datepickerComponent.onlyTime = isTimeOnly;
@@ -380,7 +380,7 @@ describe('Systelab DatepickerComponent', () => {
 
 	describe('Set of specs for datepicker with inputs selectOtherMonths active', () => {
 		const setup = (selectOtherMonths = false) => {
-			const fixtureDatepicker = TestBed.createComponent(Datepicker);
+			const fixtureDatepicker = TestBed.createComponent(DatepickerComponent);
 			const datepickerComponent = fixtureDatepicker.componentInstance;
 			datepickerComponent.selectOtherMonths = selectOtherMonths;
 			fixtureDatepicker.detectChanges();
@@ -470,7 +470,7 @@ describe('Systelab DatepickerComponent', () => {
 
 	describe('Datepicker display with a specific format', () => {
 		it('yy-mm-dd format', () => {
-			fixture2 = TestBed.createComponent(Datepicker);
+			fixture2 = TestBed.createComponent(DatepickerComponent);
 			fixture2.componentInstance.dateFormat = 'yy-mm-dd';
 			fixture2.componentInstance.currentDate = new Date(1990, 10, 30);
 			fixture2.detectChanges();
