@@ -83,12 +83,12 @@ npm publish
 
 [Angular 16 news](https://blog.angular.io/angular-v16-is-here-4d7a28ec680d)
 
-- Angular Signals
-- RxJS interoperability
-- Server-side rendering and hydration
-- Improved tooling for standalone components, directives and pipes
-- Advancing developer tooling
-- Autocomplete imports in templates
+-  Angular Signals
+-  RxJS interoperability
+-  Server-side rendering and hydration
+-  Improved tooling for standalone components, directives and pipes
+-  Advancing developer tooling
+-  Autocomplete imports in templates
 
 ## Version 15.x.x - Angular 15
 
