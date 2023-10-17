@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ChipsComponent } from './chips.component';
-import { AutoComplete } from 'primeng/autocomplete';
+import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
 	template: `
@@ -50,12 +50,13 @@ describe('Systelab Chips', () => {
 				NoopAnimationsModule,
 				FormsModule,
 				BrowserDynamicTestingModule,
-				ButtonModule
+				ButtonModule,
+				AutoCompleteModule,
 			],
 			declarations: [
 				AutoComplete,
 				ChipsComponent,
-				ChipsTestComponent
+				ChipsTestComponent,
 			]
 		});
 
@@ -132,5 +133,7 @@ describe('Systelab Chips', () => {
 			.toEqual(1);
 		expect(selectItemSpy)
 			.toHaveBeenCalled();
+
+		flush();
 	}));
 });

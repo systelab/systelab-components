@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { of } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
@@ -20,8 +20,6 @@ export class ChipsComponent {
 	private newData: string;
 	private _filter: Array<string> = [];
 
-	constructor() {}
-
 	get filter(): Array<string> {
 		return this._filter;
 	}
@@ -32,8 +30,7 @@ export class ChipsComponent {
 	}
 
 	public search(event): void {
-		of(this.texts)
-			.toPromise()
+		firstValueFrom(of(this.texts))
 			.then(
 				data => {
 					if (data) {
