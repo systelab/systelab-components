@@ -219,6 +219,12 @@ describe('Systelab DatepickerComponent', () => {
 			.toBe(2);
 	});
 
+	it('should increment by 5 days when entering 5d', () => {
+		AuxFunctionClass.enterText(fixture, '5d');
+		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
+			.toBe(5);
+	});
+
 	it('should decrement by 2 days when entering -2d', () => {
 		AuxFunctionClass.enterText(fixture, '-2d');
 		expect(differenceInCalendarDays(fixture.componentInstance.currentDate, new Date()))
