@@ -28,7 +28,7 @@ export class SpinnerTestComponent {
 	public error=false;
 	public valueStr: string;
 	public doValueChange() {
-		console.log('Do Value Change');
+		// Do value change action
 	}
 }
 const clickPlusButton = (fixture: ComponentFixture<SpinnerTestComponent>) => {

@@ -81,6 +81,8 @@ npm publish
 
 ## Version 16.x.x - Angular 16
 
+-   Datepicker has been ranamed to DatepickerComponent
+
 [Angular 16 news](https://blog.angular.io/angular-v16-is-here-4d7a28ec680d)
 
 -   Angular Signals

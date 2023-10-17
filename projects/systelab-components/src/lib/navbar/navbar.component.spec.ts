@@ -30,11 +30,11 @@ export class NavbarTestComponent {
 	}
 
 	public doSomething() {
-		console.log('Do Something');
+		// Do something action
 	}
 
 	public doSomethingElse() {
-		console.log('Do Something Else');
+		// Do something else action
 	}
 }
 

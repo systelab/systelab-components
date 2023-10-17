@@ -31,7 +31,7 @@ import { TabComponent } from './tab.component';
 })
 export class TabsTestComponent {
 	public selectedTab() {
-		console.log('Selected Tab');
+		// Selected tab action
 	}
 }
 

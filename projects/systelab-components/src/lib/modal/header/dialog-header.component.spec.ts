@@ -36,15 +36,15 @@ export class DialogHeaderTestComponent {
 	public withDrag = true;
 
 	public doClose() {
-		console.log('Do Close');
+		// Do close action
 	}
 
 	public doHome() {
-		console.log('Do Home');
+		// Do home action
 	}
 
 	public doInfo() {
-		console.log('Do Info');
+		// Do info action
 	}
 
 	public go(num: number): void {

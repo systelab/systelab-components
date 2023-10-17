@@ -38,7 +38,7 @@ export class GenderSelectTestComponent {
 	public showAll = true;
 
 	public doChange() {
-		console.log('Do Change');
+		// Do change action
 	}
 }
 
