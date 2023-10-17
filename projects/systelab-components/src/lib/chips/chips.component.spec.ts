@@ -15,9 +15,7 @@ import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
 export class ChipsTestComponent {
 
 	public readonly = false;
-
 	public disabled = false;
-
 	public texts: Array<string> = [
 		'New York',
 		'Rome',
@@ -33,8 +31,8 @@ export class ChipsTestComponent {
 	];
 }
 
-const setArrayValue = (fixture: ComponentFixture<ChipsTestComponent>, array: Array<string>) => {
-	fixture.componentInstance.texts = array;
+const setArrayValue = (fixture: ComponentFixture<ChipsTestComponent>, values: Array<string>) => {
+	fixture.componentInstance.texts = values;
 	fixture.detectChanges();
 };
 
@@ -45,7 +43,6 @@ describe('Systelab Chips', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-
 			imports:      [
 				NoopAnimationsModule,
 				FormsModule,
@@ -104,6 +101,35 @@ describe('Systelab Chips', () => {
 		expect(listEl.nativeElement.className)
 			.toContain('p-autocomplete-multiple-container');
 	});
+
+	it('filtered list is correct', fakeAsync(() => {
+		setArrayValue(fixture, fixture.componentInstance.texts);
+
+		const inputEl = fixture.debugElement.query(By.css('input'));
+		inputEl.nativeElement.dispatchEvent(new Event('focus'));
+		inputEl.nativeElement.click();
+		fixture.detectChanges();
+
+		inputEl.nativeElement.value = 'b';
+		inputEl.nativeElement.dispatchEvent(new Event('keydown'));
+		inputEl.nativeElement.dispatchEvent(new Event('input'));
+		inputEl.nativeElement.dispatchEvent(new Event('keyup'));
+		tick(300);
+		fixture.detectChanges();
+
+		const listItems = fixture.debugElement.queryAll(By.css('li > span'));
+
+		expect(listItems[0].nativeElement.innerText)
+			.toEqual('Barcelona');
+		expect(listItems[1].nativeElement.innerText)
+			.toEqual('Berlín');
+		expect(listItems[2].nativeElement.innerText)
+			.toEqual('Lisboa');
+		expect(listItems[3].nativeElement.innerText)
+			.toEqual('St Petersburgo');
+		
+		flush();
+	}));
 
 	it('should select item', fakeAsync(() => {
 		setArrayValue(fixture, fixture.componentInstance.texts);
