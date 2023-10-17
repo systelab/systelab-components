@@ -71,8 +71,6 @@ describe('Verify numPadDecimalNumericDirective Spanish', () => {
 });
 
 describe('Verify numPadDecimalNumericDirective Italian', () => {
-	;
-
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [ FormsModule ],
@@ -94,7 +92,6 @@ describe('Verify numPadDecimalNumericDirective Italian', () => {
 });
 
 describe('Verify numPadDecimalNumericDirective Portuguese', () => {
-	;
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [ FormsModule ],

@@ -1,8 +1,8 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {I18nService, SystelabTranslateModule} from 'systelab-translate';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {RouterTestingModule} from '@angular/router/testing';
+import { I18nService } from 'systelab-translate';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NumberHelper } from './number-helper';
 
 
@@ -31,9 +31,6 @@ describe('Number Helper from String English Test', () => {
 			],
 			providers: [NumberHelper,
 				{provide: I18nService, useClass: USMockI18nService},
-				//AppLoadService,
-				//AuthenticationService,
-				//{provide: JwtHelperService, useValue: JWT_OPTIONS}
 			]
 		});
 		service = TestBed.inject(NumberHelper);

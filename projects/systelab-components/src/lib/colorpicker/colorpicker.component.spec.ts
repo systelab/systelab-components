@@ -42,6 +42,7 @@ export class ColorpickerTestComponent {
 	public colorValue;
 
 	public doChange() {
+		// Do change action
 	}
 }
 

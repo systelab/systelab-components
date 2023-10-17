@@ -30,9 +30,11 @@ export class NavbarTestComponent {
 	}
 
 	public doSomething() {
+		// Do something action
 	}
 
 	public doSomethingElse() {
+		// Do something else action
 	}
 }
 

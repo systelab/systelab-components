@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ChipsComponent } from './chips.component';
-import { AutoComplete } from 'primeng/autocomplete';
+import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
 	template: `
@@ -15,9 +15,7 @@ import { AutoComplete } from 'primeng/autocomplete';
 export class ChipsTestComponent {
 
 	public readonly = false;
-
 	public disabled = false;
-
 	public texts: Array<string> = [
 		'New York',
 		'Rome',
@@ -33,8 +31,8 @@ export class ChipsTestComponent {
 	];
 }
 
-const setArrayValue = (fixture: ComponentFixture<ChipsTestComponent>, array: Array<string>) => {
-	fixture.componentInstance.texts = array;
+const setArrayValue = (fixture: ComponentFixture<ChipsTestComponent>, values: Array<string>) => {
+	fixture.componentInstance.texts = values;
 	fixture.detectChanges();
 };
 
@@ -45,17 +43,17 @@ describe('Systelab Chips', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-
 			imports:      [
 				NoopAnimationsModule,
 				FormsModule,
 				BrowserDynamicTestingModule,
-				ButtonModule
+				ButtonModule,
+				AutoCompleteModule,
 			],
 			declarations: [
 				AutoComplete,
 				ChipsComponent,
-				ChipsTestComponent
+				ChipsTestComponent,
 			]
 		});
 
@@ -104,6 +102,35 @@ describe('Systelab Chips', () => {
 			.toContain('p-autocomplete-multiple-container');
 	});
 
+	it('filtered list is correct', fakeAsync(() => {
+		setArrayValue(fixture, fixture.componentInstance.texts);
+
+		const inputEl = fixture.debugElement.query(By.css('input'));
+		inputEl.nativeElement.dispatchEvent(new Event('focus'));
+		inputEl.nativeElement.click();
+		fixture.detectChanges();
+
+		inputEl.nativeElement.value = 'b';
+		inputEl.nativeElement.dispatchEvent(new Event('keydown'));
+		inputEl.nativeElement.dispatchEvent(new Event('input'));
+		inputEl.nativeElement.dispatchEvent(new Event('keyup'));
+		tick(300);
+		fixture.detectChanges();
+
+		const listItems = fixture.debugElement.queryAll(By.css('li > span'));
+
+		expect(listItems[0].nativeElement.innerText)
+			.toEqual('Barcelona');
+		expect(listItems[1].nativeElement.innerText)
+			.toEqual('Berlín');
+		expect(listItems[2].nativeElement.innerText)
+			.toEqual('Lisboa');
+		expect(listItems[3].nativeElement.innerText)
+			.toEqual('St Petersburgo');
+		
+		flush();
+	}));
+
 	it('should select item', fakeAsync(() => {
 		setArrayValue(fixture, fixture.componentInstance.texts);
 
@@ -132,27 +159,7 @@ describe('Systelab Chips', () => {
 			.toEqual(1);
 		expect(selectItemSpy)
 			.toHaveBeenCalled();
+
+		flush();
 	}));
-
-	xit('should select new item', fakeAsync(() => {
-		setArrayValue(fixture, fixture.componentInstance.texts);
-
-		const inputEl = fixture.debugElement.query(By.css('input'));
-		inputEl.nativeElement.dispatchEvent(new Event('focus'));
-		inputEl.nativeElement.click();
-		fixture.detectChanges();
-		chips.autoComplete.value = ['NewItem'];
-		const preventDefault = () => {};
-		const event = {
-			which: 13, preventDefault
-		};
-		chips.autoComplete.onKeydown(event);
-		fixture.detectChanges();
-
-		expect(chips.autoComplete.value[0])
-			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.p-autocomplete-token-label')[0].textContent);
-		expect(chips.autoComplete.value.length)
-			.toEqual(fixture.debugElement.nativeElement.querySelectorAll('.p-autocomplete-token-label').length);
-	}));
-
 });

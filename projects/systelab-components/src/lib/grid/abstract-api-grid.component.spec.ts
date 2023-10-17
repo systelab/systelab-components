@@ -17,7 +17,6 @@ import { PreferencesService, SystelabPreferencesModule } from 'systelab-preferen
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './contextmenu/grid-header-context-menu-renderer.component';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
 import { TwoListComponent } from '../twolist/two-list.component';
 import { TabsComponent } from '../tabs/tabs.component';
@@ -181,10 +180,10 @@ describe('Systelab Grid', () => {
 	let fixture: ComponentFixture<GridTestComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
+		TestBed.configureTestingModule({
+			imports: [BrowserModule,
 				FormsModule,
+				BrowserAnimationsModule,
 				DragDropModule,
 				OverlayModule,
 				ButtonModule,
@@ -209,14 +208,10 @@ describe('Systelab Grid', () => {
 				TabComponent,
 				ButtonComponent,
 				DataFilterPipe],
-			providers:    [
+			providers: [
 				DialogService,
-				MessagePopupService]
-		});
-		TestBed.overrideModule(BrowserDynamicTestingModule, {
-			set: {
-				entryComponents: [GridColumnOptionsDialog]
-			}
+				MessagePopupService
+			]
 		});
 	});
 

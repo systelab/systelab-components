@@ -34,7 +34,7 @@ export class NumpadTestComponent {
 	}
 
 	public doSearch(): void {
-
+		// Do search action
 	}
 
 }

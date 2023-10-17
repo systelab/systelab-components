@@ -26,6 +26,29 @@ export class ToggleButtonTestComponent {
 	public disabled = false;
 }
 
+const checkHasValue = (fixture: ComponentFixture<ToggleButtonTestComponent>, value: boolean) => {
+	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+	expect(label.innerHTML)
+		.toContain(value);
+}
+
+const setValue = (fixture: ComponentFixture<ToggleButtonTestComponent>, value: boolean) => {
+	fixture.componentInstance.check = value;
+	fixture.detectChanges();
+}
+
+const clickSwitch = (fixture: ComponentFixture<ToggleButtonTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.btn');
+	button.click();
+	fixture.detectChanges();
+}
+
+const clickOnIconSwitch = (fixture: ComponentFixture<ToggleButtonTestComponent>) => {
+	const button = fixture.debugElement.nativeElement.querySelector('.btn i');
+	button.click();
+	fixture.detectChanges();
+}
+
 describe('Systelab Toggle Button', () => {
 	let fixture: ComponentFixture<ToggleButtonTestComponent>;
 
@@ -85,26 +108,3 @@ describe('Systelab Toggle Button', () => {
 		checkHasValue(fixture, false);
 	});
 });
-
-function checkHasValue(fixture: ComponentFixture<ToggleButtonTestComponent>, value: boolean) {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML)
-		.toContain(value);
-}
-
-function setValue(fixture: ComponentFixture<ToggleButtonTestComponent>, value: boolean) {
-	fixture.componentInstance.check = value;
-	fixture.detectChanges();
-}
-
-function clickSwitch(fixture: ComponentFixture<ToggleButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.btn');
-	button.click();
-	fixture.detectChanges();
-}
-
-function clickOnIconSwitch(fixture: ComponentFixture<ToggleButtonTestComponent>) {
-	const button = fixture.debugElement.nativeElement.querySelector('.btn i');
-	button.click();
-	fixture.detectChanges();
-}
