@@ -170,6 +170,9 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 							if (response !== undefined) {
 								if (this.multipleSelection) {
 									this.multipleSelectedItemList = response;
+									if (!response?.length) {
+										this.openSearchDialog();
+									}
 								} else {
 									if (response.length === 1) {
 										this.id = response[0][this.abstractSearcher.getIdField()];
