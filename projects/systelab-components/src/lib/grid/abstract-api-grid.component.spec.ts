@@ -171,6 +171,9 @@ const clickOption = (fixture: ComponentFixture<GridTestComponent>, option: numbe
 const getNumberOfColumns = (fixture: ComponentFixture<GridTestComponent>) =>
 	fixture.debugElement.nativeElement.querySelectorAll('.ag-header-cell').length;
 
+const getNumberOfOptionRows = () =>
+	document.querySelectorAll('li.slab-twolistboxrow').length;
+
 const clickOnOptionsButton = (fixture: ComponentFixture<GridTestComponent>) => {
 	const button = fixture.debugElement.query(By.css('#button-options button')).nativeElement;
 	button.click();
@@ -348,6 +351,25 @@ describe('Systelab Grid', () => {
 							.then(() => {
 								expect(isModalVisible())
 									.toBeFalsy();
+								done();
+							});
+					});
+			});
+	});
+
+	it('should be possible to remove all the columns of the grid', (done) => {
+		fixture.whenStable()
+			.then(() => {
+				clickOnOptionsButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						expect(isModalVisible())
+							.toBeTruthy();
+						clickCloseButton(fixture, 'slab-remove-all');
+						fixture.whenStable()
+							.then(() => {
+								expect(getNumberOfOptionRows())
+									.toBe(2);
 								done();
 							});
 					});
