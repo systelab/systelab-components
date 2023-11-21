@@ -376,6 +376,33 @@ describe('Systelab Grid', () => {
 			});
 	});
 
+
+	it('should be possible to remove one of the column of the grid', async(done) => {
+		await fixture.whenStable();
+		clickOnOptionsButton(fixture);
+
+		await fixture.whenStable();
+		expect(isModalVisible()).toBeTruthy();
+
+		document.getElementById('element0').click();
+
+		await fixture.whenStable();
+		// We remove one column
+		const buttonLeft: any = document.querySelector('.btn.icon-angle-left');
+		buttonLeft.click();
+
+		await fixture.whenStable();
+		expect(getNumberOfOptionRows()).toBe(1);
+
+		clickCloseButton(fixture, 'ID_optionsSubmitButton');
+
+		await fixture.whenStable();
+		expect(getNumberOfColumns(fixture))
+			.toEqual(3);
+
+		done();
+	});
+
 	it('should be possible to select more than one row', async () => {
 		await fixture.whenStable();
 		selectRow(fixture, 1);
