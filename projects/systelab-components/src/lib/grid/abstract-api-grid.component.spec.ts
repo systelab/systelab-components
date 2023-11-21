@@ -170,6 +170,9 @@ const clickOption = (fixture: ComponentFixture<GridTestComponent>, option: numbe
 const getNumberOfColumns = (fixture: ComponentFixture<GridTestComponent>) =>
 	fixture.debugElement.nativeElement.querySelectorAll('.ag-header-cell').length;
 
+const getNumberOfOptionRows = () =>
+	document.querySelectorAll('li.slab-twolistboxrow').length;
+
 const clickOnOptionsButton = (fixture: ComponentFixture<GridTestComponent>) => {
 	const button = fixture.debugElement.query(By.css('#button-options button')).nativeElement;
 	button.click();
@@ -347,6 +350,52 @@ describe('Systelab Grid', () => {
 							});
 					});
 			});
+	});
+
+	it('should be possible to remove all the columns of the grid', (done) => {
+		fixture.whenStable()
+			.then(() => {
+				clickOnOptionsButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						expect(isModalVisible())
+							.toBeTruthy();
+						clickCloseButton(fixture, 'slab-remove-all');
+						fixture.whenStable()
+							.then(() => {
+								expect(getNumberOfOptionRows())
+									.toBe(2);
+								done();
+							});
+					});
+			});
+	});
+
+
+	it('should be possible to remove one of the column of the grid', async(done) => {
+		await fixture.whenStable();
+		clickOnOptionsButton(fixture);
+
+		await fixture.whenStable();
+		expect(isModalVisible()).toBeTruthy();
+
+		document.getElementById('element0').click();
+
+		await fixture.whenStable();
+		// We remove one column
+		const buttonLeft: any = document.querySelector('.btn.icon-angle-left');
+		buttonLeft.click();
+
+		await fixture.whenStable();
+		expect(getNumberOfOptionRows()).toBe(1);
+
+		clickCloseButton(fixture, 'ID_optionsSubmitButton');
+
+		await fixture.whenStable();
+		expect(getNumberOfColumns(fixture))
+			.toEqual(3);
+
+		done();
 	});
 
 	it('should be possible to select more than one row', async () => {
