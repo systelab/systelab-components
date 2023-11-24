@@ -6,7 +6,7 @@
          (onDragLeave)="preventDefault($event)">
         <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)" [cdkDropListDisabled]="!dragAndDropEnabled">
 
-            @for (element of elementsList; track element.id; let index = $index) {
+            @for (element of elementsList; track index; let index = $index) {
             <div class="d-flex slab-sortable-list-row"
                  [ngClass]="{'slab-sortable-list-row-selected':getSelectionFieldValue(element)}"
                  [class.slab-sortable-list-even-row]="0 === index % 2"
