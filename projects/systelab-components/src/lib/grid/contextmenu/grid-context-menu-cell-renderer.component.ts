@@ -23,10 +23,13 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 	public dotsClicked(event: MouseEvent): void {
 		let selectedRows: T | Array<T> = this.data;
 
-		if (event.ctrlKey) {
+		if (event.ctrlKey && !this.container.removeSelectionOnOpenContextMenu) {
 			selectedRows = this.container.getSelectedRows();
 		} else if (this.container.removeSelectionOnOpenContextMenu) {
 			this.container.gridOptions.api.deselectAll();
+			if (event.ctrlKey) {
+				this.container.gridOptions.api.selectIndex(this.rowIndex, false, false);
+			}
 		}
 		this.container.dotsClicked(this.rowIndex, selectedRows, event);
 	}
