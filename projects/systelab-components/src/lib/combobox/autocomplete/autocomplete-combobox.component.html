@@ -2,7 +2,7 @@
      class="dropdown slab-combobox d-flex w-100"
      [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}" data-toggle="dropdown">
-        <input #input type="search" class="slab-flex-1 d-flex slab-combo-input" keyup-debounce
+        <input #input type="text" class="slab-flex-1 d-flex slab-combo-input" keyup-debounce
                [disabled]="isDisabled"
                [(ngModel)]="fieldToShow"
                [keyupDebounceTime]="debounceTime" (keyupDebounced)="doSearch($event)"
@@ -21,6 +21,9 @@
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
         <button #combobutton type="button" class="slab-combo-button slab-combo-button-icon" [disabled]="isDisabled"
                 (click)="onComboClicked($event)" tabindex="-1"></button>
+        <button *ngIf="withClearOption && !inputIsEmpty()" type="button" #clearButton
+                class="slab-combo-button border-right-0 rounded-0 {{deleteIconClass}}" (click)="clearText($event)"
+                tabindex="-1"></button>
     </div>
     <div #dropdownmenu class="dropdown-menu slab-combo-dropdown" (click)="clickDropDownMenu($event)" [ngClass]="{'disabled': isDisabled}">
         <div #dropdown id="slab-combo-dropdown-box" class="slab-combo-dropdown-box">
