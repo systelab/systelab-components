@@ -38,7 +38,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 				this.closeDropDown();
 			}
 		} else {
-			this.doSearchText(event.target.value);
+			this.doSearchText(event.target?.value);
 		}
 	}
 
@@ -162,7 +162,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	public inputIsEmpty(): boolean {
-		return this.input?.nativeElement.value.length === 0;
+		return !this.input || this.input.nativeElement?.value.length === 0;
 	}
 
 	public clearText(event: MouseEvent): void {
