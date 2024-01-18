@@ -176,4 +176,15 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(component.combobox.description).toBe(undefined);
 		expect(component.combobox.currentSelected).toBe(undefined);
 	});
+
+	it('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
+		component.combobox.isDisabled = false;
+		component.combobox.isDropdownOpened = false;
+		component.combobox.description = 'description test'
+		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown').and.callThrough();
+		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
+		component.combobox.onInputClicked(new MouseEvent(''));
+		expect(openDropDownSpy).toHaveBeenCalled();
+		expect(doSearchTextSpy).toHaveBeenCalledWith('description test');
+	});
 });
