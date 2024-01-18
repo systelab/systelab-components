@@ -19,6 +19,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public override startsWith = '';
 	@Input() public debounceTime: number = 350;
+	@Input() public withClearOption: boolean = false;
 
 	constructor(
 		public override myRenderer: Renderer2,
@@ -37,7 +38,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 				this.closeDropDown();
 			}
 		} else {
-			this.doSearchText(event.target.value);
+			this.doSearchText(event.target?.value);
 		}
 	}
 
@@ -158,6 +159,15 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		jQuery('#' + this.comboId)
 			.dropdown('toggle');
 		this.isDropdownOpened = true;
+	}
+
+	public inputIsEmpty(): boolean {
+		return !this.input || this.input.nativeElement?.value.length === 0;
+	}
+
+	public clearText(event: MouseEvent): void {
+		this.input.nativeElement.value = '';
+		this.doSearch(event);
 	}
 
 }
