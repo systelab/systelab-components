@@ -146,7 +146,7 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('should close dropdown on escape, enter, or tab key press', () => {
 		const event = new KeyboardEvent('keydown', { key: KeyName.escape });
-		const closeDropDownSpy = spyOn(AutocompleteApiComboBox.prototype, 'closeDropDown');
+		const closeDropDownSpy = spyOn(AutocompleteApiComboBox.prototype, 'closeDropDown').and.callThrough();
 		component.combobox.isDropdownOpened = true;
 		component.combobox.doSearch(event);
 		expect(closeDropDownSpy).toHaveBeenCalled();
