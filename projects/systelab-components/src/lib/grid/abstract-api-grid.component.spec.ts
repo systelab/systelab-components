@@ -91,7 +91,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 	template: `
                   <div class="position-relative" style="height: 200px;">
                       <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
-                                     [multipleSelection]="true" (clickRow)="doSelect($event)"></systelab-grid>
+                                     [showChecks]="true" [removeSelectionOnOpenContextMenu]="true" [multipleSelection]="true" (rowSelected)="doSelect($event)"></systelab-grid>
                   </div>
                   <systelab-button id="button-options" (action)="grid.showOptions()">Options</systelab-button>
 			  `
@@ -140,8 +140,16 @@ export class GridTestComponent {
 const getNumberOfRows = (fixture: ComponentFixture<GridTestComponent>) =>
 	fixture.debugElement.nativeElement.querySelectorAll('.ag-center-cols-container > .ag-row').length;
 
+const getNumberOfRowsSelected = (fixture: ComponentFixture<GridTestComponent>) =>
+	fixture.debugElement.nativeElement.querySelectorAll('.ag-center-cols-container > .ag-row-selected').length;
+
 const clickMenuOnRow = (fixture: ComponentFixture<GridTestComponent>, row: number) => {
 	fixture.debugElement.nativeElement.querySelectorAll('div[role="row"] * .slab-context-menu')[row].click();
+	fixture.detectChanges();
+};
+
+const selectRow = (fixture: ComponentFixture<GridTestComponent>, row: number) => {
+	fixture.debugElement.nativeElement.querySelectorAll('div[role="gridcell"] .ag-checkbox-input')[row].click();
 	fixture.detectChanges();
 };
 
@@ -162,6 +170,9 @@ const clickOption = (fixture: ComponentFixture<GridTestComponent>, option: numbe
 
 const getNumberOfColumns = (fixture: ComponentFixture<GridTestComponent>) =>
 	fixture.debugElement.nativeElement.querySelectorAll('.ag-header-cell').length;
+
+const getNumberOfOptionRows = () =>
+	document.querySelectorAll('li.slab-twolistboxrow').length;
 
 const clickOnOptionsButton = (fixture: ComponentFixture<GridTestComponent>) => {
 	const button = fixture.debugElement.query(By.css('#button-options button')).nativeElement;
@@ -232,7 +243,7 @@ describe('Systelab Grid', () => {
 
 	it('should have the right number of columns', () => {
 		expect(getNumberOfColumns(fixture))
-			.toEqual(3);
+			.toEqual(4);
 	});
 
 	it('should have the right number of rows', (done) => {
@@ -247,7 +258,7 @@ describe('Systelab Grid', () => {
 	it('should be possible to select a row', (done) => {
 		fixture.whenStable()
 			.then(() => {
-				clickOnGridCell(fixture, 5);
+				selectRow(fixture, 1);
 				fixture.whenStable()
 					.then(() => {
 						expect(fixture.componentInstance.selectedTestData.field1)
@@ -315,7 +326,7 @@ describe('Systelab Grid', () => {
 	it('should be possible to select the options', (done) => {
 		fixture.whenStable()
 			.then(() => {
-				clickOnGridCell(fixture, 5);
+				clickOnGridCell(fixture, 2);
 				fixture.whenStable()
 					.then(() => {
 						expect(fixture.componentInstance.selectedTestData.field1)
@@ -344,5 +355,71 @@ describe('Systelab Grid', () => {
 							});
 					});
 			});
+	});
+
+	it('should be possible to remove all the columns of the grid', (done) => {
+		fixture.whenStable()
+			.then(() => {
+				clickOnOptionsButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						expect(isModalVisible())
+							.toBeTruthy();
+						clickCloseButton(fixture, 'slab-remove-all');
+						fixture.whenStable()
+							.then(() => {
+								expect(getNumberOfOptionRows())
+									.toBe(2);
+								done();
+							});
+					});
+			});
+	});
+
+
+	it('should be possible to remove one of the column of the grid', async(done) => {
+		await fixture.whenStable();
+		clickOnOptionsButton(fixture);
+
+		await fixture.whenStable();
+		expect(isModalVisible()).toBeTruthy();
+
+		document.getElementById('element0').click();
+
+		await fixture.whenStable();
+		// We remove one column
+		const buttonLeft: any = document.querySelector('.btn.icon-angle-left');
+		buttonLeft.click();
+
+		await fixture.whenStable();
+		expect(getNumberOfOptionRows()).toBe(1);
+
+		clickCloseButton(fixture, 'ID_optionsSubmitButton');
+
+		await fixture.whenStable();
+		expect(getNumberOfColumns(fixture))
+			.toEqual(3);
+
+		done();
+	});
+
+	it('should be possible to select more than one row', async () => {
+		await fixture.whenStable();
+		selectRow(fixture, 1);
+		selectRow(fixture, 2);
+		await fixture.whenStable();
+
+		expect(getNumberOfRowsSelected(fixture)).toEqual(2);
+	});
+
+	it('should unselect other rows when context menu is opened', async () => {
+		await fixture.whenStable();
+		selectRow(fixture, 1);
+		selectRow(fixture, 2);
+		await fixture.whenStable();
+		clickMenuOnRow(fixture, 2);
+		await fixture.whenStable();
+
+		expect(getNumberOfRowsSelected(fixture)).toEqual(1);
 	});
 });

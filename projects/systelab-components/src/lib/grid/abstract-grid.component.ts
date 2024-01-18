@@ -36,6 +36,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public rowData: Array<T> = [];
 	@Input() public noRowsText;
 	@Input() public loadingText;
+	@Input() public removeSelectionOnOpenContextMenu = false;
 
 	@Output() public action = new EventEmitter();
 	@Output() public clickRow = new EventEmitter();
@@ -326,7 +327,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public doClick(event: any): void {
-		if (event.column.colId === 'contextMenu') {
+		if (event.column.colId === 'contextMenu' && !(event.event.ctrlKey && this.showChecks)) {
 			event.node.setSelected(true);
 		} else {
 			if (event.column.colId === 'selectCol') {
@@ -384,7 +385,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
 		options.visible = columnApi.getAllDisplayedColumns()
-			.filter(column => column.getColId() !== 'contextMenu')
+			.filter(column => column.getColId() !== 'contextMenu' && column.getColId() !== 'selectCol')
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true));
 
 		options.defaultVisibleColumns = columnDefs.filter(column => !column.hide)
@@ -396,7 +397,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	protected applyGridColumnOptions(columnApi: ColumnApi, columnOptions: GridColumnsOptions): void {
-		const numberOfFixedInitialColumns = (columnApi.getColumn('contextMenu') !== null) ? 1 : 0;
+		let numberOfFixedInitialColumns = (columnApi.getColumn('contextMenu') !== null) ? 1 : 0;
+		numberOfFixedInitialColumns += (columnApi.getColumn('selectCol') !== null) ? 1 : 0;
 
 		columnOptions.visible.forEach((tlp, index) => {
 			const col: Column = columnApi.getColumns()
@@ -407,7 +409,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 		columnApi.getColumns()
 			.forEach((column) => {
-				if (column.getColId() !== 'contextMenu') {
+				if (column.getColId() !== 'contextMenu' && column.getColId() !== 'selectCol') {
 					if (!columnOptions.visible.some(tlp => tlp.colId === column.getColDef().colId)) {
 						columnApi.setColumnVisible(column.getColId(), false);
 					}

@@ -45,6 +45,8 @@ export class ExampleSearcher extends AbstractSearcher<ExampleSearcherData> {
 		const searcherDialogParameters: SearcherDialogParameters<ExampleSearcherData> = new SearcherDialogParameters<ExampleSearcherData>();
 		searcherDialogParameters.widthRelative = '66%';
 		searcherDialogParameters.heightRelative = '66%';
+		// if we want a counter in the submit button
+		searcherDialogParameters.showSelectedRowsInSubmitButton = true;
 		return searcherDialogParameters;
 	}
 
