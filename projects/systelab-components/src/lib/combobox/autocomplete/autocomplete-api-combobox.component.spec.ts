@@ -154,7 +154,7 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('should clear input text and do search to reset result table', () => {
 		const event = new MouseEvent('click');
-		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
+		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText').and.callThrough();
 		component.combobox.clearText(event);
 		expect(component.combobox.input.nativeElement.value).toBe('');
 		expect(doSearchTextSpy).toHaveBeenCalled();
