@@ -69,6 +69,10 @@ export class SystelabAutocompleteComponent extends AutocompleteApiComboBox<TestD
 	public override doSearch(event: any) {
 		super.doSearch(event);
 	}
+
+	public testableResetComboSelection() {
+		this.resetComboSelection();
+	}
 }
 
 @Component({
@@ -158,5 +162,18 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.clearText(event);
 		expect(component.combobox.input.nativeElement.value).toBe('');
 		expect(doSearchTextSpy).toHaveBeenCalled();
+	});
+
+	it('should reset combo selection', () => {
+		component.combobox.id = 'id';
+		component.combobox.description = 'description';
+		component.combobox.code = 'code';
+		component.combobox.currentSelected = {};
+		const resetComboSelectionSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'resetComboSelection').and.callThrough();
+		component.combobox.testableResetComboSelection();
+		expect(component.combobox.id).toBe(undefined);
+		expect(component.combobox.code).toBe(undefined);
+		expect(component.combobox.description).toBe(undefined);
+		expect(component.combobox.currentSelected).toBe(undefined);
 	});
 });
