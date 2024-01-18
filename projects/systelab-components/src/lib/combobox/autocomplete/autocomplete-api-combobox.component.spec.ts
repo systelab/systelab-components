@@ -187,4 +187,29 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(openDropDownSpy).toHaveBeenCalled();
 		expect(doSearchTextSpy).toHaveBeenCalledWith('description test');
 	});
+
+	it('should close drop down on enter key event on cell', () => {
+		const keyEvent = new KeyboardEvent('keydown', {key: KeyName.enter});
+		const setSelectedMock = () => {}
+		const event = {event: keyEvent, node: {setSelected: setSelectedMock}}
+		const closeDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'closeDropDown').and.callThrough();
+		component.combobox.onCellKeyDown(event);
+		expect(closeDropDownSpy).toHaveBeenCalled();
+	});
+
+	it('should remove last character on backspace key event on cell', () => {
+		const keyEvent = new KeyboardEvent('keydown', {key: KeyName.backspace});
+		const event = {event: keyEvent}
+		component.combobox.inputElement.nativeElement.value = 'aa'
+		component.combobox.onCellKeyDown(event);
+		expect(component.combobox.inputElement.nativeElement.value).toEqual('a');
+	});
+
+	it('should append new character on alphanumeric key event on cell', () => {
+		const keyEvent = new KeyboardEvent('keydown', {key: 'a'});
+		const event = {event: keyEvent}
+		component.combobox.inputElement.nativeElement.value = 'a'
+		component.combobox.onCellKeyDown(event);
+		expect(component.combobox.inputElement.nativeElement.value).toEqual('aa');
+	});
 });
