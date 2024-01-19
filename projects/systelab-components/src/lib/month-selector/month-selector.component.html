@@ -12,9 +12,11 @@
         </div>
         <div class="box">
             <ul>
-                <li *ngFor="let month of months" [class.active]="month.isActive" (click)="onClickedMonth(month)">
-                    {{month.text}}
-                </li>
+                @for (month of months; track month.month) {
+                    <li [class.active]="month.isActive" (click)="onClickedMonth(month)">
+                        {{month.text}}
+                    </li>
+                }
             </ul>
         </div>
     </div>

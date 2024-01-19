@@ -24,7 +24,9 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
                                        [defaultVisibleColumns]="defaultVisibleColumns"
                                        [defaultHiddenColumns]="defaultHiddenColumns"></systelab-two-list>
                     <div>
-                        <label *ngFor="let column of availableColumns"> {{column?.displayName}}</label>
+						@for (column of availableColumns; track column.colId) {
+                        	<label> {{column?.displayName}}</label>
+						}
                     </div>
                 </div>
 	          `,

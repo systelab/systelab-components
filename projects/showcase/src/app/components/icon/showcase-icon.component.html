@@ -1,10 +1,12 @@
 <div class="container-fluid">
     <ul class="showcase-icon-list">
-        <li *ngFor="let iconName of icons">
-            <span class="slab-icon-medium mt-2 mb-2 {{iconName}}"></span>
-            <p>
-                <small>{{iconName}}</small>
-            </p>
-        </li>
+        @for (iconName of icons; track iconName) {
+            <li>
+                <span class="slab-icon-medium mt-2 mb-2 {{iconName}}"></span>
+                <p>
+                    <small>{{iconName}}</small>
+                </p>
+            </li>
+        }
     </ul>
 </div>

@@ -3,33 +3,37 @@
 <div class="d-flex flex-column slab-flex-1" id="imageViewerHeader" data-test-id="imageViewerHeader">
     <div class="d-flex">
         <div class="ml-1">
-            <ng-container *ngFor="let actionButton of actionButtons">
-                <systelab-toggle-button *ngIf="actionButton.type===actionButtonType.TOGGLE_BUTTON" class="mr-2"
-                                        [isChecked]="actionButton.state?.checked"
-                                        [disabled]="actionButton.state?.disabled"
-                                        (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
-                    {{actionButton.label}}
-                </systelab-toggle-button>
-                <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" class="mr-2"
-                                 [systelabTooltip]="actionButton.tooltip"
-                                 [disabled]="actionButton.state?.disabled"
-                                 (click)="clickActionButton.emit(actionButton.action)">
-                    {{actionButton.label}}
-                </systelab-button>
-                <div *ngIf="actionButton.type===actionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
-                    <button id="ADDropDownButton" type="button" class="btn btn-outline-primary dropdown-toogle"
-                            data-toggle="dropdown">{{getDropMainDownLabel(actionButton.label)}}
-                        <i class="ml-1 icon-chevron-up"></i>
-                    </button>
-                    <div class="dropdown-menu slab-dropdown">
-                        <ul>
-                            <li *ngFor="let dropDownLabel of getDropDownLabels(actionButton.label) let i = index">
-                                <a (click)="clickActionButton.emit(getDropDownAction(actionButton.action, i))">{{ dropDownLabel }}</a>
-                            </li>
-                        </ul>
+            @for (actionButton of actionButtons; track actionButton.label) {
+                <ng-container>
+                    <systelab-toggle-button *ngIf="actionButton.type===actionButtonType.TOGGLE_BUTTON" class="mr-2"
+                                            [isChecked]="actionButton.state?.checked"
+                                            [disabled]="actionButton.state?.disabled"
+                                            (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
+                        {{actionButton.label}}
+                    </systelab-toggle-button>
+                    <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" class="mr-2"
+                                     [systelabTooltip]="actionButton.tooltip"
+                                     [disabled]="actionButton.state?.disabled"
+                                     (click)="clickActionButton.emit(actionButton.action)">
+                        {{actionButton.label}}
+                    </systelab-button>
+                    <div *ngIf="actionButton.type===actionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
+                        <button id="ADDropDownButton" type="button" class="btn btn-outline-primary dropdown-toogle"
+                                data-toggle="dropdown">{{getDropMainDownLabel(actionButton.label)}}
+                            <i class="ml-1 icon-chevron-up"></i>
+                        </button>
+                        <div class="dropdown-menu slab-dropdown">
+                            <ul>
+                                @for (dropDownLabel of getDropDownLabels(actionButton.label); track dropDownLabel; let i = $index) {
+                                    <li>
+                                        <a (click)="clickActionButton.emit(getDropDownAction(actionButton.action, i))">{{ dropDownLabel }}</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </ng-container>
+                </ng-container>
+            }
         </div>
         <div class="d-flex slab-flex-1" id="OverImageArea"></div>
         <div class="ml-auto">
@@ -54,10 +58,12 @@
     </div>
     <div class="d-flex justify-content-end" *ngIf="showZoomScale">
         <div id="zoomScale" class="m-2" [style.width]="zoomScale.totalWidth+'px'">
-            <div class='zoomScaleMark' *ngFor="let mark of zoomScale.marks"
-                 [style.left.px]="mark.marginLeft"
-                 [style.height.px]="mark.label !== ''? 10:6"
-            >{{mark.label | number:'1.0-1'}}</div>
+            @for (mark of zoomScale.marks; track mark.label) {
+                <div class='zoomScaleMark'
+                     [style.left.px]="mark.marginLeft"
+                     [style.height.px]="mark.label !== ''? 10:6"
+                >{{mark.label | number:'1.0-1'}}</div>
+            }
         </div>
     </div>
 </div>

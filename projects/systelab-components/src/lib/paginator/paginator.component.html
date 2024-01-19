@@ -3,7 +3,9 @@
     <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'icon-angle-left'" [disabled]="page===1"
                              (click)="goPrevious()"></systelab-paginator-page>
 
-    <systelab-paginator-page *ngFor="let p of pages" [pageNumber]="p.toString()" [selected]="page===p" (click)="goToPage(p)" id="page{{p}}"></systelab-paginator-page>
+    @for (p of pages; track p) {
+        <systelab-paginator-page [pageNumber]="p.toString()" [selected]="page===p" (click)="goToPage(p)" id="page{{p}}"></systelab-paginator-page>
+    }
 
     <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'icon-angle-right'" [disabled]="page===totalPages"
                              (click)="goNext()"></systelab-paginator-page>

@@ -10,29 +10,30 @@
                     <ng-content></ng-content>
                 </div>
                 <ul #scrollableList class="slab-dropdown-scroll" [ngClass]="{'slab-dropdown-overflow': overflow}">
-                    <li *ngFor="let action of contextMenuOptions"
-                        class="d-flex align-items-center m-0"
-                        [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
-                        (click)="doClickWithAction($event, elementID, action.actionId)"
-                        (mouseover)="doMouseOver($event, elementID, action.actionId)">
-                        <div *ngIf="isEnabled(elementID, action.actionId)" class="slab-flex-1" style="flex:1 1 auto">
-                            <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
-                                                        [isEnabled]="isEnabled(elementID, action.actionId)"
-                                                        [isIconEnabled]="isIconEnabled(elementID, action.actionId)"
-                                                        [hasChildren]="action.hasChildren()"
-                                                        [hasIcons]="hasIcons"></systelab-context-menu-item>
-                            <ul *ngIf="action.hasChildren()" #childdropdownmenu id="{{action.actionId+elementID}}"
-                                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
-                                <systelab-context-menu-submenu-item [action]="action"
-                                                                    [actionName]="action.actionId"
-                                                                    [hasChildren]="action.hasChildren()"
-                                                                    [hasIcons]="hasIcons"
-                                                                    [contextMenuOriginal]="getSelfReference()"
-                                                                    [parentId]="elementID"
-                                ></systelab-context-menu-submenu-item>
-                            </ul>
-                        </div>
-                    </li>
+                    @for (action of contextMenuOptions; track action.actionId) {
+                        <li class="d-flex align-items-center m-0"
+                            [class.disabled]="!isEnabled(elementID, action.actionId) || action.isDivider"
+                            (click)="doClickWithAction($event, elementID, action.actionId)"
+                            (mouseover)="doMouseOver($event, elementID, action.actionId)">
+                            <div *ngIf="isEnabled(elementID, action.actionId)" class="slab-flex-1" style="flex:1 1 auto">
+                                <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
+                                                            [isEnabled]="isEnabled(elementID, action.actionId)"
+                                                            [isIconEnabled]="isIconEnabled(elementID, action.actionId)"
+                                                            [hasChildren]="action.hasChildren()"
+                                                            [hasIcons]="hasIcons"></systelab-context-menu-item>
+                                <ul *ngIf="action.hasChildren()" #childdropdownmenu id="{{action.actionId+elementID}}"
+                                    class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
+                                    <systelab-context-menu-submenu-item [action]="action"
+                                                                        [actionName]="action.actionId"
+                                                                        [hasChildren]="action.hasChildren()"
+                                                                        [hasIcons]="hasIcons"
+                                                                        [contextMenuOriginal]="getSelfReference()"
+                                                                        [parentId]="elementID"
+                                    ></systelab-context-menu-submenu-item>
+                                </ul>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
