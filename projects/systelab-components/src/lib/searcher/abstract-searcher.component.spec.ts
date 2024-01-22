@@ -26,6 +26,7 @@ import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from '../grid/contextmenu/grid-header-context-menu.component';
+import { ButtonComponent } from '../button/button.component';
 
 export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
@@ -211,7 +212,8 @@ describe('Systelab Searcher', () => {
 				SearcherTestComponent,
 				GridContextMenuComponent,
 				GridHeaderContextMenu,
-				SearcherTableComponent
+				SearcherTableComponent,
+				ButtonComponent,
 			],
 			providers: [
 				DialogService,

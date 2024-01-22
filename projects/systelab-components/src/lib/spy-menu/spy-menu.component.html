@@ -1,8 +1,10 @@
 <div class="spy-menu">
-    <ng-container *ngFor="let item of items">
-        <div *ngIf="!isItemHidden(item)" (click)="doClick(item)" class="spy-menu-item"
-             [ngClass]="{ 'spy-menu-item--selected': sectionSelected === item.id, 'spy-menu-item--disabled': isItemDisabled(item) }">
-            <span class="item-name">{{ item.text }}</span>
-        </div>
-    </ng-container>
+    @for (item of items; track item.id) {
+        <ng-container>
+            <div *ngIf="!isItemHidden(item)" (click)="doClick(item)" class="spy-menu-item"
+                 [ngClass]="{ 'spy-menu-item--selected': sectionSelected === item.id, 'spy-menu-item--disabled': isItemDisabled(item) }">
+                <span class="item-name">{{ item.text }}</span>
+            </div>
+        </ng-container>
+    }
 </div>
