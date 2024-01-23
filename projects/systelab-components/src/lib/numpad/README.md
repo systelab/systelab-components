@@ -11,11 +11,13 @@ Component to show a Numeric Keyboard dialog for an Input Text.
 
 ## Properties
 
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| value | string || The value |
-| isPassword | boolean | false | defines if is a password or not.|
-| autofocus | boolean | false ||
+| Name               |  Type   | Default | Description                        |
+|--------------------|:-------:|:-------:|------------------------------------|
+| value              | string  |         | The value                          |
+| isPassword         | boolean |  false  | defines if is a password or not.   |
+| autofocus          | boolean |  false  |                                    |
+| placeholder        | string  |  empty  |                                    |
+| onClickSelectValue | boolean |  false  | defines if selects on click or not |
 
 
 ## Events
