@@ -39,6 +39,12 @@
             <systelab-numpad [(value)]="value" (change)="doEnter()"></systelab-numpad>
         </div>
     </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label">NumPad with placeholder</label>
+        <div class="col-md-9">
+            <systelab-numpad [(value)]="value" (change)="doEnter()" [placeholder]="'Put your placeholder here...'"></systelab-numpad>
+        </div>
+    </div>
     <div class="row mt-1 disabled">
         <label class="col-md-3 col-form-label">Disabled NumPad</label>
         <div class="col-md-9">

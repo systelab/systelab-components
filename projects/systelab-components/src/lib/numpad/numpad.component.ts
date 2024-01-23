@@ -13,6 +13,8 @@ export class NumPadComponent {
 	@Input()
 	public autofocus = false;
 
+	@Input() public placeholder = '';
+
 	@Output() public valueChange = new EventEmitter<string>();
 	@Output() public change = new EventEmitter<string>();
 
