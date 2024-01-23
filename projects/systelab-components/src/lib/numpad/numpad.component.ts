@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { NumPadDialog, NumPadDialogParameters } from './numpad.dialog.component';
 
@@ -14,6 +14,7 @@ export class NumPadComponent {
 	public autofocus = false;
 
 	@Input() public placeholder = '';
+	@Input() public onClickSelectValue: boolean = false;
 
 	@Output() public valueChange = new EventEmitter<string>();
 	@Output() public change = new EventEmitter<string>();
@@ -27,6 +28,8 @@ export class NumPadComponent {
 		this._value = value;
 		this.valueChange.emit(this._value);
 	}
+
+	@ViewChild('input') public input: ElementRef<HTMLInputElement>;
 
 	constructor(public dialogService: DialogService) {
 	}
@@ -67,5 +70,11 @@ export class NumPadComponent {
 
 	private getNumPadElement(): HTMLElement {
 		return this.isPassword ? document.getElementById('numpaddialogPwd') : document.getElementById('numpaddialog');
+	}
+
+	public doSelectValue() {
+		if (this.onClickSelectValue) {
+			this.input.nativeElement.select();
+		}
 	}
 }
