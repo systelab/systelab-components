@@ -3,5 +3,7 @@
      (@fadeAnimation.done)="onFadeFinished($event)">
     <i class="type" [ngClass]="iconClass"></i>
     <div>{{ data.text }}</div>
-    <i *ngIf="config.showCloseButton" class="close" (click)="closeToast()"></i>
+    @if (config.showCloseButton) {
+    <i class="close" (click)="closeToast()"></i>
+    }
 </div>

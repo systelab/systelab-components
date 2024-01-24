@@ -22,7 +22,7 @@ import { ToastConfig } from './toast-config';
 	          `
 })
 export class ToastTestComponent {
-	private _toastDefaultConfig: ToastConfig;
+	private readonly _toastDefaultConfig: ToastConfig;
 	constructor(private toastService: ToastService) {
 		this._toastDefaultConfig = this.toastService.getConfig();
 	}
@@ -36,6 +36,7 @@ export class ToastTestComponent {
 			...this._toastDefaultConfig,
 			showCloseButton: true,
 		});
+		this.toastService.showInformation('Test to show');
 	}
 }
 
@@ -46,14 +47,13 @@ const clickButton = (fixture: ComponentFixture<ToastTestComponent>, buttonId: st
 };
 
 const queryToast = () => document.querySelector('systelab-toast');
-const queryCloseToastButton = () => queryToast().querySelector('.close');
+const queryCloseToastButton = () => queryToast().querySelector('systelab-toast .close');
 const isToastVisible = () => queryToast() !== null;
 const toastHasCloseButton = () => queryCloseToastButton() !== null;
 
-const clickCloseButton = (fixture: ComponentFixture<ToastTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelector('.close');
-	button.click();
-	fixture.detectChanges();
+const clickCloseButton = () => {
+	const button = document.querySelector('systelab-toast .close');
+	button.dispatchEvent(new Event('click'));
 };
 
 describe('Systelab Toast', () => {
@@ -93,7 +93,7 @@ describe('Systelab Toast', () => {
 		clickButton(fixture, 'open-toast-with-close-button');
 		expect(isToastVisible()).toBeTruthy();
 		expect(toastHasCloseButton()).toBeTruthy();
-		clickCloseButton(fixture);
+		clickCloseButton();
 		expect(isToastVisible()).toBeFalsy();
 	});
 });
