@@ -39,6 +39,7 @@ export class TimeUnitSelectTestComponent {
 	public showWeeksOption = true;
 
 	public doChange() {
+		// Do change action
 	}
 }
 

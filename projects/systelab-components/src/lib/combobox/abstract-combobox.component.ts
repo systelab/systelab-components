@@ -41,8 +41,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input() public deleteIconClass = 'icon-close';
 	@Input() public withEmptyValue: boolean;
 
-	public suppressKeyboardEvent;
-
 	public getAllFieldIDValue(): string | number {
 		return '0';
 	}
@@ -160,7 +158,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Input()
 	set code(value: string) {
 		this._code = value;
-		if (this.id && this.values) {
+		if (this.id != null && this.values) {
 			const item: T = this.values.find(it => it[this.getIdField()] === this.id);
 			if (item) {
 				this._code = item[this.getCodeField()];
@@ -219,10 +217,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public ngOnInit() {
-		this.suppressKeyboardEvent = (params) => {
-			const KEY_TAB = 9;
-			return params.event.which === KEY_TAB;
-		};
+
 		this.setRowHeight();
 
 		this.setStyle('font-family', this.fontFamily);
@@ -294,7 +289,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.suppressCellFocus = true;
+		this.gridOptions.suppressCellFocus = false;
 
 		if (this.multipleSelection) {
 			this.gridOptions.rowSelection = 'multiple';
@@ -307,12 +302,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			?.toString();
 
 		this.configGridData();
-
 	}
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
 		if (item) {
-			if (item[this.getIdField()]) {
+			if (item[this.getIdField()] != null) {
 				return item[this.getIdField()];
 			}
 			return item.data[this.getIdField()] ?? '';
@@ -386,7 +380,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public onComboKeydown() {
+	public onComboKeyArrowDown(event: any) {
 		if (!this.isDropDownOpen()) {
 			this.isDropdownOpened = true;
 			this.showDropDown();
@@ -394,6 +388,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			// close
 			this.checkMultipleSelectionClosed();
 		}
+	}
+
+
+	public onComboKeyArrowUp(event: any) {
+		event.preventDefault();
+		event.stopPropagation();
 	}
 
 	protected toggleFavourite(): void {
@@ -455,7 +455,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	private transferFocusToGrid(): void {
+	protected transferFocusToGrid(): void {
 		// scrolls to the first row
 		this.gridOptions.api.ensureIndexVisible(0);
 
@@ -469,9 +469,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public onCellKeyDown(e: any) {
 		if (e.event.key === 'Enter') {
-			e.node.setSelected(true);
-			this.gridOptions.api.selectNode(e.node);
+			if (this.multipleSelection && e.node.selected) {
+				e.node.setSelected(false);
+			} else {
+				e.node.setSelected(true);
+			}
 			e.event.preventDefault();
+		}
+		if (e.event.key === 'Tab') {
+			this.closeDropDown();
+			e.event.preventDefault();
+			e.event.stopPropagation();
 		}
 	}
 

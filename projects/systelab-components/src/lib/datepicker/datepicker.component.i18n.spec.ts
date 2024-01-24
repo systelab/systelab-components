@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
-import { Datepicker } from './datepicker.component';
+import { DatepickerComponent } from './datepicker.component';
 
 export class USMockI18nService {
 	public get(key: string) {
@@ -56,6 +56,7 @@ export class ESMockI18nService {
 		return 'dd/MM/yy';
 	}
 }
+
 export class ESMockI18nService2 {
 	public get() {
 		// eslint-disable-next-line @typescript-eslint/naming-convention
@@ -170,7 +171,7 @@ const getMonth = (date: Date) => {
 	return months[date.getMonth()];
 };
 
-const enterText = (fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<Datepicker>, text: string) => {
+const enterText = (fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<DatepickerComponent>, text: string) => {
 	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
 	inputComponent.value = text;
 	inputComponent.dispatchEvent(new Event('keydown'));
@@ -195,7 +196,7 @@ describe('Systelab US DatepickerComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
-				Datepicker,
+				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: USMockI18nService}]
@@ -286,7 +287,7 @@ describe('Systelab ES DatepickerComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
-				Datepicker,
+				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: ESMockI18nService}]
@@ -374,7 +375,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
-				Datepicker,
+				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTestComponent],
 			providers:    [{provide: I18nService, useClass: ZHMockI18nService}]
@@ -447,7 +448,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 });
 
 describe('Systelab ES DatepickerComponent, check translations', () => {
-	let fixture: ComponentFixture<Datepicker>;
+	let fixture: ComponentFixture<DatepickerComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -461,14 +462,14 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 				SystelabTranslateModule],
 			declarations: [TouchspinComponent,
 				ButtonComponent,
-				Datepicker],
+				DatepickerComponent],
 			providers:    [{provide: I18nService, useClass: ESMockI18nService2}]
 		})
 			.compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(Datepicker);
+		fixture = TestBed.createComponent(DatepickerComponent);
 		fixture.componentInstance.inline = true;
 		fixture.detectChanges();
 	});

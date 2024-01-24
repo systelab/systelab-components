@@ -11,7 +11,7 @@ $slab-base-font-size: 15px !default;
 $slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-font-size * 1.25) !default;
 // Defines the application font family
 $slab-base-body-font-family: $font-family-base;
-// Defines the appication body color
+// Defines the application body color
 $slab-base-body-color: rgb(66, 66, 66) !default;
 // Defines the minimum width of the body
 $slab-app-min-width: 367px !default;

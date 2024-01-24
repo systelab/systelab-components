@@ -38,6 +38,7 @@ export class GenderSelectTestComponent {
 	public showAll = true;
 
 	public doChange() {
+		// Do change action
 	}
 }
 

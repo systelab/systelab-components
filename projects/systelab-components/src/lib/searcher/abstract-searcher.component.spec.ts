@@ -17,7 +17,6 @@ import { AbstractSearcher } from './abstract-searcher';
 import { SearcherDialog } from './searcher.dialog.component';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable, of } from 'rxjs';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { DialogBottomComponent } from '../modal/bottom/dialog-bottom.component';
 import { SearcherTableComponent } from './searcher.table.component';
 import { GridContextMenuComponent } from '../grid/contextmenu/grid-context-menu-component';
@@ -27,6 +26,7 @@ import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
 import { MessagePopupService } from '../modal/message-popup/message-popup.service';
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from '../grid/contextmenu/grid-header-context-menu.component';
+import { ButtonComponent } from '../button/button.component';
 
 export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
@@ -39,9 +39,6 @@ export class TestData {
 export class MockTooltipDirective {
 	@Input() public systelabTooltip: string;
 	@Input() public systelabTooltipHtml: string;
-
-	constructor() {
-	}
 }
 
 export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
@@ -54,6 +51,7 @@ export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
 		const searcherDialogParameters: SearcherDialogParameters<TestData> = new SearcherDialogParameters<TestData>();
 		searcherDialogParameters.widthRelative = '66%';
 		searcherDialogParameters.heightRelative = '66%';
+		searcherDialogParameters.showSelectedRowsInSubmitButton = true;
 		return searcherDialogParameters;
 	}
 
@@ -135,7 +133,8 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
                           <div class="col-md-9">
-                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description">
+                              <systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"
+														 [multipleSelection]="true">
 							  </systelab-searcher-example>
                           </div>
                       </div>
@@ -148,7 +147,6 @@ export class SearcherTestComponent {
 	public description: string;
 }
 
-
 const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const button = fixture.debugElement.nativeElement.querySelector('.btn');
 	button.click();
@@ -156,6 +154,8 @@ const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 };
 
 const isPopupVisible = () => (document.querySelector('.cdk-overlay-pane') !== null);
+
+const isSearchInputFocused = () => document.getElementById('valueToSearch') === document.activeElement;
 
 const clickCloseButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const button: any = document.querySelector('.slab-dialog-header-button.slab-dialog-close');
@@ -179,12 +179,17 @@ const getDescription = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	return descriptionComponent.innerText;
 };
 
+const getSubmitButtonText = () => {
+	const button = document.querySelector('.slab-dialog-bottom');
+	return button ? button['innerText'] : '';
+};
+
 describe('Systelab Searcher', () => {
 	let fixture: ComponentFixture<SearcherTestComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
+		TestBed.configureTestingModule({
+			imports: [BrowserModule,
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
@@ -207,15 +212,13 @@ describe('Systelab Searcher', () => {
 				SearcherTestComponent,
 				GridContextMenuComponent,
 				GridHeaderContextMenu,
-				SearcherTableComponent],
-			providers:    [
+				SearcherTableComponent,
+				ButtonComponent,
+			],
+			providers: [
 				DialogService,
-				MessagePopupService]
-		});
-		TestBed.overrideModule(BrowserDynamicTestingModule, {
-			set: {
-				entryComponents: [SearcherDialog]
-			}
+				MessagePopupService
+			]
 		});
 	});
 
@@ -250,5 +253,24 @@ describe('Systelab Searcher', () => {
 					.toEqual('1');
 				done();
 			});
+	});
+
+	it('should focus input when showing help dialog', (done) => {
+		clickHelpButton(fixture);
+		fixture.whenStable()
+			.then(() => {
+				expect(isSearchInputFocused())
+					.toBeTruthy();
+				done();
+			});
+	});
+
+	it('should show counter with the selected items number in the submit button', async (done) => {
+		enterText(fixture, '1');
+		await fixture.whenStable();
+		clickHelpButton(fixture);
+		await fixture.whenStable();
+		expect(getSubmitButtonText()).toContain('(1)');
+		done();
 	});
 });

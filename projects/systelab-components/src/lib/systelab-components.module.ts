@@ -21,7 +21,7 @@ import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
-import { Datepicker } from './datepicker/datepicker.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 import { DatepickerTimeComponent } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
@@ -100,6 +100,9 @@ import { ResizableDirective } from './directives/resizable.directive';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
 import { APP_CONFIG, AppConfig } from './systelab-components.module.config';
+import {
+	PositiveIntegerInputCellEditorComponent
+} from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
 import { TestIdDirective } from './directives/test-id.directive';
 
 export const factory = () => {
@@ -162,7 +165,7 @@ const providers = [
 		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
-		Datepicker,
+		DatepickerComponent,
 		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
@@ -217,6 +220,8 @@ const providers = [
 		ResizableDirective,
 		ImageViewerComponent,
 		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent,
+		NumpadDecimalNumericDirective,
   		TestIdDirective,
 	],
 	exports: [
@@ -239,7 +244,7 @@ const providers = [
 		PeriodSelect,
 		TimeUnitSelectComponent,
 		GenderSelect,
-		Datepicker,
+		DatepickerComponent,
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTimeComponent,
@@ -304,6 +309,8 @@ const providers = [
 		ImageViewerComponent,
 		NumpadDecimalNumericDirective,
 		TestIdDirective,
+		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent
 	],
 })
 export class SystelabComponentsModule {

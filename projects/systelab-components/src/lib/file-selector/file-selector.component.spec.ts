@@ -26,9 +26,6 @@ export class FileSelectorTestComponent {
 	public showButtonOnDisable = false;
 	public multipleSelection = false;
 	public disable = false;
-
-	constructor() {
-	}
 }
 
 describe('Systelab FileSelectorComponent', () => {

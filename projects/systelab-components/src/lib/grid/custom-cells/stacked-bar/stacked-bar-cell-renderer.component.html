@@ -1,13 +1,14 @@
 <div class="h-100 d-flex align-items-center">
     <div class="slab-stacked-bar-cell d-flex align-items-center" [style.width.%]="width*100"
          [style.min-width.px]="stackedBars.length*25">
-        <div *ngFor="let bar of stackedBars; let index=index"
-             [ngClass]="{'rounded-left': index===0, 'rounded-right': index===stackedBars.length - 1, 'slab-stacked-bar-click': !!barClick}"
-             class="slab-stacked-bar d-inline-block stacked {{bar.colorClass}}" [style.width.%]="bar.value/total*100"
-             [style.background-color]="bar.color" systelabTooltip="{{bar.tooltipText}}"
-             (click)=" doBarClick($event,bar)">
-            <div class="h-100 d-flex align-items-center justify-content-center">{{bar.value}}</div>
-        </div>
+        @for (bar of stackedBars; track bar.id; let index = $index) {
+            <div [ngClass]="{'rounded-left': index===0, 'rounded-right': index===stackedBars.length - 1, 'slab-stacked-bar-click': !!barClick}"
+                 class="slab-stacked-bar d-inline-block stacked {{bar.colorClass}}" [style.width.%]="bar.value/total*100"
+                 [style.background-color]="bar.color" systelabTooltip="{{bar.tooltipText}}"
+                 (click)=" doBarClick($event,bar)">
+                <div class="h-100 d-flex align-items-center justify-content-center">{{bar.value}}</div>
+            </div>
+        }
     </div>
     <div class="pl-2">{{total}}</div>
 </div>

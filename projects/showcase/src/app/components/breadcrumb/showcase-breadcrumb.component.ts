@@ -16,10 +16,11 @@ export class ShowcaseBreadcrumbComponent {
 		subItems.push(new BreadcrumbSubItem('1', 'Apartments', null, 'https://google.com?apartments'));
 		subItems.push(new BreadcrumbSubItem('2', 'Campings', () => this.showModal()));
 
-		this.items.push(new BreadcrumbItem('1', 'Home', false, null, null, 'https://google.com'));
-		this.items.push(new BreadcrumbItem('2', 'Holidays', false, () => this.showModal()));
-		this.items.push(new BreadcrumbItem('3', 'Hotels', false, null, subItems, 'https://google.com'));
+		this.items.push(new BreadcrumbItem('1', 'Home', true, null, null, 'https://google.com'));
+		this.items.push(new BreadcrumbItem('2', 'Restaurants', true, () => this.showModal()));
+		this.items.push(new BreadcrumbItem('3', 'Hotels', true, null, subItems, 'https://google.com'));
 		this.items.push(new BreadcrumbItem('4', 'Rooms', true, null, null, 'https://google.com'));
+		this.items.push(new BreadcrumbItem('5', 'Libraries', false, null, null, 'https://google.com'));
 
 	}
 

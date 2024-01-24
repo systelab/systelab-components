@@ -1,5 +1,5 @@
 import { Component, Input, Renderer2 } from '@angular/core';
-import { Datepicker } from './datepicker.component';
+import { DatepickerComponent } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
@@ -10,7 +10,7 @@ import { PrimeNGConfig } from 'primeng/api';
 	templateUrl: 'datepicker-time.component.html',
 	providers:   [DataTransformerService]
 })
-export class DatepickerTimeComponent extends Datepicker {
+export class DatepickerTimeComponent extends DatepickerComponent {
 	@Input()
 	override get currentDate(): Date {
 		return this._currentDate;

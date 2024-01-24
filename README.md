@@ -7,7 +7,8 @@
 # systelab-components
 
 Library with common UI components to speed up your Angular developments. You can take a look to the components in our showcase at https://systelab.github.io/components.
-Read the documentation at https://github.com/systelab/systelab-components/tree/master/projects/systelab-components
+
+Please, read the documentation at https://github.com/systelab/systelab-components/tree/master/projects/systelab-components
 
 ## Working with the repo
 
@@ -77,6 +78,19 @@ npm publish
 ```
 
 # Breaking changes
+
+## Version 16.x.x - Angular 16
+
+-   Datepicker has been ranamed to DatepickerComponent
+
+[Angular 16 news](https://blog.angular.io/angular-v16-is-here-4d7a28ec680d)
+
+-   Angular Signals
+-   RxJS interoperability 
+-   Server-side rendering and hydration
+-   Improved tooling for standalone components, directives and pipes
+-   Advancing developer tooling
+-   Autocomplete imports in templates
 
 ## Version 15.x.x - Angular 15
 

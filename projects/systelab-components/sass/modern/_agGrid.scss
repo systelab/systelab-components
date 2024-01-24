@@ -14,6 +14,13 @@ $context-menu-width: 39px;
   background-image: none !important;
 }
 
+.ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus {
+  border: 1px dashed var(--primary_light) !important;
+}
+.ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus::after {
+  border: 1px dashed var(--primary_light) !important;
+  content: inherit;
+}
 
 .ag-root.ag-layout-normal {
   background: var(--slab_background_primary);
@@ -29,6 +36,10 @@ $context-menu-width: 39px;
       font-weight: normal;
       text-align: left;
       padding: 0;
+
+      .ag-header-select-all {
+        margin-left: 5px;
+      }
 
       .slab-grid-header-context-menu {
         display: flex;
@@ -159,6 +170,7 @@ overflow: hidden;
 font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
 .ag-header {
+
   border-bottom: none;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 

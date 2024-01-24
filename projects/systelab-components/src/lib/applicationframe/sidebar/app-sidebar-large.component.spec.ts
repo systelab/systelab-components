@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
-import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from '@angular/common/http';
-import {SystelabTranslateModule} from 'systelab-translate';
-import {SystelabPreferencesModule} from 'systelab-preferences';
-import {TooltipDirective} from '../../tooltip/tooltip.directive';
-import {ApplicationSidebarAction, ApplicationSidebarTab} from './app-sidebar.component';
-import {ApplicationSidebarLargeComponent} from './app-sidebar-large.component';
-import { DialogService } from '../../modal/dialog/dialog.service';
+import { Component, OnInit } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
+import { SystelabTranslateModule } from 'systelab-translate';
+import { SystelabPreferencesModule } from 'systelab-preferences';
+import { TooltipDirective } from '../../tooltip/tooltip.directive';
+import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.component';
+import { ApplicationSidebarLargeComponent } from './app-sidebar-large.component';
 
 @Component({
 	selector: 'systelab-app-sidebar-large-test',

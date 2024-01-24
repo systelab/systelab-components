@@ -41,13 +41,13 @@ export class TestData {
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: ModulabSelect;
 	public filter = false;
-	public valuesList: TestData[] = [new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
+	public valuesList: TestData[] = [new TestData(0, 'Description 0'),new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
 	public withEmptyValue = false;
 	public deleteIconClass = 'icon-close';
 	public defaultIdValue = undefined;
 	public withDeleteOption = false;
 
-	public selectValue(id: string): void {
+	public selectValue(id: string | number): void {
 		this.combobox.id = id;
 	}
 
@@ -142,7 +142,7 @@ describe('Systelab Select Combobox', () => {
 			.then(() => {
 				fixture.detectChanges();
 				expect(fixture.componentInstance.combobox._values.length)
-					.toEqual(3);
+					.toEqual(4);
 				done();
 			});
 	});
@@ -154,7 +154,7 @@ describe('Systelab Select Combobox', () => {
 		fixture.whenStable()
 			.then(() => {
 				expect(fixture.componentInstance.combobox._values.length)
-					.toEqual(2);
+					.toEqual(3);
 				done();
 			});
 	});
@@ -173,6 +173,23 @@ describe('Systelab Select Combobox', () => {
 			.then(() => {
 				expect(fixture.debugElement.nativeElement.querySelectorAll('.icon-trash').length)
 					.toEqual(1);
+				done();
+			});
+	});
+
+	it('should set the Description 0 element that has a zero number id', (done) => {
+		const fixture = setup();
+		fixture.componentInstance.withEmptyValue = true;
+		fixture.componentInstance.defaultIdValue = '1';
+		fixture.componentInstance.withDeleteOption = true;
+		fixture.detectChanges();
+		clickButton(fixture);
+		fixture.componentInstance.selectValue(0);
+		fixture.detectChanges();
+		fixture.whenStable()
+			.then(() => {
+				expect(fixture.componentInstance.combobox._description)
+					.toEqual('Description 0');
 				done();
 			});
 	});
