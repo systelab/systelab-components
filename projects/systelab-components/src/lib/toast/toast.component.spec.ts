@@ -53,7 +53,8 @@ const toastHasCloseButton = () => queryCloseToastButton() !== null;
 
 const clickCloseButton = () => {
 	const button = document.querySelector('systelab-toast .close');
-	button.dispatchEvent(new Event('click'));
+	const clickEvent = new Event('click');
+	button.dispatchEvent(clickEvent);
 };
 
 describe('Systelab Toast', () => {
