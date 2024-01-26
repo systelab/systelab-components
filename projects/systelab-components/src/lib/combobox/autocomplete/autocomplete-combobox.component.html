@@ -17,7 +17,7 @@
                (keydown.arrowDown)="onInputNavigate($event)"
                (keydown.arrowUp)="onInputNavigate($event)"
                 (click)="onInputClicked($event)"/>
-        <button *ngIf="withClearOption && !inputIsEmpty()" type="button" #clearButton
+        <button *ngIf="withClearOption && !inputIsEmpty()" type="button" #clearButton [hidden]="isDisabled"
                 class="slab-combo-button border-right-0 rounded-0 {{deleteIconClass}}" (click)="clearText($event)"
                 tabindex="-1"></button>
         <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
