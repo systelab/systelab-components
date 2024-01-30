@@ -123,6 +123,19 @@ describe('Systelab Numpad', () => {
 		expect(input).not.toBe(document.activeElement);
 	});
 
+	it('should select text on input when clicking and onClickSelect is true', () => {
+		fixture.componentInstance.numpad.onClickSelectValue = true;
+		fixture.componentInstance.numpad.input.nativeElement.value = 'text'
+		fixture.detectChanges();
+
+		const input = fixture.componentInstance.numpad.input.nativeElement;
+		input.click();
+		fixture.detectChanges();
+
+		const selectedText = window.getSelection().toString();
+		expect(input.value).toEqual(selectedText);
+	});
+
 });
 
 
