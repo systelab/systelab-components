@@ -1,16 +1,28 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { GetRowIdParams, GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 
-declare var jQuery: any;
+declare let jQuery: any;
 
 @Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
-	public static ROW_HEIGHT = -1;
+	public static rowHeight = -1;
 
 	@ViewChild('input', {static: false}) public input: ElementRef;
 	@ViewChild('filterInput', {static: false}) public filterInput: ElementRef;
@@ -287,7 +299,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 		this.gridOptions.columnDefs = this.columnDefs;
 
-		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
+		this.gridOptions.rowHeight = AbstractComboBox.rowHeight;
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellFocus = false;
 
@@ -320,7 +332,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected setRowHeight() {
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-		AbstractComboBox.ROW_HEIGHT = Number(lineHeight ? lineHeight : 26);
+		AbstractComboBox.rowHeight = Number(lineHeight ? lineHeight : 26);
 	}
 
 	public abstract getInstance(): T;
@@ -340,7 +352,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getInputHeight() {
-		return this.expandToParentContainerHeight ? {'height': '100%'} : undefined;
+		return this.expandToParentContainerHeight ? {height: '100%'} : undefined;
 	}
 
 	protected getComboPreferencesPrefix(): string {
@@ -500,20 +512,20 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		const totalItems: number = this.getTotalItemsForDropdownHeight();
 
 		if (this.selectDeselectAll === true) {
-			calculatedHeight += AbstractComboBox.ROW_HEIGHT + 10;
+			calculatedHeight += AbstractComboBox.rowHeight + 10;
 		}
 		if (this.filter === true) {
-			calculatedHeight += AbstractComboBox.ROW_HEIGHT + 5;
+			calculatedHeight += AbstractComboBox.rowHeight + 5;
 		}
 
 		if (totalItems === 0) {
-			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT;
+			calculatedHeight += 8 + AbstractComboBox.rowHeight;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else if (totalItems < 10) {
-			calculatedHeight += 8 + AbstractComboBox.ROW_HEIGHT * totalItems;
+			calculatedHeight += 8 + AbstractComboBox.rowHeight * totalItems;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		} else {
-			calculatedHeight += AbstractComboBox.ROW_HEIGHT * 10;
+			calculatedHeight += AbstractComboBox.rowHeight * 10;
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'height', calculatedHeight + 'px');
 		}
 
@@ -632,7 +644,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public setGridSize() {
-		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
+		this.gridOptions.rowHeight = AbstractComboBox.rowHeight;
 		if (this.gridOptions.api && this.columnDefs) {
 			if (this.windowResized) {
 				setTimeout(() => {
@@ -650,9 +662,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (!this.multipleSelection) {
 		} else if (event.node && event.node.data && event.node.data[this.getIdField()] !== undefined) {
 			if (this.multipleSelectedItemList) {
-				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-					return item[this.getIdField()] === event.node.data[this.getIdField()];
-				});
+				const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => item[this.getIdField()] === event.node.data[this.getIdField()]);
 				if (event.node.selected) {
 					if (elementIndexInSelectedList < 0) {
 						if (this.allElement) {
@@ -662,9 +672,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 								this.unselectAllNodesInGridOptions();
 							} else {
 								// the selectedNode is NOT "all: was "all" node already selected?
-								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
-									return item[this.getIdField()] === this.getAllFieldIDValue();
-								});
+								const elementAllInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => item[this.getIdField()] === this.getAllFieldIDValue());
 								// yes, it was => unselect "all" node and empty the multipleSelectedItemList
 								if (elementAllInSelectedList !== -1) {
 									this.multipleSelectedItemList = [];

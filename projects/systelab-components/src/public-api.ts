@@ -69,6 +69,7 @@ export * from './lib/image-viewer/image-viewer.component';
 export * from './lib/percentage-circle/percentage-circle.component';
 export * from './lib/combobox/abstract-combobox.component';
 export * from './lib/combobox/abstract-api-combobox.component';
+export * from './lib/combobox/combobox-option.interface';
 export * from './lib/combobox/autocomplete/autocomplete-api-combobox.component';
 export * from './lib/combobox/renderer/combobox-favourite-renderer.component';
 export * from './lib/combobox/renderer/combobox-input-renderer.component';

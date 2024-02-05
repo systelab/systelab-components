@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { AutocompleteApiComboBox } from 'systelab-components';
 import { Observable, of } from 'rxjs';
+import { ComboboxOption } from "../../../../../systelab-components/src/lib/combobox/combobox-option.interface";
 
 export class ShowcaseCities {
 	public id: string;
@@ -15,7 +16,7 @@ export class ShowcaseCities {
 
 export class ShowcaseAutocomplete extends AutocompleteApiComboBox<ShowcaseCities> {
 
-	public defaultValues = [
+	public defaultValues: ComboboxOption<string>[] = [
 		{description: 'New York', id: '1'},
 		{description: 'Rome', id: '2'},
 		{description: 'London', id: '3'},

@@ -24,8 +24,12 @@ For example:
 
 ```
 class MaritalStatus {
-    constructor(public id: string, public description: string) {
-    }
+    public static getOption<T>(id: T, description: string): ComboboxOption<T> {
+		return {
+			id,
+			description,
+		};
+	}
 }
 
 @Component({
@@ -33,21 +37,21 @@ class MaritalStatus {
     templateUrl: '../../../../../node_modules/systelab-components/html/abstract-combobox.component.html'
 })
 
-export class MaritalStatusComboBox extends AbstractComboBox<MaritalStatus> {
+export class MaritalStatusComboBox extends AbstractComboBox<ComboboxOption<string>> {
 
     constructor(myRenderer: Renderer2, public chRef: ChangeDetectorRef, public i18nService: I18nService) {
         super(myRenderer, chRef);
-        this.values = new Array<MaritalStatus>();
-        this.values.push(new MaritalStatus('1', 'Single'));
-        this.values.push(new MaritalStatus('2', 'Married'));
-        this.values.push(new MaritalStatus('3', 'Widowed'));
-        this.values.push(new MaritalStatus('4', 'Divorced'));
-        this.values.push(new MaritalStatus('5', 'Separated'));
-        this.values.push(new MaritalStatus('6', 'Registered partnership'));
+        this.values: ComboboxOption<string>[] = [];
+        this.values.push(MaritalStatus.getOption<string>('1', 'Single'));
+        this.values.push(MaritalStatus.getOption<string>('2', 'Married'));
+        this.values.push(MaritalStatus.getOption<string>('3', 'Widowed'));
+        this.values.push(MaritalStatus.getOption<string>('4', 'Divorced'));
+        this.values.push(MaritalStatus.getOption<string>('5', 'Separated'));
+        this.values.push(MaritalStatus.getOption<string>('6', 'Registered partnership'));
     }
 
-    getInstance(): MaritalStatus {
-        return new MaritalStatus('0', 'Unknown');
+    getInstance(): ComboboxOption<string> {
+        return MaritalStatus.getOption<string>('0', 'Unknown');
     }
 
     getDescriptionField(): string {
@@ -83,8 +87,12 @@ For example:
 
 ```
 class Laboratory {
-    constructor(public id: string, public description: string) {
-    }
+    public static getOption<T>(id: T, description: string): ComboboxOption<T> {
+		return {
+			id,
+			description,
+		};
+	}
 }
 
 @Component({
@@ -92,7 +100,7 @@ class Laboratory {
     templateUrl: '../../../../../node_modules/systelab-components/html/abstract-combobox.component.html'
 })
 
-export class LaboratoryComboBox extends AbstractApiComboBox<Laboratory> {
+export class LaboratoryComboBox extends AbstractApiComboBox<ComboboxOption<string>> {
 
     private totalItems=0;
 
@@ -101,7 +109,7 @@ export class LaboratoryComboBox extends AbstractApiComboBox<Laboratory> {
     }
 
     public getInstance() {
-        return new Laboratory('','');
+        return Laboratory.getOption<string>('','');
     }
 
     public getDescriptionField(): string {
@@ -116,7 +124,7 @@ export class LaboratoryComboBox extends AbstractApiComboBox<Laboratory> {
         return 'id';
     }
 
-    public getData(page: number, itemsPerPage: number): Observable<Array<Laboratory>> {
+    public getData(page: number, itemsPerPage: number): Observable<Array<Combobox<string | number>>> {
         return this.api.getLaboratoryList(page,itemsPerPage).pipe(map((value) => {
             this.totalItems = value.totalElements;
             return value.content;
@@ -194,35 +202,35 @@ Once you have your component, you can use it in your templates.
 
 ## Properties
 
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| **id** | string | | Identifier |
-| **description** | string | | Description or name that will be shown in the combobox |
-| **code** | string | | Short code |
-| **fieldToShow** | string | | Description or name for autocomplete combobox|
-| **multipleSelectedItemList** | Array<T> | | Array with selected elements for comboboxes with selection multiple|
-| startsWith| string | | Look up the item in the combo that starts with the entered text
-| customInputRenderer | any | | Class of the component with a custom renderer for the combo input field. This class must extend ComboBoxInputRenderer class|
-| initialParams | any | | Class with the initial params of the component defined in customInputRender property |
-| filter | boolean | false | If true adds an input field inside dropdown to search elements. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
-| multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
-| selectDeselectAll | boolean | false | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown inside the dropdown of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
-| listSelectedValues | boolean | false | Shows the selected values at the bottom of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
-| fontFamily | string | | Font Family |
-| fontSize | string | | Font size in pixels |
-| fontWeight | string | | normal, bold, bolder, lighter, number, initial or inherit |
-| fontStyle | string | | normal, italic, oblique, initial or inherit |
-| values | Array<any> | | Array with the elements of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos|
-| isDisabled | boolean | false | If true the combo is disabled|
-| expandToParentContainerHeight | boolean | false | If true the combo expands its height to parent container height|
-| emptyElement | boolean | false | If true adds and emtpy element at the first position of the elements list in the dropdown. Use it only in combos that extends from AbstractApiComboBox or AbstractApiTreeComboBox. Never use it with multipleSelection property|
-| allElement | boolean | false | If true adds an element that represents the "all" element at the first position of the elements list in the dropdown (the second if the emptyElement is also set to true). Use it only in combos that extends from AbstractComboBox or AbstractApiComboBox. It can be used with multipleSelection property. In this last case, if the "all" element is selected no other option will remain selected. Reversely, if the "all" element is selected and the user select any other option, then the "all" element is deselected. |																																																																																																																																								
-| withFavourites | boolean | false | Used to activate and deactivate the favourites |
-| withDeleteOption | boolean | false | Used to activate and deactivate the reset combo option |
-| defaultIdValue | string | | Used to define the default id of the combo |
-| defaultDescription | string | | Used to define the default description selected of the combo |
-| defaultCode | string | | Used to define the default code selected of the combo |
-| preferencesName | string | '' | Preference name over will be saved the preferences |
+| Name                          |                     Type                     |                                                                Default                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-------------------------------|:--------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**                        |                    string                    |                                                                                                                                       | Identifier                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **description**               |                    string                    |                                                                                                                                       | Description or name that will be shown in the combobox                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **code**                      |                    string                    |                                                                                                                                       | Short code                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **fieldToShow**               |                    string                    |                                                                                                                                       | Description or name for autocomplete combobox                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **multipleSelectedItemList**  |                   Array<T>                   |                                                                                                                                       | Array with selected elements for comboboxes with selection multiple                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| startsWith                    |                    string                    |                                                                                                                                       | Look up the item in the combo that starts with the entered text                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| customInputRenderer           |                     any                      |                                                                                                                                       | Class of the component with a custom renderer for the combo input field. This class must extend ComboBoxInputRenderer class                                                                                                                                                                                                                                                                                                                                                                                                   |
+| initialParams                 |                     any                      |                                                                                                                                       | Class with the initial params of the component defined in customInputRender property                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| filter                        |                   boolean                    |                                                                 false                                                                 | If true adds an input field inside dropdown to search elements. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos                                                                                                                                                                                                                                                                                                                                                                  |
+| multipleSelection             |                   boolean                    |                                                                 false                                                                 | Enable to select multiple elements. A checkbox will be rendered in front of each element.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| selectDeselectAll             |                   boolean                    |                                                                 false                                                                 | For a multiple selection combobox, set if a 'Select All' and 'Un-select all' should be shown inside the dropdown of the combo. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos                                                                                                                                                                                                                                                                                                   |
+| listSelectedValues            |                   boolean                    |                                                                 false                                                                 | Shows the selected values at the bottom of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos                                                                                                                                                                                                                                                                                                                                                                         |
+| fontFamily                    |                    string                    |                                                                                                                                       | Font Family                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| fontSize                      |                    string                    |                                                                                                                                       | Font size in pixels                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| fontWeight                    |                    string                    |                                                                                                                                       | normal, bold, bolder, lighter, number, initial or inherit                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| fontStyle                     |                    string                    |                                                                                                                                       | normal, italic, oblique, initial or inherit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| values                        | `Array<ComboboxOption<string &vert; number>` | Array with the elements of the combobox. Use it only in combos that extends from AbstractComboBox. Do not use with AbstractApi combos |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| isDisabled                    |                   boolean                    |                                                                 false                                                                 | If true the combo is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| expandToParentContainerHeight |                   boolean                    |                                                                 false                                                                 | If true the combo expands its height to parent container height                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| emptyElement                  |                   boolean                    |                                                                 false                                                                 | If true adds and emtpy element at the first position of the elements list in the dropdown. Use it only in combos that extends from AbstractApiComboBox or AbstractApiTreeComboBox. Never use it with multipleSelection property                                                                                                                                                                                                                                                                                               |
+| allElement                    |                   boolean                    |                                                                 false                                                                 | If true adds an element that represents the "all" element at the first position of the elements list in the dropdown (the second if the emptyElement is also set to true). Use it only in combos that extends from AbstractComboBox or AbstractApiComboBox. It can be used with multipleSelection property. In this last case, if the "all" element is selected no other option will remain selected. Reversely, if the "all" element is selected and the user select any other option, then the "all" element is deselected. |																																																																																																																																								
+| withFavourites                |                   boolean                    |                                                                 false                                                                 | Used to activate and deactivate the favourites                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| withDeleteOption              |                   boolean                    |                                                                 false                                                                 | Used to activate and deactivate the reset combo option                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| defaultIdValue                |                    string                    |                                                                                                                                       | Used to define the default id of the combo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| defaultDescription            |                    string                    |                                                                                                                                       | Used to define the default description selected of the combo                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| defaultCode                   |                    string                    |                                                                                                                                       | Used to define the default code selected of the combo                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| preferencesName               |                    string                    |                                                                  ''                                                                   | Preference name over will be saved the preferences                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 In black the Two-Way Data Binding properties.
 

@@ -13,9 +13,14 @@ import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
 import { ModulabSelect } from '../select/select.component';
+import { ComboboxOption } from './combobox-option.interface';
 
-export class TestData {
-	constructor(public id: string | number, public description: string) {
+class TestData {
+	public static getOption<T>(id: T, description: string): ComboboxOption<T> {
+		return {
+			id,
+			description,
+		};
 	}
 }
 
@@ -41,7 +46,11 @@ export class TestData {
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: ModulabSelect;
 	public filter = false;
-	public valuesList: TestData[] = [new TestData(0, 'Description 0'),new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
+	public valuesList: ComboboxOption<string>[] = [
+		TestData.getOption<string>('0', 'Description 0'),
+		TestData.getOption<string>('1', 'Description 1'),
+		TestData.getOption<string>('2', 'Description 2'),
+	];
 	public withEmptyValue = false;
 	public deleteIconClass = 'icon-close';
 	public defaultIdValue = undefined;
@@ -184,7 +193,7 @@ describe('Systelab Select Combobox', () => {
 		fixture.componentInstance.withDeleteOption = true;
 		fixture.detectChanges();
 		clickButton(fixture);
-		fixture.componentInstance.selectValue(0);
+		fixture.componentInstance.selectValue('0');
 		fixture.detectChanges();
 		fixture.whenStable()
 			.then(() => {

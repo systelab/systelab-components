@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { ComboboxOption } from "../../../../../systelab-components/src/lib/combobox/combobox-option.interface";
 
 @Component({
 	selector: 'showcase-combobox',
@@ -11,9 +12,9 @@ export class ShowcaseComboboxComponent {
 	public listSelectedValues = true;
 	public multiple = true;
 
-	public comboOptionList: Array<Object> = [];
+	public comboOptionList: ComboboxOption<number>[] = [];
 
-	public selectedComboOptionList: Array<Object> = [];
+	public selectedComboOptionList: ComboboxOption<number>[] = [];
 
 	constructor() {
 
