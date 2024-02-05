@@ -193,7 +193,7 @@ describe('Systelab Select Combobox', () => {
 		fixture.componentInstance.withDeleteOption = true;
 		fixture.detectChanges();
 		clickButton(fixture);
-		fixture.componentInstance.selectValue(0);
+		fixture.componentInstance.selectValue('0');
 		fixture.detectChanges();
 		fixture.whenStable()
 			.then(() => {
