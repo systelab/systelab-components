@@ -42,7 +42,7 @@ export class ShowcaseToastComponent {
 			...this._defaultConfig,
 			autoWidth: true,
 		})
-		this.toastService.showSuccess('This is a successful auto width action toast. It grows according on its content');
+		this.toastService.showSuccess('This is a successful auto width action toast. It grows according to its content');
 	}
 
 	public showSuccessWithCloseButtonToast(): void {

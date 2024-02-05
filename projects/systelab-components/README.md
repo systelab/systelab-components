@@ -96,7 +96,7 @@ with:
 }
 ```
 
-If you need to import SystelabComonentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
+If you need to import SystelabComponentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
 receive an error in your console.
 
 ```typescript
