@@ -86,6 +86,7 @@ export * from './lib/grid/custom-cells/checkbox/checkbox-cell-renderer.component
 export * from './lib/grid/custom-cells/decimal-input/decimal-input-cell-editor.component';
 export * from './lib/grid/custom-cells/input/input-cell-editor.component';
 export * from './lib/grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
+export * from './lib/grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
 export * from './lib/grid/contextmenu/grid-header-context-menu-renderer.component';
 export * from './lib/grid/contextmenu/grid-header-context-menu.component';
 export * from './lib/grid/contextmenu/grid-context-menu-component';
@@ -110,6 +111,7 @@ export * from './lib/directives/keyup-debounce.directive';
 export * from './lib/directives/draggable.directive';
 export * from './lib/directives/resizable.directive';
 export * from './lib/directives/numpad-decimal-numeric.directive';
+export * from './lib/directives/test-id.directive';
 
 
 export * from './lib/listbox/renderer/abstract-tree-listbox-renderer.component';
@@ -136,4 +138,7 @@ export * from './lib/toggle-selector/toggle-selector.component';
 export * from './lib/forms/validators/email-validator.directive';
 export * from './lib/forms/validators/phone-validator.directive';
 export * from './lib/forms/validators/url-validator.directive';
+
+export * from './lib/theme/theme.service';
+
 

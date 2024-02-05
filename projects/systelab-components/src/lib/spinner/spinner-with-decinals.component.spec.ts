@@ -24,6 +24,7 @@ export class SpinnerTestComponent {
 	public values = new TouchSpinValues(34.12345, 1.00001, 100.001, 1.12345, true, 5);
 
 	public doValueChange() {
+		// Do value change action
 	}
 }
 

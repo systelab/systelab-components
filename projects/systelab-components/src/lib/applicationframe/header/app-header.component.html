@@ -23,9 +23,11 @@
             <label *ngIf="!menuBars" class="text-truncate align-middle">{{userName}}</label>
             <div class="dropdown-menu dropdown-menu-right slab-dropdown" *ngIf="menu.length > 0">
                 <ul>
-                    <li *ngFor="let menuEntry of menu" (click)="menuEntry.action()">{{menuEntry.optionName}}
-                        <div *ngIf="menuEntry.isDivider" class="dropdown-divider"></div>
-                    </li>
+                    @for (menuEntry of menu; track menuEntry.action) {
+                        <li (click)="menuEntry.action()">{{menuEntry.optionName}}
+                            <div *ngIf="menuEntry.isDivider" class="dropdown-divider"></div>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

@@ -45,7 +45,7 @@ export class MessagePopupViewComponent implements ModalComponent<MessagePopupVie
 
 	public close(value?: any): void {
 		if (this.parameters.askAgain) {
-			this.dialog.close(this.checkAskAgain);
+			this.dialog.close([value, this.checkAskAgain]);
 		} else {
 			this.dialog.close(value);
 		}

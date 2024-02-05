@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupViewComponent, MessagePopupViewContext } from './message-popup-view.component';
-import { SystelabComponentsModule } from '../../systelab-components.module';
 import { DialogRef } from '../dialog/dialog-ref';
 import { MessagePopupButton } from './message-popup.service';
 import { ButtonComponent } from '../../button/button.component';
+import { MessageWithIconComponent } from './message-with-icon.component';
 
 
 describe('Systelab MessagePopupViewComponent', () => {
@@ -29,9 +29,8 @@ describe('Systelab MessagePopupViewComponent', () => {
 				OverlayModule,
 				HttpClientModule,
 				SystelabTranslateModule,
-				SystelabComponentsModule
 			],
-			declarations: [ButtonComponent],
+			declarations: [ButtonComponent, MessageWithIconComponent],
 			providers:    [{provide: DialogRef, useValue: spyDialogRef}]
 		})
 			.compileComponents();
@@ -80,7 +79,7 @@ describe('Systelab MessagePopupViewComponent', () => {
 			.toBeTruthy();
 
 		component.close();
-		expect(spyDialogRef.close).toHaveBeenCalledWith(false);
+		expect(spyDialogRef.close).toHaveBeenCalledWith([undefined, false]);
 	});
 
 	it('Closing different popup from AskAgainPopup', () => {
@@ -97,6 +96,23 @@ describe('Systelab MessagePopupViewComponent', () => {
 
 		component.close();
 		expect(spyDialogRef.close).toHaveBeenCalledWith(undefined);
+	});
+
+	it('Closing the AskAgainPopup returns an array', () => {
+		parameters.askAgain = true;
+
+		spyDialogRef.context = parameters;
+		fixture = TestBed.createComponent(MessagePopupViewComponent);
+		component = fixture.componentInstance;
+		component.parameters = parameters;
+		fixture.detectChanges();
+
+		expect(component)
+			.toBeTruthy();
+
+		component.checkAskAgain = true;
+		component.close('value');
+		expect(spyDialogRef.close).toHaveBeenCalledWith(['value', true]);
 	});
 
 });

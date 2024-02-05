@@ -36,7 +36,7 @@ $slab-button-fontsize: 25px !default;
 }
 
 .cdk-overlay-pane {
-  background-color: $background-primary;
+  background-color: var(--slab_background_primary);
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   border-radius: 7px;
   overflow: hidden;
@@ -163,7 +163,7 @@ $slab-button-fontsize: 25px !default;
 
   border: none;
   border-radius: 0;
-  background-color: $background-primary;
+  background-color: var(--slab_background_primary);
 
   & > *:first-child { /* [2] */
     flex: 1;
@@ -196,14 +196,14 @@ $slab-button-fontsize: 25px !default;
   font-size: 20px;
   border-radius: 0;
 
-  background: $slab-dialog-header-color;
-  border-bottom: 1px solid $background-secondary;
+  background: var(--slab_modal_header_background);
+  border-bottom: 1px solid var(--slab_table_border_color);
 }
 
 
 .slab-dialog-bottom {
 
-  border-top: 1px solid $background-secondary;
+  border-top: 1px solid var(--slab_table_border_color);
   background: none !important;
   padding: 15px;
 
@@ -231,18 +231,18 @@ $slab-button-fontsize: 25px !default;
   cursor: pointer;
   text-align: center;
   border-radius: 20px;
-  border: 1px solid $primary;
+  border: 1px solid var(--primary);
 
   i,
   &:before {
     @include font-smoothing(antialiased);
-    color: $primary;
+    color: var(--text-color);
     font-size: $slab-button-fontsize;
     font-family: icomoon;
   }
 
   &:hover {
-    background-color: $primary;
+    background-color: var(--primary);
   }
 }
 
@@ -277,7 +277,7 @@ $slab-button-fontsize: 25px !default;
 .slab-dialog-minimize {
   &:hover {
     &::before {
-      color: white;
+      color: var(--text-color-secondary);
     }
   }
 }
@@ -297,7 +297,7 @@ $slab-button-fontsize: 25px !default;
 
       .slab-dialog-bottom {
         border-radius: 0 0 $content-border-width $content-border-width;
-        background: $background-primary;
+        background: var(--slab_background_primary);
 
         .btn {
           height: $slab-button-size;

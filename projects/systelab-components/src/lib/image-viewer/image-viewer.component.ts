@@ -3,7 +3,6 @@ import {
 	Component,
 	ElementRef,
 	EventEmitter,
-	HostBinding,
 	HostListener,
 	Input,
 	Output,
@@ -20,7 +19,9 @@ export enum ActionButtonType {
 export interface ActionButton {
 	action: string;
 	label: string;
+	tooltip?: string;
 	type: ActionButtonType;
+	state?: { checked?: boolean, disabled: boolean };
 }
 
 @Component({
@@ -49,8 +50,8 @@ export class ImageViewerComponent {
 	@ViewChild('imageViewerWrapper') public imageViewerWrapper: ElementRef;
 	@ViewChild('imageViewerImg') public imageViewerImg: ElementRef;
 
-	@HostBinding('class.zooming') zoomEnabled = false;
-	@HostBinding('class.dragging') dragEnabled = false;
+	public zoomEnabled = false;
+	public dragEnabled = false;
 
 	public imgParams = {
 		sliderZoomPct: null,

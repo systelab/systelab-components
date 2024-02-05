@@ -6,6 +6,7 @@
                [disabled]="isDisabled"
                [(ngModel)]="fieldToShow"
                [keyupDebounceTime]="debounceTime" (keyupDebounced)="doSearch($event)"
+               (search)="doSearch($event)"
                [ngStyle]="getInputHeight()"
                [style.font-family]="fontFamily"
                [style.font-size.px]="fontSize"
@@ -13,9 +14,12 @@
                [style.font-style]="fontStyle"
                [tabindex]="tabindex"
                (keydown.Tab)="closeDropDown()"
-               (keydown.arrowDown)="onInputNavigate()"
-               (keydown.arrowUp)="onInputNavigate()"
+               (keydown.arrowDown)="onInputNavigate($event)"
+               (keydown.arrowUp)="onInputNavigate($event)"
                 (click)="onInputClicked($event)"/>
+        <button *ngIf="withClearOption && !inputIsEmpty()" type="button" #clearButton [hidden]="isDisabled"
+                class="slab-combo-button border-right-0 rounded-0 {{deleteIconClass}}" (click)="clearText($event)"
+                tabindex="-1"></button>
         <button type="button" *ngIf="withFavourites && id" #favouriteButton class="slab-combo-button slab-combo-star border-right-0 rounded-0 text-primary"
                 [ngClass]="{'icon-star': isFavourite, 'icon-star-o': !isFavourite}" (click)="doToggleFavourite($event)" tabindex="-1"></button>
         <button #combobutton type="button" class="slab-combo-button slab-combo-button-icon" [disabled]="isDisabled"

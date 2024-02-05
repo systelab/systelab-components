@@ -83,6 +83,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			}
 
 			if (this.totalItemsLoaded) {
+				this.transferFocusToGrid();
 				this.setDropdownHeight();
 				this.setDropdownPosition();
 				result = false;

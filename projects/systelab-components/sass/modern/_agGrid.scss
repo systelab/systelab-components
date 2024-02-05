@@ -6,7 +6,7 @@ $context-menu-width: 39px;
 
 
 .ag-theme-fresh .ag-row-selected::before {
-  background-color: $table-row-selected-background-color !important;
+  background-color: var(--slab_table_row_selection_background) !important;
 }
 
 
@@ -14,9 +14,16 @@ $context-menu-width: 39px;
   background-image: none !important;
 }
 
+.ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus {
+  border: 1px dashed var(--primary_light) !important;
+}
+.ag-theme-fresh .ag-keyboard-focus .ag-header-cell:focus::after {
+  border: 1px dashed var(--primary_light) !important;
+  content: inherit;
+}
 
 .ag-root.ag-layout-normal {
-  background: $background_primary;
+  background: var(--slab_background_primary);
 }
 
 @mixin ag-header-row() {
@@ -25,10 +32,14 @@ $context-menu-width: 39px;
 
     .ag-header-cell {
       overflow: hidden;
-      border-color: $grid-border-color;
+      border-color: var(--slab_table_border_color);
       font-weight: normal;
       text-align: left;
       padding: 0;
+
+      .ag-header-select-all {
+        margin-left: 5px;
+      }
 
       .slab-grid-header-context-menu {
         display: flex;
@@ -65,7 +76,7 @@ $context-menu-width: 39px;
 
       .ag-header-cell-resize {
         cursor: ew-resize;
-        border-right: 5px solid $grid-border-color;
+        border-right: 5px solid var(--slab_table_border_color);
       }
     }
   }
@@ -80,11 +91,11 @@ $context-menu-width: 39px;
 }
 
 &.ag-row-selected {
-  background-color: $table-row-selected-background-color !important;
-  color: $table-row-selected-color;
+  background-color: var(--slab_table_row_selection_background) !important;
+  color: var(--slab_table_row_selection_foreground);
 
   .icon-context-menu {
-    color: $table-row-selected-color;
+    color: var(--slab_table_row_selection_foreground);
   }
 
   &.ag-row-focus {
@@ -98,19 +109,19 @@ $context-menu-width: 39px;
 
 &:not(.ag-row-selected) {
   &.ag-row-odd {
-    background-color: $table-row-odd-background-color;
+    background-color: var(--slab_table_row_odd_background);
   }
 
   &.ag-row-even {
-    background-color: $table-row-even-background-color;
+    background-color: var(--slab_table_row_even_background);
   }
 
   &.ag-row-focus {
-    background-color: scale-color($primary, $alpha: -90%);
+    background-color: var(--primary_lighter);
   }
 
   &.ag-row-hover {
- //   background-color: scale-color($primary, $alpha: -90%);
+ //   background-color: var(--primary_lighter);
   }
 }
 
@@ -119,16 +130,16 @@ $context-menu-width: 39px;
   display: grid;
   line-height: $grid-cell-height;
   border: none;
-  //  border-right: 1px solid $grid-border-color;
+  //  border-right: 1px solid var(--slab_table_border_color);
   padding: 0 5px;
   outline-width: 0;
 
   &.ag-cell-last-left-pinned {
-    border-right: 1px solid $grid-border-color !important;
+    border-right: 1px solid var(--slab_table_border_color) !important;
   }
 
   &.ag-cell-focus {
-    border: 1px dashed scale-color($primary, $alpha: -60%) !important;
+    border: 1px dashed var(--primary_light) !important;
   }
 
   .ag-icon {
@@ -139,7 +150,7 @@ $context-menu-width: 39px;
 
 .ag-cell-inline-editing {
   height: $grid-cell-height;
-  background: $background_primary;
+  background: var(--slab_background_primary);
 }
 }
 }
@@ -159,6 +170,7 @@ overflow: hidden;
 font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
 .ag-header {
+
   border-bottom: none;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
@@ -201,11 +213,11 @@ left: 0;
 }
 .ag-pinned-left-header {
 border-right: solid 1px;
-border-right-color: $grid-border-color !important;
+border-right-color: var(--slab_table_border_color) !important;
 }
 
 .ag-header-cell-text {
-color: $slab-base-body-color;
+color: var(--slab_foreground_primary);
 }
 
 .ag-row {
@@ -219,13 +231,13 @@ border-right: none !important;
 }
 
 .ag-header {
-border-bottom: solid 1px $grid-border-color !important;
-border-top: solid 1px $grid-border-color !important;
+border-bottom: solid 1px var(--slab_table_border_color) !important;
+border-top: solid 1px var(--slab_table_border_color) !important;
 }
 
 .ag-header-cell::after,
 .ag-header-group-cell::after {
-background: white !important;
+background: var(--slab_background_primary) !important;
 }
 
 .ag-header-group-cell {
@@ -250,7 +262,7 @@ align-items: center !important;
 
 .slab-remove-top-header {
 .ag-header {
-border-top: solid 1px $background_primary !important;
+border-top: solid 1px var(--slab_background_primary) !important;
 }
 }
 

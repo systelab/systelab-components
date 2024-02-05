@@ -1,20 +1,26 @@
 <div class="slab-app-sidebar-large-menu-container">
     <ul class="slab-app-sidebar-tabs-container">
-        <li class="slab-app-sidebar-tab" *ngFor="let tab of tabs" (click)="!tab.subMenu ? tab.action ? tab.action(tab.id) : selectTab(tab.id) : false"
-            [class.selected]="tab.isSelected">
-            <div class="slab-app-sidebar-tab-decoration float-left"></div>
-            <span>{{tab.name}}</span>
-            <ul *ngIf="tab.subMenu" class="slab-app-sidebar-submenu">
-                <li class="slab-app-sidebar-subtab" *ngFor="let subTab of tab.subMenu;" (click)="subTab.action ? subTab.action(subTab.id) : selectTab(subTab.id)" [class.selected]="subTab.isSelected">
-                    <div class="slab-app-sidebar-tab-decoration  float-left"></div>
-                    <span>{{subTab.name}}</span>
-                </li>
-            </ul>
-        </li>
+        @for (tab of tabs; track tab.id) {
+            <li class="slab-app-sidebar-tab" (click)="!tab.subMenu ? tab.action ? tab.action(tab.id) : selectTab(tab.id) : false"
+                [class.selected]="tab.isSelected">
+                <div class="slab-app-sidebar-tab-decoration float-left"></div>
+                <span>{{tab.name}}</span>
+                <ul *ngIf="tab.subMenu" class="slab-app-sidebar-submenu">
+                    @for (subTab of tab.subMenu; track subTab.id) {
+                        <li class="slab-app-sidebar-subtab"  (click)="subTab.action ? subTab.action(subTab.id) : selectTab(subTab.id)" [class.selected]="subTab.isSelected">
+                            <div class="slab-app-sidebar-tab-decoration  float-left"></div>
+                            <span>{{subTab.name}}</span>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
     </ul>
     <ul class="slab-app-sidebar-actions-container">
-        <button type="button" *ngFor="let action of actions" class="btn" (click)="action.action()">
-            <i *ngIf="action.icon" class="{{action.icon}}"></i> {{action.name}}
-        </button>
+        @for (action of actions; track action.name) {
+            <button type="button" class="btn" (click)="action.action()">
+                <i *ngIf="action.icon" class="{{action.icon}}"></i> {{action.name}}
+            </button>
+        }
     </ul>
 </div>

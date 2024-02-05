@@ -37,15 +37,15 @@
     }
 
     &.danger {
-        color: $danger !important;
+        color: var(--danger) !important;
     }
 
     &.warning {
-        color: $warning !important;
+        color: var(--warning) !important;
     }
 
     &.info {
-        color: $primary !important;
+        color: var(--text-color) !important;
     }
 }
 

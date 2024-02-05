@@ -11,6 +11,7 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
 import { ToastService } from './toast.service';
 
 @Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'toast-test',
 	template: `
                 <button id="openbutton" type="button" class="btn btn-primary" (click)="showToast()">Show</button>

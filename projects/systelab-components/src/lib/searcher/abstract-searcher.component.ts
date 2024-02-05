@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SearcherDialog } from './searcher.dialog.component';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { AbstractSearcher } from './abstract-searcher';
@@ -9,6 +9,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 
 	public searcherDialogParameters: SearcherDialogParameters<T>;
 
+	@ViewChild('valueToSearch') public valueToSearch: ElementRef;
 	@Input() public multipleSelection = false;
 	@Input() public isDisabled: boolean;
 
@@ -156,6 +157,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 					} else if (this.multipleSelection) {
 						this.multipleSelectedItemList = [...previousMultipleSelectionItemList];
 					}
+					this.valueToSearch.nativeElement.focus();
 				}
 			);
 	}
@@ -168,6 +170,9 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 							if (response !== undefined) {
 								if (this.multipleSelection) {
 									this.multipleSelectedItemList = response;
+									if (!response?.length) {
+										this.openSearchDialog();
+									}
 								} else {
 									if (response.length === 1) {
 										this.id = response[0][this.abstractSearcher.getIdField()];

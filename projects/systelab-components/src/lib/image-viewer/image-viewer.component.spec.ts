@@ -34,8 +34,8 @@ export class ImageViewerTestComponent {
 	public imageTitle = 'Barcelona Eixample District';
 	public actionButtons: ActionButton[] = [
 		{action: 'Action 1', label: 'Action 1', type: ActionButtonType.BUTTON},
-		{action: 'red', label: 'Apply red', type: ActionButtonType.TOGGLE_BUTTON},
-		{action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON}
+		{action: 'red', label: 'Apply red', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}},
+		{action: 'green', label: 'Apply green', type: ActionButtonType.TOGGLE_BUTTON, state: {checked: false, disabled: false}}
 	];
 	public imageFilters = `
 	<filter id="red">
@@ -52,7 +52,6 @@ export class ImageViewerTestComponent {
 								 0 0 0 0 0
 								 0 0 0 1 0"/>
 	</filter>`;
-	private buttonActionClicked: string;
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -117,6 +116,11 @@ describe('ImageViewerTestComponent', () => {
 		expect(fixture.componentInstance).toBeDefined();
 	});
 
+	it('should initialize with zoom and drag disabled', () => {
+		expect(fixture.componentInstance.imageViewer.zoomEnabled).toBeFalse();
+		expect(fixture.componentInstance.imageViewer.dragEnabled).toBeFalse();
+	});
+
 	it('should render action and zoom toggle buttons', () => {
 		const numActionButton = fixture.debugElement.nativeElement.querySelectorAll('systelab-toggle-button').length;
 		expect(numActionButton).toEqual(3);
@@ -125,6 +129,15 @@ describe('ImageViewerTestComponent', () => {
 	it('should render the rest of regular buttons', () => {
 		const numActionButton = fixture.debugElement.nativeElement.querySelectorAll('systelab-button').length;
 		expect(numActionButton).toEqual(3);
+	});
+
+	it('should render action buttons with the correct state (enabled and non-primary look&feel)', () => {
+		const toggleButtons = fixture.debugElement.nativeElement.querySelectorAll('systelab-toggle-button');
+
+		toggleButtons.forEach(toggleButton => {
+			expect(toggleButton.querySelector('button').disabled).toBe(false);
+			expect(toggleButton.querySelector('button').classList.contains('btn-outline-primary')).toBe(true);
+		});
 	});
 
 	it('should render description parameter as overlay text', () => {

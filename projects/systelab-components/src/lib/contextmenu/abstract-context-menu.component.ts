@@ -110,6 +110,11 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 				const leftPosition = this.getFirstChildLeftWithLevels(selectedChild, optionLevel, this.previousMenuWidth);
 
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'top', this.getFirstChildTop(event, selectedChild) + 'px');
+
+				if (selectedChild.nativeElement.getBoundingClientRect().top < 0) {
+					this.myRenderer.setStyle(selectedChild.nativeElement, 'top', (0 - event.clientY + selectedChild.nativeElement.parentElement.offsetTop + 10) + 'px');
+				}
+
 				this.myRenderer.setStyle(selectedChild.nativeElement, 'left', leftPosition + 'px');
 			}
 		} else {

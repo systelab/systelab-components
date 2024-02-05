@@ -71,6 +71,20 @@ Decimal Input
 }
 ```
 
+Positive Integer Input
+```
+{
+    colId:               'positive-integer-input',
+    headerName:          'Cell with positive integer',
+    field:               'positiveIntegerValue',
+    width:               200,
+    cellEditorFramework: PositiveIntegerInputCellEditorComponent,
+    editable:            true,
+    onCellValueChanged:  event => console.log('input', e)
+}
+```
+
+
 CheckBox
 
 To use the checkbox we need to send a parameter that has to be searched in the data to get a unique id. By this way we can have all the checkbox working independent from the other.
@@ -312,23 +326,26 @@ With the **canHideAllColumns** parameter you can control if the dialog allows hi
 
 ## Properties
 
-| Name | Type | Default | Description |
-| ---- |:----:|:-------:| ----------- |
-| preferenceName | string | | Preference prefix in order to store the columns size |
-| multipleSelection | boolean | false | Set multiple selection |
-| showChecks | boolean | false | Show a column with a checkbox for each element |
-| noRowsText | string | No Rows To Show (provided by ag-grid) | String/Template to display in the grid is empty (can be html) |
-| loadingText | string | Loading... (provided by ag-grid) | String/Template to display in the grid while the grid is loading the data (can be html) |
-| rowData | Array&lt;T&gt; | | Array of the elements of type <T> displayed in the table. Only for components extending from AbstractGrid |
-| menu | Array&lt;GridContextMenuOption&lt;T&gt;&gt; | | Array with the menu options. Each option is a GridContextMenuOption. If used a column is added as the first of the table having three dots button on each row to open the context menu |
-| headerMenu | Array&lt;GridContextMenuOption&lt;Object&gt;&gt; | | Array with the header column menu options. Each option is a GridContextMenuOption. If used a three dots button is added in the header to open the context menu |
+| Name |                          Type                           | Default | Description                                                                                                                                                                            |
+| ---- |:-------------------------------------------------------:|:-------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| preferenceName |                         string                          | | Preference prefix in order to store the columns size                                                                                                                                   |
+| multipleSelection |                         boolean                         | false | Set multiple selection                                                                                                                                                                 |
+| showChecks |                         boolean                         | false | Show a column with a checkbox for each element                                                                                                                                         |
+| headerCheckboxSelection |                         boolean                         | false | Show a column with a checkbox in the header row                                                                                                                                        |
+| noRowsText |                         string                          | No Rows To Show (provided by ag-grid) | String/Template to display in the grid is empty (can be html)                                                                                                                          |
+| loadingText |                         string                          | Loading... (provided by ag-grid) | String/Template to display in the grid while the grid is loading the data (can be html)                                                                                                |
+| rowData |                     Array&lt;T&gt;                      | | Array of the elements of type <T> displayed in the table. Only for components extending from AbstractGrid                                                                              |
+| menu |       Array&lt;GridContextMenuOption&lt;T&gt;&gt;       | | Array with the menu options. Each option is a GridContextMenuOption. If used a column is added as the first of the table having three dots button on each row to open the context menu |
+| headerMenu |    Array&lt;GridContextMenuOption&lt;Object&gt;&gt;     | | Array with the header column menu options. Each option is a GridContextMenuOption. If used a three dots button is added in the header to open the context menu                         |
+| removeSelectionOnOpenContextMenu | boolean | | If true removes multiple selection when the context menu is opened                                                                                                                     |
 
 ## Events
 
 | Name | Parameters | Description |
-| ---- |:----------:| ----------- |
+|  |:----------:| ----------- |
 | action | GridContextMenuActionData&lt;T&gt;&#124;GridContextMenuActionData&lt;Object&gt; | When an action in the popup menu (row or header) is selected, the event is fired with the selected GridContextMenuActionData |
 | clickRow | T | When a row is selected, the event is fired with the element in the row. |
+| rowSelection | T | When a row is selected with a checkbox, the event is fired with the element in the row. |
 | rowDragEnd | Event | Emits ag grid event after a row drag when a column is defined as rowDrag: true.|
 
 ## Ag-grid

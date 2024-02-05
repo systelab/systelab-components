@@ -8,24 +8,41 @@
     text-indent: 10px;
     cursor: pointer;
 
+    [class*='icon-'] {
+      color: var(--text-color) !important;
+
+      &.text-black-50 {
+        color: rgba(0, 0, 0, 0.5) !important;
+      }
+    }
+
     @include user-selection(none);
   }
 
 
   .slab-sortable-list-even-row {
-    background-color: $table-row-even-background-color;
+    background-color: var(--slab_table_row_even_background);
 
     &.slab-sortable-list-row-selected {
-      background-color: $slab-selected-background-color;
+      background-color: var(--slab_table_row_selection_background);
+      color: var(--slab_table_row_selection_foreground);
     }
   }
 
   .slab-sortable-list-odd-row {
-    background-color: $table-row-odd-background-color;
+    background-color: var(--slab_table_row_odd_background);
 
     &.slab-sortable-list-row-selected {
-      background-color: $slab-selected-background-color;
+      background-color: var(--slab_table_row_selection_background);
+      color: var(--slab_table_row_selection_foreground);
     }
+  }
+
+  .slab-sortable-checkbox {
+    position: relative;
+    top: 3px;
+    left: 4px;
+    text-indent: 0;
   }
 
 }

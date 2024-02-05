@@ -51,8 +51,20 @@ systelab-two-list {
             @include user-selection(none);
           }
 
-          .slab-twolistboxrowselected {
-            background-color: $slab-selected-background-color;
+          .slab-twolistboxrow-even-row {
+            background-color: var(--slab_table_row_even_background);
+
+            &.slab-twolistboxrowselected {
+              background-color: var(--slab_table_row_selection_background);
+            }
+          }
+
+          .slab-twolistboxrow-odd-row {
+            background-color: var(--slab_table_row_odd_background);
+
+            &.slab-twolistboxrowselected {
+              background-color: var(--slab_table_row_selection_background);
+            }
           }
 
           .slab-twolistboxrowdrag {
@@ -74,14 +86,14 @@ systelab-two-list {
         height: 35px;
         width: 35px;
         margin: 2px;
-        color: $primary;
+        color: var(--primary);
         padding: 0;
         border-radius: 30px;
-        border: 1px solid $primary;
+        border: 1px solid var(--primary);
 
         &:hover {
           color: white;
-          background-color: $primary;
+          background-color: var(--primary);
         }
         &:disabled {
           opacity: 0.4 !important;

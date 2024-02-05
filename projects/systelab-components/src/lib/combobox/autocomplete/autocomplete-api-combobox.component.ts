@@ -12,13 +12,17 @@ export class KeyName {
 	static readonly enter = 'Enter';
 	static readonly escape = 'Escape';
 	static readonly tab = 'Tab';
+	static readonly arrowUp = 'ArrowUp';
+	static readonly arrowDown = 'ArrowDown';
+	static readonly shift = 'Shift';
 }
 
 @Directive()
 export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> implements AgRendererComponent {
 
 	public override startsWith = '';
-	@Input() public debounceTime = 350;
+	@Input() public debounceTime: number = 350;
+	@Input() public withClearOption: boolean = false;
 
 	constructor(
 		public override myRenderer: Renderer2,
@@ -29,7 +33,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	public override doSearch(event: any): void {
-		if (event.shiftKey || event.ctrlKey) {
+		if (event.shiftKey || event.ctrlKey || event.key === KeyName.arrowUp || event.key === KeyName.arrowDown || event.key === KeyName.shift) {
 			return;
 		}
 		if (event.key === KeyName.escape || event.key === KeyName.enter || event.key === KeyName.tab) {
@@ -37,7 +41,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 				this.closeDropDown();
 			}
 		} else {
-			this.doSearchText(event.target.value);
+			this.doSearchText(event.target?.value);
 		}
 	}
 
@@ -60,7 +64,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		}
 	}
 
-	public onInputNavigate(): void {
+	public onInputNavigate(event): void {
 		if (!this.isDisabled) {
 			if (!this.isDropdownOpened) {
 				this.openDropDown();
@@ -86,6 +90,9 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		} else if (e.event.key.length === 1 && e.event.key.match(/^[a-zA-Z]+|[0-9]/g)) {
 			this.inputElement.nativeElement.value += e.event.key;
 			this.inputElement.nativeElement.focus();
+		} else if (e.event.key === KeyName.tab) {
+			this.closeDropDown();
+			e.event.stopPropagation();
 		}
 		e.event.preventDefault();
 	}
@@ -158,6 +165,15 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		jQuery('#' + this.comboId)
 			.dropdown('toggle');
 		this.isDropdownOpened = true;
+	}
+
+	public inputIsEmpty(): boolean {
+		return !this.input || this.input.nativeElement?.value.length === 0;
+	}
+
+	public clearText(event: MouseEvent): void {
+		this.input.nativeElement.value = '';
+		this.doSearch(event);
 	}
 
 }

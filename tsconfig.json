@@ -13,7 +13,8 @@
     "target": "ES2022",
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+      "dom.iterable"
     ],
     "paths": {
       "systelab-components": [
@@ -21,7 +22,8 @@
         "dist/systelab-components"
       ]
     },
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

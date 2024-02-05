@@ -1,4 +1,16 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	DoCheck,
+	ElementRef,
+	EventEmitter,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import { addDays } from 'date-fns';
 import { PrimeNGConfig } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
@@ -10,7 +22,7 @@ import { DataTransformerService } from './date-transformer.service';
 	templateUrl: 'datepicker.component.html',
 	providers:   [DataTransformerService]
 })
-export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	@Input() public disabled = false;
 	@Input() public error = false;
@@ -25,12 +37,13 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	@Input() public warnDaysBefore: number;
 	@Input() public warnDaysAfter: number;
 	@Input() public autofocus = false;
-	@Input() public fromDateForRelativeDates;
+	@Input() public fromDateForRelativeDates: Date;
 	@Input() public tabindex: number;
 	@Input() public withIntegratedTime = false;
 	@Input() public onlyTime = false;
 	@Input() public showOtherMonths = true;
 	@Input() public selectOtherMonths = false;
+	@Input() public dateFormat: string;
 
 	@Input()
 	get currentDate(): Date {
@@ -64,7 +77,9 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public currentDocSize: number;
 	public currentLanguage: string;
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	public destroyWheelListener: Function;
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	public destroyKeyListener: Function;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
@@ -143,7 +158,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
 	public changeDate(): void {
 		this.formatError = false;
-		if (this.currentCalendar && this.currentCalendar.inputfieldViewChild.nativeElement.value !== undefined) {
+		if (this.currentCalendar?.inputfieldViewChild.nativeElement.value !== undefined) {
 			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
 				.toLowerCase();
 			if (this.inputChanged) {
@@ -224,10 +239,7 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	public repositionateCalendar(element?: ElementRef): void {
 
 		try {
-			let inputElementTop: number, inputElementHeight: number, datepickerElementHeight: number;
-			inputElementTop = this.inputElement.nativeElement.getBoundingClientRect().top;
-			inputElementHeight = this.inputElement.nativeElement.getBoundingClientRect().height;
-			datepickerElementHeight = element.nativeElement.getBoundingClientRect().height;
+			const { inputElementTop, inputElementHeight, datepickerElementHeight } = this.inputElement.nativeElement.getBoundingClientRect();
 			if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
 				const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
 				this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
@@ -365,9 +377,10 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 		};
 
 		this.language.firstDayOfWeek = this.i18nService.getFirstDayOfWeek();
-		this.language.dateFormatValue = this.i18nService.getDateFormatForDatePicker(true);
+
+		this.language.dateFormatValue = this.dateFormat ? this.dateFormat : this.i18nService.getDateFormatForDatePicker(true);
 		if (this.currentCalendar) {
-			this.currentCalendar.dateFormat = this.language.dateFormatValue;
+			this.currentCalendar.dateFormat = this.dateFormat || this.language.dateFormatValue;
 		}
 
 		this.config.setTranslation(this.language.translations);

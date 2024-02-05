@@ -98,13 +98,13 @@
               }
             ],
             "styles": [
-              "projects/showcase/src/styles.scss",
-              "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
               "node_modules/primeng/resources/themes/nova/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
+              "projects/showcase/src/styles.scss",
+              "projects/systelab-components/icons/icomoon.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -153,18 +153,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "showcase:build"
+            "buildTarget": "showcase:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "showcase:build:production"
+              "buildTarget": "showcase:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "showcase:build"
+            "buildTarget": "showcase:build"
           }
         },
         "test": {
@@ -195,7 +195,7 @@
               "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
               "node_modules/primeng/resources/themes/nova/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

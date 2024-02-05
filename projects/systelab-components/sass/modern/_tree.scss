@@ -5,7 +5,7 @@
 
     .slab-tree-node {
       &.slab-selected {
-        background-color: $table-row-selected-background-color;
+        background-color: var(--slab_table_row_selection_background);
       }
 
       button {
@@ -13,9 +13,13 @@
         border: none;
       }
 
+      [class*='icon-'] {
+        color: var(--text-primary) !important;
+      }
+
       &:hover {
         cursor: pointer;
-        background-color: scale-color($primary, $alpha: -90%);
+        background-color: var(--slab_table_row_hover_background);
       }
 
     }

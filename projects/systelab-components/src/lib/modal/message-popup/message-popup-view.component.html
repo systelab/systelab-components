@@ -7,8 +7,12 @@
 </div>
 <systelab-dialog-bottom>
     <div class="ml-auto" *ngIf="parameters.buttons.length>0">
-        <button *ngFor="let button of parameters.buttons; let i=index; let cnt=count;" type="button" class="btn ml-1 {{button.cssClass}}" (click)="close(button.returnValue)"
-                [autoFocus]="button.focus || (!hasAnyButtonFocus && i===cnt-1)">{{button.title}}</button>
+        @for (button of parameters.buttons; track button; let i = $index; let cnt = $count;) {
+            <button type="button"
+                    class="btn ml-1 {{button.cssClass}}"
+                    (click)="close(button.returnValue)"
+                    [autoFocus]="button.focus || (!hasAnyButtonFocus && i===cnt-1)">{{button.title}}</button>
+        }
     </div>
     <div class="ml-auto" *ngIf="parameters.buttons.length===0">
         <button type="button" class="btn btn-primary" (click)="close()" [autoFocus]="true">{{ 'COMMON_CLOSE' | translate | async }}</button>

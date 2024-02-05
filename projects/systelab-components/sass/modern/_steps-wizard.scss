@@ -19,7 +19,7 @@ systelab-wizard-steps {
       }
 
       .slab-step-optional-text {
-        color: $secondary;
+        color: var(--secondary);
       }
 
       .slab-step-button-container {
@@ -31,7 +31,7 @@ systelab-wizard-steps {
           flex: 1;
 
           &.slab-step-visited {
-            border-bottom: 1px solid $primary;
+            border-bottom: 1px solid var(--primary);
           }
           &.slab-step-first {
             border-bottom: 1px solid transparent;

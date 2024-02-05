@@ -1,28 +1,34 @@
 
 .table {
-  color: $slab-base-body-color;
+  color: var(--slab_foreground_primary);
 
   tr {
     height: $slab-table-min-row-height;
+
+    th,
+    td {
+      border-color: var(--slab_table_border_color) !important;
+    }
   }
 
   thead th {
-    border-bottom: 1px solid $table-border-color;
+    border-bottom: 1px solid var(--slab_table_border_color);
   }
 
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: $table-row-odd-background-color;
+  background-color: var(--slab_table_row_odd_background);
 }
 
 .table-striped tbody tr:nth-of-type(even) {
-  background-color: $table-row-even-background-color;
+  background-color: var(--slab_table_row_even_background);
 }
 
 
 .table-hover tbody tr:hover {
-  background-color: scale-color($primary, $alpha: -90%);
+  color: var(--ag-data-color);
+  background-color: var(--slab_table_row_hover_background) !important;
 }
 
 

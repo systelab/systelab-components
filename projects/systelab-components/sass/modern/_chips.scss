@@ -2,7 +2,7 @@ systelab-chips {
 
   .p-autocomplete-multiple-container.p-inputtext {
     height: 100%;
-    border: 1px solid $slab-component-border-color !important;
+    border: 1px solid var(--slab_component_border_color) !important;
 
     &:focus {
       border-color: $slab-focus-component-border-color !important;
@@ -10,7 +10,7 @@ systelab-chips {
     }
 
     &:hover:enabled:not(:focus) {
-      border-color:  $slab-component-border-color !important;
+      border-color:  var(--slab_component_border_color) !important;
     }
   }
 
@@ -36,7 +36,7 @@ systelab-chips {
   }
 
   .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-token {
-    background-color: $primary;
+    background-color: var(--primary);
     border-radius: 20px;
     padding: 2px 5px;
   }

@@ -36,9 +36,6 @@ export class ApplicationFrameTestComponent {
 
 	public selectedTab;
 
-	constructor() {
-	}
-
 	public doDummySelected(newTab: any): void {
 		this.selectedTab = newTab;
 	}

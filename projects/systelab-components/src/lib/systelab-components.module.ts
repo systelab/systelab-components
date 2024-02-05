@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
@@ -21,7 +21,7 @@ import { GenderSelect } from './select/gender-combobox.component';
 import { ColorCellRendererComponent } from './colorpicker/color-cell-renderer.component';
 import { ApplicationHeaderComponent } from './applicationframe/header/app-header.component';
 import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
-import { Datepicker } from './datepicker/datepicker.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 import { DatepickerTimeComponent } from './datepicker/datepicker-time.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
@@ -97,8 +97,27 @@ import { SliderDoubleRangeComponent } from './slider-double-range/slider-double-
 import { ButtonComponent } from './button/button.component';
 import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
-import {ImageViewerComponent} from './image-viewer/image-viewer.component';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
+import {
+	PositiveIntegerInputCellEditorComponent
+} from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
+import { APP_CONFIG, AppConfig } from './config';
+import { TestIdDirective } from './directives/test-id.directive';
+
+export const factory = () => {
+	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
+	if (systelabComponentsModuleCreated) {
+		throw new Error('SystelabComponentsModuleCreated.forRoot imported to many times');
+	}
+	(factory as any)._systelabComponentsModuleCreated = true;
+};
+
+const providers = [
+	StylesUtilService,
+	ColorUtilService,
+	LoadingService
+];
 
 @NgModule({
 	imports:      [
@@ -146,7 +165,7 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
-		Datepicker,
+		DatepickerComponent,
 		DatepickerTimeComponent,
 		SearcherDialog,
 		CalendarDialog,
@@ -200,9 +219,12 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent,
+		NumpadDecimalNumericDirective,
+  		TestIdDirective,
 	],
-	exports:      [
+	exports: [
 		SliderComponent,
 		SliderDoubleRangeComponent,
 		SwitchComponent,
@@ -222,7 +244,7 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		PeriodSelect,
 		TimeUnitSelectComponent,
 		GenderSelect,
-		Datepicker,
+		DatepickerComponent,
 		TouchspinComponent,
 		ModulabSelect,
 		DatepickerTimeComponent,
@@ -285,13 +307,37 @@ import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numer
 		DraggableDirective,
 		ResizableDirective,
 		ImageViewerComponent,
-		NumpadDecimalNumericDirective
+		NumpadDecimalNumericDirective,
+		TestIdDirective,
+		NumpadDecimalNumericDirective,
+		PositiveIntegerInputCellEditorComponent
 	],
-	providers:    [
-		StylesUtilService,
-		ColorUtilService,
-		LoadingService
-	]
 })
 export class SystelabComponentsModule {
+
+	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {
+	}
+
+	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
+		return {
+			ngModule: SystelabComponentsModule,
+			providers: [
+				...providers,
+				{
+					provide: 'SystelabComponentsModuleInstance',
+					useFactory: factory
+				},
+				{
+					provide: APP_CONFIG, useValue: conf
+				}
+			]
+		};
+	}
+
+	public static forChild(): ModuleWithProviders<SystelabComponentsModule> {
+		return {
+			ngModule: SystelabComponentsModule,
+			providers: [],
+		};
+	}
 }

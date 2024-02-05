@@ -30,11 +30,11 @@ const englishNumPadScenarios = [
 	{description: 'Use Number not processed', code: 'Digit8', key: '8', expected: ''},
 ];
 
-function setup() {
+const setup = () => {
 	const fixture = TestBed.createComponent(TestComponent);
 	fixture.detectChanges();
 	return {fixture};
-}
+};
 
 describe('Verify numPadDecimalNumericDirective english', () => {
 

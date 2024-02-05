@@ -39,6 +39,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 			if (this.totalItemsLoaded) {
 				this.setDropdownHeight();
 				this.setDropdownPosition();
+				this.transferFocusToGrid();
 				result = false;
 			}
 		}

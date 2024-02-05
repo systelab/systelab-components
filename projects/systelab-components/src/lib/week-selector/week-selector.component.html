@@ -11,16 +11,20 @@
         </div>
         <div class="box">
             <ul>
-                <li *ngFor="let week of weeks" [class.active]="week.isActive" (click)="onClickedWeek(week)">
+                @for (week of weeks; track week) {
+                <li [class.active]="week.isActive" (click)="onClickedWeek(week)">
                     {{week.text}}
                 </li>
+                }
             </ul>
         </div>
         <div class="box">
             <ul>
-                <li *ngFor="let month of months" [class.active]="month.isActive" (click)="onClickedMonth(month)">
-                    {{month.text}}
-                </li>
+                @for (month of months; track month) {
+                    <li [class.active]="month.isActive" (click)="onClickedMonth(month)">
+                        {{month.text}}
+                    </li>
+                }
             </ul>
         </div>
     </div>

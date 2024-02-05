@@ -1,6 +1,7 @@
 <div #combobox class="dropdown slab-combobox d-flex w-100" [ngClass]="{'disabled': isDisabled}">
     <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}"
-         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeydown()">
+         data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeyArrowDown($event)"
+         (keydown.arrowUp)="onComboKeyArrowUp($event)">
         <input *ngIf="!customInputRenderer" #input [readonly]="!allowEditInput" type="text"
                class="slab-flex-1 slab-combo-label slab-combo-input"
                [tabindex]="tabindex"
@@ -11,7 +12,7 @@
              class="slab-flex-1 slab-combo-input combobox-input-renderer" [ngStyle]="getInputHeight()"
              [style.font-family]="fontFamily" [style.font-size.px]="fontSize" [style.font-weight]="fontWeight"
              [style.font-style]="fontStyle" [style.color]="inputColor"
-             tabindex="0">
+             [tabindex]="tabindex">
             <combobox-input-renderer [componentType]="customInputRenderer" [id]="id" [description]="description"
                                      [initialParams]="initialParams"
                                      [selectedData]="currentSelected"></combobox-input-renderer>
@@ -54,7 +55,7 @@
                                  [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)"
                                  (modelUpdated)="onModelUpdated()"
                                  (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady()"
-                                 [suppressKeyboardEvent]="suppressKeyboardEvent" (cellKeyPress)="onCellKeyDown($event)">
+                                 (cellKeyDown)="onCellKeyDown($event)">
                 </ag-grid-angular>
             </div>
         </div>
