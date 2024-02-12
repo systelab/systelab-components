@@ -381,11 +381,19 @@ export class ImageViewerComponent {
 	}
 
 	private getInitialZoom(): number {
-		// Calculate initial zoom of the image to fit the window
-		const availableSize = this.viewPort.offsetWidth < this.viewPort.offsetHeight ? this.viewPort.offsetWidth
-			: this.viewPort.offsetHeight;
-		const imageSize = this.image.naturalWidth < this.image.naturalHeight ? this.image.naturalWidth : this.image.naturalHeight;
-		return availableSize / imageSize * 100;
+		// Calculate initial Zoom of the image to fit the window
+		const availableWidth = this.viewPort.offsetWidth;
+		const availableHeight = this.viewPort.offsetHeight;
+
+		const imageWidth = this.image.naturalWidth;
+		const imageHeight = this.image.naturalHeight;
+
+		// Calculate Zoom for width and height
+		const zoomWidth = (availableWidth / imageWidth) * 100;
+		const zoomHeight = (availableHeight / imageHeight) * 100;
+
+		// Use Zoom calculation of the smaller size, so it always fits
+		return Math.min(Math.min(zoomWidth, zoomHeight), 200);
 	}
 
 }
