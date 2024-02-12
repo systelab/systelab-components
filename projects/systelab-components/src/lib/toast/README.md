@@ -17,3 +17,18 @@ public showError() {
 
 }
 ```
+
+Now you can configure some default settings for this service: 
+
+```typescript
+    enum ToastSize {
+        small = 'small',
+        large = 'large'
+    }
+    {
+      autoWidth: boolean,
+      fixedSize: ToastSize,
+      showCloseButton: boolean,
+      timeout: number,
+    }
+```

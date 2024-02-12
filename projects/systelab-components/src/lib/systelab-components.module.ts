@@ -99,10 +99,10 @@ import { DraggableDirective } from './directives/draggable.directive';
 import { ResizableDirective } from './directives/resizable.directive';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { NumpadDecimalNumericDirective } from './directives/numpad-decimal-numeric.directive';
+import { APP_CONFIG, AppConfig } from './systelab-components.module.config';
 import {
 	PositiveIntegerInputCellEditorComponent
 } from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
-import { APP_CONFIG, AppConfig } from './config';
 import { TestIdDirective } from './directives/test-id.directive';
 
 export const factory = () => {

@@ -63,10 +63,40 @@ NgModule({
     ...
 ```
 
-You can config the productionMode for the library to true or false using the *forRoot* method. The *forRoot* method is optional. By default, the module is configured 
-with the *productionMode* flag to true.
+You can config some application parameters using the *forRoot* method:
 
-If you need to import SystelabComonentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
+```typescript
+    enum ToastSize {
+        small = 'small',
+        large = 'large'
+    }
+  {
+    productionMode: boolean;
+    toast?: {
+      autoWidth: boolean,
+      fixedSize: ToastSize,
+      showCloseButton: boolean,
+      timeout: number,
+    }
+  }
+```
+
+The *forRoot* method is optional. By default, the module is configured 
+with:
+
+```typescript
+{
+    productionMode: true,
+    toast: {
+        autoWidth: false,
+      fixedSize: ToastSize.small,
+      showCloseButton: false,
+      timeout: 5000,
+    }
+}
+```
+
+If you need to import SystelabComponentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
 receive an error in your console.
 
 ```typescript
