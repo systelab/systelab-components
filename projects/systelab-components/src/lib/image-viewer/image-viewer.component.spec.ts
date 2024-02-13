@@ -72,6 +72,10 @@ export class ImageViewerTestComponent {
 			this.imageViewer.setFilter(action);
 		}
 	}
+
+	public setInitials() {
+		this.imageViewer.setInitialValues();
+	}
 }
 
 const clickActionButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>, children: number) => {
@@ -180,14 +184,14 @@ describe('ImageViewerTestComponent', () => {
 
 	it('should adjust image zoom on init', () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
-		imageViewerComponent.setInitialValues();
+		fixture.componentInstance.setInitials();
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
 	});
 
 	it('should adjust image zoom after doing adjust', () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
-		imageViewerComponent.setInitialValues();
+		fixture.componentInstance.setInitials();
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
 
@@ -199,7 +203,7 @@ describe('ImageViewerTestComponent', () => {
 
 	it('should toggleZoomByArea when zoom is enabled', () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
-		imageViewerComponent.setInitialValues();
+		fixture.componentInstance.setInitials();
 		imageViewerComponent.zoomEnabled = true;
 		imageViewerComponent.toggleZoomByArea();
 		expect(imageViewerComponent.zoomEnabled).toBeFalse();
@@ -207,7 +211,7 @@ describe('ImageViewerTestComponent', () => {
 
 	it('should toggleZoomByArea when zoom is disabled', () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
-		imageViewerComponent.setInitialValues();
+		fixture.componentInstance.setInitials();
 		imageViewerComponent.zoomEnabled = false;
 		imageViewerComponent.toggleZoomByArea();
 		expect(imageViewerComponent.zoomEnabled).toBeTrue();
