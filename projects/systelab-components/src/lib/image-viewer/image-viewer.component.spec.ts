@@ -177,5 +177,13 @@ describe('ImageViewerTestComponent', () => {
 		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThanOrEqual(0);
 	});
 
+	it('should adjust image', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		spyOn<any>(imageViewerComponent, 'getInitialZoom').and.callThrough();
+		imageViewerComponent.setInitialValues();
+		expect(imageViewerComponent['getInitialZoom']).toHaveBeenCalled();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toEqual(55.666666666666664);
+	});
+
 });
 
