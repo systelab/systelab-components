@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -105,7 +105,8 @@ describe('ImageViewerTestComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule
 			],
-			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent]
+			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent],
+			schemas: [ NO_ERRORS_SCHEMA ]
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ImageViewerTestComponent);
@@ -194,6 +195,23 @@ describe('ImageViewerTestComponent', () => {
 		imageViewerComponent.doAdjust();
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+	});
+
+	it('should toggleZoomByArea when zoom is enabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		imageViewerComponent.setInitialValues();
+		imageViewerComponent.zoomEnabled = true;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeFalse();
+	});
+
+	it('should toggleZoomByArea when zoom is disabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		imageViewerComponent.setInitialValues();
+		imageViewerComponent.zoomEnabled = false;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeTrue();
+		expect(imageViewerComponent.dragEnabled).toBeFalse();
 	});
 
 });
