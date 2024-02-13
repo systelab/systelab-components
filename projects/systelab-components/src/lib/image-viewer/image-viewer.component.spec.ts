@@ -177,11 +177,23 @@ describe('ImageViewerTestComponent', () => {
 		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThanOrEqual(0);
 	});
 
-	it('should adjust image', () => {
+	it('should adjust image zoom on init', () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
 		imageViewerComponent.setInitialValues();
-		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThan(0);
-		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(200);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+	});
+
+	it('should adjust image zoom after doing adjust', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		imageViewerComponent.setInitialValues();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+
+		imageViewerComponent.imgParams.sliderZoomPct = 199;
+		imageViewerComponent.doAdjust();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
 	});
 
 });
