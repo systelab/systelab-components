@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -72,6 +72,10 @@ export class ImageViewerTestComponent {
 			this.imageViewer.setFilter(action);
 		}
 	}
+
+	public setInitials() {
+		this.imageViewer.setInitialValues();
+	}
 }
 
 const clickActionButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>, children: number) => {
@@ -84,6 +88,12 @@ const clickActionButton = (imageViewer: ComponentFixture<ImageViewerTestComponen
 const clickToggleButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>, children: number) => {
 	const button = imageViewer.debugElement.nativeElement.querySelector('#imageViewerHeader > div:nth-child('
 		+ children +') > div.ml-1 > systelab-toggle-button');
+	button.click();
+	imageViewer.detectChanges();
+};
+
+const clickAdjustButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>) => {
+	const button = imageViewer.debugElement.nativeElement.querySelector('[data-test-id="AdjustBtn"]');
 	button.click();
 	imageViewer.detectChanges();
 };
@@ -105,7 +115,8 @@ describe('ImageViewerTestComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule
 			],
-			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent]
+			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent],
+			schemas: [ NO_ERRORS_SCHEMA ]
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ImageViewerTestComponent);
@@ -177,5 +188,39 @@ describe('ImageViewerTestComponent', () => {
 		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThanOrEqual(0);
 	});
 
+	it('should have initialized zoom with valid value', async () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+	});
+
+	it('should adjust image zoom after doing adjust to a valid value', async () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.imgParams.sliderZoomPct = 199;
+		clickAdjustButton(fixture);
+		await fixture.whenStable();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+	});
+
+
+	it('should toggleZoomByArea when zoom is enabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = true;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeFalse();
+	});
+
+	it('should toggleZoomByArea when zoom is disabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = false;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeTrue();
+		expect(imageViewerComponent.dragEnabled).toBeFalse();
+	});
 });
 
