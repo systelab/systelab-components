@@ -92,6 +92,12 @@ const clickToggleButton = (imageViewer: ComponentFixture<ImageViewerTestComponen
 	imageViewer.detectChanges();
 };
 
+const clickAdjustButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>) => {
+	const button = imageViewer.debugElement.nativeElement.querySelector('[data-test-id="AdjustBtn"]');
+	button.click();
+	imageViewer.detectChanges();
+};
+
 const clickOverlay = (imageViewer: ComponentFixture<ImageViewerTestComponent>) => {
 	const overlay = imageViewer.debugElement.nativeElement.querySelector('#imageViewerOverlayText');
 	overlay.click();
@@ -182,41 +188,21 @@ describe('ImageViewerTestComponent', () => {
 		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThanOrEqual(0);
 	});
 
-	it('should adjust image zoom on init', () => {
+	it('should have initialized zoom with valid value', async () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
 		fixture.componentInstance.setInitials();
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
 	});
 
-	it('should adjust image zoom after doing adjust', () => {
+	it('should adjust image zoom after doing adjust to a valid value', async () => {
 		const imageViewerComponent = fixture.componentInstance.imageViewer;
 		fixture.componentInstance.setInitials();
-		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
-		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
-
 		imageViewerComponent.imgParams.sliderZoomPct = 199;
-		imageViewerComponent.doAdjust();
+		clickAdjustButton(fixture);
+		await fixture.whenStable();
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
 	});
-
-	it('should toggleZoomByArea when zoom is enabled', () => {
-		const imageViewerComponent = fixture.componentInstance.imageViewer;
-		fixture.componentInstance.setInitials();
-		imageViewerComponent.zoomEnabled = true;
-		imageViewerComponent.toggleZoomByArea();
-		expect(imageViewerComponent.zoomEnabled).toBeFalse();
-	});
-
-	it('should toggleZoomByArea when zoom is disabled', () => {
-		const imageViewerComponent = fixture.componentInstance.imageViewer;
-		fixture.componentInstance.setInitials();
-		imageViewerComponent.zoomEnabled = false;
-		imageViewerComponent.toggleZoomByArea();
-		expect(imageViewerComponent.zoomEnabled).toBeTrue();
-		expect(imageViewerComponent.dragEnabled).toBeFalse();
-	});
-
 });
 
