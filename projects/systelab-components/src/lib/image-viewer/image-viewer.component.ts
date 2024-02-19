@@ -388,12 +388,20 @@ export class ImageViewerComponent {
 		const imageWidth = this.image.naturalWidth;
 		const imageHeight = this.image.naturalHeight;
 
-		// Calculate Zoom for width and height
-		const zoomWidth = (availableWidth / imageWidth) * 100;
-		const zoomHeight = (availableHeight / imageHeight) * 100;
-
-		// Use Zoom calculation of the smaller size, so it always fits, and it is between the allowed limits
-		return Math.max(Math.min(Math.min(zoomWidth, zoomHeight), this.sliderZoomMax), this.sliderZoomMin);
+		let newZoom: number;
+		if (imageWidth > imageHeight) {
+			if (imageWidth < availableWidth) {
+				newZoom = (availableHeight / imageHeight) * 100;
+			} else {
+				newZoom = (availableWidth / imageWidth) * 100;
+			}
+		} else {
+			if (imageHeight < availableHeight) {
+				newZoom = (availableWidth / imageWidth) * 100;
+			} else {
+				newZoom = (availableHeight / imageHeight) * 100;
+			}
+		}
+		return Math.min(newZoom, this.sliderZoomMax);
 	}
-
 }
