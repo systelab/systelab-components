@@ -204,5 +204,23 @@ describe('ImageViewerTestComponent', () => {
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
 		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
 	});
+
+
+	it('should toggleZoomByArea when zoom is enabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = true;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeFalse();
+	});
+
+	it('should toggleZoomByArea when zoom is disabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = false;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeTrue();
+		expect(imageViewerComponent.dragEnabled).toBeFalse();
+	});
 });
 
