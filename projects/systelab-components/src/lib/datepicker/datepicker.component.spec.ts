@@ -207,7 +207,7 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('should set next month +1 when calling nextmonth and current month < 11', () => {
-		fixture2 = TestBed.createComponent(DatepickerComponent);
+		fixture2 = TestBed.createComponent(Datepicker);
 		fixture2.detectChanges();
 		fixture2.componentInstance.currentCalendar.currentMonth = 9;
 		fixture2.componentInstance.nextMonth();
@@ -215,7 +215,7 @@ describe('Systelab DatepickerComponent', () => {
 	});
 
 	it('should set next month to 0 when calling nextmonth and current month >= 11', () => {
-		fixture2 = TestBed.createComponent(DatepickerComponent);
+		fixture2 = TestBed.createComponent(Datepicker);
 		fixture2.detectChanges();
 		fixture2.componentInstance.currentCalendar.currentMonth = 11;
 		fixture2.componentInstance.nextMonth();
