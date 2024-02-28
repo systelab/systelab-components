@@ -2,7 +2,7 @@ systelab-numpad {
   #showDialogButton {
     background-color: var(--slab_background_primary);
     border: 1px solid var(--slab_component_border_color);
-    color: var(--text-color);
+    color: var(--slab_numpad_icon);
 
     &:hover:enabled {
       background-color: var(--primary);
