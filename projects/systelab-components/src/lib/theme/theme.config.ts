@@ -77,7 +77,6 @@ export const THEMES = {
 		'danger_light':                           'rgb(255, 91, 87)',
 		'danger_lighter':                         'rgb(255, 109, 105)',
 		'text-color':                             'rgb(255, 255, 255)',
-		'text-color-secondary':                   'rgb(255, 255, 255)',
-		'slab_numpad_icon':						  'rgb(52, 58, 64)'
+		'text-color-secondary':                   'rgb(255, 255, 255)'
 	}
 };
