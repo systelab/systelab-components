@@ -4,7 +4,7 @@ import {
 	ElementRef,
 	EventEmitter,
 	HostListener,
-	Input,
+	Input, OnInit,
 	Output,
 	ViewChild
 } from '@angular/core';
@@ -29,7 +29,7 @@ export interface ActionButton {
 	templateUrl: 'image-viewer.component.html',
 	styleUrls:   ['image-viewer.component.scss']
 })
-export class ImageViewerComponent {
+export class ImageViewerComponent implements OnInit {
 
 	@Input() public imageSrc: string;
 	@Input() public imageTitle: string;
@@ -79,6 +79,9 @@ export class ImageViewerComponent {
 	};
 
 	public actionButtonType: any = ActionButtonType;
+	public safeHtml: SafeHtml = '';
+	public filteredUrl = '';
+	public imageWidth ='';
 
 	private zoomArea = {
 		top:          null,
@@ -103,6 +106,11 @@ export class ImageViewerComponent {
 
 	constructor(private readonly chref: ChangeDetectorRef, private readonly elementRef: ElementRef,
 				private readonly sanitizer: DomSanitizer) {
+	}
+
+	ngOnInit(): void {
+		this.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
+		this.imageWidth = this.getWidth();
 	}
 
 	@HostListener('mousedown', ['$event'])
@@ -172,12 +180,14 @@ export class ImageViewerComponent {
 
 	public setFilter(filter: string): void {
 		this.imgParams.filter = filter;
+		this.filteredUrl = this.getFilterUrl();
 	}
 
 	public doAdjust(): void {
 		this.imgParams.sliderZoomPct = this.getInitialZoom();
 		this.dragEnabled = false;
 		this.zoomEnabled = false;
+		this.imageWidth = this.getWidth();
 	}
 
 	public toggleZoomByArea(): void {
@@ -189,11 +199,13 @@ export class ImageViewerComponent {
 			this.zoomEnabled = true;
 			this.dragEnabled = false;
 		}
+		this.imageWidth = this.getWidth();
 	}
 
 	public sliderZoomChanged(): void {
 		this.dragEnabled = this.imageOverflowViewport();
 		this.zoomEnabled = false;
+		this.imageWidth = this.getWidth();
 		this.scaleImage(1);
 	}
 
@@ -239,10 +251,6 @@ export class ImageViewerComponent {
 
 	public getDropDownAction(dropDownActions: string, i: number): string {
 		return dropDownActions.split(';')[i];
-	}
-
-	public getImageFiltersHtml(): SafeHtml {
-		return this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
 	}
 
 	public getFilterUrl(): string {
