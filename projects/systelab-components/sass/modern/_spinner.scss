@@ -35,7 +35,7 @@ systelab-spinner {
 
     }
 
-    #minus-button, #plus-button {
+    .spinner-buttons {
       background-color: var(--slab_background_primary);
       border: 1px solid var(--slab_component_border_color);
       color: var(--ag-data-color);
