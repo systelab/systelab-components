@@ -1,4 +1,4 @@
-<svg class="d-none" [innerHTML]="getImageFiltersHtml()"></svg>
+<svg class="d-none" [innerHTML]="safeHtml"></svg>
 
 <div class="d-flex flex-column slab-flex-1" id="imageViewerHeader" data-test-id="imageViewerHeader">
     <div class="d-flex">
@@ -74,8 +74,8 @@
          [src]="imageSrc"
          (load)="setInitialValues()"
          [ngStyle]="{
-            'filter':getFilterUrl(),
-            'width':getWidth(),
+            'filter': filteredUrl,
+            'width': imageWidth,
             'cursor':zoomSelector.visible && !zoomSelector.allow ? 'not-allowed' : 'inherit'}"
          alt="{{imageTitle}}"/>
 

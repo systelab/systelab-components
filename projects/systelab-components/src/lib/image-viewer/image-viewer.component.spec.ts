@@ -67,7 +67,7 @@ export class ImageViewerTestComponent {
 
 	public applyImageFilter(action: string): void {
 		if (this.imageViewer.getFilter() === action) {
-				this.imageViewer.setFilter(undefined);
+			this.imageViewer.setFilter(undefined);
 		} else {
 			this.imageViewer.setFilter(action);
 		}
@@ -173,6 +173,14 @@ describe('ImageViewerTestComponent', () => {
 		clickToggleButton(fixture, 1);
 		expect(fixture.componentInstance.applyImageFilter)
 			.toHaveBeenCalled();
+	})
+
+	it('should change filter props when filter button is clicked', () => {
+		clickToggleButton(fixture, 1);
+		expect(fixture.componentInstance.imageViewer.imgParams.filter)
+			.toBe('red');
+		expect(fixture.componentInstance.imageViewer.filteredUrl)
+			.toBe('url(#red)');
 	});
 
 	it('should overlay action when overlay is clicked', () => {
@@ -221,6 +229,14 @@ describe('ImageViewerTestComponent', () => {
 		imageViewerComponent.toggleZoomByArea();
 		expect(imageViewerComponent.zoomEnabled).toBeTrue();
 		expect(imageViewerComponent.dragEnabled).toBeFalse();
+	});
+
+	it('should get new with when zoom is enabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = true;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.imageWidth).not.toBe('');
 	});
 });
 
