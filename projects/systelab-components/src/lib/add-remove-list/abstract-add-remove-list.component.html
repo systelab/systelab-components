@@ -20,8 +20,6 @@
                 <i *ngIf="showIcon" class="mr-1 d-flex align-items-center" [ngClass]="[getIcon(element), isDisabled ? 'text-black-50' : 'text-primary']"></i>
                 <span [ngClass]="{'text-black-50': isDisabled}">{{getDescription(element)}}</span>
             </div>
-            }
-
         </div>
     </div>
     <div *ngIf="!isDisabled" class="d-flex p-1"
