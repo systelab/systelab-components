@@ -238,5 +238,17 @@ describe('ImageViewerTestComponent', () => {
 		imageViewerComponent.toggleZoomByArea();
 		expect(imageViewerComponent.imageWidth).not.toBe('');
 	});
+
+	it('should should not have transparent class when input is false', () => {
+		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(isTransparentClass).toBe(0);
+	});
+
+	it('should should have transparent class when input is true', () => {
+		fixture.componentInstance.imageViewer.setTransparentBackgroundForButtons = true;
+		fixture.detectChanges();
+		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(isTransparentClass).toBeGreaterThan(0);
+	});
 });
 
