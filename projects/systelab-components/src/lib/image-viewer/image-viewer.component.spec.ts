@@ -23,6 +23,7 @@ import {SystelabTranslateModule} from 'systelab-translate';
 				 (clickOverlayText)="doClickOverlayText()"
 			   [showZoomByAreaButton]="true"
 			   [showAdjustButton]="true"
+			   [setTransparentBackgroundForButtons]="false"
 			   [showZoomScale]="true">
         </systelab-image-viewer>`,
 	styles:   []
