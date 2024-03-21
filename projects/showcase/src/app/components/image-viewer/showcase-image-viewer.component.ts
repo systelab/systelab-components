@@ -40,6 +40,8 @@ export class ShowcaseImageViewerComponent {
 									0 0 0 1 0"/>
 	   </filter>`;
 
+	public setTransparent = false;
+
 	constructor() {
 	}
 

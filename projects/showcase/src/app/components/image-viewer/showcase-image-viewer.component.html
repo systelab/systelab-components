@@ -1,3 +1,7 @@
+<div>
+    <input type="checkbox" [checked]="setTransparent" [(ngModel)]="setTransparent" id="check-transparent">
+    <label for="check-transparent">Transparent header</label>
+</div>
 <div class="position-relative d-flex slab-flex-1 border" style="height:600px;width:900px">
     <systelab-image-viewer class="slab-overflow-container d-flex slab-flex-1" #imageViewer
               [imageSrc]="imageSrc"
@@ -10,6 +14,7 @@
               [showAdjustButton]="true"
               [showZoomScale]="true"
               [showSliderToolTip]="false"
+              [setTransparentBackgroundForButtons]="setTransparent"
               (clickActionButton)="doClickActionButton($event)"
               (clickOverlayText)="doClickOverlayText()">
     </systelab-image-viewer>
