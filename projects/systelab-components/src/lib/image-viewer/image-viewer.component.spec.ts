@@ -243,6 +243,7 @@ describe('ImageViewerTestComponent', () => {
 
 	it('should should not have transparent class when input is false', () => {
 		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(fixture.componentInstance.imageViewer.setTransparentBackgroundForButtons).toBe(false);
 		expect(isTransparentClass).toBe(0);
 	});
 
@@ -250,6 +251,7 @@ describe('ImageViewerTestComponent', () => {
 		fixture.componentInstance.setTransparentBackgroundForButtons = true;
 		fixture.detectChanges();
 		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(fixture.componentInstance.imageViewer.setTransparentBackgroundForButtons).toBe(true);
 		expect(isTransparentClass).toBeGreaterThan(0);
 	});
 });
