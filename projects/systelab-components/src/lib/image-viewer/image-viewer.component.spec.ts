@@ -23,7 +23,7 @@ import {SystelabTranslateModule} from 'systelab-translate';
 				 (clickOverlayText)="doClickOverlayText()"
 			   [showZoomByAreaButton]="true"
 			   [showAdjustButton]="true"
-			   [setTransparentBackgroundForButtons]="false"
+			   [setTransparentBackgroundForButtons]="setTransparentBackgroundForButtons"
 			   [showZoomScale]="true">
         </systelab-image-viewer>`,
 	styles:   []
@@ -53,6 +53,7 @@ export class ImageViewerTestComponent {
 								 0 0 0 0 0
 								 0 0 0 1 0"/>
 	</filter>`;
+	public setTransparentBackgroundForButtons = false;
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -246,7 +247,7 @@ describe('ImageViewerTestComponent', () => {
 	});
 
 	it('should should have transparent class when input is true', () => {
-		fixture.componentInstance.imageViewer.setTransparentBackgroundForButtons = true;
+		fixture.componentInstance.setTransparentBackgroundForButtons = true;
 		fixture.detectChanges();
 		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
 		expect(isTransparentClass).toBeGreaterThan(0);
