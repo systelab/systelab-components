@@ -13,18 +13,19 @@ import {SystelabTranslateModule} from 'systelab-translate';
 @Component({
 	selector: 'systelab-image-viewer-test',
 	template: `
-        <systelab-image-viewer #imageViewer class="slab-overflow-container"
-			   [imageSrc]="imageSrc"
-			   [imageTitle]="imageTitle"
-			   [overlayText]="imageTitle"
-			   [actionButtons]="actionButtons"
-				 [imageFilters]="imageFilters"
-			   (clickActionButton)="doClickActionButton($event)"
-				 (clickOverlayText)="doClickOverlayText()"
-			   [showZoomByAreaButton]="true"
-			   [showAdjustButton]="true"
-			   [showZoomScale]="true">
-        </systelab-image-viewer>`,
+                  <systelab-image-viewer #imageViewer class="slab-overflow-container"
+                                         [imageSrc]="imageSrc"
+                                         [imageTitle]="imageTitle"
+                                         [overlayText]="imageTitle"
+                                         [actionButtons]="actionButtons"
+                                         [imageFilters]="imageFilters"
+                                         (clickActionButton)="doClickActionButton($event)"
+                                         (clickOverlayText)="doClickOverlayText()"
+                                         [showZoomByAreaButton]="true"
+                                         [showAdjustButton]="true"
+                                         [transparentBackgroundForButtons]="transparentBackgroundForButtons"
+                                         [showZoomScale]="true">
+                  </systelab-image-viewer>`,
 	styles:   []
 })
 export class ImageViewerTestComponent {
@@ -52,6 +53,7 @@ export class ImageViewerTestComponent {
 								 0 0 0 0 0
 								 0 0 0 1 0"/>
 	</filter>`;
+	public transparentBackgroundForButtons = false;
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -237,6 +239,20 @@ describe('ImageViewerTestComponent', () => {
 		imageViewerComponent.zoomEnabled = true;
 		imageViewerComponent.toggleZoomByArea();
 		expect(imageViewerComponent.imageWidth).not.toBe('');
+	});
+
+	it('should should not have transparent class when input is false', () => {
+		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(fixture.componentInstance.imageViewer.transparentBackgroundForButtons).toBe(false);
+		expect(isTransparentClass).toBe(0);
+	});
+
+	it('should should have transparent class when input is true', () => {
+		fixture.componentInstance.transparentBackgroundForButtons = true;
+		fixture.detectChanges();
+		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(fixture.componentInstance.imageViewer.transparentBackgroundForButtons).toBe(true);
+		expect(isTransparentClass).toBeGreaterThan(0);
 	});
 });
 
