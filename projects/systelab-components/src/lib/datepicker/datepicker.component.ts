@@ -76,8 +76,6 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	private headerElement: any = document.getElementById(this.datepickerId);
 
 	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNGConfig) {
-		this.addListeners();
-		// TODO: To get the language and modify the values.
 	}
 
 	public ngOnInit() {
@@ -132,8 +130,8 @@ export class Datepicker implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 	}
 
 	public ngOnDestroy() {
-		this.destroyKeyListener();
-		this.destroyWheelListener();
+		this.destroyKeyListener?.();
+		this.destroyWheelListener?.();
 	}
 
 	public selectDate(): void {
