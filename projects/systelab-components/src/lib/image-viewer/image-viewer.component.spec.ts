@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -13,18 +13,19 @@ import {SystelabTranslateModule} from 'systelab-translate';
 @Component({
 	selector: 'systelab-image-viewer-test',
 	template: `
-        <systelab-image-viewer #imageViewer class="slab-overflow-container"
-			   [imageSrc]="imageSrc"
-			   [imageTitle]="imageTitle"
-			   [overlayText]="imageTitle"
-			   [actionButtons]="actionButtons"
-				 [imageFilters]="imageFilters"
-			   (clickActionButton)="doClickActionButton($event)"
-				 (clickOverlayText)="doClickOverlayText()"
-			   [showZoomByAreaButton]="true"
-			   [showAdjustButton]="true"
-			   [showZoomScale]="true">
-        </systelab-image-viewer>`,
+                  <systelab-image-viewer #imageViewer class="slab-overflow-container"
+                                         [imageSrc]="imageSrc"
+                                         [imageTitle]="imageTitle"
+                                         [overlayText]="imageTitle"
+                                         [actionButtons]="actionButtons"
+                                         [imageFilters]="imageFilters"
+                                         (clickActionButton)="doClickActionButton($event)"
+                                         (clickOverlayText)="doClickOverlayText()"
+                                         [showZoomByAreaButton]="true"
+                                         [showAdjustButton]="true"
+                                         [transparentBackgroundForButtons]="transparentBackgroundForButtons"
+                                         [showZoomScale]="true">
+                  </systelab-image-viewer>`,
 	styles:   []
 })
 export class ImageViewerTestComponent {
@@ -52,6 +53,7 @@ export class ImageViewerTestComponent {
 								 0 0 0 0 0
 								 0 0 0 1 0"/>
 	</filter>`;
+	public transparentBackgroundForButtons = false;
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -67,10 +69,14 @@ export class ImageViewerTestComponent {
 
 	public applyImageFilter(action: string): void {
 		if (this.imageViewer.getFilter() === action) {
-				this.imageViewer.setFilter(undefined);
+			this.imageViewer.setFilter(undefined);
 		} else {
 			this.imageViewer.setFilter(action);
 		}
+	}
+
+	public setInitials() {
+		this.imageViewer.setInitialValues();
 	}
 }
 
@@ -84,6 +90,12 @@ const clickActionButton = (imageViewer: ComponentFixture<ImageViewerTestComponen
 const clickToggleButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>, children: number) => {
 	const button = imageViewer.debugElement.nativeElement.querySelector('#imageViewerHeader > div:nth-child('
 		+ children +') > div.ml-1 > systelab-toggle-button');
+	button.click();
+	imageViewer.detectChanges();
+};
+
+const clickAdjustButton = (imageViewer: ComponentFixture<ImageViewerTestComponent>) => {
+	const button = imageViewer.debugElement.nativeElement.querySelector('[data-test-id="AdjustBtn"]');
 	button.click();
 	imageViewer.detectChanges();
 };
@@ -105,7 +117,8 @@ describe('ImageViewerTestComponent', () => {
 				HttpClientModule,
 				SystelabTranslateModule
 			],
-			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent]
+			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent],
+			schemas: [ NO_ERRORS_SCHEMA ]
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(ImageViewerTestComponent);
@@ -162,6 +175,14 @@ describe('ImageViewerTestComponent', () => {
 		clickToggleButton(fixture, 1);
 		expect(fixture.componentInstance.applyImageFilter)
 			.toHaveBeenCalled();
+	})
+
+	it('should change filter props when filter button is clicked', () => {
+		clickToggleButton(fixture, 1);
+		expect(fixture.componentInstance.imageViewer.imgParams.filter)
+			.toBe('red');
+		expect(fixture.componentInstance.imageViewer.filteredUrl)
+			.toBe('url(#red)');
 	});
 
 	it('should overlay action when overlay is clicked', () => {
@@ -177,5 +198,61 @@ describe('ImageViewerTestComponent', () => {
 		expect(imageViewerComponent.zoomScale.marks.length).toBeGreaterThanOrEqual(0);
 	});
 
+	it('should have initialized zoom with valid value', async () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+	});
+
+	it('should adjust image zoom after doing adjust to a valid value', async () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.imgParams.sliderZoomPct = 199;
+		clickAdjustButton(fixture);
+		await fixture.whenStable();
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeGreaterThanOrEqual(imageViewerComponent.sliderZoomMin);
+		expect(imageViewerComponent.imgParams.sliderZoomPct).toBeLessThanOrEqual(imageViewerComponent.sliderZoomMax);
+	});
+
+
+	it('should toggleZoomByArea when zoom is enabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = true;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeFalse();
+	});
+
+	it('should toggleZoomByArea when zoom is disabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = false;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.zoomEnabled).toBeTrue();
+		expect(imageViewerComponent.dragEnabled).toBeFalse();
+	});
+
+	it('should get new with when zoom is enabled', () => {
+		const imageViewerComponent = fixture.componentInstance.imageViewer;
+		fixture.componentInstance.setInitials();
+		imageViewerComponent.zoomEnabled = true;
+		imageViewerComponent.toggleZoomByArea();
+		expect(imageViewerComponent.imageWidth).not.toBe('');
+	});
+
+	it('should should not have transparent class when input is false', () => {
+		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(fixture.componentInstance.imageViewer.transparentBackgroundForButtons).toBe(false);
+		expect(isTransparentClass).toBe(0);
+	});
+
+	it('should should have transparent class when input is true', () => {
+		fixture.componentInstance.transparentBackgroundForButtons = true;
+		fixture.detectChanges();
+		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
+		expect(fixture.componentInstance.imageViewer.transparentBackgroundForButtons).toBe(true);
+		expect(isTransparentClass).toBeGreaterThan(0);
+	});
 });
 

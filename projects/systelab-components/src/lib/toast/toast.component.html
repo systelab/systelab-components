@@ -1,6 +1,9 @@
-<div [class]="'slab-toast ' + classType"
-        [@fadeAnimation]="{ value: animationState, params: { fadeIn: 1000, fadeOut: 1000 } }"
-        (@fadeAnimation.done)="onFadeFinished($event)">
-    <i [class]="'fa ' + iconType"></i>
+<div [ngClass]="toastClass"
+     [@fadeAnimation]="{ value: animationState, params: { fadeIn: 1000, fadeOut: 1000 } }"
+     (@fadeAnimation.done)="onFadeFinished($event)">
+    <i class="type" [ngClass]="iconClass"></i>
     <div>{{ data.text }}</div>
+    @if (config.showCloseButton) {
+    <i class="close" (click)="closeToast()"></i>
+    }
 </div>

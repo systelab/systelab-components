@@ -1,6 +1,8 @@
-<svg class="d-none" [innerHTML]="getImageFiltersHtml()"></svg>
+<svg class="d-none" [innerHTML]="safeHtml"></svg>
 
-<div class="d-flex flex-column slab-flex-1" id="imageViewerHeader" data-test-id="imageViewerHeader">
+<div class="d-flex flex-column slab-flex-1" id="imageViewerHeader"
+     [ngClass]="transparentBackgroundForButtons ? 'bg-color-transparent' : 'bg-color-primary'"
+     data-test-id="imageViewerHeader">
     <div class="d-flex">
         <div class="ml-1">
             @for (actionButton of actionButtons; track actionButton.label) {
@@ -74,8 +76,8 @@
          [src]="imageSrc"
          (load)="setInitialValues()"
          [ngStyle]="{
-            'filter':getFilterUrl(),
-            'width':getWidth(),
+            'filter': filteredUrl,
+            'width': imageWidth,
             'cursor':zoomSelector.visible && !zoomSelector.allow ? 'not-allowed' : 'inherit'}"
          alt="{{imageTitle}}"/>
 

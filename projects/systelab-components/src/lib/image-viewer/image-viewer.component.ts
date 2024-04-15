@@ -4,7 +4,7 @@ import {
 	ElementRef,
 	EventEmitter,
 	HostListener,
-	Input,
+	Input, OnInit,
 	Output,
 	ViewChild
 } from '@angular/core';
@@ -29,7 +29,7 @@ export interface ActionButton {
 	templateUrl: 'image-viewer.component.html',
 	styleUrls:   ['image-viewer.component.scss']
 })
-export class ImageViewerComponent {
+export class ImageViewerComponent implements OnInit {
 
 	@Input() public imageSrc: string;
 	@Input() public imageTitle: string;
@@ -43,6 +43,7 @@ export class ImageViewerComponent {
 	@Input() public sliderZoomMin = 100;
 	@Input() public sliderZoomMax = 200;
 	@Input() public sliderZoomStep = 1;
+	@Input() public transparentBackgroundForButtons = false;
 
 	@Output() public clickActionButton = new EventEmitter<string>();
 	@Output() public clickOverlayText = new EventEmitter();
@@ -79,6 +80,9 @@ export class ImageViewerComponent {
 	};
 
 	public actionButtonType: any = ActionButtonType;
+	public safeHtml: SafeHtml = '';
+	public filteredUrl = '';
+	public imageWidth ='';
 
 	private zoomArea = {
 		top:          null,
@@ -103,6 +107,11 @@ export class ImageViewerComponent {
 
 	constructor(private readonly chref: ChangeDetectorRef, private readonly elementRef: ElementRef,
 				private readonly sanitizer: DomSanitizer) {
+	}
+
+	ngOnInit(): void {
+		this.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
+		this.imageWidth = this.getWidth();
 	}
 
 	@HostListener('mousedown', ['$event'])
@@ -172,12 +181,14 @@ export class ImageViewerComponent {
 
 	public setFilter(filter: string): void {
 		this.imgParams.filter = filter;
+		this.filteredUrl = this.getFilterUrl();
 	}
 
 	public doAdjust(): void {
 		this.imgParams.sliderZoomPct = this.getInitialZoom();
 		this.dragEnabled = false;
 		this.zoomEnabled = false;
+		this.imageWidth = this.getWidth();
 	}
 
 	public toggleZoomByArea(): void {
@@ -189,11 +200,13 @@ export class ImageViewerComponent {
 			this.zoomEnabled = true;
 			this.dragEnabled = false;
 		}
+		this.imageWidth = this.getWidth();
 	}
 
 	public sliderZoomChanged(): void {
 		this.dragEnabled = this.imageOverflowViewport();
 		this.zoomEnabled = false;
+		this.imageWidth = this.getWidth();
 		this.scaleImage(1);
 	}
 
@@ -239,10 +252,6 @@ export class ImageViewerComponent {
 
 	public getDropDownAction(dropDownActions: string, i: number): string {
 		return dropDownActions.split(';')[i];
-	}
-
-	public getImageFiltersHtml(): SafeHtml {
-		return this.sanitizer.bypassSecurityTrustHtml(this.imageFilters);
 	}
 
 	public getFilterUrl(): string {
@@ -381,11 +390,27 @@ export class ImageViewerComponent {
 	}
 
 	private getInitialZoom(): number {
-		// Calculate initial zoom of the image to fit the window
-		const availableSize = this.viewPort.offsetWidth < this.viewPort.offsetHeight ? this.viewPort.offsetWidth
-			: this.viewPort.offsetHeight;
-		const imageSize = this.image.naturalWidth < this.image.naturalHeight ? this.image.naturalWidth : this.image.naturalHeight;
-		return availableSize / imageSize * 100;
-	}
+		// Calculate initial Zoom of the image to fit the window
+		const availableWidth = this.viewPort.offsetWidth;
+		const availableHeight = this.viewPort.offsetHeight;
 
+		const imageWidth = this.image.naturalWidth;
+		const imageHeight = this.image.naturalHeight;
+
+		let newZoom: number;
+		if (imageWidth > imageHeight) {
+			if (imageWidth < availableWidth) {
+				newZoom = (availableHeight / imageHeight) * 100;
+			} else {
+				newZoom = (availableWidth / imageWidth) * 100;
+			}
+		} else {
+			if (imageHeight < availableHeight) {
+				newZoom = (availableWidth / imageWidth) * 100;
+			} else {
+				newZoom = (availableHeight / imageHeight) * 100;
+			}
+		}
+		return Math.min(newZoom, this.sliderZoomMax);
+	}
 }
