@@ -61,6 +61,12 @@ $slab-button-fontsize: 25px !default;
     animation: scaleUp .2s;
   }
 
+  // avoid animation in firefox because it produces an unpleasant flickering effect
+  @-moz-document url-prefix() {
+    &:not(.fullscreen) {
+      animation: none;
+    }
+  }
 
   &.fullscreen {
     border: 0;
