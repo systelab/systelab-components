@@ -44,7 +44,7 @@ $slab-button-fontsize: 25px !default;
 
 
   .slab-dialog-bottom {
-    padding: 1rem;
+    padding: 16px 24px;
 
     .btn {
       height: $slab-button-size;
@@ -61,6 +61,12 @@ $slab-button-fontsize: 25px !default;
     animation: scaleUp .2s;
   }
 
+  // avoid animation in firefox because it produces an unpleasant flickering effect
+  @-moz-document url-prefix() {
+    &:not(.fullscreen) {
+      animation: none;
+    }
+  }
 
   &.fullscreen {
     border: 0;
@@ -68,7 +74,8 @@ $slab-button-fontsize: 25px !default;
 
     .slab-dialog-bottom {
       background: none;
-      padding: 10px;
+      padding: 16px 24px;
+
 
       .btn {
         height: $slab-button-size;
@@ -191,7 +198,7 @@ $slab-button-fontsize: 25px !default;
   display: flex;
   align-items: center;
   height: $slab-dialog-header-height;
-  padding-left: 20px;
+  padding: 16px 24px;
 
   font-size: 20px;
   border-radius: 0;
@@ -205,7 +212,6 @@ $slab-button-fontsize: 25px !default;
 
   border-top: 1px solid var(--slab_table_border_color);
   background: none !important;
-  padding: 15px;
 
   .square {
     @include size($slab-button-size);
