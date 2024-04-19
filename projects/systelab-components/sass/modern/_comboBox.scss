@@ -157,7 +157,7 @@
           background-color: var(--slab_background_primary);
 
           .ag-center-cols-container {
-            width: 100% !important;
+            min-width: 100% !important;
 
             .ag-row {
               background-color: var(--slab_background_primary);
@@ -187,10 +187,6 @@
 
           }
         }
-      }
-
-      .ag-body-horizontal-scroll {
-        display: none;
       }
 
       .ag-row {

@@ -21,6 +21,10 @@
       .ag-center-cols-viewport {
         overflow-x: hidden;
 
+        .ag-center-cols-container {
+          min-width: 100% !important;
+        }
+
         .ag-row {
           background-color: var(--slab_background_primary);
           border-bottom: none;
@@ -49,9 +53,6 @@
       }
     }
 
-    .ag-body-horizontal-scroll {
-      display: none;
-    }
   }
 
   &.disabled {
