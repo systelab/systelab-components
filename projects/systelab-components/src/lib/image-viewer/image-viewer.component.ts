@@ -337,6 +337,9 @@ export class ImageViewerComponent implements OnInit {
 		this.zoomSelector.top = selectorTop;
 
 		this.scaleImage(magnification);
+		this.imageWidth = this.getWidth();
+
+		this.imgParams.sliderZoomPct = this.getSliderPct();
 
 		//scroll viewport after the image is resized
 		setTimeout(() => {
