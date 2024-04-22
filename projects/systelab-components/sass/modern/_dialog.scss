@@ -212,6 +212,7 @@ $slab-button-fontsize: 25px !default;
 
   border-top: 1px solid var(--slab_table_border_color);
   background: none !important;
+  padding: 16px 24px;
 
   .square {
     @include size($slab-button-size);
