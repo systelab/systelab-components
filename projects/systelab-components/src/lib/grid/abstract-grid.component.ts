@@ -13,6 +13,7 @@ import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './op
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { TwoListItem } from '../twolist/two-list-utilities';
 import { GridHeaderContextMenu, GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';
+import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 export type rowSelectionType = 'single' | 'multiple';
 
@@ -37,6 +38,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public noRowsText;
 	@Input() public loadingText;
 	@Input() public removeSelectionOnOpenContextMenu = false;
+	@Input() public autoSizeColumnsToContent = false;
 
 	@Output() public action = new EventEmitter();
 	@Output() public clickRow = new EventEmitter();
@@ -48,7 +50,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
 
-	protected firstSizeToFitExecuted = false;
+	protected firstAutoSizeExecuted = false;
+	private calculatedGridState: CalculatedGridState;
+	private scrollTimeout;
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
@@ -62,6 +66,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			this.overlayNoRowsTemplate = this.noRowsText;
 			this.overlayLoadingTemplate = this.loadingText;
 		}
+		this.calculatedGridState = initializeCalculatedGridState(this.autoSizeColumnsToContent);
 	}
 
 	protected getInitialGridOptions(): GridOptions {
@@ -103,20 +108,23 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public onModelUpdated(event: any) {
-		this.gridOptions.api.sizeColumnsToFit();
+		this.doAutoSizeManagement();
 		return event;
 	}
 
 	public doGridReady(event: any): void {
 		this.loadColumnsStateFromPreferences();
-		this.firstSizeToFitExecuted = true;
-		this.gridOptions.api.sizeColumnsToFit();
 
+		if(this.autoSizeColumnsToContent) {
+			this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		} else {
+			this.doAutoSizeManagement();
+		}
 		this.gridOptions.api.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
 	}
 
 	protected saveColumnsStateInPreferences(): void {
-		if (this.firstSizeToFitExecuted) {
+		if (this.firstAutoSizeExecuted) {
 			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi.getColumnState());
 		}
 	}
@@ -351,7 +359,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public doGridSizeChanged(event: any): void {
 		if (this.gridOptions.api) {
-			this.gridOptions.api.sizeColumnsToFit();
+			this.doAutoSizeManagement();
 		}
 	}
 
@@ -366,7 +374,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 				(columnsOptions: GridColumnsOptions) => {
 					if (columnsOptions) {
 						this.applyGridColumnOptions(this.gridOptions.columnApi, columnsOptions);
-						this.gridOptions.api.sizeColumnsToFit();
+						this.doAutoSizeManagement();
 						this.saveColumnsStateInPreferences();
 					}
 				}
@@ -469,5 +477,17 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected getCheckColumnWidth(): number {
 		return 35;
+	}
+
+	private onBodyScroll(event: any): void {
+		clearTimeout(this.scrollTimeout);
+		this.scrollTimeout = setTimeout(() => {
+			this.doAutoSizeManagement(event);
+		}, 150);
+	}
+
+	private doAutoSizeManagement(event?: any) {
+		this.firstAutoSizeExecuted = true;
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
 	}
 }
