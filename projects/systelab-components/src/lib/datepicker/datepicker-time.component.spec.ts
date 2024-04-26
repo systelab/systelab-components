@@ -144,22 +144,22 @@ describe('Systelab DatepickerTimeComponent', () => {
 
 
 	it('currentHours should decrement the value if hours minus button is clicked (-1)', () => {
-		clickTouchSpinnerButton(fixture, '#hours', '#minus-button');
+		clickTouchSpinnerButton(fixture, '#hours', '.spinner-button-minus');
 		expect(fixture.componentInstance.currentDate.getHours()).toBe(fixture.componentInstance.defaultHours - 1);
 	});
 
 	it('currentHours should increment the value if hours plus button is clicked (+1)', () => {
-		clickTouchSpinnerButton(fixture, '#hours', '#plus-button');
+		clickTouchSpinnerButton(fixture, '#hours', '.spinner-button-plus');
 		expect(fixture.componentInstance.currentDate.getHours()).toBe(fixture.componentInstance.defaultHours + 1);
 	});
 
 	it('currentMinutes should decrement the value if minutes minus button is clicked (-1)', () => {
-		clickTouchSpinnerButton(fixture, '#minutes', '#minus-button');
+		clickTouchSpinnerButton(fixture, '#minutes', '.spinner-button-minus');
 		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes - 1);
 	});
 
 	it('currentMinutes should increment the value if minutes plus button is clicked (+1)', () => {
-		clickTouchSpinnerButton(fixture, '#minutes', '#plus-button');
+		clickTouchSpinnerButton(fixture, '#minutes', '.spinner-button-plus');
 		expect(fixture.componentInstance.currentDate.getMinutes()).toBe(fixture.componentInstance.defaultMinutes + 1);
 	});
 

@@ -1,7 +1,7 @@
 <div class="slab-spinner-container d-flex">
     <div class="input-group">
         <div class="input-group-prepend">
-            <button type="button" id="minus-button" class="btn pt-0 pb-0 pl-1 pr-1 spinner-buttons" [disabled]="disabled" [tabIndex]="-1"
+            <button type="button" class="btn pt-0 pb-0 pl-1 pr-1 spinner-button-minus" [disabled]="disabled" [tabIndex]="-1"
                     [class.disabled]="disabled" [class.slab-spinner-error]="error" (click)="minus()"><i
                     class="icon-minus-thin"></i></button>
         </div>
@@ -13,7 +13,7 @@
                (blur)="checkValue(valueStr)"
                autocomplete="off" [disabled]="disabled">
         <div class="input-group-append">
-            <button type="button" id="plus-button" class="btn pt-0 pb-0 pl-1 pr-1 spinner-buttons" [disabled]="disabled" [tabIndex]="-1"
+            <button type="button" class="btn pt-0 pb-0 pl-1 pr-1 spinner-button-plus" [disabled]="disabled" [tabIndex]="-1"
                     [class.disabled]="disabled" [class.slab-spinner-error]="error" (click)="plus()"><i
                     class="icon-plus-thin"></i></button>
         </div>

@@ -32,13 +32,13 @@ export class SpinnerTestComponent {
 	}
 }
 const clickPlusButton = (fixture: ComponentFixture<SpinnerTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelector('#plus-button');
+	const button = fixture.debugElement.nativeElement.querySelector('.spinner-button-plus');
 	button.click();
 	fixture.detectChanges();
 };
 
 const clickMinusButton = (fixture: ComponentFixture<SpinnerTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelector('#minus-button');
+	const button = fixture.debugElement.nativeElement.querySelector('.spinner-button-minus');
 	button.click();
 	fixture.detectChanges();
 };
