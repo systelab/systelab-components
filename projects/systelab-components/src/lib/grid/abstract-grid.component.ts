@@ -487,7 +487,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	private doAutoSizeManagement(event?: any) {
-		this.firstSizeToFitExecuted = true;
+		this.firstSizeToFitExecuted = true; 
 		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
 	}
 }
