@@ -50,7 +50,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
 
-	protected firstAutoSizeExecuted = false;
+	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
 
@@ -124,7 +124,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	protected saveColumnsStateInPreferences(): void {
-		if (this.firstAutoSizeExecuted) {
+		if (this.firstSizeToFitExecuted) {
 			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi.getColumnState());
 		}
 	}
@@ -487,7 +487,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	private doAutoSizeManagement(event?: any) {
-		this.firstAutoSizeExecuted = true;
+		this.firstSizeToFitExecuted = true; 
 		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
 	}
 }
