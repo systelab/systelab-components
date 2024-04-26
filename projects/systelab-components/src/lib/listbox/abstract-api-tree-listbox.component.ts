@@ -112,7 +112,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			this.selectedIDListChange.emit(this.selectedIDList);
 		}
 		if (this.gridOptions.api) {
-			this.gridOptions.api.sizeColumnsToFit();
+			this.doAutoSizeManagement();
 		}
 	}
 
@@ -220,7 +220,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					} else if (this.selectedTreeItem) {
 						this.selectTreeItemInGrid();
 					}
-					this.gridOptions.api.sizeColumnsToFit();
+					this.doAutoSizeManagement();
 				},
 				error: () => {
 					this.gridOptions.api.hideOverlay();

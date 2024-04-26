@@ -5,7 +5,6 @@
   z-index: 100;
   width: 100%;
   padding: 10px;
-  background-color: rgba($background-primary, 0.8);
 
   /* Allow click on the image also below the header area */
   pointer-events: none;
@@ -13,6 +12,14 @@
   div > div:not(#overImageArea),
   #ImageViewerSlider {
     pointer-events: initial;
+  }
+
+  &.bg-color-transparent {
+    background-color: transparent;
+  }
+
+  &.bg-color-primary {
+    background-color: rgba($background-primary, 0.8);
   }
 
   #zoomScale {

@@ -4,6 +4,7 @@ import { GetRowIdParams, GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
+import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 declare var jQuery: any;
 
@@ -211,7 +212,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public left = 0;
 	public windowResized = false;
 	public isDropdownOpened = false;
-	public scrollHandler: any;
+	public windowScrollHandler: any;
+
+	private calculatedGridState : CalculatedGridState = initializeCalculatedGridState();
+	private scrollTimeout;
 
 	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public preferencesService?: PreferencesService) {
 	}
@@ -270,6 +274,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				colId:              'itemDescription',
 				id:                 this.getIdField(),
 				field:              this.getDescriptionField(),
+				tooltipField: 		this.getDescriptionField(),
 				checkboxSelection:  this.multipleSelection,
 				cellRenderer:       ComboboxFavouriteRendererComponent,
 				cellRendererParams: {
@@ -278,9 +283,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			}
 		] : [
 			{
-				colId:             'itemDescription',
-				field:             this.getDescriptionField(),
-				checkboxSelection: this.multipleSelection,
+				colId:             	'itemDescription',
+				field:             	this.getDescriptionField(),
+				tooltipField: 		this.getDescriptionField(),
+				checkboxSelection: 	this.multipleSelection,
 			}
 		];
 		this.gridOptions = {};
@@ -302,6 +308,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			?.toString();
 
 		this.configGridData();
+
+		this.gridOptions.enableBrowserTooltips = true;
 	}
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
@@ -419,7 +427,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public closeDropDown() {
 		this.isDropdownOpened = false;
-		this.removeScrollHandler();
+		this.removeWindowScrollHandler();
+		this.removeGridScrollHandler();
 		this.resetDropDownPositionAndHeight();
 		if (this.isDropDownOpen()) {
 			this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'show');
@@ -484,7 +493,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public showDropDown() {
-		this.addScrollHandler();
+		this.addWindowScrollHandler();
 		this.setDropdownWidth();
 		if (!this.isDropDownOpen()) {
 			setTimeout(() => this.loop(), 10);
@@ -612,7 +621,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public onModelUpdated() {
-		this.gridOptions.api.sizeColumnsToFit();
+		this.addGridScrollHandler();
 		if (this.multipleSelection) {
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridOptions.api.forEachNode(node => {
@@ -636,11 +645,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.gridOptions.api && this.columnDefs) {
 			if (this.windowResized) {
 				setTimeout(() => {
-					this.gridOptions.api.sizeColumnsToFit();
+					this.doAutoSizeManagement();
 					this.windowResized = false;
 				}, 5);
 			} else {
-				this.gridOptions.api.sizeColumnsToFit();
+				this.doAutoSizeManagement();
 			}
 		}
 	}
@@ -749,17 +758,35 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	protected addScrollHandler() {
-		this.scrollHandler = this.scroll.bind(this);
-		window.addEventListener('scroll', this.scrollHandler, true);
+	protected addWindowScrollHandler() {
+		this.windowScrollHandler = this.scroll.bind(this);
+		window.addEventListener('scroll', this.windowScrollHandler, true);
 	}
 
-	protected removeScrollHandler() {
-		window.removeEventListener('scroll', this.scrollHandler, true);
+	protected removeWindowScrollHandler() {
+		window.removeEventListener('scroll', this.windowScrollHandler, true);
+	}
+
+	protected addGridScrollHandler() {
+		if(this.gridOptions.api) {
+			this.gridOptions.api.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
+
+			this.calculatedGridState = initializeCalculatedGridState();
+			this.onBodyScroll(undefined);
+
+			this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		}
+	}
+
+	protected removeGridScrollHandler() {
+		if(this.gridOptions.api) {
+			this.gridOptions.api.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		}
 	}
 
 	public ngOnDestroy() {
-		this.removeScrollHandler();
+		this.removeWindowScrollHandler();
+		this.removeGridScrollHandler();
 		this.chRef.detach();
 	}
 
@@ -790,4 +817,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
+	private onBodyScroll(event: any): void {
+		clearTimeout(this.scrollTimeout);
+		this.scrollTimeout = setTimeout(() => {
+			this.doAutoSizeManagement(event);
+		}, 150);
+	}
+
+	protected doAutoSizeManagement(event?: any) {
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+	}
 }

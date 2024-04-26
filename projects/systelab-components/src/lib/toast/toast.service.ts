@@ -1,17 +1,29 @@
-import {Injectable, Injector} from '@angular/core';
-import {Overlay} from '@angular/cdk/overlay';
-import {ComponentPortal} from '@angular/cdk/portal';
-import {ToastRef} from './toast-ref';
-import {ToastData} from './toast-config';
-import {ToastComponent} from './toast.component';
+import { Inject, Injectable, Injector, Optional } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ToastRef } from './toast-ref';
+import { DEFAULT_TOAST_CONFIG, ToastConfig, ToastData } from './toast-config';
+import { ToastComponent } from './toast.component';
+import { APP_CONFIG } from '../systelab-components.module.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  private lastToast: ToastRef;
+  private _lastToast: ToastRef;
+  private _config: ToastConfig;
 
-  constructor(private overlay: Overlay, private parentInjector: Injector) {}
+  constructor(@Optional() @Inject(APP_CONFIG) private config, private overlay: Overlay, private parentInjector: Injector) {
+    this._config = config?.toast ?? DEFAULT_TOAST_CONFIG;
+  }
+
+  public setConfig(config: ToastConfig): void {
+    this._config = config;
+  }
+
+  public getConfig(): ToastConfig {
+    return this._config;
+  }
 
   public showError(text: string) {
     this.show({text, type: 'error' });
@@ -34,7 +46,7 @@ export class ToastService {
     const overlayRef = this.overlay.create({ positionStrategy, panelClass: 'slab-toast-panel' });
 
     const toastRef = new ToastRef(overlayRef);
-    this.lastToast = toastRef;
+    this._lastToast = toastRef;
 
     const injector = this.getInjector(data, toastRef, this.parentInjector);
     const toastPortal = new ComponentPortal(ToastComponent, null, injector);
@@ -45,7 +57,7 @@ export class ToastService {
   }
 
   private getPositionStrategy() {
-    if (!this.lastToast || (this.lastToast && !this.lastToast.isVisible())) {
+    if (!this._lastToast || (this._lastToast && !this._lastToast.isVisible())) {
       return this.overlay.position().global().bottom(this.getPosition()).centerHorizontally();
     } else {
       return this.overlay.position().global().top(this.getPosition()).centerHorizontally();
@@ -53,10 +65,10 @@ export class ToastService {
   }
 
   private getPosition() {
-    const lastToastIsVisible = this.lastToast && this.lastToast.isVisible();
+    const lastToastIsVisible = this._lastToast && this._lastToast.isVisible();
     let position = 25;
     if (lastToastIsVisible) {
-      const { height, top } = this.lastToast.getPosition();
+      const { height, top } = this._lastToast.getPosition();
       position = top - height - 25;
     }
 
@@ -68,7 +80,7 @@ export class ToastService {
       parent: parentInjector,
       providers: [
         { provide: ToastData, useValue: data },
-        { provide: ToastRef, useValue: toastRef }
+        { provide: ToastRef, useValue: toastRef },
       ]
     });
   }

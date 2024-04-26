@@ -1,6 +1,7 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ColDef, GetRowIdParams, GridOptions } from 'ag-grid-community';
+import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
 export abstract class AbstractListBox<T> implements OnInit {
@@ -45,6 +46,9 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Input() public hideChecks = false;
 
 	protected _multipleSelectedItemList: Array<T>;
+
+	private calculatedGridState : CalculatedGridState = initializeCalculatedGridState();
+	private scrollTimeout;
 
 	@Input()
 	set multipleSelectedItemList(value: Array<T>) {
@@ -105,6 +109,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 			?.toString();
 
 		this.gridOptions.rowData = this.values;
+
+		this.gridOptions.enableBrowserTooltips = true;
 	}
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
@@ -123,7 +129,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 			{
 				rowDrag: this.rowDrag,
 				colId:   this.getIdField(),
-				field:   this.getDescriptionField()
+				field:   this.getDescriptionField(),
+				tooltipField: this.getDescriptionField()
 			}
 		];
 
@@ -135,7 +142,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 				width:             this.getCheckColumnWidth(),
 				suppressSizeToFit: true,
 				resizable:         false,
-				suppressMovable:   true
+				suppressMovable:   true,
+				pinned:            'left'
 			});
 		}
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
@@ -168,12 +176,23 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	public doGridReady(event: any) {
-		this.gridOptions.api.sizeColumnsToFit();
+		this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+	}
+
+	private onBodyScroll(event: any): void {
+		clearTimeout(this.scrollTimeout);
+		this.scrollTimeout = setTimeout(() => {
+			this.doAutoSizeManagement(event);
+		}, 150);
+	}
+
+	protected doAutoSizeManagement(event?: any) {
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
 	}
 
 	public doGridSizeChanged(event: any) {
 		if (this.gridOptions.api) {
-			this.gridOptions.api.sizeColumnsToFit();
+			this.doAutoSizeManagement();
 		}
 	}
 
@@ -236,7 +255,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	public onModelUpdated(pEvent: any) {
-		this.gridOptions.api.sizeColumnsToFit();
+		this.doAutoSizeManagement();
 		this.selectItemInGrid();
 		return pEvent;
 	}

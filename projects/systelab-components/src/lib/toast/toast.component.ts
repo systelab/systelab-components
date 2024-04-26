@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AnimationEvent} from '@angular/animations';
-import {toastAnimations, ToastAnimationState} from './toast-animation';
-import {ToastData} from './toast-config';
-import {ToastRef} from './toast-ref';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AnimationEvent } from '@angular/animations';
+import { toastAnimations, ToastAnimationState } from './toast-animation';
+import { ToastConfig, ToastData, ToastSize } from './toast-config';
+import { ToastRef } from './toast-ref';
+import { ToastService } from './toast.service';
 
 const ICONS = {
   success: 'icon-check-circle',
@@ -17,36 +18,52 @@ const ICONS = {
   animations: [toastAnimations.fadeToast],
 })
 export class ToastComponent implements OnInit, OnDestroy {
-  iconType: string;
-  classType: string;
-  animationState: ToastAnimationState = 'default';
+  public iconClass: string;
+  public toastClass: string;
+  public animationState: ToastAnimationState = 'default';
+  public config: ToastConfig;
 
-  private intervalId: number;
+  private _intervalId: number;
 
-  constructor(readonly data: ToastData, readonly ref: ToastRef) {
-    this.iconType = ICONS[data.type];
-    this.classType = `slab-toast--${data.type}`;
+  constructor(readonly data: ToastData, readonly ref: ToastRef, readonly toastService: ToastService) {
+    this.config = this.toastService.getConfig();
+    this.iconClass = `fa ${ICONS[data.type]}`;
+    this.toastClass = `slab-toast slab-toast--${data.type}`;
+    if (this.config.autoWidth) {
+      this.toastClass = `${this.toastClass} slab-toast--auto-width`;
+    } else if (this.config.fixedSize === ToastSize.small) {
+      this.toastClass = `${this.toastClass} slab-toast--fixed-size-small`;
+    } else if (this.config.fixedSize === ToastSize.large) {
+      this.toastClass = `${this.toastClass} slab-toast--fixed-size-large`;
+    }
+    if (this.config.showCloseButton) {
+      this.toastClass = `${this.toastClass} show-close-button`;
+    }
   }
 
   public ngOnInit(): void {
-    this.intervalId = window.setTimeout(() => (this.animationState = 'closing'), 5000);
+    this._intervalId = window.setTimeout(() => (this.animationState = 'closing'), this.config.timeout);
   }
 
-  public close(): void {
-    this.ref.close();
+  public closeToast(): void {
+    this.close();
   }
 
   public onFadeFinished(event: AnimationEvent) {
     const { toState } = event;
     const isFadeOut = (toState as ToastAnimationState) === 'closing';
-    const itFinished = this.animationState === 'closing';
+    const isFinished = this.animationState === 'closing';
 
-    if (isFadeOut && itFinished) {
+    if (isFadeOut && isFinished) {
       this.close();
     }
   }
 
   public ngOnDestroy() {
-    clearTimeout(this.intervalId);
+    clearTimeout(this._intervalId);
+  }
+
+  private close(): void {
+    this.ref.close();
   }
 }
