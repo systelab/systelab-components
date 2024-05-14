@@ -2,6 +2,10 @@
     <input type="checkbox" [checked]="transparentBackgroundForButtons" [(ngModel)]="transparentBackgroundForButtons" id="check-transparent">
     <label for="check-transparent">Transparent header</label>
 </div>
+<div>
+    <input type="checkbox" [checked]="showSaveButton" [(ngModel)]="showSaveButton" id="check-show-save-button">
+    <label for="check-show-save-button">Show / Hide download button</label>
+</div>
 <div class="position-relative d-flex slab-flex-1 border" style="height:600px;width:900px">
     <systelab-image-viewer class="slab-overflow-container d-flex slab-flex-1" #imageViewer
               [imageSrc]="imageSrc"
@@ -10,6 +14,7 @@
               [actionButtons]="actionButtons"
               [imageFilters]="imageFilters"
               [sliderZoomMax]="200"
+              [showSaveButton]="showSaveButton"
               [showZoomByAreaButton]="true"
               [showAdjustButton]="true"
               [showZoomScale]="true"

@@ -41,6 +41,7 @@ export class ShowcaseImageViewerComponent {
 	   </filter>`;
 
 	public transparentBackgroundForButtons = false;
+	public showSaveButton = true;
 
 	constructor() {
 	}

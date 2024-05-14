@@ -36,6 +36,7 @@ export class ImageViewerComponent implements OnInit {
 	@Input() public overlayText: string;
 	@Input() public actionButtons: ActionButton[];
 	@Input() public imageFilters = '';
+	@Input() public showSaveButton = true;
 	@Input() public showZoomByAreaButton = false;
 	@Input() public showAdjustButton = false;
 	@Input() public showZoomScale = false;
