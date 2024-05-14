@@ -73,6 +73,7 @@
 <div *ngIf="imageSrc; else noImage" id="imageViewerWrapper" #imageViewerWrapper [ngClass]="{'zooming' : zoomEnabled, 'dragging' : dragEnabled }">
 
     <img data-test-id="ImageViewerImg" id="imageViewerImg" #imageViewerImg
+         [ngClass]="{'no-overlapping' : !overlapImageWithButtons }"
          [src]="imageSrc"
          (load)="setInitialValues()"
          [ngStyle]="{

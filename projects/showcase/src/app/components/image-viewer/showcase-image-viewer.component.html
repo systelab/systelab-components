@@ -6,6 +6,10 @@
     <input type="checkbox" [checked]="showSaveButton" [(ngModel)]="showSaveButton" id="check-show-save-button">
     <label for="check-show-save-button">Show / Hide download button</label>
 </div>
+<div>
+    <input type="checkbox" [checked]="overlapImage" [(ngModel)]="overlapImage" id="check-overlap-image">
+    <label for="check-overlap-image">Overlap image & buttons</label>
+</div>
 <div class="position-relative d-flex slab-flex-1 border" style="height:600px;width:900px">
     <systelab-image-viewer class="slab-overflow-container d-flex slab-flex-1" #imageViewer
               [imageSrc]="imageSrc"
@@ -20,6 +24,7 @@
               [showZoomScale]="true"
               [showSliderToolTip]="false"
               [transparentBackgroundForButtons]="transparentBackgroundForButtons"
+              [overlapImageWithButtons]="overlapImage"
               (clickActionButton)="doClickActionButton($event)"
               (clickOverlayText)="doClickOverlayText()">
     </systelab-image-viewer>

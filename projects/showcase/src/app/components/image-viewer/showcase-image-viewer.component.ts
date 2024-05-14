@@ -42,6 +42,7 @@ export class ShowcaseImageViewerComponent {
 
 	public transparentBackgroundForButtons = false;
 	public showSaveButton = true;
+	public overlapImage = true;
 
 	constructor() {
 	}
