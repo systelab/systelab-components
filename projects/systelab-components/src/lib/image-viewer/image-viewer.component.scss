@@ -54,6 +54,9 @@
   img {
     position: relative;
 
+    &.no-overlapping {
+      margin-top: 100px;
+    }
   }
 
   #selector {

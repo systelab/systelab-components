@@ -21,9 +21,11 @@ import {SystelabTranslateModule} from 'systelab-translate';
                                          [imageFilters]="imageFilters"
                                          (clickActionButton)="doClickActionButton($event)"
                                          (clickOverlayText)="doClickOverlayText()"
+										 [showSaveButton]="showDownloadButton"
                                          [showZoomByAreaButton]="true"
                                          [showAdjustButton]="true"
                                          [transparentBackgroundForButtons]="transparentBackgroundForButtons"
+										 [overlapImageWithButtons]="overlapImageWithButtons"
                                          [showZoomScale]="true">
                   </systelab-image-viewer>`,
 	styles:   []
@@ -54,6 +56,8 @@ export class ImageViewerTestComponent {
 								 0 0 0 1 0"/>
 	</filter>`;
 	public transparentBackgroundForButtons = false;
+	public showDownloadButton = true;
+	public overlapImageWithButtons = true;
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -253,6 +257,35 @@ describe('ImageViewerTestComponent', () => {
 		const isTransparentClass = fixture.debugElement.nativeElement.getElementsByClassName('bg-color-transparent').length;
 		expect(fixture.componentInstance.imageViewer.transparentBackgroundForButtons).toBe(true);
 		expect(isTransparentClass).toBeGreaterThan(0);
+	});
+
+	it('should show download button when input is true', () => {
+		fixture.componentInstance.showDownloadButton = true;
+		fixture.detectChanges();
+		const button = fixture.debugElement.nativeElement.querySelector('[data-test-id="SaveBtn"]');
+		expect(button).toBeDefined();
+	});
+
+	it('should not show download button when input is true', () => {
+		fixture.componentInstance.showDownloadButton = false;
+		fixture.detectChanges();
+		const button = fixture.debugElement.nativeElement.querySelector('[data-test-id="SaveBtn"]');
+		expect(button).toBeNull();
+	});
+
+	it('should overlap image with buttons', () => {
+		fixture.componentInstance.overlapImageWithButtons = true;
+		const isNoOverlapClass = fixture.debugElement.nativeElement.getElementsByClassName('no-overlapping').length;
+		expect(fixture.componentInstance.imageViewer.overlapImageWithButtons).toBe(true);
+		expect(isNoOverlapClass).toBe(0);
+	});
+
+	it('should not overlap image with buttons', () => {
+		fixture.componentInstance.overlapImageWithButtons = false;
+		fixture.detectChanges();
+		const isNoOverlapClass = fixture.debugElement.nativeElement.getElementsByClassName('no-overlapping').length;
+		expect(fixture.componentInstance.imageViewer.overlapImageWithButtons).toBe(false);
+		expect(isNoOverlapClass).toBeGreaterThan(0);
 	});
 });
 
