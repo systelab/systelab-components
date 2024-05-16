@@ -36,6 +36,12 @@ script:
   - npm run test
 
 after_success:
+  - curl -sSL https://get.rvm.io | bash -s stable
+  - source ~/.rvm/scripts/rvm
+  - rvm requirements
+  - rvm install 3.0.0
+  - rvm use 3.0.0 --default
+  - ruby -v
   - cat coverage/systelab-components/lcov.info | codecov
   - cat ./coverage/systelab-components/lcov.info | codacy-coverage
 
