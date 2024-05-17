@@ -23,11 +23,14 @@ before_install:
   - curl -sSL https://get.rvm.io | bash -s stable
   - source ~/.rvm/scripts/rvm
   - rvm requirements
+  - sudo apt-get update
+  - sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
   - rvm install 3.0.0
   - rvm use 3.0.0 --default
   - ruby -v
 
 install:
+
   - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
   - npm install -g codecov
   - npm install -g codacy-coverage
