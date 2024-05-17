@@ -15,23 +15,13 @@ addons:
 services:
   - xvfb
 
-
 before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
   - export DISPLAY=:99.0
   - npm i -g npm@8.19.4
   - npm --version
-  - curl -sSL https://get.rvm.io | bash -s stable
-  - source ~/.rvm/scripts/rvm
-  - rvm requirements
-  - sudo apt-get update
-  - sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm-dev
 
 install:
-  - rvm install 3.1.0
-  - rvm use 3.1.0 --default
-  - ruby -v
-
   - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
   - npm install -g codecov
   - npm install -g codacy-coverage
@@ -67,7 +57,8 @@ deploy:
   skip_cleanup: true
   provider: npm
   email: aserra@werfen.com
-  edge: true
+  edge:
+    branch: v2.0.3-beta.4
   api_key: $NPM_TOKEN
   on:
     tags: true
