@@ -26,6 +26,7 @@ import {SystelabTranslateModule} from 'systelab-translate';
                                          [showAdjustButton]="true"
                                          [transparentBackgroundForButtons]="transparentBackgroundForButtons"
 										 [overlapImageWithButtons]="overlapImageWithButtons"
+										 [allowBorderColor]="allowBorderColor"
                                          [showZoomScale]="true">
                   </systelab-image-viewer>`,
 	styles:   []
@@ -58,6 +59,7 @@ export class ImageViewerTestComponent {
 	public transparentBackgroundForButtons = false;
 	public showDownloadButton = true;
 	public overlapImageWithButtons = true;
+	public allowBorderColor = 'white';
 
 	public doClickActionButton($event: string): void {
 		if ($event === 'Action 1') {
@@ -286,6 +288,13 @@ describe('ImageViewerTestComponent', () => {
 		const isNoOverlapClass = fixture.debugElement.nativeElement.getElementsByClassName('no-overlapping').length;
 		expect(fixture.componentInstance.imageViewer.overlapImageWithButtons).toBe(false);
 		expect(isNoOverlapClass).toBeGreaterThan(0);
+	});
+
+	it('should set allow zoom area border color to the input value', () => {
+		fixture.componentInstance.allowBorderColor = 'blue';
+		fixture.detectChanges();
+		const area = fixture.debugElement.nativeElement.querySelector('[data-test-id="ZoomSelector"]');
+		expect(area.style.borderColor).toEqual('blue');
 	});
 });
 

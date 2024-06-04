@@ -46,6 +46,7 @@ export class ImageViewerComponent implements OnInit {
 	@Input() public sliderZoomStep = 1;
 	@Input() public transparentBackgroundForButtons = false;
 	@Input() public overlapImageWithButtons = true;
+	@Input() public allowBorderColor = 'white';
 
 	@Output() public clickActionButton = new EventEmitter<string>();
 	@Output() public clickOverlayText = new EventEmitter();
