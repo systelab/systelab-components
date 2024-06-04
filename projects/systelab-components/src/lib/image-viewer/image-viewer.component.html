@@ -84,7 +84,7 @@
 
     <div id="selector" data-test-id="ZoomSelector"
          [style.display]="zoomSelector.visible ? 'block' : 'none'"
-         [style.borderColor]="zoomSelector.allow ? 'white' : 'red'"
+         [style.borderColor]="zoomSelector.allow ? allowBorderColor : 'red'"
          [style.top.px]="zoomSelector.top"
          [style.left.px]="zoomSelector.left"
          [style.width.px]="zoomSelector.width"
