@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
-import { AgRendererComponent } from 'ag-grid-angular';
+import { ChangeDetectorRef, Directive, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { AgGridAngular, AgRendererComponent } from 'ag-grid-angular';
 import {IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
+import { grid } from '@interactjs/snappers/all';
 
 declare const jQuery: any;
 
@@ -23,6 +24,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public override startsWith = '';
 	@Input() public debounceTime: number = 350;
 	@Input() public withClearOption: boolean = false;
+
+	@ViewChild('grid', { read: ElementRef }) grid: ElementRef;
 
 	constructor(
 		public override myRenderer: Renderer2,
@@ -174,6 +177,14 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public clearText(event: MouseEvent): void {
 		this.input.nativeElement.value = '';
 		this.doSearch(event);
+	}
+
+	public onEnterDoSelect(event: KeyboardEvent) {
+		if (this.isDropdownOpened) {
+			//this.grid.nativeElement.getElementsByClassName('ag-row-first')[0].click();
+			this.gridOptions.api.getDisplayedRowAtIndex(0).selectThisNode(true);
+			this.inputElement.nativeElement.focus();
+		}
 	}
 
 }
