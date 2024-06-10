@@ -181,9 +181,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public onEnterDoSelect(event: KeyboardEvent) {
 		if (this.isDropdownOpened) {
-			//this.grid.nativeElement.getElementsByClassName('ag-row-first')[0].click();
 			this.gridOptions.api.getDisplayedRowAtIndex(0).selectThisNode(true);
-			this.inputElement.nativeElement.focus();
 		}
 	}
 

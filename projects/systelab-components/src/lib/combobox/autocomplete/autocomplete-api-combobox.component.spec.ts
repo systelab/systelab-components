@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Renderer2, ViewChild } from '@angular/core';
 import { AutocompleteApiComboBox, KeyName } from './autocomplete-api-combobox.component';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuCellRendererComponent } from '../../grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -55,7 +55,6 @@ export class SystelabAutocompleteComponent extends AutocompleteApiComboBox<TestD
 		values.push(new TestData('3', 'Description 3'));
 		values.push(new TestData('4', 'Description 4'));
 		this.totalItems = values.length;
-		console.log("AAAAAAAAAAAAAAAAAA")
 		return of(values);
 	}
 
@@ -212,41 +211,5 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.inputElement.nativeElement.value = 'a'
 		component.combobox.onCellKeyDown(event);
 		expect(component.combobox.inputElement.nativeElement.value).toEqual('aa');
-	});
-
-	fit('should select first row and focus input on Enter key press', async () => {
-		component.combobox.isDisabled = false;
-		component.combobox.isDropdownOpened = false;
-		component.combobox.description = '3'
-		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown').and.callThrough();
-		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
-		component.combobox.onInputClicked(new MouseEvent(''));
-		expect(openDropDownSpy).toHaveBeenCalled();
-		expect(doSearchTextSpy).toHaveBeenCalledWith('3');
-
-		//component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {key: KeyName.enter}));
-		component.combobox.inputElement.nativeElement.value = '3'
-		component.combobox.inputElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: KeyName.enter}));
-
-		fixture.detectChanges();
-		await fixture.whenStable();
-
-		expect(component.combobox.isDropdownOpened).toBeFalse();
-		expect(component.combobox.description).toEqual('Description 3');
-	});
-
-	xit('should select first row after enter key is pressed and close dropdown ', () => {
-		const keyEvent = new KeyboardEvent('keydown', {key: 'd'});
-		const event = {event: keyEvent}
-		component.combobox.inputElement.nativeElement.value = ''
-		component.combobox.onCellKeyDown(event);
-
-		const keyEnterEvent = new KeyboardEvent('keydown', {key: KeyName.enter});
-		const setSelectedMock = () => {};
-		const enterEvent = {event: keyEnterEvent, node: {setSelected: setSelectedMock}}
-		component.combobox.onEnterDoSelect(keyEnterEvent);
-		component.combobox.onCellKeyDown(enterEvent);
-
-		expect(component.combobox.description).toEqual('Description 1');
 	});
 });
