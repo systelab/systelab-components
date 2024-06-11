@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
+import { GridApi, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -211,5 +212,15 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.inputElement.nativeElement.value = 'a'
 		component.combobox.onCellKeyDown(event);
 		expect(component.combobox.inputElement.nativeElement.value).toEqual('aa');
+	});
+
+	it('onEnterDoSelect', () => {
+		const selectThisNodeSpy = spyOn(RowNode.prototype, 'selectThisNode');
+		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
+		if (component.combobox.isDropdownOpened) {
+			expect(selectThisNodeSpy).toHaveBeenCalled();
+		} else {
+			expect(selectThisNodeSpy).not.toHaveBeenCalled();
+		}
 	});
 });
