@@ -26,6 +26,25 @@ describe('DataTransformerService Test', () => {
 				expected: new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() + 2)},
 	];
 
+	const checkMonthScenarios = [
+		{description: 'Month number -1', monthNumber: -1, expected: false},
+		{description: 'Month Number 5', monthNumber: 5, expected: true},
+		{description: 'Month Number 15', monthNumber: 15, expected: false},
+	];
+
+	const checkDayScenarios = [
+		{description: 'Day Number -1', yearInDate: 2024, monthInDate: 6, dayNumber: -1, expected: false},
+		{description: 'Day Number 21', yearInDate: 2024, monthInDate: 6, dayNumber: 21, expected: true},
+		{description: 'Day Number 35', yearInDate: 2024, monthInDate: 6, dayNumber: 35, expected: false},
+	];
+
+	const getSeparatorScenarios = [
+		{description: 'Format Date yy/mm', dateFormat: 'yy/mm', expected: '/'},
+		{description: 'Format Date yy-mm', dateFormat: 'yy-mm', expected: '-'},
+		{description: 'Format Date yy.mm', dateFormat: 'yy.mm', expected: '.'},
+		{description: 'Format Date yy', dateFormat: 'yy', expected: undefined},
+	];
+
  	const isSameDate = (date1: Date, date2: Date): boolean => {
 		if (date1.getDate() !== date2.getDate()) {
 			return false;
@@ -63,5 +82,26 @@ describe('DataTransformerService Test', () => {
 			expect(isSameDate(transformedDate, parameter.expected)).toBeTrue();
 		});
 	});
+
+	checkMonthScenarios.forEach(scenario => {
+		it(scenario.description, () => {
+			const result = dataTransformerService['checkMonthNumber'](scenario.monthNumber);
+			expect(result).toEqual(scenario.expected);
+		});
+	})
+
+	checkDayScenarios.forEach(scenario => {
+		it(scenario.description, () => {
+			const result = dataTransformerService['checkDayNumber'](scenario.yearInDate, scenario.monthInDate, scenario.dayNumber);
+			expect(result).toEqual(scenario.expected);
+		});
+	})
+
+	getSeparatorScenarios.forEach(scenario => {
+		it(scenario.description, () => {
+			const result = dataTransformerService['getDateSeparator'](scenario.dateFormat);
+			expect(result).toEqual(scenario.expected);
+		});
+	})
 
 });

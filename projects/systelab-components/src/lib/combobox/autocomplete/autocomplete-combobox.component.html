@@ -16,6 +16,7 @@
                (keydown.Tab)="closeDropDown()"
                (keydown.arrowDown)="onInputNavigate($event)"
                (keydown.arrowUp)="onInputNavigate($event)"
+               (keydown.enter)="onEnterDoSelect($event)"
                 (click)="onInputClicked($event)"/>
         <button *ngIf="withClearOption && !inputIsEmpty()" type="button" #clearButton [hidden]="isDisabled"
                 class="slab-combo-button border-right-0 rounded-0 {{deleteIconClass}}" (click)="clearText($event)"

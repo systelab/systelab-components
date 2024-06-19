@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Renderer2, ViewChild } from '@angular/core';
 import { AutocompleteApiComboBox, KeyName } from './autocomplete-api-combobox.component';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuCellRendererComponent } from '../../grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
+import { GridApi, RowNode } from 'ag-grid-community';
+import { roundToNearestMinutesWithOptions } from 'date-fns/fp';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -106,6 +108,12 @@ export class AutocompleteTestComponent {
 describe('AutocompleteApiAutocomplete', () => {
 	let component: AutocompleteTestComponent;
 	let fixture: ComponentFixture<AutocompleteTestComponent>;
+	const gridApiSpy = jasmine.createSpyObj('GridApi', ['getDisplayedRowAtIndex']);
+	const gridApiMock = {
+		getDisplayedRowAtIndex: () => {
+			return new RowNode<any>(null);
+		}
+	} as unknown as GridApi;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -127,7 +135,10 @@ describe('AutocompleteApiAutocomplete', () => {
 				SystelabAutocompleteComponent,
 				AutocompleteTestComponent
 			],
-			providers: [Renderer2, ChangeDetectorRef],
+			providers: [
+				Renderer2,
+				ChangeDetectorRef,
+			],
 		}).compileComponents();
 	});
 
@@ -212,4 +223,23 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.onCellKeyDown(event);
 		expect(component.combobox.inputElement.nativeElement.value).toEqual('aa');
 	});
+
+	it('onEnterDoSelect', () => {
+		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
+		spyOn(RowNode.prototype, 'selectThisNode');
+		component.combobox.gridOptions.api = gridApiMock;
+		component.combobox.isDropdownOpened = true;
+		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
+		expect(getDisplayedRowAtIndexSpy).toHaveBeenCalled();
+	});
+
+	it('onEnterDoSelect', () => {
+		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
+		spyOn(RowNode.prototype, 'selectThisNode');
+		component.combobox.gridOptions.api = gridApiMock;
+		component.combobox.isDropdownOpened = false;
+		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
+		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
+	});
+
 });

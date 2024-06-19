@@ -176,4 +176,10 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		this.doSearch(event);
 	}
 
+	public onEnterDoSelect(event: KeyboardEvent) {
+		if (this.isDropdownOpened) {
+			this.gridOptions.api.getDisplayedRowAtIndex(0).selectThisNode(true);
+		}
+	}
+
 }
