@@ -169,7 +169,7 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('should clear input text and do search to reset result table', () => {
 		const event = new MouseEvent('click');
-		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText').and.callThrough();
+		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
 		component.combobox.clearText(event);
 		expect(component.combobox.input.nativeElement.value).toBe('');
 		expect(doSearchTextSpy).toHaveBeenCalled();
@@ -192,7 +192,7 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = false;
 		component.combobox.description = 'description test'
-		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown').and.callThrough();
+		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown');
 		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
 		component.combobox.onInputClicked(new MouseEvent(''));
 		expect(openDropDownSpy).toHaveBeenCalled();
