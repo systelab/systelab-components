@@ -166,9 +166,12 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(closeDropDownSpy).toHaveBeenCalled();
 	});
 
-	it('should clear input text and do search to reset result table', () => {
+	fit('should clear input text and do search to reset result table', () => {
 		const event = new MouseEvent('click');
-		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
+		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText').and.callThrough();
 		component.combobox.clearText(event);
 		expect(component.combobox.input.nativeElement.value).toBe('');
 		expect(doSearchTextSpy).toHaveBeenCalled();
@@ -187,11 +190,14 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(component.combobox.currentSelected).toBe(undefined);
 	});
 
-	it('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
+	fit('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = false;
-		component.combobox.description = 'description test'
-		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown');
+		component.combobox.description = 'description test';
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
+		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown').and.callThrough();
 		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
 		component.combobox.onInputClicked(new MouseEvent(''));
 		expect(openDropDownSpy).toHaveBeenCalled();
