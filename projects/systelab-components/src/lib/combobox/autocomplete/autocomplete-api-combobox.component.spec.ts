@@ -166,7 +166,7 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(closeDropDownSpy).toHaveBeenCalled();
 	});
 
-	fit('should clear input text and do search to reset result table', () => {
+	it('should clear input text and do search to reset result table', () => {
 		const event = new MouseEvent('click');
 		component.combobox.filterInput = {
 			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
@@ -190,7 +190,7 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(component.combobox.currentSelected).toBe(undefined);
 	});
 
-	fit('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
+	it('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = false;
 		component.combobox.description = 'description test';
