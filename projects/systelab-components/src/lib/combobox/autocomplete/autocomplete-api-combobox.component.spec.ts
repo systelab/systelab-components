@@ -15,7 +15,6 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridApi, RowNode } from 'ag-grid-community';
-import { roundToNearestMinutesWithOptions } from 'date-fns/fp';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -240,6 +239,15 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.isDropdownOpened = false;
 		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
 		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
+	});
+
+	it('should open dropdown and give inputFilter the focus', () => {
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
+		component.combobox['openDropDown']();
+		expect(component.combobox.isDropdownOpened).toBeTrue();
+		expect(component.combobox.filterInput.nativeElement.focus).toHaveBeenCalled();
 	});
 
 });
