@@ -15,7 +15,6 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridApi, RowNode } from 'ag-grid-community';
-import { roundToNearestMinutesWithOptions } from 'date-fns/fp';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -169,6 +168,9 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('should clear input text and do search to reset result table', () => {
 		const event = new MouseEvent('click');
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
 		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText').and.callThrough();
 		component.combobox.clearText(event);
 		expect(component.combobox.input.nativeElement.value).toBe('');
@@ -191,7 +193,10 @@ describe('AutocompleteApiAutocomplete', () => {
 	it('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = false;
-		component.combobox.description = 'description test'
+		component.combobox.description = 'description test';
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
 		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown').and.callThrough();
 		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
 		component.combobox.onInputClicked(new MouseEvent(''));
@@ -240,6 +245,15 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.isDropdownOpened = false;
 		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
 		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
+	});
+
+	it('should open dropdown and give inputFilter the focus', () => {
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
+		component.combobox['openDropDown']();
+		expect(component.combobox.isDropdownOpened).toBeTrue();
+		expect(component.combobox.filterInput.nativeElement.focus).toHaveBeenCalled();
 	});
 
 });
