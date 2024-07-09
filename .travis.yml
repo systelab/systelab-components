@@ -58,7 +58,7 @@ deploy:
   provider: npm
   email: aserra@werfen.com
   edge:
-    branch: v2.0.3-beta.4
+    branch: v2.0.3-beta.5
   api_key: $NPM_TOKEN
   on:
     tags: true
