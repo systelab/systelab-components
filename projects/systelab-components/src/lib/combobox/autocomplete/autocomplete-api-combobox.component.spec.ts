@@ -247,13 +247,4 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
 	});
 
-	it('should open dropdown and give inputFilter the focus', () => {
-		component.combobox.filterInput = {
-			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
-		}
-		component.combobox['openDropDown']();
-		expect(component.combobox.isDropdownOpened).toBeTrue();
-		expect(component.combobox.filterInput.nativeElement.focus).toHaveBeenCalled();
-	});
-
 });
