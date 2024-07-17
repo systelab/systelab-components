@@ -72,8 +72,10 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			}
 			this.chref.detectChanges();
 			// sets focus into the first grid cell
-			const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
-			this.gridOptions.api.setFocusedCell(0, firstCol);
+			setTimeout(() => {
+				const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
+				this.gridOptions.api.setFocusedCell(0, firstCol);
+			}, 0);
 		}
 	}
 
@@ -165,7 +167,6 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		jQuery('#' + this.comboId)
 			.dropdown('toggle');
 		this.isDropdownOpened = true;
-		this.filterInput.nativeElement.focus();
 	}
 
 	public inputIsEmpty(): boolean {

@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectorRef, Component, Renderer2, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, Renderer2, ViewChild } from '@angular/core';
 import { AutocompleteApiComboBox, KeyName } from './autocomplete-api-combobox.component';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuCellRendererComponent } from '../../grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { GridApi, RowNode } from 'ag-grid-community';
+import { ColumnApi, GridApi, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -107,7 +107,7 @@ export class AutocompleteTestComponent {
 describe('AutocompleteApiAutocomplete', () => {
 	let component: AutocompleteTestComponent;
 	let fixture: ComponentFixture<AutocompleteTestComponent>;
-	const gridApiSpy = jasmine.createSpyObj('GridApi', ['getDisplayedRowAtIndex']);
+
 	const gridApiMock = {
 		getDisplayedRowAtIndex: () => {
 			return new RowNode<any>(null);
@@ -138,6 +138,7 @@ describe('AutocompleteApiAutocomplete', () => {
 				Renderer2,
 				ChangeDetectorRef,
 			],
+			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();
 	});
 
@@ -168,9 +169,6 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('should clear input text and do search to reset result table', () => {
 		const event = new MouseEvent('click');
-		component.combobox.filterInput = {
-			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
-		}
 		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText').and.callThrough();
 		component.combobox.clearText(event);
 		expect(component.combobox.input.nativeElement.value).toBe('');
@@ -247,13 +245,20 @@ describe('AutocompleteApiAutocomplete', () => {
 		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
 	});
 
-	it('should open dropdown and give inputFilter the focus', () => {
-		component.combobox.filterInput = {
-			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
-		}
-		component.combobox['openDropDown']();
-		expect(component.combobox.isDropdownOpened).toBeTrue();
-		expect(component.combobox.filterInput.nativeElement.focus).toHaveBeenCalled();
-	});
+	it('onInputNavigate', fakeAsync( () => {
+		const getAllDisplayedColumnsSpy = spyOn<any>(ColumnApi.prototype, 'getAllDisplayedColumns').and.callThrough();
+		const setFocusedCellSpy = spyOn<any>(GridApi.prototype, 'setFocusedCell').and.callThrough();
+
+		component.combobox.isDisabled = false;
+		component.combobox.isDropdownOpened = true;
+
+		component.combobox.onInputNavigate({});
+
+		tick();
+		flush();
+
+		expect(getAllDisplayedColumnsSpy).toHaveBeenCalled();
+		expect(setFocusedCellSpy).toHaveBeenCalled();
+	}));
 
 });
