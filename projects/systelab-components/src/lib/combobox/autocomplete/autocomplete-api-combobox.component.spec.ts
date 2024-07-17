@@ -251,7 +251,6 @@ describe('AutocompleteApiAutocomplete', () => {
 
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = true;
-		console.log('TEST SET')
 
 		component.combobox.onInputNavigate({});
 
