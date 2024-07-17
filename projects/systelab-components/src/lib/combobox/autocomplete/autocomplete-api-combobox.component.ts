@@ -75,7 +75,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			setTimeout(() => {
 				const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
 				this.gridOptions.api.setFocusedCell(0, firstCol);
-			}, 10);
+			}, 0);
 		}
 	}
 
