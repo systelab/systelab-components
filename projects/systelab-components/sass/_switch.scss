@@ -1,13 +1,13 @@
-
+@use "sass:math";
 
 
 .slab-switch {
 
   $slab-ball-size: $slab-switch-height - 8px;
-  $slab-top-icon: ceil(($form-elements-height - $slab-switch-height) / 2);
+  $slab-top-icon: ceil(math.div(($form-elements-height - $slab-switch-height), 2));
 
   background: $slab-switch-bg-color;
-  border-radius: ($slab-switch-height / 2) !important;
+  border-radius: math.div($slab-switch-height, 2) !important;
 
   border: 1px solid #dfdfdf;
   position: relative;

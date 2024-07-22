@@ -1,3 +1,5 @@
+@use "sass:math";
+
 systelab-slider-double-range {
   $slab-slider-track-brackground-color: #d3d3d3;
   $slab-slider-track-border-radius: 5px;
@@ -85,14 +87,14 @@ systelab-slider-double-range {
       border-radius: $slab-slider-thumb-border-radius;
       border: $slab-slider-thumb-border;
       cursor: $slab-slider-thumb-cursor;
-      margin-top: -($slab-slider-height - $slab-slider-background-line) / 2;
+      margin-top: -1 * math.div(($slab-slider-height - $slab-slider-background-line), 2);
       pointer-events: auto;
     }
 
     &::-moz-range-thumb {
       -webkit-appearance: none;
       appearance: none;
-      @include size(($slab-slider-height/2) !important);
+      @include size(math.div($slab-slider-height, 2) !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
       border: $slab-slider-thumb-border;
@@ -102,13 +104,13 @@ systelab-slider-double-range {
 
     &::-ms-thumb {
       appearance: none;
-      @include size(($slab-slider-height/2) !important);
+      @include size(math.div($slab-slider-height, 2) !important);
       background-color: $slab-slider-circle-color;
       border-radius: $slab-slider-thumb-border-radius;
       border: $slab-slider-thumb-border;
       cursor: $slab-slider-thumb-cursor;
-      margin-top: ($slab-slider-height - $slab-slider-background-line) / 2;
-      margin-bottom: ($slab-slider-height - $slab-slider-background-line) / 2;
+      margin-top: math.div(($slab-slider-height - $slab-slider-background-line), 2);
+      margin-bottom: math.div(($slab-slider-height - $slab-slider-background-line), 2);
       pointer-events: auto;
     }
 

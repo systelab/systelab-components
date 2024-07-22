@@ -1,5 +1,7 @@
+@use "sass:math";
+
 $icon-header-size: 40px;
-$icon-header-margin: ($slab-app-header-height - $icon-header-size) / 2;
+$icon-header-margin: math.div(($slab-app-header-height - $icon-header-size), 2);
 
 .slab-app-header-bar {
   height: $slab-app-header-height;

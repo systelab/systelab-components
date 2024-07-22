@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $slab-icon-context-menu-font-size: ceil(22px * $slab-size-percentage);
 $slab-icon-context-menu-size: ceil(28px * $slab-size-percentage);
 
@@ -11,7 +13,7 @@ $slab-icon-context-menu-size: ceil(28px * $slab-size-percentage);
 
   .icon-context-menu {
     font-size: $slab-icon-context-menu-font-size;
-    padding-top: ceil(($grid-cell-height - $slab-icon-context-menu-font-size) / 2);
+    padding-top: ceil(math.div(($grid-cell-height - $slab-icon-context-menu-font-size), 2));
     color: grey;
   }
 }

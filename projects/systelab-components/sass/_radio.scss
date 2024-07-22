@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Hide native radio
 input[type="radio"]:not(:checked), input[type="radio"]:checked {
   @include position(absolute, $left: -9999px);
@@ -6,7 +8,7 @@ input[type="radio"]:not(:checked), input[type="radio"]:checked {
 
 // Styles for label after radio
 input[type="radio"] + label {
-  $top-icon: ($form-elements-height - $slab-radio-height) / 2;
+  $top-icon: math.div(($form-elements-height - $slab-radio-height), 2);
 
   @include user-selection(none);
 
@@ -32,7 +34,7 @@ input[type="radio"] + label {
 
     content: '';
     z-index: 0;
-    border: solid ($slab-radio-height / 8) $medium-gray;
+    border: solid math.div(($slab-radio-height, 8)) $medium-gray;
     border-radius: 50%;
     box-sizing: border-box;
     background-color: $slab-radio-color;
@@ -42,7 +44,7 @@ input[type="radio"] + label {
 
 // Define background color and icon size when checked
 input[type="radio"]:checked + label:before {
-  border: solid ($slab-radio-height / 3) $slab-radio-border-color;
+  border: solid math.div(($slab-radio-height, 3)) $slab-radio-border-color;
 }
 
 input[type="radio"]:focus + label:before {
