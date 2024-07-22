@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextMenuComponent } from './context-menu.component';
 import { ContextMenuOption } from './context-menu-option';
@@ -97,16 +97,16 @@ describe('Systelab Context Menu', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [ContextMenuComponent, ContextMenuItemComponent, ContextMenuTestComponent, ContextMenuSubmenuItemComponent]
-		})
+    declarations: [ContextMenuComponent, ContextMenuItemComponent, ContextMenuTestComponent, ContextMenuSubmenuItemComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

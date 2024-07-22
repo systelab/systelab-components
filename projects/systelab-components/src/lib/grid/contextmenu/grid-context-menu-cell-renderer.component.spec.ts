@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GridContextMenuCellRendererComponent } from "./grid-context-menu-cell-renderer.component"
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -67,17 +67,17 @@ describe('GridContextMenuCellRendererComponent', ()=>{
     beforeEach(async ()=>{
 
         await TestBed.configureTestingModule({
-            imports: [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				AgGridModule],
-            declarations: [ GridContextMenuCellRendererMock],
-        }).compileComponents()
+    declarations: [GridContextMenuCellRendererMock],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents()
     })
 
     beforeEach(()=>{

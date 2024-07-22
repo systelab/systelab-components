@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -76,19 +76,18 @@ describe('Systelab Time unit selector', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [
-				BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				DragDropModule,
-				OverlayModule,
-				TreeModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				AgGridModule,
-				TestModule]
-		})
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule,
+        TestModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

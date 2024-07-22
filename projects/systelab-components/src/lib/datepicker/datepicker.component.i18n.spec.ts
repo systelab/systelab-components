@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -187,20 +187,19 @@ describe('Systelab US DatepickerComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [TouchspinComponent,
-				DatepickerComponent,
-				ButtonComponent,
-				DatepickerTestComponent],
-			providers:    [{provide: I18nService, useClass: USMockI18nService}]
-		})
+    declarations: [TouchspinComponent,
+        DatepickerComponent,
+        ButtonComponent,
+        DatepickerTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [{ provide: I18nService, useClass: USMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 
@@ -278,20 +277,19 @@ describe('Systelab ES DatepickerComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [TouchspinComponent,
-				DatepickerComponent,
-				ButtonComponent,
-				DatepickerTestComponent],
-			providers:    [{provide: I18nService, useClass: ESMockI18nService}]
-		})
+    declarations: [TouchspinComponent,
+        DatepickerComponent,
+        ButtonComponent,
+        DatepickerTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [{ provide: I18nService, useClass: ESMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 
@@ -366,20 +364,19 @@ describe('Systelab ZH DatepickerComponent', () => {
 	let fixture: ComponentFixture<DatepickerTestComponent>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [TouchspinComponent,
-				DatepickerComponent,
-				ButtonComponent,
-				DatepickerTestComponent],
-			providers:    [{provide: I18nService, useClass: ZHMockI18nService}]
-		})
+    declarations: [TouchspinComponent,
+        DatepickerComponent,
+        ButtonComponent,
+        DatepickerTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [{ provide: I18nService, useClass: ZHMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 	beforeEach(() => {
@@ -452,19 +449,18 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [TouchspinComponent,
-				ButtonComponent,
-				DatepickerComponent],
-			providers:    [{provide: I18nService, useClass: ESMockI18nService2}]
-		})
+    declarations: [TouchspinComponent,
+        ButtonComponent,
+        DatepickerComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [{ provide: I18nService, useClass: ESMockI18nService2 }, provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

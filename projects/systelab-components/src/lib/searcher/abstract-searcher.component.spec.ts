@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
@@ -189,37 +189,37 @@ describe('Systelab Searcher', () => {
 
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
-			imports: [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				AgGridModule],
-			declarations: [
-				MockTooltipDirective,
-				DialogBottomComponent,
-				DialogHeaderComponent,
-				SearcherDialog,
-				GridContextMenuCellRendererComponent,
-				GridHeaderContextMenuComponent,
-				ContextMenuItemComponent,
-				ContextMenuSubmenuItemComponent,
-				ComboBoxInputRendererComponent,
-				SystelabSearcherComponent,
-				SearcherTestComponent,
-				GridContextMenuComponent,
-				GridHeaderContextMenu,
-				SearcherTableComponent,
-				ButtonComponent,
-			],
-			providers: [
-				DialogService,
-				MessagePopupService
-			]
-		});
+    declarations: [
+        MockTooltipDirective,
+        DialogBottomComponent,
+        DialogHeaderComponent,
+        SearcherDialog,
+        GridContextMenuCellRendererComponent,
+        GridHeaderContextMenuComponent,
+        ContextMenuItemComponent,
+        ContextMenuSubmenuItemComponent,
+        ComboBoxInputRendererComponent,
+        SystelabSearcherComponent,
+        SearcherTestComponent,
+        GridContextMenuComponent,
+        GridHeaderContextMenu,
+        SearcherTableComponent,
+        ButtonComponent,
+    ],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule],
+    providers: [
+        DialogService,
+        MessagePopupService,
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
 	});
 
 	beforeEach(() => {

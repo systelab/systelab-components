@@ -6,7 +6,7 @@ import { GridColumnOptionsDialog } from './grid-column-options-dialog.component'
 import { GridColumnOptionsDialogParameters } from './grid-column-options-dialog.component';
 import { TwoListItem } from '../../twolist/two-list-utilities';
 import { GridColumnsOptions } from './grid-column-options';
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 describe('GridColumnOptionsDialog', () => {
     let component: GridColumnOptionsDialog;
@@ -22,16 +22,14 @@ describe('GridColumnOptionsDialog', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GridColumnOptionsDialog],
-            imports: [
-                HttpClientModule,
-                SystelabTranslateModule
-            ],
-            providers: [
-                { provide: DialogRef, useValue: dialogMock },
-            ],
-            schemas: [NO_ERRORS_SCHEMA]
-        }).compileComponents();
+    declarations: [GridColumnOptionsDialog],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [SystelabTranslateModule],
+    providers: [
+        { provide: DialogRef, useValue: dialogMock },
+        provideHttpClient(withInterceptorsFromDi()),
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

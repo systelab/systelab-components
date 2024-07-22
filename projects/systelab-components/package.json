@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "17.1.18",
+  "version": "18.0.0",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -16,11 +16,11 @@
   },
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
     "ag-grid-angular": "^28.0.0",
     "ag-grid-community": "^28.0.0",
-    "angular-split": "^17.0.0",
+    "angular-split": "^17.2.0",
     "bootstrap": "^4.5.2",
     "date-fns": "^2.0.0",
     "jquery": "^3.3.1",
@@ -28,8 +28,8 @@
     "popper.js": "^1.16.1",
     "primeicons": "^6.0.1",
     "primeng": "^16.5.0",
-    "systelab-preferences": "^17.0.0",
-    "systelab-translate": "^17.0.0",
+    "systelab-preferences": "^18.0.0",
+    "systelab-translate": "^18.0.0",
     "interactjs": "^1.10.11"
   }
 }

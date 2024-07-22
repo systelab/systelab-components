@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ToggleButtonComponent } from './toggle-button.component';
 
 @Component({
@@ -54,15 +54,15 @@ describe('Systelab Toggle Button', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				DragDropModule,
-				OverlayModule,
-				TreeModule,
-				HttpClientModule],
-			declarations: [ToggleButtonComponent, ToggleButtonTestComponent]
-		})
+    declarations: [ToggleButtonComponent, ToggleButtonTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

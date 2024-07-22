@@ -7,7 +7,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
 import { TreeModule } from 'primeng/tree';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NumPadComponent } from './numpad.component';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { DialogHeaderComponent } from '../modal/header/dialog-header.component';
@@ -55,21 +55,22 @@ describe('Systelab Numpad', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				ButtonModule,
-				FormsModule,
-				DragDropModule,
-				OverlayModule,
-				TreeModule,
-				SystelabTranslateModule,
-				HttpClientModule],
-			declarations: [NumPadComponent, NumpadTestComponent, DialogHeaderComponent],
-			providers:    [
-				DialogService,
-				MessagePopupService,
-				I18nService]
-		})
+    declarations: [NumPadComponent, NumpadTestComponent, DialogHeaderComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        ButtonModule,
+        FormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule,
+        SystelabTranslateModule],
+    providers: [
+        DialogService,
+        MessagePopupService,
+        I18nService,
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+})
 			.compileComponents();
 	});
 

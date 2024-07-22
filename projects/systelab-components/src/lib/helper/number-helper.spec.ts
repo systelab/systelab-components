@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { I18nService } from 'systelab-translate';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NumberHelper } from './number-helper';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 const Number_to_String_Scenarios_For_US = [
@@ -26,13 +27,10 @@ describe('Number Helper from String English Test', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule,
-				RouterTestingModule
-			],
-			providers: [NumberHelper,
-				{provide: I18nService, useClass: USMockI18nService},
-			]
-		});
+    imports: [RouterTestingModule],
+    providers: [NumberHelper,
+        { provide: I18nService, useClass: USMockI18nService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(),]
+});
 		service = TestBed.inject(NumberHelper);
 
 	});
