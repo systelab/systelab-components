@@ -83,6 +83,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	public override onCellKeyDown(e: any): void {
 		if (e.event.key === KeyName.enter) {
 			e.node.setSelected(true);
+			console.log('paso')
 			this.selectedItemChange.emit(e.node.data);
 			this.closeDropDown();
 			this.inputElement.nativeElement.focus();
@@ -175,12 +176,14 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public clearText(event: MouseEvent): void {
 		this.input.nativeElement.value = '';
-		this.doSearch(event);
+		this.doSearchText('');
+		this.openDropDown();
 	}
 
 	public onEnterDoSelect(event: KeyboardEvent) {
-		if (this.isDropdownOpened) {
+		if (this.isDropdownOpened && this.gridOptions.api.getRenderedNodes().length > 0) {
 			this.gridOptions.api.getDisplayedRowAtIndex(0).selectThisNode(true);
+			this.selectedItemChange.emit(this.gridOptions.api.getDisplayedRowAtIndex(0).data);
 		}
 	}
 
