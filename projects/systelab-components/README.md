@@ -50,7 +50,6 @@ NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        HttpClientModule,
         DragDropModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,

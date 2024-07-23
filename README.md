@@ -79,6 +79,28 @@ npm publish
 
 # Breaking changes
 
+## Version 18.x.x - Angular 18
+
+[Angular 18 news](https://blog.angular.dev/angular-v18-is-now-available-e79d5ac0affe)
+
+-   Experimental zoneless support
+-   Material 3 deferrable views
+-   SSR improvements
+-   Deferrable views are now stable
+-   Control flow is stable
+
+## Version 17.x.x - Angular 17
+
+[Angular 17 news](https://blog.angular.dev/introducing-angular-v17-4d7033312e4b)
+
+-   Deferrable views
+-   Faster runtime
+-   Faster builds
+-   Built-in control flow
+-   New lifecycle hooks ( afterRender and afterNextRender )
+-   Default Vite + esbuild for new projects
+-   Signals
+
 ## Version 16.x.x - Angular 16
 
 -   Datepicker has been ranamed to DatepickerComponent
