@@ -221,7 +221,10 @@ import { CdkTreeModule } from '@angular/cdk/tree';
         AgGridModule,
         AutoCompleteModule,
         CdkTreeModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())] })
+    providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+})
 export class ShowcaseModule {
 }
 
