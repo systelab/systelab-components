@@ -227,5 +227,3 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 })
 export class ShowcaseModule {
 }
-
-export { ShowcaseComponent } from './showcase.component';
