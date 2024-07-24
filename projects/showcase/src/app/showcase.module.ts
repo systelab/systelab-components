@@ -5,7 +5,7 @@ import { SystelabComponentsModule } from 'systelab-components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ShowcaseSplitDialog } from './components/dialog/split/showcase-split-dialog.component';
 import { ShowcaseTwoTabsComponent } from './components/dialog/two-tabs/showcase-two-tabs.component';
 import { ShowcaseLowerFlexComponent } from './components/dialog/lower-flex/showcase-lower-flex.component';
@@ -17,7 +17,9 @@ import { ShowcaseTwoColumnsDialog } from './components/dialog/two-columns/showca
 import { ShowcaseFullFlexDialog } from './components/dialog/full-flex/showcase-full-flex-dialog.component';
 import { SampleRouteComponent } from './components/sample-route/sample-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShowcaseProgressBarDialog } from './components/progress-bars/progressbar-dialog/showcase-progressbar-dialog.component';
+import {
+        ShowcaseProgressBarDialog
+} from './components/progress-bars/progressbar-dialog/showcase-progressbar-dialog.component';
 import { ShowcaseDialogComponent } from './components/dialog/showcase-dialog.component';
 import { ShowcaseStandardDialog } from './components/dialog/standard-dialog/showcase-standard-dialog.component';
 import { ShowcaseStandardComponent } from './components/dialog/standard-dialog/showcase-standard.component';
@@ -31,15 +33,21 @@ import { ShowcaseTextareaComponent } from './components/textarea/showcase-textar
 import { ShowcaseDatepickerComponent } from './components/datepicker/showcase-datepicker.component';
 import { ShowcaseComboboxComponent } from './components/combobox/showcase-combobox.component';
 import { ShowcaseInputComponent } from './components/input/showcase-input.component';
-import { ShowcaseInputTemplateDrivenFormValidationsComponent } from './components/input/showcase-input-template-driven-form-validations.component';
-import { ShowcaseInputReactiveFormsValidationsComponent } from './components/input/showcase-input-reactive-forms-validations.component';
+import {
+        ShowcaseInputTemplateDrivenFormValidationsComponent
+} from './components/input/showcase-input-template-driven-form-validations.component';
+import {
+        ShowcaseInputReactiveFormsValidationsComponent
+} from './components/input/showcase-input-reactive-forms-validations.component';
 import { ShowcaseTableComponent } from './components/table/showcase-table.component';
 import { ShowcaseGridComponent } from './components/grid/showcase-grid.component';
 import { ShowcaseInnerApiGridComponent } from './components/grid/showcase-inner-api-grid.component';
 import { ShowcaseIconComponent } from './components/icon/showcase-icon.component';
 import { ShowcaseTwoListComponent } from './components/two-list/showcase-two-list.component';
 import { ShowcaseApplicationFrameComponent } from './components/application-frame/showcase-application-frame.component';
-import { ShowcaseApplicationFrameDialog } from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
+import {
+        ShowcaseApplicationFrameDialog
+} from './components/application-frame/application-frame-dialog/showcase-application-frame-dialog.component';
 import { ShowcaseMessagePopupComponent } from './components/message-popup/showcase-message-popup.component';
 import { ShowcaseTitleComponent } from './components/showcase-title.component';
 import { ShowcaseProgressBarComponent } from './components/progress-bars/showcase-progress-bar.component';
@@ -67,7 +75,9 @@ import { ShowcaseWizardStepsComponent } from './components/wizard-steps/showcase
 import { ShowcaseSortableListComponent } from './components/sortable-list/showcase-sortable-list.component';
 import { ShowcaseInnerSortableListComponent } from './components/sortable-list/showcase-inner-sortable-list.component';
 import { ShowcaseAddRemoveListComponent } from './components/add-remove-list/showcase-add-remove-list.component';
-import { ShowcaseInnerAddRemoveListComponent } from './components/add-remove-list/showcase-inner-add-remove-list.component';
+import {
+        ShowcaseInnerAddRemoveListComponent
+} from './components/add-remove-list/showcase-inner-add-remove-list.component';
 import { ShowcaseContextMenu } from './components/context-menu/showcase-context-menu.component';
 import { ShowcaseListBoxComponent } from './components/listbox/showcase-listbox.component';
 import { ShowcaseInnerTreeListBox } from './components/listbox/showcase-inner-tree-listbox.component';
@@ -92,124 +102,128 @@ import { ShowcaseInnerGroupColumnsGridComponent } from './components/grid/showca
 import { ShowcaseToggleSelectorComponent } from './components/toggle-selector/showcase-toggle-selector.component';
 import { ShowcaseSliderDoubleComponent } from './components/slider-double/slider-double.component';
 import { ShowcaseButtonComponent } from './components/button/showcase-button.component';
-import { EmailValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/email-validator.directive';
+import {
+        EmailValidatorDirective
+} from 'projects/systelab-components/src/lib/forms/validators/email-validator.directive';
 import { UrlValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/url-validator.directive';
-import { PhoneValidatorDirective } from 'projects/systelab-components/src/lib/forms/validators/phone-validator.directive';
+import {
+        PhoneValidatorDirective
+} from 'projects/systelab-components/src/lib/forms/validators/phone-validator.directive';
 import { ShowcaseInteractiveComponent } from './components/dialog/interactive/showcase-interactive.component';
-import { ShowcaseProgressBarWithTextDialog } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
+import {
+        ShowcaseProgressBarWithTextDialog
+} from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
 
-@NgModule({
-	imports:      [
-		A11yModule,
-		BrowserModule,
-		BrowserAnimationsModule,
-		FormsModule,
-		ReactiveFormsModule,
-		DragDropModule,
-		OverlayModule,
-		TreeModule,
-		HttpClientModule,
-		SystelabComponentsModule.forRoot(),
-		SystelabTranslateModule,
-		SystelabPreferencesModule,
-		AgGridModule,
-		AutoCompleteModule,
-		CdkTreeModule
-	],
-	declarations: [
-		ShowcaseComponent,
-		ShowcaseTwoTabsComponent,
-		ShowcaseLowerFlexComponent,
-		ShowcaseTwoColumnsComponent,
-		ShowcaseFullFlexComponent,
-		ShowcaseDialogComponent,
-		ShowcaseComponentsComponent,
-		ShowcaseSpinnerComponent,
-		ShowcaseCheckboxComponent,
-		ShowcaseRadioComponent,
-		ShowcaseSliderComponent,
-		ShowcaseSliderComponent,
-		ShowcaseTooltipComponent,
-		ShowcaseInputComponent,
-		ShowcaseInputTemplateDrivenFormValidationsComponent,
-		ShowcaseInputReactiveFormsValidationsComponent,
-		ShowcaseButtonStylesComponent,
-		ShowcaseButtonComponent,
-		ShowcaseIconComponent,
-		ShowcaseComboboxComponent,
-		ShowcaseDatepickerComponent,
-		ShowcaseTextareaComponent,
-		ShowcaseTableComponent,
-		ShowcaseGridComponent,
-		ShowcaseInnerTreeComboBox,
-		ShowcaseTwoListComponent,
-		ShowcaseApplicationFrameComponent,
-		ShowcaseMessagePopupComponent,
-		ShowcaseTitleComponent,
-		ShowcaseProgressBarComponent,
-		ShowcaseHeadingsComponent,
-		ShowcaseAlertComponent,
-		ShowcaseTextComponent,
-		ShowcaseTabsComponent,
-		ShowcaseSearcherComponent,
-		InnerSearcherComponent,
-		ShowcaseLoadingComponent,
-		ShowcaseTwoTabsDialog,
-		ShowcaseLowerFlexDialog,
-		ShowcaseTwoColumnsDialog,
-		ShowcaseFullFlexDialog,
-		ShowcaseSplitDialog,
-		ShowcaseInnerGridComponent,
-		ShowcaseInnerApiGridComponent,
-		ShowcaseInnerGroupColumnsGridComponent,
-		ShowcaseStandardDialog,
-		SampleRouteComponent,
-		ShowcaseStandardComponent,
-		ShowcaseFileSelectorComponent,
-		ShowcaseProgressBarDialog,
-		ShowcaseApplicationFrameDialog,
-		ShowcaseLoadingDialog,
-		ShowcaseTimelineDialog,
-		ShowcaseTimelineComponent,
-		ShowcaseNavbarComponent,
-		ShowcaseBreadcrumbComponent,
-		ShowcaseSignatureCanvasComponent,
-		ShowcaseTreeComponent,
-		ShowcaseInnerTreeComponent,
-		ShowcasePercentageCircleComponent,
-		ShowcaseInlineComponent,
-		ShowcaseWizardStepsComponent,
-		ShowcaseSortableListComponent,
-		ShowcaseInnerSortableListComponent,
-		ShowcaseAddRemoveListComponent,
-		ShowcaseInnerAddRemoveListComponent,
-		ShowcaseContextMenu,
-		ShowcaseContextPanel,
-		ShowcaseListBoxComponent,
-		ShowcaseInnerTreeListBox,
-		ShowcaseAutocomplete,
-		ShowcasePaginatorComponent,
-		ShowcaseBarsGridComponent,
-		ShowcaseSpyMenuComponent,
-		ShowcaseSpyMenuDialog,
-		ShowcaseVerticalComponent,
-		ShowcaseVerticaldDialog,
-		ShowcaseToastComponent,
-		ShowcaseToggleSelectorComponent,
-		KeyupDebounceDirective,
-		ShowcaseSliderDoubleComponent,
-		EmailValidatorDirective,
-		PhoneValidatorDirective,
-		UrlValidatorDirective,
-		ShowcaseInteractiveComponent,
-		ShowcaseProgressBarWithTextDialog,
-		ShowcaseImageViewerComponent,
-	],
-	bootstrap:    [ShowcaseComponent]
+@NgModule({ declarations: [
+        ShowcaseComponent,
+        ShowcaseTwoTabsComponent,
+        ShowcaseLowerFlexComponent,
+        ShowcaseTwoColumnsComponent,
+        ShowcaseFullFlexComponent,
+        ShowcaseDialogComponent,
+        ShowcaseComponentsComponent,
+        ShowcaseSpinnerComponent,
+        ShowcaseCheckboxComponent,
+        ShowcaseRadioComponent,
+        ShowcaseSliderComponent,
+        ShowcaseSliderComponent,
+        ShowcaseTooltipComponent,
+        ShowcaseInputComponent,
+        ShowcaseInputTemplateDrivenFormValidationsComponent,
+        ShowcaseInputReactiveFormsValidationsComponent,
+        ShowcaseButtonStylesComponent,
+        ShowcaseButtonComponent,
+        ShowcaseIconComponent,
+        ShowcaseComboboxComponent,
+        ShowcaseDatepickerComponent,
+        ShowcaseTextareaComponent,
+        ShowcaseTableComponent,
+        ShowcaseGridComponent,
+        ShowcaseInnerTreeComboBox,
+        ShowcaseTwoListComponent,
+        ShowcaseApplicationFrameComponent,
+        ShowcaseMessagePopupComponent,
+        ShowcaseTitleComponent,
+        ShowcaseProgressBarComponent,
+        ShowcaseHeadingsComponent,
+        ShowcaseAlertComponent,
+        ShowcaseTextComponent,
+        ShowcaseTabsComponent,
+        ShowcaseSearcherComponent,
+        InnerSearcherComponent,
+        ShowcaseLoadingComponent,
+        ShowcaseTwoTabsDialog,
+        ShowcaseLowerFlexDialog,
+        ShowcaseTwoColumnsDialog,
+        ShowcaseFullFlexDialog,
+        ShowcaseSplitDialog,
+        ShowcaseInnerGridComponent,
+        ShowcaseInnerApiGridComponent,
+        ShowcaseInnerGroupColumnsGridComponent,
+        ShowcaseStandardDialog,
+        SampleRouteComponent,
+        ShowcaseStandardComponent,
+        ShowcaseFileSelectorComponent,
+        ShowcaseProgressBarDialog,
+        ShowcaseApplicationFrameDialog,
+        ShowcaseLoadingDialog,
+        ShowcaseTimelineDialog,
+        ShowcaseTimelineComponent,
+        ShowcaseNavbarComponent,
+        ShowcaseBreadcrumbComponent,
+        ShowcaseSignatureCanvasComponent,
+        ShowcaseTreeComponent,
+        ShowcaseInnerTreeComponent,
+        ShowcasePercentageCircleComponent,
+        ShowcaseInlineComponent,
+        ShowcaseWizardStepsComponent,
+        ShowcaseSortableListComponent,
+        ShowcaseInnerSortableListComponent,
+        ShowcaseAddRemoveListComponent,
+        ShowcaseInnerAddRemoveListComponent,
+        ShowcaseContextMenu,
+        ShowcaseContextPanel,
+        ShowcaseListBoxComponent,
+        ShowcaseInnerTreeListBox,
+        ShowcaseAutocomplete,
+        ShowcasePaginatorComponent,
+        ShowcaseBarsGridComponent,
+        ShowcaseSpyMenuComponent,
+        ShowcaseSpyMenuDialog,
+        ShowcaseVerticalComponent,
+        ShowcaseVerticaldDialog,
+        ShowcaseToastComponent,
+        ShowcaseToggleSelectorComponent,
+        KeyupDebounceDirective,
+        ShowcaseSliderDoubleComponent,
+        EmailValidatorDirective,
+        PhoneValidatorDirective,
+        UrlValidatorDirective,
+        ShowcaseInteractiveComponent,
+        ShowcaseProgressBarWithTextDialog,
+        ShowcaseImageViewerComponent,
+    ],
+    bootstrap: [ShowcaseComponent],
+    imports: [
+        A11yModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule,
+        SystelabComponentsModule.forRoot(),
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule,
+        AutoCompleteModule,
+        CdkTreeModule],
+    providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ]
 })
 export class ShowcaseModule {
 }
-
-export { ShowcaseComponent } from './showcase.component';

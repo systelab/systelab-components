@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {SystelabTranslateModule} from 'systelab-translate';
 import {SystelabPreferencesModule} from 'systelab-preferences';
 import {ApplicationHeaderComponent, ApplicationHeaderMenuEntry} from './app-header.component';
@@ -52,17 +52,18 @@ describe('Systelab App Header', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				HttpClientModule],
-			declarations: [
-				ApplicationHeaderComponent,
-				AppHeaderTestComponent]
-		})
+    declarations: [
+        ApplicationHeaderComponent,
+        AppHeaderTestComponent
+    ],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

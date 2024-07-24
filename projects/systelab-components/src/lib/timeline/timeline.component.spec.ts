@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TimelineComponent, TimelineEvent } from './timeline.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 
@@ -69,13 +69,13 @@ describe('Systelab Timeline', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				SystelabTranslateModule,
-				HttpClientModule],
-			declarations: [TimelineComponent, TimeLineTestComponent]
-		})
+    declarations: [TimelineComponent, TimeLineTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        SystelabTranslateModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

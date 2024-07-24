@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupViewComponent, MessagePopupViewContext } from './message-popup-view.component';
 import { DialogRef } from '../dialog/dialog-ref';
@@ -22,17 +22,14 @@ describe('Systelab MessagePopupViewComponent', () => {
 	beforeEach(async () => {
 		spyDialogRef = jasmine.createSpyObj('DialogRef', ['context', 'close']);
 		await TestBed.configureTestingModule({
-			imports:      [
-				BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-			],
-			declarations: [ButtonComponent, MessageWithIconComponent],
-			providers:    [{provide: DialogRef, useValue: spyDialogRef}]
-		})
+    declarations: [ButtonComponent, MessageWithIconComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        SystelabTranslateModule],
+    providers: [{ provide: DialogRef, useValue: spyDialogRef }, provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

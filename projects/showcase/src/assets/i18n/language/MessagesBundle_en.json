@@ -1,4 +1,6 @@
 {
+  "COMMON_ALL": "All",
+  "COMMON_UNKNOWN": "Unknown",
   "COMMON_ENTER": "Enter",
   "COMMON_CLOSE": "Close",
   "COMMON_YES": "Yes",

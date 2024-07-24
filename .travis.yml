@@ -2,7 +2,7 @@ sudo: required
 dist: jammy
 language: node_js
 node_js:
-  - '20.11.0'
+  - '22.4.0'
 addons:
   apt:
     update: true

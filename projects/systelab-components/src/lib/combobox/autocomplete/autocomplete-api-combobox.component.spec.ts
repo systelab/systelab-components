@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
@@ -116,30 +116,28 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [
-				BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				AgGridModule
-			],
-			declarations: [
-				GridContextMenuCellRendererComponent,
-				GridHeaderContextMenuComponent,
-				ComboBoxInputRendererComponent,
-				SystelabAutocompleteComponent,
-				AutocompleteTestComponent
-			],
-			providers: [
-				Renderer2,
-				ChangeDetectorRef,
-			],
-			schemas: [NO_ERRORS_SCHEMA]
-		}).compileComponents();
+    declarations: [
+        GridContextMenuCellRendererComponent,
+        GridHeaderContextMenuComponent,
+        ComboBoxInputRendererComponent,
+        SystelabAutocompleteComponent,
+        AutocompleteTestComponent
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule],
+    providers: [
+        Renderer2,
+        ChangeDetectorRef,
+        provideHttpClient(withInterceptorsFromDi()),
+    ]
+}).compileComponents();
 	});
 
 	beforeEach(() => {

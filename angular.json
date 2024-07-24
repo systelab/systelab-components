@@ -67,12 +67,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/showcase",
+            "outputPath": {
+              "base": "dist/showcase"
+            },
             "index": "projects/showcase/src/index.html",
-            "main": "projects/showcase/src/main.ts",
-            "polyfills": "projects/showcase/src/polyfills.ts",
+            "polyfills": [
+              "projects/showcase/src/polyfills.ts"
+            ],
             "tsConfig": "projects/showcase/tsconfig.app.json",
             "allowedCommonJsDependencies": [
               "interactjs",
@@ -103,8 +106,9 @@
               "node_modules/primeng/resources/themes/nova/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "projects/showcase/src/styles.scss",
-              "projects/systelab-components/icons/icomoon.css"
+              "projects/systelab-components/icons/icomoon.css",
+              "dist/systelab-components/sass/modern/systelab-components.scss",
+              "projects/showcase/src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -112,12 +116,11 @@
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/pako/dist/pako.min.js"
             ],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/showcase/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -132,8 +135,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",

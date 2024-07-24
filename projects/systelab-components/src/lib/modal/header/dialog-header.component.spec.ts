@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { DialogHeaderComponent } from './dialog-header.component';
@@ -98,17 +98,17 @@ describe('Systelab Dialog Header', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				DragDropModule,
-				OverlayModule,
-				TreeModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				HttpClientModule],
-			declarations: [DialogHeaderComponent, DialogHeaderTestComponent]
-		})
+    declarations: [DialogHeaderComponent, DialogHeaderTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

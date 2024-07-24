@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { FileSelectorComponent } from './file-selector.component';
 
@@ -33,16 +33,17 @@ describe('Systelab FileSelectorComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule],
-			declarations: [
-				FileSelectorComponent,
-				FileSelectorTestComponent]
-		}).compileComponents();
+    declarations: [
+        FileSelectorComponent,
+        FileSelectorTestComponent
+    ],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
 
 	});
 

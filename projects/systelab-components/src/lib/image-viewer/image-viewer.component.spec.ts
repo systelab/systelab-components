@@ -3,12 +3,12 @@ import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import {ButtonComponent} from '../button/button.component';
-import {SliderComponent} from '../slider/slider.component';
-import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
-import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-components';
-import {SystelabTranslateModule} from 'systelab-translate';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ButtonComponent } from '../button/button.component';
+import { SliderComponent } from '../slider/slider.component';
+import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
+import { ActionButton, ActionButtonType, ImageViewerComponent } from 'systelab-components';
+import { SystelabTranslateModule } from 'systelab-translate';
 
 @Component({
 	selector: 'systelab-image-viewer-test',
@@ -117,15 +117,14 @@ describe('ImageViewerTestComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				HttpClientModule,
-				SystelabTranslateModule
-			],
-			declarations: [ImageViewerComponent,ImageViewerTestComponent,ButtonComponent,SliderComponent,ToggleButtonComponent],
-			schemas: [ NO_ERRORS_SCHEMA ]
-		}).compileComponents();
+    declarations: [ImageViewerComponent, ImageViewerTestComponent, ButtonComponent, SliderComponent, ToggleButtonComponent],
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        SystelabTranslateModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
 
 		fixture = TestBed.createComponent(ImageViewerTestComponent);
 		fixture.detectChanges();

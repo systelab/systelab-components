@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TwoListComponent } from './two-list.component';
 import { TwoListItem } from './two-list-utilities';
 import { SystelabTranslateModule } from 'systelab-translate';
@@ -100,17 +100,17 @@ describe('Systelab Two list', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				DragDropModule,
-				OverlayModule,
-				TreeModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				HttpClientModule],
-			declarations: [TwoListComponent, TwoListTestComponent, TwoListSortableListComponent, DataFilterPipe]
-		})
+    declarations: [TwoListComponent, TwoListTestComponent, TwoListSortableListComponent, DataFilterPipe],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { PaginatorComponent } from './paginator.component';
 import { PaginatorPageComponent } from './paginator-page.component';
 
@@ -77,15 +77,15 @@ describe('Systelab Paginator', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				DragDropModule,
-				OverlayModule,
-				TreeModule,
-				HttpClientModule],
-			declarations: [PaginatorComponent, PaginatorPageComponent, PaginatorTestComponent]
-		})
+    declarations: [PaginatorComponent, PaginatorPageComponent, PaginatorTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DragDropModule,
+        OverlayModule,
+        TreeModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

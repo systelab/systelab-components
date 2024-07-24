@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { DialogRef, DialogService } from 'systelab-components';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
@@ -51,17 +51,15 @@ describe('MessagePopupService', () => {
     beforeEach(() => {
         spyDialogRef = jasmine.createSpyObj('MessagePopupService', ['showYesNoQuestionPopup']);
 		TestBed.configureTestingModule({
-            imports: [
-                OverlayModule,
-				HttpClientModule,
-				SystelabTranslateModule
-			],
-			providers: [
-                DialogService,
-                {provide: DialogRef, useValue: spyDialogRef},
-                {provide: I18nService, useClass: I18nService}
-			]
-		});
+    imports: [OverlayModule,
+        SystelabTranslateModule],
+    providers: [
+        DialogService,
+        { provide: DialogRef, useValue: spyDialogRef },
+        { provide: I18nService, useClass: I18nService },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
 		service = TestBed.inject(MessagePopupService);
 	});
 

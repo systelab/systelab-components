@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { DatepickerTimeComponent } from './datepicker-time.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
@@ -92,20 +92,20 @@ describe('Systelab DatepickerTimeComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [TouchspinComponent,
-				DatepickerComponent,
-				ButtonComponent,
-				DatepickerTimeComponent,
-				DatepickerTimeTestComponent]
-		}).compileComponents();
+    declarations: [TouchspinComponent,
+        DatepickerComponent,
+        ButtonComponent,
+        DatepickerTimeComponent,
+        DatepickerTimeTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
 	});
 
 	beforeEach(() => {

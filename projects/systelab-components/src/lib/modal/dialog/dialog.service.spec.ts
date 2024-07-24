@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { DialogService } from './dialog.service';
@@ -82,20 +82,21 @@ describe('Systelab Modal', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule],
-			declarations: [
-				ModalTestComponent,
-				SampleDialog,
-				DialogHeaderComponent,
-				DialogBottomComponent]
-		});
+    declarations: [
+        ModalTestComponent,
+        SampleDialog,
+        DialogHeaderComponent,
+        DialogBottomComponent
+    ],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
 	});
 
 	beforeEach(() => {

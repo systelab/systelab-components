@@ -10,7 +10,7 @@ import { ApplicationSidebarSmallComponent } from './sidebar/app-sidebar-small.co
 import { ApplicationSidebarAction, ApplicationSidebarTab } from './sidebar/app-sidebar.component';
 import { TooltipDirective } from '../tooltip/tooltip.directive';
 import { SystelabTranslateModule } from 'systelab-translate';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
@@ -46,23 +46,24 @@ describe('Systelab ApplicationFrameComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				SystelabTranslateModule,
-				HttpClientModule,
-				OverlayModule],
-			declarations: [
-				TooltipDirective,
-				ApplicationHeaderComponent,
-				ApplicationSidebarLargeComponent,
-				ApplicationSidebarSmallComponent,
-				ApplicationFrameComponent,
-				ApplicationFrameTestComponent],
-			providers: [
-				TooltipDirective
-			]
-		}).compileComponents();
+    declarations: [
+        TooltipDirective,
+        ApplicationHeaderComponent,
+        ApplicationSidebarLargeComponent,
+        ApplicationSidebarSmallComponent,
+        ApplicationFrameComponent,
+        ApplicationFrameTestComponent
+    ],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        SystelabTranslateModule,
+        OverlayModule],
+    providers: [
+        TooltipDirective,
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+}).compileComponents();
 
 	});
 

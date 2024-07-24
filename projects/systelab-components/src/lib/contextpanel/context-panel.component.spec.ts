@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextPanelComponent } from './context-panel.component';
 
@@ -35,16 +35,16 @@ describe('Systelab Context Panel', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				CalendarModule,
-				HttpClientModule,
-				SystelabTranslateModule],
-			declarations: [ContextPanelComponent, ContextPanelTestComponent]
-		})
+    declarations: [ContextPanelComponent, ContextPanelTestComponent],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        CalendarModule,
+        SystelabTranslateModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { Observable, of } from 'rxjs';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -89,22 +89,23 @@ describe('Systelab Listbox', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports:      [BrowserModule,
-				BrowserAnimationsModule,
-				FormsModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				AgGridModule],
-			declarations: [
-				GridContextMenuCellRendererComponent,
-				GridHeaderContextMenuComponent,
-				ComboBoxInputRendererComponent,
-				SystelabListboxComponent,
-				ListboxTestComponent]
-		})
+    declarations: [
+        GridContextMenuCellRendererComponent,
+        GridHeaderContextMenuComponent,
+        ComboBoxInputRendererComponent,
+        SystelabListboxComponent,
+        ListboxTestComponent
+    ],
+    imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        OverlayModule,
+        ButtonModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 			.compileComponents();
 	});
 

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { AbstractApiGrid } from './abstract-api-grid.component';
 import { Observable, of } from 'rxjs';
@@ -192,38 +192,38 @@ describe('Systelab Grid', () => {
 
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
-			imports: [BrowserModule,
-				FormsModule,
-				BrowserAnimationsModule,
-				DragDropModule,
-				OverlayModule,
-				ButtonModule,
-				HttpClientModule,
-				SystelabTranslateModule,
-				SystelabPreferencesModule,
-				AgGridModule],
-			declarations: [GridHeaderContextMenuComponent,
-				GridContextMenuCellRendererComponent,
-				GridContextMenuComponent,
-				GridHeaderContextMenu,
-				ContextMenuItemComponent,
-				ContextMenuSubmenuItemComponent,
-				SystelabGridComponent,
-				GridTestComponent,
-				GridColumnOptionsDialog,
-				DialogHeaderComponent,
-				DialogBottomComponent,
-				TwoListComponent,
-				TwoListSortableListComponent,
-				TabsComponent,
-				TabComponent,
-				ButtonComponent,
-				DataFilterPipe],
-			providers: [
-				DialogService,
-				MessagePopupService
-			]
-		});
+    declarations: [GridHeaderContextMenuComponent,
+        GridContextMenuCellRendererComponent,
+        GridContextMenuComponent,
+        GridHeaderContextMenu,
+        ContextMenuItemComponent,
+        ContextMenuSubmenuItemComponent,
+        SystelabGridComponent,
+        GridTestComponent,
+        GridColumnOptionsDialog,
+        DialogHeaderComponent,
+        DialogBottomComponent,
+        TwoListComponent,
+        TwoListSortableListComponent,
+        TabsComponent,
+        TabComponent,
+        ButtonComponent,
+        DataFilterPipe],
+    imports: [BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        DragDropModule,
+        OverlayModule,
+        ButtonModule,
+        SystelabTranslateModule,
+        SystelabPreferencesModule,
+        AgGridModule],
+    providers: [
+        DialogService,
+        MessagePopupService,
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+});
 	});
 
 	beforeEach(() => {
