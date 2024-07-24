@@ -34,7 +34,7 @@ input[type="radio"] + label {
 
     content: '';
     z-index: 0;
-    border: solid math.div(($slab-radio-height, 8)) $medium-gray;
+    border: solid math.div($slab-radio-height, 8) $medium-gray;
     border-radius: 50%;
     box-sizing: border-box;
     background-color: $slab-radio-color;
@@ -44,7 +44,7 @@ input[type="radio"] + label {
 
 // Define background color and icon size when checked
 input[type="radio"]:checked + label:before {
-  border: solid math.div(($slab-radio-height, 3)) $slab-radio-border-color;
+  border: solid math.div($slab-radio-height, 3) $slab-radio-border-color;
 }
 
 input[type="radio"]:focus + label:before {
