@@ -10,7 +10,7 @@ systelab-percentage-circle {
 
   //Create how many steps
   $howManySteps: 100; //this needs to be even.
-  //for fun try using 20 and changine in the HTML the data-percentage to 15 or 85
+  //for fun try using 20 and changing in the HTML the data-percentage to 15 or 85
 
 
   .percentage-circle {
@@ -64,7 +64,6 @@ systelab-percentage-circle {
       border-left: 0;
       -webkit-transform-origin: center left;
       transform-origin: center left;
-      //animation: loading-2 1.5s linear forwards 1.8s;
     }
 
     .percentage-circle-right {
@@ -77,7 +76,6 @@ systelab-percentage-circle {
         border-right: 0;
         -webkit-transform-origin: center right;
         transform-origin: center right;
-        //animation: loading-1 1.8s linear forwards;
       }
     }
 
@@ -90,7 +88,6 @@ systelab-percentage-circle {
       align-items: center;
       justify-content: center;
       height: 100%;
-      //font-family: $work-sans;
       font-weight: 300;
 
       div {
