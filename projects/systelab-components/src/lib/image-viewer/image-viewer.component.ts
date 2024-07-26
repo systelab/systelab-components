@@ -36,6 +36,7 @@ export class ImageViewerComponent implements OnInit {
 	@Input() public overlayText: string;
 	@Input() public actionButtons: ActionButton[];
 	@Input() public imageFilters = '';
+	@Input() public showSaveButton = true;
 	@Input() public showZoomByAreaButton = false;
 	@Input() public showAdjustButton = false;
 	@Input() public showZoomScale = false;
@@ -44,6 +45,8 @@ export class ImageViewerComponent implements OnInit {
 	@Input() public sliderZoomMax = 200;
 	@Input() public sliderZoomStep = 1;
 	@Input() public transparentBackgroundForButtons = false;
+	@Input() public overlapImageWithButtons = true;
+	@Input() public allowBorderColor = 'white';
 
 	@Output() public clickActionButton = new EventEmitter<string>();
 	@Output() public clickOverlayText = new EventEmitter();

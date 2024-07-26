@@ -41,6 +41,9 @@ export class ShowcaseImageViewerComponent {
 	   </filter>`;
 
 	public transparentBackgroundForButtons = false;
+	public showSaveButton = true;
+	public overlapImage = true;
+	public allowBorderColor = 'white';
 
 	constructor() {
 	}

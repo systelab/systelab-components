@@ -2,6 +2,20 @@
     <input type="checkbox" [checked]="transparentBackgroundForButtons" [(ngModel)]="transparentBackgroundForButtons" id="check-transparent">
     <label for="check-transparent">Transparent header</label>
 </div>
+<div>
+    <input type="checkbox" [checked]="showSaveButton" [(ngModel)]="showSaveButton" id="check-show-save-button">
+    <label for="check-show-save-button">Show / Hide download button</label>
+</div>
+<div>
+    <input type="checkbox" [checked]="overlapImage" [(ngModel)]="overlapImage" id="check-overlap-image">
+    <label for="check-overlap-image">Overlap image & buttons</label>
+</div>
+<div class="row mt-1">
+    <label class="col-md-3 col-form-label" for="allow-border-color">Border color for allowed zoom area: </label>
+    <div class="col-md-9">
+        <input type="text" class="form-control" placeholder="color" [(ngModel)]="allowBorderColor" id="allow-border-color">
+    </div>
+</div>
 <div class="position-relative d-flex slab-flex-1 border" style="height:600px;width:900px">
     <systelab-image-viewer class="slab-overflow-container d-flex slab-flex-1" #imageViewer
               [imageSrc]="imageSrc"
@@ -10,11 +24,14 @@
               [actionButtons]="actionButtons"
               [imageFilters]="imageFilters"
               [sliderZoomMax]="200"
+              [showSaveButton]="showSaveButton"
               [showZoomByAreaButton]="true"
               [showAdjustButton]="true"
               [showZoomScale]="true"
               [showSliderToolTip]="false"
               [transparentBackgroundForButtons]="transparentBackgroundForButtons"
+              [overlapImageWithButtons]="overlapImage"
+              [allowBorderColor]="allowBorderColor"
               (clickActionButton)="doClickActionButton($event)"
               (clickOverlayText)="doClickOverlayText()">
     </systelab-image-viewer>

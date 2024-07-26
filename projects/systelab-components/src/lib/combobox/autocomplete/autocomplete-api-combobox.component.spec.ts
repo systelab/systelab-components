@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, Renderer2, ViewChild } from '@angular/core';
 import { AutocompleteApiComboBox, KeyName } from './autocomplete-api-combobox.component';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuCellRendererComponent } from '../../grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
+import { ColumnApi, GridApi, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -107,6 +108,16 @@ describe('AutocompleteApiAutocomplete', () => {
 	let component: AutocompleteTestComponent;
 	let fixture: ComponentFixture<AutocompleteTestComponent>;
 
+	const gridApiMock = {
+		getDisplayedRowAtIndex: () => {
+			return new RowNode<any>(null);
+		},
+		getRenderedNodes: () => {
+			return [new RowNode<any>(null)];
+		},
+		removeEventListener: () => {}
+	} as unknown as GridApi;
+
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
@@ -127,7 +138,11 @@ describe('AutocompleteApiAutocomplete', () => {
 				SystelabAutocompleteComponent,
 				AutocompleteTestComponent
 			],
-			providers: [Renderer2, ChangeDetectorRef],
+			providers: [
+				Renderer2,
+				ChangeDetectorRef,
+			],
+			schemas: [NO_ERRORS_SCHEMA]
 		}).compileComponents();
 	});
 
@@ -180,7 +195,10 @@ describe('AutocompleteApiAutocomplete', () => {
 	it('should open dropdown and search text on input click when it is not disabled and not already opened', () => {
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = false;
-		component.combobox.description = 'description test'
+		component.combobox.description = 'description test';
+		component.combobox.filterInput = {
+			nativeElement: jasmine.createSpyObj('nativeElement', ['focus'])
+		}
 		const openDropDownSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'openDropDown').and.callThrough();
 		const doSearchTextSpy = spyOn<any>(AutocompleteApiComboBox.prototype, 'doSearchText');
 		component.combobox.onInputClicked(new MouseEvent(''));
@@ -212,4 +230,39 @@ describe('AutocompleteApiAutocomplete', () => {
 		component.combobox.onCellKeyDown(event);
 		expect(component.combobox.inputElement.nativeElement.value).toEqual('aa');
 	});
+
+	it('onEnterDoSelect', () => {
+		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
+		spyOn(RowNode.prototype, 'selectThisNode');
+		component.combobox.gridOptions.api = gridApiMock;
+		component.combobox.isDropdownOpened = true;
+		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
+		expect(getDisplayedRowAtIndexSpy).toHaveBeenCalled();
+	});
+
+	it('onEnterDoSelect', () => {
+		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
+		spyOn(RowNode.prototype, 'selectThisNode');
+		component.combobox.gridOptions.api = gridApiMock;
+		component.combobox.isDropdownOpened = false;
+		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
+		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
+	});
+
+	it('onInputNavigate', fakeAsync( () => {
+		const getAllDisplayedColumnsSpy = spyOn<any>(ColumnApi.prototype, 'getAllDisplayedColumns').and.callThrough();
+		const setFocusedCellSpy = spyOn<any>(GridApi.prototype, 'setFocusedCell').and.callThrough();
+
+		component.combobox.isDisabled = false;
+		component.combobox.isDropdownOpened = true;
+
+		component.combobox.onInputNavigate({});
+
+		tick();
+		flush();
+
+		expect(getAllDisplayedColumnsSpy).toHaveBeenCalled();
+		expect(setFocusedCellSpy).toHaveBeenCalled();
+	}));
+
 });

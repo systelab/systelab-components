@@ -72,8 +72,10 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			}
 			this.chref.detectChanges();
 			// sets focus into the first grid cell
-			const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
-			this.gridOptions.api.setFocusedCell(0, firstCol);
+			setTimeout(() => {
+				const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
+				this.gridOptions.api.setFocusedCell(0, firstCol);
+			}, 0);
 		}
 	}
 
@@ -173,7 +175,14 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public clearText(event: MouseEvent): void {
 		this.input.nativeElement.value = '';
-		this.doSearch(event);
+		this.doSearchText('');
+	}
+
+	public onEnterDoSelect(event: KeyboardEvent) {
+		if (this.isDropdownOpened && this.gridOptions.api.getRenderedNodes().length > 0) {
+			this.gridOptions.api.getDisplayedRowAtIndex(0).selectThisNode(true);
+			this.selectedItemChange.emit(this.gridOptions.api.getDisplayedRowAtIndex(0).data);
+		}
 	}
 
 }
