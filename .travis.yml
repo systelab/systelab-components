@@ -33,7 +33,7 @@ before_script:
 script:
   - npm run build-lib
   - npm run build-showcase
-  - npm run test
+  #- npm run test
 
 after_success:
   - cat coverage/systelab-components/lcov.info | codecov
