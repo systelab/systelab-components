@@ -60,7 +60,7 @@ describe('Systelab ScrollSpyDirective', () => {
 		const mockEvent = {};
 		mockEvent['type'] = 'scroll';
 		mockEvent['target'] = {};
-		mockEvent['target']['scrollTop'] = 1500;
+		mockEvent['target']['scrollTop'] = 1800;
 		mockEvent['target']['offsetTop'] = 0;
 		directiveElList[0].triggerEventHandler('scroll', mockEvent);
 		fixture.detectChanges();
