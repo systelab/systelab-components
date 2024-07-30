@@ -83,5 +83,9 @@ systelab-chip-button {
     margin-top: 1px;
     padding-top: 0;
     width: 26px;
+
+    &:disabled {
+      opacity: 0.45;
+    }
   }
 }
