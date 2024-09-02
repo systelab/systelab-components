@@ -12,6 +12,7 @@ declare var jQuery: any;
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static ROW_HEIGHT = -1;
+	public static DROPDOWN_MENU_MARGIN = 16;
 
 	@ViewChild('input', {static: false}) public input: ElementRef;
 	@ViewChild('filterInput', {static: false}) public filterInput: ElementRef;
@@ -547,16 +548,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'position', 'fixed');
 		const dropdownParentRect: any = this.inputElement.nativeElement.getBoundingClientRect();
 		this.top = dropdownParentRect.top;
+		this.left = dropdownParentRect.left;
 
 		// Trick for positioning in IE11
 		if (!!(<any>window).MSInputMethodContext && !!(<any>window).document.documentMode) {
 			this.top = dropdownParentRect.top + this.inputElement.nativeElement.offsetHeight;
 		}
 
-		this.left = dropdownParentRect.left;
 		if (this.top + this.dropdownElement.nativeElement.offsetHeight > window.innerHeight) {
-			this.top = this.top - this.dropdownElement.nativeElement.offsetHeight - this.inputElement.nativeElement.offsetHeight - 2;
+			this.top = this.top - this.dropdownElement.nativeElement.offsetHeight - this.inputElement.nativeElement.offsetHeight - AbstractComboBox.DROPDOWN_MENU_MARGIN;
 		}
+
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', this.top + 'px');
 		this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', this.left + 'px');
 	}
