@@ -33,6 +33,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public override ngOnInit(): void {
+
 		this.setRowHeight();
 		this.configGrid();
 		this.initializeFavouriteList();
@@ -118,9 +119,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			}
 
 			if (this.totalItemsLoaded) {
-				this.transferFocusToGrid();
 				this.setDropdownHeight();
 				this.setDropdownPosition();
+				this.transferFocusToGrid();
 				result = false;
 			}
 		}
