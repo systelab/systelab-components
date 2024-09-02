@@ -647,11 +647,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.gridOptions.api && this.columnDefs) {
 			if (this.windowResized) {
 				setTimeout(() => {
-					AutosizeGridHelper.sizeColumnsToFit(this.gridOptions);
+					this.doAutoSizeManagement();
 					this.windowResized = false;
 				}, 5);
 			} else {
-				AutosizeGridHelper.sizeColumnsToFit(this.gridOptions);
+				this.doAutoSizeManagement();
 			}
 		}
 	}
