@@ -3,17 +3,20 @@ import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
 	selector:    'systelab-checkbox-cell',
-	templateUrl: 'checkbox-cell-renderer.component.html'
+	templateUrl: 'checkbox-cell-renderer.component.html',
+	styleUrl: 'checkbox-cell-renderer.component.scss'
 })
 export class CheckboxCellRendererComponent implements AgRendererComponent {
 	private params: any;
 
 	public isCheckboxActive: boolean;
 	public hideCheckbox = false;
+	public showDisabled = false;
 	public id: string;
 
 	public agInit(params: any): void {
 		this.params = params;
+		this.showDisabled = params.showInactive;
 		if (params.data) {
 			this.id = params.data[params.colDef.elementID];
 			this.isCheckboxActive = params.data[this.params.colDef.field];
