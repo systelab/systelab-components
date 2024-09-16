@@ -16,7 +16,7 @@ export class CheckboxCellRendererComponent implements AgRendererComponent {
 
 	public agInit(params: any): void {
 		this.params = params;
-		this.showDisabled = params.showInactive;
+		this.showDisabled = params.showDisabled;
 		if (params.data) {
 			this.id = params.data[params.colDef.elementID];
 			this.isCheckboxActive = params.data[this.params.colDef.field];

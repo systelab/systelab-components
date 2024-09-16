@@ -82,7 +82,7 @@ export class ShowcaseGridUtil {
 				field:               'checkboxValue',
 				width:               200,
 				cellRenderer:        CheckboxCellRendererComponent,
-				cellRendererParams: { showInactive: true},
+				cellRendererParams: { showDisabled: true},
 				onCellValueChanged:  e => console.log('checkbox', e),
 				editable:            false,
 				elementID:           'checkboxID',
