@@ -29,7 +29,8 @@ describe('CheckboxCellEditorComponent', () => {
 	it('should toggle checkbox value if singleClickEdit is enabled', fakeAsync(() => {
 		const params = {
 			stopEditing: jasmine.createSpy('stopEditing'),
-			column: { colDef: { singleClickEdit: true } },
+			column: { colDef: { elementID: 'id' } },
+			singleClickEdit: true,
 			node: { data: {} },
 			value: true
 		};
@@ -45,7 +46,8 @@ describe('CheckboxCellEditorComponent', () => {
 	it('should not toggle checkbox value if singleClickEdit is enabled', fakeAsync(() => {
 		const params = {
 			stopEditing: jasmine.createSpy('stopEditing'),
-			column: { colDef: { singleClickEdit: false } },
+			column: { colDef: { elementID: 'id' } },
+			singleClickEdit: false,
 			node: { data: {} },
 			value: true
 		};

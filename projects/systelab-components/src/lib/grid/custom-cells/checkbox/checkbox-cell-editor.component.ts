@@ -10,7 +10,7 @@ export class CheckboxCellEditorComponent implements AgEditorComponent, AfterView
 
 	public isCheckboxActive: boolean;
 	public id: string;
-	private singleClickEdit = false;
+	private singleClickEdit: boolean;
 
 	public ngAfterViewInit() {
 		if (this.singleClickEdit) {
@@ -27,7 +27,7 @@ export class CheckboxCellEditorComponent implements AgEditorComponent, AfterView
 			this.id = this.params.node.data[this.params.column.colDef['elementID']];
 		}
 		this.isCheckboxActive = this.params.value;
-		this.singleClickEdit = this.params.column.colDef['singleClickEdit'];
+		this.singleClickEdit = !this.params.hasOwnProperty('singleClickEdit') || this.params.singleClickEdit;
 	}
 
 	public getValue(): any {

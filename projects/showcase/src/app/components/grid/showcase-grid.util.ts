@@ -71,7 +71,7 @@ export class ShowcaseGridUtil {
 				width:               200,
 				cellRenderer:        CheckboxCellRendererComponent,
 				cellEditorFramework: CheckboxCellEditorComponent,
-				singleClickEdit:     true,
+				cellEditorParams: { singleClickEdit: true},
 				onCellValueChanged:  e => console.log('checkbox', e),
 				editable:            true,
 				elementID:           'checkboxID',
