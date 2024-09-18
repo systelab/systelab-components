@@ -27,10 +27,9 @@ describe('CheckboxCellRendererComponent', () => {
             data: { field1: true, field2: 'value' },
             colDef: {
                 field: 'field1',
-                elementID: 'field2',
-                hideCheckbox: (data: any) => data.field1 === false,
+                elementID: 'field2'
             },
-            showInactive: true,
+            showDisabled: true,
         };
 
         component.agInit(params);
@@ -53,7 +52,7 @@ describe('CheckboxCellRendererComponent', () => {
         const params = {
             data: null,
             colDef: { field: 'field1', elementID: 'field2' },
-            showInactive: false,
+            showDisabled: false,
         };
 
         component.agInit(params);
