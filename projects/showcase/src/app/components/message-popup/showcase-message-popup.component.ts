@@ -12,12 +12,10 @@ export class ShowcaseMessagePopupComponent {
 	}
 
 	public showError() {
-		setInterval(()=>{
-			this.messagePopupService.showErrorPopup('Test', 'Error message popup example', null, 800, 600)
-				.subscribe((v) => {
-					console.log('Observable returned to showcase', v);
-				});
-		}, 1000);
+		this.messagePopupService.showErrorPopup('Test', 'Error message popup example', null, 800, 600)
+			.subscribe((v) => {
+				console.log('Observable returned to showcase', v);
+			});
 	}
 
 	public showWarning() {
