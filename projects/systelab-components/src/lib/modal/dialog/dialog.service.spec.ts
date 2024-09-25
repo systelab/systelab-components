@@ -21,7 +21,7 @@ export class SampleDialogParameters extends SystelabModalContext {}
 	selector: 'sample-dialog',
 	template: `
                 <systelab-dialog-header [withInfo]="false" (close)="close();">Title</systelab-dialog-header>
-                <div class="slab-flex-1"></div>
+                <div class="slab-flex-1">Message</div>
                 <systelab-dialog-bottom>
                     <button id="closebutton" type="button" class="btn btn-primary ml-auto" (click)="close()"> Close</button>
                 </systelab-dialog-bottom>
@@ -48,17 +48,20 @@ export class SampleDialog implements ModalComponent<SampleDialogParameters> {
 @Component({
 	selector: 'systelab-modal-test',
 	template: `
-                <button id="openbutton" type="button" class="btn btn-primary" (click)="openDialog()">Open</button>
+                <button id="openbutton" type="button" class="btn btn-primary" (click)="openDialog('Message')">Open</button>
+                <button id="openbutton2" type="button" class="btn btn-primary" (click)="openDialog('Message 2')">Open 2</button>
 	          `
 })
 export class ModalTestComponent {
 	constructor(private dialogService: DialogService) {
 	}
 
-	public openDialog() {
+	public openDialog(msg: string) {
 		const parameters: SampleDialogParameters = SampleDialog.getParameters();
 		parameters.height = 175;
 		parameters.width = 200;
+		parameters['title'] = 'Title';
+		parameters['msg'] = msg;
 		this.dialogService.showDialog(SampleDialog, parameters);
 	}
 }
@@ -70,6 +73,7 @@ const clickButton = (fixture: ComponentFixture<ModalTestComponent>, buttonId: st
 };
 
 const isPopupVisible = () => (document.querySelector('.cdk-overlay-pane') !== null);
+const numberPopupVisibles = () => document.querySelectorAll('.cdk-overlay-pane').length;
 
 const clickCloseButton = (fixture: ComponentFixture<ModalTestComponent>, buttonId: string) => {
 	const button: any = document.querySelector('#' + buttonId);
@@ -113,5 +117,17 @@ describe('Systelab Modal', () => {
 		expect(isPopupVisible()).toBeTruthy();
 		clickCloseButton(fixture, 'closebutton');
 		expect(isPopupVisible()).toBeFalsy();
+	});
+
+	it('should be only one dialog when is opened the same dialog twice', () => {
+		clickButton(fixture, 'openbutton');
+		clickButton(fixture, 'openbutton');
+		expect(numberPopupVisibles()).toBe(1);
+	});
+
+	it('should be open two dialogs when is opened a dialog with different messages', () => {
+		clickButton(fixture, 'openbutton');
+		clickButton(fixture, 'openbutton2');
+		expect(numberPopupVisibles()).toBe(2);
 	});
 });
