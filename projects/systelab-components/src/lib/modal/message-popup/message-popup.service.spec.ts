@@ -1,11 +1,9 @@
-import {Overlay, OverlayConfig, OverlayModule} from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import { DialogRef, DialogService } from 'systelab-components';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupButton, MessagePopupService } from './message-popup.service';
 import { MessageWithIconComponent } from './message-with-icon.component';
-import {ComponentPortal} from "@angular/cdk/portal";
 import {NgZone} from "@angular/core";
 import {MessagePopupViewComponent} from "./message-popup-view.component";
 
