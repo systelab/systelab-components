@@ -1,6 +1,6 @@
 import { Injectable, Injector, Type } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {Overlay, OverlayConfig, OverlayKeyboardDispatcher, OverlayRef} from '@angular/cdk/overlay';
+import { Observable } from 'rxjs';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DialogRef } from './dialog-ref';
 import { SystelabModalContext } from './modal-context';
@@ -10,22 +10,15 @@ export class DialogService {
 
 	public static readonly breakpointMedium = 768;
 
-	constructor(private readonly overlay: Overlay, private injector: Injector, private overlayDispatcher: OverlayKeyboardDispatcher,) {
+	constructor(private readonly overlay: Overlay, private injector: Injector) {
 	}
 
 	public showDialog(component: Type<any>, parameters: SystelabModalContext): Observable<any> {
-		const isAlreadyOpen = this.overlayDispatcher._attachedOverlays.some((overlayRef: OverlayRef) =>
-			overlayRef.overlayElement.textContent?.startsWith(parameters['title'] + parameters['msg']));
-
-		if (!isAlreadyOpen) {
-			const overlayRef = this.overlay.create(this.getConfig(parameters));
-			const dialogRef = new DialogRef(overlayRef, parameters);
-			const userProfilePortal = new ComponentPortal(component, null, this.createInjector(dialogRef));
-			overlayRef.attach(userProfilePortal);
-			return dialogRef.getResult();
-		} else {
-			return of(null);
-		}
+		const overlayRef = this.overlay.create(this.getConfig(parameters));
+		const dialogRef = new DialogRef(overlayRef, parameters);
+		const userProfilePortal = new ComponentPortal(component, null, this.createInjector(dialogRef));
+		overlayRef.attach(userProfilePortal);
+		return dialogRef.getResult();
 	}
 
 	private getConfig(parameters: SystelabModalContext): OverlayConfig {

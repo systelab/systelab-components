@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {EMPTY, Observable, of} from 'rxjs';
 import { I18nService } from 'systelab-translate';
 import { DialogService } from '../dialog/dialog.service';
 import { MessagePopupViewComponent } from './message-popup-view.component';
 import { MessagePopupIcon, MessageWithIconComponent } from './message-with-icon.component';
+import {OverlayKeyboardDispatcher, OverlayRef} from "@angular/cdk/overlay";
 
 export class MessagePopupButton {
 	constructor(public title: string, public returnValue: any, public cssClass?: string, public focus: boolean = false) {
@@ -15,10 +16,14 @@ export class MessagePopupService {
 
 	public static readonly breakpointMedium = 500;
 
-	constructor(protected i18nService: I18nService, protected dialogService: DialogService) {
+	constructor(protected i18nService: I18nService, protected dialogService: DialogService, private overlayDispatcher: OverlayKeyboardDispatcher) {
 	}
 
 	public showErrorPopup(titleDescription: string, errorDescription: string, modalClass?: string, width?: number, height?: number): Observable<any> {
+		if (this.isPopupAlreadyShowed(titleDescription, errorDescription)) {
+			return EMPTY;
+		}
+
 		return this.showPopup(
 			titleDescription,
 			MessageWithIconComponent.MESSAGE_ERROR,
@@ -113,6 +118,11 @@ export class MessagePopupService {
 		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_NO'), false, 'btn-link', template?.includes('danger')));
 		buttons.push(new MessagePopupButton(this.i18nService.instant('COMMON_YES'), true, classTemplate));
 		return buttons;
+	}
+
+	private isPopupAlreadyShowed(title:string, message: string): boolean {
+		return this.overlayDispatcher._attachedOverlays.some((overlayRef: OverlayRef) =>
+			overlayRef.overlayElement.textContent?.startsWith(title + message));
 	}
 
 }

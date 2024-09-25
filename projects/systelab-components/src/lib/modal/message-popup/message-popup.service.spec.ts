@@ -1,10 +1,13 @@
-import { OverlayModule } from '@angular/cdk/overlay';
+import {Overlay, OverlayConfig, OverlayModule} from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { DialogRef, DialogService } from 'systelab-components';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupButton, MessagePopupService } from './message-popup.service';
 import { MessageWithIconComponent } from './message-with-icon.component';
+import {ComponentPortal} from "@angular/cdk/portal";
+import {NgZone} from "@angular/core";
+import {MessagePopupViewComponent} from "./message-popup-view.component";
 
 const yesNoNoTemplate = {
     titleDescription: 'Test',
@@ -45,14 +48,16 @@ const expectedButtonsWithWarningTemplate = [
     new MessagePopupButton('COMMON_YES', true, 'btn-outline-warning')
 ];
 
+let ngZone: NgZone;
+
 describe('MessagePopupService', () => {
     let service: MessagePopupService;
     let spyDialogRef: jasmine.SpyObj<MessagePopupService>;
     beforeEach(() => {
         spyDialogRef = jasmine.createSpyObj('MessagePopupService', ['showYesNoQuestionPopup']);
 		TestBed.configureTestingModule({
+			declarations: [MessagePopupViewComponent, MessageWithIconComponent],
             imports: [
-                OverlayModule,
 				HttpClientModule,
 				SystelabTranslateModule
 			],
@@ -63,6 +68,7 @@ describe('MessagePopupService', () => {
 			]
 		});
 		service = TestBed.inject(MessagePopupService);
+		ngZone = TestBed.inject(NgZone);
 	});
 
     it('should be created', () => {
@@ -106,6 +112,37 @@ describe('MessagePopupService', () => {
 			commonParams.height,
 			[]
 		);
+	});
+
+	it('when the same showErrorPopup is called twice it should showed only one Error dialog', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+		const spy = jasmine.createSpy('subscribeSpy');
+
+		ngZone.run(() => {
+			service.showErrorPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+				commonParams.width, commonParams.height).subscribe(spy);
+		});
+
+		service.showErrorPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+			commonParams.width, commonParams.height).subscribe(spy);
+
+		expect(service['showPopup']).toHaveBeenCalledTimes(1);
+		expect(spy).not.toHaveBeenCalled();
+
+	});
+
+	it('when two different showErrorPopups are opened twice it should showed the two dialogs', () => {
+		spyOn<any>(service, 'showPopup').and.callThrough();
+
+		ngZone.run(() => {
+			service.showErrorPopup(commonParams.titleDescription, commonParams.messageDescription, commonParams.modalClass,
+				commonParams.width, commonParams.height);
+		});
+
+		service.showErrorPopup(commonParams.titleDescription, 'another message', commonParams.modalClass,
+			commonParams.width, commonParams.height);
+
+		expect(service['showPopup']).toHaveBeenCalledTimes(2);
 	});
 
 	it('it should show a warning dialog', () => {
