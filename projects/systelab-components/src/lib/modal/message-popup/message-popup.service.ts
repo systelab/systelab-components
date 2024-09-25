@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {EMPTY, Observable, of} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import { I18nService } from 'systelab-translate';
 import { DialogService } from '../dialog/dialog.service';
 import { MessagePopupViewComponent } from './message-popup-view.component';
