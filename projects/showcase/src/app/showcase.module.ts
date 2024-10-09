@@ -115,6 +115,7 @@ import {
 } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { ComboboxSearcherComponent } from './components/searcher/combobox-searcher.component';
 
 @NgModule({ declarations: [
         ShowcaseComponent,
@@ -204,6 +205,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
         ShowcaseInteractiveComponent,
         ShowcaseProgressBarWithTextDialog,
         ShowcaseImageViewerComponent,
+                ComboboxSearcherComponent
     ],
     bootstrap: [ShowcaseComponent],
     imports: [
