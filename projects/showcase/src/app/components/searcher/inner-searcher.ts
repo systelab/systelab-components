@@ -6,7 +6,7 @@ import { IsFullWidthRowParams } from 'ag-grid-community';
 import { SearcherTreeHeaderRendererComponent } from 'systelab-components';
 
 export class ShowcaseSearcherData {
-	constructor(public id: string, public code: string, public description: string, public level?: number, public headerSelectable: boolean = false) {
+	constructor(public id: string, public code: string, public description: string, public level?: number) {
 
 	}
 
@@ -61,7 +61,7 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 	}
 
 	public getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
-		return isFullWidthRowParams.rowNode.data ? (isFullWidthRowParams.rowNode.data.level === 0) : false;
+		return isFullWidthRowParams.rowNode.data ? (this.treeSearcher && isFullWidthRowParams.rowNode.data.level === 0) : false;
 	}
 
 	public getFullWidthCellRenderer(): any {
@@ -95,17 +95,17 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 	private getDataModel(valueToSearch: string): Array<ShowcaseSearcherData> {
 		const array: ShowcaseSearcherData[] = [];
 
-		array.push(new ShowcaseSearcherData('1', '1', '1', this.treeSearcher && 0, this.headerSelectable));
+		array.push(new ShowcaseSearcherData('1', '1', '1', 0));
 		array.push(new ShowcaseSearcherData('2', '2', '2'));
 		array.push(new ShowcaseSearcherData('3', '3', '3'));
 		array.push(new ShowcaseSearcherData('4', '4', '4'));
 		array.push(new ShowcaseSearcherData('5', '5', '5'));
-		array.push(new ShowcaseSearcherData('6', '6', '6', this.treeSearcher && 0, this.headerSelectable));
+		array.push(new ShowcaseSearcherData('6', '6', '6', 0));
 		array.push(new ShowcaseSearcherData('7', '7', '7'));
 		array.push(new ShowcaseSearcherData('8', '8', '8'));
 		array.push(new ShowcaseSearcherData('9', '9', '9'));
 		array.push(new ShowcaseSearcherData('10', '10', 'This is a large description for the element number 10'));
-		array.push(new ShowcaseSearcherData('11', '11', '11', this.treeSearcher && 0, this.headerSelectable));
+		array.push(new ShowcaseSearcherData('11', '11', '11', 0));
 		array.push(new ShowcaseSearcherData('12', '12', '12'));
 		array.push(new ShowcaseSearcherData('13', '13', '13'));
 		array.push(new ShowcaseSearcherData('14', '14', '14'));

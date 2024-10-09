@@ -17,7 +17,9 @@ export class SearcherTreeHeaderRendererComponent implements AgRendererComponent 
 		return true;
 	}
 
-	public doSubmit(event): void {
-		console.log(event);
+	public doClick(event): void {
+		if(this.params.context.componentParent.searcher.headerSelectable) {
+			this.params.context.componentParent.clickRow.emit(event);
+		}
 	}
 }
