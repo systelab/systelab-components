@@ -4,19 +4,14 @@ import { AbstractSearcher } from 'systelab-components';
 import { SearcherDialogParameters } from 'systelab-components';
 import { IsFullWidthRowParams } from 'ag-grid-community';
 import { SearcherTreeHeaderRendererComponent } from 'systelab-components';
-
-export class ShowcaseSearcherData {
-	constructor(public id: string, public code: string, public description: string, public level?: number) {
-
-	}
-
-}
+import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 
 export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 
 	private dataModel:Array<ShowcaseSearcherData> = [];
 	constructor(public i18nService: I18nService) {
 		super();
+		this.generateMockData(100);
 	}
 
 	public getDialogParameters(): SearcherDialogParameters<ShowcaseSearcherData> {
@@ -30,10 +25,27 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 	public getData(valueToSearch: string, page: number, pageNumber: number, useCode?: boolean): Observable<Array<ShowcaseSearcherData>> {
 		const aCode = (useCode) ? valueToSearch : undefined;
 		const aSearch = (useCode) ? undefined : valueToSearch;
+		//this.dataModel = this.getDataModel(valueToSearch);
 
-		this.dataModel = this.getDataModel(valueToSearch);
+		const pages: Map<number, ShowcaseSearcherData[]> = new Map<number, ShowcaseSearcherData[]>();
 
-		return of(this.dataModel);
+		let pageIndex: number = 1;
+		let pageData: ShowcaseSearcherData[] = [];
+		this.dataModel.forEach((data, index) => {
+			if(pageData.length < pageNumber) {
+				pageData.push(data);
+			} else {
+				pages.set(pageIndex, [...pageData]);
+				pageIndex += 1;
+				pageData = [data];
+			}
+			if(this.dataModel.length === index+1) {
+				pages.set(pageIndex, [...pageData]);
+				pageData = [];
+			}
+		});
+		console.log(`Page number: ${page} with values ${pages.get(page).length}`);
+		return of(this.getDataFromPage(pages.get(page), valueToSearch));
 	}
 
 
@@ -117,6 +129,24 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 			}
 		} else {
 			return array;
+		}
+	}
+
+	private generateMockData(numOfElements: number): void {
+		for (let i: number = 1; i <= numOfElements; i++) {
+			this.dataModel.push(new ShowcaseSearcherData(`${i}`, `Code${i}`, `Description${i}`, (i % 5 === 0 || i === 1) ? 0 : 1));
+		}
+	}
+
+	private getDataFromPage(pageData: ShowcaseSearcherData[], valueToSearch: string): ShowcaseSearcherData[] {
+		if (valueToSearch != null) {
+			if (valueToSearch.startsWith(('%'))) {
+				return pageData.filter(item => item.description.includes(valueToSearch.substring(1)));
+			} else {
+				return pageData.filter(item => item.description.startsWith(valueToSearch));
+			}
+		} else {
+			return pageData;
 		}
 	}
 }

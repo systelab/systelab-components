@@ -39,23 +39,33 @@
         </div>
     </div>
     <div class="row mt-1">
+        <label class="col-md-3 col-form-label">Combo Multiselect Paginate Searcher</label>
+        <div class="col-md-9">
+            <showcase-combobox-searcher [multipleSelection]="true" [(multipleSelectedItemList)]="selectedComboOptionListPaginate">
+                <showcase-api-paginate-combobox
+                        [multipleSelection]="true"
+                        [(multipleSelectedItemList)]="selectedComboOptionListPaginate" />
+            </showcase-combobox-searcher>
+        </div>
+    </div>
+    <div class="row mt-1">
         <label class="col-md-3 col-form-label">Combo Tree Searcher</label>
         <div class="col-md-9">
             <showcase-combobox-searcher [treeSearcher]="true"
                                         [(id)]="comboTreeSearcherId"
                                         [(description)]="comboTreeSearcherDescription">
-                <showcase-inner-tree-combobox [description]="comboTreeSearcherDescription" [id]="comboTreeSearcherId" />
+                <showcase-inner-tree-generic-combobox [description]="comboTreeSearcherDescription" [id]="comboTreeSearcherId" />
             </showcase-combobox-searcher>
         </div>
     </div>
     <div class="row mt-1">
-        <label class="col-md-3 col-form-label">Combo Tree Searcher With Header Selectable</label>
+        <label class="col-md-3 col-form-label">Combo Tree Searcher with parent node selectable</label>
         <div class="col-md-9">
             <showcase-combobox-searcher [treeSearcher]="true"
                                         [headerSelectable]="true"
                                         [(id)]="comboTreeHeaderSearcherId"
                                         [(description)]="comboTreeHeaderSelectableSearcherDescription">
-                <showcase-inner-tree-combobox [description]="comboTreeHeaderSelectableSearcherDescription"
+                <showcase-inner-tree-generic-combobox [description]="comboTreeHeaderSelectableSearcherDescription"
                                               [id]="comboTreeHeaderSearcherId"/>
             </showcase-combobox-searcher>
         </div>

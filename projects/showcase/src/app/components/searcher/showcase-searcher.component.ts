@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { ShowcaseSearcherData } from './inner-searcher';
+import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 
 @Component({
 	selector:    'showcase-searcher',
 	templateUrl: 'showcase-searcher.component.html'
 })
 export class ShowcaseSearcherComponent {
-	public comboOptionList: Array<ShowcaseSearcherData> = this.getDataModel();
+	public comboOptionList: Array<ShowcaseSearcherData> = [];
 	public selectedComboOptionList: Array<ShowcaseSearcherData> = [];
+	public selectedComboOptionListPaginate: Array<ShowcaseSearcherData> = [];
 	public comboSearcherId: string;
 	public comboSearcherDescription: string;
 	public comboTreeSearcherId: string;
@@ -16,7 +17,9 @@ export class ShowcaseSearcherComponent {
 	public comboTreeHeaderSelectableSearcherDescription: string;
 	public disabledComboSearcherId: string;
 	public disabledComboSearcherDescription: string;
+
 	constructor() {
+		this.generateMockData(100);
 	}
 
 	private getDataModel(): Array<ShowcaseSearcherData> {
@@ -37,5 +40,11 @@ export class ShowcaseSearcherComponent {
 		array.push(new ShowcaseSearcherData('14', 'Code14', 'Description14'));
 		array.push(new ShowcaseSearcherData('15', 'Code15', 'Description15'));
 		return array;
+	}
+
+	private generateMockData(numOfElements: number): void {
+		for (let i: number = 1; i <= numOfElements; i++) {
+			this.comboOptionList.push(new ShowcaseSearcherData(`${i}`, `Code${i}`, `Description${i}`));
+		}
 	}
 }

@@ -10,7 +10,6 @@ export class SearcherTreeHeaderRendererComponent implements AgRendererComponent 
 
 	public agInit(params: any): void {
 		this.params = params;
-		console.log(this.params);
 	}
 
 	public refresh(params: any): boolean {

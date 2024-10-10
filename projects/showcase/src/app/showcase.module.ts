@@ -116,6 +116,8 @@ import {
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ComboboxSearcherComponent } from './components/searcher/combobox-searcher.component';
+import { ShowcaseInnerTreeGenericComboboxComponent } from './components/combobox/showcase-inner-tree-generic.combobox.component';
+import { ShowcaseApiPaginateCombobox } from './components/combobox/showcase-api-paginate.combobox';
 
 @NgModule({ declarations: [
         ShowcaseComponent,
@@ -205,7 +207,9 @@ import { ComboboxSearcherComponent } from './components/searcher/combobox-search
         ShowcaseInteractiveComponent,
         ShowcaseProgressBarWithTextDialog,
         ShowcaseImageViewerComponent,
-                ComboboxSearcherComponent
+                ComboboxSearcherComponent,
+                ShowcaseInnerTreeGenericComboboxComponent,
+                ShowcaseApiPaginateCombobox
     ],
     bootstrap: [ShowcaseComponent],
     imports: [
