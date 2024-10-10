@@ -1,6 +1,5 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Directive, ElementRef, Input, ViewChild } from '@angular/core';
 import { SearcherDialog } from './searcher.dialog.component';
-import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { AbstractSearcher } from './abstract-searcher';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { AbstractGenericSearcherComponent } from './abstract-generic.searcher.component';
