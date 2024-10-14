@@ -43,7 +43,6 @@ export class InnerSearcher extends AbstractSearcher<ShowcaseSearcherData> {
 				pageData = [];
 			}
 		});
-		console.log(`Page number: ${page} with values ${pages.get(page).length}`);
 		return of(this.getDataFromPage(pages.get(page), valueToSearch));
 	}
 

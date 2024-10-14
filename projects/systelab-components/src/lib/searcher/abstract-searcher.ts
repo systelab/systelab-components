@@ -10,7 +10,7 @@ export abstract class AbstractSearcher<T> {
 	public multipleSelectedItemList: Array<T>;
 	public multipleSelection: boolean = false;
 	public treeSearcher: boolean = false;
-	public headerSelectable: boolean = false;
+	public parentSelectable: boolean = false;
 
 	protected constructor() {
 

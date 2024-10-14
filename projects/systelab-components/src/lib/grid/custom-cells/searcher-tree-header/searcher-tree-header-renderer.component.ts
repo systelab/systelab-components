@@ -17,7 +17,7 @@ export class SearcherTreeHeaderRendererComponent implements AgRendererComponent 
 	}
 
 	public doClick(event): void {
-		if(this.params.context.componentParent.searcher.headerSelectable) {
+		if(this.params.context.componentParent.searcher.parentSelectable) {
 			this.params.context.componentParent.clickRow.emit(event);
 		}
 	}

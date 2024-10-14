@@ -11,7 +11,7 @@ import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 })
 export class ComboboxSearcherComponent extends AbstractGenericSearcherComponent<ShowcaseSearcherData> implements OnInit {
 	@Input() treeSearcher: boolean;
-	@Input() headerSelectable: boolean;
+	@Input() parentSelectable: boolean;
 	constructor(public i18nService: I18nService, public dialogService: DialogService) {
 		super(dialogService, new InnerSearcher(i18nService));
 	}
@@ -19,6 +19,6 @@ export class ComboboxSearcherComponent extends AbstractGenericSearcherComponent<
 	public ngOnInit() {
 		super.ngOnInit();
 		(this.abstractSearcher as InnerSearcher).treeSearcher = this.treeSearcher;
-		(this.abstractSearcher as InnerSearcher).headerSelectable = this.headerSelectable;
+		(this.abstractSearcher as InnerSearcher).parentSelectable = this.parentSelectable;
 	}
 }

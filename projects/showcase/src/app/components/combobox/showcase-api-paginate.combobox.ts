@@ -43,7 +43,6 @@ export class ShowcaseApiPaginateCombobox extends AbstractApiComboBox<ShowcaseSea
 				pageData = [];
 			}
 		});
-		console.log(`Page number: ${page} with values ${pages.get(page).length}`);
 		return of(pages.get(page));
     }
     getTotalItems(): number {
