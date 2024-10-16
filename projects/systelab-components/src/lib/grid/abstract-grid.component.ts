@@ -109,7 +109,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return options;
 	}
 
-	onCellEditingStarted(event: any): void {
+	protected onCellEditingStarted(event: any): void {
 		this.startCellEditorWithTab = event.event?.key === 'Tab';
 	}
 
