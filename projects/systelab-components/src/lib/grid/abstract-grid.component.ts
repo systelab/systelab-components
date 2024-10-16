@@ -26,6 +26,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public gridOptions: GridOptions;
 	public overlayNoRowsTemplate;
 	public overlayLoadingTemplate;
+	public startCellEditorWithTab = false;
 
 	@Input() public headerMenu: Array<GridContextMenuOption<Object>>;
 	@Input() public menu: Array<GridContextMenuOption<T>>;
@@ -103,8 +104,13 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.isFullWidthRow = (isFullWidthRowParams: IsFullWidthRowParams) => this.getIsFullWidthRow(isFullWidthRowParams);
 		options.fullWidthCellRenderer = this.getFullWidthCellRenderer();
 		options.context = {componentParent: this};
+		options.onCellEditingStarted = (event) => this.onCellEditingStarted(event);
 
 		return options;
+	}
+
+	onCellEditingStarted(event: any): void {
+		this.startCellEditorWithTab = event.event?.key === 'Tab';
 	}
 
 	public onModelUpdated(event: any) {
