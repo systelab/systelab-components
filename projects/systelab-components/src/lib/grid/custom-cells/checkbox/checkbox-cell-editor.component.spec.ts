@@ -59,4 +59,26 @@ describe('CheckboxCellEditorComponent', () => {
 		expect(component.isCheckboxActive).toBe(true);
 		expect(params.stopEditing).not.toHaveBeenCalled();
 	}));
+
+	it('should not toggle checkbox value if navigation comes from Tab key', fakeAsync(() => {
+		const params = {
+			stopEditing: jasmine.createSpy('stopEditing'),
+			column: { colDef: { elementID: 'id' } },
+			singleClickEdit: true,
+			node: { data: {} },
+			value: true,
+			context: {
+				componentParent: {
+					startCellEditorWithTab: true
+				}
+			}
+		};
+
+		component.agInit(params);
+		component.ngAfterViewInit();
+
+		tick();
+		expect(component.isCheckboxActive).toBe(true);
+		expect(params.stopEditing).not.toHaveBeenCalled();
+	}));
 });

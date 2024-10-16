@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -96,6 +96,7 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 			  `
 })
 export class GridTestComponent {
+	@ViewChild('grid') public grid: SystelabGridComponent;
 
 	public selectedOptionID = '';
 	public selectedTestData: TestData;
@@ -417,4 +418,16 @@ describe('Systelab Grid', () => {
 
 		expect(getNumberOfRowsSelected(fixture)).toEqual(1);
 	});
+
+	it('should startCellEditorWithTab be false when the start edition without tab key', ()=> {
+		fixture.componentInstance.grid['onCellEditingStarted']({event: null});
+
+		expect(fixture.componentInstance.grid.startCellEditorWithTab).toBeFalse();
+	})
+
+	it('should startCellEditorWithTab be true when the start edition with tab key', ()=> {
+		fixture.componentInstance.grid['onCellEditingStarted']({event: { key: 'Tab'}});
+
+		expect(fixture.componentInstance.grid.startCellEditorWithTab).toBeTrue();
+	})
 });
