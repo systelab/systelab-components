@@ -14,7 +14,7 @@ export class CheckboxCellEditorComponent implements AgEditorComponent, AfterView
 
 	public ngAfterViewInit() {
 			setTimeout(() => {
-				if (this.singleClickEdit && !this.params.context.componentParent.startCellEditorWithTab) {
+				if (this.singleClickEdit && !this.params.context?.componentParent.startCellEditorWithTab) {
 					this.isCheckboxActive = !this.isCheckboxActive;
 					this.params.stopEditing();
 				}
