@@ -20,7 +20,9 @@
             </div>
             <div class="slab-input d-flex slab-flex-1">
                 <input type="text" class="slab-flex-1 slab-searcher-dialog-search-text" #valueToSearchInput id="valueToSearch"
-                       (keyup)="refreshSearch()" (keydown.tab)="setFocusToGrid($event)"
+                       keyup-debounce
+                       [keyupDebounceTime]="parameters.debounceTime"
+                       (keyupDebounced)="refreshSearch()" (keydown.tab)="setFocusToGrid($event)"
                        placeholder="{{'COMMON_SEARCH' | translate | async}}"
                        [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
             </div>
