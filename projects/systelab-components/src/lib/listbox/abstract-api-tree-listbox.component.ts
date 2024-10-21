@@ -298,7 +298,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	private selectUnselectChildTree(event: any) {
+	protected selectUnselectChildTree(event: any) {
 		this.treeValues.forEach((value: TreeListBoxElement<T>) => {
 			if (value.nodeData[this.getIdField(0)] === event.nodeData[this.getIdField(0)]) {
 				value.selected = event.selected;
@@ -307,7 +307,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		});
 	}
 
-	private selectUnselectParentTree(event: any) {
+	protected selectUnselectParentTree(event: any) {
 		const parentID = event.nodeData[this.getIdField(0)];
 		let allChildSelected = true;
 		let anyNode = false;
@@ -329,7 +329,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	private addRemoveToMultipleSelectedItem(event: any) {
+	protected addRemoveToMultipleSelectedItem(event: any) {
 		if (this.multipleSelectedItemList) {
 			const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) =>
 				(item.nodeData[this.getIdField(1)] === event.nodeData[this.getIdField(1)] && item['level'] === event['level'])
