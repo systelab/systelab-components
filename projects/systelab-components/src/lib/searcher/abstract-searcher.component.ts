@@ -1,111 +1,32 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Directive, ElementRef, Input, ViewChild } from '@angular/core';
 import { SearcherDialog } from './searcher.dialog.component';
-import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { AbstractSearcher } from './abstract-searcher';
 import { DialogService } from '../modal/dialog/dialog.service';
+import { AbstractGenericSearcherComponent } from './abstract-generic.searcher.component';
 
 @Directive()
-export abstract class AbstractSearcherComponent<T> implements OnInit {
-
-	public searcherDialogParameters: SearcherDialogParameters<T>;
+export abstract class AbstractSearcherComponent<T> extends AbstractGenericSearcherComponent<T>{
 
 	@ViewChild('valueToSearch') public valueToSearch: ElementRef;
-	@Input() public multipleSelection = false;
-	@Input() public isDisabled: boolean;
 
 	@Input() public fontFamily: string;
 	@Input() public fontSize: string;
 	@Input() public fontWeight: string;
 	@Input() public fontStyle: string;
 	@Input() public tabindex: number;
-	public _id: number | string;
-	protected _multipleSelectedItemList: Array<T>;
-
-	@Input()
-	get multipleSelectedItemList() {
-		return this._multipleSelectedItemList;
-	}
-
-	set multipleSelectedItemList(value: Array<T>) {
-
-		this._multipleSelectedItemList = value;
-		this.abstractSearcher.multipleSelectedItemList = this._multipleSelectedItemList;
-		this._code = '';
-		let description = '';
-
-		for (const selectedItem of value) {
-			if (this._code !== '') {
-				this._code += ', ';
-			}
-			this._code += selectedItem[this.abstractSearcher.getCodeField()] ? selectedItem[this.abstractSearcher.getCodeField()] : '';
-
-			if (description !== '') {
-				description += '; ';
-			}
-			description += selectedItem[this.abstractSearcher.getDescriptionField()] ? selectedItem[this.abstractSearcher.getDescriptionField()] : '';
-
-		}
-		this.codeChange.emit(this._code);
-		this.description = description;
-		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
-	}
-
-	@Output() public multipleSelectedItemListChange = new EventEmitter();
-
-	@Input()
-	set id(value: number | string) {
-		this._id = value;
-		this.abstractSearcher.id = value;
-		this.idChange.emit(this._id);
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	public _description: string;
-	@Input()
-	set description(value: string) {
-		this._description = value;
-		this.searchingValue = value;
-		this.descriptionChange.emit(this._description);
-	}
-
-	get description() {
-		return this._description;
-	}
-
-	public _code: string;
-	@Input()
-	set code(value: string) {
-		this._code = value;
-		this.codeChange.emit(this._code);
-	}
-
-	get code() {
-		return this._code;
-	}
-
-	@Output() public idChange = new EventEmitter();
-	@Output() public descriptionChange = new EventEmitter();
-	@Output() public codeChange = new EventEmitter();
-
-	@Output() public selectedHasChanged = new EventEmitter();
 
 	public searchingValue: string;
 	@Input() public withButton = true;
 	@Input() public isManagement = false;
-
 	@Input() public height;
 
-	protected constructor(public dialogService: DialogService, public abstractSearcher: AbstractSearcher<T>) {
-		this.searcherDialogParameters = this.abstractSearcher.getDialogParameters();
-		this.abstractSearcher = abstractSearcher;
-
+	protected constructor(public override dialogService: DialogService, public override abstractSearcher: AbstractSearcher<T>) {
+		super(dialogService, abstractSearcher)
 	}
 
-	public ngOnInit() {
-		this.abstractSearcher.multipleSelection = this.multipleSelection;
+	override set description(value: string) {
+		this.searchingValue = value;
+		super.description = value;
 	}
 
 	public getWidth() {
@@ -135,7 +56,7 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 		return undefined;
 	}
 
-	public openSearchDialog(): void {
+	public override openSearchDialog(): void {
 		let previousMultipleSelectionItemList: Array<T> = [];
 		if (this.multipleSelection && this._multipleSelectedItemList) {
 			previousMultipleSelectionItemList = [...this._multipleSelectedItemList];
@@ -202,8 +123,8 @@ export abstract class AbstractSearcherComponent<T> implements OnInit {
 		}
 	}
 
-	public upDateField(value: T): void {
-		this.selectedHasChanged.emit(this.id);
+	public override upDateField(value: T): void {
+		super.upDateField(value);
 		if (this.description) {
 			this.searchingValue = this.description;
 		}
