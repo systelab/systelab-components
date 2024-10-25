@@ -46,6 +46,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	}
 
 	public setFocusToInput(): void {
+		this.refreshSearch();
 		setTimeout(() => this.valueToSearchInput?.nativeElement.focus(), 100);
 	}
 
