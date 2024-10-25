@@ -8,13 +8,15 @@
         <div class="d-flex slab-flex-1 border rounded">
             <div class="d-flex border-right pb-1">
                 <div class="slab-first-option ml-3 mr-2">
-                    <input name="status-searchby1" type="radio" id="status-searchby-starts" [(ngModel)]="searchByContains" [value]="false"
-                    (ngModelChange)="setFocusToInput()">
+                    <input name="status-searchby1" type="radio" id="status-searchby-starts"
+                           [(ngModel)]="searchByContains" [value]="false"
+                           (ngModelChange)="setFocusToInput()">
                     <label for="status-searchby-starts">{{ 'COMMON_STARTS_WITH' | translate | async}}</label>
                 </div>
                 <div class="slab-second-option ml-2 mr-3">
-                    <input name="status-searchby2" type="radio" id="status-searchby-contains" [(ngModel)]="searchByContains" [value]="true"
-                       (ngModelChange)="setFocusToInput()">
+                    <input name="status-searchby2" type="radio" id="status-searchby-contains"
+                           [(ngModel)]="searchByContains" [value]="true"
+                           (ngModelChange)="setFocusToInput()">
                     <label for="status-searchby-contains">{{ 'COMMON_CONTAINS' | translate | async}}</label>
                 </div>
             </div>

@@ -8,4 +8,5 @@ export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public showSelectedRowsInSubmitButton = false;
 	public isTeeSearcher: boolean = false;
 	public debounceTime: number = 0;
+	public searchByStartWithAsDefault: boolean = false;
 }
