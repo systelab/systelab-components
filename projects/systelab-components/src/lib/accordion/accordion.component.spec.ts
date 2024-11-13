@@ -2,15 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Accordion } from './accordion.component';
+import { PreferencesService } from 'systelab-preferences';
 
 describe('Systelab Accordion', () => {
 	let fixture: ComponentFixture<Accordion>;
 	let component: Accordion;
+
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [],
 			imports: [BrowserModule],
 			providers: [
+				PreferencesService,
 				provideHttpClient(withInterceptorsFromDi())
 			]
 		}).compileComponents();
@@ -61,5 +64,20 @@ describe('Systelab Accordion', () => {
 		fixture.detectChanges();
 		await fixture.whenStable();
 		expect(component.isCollapsed).toBeFalse();
+	});
+
+	it('should be get isCollapsed value from preferences id flag preferenceName exists', async () => {
+		const valueReturned: boolean = true;
+		const initianPreferenceName = 'testName';
+		component.isCollapsed = false;
+		component.preferenceName = initianPreferenceName;
+		const preferenceServiceGetSpy = spyOn<any>(component['preferenceService'], 'get').and.returnValue(valueReturned);
+		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
+		component.ngOnInit();
+		await fixture.whenStable();
+		expect(component.preferenceName).toEqual(`${component['preferencePrefix']}.${initianPreferenceName}`);
+		expect(preferenceServiceGetSpy).toHaveBeenCalledWith(component.preferenceName, false);
+		expect(component.isCollapsed).toEqual(valueReturned);
+		expect(preferenceServicePutSpy).toHaveBeenCalledWith(component.preferenceName, valueReturned);
 	});
 });
