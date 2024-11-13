@@ -123,6 +123,7 @@ export * from './lib/listbox/abstract-listbox.component';
 export * from './lib/listbox/abstract-api-listbox.component';
 export * from './lib/listbox/abstract-api-tree-listbox.component';
 export * from './lib/sortable-list/abstract-sortable-list.component';
+export * from './lib/accordion/accordion.component';
 export * from './lib/add-remove-list/abstract-add-remove-list.component';
 export * from './lib/tree/tree-node';
 export * from './lib/tree/abstract-tree.component';
