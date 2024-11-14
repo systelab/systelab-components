@@ -50,7 +50,7 @@ describe('Systelab Accordion', () => {
 
 	it('should be collapsed if is expanded and clicks icon button', async () => {
 		component.isCollapsed = false;
-		const collapseExpandIcon = fixture.debugElement.query(By.css('.mlab-accordion-header'));
+		const collapseExpandIcon = fixture.debugElement.query(By.css('.accordion-header'));
 		collapseExpandIcon.triggerEventHandler('click', null);
 		fixture.detectChanges();
 		await fixture.whenStable();
@@ -59,7 +59,7 @@ describe('Systelab Accordion', () => {
 
 	it('should be expanded if is collapsed and clicks icon button', async () => {
 		component.isCollapsed = true;
-		const collapseExpandIcon = fixture.debugElement.query(By.css('.mlab-accordion-header'));
+		const collapseExpandIcon = fixture.debugElement.query(By.css('.accordion-header'));
 		collapseExpandIcon.triggerEventHandler('click', null);
 		fixture.detectChanges();
 		await fixture.whenStable();
