@@ -15,14 +15,14 @@ export class Accordion implements OnInit {
 	@Input() headerColor: string;
 	@Input() iconColor: string;
 	public isCollapsed: boolean = false;
-	private preferencePrefix: string = 'accordionStatus';
+	private preferenceSuffix: string = 'accordionStatus';
 
 	constructor(private readonly preferenceService: PreferencesService) {
 	}
 
 	public ngOnInit() {
 		if(this.preferenceName) {
-			this.preferenceName = `${this.preferencePrefix}.${this.preferenceName}`;
+			this.preferenceName = `${this.preferenceName}.${this.preferenceSuffix}`;
 			this.isCollapsed = this.preferenceService.get(this.preferenceName, false);
 			this.preferenceService.put(this.preferenceName, this.isCollapsed);
 		}
