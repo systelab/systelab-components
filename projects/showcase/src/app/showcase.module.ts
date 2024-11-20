@@ -115,6 +115,7 @@ import {
 } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { environment } from '../environments/environment';
 
 @NgModule({ declarations: [
         ShowcaseComponent,
