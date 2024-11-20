@@ -3,7 +3,7 @@
         <i class="d-flex justify-content-center align-items-center position-relative" [class.icon-chevron-circle-up]="!isCollapsed" [class.icon-chevron-circle-down]="isCollapsed" [ngClass]="{'text-primary': !iconColor}" [ngStyle]="{'color': iconColor}"></i>
         <span class="d-block ml-3">{{ headerTitle }}</span>
     </div>
-    <div class="collapsible-content d-flex" [class.collapsed]="isCollapsed" [class.p-3]="!isCollapsed"
+    <div class="collapsible-content d-flex" [class.collapsed]="isCollapsed"
          [ngStyle]="{'max-height.px': isCollapsed ? '0' : contentMaxHeight, 'overflow': withOverflow ? 'auto' : 'hidden'}">
         <ng-content />
     </div>
