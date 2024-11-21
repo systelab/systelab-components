@@ -3,7 +3,7 @@
   border-radius: 4px 4px 0 0;
   height: 40px;
   i {
-    &:after {
+    &::after {
       content: '';
       background-color: white;
       width: 15px;
@@ -11,7 +11,7 @@
       z-index: 1;
       position: absolute;
     }
-    &:before {
+    &::before {
       z-index: 2;
     }
     font-size: 25px;
