@@ -68,14 +68,14 @@ describe('Systelab Accordion', () => {
 
 	it('should be get isCollapsed value from preferences id flag preferenceName exists', async () => {
 		const valueReturned: boolean = true;
-		const initianPreferenceName = 'testName';
+		const initialPreferenceName = 'testName';
 		component.isCollapsed = false;
-		component.preferenceName = initianPreferenceName;
+		component.preferenceName = initialPreferenceName;
 		const preferenceServiceGetSpy = spyOn<any>(component['preferenceService'], 'get').and.returnValue(valueReturned);
 		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
 		component.ngOnInit();
 		await fixture.whenStable();
-		expect(component.preferenceName).toEqual(`${component['preferencePrefix']}.${initianPreferenceName}`);
+		expect(component.preferenceName).toEqual(`${initialPreferenceName}.${component['preferenceSuffix']}`);
 		expect(preferenceServiceGetSpy).toHaveBeenCalledWith(component.preferenceName, false);
 		expect(component.isCollapsed).toEqual(valueReturned);
 		expect(preferenceServicePutSpy).toHaveBeenCalledWith(component.preferenceName, valueReturned);
