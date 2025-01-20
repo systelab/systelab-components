@@ -118,6 +118,6 @@ export abstract class AbstractGenericSearcherComponent<T> implements OnInit {
 	}
 
 	public upDateField(value: T): void {
-		this.selectedHasChanged.emit(value ? value[this.abstractSearcher.getIdField()] : undefined);
+		this.selectedHasChanged.emit(value[this.abstractSearcher.getIdField()]);
 	}
 }
