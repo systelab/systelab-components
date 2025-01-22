@@ -1,4 +1,6 @@
-import { AfterViewInit, Component,  EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
+import { APP_CONFIG, AppConfig } from '../../systelab-components.module.config';
+import { DEFAULT_SYSTELAB_DIALOG_CONFIG } from '../systelab-dialog-config';
 
 @Component({
 	selector:    'systelab-dialog-header',
@@ -35,7 +37,9 @@ export class DialogHeaderComponent implements AfterViewInit {
 	private on: number;
 	private here: number;
 
-	constructor() {
+	constructor(@Optional() @Inject(APP_CONFIG) private config: AppConfig) {
+		this.withDrag = config?.dialogConfig?.dialogsDraggableByDefault !== undefined ?
+			config.dialogConfig.dialogsDraggableByDefault : DEFAULT_SYSTELAB_DIALOG_CONFIG.dialogsDraggableByDefault;
 	}
 
 	public ngAfterViewInit() {
