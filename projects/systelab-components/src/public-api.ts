@@ -34,6 +34,7 @@ export * from './lib/searcher/searcher.dialog.component';
 export * from './lib/searcher/searcher.dialog.parameters';
 export * from './lib/searcher/abstract-searcher.component';
 export * from './lib/searcher/abstract-searcher';
+export * from './lib/searcher/abstract-generic.searcher.component'
 
 export * from './lib/button/button.component';
 export * from './lib/searcher/searcher.table.component';
@@ -86,6 +87,7 @@ export * from './lib/grid/custom-cells/decimal-input/decimal-input-cell-editor.c
 export * from './lib/grid/custom-cells/input/input-cell-editor.component';
 export * from './lib/grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
 export * from './lib/grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
+export * from './lib/grid/custom-cells/searcher-tree-header/searcher-tree-header-renderer.component'
 export * from './lib/grid/contextmenu/grid-header-context-menu-renderer.component';
 export * from './lib/grid/contextmenu/grid-header-context-menu.component';
 export * from './lib/grid/contextmenu/grid-context-menu-component';
