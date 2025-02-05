@@ -74,9 +74,9 @@ systelab-button {
     border-radius: 3em;
     cursor: pointer;
     display: inline-block;
-    line-height: 1;
+    line-height: 1.5;
     font-size: 1rem;
-    padding: 9px 12px;
+    padding: 0.375rem 0.75rem;
     border: none;
   }
 
@@ -87,15 +87,15 @@ systelab-button {
 
   .slab-btn-small {
     font-size: 0.875rem;
-    padding: 7px 11px;
+    padding: 0.35rem 0.65rem;
   }
   .slab-btn-medium {
     font-size: 1rem;
-    padding: 9px 12px;
+    padding: 0.375rem 0.75rem;
   }
   .slab-btn-large {
     font-size: 1.25rem;
-    padding: 14px 16px;
+    padding: 0.6rem 1rem;
   }
 
 
