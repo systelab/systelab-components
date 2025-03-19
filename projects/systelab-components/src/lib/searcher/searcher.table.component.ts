@@ -96,7 +96,6 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 			this.gridOptions.api.forEachNode(node => {
 				if (node.data && node.data[this.searcher.getIdField()] === this.searcher.id) {
 					node.selectThisNode(true);
-					this.gridOptions.api.ensureNodeVisible(node);
 				}
 			});
 		}
