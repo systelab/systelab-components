@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
-	selector:    'systelab-checkbox-cell',
-	templateUrl: 'checkbox-cell-renderer.component.html'
+    selector: 'systelab-checkbox-cell',
+    templateUrl: 'checkbox-cell-renderer.component.html',
+    standalone: false
 })
 export class CheckboxCellRendererComponent implements AgRendererComponent {
 	private params: any;

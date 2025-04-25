@@ -21,8 +21,9 @@ export class TestData {
 }
 
 @Component({
-	selector: 'systelab-listbox-example',
-	templateUrl: 'abstract-listbox.component.html'
+    selector: 'systelab-listbox-example',
+    templateUrl: 'abstract-listbox.component.html',
+    standalone: false
 })
 export class SystelabListboxComponent extends AbstractApiListBox<TestData> {
 
@@ -64,14 +65,15 @@ export class SystelabListboxComponent extends AbstractApiListBox<TestData> {
 }
 
 @Component({
-	selector: 'systelab-listbox-test',
-	template: `
+    selector: 'systelab-listbox-test',
+    template: `
         <div class="position-relative" style="height: 200px;">
             <systelab-listbox-example #listbox
                                       [multipleSelection]="true" [multipleSelectedItemList]="multipleSelectedItemList">
             </systelab-listbox-example>
         </div>
-	`
+	`,
+    standalone: false
 })
 export class ListboxTestComponent {
 	@ViewChild('listbox') public listbox: SystelabListboxComponent;

@@ -3,8 +3,9 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { AbstractGrid } from '../abstract-grid.component';
 
 @Component({
-	selector:    'systelab-grid-context-menu-cell-renderer',
-	templateUrl: 'grid-context-menu-cell-renderer.component.html'
+    selector: 'systelab-grid-context-menu-cell-renderer',
+    templateUrl: 'grid-context-menu-cell-renderer.component.html',
+    standalone: false
 })
 export class GridContextMenuCellRendererComponent<T> implements AgRendererComponent {
 

@@ -3,8 +3,9 @@ import { TouchSpinValues } from 'systelab-components';
 import { ContextPanelComponent } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-context-panel',
-	templateUrl: 'showcase-context-panel.component.html'
+    selector: 'showcase-context-panel',
+    templateUrl: 'showcase-context-panel.component.html',
+    standalone: false
 })
 export class ShowcaseContextPanel implements OnInit {
 	public touchSpinValues1: TouchSpinValues;

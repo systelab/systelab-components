@@ -6,8 +6,9 @@ export class ShowcaseSpyMenuDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-spy-menu-dialog.component.html',
-	styleUrls: ['showcase-spy-menu-dialog.component.scss']
+    templateUrl: 'showcase-spy-menu-dialog.component.html',
+    styleUrls: ['showcase-spy-menu-dialog.component.scss'],
+    standalone: false
 })
 export class ShowcaseSpyMenuDialog implements ModalComponent<ShowcaseSpyMenuDialogParameters> {
 

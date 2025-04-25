@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-	selector: 'showcase-tooltip',
-	templateUrl: 'showcase-tooltip.component.html'
+    selector: 'showcase-tooltip',
+    templateUrl: 'showcase-tooltip.component.html',
+    standalone: false
 })
 export class ShowcaseTooltipComponent implements OnInit {
 

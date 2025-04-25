@@ -8,9 +8,9 @@ import { DialogService } from '../modal/dialog/dialog.service';
 import { Observable } from 'rxjs';
 
 @Component({
-	selector:    'systelab-internal-searcher-table',
-	templateUrl: '../grid/abstract-grid.component.html'
-
+    selector: 'systelab-internal-searcher-table',
+    templateUrl: '../grid/abstract-grid.component.html',
+    standalone: false
 })
 export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnInit {
 

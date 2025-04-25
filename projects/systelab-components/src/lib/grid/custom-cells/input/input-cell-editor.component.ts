@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {AgEditorComponent} from 'ag-grid-angular';
 
 @Component({
-	selector: 'systelab-input-cell-editor',
-	templateUrl: 'input-cell-editor.component.html'
+    selector: 'systelab-input-cell-editor',
+    templateUrl: 'input-cell-editor.component.html',
+    standalone: false
 })
 export class InputCellEditorComponent implements AgEditorComponent {
 	public params: any;

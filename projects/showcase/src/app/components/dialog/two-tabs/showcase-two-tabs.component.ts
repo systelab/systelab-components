@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { TouchSpinValues } from 'systelab-components';
 
 @Component( {
-	selector:    'showcase-two-tabs',
-	templateUrl: 'showcase-two-tabs.component.html'
+    selector: 'showcase-two-tabs',
+    templateUrl: 'showcase-two-tabs.component.html',
+    standalone: false
 } )
 export class ShowcaseTwoTabsComponent {
 

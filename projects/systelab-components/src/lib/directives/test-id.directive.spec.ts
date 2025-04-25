@@ -5,9 +5,10 @@ import { TestIdDirective } from './test-id.directive';
 import { APP_CONFIG } from '../systelab-components.module.config';
 
 @Component({
-  template: `
+    template: `
     <div systelabTestId='test'></div>
-  `
+  `,
+    standalone: false
 })
 class SystelabTestIdDirectiveTestComponent {}
 

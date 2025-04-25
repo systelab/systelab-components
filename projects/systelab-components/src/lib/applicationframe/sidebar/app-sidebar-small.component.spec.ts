@@ -12,14 +12,15 @@ import { TooltipDirective } from '../../tooltip/tooltip.directive';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.component';
 
 @Component({
-	selector: 'systelab-app-sidebar-small-test',
-	template: `
+    selector: 'systelab-app-sidebar-small-test',
+    template: `
         <div>
             <systelab-app-sidebar-small [actions]="actions" [tabs]="tabs"
                                         (selected)="updateSelectedTab($event)"></systelab-app-sidebar-small>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class AppSidebarSmallTestComponent {
 

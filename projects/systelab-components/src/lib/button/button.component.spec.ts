@@ -10,15 +10,16 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { ButtonComponent } from './button.component';
 
 @Component({
-	selector: 'systelab-button-test',
-	template: `
+    selector: 'systelab-button-test',
+    template: `
                 <div>
                     <systelab-button (action)="doClick()" [disabled]="disabled" [type]="'primary'">
                         <i class="icon-plus-circle"></i>My Button</systelab-button>
                     <label class="label-value">{{isClicked}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ButtonTestComponent {
 

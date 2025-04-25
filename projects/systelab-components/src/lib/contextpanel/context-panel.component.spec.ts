@@ -11,11 +11,12 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextPanelComponent } from './context-panel.component';
 
 @Component({
-	selector: 'systelab-context-panel-test',
-	template: `
+    selector: 'systelab-context-panel-test',
+    template: `
                 <systelab-context-panel>
                 </systelab-context-panel>
-	          `
+	          `,
+    standalone: false
 })
 export class ContextPanelTestComponent {
 }

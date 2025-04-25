@@ -9,8 +9,9 @@ export interface GridRowMenuActionHandler {
 }
 
 @Component({
-	selector:    'systelab-grid-context-menu',
-	templateUrl: '../../contextmenu/context-menu.component.html'
+    selector: 'systelab-grid-context-menu',
+    templateUrl: '../../contextmenu/context-menu.component.html',
+    standalone: false
 })
 export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<GridContextMenuOption<T>> {
 

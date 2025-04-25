@@ -11,13 +11,14 @@ import { CalendarFooterComponent } from './calendar-footer.component';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-	selector: 'systelab-calendar-footer-test',
-	template: `
+    selector: 'systelab-calendar-footer-test',
+    template: `
         <div>
             <systelab-calendar-footer [currentDate]="date" (onClearDate)="doClearDate($event)"></systelab-calendar-footer>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class CalendarFooterTestComponent {
 

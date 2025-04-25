@@ -20,7 +20,8 @@ interface TestData {
 
 @Component({
     selector: 'systelab-grid-context-menu-cell-renderer-mock',
-    templateUrl: 'grid-context-menu-cell-renderer.component.html'
+    templateUrl: 'grid-context-menu-cell-renderer.component.html',
+    standalone: false
 })
 class GridContextMenuCellRendererMock extends GridContextMenuCellRendererComponent<TestData> {
     constructor() {

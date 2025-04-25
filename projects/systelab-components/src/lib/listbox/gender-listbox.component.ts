@@ -9,9 +9,9 @@ class Element {
 }
 
 @Component({
-	selector:    'systelab-gender-listbox',
-	templateUrl: 'abstract-listbox.component.html'
-
+    selector: 'systelab-gender-listbox',
+    templateUrl: 'abstract-listbox.component.html',
+    standalone: false
 })
 export class SystelabGenderListBox extends AbstractListBox<Element> implements AfterViewInit {
 

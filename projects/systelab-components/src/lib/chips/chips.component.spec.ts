@@ -9,8 +9,9 @@ import { ChipsComponent } from './chips.component';
 import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
-	template: `
-                <systelab-chips [texts]="texts" [disabled]="disabled" [readonly]="readonly"></systelab-chips>`
+    template: `
+                <systelab-chips [texts]="texts" [disabled]="disabled" [readonly]="readonly"></systelab-chips>`,
+    standalone: false
 })
 export class ChipsTestComponent {
 

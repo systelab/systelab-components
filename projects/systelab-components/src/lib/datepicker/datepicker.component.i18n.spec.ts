@@ -131,13 +131,14 @@ export class ZHMockI18nService {
 }
 
 @Component({
-	selector: 'systelab-datepicker-test',
-	template: `
+    selector: 'systelab-datepicker-test',
+    template: `
                   <div>
                       <systelab-datepicker [(currentDate)]='currentDate'></systelab-datepicker>
                   </div>
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class DatepickerTestComponent {
 

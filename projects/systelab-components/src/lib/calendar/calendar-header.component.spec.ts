@@ -10,14 +10,15 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
 import { CalendarHeaderComponent } from './calendar-header.component';
 
 @Component({
-	selector: 'systelab-calendar-header-test',
-	template: `
+    selector: 'systelab-calendar-header-test',
+    template: `
         <div>
             <systelab-calendar-header [currentDate]="date" (previousYear)="doPreviousYear()" (previousMonth)="doPreviousMonth()"
                                       (nextMonth)="doNextMonth()" (nextYear)="doNextYear()"></systelab-calendar-header>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class CalendarHeaderTestComponent {
 

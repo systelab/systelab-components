@@ -17,8 +17,8 @@ import { GenderSelect } from './gender-combobox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 
 @Component({
-	selector: 'systelab-gender-select-test',
-	template: `
+    selector: 'systelab-gender-select-test',
+    template: `
                   <div>
                       <systelab-gender-select [(id)]="id" [(description)]="description"
                                               [showAll]="showAll"
@@ -28,7 +28,8 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
                   </div>
 
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class GenderSelectTestComponent {
 

@@ -38,8 +38,9 @@ export class TestData {
 }
 
 @Component({
-	selector:    'systelab-grid',
-	templateUrl: 'abstract-grid.component.html'
+    selector: 'systelab-grid',
+    templateUrl: 'abstract-grid.component.html',
+    standalone: false
 })
 export class SystelabGridComponent extends AbstractApiGrid<TestData> implements OnInit {
 
@@ -86,14 +87,15 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 }
 
 @Component({
-	selector: 'systelab-grid-test',
-	template: `
+    selector: 'systelab-grid-test',
+    template: `
                   <div class="position-relative" style="height: 200px;">
                       <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
                                      [showChecks]="true" [removeSelectionOnOpenContextMenu]="true" [multipleSelection]="true" (rowSelected)="doSelect($event)"></systelab-grid>
                   </div>
                   <systelab-button id="button-options" (action)="grid.showOptions()">Options</systelab-button>
-			  `
+			  `,
+    standalone: false
 })
 export class GridTestComponent {
 

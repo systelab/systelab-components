@@ -3,14 +3,15 @@ import { DataFilterPipe } from './datafilter.pipe';
 import { CurrentSelectionStatus, TwoListItem } from './two-list-utilities';
 
 @Component({
-	selector:    'systelab-two-list',
-	templateUrl: 'two-list.component.html',
-	styles:      [`
+    selector: 'systelab-two-list',
+    templateUrl: 'two-list.component.html',
+    styles: [`
         :host {
             width: 100%;
             height: 100%;
         }
-	`]
+	`],
+    standalone: false
 })
 export class TwoListComponent {
 

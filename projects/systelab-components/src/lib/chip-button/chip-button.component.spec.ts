@@ -11,15 +11,16 @@ import { ChipButtonComponent, ChipButtonItem } from './chip-button.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 
 @Component({
-	selector: 'systelab-chip-button-test',
-	template: `
+    selector: 'systelab-chip-button-test',
+    template: `
                   <div>
                       <systelab-chip-button [buttonList]="buttonList"
                                             [isRemoveEnabled]="isRemoveEnabled"
                                             [showAddButton]="showAddButton"></systelab-chip-button>
                   </div>
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ChipButtonTestComponent {
 	public buttonList: ChipButtonItem[] = [

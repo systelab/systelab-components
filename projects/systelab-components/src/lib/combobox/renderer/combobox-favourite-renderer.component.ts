@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
-	selector:    'combobox-favourite-renderer',
-	templateUrl: 'combobox-favourite-renderer.component.html'
+    selector: 'combobox-favourite-renderer',
+    templateUrl: 'combobox-favourite-renderer.component.html',
+    standalone: false
 })
 export class ComboboxFavouriteRendererComponent implements AgRendererComponent {
 

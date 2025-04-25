@@ -7,9 +7,10 @@ import { UnitTestHelper } from '../helper/unit.test-helper';
 
 
 @Component({
-	template: `
+    template: `
       <input name="number" id="number" type="text" systelabNumPadDecimalNumericDirective />
-  `
+  `,
+    standalone: false
 })
 class TestComponent {
 	public value: string;

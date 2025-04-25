@@ -10,8 +10,9 @@ class Element {
 }
 
 @Component({
-	selector: 'systelab-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-select',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 })
 
 export class ModulabSelect extends AbstractComboBox<Element> {

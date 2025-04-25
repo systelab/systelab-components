@@ -22,8 +22,9 @@ export class TestData {
 }
 
 @Component({
-	selector:    'systelab-autocomplete-example',
-	templateUrl: 'autocomplete-combobox.component.html'
+    selector: 'systelab-autocomplete-example',
+    templateUrl: 'autocomplete-combobox.component.html',
+    standalone: false
 })
 export class SystelabAutocompleteComponent extends AutocompleteApiComboBox<TestData> {
 
@@ -77,8 +78,8 @@ export class SystelabAutocompleteComponent extends AutocompleteApiComboBox<TestD
 }
 
 @Component({
-	selector: 'systelab-autocomplete-test',
-	template: `
+    selector: 'systelab-autocomplete-test',
+    template: `
                 <div class="container-fluid" style="height: 200px;">
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -91,7 +92,8 @@ export class SystelabAutocompleteComponent extends AutocompleteApiComboBox<TestD
                         </div>
                     </div>
                 </div>
-	          `
+	          `,
+    standalone: false
 })
 export class AutocompleteTestComponent {
 	@ViewChild('combobox') public combobox: SystelabAutocompleteComponent;

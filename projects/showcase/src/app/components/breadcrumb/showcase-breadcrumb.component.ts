@@ -3,8 +3,9 @@ import { MessagePopupService } from 'systelab-components';
 import { BreadcrumbItem, BreadcrumbSubItem } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-breadcrumb',
-	templateUrl: 'showcase-breadcrumb.component.html'
+    selector: 'showcase-breadcrumb',
+    templateUrl: 'showcase-breadcrumb.component.html',
+    standalone: false
 })
 export class ShowcaseBreadcrumbComponent {
 

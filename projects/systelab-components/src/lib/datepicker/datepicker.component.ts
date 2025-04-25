@@ -18,9 +18,10 @@ import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
 
 @Component({
-	selector:    'systelab-datepicker',
-	templateUrl: 'datepicker.component.html',
-	providers:   [DataTransformerService]
+    selector: 'systelab-datepicker',
+    templateUrl: 'datepicker.component.html',
+    providers: [DataTransformerService],
+    standalone: false
 })
 export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 

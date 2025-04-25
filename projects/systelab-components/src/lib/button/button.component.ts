@@ -1,12 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector:    'systelab-button',
-	templateUrl: 'button.component.html',
-	styles:      [`
+    selector: 'systelab-button',
+    templateUrl: 'button.component.html',
+    styles: [`
       :host {
           display: inline-block;
-      }`]
+      }`],
+    standalone: false
 })
 export class ButtonComponent {
 

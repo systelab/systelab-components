@@ -12,8 +12,9 @@ export class BreadcrumbItem {
 }
 
 @Component({
-	selector: 'systelab-breadcrumb',
-	templateUrl: './breadcrumb.component.html'
+    selector: 'systelab-breadcrumb',
+    templateUrl: './breadcrumb.component.html',
+    standalone: false
 })
 export class BreadcrumbComponent {
 

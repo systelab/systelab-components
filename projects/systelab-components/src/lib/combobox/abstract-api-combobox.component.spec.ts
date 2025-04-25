@@ -21,8 +21,9 @@ export class TestData {
 }
 
 @Component({
-	selector:    'systelab-combobox-example',
-	templateUrl: 'abstract-combobox.component.html'
+    selector: 'systelab-combobox-example',
+    templateUrl: 'abstract-combobox.component.html',
+    standalone: false
 })
 export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 
@@ -64,8 +65,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 }
 
 @Component({
-	selector: 'systelab-combobox-test',
-	template: `
+    selector: 'systelab-combobox-test',
+    template: `
                 <div class="container-fluid" style="height: 200px;">
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -77,7 +78,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                         </div>
                     </div>
                 </div>
-	          `
+	          `,
+    standalone: false
 })
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: SystelabComboboxComponent;
