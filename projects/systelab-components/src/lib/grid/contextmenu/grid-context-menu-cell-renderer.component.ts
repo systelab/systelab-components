@@ -27,9 +27,9 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 		if (event.ctrlKey && !this.container.removeSelectionOnOpenContextMenu) {
 			selectedRows = this.container.getSelectedRows();
 		} else if (this.container.removeSelectionOnOpenContextMenu) {
-			this.container.gridOptions.api.deselectAll();
+			this.container.gridApi.deselectAll();
 			if (event.ctrlKey) {
-				this.container.gridOptions.api.selectIndex(this.rowIndex, false, false);
+				this.container.gridApi.getRowNode(this.rowIndex.toString()).setSelected(false);//selectIndex(this.rowIndex, false, false);
 			}
 		}
 		this.container.dotsClicked(this.rowIndex, selectedRows, event);

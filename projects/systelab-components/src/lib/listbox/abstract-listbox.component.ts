@@ -1,19 +1,21 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GetRowIdParams, GridOptions } from 'ag-grid-community';
+import { ColDef, ColumnApi, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
 export abstract class AbstractListBox<T> implements OnInit {
 
 	public gridOptions: GridOptions;
+	public gridApi: GridApi;
+	public columnApi: ColumnApi;
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	public _values: Array<T>;
 	@Input()
 	set values(newValues: Array<T>) {
 		this._values = newValues;
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.setRowData(this._values);
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.setRowData(this._values);
 		}
 	}
 
@@ -176,7 +178,9 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	public doGridReady(event: any) {
-		this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		this.gridApi = event.api;
+		this.columnApi = event.columnApi;
+		this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 	}
 
 	private onBodyScroll(event: any): void {
@@ -187,11 +191,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected doAutoSizeManagement(event?: any) {
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, this.columnApi, event);
 	}
 
 	public doGridSizeChanged(event: any) {
-		if (this.gridOptions.api) {
+		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
 	}
@@ -261,8 +265,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected selectItemInGrid(): void {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (node.data) {
 					if (this.multipleSelection) {
 						if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
@@ -270,12 +274,12 @@ export abstract class AbstractListBox<T> implements OnInit {
 								.filter((selectedItem) => {
 									return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
 								}).length > 0) {
-								node.selectThisNode(true);
+								node.setSelected(true);
 							} else {
-								node.selectThisNode(false);
+								node.setSelected(false);
 							}
 						} else {
-							node.selectThisNode(false);
+							node.setSelected(false);
 						}
 					} else {
 						if (!this.selectedItem && this.selectFirstItem) {
@@ -306,20 +310,20 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	private unselectAllNodes() {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (node && this.getRowNodeId(node.data) !== this.getAllFieldID()) {
-					node.selectThisNode(false);
+					node.setSelected(false);
 				}
 			});
 		}
 	}
 
 	private unselectNodeAll() {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (node && this.getRowNodeId(node.data) === this.getAllFieldID()) {
-					node.selectThisNode(false);
+					node.setSelected(false);
 				}
 			});
 		}

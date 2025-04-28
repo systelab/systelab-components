@@ -73,8 +73,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.chref.detectChanges();
 			// sets focus into the first grid cell
 			setTimeout(() => {
-				const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
-				this.gridOptions.api.setFocusedCell(0, firstCol);
+				const firstCol = this.columnApi.getAllDisplayedColumns()[0];
+				this.gridApi.setFocusedCell(0, firstCol);
 			}, 0);
 		}
 	}
@@ -120,19 +120,19 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public override getRows(params: IGetRowsParams): void {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.showLoadingOverlay();
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.showLoadingOverlay();
 			const page: number = params.endRow / this.gridOptions.paginationPageSize;
 			this.totalItemsLoaded = false;
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe({
 						next:  (v: Array<T>) => {
-							this.gridOptions.api.hideOverlay();
+							this.gridApi.hideOverlay();
 							this.totalItemsLoaded = true;
 							params.successCallback(v, this.getTotalItems());
 						},
 						error: () => {
-							this.gridOptions.api.hideOverlay();
+							this.gridApi.hideOverlay();
 							params.failCallback();
 						}
 					}
@@ -156,8 +156,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		this.code = undefined;
 		this.description = undefined;
 		this.currentSelected = undefined;
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.deselectAll();
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.deselectAll();
 		}
 		this.selectedItemChange.emit(undefined);
 	}
@@ -180,7 +180,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public onEnterDoSelect(event: KeyboardEvent) {
 		if (this.isDropdownOpened) {
-			this.gridOptions.api.getDisplayedRowAtIndex(0).selectThisNode(true);
+			this.gridApi.getDisplayedRowAtIndex(0).setSelected(true);
 		}
 	}
 

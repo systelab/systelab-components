@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GetRowIdParams, GridOptions } from 'ag-grid-community';
+import { ColumnApi, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -206,6 +206,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public selectionChanged = false;
 
 	public gridOptions: GridOptions;
+	public gridApi: GridApi;
+	public columnApi: ColumnApi;
 	public columnDefs: Array<any>;
 
 	public params: any;
@@ -468,14 +470,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected transferFocusToGrid(): void {
 		// scrolls to the first row
-		this.gridOptions.api.ensureIndexVisible(0);
+		this.gridApi.ensureIndexVisible(0);
 
 		// scrolls to the first column
-		const firstCol = this.gridOptions.columnApi.getAllDisplayedColumns()[0];
-		this.gridOptions.api.ensureColumnVisible(firstCol);
+		const firstCol = this.columnApi.getAllDisplayedColumns()[0];
+		this.gridApi.ensureColumnVisible(firstCol);
 
 		// sets focus into the first grid cell
-		this.gridOptions.api.setFocusedCell(0, firstCol);
+		this.gridApi.setFocusedCell(0, firstCol);
 	}
 
 	public onCellKeyDown(e: any) {
@@ -565,8 +567,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getSelectedRow(): T {
-		if (this.gridOptions && this.gridOptions.api) {
-			const selectedRow: Array<T> = this.gridOptions.api.getSelectedRows();
+		if (this.gridOptions && this.gridApi) {
+			const selectedRow: Array<T> = this.gridApi.getSelectedRows();
 			if (selectedRow !== null) {
 				return selectedRow[0];
 			}
@@ -582,15 +584,15 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public doFilter() {
 		const auxListArray = this.values.filter(element => element.description.toLowerCase()
 			.indexOf(this.filterValue.toLowerCase()) > -1);
-		this.gridOptions.api.setRowData(auxListArray);
+		this.gridApi.setRowData(auxListArray);
 	}
 
 	public doSelectAll() {
-		this.gridOptions.api.selectAll();
+		this.gridApi.selectAll();
 	}
 
 	public doDeselectAll() {
-		this.gridOptions.api.deselectAll();
+		this.gridApi.deselectAll();
 	}
 
 	public onSelectionChanged(event: any) {
@@ -627,17 +629,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.addGridScrollHandler();
 		if (this.multipleSelection) {
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
-				this.gridOptions.api.forEachNode(node => {
+				this.gridApi.forEachNode(node => {
 					if (this.multipleSelectedItemList.some((item) => (item !== undefined && node.data !== undefined && item[this.getIdField()] === this.getRowNodeId(node.data)))) {
-						node.selectThisNode(true);
+						node.setSelected(true);
 					}
 				});
 			}
 		} else if (this._id) {
-			this.gridOptions.api.forEachNode(node => {
+			this.gridApi.forEachNode(node => {
 				if (this.getRowNodeId(node.data) === this._id) {
 					this.currentSelected = node.data;
-					node.selectThisNode(true);
+					node.setSelected(true);
 				}
 			});
 		}
@@ -645,14 +647,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public setGridSize() {
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
-		if (this.gridOptions.api && this.columnDefs) {
+		if (this.gridApi && this.columnDefs) {
 			if (this.windowResized) {
 				setTimeout(() => {
-					AutosizeGridHelper.sizeColumnsToFit(this.gridOptions);
+					AutosizeGridHelper.sizeColumnsToFit(this.gridApi, this.columnApi);
 					this.windowResized = false;
 				}, 5);
 			} else {
-				AutosizeGridHelper.sizeColumnsToFit(this.gridOptions);
+				AutosizeGridHelper.sizeColumnsToFit(this.gridApi, this.columnApi);
 			}
 		}
 	}
@@ -704,20 +706,20 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	private unselectAllNodesInGridOptions() {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (node && this.getRowNodeId(node.data) !== this.getAllFieldIDValue()) {
-					node.selectThisNode(false);
+					node.setSelected(false);
 				}
 			});
 		}
 	}
 
 	private unselectNodeAllInGridOptions() {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (node && this.getRowNodeId(node.data) === this.getAllFieldIDValue()) {
-					node.selectThisNode(false);
+					node.setSelected(false);
 				}
 			});
 		}
@@ -771,19 +773,19 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected addGridScrollHandler() {
-		if(this.gridOptions.api) {
-			this.gridOptions.api.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		if(this.gridApi) {
+			this.gridApi.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
 
 			this.calculatedGridState = initializeCalculatedGridState();
 			this.onBodyScroll(undefined);
 
-			this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+			this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 		}
 	}
 
 	protected removeGridScrollHandler() {
-		if(this.gridOptions.api) {
-			this.gridOptions.api.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		if(this.gridApi) {
+			this.gridApi.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
 		}
 	}
 
@@ -828,6 +830,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected doAutoSizeManagement(event?: any) {
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, this.columnApi, event);
 	}
 }

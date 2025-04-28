@@ -68,11 +68,11 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	}
 
 	public focusFirstRow(): void {
-		this.gridOptions.api.setFocusedCell(0, this.gridOptions.columnApi.getColumns()[0].getColId());
+		this.gridApi.setFocusedCell(0, this.columnApi.getColumns()[0].getColId());
 	}
 
 	public getSelectedElements(): Array<T> {
-		return this.gridOptions.api.getSelectedRows();
+		return this.gridApi.getSelectedRows();
 	}
 
 	protected override getGridOptionsPreferencesPrefix(): string {
@@ -83,20 +83,20 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		super.onModelUpdated(event);
 		if (this.multipleSelection) {
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
-				this.gridOptions.api.forEachNode(node => {
+				this.gridApi.forEachNode(node => {
 					if (this.searcher.multipleSelectedItemList
 						.filter((selectedItem) => {
 							return (selectedItem && node.data && selectedItem[this.searcher.getCodeField()] === node.data[this.searcher.getCodeField()]);
 						}).length > 0) {
-						node.selectThisNode(true);
+						node.setSelected(true);
 					}
 				});
 			}
 		} else if (this.searcher && this.searcher.id && this.searcher.id !== undefined) {
-			this.gridOptions.api.forEachNode(node => {
+			this.gridApi.forEachNode(node => {
 				if (node.data && node.data[this.searcher.getIdField()] === this.searcher.id) {
-					node.selectThisNode(true);
-					this.gridOptions.api.ensureNodeVisible(node);
+					node.setSelected(true);
+					this.gridApi.ensureNodeVisible(node);
 				}
 			});
 		}

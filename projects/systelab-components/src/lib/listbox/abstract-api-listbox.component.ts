@@ -34,7 +34,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 
 	public getRows(params: IGetRowsParams): void {
 
-		this.gridOptions.api.showLoadingOverlay();
+		this.gridApi.showLoadingOverlay();
 		const page: number = params.endRow / this.gridOptions.paginationPageSize;
 		const pageSize: number = this.gridOptions.paginationPageSize;
 
@@ -48,7 +48,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 			this.getData(page - 1, this.gridOptions.paginationPageSize)
 				.subscribe({
 						next:  (previousPage: Array<T>) => {
-							this.gridOptions.api.hideOverlay();
+							this.gridApi.hideOverlay();
 							const itemArray: Array<T> = [];
 							const totItems: number = Number(this.getTotalItems() + showAllElementNumber);
 
@@ -59,7 +59,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 
 						},
 						error: () => {
-							this.gridOptions.api.hideOverlay();
+							this.gridApi.hideOverlay();
 							params.failCallback();
 						}
 					}
@@ -72,7 +72,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 			.subscribe(
 				{
 					next:  (v: Array<T>) => {
-						this.gridOptions.api.hideOverlay();
+						this.gridApi.hideOverlay();
 						const itemArray: Array<T> = [];
 						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
 
@@ -114,7 +114,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 						}
 					},
 					error: () => {
-						this.gridOptions.api.hideOverlay();
+						this.gridApi.hideOverlay();
 						params.failCallback();
 					}
 				}
@@ -122,7 +122,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	}
 
 	public refresh() {
-		this.gridOptions.api.setDatasource(this);
+		this.gridApi.setDatasource(this);
 	}
 
 }

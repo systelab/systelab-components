@@ -134,7 +134,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	// Override
 	public override setDropdownHeight() {
-		let totalItems = Number(this.gridOptions.api.getDisplayedRowCount());
+		let totalItems = Number(this.gridApi.getDisplayedRowCount());
 		let calculatedHeight = 0;
 
 		if (this.emptyElement) {
@@ -204,12 +204,12 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 							nodeVector.push(comboNode);
 						});
 						this.totalItemsLoaded = true;
-						this.gridOptions.api.hideOverlay();
-						this.gridOptions.api.setRowData(nodeVector);
-						this.gridOptions.api.redrawRows();
+						this.gridApi.hideOverlay();
+						this.gridApi.setRowData(nodeVector);
+						this.gridApi.redrawRows();
 					},
 					error: () => {
-						this.gridOptions.api.hideOverlay();
+						this.gridApi.hideOverlay();
 					}
 				}
 			);
@@ -287,7 +287,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public override refresh(params: any): boolean {
-		if (this.gridOptions && this.gridOptions.api) {
+		if (this.gridOptions && this.gridApi) {
 			this.getRows();
 			return true;
 		}

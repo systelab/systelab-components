@@ -82,8 +82,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			treeValue.selected = false;
 			return treeValue;
 		});
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.redrawRows();
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.redrawRows();
 		}
 	}
 
@@ -111,7 +111,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			}
 			this.selectedIDListChange.emit(this.selectedIDList);
 		}
-		if (this.gridOptions.api) {
+		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
 	}
@@ -212,9 +212,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			.subscribe({
 				next:  (dataVector: Array<T>) => {
 					this.loadValues(dataVector);
-					this.gridOptions.api.hideOverlay();
-					this.gridOptions.api.setRowData(this.treeValues);
-					this.gridOptions.api.redrawRows();
+					this.gridApi.hideOverlay();
+					this.gridApi.setRowData(this.treeValues);
+					this.gridApi.redrawRows();
 					if (this.multipleSelection) {
 						this.initSelectionList();
 					} else if (this.selectedTreeItem) {
@@ -223,7 +223,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					this.doAutoSizeManagement();
 				},
 				error: () => {
-					this.gridOptions.api.hideOverlay();
+					this.gridApi.hideOverlay();
 				}
 			});
 	}
@@ -275,8 +275,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	protected selectTreeItemInGrid(): void {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (!this.multipleSelection) {
 					if (!this.selectedTreeItem && this.selectFirstItem) {
 						if (node.rowIndex === 0) {

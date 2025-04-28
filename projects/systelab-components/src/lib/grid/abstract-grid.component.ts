@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, ColumnApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
+import { ColDef, Column, ColumnApi, GridApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -24,6 +24,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public static readonly selectionColId = 'selectCol';
 
 	public gridOptions: GridOptions;
+	public gridApi: GridApi;
+	public columnApi: ColumnApi;
 	public overlayNoRowsTemplate;
 	public overlayLoadingTemplate;
 
@@ -113,24 +115,26 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public doGridReady(event: any): void {
+		this.gridApi = event.api;
+		this.columnApi = event.columnApi;
 		this.loadColumnsStateFromPreferences();
 
 		if(this.autoSizeColumnsToContent) {
-			this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+			this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 		} else {
 			this.doAutoSizeManagement();
 		}
-		this.gridOptions.api.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
+		this.gridApi.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
 	}
 
 	protected saveColumnsStateInPreferences(): void {
 		if (this.firstSizeToFitExecuted) {
-			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi.getColumnState());
+			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.columnApi.getColumnState());
 		}
 	}
 
 	protected loadColumnsStateFromPreferences(): void {
-		this.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
+		this.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.columnApi);
 	}
 
 	private loadColumnsState(prefix: string, columnApi: ColumnApi): void {
@@ -251,9 +255,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridOptions.api.getModel()
+		const data: T = this.gridApi.getModel()
 			.getRow(rowId).data;
-		const rowsSelected: Array<T> = this.gridOptions.api.getSelectedRows();
+		const rowsSelected: Array<T> = this.gridApi.getSelectedRows();
 
 		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(rowId.toString(), actionId, data, this.gridOptions, rowsSelected);
 		if (option && option.action && data !== undefined) {
@@ -269,7 +273,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridOptions.api.getModel()
+		const data: T = this.gridApi.getModel()
 			.getRow(rowId).data;
 
 		if (option && option.isActionEnabled && data !== undefined) {
@@ -320,7 +324,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public getSelectedRows(): Array<T> {
-		return this.gridOptions.api.getSelectedRows();
+		return this.gridApi.getSelectedRows();
 	}
 
 	public getSelectedRow(): T {
@@ -329,9 +333,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public selectRow(index: number): void {
-		this.gridOptions.api.ensureIndexVisible(index);
+		this.gridApi.ensureIndexVisible(index);
 		timer(200)
-			.subscribe(() => this.gridOptions.api.selectIndex(index, false, false));
+			.subscribe(() => this.gridApi.getRowNode(index.toString()).setSelected(true));
 	}
 
 	public doClick(event: any): void {
@@ -358,7 +362,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public doGridSizeChanged(event: any): void {
-		if (this.gridOptions.api) {
+		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
 	}
@@ -366,14 +370,14 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public showOptions(canHideAllColumns?: boolean): void {
 		const parameters: GridColumnOptionsDialogParameters = GridColumnOptionsDialog.getParameters();
 
-		parameters.columnOptions = this.getGridColumnOptions(this.gridOptions.columnApi, this.getColumnDefs());
+		parameters.columnOptions = this.getGridColumnOptions(this.columnApi, this.getColumnDefs());
 		parameters.canHideAllColumns = canHideAllColumns;
 
 		this.dialogService.showDialog(GridColumnOptionsDialog, parameters)
 			.subscribe(
 				(columnsOptions: GridColumnsOptions) => {
 					if (columnsOptions) {
-						this.applyGridColumnOptions(this.gridOptions.columnApi, columnsOptions);
+						this.applyGridColumnOptions(this.columnApi, columnsOptions);
 						this.doAutoSizeManagement();
 						this.saveColumnsStateInPreferences();
 					}
@@ -411,7 +415,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		columnOptions.visible.forEach((tlp, index) => {
 			const col: Column = columnApi.getColumns()
 				.find((column: Column) => column.getColDef().colId === tlp.colId);
-			col.setVisible(true);
+			col.setVisible(true, 'api');
 			columnApi.moveColumn(col.getColId(), index + numberOfFixedInitialColumns);
 		});
 
@@ -488,6 +492,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	private doAutoSizeManagement(event?: any) {
 		this.firstSizeToFitExecuted = true; 
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, this.columnApi, event);
 	}
 }
