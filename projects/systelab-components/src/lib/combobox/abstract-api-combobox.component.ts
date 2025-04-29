@@ -42,7 +42,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 
 	public override refresh(params: any): boolean {
 		if (this.gridOptions && this.gridApi) {
-			this.gridApi.setDatasource(this);
+			this.gridApi.setGridOption('datasource', this);
 		}
 		return true;
 	}

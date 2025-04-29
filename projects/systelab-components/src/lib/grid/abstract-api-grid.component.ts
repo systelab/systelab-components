@@ -49,6 +49,6 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	}
 
 	public refresh(): void {
-		this.gridApi.setDatasource(this);
+		this.gridApi.setGridOption('datasource', this);
 	}
 }

@@ -122,7 +122,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	}
 
 	public refresh() {
-		this.gridApi.setDatasource(this);
+		this.gridApi.setGridOption('datasource', this);
 	}
 
 }
