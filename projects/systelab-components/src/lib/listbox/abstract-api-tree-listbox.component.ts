@@ -18,7 +18,7 @@ export class TreeListBoxElement<T> {
 }
 
 @Directive()
-export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
+export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit {
 	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
 
 	@Input() public isParentSelectable = true;
@@ -72,7 +72,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.configGrid();
 	}
 
-	public ngAfterViewInit(): void {
+	public override doGridReady(event: any) {
+		super.doGridReady(event);
 		this.getRows();
 	}
 

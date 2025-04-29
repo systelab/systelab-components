@@ -110,7 +110,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public onModelUpdated(event: any) {
-		this.doAutoSizeManagement();
+		if(this.gridApi && this.columnApi) {
+			this.doAutoSizeManagement();
+		}
 		return event;
 	}
 
