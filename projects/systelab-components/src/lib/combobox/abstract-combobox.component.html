@@ -60,7 +60,7 @@
                                  [style.font-style]="fontStyle" class="ag-theme-fresh"
                                  [gridOptions]="gridOptions" (selectionChanged)="onSelectionChanged($event)"
                                  (modelUpdated)="onModelUpdated()"
-                                 (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady()"
+                                 (rowSelected)="onRowSelected($event)" (gridReady)="doGridReady($event)"
                                  (cellKeyDown)="onCellKeyDown($event)">
                 </ag-grid-angular>
             </div>

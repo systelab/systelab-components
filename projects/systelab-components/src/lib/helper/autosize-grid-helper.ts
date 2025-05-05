@@ -20,12 +20,12 @@ export function initializeCalculatedGridState(autoSizeColumnsToContent: boolean 
 
 export class AutosizeGridHelper {
 
-	private static itWasPreviouslyCalculated(event: any, gridState: CalculatedGridState, gridApi: GridApi, columnApi: ColumnApi) {
+	private static itWasPreviouslyCalculated(event: any, gridState: CalculatedGridState, gridApi: GridApi) {
 		let previouslyCalculated = false;
 		if (event?.direction === 'vertical') {
 			previouslyCalculated = this.itWasVerticallyCalculated(gridState, gridApi, event);
 		} else if (event?.direction === 'horizontal') {
-			previouslyCalculated = this.itWasHorizontallyCalculated(gridState, columnApi);
+			previouslyCalculated = this.itWasHorizontallyCalculated(gridState, gridApi);
 		}
 		return previouslyCalculated;
 	}
@@ -53,31 +53,29 @@ export class AutosizeGridHelper {
 		return previouslyCalculated;
 	}
 
-	private static itWasHorizontallyCalculated(gridState: CalculatedGridState, columnApi: ColumnApi) {
-		const displayedColumns: Column[] = columnApi.getAllDisplayedColumns();
+	private static itWasHorizontallyCalculated(gridState: CalculatedGridState, gridApi: GridApi) {
+		const displayedColumns: Column[] = gridApi.getAllDisplayedColumns();
 		const newColumnOnDisplay: Column = displayedColumns.find(col => !gridState.calculatedDisplayedCols.includes(col.getColId()));
 
 		gridState.calculatedDisplayedCols = displayedColumns.map(col => col.getColId());
 		return !newColumnOnDisplay;
 	}
 
-	public static doAutoSizeManagement(calculatedGridState: CalculatedGridState, gridApi: GridApi, columnApi: ColumnApi, event?: any) {
+	public static doAutoSizeManagement(calculatedGridState: CalculatedGridState, gridApi: GridApi, event?: any) {
+		if(!gridApi) {
+			return
+		}
 		if(!event || !calculatedGridState) {
 			calculatedGridState = initializeCalculatedGridState(calculatedGridState?.autoSizeColumnsToContent);
 		}
 
 		if(calculatedGridState.autoSizeColumnsToContent) {
-			const previouslyCalculated = this.itWasPreviouslyCalculated(event, calculatedGridState, gridApi, columnApi);
+			const previouslyCalculated = this.itWasPreviouslyCalculated(event, calculatedGridState, gridApi);
 			if (!previouslyCalculated) {
-				columnApi.getColumns()
-					.forEach(col => {
-						if (!col.getColDef().suppressSizeToFit) {
-							columnApi.autoSizeColumn(col.getColId(), true);
-						}
-					});
+				gridApi.autoSizeColumns(gridApi.getColumns().filter(col => !col.getColDef().suppressSizeToFit), true);
 			}
 		} else {
-			this.sizeColumnsToFit(gridApi, columnApi);
+			this.sizeColumnsToFit(gridApi);
 		}
 	}
 
@@ -90,14 +88,14 @@ export class AutosizeGridHelper {
 	//	Additionally, as the size in difference is less than 1 (caused because of
 	//	rounding), the scrollbar is empty, having no bar handle.
 	//This is only necessary for sizeColumnsToFit, autoSizeColumns does it correctly.
-	public static sizeColumnsToFit(gridApi: GridApi, columnApi: ColumnApi) {
+	public static sizeColumnsToFit(gridApi: GridApi) {
 		gridApi.sizeColumnsToFit();
 
-		const cols: Column[] = columnApi.getColumns();
+		const cols: Column[] = gridApi.getColumns();
 		for(let i: number = cols.length - 1; i >= 0; i--) {
 			const col: Column = cols[i];
 			if(!col.getColDef().suppressSizeToFit && col.getActualWidth() > 1) {
-				columnApi.setColumnWidth(col, col.getActualWidth() - 1);
+				gridApi.setColumnWidths([{key:col, newWidth: col.getActualWidth() - 1}])
 				break;
 			}
 		}

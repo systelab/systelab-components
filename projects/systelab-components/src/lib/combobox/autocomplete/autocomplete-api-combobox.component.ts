@@ -73,8 +73,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.chref.detectChanges();
 			// sets focus into the first grid cell
 			setTimeout(() => {
-				const firstCol = this.columnApi.getAllDisplayedColumns()[0];
-				this.gridApi.setFocusedCell(0, firstCol);
+				const firstCol = this.gridApi?.getAllDisplayedColumns()[0];
+				this.gridApi?.setFocusedCell(0, firstCol);
 			}, 0);
 		}
 	}

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { ColumnApi, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
+import { ColumnApi, GetRowIdParams, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -207,7 +207,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
-	public columnApi: ColumnApi;
 	public columnDefs: Array<any>;
 
 	public params: any;
@@ -470,14 +469,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected transferFocusToGrid(): void {
 		// scrolls to the first row
-		this.gridApi.ensureIndexVisible(0);
+		this.gridApi?.ensureIndexVisible(0);
 
 		// scrolls to the first column
-		const firstCol = this.columnApi.getAllDisplayedColumns()[0];
-		this.gridApi.ensureColumnVisible(firstCol);
+		const firstCol = this.gridApi?.getColumns()?.filter(col => col.isVisible())[0];
+		this.gridApi?.ensureColumnVisible(firstCol);
 
 		// sets focus into the first grid cell
-		this.gridApi.setFocusedCell(0, firstCol);
+		this.gridApi?.setFocusedCell(0, firstCol);
 	}
 
 	public onCellKeyDown(e: any) {
@@ -636,7 +635,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				});
 			}
 		} else if (this._id) {
-			this.gridApi.forEachNode(node => {
+			this.gridApi?.forEachNode(node => {
 				if (this.getRowNodeId(node.data) === this._id) {
 					this.currentSelected = node.data;
 					node.setSelected(true);
@@ -650,11 +649,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.gridApi && this.columnDefs) {
 			if (this.windowResized) {
 				setTimeout(() => {
-					AutosizeGridHelper.sizeColumnsToFit(this.gridApi, this.columnApi);
+					AutosizeGridHelper.sizeColumnsToFit(this.gridApi);
 					this.windowResized = false;
 				}, 5);
 			} else {
-				AutosizeGridHelper.sizeColumnsToFit(this.gridApi, this.columnApi);
+				AutosizeGridHelper.sizeColumnsToFit(this.gridApi);
 			}
 		}
 	}
@@ -791,7 +790,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public ngOnDestroy() {
 		this.removeWindowScrollHandler();
-		this.removeGridScrollHandler();
 		this.chRef.detach();
 	}
 
@@ -816,7 +814,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	public doGridReady() {
+	public doGridReady(event: GridReadyEvent) {
+		this.gridApi = event.api;
 		if (this.filterValue && this.filter === true) {
 			this.doFilter();
 		}
@@ -830,6 +829,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected doAutoSizeManagement(event?: any) {
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, this.columnApi, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, event);
 	}
 }

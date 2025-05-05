@@ -8,7 +8,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
-	public columnApi: ColumnApi;
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	public _values: Array<T>;
 	@Input()
@@ -179,7 +178,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	public doGridReady(event: any) {
 		this.gridApi = event.api;
-		this.columnApi = event.columnApi;
 		this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 	}
 
@@ -191,7 +189,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected doAutoSizeManagement(event?: any) {
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, this.columnApi, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, event);
 	}
 
 	public doGridSizeChanged(event: any) {

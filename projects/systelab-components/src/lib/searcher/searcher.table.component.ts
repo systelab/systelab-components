@@ -68,7 +68,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	}
 
 	public focusFirstRow(): void {
-		this.gridApi.setFocusedCell(0, this.columnApi.getColumns()[0].getColId());
+		this.gridApi.setFocusedCell(0, this.gridApi.getColumns()[0].getColId());
 	}
 
 	public getSelectedElements(): Array<T> {
@@ -83,7 +83,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		super.onModelUpdated(event);
 		if (this.multipleSelection) {
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
-				this.gridApi.forEachNode(node => {
+				this.gridApi?.forEachNode(node => {
 					if (this.searcher.multipleSelectedItemList
 						.filter((selectedItem) => {
 							return (selectedItem && node.data && selectedItem[this.searcher.getCodeField()] === node.data[this.searcher.getCodeField()]);
