@@ -14,7 +14,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { ColumnApi, GridApi, RowNode } from 'ag-grid-community';
+import { ColumnApi, GridApi, GridReadyEvent, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -230,7 +230,7 @@ describe('AutocompleteApiAutocomplete', () => {
 	it('onEnterDoSelect', () => {
 		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
 		spyOn(RowNode.prototype, 'selectThisNode');
-		component.combobox.gridOptions.api = gridApiMock;
+		component.combobox.gridApi = gridApiMock;
 		component.combobox.isDropdownOpened = true;
 		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
 		expect(getDisplayedRowAtIndexSpy).toHaveBeenCalled();
@@ -239,15 +239,21 @@ describe('AutocompleteApiAutocomplete', () => {
 	it('onEnterDoSelect', () => {
 		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
 		spyOn(RowNode.prototype, 'selectThisNode');
-		component.combobox.gridOptions.api = gridApiMock;
+		component.combobox.gridApi = gridApiMock;
 		component.combobox.isDropdownOpened = false;
 		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
 		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
 	});
 
 	it('onInputNavigate', fakeAsync( () => {
-		const getAllDisplayedColumnsSpy = spyOn<any>(ColumnApi.prototype, 'getAllDisplayedColumns').and.callThrough();
-		const setFocusedCellSpy = spyOn<any>(GridApi.prototype, 'setFocusedCell').and.callThrough();
+		component.combobox.doGridReady({
+			api: {
+				getAllDisplayedColumns: () => [],
+				setFocusedCell: () => []
+			}
+		} as any)
+		const getAllDisplayedColumnsSpy = spyOn<any>(component.combobox.gridApi, 'getAllDisplayedColumns').and.callThrough();
+		const setFocusedCellSpy = spyOn<any>(component.combobox.gridApi, 'setFocusedCell').and.callThrough();
 
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = true;
@@ -256,7 +262,6 @@ describe('AutocompleteApiAutocomplete', () => {
 
 		tick();
 		flush();
-
 		expect(getAllDisplayedColumnsSpy).toHaveBeenCalled();
 		expect(setFocusedCellSpy).toHaveBeenCalled();
 	}));

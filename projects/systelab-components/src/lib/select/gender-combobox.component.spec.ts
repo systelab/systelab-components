@@ -116,18 +116,15 @@ describe('Systelab Gender selector', () => {
 			});
 	});
 
-	it('should select unknown', (done) => {
+	it('should select unknown', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'U');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('U');
-						done();
-					});
-			});
+		fixture.detectChanges()
+		await fixture.whenStable();
+		clickOnRow(fixture, 'U');
+		fixture.detectChanges()
+		await fixture.whenStable()
+		expect(fixture.componentInstance.id)
+			.toEqual('U');
 	});
 
 	it('should select male', (done) => {

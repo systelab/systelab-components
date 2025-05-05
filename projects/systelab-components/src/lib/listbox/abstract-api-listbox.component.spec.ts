@@ -124,7 +124,7 @@ describe('Systelab Listbox', () => {
 		fixture.whenStable().then(() => {
 			const component = fixture.componentInstance;
 			const listboxComponent = component.listbox;
-			const listSelectedItems = listboxComponent.gridOptions.api.getSelectedNodes().map(node => node.data);
+			const listSelectedItems = listboxComponent.gridApi.getSelectedNodes().map(node => node.data);
 			expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 			done();
 		});
@@ -137,7 +137,7 @@ describe('Systelab Listbox', () => {
 			fixture.whenStable().then(() => {
 				const component = fixture.componentInstance;
 				const listboxComponent = component.listbox;
-				const listSelectedItems = listboxComponent.gridOptions.api.getSelectedNodes().map(node => node.data);
+				const listSelectedItems = listboxComponent.gridApi.getSelectedNodes().map(node => node.data);
 				expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 				done();
 			});
