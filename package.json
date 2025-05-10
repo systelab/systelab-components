@@ -30,7 +30,7 @@
     "angular-split": "17.2.0",
     "bootstrap": "4.6.2",
     "core-js": "3.37.1",
-    "date-fns": "2.30.0",
+    "date-fns": "3.0.0",
     "interactjs": "1.10.27",
     "jquery": "3.7.1",
     "mobile-drag-drop": "3.0.0-rc.0",
