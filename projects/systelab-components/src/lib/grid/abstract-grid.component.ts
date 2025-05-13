@@ -137,6 +137,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		this.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridApi);
 	}
 
+	public onSortChanged(): void {
+		this.saveColumnsStateInPreferences();
+	}
+
 	private loadColumnsState(prefix: string, gridApi: GridApi): void {
 
 		if (this.preferencesService.get(prefix)) {
