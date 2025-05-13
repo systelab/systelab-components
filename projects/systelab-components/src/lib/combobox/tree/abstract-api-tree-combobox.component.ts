@@ -23,7 +23,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	@Input() public isParentSelectable = false;
 	@Input() public isAllSelectable = true;
-
 	public totalItemsLoaded = false;
 	public isFirstTime = true;
 	public override isTree = true;
@@ -205,7 +204,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 						});
 						this.totalItemsLoaded = true;
 						this.gridApi.hideOverlay();
-						this.gridApi.setRowData(nodeVector);
+						this.gridOptions.rowData = nodeVector;
 						this.gridApi.redrawRows();
 					},
 					error: () => {

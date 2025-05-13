@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { ColumnApi, GetRowIdParams, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { GetRowIdParams, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -583,7 +583,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public doFilter() {
 		const auxListArray = this.values.filter(element => element.description.toLowerCase()
 			.indexOf(this.filterValue.toLowerCase()) > -1);
-		this.gridApi.setRowData(auxListArray);
+		this.gridOptions.rowData = auxListArray
 	}
 
 	public doSelectAll() {

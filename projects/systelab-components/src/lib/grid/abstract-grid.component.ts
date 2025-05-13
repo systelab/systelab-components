@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, ColumnApi, Grid, GridApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
+import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';

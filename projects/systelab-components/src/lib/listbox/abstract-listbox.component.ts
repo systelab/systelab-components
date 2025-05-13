@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, ColumnApi, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
+import { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
@@ -14,7 +14,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	set values(newValues: Array<T>) {
 		this._values = newValues;
 		if (this.gridOptions && this.gridApi) {
-			this.gridApi.setRowData(this._values);
+			this.gridOptions.rowData = this._values;
 		}
 	}
 

@@ -214,7 +214,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 				next:  (dataVector: Array<T>) => {
 					this.loadValues(dataVector);
 					this.gridApi.hideOverlay();
-					this.gridApi.setRowData(this.treeValues);
+					this.gridOptions.rowData = this.treeValues;
 					this.gridApi.redrawRows();
 					if (this.multipleSelection) {
 						this.initSelectionList();

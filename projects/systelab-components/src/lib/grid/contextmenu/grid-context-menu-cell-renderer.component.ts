@@ -17,7 +17,7 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 
 	public agInit(params: any): void {
 		this.container = params.context.componentParent;
-		this.rowIndex = params.rowIndex;
+		this.rowIndex = params.rowIndex || params.node.rowIndex;
 		this.data = params.data;
 	}
 
