@@ -37,18 +37,18 @@ export class AutosizeGridHelper {
 
 		let previouslyCalculated = false;
 		//Scrolling up
-		if (event.top <= gridState.top && gridState.minRow <= gridApi.getFirstDisplayedRow()) {
+		if (event.top <= gridState.top && gridState.minRow <= gridApi.getLastDisplayedRowIndex()) {
 			previouslyCalculated = true;
 		}
 
 		//Scrolling down
-		if (event.top >= gridState.top && gridState.maxRow >= gridApi.getLastDisplayedRow()) {
+		if (event.top >= gridState.top && gridState.maxRow >= gridApi.getLastDisplayedRowIndex()) {
 			previouslyCalculated = true;
 		}
 
 		gridState.top = event.top;
-		gridState.minRow = gridApi.getFirstDisplayedRow();
-		gridState.maxRow = gridApi.getLastDisplayedRow();
+		gridState.minRow = gridApi.getLastDisplayedRowIndex();
+		gridState.maxRow = gridApi.getLastDisplayedRowIndex();
 
 		return previouslyCalculated;
 	}

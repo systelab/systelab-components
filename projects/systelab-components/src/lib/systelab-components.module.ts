@@ -104,6 +104,7 @@ import {
 	PositiveIntegerInputCellEditorComponent
 } from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
 import { TestIdDirective } from './directives/test-id.directive';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
 
 export const factory = () => {
 	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
@@ -315,10 +316,13 @@ const providers = [
 })
 export class SystelabComponentsModule {
 
-	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {
-	}
+	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {}
 
 	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
+		ModuleRegistry.registerModules([ AllCommunityModule ]);
+		provideGlobalGridOptions({
+			theme: 'legacy'
+		});
 		return {
 			ngModule: SystelabComponentsModule,
 			providers: [

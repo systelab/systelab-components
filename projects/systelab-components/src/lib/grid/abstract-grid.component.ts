@@ -1,5 +1,5 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
+import { Directive, ElementRef, EventEmitter, inject, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { AllCommunityModule, ClientSideRowModelModule, ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, themeAlpine, themeMaterial } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -22,7 +22,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public static readonly contextMenuColId = 'contextMenu';
 	public static readonly selectionColId = 'selectCol';
-
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
 	public overlayNoRowsTemplate;
@@ -75,13 +74,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const headerHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'height');
 
 		const options: GridOptions = {};
-
 		options.columnDefs = this.getColumnDefsWithOptions();
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
 		options.suppressDragLeaveHidesColumns = true;
 		options.suppressCellFocus = true;
-		options.enableRangeSelection = true;
 		options.stopEditingWhenCellsLoseFocus = true;
 		options.singleClickEdit = true;
 		options.defaultColDef = {
@@ -259,8 +256,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridApi.getModel()
-			.getRow(rowId).data;
+		const data: T = this.gridApi.getRowNode(elementId).data;
 		const rowsSelected: Array<T> = this.gridApi.getSelectedRows();
 
 		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(rowId.toString(), actionId, data, this.gridOptions, rowsSelected);
@@ -277,8 +273,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridApi.getModel()
-			.getRow(rowId).data;
+		const data: T = this.gridApi.getRowNode(elementId).data;
 
 		if (option && option.isActionEnabled && data !== undefined) {
 			return option.isActionEnabled(data);

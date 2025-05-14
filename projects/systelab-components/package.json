@@ -18,8 +18,8 @@
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0",
-    "ag-grid-angular": "^31.0.0",
-    "ag-grid-community": "^31.0.0",
+    "ag-grid-angular": "^33.0.0",
+    "ag-grid-community": "^33.0.0",
     "angular-split": "^17.2.0",
     "bootstrap": "^4.5.2",
     "date-fns": "^2.0.0",

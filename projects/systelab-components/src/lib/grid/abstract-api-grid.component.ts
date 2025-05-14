@@ -16,6 +16,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 
 	protected override getInitialGridOptions(): GridOptions {
 		const options = super.getInitialGridOptions();
+		this.rowData = null;
 		options.rowModelType = 'infinite';
 		options.paginationPageSize = 50;
 		options.cacheBlockSize = 50;
@@ -32,7 +33,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 
 	public getRows(params: IGetRowsParams): void {
-		this.gridApi.showLoadingOverlay();
+		this.gridApi.setGridOption("loading", true);
 		this.getData(params.endRow / this.gridOptions.paginationPageSize, this.gridOptions.paginationPageSize)
 			.subscribe({
 				next:  (page: Array<T>) => this.putPage(page, this.getTotalItems(), params),
