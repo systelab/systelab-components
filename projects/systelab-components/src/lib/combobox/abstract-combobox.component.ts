@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GetRowIdParams, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { GetRowIdParams, GridApi, GridOptions, GridReadyEvent, RowSelectionOptions } from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -301,10 +301,14 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.gridOptions.suppressCellFocus = false;
 
 		if (this.multipleSelection) {
-			this.gridOptions.rowSelection = 'multiple';
-			this.gridOptions.suppressRowClickSelection = true;
+			this.gridOptions.rowSelection = {
+				mode: 'multiRow',
+				enableClickSelection: false
+			} as RowSelectionOptions;
 		} else {
-			this.gridOptions.rowSelection = 'single';
+			this.gridOptions.rowSelection = {
+				mode: 'singleRow',
+			} as RowSelectionOptions;
 		}
 
 		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)

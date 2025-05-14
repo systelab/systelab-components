@@ -1,5 +1,5 @@
-import { Directive, ElementRef, EventEmitter, inject, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
-import { AllCommunityModule, ClientSideRowModelModule, ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, themeAlpine, themeMaterial } from 'ag-grid-community';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowSelectionOptions } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -95,7 +95,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 		if (this.showChecks) {
 			if (this.multipleSelection) {
-				options.suppressRowClickSelection = true;
+				options.rowSelection.enableClickSelection = false;
 			}
 		}
 		options.isFullWidthRow = (isFullWidthRowParams: IsFullWidthRowParams) => this.getIsFullWidthRow(isFullWidthRowParams);
@@ -318,8 +318,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		this.rowSelected.emit(event.data);
 	}
 
-	protected getRowSelectionType(): rowSelectionType {
-		return this.multipleSelection ? 'multiple' : 'single';
+	protected getRowSelectionType(): RowSelectionOptions {
+		return {
+			mode: this.multipleSelection ? 'multiRow' : 'singleRow'
+		} as RowSelectionOptions;
 	}
 
 	public getSelectedRows(): Array<T> {

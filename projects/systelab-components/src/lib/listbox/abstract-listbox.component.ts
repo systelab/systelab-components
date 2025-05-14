@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
+import { ColDef, GetRowIdParams, GridApi, GridOptions, RowSelectionOptions } from 'ag-grid-community';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
@@ -84,14 +84,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
 
 		if (this.multipleSelection && !this.hideChecks) {
-			this.gridOptions.suppressRowClickSelection = true;
+			this.gridOptions.rowSelection = {enableClickSelection: false} as RowSelectionOptions;
 			this.gridOptions.rowClassRules = {
 				'ag-row-disabled': (params) => {
 					return this.isDisabled;
 				},
 			};
 		} else {
-			this.gridOptions.suppressRowClickSelection = this.isDisabled;
+			this.gridOptions.rowSelection = {enableClickSelection: !this.isDisabled} as RowSelectionOptions;
 		}
 
 		this.gridOptions.rowHeight = Number(rowHeight);
@@ -99,9 +99,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.suppressCellFocus = true;
 		this.gridOptions.defaultColDef = {};
 		this.gridOptions.defaultColDef.resizable = false;
-		this.gridOptions.rowSelection = this.multipleSelection ? 'multiple' : 'single';
-		this.gridOptions.suppressRowDeselection = this.isDisabled;
-
+		(this.gridOptions.rowSelection as RowSelectionOptions).mode = this.multipleSelection ? 'multiRow' : 'singleRow';
+		(this.gridOptions.rowSelection as RowSelectionOptions).enableClickSelection = !this.isDisabled;
 		this.gridOptions.context = {componentParent: this};
 
 		this.gridOptions.headerHeight = 0;
