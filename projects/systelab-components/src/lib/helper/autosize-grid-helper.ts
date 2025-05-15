@@ -89,14 +89,15 @@ export class AutosizeGridHelper {
 	//	rounding), the scrollbar is empty, having no bar handle.
 	//This is only necessary for sizeColumnsToFit, autoSizeColumns does it correctly.
 	public static sizeColumnsToFit(gridApi: GridApi) {
-		gridApi.sizeColumnsToFit();
-
-		const cols: Column[] = gridApi.getColumns();
-		for(let i: number = cols.length - 1; i >= 0; i--) {
-			const col: Column = cols[i];
-			if(!col.getColDef().suppressSizeToFit && col.getActualWidth() > 1) {
-				gridApi.setColumnWidths([{key:col, newWidth: col.getActualWidth() - 1}])
-				break;
+		if(!gridApi.isDestroyed()) {
+			gridApi.sizeColumnsToFit();
+			const cols: Column[] = gridApi.getColumns() || [];
+			for(let i: number = cols.length - 1; i >= 0; i--) {
+				const col: Column = cols[i];
+				if(!col.getColDef().suppressSizeToFit && col.getActualWidth() > 1) {
+					gridApi.setColumnWidths([{key:col, newWidth: col.getActualWidth() - 1}])
+					break;
+				}
 			}
 		}
 	}

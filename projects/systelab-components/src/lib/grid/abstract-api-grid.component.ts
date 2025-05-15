@@ -12,18 +12,18 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
+		this.rowData = null;
 	}
 
 	protected override getInitialGridOptions(): GridOptions {
 		const options = super.getInitialGridOptions();
-		this.rowData = null;
 		options.rowModelType = 'infinite';
 		options.paginationPageSize = 50;
 		options.cacheBlockSize = 50;
 		options.cacheOverflowSize = 2;
 		options.maxConcurrentDatasourceRequests = 4;
 		options.maxBlocksInCache = 15;
-		options.infiniteInitialRowCount = 0;
+		options.infiniteInitialRowCount = 1;
 		options.datasource = this;
 		return options;
 	}
@@ -33,7 +33,6 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 
 	public getRows(params: IGetRowsParams): void {
-		this.gridApi.setGridOption("loading", true);
 		this.getData(params.endRow / this.gridOptions.paginationPageSize, this.gridOptions.paginationPageSize)
 			.subscribe({
 				next:  (page: Array<T>) => this.putPage(page, this.getTotalItems(), params),
@@ -47,9 +46,15 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 		if (page.length === 0) {
 			this.gridApi.showNoRowsOverlay();
 		}
+		this.gridApi.updateGridOptions({loading: false});
+	}
+
+	public override doGridReady(event: any) {
+		super.doGridReady(event);
+		this.refresh();
 	}
 
 	public refresh(): void {
-		this.gridApi.setGridOption('datasource', this);
+		this.gridApi.updateGridOptions({datasource: this, loading: true});
 	}
 }

@@ -256,7 +256,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridApi.getRowNode(elementId).data;
+		const data: T = this.gridApi.getDisplayedRowAtIndex(rowId).data;
 		const rowsSelected: Array<T> = this.gridApi.getSelectedRows();
 
 		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(rowId.toString(), actionId, data, this.gridOptions, rowsSelected);
@@ -273,7 +273,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridApi.getRowNode(elementId).data;
+		const data: T = this.gridApi.getDisplayedRowAtIndex(rowId).data;
 
 		if (option && option.isActionEnabled && data !== undefined) {
 			return option.isActionEnabled(data);
@@ -336,7 +336,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public selectRow(index: number): void {
 		this.gridApi.ensureIndexVisible(index);
 		timer(200)
-			.subscribe(() => this.gridApi.getRowNode(index.toString()).setSelected(true));
+			.subscribe(() => this.gridApi.getDisplayedRowAtIndex(index).setSelected(true));
 	}
 
 	public doClick(event: any): void {

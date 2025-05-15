@@ -289,7 +289,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				colId:             	'itemDescription',
 				field:             	this.getDescriptionField(),
 				tooltipField: 		this.getDescriptionField(),
-				checkboxSelection: 	this.multipleSelection,
+				checkboxSelection: 	this.multipleSelection
 			}
 		];
 		this.gridOptions = {};
@@ -299,18 +299,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.suppressCellFocus = false;
-
-		if (this.multipleSelection) {
-			this.gridOptions.rowSelection = {
-				mode: 'multiRow',
-				enableClickSelection: false
-			} as RowSelectionOptions;
-		} else {
-			this.gridOptions.rowSelection = {
-				mode: 'singleRow',
-			} as RowSelectionOptions;
-		}
-
+		this.gridOptions.rowSelection = {
+			checkboxes: false
+		} as RowSelectionOptions;
+		this.gridOptions.rowSelection.mode = this.multipleSelection ? 'multiRow' : 'singleRow';
+		this.gridOptions.rowSelection.enableClickSelection = !this.multipleSelection;
 		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
 
@@ -776,7 +769,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected addGridScrollHandler() {
-		if(this.gridApi) {
+		if(this.gridApi && !this.gridApi.isDestroyed()) {
 			this.gridApi.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
 
 			this.calculatedGridState = initializeCalculatedGridState();
