@@ -54,7 +54,7 @@ export class AutosizeGridHelper {
 	}
 
 	private static itWasHorizontallyCalculated(gridState: CalculatedGridState, gridApi: GridApi) {
-		const displayedColumns: Column[] = gridApi.getAllDisplayedColumns();
+		const displayedColumns: Column[] = gridApi.getAllDisplayedColumns() || [];
 		const newColumnOnDisplay: Column = displayedColumns.find(col => !gridState.calculatedDisplayedCols.includes(col.getColId()));
 
 		gridState.calculatedDisplayedCols = displayedColumns.map(col => col.getColId());
@@ -62,7 +62,7 @@ export class AutosizeGridHelper {
 	}
 
 	public static doAutoSizeManagement(calculatedGridState: CalculatedGridState, gridApi: GridApi, event?: any) {
-		if(!gridApi) {
+		if(!gridApi || gridApi.isDestroyed()) {
 			return
 		}
 		if(!event || !calculatedGridState) {
@@ -71,7 +71,7 @@ export class AutosizeGridHelper {
 
 		if(calculatedGridState.autoSizeColumnsToContent) {
 			const previouslyCalculated = this.itWasPreviouslyCalculated(event, calculatedGridState, gridApi);
-			if (!previouslyCalculated) {
+			if (!previouslyCalculated && !!gridApi.getColumns()) {
 				gridApi.autoSizeColumns(gridApi.getColumns().filter(col => !col.getColDef().suppressSizeToFit), true);
 			}
 		} else {

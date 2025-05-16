@@ -320,7 +320,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected getRowSelectionType(): RowSelectionOptions {
 		return {
-			mode: this.multipleSelection ? 'multiRow' : 'singleRow'
+			mode: this.multipleSelection ? 'multiRow' : 'singleRow',
+			checkboxes: false,
+			headerCheckbox: false
 		} as RowSelectionOptions;
 	}
 

@@ -160,7 +160,10 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.paddingSingleSelection = this.multipleSelection ? 0 : 2;
 		this.gridOptions = {};
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.rowSelection = {mode: 'singleRow'} as RowSelectionOptions;
+		this.gridOptions.rowSelection = {
+			mode: 'singleRow',
+			checkboxes: false
+		} as RowSelectionOptions;
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
 		if (lineHeight) {
 			this.gridOptions.rowHeight = Number(lineHeight);
@@ -214,7 +217,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 				next:  (dataVector: Array<T>) => {
 					this.loadValues(dataVector);
 					this.gridApi.hideOverlay();
-					this.gridOptions.rowData = this.treeValues;
+					this.rowData = this.treeValues;
 					this.gridApi.redrawRows();
 					if (this.multipleSelection) {
 						this.initSelectionList();
