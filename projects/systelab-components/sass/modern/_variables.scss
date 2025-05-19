@@ -3,6 +3,12 @@
 
 @import "mixins";
 
+.ag-theme-alpine {
+  --ag-header-background-color: white;
+  --ag-data-color: black;
+  --ag-header-foreground-color: black;
+}
+
 
 :root {
   --ag-header-background-color: white;

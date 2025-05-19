@@ -64,7 +64,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
   cursor: default;
 }
 
-.ag-theme-fresh {
+.ag-theme-alpine {
 
   .ag-checkbox-input-wrapper {
     input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
@@ -101,7 +101,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     width: $slab-checkbox-grid-height !important;
     height: $slab-checkbox-grid-height !important;
     color: $white !important;
-    padding-top: 3px !important;
+    padding-top: 1px !important;
     padding-left: 2px !important;
     background-color: $slab-checkbox-border-color;
   }
