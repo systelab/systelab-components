@@ -567,7 +567,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public getSelectedRow(): T {
 		if (this.gridOptions && this.gridApi) {
 			const selectedRow: Array<T> = this.gridApi.getSelectedRows();
-			if (selectedRow !== null) {
+			if (selectedRow != null) {
 				return selectedRow[0];
 			}
 		}
@@ -603,7 +603,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.currentSelected = selectedRow;
 				this.change.emit(selectedRow);
 				this.selectedItemChange.emit(selectedRow);
-				this.closeDropDown();
+				event.source === 'rowClicked' && this.closeDropDown();
 				if (selectedRow[this.getIdField()]) {
 					this.checkIfIsFavourite(selectedRow[this.getIdField()].toString());
 				}
