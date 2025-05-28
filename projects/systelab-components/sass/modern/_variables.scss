@@ -4,11 +4,13 @@
 @forward "./systelab-bootstrap-settings";
 @forward "./mixins";
 
-
-:root {
+.ag-theme-alpine {
   --ag-header-background-color: white;
   --ag-data-color: black;
   --ag-header-foreground-color: black;
+}
+
+:root {
 
   --slab_background_primary: white;
   --slab_foreground_primary: black;
