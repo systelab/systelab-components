@@ -1,3 +1,6 @@
+@use "./variables" as *;
+@use "bootstrap/scss/bootstrap" as *;
+
 systelab-file-selector {
   .slab-file-selector {
     input {

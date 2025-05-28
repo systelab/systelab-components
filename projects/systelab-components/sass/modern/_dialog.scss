@@ -28,7 +28,8 @@ $slab-button-size: 35px !default;
 $slab-button-fontsize: 25px !default;
 
 
-@import '@angular/cdk/overlay-prebuilt.css';
+@use '@angular/cdk/overlay-prebuilt.css';
+@use './variables'as *;
 
 .cdk-overlay-dark-backdrop {
   backdrop-filter: saturate(30%);

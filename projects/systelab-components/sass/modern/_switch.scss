@@ -1,11 +1,12 @@
 @use "sass:math";
+@use "./variables" as *;
 
 systelab-switch {
 
   .slab-switch {
 
     $slab-ball-size: $slab-switch-height - 8px;
-    $slab-top-icon: ceil(math.div(($form-elements-height - $slab-switch-height), 2));
+    $slab-top-icon: math.ceil(math.div(($form-elements-height - $slab-switch-height), 2));
 
     background: $slab-switch-bg-color;
     border-radius: math.div($slab-switch-height, 2) !important;

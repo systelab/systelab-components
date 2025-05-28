@@ -1,3 +1,6 @@
+@use "./variables" as *;
+@use "bootstrap/scss/bootstrap" as *;
+
 /* This styles are used to override the default primeng styles for calendar (https://www.primefaces.org/primeng/#/calendar).*/
 
 /* $icon-margin-right: defines the margin-right of the arrow buttons.*/

@@ -1,4 +1,4 @@
-
+@use './variables'as *;
 .dropdown, .dropup {
   .dropdown-toggle::after {
     display: none;

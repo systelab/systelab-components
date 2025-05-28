@@ -1,7 +1,8 @@
-@import "systelab-bootstrap-settings";
-@import "bootstrap/scss/bootstrap";
-
-@import "mixins";
+@use "sass:math";
+@use "sass:string";
+@use "bootstrap/scss/bootstrap" as *;
+@forward "./systelab-bootstrap-settings";
+@forward "./mixins";
 
 
 :root {
@@ -51,7 +52,7 @@ $slab-size-percentage: 1.2 !default;
 // Internal variable to set the font size
 $slab-base-font-size: 15px !default;
 // Defines the application font size
-$slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-font-size * 1.25) !default;
+$slab-base-body-font-size: $slab-base-font-size string.unquote("/") math.ceil($slab-base-font-size * 1.25) !default;
 // Defines the application font family
 $slab-base-body-font-family: $font-family-base;
 // Defines the application body color
@@ -70,7 +71,7 @@ $background-secondary: rgb(238, 238, 238) !default;
 $slab-selected-background-color: rgb(200, 223, 252) !default;
 
 // Internal variable to define the height of the elements in a form
-$form-elements-height: floor(28px * $slab-size-percentage) !default;
+$form-elements-height: math.floor(28px * $slab-size-percentage) !default;
 
 
 $slab-component-border-color: #b9bdbe !default;
@@ -161,7 +162,7 @@ $slab-radio-color: white !default;
 // Defines the slider height
 $slab-slider-height: 24px !default;
 // Defines the height of the ui-slider
-$slab-slider-background-line: round(calc($slab-slider-height / 3));
+$slab-slider-background-line: math.round(calc($slab-slider-height / 3));
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: var(--primary) !default;
 

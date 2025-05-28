@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 .slab-tree {
   cdk-nested-tree-node {
     line-height: $slab-tree-row-height;

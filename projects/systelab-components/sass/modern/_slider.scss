@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "./variables" as *;
 
 systelab-slider {
   $slab-slider-track-brackground-color: #d3d3d3;

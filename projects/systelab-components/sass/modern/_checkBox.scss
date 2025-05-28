@@ -1,3 +1,5 @@
+@use './variables'as *;
+@use "bootstrap/scss/bootstrap" as bootstrap;
 // Hide native checkbox
 input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
   @include position(absolute, $left: -9999px);
@@ -84,7 +86,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     -moz-osx-font-smoothing: grayscale;
 
     &.after {
-      background-color: $white;
+      background-color: bootstrap.$white;
       width: $slab-checkbox-grid-height !important;
       height: $slab-checkbox-grid-height !important;
       content: '' !important;;
@@ -100,7 +102,7 @@ input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
     font-size: 16px;
     width: $slab-checkbox-grid-height !important;
     height: $slab-checkbox-grid-height !important;
-    color: $white !important;
+    color: bootstrap.$white !important;
     padding-top: 1px !important;
     padding-left: 2px !important;
     background-color: $slab-checkbox-border-color;

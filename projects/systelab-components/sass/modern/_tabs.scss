@@ -1,3 +1,5 @@
+@use './variables'as *;
+@use "bootstrap/scss/bootstrap" as *;
 systelab-tabs {
 
   .nav-link.active,

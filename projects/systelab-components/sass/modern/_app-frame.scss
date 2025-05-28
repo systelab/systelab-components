@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 systelab-app-frame {
   $width-for-small-bar: 60px;
   $width-for-large-bar: 200px;
