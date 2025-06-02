@@ -39,8 +39,8 @@
     "primeicons": "~7.0.0",
     "primeng": "~17.18.15",
     "rxjs": "7.8.1",
-    "systelab-preferences": "file:../A19UpdatePackages/systelab-preferences-19.0.0.tgz",
-    "systelab-translate": "file:../A19UpdatePackages/systelab-translate-19.0.0.tgz",
+    "systelab-preferences": "~19.0.0",
+    "systelab-translate": "~19.0.0",
     "tslib": "2.6.3",
     "zone.js": "0.15.0"
   },
