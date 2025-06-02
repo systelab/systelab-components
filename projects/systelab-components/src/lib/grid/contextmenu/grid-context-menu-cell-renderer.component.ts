@@ -23,7 +23,7 @@ export class GridContextMenuCellRendererComponent<T> implements AgRendererCompon
 
 	public dotsClicked(event: MouseEvent): void {
 		let selectedRows: T | Array<T> = this.data;
-
+		this.container?.popupmenu?.closeDropDown();
 		if (event.ctrlKey && !this.container.removeSelectionOnOpenContextMenu) {
 			selectedRows = this.container.getSelectedRows();
 		} else if (this.container.removeSelectionOnOpenContextMenu) {
