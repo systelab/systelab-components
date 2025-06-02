@@ -14,7 +14,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { ColumnApi, GridApi, GridReadyEvent, RowNode } from 'ag-grid-community';
+import { Column, GridApi, GridReadyEvent, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -96,7 +96,7 @@ export class SystelabAutocompleteComponent extends AutocompleteApiComboBox<TestD
     standalone: false
 })
 export class AutocompleteTestComponent {
-	@ViewChild('combobox') public combobox: SystelabAutocompleteComponent;
+	@ViewChild('combobox', {static: true}) public combobox: SystelabAutocompleteComponent;
 	public id = '1';
 	public description = 'Description 2';
 	public multipleSelection = false;
@@ -229,7 +229,7 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('onEnterDoSelect', () => {
 		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
-		spyOn(RowNode.prototype, 'selectThisNode');
+		spyOn(RowNode.prototype, 'setSelected');
 		component.combobox.gridApi = gridApiMock;
 		component.combobox.isDropdownOpened = true;
 		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
@@ -238,14 +238,14 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	it('onEnterDoSelect', () => {
 		const getDisplayedRowAtIndexSpy = spyOn<any>(gridApiMock, 'getDisplayedRowAtIndex').and.callThrough();
-		spyOn(RowNode.prototype, 'selectThisNode');
+		spyOn(RowNode.prototype, 'setSelected');
 		component.combobox.gridApi = gridApiMock;
 		component.combobox.isDropdownOpened = false;
 		component.combobox.onEnterDoSelect(new KeyboardEvent('keydown', {}));
 		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
 	});
 
-	it('onInputNavigate', fakeAsync( () => {
+	it('onInputNavigate', async () => {
 		component.combobox.doGridReady({
 			api: {
 				getAllDisplayedColumns: () => [],
@@ -257,13 +257,11 @@ describe('AutocompleteApiAutocomplete', () => {
 
 		component.combobox.isDisabled = false;
 		component.combobox.isDropdownOpened = true;
-
+		component.combobox.filter = false;
 		component.combobox.onInputNavigate({});
-
-		tick();
-		flush();
+		await fixture.whenStable();
 		expect(getAllDisplayedColumnsSpy).toHaveBeenCalled();
 		expect(setFocusedCellSpy).toHaveBeenCalled();
-	}));
+	});
 
 });

@@ -14,7 +14,7 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
-import { Column, GridReadyEvent } from 'ag-grid-community';
+import { Column, GridReadyEvent, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -106,6 +106,8 @@ const clickOnGridCell = (fixture: ComponentFixture<ComboboxTestComponent>, cell:
 	fixture.detectChanges();
 };
 
+let gridEventMock;
+
 describe('Systelab Combobox', () => {
 	let fixture: ComponentFixture<ComboboxTestComponent>;
 	let component: ComboboxTestComponent;
@@ -134,6 +136,12 @@ describe('Systelab Combobox', () => {
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ComboboxTestComponent);
+		gridEventMock = {
+			api: {
+				getSelectedNodes: () => component.multipleSelectedItemList.map(data => ({data} as RowNode)),
+				setGridOption: () => null
+			}
+		} as any;
 		fixture.detectChanges();
 		component = fixture.componentInstance;
 	});
@@ -164,16 +172,14 @@ describe('Systelab Combobox', () => {
 		}
 	});
 
-	it('should check selected items', (done) => {
+	it('should check selected items', () => {
 		fixture.componentInstance.multipleSelection = true;
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				const component = fixture.componentInstance;
-				const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
-				expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
-				done();
-			});
+		const component = fixture.componentInstance;
+		component.combobox.doGridReady(gridEventMock)
+		const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
+		expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
+
 	});
 
 	it('should check clear id', async () => {

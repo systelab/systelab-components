@@ -13,7 +13,7 @@ class Element {
     templateUrl: 'abstract-listbox.component.html',
     standalone: false
 })
-export class SystelabGenderListBox extends AbstractListBox<Element> implements AfterViewInit {
+export class SystelabGenderListBox extends AbstractListBox<Element> {
 
 	@Input() override showAll = false;
 
@@ -21,7 +21,8 @@ export class SystelabGenderListBox extends AbstractListBox<Element> implements A
 		super();
 	}
 
-	public ngAfterViewInit(): void {
+	public override ngOnInit() {
+		super.ngOnInit();
 		const elements = [];
 		if (this.showAll) {
 			elements.push(new Element('A', this.i18nService.instant('COMMON_ALL')));

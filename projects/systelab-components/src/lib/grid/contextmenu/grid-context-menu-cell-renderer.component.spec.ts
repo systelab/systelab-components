@@ -11,7 +11,6 @@ import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
 import { Component } from "@angular/core";
 import { AbstractGrid } from "systelab-components";
-import { Column } from 'ag-grid-community';
 
 
 interface TestData {
@@ -59,7 +58,10 @@ describe('GridContextMenuCellRendererComponent', () => {
             deselectAll: () => {
             },
             selectIndex: (rowIndex, tryMulti, supressEvents) => {
-            }
+            },
+            getDisplayedRowAtIndex: (index: number) => { return {
+                setSelected: (select: boolean) => true
+            } as any}
         }
     } as unknown as AbstractGrid<TestData>
 
@@ -72,7 +74,6 @@ describe('GridContextMenuCellRendererComponent', () => {
     }
 
     beforeEach(async () => {
-
         await TestBed.configureTestingModule({
             declarations: [GridContextMenuCellRendererMock],
             imports: [BrowserModule,
@@ -128,9 +129,7 @@ describe('GridContextMenuCellRendererComponent', () => {
         it('Should call gridApi.deselectAll if removeSelectionOnOpenContextMenu is true & call gridApi.selectIndex if ctrlKey is true', () => {
             spyOn(containerMock.gridApi, 'deselectAll');
             spyOn(containerMock.gridApi as any, 'selectIndex');
-            spyOn(containerMock.gridApi as any, 'getRowNode').and.returnValue({
-                setSelected: (isSelected: boolean) => ({})
-            });
+
             component.agInit(paramsMock);
 
             containerMock.removeSelectionOnOpenContextMenu = true;
@@ -138,7 +137,6 @@ describe('GridContextMenuCellRendererComponent', () => {
             component.dotsClicked(eventMock);
 
             expect(component['container'].dotsClicked).toHaveBeenCalled()
-            expect(component['container'].gridApi.getRowNode).toHaveBeenCalled()
             expect(containerMock.gridApi.deselectAll).toHaveBeenCalled()
         })
     })

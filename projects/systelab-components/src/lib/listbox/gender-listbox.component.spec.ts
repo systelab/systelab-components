@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { I18nService } from 'systelab-translate';
 import { SystelabGenderListBox } from './gender-listbox.component';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
 describe('SystelabGenderListBox', () => {
     let component: SystelabGenderListBox;
@@ -10,7 +11,7 @@ describe('SystelabGenderListBox', () => {
 
     beforeEach(async () => {
         const i18nServiceSpy = jasmine.createSpyObj('I18nService', ['instant']);
-
+        ModuleRegistry.registerModules([AllCommunityModule]);
         await TestBed.configureTestingModule({
             declarations: [SystelabGenderListBox],
             providers: [{ provide: I18nService, useValue: i18nServiceSpy }],
@@ -34,7 +35,7 @@ describe('SystelabGenderListBox', () => {
         component.showAll = true;
         i18nServiceMock.instant.and.returnValue('Test');
 
-        component.ngAfterViewInit();
+        component.ngOnInit();
 
         expect(component.values.length).toBe(4);
         expect(component.values[0].id).toBe('A');
@@ -43,12 +44,12 @@ describe('SystelabGenderListBox', () => {
         expect(component.values[3].id).toBe('M');
     });
 
-    it('should call ngAfterViewInit with showAll false', () => {
+    it('should call ngOnInit with showAll false', () => {
         // Arrange
         component.showAll = false;
         i18nServiceMock.instant.and.returnValue('Test');
 
-        component.ngAfterViewInit();
+        component.ngOnInit();
 
         expect(component.values.length).toBe(3);
         expect(component.values[0].id).toBe('U');
