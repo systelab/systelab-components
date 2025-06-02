@@ -1,4 +1,4 @@
-@use "./variables" as *;
+@use "../variables" as *;
 @use "bootstrap/scss/bootstrap" as bootstrap;
 // Defines the width of the textarea when the w-* class is not present.
 $slab-textarea-default-width: 100% !default;

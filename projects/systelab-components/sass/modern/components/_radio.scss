@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "./variables" as *;
+@use "../variables" as *;
 
 // Hide native radio
 input[type="radio"]:not(:checked), input[type="radio"]:checked {
