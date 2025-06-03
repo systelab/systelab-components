@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MessagePopupButton, MessagePopupIcon, MessagePopupService } from 'systelab-components';
 
 @Component({
-	selector: 'showcase-message-popup',
-	templateUrl: 'showcase-message-popup.component.html'
+    selector: 'showcase-message-popup',
+    templateUrl: 'showcase-message-popup.component.html',
+    standalone: false
 })
 export class ShowcaseMessagePopupComponent {
 

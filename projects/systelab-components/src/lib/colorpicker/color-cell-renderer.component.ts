@@ -4,8 +4,9 @@ import { ComboBoxInputRenderer } from '../combobox/renderer/combobox-input-rende
 import { ColorUtilService } from '../utilities/color.util.service';
 
 @Component({
-	selector:    'systelab-cell-colorpicker',
-	templateUrl: 'color-renderer.component.html'
+    selector: 'systelab-cell-colorpicker',
+    templateUrl: 'color-renderer.component.html',
+    standalone: false
 })
 export class ColorCellRendererComponent extends ComboBoxInputRenderer implements AgRendererComponent, AfterViewInit {
 	public agGridParams: any;

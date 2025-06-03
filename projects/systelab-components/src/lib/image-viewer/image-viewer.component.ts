@@ -25,9 +25,10 @@ export interface ActionButton {
 }
 
 @Component({
-	selector:    'systelab-image-viewer',
-	templateUrl: 'image-viewer.component.html',
-	styleUrls:   ['image-viewer.component.scss']
+    selector: 'systelab-image-viewer',
+    templateUrl: 'image-viewer.component.html',
+    styleUrls: ['image-viewer.component.scss'],
+    standalone: false
 })
 export class ImageViewerComponent implements OnInit {
 

@@ -9,8 +9,9 @@ class Element {
 }
 
 @Component({
-	selector:    'systelab-time-unit-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-time-unit-select',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 })
 
 export class TimeUnitSelectComponent extends AbstractComboBox<Element> implements AfterViewInit {

@@ -12,14 +12,15 @@ import { ToastService } from './toast.service';
 import { ToastConfig } from './toast-config';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'toast-test',
-	template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'toast-test',
+    template: `
                 <button id="open-toast" type="button" class="btn btn-primary" (click)="showToast()">Show</button>
 				<button id="open-toast-with-close-button" type="button" class="btn btn-primary" (click)="showToastWithCloseButton()">
 					Show
 				</button>
-	          `
+	          `,
+    standalone: false
 })
 export class ToastTestComponent {
 	private readonly _toastDefaultConfig: ToastConfig;

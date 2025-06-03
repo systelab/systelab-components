@@ -4,8 +4,9 @@ import { AbstractSortableListComponent } from '../sortable-list/abstract-sortabl
 import { DataFilterPipe } from './datafilter.pipe';
 
 @Component({
-	selector:    'systelab-two-list-sortable-list',
-	templateUrl: '../sortable-list/abstract-sortable-list.component.html'
+    selector: 'systelab-two-list-sortable-list',
+    templateUrl: '../sortable-list/abstract-sortable-list.component.html',
+    standalone: false
 })
 export class TwoListSortableListComponent extends AbstractSortableListComponent<TwoListItem> {
 

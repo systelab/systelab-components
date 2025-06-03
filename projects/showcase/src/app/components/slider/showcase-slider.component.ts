@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector:    'showcase-slider',
-	templateUrl: 'showcase-slider.component.html'
+    selector: 'showcase-slider',
+    templateUrl: 'showcase-slider.component.html',
+    standalone: false
 })
 export class ShowcaseSliderComponent {
 

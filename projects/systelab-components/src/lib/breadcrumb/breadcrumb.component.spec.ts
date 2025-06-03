@@ -10,13 +10,14 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { BreadcrumbComponent, BreadcrumbItem } from './breadcrumb.component';
 
 @Component({
-	selector: 'systelab-breadcrumb-test',
-	template: `
+    selector: 'systelab-breadcrumb-test',
+    template: `
                 <div>
                     <systelab-breadcrumb [items]="items"></systelab-breadcrumb>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class BreadcrumbTestComponent {
 

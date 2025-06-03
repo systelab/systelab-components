@@ -73,7 +73,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 }
 
 
-.ag-theme-fresh .ag-checkbox-input-wrapper {
+.ag-theme-alpine .ag-checkbox-input-wrapper {
   input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
     left: auto;
     position: relative;
@@ -91,7 +91,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ag-theme-fresh .ag-checkbox-input-wrapper::after {
+.ag-theme-alpine .ag-checkbox-input-wrapper::after {
   background-color: $white;
   width: 22px !important;
   height: 22px !important;
@@ -99,7 +99,7 @@ $checkbox-text-gap: $slab-checkbox-height * 1.5 !default;
 }
 
 
-.ag-theme-fresh .ag-checkbox-input-wrapper.ag-checked::after {
+.ag-theme-alpine .ag-checkbox-input-wrapper.ag-checked::after {
   content: '\f00d' !important;
   width: 22px !important;
   height: 22px !important;

@@ -10,13 +10,14 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import {BreadcrumbComponent, BreadcrumbItem, BreadcrumbSubItem} from './breadcrumb.component';
 
 @Component({
-	selector: 'systelab-breadcrumb-maxwidth-test',
-	template: `
+    selector: 'systelab-breadcrumb-maxwidth-test',
+    template: `
                 <div>
                     <systelab-breadcrumb [items]="items" [itemMaxWidth]="itemMaxWidth" [subItemMaxWidth]="subItemMaxWidth"></systelab-breadcrumb>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class BreadcrumbMaxWidthTestComponent {
 

@@ -20,8 +20,8 @@ export class TestData {
 }
 
 @Component({
-	selector: 'systelab-combobox-test',
-	template: `
+    selector: 'systelab-combobox-test',
+    template: `
                   <div class="container-fluid" style="height: 200px;">
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -36,7 +36,8 @@ export class TestData {
                           </div>
                       </div>
                   </div>
-			  `
+			  `,
+    standalone: false
 })
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: ModulabSelect;

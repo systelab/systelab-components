@@ -8,8 +8,9 @@ class Element {
 }
 
 @Component({
-	selector:    'showcase-listbox',
-	templateUrl: 'showcase-listbox.component.html'
+    selector: 'showcase-listbox',
+    templateUrl: 'showcase-listbox.component.html',
+    standalone: false
 })
 export class ShowcaseListBoxComponent implements OnInit {
 

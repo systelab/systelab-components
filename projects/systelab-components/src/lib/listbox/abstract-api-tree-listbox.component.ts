@@ -3,7 +3,7 @@ import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-l
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
 import { Observable } from 'rxjs';
-import { GetRowIdParams } from 'ag-grid-community';
+import { GetRowIdParams, RowSelectionOptions } from 'ag-grid-community';
 
 export class TreeListBoxElement<T> {
 	public nodeData: T;
@@ -18,7 +18,7 @@ export class TreeListBoxElement<T> {
 }
 
 @Directive()
-export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit, AfterViewInit {
+export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeListBoxElement<T>> implements OnInit {
 	@ViewChild('hidden', {static: true}) public override hiddenElement: ElementRef;
 
 	@Input() public isParentSelectable = true;
@@ -72,7 +72,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.configGrid();
 	}
 
-	public ngAfterViewInit(): void {
+	public override doGridReady(event: any) {
+		super.doGridReady(event);
 		this.getRows();
 	}
 
@@ -82,8 +83,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			treeValue.selected = false;
 			return treeValue;
 		});
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.redrawRows();
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.redrawRows();
 		}
 	}
 
@@ -111,7 +112,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			}
 			this.selectedIDListChange.emit(this.selectedIDList);
 		}
-		if (this.gridOptions.api) {
+		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
 	}
@@ -159,7 +160,10 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.paddingSingleSelection = this.multipleSelection ? 0 : 2;
 		this.gridOptions = {};
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.rowSelection = 'single';
+		this.gridOptions.rowSelection = {
+			mode: 'singleRow',
+			checkboxes: false
+		} as RowSelectionOptions;
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
 		if (lineHeight) {
 			this.gridOptions.rowHeight = Number(lineHeight);
@@ -169,9 +173,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.gridOptions.suppressCellFocus = true;
 
 		if (this.multipleSelection) {
-			this.gridOptions.suppressRowClickSelection = true;
+			this.gridOptions.rowSelection.enableClickSelection = false;
 		} else {
-			this.gridOptions.suppressRowClickSelection = this.isDisabled;
+			this.gridOptions.rowSelection.enableClickSelection = !this.isDisabled;
 		}
 
 		this.columnDefs = [
@@ -212,9 +216,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			.subscribe({
 				next:  (dataVector: Array<T>) => {
 					this.loadValues(dataVector);
-					this.gridOptions.api.hideOverlay();
-					this.gridOptions.api.setRowData(this.treeValues);
-					this.gridOptions.api.redrawRows();
+					this.gridApi.hideOverlay();
+					this.rowData = this.treeValues;
+					this.gridApi.redrawRows();
 					if (this.multipleSelection) {
 						this.initSelectionList();
 					} else if (this.selectedTreeItem) {
@@ -223,7 +227,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					this.doAutoSizeManagement();
 				},
 				error: () => {
-					this.gridOptions.api.hideOverlay();
+					this.gridApi.hideOverlay();
 				}
 			});
 	}
@@ -275,8 +279,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	protected selectTreeItemInGrid(): void {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
+		if (this.gridOptions && this.gridApi) {
+			this.gridApi.forEachNode(node => {
 				if (!this.multipleSelection) {
 					if (!this.selectedTreeItem && this.selectFirstItem) {
 						if (node.rowIndex === 0) {

@@ -1,9 +1,9 @@
 import { AfterViewInit, Component,  EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector:    'systelab-dialog-header',
-	templateUrl: 'dialog-header.component.html',
-	styles:      [`
+    selector: 'systelab-dialog-header',
+    templateUrl: 'dialog-header.component.html',
+    styles: [`
         :host {
             width: 100%;
         }
@@ -13,7 +13,8 @@ import { AfterViewInit, Component,  EventEmitter, Input, Output } from '@angular
             cursor: -moz-grab;
             cursor: -webkit-grab;
         }
-	`]
+	`],
+    standalone: false
 })
 export class DialogHeaderComponent implements AfterViewInit {
 

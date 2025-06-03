@@ -15,12 +15,13 @@ import { ContextMenuItemComponent } from './context-menu-item.component';
 import { ContextMenuSubmenuItemComponent } from './context-menu-submenu-item.component';
 
 @Component({
-	selector: 'systelab-context-menu-test',
-	template: `
+    selector: 'systelab-context-menu-test',
+    template: `
                   <systelab-context-menu [contextMenuOptions]="contextMenuOptions"
                                          (action)="executeContextMenuAction($event)">
                   </systelab-context-menu>
-			  `
+			  `,
+    standalone: false
 })
 export class ContextMenuTestComponent implements OnInit {
 	public contextMenuOptions: Array<ContextMenuOption> = [];

@@ -6,7 +6,8 @@ export class ShowcaseFullFlexDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-full-flex-dialog.component.html',
+    templateUrl: 'showcase-full-flex-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseFullFlexDialog implements ModalComponent<ShowcaseFullFlexDialogParameters> {
 

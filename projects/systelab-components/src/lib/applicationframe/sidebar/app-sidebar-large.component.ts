@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.component';
 
 @Component({
-	selector:    'systelab-app-sidebar-large',
-	templateUrl: 'app-sidebar-large.component.html'
+    selector: 'systelab-app-sidebar-large',
+    templateUrl: 'app-sidebar-large.component.html',
+    standalone: false
 })
 export class ApplicationSidebarLargeComponent implements OnInit {
 

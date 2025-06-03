@@ -13,8 +13,8 @@ export class Connection {
 }
 
 @Component({
-	selector: 'sample-route',
-	template: `
+    selector: 'sample-route',
+    template: `
 <div style="padding-bottom: 10px;">
 	<systelab-button (action)="setColor('green')">Green</systelab-button>
 	<systelab-button (action)="setColor('red')">Red</systelab-button>
@@ -35,7 +35,8 @@ export class Connection {
 				
 </canvas>
 </div>
-`
+`,
+    standalone: false
 })
 export class SampleRouteComponent implements OnInit, AfterViewInit {
 

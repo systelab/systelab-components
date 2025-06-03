@@ -6,7 +6,8 @@ import { DialogRef } from '../modal/dialog/dialog-ref';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 
 @Component({
-	templateUrl: 'searcher.dialog.component.html'
+    templateUrl: 'searcher.dialog.component.html',
+    standalone: false
 })
 export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>>, AfterViewInit {
 

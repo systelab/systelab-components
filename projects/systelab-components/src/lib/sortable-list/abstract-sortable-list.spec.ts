@@ -72,8 +72,9 @@ export class TestData {
 }
 
 @Component({
-	selector:    'systelab-sortable-list-test',
-	templateUrl: 'abstract-sortable-list.component.html'
+    selector: 'systelab-sortable-list-test',
+    templateUrl: 'abstract-sortable-list.component.html',
+    standalone: false
 })
 export class SortableListTestComponent extends AbstractSortableListComponent<TestData> {
 

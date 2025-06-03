@@ -2,7 +2,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 import interact from 'interactjs';
 
 @Directive({
-	selector: '[resizable]'
+    selector: '[resizable]',
+    standalone: false
 })
 export class ResizableDirective implements OnInit {
 

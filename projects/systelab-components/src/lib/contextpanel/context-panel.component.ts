@@ -3,8 +3,9 @@ import { ContextMenuOption } from '../contextmenu/context-menu-option';
 import { AbstractContextComponent } from '../contextmenu/abstract-context.component';
 
 @Component({
-	selector:    'systelab-context-panel',
-	templateUrl: 'context-panel.component.html',
+    selector: 'systelab-context-panel',
+    templateUrl: 'context-panel.component.html',
+    standalone: false
 })
 export class ContextPanelComponent extends AbstractContextComponent<ContextMenuOption> implements OnInit, OnDestroy {
 

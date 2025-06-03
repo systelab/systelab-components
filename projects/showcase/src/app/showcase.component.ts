@@ -4,9 +4,10 @@ import { I18nService } from 'systelab-translate';
 import { NavbarItem, ThemeService } from 'systelab-components';
 
 @Component({
-	selector:    'app-root',
-	templateUrl: 'showcase.component.html',
-	styleUrls:   ['showcase.component.scss']
+    selector: 'app-root',
+    templateUrl: 'showcase.component.html',
+    styleUrls: ['showcase.component.scss'],
+    standalone: false
 })
 export class ShowcaseComponent {
 

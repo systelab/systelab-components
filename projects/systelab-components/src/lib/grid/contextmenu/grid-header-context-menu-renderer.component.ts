@@ -4,8 +4,9 @@ import {IHeaderParams} from 'ag-grid-community';
 import {AbstractGrid} from '../abstract-grid.component';
 
 @Component({
-	selector: 'systelab-grid-header-context-menu-cell-renderer',
-	templateUrl: 'grid-header-context-menu-renderer.component.html'
+    selector: 'systelab-grid-header-context-menu-cell-renderer',
+    templateUrl: 'grid-header-context-menu-renderer.component.html',
+    standalone: false
 })
 
 export class GridHeaderContextMenuComponent<T> implements IHeaderAngularComp {

@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { CellKeyDownEvent, IsFullWidthRowParams } from 'ag-grid-community';
+import { CellKeyDownEvent, IsFullWidthRowParams, RowSelectedEvent } from 'ag-grid-community';
 import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { Observable } from 'rxjs';
 
 @Component({
-	selector:    'systelab-internal-searcher-table',
-	templateUrl: '../grid/abstract-grid.component.html'
-
+    selector: 'systelab-internal-searcher-table',
+    templateUrl: '../grid/abstract-grid.component.html',
+    standalone: false
 })
 export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnInit {
 
@@ -68,11 +68,11 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	}
 
 	public focusFirstRow(): void {
-		this.gridOptions.api.setFocusedCell(0, this.gridOptions.columnApi.getColumns()[0].getColId());
+		this.gridApi.setFocusedCell(0, this.gridApi.getColumns()[0].getColId());
 	}
 
 	public getSelectedElements(): Array<T> {
-		return this.gridOptions.api.getSelectedRows();
+		return this.gridApi.getSelectedRows();
 	}
 
 	protected override getGridOptionsPreferencesPrefix(): string {
@@ -83,36 +83,36 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		super.onModelUpdated(event);
 		if (this.multipleSelection) {
 			if (this.searcher && this.searcher.multipleSelectedItemList && this.searcher.multipleSelectedItemList.length > 0) {
-				this.gridOptions.api.forEachNode(node => {
+				this.gridApi?.forEachNode(node => {
 					if (this.searcher.multipleSelectedItemList
 						.filter((selectedItem) => {
 							return (selectedItem && node.data && selectedItem[this.searcher.getCodeField()] === node.data[this.searcher.getCodeField()]);
 						}).length > 0) {
-						node.selectThisNode(true);
+						node.setSelected(true);
 					}
 				});
 			}
 		} else if (this.searcher && this.searcher.id && this.searcher.id !== undefined) {
-			this.gridOptions.api.forEachNode(node => {
+			this.gridApi.forEachNode(node => {
 				if (node.data && node.data[this.searcher.getIdField()] === this.searcher.id) {
-					node.selectThisNode(true);
-					this.gridOptions.api.ensureNodeVisible(node);
+					node.setSelected(true);
+					this.gridApi.ensureNodeVisible(node);
 				}
 			});
 		}
 	}
 
 	// overrides
-	public override onRowSelected(event: any): void {
+	public override onRowSelected(event: RowSelectedEvent): void {
 		if (this.multipleSelection) {
 			if (event.node && event.node.data && event.node.data[this.searcher.getIdField()] !== undefined) {
 				if (this.searcher.multipleSelectedItemList) {
 					const element = this.searcher.multipleSelectedItemList.find((item) => {
 						return item[this.searcher.getCodeField()] === event.node.data[this.searcher.getCodeField()];
 					});
-					if (event.node.selected && !element) {
+					if (event.node.isSelected() && !element) {
 						this.addElementToMultipleSelectedItemList(event.node.data);
-					} else if (!event.node.selected && element) {
+					} else if (!event.node.isSelected() && element) {
 						this.searcher.multipleSelectedItemList = this.searcher.multipleSelectedItemList
 							.filter((item) => item[this.searcher.getCodeField()] !== element[this.searcher.getCodeField()]);
 					}

@@ -3,8 +3,9 @@ import { firstValueFrom, of } from 'rxjs';
 import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
-	selector:    'systelab-chips',
-	templateUrl: 'chips.component.html'
+    selector: 'systelab-chips',
+    templateUrl: 'chips.component.html',
+    standalone: false
 })
 export class ChipsComponent {
 

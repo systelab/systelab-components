@@ -1,4 +1,4 @@
-@import "../../../sass/variables";
+@use "../../../sass/variables" as *;
 
 .slab-custom-calendar {
   max-width: 100%;

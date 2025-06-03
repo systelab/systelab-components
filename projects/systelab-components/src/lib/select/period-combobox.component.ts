@@ -9,8 +9,9 @@ class Element {
 }
 
 @Component({
-	selector:    'systelab-period-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-period-select',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 })
 
 export class PeriodSelect extends AbstractComboBox<Element> implements AfterViewInit {

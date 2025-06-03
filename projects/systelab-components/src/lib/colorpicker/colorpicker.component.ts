@@ -5,8 +5,9 @@ import { ColorUtilService } from '../utilities/color.util.service';
 import { ComboBoxInputRenderer } from '../combobox/renderer/combobox-input-renderer';
 
 @Component({
-	selector:    'systelab-colorpicker',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-colorpicker',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 })
 export class ColorComboBox extends AbstractComboBox<ComboBoxInputRenderer> implements OnInit {
 	constructor(public override myRenderer: Renderer2, chRef: ChangeDetectorRef) {

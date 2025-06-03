@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {ShowcaseSortableListData} from './showcase-inner-sortable-list.component';
 
 @Component({
-	selector: 'showcase-sortable-list',
-	templateUrl: 'showcase-sortable-list.component.html'
+    selector: 'showcase-sortable-list',
+    templateUrl: 'showcase-sortable-list.component.html',
+    standalone: false
 })
 export class ShowcaseSortableListComponent {
 

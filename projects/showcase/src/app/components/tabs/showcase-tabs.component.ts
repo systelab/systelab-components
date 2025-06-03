@@ -4,8 +4,9 @@ import { DialogService } from 'systelab-components';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
-	selector:    'showcase-tabs',
-	templateUrl: 'showcase-tabs.component.html'
+    selector: 'showcase-tabs',
+    templateUrl: 'showcase-tabs.component.html',
+    standalone: false
 })
 export class ShowcaseTabsComponent {
 

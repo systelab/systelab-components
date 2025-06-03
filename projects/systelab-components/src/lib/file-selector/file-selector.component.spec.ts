@@ -9,8 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { FileSelectorComponent } from './file-selector.component';
 
 @Component({
-	selector: 'systelab-file-selector-test',
-	template: `
+    selector: 'systelab-file-selector-test',
+    template: `
         <div>
             <systelab-file-selector [(fileName)]="fileName"
                                     [showButtonOnDisable]="showButtonOnDisable"
@@ -18,7 +18,8 @@ import { FileSelectorComponent } from './file-selector.component';
                                     [disabled]="disable"
             ></systelab-file-selector>
         </div>
-	`
+	`,
+    standalone: false
 })
 export class FileSelectorTestComponent {
 

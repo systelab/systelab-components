@@ -12,9 +12,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { KeyupDebounceDirective } from './keyup-debounce.directive';
 
 @Component({
-	template: `
+    template: `
                   <input keyup-debounce #input type="text" [keyupDebounceTime]="debounceTime" (keyupDebounced)="doKeyUpDebounced()"/>
-			  `
+			  `,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class KeyupDebounceDirectiveTest {
