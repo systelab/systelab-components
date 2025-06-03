@@ -97,13 +97,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public getLabelForLevel(comboTreeNode: ComboTreeNode<T>): string {
-		if (comboTreeNode.level === 0) {
-			return comboTreeNode.nodeData[this.getLevelDescriptionField(0)];
-		} else if (comboTreeNode.level > 0) {
-			return '<span style="padding-left: ' + (20 * comboTreeNode.level) + 'px">'
-				+ comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)]
-				+ '</span>';
-		}
+		const style: string = comboTreeNode.level > 0 ? `style="padding-left: ${(20 * comboTreeNode.level)}px"` : '';
+		const description: string = comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)];
+		return `<span title="${description}" ${style}>${description}</span>`;
 	}
 
 	// override
