@@ -2,7 +2,7 @@ import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { SwitchComponent } from './switch/switch.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContextMenuComponent } from './contextmenu/context-menu.component';
 import { DataFilterPipe } from './twolist/datafilter.pipe';
 import { TwoListComponent } from './twolist/two-list.component';
@@ -133,7 +133,8 @@ const providers = [
 		AngularSplitModule,
 		SystelabTranslateModule,
 		AgGridModule,
-		CdkTreeModule
+		CdkTreeModule,
+		ReactiveFormsModule
 	],
 	declarations: [
 		SliderComponent,

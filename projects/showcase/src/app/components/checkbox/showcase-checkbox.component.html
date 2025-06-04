@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row mt-1">
         <label class="col-md-3 col-form-label">Switcher</label>
-        <div class="col-md-9">
-            <systelab-switch id="enabled" name="enabled"
-                             [(isChecked)]="check2"></systelab-switch>
-            <systelab-switch [disabled]="true" id="enabled" name="enabled"
-                             [(isChecked)]="check1"></systelab-switch>
-            <systelab-switch [disabled]="true" id="enabled" name="enabled"
-                             [(isChecked)]="check3"></systelab-switch>
-        </div>
+        <form [formGroup]="myForm" class="col-md-9">
+            <systelab-switch formControlName="mySwitch"
+                             id="enabled" name="enabled"></systelab-switch>
+            <systelab-switch formControlName="mySwitch2"
+                            [disabled]="true" id="enabled" name="enabled"></systelab-switch>
+            <systelab-switch formControlName="mySwitch3"
+                            [disabled]="true" id="enabled" name="enabled"></systelab-switch>
+        </form>
     </div>
 
     <div class="row align-items-top mt-1">

@@ -1,5 +1,6 @@
 import {AbstractComboBox} from '../combobox/abstract-combobox.component';
-import {ChangeDetectorRef, Component, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, Renderer2, forwardRef} from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import {PreferencesService} from 'systelab-preferences';
 
 
@@ -11,7 +12,14 @@ class Element {
 
 @Component({
 	selector: 'systelab-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+	templateUrl: '../combobox/abstract-combobox.component.html',
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => ModulabSelect),
+			multi: true
+		}
+	]
 })
 
 export class ModulabSelect extends AbstractComboBox<Element> {

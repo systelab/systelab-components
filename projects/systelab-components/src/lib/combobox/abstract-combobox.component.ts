@@ -5,11 +5,12 @@ import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
+import { ControlValueAccessorBase } from '../utilities/form/control-value-accessor-base';
 
 declare var jQuery: any;
 
 @Directive()
-export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
+export abstract class AbstractComboBox<T> extends ControlValueAccessorBase implements AgRendererComponent, OnInit, OnDestroy {
 
 	public static ROW_HEIGHT = -1;
 	public static DROPDOWN_MENU_MARGIN = 16;
@@ -220,6 +221,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	private scrollTimeout;
 
 	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public preferencesService?: PreferencesService) {
+		super();
 	}
 
 	public ngOnInit() {
@@ -593,6 +595,16 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.gridOptions.api.deselectAll();
 	}
 
+	// ControlValuAccessor method to write value for reactive forms
+	// @Override
+	override writeValue(value: any): void {
+		if (value) {
+			this.id = value[this.getIdField()];
+			// Calling the method to set code and description
+			this.setCodeDescriptionById();
+		}
+	}
+
 	public onSelectionChanged(event: any) {
 		if (!this.multipleSelection) {
 			const selectedRow = this.getSelectedRow();
@@ -601,6 +613,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				this.code = selectedRow[this.getCodeField()];
 				this.description = selectedRow[this.getDescriptionField()];
 				this.currentSelected = selectedRow;
+
+				// Notify change to form observers
+				if (this.onChange) {
+					this.onChange(selectedRow);
+				}
+
 				this.change.emit(selectedRow);
 				this.selectedItemChange.emit(selectedRow);
 				this.closeDropDown();
