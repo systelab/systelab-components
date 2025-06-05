@@ -102,6 +102,38 @@ To use the checkbox we need to send a parameter that has to be searched in the d
     resizable:             false
 }
 ```
+To show the checkbox disabled we can use the parameter showDisabled
+```
+{
+    colId:                 'checkbox',
+    headerName:            'Cell with Checkbox',
+    field:                 'checkboxValue',
+    width:                 200,
+    cellRendererFramework: CheckboxCellRendererComponent,
+    cellRendererParams: { showDisabled: true},
+    onCellValueChanged:    e => console.log('checkbox', e),
+    editable:              false,
+    elementID: 		       'checkboxID',
+    resizable:             false
+}
+```
+
+To use the checkbox with a single click we have the parameter singleClickEdit true as default. Inform with false to use the old behaviour of two clicks to open editor and change the value.
+```
+{
+    colId:                 'checkbox',
+    headerName:            'Cell with Checkbox',
+    field:                 'checkboxValue',
+    width:                 200,
+    cellRendererFramework: CheckboxCellRendererComponent,
+    cellEditorFramework:   CheckboxCellEditorComponent,
+    cellEditorParams: { singleClickEdit: true},
+    onCellValueChanged:    e => console.log('checkbox', e),
+    editable:              true,
+    elementID: 		       'checkboxID',
+    resizable:             false
+}
+```
 
 Spinner
 ```

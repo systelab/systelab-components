@@ -319,7 +319,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 			if (item[this.getIdField()] != null) {
 				return item[this.getIdField()];
 			}
-			return this.getIdField() === '' ? '' : item.data[this.getIdField()] ?? '';
+			return this.getIdField() === '' ? '' : item.data?.[this.getIdField()] ?? '';
 		}
 		return '';
 	}
