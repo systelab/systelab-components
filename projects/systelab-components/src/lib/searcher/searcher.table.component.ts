@@ -86,7 +86,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 				this.gridApi?.forEachNode(node => {
 					if (this.searcher.multipleSelectedItemList
 						.filter((selectedItem) => {
-							return (selectedItem && node.data && selectedItem[this.searcher.getCodeField()] === node.data[this.searcher.getCodeField()]);
+							return (selectedItem && node.data && selectedItem[this.getSelectionField()] === node.data[this.getSelectionField()]);
 						}).length > 0) {
 						node.setSelected(true);
 					}
@@ -102,19 +102,23 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		}
 	}
 
+	private getSelectionField() {
+		return this.searcher.useIdInMultipleSelectionGrid ? this.searcher.getIdField() : this.searcher.getCodeField();
+	}
+
 	// overrides
 	public override onRowSelected(event: RowSelectedEvent): void {
 		if (this.multipleSelection) {
 			if (event.node && event.node.data && event.node.data[this.searcher.getIdField()] !== undefined) {
 				if (this.searcher.multipleSelectedItemList) {
 					const element = this.searcher.multipleSelectedItemList.find((item) => {
-						return item[this.searcher.getCodeField()] === event.node.data[this.searcher.getCodeField()];
+						return item[this.getSelectionField()] === event.node.data[this.getSelectionField()];
 					});
 					if (event.node.isSelected() && !element) {
 						this.addElementToMultipleSelectedItemList(event.node.data);
 					} else if (!event.node.isSelected() && element) {
 						this.searcher.multipleSelectedItemList = this.searcher.multipleSelectedItemList
-							.filter((item) => item[this.searcher.getCodeField()] !== element[this.searcher.getCodeField()]);
+							.filter((item) => item[this.getSelectionField()] !== element[this.getSelectionField()]);
 					}
 				} else {
 					this.addElementToMultipleSelectedItemList(event.node.data);
