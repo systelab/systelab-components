@@ -71,8 +71,20 @@ export class ShowcaseGridUtil {
 				width:               200,
 				cellRenderer:        CheckboxCellRendererComponent,
 				cellEditorFramework: CheckboxCellEditorComponent,
+				cellEditorParams: { singleClickEdit: true},
 				onCellValueChanged:  e => console.log('checkbox', e),
 				editable:            true,
+				elementID:           'checkboxID',
+				resizable:           false
+			}, {
+				colId:               'checkbox',
+				headerName:          'Cell with Checkbox disabled',
+				field:               'checkboxValue',
+				width:               200,
+				cellRenderer:        CheckboxCellRendererComponent,
+				cellRendererParams: { showDisabled: true},
+				onCellValueChanged:  e => console.log('checkbox', e),
+				editable:            false,
 				elementID:           'checkboxID',
 				resizable:           false
 			}, {
@@ -155,7 +167,7 @@ export class ShowcaseGridUtil {
 		const values: ShowcaseData[] = [];
 		for (let i = 0; i < 10; i++) {
 			values.push(new ShowcaseData('12/12/2017', i + '', '10x', 26, 24,10,
-				false, i, new TouchSpinValues(5, 0, 100, 1), this.stackedBars[i % 4]));
+				true, i, new TouchSpinValues(5, 0, 100, 1), this.stackedBars[i % 4]));
 		}
 		return values;
 	}

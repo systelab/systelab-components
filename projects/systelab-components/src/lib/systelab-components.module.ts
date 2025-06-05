@@ -104,6 +104,8 @@ import {
 	PositiveIntegerInputCellEditorComponent
 } from './grid/custom-cells/positive-integer/positive-integer-input-cell-editor.component';
 import { TestIdDirective } from './directives/test-id.directive';
+import { SearcherTreeHeaderRendererComponent } from './grid/custom-cells/searcher-tree-header/searcher-tree-header-renderer.component';
+import { Accordion } from './accordion/accordion.component';
 
 export const factory = () => {
 	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
@@ -223,6 +225,8 @@ const providers = [
 		PositiveIntegerInputCellEditorComponent,
 		NumpadDecimalNumericDirective,
   		TestIdDirective,
+		SearcherTreeHeaderRendererComponent,
+		Accordion,
 	],
 	exports: [
 		SliderComponent,
@@ -310,7 +314,9 @@ const providers = [
 		NumpadDecimalNumericDirective,
 		TestIdDirective,
 		NumpadDecimalNumericDirective,
-		PositiveIntegerInputCellEditorComponent
+		PositiveIntegerInputCellEditorComponent,
+		SearcherTreeHeaderRendererComponent,
+		Accordion
 	],
 })
 export class SystelabComponentsModule {
