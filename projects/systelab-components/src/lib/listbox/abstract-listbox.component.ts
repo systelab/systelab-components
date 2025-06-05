@@ -143,7 +143,8 @@ export abstract class AbstractListBox<T> implements OnInit {
 				suppressSizeToFit: true,
 				resizable:         false,
 				suppressMovable:   true,
-				pinned:            'left'
+				pinned:            'left',
+				cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
 			});
 		}
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);

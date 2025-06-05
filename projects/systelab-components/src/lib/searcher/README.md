@@ -141,6 +141,7 @@ Once you have your component, you can use it in your templates.
 | **code** | string | | Short code of selected item that will be shown in the input of the searcher  |
 | **multipleSelectedItemList** | Array<T> | | Array with selected elements for searchers with multiple selection|
 | multipleSelection | boolean | false | Enable to select multiple elements. A checkbox will be rendered in front of each element. |
+| useIdInMultipleSelectionGrid | boolean | false | If true use as a unique identifier the id of the element instead of the code.             |
 | fontFamily | string | | Font Family |
 | fontSize | string | | Font size in pixels |
 | fontWeight | string | | normal, bold, bolder, lighter, number, initial or inherit |
