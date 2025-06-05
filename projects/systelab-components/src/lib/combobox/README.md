@@ -150,10 +150,11 @@ In order to use a combobox with a custom input text color you must set the input
 represent as a rgb code or hex code the color that must be displayed the text.
 
 ## Using a Combo with icons
-In order to set an icon at the end of the input text box (similar as favourites), you must use the input property "withIcon" as true 
+In order to set an icon in the input text box (similar as favourites), you must use the input property "withIcon" as true 
 and set the property "iconClass" with the icon that you want to show (for example, if we want to show an engine icon: 'icon-gear').
 This icon will be displayed with the color of the input text by default, but you can set a different color using the
-"iconColor" to change the color of the icon.
+"iconColor" to change the color of the icon. If you want to change the side where the icon appears (by default it is 
+the right side), you will have to set the "iconSide" property to "left".
 
 ## Using a Combo with Favourites
 
