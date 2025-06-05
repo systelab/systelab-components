@@ -193,5 +193,33 @@ describe('Systelab Two list', () => {
 		expect(availableSelected)
 			.toEqual(3);
 	});
+	it('should be able to show only the size of filtered elements', () => {
+		const component = fixture.componentInstance;
+
+		component.availableColumns = [
+			new TwoListItem('Element 1', 'id1', false, true),
+			new TwoListItem('Element 2', 'id2', false, true),
+			new TwoListItem('Element 3', 'id3', false, true)
+		];
+
+		fixture.detectChanges();
+
+		const searchInput: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('.slab-twolistdiv input.form-control');
+		const seacrchLabel: HTMLLabelElement = fixture.debugElement.nativeElement.querySelector('.slab-twolistdiv label');
+		const addAllText: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector('#slab-add-all');
+
+		searchInput.value = '1';
+		searchInput.dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+		checkIfListContains(fixture, 'left-list', 'Element 1');
+		checkIfListNotContains(fixture, 'left-list', 'Element 2');
+		checkIfListNotContains(fixture, 'left-list', 'Element 3');
+		expect(seacrchLabel.innerHTML).toContain('1');
+		expect(addAllText.innerHTML).toContain('1');
+		clickButton(fixture, '#slab-add-all');
+		checkIfListContains(fixture, 'right-list', 'Element 1');
+		checkIfListNotContains(fixture, 'right-list', 'Element 2');
+		checkIfListNotContains(fixture, 'right-list', 'Element 3');
+	});
 
 });
