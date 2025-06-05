@@ -55,6 +55,5 @@ export class ShowcaseComboboxComponent {
 	public comboChangeEvent(event: any): void {
 		console.log(this.colorId);
 		console.log(this.colorValue);
-
 	}
 }

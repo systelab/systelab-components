@@ -116,6 +116,7 @@ import {
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { environment } from '../environments/environment';
+import {ShowcaseReactiveFormsComponent} from "./components/reactive-forms/showcase-reactive-forms.component";
 
 @NgModule({ declarations: [
         ShowcaseComponent,
@@ -205,6 +206,7 @@ import { environment } from '../environments/environment';
         ShowcaseInteractiveComponent,
         ShowcaseProgressBarWithTextDialog,
         ShowcaseImageViewerComponent,
+        ShowcaseReactiveFormsComponent
     ],
     bootstrap: [ShowcaseComponent],
     imports: [

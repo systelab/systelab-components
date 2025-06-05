@@ -1,0 +1,29 @@
+
+<div class="container-fluid">
+    <form [formGroup]="myForm">
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Sin buscador</label>
+            <div class="col-md-9">
+                <systelab-select
+                        formControlName="mySelectField"
+                        [withEmptyValue]="true"
+                        [values]="comboOptionList"
+                        (change)="comboChangeEvent($event)">
+                </systelab-select>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Switcher</label>
+            <div class="col-md-9">
+                <systelab-switch formControlName="mySwitch"
+                                 id="enabled" name="enabled"></systelab-switch>
+                <systelab-switch formControlName="mySwitch2"
+                                 id="enabled2" name="enabled2"></systelab-switch>
+                <systelab-switch formControlName="mySwitch3"
+                                 id="enabled3" name="enabled3"></systelab-switch>
+                <systelab-switch formControlName="mySwitch4"
+                                 id="enabled4" name="enabled4"></systelab-switch>
+            </div>
+        </div>
+    </form>
+</div>

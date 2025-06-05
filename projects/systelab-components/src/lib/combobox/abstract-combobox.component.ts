@@ -240,6 +240,12 @@ export abstract class AbstractComboBox<T> extends ControlValueAccessorBase imple
 		this.configGrid();
 	}
 
+	// This method is called by Angular forms when the control is enabled/disabled
+	public override setDisabledState(isDisabled: boolean): void {
+		this.isDisabled = isDisabled;
+		this.chRef.markForCheck(); // Optional: triggers change detection if needed
+	}
+
 	private setStyle(styleName: string, styleValue: string): void {
 		if (styleValue) {
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, styleName, styleValue);

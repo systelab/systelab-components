@@ -39,9 +39,7 @@ export class SwitchComponent extends ControlValueAccessorBase {
 	// Override
 	public override writeValue(value: any) {
 		super.writeValue(value);
-		if (value) {
-			this.checked = value;
-		}
+		this.checked = value;
 	}
 
 	@HostListener('click')
