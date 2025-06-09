@@ -119,7 +119,10 @@ export class ShowcaseTextareaComponent implements OnInit {
 	}
 
 	public executeContextMenuAction(contextMenuActionData: ContextMenuActionData): void {
-		switch (contextMenuActionData.actionId) {
+
+		// Extract only the first part behore the divider "_|_"
+		const action = contextMenuActionData.actionId.split('_|_')[0];
+		switch (action) {
 			case 'option1':
 				console.log('Option 1');
 				break;
@@ -130,6 +133,7 @@ export class ShowcaseTextareaComponent implements OnInit {
 				console.log('Option 3');
 				break;
 			default:
+				console.log('Unknown option:', action);
 				break;
 		}
 	}

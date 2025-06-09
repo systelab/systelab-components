@@ -1,8 +1,25 @@
 
 <div class="container-fluid">
     <form [formGroup]="myForm">
+        <!-- Input -->
         <div class="row mt-1">
-            <label class="col-md-3 col-form-label">Sin buscador</label>
+            <label class="col-md-3 col-form-label" for="full-width-input">Input</label>
+            <div class="col-md-9">
+                <input formControlName="name" class="form-control" placeholder="Name" id="full-width-input">
+            </div>
+        </div>
+        <!-- Text Area -->
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label" for="resize-textarea">Textarea resizable (only vertical)</label>
+            <div class="col-md-9">
+            <textarea formControlName="textArea" id="resize-textarea"
+                      class="form-control slab-textarea w-100 slab-textarea-vertical-resize">
+            </textarea>
+            </div>
+        </div>
+        <!-- Select -->
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Select</label>
             <div class="col-md-9">
                 <systelab-select
                         formControlName="mySelectField"
@@ -12,6 +29,43 @@
                 </systelab-select>
             </div>
         </div>
+        <!-- Checkbox -->
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Checkbox</label>
+            <div class="col-md-9">
+                <div class="form-check form-check-inline">
+                    <input formControlName="myCheck1" class="form-check-input" type="checkbox" id="check_1" checked>
+                    <label class="form-check-label" for="check_1">Enabled checked</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input formControlName="myCheck2" class="form-check-input" type="checkbox" id="check_2">
+                    <label class="form-check-label" for="check_2">Enabled unckecked</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input formControlName="myCheck3" class="form-check-input" type="checkbox" id="check_3" checked>
+                    <label class="form-check-label" for="check_3">Disabled checked</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input formControlName="myCheck4" class="form-check-input" type="checkbox" id="check_4">
+                    <label class="form-check-label" for="check_4">Disabled unchecked</label>
+                </div>
+            </div>
+        </div>
+        <!-- Radio -->
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Radio Button</label>
+            <div class="col-md-9">
+                <div class="form-check form-check-inline">
+                    <input formControlName="myRadio1" type="radio" value="urgent" id="urgent">
+                    <label class="form-check-label" for="urgent">Urgent</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input formControlName="myRadio1" type="radio" value="not-urgent" id="not-urgent">
+                    <label class="form-check-label" for="not-urgent">Not Urgent</label>
+                </div>
+            </div>
+        </div>
+        <!-- Switcher -->
         <div class="row mt-1">
             <label class="col-md-3 col-form-label">Switcher</label>
             <div class="col-md-9">
@@ -25,5 +79,25 @@
                                  id="enabled4" name="enabled4"></systelab-switch>
             </div>
         </div>
+        <!-- Toggle Selector -->
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Toggle Selector</label>
+            <div class="col-md-9 d-flex">
+                <systelab-toggle-selector formControlName="myToggleSelector"
+                                          [options]="options"
+                                          (select)="doSomething($event)">
+                </systelab-toggle-selector>
+            </div>
+        </div>
+        <!-- Date Time -->
+<!--        <div class="row mt-1">-->
+<!--            <label class="col-md-3 col-form-label" for="form-h-s">Datepicker Time (Time integrated)</label>-->
+<!--            <div class="col-md-9">-->
+<!--                <systelab-date-time-->
+<!--                        [(currentDate)]="myNewDate"-->
+<!--                        [withIntegratedTime]="true"-->
+<!--                ></systelab-date-time>-->
+<!--            </div>-->
+<!--        </div>-->
     </form>
 </div>

@@ -1,5 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {
+    ToggleSelectorOption
+} from "../../../../../systelab-components/src/lib/toggle-selector/toggle-selector.component";
 
 @Component({
     selector: 'showcase-reactive-forms',
@@ -9,6 +12,7 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
 
     public comboOptionList: Array<Object> = [];
     public myForm: FormGroup;
+    public options: Array<ToggleSelectorOption> = [];
 
     constructor(private fb: FormBuilder) {
         this.comboOptionList = [
@@ -24,13 +28,27 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
             {description: 'Amsterdam', id: 10},
             {description: 'St Petersburgo', id: 11}
         ];
+
+        this.options.push({ id: '1', name: 'All' });
+        this.options.push({ id: '2', name: 'Only A' });
+        this.options.push({ id: '3', name: 'Only B' });
+
         this.myForm = this.fb.group({
+            name :[{value: 'Homer Simpson', disabled: true}],
+            textArea: [{value: 'This is a text area', disabled: true}],
             mySelectField: [{ value: { id: null, description: '' }, disabled: true }],
+            myCheck1: [{ value: true, disabled: false }],
+            myCheck2: [{ value: false, disabled: false }],
+            myCheck3: [{ value: true, disabled: true }],
+            myCheck4: [{ value: false, disabled: true }],
+            myRadio1: [{ value: 'urgent', disabled: false }],
             mySwitch: [{ value: false, disabled: false }],
             mySwitch2: [{ value: false, disabled: true }],
             mySwitch3: [{ value: true, disabled: false }],
             mySwitch4: [{ value: true, disabled: true }],
+            myToggleSelector: [{ value: '2', disabled: false }],
         });
+
     }
 
     public ngOnInit(): void {
@@ -40,6 +58,10 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
     public comboChangeEvent(event: any): void {
         console.log('Event: ', event);
         console.log('Form Value: ', this.myForm.value);
+    }
+
+    public doSomething(event: any): void {
+        console.log('doSomething event: ', event);
     }
 
     private initSwitcherValues(): void {
