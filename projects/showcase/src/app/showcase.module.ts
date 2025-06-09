@@ -115,6 +115,10 @@ import {
 } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { ComboboxSearcherComponent } from './components/searcher/combobox-searcher.component';
+import { ShowcaseInnerTreeGenericComboboxComponent } from './components/combobox/showcase-inner-tree-generic.combobox.component';
+import { ShowcaseApiPaginateCombobox } from './components/combobox/showcase-api-paginate.combobox';
+import { ShowcaseAccordion } from './components/accordion/showcase-accordion.component';
 import { environment } from '../environments/environment';
 import {ShowcaseReactiveFormsComponent} from "./components/reactive-forms/showcase-reactive-forms.component";
 
@@ -206,6 +210,10 @@ import {ShowcaseReactiveFormsComponent} from "./components/reactive-forms/showca
         ShowcaseInteractiveComponent,
         ShowcaseProgressBarWithTextDialog,
         ShowcaseImageViewerComponent,
+        ComboboxSearcherComponent,
+        ShowcaseInnerTreeGenericComboboxComponent,
+        ShowcaseApiPaginateCombobox,
+        ShowcaseAccordion,
         ShowcaseReactiveFormsComponent
     ],
     bootstrap: [ShowcaseComponent],

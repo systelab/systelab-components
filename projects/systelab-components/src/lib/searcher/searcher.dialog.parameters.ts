@@ -6,4 +6,7 @@ export class SearcherDialogParameters<T> extends SystelabModalContext {
 	public searcher: AbstractSearcher<T>;
 	public showCloseButton = true;
 	public showSelectedRowsInSubmitButton = false;
+	public isTeeSearcher: boolean = false;
+	public debounceTime: number = 0;
+	public searchByStartWithAsDefault: boolean = false;
 }

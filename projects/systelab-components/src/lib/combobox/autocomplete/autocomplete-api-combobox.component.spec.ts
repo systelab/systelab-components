@@ -111,7 +111,11 @@ describe('AutocompleteApiAutocomplete', () => {
 	const gridApiMock = {
 		getDisplayedRowAtIndex: () => {
 			return new RowNode<any>(null);
-		}
+		},
+		getRenderedNodes: () => {
+			return [new RowNode<any>(null)];
+		},
+		removeEventListener: () => {}
 	} as unknown as GridApi;
 
 	beforeEach(async () => {

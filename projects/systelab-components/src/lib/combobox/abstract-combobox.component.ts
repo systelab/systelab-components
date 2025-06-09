@@ -327,7 +327,7 @@ export abstract class AbstractComboBox<T> extends ControlValueAccessorBase imple
 			if (item[this.getIdField()] != null) {
 				return item[this.getIdField()];
 			}
-			return this.getIdField() === '' ? '' : item.data[this.getIdField()] ?? '';
+			return this.getIdField() === '' ? '' : item.data?.[this.getIdField()] ?? '';
 		}
 		return '';
 	}

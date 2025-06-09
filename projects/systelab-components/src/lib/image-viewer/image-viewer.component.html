@@ -40,6 +40,7 @@
         <div class="d-flex slab-flex-1" id="OverImageArea"></div>
         <div class="d-flex ml-auto">
             <a [href]="imageSrc" download="{{imageTitle}}">
+                <a [href]="imageSrc" download="{{imageTitle}}" ></a>
                 <systelab-button *ngIf="showSaveButton" data-test-id="SaveBtn"
                              systelabTooltip="{{ 'COMMON_SAVE' | translate | async }}">
                     <i class="icon-download1"></i>
