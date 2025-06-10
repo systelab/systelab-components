@@ -11,6 +11,8 @@ import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
 import { Component } from "@angular/core";
 import { AbstractGrid } from "systelab-components";
+import { GridContextMenuComponent } from './grid-context-menu-component';
+import createSpyObj = jasmine.createSpyObj;
 
 
 interface TestData {
@@ -48,6 +50,7 @@ describe('GridContextMenuCellRendererComponent', () => {
     const containerMock = {
         removeSelectionOnOpenContextMenu: false,
         getSelectedRows: () => [{id: 16, row: 0}],
+        popupmenu: createSpyObj('popupmenu', ['closeDropDown']),
         dotsClicked: (rowIndex, selectedRows, event) => {
         },
         gridOptions: {
@@ -139,6 +142,11 @@ describe('GridContextMenuCellRendererComponent', () => {
             expect(containerMock.gridOptions.api.deselectAll).toHaveBeenCalled()
 
         })
+        it('Should to call closeDropDown of container when dotsClicked is called', () => {
+            component.agInit(paramsMock);
+            component.dotsClicked(eventMock);
+            expect((component['container'] as any).popupmenu.closeDropDown).toHaveBeenCalled();
+        });
     })
 
     describe('refresh', () => {
