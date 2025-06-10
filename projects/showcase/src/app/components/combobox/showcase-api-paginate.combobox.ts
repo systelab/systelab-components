@@ -7,7 +7,8 @@ import { PreferencesService } from 'systelab-preferences';
 
 @Component({
 	selector:    'showcase-api-paginate-combobox',
-	templateUrl: '../../../../../systelab-components/src/lib/combobox/abstract-combobox.component.html'
+	templateUrl: '../../../../../systelab-components/src/lib/combobox/abstract-combobox.component.html',
+	standalone: false,
 })
 export class ShowcaseApiPaginateCombobox extends AbstractApiComboBox<ShowcaseSearcherData> {
 

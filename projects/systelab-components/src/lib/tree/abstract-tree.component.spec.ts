@@ -11,8 +11,9 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { AbstractTree } from './abstract-tree.component';
 
 @Component({
-	selector:    'systelab-abstract-tree-test',
-	templateUrl: 'abstract-tree.component.html'
+    selector: 'systelab-abstract-tree-test',
+    templateUrl: 'abstract-tree.component.html',
+    standalone: false
 })
 export class AbstractTreeTestComponent extends AbstractTree {
 
@@ -83,8 +84,8 @@ export class AbstractTreeTestComponent extends AbstractTree {
 }
 
 @Component({
-	selector: 'systelab-abstract-tree-test-panel',
-	template: `
+    selector: 'systelab-abstract-tree-test-panel',
+    template: `
                   <div class="container-fluid" style="height: 200px;">
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -93,7 +94,8 @@ export class AbstractTreeTestComponent extends AbstractTree {
                           </div>
                       </div>
                   </div>
-			  `
+			  `,
+    standalone: false
 })
 export class AbstractTreeTestPanelComponent {
 	@ViewChild('testTree') public testTree: AbstractTreeTestComponent;

@@ -16,9 +16,9 @@ export class CalendarDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'calendar-dialog.component.html',
-	styleUrls:   ['calendar-dialog.component.scss']
-
+    templateUrl: 'calendar-dialog.component.html',
+    styleUrls: ['calendar-dialog.component.scss'],
+    standalone: false
 })
 export class CalendarDialog implements ModalComponent<CalendarDialogParameters> {
 

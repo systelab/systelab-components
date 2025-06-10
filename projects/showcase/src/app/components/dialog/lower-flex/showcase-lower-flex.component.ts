@@ -3,8 +3,9 @@ import { TouchSpinValues } from 'systelab-components';
 
 
 @Component( {
-	selector:    'showcase-lower-flex',
-	templateUrl: 'showcase-lower-flex.component.html'
+    selector: 'showcase-lower-flex',
+    templateUrl: 'showcase-lower-flex.component.html',
+    standalone: false
 } )
 export class ShowcaseLowerFlexComponent {
 

@@ -3,8 +3,9 @@ import { DialogService } from 'systelab-components';
 import { ShowcaseTimelineDialog } from './timeline-dialog/showcase-timeline-dialog.component';
 
 @Component({
-	selector:    'showcase-timeline',
-	templateUrl: 'showcase-timeline.component.html'
+    selector: 'showcase-timeline',
+    templateUrl: 'showcase-timeline.component.html',
+    standalone: false
 })
 export class ShowcaseTimelineComponent {
 

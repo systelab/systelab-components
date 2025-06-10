@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AbstractApiTreeComboBox } from 'systelab-components';
 import { PreferencesService } from 'systelab-preferences';
+import { AbstractApiTreeComboBox } from '../../../../../systelab-components/src/lib/combobox/tree/abstract-api-tree-combobox.component';
 
 @Component({
-	selector:    'showcase-inner-tree-combobox',
-	templateUrl: '../../../../../systelab-components/src/lib/combobox/abstract-combobox.component.html'
+    selector: 'showcase-inner-tree-combobox',
+    templateUrl: '../../../../../systelab-components/src/lib/combobox/abstract-combobox.component.html',
+    standalone: false
 })
 
 export class ShowcaseInnerTreeComboBox extends AbstractApiTreeComboBox<any> {

@@ -17,8 +17,8 @@ import { TimeUnitSelectComponent } from './time-unit-combobox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 
 @Component({
-	selector: 'systelab-time-unit-select-test',
-	template: `
+    selector: 'systelab-time-unit-select-test',
+    template: `
                 <div>
                     <systelab-time-unit-select [(id)]="id" [(description)]="description"
                                                [showHoursOption]="showHoursOption"
@@ -29,7 +29,8 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
                 </div>
 
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class TimeUnitSelectTestComponent {
 

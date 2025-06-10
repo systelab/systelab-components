@@ -9,7 +9,8 @@ export class ShowcaseApplicationFrameDialogParameters extends SystelabModalConte
 }
 
 @Component({
-	templateUrl: 'showcase-application-frame-dialog.component.html'
+    templateUrl: 'showcase-application-frame-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseApplicationFrameDialog implements ModalComponent<ShowcaseApplicationFrameDialogParameters>, OnInit {
 

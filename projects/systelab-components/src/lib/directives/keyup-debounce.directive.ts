@@ -3,7 +3,8 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Directive({
-	selector: '[keyup-debounce]'
+    selector: '[keyup-debounce]',
+    standalone: false
 })
 export class KeyupDebounceDirective implements OnInit, OnDestroy {
 

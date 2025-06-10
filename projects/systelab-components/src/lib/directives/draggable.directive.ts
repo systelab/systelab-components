@@ -2,7 +2,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 import interact from 'interactjs';
 
 @Directive({
-	selector: '[draggable]'
+    selector: '[draggable]',
+    standalone: false
 })
 export class DraggableDirective implements OnInit {
 

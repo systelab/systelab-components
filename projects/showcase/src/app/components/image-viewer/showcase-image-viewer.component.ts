@@ -2,8 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {ActionButton, ActionButtonType, ImageViewerComponent} from 'systelab-components';
 
 @Component({
-	selector:    'showcase-image-viewer',
-	templateUrl: 'showcase-image-viewer.component.html'
+    selector: 'showcase-image-viewer',
+    templateUrl: 'showcase-image-viewer.component.html',
+    standalone: false
 })
 
 export class ShowcaseImageViewerComponent {

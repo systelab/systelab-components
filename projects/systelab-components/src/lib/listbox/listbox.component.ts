@@ -8,8 +8,9 @@ export class ListBoxElement {
 }
 
 @Component({
-	selector:    'systelab-listbox',
-	templateUrl: 'abstract-listbox.component.html'
+    selector: 'systelab-listbox',
+    templateUrl: 'abstract-listbox.component.html',
+    standalone: false
 })
 
 export class ModulabListBox extends AbstractListBox<ListBoxElement> {

@@ -2,8 +2,9 @@ import { AfterViewInit, Component } from '@angular/core';
 import { AgEditorComponent } from 'ag-grid-angular';
 
 @Component({
-	selector:    'systelab-checkbox-cell',
-	templateUrl: 'checkbox-cell-editor.component.html'
+    selector: 'systelab-checkbox-cell',
+    templateUrl: 'checkbox-cell-editor.component.html',
+    standalone: false
 })
 export class CheckboxCellEditorComponent implements AgEditorComponent, AfterViewInit {
 	private params: any;

@@ -5,7 +5,7 @@ import { SpyMenuItem } from 'systelab-components';
 import { By } from '@angular/platform-browser';
 
 @Component({
-	template: `<systelab-spy-menu [items]="menuItems" [sectionSelected]="sectionSelected"></systelab-spy-menu>
+    template: `<systelab-spy-menu [items]="menuItems" [sectionSelected]="sectionSelected"></systelab-spy-menu>
 		<div class="slab-flex-1 d-flex slab-overflow-container">
 			<div class="slab-flex-1">
 				<div id="section1" style="height: 500px">
@@ -15,7 +15,8 @@ import { By } from '@angular/platform-browser';
 				<div id="section3" style="height: 500px">
 				</div>
 			</div>
-	    </div>`
+	    </div>`,
+    standalone: false
 })
 export class SpyMenuTestComponent {
 

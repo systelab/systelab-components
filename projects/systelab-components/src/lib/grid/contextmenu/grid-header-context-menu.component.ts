@@ -10,8 +10,9 @@ export interface GridHeaderMenuActionHandler {
 }
 
 @Component({
-	selector: 'systelab-grid-header-context-menu',
-	templateUrl: '../../contextmenu/context-menu.component.html'
+    selector: 'systelab-grid-header-context-menu',
+    templateUrl: '../../contextmenu/context-menu.component.html',
+    standalone: false
 })
 export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<GridContextMenuOption<Object>> {
 	public actionHandler: GridHeaderMenuActionHandler;

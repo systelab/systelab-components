@@ -3,8 +3,9 @@ import { TwoListItem } from 'systelab-components';
 import { PreferencesService } from 'systelab-preferences';
 
 @Component({
-	selector:    'showcase-two-list',
-	templateUrl: 'showcase-two-list.component.html'
+    selector: 'showcase-two-list',
+    templateUrl: 'showcase-two-list.component.html',
+    standalone: false
 })
 export class ShowcaseTwoListComponent {
 

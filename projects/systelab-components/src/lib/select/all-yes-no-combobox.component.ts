@@ -8,8 +8,9 @@ class Element {
 }
 
 @Component({
-	selector:    'systelab-all-yes-no-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-all-yes-no-select',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 })
 
 export class AllYesNoSelect extends AbstractComboBox<Element> implements OnInit {

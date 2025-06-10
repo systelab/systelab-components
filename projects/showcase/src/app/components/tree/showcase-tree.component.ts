@@ -3,8 +3,9 @@ import { ShowcaseInnerTreeComponent } from './showcase-inner-tree.component';
 import { TreeNode } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-tree',
-	templateUrl: 'showcase-tree.component.html'
+    selector: 'showcase-tree',
+    templateUrl: 'showcase-tree.component.html',
+    standalone: false
 })
 export class ShowcaseTreeComponent {
 

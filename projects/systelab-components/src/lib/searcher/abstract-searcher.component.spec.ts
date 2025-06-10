@@ -34,7 +34,8 @@ export class TestData {
 }
 
 @Directive({
-	selector: '[systelabTooltip],[systelabTooltipHtml]'
+    selector: '[systelabTooltip],[systelabTooltipHtml]',
+    standalone: false
 })
 export class MockTooltipDirective {
 	@Input() public systelabTooltip: string;
@@ -117,8 +118,9 @@ export class SystelabSearcherInnerComponent extends AbstractSearcher<TestData> {
 }
 
 @Component({
-	selector:    'systelab-searcher-example',
-	templateUrl: 'abstract-searcher.component.html'
+    selector: 'systelab-searcher-example',
+    templateUrl: 'abstract-searcher.component.html',
+    standalone: false
 })
 export class SystelabSearcherComponent extends AbstractSearcherComponent<TestData> {
 	constructor(public i18nService: I18nService, public dialogService: DialogService) {
@@ -127,8 +129,8 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
 }
 
 @Component({
-	selector: 'systelab-searcher-test',
-	template: `
+    selector: 'systelab-searcher-test',
+    template: `
                   <div class="container-fluid" style="height: 200px;">
                       <div class="row mt-1">
                           <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -139,7 +141,8 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
                           </div>
                       </div>
                   </div>
-			  `
+			  `,
+    standalone: false
 })
 export class SearcherTestComponent {
 	public id: string;

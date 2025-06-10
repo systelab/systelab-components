@@ -11,8 +11,8 @@ import { ActionButton, ActionButtonType, ImageViewerComponent } from 'systelab-c
 import { SystelabTranslateModule } from 'systelab-translate';
 
 @Component({
-	selector: 'systelab-image-viewer-test',
-	template: `
+    selector: 'systelab-image-viewer-test',
+    template: `
                   <systelab-image-viewer #imageViewer class="slab-overflow-container"
                                          [imageSrc]="imageSrc"
                                          [imageTitle]="imageTitle"
@@ -29,7 +29,8 @@ import { SystelabTranslateModule } from 'systelab-translate';
 										 [allowBorderColor]="allowBorderColor"
                                          [showZoomScale]="true">
                   </systelab-image-viewer>`,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ImageViewerTestComponent {
 	@ViewChild('imageViewer') public imageViewer: ImageViewerComponent;

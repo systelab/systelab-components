@@ -7,8 +7,9 @@ export class NavbarItem {
 }
 
 @Component({
-	selector: 'systelab-navbar',
-	templateUrl: 'navbar.component.html',
+    selector: 'systelab-navbar',
+    templateUrl: 'navbar.component.html',
+    standalone: false
 })
 export class NavbarComponent {
 

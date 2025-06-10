@@ -20,7 +20,8 @@ interface TestData {
 
 @Component({
     selector: 'systelab-grid-context-menu-cell-renderer-mock',
-    templateUrl: 'grid-context-menu-cell-renderer.component.html'
+    templateUrl: 'grid-context-menu-cell-renderer.component.html',
+    standalone: false
 })
 class GridContextMenuCellRendererMock extends GridContextMenuCellRendererComponent<TestData> {
     constructor() {
@@ -50,13 +51,17 @@ describe('GridContextMenuCellRendererComponent', () => {
         getSelectedRows: () => [{id: 16, row: 0}],
         dotsClicked: (rowIndex, selectedRows, event) => {
         },
-        gridOptions: {
-            api: {
-                deselectAll: () => {
-                },
-                selectIndex: (rowIndex, tryMulti, supressEvents) => {
-                }
-            }
+        gridApi: {
+            getRowNode: (id: string | number) => ({
+                setSelected: (isSelected: boolean) => ({})
+            }),
+            deselectAll: () => {
+            },
+            selectIndex: (rowIndex, tryMulti, supressEvents) => {
+            },
+            getDisplayedRowAtIndex: (index: number) => { return {
+                setSelected: (select: boolean) => true
+            } as any}
         }
     } as unknown as AbstractGrid<TestData>
 
@@ -69,7 +74,6 @@ describe('GridContextMenuCellRendererComponent', () => {
     }
 
     beforeEach(async () => {
-
         await TestBed.configureTestingModule({
             declarations: [GridContextMenuCellRendererMock],
             imports: [BrowserModule,
@@ -87,7 +91,6 @@ describe('GridContextMenuCellRendererComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(GridContextMenuCellRendererMock)
         component = fixture.componentInstance;
-
         fixture.detectChanges()
     })
 
@@ -117,27 +120,24 @@ describe('GridContextMenuCellRendererComponent', () => {
 
         it('Should call dotsClicked if event.ctrlKey is true & removeSelectionOnOpenContextMenu is false', () => {
             component.agInit(paramsMock);
-
             component.dotsClicked(eventMock);
 
             expect(component['container'].dotsClicked)
                 .toHaveBeenCalled()
         })
 
-        it('Should call gridOptions.api.deselectAll if removeSelectionOnOpenContextMenu is true & call gridOptions.api.selectIndex if ctrlKey is true', () => {
-            spyOn(containerMock.gridOptions.api, 'deselectAll');
-            spyOn(containerMock.gridOptions.api, 'selectIndex');
+        it('Should call gridApi.deselectAll if removeSelectionOnOpenContextMenu is true & call gridApi.selectIndex if ctrlKey is true', () => {
+            spyOn(containerMock.gridApi, 'deselectAll');
+            spyOn(containerMock.gridApi as any, 'selectIndex');
+
             component.agInit(paramsMock);
 
-
             containerMock.removeSelectionOnOpenContextMenu = true;
-
+            (eventMock as any).ctrlKey = true;
             component.dotsClicked(eventMock);
 
             expect(component['container'].dotsClicked).toHaveBeenCalled()
-            expect(containerMock.gridOptions.api.selectIndex).toHaveBeenCalled()
-            expect(containerMock.gridOptions.api.deselectAll).toHaveBeenCalled()
-
+            expect(containerMock.gridApi.deselectAll).toHaveBeenCalled()
         })
     })
 

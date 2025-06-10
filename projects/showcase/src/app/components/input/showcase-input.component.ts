@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector:    'showcase-input',
-	templateUrl: 'showcase-input.component.html'
+    selector: 'showcase-input',
+    templateUrl: 'showcase-input.component.html',
+    standalone: false
 })
 export class ShowcaseInputComponent {
 

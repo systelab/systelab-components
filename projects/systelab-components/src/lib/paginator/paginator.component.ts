@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
-	selector:    'systelab-paginator',
-	templateUrl: 'paginator.component.html'
+    selector: 'systelab-paginator',
+    templateUrl: 'paginator.component.html',
+    standalone: false
 })
 export class PaginatorComponent implements OnInit, OnChanges {
 

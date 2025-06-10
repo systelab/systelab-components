@@ -3,8 +3,9 @@ import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.c
 
 
 @Component({
-	selector:    'systelab-app-sidebar-small',
-	templateUrl: 'app-sidebar-small.component.html'
+    selector: 'systelab-app-sidebar-small',
+    templateUrl: 'app-sidebar-small.component.html',
+    standalone: false
 })
 export class ApplicationSidebarSmallComponent {
 

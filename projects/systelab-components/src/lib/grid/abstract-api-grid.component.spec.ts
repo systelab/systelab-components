@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -31,6 +31,7 @@ import { MessagePopupService } from '../modal/message-popup/message-popup.servic
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from './contextmenu/grid-header-context-menu.component';
 import { ButtonComponent } from '../button/button.component';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public field1: string, public field2: number) {
@@ -38,8 +39,9 @@ export class TestData {
 }
 
 @Component({
-	selector:    'systelab-grid',
-	templateUrl: 'abstract-grid.component.html'
+    selector: 'systelab-grid',
+    templateUrl: 'abstract-grid.component.html',
+    standalone: false
 })
 export class SystelabGridComponent extends AbstractApiGrid<TestData> implements OnInit {
 
@@ -86,18 +88,18 @@ export class SystelabGridComponent extends AbstractApiGrid<TestData> implements 
 }
 
 @Component({
-	selector: 'systelab-grid-test',
-	template: `
+    selector: 'systelab-grid-test',
+    template: `
                   <div class="position-relative" style="height: 200px;">
                       <systelab-grid #grid [menu]="getMenu()" (action)="doMenuAction($event)" [headerMenu]="getHeaderMenu()"
                                      [showChecks]="true" [removeSelectionOnOpenContextMenu]="true" [multipleSelection]="true" (rowSelected)="doSelect($event)"></systelab-grid>
                   </div>
                   <systelab-button id="button-options" (action)="grid.showOptions()">Options</systelab-button>
-			  `
+			  `,
+    standalone: false
 })
 export class GridTestComponent {
-	@ViewChild('grid') public grid: SystelabGridComponent;
-
+	@ViewChild('grid', {static: true}) grid: SystelabGridComponent;
 	public selectedOptionID = '';
 	public selectedTestData: TestData;
 
@@ -164,6 +166,7 @@ const clickMenuHeaderOnRow = (fixture: ComponentFixture<GridTestComponent>) => {
 };
 
 const clickOption = (fixture: ComponentFixture<GridTestComponent>, option: number) => {
+	console.log(fixture.debugElement.nativeElement.querySelectorAll('li'));
 	fixture.debugElement.nativeElement.querySelectorAll('li')[option].click();
 	fixture.detectChanges();
 };
@@ -190,7 +193,7 @@ const clickCloseButton = (fixture: ComponentFixture<GridTestComponent>, buttonId
 
 describe('Systelab Grid', () => {
 	let fixture: ComponentFixture<GridTestComponent>;
-
+	ModuleRegistry.registerModules([AllCommunityModule]);
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
     declarations: [GridHeaderContextMenuComponent,

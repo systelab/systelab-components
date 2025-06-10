@@ -10,13 +10,14 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { NavbarComponent, NavbarItem } from './navbar.component';
 
 @Component({
-	selector: 'systelab-navbar-test',
-	template: `
+    selector: 'systelab-navbar-test',
+    template: `
                 <div>
                     <systelab-navbar [items]="items"></systelab-navbar>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class NavbarTestComponent {
 

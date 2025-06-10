@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector:    'showcase-signature-canvas',
-	templateUrl: './showcase-signature-canvas.component.html'
+    selector: 'showcase-signature-canvas',
+    templateUrl: './showcase-signature-canvas.component.html',
+    standalone: false
 })
 export class ShowcaseSignatureCanvasComponent {
 	public withCodeVerification = true;

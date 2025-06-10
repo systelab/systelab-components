@@ -3,8 +3,9 @@ import { AgEditorComponent } from 'ag-grid-angular';
 import { TouchSpinValues } from '../../../spinner/touch.spin-values';
 
 @Component({
-	selector:    'systelab-spinner-cell-editor',
-	templateUrl: 'spinner-cell-editor.component.html'
+    selector: 'systelab-spinner-cell-editor',
+    templateUrl: 'spinner-cell-editor.component.html',
+    standalone: false
 })
 export class SpinnerCellEditorComponent implements AgEditorComponent {
 	public params: any;

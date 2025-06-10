@@ -17,15 +17,16 @@ import { DialogHeaderComponent } from '../header/dialog-header.component';
 export class SampleDialogParameters extends SystelabModalContext {}
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'sample-dialog',
-	template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'sample-dialog',
+    template: `
                 <systelab-dialog-header [withInfo]="false" (close)="close();">Title</systelab-dialog-header>
                 <div class="slab-flex-1"></div>
                 <systelab-dialog-bottom>
                     <button id="closebutton" type="button" class="btn btn-primary ml-auto" (click)="close()"> Close</button>
                 </systelab-dialog-bottom>
-	          `
+	          `,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SampleDialog implements ModalComponent<SampleDialogParameters> {
@@ -46,10 +47,11 @@ export class SampleDialog implements ModalComponent<SampleDialogParameters> {
 }
 
 @Component({
-	selector: 'systelab-modal-test',
-	template: `
+    selector: 'systelab-modal-test',
+    template: `
                 <button id="openbutton" type="button" class="btn btn-primary" (click)="openDialog()">Open</button>
-	          `
+	          `,
+    standalone: false
 })
 export class ModalTestComponent {
 	constructor(private dialogService: DialogService) {

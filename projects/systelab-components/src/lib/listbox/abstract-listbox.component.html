@@ -1,7 +1,8 @@
 <div class="slab-listbox" [ngClass]="{'disabled': isDisabled}">
     <div #hidden class="height-hidden"></div>
     <ag-grid-angular #grid id="agGrid" style="position:absolute; top:0; bottom:0; left:0; right:0; overflow: hidden;"
-                     class="ag-theme-fresh border rounded" [ngClass]="{'disabled': isDisabled}"
+                     class="ag-theme-alpine border rounded" [ngClass]="{'disabled': isDisabled}"
+                     [rowData]="rowData"
                      [gridOptions]="gridOptions"
                      [rowDragManaged]="rowDrag"
                      [animateRows]="rowDrag"

@@ -1,0 +1,25 @@
+@use "../variables" as *;
+@use "bootstrap/scss/bootstrap" as *;
+
+systelab-file-selector {
+  .slab-file-selector {
+    input {
+      border-radius: $border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    input[readonly] {
+      border-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+
+      &:enabled {
+        background: white;
+      }
+    }
+
+    .btn {
+      border: 1px solid var(--slab_component_border_color);
+    }
+  }
+}

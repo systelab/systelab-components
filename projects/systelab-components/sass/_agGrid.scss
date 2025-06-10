@@ -112,11 +112,11 @@ $icon-rowaction-font-size: 20px;
   overflow: hidden;
 }
 
-.ag-theme-fresh .ag-root-wrapper {
+.ag-theme-alpine .ag-root-wrapper {
   border: none !important;
 }
 
-.ag-theme-fresh .ag-ltr .ag-root {
+.ag-theme-alpine .ag-ltr .ag-root {
   border: none;
   overflow: hidden;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
@@ -169,7 +169,7 @@ systelab-spinner-cell {
   display: flex;
 }
 
-.ag-theme-fresh .ag-row-drag {
+.ag-theme-alpine .ag-row-drag {
   background: none;
   width: 100%;
   position: absolute;
