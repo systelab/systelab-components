@@ -421,4 +421,16 @@ describe('Systelab Grid', () => {
 
 		expect(getNumberOfRowsSelected(fixture)).toEqual(1);
 	});
+
+	it('should startCellEditorWithTab be false when the start edition without tab key', ()=> {
+		fixture.componentInstance.grid['onCellEditingStarted']({event: null});
+
+		expect(fixture.componentInstance.grid.startCellEditorWithTab).toBeFalse();
+	})
+
+	it('should startCellEditorWithTab be true when the start edition with tab key', ()=> {
+		fixture.componentInstance.grid['onCellEditingStarted']({event: { key: 'Tab'}});
+
+		expect(fixture.componentInstance.grid.startCellEditorWithTab).toBeTrue();
+	})
 });

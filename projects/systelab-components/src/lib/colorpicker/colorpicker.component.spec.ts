@@ -151,19 +151,16 @@ describe('Systelab Color picker', () => {
 			});
 	});
 
-	it('should call method change when a color is selected', (done) => {
+	it('should call method change when a color is selected', async () => {
 		spyOn(fixture.componentInstance, 'doChange');
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnColor(fixture, '#008000');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.doChange)
-							.toHaveBeenCalled();
-						done();
-					});
-			});
+		fixture.detectChanges();
+		await fixture.whenStable();
+		clickOnColor(fixture, '#008000');
+		fixture.detectChanges();
+		await fixture.whenStable();
+		expect(fixture.componentInstance.doChange)
+			.toHaveBeenCalled();
 	});
 
 	it('should have the show the color set', (done) => {

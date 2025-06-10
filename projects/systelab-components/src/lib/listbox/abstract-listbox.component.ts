@@ -132,6 +132,19 @@ export abstract class AbstractListBox<T> implements OnInit {
 			}
 		];
 
+		if (this.multipleSelection && !this.hideChecks) {
+			colDefs.unshift({
+				colId:             'selectCol',
+				headerName:        '',
+				checkboxSelection: true,
+				width:             this.getCheckColumnWidth(),
+				suppressSizeToFit: true,
+				resizable:         false,
+				suppressMovable:   true,
+				pinned:            'left',
+				cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
+			});
+		}
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
 
 		return colDefs;

@@ -114,8 +114,10 @@ import {
 } from './components/progress-bars/progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 import { ShowcaseImageViewerComponent } from './components/image-viewer/showcase-image-viewer.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import { environment } from '../environments/environment';
-import { themeQuartz } from 'ag-grid-community';
+import { ComboboxSearcherComponent } from './components/searcher/combobox-searcher.component';
+import { ShowcaseInnerTreeGenericComboboxComponent } from './components/combobox/showcase-inner-tree-generic.combobox.component';
+import { ShowcaseApiPaginateCombobox } from './components/combobox/showcase-api-paginate.combobox';
+import { ShowcaseAccordion } from './components/accordion/showcase-accordion.component';
 import { SystelabComponentsModule } from 'systelab-components';
 
 @NgModule({ declarations: [
@@ -206,7 +208,10 @@ import { SystelabComponentsModule } from 'systelab-components';
         ShowcaseInteractiveComponent,
         ShowcaseProgressBarWithTextDialog,
         ShowcaseImageViewerComponent,
-    ],
+    ComboboxSearcherComponent,
+                ShowcaseInnerTreeGenericComboboxComponent,
+                ShowcaseApiPaginateCombobox,
+                ShowcaseAccordion],
     bootstrap: [ShowcaseComponent],
     imports: [
         A11yModule,

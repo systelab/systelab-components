@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GridReadyEvent, IGetRowsParams } from 'ag-grid-community';
+import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -173,13 +173,13 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public clearText(event: MouseEvent): void {
 		this.input.nativeElement.value = '';
-		this.doSearch(event);
+		this.doSearchText('');
 	}
 
 	public onEnterDoSelect(event: KeyboardEvent) {
-		if (this.isDropdownOpened) {
+		if (this.isDropdownOpened && this.gridOptions.api.getRenderedNodes().length > 0) {
 			this.gridApi.getDisplayedRowAtIndex(0).setSelected(true);
+			this.selectedItemChange.emit(this.gridOptions.api.getDisplayedRowAtIndex(0).data);
 		}
 	}
-
 }

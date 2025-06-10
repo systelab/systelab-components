@@ -9,6 +9,9 @@ export abstract class AbstractSearcher<T> {
 	public id: number | string;
 	public multipleSelectedItemList: Array<T>;
 	public multipleSelection: boolean = false;
+	public treeSearcher: boolean = false;
+	public parentSelectable: boolean = false;
+	public useIdInMultipleSelectionGrid = false
 
 	protected constructor() {
 

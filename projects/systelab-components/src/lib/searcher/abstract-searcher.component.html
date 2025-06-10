@@ -1,5 +1,4 @@
 <div class="slab-searcher-container d-flex flex-nowrap" [ngClass]="{'disabled': isDisabled}" [ngStyle]="getInputHeight()">
-
     <div class="input-group" style="width: 120px;">
         <input #valueToSearch type="input" class="form-control"
                [(ngModel)]="code"
@@ -23,5 +22,3 @@
        [style.font-weight]="fontWeight"
        [style.font-style]="fontStyle" systelabTooltip="{{searchingValue}}">{{searchingValue}}</p>
 </div>
-
-

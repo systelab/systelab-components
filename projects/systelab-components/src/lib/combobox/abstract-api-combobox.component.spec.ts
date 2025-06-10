@@ -15,6 +15,7 @@ import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
 import { Column, GridReadyEvent, RowNode } from 'ag-grid-community';
+import { fi } from 'date-fns/locale';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -172,14 +173,14 @@ describe('Systelab Combobox', () => {
 		}
 	});
 
-	it('should check selected items', () => {
+	it('should check selected items', async () => {
 		fixture.componentInstance.multipleSelection = true;
 		clickButton(fixture);
+		fixture.detectChanges();
+		await fixture.whenStable();
 		const component = fixture.componentInstance;
-		component.combobox.doGridReady(gridEventMock)
-		const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
+		const listSelectedItems = component.combobox.gridOptions.api.getSelectedNodes().map(node => node.data);
 		expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
-
 	});
 
 	it('should check clear id', async () => {
