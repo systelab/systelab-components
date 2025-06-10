@@ -4,7 +4,8 @@ import { PreferencesService } from 'systelab-preferences';
 @Component({
 	selector:    'systelab-accordion',
 	templateUrl: './accordion.component.html',
-	styleUrls: ['./accordion.component.scss']
+	styleUrls: ['./accordion.component.scss'],
+	standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class Accordion implements OnInit {

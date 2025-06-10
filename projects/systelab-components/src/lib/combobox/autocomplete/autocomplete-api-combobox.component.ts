@@ -173,13 +173,13 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public clearText(event: MouseEvent): void {
 		this.input.nativeElement.value = '';
-		this.doSearchText('');
+		this.doSearch(event);
 	}
 
 	public onEnterDoSelect(event: KeyboardEvent) {
-		if (this.isDropdownOpened && this.gridOptions.api.getRenderedNodes().length > 0) {
+		if (this.isDropdownOpened) {
 			this.gridApi.getDisplayedRowAtIndex(0).setSelected(true);
-			this.selectedItemChange.emit(this.gridOptions.api.getDisplayedRowAtIndex(0).data);
 		}
 	}
+
 }
