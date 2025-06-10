@@ -48,24 +48,6 @@ describe('Systelab Accordion', () => {
 		expect(maxHeight).toEqual(component.contentMaxHeight);
 	});
 
-	it('should be collapsed if is expanded and clicks icon button', async () => {
-		component.isCollapsed = false;
-		const collapseExpandIcon = fixture.debugElement.query(By.css('.accordion-header'));
-		collapseExpandIcon.triggerEventHandler('click', null);
-		fixture.detectChanges();
-		await fixture.whenStable();
-		expect(component.isCollapsed).toBeTrue();
-	});
-
-	it('should be expanded if is collapsed and clicks icon button', async () => {
-		component.isCollapsed = true;
-		const collapseExpandIcon = fixture.debugElement.query(By.css('.accordion-header'));
-		collapseExpandIcon.triggerEventHandler('click', null);
-		fixture.detectChanges();
-		await fixture.whenStable();
-		expect(component.isCollapsed).toBeFalse();
-	});
-
 	it('should be get isCollapsed value from preferences id flag preferenceName exists', async () => {
 		const valueReturned: boolean = true;
 		const initialPreferenceName = 'testName';
@@ -79,5 +61,47 @@ describe('Systelab Accordion', () => {
 		expect(preferenceServiceGetSpy).toHaveBeenCalledWith(component.preferenceName, false);
 		expect(component.isCollapsed).toEqual(valueReturned);
 		expect(preferenceServicePutSpy).toHaveBeenCalledWith(component.preferenceName, valueReturned);
+	});
+
+	it('should to be collapsed if preferenceName is not defined', async () => {
+		component.isCollapsed = false;
+		component.preferenceName = undefined;
+		const preferenceServiceGetSpy = spyOn<any>(component['preferenceService'], 'get').and.callThrough();
+		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
+		component.ngOnInit();
+		await fixture.whenStable();
+		expect(component.isCollapsed).toBeFalse();
+		expect(preferenceServiceGetSpy).not.toHaveBeenCalled();
+		expect(preferenceServicePutSpy).not.toHaveBeenCalled();
+	});
+	it('should to call put method of preferences service when toggleAccordion is called', async () => {
+		const initialPreferenceName = 'testName';
+		component.preferenceName = initialPreferenceName;
+		component.ngOnInit();
+		await fixture.whenStable();
+		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
+		component.toggleAccordion();
+		await fixture.whenStable();
+		expect(preferenceServicePutSpy).toHaveBeenCalledWith(`${initialPreferenceName}.${component['preferenceSuffix']}`, component.isCollapsed);
+	});
+	it('should to collapse or uncollapse the accordion when click collapse button', async () => {
+		const initialPreferenceName = 'testName';
+		const isCollapsed = false;
+		component.isCollapsed = isCollapsed;
+		component.preferenceName = initialPreferenceName;
+		component.ngOnInit();
+		await fixture.whenStable();
+		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
+		component.toggleAccordion();
+		await fixture.whenStable();
+		expect(component.isCollapsed).toBe(!isCollapsed);
+	});
+	it('should to call toggleAccordion method when clicks icon button', async () => {
+		const collapseExpandButton = fixture.debugElement.query(By.css('.accordion-header button'));
+		const toggleAccordionSpy = spyOn(component, 'toggleAccordion').and.callThrough();
+		collapseExpandButton.triggerEventHandler('click', null);
+		fixture.detectChanges();
+		await fixture.whenStable();
+		expect(toggleAccordionSpy).toHaveBeenCalled();
 	});
 });
