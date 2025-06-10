@@ -11,6 +11,8 @@ import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
 import { Component } from "@angular/core";
 import { AbstractGrid } from "systelab-components";
+import { GridContextMenuComponent } from './grid-context-menu-component';
+import createSpyObj = jasmine.createSpyObj;
 
 
 type TestData = {
@@ -33,11 +35,11 @@ type TestData = {
     public dotsClicked(event: MouseEvent): void {
         super.dotsClicked(event)
     }
-    
+
     public refresh(params: any): boolean {
-        return super.refresh(params)    
+        return super.refresh(params)
     }
-    
+
 };
 
 describe('GridContextMenuCellRendererComponent', ()=>{
@@ -47,6 +49,7 @@ describe('GridContextMenuCellRendererComponent', ()=>{
     const containerMock = {
         removeSelectionOnOpenContextMenu: false,
         getSelectedRows: () => [{id: 16, row: 0}],
+        popupmenu: createSpyObj('popupmenu', ['closeDropDown']),
         dotsClicked: (rowIndex, selectedRows, event) => {},
         gridOptions: {
             api: {
@@ -96,7 +99,7 @@ describe('GridContextMenuCellRendererComponent', ()=>{
         it('Should set the properties container, rowIndex & data to the values passed on the params', ()=>{
 
             component.agInit(paramsMock);
-            
+
             expect(component['container']).toBe(paramsMock.context.componentParent)
             expect(component.rowIndex).toBe(paramsMock.rowIndex)
             expect(component.data).toEqual(paramsMock.data)
@@ -135,6 +138,11 @@ describe('GridContextMenuCellRendererComponent', ()=>{
             expect(containerMock.gridOptions.api.deselectAll).toHaveBeenCalled()
 
         })
+        it('Should to call closeDropDown of container when dotsClicked is called', () => {
+			component.agInit(paramsMock);
+            component.dotsClicked(eventMock);
+            expect((component['container'] as any).popupmenu.closeDropDown).toHaveBeenCalled();
+        });
     })
 
     describe('refresh', ()=>{
