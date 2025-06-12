@@ -76,6 +76,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 		const options: GridOptions = {};
 		options.columnDefs = this.getColumnDefsWithOptions();
+		options.selectionColumnDef = this.getSelectionColumnDefs();
+		options.rowSelection = this.getRowSelectionType();
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
 		options.suppressDragLeaveHidesColumns = true;
@@ -85,7 +87,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.defaultColDef = {
 			resizable: this.isColResizeEnabled()
 		};
-		options.rowSelection = this.getRowSelectionType();
 		options.localeText = {
 			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
 			loadingOoo:   this.i18nService.instant('COMMON_LOADING')
@@ -94,11 +95,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		if (this.hideHeader()) {
 			options.headerHeight = 0;
 		}
-		if (this.showChecks) {
-			if (this.multipleSelection) {
-				options.rowSelection.enableClickSelection = false;
-			}
-		}
+
 		options.isFullWidthRow = (isFullWidthRowParams: IsFullWidthRowParams) => this.getIsFullWidthRow(isFullWidthRowParams);
 		options.fullWidthCellRenderer = this.getFullWidthCellRenderer();
 		options.context = {componentParent: this};
@@ -198,7 +195,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			});
 	}
 
-	private getContextMenuColumnDef(width: number) {
+	private getContextMenuColumnDef(width: number): ColDef {
 		return {
 			colId:             AbstractGrid.contextMenuColId,
 			headerName:        '',
@@ -208,37 +205,44 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			resizable:         false,
 			suppressMovable:   true,
 			cellRenderer:      GridContextMenuCellRendererComponent
-		};
-	}
-
-	private getCheckColumnDef(width: number) {
-		return {
-			colId:             AbstractGrid.selectionColId,
-			headerName:        '',
-			headerCheckboxSelection: this.headerCheckboxSelection,
-			checkboxSelection: true,
-			pinned:            'left',
-			width:             width,
-			suppressSizeToFit: true,
-			resizable:         false,
-			suppressMovable:   true
-		};
+		} as ColDef;
 	}
 
 	protected abstract getColumnDefs(): Array<any>;
 
-	protected getColumnDefsWithOptions(): Array<any> {
-
-		const colDefs: Array<any> = this.getColumnDefs();
-
-		if (this.menu && this.menu.length > 0) {
-			colDefs.unshift(this.getContextMenuColumnDef(this.getContextMenuColumnWidth()));
+	private getSelectionColumnDefs(): ColDef {
+		let selectionColDef: ColDef;
+		if(this.getSpecialColumnDefs().length > 0) {
+			selectionColDef = this.getSpecialColumnDefs()[0];
+		} else {
+			selectionColDef = this.getColumnDefsWithOptions()[0];
 		}
-		if (this.showChecks) {
-			colDefs.unshift(this.getCheckColumnDef(this.getCheckColumnWidth()));
+		selectionColDef.type = 'selection';
+		selectionColDef.cellClass = 'checkbox-cell';
+		return selectionColDef;
+	}
+
+	private getSpecialColumnDefs(): Array<ColDef> {
+		const specialColumnDefs: Array<ColDef> = [];
+		if (this.menu && this.menu.length > 0) {
+			specialColumnDefs.push(this.getContextMenuColumnDef(this.getContextMenuColumnWidth()));
+		}
+		return specialColumnDefs;
+	}
+
+	private isUsingChecks(): boolean {
+		return !!this.showChecks || !!this.headerCheckboxSelection;
+	}
+
+	protected getColumnDefsWithOptions(): Array<ColDef> {
+		let colDefs: Array<ColDef> = this.getColumnDefs();
+		if(this.isUsingChecks() && this.getSpecialColumnDefs().length > 1) {
+			colDefs = [...this.getSpecialColumnDefs().filter((_,index) => index > 0), ...colDefs];
+		}
+		if(!this.isUsingChecks()) {
+			colDefs = [...this.getSpecialColumnDefs(), ...colDefs];
 		}
 		colDefs.forEach((colDef: ColDef) => this.suppressColumnSizeToFit(colDef));
-
 		return colDefs;
 	}
 
@@ -327,8 +331,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	protected getRowSelectionType(): RowSelectionOptions {
 		return {
 			mode: this.multipleSelection ? 'multiRow' : 'singleRow',
-			checkboxes: false,
-			headerCheckbox: false
+			checkboxes: this.showChecks,
+			headerCheckbox: this.headerCheckboxSelection,
+			enableClickSelection: !(this.showChecks && this.multipleSelection),
 		} as RowSelectionOptions;
 	}
 
@@ -482,11 +487,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	protected getContextMenuColumnWidth(): number {
-		return 40;
-	}
-
-	protected getCheckColumnWidth(): number {
-		return 35;
+		return this.isUsingChecks() ? 75 : 40;
 	}
 
 	private onBodyScroll(event: any): void {

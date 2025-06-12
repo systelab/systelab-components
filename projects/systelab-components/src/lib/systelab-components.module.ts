@@ -106,7 +106,7 @@ import {
 import { TestIdDirective } from './directives/test-id.directive';
 import { SearcherTreeHeaderRendererComponent } from './grid/custom-cells/searcher-tree-header/searcher-tree-header-renderer.component';
 import { Accordion } from './accordion/accordion.component';
-import { ClientSideRowModelModule, ColumnApiModule, ColumnAutoSizeModule, CustomEditorModule, EventApiModule, InfiniteRowModelModule, LocaleModule, ModuleRegistry, provideGlobalGridOptions, RowApiModule, RowDragModule, RowSelectionModule, RowStyleModule, TooltipModule, ValidationModule } from 'ag-grid-community';
+import { CellStyleModule, ClientSideRowModelModule, ColumnApiModule, ColumnAutoSizeModule, CustomEditorModule, EventApiModule, InfiniteRowModelModule, LocaleModule, ModuleRegistry, provideGlobalGridOptions, RowApiModule, RowDragModule, RowSelectionModule, RowStyleModule, TooltipModule, ValidationModule } from 'ag-grid-community';
 
 export const factory = () => {
 	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
@@ -328,7 +328,7 @@ export class SystelabComponentsModule {
 		ModuleRegistry.registerModules([ InfiniteRowModelModule,
 			ClientSideRowModelModule, ValidationModule, EventApiModule, RowApiModule, ColumnApiModule,
 			RowSelectionModule, TooltipModule, ColumnAutoSizeModule, RowDragModule, RowStyleModule,
-			LocaleModule, CustomEditorModule ]);
+			LocaleModule, CustomEditorModule, CellStyleModule ]);
 
 		provideGlobalGridOptions({
 			theme: 'legacy'
