@@ -261,40 +261,39 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected selectItemInGrid(): void {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.forEachNode(node => {
-				if (node.data) {
-					if (this.multipleSelection) {
-						if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
-							if (this.multipleSelectedItemList
-								.filter((selectedItem) => {
-									return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
-								}).length > 0) {
-								node.setSelected(true);
-							} else {
-								node.setSelected(false);
-							}
+		this.gridApi?.forEachNode(node => {
+			if (node.data) {
+				if (this.multipleSelection) {
+					if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
+						if (this.multipleSelectedItemList
+							.filter((selectedItem) => {
+								return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
+							}).length > 0) {
+							node.setSelected(true);
 						} else {
 							node.setSelected(false);
 						}
 					} else {
-						if (!this.selectedItem && this.selectFirstItem) {
-							if (node.rowIndex === 0) {
-								node.setSelected(true);
-								this.selectedItem = node.data;
-								this.selectedItemChange.emit(node.data);
-								return;
-							}
-						} else if (this.selectedItem) {
-							if (this.getRowNodeId(node.data) === this.selectedItem[this.getIdField()]) {
-								node.setSelected(true);
-								return;
-							}
+						node.setSelected(false);
+					}
+				} else {
+					if (!this.selectedItem && this.selectFirstItem) {
+						if (node.rowIndex === 0) {
+							node.setSelected(true);
+							this.selectedItem = node.data;
+							this.selectedItemChange.emit(node.data);
+							return;
+						}
+					} else if (this.selectedItem) {
+						if (this.getRowNodeId(node.data) === this.selectedItem[this.getIdField()]) {
+							node.setSelected(true);
+							return;
 						}
 					}
 				}
-			});
-		}
+			}
+		});
+
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {
@@ -306,23 +305,19 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	private unselectAllNodes() {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.forEachNode(node => {
-				if (node && this.getRowNodeId(node.data) !== this.getAllFieldID()) {
-					node.setSelected(false);
-				}
-			});
-		}
+		this.gridApi?.forEachNode(node => {
+			if (node && this.getRowNodeId(node.data) !== this.getAllFieldID()) {
+				node.setSelected(false);
+			}
+		});
 	}
 
 	private unselectNodeAll() {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.forEachNode(node => {
-				if (node && this.getRowNodeId(node.data) === this.getAllFieldID()) {
-					node.setSelected(false);
-				}
-			});
-		}
+		this.gridApi?.forEachNode(node => {
+			if (node && this.getRowNodeId(node.data) === this.getAllFieldID()) {
+				node.setSelected(false);
+			}
+		});
 	}
 
 	public onRowDragEnd(event: any) {

@@ -166,7 +166,6 @@ const clickMenuHeaderOnRow = (fixture: ComponentFixture<GridTestComponent>) => {
 };
 
 const clickOption = (fixture: ComponentFixture<GridTestComponent>, option: number) => {
-	console.log(fixture.debugElement.nativeElement.querySelectorAll('li'));
 	fixture.debugElement.nativeElement.querySelectorAll('li')[option].click();
 	fixture.detectChanges();
 };

@@ -83,9 +83,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 			treeValue.selected = false;
 			return treeValue;
 		});
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.redrawRows();
-		}
+		this.gridApi?.redrawRows();
 	}
 
 	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -279,27 +277,25 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 	}
 
 	protected selectTreeItemInGrid(): void {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.forEachNode(node => {
-				if (!this.multipleSelection) {
-					if (!this.selectedTreeItem && this.selectFirstItem) {
-						if (node.rowIndex === 0) {
-							node.setSelected(true);
-							this.selectedTreeItem = node.data;
-							this.selectedTreeItemChange.emit(node.data);
-							return;
-						}
-					} else if (this.selectedTreeItem && this.selectedTreeItem.nodeData) {
-						const level = this.getIdField(this.selectedTreeItem.level);
-						if (node.data.nodeData[level] === this.selectedTreeItem.nodeData[level]
-							&& node.data.level === this.selectedTreeItem.level) {
-							node.setSelected(true);
-							return;
-						}
+		this.gridApi?.forEachNode(node => {
+			if (!this.multipleSelection) {
+				if (!this.selectedTreeItem && this.selectFirstItem) {
+					if (node.rowIndex === 0) {
+						node.setSelected(true);
+						this.selectedTreeItem = node.data;
+						this.selectedTreeItemChange.emit(node.data);
+						return;
+					}
+				} else if (this.selectedTreeItem && this.selectedTreeItem.nodeData) {
+					const level = this.getIdField(this.selectedTreeItem.level);
+					if (node.data.nodeData[level] === this.selectedTreeItem.nodeData[level]
+						&& node.data.level === this.selectedTreeItem.level) {
+						node.setSelected(true);
+						return;
 					}
 				}
-			});
-		}
+			}
+		});
 	}
 
 	protected selectUnselectChildTree(event: any) {

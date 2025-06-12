@@ -565,11 +565,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getSelectedRow(): T {
-		if (this.gridOptions && this.gridApi) {
-			const selectedRow: Array<T> = this.gridApi.getSelectedRows();
-			if (selectedRow != null) {
-				return selectedRow[0];
-			}
+		const selectedRow: Array<T> = this.gridApi?.getSelectedRows();
+		if (selectedRow != null) {
+			return selectedRow[0];
 		}
 		return undefined;
 	}
@@ -704,23 +702,19 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	private unselectAllNodesInGridOptions() {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.forEachNode(node => {
-				if (node && this.getRowNodeId(node.data) !== this.getAllFieldIDValue()) {
-					node.setSelected(false);
-				}
-			});
-		}
+		this.gridApi?.forEachNode(node => {
+			if (node && this.getRowNodeId(node.data) !== this.getAllFieldIDValue()) {
+				node.setSelected(false);
+			}
+		});
 	}
 
 	private unselectNodeAllInGridOptions() {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.forEachNode(node => {
-				if (node && this.getRowNodeId(node.data) === this.getAllFieldIDValue()) {
-					node.setSelected(false);
-				}
-			});
-		}
+		this.gridApi?.forEachNode(node => {
+			if (node && this.getRowNodeId(node.data) === this.getAllFieldIDValue()) {
+				node.setSelected(false);
+			}
+		});
 	}
 
 	public setCodeDescriptionById() {
