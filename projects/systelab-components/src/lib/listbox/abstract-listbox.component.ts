@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GetRowIdParams, GridApi, GridOptions, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
+import { ColDef, Column, GetRowIdParams, GridApi, GridOptions, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
@@ -80,16 +80,16 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions = {};
 
 		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
-
 		if (this.multipleSelection && !this.hideChecks) {
-			this.gridOptions.rowSelection = {enableClickSelection: false} as RowSelectionOptions;
+			this.gridOptions.selectionColumnDef = this.getSelectionColumnDefs();
+			this.gridOptions.rowSelection = {enableClickSelection: false, checkboxes: true, headerCheckbox: this.showAll, selectAll: 'all'} as RowSelectionOptions;
 			this.gridOptions.rowClassRules = {
 				'ag-row-disabled': (params) => {
 					return this.isDisabled;
 				},
 			};
 		} else {
-			this.gridOptions.rowSelection = {enableClickSelection: !this.isDisabled} as RowSelectionOptions;
+			this.gridOptions.rowSelection = {enableClickSelection: !this.isDisabled, checkboxes: false, headerCheckbox: false} as RowSelectionOptions;
 		}
 
 		this.gridOptions.rowHeight = Number(rowHeight);
@@ -98,7 +98,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 		this.gridOptions.defaultColDef = {};
 		this.gridOptions.defaultColDef.resizable = false;
 		(this.gridOptions.rowSelection as RowSelectionOptions).mode = this.multipleSelection ? 'multiRow' : 'singleRow';
-		(this.gridOptions.rowSelection as RowSelectionOptions).checkboxes = this.multipleSelection && !this.hideChecks;
 		(this.gridOptions.rowSelection as RowSelectionOptions).enableClickSelection = !this.isDisabled;
 		this.gridOptions.context = {componentParent: this};
 
@@ -121,6 +120,22 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return '';
 	}
 
+	private getSelectionColumnDefs(): ColDef {
+
+		return {
+			type: 		   'selection',
+			colId:             'selectCol',
+			headerName:        '',
+			width:             this.getCheckColumnWidth(),
+			suppressSizeToFit: true,
+			resizable:         false,
+			suppressMovable:   true,
+			pinned:            'left',
+			cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
+		} as ColDef;
+
+	}
+
 	protected getColumnDefsWithOptions(): Array<any> {
 
 		const colDefs: Array<any> = [
@@ -131,20 +146,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 				tooltipField: this.getDescriptionField()
 			}
 		];
-
-		if (this.multipleSelection && !this.hideChecks) {
-			colDefs.unshift({
-				colId:             'selectCol',
-				headerName:        '',
-				checkboxSelection: true,
-				width:             this.getCheckColumnWidth(),
-				suppressSizeToFit: true,
-				resizable:         false,
-				suppressMovable:   true,
-				pinned:            'left',
-				cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
-			});
-		}
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
 
 		return colDefs;

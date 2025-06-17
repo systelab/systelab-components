@@ -17,11 +17,12 @@ export class ShowcaseListBoxComponent implements OnInit {
 	public selectedItem;
 	public selectedTreeItem;
 	public multipleSelectedItemList;
+	public selectAllmultipleSelectedItemList;
 	public multipleSelectedItemListTree;
 
 	constructor() {
 		this.multipleSelectedItemList = [new Element('F', 'COMMON_FEMALE')];
-
+		this.selectAllmultipleSelectedItemList = [...this.multipleSelectedItemList];
 		this.multipleSelectedItemListTree = [];
 		this.multipleSelectedItemListTree.push({
 			'centerID':           1,

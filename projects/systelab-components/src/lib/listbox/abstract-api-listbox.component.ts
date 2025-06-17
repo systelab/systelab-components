@@ -34,7 +34,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 
 	public getRows(params: IGetRowsParams): void {
 
-		this.gridApi.showLoadingOverlay();
+		this.gridApi.setGridOption("loading", true);
 		const page: number = params.endRow / this.gridOptions.paginationPageSize;
 		const pageSize: number = this.gridOptions.paginationPageSize;
 
@@ -49,6 +49,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 				.subscribe({
 						next:  (previousPage: Array<T>) => {
 							this.gridApi.hideOverlay();
+							this.gridApi.setGridOption("loading", false);
 							const itemArray: Array<T> = [];
 							const totItems: number = Number(this.getTotalItems() + showAllElementNumber);
 
@@ -60,6 +61,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 						},
 						error: () => {
 							this.gridApi.hideOverlay();
+							this.gridApi.setGridOption("loading", false);
 							params.failCallback();
 						}
 					}

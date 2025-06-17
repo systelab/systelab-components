@@ -179,7 +179,7 @@ describe('Systelab Combobox', () => {
 		fixture.detectChanges();
 		await fixture.whenStable();
 		const component = fixture.componentInstance;
-		const listSelectedItems = component.combobox.gridOptions.api.getSelectedNodes().map(node => node.data);
+		const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
 		expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 	});
 
