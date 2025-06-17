@@ -82,9 +82,6 @@ $context-menu-width: 39px;
       .ag-header-cell-resize {
         cursor: ew-resize;
         border-right: 5px solid var(--slab_table_border_color);
-        &::after {
-          display: none;
-        }
       }
     }
   }
@@ -93,10 +90,6 @@ $context-menu-width: 39px;
 
 @mixin ag-row() {
   .ag-row {
-
-    .checkbox-cell .icon-context-menu {
-      padding-top: 0;
-    }
 
     .icon-context-menu {
       padding-top: math.ceil(math.div(($grid-cell-height - $slab-icon-context-menu-font-size), 2));
@@ -252,9 +245,6 @@ $context-menu-width: 39px;
     .ag-header-cell-comp-wrapper {
       justify-content: center !important;
       font-weight: normal;
-    }
-    .ag-header-cell-resize::after {
-      display: none;
     }
   }
 
