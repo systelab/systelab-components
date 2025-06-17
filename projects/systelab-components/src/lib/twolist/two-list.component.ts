@@ -126,7 +126,7 @@ export class TwoListComponent {
 	}
 
 	public removeItemsFromList(list: Array<any>, itemsToRemove: Array<any>): Array<any> {
-		return list.filter(element => !itemsToRemove.some(item => item.colId === element.colId));
+		return list.filter(element => !itemsToRemove.some(item => item?.colId === element?.colId));
 	}
 
 	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {

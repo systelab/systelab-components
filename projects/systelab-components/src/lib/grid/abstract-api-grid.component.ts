@@ -33,6 +33,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 
 	public getRows(params: IGetRowsParams): void {
+		this.gridApi.updateGridOptions({loading: true});
 		this.getData(params.endRow / this.gridOptions.paginationPageSize, this.gridOptions.paginationPageSize)
 			.subscribe({
 				next:  (page: Array<T>) => this.putPage(page, this.getTotalItems(), params),
@@ -41,17 +42,12 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	}
 
 	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {
-		this.gridApi.hideOverlay();
+		this.gridApi.updateGridOptions({loading: false});
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
 			this.gridApi.showNoRowsOverlay();
 		}
 		this.gridApi.updateGridOptions({loading: false});
-	}
-
-	public override doGridReady(event: any) {
-		super.doGridReady(event);
-		this.refresh();
 	}
 
 	public refresh(): void {

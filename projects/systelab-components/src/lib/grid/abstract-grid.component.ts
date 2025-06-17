@@ -76,7 +76,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 		const options: GridOptions = {};
 		options.columnDefs = this.getColumnDefsWithOptions();
-		options.selectionColumnDef = this.getSelectionColumnDefs();
+		options.selectionColumnDef = this.getCheckColumnDef(this.getCheckColumnWidth());
 		options.rowSelection = this.getRowSelectionType();
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
@@ -208,41 +208,31 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		} as ColDef;
 	}
 
+	private getCheckColumnDef(width: number): ColDef {
+		return {
+			colId:             AbstractGrid.selectionColId,
+			type: 'selection',
+			cellClass: 'checkbox-cell',
+			headerName:        '',
+			pinned:            'left',
+			maxWidth: width,
+			suppressSizeToFit: true,
+			resizable:         false,
+			suppressMovable:   true
+		} as ColDef;
+	}
+
 	protected abstract getColumnDefs(): Array<any>;
 
-	private getSelectionColumnDefs(): ColDef {
-		let selectionColDef: ColDef;
-		if(this.getSpecialColumnDefs().length > 0) {
-			selectionColDef = this.getSpecialColumnDefs()[0];
-		} else {
-			selectionColDef = this.getColumnDefsWithOptions()[0];
-		}
-		selectionColDef.type = 'selection';
-		selectionColDef.cellClass = 'checkbox-cell';
-		return selectionColDef;
-	}
-
-	private getSpecialColumnDefs(): Array<ColDef> {
-		const specialColumnDefs: Array<ColDef> = [];
-		if (this.menu && this.menu.length > 0) {
-			specialColumnDefs.push(this.getContextMenuColumnDef(this.getContextMenuColumnWidth()));
-		}
-		return specialColumnDefs;
-	}
-
-	private isUsingChecks(): boolean {
-		return !!this.showChecks || !!this.headerCheckboxSelection;
-	}
-
 	protected getColumnDefsWithOptions(): Array<ColDef> {
-		let colDefs: Array<ColDef> = this.getColumnDefs();
-		if(this.isUsingChecks() && this.getSpecialColumnDefs().length > 1) {
-			colDefs = [...this.getSpecialColumnDefs().filter((_,index) => index > 0), ...colDefs];
+		const colDefs: Array<any> = this.getColumnDefs();
+
+		if (this.menu && this.menu.length > 0) {
+			colDefs.unshift(this.getContextMenuColumnDef(this.getContextMenuColumnWidth()));
 		}
-		if(!this.isUsingChecks()) {
-			colDefs = [...this.getSpecialColumnDefs(), ...colDefs];
-		}
+
 		colDefs.forEach((colDef: ColDef) => this.suppressColumnSizeToFit(colDef));
+
 		return colDefs;
 	}
 
@@ -424,7 +414,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected applyGridColumnOptions(gridApi: GridApi, columnOptions: GridColumnsOptions): void {
 		let numberOfFixedInitialColumns = (gridApi.getColumn('contextMenu') !== null) ? 1 : 0;
-		numberOfFixedInitialColumns += (gridApi.getColumn('selectCol') !== null) ? 1 : 0;
+		numberOfFixedInitialColumns += this.showChecks ? 1 : 0;
 		const columns: Map<string, Column> = new Map<string, Column>(gridApi.getColumns().map(col => [col.getColId(), col]));
 		const colsToApplyGridOptions: Column[] = [];
 		columnOptions.visible.forEach((tlp, index) => {
@@ -487,7 +477,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	protected getContextMenuColumnWidth(): number {
-		return this.isUsingChecks() ? 75 : 40;
+		return 40;
+	}
+
+	protected getCheckColumnWidth(): number {
+		return 35;
 	}
 
 	private onBodyScroll(event: any): void {
