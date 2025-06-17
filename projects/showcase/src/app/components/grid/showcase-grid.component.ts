@@ -4,8 +4,9 @@ import { ShowcaseGridUtil } from './showcase-grid.util';
 import { GridContextMenuActionData, GridContextMenuOption } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-grid',
-	templateUrl: 'showcase-grid.component.html'
+    selector: 'showcase-grid',
+    templateUrl: 'showcase-grid.component.html',
+    standalone: false
 })
 export class ShowcaseGridComponent implements OnInit {
 

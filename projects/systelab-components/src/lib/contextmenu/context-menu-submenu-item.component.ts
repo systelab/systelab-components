@@ -3,8 +3,9 @@ import { AbstractContextMenuComponent } from './abstract-context-menu.component'
 import { ContextMenuOption } from './context-menu-option';
 
 @Component({
-	selector:    'systelab-context-menu-submenu-item',
-	templateUrl: 'context-menu-submenu-item.component.html'
+    selector: 'systelab-context-menu-submenu-item',
+    templateUrl: 'context-menu-submenu-item.component.html',
+    standalone: false
 })
 export class ContextMenuSubmenuItemComponent {
 

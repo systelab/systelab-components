@@ -14,8 +14,9 @@ export class ShowcaseAddRemoveListData {
 }
 
 @Component({
-	selector:    'systelab-inner-add-remove-list',
-	templateUrl: '../../../../../systelab-components/src/lib/add-remove-list/abstract-add-remove-list.component.html'
+    selector: 'systelab-inner-add-remove-list',
+    templateUrl: '../../../../../systelab-components/src/lib/add-remove-list/abstract-add-remove-list.component.html',
+    standalone: false
 })
 export class ShowcaseInnerAddRemoveListComponent extends AbstractAddRemoveList<ShowcaseAddRemoveListData> {
 

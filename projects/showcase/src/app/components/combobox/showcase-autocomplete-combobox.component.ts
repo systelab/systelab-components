@@ -8,9 +8,10 @@ export class ShowcaseCities {
 }
 
 @Component({
-	selector:    'showcase-autocomplete',
-	//templateUrl: '../../../../../node_modules/systelab-components/html/autocomplete-combobox.component.html' *This is the template path to be used in your project*
-	templateUrl: '../../../../../systelab-components/src/lib/combobox/autocomplete/autocomplete-combobox.component.html'
+    selector: 'showcase-autocomplete',
+    //templateUrl: '../../../../../node_modules/systelab-components/html/autocomplete-combobox.component.html' *This is the template path to be used in your project*
+    templateUrl: '../../../../../systelab-components/src/lib/combobox/autocomplete/autocomplete-combobox.component.html',
+    standalone: false
 })
 
 export class ShowcaseAutocomplete extends AutocompleteApiComboBox<ShowcaseCities> {

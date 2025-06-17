@@ -11,13 +11,14 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { DialogBottomComponent } from './dialog-bottom.component';
 
 @Component({
-	selector: 'systelab-dialog-bottom-test',
-	template: `
+    selector: 'systelab-dialog-bottom-test',
+    template: `
                 <div>
                     <systelab-dialog-bottom></systelab-dialog-bottom>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class DialogBottomTestComponent {
 

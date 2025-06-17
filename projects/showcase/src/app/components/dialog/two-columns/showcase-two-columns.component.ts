@@ -2,8 +2,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { TouchSpinValues } from 'systelab-components';
 
 @Component( {
-	selector:    'showcase-two-columns-panel',
-	templateUrl: 'showcase-two-columns.component.html'
+    selector: 'showcase-two-columns-panel',
+    templateUrl: 'showcase-two-columns.component.html',
+    standalone: false
 } )
 export class ShowcaseTwoColumnsComponent {
 

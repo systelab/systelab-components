@@ -30,13 +30,14 @@ const getImage= (fixture: ComponentFixture<TimeLineTestComponent>, i: number) =>
 	fixture.debugElement.nativeElement.querySelectorAll('li .slab-timeline-badge')[i].innerHTML;
 
 @Component({
-	selector: 'systelab-timeline-test',
-	template: `
+    selector: 'systelab-timeline-test',
+    template: `
                   <div>
                       <systelab-timeline [events]="events"></systelab-timeline>
                   </div>
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class TimeLineTestComponent {
 

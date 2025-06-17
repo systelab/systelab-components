@@ -3,14 +3,15 @@ import { DataFilterPipe } from './datafilter.pipe';
 import { CurrentSelectionStatus, TwoListItem } from './two-list-utilities';
 
 @Component({
-	selector:    'systelab-two-list',
-	templateUrl: 'two-list.component.html',
-	styles:      [`
+    selector: 'systelab-two-list',
+    templateUrl: 'two-list.component.html',
+    styles: [`
         :host {
             width: 100%;
             height: 100%;
         }
-	`]
+	`],
+    standalone: false
 })
 export class TwoListComponent {
 
@@ -125,7 +126,7 @@ export class TwoListComponent {
 	}
 
 	public removeItemsFromList(list: Array<any>, itemsToRemove: Array<any>): Array<any> {
-		return list.filter(element => !itemsToRemove.some(item => item.colId === element.colId));
+		return list.filter(element => !itemsToRemove.some(item => item?.colId === element?.colId));
 	}
 
 	public selectAvailableItem(element: TwoListItem, ev: KeyboardEvent) {

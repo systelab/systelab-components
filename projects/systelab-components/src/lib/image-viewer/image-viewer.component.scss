@@ -1,4 +1,4 @@
-@import "../../../sass/modern/variables";
+@use "../../../sass/modern/variables" as *;
 
 #imageViewerHeader {
   position: absolute;

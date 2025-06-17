@@ -27,7 +27,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		this.gridOptions.cacheBlockSize = 20;
 		this.gridOptions.cacheOverflowSize = 2;
 		this.gridOptions.maxConcurrentDatasourceRequests = 1;
-		this.gridOptions.infiniteInitialRowCount = 0;
+		this.gridOptions.infiniteInitialRowCount = 1;
 		this.gridOptions.maxBlocksInCache = 100;
 
 	}
@@ -41,9 +41,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	public abstract getTotalItems(): number;
 
 	public override refresh(params: any): boolean {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.setDatasource(this);
-		}
+		this.gridApi?.setGridOption('datasource', this);
 		return true;
 	}
 

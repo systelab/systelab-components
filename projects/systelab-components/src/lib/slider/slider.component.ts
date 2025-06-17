@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
-	selector:    'systelab-slider',
-	templateUrl: 'slider.component.html'
+    selector: 'systelab-slider',
+    templateUrl: 'slider.component.html',
+    standalone: false
 })
 export class SliderComponent {
 

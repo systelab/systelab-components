@@ -9,8 +9,9 @@ class Element {
 }
 
 @Component( {
-	selector:    'systelab-no-yes-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-no-yes-select',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 } )
 
 export class NoYesSelect extends AbstractComboBox<Element> implements AfterViewInit{

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector:    'systelab-date-range-picker',
-	templateUrl: 'date-range-picker.component.html'
+    selector: 'systelab-date-range-picker',
+    templateUrl: 'date-range-picker.component.html',
+    standalone: false
 })
 export class DateRangepicker {
 

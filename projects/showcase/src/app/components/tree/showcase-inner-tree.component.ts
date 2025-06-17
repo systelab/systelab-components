@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AbstractTree } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-inner-tree',
-	templateUrl: '../../../../../systelab-components/src/lib/tree/abstract-tree.component.html'
+    selector: 'showcase-inner-tree',
+    templateUrl: '../../../../../systelab-components/src/lib/tree/abstract-tree.component.html',
+    standalone: false
 })
 export class ShowcaseInnerTreeComponent extends AbstractTree {
 

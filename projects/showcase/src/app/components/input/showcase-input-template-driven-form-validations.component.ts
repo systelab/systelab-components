@@ -6,8 +6,9 @@ class Info {
 }
 
 @Component({
-	selector:    'showcase-input-template-driven-form-validations',
-	templateUrl: 'showcase-input-template-driven-form-validations.component.html'
+    selector: 'showcase-input-template-driven-form-validations',
+    templateUrl: 'showcase-input-template-driven-form-validations.component.html',
+    standalone: false
 })
 export class ShowcaseInputTemplateDrivenFormValidationsComponent {
 

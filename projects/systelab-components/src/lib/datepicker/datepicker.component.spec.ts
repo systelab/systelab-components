@@ -14,15 +14,16 @@ import { TouchspinComponent } from '../spinner/spinner.component';
 import { DatepickerComponent } from './datepicker.component';
 
 @Component({
-	selector: 'systelab-datepicker-test',
-	template: `
+    selector: 'systelab-datepicker-test',
+    template: `
                   <div>
                       <systelab-datepicker [(currentDate)]="currentDate" [showTodayButton]="showTodayButton"
                                            [markPreviousAfterDate]="true"
                       ></systelab-datepicker>
                   </div>
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class DatepickerTestComponent {
 

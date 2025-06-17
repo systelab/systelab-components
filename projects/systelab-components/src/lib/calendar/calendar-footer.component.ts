@@ -2,8 +2,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {I18nService} from 'systelab-translate';
 
 @Component({
-	selector: 'systelab-calendar-footer',
-	templateUrl: 'calendar-footer.component.html'
+    selector: 'systelab-calendar-footer',
+    templateUrl: 'calendar-footer.component.html',
+    standalone: false
 })
 export class CalendarFooterComponent {
 

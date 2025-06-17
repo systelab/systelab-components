@@ -9,8 +9,9 @@ import { ChipsComponent } from './chips.component';
 import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
-	template: `
-                <systelab-chips [texts]="texts" [disabled]="disabled" [readonly]="readonly"></systelab-chips>`
+    template: `
+                <systelab-chips [texts]="texts" [disabled]="disabled" [readonly]="readonly"></systelab-chips>`,
+    standalone: false
 })
 export class ChipsTestComponent {
 
@@ -51,7 +52,6 @@ describe('Systelab Chips', () => {
 				AutoCompleteModule,
 			],
 			declarations: [
-				AutoComplete,
 				ChipsComponent,
 				ChipsTestComponent,
 			]
@@ -61,25 +61,18 @@ describe('Systelab Chips', () => {
 		chips = fixture.debugElement.children[0].componentInstance;
 	});
 
-	it('should be disabled', () => {
+	it('should be disabled', async () => {
 		setArrayValue(fixture, fixture.componentInstance.texts);
 		fixture.componentInstance.disabled = true;
 		fixture.detectChanges();
-
+		await fixture.whenStable();
 		const inputDefaultEl = fixture.debugElement.query(By.css('input')).nativeElement;
-		expect(inputDefaultEl.disabled)
-			.toEqual(true);
-		fixture.detectChanges();
-		fixture.componentInstance.disabled = true;
-		fixture.detectChanges();
-
-		const inputMultipleEl = fixture.debugElement.query(By.css('ul'))
-			.query(By.css('input'));
-		const multiContainer = fixture.debugElement.query(By.css('ul'));
-		expect(inputMultipleEl.properties.disabled)
-			.toEqual(true);
-		expect(multiContainer.nativeElement.className)
-			.toContain('p-disabled');
+		expect(inputDefaultEl.disabled).toBeTrue();
+		const inputMultipleEl = fixture.debugElement.query(By.css('ul input'));
+		expect(inputMultipleEl.nativeElement.disabled).toBeTrue();
+		const multiContainer = fixture.debugElement.query(By.css('p-autocomplete'));
+		console.log(multiContainer);
+		expect(multiContainer.nativeElement.children[0].className).toContain('p-disabled');
 	});
 
 	it('should be readonly', () => {
@@ -94,12 +87,9 @@ describe('Systelab Chips', () => {
 
 	it('should be multiple', () => {
 		setArrayValue(fixture, fixture.componentInstance.texts);
-		const spanEl = fixture.debugElement.query(By.css('span'));
-		const listEl = fixture.debugElement.query(By.css('ul'));
-		expect(spanEl.nativeElement.className)
-			.toContain('p-autocomplete-multiple');
-		expect(listEl.nativeElement.className)
-			.toContain('p-autocomplete-multiple-container');
+		const autoComplete = fixture.debugElement.query(By.css('p-autoComplete')).componentInstance;
+		expect(autoComplete.multiple).toBeTrue();
+		expect(fixture.componentInstance.texts.length).toBeGreaterThan(1);
 	});
 
 	it('filtered list is correct', fakeAsync(() => {
@@ -131,37 +121,33 @@ describe('Systelab Chips', () => {
 		flush();
 	}));
 
-	it('should select item', fakeAsync(() => {
+	it('should select item', async () => {
 		setArrayValue(fixture, fixture.componentInstance.texts);
 
-		const inputEl = fixture.debugElement.query(By.css('input'));
-		inputEl.nativeElement.dispatchEvent(new Event('focus'));
-		inputEl.nativeElement.click();
+		const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
+		inputEl.dispatchEvent(new Event('focus'));
+		inputEl.dispatchEvent(new Event('click'));
+		fixture.detectChanges();
+		await fixture.whenStable();
+
+		// Simulamos el valor de entrada
+		inputEl.value = 'New';
+		inputEl.dispatchEvent(new Event('input'));
+		fixture.detectChanges();
+		await fixture.whenStable();
+
+		// Esperamos que la lista se haya filtrado
+		const listItems = fixture.debugElement.queryAll(By.css('li'));
+		const firstItemEl = listItems[0].nativeElement; // Seleccionamos el primer ítem
+		firstItemEl.click(); // Simulamos el click en el primer ítem
 		fixture.detectChanges();
 
-		const selectItemSpy = spyOn(chips.autoComplete, 'selectItem')
-			.and
-			.callThrough();
-		inputEl.nativeElement.value = 'New';
-		inputEl.nativeElement.dispatchEvent(new Event('keydown'));
-		inputEl.nativeElement.dispatchEvent(new Event('input'));
-		inputEl.nativeElement.dispatchEvent(new Event('keyup'));
-		tick(300);
-		fixture.detectChanges();
+		await fixture.whenStable();
 
-		const firstItemEl = fixture.debugElement.queryAll(By.css('li'))[1].nativeElement;
-		firstItemEl.click();
-		fixture.detectChanges();
-
-		expect(chips.autoComplete.value[0])
-			.toEqual('New York');
-		expect(chips.autoComplete.value.length)
-			.toEqual(1);
-		expect(selectItemSpy)
-			.toHaveBeenCalled();
-
-		flush();
-	}));
+		// Verificamos que el valor de autocompletado esté correctamente seleccionado
+		expect(fixture.componentInstance.texts[0]).toEqual('New York');
+		expect(fixture.componentInstance.texts.length).toEqual(11);
+	});
 
 	it('should handle enter key press', fakeAsync(() => {
 		setArrayValue(fixture, fixture.componentInstance.texts);
@@ -196,5 +182,4 @@ describe('Systelab Chips', () => {
 		chips.onKeyEnter(event);
 		expect(hideSpy).toHaveBeenCalled();
 	}));
-
 });

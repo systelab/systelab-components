@@ -8,7 +8,8 @@ export class ShowcaseProgressBarDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-progressbar-dialog.component.html',
+    templateUrl: 'showcase-progressbar-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseProgressBarDialog implements ModalComponent<ShowcaseProgressBarDialogParameters> {
 

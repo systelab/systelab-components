@@ -6,8 +6,9 @@ import { ShowcaseProgressBarWithTextDialog, ShowcaseProgressBarWithTextDialogPar
 	from './progressbar-with-text-dialog/showcase-progressbar-with-text-dialog.component';
 
 @Component({
-	selector:    'showcase-progress-bar',
-	templateUrl: 'showcase-progress-bar.component.html'
+    selector: 'showcase-progress-bar',
+    templateUrl: 'showcase-progress-bar.component.html',
+    standalone: false
 })
 export class ShowcaseProgressBarComponent {
 

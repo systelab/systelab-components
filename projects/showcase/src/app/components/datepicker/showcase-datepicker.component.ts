@@ -3,8 +3,9 @@ import { Month, Week } from 'systelab-components';
 import { I18nService } from 'systelab-translate';
 
 @Component({
-	selector:    'showcase-datepicker',
-	templateUrl: 'showcase-datepicker.component.html'
+    selector: 'showcase-datepicker',
+    templateUrl: 'showcase-datepicker.component.html',
+    standalone: false
 })
 export class ShowcaseDatepickerComponent {
 

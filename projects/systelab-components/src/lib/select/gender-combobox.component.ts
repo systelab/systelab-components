@@ -9,8 +9,9 @@ class Element {
 }
 
 @Component({
-	selector:    'systelab-gender-select',
-	templateUrl: '../combobox/abstract-combobox.component.html'
+    selector: 'systelab-gender-select',
+    templateUrl: '../combobox/abstract-combobox.component.html',
+    standalone: false
 })
 
 export class GenderSelect extends AbstractComboBox<Element> implements OnInit {

@@ -3,7 +3,8 @@ import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Rend
 declare var jQuery: any;
 
 @Directive({
-	selector: '[systelabTooltip],[systelabTooltipHtml]'
+    selector: '[systelabTooltip],[systelabTooltipHtml]',
+    standalone: false
 })
 export class TooltipDirective implements AfterViewInit, OnDestroy, OnChanges {
 

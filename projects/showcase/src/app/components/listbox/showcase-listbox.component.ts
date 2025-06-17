@@ -8,19 +8,21 @@ class Element {
 }
 
 @Component({
-	selector:    'showcase-listbox',
-	templateUrl: 'showcase-listbox.component.html'
+    selector: 'showcase-listbox',
+    templateUrl: 'showcase-listbox.component.html',
+    standalone: false
 })
 export class ShowcaseListBoxComponent implements OnInit {
 
 	public selectedItem;
 	public selectedTreeItem;
 	public multipleSelectedItemList;
+	public selectAllmultipleSelectedItemList;
 	public multipleSelectedItemListTree;
 
 	constructor() {
 		this.multipleSelectedItemList = [new Element('F', 'COMMON_FEMALE')];
-
+		this.selectAllmultipleSelectedItemList = [...this.multipleSelectedItemList];
 		this.multipleSelectedItemListTree = [];
 		this.multipleSelectedItemListTree.push({
 			'centerID':           1,

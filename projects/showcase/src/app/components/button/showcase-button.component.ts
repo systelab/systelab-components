@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ChipButtonItem } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-button',
-	templateUrl: 'showcase-button.component.html'
+    selector: 'showcase-button',
+    templateUrl: 'showcase-button.component.html',
+    standalone: false
 })
 export class ShowcaseButtonComponent {
 

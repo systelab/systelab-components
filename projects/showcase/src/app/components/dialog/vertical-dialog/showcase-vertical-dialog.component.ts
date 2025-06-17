@@ -9,7 +9,8 @@ export class ShowcaseVerticaldDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-vertical-dialog.component.html',
+    templateUrl: 'showcase-vertical-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseVerticaldDialog implements ModalComponent<ShowcaseVerticaldDialogParameters> {
 
