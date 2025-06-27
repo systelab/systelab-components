@@ -1,14 +1,22 @@
-import { Component, Input, Renderer2 } from '@angular/core';
+import {Component, forwardRef, Input, Renderer2} from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
 import { PrimeNGConfig } from 'primeng/api';
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
 	selector:    'systelab-date-time',
 	templateUrl: 'datepicker-time.component.html',
-	providers:   [DataTransformerService]
+	providers:   [
+		DataTransformerService,
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => DatepickerTimeComponent),
+			multi: true
+		}
+		]
 })
 export class DatepickerTimeComponent extends DatepickerComponent {
 	@Input()

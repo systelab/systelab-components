@@ -4,6 +4,7 @@ import {
 	DoCheck,
 	ElementRef,
 	EventEmitter,
+	forwardRef,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -16,15 +17,23 @@ import { PrimeNGConfig } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
+import {ControlValueAccessorBase} from "../utilities/form/control-value-accessor-base";
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
 	selector:    'systelab-datepicker',
 	templateUrl: 'datepicker.component.html',
-	providers:   [DataTransformerService]
+	providers:   [
+		DataTransformerService,
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => DatepickerComponent),
+			multi: true
+		}
+	]
 })
-export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class DatepickerComponent extends ControlValueAccessorBase implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
-	@Input() public disabled = false;
 	@Input() public error = false;
 	@Input() public required = false;
 	@Input() public inputExpandHeight: boolean;
@@ -44,6 +53,13 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	@Input() public showOtherMonths = true;
 	@Input() public selectOtherMonths = false;
 	@Input() public dateFormat: string;
+	@Input()
+	public override get disabled(): boolean {
+		return super.disabled;
+	}
+	public override set disabled(value: boolean) {
+		super.disabled = value;
+	}
 
 	@Input()
 	get currentDate(): Date {
@@ -90,6 +106,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	private headerElement: any = document.getElementById(this.datepickerId);
 
 	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNGConfig) {
+		super();
 	}
 
 	public ngOnInit() {
@@ -122,6 +139,12 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 				.setAttribute('tabindex', this.tabindex);
 		}
 
+	}
+
+	public override writeValue(value: any): void {
+		// Update the internal value and propagate to the view
+		this._currentDate = value;
+		this.currentDateChange.emit(this._currentDate);
 	}
 
 	public ngDoCheck() {

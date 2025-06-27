@@ -47,6 +47,7 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
             mySwitch3: [{ value: true, disabled: false }],
             mySwitch4: [{ value: true, disabled: true }],
             myToggleSelector: [{ value: '2', disabled: false }],
+            myDateTime: [{ value: new Date(), disabled: true }],
         });
 
     }
