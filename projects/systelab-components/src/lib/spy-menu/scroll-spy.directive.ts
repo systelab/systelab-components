@@ -1,33 +1,55 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Directive({
   selector: '[scrollSpy]',
 })
-export class ScrollSpyDirective {
+export class ScrollSpyDirective implements OnInit
+ {
   @Input() public spiedTags: Array<string> = ['div'];
   @Input() public querySelector = '[id^="section"]';
   @Output() public sectionChange = new EventEmitter<string>();
+
   private currentSection: string;
+	private observer: IntersectionObserver;
 
-  constructor(private _el: ElementRef) {}
+  constructor(private readonly _el: ElementRef) { }
 
-  @HostListener('scroll', ['$event'])
-  onScroll(event: any) {
-    let nextSection: string;
+  public ngOnInit(): void {
+    this.spiedTags = this.spiedTags.map(tag => tag.toLowerCase());
+  }
+
+  public ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  public ngAfterViewInit(): void {
+    const options: IntersectionObserverInit = {
+      root: this._el.nativeElement, 
+      threshold: 0.6, 
+    };
+
+    this.observer = new IntersectionObserver(this.handleIntersect.bind(this), options);
     const children = this._el.nativeElement.querySelectorAll(this.querySelector);
-    const scrollTop = event.target.scrollTop;
-    const parentOffset = event.target.offsetTop;
-    for (let i = 0; i < children.length; i++) {
-      const element = children[i];
-      if (this.spiedTags.some((spiedTag) => spiedTag.toLowerCase() === element.tagName.toLowerCase())) {
-        if (element.offsetTop - parentOffset <= scrollTop) {
-          nextSection = element.id;
+
+    children.forEach(element => {
+      const tagName = element.tagName.toLowerCase();
+      if (this.spiedTags.includes(tagName)) {
+        this.observer.observe(element);
+      }
+    });
+  }
+
+  private handleIntersect(entries: IntersectionObserverEntry[]): void {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        const sectionId = (entry.target as HTMLElement).id;
+        if (sectionId && sectionId !== this.currentSection) {
+          this.currentSection = sectionId;
+          this.sectionChange.emit(this.currentSection);
         }
       }
-    }
-    if (nextSection && nextSection !== this.currentSection) {
-      this.currentSection = nextSection;
-      this.sectionChange.emit(this.currentSection);
     }
   }
 }
