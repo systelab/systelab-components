@@ -25,8 +25,8 @@ Component to display a spy menu and a directive to update menu position.
     </div>
 </div>
 ```
-## How to disable & hidde a section
-In order to hidde or disable a section you must use [hidden] input
+## How to disable & hide a section
+In order to hide or disable a section you must use [hidden] input
 ```html
 <div [hidden]="disabledOption" id="sectionOpt">
     <h3 class="mt-3">Section Optional</h3>
