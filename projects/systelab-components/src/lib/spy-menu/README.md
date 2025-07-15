@@ -25,6 +25,18 @@ Component to display a spy menu and a directive to update menu position.
     </div>
 </div>
 ```
+## How to disable & hidde a section
+In order to hidde or disable a section you must use [hidden] input
+```html
+<div [hidden]="disabledOption" id="sectionOpt">
+    <h3 class="mt-3">Section Optional</h3>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div style="height: 500px; background: lightgrey;"></div>
+        </div>
+    </div>
+</div>
+```
 
 ## systelab-spy-menu Component Properties
 
