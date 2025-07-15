@@ -1,9 +1,9 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
   selector: '[scrollSpy]',
 })
-export class ScrollSpyDirective implements OnInit
+export class ScrollSpyDirective implements AfterViewInit
  {
   @Input() public spiedTags: Array<string> = ['div'];
   @Input() public querySelector = '[id^="section"]';
@@ -14,14 +14,8 @@ export class ScrollSpyDirective implements OnInit
 
   constructor(private readonly _el: ElementRef) { }
 
-  public ngOnInit(): void {
-    this.spiedTags = this.spiedTags.map(tag => tag.toLowerCase());
-  }
-
   public ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
+      this.observer?.disconnect();
   }
 
   public ngAfterViewInit(): void {
