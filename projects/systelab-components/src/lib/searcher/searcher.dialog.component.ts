@@ -6,7 +6,8 @@ import { DialogRef } from '../modal/dialog/dialog-ref';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 
 @Component({
-    templateUrl: 'searcher.dialog.component.html',
+    selector: 'systelab-searcher-dialog',
+	templateUrl: 'searcher.dialog.component.html',
     standalone: false
 })
 export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>>, AfterViewInit {
@@ -27,6 +28,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	constructor(public dialog: DialogRef<SearcherDialogParameters<T>>, protected i18nService: I18nService) {
 		this.parameters = dialog.context;
 		this.searchingValue = this.parameters.valueToSearch;
+		this.searchByContains = !this.parameters.searchByStartWithAsDefault;
 
 		this.showClose = this.parameters.showCloseButton;
 		if (!this.parameters.showCloseButton) {
@@ -46,6 +48,7 @@ export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameter
 	}
 
 	public setFocusToInput(): void {
+		this.refreshSearch();
 		setTimeout(() => this.valueToSearchInput?.nativeElement.focus(), 100);
 	}
 

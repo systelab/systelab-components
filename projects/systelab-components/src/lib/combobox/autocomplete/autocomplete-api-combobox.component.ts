@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GridReadyEvent, IGetRowsParams } from 'ag-grid-community';
+import { IGetRowsParams } from 'ag-grid-community';
 import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
@@ -118,19 +118,19 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public override getRows(params: IGetRowsParams): void {
-		if (this.gridOptions && this.gridApi && !this.gridApi.isDestroyed()) {
-			this.gridApi.showLoadingOverlay();
+		if (this.gridApi && !this.gridApi.isDestroyed()) {
+			this.gridApi.setGridOption("loading", true);
 			const page: number = params.endRow / this.gridOptions.paginationPageSize;
 			this.totalItemsLoaded = false;
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe({
 						next:  (v: Array<T>) => {
-							this.gridApi.hideOverlay();
+							this.gridApi.setGridOption("loading", false);
 							this.totalItemsLoaded = true;
 							params.successCallback(v, this.getTotalItems());
 						},
 						error: () => {
-							this.gridApi.hideOverlay();
+							this.gridApi.setGridOption("loading", false);
 							params.failCallback();
 						}
 					}
@@ -154,7 +154,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 		this.code = undefined;
 		this.description = undefined;
 		this.currentSelected = undefined;
-		if (this.gridOptions && this.gridApi && !this.gridApi.isDestroyed()) {
+		if (this.gridApi && !this.gridApi.isDestroyed()) {
 			this.gridApi.deselectAll();
 		}
 		this.selectedItemChange.emit(undefined);

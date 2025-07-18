@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { InnerSearcher, ShowcaseSearcherData } from './inner-searcher';
+import { InnerSearcher } from './inner-searcher';
 import { I18nService } from 'systelab-translate';
 import { DialogService } from 'systelab-components';
 import { AbstractSearcherComponent } from 'systelab-components';
+import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 
 @Component({
     selector: 'showcase-inner-searcher',

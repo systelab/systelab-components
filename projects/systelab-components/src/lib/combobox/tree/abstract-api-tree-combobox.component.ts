@@ -275,7 +275,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public override refresh(params: any): boolean {
-		if (this.gridOptions && this.gridApi) {
+		if (this.gridApi) {
 			this.getRows();
 			return true;
 		}

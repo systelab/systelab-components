@@ -55,6 +55,7 @@ export class ChipsComponent {
 			input.value = '';
 		}
 		this.filtered.emit(this.filter);
+		this.autoComplete.hide();
 	}
 }
 

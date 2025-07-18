@@ -1,0 +1,32 @@
+.accordion-header {
+  background-color: lightgrey;
+  border-radius: 4px 4px 0 0;
+  height: 40px;
+  i {
+    &::after {
+      content: '';
+      background-color: white;
+      width: 15px;
+      height: 15px;
+      z-index: 1;
+      position: absolute;
+    }
+    &::before {
+      z-index: 2;
+    }
+    font-size: 25px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.collapsible-content {
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 1;
+  border: 1px solid var(--slab_table_border_color) !important;
+}
+
+.collapsed {
+  opacity: 0;
+}

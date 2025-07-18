@@ -41,9 +41,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 	public abstract getTotalItems(): number;
 
 	public override refresh(params: any): boolean {
-		if (this.gridOptions && this.gridApi) {
-			this.gridApi.setGridOption('datasource', this);
-		}
+		this.gridApi?.setGridOption('datasource', this);
 		return true;
 	}
 

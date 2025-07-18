@@ -3,7 +3,7 @@
     <div class="ag-labeled ag-label-align-right ag-checkbox ag-input-field h-100">
         <label class="ag-input-field-label ag-label ag-hidden ag-checkbox-label" for="{{id}}-active"></label>
         <div class="ag-wrapper ag-input-wrapper ag-checkbox-input-wrapper ag-checkbox-input-wrapper-cell-editor"
-             [ngClass]="{'ag-checked': isCheckboxActive}">
+             [ngClass]="{'ag-checked': isCheckboxActive, 'slab-inactive-checkbox': showDisabled}">
             <input class="ag-input-field-input ag-checkbox-input"
                    type="checkbox"
                    id="{{id}}-active" [checked]="isCheckboxActive"

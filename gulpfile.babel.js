@@ -13,6 +13,7 @@ gulp.task('copytemplates', function (done) {
 		'./projects/systelab-components/src/lib/add-remove-list/abstract-add-remove-list.component.html',
 		'./projects/systelab-components/src/lib/datepicker/datepicker.component.html',
 		'./projects/systelab-components/src/lib/datepicker/datepicker-time.component.html',
+		'./projects/systelab-components/src/lib/searcher/abstract-generic-searcher.component.html'
 	])
 		.pipe(gulp.dest('./dist/systelab-components/html'));
 	done();

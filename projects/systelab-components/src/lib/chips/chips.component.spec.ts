@@ -148,4 +148,38 @@ describe('Systelab Chips', () => {
 		expect(fixture.componentInstance.texts[0]).toEqual('New York');
 		expect(fixture.componentInstance.texts.length).toEqual(11);
 	});
+
+	it('should handle enter key press', fakeAsync(() => {
+		setArrayValue(fixture, fixture.componentInstance.texts);
+
+		// Simulate user input
+		const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
+		inputEl.value = 'TestValue';
+
+		// Create a KeyboardEvent
+		const event = new KeyboardEvent('keydown', { key: 'Enter' });
+
+		// Manually assign the target property
+		Object.defineProperty(event, 'target', { value: inputEl, writable: true });
+
+		// Explicitly call the onKeyEnter method
+		chips.onKeyEnter(event);
+		fixture.detectChanges();
+
+		// Verify that the value was added to the filter
+		expect(chips.filter).toContain('TestValue');
+
+		// Verify that the input was cleared
+		expect(inputEl.value).toEqual('');
+
+		// Verify that the filtered event was emitted
+		const emitSpy = spyOn(chips.filtered, 'emit');
+		chips.onKeyEnter(event);
+		expect(emitSpy).toHaveBeenCalledWith(chips.filter);
+
+		// Verify that the hide() method was called
+		const hideSpy = spyOn(chips.autoComplete, 'hide');
+		chips.onKeyEnter(event);
+		expect(hideSpy).toHaveBeenCalled();
+	}));
 });
