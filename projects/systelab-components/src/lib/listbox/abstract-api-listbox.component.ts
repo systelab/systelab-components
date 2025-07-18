@@ -34,7 +34,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 
 	public getRows(params: IGetRowsParams): void {
 
-		this.gridApi.setGridOption("loading", true);
+		this.gridApi.showLoadingOverlay();
 		const page: number = params.endRow / this.gridOptions.paginationPageSize;
 		const pageSize: number = this.gridOptions.paginationPageSize;
 
