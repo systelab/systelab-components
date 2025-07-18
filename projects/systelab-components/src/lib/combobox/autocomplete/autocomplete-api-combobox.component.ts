@@ -119,7 +119,7 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	// Overrides
 	public override getRows(params: IGetRowsParams): void {
 		if (this.gridOptions && this.gridApi && !this.gridApi.isDestroyed()) {
-			this.gridApi.showLoadingOverlay();
+			this.gridApi.setGridOption("loading", true);
 			const page: number = params.endRow / this.gridOptions.paginationPageSize;
 			this.totalItemsLoaded = false;
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
