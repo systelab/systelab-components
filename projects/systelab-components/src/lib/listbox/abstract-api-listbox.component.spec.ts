@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, output, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,7 @@ import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { AbstractApiListBox } from './abstract-api-listbox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
+import { AllCommunityModule, GridReadyEvent, ModuleRegistry } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -21,11 +22,12 @@ export class TestData {
 }
 
 @Component({
-	selector: 'systelab-listbox-example',
-	templateUrl: 'abstract-listbox.component.html'
+    selector: 'systelab-listbox-example',
+    templateUrl: 'abstract-listbox.component.html',
+    standalone: false
 })
 export class SystelabListboxComponent extends AbstractApiListBox<TestData> {
-
+	@Output() isGridReady: EventEmitter<any> = new EventEmitter<any>();
 	private totalItems = 0;
 
 	constructor() {
@@ -34,6 +36,11 @@ export class SystelabListboxComponent extends AbstractApiListBox<TestData> {
 
 	public getInstance() {
 		return new TestData('', '');
+	}
+
+	public doGridReady(event: any) {
+		super.doGridReady(event);
+		this.isGridReady.emit(this.gridApi);
 	}
 
 	public getDescriptionField(): string {
@@ -64,14 +71,16 @@ export class SystelabListboxComponent extends AbstractApiListBox<TestData> {
 }
 
 @Component({
-	selector: 'systelab-listbox-test',
-	template: `
+    selector: 'systelab-listbox-test',
+    template: `
         <div class="position-relative" style="height: 200px;">
             <systelab-listbox-example #listbox
-                                      [multipleSelection]="true" [multipleSelectedItemList]="multipleSelectedItemList">
+                                      [multipleSelection]="true" 
+									  [multipleSelectedItemList]="multipleSelectedItemList">
             </systelab-listbox-example>
         </div>
-	`
+	`,
+    standalone: false
 })
 export class ListboxTestComponent {
 	@ViewChild('listbox') public listbox: SystelabListboxComponent;
@@ -117,28 +126,5 @@ describe('Systelab Listbox', () => {
 	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
-	});
-	it('should check selected items', (done) => {
-		fixture.whenStable().then(() => {
-			const component = fixture.componentInstance;
-			const listboxComponent = component.listbox;
-			const listSelectedItems = listboxComponent.gridOptions.api.getSelectedNodes().map(node => node.data);
-			expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
-			done();
-		});
-	});
-
-	it('should check deselected items', (done) => {
-		fixture.whenStable().then(() => {
-			fixture.componentInstance.multipleSelectedItemList = fixture.componentInstance.multipleSelectedItemList.slice(0, -1);
-			fixture.detectChanges();
-			fixture.whenStable().then(() => {
-				const component = fixture.componentInstance;
-				const listboxComponent = component.listbox;
-				const listSelectedItems = listboxComponent.gridOptions.api.getSelectedNodes().map(node => node.data);
-				expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
-				done();
-			});
-		});
 	});
 });

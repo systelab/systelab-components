@@ -10,12 +10,13 @@ export const emailValidator = (control: UntypedFormControl): ValidationErrors | 
 };
 
 @Directive({
-  selector: '[systelab-emailValidator]',
-  providers: [{
-      provide: NG_VALIDATORS,
-      useExisting: EmailValidatorDirective,
-      multi: true
-  }]
+    selector: '[systelab-emailValidator]',
+    providers: [{
+            provide: NG_VALIDATORS,
+            useExisting: EmailValidatorDirective,
+            multi: true
+        }],
+    standalone: false
 })
 export class EmailValidatorDirective implements Validator {
   validate(control: UntypedFormControl): ValidationErrors | null {

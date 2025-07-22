@@ -10,14 +10,15 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SliderComponent } from './slider.component';
 
 @Component({
-	selector: 'systelab-slider-test',
-	template: `
+    selector: 'systelab-slider-test',
+    template: `
                 <div>
                     <systelab-slider [min]="min" [max]="max" [step]="step" [(value)]="value"></systelab-slider>
                     <label class="label-value">{{value}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class SliderTestComponent {
 	public min = 0;

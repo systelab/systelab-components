@@ -10,7 +10,8 @@ export class NumPadDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'numpad.dialog.component.html'
+    templateUrl: 'numpad.dialog.component.html',
+    standalone: false
 })
 export class NumPadDialog implements ModalComponent<NumPadDialogParameters> {
 

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ToggleSelectorOption } from '../../../../../systelab-components/src/lib/toggle-selector/toggle-selector.component';
 
 @Component({
-	selector:    'showcase-toggle-selector',
-	templateUrl: './showcase-toggle-selector.component.html'
+    selector: 'showcase-toggle-selector',
+    templateUrl: './showcase-toggle-selector.component.html',
+    standalone: false
 })
 export class ShowcaseToggleSelectorComponent implements OnInit {
 

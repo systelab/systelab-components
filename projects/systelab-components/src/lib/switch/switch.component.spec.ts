@@ -10,14 +10,15 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SwitchComponent } from './switch.component';
 
 @Component({
-	selector: 'systelab-switch-test',
-	template: `
+    selector: 'systelab-switch-test',
+    template: `
                 <div>
                     <systelab-switch  [(isChecked)]="check"></systelab-switch>
                     <label class="label-value">{{check}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class SwitchTestComponent {
 	public check = true;

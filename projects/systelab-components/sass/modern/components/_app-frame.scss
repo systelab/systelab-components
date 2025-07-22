@@ -1,0 +1,28 @@
+@use "../variables" as *;
+
+systelab-app-frame {
+  $width-for-small-bar: 60px;
+  $width-for-large-bar: 200px;
+
+  .slab-side-bar-container-large {
+    background-color: lightgrey;
+    min-width: $width-for-large-bar;
+    width: $width-for-large-bar;
+  }
+
+  .slab-side-bar-container-small {
+    background-color: lightgrey;
+    min-width: $width-for-small-bar;
+    width: $width-for-small-bar;
+  }
+
+  .slab-main-container {
+    background-color: var(--slab_background_primary);
+  }
+
+  @media (max-width: $slab-ipad-width) {
+    .slab-side-bar-container {
+      display: none;
+    }
+  }
+}

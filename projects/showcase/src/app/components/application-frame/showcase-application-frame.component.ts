@@ -3,8 +3,9 @@ import { ShowcaseApplicationFrameDialog } from './application-frame-dialog/showc
 import { DialogService } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-application-frame',
-	templateUrl: 'showcase-application-frame.component.html'
+    selector: 'showcase-application-frame',
+    templateUrl: 'showcase-application-frame.component.html',
+    standalone: false
 })
 export class ShowcaseApplicationFrameComponent {
 

@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
-	selector:    'systelab-slider-double-range',
-	templateUrl: 'slider-double-range.component.html'
+    selector: 'systelab-slider-double-range',
+    templateUrl: 'slider-double-range.component.html',
+    standalone: false
 })
 export class SliderDoubleRangeComponent {
 

@@ -8,8 +8,9 @@ export class Week {
 }
 
 @Component({
-	selector: 'systelab-week-selector',
-	templateUrl: './week-selector.component.html'
+    selector: 'systelab-week-selector',
+    templateUrl: './week-selector.component.html',
+    standalone: false
 })
 export class WeekSelectorComponent implements OnInit {
 

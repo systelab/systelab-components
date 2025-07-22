@@ -11,13 +11,14 @@ import { PaginatorComponent } from './paginator.component';
 import { PaginatorPageComponent } from './paginator-page.component';
 
 @Component({
-	selector: 'systelab-paginator-test',
-	template: `
+    selector: 'systelab-paginator-test',
+    template: `
                   <systelab-paginator [(page)]="page" [pagesToShow]="15" [showFirstLastButtons]="true" [showNextPreviousButtons]="true"
                                       [totalPages]="45"></systelab-paginator>
                   <label class="label-value">{{page}}</label>
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class PaginatorTestComponent {
 	public page = 8;

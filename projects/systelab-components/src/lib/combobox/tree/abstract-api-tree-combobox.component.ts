@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 import { AbstractComboBox } from '../abstract-combobox.component';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { PreferencesService } from 'systelab-preferences';
+import { GridOptions, GridReadyEvent } from 'ag-grid-community';
 
 declare var jQuery: any;
 
@@ -23,17 +24,16 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	@Input() public isParentSelectable = false;
 	@Input() public isAllSelectable = true;
-
 	public totalItemsLoaded = false;
 	public isFirstTime = true;
 	public override isTree = true;
 
-	constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
+	protected constructor(public override myRenderer: Renderer2, public chref: ChangeDetectorRef, public override preferencesService?: PreferencesService) {
 		super(myRenderer, chref, preferencesService);
 	}
 
 	public override ngOnInit(): void {
-
+		super.ngOnInit();
 		this.setRowHeight();
 		this.configGrid();
 		this.initializeFavouriteList();
@@ -49,13 +49,17 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			}
 		];
 
-		this.gridOptions = {};
+		this.gridOptions = {} as GridOptions;
 
 		this.gridOptions.columnDefs = this.columnDefs;
 
 		this.gridOptions.rowHeight = AbstractComboBox.ROW_HEIGHT;
 		this.gridOptions.headerHeight = 0;
-		this.gridOptions.rowSelection = 'single';
+		this.gridOptions.rowSelection = {
+			checkboxes: false,
+			mode: 'singleRow',
+			enableClickSelection: true
+		};
 	}
 
 	getInstance(): ComboTreeNode<T> {
@@ -93,13 +97,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public getLabelForLevel(comboTreeNode: ComboTreeNode<T>): string {
-		if (comboTreeNode.level === 0) {
-			return comboTreeNode.nodeData[this.getLevelDescriptionField(0)];
-		} else if (comboTreeNode.level > 0) {
-			return '<span style="padding-left: ' + (20 * comboTreeNode.level) + 'px">'
-				+ comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)]
-				+ '</span>';
-		}
+		const style: string = comboTreeNode.level > 0 ? `style="padding-left: ${(20 * comboTreeNode.level)}px"` : '';
+		const description: string = comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)];
+		return `<span title="${description}" ${style}>${description}</span>`;
 	}
 
 	// override
@@ -108,33 +108,28 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 		super.closeDropDown();
 	}
 
-	// override
-	public override loop(): void {
-		let result = true;
-
-		if (this.isDropDownOpen()) {
-			// First time opened we load the table
-			if (this.isFirstTime) {
-				this.getRows();
+	public override doGridReady(event: GridReadyEvent) {
+		super.doGridReady(event);
+		this.getRows().subscribe({
+			next: (nodeVector) => {
+				this.gridApi.hideOverlay();
+				this.rowData = nodeVector;
+				this.gridApi.redrawRows();
+				if (this.totalItemsLoaded) {
+					this.setDropdownHeight(nodeVector.length);
+					this.setDropdownPosition();
+					this.transferFocusToGrid();
+				}
+			},
+			error: () => {
+				this.gridApi.hideOverlay();
 			}
-
-			if (this.totalItemsLoaded) {
-				this.setDropdownHeight();
-				this.setDropdownPosition();
-				this.transferFocusToGrid();
-				result = false;
-			}
-		}
-		if (result) {
-			setTimeout(() => this.loop(), 10);
-		} else {
-			return;
-		}
+		})
 	}
 
 	// Override
-	public override setDropdownHeight() {
-		let totalItems = Number(this.gridOptions.api.getDisplayedRowCount());
+	public override setDropdownHeight(items?: number) {
+		let totalItems = items ?? Number(this.gridApi.getDisplayedRowCount());
 		let calculatedHeight = 0;
 
 		if (this.emptyElement) {
@@ -153,66 +148,59 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 
 	}
 
-	public getRows(): void {
+	public getRows(): Observable<ComboTreeNode<T>[]> {
 		this.totalItemsLoaded = false;
 		this.isFirstTime = false;
-		this.getData()
-			.subscribe({
-					next:  (dataVector: Array<T>) => {
-						const nodeVector: Array<ComboTreeNode<T>> = [];
-						let previousParent: number | string;
+		return this.getData().pipe(
+			map((dataVector: Array<T>) => {
+				const nodeVector: Array<ComboTreeNode<T>> = [];
+				let previousParent: number | string;
 
-						if (this.emptyElement) {
-							const emptyElement: T = {} as T;
-							emptyElement[this.getLevelIdField(0)] = '';
-							emptyElement[this.getLevelDescriptionField(0)] = '';
-							const emptyElementNode: ComboTreeNode<T> = new ComboTreeNode<T>(emptyElement, 0);
-							nodeVector.push(emptyElementNode);
-						}
+				if (this.emptyElement) {
+					const emptyElement: T = {} as T;
+					emptyElement[this.getLevelIdField(0)] = '';
+					emptyElement[this.getLevelDescriptionField(0)] = '';
+					const emptyElementNode: ComboTreeNode<T> = new ComboTreeNode<T>(emptyElement, 0);
+					nodeVector.push(emptyElementNode);
+				}
 
-						if (this.withFavourites) {
-							this.initializeFavouriteList();
-							if (this.favouriteList.length > 0) {
-								const favouriteElement: T = {} as T;
-								favouriteElement[this.getLevelIdField(0)] = AbstractApiTreeComboBox.FAVOURITEID;
-								favouriteElement[this.getLevelDescriptionField(0)] = this.getFavouriteText();
-								const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
-								nodeVector.push(favouriteComboNode);
-								const favouriteElements = this.getFavouriteElements(dataVector);
-								favouriteElements.forEach(currentFavouriteElement => {
-									const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
-									nodeVector.push(currentFavouriteNode);
-								});
-							}
-						}
-
-						if (this.isAllSelectable) {
-							const allElement: T = {} as T;
-							allElement[this.getLevelIdField(0)] = this.getAllNodeId();
-							allElement[this.getLevelDescriptionField(0)] = this.getAllNodeDescription();
-							const allComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(allElement, 0);
-							nodeVector.push(allComboNode);
-						}
-
-						dataVector.forEach((element: T) => {
-							if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
-								previousParent = element[this.getLevelIdField(0)];
-								const parentComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 0);
-								nodeVector.push(parentComboNode);
-							}
-							const comboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 1);
-							nodeVector.push(comboNode);
+				if (this.withFavourites) {
+					this.initializeFavouriteList();
+					if (this.favouriteList.length > 0) {
+						const favouriteElement: T = {} as T;
+						favouriteElement[this.getLevelIdField(0)] = AbstractApiTreeComboBox.FAVOURITEID;
+						favouriteElement[this.getLevelDescriptionField(0)] = this.getFavouriteText();
+						const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
+						nodeVector.push(favouriteComboNode);
+						const favouriteElements = this.getFavouriteElements(dataVector);
+						favouriteElements.forEach(currentFavouriteElement => {
+							const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
+							nodeVector.push(currentFavouriteNode);
 						});
-						this.totalItemsLoaded = true;
-						this.gridOptions.api.hideOverlay();
-						this.gridOptions.api.setRowData(nodeVector);
-						this.gridOptions.api.redrawRows();
-					},
-					error: () => {
-						this.gridOptions.api.hideOverlay();
 					}
 				}
-			);
+
+				if (this.isAllSelectable) {
+					const allElement: T = {} as T;
+					allElement[this.getLevelIdField(0)] = this.getAllNodeId();
+					allElement[this.getLevelDescriptionField(0)] = this.getAllNodeDescription();
+					const allComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(allElement, 0);
+					nodeVector.push(allComboNode);
+				}
+
+				dataVector.forEach((element: T) => {
+					if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
+						previousParent = element[this.getLevelIdField(0)];
+						const parentComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 0);
+						nodeVector.push(parentComboNode);
+					}
+					const comboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 1);
+					nodeVector.push(comboNode);
+				});
+				this.totalItemsLoaded = true;
+				return nodeVector;
+			})
+		)
 	}
 
 	// Overrides
@@ -287,7 +275,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public override refresh(params: any): boolean {
-		if (this.gridOptions && this.gridOptions.api) {
+		if (this.gridApi) {
 			this.getRows();
 			return true;
 		}

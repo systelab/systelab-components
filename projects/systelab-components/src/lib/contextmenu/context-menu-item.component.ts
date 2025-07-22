@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { ContextMenuOption } from './context-menu-option';
 
 @Component({
-	selector:    'systelab-context-menu-item',
-	templateUrl: 'context-menu-item.component.html'
+    selector: 'systelab-context-menu-item',
+    templateUrl: 'context-menu-item.component.html',
+    standalone: false
 })
 export class ContextMenuItemComponent {
 

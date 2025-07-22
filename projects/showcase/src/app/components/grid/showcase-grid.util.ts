@@ -43,7 +43,7 @@ export class ShowcaseGridUtil {
 				headerName:          'Cell with Decimal Input',
 				field:               'decimalValue',
 				width:               200,
-				cellEditorFramework: DecimalInputCellEditorComponent,
+				cellEditor: DecimalInputCellEditorComponent,
 				editable:            true,
 				sortable:            true,
 				onCellValueChanged:  e => console.log('input', e)
@@ -52,7 +52,7 @@ export class ShowcaseGridUtil {
 				headerName:          'Cell with Positive Integer',
 				field:               'positiveIntegerValue',
 				width:               200,
-				cellEditorFramework: PositiveIntegerInputCellEditorComponent,
+				cellEditor: PositiveIntegerInputCellEditorComponent,
 				editable:            true,
 				sortable:            true,
 				onCellValueChanged:  e => console.log('input', e)
@@ -61,7 +61,7 @@ export class ShowcaseGridUtil {
 				headerName:          'Cell with Input',
 				field:               'inputValue',
 				width:               200,
-				cellEditorFramework: InputCellEditorComponent,
+				cellEditor: InputCellEditorComponent,
 				editable:            true,
 				onCellValueChanged:  e => console.log('input', e)
 			}, {
@@ -70,7 +70,7 @@ export class ShowcaseGridUtil {
 				field:               'checkboxValue',
 				width:               200,
 				cellRenderer:        CheckboxCellRendererComponent,
-				cellEditorFramework: CheckboxCellEditorComponent,
+				cellEditor: CheckboxCellEditorComponent,
 				cellEditorParams: { singleClickEdit: true},
 				onCellValueChanged:  e => console.log('checkbox', e),
 				editable:            true,
@@ -94,7 +94,7 @@ export class ShowcaseGridUtil {
 				width:               200,
 				editable:            true,
 				cellRenderer:        SpinnerCellRendererComponent,
-				cellEditorFramework: SpinnerCellEditorComponent,
+				cellEditor: SpinnerCellEditorComponent,
 				onCellValueChanged:  e => console.log('test', e),
 				resizable:           false
 			}];

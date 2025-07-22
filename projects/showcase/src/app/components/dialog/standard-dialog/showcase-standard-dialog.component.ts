@@ -11,7 +11,8 @@ export class ShowcaseStandardDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-standard-dialog.component.html',
+    templateUrl: 'showcase-standard-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseStandardDialog implements ModalComponent<ShowcaseStandardDialogParameters> {
 

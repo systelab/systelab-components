@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TouchSpinValues } from './touch.spin-values';
 
 @Component({
-	selector:    'systelab-spinner',
-	templateUrl: 'spinner.component.html'
+    selector: 'systelab-spinner',
+    templateUrl: 'spinner.component.html',
+    standalone: false
 })
 export class TouchspinComponent {
 

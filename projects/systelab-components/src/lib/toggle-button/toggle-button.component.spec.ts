@@ -10,8 +10,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { ToggleButtonComponent } from './toggle-button.component';
 
 @Component({
-	selector: 'systelab-toggle-button-test',
-	template: `
+    selector: 'systelab-toggle-button-test',
+    template: `
                 <div>
                     <systelab-toggle-button [(isChecked)]="check" [disabled]="disabled">
 						<i class="icon-plus-circle"></i>My Toggle Button
@@ -19,7 +19,8 @@ import { ToggleButtonComponent } from './toggle-button.component';
                     <label class="label-value">{{check}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ToggleButtonTestComponent {
 	public check = true;

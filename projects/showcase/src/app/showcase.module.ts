@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ShowcaseComponent } from './showcase.component';
-import { SystelabComponentsModule } from 'systelab-components';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -119,6 +118,7 @@ import { ComboboxSearcherComponent } from './components/searcher/combobox-search
 import { ShowcaseInnerTreeGenericComboboxComponent } from './components/combobox/showcase-inner-tree-generic.combobox.component';
 import { ShowcaseApiPaginateCombobox } from './components/combobox/showcase-api-paginate.combobox';
 import { ShowcaseAccordion } from './components/accordion/showcase-accordion.component';
+import { SystelabComponentsModule } from 'systelab-components';
 
 @NgModule({ declarations: [
         ShowcaseComponent,
@@ -219,18 +219,18 @@ import { ShowcaseAccordion } from './components/accordion/showcase-accordion.com
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
+        AgGridModule,
         DragDropModule,
         OverlayModule,
         TreeModule,
-        SystelabComponentsModule.forRoot(),
         SystelabTranslateModule,
         SystelabPreferencesModule,
-        AgGridModule,
         AutoCompleteModule,
-        CdkTreeModule],
+        CdkTreeModule,
+        SystelabComponentsModule.forRoot()
+    ],
     providers: [
         provideHttpClient(withInterceptorsFromDi())
     ]
 })
-export class ShowcaseModule {
-}
+export class ShowcaseModule {}

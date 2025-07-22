@@ -8,8 +8,9 @@ export class ChipButtonItem {
 }
 
 @Component({
-	selector:    'systelab-chip-button',
-	templateUrl: 'chip-button.component.html',
+    selector: 'systelab-chip-button',
+    templateUrl: 'chip-button.component.html',
+    standalone: false
 })
 export class ChipButtonComponent {
 

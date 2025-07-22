@@ -11,8 +11,8 @@ import { SliderDoubleRangeComponent } from './slider-double-range.component';
 
 
 @Component({
-	selector: 'systelab-slider-double-range-test',
-	template: `
+    selector: 'systelab-slider-double-range-test',
+    template: `
                 <div>
                     <systelab-slider-double-range
 						 [min]="min"
@@ -25,7 +25,8 @@ import { SliderDoubleRangeComponent } from './slider-double-range.component';
 					<label class="max-label-value">{{maxValue}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 
 export class SliderDoubleRangeTestComponent {

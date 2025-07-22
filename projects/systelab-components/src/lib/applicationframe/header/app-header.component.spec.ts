@@ -10,14 +10,15 @@ import {SystelabPreferencesModule} from 'systelab-preferences';
 import {ApplicationHeaderComponent, ApplicationHeaderMenuEntry} from './app-header.component';
 
 @Component({
-	selector: 'systelab-app-header-test',
-	template: `
+    selector: 'systelab-app-header-test',
+    template: `
         <div>
             <systelab-app-header [userName]="userName" [userFullName]="userFullName" [title]="title" [logoIcon]="logoIcon"
                                  [menuBars]="menuBars" [menu]="menu"></systelab-app-header>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class AppHeaderTestComponent implements OnInit {
 

@@ -1,0 +1,116 @@
+@use "sass:math";
+@use "../variables" as *;
+
+systelab-slider {
+  $slab-slider-track-brackground-color: #d3d3d3;
+  $slab-slider-track-border-radius: 5px;
+  $slab-slider-thumb-border-radius: 50%;
+  $slab-slider-thumb-border: 6px solid $slab-slider-circle-border-color;
+  $slab-slider-thumb-cursor: pointer;
+
+  .slab-slider {
+
+    &:not([class*="w-"]) {
+      width: 100%;
+    }
+
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      border-color: $slab-focus-component-border-color;
+      outline: 0;
+      box-shadow: $slab-focus-component-shadow;
+      border-radius: $slab-slider-track-border-radius;
+    }
+
+    &::-webkit-slider-runnable-track {
+      height: $slab-slider-background-line;
+      background: $slab-slider-track-brackground-color;
+      border-radius: $slab-slider-track-border-radius;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      @include size($slab-slider-height !important);
+      background-color: $slab-slider-circle-color;
+      border-radius: $slab-slider-thumb-border-radius;
+      border: $slab-slider-thumb-border;
+      cursor: $slab-slider-thumb-cursor;
+      margin-top: -1 * math.div(($slab-slider-height - $slab-slider-background-line), 2);
+    }
+
+    &::-moz-range-track {
+      height: $slab-slider-background-line;
+      background: $slab-slider-track-brackground-color;
+      border-radius: $slab-slider-track-border-radius;
+      border: none;
+    }
+
+    &::-moz-range-thumb {
+      @include size(math.div($slab-slider-height, 2) !important);
+      background-color: $slab-slider-circle-color;
+      border-radius: $slab-slider-thumb-border-radius;
+      border: $slab-slider-thumb-border;
+      cursor: $slab-slider-thumb-cursor;
+    }
+
+    &::-moz-focus-outer {
+      border: 0;
+    }
+
+    &::-ms-track {
+      height: $slab-slider-height;
+      /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+      background-color: transparent !important;
+      /*leave room for the larger thumb to overflow with a transparent border */
+      border-color: transparent;
+      /*remove default tick marks*/
+      color: transparent;
+    }
+
+    &::-ms-fill-lower, &::-ms-fill-upper {
+      height: $slab-slider-background-line;
+      background: $slab-slider-track-brackground-color;
+      border-radius: $slab-slider-track-border-radius;
+    }
+
+    &::-ms-thumb {
+      @include size(math.div($slab-slider-height, 2) !important);
+      background-color: $slab-slider-circle-color;
+      border-radius: $slab-slider-thumb-border-radius;
+      border: $slab-slider-thumb-border;
+      cursor: $slab-slider-thumb-cursor;
+      margin-top: math.div(($slab-slider-height - $slab-slider-background-line), 2);
+      margin-bottom: math.div(($slab-slider-height - $slab-slider-background-line), 2);
+    }
+
+    &::-ms-tooltip {
+      display: none;
+    }
+
+  }
+
+  /* Apply primary color to slider track */
+  &.bg-primary-track {
+    .slab-slider {
+      &::-webkit-slider-runnable-track {
+        background: var(--primary);
+      }
+    }
+  }
+
+}
+

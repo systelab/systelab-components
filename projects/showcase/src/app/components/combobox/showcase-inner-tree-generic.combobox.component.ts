@@ -6,7 +6,8 @@ import { ShowcaseTreeSearcherData } from '../searcher/showcase-tree-searcher-dat
 
 @Component({
 	selector:    'showcase-inner-tree-generic-combobox',
-	templateUrl: '../../../../../systelab-components/src/lib/combobox/abstract-combobox.component.html'
+	templateUrl: '../../../../../systelab-components/src/lib/combobox/abstract-combobox.component.html',
+	standalone: false,
 })
 export class ShowcaseInnerTreeGenericComboboxComponent extends AbstractApiTreeComboBox<ShowcaseTreeSearcherData> {
 	constructor(public myRenderer: Renderer2, public chref: ChangeDetectorRef, public preferencesService: PreferencesService) {

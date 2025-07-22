@@ -3,8 +3,9 @@ import { DialogService } from 'systelab-components';
 import { ShowcaseLoadingDialog, ShowcaseLoadingDialogParameters } from './loading-dialog/showcase-loading-dialog.component';
 
 @Component({
-	selector:    'showcase-loading',
-	templateUrl: 'showcase-loading.component.html'
+    selector: 'showcase-loading',
+    templateUrl: 'showcase-loading.component.html',
+    standalone: false
 })
 export class ShowcaseLoadingComponent {
 

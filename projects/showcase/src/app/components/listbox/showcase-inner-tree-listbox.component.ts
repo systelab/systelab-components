@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 import { AbstractApiTreeListBox, TreeListBoxElement } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-inner-tree-listbox',
-	templateUrl: '../../../../../systelab-components/src/lib/listbox/abstract-listbox.component.html'
+    selector: 'showcase-inner-tree-listbox',
+    templateUrl: '../../../../../systelab-components/src/lib/listbox/abstract-listbox.component.html',
+    standalone: false
 })
 
 export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<TreeListBoxElement<any>> {

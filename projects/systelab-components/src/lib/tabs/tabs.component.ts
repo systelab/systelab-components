@@ -2,8 +2,8 @@ import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, Outp
 import { TabComponent } from './tab.component';
 
 @Component({
-	selector: 'systelab-tabs',
-	template: `
+    selector: 'systelab-tabs',
+    template: `
                 <ul class="nav nav-tabs" [class.hideTabBackground]="!showTabBackground" [class.slab-tabs-shrink]="shrink" role="tablist">
 					@for (tab of tabs; track tab.id) {
 						<li class="nav-item" [class.hideTabBackground]="!showTabBackground"
@@ -23,7 +23,7 @@ import { TabComponent } from './tab.component';
                 </div>
 
 	          `,
-	styles:   [`
+    styles: [`
       :host {
           width: 100%;
           display: flex;
@@ -31,7 +31,8 @@ import { TabComponent } from './tab.component';
       }
 
 
-	`]
+	`],
+    standalone: false
 })
 export class TabsComponent implements AfterContentInit {
 

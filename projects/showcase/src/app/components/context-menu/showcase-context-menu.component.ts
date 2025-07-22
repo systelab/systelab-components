@@ -3,8 +3,9 @@ import {ContextMenuOption} from 'systelab-components';
 import {ContextMenuActionData} from 'systelab-components';
 
 @Component({
-	selector: 'showcase-context-menu',
-	templateUrl: 'showcase-context-menu.component.html'
+    selector: 'showcase-context-menu',
+    templateUrl: 'showcase-context-menu.component.html',
+    standalone: false
 })
 export class ShowcaseContextMenu implements OnInit {
 
