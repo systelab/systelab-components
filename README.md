@@ -90,6 +90,23 @@ npm publish
 -   Developer Experience Improvements (new material components like as time picker, HMR styles, detection of unused imports)
 -   New Reactive handler for HTTP requests (httpResource and rxResource)
 
+The following steps should be considered when upgrade to systelab-components 19.x.x
+
+- [AG Grid](https://www.ag-grid.com/angular-data-grid/upgrading-to-ag-grid-33/) has been updated from v28.2.1 to v33.3.0. Some breaking changes must be applied.
+  - gridOptions.api are deprecated now We have a GridApi comes from the gridReady event ([AG Grid 31 deprecations](https://www.ag-grid.com/angular-data-grid/upgrading-to-ag-grid-31/#deprecations)).
+  - columnApi is deprecated now the methods of columnApi is into GridAPi ([AG Grid 31 deprecations](https://www.ag-grid.com/angular-data-grid/upgrading-to-ag-grid-31/#column-api)).
+  - The ag-theme-fresh is deprecated (the new used theme is ag-theme-alpine) ([AG Grid 32 deprecations](https://www.ag-grid.com/javascript-data-grid/theming-v32)).
+  - The ag-grid modules must to be used with ModuleRegistry method in order to load only the neccessary modules ([AG Grid 33 deprecations](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-33/#deprecations)).
+  - The RangeSelectionCell has been disabled because belongs to ag-grid-enterprise library and wasn't use ([AG Grid](https://www.ag-grid.com/javascript-data-grid/cell-selection/)).
+  - The multiple and single selection are changes now needs to be use multiRow and singleRow ([AG Grid 32](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-32-2-1/)).
+  - Several attributes now are functions like as node.selected that now is node.isSelected() ([AG Grid 29](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-29/#removal-of-deprecated-apis)).
+  - setDataSource is deprecated now needs to be use the setGridOptions and updateGridOptions ([AG Grid 31](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-31/#deprecations)).
+  - cellEditorFramework is deprecated with cellEditor ([AG Grid 30](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-30/#removal-of-deprecated-apis)).
+  - suppressRowClickSelection is deprecated now needs to be used enableClickSelection ([AG Grid 32](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-32-2-1/#deprecations)).
+  - node.selectThisNode is deprecated now needs to be use node.setSelected ([AG Grid 29](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-29/#removal-of-deprecated-apis)).
+  - Needs to be scope the theme variables to be used in specific theme ([AG Grid 31](https://www.ag-grid.com/javascript-data-grid/theming/)).
+
+
 ## Version 18.x.x - Angular 18
 
 [Angular 18 news](https://blog.angular.dev/angular-v18-is-now-available-e79d5ac0affe)
