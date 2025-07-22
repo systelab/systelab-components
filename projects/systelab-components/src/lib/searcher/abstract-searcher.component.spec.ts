@@ -127,11 +127,6 @@ export class SystelabSearcherComponent extends AbstractSearcherComponent<TestDat
 	constructor(public i18nService: I18nService, public dialogService: DialogService) {
 		super(dialogService, new SystelabSearcherInnerComponent());
 	}
-
-	@HostListener('focus', ['$event'])
-	onFocus(event: FocusEvent) {
-		console.log(event);
-	}
 }
 
 @Component({
