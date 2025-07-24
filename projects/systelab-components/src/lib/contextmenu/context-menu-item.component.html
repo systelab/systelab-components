@@ -1,11 +1,17 @@
-<div *ngIf="hasIcons && isIconEnabled"
-     class="slab-icon-container rounded d-flex text-center justify-content-center align-items-center"
-     [style.background-color]="action.backgroundIconColor">
+@if (hasIcons && isIconEnabled) {
+  <div
+    class="slab-icon-container rounded d-flex text-center justify-content-center align-items-center"
+    [style.background-color]="action.backgroundIconColor">
     <i class="slab-flex-1 slab-menu-icon {{action.iconClass}}" [style.color]="action.iconColor"
-       [style.font-size]="action.iconFontSize"
-       [ngClass]="{'text-white': !action.iconColor}"></i>
-</div>
+      [style.font-size]="action.iconFontSize"
+    [ngClass]="{'text-white': !action.iconColor}"></i>
+  </div>
+}
 <a class="slab-flex-1" style="flex:1 1 auto" [style.padding-left]="hasIcons && !isIconEnabled?'20px':'0'"
-   [ngClass]="{'ml-2': hasIcons}">{{action.actionText}}</a>
-<span *ngIf="hasChildren" class="pl-3 slab-menu-caret icon-chevron-right small mt-1" ></span>
-<div *ngIf="action.isDivider && isEnabled" class="dropdown-divider"></div>
+[ngClass]="{'ml-2': hasIcons}">{{action.actionText}}</a>
+@if (hasChildren) {
+  <span class="pl-3 slab-menu-caret icon-chevron-right small mt-1" ></span>
+}
+@if (action.isDivider && isEnabled) {
+  <div class="dropdown-divider"></div>
+}

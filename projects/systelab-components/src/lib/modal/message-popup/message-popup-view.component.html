@@ -1,21 +1,27 @@
 <systelab-dialog-header (close)="close()">{{parameters.title}}</systelab-dialog-header>
 <systelab-message-with-icon class="d-flex slab-flex-1 slab-overflow-container" [message]="parameters.msg" [type]="parameters.type"
-                            [icon]="parameters.icon"></systelab-message-with-icon>
-<div *ngIf="parameters.askAgain" class="d-flex slab-flex-1 align-items-center pl-5">
+[icon]="parameters.icon"></systelab-message-with-icon>
+@if (parameters.askAgain) {
+  <div class="d-flex slab-flex-1 align-items-center pl-5">
     <systelab-switch [(isChecked)]="checkAskAgain"></systelab-switch>
     <label class="col-form-label ml-2">{{parameters.msgAskAgain}}</label>
-</div>
+  </div>
+}
 <systelab-dialog-bottom>
-    <div class="ml-auto" *ngIf="parameters.buttons?.length>0">
-        @for (button of parameters.buttons; track button; let i = $index; let cnt = $count;) {
-            <button type="button"
-                    class="btn ml-1 {{button.cssClass}}"
-                    (click)="close(button.returnValue)"
-                    [autoFocus]="button.focus || (!hasAnyButtonFocus && i===cnt-1)">{{button.title}}</button>
-        }
+  @if (parameters.buttons?.length>0) {
+    <div class="ml-auto">
+      @for (button of parameters.buttons; track button; let i = $index; let cnt = $count;) {
+        <button type="button"
+          class="btn ml-1 {{button.cssClass}}"
+          (click)="close(button.returnValue)"
+        [autoFocus]="button.focus || (!hasAnyButtonFocus && i===cnt-1)">{{button.title}}</button>
+      }
     </div>
-    <div class="ml-auto" *ngIf="parameters.buttons?.length===0">
-        <button type="button" class="btn btn-primary" (click)="close()" [autoFocus]="true">{{ 'COMMON_CLOSE' | translate | async }}</button>
+  }
+  @if (parameters.buttons?.length===0) {
+    <div class="ml-auto">
+      <button type="button" class="btn btn-primary" (click)="close()" [autoFocus]="true">{{ 'COMMON_CLOSE' | translate | async }}</button>
     </div>
+  }
 </systelab-dialog-bottom>
 

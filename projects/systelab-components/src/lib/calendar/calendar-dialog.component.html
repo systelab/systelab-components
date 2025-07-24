@@ -1,18 +1,20 @@
 <systelab-dialog-header [withInfo]="false" (close)="close();">{{parameters.headerDescription}}</systelab-dialog-header>
 <div class="slab-calendar-dialog">
-    <systelab-calendar-header [currentDate]="currentDate"
-                              (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"
-                              (nextMonth)="changeMonth(1)" (nextYear)="changeYear(1)">
-    </systelab-calendar-header>
-    <systelab-calendar-table #calendar class="slab-calendar-table" [currentDate]="currentDate" [days]="days">
-        <ng-template let-daySlot="daySlot">
-            <a [ngClass]="{'is-holiday': daySlot.isHoliday,'disable-link':daySlot.isDisabled}" (click)="selectDaySlot(daySlot)">
-                {{daySlot.day}}
-            </a>
-            <div *ngIf="!daySlot.isHoliday" class="slab-calendar-buttons">
-                <button type="button" class="slab-calendar-button1" (click)="doSomething(daySlot)"></button>
-            </div>
-        </ng-template>
-    </systelab-calendar-table>
-    <systelab-calendar-footer></systelab-calendar-footer>
+  <systelab-calendar-header [currentDate]="currentDate"
+    (previousYear)="changeYear(-1)" (previousMonth)="changeMonth(-1)"
+    (nextMonth)="changeMonth(1)" (nextYear)="changeYear(1)">
+  </systelab-calendar-header>
+  <systelab-calendar-table #calendar class="slab-calendar-table" [currentDate]="currentDate" [days]="days">
+    <ng-template let-daySlot="daySlot">
+      <a [ngClass]="{'is-holiday': daySlot.isHoliday,'disable-link':daySlot.isDisabled}" (click)="selectDaySlot(daySlot)">
+        {{daySlot.day}}
+      </a>
+      @if (!daySlot.isHoliday) {
+        <div class="slab-calendar-buttons">
+          <button type="button" class="slab-calendar-button1" (click)="doSomething(daySlot)"></button>
+        </div>
+      }
+    </ng-template>
+  </systelab-calendar-table>
+  <systelab-calendar-footer></systelab-calendar-footer>
 </div>

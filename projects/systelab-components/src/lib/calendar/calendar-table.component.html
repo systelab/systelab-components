@@ -1,24 +1,26 @@
 <div class="slab-custom-calendar">
-    <table class="slab-custom-calendar-table">
-        <thead>
+  <table class="slab-custom-calendar-table">
+    <thead>
+      <tr>
+        @for (dayName of daysHeader; track dayName) {
+          <th>{{dayName}}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track row) {
         <tr>
-            @for (dayName of daysHeader; track dayName) {
-                <th>{{dayName}}</th>
-            }
+          @for (daySlot of row; track daySlot.day) {
+            <td [ngClass]="{'disabled-cell': !daySlot.date}">
+              @if (daySlot.date) {
+                <div class="slab-custom-calendar-cell">
+                  <ng-container *ngTemplateOutlet="templateRef; context: { daySlot: daySlot }"></ng-container>
+                </div>
+              }
+            </td>
+          }
         </tr>
-        </thead>
-        <tbody>
-            @for (row of rows; track row) {
-                <tr>
-                    @for (daySlot of row; track daySlot.day) {
-                        <td [ngClass]="{'disabled-cell': !daySlot.date}">
-                            <div *ngIf="daySlot.date" class="slab-custom-calendar-cell">
-                                <ng-container *ngTemplateOutlet="templateRef; context: { daySlot: daySlot }"></ng-container>
-                            </div>
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
+      }
+    </tbody>
+  </table>
 </div>

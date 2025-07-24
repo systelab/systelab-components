@@ -1,23 +1,27 @@
 @for (childAction of action.childrenContextMenuOptions; track childAction.actionId) {
-    <li class="d-flex align-items-center" [class.disabled]="!true"
-        (click)="doClickWithAction($event, parentId, actionName + levelSeparator + childAction.actionId)"
-        (mouseover)="doMouseOver($event, elementID, actionName + levelSeparator + childAction.actionId)">
-        <div *ngIf="isEnabled" class="slab-flex-1" style="flex:1 1 auto">
-            <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
-                                        [isEnabled]="isEnabled(elementID, childAction.actionId)"
-                                        [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
-                                        [hasChildren]="childAction.hasChildren()"
-                                        [hasIcons]="hasIcons"></systelab-context-menu-item>
-            <ul *ngIf="childAction.hasChildren()" #childdropdownmenu id="{{childAction.actionId+elementID}}"
-                class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
-                <systelab-context-menu-submenu-item [action]="childAction"
-                                                    [actionName]="getAction(childAction.actionId)"
-                                                    [hasChildren]="childAction.hasChildren()"
-                                                    [hasIcons]="hasIcons"
-                                                    [contextMenuOriginal]="contextMenuOriginal"
-                                                    [parentId]="parentId"
-                ></systelab-context-menu-submenu-item>
-            </ul>
-        </div>
-    </li>
+  <li class="d-flex align-items-center" [class.disabled]="!true"
+    (click)="doClickWithAction($event, parentId, actionName + levelSeparator + childAction.actionId)"
+    (mouseover)="doMouseOver($event, elementID, actionName + levelSeparator + childAction.actionId)">
+    @if (isEnabled) {
+      <div class="slab-flex-1" style="flex:1 1 auto">
+        <systelab-context-menu-item class="d-flex align-items-center" [action]="childAction"
+          [isEnabled]="isEnabled(elementID, childAction.actionId)"
+          [isIconEnabled]="isIconEnabled(elementID, childAction.actionId)"
+          [hasChildren]="childAction.hasChildren()"
+        [hasIcons]="hasIcons"></systelab-context-menu-item>
+        @if (childAction.hasChildren()) {
+          <ul #childdropdownmenu id="{{childAction.actionId+elementID}}"
+            class="slab-dropdown dropdown-menu slab-dropdown-menu slab-dropdown-scroll slab-dropdown-absolute">
+            <systelab-context-menu-submenu-item [action]="childAction"
+              [actionName]="getAction(childAction.actionId)"
+              [hasChildren]="childAction.hasChildren()"
+              [hasIcons]="hasIcons"
+              [contextMenuOriginal]="contextMenuOriginal"
+              [parentId]="parentId"
+            ></systelab-context-menu-submenu-item>
+          </ul>
+        }
+      </div>
+    }
+  </li>
 }

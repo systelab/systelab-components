@@ -1,24 +1,26 @@
 <div class="slab-searcher-container d-flex flex-nowrap" [ngClass]="{'disabled': isDisabled}" [ngStyle]="getInputHeight()">
-    <div class="input-group" style="width: 120px;">
-        <input #valueToSearch type="input" class="form-control"
-               [(ngModel)]="code"
-               (blur)="doSearch()"
-               [tabindex]="tabindex"
-               [disabled]="isDisabled"
-               [style.font-family]="fontFamily"
-               [style.font-size.px]="fontSize"
-               [style.font-weight]="fontWeight"
-               [ngStyle]="getInputHeight()"
-               [style.font-style]="fontStyle">
+  <div class="input-group" style="width: 120px;">
+    <input #valueToSearch type="input" class="form-control"
+      [(ngModel)]="code"
+      (blur)="doSearch()"
+      [tabindex]="tabindex"
+      [disabled]="isDisabled"
+      [style.font-family]="fontFamily"
+      [style.font-size.px]="fontSize"
+      [style.font-weight]="fontWeight"
+      [ngStyle]="getInputHeight()"
+      [style.font-style]="fontStyle">
 
-        <div class="input-group-append">
-            <button class="btn btn-sm py-0" type="button" [disabled]="isDisabled" [ngStyle]="getWidth()"
-                    (click)="openSearchDialog()" *ngIf="withButton"><i class="icon-search"></i></button>
+      <div class="input-group-append">
+        @if (withButton) {
+          <button class="btn btn-sm py-0" type="button" [disabled]="isDisabled" [ngStyle]="getWidth()"
+            (click)="openSearchDialog()"><i class="icon-search"></i></button>
+          }
         </div>
+      </div>
+      <p class="slab-flex-1 text-truncate mb-0 ml-1" style="width: 30px;" [ngStyle]="getLineHeight()"
+        [style.font-family]="fontFamily"
+        [style.font-size.px]="fontSize"
+        [style.font-weight]="fontWeight"
+      [style.font-style]="fontStyle" systelabTooltip="{{searchingValue}}">{{searchingValue}}</p>
     </div>
-    <p class="slab-flex-1 text-truncate mb-0 ml-1" style="width: 30px;" [ngStyle]="getLineHeight()"
-       [style.font-family]="fontFamily"
-       [style.font-size.px]="fontSize"
-       [style.font-weight]="fontWeight"
-       [style.font-style]="fontStyle" systelabTooltip="{{searchingValue}}">{{searchingValue}}</p>
-</div>

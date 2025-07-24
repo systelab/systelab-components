@@ -1,24 +1,26 @@
 <div class="slab-app-sidebar-small-menu-container d-flex flex-column overflow-hidden">
-    <ul class="slab-app-sidebar-button-container slab-flex-1">
+  <ul class="slab-app-sidebar-button-container slab-flex-1">
 
-        @for(tab of tabs; track tab.id) {
-            <li class="slab-app-sidebar-button"
-                (click)="executeTabAction(tab)"
-                [class.selected]="tab.isSelected" systelabTooltip="{{tab.name}}" systelabTooltipPlacement="right"
-                systelabTooltipDelay="0" systelabTooltipHideDelay="0">
-                <i [ngClass]="tab.icon"></i>
-                <div *ngIf="tab.isSelected" class="arrow-left w-100"></div>
-            </li>
+    @for(tab of tabs; track tab.id) {
+      <li class="slab-app-sidebar-button"
+        (click)="executeTabAction(tab)"
+        [class.selected]="tab.isSelected" systelabTooltip="{{tab.name}}" systelabTooltipPlacement="right"
+        systelabTooltipDelay="0" systelabTooltipHideDelay="0">
+        <i [ngClass]="tab.icon"></i>
+        @if (tab.isSelected) {
+          <div class="arrow-left w-100"></div>
         }
-    </ul>
-    <ul class="slab-app-sidebar-button-container slab-bottom">
+      </li>
+    }
+  </ul>
+  <ul class="slab-app-sidebar-button-container slab-bottom">
 
-        @for (action of actions; track action.name) {
-            <li class="slab-app-sidebar-button w-100" (click)="action.action()"
-                systelabTooltip="{{action.name}}" systelabTooltipPlacement="right" systelabTooltipDelay="0"
-                systelabTooltipHideDelay="0">
-                <i class="{{action.icon}}"></i>
-            </li>
-        }
-    </ul>
+    @for (action of actions; track action.name) {
+      <li class="slab-app-sidebar-button w-100" (click)="action.action()"
+        systelabTooltip="{{action.name}}" systelabTooltipPlacement="right" systelabTooltipDelay="0"
+        systelabTooltipHideDelay="0">
+        <i class="{{action.icon}}"></i>
+      </li>
+    }
+  </ul>
 </div>
