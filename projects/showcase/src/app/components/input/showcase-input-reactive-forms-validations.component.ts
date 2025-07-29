@@ -3,8 +3,9 @@ import { AbstractControl, UntypedFormBuilder } from '@angular/forms';
 import { emailValidator, phoneValidator, urlValidator } from 'systelab-components';
 
 @Component({
-  selector: 'showcase-input-reactive-forms-validations',
-  templateUrl: './showcase-input-reactive-forms-validations.component.html'
+    selector: 'showcase-input-reactive-forms-validations',
+    templateUrl: './showcase-input-reactive-forms-validations.component.html',
+    standalone: false
 })
 export class ShowcaseInputReactiveFormsValidationsComponent implements OnInit {
 

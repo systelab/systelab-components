@@ -3,8 +3,9 @@ import { ToastService } from 'systelab-components';
 import { ToastConfig, ToastSize } from "../../../../../systelab-components/src/lib/toast/toast-config";
 
 @Component({
-	selector:    'showcase-toast',
-	templateUrl: 'showcase-toast.component.html'
+    selector: 'showcase-toast',
+    templateUrl: 'showcase-toast.component.html',
+    standalone: false
 })
 export class ShowcaseToastComponent {
 	private readonly _defaultConfig: ToastConfig;

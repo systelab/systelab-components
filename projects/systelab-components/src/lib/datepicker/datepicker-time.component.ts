@@ -6,9 +6,10 @@ import { DataTransformerService } from './date-transformer.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
-	selector:    'systelab-date-time',
-	templateUrl: 'datepicker-time.component.html',
-	providers:   [DataTransformerService]
+    selector: 'systelab-date-time',
+    templateUrl: 'datepicker-time.component.html',
+    providers: [DataTransformerService],
+    standalone: false
 })
 export class DatepickerTimeComponent extends DatepickerComponent {
 	@Input()

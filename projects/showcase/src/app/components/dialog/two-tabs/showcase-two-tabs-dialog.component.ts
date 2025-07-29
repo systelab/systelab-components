@@ -6,7 +6,8 @@ export class ShowcaseTwoTabsDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-two-tabs-dialog.component.html',
+    templateUrl: 'showcase-two-tabs-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseTwoTabsDialog implements ModalComponent<ShowcaseTwoTabsDialogParameters> {
 

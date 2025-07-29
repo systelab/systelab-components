@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {AgEditorComponent} from 'ag-grid-angular';
 
 @Component({
-	selector: 'systelab-decimal-input-cell-editor',
-	templateUrl: 'decimal-input-cell-editor.component.html'
+    selector: 'systelab-decimal-input-cell-editor',
+    templateUrl: 'decimal-input-cell-editor.component.html',
+    standalone: false
 })
 export class DecimalInputCellEditorComponent implements AgEditorComponent {
 	public params: any;

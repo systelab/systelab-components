@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector: 'systelab-file-selector',
-	templateUrl: 'file-selector.component.html'
+    selector: 'systelab-file-selector',
+    templateUrl: 'file-selector.component.html',
+    standalone: false
 })
 
 export class FileSelectorComponent {

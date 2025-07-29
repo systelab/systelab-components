@@ -14,8 +14,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-	selector: 'systelab-datepicker-time-test',
-	template: `
+    selector: 'systelab-datepicker-time-test',
+    template: `
         <div>
             <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDateWithReset" [resetTimeWhenChangingCurrentDate]="true"></systelab-date-time>
@@ -24,7 +24,8 @@ import { ButtonComponent } from '../button/button.component';
             <systelab-button class="mt-2 mr-1" (click)="setCurrentDate()">Set Current Date</systelab-button>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class DatepickerTimeTestComponent {
 

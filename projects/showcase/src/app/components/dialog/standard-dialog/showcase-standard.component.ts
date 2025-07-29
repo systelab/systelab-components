@@ -2,8 +2,9 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { timer } from 'rxjs';
 
 @Component({
-	selector:    'showcase-standard',
-	templateUrl: 'showcase-standard.component.html',
+    selector: 'showcase-standard',
+    templateUrl: 'showcase-standard.component.html',
+    standalone: false
 })
 export class ShowcaseStandardComponent implements OnInit {
 

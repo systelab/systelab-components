@@ -10,14 +10,15 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { WizardStep, WizardStepsComponent } from './wizard-steps.component';
 
 @Component({
-	selector: 'systelab-wizard-steps-test',
-	template: `
+    selector: 'systelab-wizard-steps-test',
+    template: `
                 <div>
                     <systelab-wizard-steps [allowNavigation]="allowNavigation" [steps]="steps"
 										   [(currentStep)]="currentStep" [roundedStep]="roundedStep"></systelab-wizard-steps>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class WizardStepsTestComponent {
 	public allowNavigation = true;

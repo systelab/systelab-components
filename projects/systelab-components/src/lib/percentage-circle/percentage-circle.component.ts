@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector:    'systelab-percentage-circle',
-	templateUrl: 'percentage-circle.component.html'
+    selector: 'systelab-percentage-circle',
+    templateUrl: 'percentage-circle.component.html',
+    standalone: false
 })
 export class PercentageCircleComponent {
 

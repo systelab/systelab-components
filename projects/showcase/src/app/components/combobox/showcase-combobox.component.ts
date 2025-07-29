@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-	selector: 'showcase-combobox',
-	templateUrl: 'showcase-combobox.component.html'
+    selector: 'showcase-combobox',
+    templateUrl: 'showcase-combobox.component.html',
+    standalone: false
 })
 export class ShowcaseComboboxComponent {
 

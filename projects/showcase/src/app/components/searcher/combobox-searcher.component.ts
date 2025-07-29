@@ -7,7 +7,8 @@ import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 
 @Component({
 	selector:    'showcase-combobox-searcher',
-	templateUrl: '../../../../../systelab-components/src/lib/searcher/abstract-generic-searcher.component.html'
+	templateUrl: '../../../../../systelab-components/src/lib/searcher/abstract-generic-searcher.component.html',
+	standalone: false
 })
 export class ComboboxSearcherComponent extends AbstractGenericSearcherComponent<ShowcaseSearcherData> implements OnInit {
 	@Input() treeSearcher: boolean;

@@ -6,8 +6,9 @@ export interface ToggleSelectorOption {
 }
 
 @Component({
-  selector: 'systelab-toggle-selector',
-  templateUrl: './toggle-selector.component.html'
+    selector: 'systelab-toggle-selector',
+    templateUrl: './toggle-selector.component.html',
+    standalone: false
 })
 export class ToggleSelectorComponent {
   @Input() public options: Array<ToggleSelectorOption> = [];

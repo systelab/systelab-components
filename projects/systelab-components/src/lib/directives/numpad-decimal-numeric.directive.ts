@@ -4,7 +4,8 @@ import { NumberHelper } from '../helper/number-helper';
 
 
 @Directive({
-	selector: '[systelabNumPadDecimalNumericDirective]'
+    selector: '[systelabNumPadDecimalNumericDirective]',
+    standalone: false
 })
 
 export class NumpadDecimalNumericDirective {

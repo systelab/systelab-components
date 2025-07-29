@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector:    'showcase-paginator',
-	templateUrl: 'showcase-paginator.component.html'
+    selector: 'showcase-paginator',
+    templateUrl: 'showcase-paginator.component.html',
+    standalone: false
 })
 export class ShowcasePaginatorComponent {
 

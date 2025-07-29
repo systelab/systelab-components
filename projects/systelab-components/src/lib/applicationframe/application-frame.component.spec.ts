@@ -14,14 +14,15 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
-	selector: 'systelab-application-frame-test',
-	template: `
+    selector: 'systelab-application-frame-test',
+    template: `
         <div class="w-100 h-100 d-flex">
             <systelab-app-frame class="slab-flex-1" [userName]="userName" [userFullName]="userFullName" [title]="title" [menu]="menu"
                                 [largeSideBar]="largeSideBar" [tabs]="sideTabs" [logoIcon]="logoIcon"
                                 [actions]="sideActions" (selected)="doDummySelected($event)"></systelab-app-frame>
         </div>
-	`
+	`,
+    standalone: false
 })
 export class ApplicationFrameTestComponent {
 

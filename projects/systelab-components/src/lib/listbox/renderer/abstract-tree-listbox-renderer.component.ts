@@ -3,8 +3,9 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { TreeListBoxElement } from '../abstract-api-tree-listbox.component';
 
 @Component({
-	selector:    'abstract-listbox-renderer',
-	templateUrl: 'abstract-tree-listbox-renderer.component.html'
+    selector: 'abstract-listbox-renderer',
+    templateUrl: 'abstract-tree-listbox-renderer.component.html',
+    standalone: false
 })
 export class AbstractTreeListboxRendererComponent implements AgRendererComponent {
 	public params: any;

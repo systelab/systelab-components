@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, ColumnApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
+import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowSelectionOptions } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -22,8 +22,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public static readonly contextMenuColId = 'contextMenu';
 	public static readonly selectionColId = 'selectCol';
-
 	public gridOptions: GridOptions;
+	public gridApi: GridApi;
 	public overlayNoRowsTemplate;
 	public overlayLoadingTemplate;
 	public startCellEditorWithTab = false;
@@ -75,19 +75,18 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const headerHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'height');
 
 		const options: GridOptions = {};
-
 		options.columnDefs = this.getColumnDefsWithOptions();
+		options.selectionColumnDef = this.getCheckColumnDef(this.getCheckColumnWidth());
+		options.rowSelection = this.getRowSelectionType();
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
 		options.suppressDragLeaveHidesColumns = true;
 		options.suppressCellFocus = true;
-		options.enableRangeSelection = true;
 		options.stopEditingWhenCellsLoseFocus = true;
 		options.singleClickEdit = true;
 		options.defaultColDef = {
 			resizable: this.isColResizeEnabled()
 		};
-		options.rowSelection = this.getRowSelectionType();
 		options.localeText = {
 			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
 			loadingOoo:   this.i18nService.instant('COMMON_LOADING')
@@ -96,11 +95,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		if (this.hideHeader()) {
 			options.headerHeight = 0;
 		}
-		if (this.showChecks) {
-			if (this.multipleSelection) {
-				options.suppressRowClickSelection = true;
-			}
-		}
+
 		options.isFullWidthRow = (isFullWidthRowParams: IsFullWidthRowParams) => this.getIsFullWidthRow(isFullWidthRowParams);
 		options.fullWidthCellRenderer = this.getFullWidthCellRenderer();
 		options.context = {componentParent: this};
@@ -114,32 +109,39 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public onModelUpdated(event: any) {
-		this.doAutoSizeManagement();
+		if(this.gridApi) {
+			this.doAutoSizeManagement();
+		}
 		return event;
 	}
 
 	public doGridReady(event: any): void {
+		this.gridApi = event.api;
 		this.loadColumnsStateFromPreferences();
 
 		if(this.autoSizeColumnsToContent) {
-			this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+			this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 		} else {
 			this.doAutoSizeManagement();
 		}
-		this.gridOptions.api.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
+		this.gridApi.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
 	}
 
 	protected saveColumnsStateInPreferences(): void {
 		if (this.firstSizeToFitExecuted) {
-			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi.getColumnState());
+			this.preferencesService.put(this.getGridOptionsPreferencesPrefix(), this.gridApi.getColumnState());
 		}
 	}
 
 	protected loadColumnsStateFromPreferences(): void {
-		this.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridOptions.columnApi);
+		this.loadColumnsState(this.getGridOptionsPreferencesPrefix(), this.gridApi);
 	}
 
-	private loadColumnsState(prefix: string, columnApi: ColumnApi): void {
+	public onSortChanged(): void {
+		this.saveColumnsStateInPreferences();
+	}
+
+	private loadColumnsState(prefix: string, gridApi: GridApi): void {
 
 		if (this.preferencesService.get(prefix)) {
 
@@ -147,11 +149,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 			// Filtered preferences columns that are not in the current columnDef.
 			const filteredGridOptionsPreferences: Array<any> = gridOptionsPreferences
-				.filter(colPref => columnApi.getColumns()
+				.filter(colPref => gridApi.getColumns()
 					.some(column => colPref.colId === column.getColId()));
 
 			// Show new added columns
-			columnApi.getColumns()
+			gridApi.getColumns()
 				.filter(column => !filteredGridOptionsPreferences.some(colPref => colPref.colId === column.getColId()))
 				.forEach(column => {
 					const newColumn: any = {
@@ -171,21 +173,21 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 					}
 				});
 
-			this.setColumnWidthToFitContent(columnApi, filteredGridOptionsPreferences);
+			this.setColumnWidthToFitContent(gridApi, filteredGridOptionsPreferences);
 
 			// Override pinned property saved in preferences
 			const pinnedCol = filteredGridOptionsPreferences.find(column => column.colId === AbstractGrid.contextMenuColId || column.colId === AbstractGrid.selectionColId);
 			if (pinnedCol) {
 				pinnedCol['pinned'] = 'left';
 			}
-			columnApi.applyColumnState({state: filteredGridOptionsPreferences, applyOrder: true});
+			gridApi.applyColumnState({state: filteredGridOptionsPreferences, applyOrder: true});
 		}
 	}
 
-	private setColumnWidthToFitContent(columnApi: ColumnApi, filteredGridOptionsPreferences: Array<any>) {
+	private setColumnWidthToFitContent(gridApi: GridApi, filteredGridOptionsPreferences: Array<any>) {
 		// Set to null width of preferences of columns without supressSizeToFit
 		// If not set to null these columns are not sizedtofit
-		columnApi.getColumns()
+		gridApi.getColumns()
 			.filter(column => !column.getColDef().suppressSizeToFit)
 			.forEach(column => {
 				const columnPref: any = filteredGridOptionsPreferences.find(colPref => colPref.colId === column.getColId());
@@ -193,7 +195,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			});
 	}
 
-	private getContextMenuColumnDef(width: number) {
+	private getContextMenuColumnDef(width: number): ColDef {
 		return {
 			colId:             AbstractGrid.contextMenuColId,
 			headerName:        '',
@@ -203,35 +205,32 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			resizable:         false,
 			suppressMovable:   true,
 			cellRenderer:      GridContextMenuCellRendererComponent
-		};
+		} as ColDef;
 	}
 
-	private getCheckColumnDef(width: number) {
+	private getCheckColumnDef(width: number): ColDef {
 		return {
 			colId:             AbstractGrid.selectionColId,
+			type: 'selection',
+			cellClass: 'checkbox-cell',
 			headerName:        '',
-			headerCheckboxSelection: this.headerCheckboxSelection,
-			checkboxSelection: true,
 			pinned:            'left',
-			width:             width,
+			maxWidth: width,
 			suppressSizeToFit: true,
 			resizable:         false,
 			suppressMovable:   true
-		};
+		} as ColDef;
 	}
 
 	protected abstract getColumnDefs(): Array<any>;
 
-	protected getColumnDefsWithOptions(): Array<any> {
-
+	protected getColumnDefsWithOptions(): Array<ColDef> {
 		const colDefs: Array<any> = this.getColumnDefs();
 
 		if (this.menu && this.menu.length > 0) {
 			colDefs.unshift(this.getContextMenuColumnDef(this.getContextMenuColumnWidth()));
 		}
-		if (this.showChecks) {
-			colDefs.unshift(this.getCheckColumnDef(this.getCheckColumnWidth()));
-		}
+
 		colDefs.forEach((colDef: ColDef) => this.suppressColumnSizeToFit(colDef));
 
 		return colDefs;
@@ -257,9 +256,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridOptions.api.getModel()
-			.getRow(rowId).data;
-		const rowsSelected: Array<T> = this.gridOptions.api.getSelectedRows();
+		const data: T = this.gridApi.getDisplayedRowAtIndex(rowId).data;
+		const rowsSelected: Array<T> = this.gridApi.getSelectedRows();
 
 		const actionData: GridContextMenuActionData<T> = new GridContextMenuActionData(rowId.toString(), actionId, data, this.gridOptions, rowsSelected);
 		if (option && option.action && data !== undefined) {
@@ -275,8 +273,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const option: GridContextMenuOption<T> = this.menu.find(opt => opt.actionId === actionId);
 		const rowId = Number(elementId.substr(elementId.indexOf('row'))
 			.replace('row', ''));
-		const data: T = this.gridOptions.api.getModel()
-			.getRow(rowId).data;
+		const data: T = this.gridApi.getDisplayedRowAtIndex(rowId).data;
 
 		if (option && option.isActionEnabled && data !== undefined) {
 			return option.isActionEnabled(data);
@@ -321,12 +318,17 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		this.rowSelected.emit(event.data);
 	}
 
-	protected getRowSelectionType(): rowSelectionType {
-		return this.multipleSelection ? 'multiple' : 'single';
+	protected getRowSelectionType(): RowSelectionOptions {
+		return {
+			mode: this.multipleSelection ? 'multiRow' : 'singleRow',
+			checkboxes: this.showChecks,
+			headerCheckbox: this.headerCheckboxSelection,
+			enableClickSelection: !(this.showChecks && this.multipleSelection),
+		} as RowSelectionOptions;
 	}
 
 	public getSelectedRows(): Array<T> {
-		return this.gridOptions.api.getSelectedRows();
+		return this.gridApi.getSelectedRows();
 	}
 
 	public getSelectedRow(): T {
@@ -335,9 +337,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public selectRow(index: number): void {
-		this.gridOptions.api.ensureIndexVisible(index);
+		this.gridApi.ensureIndexVisible(index);
 		timer(200)
-			.subscribe(() => this.gridOptions.api.selectIndex(index, false, false));
+			.subscribe(() => this.gridApi.getDisplayedRowAtIndex(index).setSelected(true));
 	}
 
 	public doClick(event: any): void {
@@ -364,7 +366,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public doGridSizeChanged(event: any): void {
-		if (this.gridOptions.api) {
+		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
 	}
@@ -372,14 +374,14 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public showOptions(canHideAllColumns?: boolean): void {
 		const parameters: GridColumnOptionsDialogParameters = GridColumnOptionsDialog.getParameters();
 
-		parameters.columnOptions = this.getGridColumnOptions(this.gridOptions.columnApi, this.getColumnDefs());
+		parameters.columnOptions = this.getGridColumnOptions(this.gridApi, this.getColumnDefs());
 		parameters.canHideAllColumns = canHideAllColumns;
 
 		this.dialogService.showDialog(GridColumnOptionsDialog, parameters)
 			.subscribe(
 				(columnsOptions: GridColumnsOptions) => {
 					if (columnsOptions) {
-						this.applyGridColumnOptions(this.gridOptions.columnApi, columnsOptions);
+						this.applyGridColumnOptions(this.gridApi, columnsOptions);
 						this.doAutoSizeManagement();
 						this.saveColumnsStateInPreferences();
 					}
@@ -387,18 +389,18 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			);
 	}
 
-	protected getGridColumnOptions(columnApi: ColumnApi, columnDefs: Array<any>): GridColumnsOptions {
+	protected getGridColumnOptions(gridApi: GridApi, columnDefs: Array<any>): GridColumnsOptions {
 		const options = new GridColumnsOptions();
 
-		options.available = columnApi.getColumns()
-			.filter(column => !columnApi.getColumn(column.getColDef().colId)
+		options.available = gridApi.getColumns()
+			.filter(column => !gridApi.getColumn(column.getColDef().colId)
 				.isVisible())
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
-		options.initialAvailableColumns = columnApi.getColumns()
+		options.initialAvailableColumns = gridApi.getColumns()
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
-		options.visible = columnApi.getAllDisplayedColumns()
+		options.visible = gridApi.getAllDisplayedColumns()
 			.filter(column => column.getColId() !== 'contextMenu' && column.getColId() !== 'selectCol')
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true));
 
@@ -410,25 +412,22 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return options;
 	}
 
-	protected applyGridColumnOptions(columnApi: ColumnApi, columnOptions: GridColumnsOptions): void {
-		let numberOfFixedInitialColumns = (columnApi.getColumn('contextMenu') !== null) ? 1 : 0;
-		numberOfFixedInitialColumns += (columnApi.getColumn('selectCol') !== null) ? 1 : 0;
-
+	protected applyGridColumnOptions(gridApi: GridApi, columnOptions: GridColumnsOptions): void {
+		let numberOfFixedInitialColumns = (gridApi.getColumn('contextMenu') !== null) ? 1 : 0;
+		numberOfFixedInitialColumns += this.showChecks ? 1 : 0;
+		const columns: Map<string, Column> = new Map<string, Column>(gridApi.getColumns().map(col => [col.getColId(), col]));
+		const colsToApplyGridOptions: Column[] = [];
 		columnOptions.visible.forEach((tlp, index) => {
-			const col: Column = columnApi.getColumns()
-				.find((column: Column) => column.getColDef().colId === tlp.colId);
-			col.setVisible(true);
-			columnApi.moveColumn(col.getColId(), index + numberOfFixedInitialColumns);
+			const col: Column = columns.get(tlp.colId)
+			if(col) {
+				colsToApplyGridOptions.push(col);
+				gridApi.moveColumns([col], index + numberOfFixedInitialColumns);
+			}
 		});
-
-		columnApi.getColumns()
-			.forEach((column) => {
-				if (column.getColId() !== 'contextMenu' && column.getColId() !== 'selectCol') {
-					if (!columnOptions.visible.some(tlp => tlp.colId === column.getColDef().colId)) {
-						columnApi.setColumnVisible(column.getColId(), false);
-					}
-				}
-			});
+		gridApi.setColumnsVisible(colsToApplyGridOptions, true);
+		gridApi.setColumnsVisible(gridApi.getColumns()
+			.filter(col => col.getColId() !== 'contextMenu' && col.getColId() !== 'selectCol')
+			.filter(col => !columnOptions.visible.some(tlp => tlp.colId === col.getColDef().colId)), false);
 	}
 
 	public dotsClicked(rowIndex: number, data: T | Array<T>, event: MouseEvent): void {
@@ -494,6 +493,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	private doAutoSizeManagement(event?: any) {
 		this.firstSizeToFitExecuted = true; 
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, event);
 	}
 }

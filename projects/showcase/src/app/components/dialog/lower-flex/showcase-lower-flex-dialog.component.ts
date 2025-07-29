@@ -7,7 +7,8 @@ export class LowerFlexDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-lower-flex-dialog.component.html',
+    templateUrl: 'showcase-lower-flex-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseLowerFlexDialog implements ModalComponent<LowerFlexDialogParameters> {
 

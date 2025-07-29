@@ -10,13 +10,14 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { PercentageCircleComponent } from './percentage-circle.component';
 
 @Component({
-	selector: 'systelab-switch-test',
-	template: `
+    selector: 'systelab-switch-test',
+    template: `
                 <div>
                     <systelab-percentage-circle [value]="value" [text]="text" [color]="color"></systelab-percentage-circle>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class PercentageCircleTestComponent {
 	public value = 45;

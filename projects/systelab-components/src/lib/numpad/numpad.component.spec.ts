@@ -15,13 +15,14 @@ import { MessagePopupService } from '../modal/message-popup/message-popup.servic
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 
 @Component({
-	selector: 'systelab-numpad-test',
-	template: `
+    selector: 'systelab-numpad-test',
+    template: `
                 <div>
                     <systelab-numpad #numpad [value]="value" (change)="doSearch()" [isPassword]="isPassword"></systelab-numpad>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class NumpadTestComponent {
 	@ViewChild('numpad') public numpad: NumPadComponent;

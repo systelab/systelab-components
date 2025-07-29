@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { SpyMenuItem } from './spy-menu-item';
 
 @Component({
-	selector:    'systelab-spy-menu',
-	templateUrl: './spy-menu.component.html'
+    selector: 'systelab-spy-menu',
+    templateUrl: './spy-menu.component.html',
+    standalone: false
 })
 export class SpyMenuComponent {
 

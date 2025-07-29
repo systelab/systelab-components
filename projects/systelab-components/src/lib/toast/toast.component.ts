@@ -13,9 +13,10 @@ const ICONS = {
 };
 
 @Component({
-  selector: 'systelab-toast',
-  templateUrl: './toast.component.html',
-  animations: [toastAnimations.fadeToast],
+    selector: 'systelab-toast',
+    templateUrl: './toast.component.html',
+    animations: [toastAnimations.fadeToast],
+    standalone: false
 })
 export class ToastComponent implements OnInit, OnDestroy {
   public iconClass: string;

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ShowcaseAddRemoveListData } from './showcase-inner-add-remove-list.component';
 
 @Component({
-	selector:    'showcase-add-remove-list',
-	templateUrl: 'showcase-add-remove-list.component.html'
+    selector: 'showcase-add-remove-list',
+    templateUrl: 'showcase-add-remove-list.component.html',
+    standalone: false
 })
 export class ShowcaseAddRemoveListComponent {
 

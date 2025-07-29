@@ -10,12 +10,13 @@ export const phoneValidator = (control: UntypedFormControl): ValidationErrors | 
 };
 
 @Directive({
-  selector: '[systelab-phoneValidator]',
-  providers: [{
-      provide: NG_VALIDATORS,
-      useExisting: PhoneValidatorDirective,
-      multi: true
-  }]
+    selector: '[systelab-phoneValidator]',
+    providers: [{
+            provide: NG_VALIDATORS,
+            useExisting: PhoneValidatorDirective,
+            multi: true
+        }],
+    standalone: false
 })
 export class PhoneValidatorDirective implements Validator {
   validate(control: UntypedFormControl): ValidationErrors | null {

@@ -9,9 +9,10 @@ export interface DaySlot {
 }
 
 @Component({
-	selector: 'systelab-calendar-table',
-	templateUrl: 'calendar-table.component.html',
-	styleUrls: ['calendar-table.component.scss']
+    selector: 'systelab-calendar-table',
+    templateUrl: 'calendar-table.component.html',
+    styleUrls: ['calendar-table.component.scss'],
+    standalone: false
 })
 export class CalendarTableComponent implements OnChanges {
 

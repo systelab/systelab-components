@@ -15,8 +15,8 @@ import { TwoListSortableListComponent } from './two-list-sortable-list.component
 import { SystelabPreferencesModule } from 'systelab-preferences';
 
 @Component({
-	selector: 'systelab-toggle-button-test',
-	template: `
+    selector: 'systelab-toggle-button-test',
+    template: `
                 <div>
                     <systelab-two-list [(available)]="availableColumns"
                                        [(visible)]="visibleColumns"
@@ -30,7 +30,8 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
                     </div>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class TwoListTestComponent implements OnInit {
 	public availableColumns: Array<TwoListItem> = [];

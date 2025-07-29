@@ -106,6 +106,7 @@ import {
 import { TestIdDirective } from './directives/test-id.directive';
 import { SearcherTreeHeaderRendererComponent } from './grid/custom-cells/searcher-tree-header/searcher-tree-header-renderer.component';
 import { Accordion } from './accordion/accordion.component';
+import { CellStyleModule, ClientSideRowModelModule, ColumnApiModule, ColumnAutoSizeModule, CustomEditorModule, EventApiModule, InfiniteRowModelModule, LocaleModule, ModuleRegistry, provideGlobalGridOptions, RowApiModule, RowDragModule, RowSelectionModule, RowStyleModule, TooltipModule, ValidationModule } from 'ag-grid-community';
 
 export const factory = () => {
 	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
@@ -321,10 +322,17 @@ const providers = [
 })
 export class SystelabComponentsModule {
 
-	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {
-	}
+	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {}
 
 	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
+		ModuleRegistry.registerModules([ InfiniteRowModelModule,
+			ClientSideRowModelModule, ValidationModule, EventApiModule, RowApiModule, ColumnApiModule,
+			RowSelectionModule, TooltipModule, ColumnAutoSizeModule, RowDragModule, RowStyleModule,
+			LocaleModule, CustomEditorModule, CellStyleModule ]);
+
+		provideGlobalGridOptions({
+			theme: 'legacy'
+		});
 		return {
 			ngModule: SystelabComponentsModule,
 			providers: [

@@ -1,7 +1,8 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
-  selector: '[scrollSpy]',
+    selector: '[scrollSpy]',
+    standalone: false
 })
 export class ScrollSpyDirective implements AfterViewInit
  {

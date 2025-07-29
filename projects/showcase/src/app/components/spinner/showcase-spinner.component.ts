@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { TouchSpinValues } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-spinner',
-	templateUrl: 'showcase-spinner.component.html'
+    selector: 'showcase-spinner',
+    templateUrl: 'showcase-spinner.component.html',
+    standalone: false
 })
 export class ShowcaseSpinnerComponent {
 	public touchSpinValues1: TouchSpinValues;
