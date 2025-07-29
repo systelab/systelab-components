@@ -26,7 +26,7 @@ import { DatepickerTimeComponent } from './datepicker/datepicker-time.component'
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
-import { AngularSplitModule, SplitAreaDirective, SplitComponent } from 'angular-split';
+import { AngularSplitModule, SplitComponent } from 'angular-split';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
 import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
@@ -277,7 +277,6 @@ const providers = [
 		PercentageCircleComponent,
 		Tree,
 		SplitComponent,
-		SplitAreaDirective,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
 		CheckboxCellRendererComponent,

@@ -119,6 +119,7 @@ import { ShowcaseInnerTreeGenericComboboxComponent } from './components/combobox
 import { ShowcaseApiPaginateCombobox } from './components/combobox/showcase-api-paginate.combobox';
 import { ShowcaseAccordion } from './components/accordion/showcase-accordion.component';
 import { SystelabComponentsModule } from 'systelab-components';
+import { AngularSplitModule } from 'angular-split';
 
 @NgModule({ declarations: [
         ShowcaseComponent,
@@ -214,6 +215,7 @@ import { SystelabComponentsModule } from 'systelab-components';
                 ShowcaseAccordion],
     bootstrap: [ShowcaseComponent],
     imports: [
+        AngularSplitModule,
         A11yModule,
         BrowserModule,
         BrowserAnimationsModule,
