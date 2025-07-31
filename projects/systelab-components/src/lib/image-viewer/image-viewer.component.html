@@ -1,103 +1,118 @@
 <svg class="d-none" [innerHTML]="safeHtml"></svg>
 
 <div class="d-flex flex-column slab-flex-1" id="imageViewerHeader"
-     [ngClass]="transparentBackgroundForButtons ? 'bg-color-transparent' : 'bg-color-primary'"
-     data-test-id="imageViewerHeader">
-    <div class="d-flex align-items-center">
-        <div class="d-flex ml-1">
-            @for (actionButton of actionButtons; track actionButton.label) {
-                <ng-container>
-                    <systelab-toggle-button *ngIf="actionButton.type===actionButtonType.TOGGLE_BUTTON" class="mr-2"
-                                            [isChecked]="actionButton.state?.checked"
-                                            [disabled]="actionButton.state?.disabled"
-                                            (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
-                        {{actionButton.label}}
-                    </systelab-toggle-button>
-                    <systelab-button *ngIf="actionButton.type===actionButtonType.BUTTON" class="mr-2"
-                                     [systelabTooltip]="actionButton.tooltip"
-                                     [disabled]="actionButton.state?.disabled"
-                                     (click)="clickActionButton.emit(actionButton.action)">
-                        {{actionButton.label}}
-                    </systelab-button>
-                    <div *ngIf="actionButton.type===actionButtonType.DROP_DOWN" class="dropup slab-button-dropdown">
-                        <button id="ADDropDownButton" type="button" class="btn btn-outline-primary dropdown-toogle"
-                                data-toggle="dropdown">{{getDropMainDownLabel(actionButton.label)}}
-                            <i class="ml-1 icon-chevron-up"></i>
-                        </button>
-                        <div class="dropdown-menu slab-dropdown">
-                            <ul>
-                                @for (dropDownLabel of getDropDownLabels(actionButton.label); track dropDownLabel; let i = $index) {
-                                    <li>
-                                        <a (click)="clickActionButton.emit(getDropDownAction(actionButton.action, i))">{{ dropDownLabel }}</a>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </ng-container>
-            }
-        </div>
-        <div class="d-flex slab-flex-1" id="OverImageArea"></div>
-        <div class="d-flex ml-auto">
-            <a [href]="imageSrc" download="{{imageTitle}}">
-                <a [href]="imageSrc" download="{{imageTitle}}" ></a>
-                <systelab-button *ngIf="showSaveButton" data-test-id="SaveBtn"
-                             systelabTooltip="{{ 'COMMON_SAVE' | translate | async }}">
-                    <i class="icon-download1"></i>
-                </systelab-button>
-            </a>
-            <systelab-toggle-button *ngIf="showZoomByAreaButton" class="ml-2" data-test-id="ZoomByAreaBtn" systelabTooltip="{{ 'COMMON_ZOOM_DRAG' | translate | async }}"
-                                    (click)="toggleZoomByArea()" [isChecked]="this.zoomEnabled">
-                <i class="icon-search"></i>
+  [ngClass]="transparentBackgroundForButtons ? 'bg-color-transparent' : 'bg-color-primary'"
+  data-test-id="imageViewerHeader">
+  <div class="d-flex align-items-center">
+    <div class="d-flex ml-1">
+      @for (actionButton of actionButtons; track actionButton.label) {
+        <ng-container>
+          @if (actionButton.type===actionButtonType.TOGGLE_BUTTON) {
+            <systelab-toggle-button class="mr-2"
+              [isChecked]="actionButton.state?.checked"
+              [disabled]="actionButton.state?.disabled"
+              (click)="clickActionButton.emit(actionButton.action)" [systelabTooltip]="actionButton.tooltip">
+              {{actionButton.label}}
             </systelab-toggle-button>
-            <systelab-button *ngIf="showAdjustButton" class="ml-2" data-test-id="AdjustBtn" (click)="doAdjust()" systelabTooltip="{{ 'COMMON_ADJUST' | translate | async }}">
-                <i class="icon-enlarge"></i>
+          }
+          @if (actionButton.type===actionButtonType.BUTTON) {
+            <systelab-button class="mr-2"
+              [systelabTooltip]="actionButton.tooltip"
+              [disabled]="actionButton.state?.disabled"
+              (click)="clickActionButton.emit(actionButton.action)">
+              {{actionButton.label}}
             </systelab-button>
-        </div>
-        <systelab-slider class="m-2 pl-2 bg-primary-track" id="ImageViewerSlider" data-test-id="ImageViewerSlider"
-                         [systelabTooltip]="showSliderToolTip ? (imgParams.sliderZoomPct/100 | number:'1.0-1')+'x' : ''"
-                         [(value)]="imgParams.sliderZoomPct" (valueChange)="sliderZoomChanged()"
-                         [min]="sliderZoomMin"
-                         [max]="sliderZoomMax"
-                         [step]="sliderZoomStep"></systelab-slider>
+          }
+          @if (actionButton.type===actionButtonType.DROP_DOWN) {
+            <div class="dropup slab-button-dropdown">
+              <button id="ADDropDownButton" type="button" class="btn btn-outline-primary dropdown-toogle"
+                data-toggle="dropdown">{{getDropMainDownLabel(actionButton.label)}}
+                <i class="ml-1 icon-chevron-up"></i>
+              </button>
+              <div class="dropdown-menu slab-dropdown">
+                <ul>
+                  @for (dropDownLabel of getDropDownLabels(actionButton.label); track dropDownLabel; let i = $index) {
+                    <li>
+                      <a (click)="clickActionButton.emit(getDropDownAction(actionButton.action, i))">{{ dropDownLabel }}</a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        </ng-container>
+      }
     </div>
-    <div class="d-flex justify-content-end" *ngIf="showZoomScale">
-        <div id="zoomScale" class="m-2" [style.width]="zoomScale.totalWidth+'px'">
-            @for (mark of zoomScale.marks; track mark.label) {
-                <div class='zoomScaleMark'
-                     [style.left.px]="mark.marginLeft"
-                     [style.height.px]="mark.label !== ''? 10:6"
-                >{{mark.label | number:'1.0-1'}}</div>
-            }
-        </div>
+    <div class="d-flex slab-flex-1" id="OverImageArea"></div>
+    <div class="d-flex ml-auto">
+      <a [href]="imageSrc" download="{{imageTitle}}">
+        <a [href]="imageSrc" download="{{imageTitle}}" ></a>
+        @if (showSaveButton) {
+          <systelab-button data-test-id="SaveBtn"
+            systelabTooltip="{{ 'COMMON_SAVE' | translate | async }}">
+            <i class="icon-download1"></i>
+          </systelab-button>
+        }
+      </a>
+      @if (showZoomByAreaButton) {
+        <systelab-toggle-button class="ml-2" data-test-id="ZoomByAreaBtn" systelabTooltip="{{ 'COMMON_ZOOM_DRAG' | translate | async }}"
+          (click)="toggleZoomByArea()" [isChecked]="this.zoomEnabled">
+          <i class="icon-search"></i>
+        </systelab-toggle-button>
+      }
+      @if (showAdjustButton) {
+        <systelab-button class="ml-2" data-test-id="AdjustBtn" (click)="doAdjust()" systelabTooltip="{{ 'COMMON_ADJUST' | translate | async }}">
+          <i class="icon-enlarge"></i>
+        </systelab-button>
+      }
     </div>
+    <systelab-slider class="m-2 pl-2 bg-primary-track" id="ImageViewerSlider" data-test-id="ImageViewerSlider"
+      [systelabTooltip]="showSliderToolTip ? (imgParams.sliderZoomPct/100 | number:'1.0-1')+'x' : ''"
+      [(value)]="imgParams.sliderZoomPct" (valueChange)="sliderZoomChanged()"
+      [min]="sliderZoomMin"
+      [max]="sliderZoomMax"
+    [step]="sliderZoomStep"></systelab-slider>
+  </div>
+  @if (showZoomScale) {
+    <div class="d-flex justify-content-end">
+      <div id="zoomScale" class="m-2" [style.width]="zoomScale.totalWidth+'px'">
+        @for (mark of zoomScale.marks; track mark.label) {
+          <div class='zoomScaleMark'
+            [style.left.px]="mark.marginLeft"
+            [style.height.px]="mark.label !== ''? 10:6"
+          >{{mark.label | number:'1.0-1'}}</div>
+        }
+      </div>
+    </div>
+  }
 </div>
 
-<div *ngIf="imageSrc; else noImage" id="imageViewerWrapper" #imageViewerWrapper [ngClass]="{'zooming' : zoomEnabled, 'dragging' : dragEnabled }">
-
+@if (imageSrc) {
+  <div id="imageViewerWrapper" #imageViewerWrapper [ngClass]="{'zooming' : zoomEnabled, 'dragging' : dragEnabled }">
     <img data-test-id="ImageViewerImg" id="imageViewerImg" #imageViewerImg
-         [ngClass]="{'no-overlapping' : !overlapImageWithButtons }"
-         [src]="imageSrc"
-         (load)="setInitialValues()"
+      [ngClass]="{'no-overlapping' : !overlapImageWithButtons }"
+      [src]="imageSrc"
+      (load)="setInitialValues()"
          [ngStyle]="{
             'filter': filteredUrl,
             'width': imageWidth,
             'cursor':zoomSelector.visible && !zoomSelector.allow ? 'not-allowed' : 'inherit'}"
-         alt="{{imageTitle}}"/>
-
-    <div id="selector" data-test-id="ZoomSelector"
-         [style.display]="zoomSelector.visible ? 'block' : 'none'"
-         [style.borderColor]="zoomSelector.allow ? allowBorderColor : 'red'"
-         [style.top.px]="zoomSelector.top"
-         [style.left.px]="zoomSelector.left"
-         [style.width.px]="zoomSelector.width"
-         [style.height.px]="zoomSelector.height"></div>
-</div>
-<div class="mlab-link" id="imageViewerOverlayText" data-test-id="ImageViewerOverlayText" *ngIf="overlayText"
-     (click)="clickOverlayText.emit()">{{overlayText}}</div>
-
-<ng-template #noImage>
+      alt="{{imageTitle}}"/>
+      <div id="selector" data-test-id="ZoomSelector"
+        [style.display]="zoomSelector.visible ? 'block' : 'none'"
+        [style.borderColor]="zoomSelector.allow ? allowBorderColor : 'red'"
+        [style.top.px]="zoomSelector.top"
+        [style.left.px]="zoomSelector.left"
+        [style.width.px]="zoomSelector.width"
+      [style.height.px]="zoomSelector.height"></div>
+    </div>
+  } @else {
     <span class="slab-flex-1 d-flex justify-content-center align-items-center " style="font-size: 5em; color: lightgrey;">
-        <i class="icon-exclamation"></i>
+      <i class="icon-exclamation"></i>
     </span>
-</ng-template>
+  }
+  @if (overlayText) {
+    <div class="mlab-link" id="imageViewerOverlayText" data-test-id="ImageViewerOverlayText"
+    (click)="clickOverlayText.emit()">{{overlayText}}</div>
+  }
+

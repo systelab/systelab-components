@@ -1,15 +1,19 @@
 <div class="d-flex column">
-    <div *ngIf="isMultipleSelection">
-        <div class="slab-flex-1" [style.marginLeft.px]="(level*20)+1">
-            <input type="checkbox" id="{{checkId}}-{{level}}-{{id}}" [(ngModel)]="params.data.selected"
-                   [disabled]="params.isDisabled"
-                   (change)="changeValue()">
-            <label for="{{checkId}}-{{level}}-{{id}}">{{description}}</label>
+  @if (isMultipleSelection) {
+    <div>
+      <div class="slab-flex-1" [style.marginLeft.px]="(level*20)+1">
+        <input type="checkbox" id="{{checkId}}-{{level}}-{{id}}" [(ngModel)]="params.data.selected"
+          [disabled]="params.isDisabled"
+          (change)="changeValue()">
+          <label for="{{checkId}}-{{level}}-{{id}}">{{description}}</label>
         </div>
-    </div>
-    <div *ngIf="!isMultipleSelection" class="d-flex slab-flex-1">
+      </div>
+    }
+    @if (!isMultipleSelection) {
+      <div class="d-flex slab-flex-1">
         <div class="slab-flex-1" (click)="changeValue()" [style.marginLeft.px]="(level*20)+1">
-            <span>{{description}}</span>
+          <span>{{description}}</span>
         </div>
-    </div>
-</div>
+      </div>
+    }
+  </div>

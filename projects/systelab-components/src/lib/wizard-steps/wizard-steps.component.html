@@ -1,24 +1,26 @@
 <div class="slab-steps-wizard">
-    <div class="slab-row">
-        @for (step of steps; track step.step; let first = $first; let last = $last;) {
-            <div class="slab-step">
-                <div class="slab-step-button-container">
-                    <div class="step-line step-line-left" [class.slab-step-visited]="step.step < currentStep && step.visited || step.step == currentStep"
-                         [class.slab-step-first]="first">
-                    </div>
-                    <button (click)="doAction(step)" [disabled]="(!allowNavigation  && step.step < currentStep) || step.step > currentStep" class="btn cursor"
-                            [class.btn-outline-primary]="step.step > currentStep && !step.visited"
-                            [class.btn-primary]="step.step < currentStep && step.visited || step.step == currentStep"
-                            [class.slab-step-round]="roundedStep">{{step.step}}</button>
-                    <div class="step-line step-line-right" [class.slab-step-visited]="step.step < currentStep && step.visited"
-                         [class.slab-step-last]="last">
-                    </div>
-                </div>
-                <p class="slab-step-text">{{step.description}}</p>
-                <p *ngIf="step.optionalText" class="slab-step-optional-text">{{step.optionalText}}</p>
-
-            </div>
+  <div class="slab-row">
+    @for (step of steps; track step.step; let first = $first; let last = $last;) {
+      <div class="slab-step">
+        <div class="slab-step-button-container">
+          <div class="step-line step-line-left" [class.slab-step-visited]="step.step < currentStep && step.visited || step.step == currentStep"
+            [class.slab-step-first]="first">
+          </div>
+          <button (click)="doAction(step)" [disabled]="(!allowNavigation  && step.step < currentStep) || step.step > currentStep" class="btn cursor"
+            [class.btn-outline-primary]="step.step > currentStep && !step.visited"
+            [class.btn-primary]="step.step < currentStep && step.visited || step.step == currentStep"
+          [class.slab-step-round]="roundedStep">{{step.step}}</button>
+          <div class="step-line step-line-right" [class.slab-step-visited]="step.step < currentStep && step.visited"
+            [class.slab-step-last]="last">
+          </div>
+        </div>
+        <p class="slab-step-text">{{step.description}}</p>
+        @if (step.optionalText) {
+          <p class="slab-step-optional-text">{{step.optionalText}}</p>
         }
-    </div>
+
+      </div>
+    }
+  </div>
 </div>
 

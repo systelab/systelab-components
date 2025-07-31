@@ -10,6 +10,7 @@ declare var jQuery: any;
 export class ComboTreeNode<T> {
 	public nodeData: T;
 	public level: number;
+	public description?: string;
 
 	constructor(pNodeData?: T, pLevel?: number) {
 		this.nodeData = pNodeData;

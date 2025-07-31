@@ -1,14 +1,22 @@
 <div class="slab-paginator-container w-100 h-100 d-flex justify-content-center">
-    <systelab-paginator-page *ngIf="showFirstLastButtons" [icon]="'icon-angle-double-left'" [disabled]="page===1" (click)="goFirst()"></systelab-paginator-page>
-    <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'icon-angle-left'" [disabled]="page===1"
-                             (click)="goPrevious()"></systelab-paginator-page>
+  @if (showFirstLastButtons) {
+    <systelab-paginator-page [icon]="'icon-angle-double-left'" [disabled]="page===1" (click)="goFirst()"></systelab-paginator-page>
+  }
+  @if (showNextPreviousButtons) {
+    <systelab-paginator-page [icon]="'icon-angle-left'" [disabled]="page===1"
+    (click)="goPrevious()"></systelab-paginator-page>
+  }
 
-    @for (p of pages; track p) {
-        <systelab-paginator-page [pageNumber]="p.toString()" [selected]="page===p" (click)="goToPage(p)" id="page{{p}}"></systelab-paginator-page>
-    }
+  @for (p of pages; track p) {
+    <systelab-paginator-page [pageNumber]="p.toString()" [selected]="page===p" (click)="goToPage(p)" id="page{{p}}"></systelab-paginator-page>
+  }
 
-    <systelab-paginator-page *ngIf="showNextPreviousButtons" [icon]="'icon-angle-right'" [disabled]="page===totalPages"
-                             (click)="goNext()"></systelab-paginator-page>
-    <systelab-paginator-page *ngIf="showFirstLastButtons" [icon]="'icon-angle-double-right'" [disabled]="page===totalPages"
-                             (click)="goLast()"></systelab-paginator-page>
+  @if (showNextPreviousButtons) {
+    <systelab-paginator-page [icon]="'icon-angle-right'" [disabled]="page===totalPages"
+    (click)="goNext()"></systelab-paginator-page>
+  }
+  @if (showFirstLastButtons) {
+    <systelab-paginator-page [icon]="'icon-angle-double-right'" [disabled]="page===totalPages"
+    (click)="goLast()"></systelab-paginator-page>
+  }
 </div>

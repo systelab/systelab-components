@@ -1,38 +1,54 @@
 <cdk-tree [(dataSource)]="dataSource" [(treeControl)]="treeControl" class="slab-tree">
-    <!-- This is the tree node template for leaf nodes -->
-    <cdk-nested-tree-node *cdkTreeNodeDef="let node"
-                          class="d-block">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <div class="d-block">
-            <div class="slab-tree-node" [class.slab-selected]="node==selectedNode" [ngClass]="node.styleClass?[node.styleClass]:[]"
-                 (click)="doClick(node)">
-                <button style="min-width: 30px" disabled></button>
-                <i *ngIf="node.icon" class="{{node.icon}} mr-2"></i>
-                <i *ngIf="node.status" class="{{node.status}} mr-2"></i>
-                <i *ngIf="treeControl.isExpanded(node) && node.expandedIcon" class="{{node.expandedIcon}} mr-2"></i>
-                <i *ngIf="!treeControl.isExpanded(node) && node.collapsedIcon" class="{{node.collapsedIcon}} mr-2"></i>
-                <span class="slab-tree-label">{{node.label}}</span>
-            </div>
-        </div>
-    </cdk-nested-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
-    <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild"
-                          class="d-block">
-        <div class="d-block">
-            <div class="slab-tree-node" [class.slab-selected]="node==selectedNode" [ngClass]="node.styleClass?[node.styleClass]:[]"
-                 (click)="doClick(node)">
-                <button class="slab-tree-toggle-button" style="min-width: 30px" cdkTreeNodeToggle>
-                    <i [ngClass]="[treeControl.isExpanded(node) ? defaultExpandedIcon : defaultCollapsedIcon]"></i>
-                </button>
-                <i *ngIf="node.icon" class="{{node.icon}} mr-2"></i>
-                <i *ngIf="node.status" class="{{node.status}} mr-2"></i>
-                <i *ngIf="treeControl.isExpanded(node) && node.expandedIcon" class="{{node.expandedIcon}} mr-2"></i>
-                <i *ngIf="!treeControl.isExpanded(node) && node.collapsedIcon" class="{{node.collapsedIcon}} mr-2"></i>
-                <span class="slab-tree-label">{{node.label}}</span>
-            </div>
-            <div class="pl-3" [class.slab-tree-invisible]="!treeControl.isExpanded(node)">
-                <ng-container cdkTreeNodeOutlet></ng-container>
-            </div>
-        </div>
-    </cdk-nested-tree-node>
+  <!-- This is the tree node template for leaf nodes -->
+  <cdk-nested-tree-node *cdkTreeNodeDef="let node"
+    class="d-block">
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <div class="d-block">
+      <div class="slab-tree-node" [class.slab-selected]="node==selectedNode" [ngClass]="node.styleClass?[node.styleClass]:[]"
+        (click)="doClick(node)">
+        <button style="min-width: 30px" disabled></button>
+        @if (node.icon) {
+          <i class="{{node.icon}} mr-2"></i>
+        }
+        @if (node.status) {
+          <i class="{{node.status}} mr-2"></i>
+        }
+        @if (treeControl.isExpanded(node) && node.expandedIcon) {
+          <i class="{{node.expandedIcon}} mr-2"></i>
+        }
+        @if (!treeControl.isExpanded(node) && node.collapsedIcon) {
+          <i class="{{node.collapsedIcon}} mr-2"></i>
+        }
+        <span class="slab-tree-label">{{node.label}}</span>
+      </div>
+    </div>
+  </cdk-nested-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild"
+    class="d-block">
+    <div class="d-block">
+      <div class="slab-tree-node" [class.slab-selected]="node==selectedNode" [ngClass]="node.styleClass?[node.styleClass]:[]"
+        (click)="doClick(node)">
+        <button class="slab-tree-toggle-button" style="min-width: 30px" cdkTreeNodeToggle>
+          <i [ngClass]="[treeControl.isExpanded(node) ? defaultExpandedIcon : defaultCollapsedIcon]"></i>
+        </button>
+        @if (node.icon) {
+          <i class="{{node.icon}} mr-2"></i>
+        }
+        @if (node.status) {
+          <i class="{{node.status}} mr-2"></i>
+        }
+        @if (treeControl.isExpanded(node) && node.expandedIcon) {
+          <i class="{{node.expandedIcon}} mr-2"></i>
+        }
+        @if (!treeControl.isExpanded(node) && node.collapsedIcon) {
+          <i class="{{node.collapsedIcon}} mr-2"></i>
+        }
+        <span class="slab-tree-label">{{node.label}}</span>
+      </div>
+      <div class="pl-3" [class.slab-tree-invisible]="!treeControl.isExpanded(node)">
+        <ng-container cdkTreeNodeOutlet></ng-container>
+      </div>
+    </div>
+  </cdk-nested-tree-node>
 </cdk-tree>

@@ -5,24 +5,30 @@ import { TabComponent } from './tab.component';
     selector: 'systelab-tabs',
     template: `
                 <ul class="nav nav-tabs" [class.hideTabBackground]="!showTabBackground" [class.slab-tabs-shrink]="shrink" role="tablist">
-					@for (tab of tabs; track tab.id) {
-						<li class="nav-item" [class.hideTabBackground]="!showTabBackground"
-							(click)="doSelectTab(tab)">
-							<div class="nav-link nav-single-tab d-flex align-items-center justify-content-center"
-								 [class.active]="tab.active" [class.slab-tabs-shrink]="shrink" data-toggle="tab" role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}"
-								 [tabindex]="paintFocus?0:-1" (keydown)="doKeyDown($event,tab)">
-								<span *ngIf="tab.titleHtml" [innerHTML]="tab.titleHtml" class="d-flex align-items-center"></span>
-								<span *ngIf="tab.title" class="d-flex align-items-center">{{tab.title}}</span>
-								<i *ngIf="tab.warning" class="text-warning icon-warning ml-3"></i>
-							</div>
-						</li>
-					}
+                  @for (tab of tabs; track tab.id) {
+                    <li class="nav-item" [class.hideTabBackground]="!showTabBackground"
+                      (click)="doSelectTab(tab)">
+                      <div class="nav-link nav-single-tab d-flex align-items-center justify-content-center"
+                        [class.active]="tab.active" [class.slab-tabs-shrink]="shrink" data-toggle="tab" role="tab" [attr.aria-controls]="tab.id" id="tab-{{tab.id}}"
+                        [tabindex]="paintFocus?0:-1" (keydown)="doKeyDown($event,tab)">
+                        @if (tab.titleHtml) {
+                          <span [innerHTML]="tab.titleHtml" class="d-flex align-items-center"></span>
+                        }
+                        @if (tab.title) {
+                          <span class="d-flex align-items-center">{{tab.title}}</span>
+                        }
+                        @if (tab.warning) {
+                          <i class="text-warning icon-warning ml-3"></i>
+                        }
+                      </div>
+                    </li>
+                  }
                 </ul>
                 <div class="slab-flex-1 d-flex slab-overflow-container">
-                    <ng-content></ng-content>
+                  <ng-content></ng-content>
                 </div>
-
-	          `,
+                
+                `,
     styles: [`
       :host {
           width: 100%;
