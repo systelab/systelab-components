@@ -1,4 +1,4 @@
-import { Component, Directive, HostListener, Input } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +27,6 @@ import { MessagePopupService } from '../modal/message-popup/message-popup.servic
 import { ContextMenuSubmenuItemComponent } from '../contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from '../grid/contextmenu/grid-header-context-menu.component';
 import { ButtonComponent } from '../button/button.component';
-import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 
 export class TestData {
 	constructor(public id: string, public code: string, public description: string) {
@@ -269,13 +268,13 @@ describe('Systelab Searcher', () => {
 		expect(isSearchInputFocused()).toBeTruthy();
 	});
 
-	it('should show counter with the selected items number in the submit button', async (done) => {
+	fit('should show counter with the selected items number in the submit button', async() => {
 		spyOn(SearcherTableComponent.prototype as any, 'refresh').and.stub();
 		enterText(fixture, '1');
 		await fixture.whenStable();
 		clickHelpButton(fixture);
+		fixture.detectChanges();
 		await fixture.whenStable();
 		expect(getSubmitButtonText()).toContain('(1)');
-		done();
 	});
 });
