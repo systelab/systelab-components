@@ -268,7 +268,7 @@ describe('Systelab Searcher', () => {
 		expect(isSearchInputFocused()).toBeTruthy();
 	});
 
-	fit('should show counter with the selected items number in the submit button', async() => {
+	it('should show counter with the selected items number in the submit button', async() => {
 		spyOn(SearcherTableComponent.prototype as any, 'refresh').and.stub();
 		enterText(fixture, '1');
 		await fixture.whenStable();
