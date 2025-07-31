@@ -249,81 +249,52 @@ describe('Systelab Grid', () => {
 			.toEqual(4);
 	});
 
-	it('should have the right number of rows', (done) => {
-		fixture.whenStable()
-			.then(() => {
-				expect(getNumberOfRows(fixture))
-					.toEqual(3);
-				done();
-			});
+	it('should have the right number of rows', async () => {
+		await fixture.whenStable();
+		expect(getNumberOfRows(fixture)).toEqual(3);
+
 	});
 
-	it('should be possible to select a row', (done) => {
-		fixture.whenStable()
-			.then(() => {
-				selectRow(fixture, 1);
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.selectedTestData.field1)
-							.toEqual('Data 2');
-						expect(fixture.componentInstance.selectedTestData.field2)
-							.toEqual(2);
-						done();
-					});
-			});
+	it('should be possible to select a row', async () => {
+		await fixture.whenStable();
+		selectRow(fixture, 1);
+		await fixture.whenStable();
+		expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 2');
+		expect(fixture.componentInstance.selectedTestData.field2).toEqual(2);
+
 	});
 
-	it('should be able to show the menu on a row and select an option', (done) => {
-		fixture.whenStable()
-			.then(() => {
-				clickMenuOnRow(fixture, 1);
-				fixture.whenStable()
-					.then(() => {
-						clickOption(fixture, 1);
-						expect(fixture.componentInstance.selectedOptionID)
-							.toEqual('action2');
-						expect(fixture.componentInstance.selectedTestData.field1)
-							.toEqual('Data 1');
-						expect(fixture.componentInstance.selectedTestData.field2)
-							.toEqual(1);
-						done();
-					});
-			});
+	it('should be able to show the menu on a row and select an option', async () => {
+		await fixture.whenStable();
+		clickMenuOnRow(fixture, 1);
+		await fixture.whenStable();
+		clickOption(fixture, 1);
+		expect(fixture.componentInstance.selectedOptionID).toEqual('action2');
+		expect(fixture.componentInstance.selectedTestData.field1).toEqual('Data 1');
+		expect(fixture.componentInstance.selectedTestData.field2).toEqual(1);
+
 	});
 
-	it('should be able to show the menu on a row and select an option and then a suboption', (done) => {
-		fixture.whenStable()
-			.then(() => {
-				clickMenuOnRow(fixture, 1);
-				fixture.whenStable()
-					.then(() => {
-						clickOption(fixture, 2);
-						expect(fixture.componentInstance.selectedOptionID)
-							.toEqual('');
+	it('should be able to show the menu on a row and select an option and then a suboption', async () => {
+		await fixture.whenStable();
+		clickMenuOnRow(fixture, 1);
+		await fixture.whenStable();
+		clickOption(fixture, 2);
+		expect(fixture.componentInstance.selectedOptionID).toEqual('');
 
-						fixture.whenStable().then(() => {
-							clickOption(fixture, 5);
-							expect(fixture.componentInstance.selectedOptionID)
-								.toEqual('action33');
-							done();
-						});
-					});
-			});
+		await fixture.whenStable();
+		clickOption(fixture, 5);
+		expect(fixture.componentInstance.selectedOptionID).toEqual('action33');
+
 	});
 
 
-	it('should be able to show the menu on a header and select an option', (done) => {
-		fixture.whenStable()
-			.then(() => {
-				clickMenuHeaderOnRow(fixture);
-				fixture.whenStable()
-					.then(() => {
-						clickOption(fixture, 1);
-						expect(fixture.componentInstance.selectedOptionID)
-							.toEqual('headeraction2');
-						done();
-					});
-			});
+	it('should be able to show the menu on a header and select an option', async () => {
+		await fixture.whenStable();
+		clickMenuHeaderOnRow(fixture);
+		await fixture.whenStable();
+		clickOption(fixture, 1);
+		expect(fixture.componentInstance.selectedOptionID).toEqual('headeraction2');
 	});
 
 	it('should be possible to select the options', async () => {
@@ -336,23 +307,16 @@ describe('Systelab Grid', () => {
 			.toEqual(2);
 	});
 
-	it('should be possible to show a modal with the columns', (done) => {
-		fixture.whenStable()
-			.then(() => {
-				clickOnOptionsButton(fixture);
-				fixture.whenStable()
-					.then(() => {
-						expect(isModalVisible())
-							.toBeTruthy();
-						clickCloseButton(fixture, 'ID_optionsSubmitButton');
-						fixture.whenStable()
-							.then(() => {
-								expect(isModalVisible())
-									.toBeFalsy();
-								done();
-							});
-					});
-			});
+	it('should be possible to show a modal with the columns', async () => {
+		await fixture.whenStable();
+		clickOnOptionsButton(fixture);
+		await fixture.whenStable();
+		expect(isModalVisible()).toBeTruthy();
+
+		clickCloseButton(fixture, 'ID_optionsSubmitButton');
+		await fixture.whenStable();
+		expect(isModalVisible()).toBeFalsy();
+
 	});
 
 	it('should not to be possible to remove all the columns of the grid', async () => {

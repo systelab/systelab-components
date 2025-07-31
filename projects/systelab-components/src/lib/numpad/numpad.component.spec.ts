@@ -86,13 +86,10 @@ describe('Systelab Numpad', () => {
 	});
 
 
-	it('should show numPad dialog and should be closed', (done) => {
+	it('should show numPad dialog and should be closed', async () => {
 		clickShowDialogButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				expect(isPopupVisible()).toBeTruthy();
-				done();
-			});
+		await fixture.whenStable();
+		expect(isPopupVisible()).toBeTruthy();
 	});
 
 	it('Check type element if it is not password numpad', () => {
