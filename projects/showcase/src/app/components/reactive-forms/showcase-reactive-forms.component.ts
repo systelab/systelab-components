@@ -6,7 +6,8 @@ import {
 
 @Component({
     selector: 'showcase-reactive-forms',
-    templateUrl: './showcase-reactive-forms.component.html'
+    templateUrl: './showcase-reactive-forms.component.html',
+    standalone: false
 })
 export class ShowcaseReactiveFormsComponent implements OnInit {
 
