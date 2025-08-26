@@ -7,7 +7,7 @@ import { I18nService } from 'systelab-translate';
 import { DialogService } from '../modal/dialog/dialog.service';
 
 @Directive()
-export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
+export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource {
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
@@ -23,12 +23,16 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 		options.cacheOverflowSize = 2;
 		options.maxConcurrentDatasourceRequests = 4;
 		options.maxBlocksInCache = 15;
-		options.infiniteInitialRowCount = 1;
 		options.datasource = this;
+		options.loading = false;
 		return options;
 	}
 
 	public abstract getTotalItems(): number;
+
+	public override doGridReady(event: any) {
+		super.doGridReady(event);
+	}
 
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 
@@ -42,7 +46,6 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	}
 
 	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {
-		this.gridApi.updateGridOptions({loading: false});
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
 			this.gridApi.showNoRowsOverlay();
@@ -51,6 +54,6 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	}
 
 	public refresh(): void {
-		this.gridApi.updateGridOptions({datasource: this, loading: true});
+		this.gridApi.updateGridOptions({datasource: this });
 	}
 }

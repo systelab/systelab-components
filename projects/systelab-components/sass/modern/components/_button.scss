@@ -1,4 +1,4 @@
-
+@use "../variables" as variables;
 .btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link)
 {
   border-color: var(--slab_component_border_color);
@@ -16,6 +16,16 @@
   }
 }
 
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.btn-group > .btn:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
 .btn-link {
   color: var(--text-color);
 
@@ -30,10 +40,14 @@
 }
 
 .btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark {
-  border-radius: 20px;
+  border-radius: 20px !important;
 }
 
 .btn {
+  &.btn-searcher {
+    width: variables.$slab-searcher-button-width;
+    aspect-ratio: 1 / 1;
+  }
   &.btn-outline-primary {
     color: var(--text-color);
     border-color: var(--primary) !important;

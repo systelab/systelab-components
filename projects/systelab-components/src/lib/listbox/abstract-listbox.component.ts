@@ -74,40 +74,40 @@ export abstract class AbstractListBox<T> implements OnInit {
 	public abstract getInstance(): T;
 
 	public ngOnInit() {
+		this.gridOptions = this.getInitialGridOptions();
+	}
 
+	protected getInitialGridOptions(): GridOptions {
 		const rowHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-
-		this.gridOptions = {};
-
-		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
+		const options: GridOptions = {};
+		options.columnDefs = this.getColumnDefsWithOptions();
 		if (this.multipleSelection && !this.hideChecks) {
-			this.gridOptions.selectionColumnDef = this.getSelectionColumnDefs();
-			this.gridOptions.rowSelection = {enableClickSelection: false, checkboxes: true, headerCheckbox: this.showAll, selectAll: 'all'} as RowSelectionOptions;
-			this.gridOptions.rowClassRules = {
+			options.selectionColumnDef = this.getSelectionColumnDefs();
+			options.rowSelection = {enableClickSelection: false, checkboxes: true, headerCheckbox: this.showAll, selectAll: 'all'} as RowSelectionOptions;
+			options.rowClassRules = {
 				'ag-row-disabled': (params) => {
 					return this.isDisabled;
 				},
 			};
 		} else {
-			this.gridOptions.rowSelection = {enableClickSelection: !this.isDisabled, checkboxes: false, headerCheckbox: false} as RowSelectionOptions;
+			options.rowSelection = {enableClickSelection: !this.isDisabled, checkboxes: false, headerCheckbox: false} as RowSelectionOptions;
 		}
 
-		this.gridOptions.rowHeight = Number(rowHeight);
-		this.gridOptions.suppressDragLeaveHidesColumns = true;
-		this.gridOptions.suppressCellFocus = true;
-		this.gridOptions.defaultColDef = {};
-		this.gridOptions.defaultColDef.resizable = false;
-		(this.gridOptions.rowSelection as RowSelectionOptions).mode = this.multipleSelection ? 'multiRow' : 'singleRow';
-		(this.gridOptions.rowSelection as RowSelectionOptions).enableClickSelection = !this.isDisabled;
-		this.gridOptions.context = {componentParent: this};
+		options.rowHeight = Number(rowHeight);
+		options.suppressDragLeaveHidesColumns = true;
+		options.suppressCellFocus = true;
+		options.defaultColDef = {};
+		options.defaultColDef.resizable = false;
+		(options.rowSelection as RowSelectionOptions).mode = this.multipleSelection ? 'multiRow' : 'singleRow';
+		(options.rowSelection as RowSelectionOptions).enableClickSelection = !this.isDisabled;
+		options.context = {componentParent: this};
 
-		this.gridOptions.headerHeight = 0;
-		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
+		options.headerHeight = 0;
+		options.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
 
-		this.rowData = this.values;
-
-		this.gridOptions.enableBrowserTooltips = true;
+		options.enableBrowserTooltips = true;
+		return options;
 	}
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {

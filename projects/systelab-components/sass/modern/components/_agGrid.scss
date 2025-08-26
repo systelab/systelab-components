@@ -13,6 +13,11 @@ $context-menu-width: 39px;
   background-color: var(--slab_table_row_selection_background) !important;
 }
 
+.ag-theme-alpine .ag-row {
+  font-size: $slab-base-font-size !important;
+  border-bottom: unset;
+}
+
 
 .ag-theme-alpine .ag-header, .ag-theme-alpine .ag-column-drop-cell {
   background-image: none !important;

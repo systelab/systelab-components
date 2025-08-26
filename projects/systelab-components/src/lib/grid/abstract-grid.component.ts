@@ -35,7 +35,16 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public multipleSelection = false;
 	@Input() public showChecks = false;
 	@Input() public headerCheckboxSelection = false;
-	@Input() public rowData: Array<T> = [];
+	@Input()
+	set rowData(value: Array<T>) {
+		if(value) {
+			this._rowData = [...value];
+		}
+	}
+
+	get rowData(): Array<T> {
+		return this._rowData;
+	}
 	@Input() public noRowsText;
 	@Input() public loadingText;
 	@Input() public removeSelectionOnOpenContextMenu = false;
@@ -54,6 +63,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
+	private _rowData: Array<T>;
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
