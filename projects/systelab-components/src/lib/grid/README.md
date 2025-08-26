@@ -31,7 +31,7 @@ Use "rowDrag: true" in a column to allow reorder the table by dragging rows from
 
 Ag-grid documentation of column properties: <https://www.ag-grid.com/javascript-grid-column-properties/>
 
-We can add custom-cells/custom-editors as cellRendererFramework/cellEditorFramework in our column definition. At this moment, we have four generic cellRenderers/cellEditors for the table:
+We can add custom-cells/custom-editors as cellRendererFramework/cellEditor in our column definition. At this moment, we have four generic cellRenderers/cellEditors for the table:
  
 - Input 
 - Decimal Input
@@ -42,7 +42,7 @@ We can add custom-cells/custom-editors as cellRendererFramework/cellEditorFramew
 To use these renderers/editors you need to set the following column properties:
 
 - cellRendererFramework
-- cellEditorFramework
+- cellEditor
 - editable: true
  
 Input
@@ -52,7 +52,7 @@ Input
     headerName:          'Cell with Input',
     field:               'inputValue',
     width:               200,
-    cellEditorFramework: InputCellEditorComponent,
+    cellEditor: InputCellEditorComponent,
     editable:            true,
     onCellValueChanged:  e => console.log('input', e)
 }
@@ -65,7 +65,7 @@ Decimal Input
     headerName:          'Cell with Decimal Input',
     field:               'decimalValue',
     width:               200,
-    cellEditorFramework: DecimalInputCellEditorComponent,
+    cellEditor: DecimalInputCellEditorComponent,
     editable:            true,
     onCellValueChanged:  e => console.log('input', e)
 }
@@ -78,7 +78,7 @@ Positive Integer Input
     headerName:          'Cell with positive integer',
     field:               'positiveIntegerValue',
     width:               200,
-    cellEditorFramework: PositiveIntegerInputCellEditorComponent,
+    cellEditor: PositiveIntegerInputCellEditorComponent,
     editable:            true,
     onCellValueChanged:  event => console.log('input', e)
 }
@@ -95,7 +95,7 @@ To use the checkbox we need to send a parameter that has to be searched in the d
     field:                 'checkboxValue',
     width:                 200,
     cellRendererFramework: CheckboxCellRendererComponent,
-    cellEditorFramework:   CheckboxCellEditorComponent,
+    cellEditor:   CheckboxCellEditorComponent,
     onCellValueChanged:    e => console.log('checkbox', e),
     editable:              true,
     elementID: 		       'checkboxID',
@@ -144,7 +144,7 @@ Spinner
     width:                 200,
     editable:              true,
     cellRendererFramework: SpinnerCellRendererComponent,
-    cellEditorFramework:   SpinnerCellEditorComponent,
+    cellEditor:   SpinnerCellEditorComponent,
     onCellValueChanged:    e => console.log('test', e),
     resizable:             false
 }

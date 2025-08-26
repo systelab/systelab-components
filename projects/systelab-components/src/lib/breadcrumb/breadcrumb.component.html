@@ -1,22 +1,30 @@
 <ol class="breadcrumb" [style.background-color]="backgroundColor">
 
-    @for (bread of items; track bread.id) {
-        <li [class.active]="bread.isActive" (click)="bread.isActive?bread.action():noop()">
-            <a *ngIf="bread.isActive" [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null "
-               [style.color]="fontColor" [style.max-width]="itemMaxWidth">{{bread.text}}</a>
-            <label *ngIf="!bread.isActive" [style.max-width]="itemMaxWidth">{{bread.text}}</label>
-            <button *ngIf="bread.subItems" class="slab-caret-button" type="button"
-                    id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                &nbsp;<i class="icon-caret-down" [style.color]="fontColor"></i>
-            </button>
-            <ul *ngIf="bread.subItems" class="dropdown-menu slab-sub-items" aria-labelledby="dropdownMenu1">
-                @for (subBread of bread.subItems; track subBread.id) {
-                    <li (click)="subBread.action()" class="slab-items">
-                        <a [attr.target]="subBread.url ? '_self' : null " [attr.href]="subBread.url ?  subBread.url  : null "
-                           [style.color]="fontColor" [style.max-width]="subItemMaxWidth">{{subBread.text}}</a>
-                    </li>
-                }
-            </ul>
-        </li>
-    }
+  @for (bread of items; track bread.id) {
+    <li [class.active]="bread.isActive" (click)="bread.isActive?bread.action():noop()">
+      @if (bread.isActive) {
+        <a [attr.target]="bread.url ? '_self' : null " [attr.href]="bread.url ?  bread.url  : null "
+        [style.color]="fontColor" [style.max-width]="itemMaxWidth">{{bread.text}}</a>
+      }
+      @if (!bread.isActive) {
+        <label [style.max-width]="itemMaxWidth">{{bread.text}}</label>
+      }
+      @if (bread.subItems) {
+        <button class="slab-caret-button" type="button"
+          id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          &nbsp;<i class="icon-caret-down" [style.color]="fontColor"></i>
+        </button>
+      }
+      @if (bread.subItems) {
+        <ul class="dropdown-menu slab-sub-items" aria-labelledby="dropdownMenu1">
+          @for (subBread of bread.subItems; track subBread.id) {
+            <li (click)="subBread.action()" class="slab-items">
+              <a [attr.target]="subBread.url ? '_self' : null " [attr.href]="subBread.url ?  subBread.url  : null "
+              [style.color]="fontColor" [style.max-width]="subItemMaxWidth">{{subBread.text}}</a>
+            </li>
+          }
+        </ul>
+      }
+    </li>
+  }
 </ol>

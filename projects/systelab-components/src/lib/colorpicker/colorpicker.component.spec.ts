@@ -25,8 +25,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { SharedModule } from 'primeng/api';
 
 @Component({
-	selector: 'systelab-colorpicker-test',
-	template: `
+    selector: 'systelab-colorpicker-test',
+    template: `
                 <div>
                     <systelab-colorpicker [(id)]="colorId" [(description)]="colorValue" (change)="doChange()"></systelab-colorpicker>
                     <p>{{colorId}}</p>
@@ -34,7 +34,8 @@ import { SharedModule } from 'primeng/api';
                 </div>
 
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ColorpickerTestComponent {
 

@@ -11,14 +11,15 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { TouchspinComponent } from './spinner.component';
 
 @Component({
-	selector: 'systelab-spinner-test',
-	template: `
+    selector: 'systelab-spinner-test',
+    template: `
                 <div>
                     <systelab-spinner [spinValues]="values" (change)="doValueChange()"></systelab-spinner>
                     <label class="label-value">{{values.value}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class SpinnerTestComponent {
 	public values = new TouchSpinValues(34.12345, 1.00001, 100.001, 1.12345, true, 5);

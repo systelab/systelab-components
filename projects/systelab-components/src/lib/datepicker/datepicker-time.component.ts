@@ -7,16 +7,16 @@ import { PrimeNGConfig } from 'primeng/api';
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
-	selector:    'systelab-date-time',
-	templateUrl: 'datepicker-time.component.html',
+    selector: 'systelab-date-time',
+    templateUrl: 'datepicker-time.component.html',
 	providers:   [
 		DataTransformerService,
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => DatepickerTimeComponent),
 			multi: true
-		}
-		]
+		}],
+    standalone: false
 })
 export class DatepickerTimeComponent extends DatepickerComponent {
 	@Input()

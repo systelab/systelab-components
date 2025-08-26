@@ -7,7 +7,8 @@ export class SplitShowcaseDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-split-dialog.component.html',
+    templateUrl: 'showcase-split-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseSplitDialog implements ModalComponent<SplitShowcaseDialogParameters> {
 

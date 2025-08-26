@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-	selector: 'showcase-combobox',
-	templateUrl: 'showcase-combobox.component.html'
+    selector: 'showcase-combobox',
+    templateUrl: 'showcase-combobox.component.html',
+    standalone: false
 })
 export class ShowcaseComboboxComponent {
 

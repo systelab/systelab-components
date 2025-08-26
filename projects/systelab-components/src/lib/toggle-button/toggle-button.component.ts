@@ -1,12 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-	selector:    'systelab-toggle-button',
-	templateUrl: 'toggle-button.component.html',
-	styles:      [`
+    selector: 'systelab-toggle-button',
+    templateUrl: 'toggle-button.component.html',
+    styles: [`
       :host {
           background-color: transparent;
-      }`]
+      }`],
+    standalone: false
 })
 export class ToggleButtonComponent {
 	private checked = false;

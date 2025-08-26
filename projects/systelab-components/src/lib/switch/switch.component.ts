@@ -11,7 +11,8 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 			useExisting: forwardRef(() => SwitchComponent),
 			multi: true
 		}
-	]
+	],
+    standalone: false
 })
 export class SwitchComponent extends ControlValueAccessorBase {
 	private checked = false;

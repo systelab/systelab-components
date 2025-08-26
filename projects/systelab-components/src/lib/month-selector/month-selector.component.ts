@@ -7,8 +7,9 @@ export class Month {
 }
 
 @Component({
-	selector:    'systelab-month-selector',
-	templateUrl: './month-selector.component.html'
+    selector: 'systelab-month-selector',
+    templateUrl: './month-selector.component.html',
+    standalone: false
 })
 export class MonthSelectorComponent implements OnInit {
 

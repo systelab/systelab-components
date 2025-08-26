@@ -3,7 +3,8 @@ import { APP_CONFIG } from '../systelab-components.module.config';
 
 const DEFAULT_PRODUCTION_MODE = true;
 @Directive({
-  selector: '[systelabTestId]'
+    selector: '[systelabTestId]',
+    standalone: false
 })
 export class TestIdDirective implements OnChanges {
   @Input('systelabTestId') label: string;

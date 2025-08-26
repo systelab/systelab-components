@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContextMenuActionData, ContextMenuComponent, ContextMenuOption } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-textarea',
-	templateUrl: 'showcase-textarea.component.html'
+    selector: 'showcase-textarea',
+    templateUrl: 'showcase-textarea.component.html',
+    standalone: false
 })
 export class ShowcaseTextareaComponent implements OnInit {
 

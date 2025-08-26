@@ -11,7 +11,7 @@ class Element {
 }
 
 @Component({
-	selector: 'systelab-select',
+    selector: 'systelab-select',
 	templateUrl: '../combobox/abstract-combobox.component.html',
 	providers: [
 		{
@@ -19,7 +19,8 @@ class Element {
 			useExisting: forwardRef(() => ModulabSelect),
 			multi: true
 		}
-	]
+	],
+    standalone: false
 })
 
 export class ModulabSelect extends AbstractComboBox<Element> {

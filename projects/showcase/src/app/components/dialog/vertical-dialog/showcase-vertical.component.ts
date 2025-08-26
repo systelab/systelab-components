@@ -2,8 +2,9 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { timer } from 'rxjs';
 
 @Component({
-	selector:    'showcase-vertical',
-	templateUrl: 'showcase-vertical.component.html',
+    selector: 'showcase-vertical',
+    templateUrl: 'showcase-vertical.component.html',
+    standalone: false
 })
 export class ShowcaseVerticalComponent {
 

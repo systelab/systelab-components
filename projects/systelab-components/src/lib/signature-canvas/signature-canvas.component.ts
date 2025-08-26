@@ -8,8 +8,9 @@ export class Point {
 }
 
 @Component({
-	selector:    'systelab-signature-canvas',
-	templateUrl: './signature-canvas.component.html'
+    selector: 'systelab-signature-canvas',
+    templateUrl: './signature-canvas.component.html',
+    standalone: false
 })
 export class SignatureCanvasComponent implements AfterViewInit {
 

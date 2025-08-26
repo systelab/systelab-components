@@ -6,8 +6,9 @@ export class ShowcaseTimelineDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-timeline-dialog.component.html',
-	styleUrls: ['showcase-timeline-dialog.component.scss']
+    templateUrl: 'showcase-timeline-dialog.component.html',
+    styleUrls: ['showcase-timeline-dialog.component.scss'],
+    standalone: false
 })
 export class ShowcaseTimelineDialog implements ModalComponent<ShowcaseTimelineDialogParameters>, OnInit {
 

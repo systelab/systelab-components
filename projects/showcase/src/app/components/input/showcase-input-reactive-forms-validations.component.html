@@ -1,43 +1,47 @@
 
-  <div class="container-fluid">
-    <form [formGroup]="inputValidationForm" (ngSubmit)="onFormSubmit()">
-        <div class="row mt-1">
-            <label class="col-md-3 col-form-label" for="full-width-input">Email validation</label>
-            <div class="col-md-9">
-                <input formControlName="email" class="form-control" 
-                placeholder="Email" id="full-width-input">
-                <div *ngIf="email?.errors?.email"> 
-                    Email not valid.
-                </div>	
+<div class="container-fluid">
+  <form [formGroup]="inputValidationForm" (ngSubmit)="onFormSubmit()">
+    <div class="row mt-1">
+      <label class="col-md-3 col-form-label" for="full-width-input">Email validation</label>
+      <div class="col-md-9">
+        <input formControlName="email" class="form-control"
+          placeholder="Email" id="full-width-input">
+          @if (email?.errors?.email) {
+            <div>
+              Email not valid.
             </div>
+          }
+        </div>
+      </div>
+      <div class="row mt-1">
+        <label class="col-md-3 col-form-label" for="full-width-input">Phone validation</label>
+        <div class="col-md-9">
+          <input formControlName="phone" class="form-control"
+            placeholder="Phone" id="full-width-input">
+            <div [hidden]="phone.valid || phone.pristine">
+              Phone not valid.
+            </div>
+          </div>
         </div>
         <div class="row mt-1">
-            <label class="col-md-3 col-form-label" for="full-width-input">Phone validation</label>
-            <div class="col-md-9">
-              <input formControlName="phone" class="form-control" 
-                placeholder="Phone" id="full-width-input">
-                <div [hidden]="phone.valid || phone.pristine"> 
-                    Phone not valid.
-                </div>	
-            </div>
-        </div>
-        <div class="row mt-1">
-            <label class="col-md-3 col-form-label" for="third-width-input">Url validation</label>
-            <div class="col-md-9">
-              <input formControlName="url" class="form-control" 
-                placeholder="Url" id="full-width-input">
-              <div *ngIf="url?.errors?.url">  
-                    Url not valid.
+          <label class="col-md-3 col-form-label" for="third-width-input">Url validation</label>
+          <div class="col-md-9">
+            <input formControlName="url" class="form-control"
+              placeholder="Url" id="full-width-input">
+              @if (url?.errors?.url) {
+                <div>
+                  Url not valid.
                 </div>
+              }
             </div>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
             <div class="ml-auto">
-            <systelab-button [disabled]="!inputValidationForm.valid">Submit</systelab-button>
+              <systelab-button [disabled]="!inputValidationForm.valid">Submit</systelab-button>
             </div>
-        </div>        
-      </form>
-</div>
+          </div>
+        </form>
+      </div>
 
 
-  
+

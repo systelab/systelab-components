@@ -12,14 +12,15 @@ import { ApplicationSidebarAction, ApplicationSidebarTab } from './app-sidebar.c
 import { ApplicationSidebarLargeComponent } from './app-sidebar-large.component';
 
 @Component({
-	selector: 'systelab-app-sidebar-large-test',
-	template: `
+    selector: 'systelab-app-sidebar-large-test',
+    template: `
         <div>
             <systelab-app-sidebar-large [actions]="actions" [tabs]="tabs"
                                         (selected)="updateSelectedTab($event)"></systelab-app-sidebar-large>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class AppSidebarLargeTestComponent implements OnInit {
 

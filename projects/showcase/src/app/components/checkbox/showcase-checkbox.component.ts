@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
-	selector:    'showcase-checkbox',
-	templateUrl: 'showcase-checkbox.component.html'
+    selector: 'showcase-checkbox',
+    templateUrl: 'showcase-checkbox.component.html',
+    standalone: false
 })
 export class ShowcaseCheckboxComponent {
 

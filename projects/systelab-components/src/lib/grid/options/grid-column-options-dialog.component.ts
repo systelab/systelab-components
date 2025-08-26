@@ -13,8 +13,9 @@ export class GridColumnOptionsDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	selector:    'grid-column-options-dialog',
-	templateUrl: 'grid-column-options-dialog.component.html',
+    selector: 'grid-column-options-dialog',
+    templateUrl: 'grid-column-options-dialog.component.html',
+    standalone: false
 })
 export class GridColumnOptionsDialog implements ModalComponent<GridColumnOptionsDialogParameters>, AfterViewInit {
 

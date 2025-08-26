@@ -21,8 +21,8 @@ import {ControlValueAccessorBase} from "../utilities/form/control-value-accessor
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
-	selector:    'systelab-datepicker',
-	templateUrl: 'datepicker.component.html',
+    selector: 'systelab-datepicker',
+    templateUrl: 'datepicker.component.html',
 	providers:   [
 		DataTransformerService,
 		{
@@ -30,7 +30,8 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 			useExisting: forwardRef(() => DatepickerComponent),
 			multi: true
 		}
-	]
+	],
+    standalone: false
 })
 export class DatepickerComponent extends ControlValueAccessorBase implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 

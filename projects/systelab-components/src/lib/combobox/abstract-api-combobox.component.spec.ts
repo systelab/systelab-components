@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Renderer2, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,7 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
+import { Column, GridReadyEvent, RowNode } from 'ag-grid-community';
 import { fi } from 'date-fns/locale';
 
 export class TestData {
@@ -22,13 +23,13 @@ export class TestData {
 }
 
 @Component({
-	selector:    'systelab-combobox-example',
-	templateUrl: 'abstract-combobox.component.html'
+    selector: 'systelab-combobox-example',
+    templateUrl: 'abstract-combobox.component.html',
+    standalone: false
 })
 export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 
 	private totalItems: number;
-
 	constructor(myRenderer: Renderer2, public chref: ChangeDetectorRef) {
 		super(myRenderer, chref);
 	}
@@ -65,8 +66,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 }
 
 @Component({
-	selector: 'systelab-combobox-test',
-	template: `
+    selector: 'systelab-combobox-test',
+    template: `
                 <div class="container-fluid" style="height: 200px;">
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -78,7 +79,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                         </div>
                     </div>
                 </div>
-	          `
+	          `,
+    standalone: false
 })
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: SystelabComboboxComponent;
@@ -105,8 +107,11 @@ const clickOnGridCell = (fixture: ComponentFixture<ComboboxTestComponent>, cell:
 	fixture.detectChanges();
 };
 
+let gridEventMock;
+
 describe('Systelab Combobox', () => {
 	let fixture: ComponentFixture<ComboboxTestComponent>;
+	let component: ComboboxTestComponent;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -132,7 +137,14 @@ describe('Systelab Combobox', () => {
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ComboboxTestComponent);
+		gridEventMock = {
+			api: {
+				getSelectedNodes: () => component.multipleSelectedItemList.map(data => ({data} as RowNode)),
+				setGridOption: () => null
+			}
+		} as any;
 		fixture.detectChanges();
+		component = fixture.componentInstance;
 	});
 
 	it('should instantiate', () => {
@@ -140,30 +152,25 @@ describe('Systelab Combobox', () => {
 			.toBeDefined();
 	});
 
-	it('should be able to show a popup with the values to choose', (done) => {
+	it('should be able to show a popup with the values to choose', async () => {
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				expect(getNumberOfRows(fixture))
-					.toEqual(4);
-				done();
-			});
+		component.combobox.gridOptions.onGridReady = async (event) => {
+			await fixture.whenRenderingDone();
+			expect(getNumberOfRows(fixture)).toEqual(4);
+		}
 	});
 
-	it('should be able to select a value in the popup', (done) => {
+	it('should be able to select a value in the popup', async () => {
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnGridCell(fixture, 2);
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('3');
-						expect(fixture.componentInstance.description)
-							.toEqual('Description 3');
-						done();
-					});
-			});
+		component.combobox.gridOptions.onGridReady = async () => {
+			await fixture.whenStable();
+			clickOnGridCell(fixture, 2);
+			await fixture.whenStable();
+			expect(fixture.componentInstance.id)
+				.toEqual('3');
+			expect(fixture.componentInstance.description)
+				.toEqual('Description 3');
+		}
 	});
 
 	it('should check selected items', async () => {
@@ -172,24 +179,21 @@ describe('Systelab Combobox', () => {
 		fixture.detectChanges();
 		await fixture.whenStable();
 		const component = fixture.componentInstance;
-		const listSelectedItems = component.combobox.gridOptions.api.getSelectedNodes().map(node => node.data);
+		const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
 		expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 	});
 
-	it('should check clear id', (done) => {
+	it('should check clear id', async () => {
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				fixture.componentInstance.id = undefined;
-				clickButton(fixture);
-				fixture.whenStable()
-					.then(() => {
-						const component = fixture.componentInstance;
-						const id = component.combobox.id;
-						expect(id).toEqual(component.id);
-						done();
-					});
-			});
+		component.combobox.gridOptions.onGridReady = async () => {
+			await fixture.whenStable();
+			fixture.componentInstance.id = undefined;
+			clickButton(fixture);
+			await fixture.whenStable();
+			const component = fixture.componentInstance;
+			const id = component.combobox.id;
+			expect(id).toEqual(component.id);
+		}
 	});
 
 });

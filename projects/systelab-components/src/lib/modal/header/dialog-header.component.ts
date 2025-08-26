@@ -3,9 +3,9 @@ import { APP_CONFIG, AppConfig } from '../../systelab-components.module.config';
 import { DEFAULT_SYSTELAB_DIALOG_CONFIG } from '../systelab-dialog-config';
 
 @Component({
-	selector:    'systelab-dialog-header',
-	templateUrl: 'dialog-header.component.html',
-	styles:      [`
+    selector: 'systelab-dialog-header',
+    templateUrl: 'dialog-header.component.html',
+    styles: [`
         :host {
             width: 100%;
         }
@@ -15,7 +15,8 @@ import { DEFAULT_SYSTELAB_DIALOG_CONFIG } from '../systelab-dialog-config';
             cursor: -moz-grab;
             cursor: -webkit-grab;
         }
-	`]
+	`],
+    standalone: false
 })
 export class DialogHeaderComponent implements AfterViewInit {
 

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
-	selector:    'combobox-favourite-renderer',
-	templateUrl: 'combobox-favourite-renderer.component.html'
+    selector: 'combobox-favourite-renderer',
+    templateUrl: 'combobox-favourite-renderer.component.html',
+    standalone: false
 })
 export class ComboboxFavouriteRendererComponent implements AgRendererComponent {
 
@@ -25,7 +26,9 @@ export class ComboboxFavouriteRendererComponent implements AgRendererComponent {
 	}
 
 	protected checkIfIsFavourite(params: any): void {
-		this.isFavourite = this.favouriteList.map(String)
-			.includes(params.data[params.colDef.id].toString());
+		if(params.data[params.colDef.id]) {
+			this.isFavourite = this.favouriteList.map(String)
+				.includes(params.data[params.colDef.id].toString());
+		}
 	}
 }

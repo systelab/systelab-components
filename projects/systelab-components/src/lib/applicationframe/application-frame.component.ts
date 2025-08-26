@@ -6,8 +6,9 @@ import { ApplicationSidebarLargeComponent } from './sidebar/app-sidebar-large.co
 import { ApplicationSidebarSmallComponent } from './sidebar/app-sidebar-small.component';
 
 @Component({
-	selector:    'systelab-app-frame',
-	templateUrl: 'application-frame.component.html'
+    selector: 'systelab-app-frame',
+    templateUrl: 'application-frame.component.html',
+    standalone: false
 })
 export class ApplicationFrameComponent {
 

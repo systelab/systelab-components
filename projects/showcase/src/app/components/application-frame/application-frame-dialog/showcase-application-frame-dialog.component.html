@@ -1,10 +1,14 @@
 <systelab-app-frame #appFrame [userName]="userName" [userFullName]="userFullName" [title]="title" [menu]="menu" [tabs]="sidetabs"
-    [actions]="sideactions" [menuBars]="menuBars"  [largeSideBar]="false" [logoIcon]="logoIcon" (selected)="doSelect($event)">
-    <div header-content>
-        <systelab-button size="small" >Button Top</systelab-button>
-    </div>
-    <div class="slab-flex-1 p-2" style="overflow: auto;" main-content>
-        <div *ngIf="currentTab==='T1'"></div>
-        <div *ngIf="currentTab==='T2'"></div>
-    </div>
+  [actions]="sideactions" [menuBars]="menuBars"  [largeSideBar]="false" [logoIcon]="logoIcon" (selected)="doSelect($event)">
+  <div header-content>
+    <systelab-button size="small" >Button Top</systelab-button>
+  </div>
+  <div class="slab-flex-1 p-2" style="overflow: auto;" main-content>
+    @if (currentTab==='T1') {
+      <div></div>
+    }
+    @if (currentTab==='T2') {
+      <div></div>
+    }
+  </div>
 </systelab-app-frame>

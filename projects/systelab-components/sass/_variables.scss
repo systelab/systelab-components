@@ -1,14 +1,15 @@
-@import "systelab-bootstrap-settings";
-@import "bootstrap/scss/bootstrap";
-
-@import "mixins";
+@use "sass:math";
+@use "sass:string";
+@use "bootstrap/scss/bootstrap" as *;
+@forward "./systelab-bootstrap-settings";
+@forward "./mixins";
 
 // Internal variable to help set the size
 $slab-size-percentage: 0.7 !default;
 // Internal variable to set the font size
 $slab-base-font-size: 15px !default;
 // Defines the application font size
-$slab-base-body-font-size: $slab-base-font-size unquote("/") ceil($slab-base-font-size * 1.25) !default;
+$slab-base-body-font-size: $slab-base-font-size string.unquote("/") math.ceil($slab-base-font-size * 1.25) !default;
 // Defines the application font family
 $slab-base-body-font-family: $font-family-base;
 // Defines the application body color
@@ -29,7 +30,7 @@ $background-secondary: rgb(238, 238, 238) !default;
 $slab-selected-background-color: rgb(200, 223, 252) !default;
 
 // Internal variable to define the height of the elements in a form
-$form-elements-height: ceil(35px * $slab-size-percentage) !default;
+$form-elements-height: math.ceil(35px * $slab-size-percentage) !default;
 $form-border: rgb(221, 221, 221) !default;
 
 //Grayscale
@@ -51,7 +52,7 @@ $slab-app-header-user-width: 130px !default;
 //Translucent grayscale
 $slab-dialog-border-color: rgba(170, 170, 170, 0.8) !default;
 // Defines the height of the dialogs header
-$slab-dialog-header-height: max(45px, ceil(60px * $slab-size-percentage)) !default;
+$slab-dialog-header-height: max(45px, math.ceil(60px * $slab-size-percentage)) !default;
 // Defines the minimum width for the button
 $slab-minimum-button-width: 85px !default;
 
@@ -61,14 +62,14 @@ $table-row-odd-background-color: rgb(243, 243, 243) !default;
 $table-row-even-background-color: rgb(253, 253, 253) !default;
 $table-row-selected-background-color: $slab-selected-background-color !default;
 // Defines the height of the ui-grid-header-cell
-$grid-header-height: $form-elements-height + ceil(8 * $slab-size-percentage) !default;
+$grid-header-height: $form-elements-height + math.ceil(8 * $slab-size-percentage) !default;
 // Defines the line-height of the ui-grid-header-cell.
 $grid-header-line-height: $grid-header-height - $slab-base-font-size + 2 !default;
 // Defines the height and the min-height of the ui-grid row and cell
-$grid-cell-height: $form-elements-height + ceil(4 * $slab-size-percentage) !default;
+$grid-cell-height: $form-elements-height + math.ceil(4 * $slab-size-percentage) !default;
 
 // Defines the height of the tab
-$slab-tab-height: ceil(38px * $slab-size-percentage) !default;
+$slab-tab-height: math.ceil(38px * $slab-size-percentage) !default;
 // Defines the min-width of the tab
 $slab-tab-min-width: 120px !default;
 // Define the top margin and the gutter between tab elements
@@ -106,7 +107,7 @@ $slab-radio-color: white !default;
 // Defines the slider height
 $slab-slider-height: $form-elements-height !default;
 // Defines the height of the ui-slider
-$slab-slider-background-line: round(calc($slab-slider-height / 3));
+$slab-slider-background-line: math.round(calc($slab-slider-height / 3));
 $slab-slider-circle-color: white !default;
 $slab-slider-circle-border-color: $primary !default;
 

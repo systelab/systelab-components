@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { WizardStep } from 'systelab-components';
 
 @Component({
-	selector: 'showcase-wizard-steps',
-	templateUrl: './showcase-wizard-steps.component.html'
+    selector: 'showcase-wizard-steps',
+    templateUrl: './showcase-wizard-steps.component.html',
+    standalone: false
 })
 export class ShowcaseWizardStepsComponent {
 	public allowNavigation = true;

@@ -1,6 +1,7 @@
 <div #hidden class="height-hidden"></div>
 <ag-grid-angular id="agGrid" #agGrid style="position:absolute; top:0; bottom:0; left:0; right:0; overflow: hidden;"
-                 class="ag-theme-fresh"
+                 class="ag-theme-alpine"
+                 theme="legacy"
                  [gridOptions]="gridOptions"
                  (gridReady)="doGridReady($event)"
                  (gridSizeChanged)="doGridSizeChanged($event)"
@@ -13,6 +14,7 @@
                  [overlayNoRowsTemplate]="overlayNoRowsTemplate"
                  [overlayLoadingTemplate]="overlayLoadingTemplate"
                  (rowSelected)="onRowSelected($event)"
+                 (sortChanged)="onSortChanged()"
                  (modelUpdated)="onModelUpdated($event)" [rowData]="rowData">
 </ag-grid-angular>
 <systelab-grid-context-menu #popupmenu [style.position]="'fixed'" [isEmbedded]="true"></systelab-grid-context-menu>

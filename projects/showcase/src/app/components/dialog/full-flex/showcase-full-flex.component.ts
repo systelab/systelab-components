@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { TouchSpinValues } from 'systelab-components';
 
 @Component( {
-	selector:    'showcase-full-flex',
-	templateUrl: 'showcase-full-flex.component.html'
+    selector: 'showcase-full-flex',
+    templateUrl: 'showcase-full-flex.component.html',
+    standalone: false
 } )
 export class ShowcaseFullFlexComponent {
 

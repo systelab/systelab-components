@@ -1,0 +1,45 @@
+@use "../variables" as *;
+.table {
+  color: var(--slab_foreground_primary);
+
+  tr {
+    height: $slab-table-min-row-height;
+
+    th,
+    td {
+      border-color: var(--slab_table_border_color) !important;
+    }
+  }
+
+  thead th {
+    border-bottom: 1px solid var(--slab_table_border_color);
+  }
+
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--slab_table_row_odd_background);
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: var(--slab_table_row_even_background);
+}
+
+
+.table-hover tbody tr:hover {
+  color: var(--ag-data-color);
+  background-color: var(--slab_table_row_hover_background) !important;
+}
+
+
+/*
+ * This is a custom modifier class extending 
+ * default Bootstrap functionality
+ */
+.table-remove-border {
+  border: 0;
+
+  tr, th, td {
+    border: 0;
+  }
+}

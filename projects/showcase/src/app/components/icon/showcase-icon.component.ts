@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector:    'showcase-icon',
-	templateUrl: 'showcase-icon.component.html',
-	styleUrls:   ['showcase-icon.component.scss']
+    selector: 'showcase-icon',
+    templateUrl: 'showcase-icon.component.html',
+    styleUrls: ['showcase-icon.component.scss'],
+    standalone: false
 })
 export class ShowcaseIconComponent {
 
