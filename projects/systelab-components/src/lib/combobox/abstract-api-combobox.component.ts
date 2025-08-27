@@ -27,7 +27,6 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		this.gridOptions.cacheBlockSize = 20;
 		this.gridOptions.cacheOverflowSize = 2;
 		this.gridOptions.maxConcurrentDatasourceRequests = 1;
-		this.gridOptions.infiniteInitialRowCount = 1;
 		this.gridOptions.maxBlocksInCache = 100;
 
 	}
