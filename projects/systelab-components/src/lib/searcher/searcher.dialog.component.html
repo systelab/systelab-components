@@ -38,6 +38,7 @@
             [multipleSelection]="multipleSelection"
             [valueForSearch]="searchingValue"
             [searcher]="parameters.searcher"
+                                            (gridReady)="refreshSearch()"
           (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
         </div>
       </div>

@@ -1,31 +1,30 @@
 import { Directive, OnInit } from '@angular/core';
-import { IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { AbstractListBox } from './abstract-listbox.component';
 
 @Directive()
-export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implements IDatasource, OnInit {
+export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implements IDatasource {
 
 	public abstract override getInstance(): T;
 
 	protected constructor() {
 		super();
+		this.values = null;
+		this.rowData = null;
 	}
 
-	public override ngOnInit() {
-
-		super.ngOnInit();
-
-		this.gridOptions.rowModelType = 'infinite';
-		this.gridOptions.paginationPageSize = 50;
-		this.gridOptions.cacheBlockSize = 50;
-		this.gridOptions.cacheOverflowSize = 2;
-		this.gridOptions.maxConcurrentDatasourceRequests = 4;
-		this.gridOptions.maxBlocksInCache = 15;
-		// this.gridOptions.paginationInitialRowCount = 0;
-		this.gridOptions.infiniteInitialRowCount = 0;
-
-		this.gridOptions.datasource = this;
+	protected override getInitialGridOptions(): GridOptions {
+		const options = super.getInitialGridOptions();
+		options.rowModelType= 'infinite';
+		options.paginationPageSize= 50;
+		options.cacheBlockSize= 50;
+		options.cacheOverflowSize= 2;
+		options.maxConcurrentDatasourceRequests= 4;
+		options.maxBlocksInCache= 15;
+		options.datasource = this;
+		options.loading = false;
+		return options;
 	}
 
 	public abstract getTotalItems(): number;
@@ -33,22 +32,19 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 
 	public getRows(params: IGetRowsParams): void {
-
-		this.gridApi.setGridOption("loading", true);
+		this.gridApi.updateGridOptions({ loading: true });
 		const page: number = params.endRow / this.gridOptions.paginationPageSize;
 		const pageSize: number = this.gridOptions.paginationPageSize;
-
 		const showAllElementNumber: number = this.showAll ? 1 : 0;
 		const totalItems: number = this.getTotalItems() + showAllElementNumber;
 		const modulus: number = totalItems % pageSize;
-
 		if (page === 1 || page <= totalItems / pageSize || modulus > 1 || (modulus === 1 && !this.showAll)) {
 			this.getElements(page, pageSize, showAllElementNumber, params);
 		} else {
 			this.getData(page - 1, this.gridOptions.paginationPageSize)
 				.subscribe({
 						next:  (previousPage: Array<T>) => {
-							this.gridApi.setGridOption("loading", false);
+							this.gridApi.updateGridOptions({ loading: false });
 							this.gridApi.hideOverlay();
 							const itemArray: Array<T> = [];
 							const totItems: number = Number(this.getTotalItems() + showAllElementNumber);
@@ -57,10 +53,9 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 							itemArray.push(lastItemFromPreviousPage);
 
 							params.successCallback(itemArray, totItems);
-
 						},
 						error: () => {
-							this.gridApi.setGridOption("loading", false);
+							this.gridApi.updateGridOptions({loading: false});
 							this.gridApi.hideOverlay();
 							params.failCallback();
 						}
@@ -74,6 +69,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 			.subscribe(
 				{
 					next:  (v: Array<T>) => {
+						this.gridApi.updateGridOptions({ loading: false });
 						this.gridApi.hideOverlay();
 						const itemArray: Array<T> = [];
 						const totalItems: number = Number(this.getTotalItems() + emptyElemNumber);
@@ -116,6 +112,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 						}
 					},
 					error: () => {
+						this.gridApi.updateGridOptions({ loading: false });
 						this.gridApi.hideOverlay();
 						params.failCallback();
 					}
@@ -124,7 +121,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	}
 
 	public refresh() {
-		this.gridApi.setGridOption('datasource', this);
+		this.gridApi.updateGridOptions({datasource: this});
 	}
 
 }

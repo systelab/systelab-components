@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
 import { CellKeyDownEvent, IsFullWidthRowParams, RowSelectedEvent } from 'ag-grid-community';
@@ -17,6 +17,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input() public valueForSearch: string;
 	@Input('contains') public searchForContain: boolean;
 	@Input() public searcher: AbstractSearcher<T>;
+	@Output() public gridReady: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
@@ -38,6 +39,10 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		return this.searcher.hideHeader();
 	}
 
+	public override doGridReady(event: any) {
+		super.doGridReady(event);
+		this.gridReady.emit(true);
+	}
 
 	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
 		return this.searcher.getIsFullWidthRow(isFullWidthRowParams);
@@ -64,7 +69,9 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	}
 
 	public refreshTable(): void {
-		this.refresh();
+		if(this.gridApi) {
+			this.refresh();
+		}
 	}
 
 	public focusFirstRow(): void {

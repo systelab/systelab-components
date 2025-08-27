@@ -67,6 +67,8 @@ export abstract class AbstractContextComponent<T> implements OnInit, OnDestroy {
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'top', y + 'px');
 			this.myRenderer.setStyle(this.dropdownElement.nativeElement, 'left', x + 'px');
 			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'visibility', 'visible');
+			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'backgroundColor', 'transparent');
+			this.myRenderer.setStyle(this.dropdownMenuElement.nativeElement, 'border', '0');
 			this.addListeners();
 
 		} else {
