@@ -54,6 +54,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	}
 
 	public refresh(): void {
-		this.gridApi.updateGridOptions({datasource: this });
+		// the ? is to avoid errors in tests
+		this.gridApi?.updateGridOptions({datasource: this });
 	}
 }
