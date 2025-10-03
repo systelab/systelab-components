@@ -76,7 +76,6 @@ import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app
 import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
 import { CalendarModule } from 'primeng/calendar';
-import { Tree, TreeModule } from 'primeng/tree';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
@@ -85,7 +84,6 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { ChipsComponent } from './chips/chips.component';
 import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
-import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
@@ -126,9 +124,7 @@ const providers = [
 	imports:      [
 		CommonModule,
 		FormsModule,
-		SharedModule,
 		CalendarModule,
-		TreeModule,
 		AutoCompleteModule,
 		DragDropModule,
 		OverlayModule,
@@ -275,7 +271,6 @@ const providers = [
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
-		Tree,
 		SplitComponent,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
