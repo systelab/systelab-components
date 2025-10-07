@@ -12,10 +12,10 @@ import {
 	ViewChild
 } from '@angular/core';
 import { addDays } from 'date-fns';
-import { PrimeNGConfig } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
     selector: 'systelab-datepicker',
@@ -90,7 +90,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNGConfig) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNG) {
 	}
 
 	public ngOnInit() {

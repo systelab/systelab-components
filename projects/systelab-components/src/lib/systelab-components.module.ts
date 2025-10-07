@@ -105,6 +105,7 @@ import { TestIdDirective } from './directives/test-id.directive';
 import { SearcherTreeHeaderRendererComponent } from './grid/custom-cells/searcher-tree-header/searcher-tree-header-renderer.component';
 import { Accordion } from './accordion/accordion.component';
 import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
+import { libConfig } from './lib.config';
 
 export const factory = () => {
 	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
@@ -115,6 +116,7 @@ export const factory = () => {
 };
 
 const providers = [
+	...libConfig.providers,
 	StylesUtilService,
 	ColorUtilService,
 	LoadingService
