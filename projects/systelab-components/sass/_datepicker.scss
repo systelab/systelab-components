@@ -138,20 +138,154 @@ p-datepicker {
   }
 }
 
-/* Estilos para el overlay del datepicker */
-.p-datepicker {
-  &.p-component {
-    z-index: 100000 !important;
-    max-width: 425px;
-    min-width: 420px;
-    border: 1px solid $medium-gray;
-    margin-top: 5px;
-    border-radius: 4px !important;
-    overflow: hidden;
-    padding: 0 !important;
-    width: auto;
-    box-shadow: none;
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+/* Estilos para el overlay del datepicker PrimeNG 20 */
+.p-datepicker-panel.p-component {
+  z-index: 100000 !important;
+  max-width: 425px;
+  min-width: 420px;
+  border: 1px solid $medium-gray;
+  margin-top: 5px;
+  border-radius: 4px !important;
+  overflow: hidden;
+  padding: 0 !important;
+  width: auto;
+  box-shadow: none;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+  .p-datepicker-calendar-container {
+    .p-datepicker-calendar {
+      .p-datepicker-header {
+        display: none !important;
+      }
+
+      .p-datepicker-day-view {
+        margin: 0 !important;
+
+  p-header {
+    .slab-datepicker-header {
+      $icon-margin-right: 10px;
+      $icon-margin-left: 40px;
+      background: $primary;
+      padding: 15px;
+      margin-bottom: 0;
+      line-height: $slab-datepicker-header-navigation-line-height !important;
+      color: white;
+
+      .p-datepicker-title {
+        margin: 0;
+      }
+
+      a {
+        color: white;
+
+        &:hover {
+          text-decoration: none;
+          background: none;
+          color: white;
+        }
+      }
+
+      .icon-angle-double-left {
+        float: left;
+        margin-left: $icon-margin-right;
+        line-height: $slab-datepicker-header-navigation-line-height;
+      }
+
+      .icon-angle-double-right {
+        float: right;
+        margin-right: $icon-margin-right;
+        line-height: $slab-datepicker-header-navigation-line-height;
+      }
+
+      .icon-angle-left {
+        float: left;
+        margin-left: $icon-margin-left;
+        line-height: $slab-datepicker-header-navigation-line-height;
+      }
+
+      .icon-angle-right {
+        float: right;
+        margin-right: $icon-margin-left;
+        line-height: $slab-datepicker-header-navigation-line-height;
+      }
+    }
+  }
+
+        /**
+         * 1. Overrides default browser behaviour
+         */
+        $datepicker-max-size: 60px;
+        $datepicker-height-size: 50px;
+
+        thead {
+          background-color: $light-gray;
+          border-bottom: 1px solid $background-secondary;
+          line-height: 34px;
+
+          .p-datepicker-weekday-cell {
+            font-weight: normal;
+            min-width: $datepicker-max-size;
+            max-width: $datepicker-max-size;
+            padding: 0 !important;
+
+            .p-datepicker-weekday {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+            }
+          }
+        }
+
+        tbody {
+          .p-datepicker-day-cell {
+            padding: 0 !important;
+            border-bottom: 1px solid $background-secondary;
+
+            .p-datepicker-day {
+              width: 100%;
+              line-height: 50px;
+              min-width: $datepicker-max-size;
+              max-width: $datepicker-max-size;
+              min-height: $datepicker-height-size;
+              max-height: $datepicker-height-size;
+              padding: 0 !important;
+              border-radius: 0;
+              display: block;
+              text-align: center;
+
+              &:hover,
+              &:active {
+                background-color: $medium-gray;
+                background: $medium-gray !important;
+              }
+
+              &.p-datepicker-day-selected {
+                background-color: $primary !important;
+                color: white;
+              }
+
+              &.p-disabled {
+                opacity: 0.5;
+                background-color: transparent !important;
+              }
+            }
+          }
+
+          .p-datepicker-other-month {
+            .p-datepicker-day {
+              opacity: 0.3;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Footer con botones
+  .p-3 {
+    padding: 15px !important;
+    background-color: $light-gray;
+    border-top: 1px solid $background-secondary;
   }
 }
 
@@ -205,27 +339,7 @@ body {
   }
 }
 
-body {
-  .p-datepicker {
-    z-index: 100000 !important;
-    max-width: 425px;
-    min-width: 420px;
-    border: 1px solid $medium-gray;
-    margin-top: 5px;
-    border-radius: 4px !important;
-    overflow: hidden;
-    padding: 0 !important;
-    width: auto;
-    box-shadow: none;
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-    .p-datepicker-title {
-      line-height: $slab-datepicker-header-navigation-line-height !important;
-    }
-
-    .p-datepicker-header {
-      display: none;
-    }
 
     p-header {
       .slab-datepicker-header {

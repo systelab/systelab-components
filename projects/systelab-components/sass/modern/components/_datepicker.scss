@@ -142,16 +142,91 @@ p-datepicker {
   }
 }
 
-/* Estilos para el overlay del datepicker */
-.p-datepicker {
-  &.p-component {
-    color: var(--ag-data-color);
-    background-color: var(--slab_background_primary) !important;
-    z-index: 100000 !important;
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+/* Estilos para el overlay del datepicker PrimeNG 20 */
+.p-datepicker-panel.p-component {
+  color: var(--ag-data-color);
+  background-color: var(--slab_background_primary) !important;
+  z-index: 100000 !important;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
+  border-color: var(--slab_component_border_color) !important;
+  border-radius: $slab-border-radius !important;
+  padding: 0 !important;
+  width: 450px !important;
+  margin-top: 10px;
+
+  .p-datepicker-calendar-container {
+    .p-datepicker-calendar {
+      .p-datepicker-header {
+        display: none !important;
+      }
+
+      .p-datepicker-day-view {
+        margin: 0 !important;
+
+        thead {
+          text-align: center;
+          border-top: 1px solid var(--slab_component_border_color);
+          border-bottom: 1px solid var(--slab_component_border_color);
+          background: white !important;
+          
+          .p-datepicker-weekday-cell {
+            font-weight: normal;
+            padding: 8px !important;
+            
+            .p-datepicker-weekday {
+              font-weight: normal;
+            }
+          }
+        }
+
+        tbody {
+          .p-datepicker-day-cell {
+            padding: 5px !important;
+
+            .p-datepicker-day {
+              border-radius: 30px !important;
+              width: 100%;
+              height: 35px;
+              line-height: 35px;
+              text-align: center;
+
+              &:hover,
+              &:active {
+                color: black;
+                border: 1px solid $medium-gray;
+                background-color: $medium-gray !important;
+              }
+
+              &.p-datepicker-day-selected {
+                background-color: var(--primary) !important;
+                border: 1px solid var(--primary);
+                color: white !important;
+              }
+
+              &.p-disabled {
+                opacity: 0.5;
+                background-color: transparent !important;
+              }
+            }
+          }
+
+          .p-datepicker-other-month {
+            .p-datepicker-day {
+              opacity: 0.3;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Footer con botones
+  .p-3 {
+    padding: 15px !important;
+    background-color: var(--slab_modal_bottom_background);
     border-color: var(--slab_component_border_color) !important;
-    border-radius: $slab-border-radius !important;
-    padding: 0 !important;
+    border-bottom-right-radius: $slab-border-radius;
+    border-bottom-left-radius: $slab-border-radius;
   }
 }
 
@@ -197,153 +272,76 @@ p-datepicker {
   }
 }
 
-body {
-  .p-datepicker {
-    width: 450px !important;
-    margin-top: 10px;
-    table {
-        margin: 0 !important;
-      }
-    .p-datepicker-title {
-      width: 100%;
-      height: 65px;;
-    }
-
-    .icon-angle-double-right {
-      position: absolute;
-      float: right;
-      right: 15px;
-    }
-
-    .icon-angle-right {
-      position: absolute;
-      float: right;
-      right: 65px;
-    }
-
-    .icon-angle-double-left {
-      position: absolute;
-      float: left;
-      left: 15px;
-    }
-
-    .icon-angle-left {
-      position: absolute;
-      float: left;
-      left: 65px;
-    }
-  }
-
+// Estilos para el header custom de Systelab dentro del panel
+.p-datepicker-panel {
   .slab-datepicker-header {
     display: flex;
     height: 65px;
     align-items: center;
+    background: var(--primary) !important;
+    color: white;
+    padding: 15px;
+    position: relative;
+    
     a {
       cursor: pointer;
-      color: var(--text-color) !important;
-      border: 1px solid var(--primary);
+      color: white !important;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 35px;
       width: 35px;
       height: 35px;
       line-height: 32px !important;
       text-align: center;
       margin: 0 !important;
-      &#next-month{
-        margin-right: 10px !important;
+      position: absolute;
+      
+      &#previousYear {
+        left: 15px;
       }
-      &#previous-month{
-        margin-left: 10px !important;
+      
+      &#previousMonth {
+        left: 65px;
       }
+      
+      &#nextYear {
+        right: 15px;
+      }
+      
+      &#nextMonth {
+        right: 65px;
+      }
+      
       &:hover {
         text-decoration: none;
-        background: var(--primary) !important;
+        background: rgba(255, 255, 255, 0.2) !important;
         color: white !important;
       }
     }
+    
+    .p-datepicker-title {
+      flex: 1;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+      
+      .p-datepicker-month,
+      .p-datepicker-year {
+        color: white;
+      }
+    }
   }
-
-  .slab-custom-calendar .slab-custom-calendar-table thead {
-    background: white !important;
-    border-top: 1px solid #eee;
-    width: 35px !important;
-    height: 35px !important;
-    line-height: 32px !important;
-  }
-  .slab-custom-calendar .disabled-cell {
-    background: white !important;
-  }
-
 }
 
-.p-datepicker {
-  color: var(--ag-data-color);
-  background-color: var(--slab_background_primary) !important;
-  z-index: 100000 !important;
-  font: normal $slab-base-body-font-size $slab-base-body-font-family;
-  border-color: var(--slab_component_border_color) !important;
-  border-radius: $slab-border-radius !important;
-  padding: 0 !important;
+.slab-custom-calendar .slab-custom-calendar-table thead {
+  background: white !important;
+  border-top: 1px solid #eee;
+  width: 35px !important;
+  height: 35px !important;
+  line-height: 32px !important;
+}
 
-  div:nth-child(3) {
-    padding: 15px !important;
-    background-color: var(--slab_modal_bottom_background);
-    border-color: var(--slab_component_border_color) !important;
-    border-bottom-right-radius: $slab-border-radius;
-    border-bottom-left-radius: $slab-border-radius;
-  }
-
-  .p-datepicker-title, .p-datepicker-header {
-    display: none;
-  }
-
-  .p-datepicker-header {
-    font-weight: normal !important;
-    padding: 15px 15px 0 15px !important;
-  }
-  .p-datepicker-prev, .p-datepicker-next {
-    border: 1px solid var(--primary) !important;
-    color: var(--text-color) !important;
-    &:hover {
-      text-decoration: none;
-      background: var(--primary) !important;
-      color: white !important;
-    }
-  }
-
-  thead {
-    text-align: center;
-    border-top: 1px solid var(--slab_component_border_color);
-    border-bottom: 1px solid var(--slab_component_border_color);
-    th {
-      font-weight: normal;
-    }
-  }
-
-  td {
-    padding: 5px !important;
-
-    a, span {
-      border-radius: 30px !important;
-
-      &:hover,
-      &:active {
-        color: black;
-        border: 1px solid $medium-gray;
-        background-color: $medium-gray !important;
-      }
-
-      &.p-state-highlight {
-        background-color: $slab-selected-background-color !important;
-      }
-
-      &.p-state-active,
-      &.p-highlight {
-        background-color: var(--primary) !important;
-        border: 1px solid var(--primary);
-      }
-    }
-  }
-
+.slab-custom-calendar .disabled-cell {
+  background: white !important;
 }
 
 systelab-datepicker {
