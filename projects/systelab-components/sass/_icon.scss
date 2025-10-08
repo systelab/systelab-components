@@ -10,13 +10,14 @@
 
     & > [class*='icon-'] {
         position: absolute;
-        right: 0;
-        top: 0;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 25px;
-        width: 30px;
+        height: 16px;
+        width: 16px;
         font-size: 14px;
         color: #999999;
         pointer-events: none;

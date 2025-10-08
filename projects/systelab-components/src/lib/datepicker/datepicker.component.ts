@@ -106,23 +106,84 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	}
 
 	public ngAfterViewInit() {
-		const newElement = document.createElement('i');
 		if (!this.inline) {
-			newElement.className = this.onlyTime ? 'icon-clock' : 'icon-calendar';
-			if (this.currentCalendar) {
-				if (this.autofocus) {
-					this.currentCalendar.el.nativeElement.querySelector('input')
-						.focus();
-				}
-				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-inputwrapper slab-form-icon w-100';
-				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
+			this.addIconToDatepicker();
+		}
+		
+		if (this.currentCalendar && this.autofocus) {
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			if (inputElement) {
+				inputElement.focus();
 			}
 		}
-		if (this.tabindex) {
-			this.currentCalendar.el.nativeElement.querySelector('input')
-				.setAttribute('tabindex', this.tabindex);
+		
+		if (this.tabindex && this.currentCalendar) {
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			if (inputElement) {
+				inputElement.setAttribute('tabindex', this.tabindex.toString());
+			}
+		}
+	}
+
+	private addIconToDatepicker(): void {
+		if (!this.currentCalendar) {
+			return;
 		}
 
+		const datepickerElement = this.currentCalendar.el.nativeElement;
+		
+		// Función que intenta agregar el icono
+		const attemptAddIcon = (): boolean => {
+			const inputElement = datepickerElement.querySelector('input');
+			if (!inputElement || !inputElement.parentElement) {
+				return false;
+			}
+
+			const parentWrapper = inputElement.parentElement;
+			
+			// Verificar si ya existe un icono
+			if (parentWrapper.querySelector('i.icon-calendar, i.icon-clock')) {
+				return true;
+			}
+
+			// Crear y configurar el icono
+			const iconElement = document.createElement('i');
+			iconElement.className = this.onlyTime ? 'icon-clock' : 'icon-calendar';
+			
+			// Configurar el contenedor
+			parentWrapper.classList.add('slab-form-icon', 'w-100');
+			parentWrapper.style.position = 'relative';
+			parentWrapper.appendChild(iconElement);
+			
+			return true;
+		};
+
+		// Intentar agregar el icono inmediatamente
+		if (attemptAddIcon()) {
+			return;
+		}
+
+		// Si no funciona, usar MutationObserver para esperar cambios en el DOM
+		const observer = new MutationObserver((mutations) => {
+			for (const mutation of mutations) {
+				if (mutation.type === 'childList' || mutation.type === 'attributes') {
+					if (attemptAddIcon()) {
+						observer.disconnect();
+						return;
+					}
+				}
+			}
+		});
+
+		// Observar cambios en el elemento datepicker
+		observer.observe(datepickerElement, {
+			childList: true,
+			subtree: true,
+			attributes: true
+		});
+
+		// Desconectar el observer después de 5 segundos como medida de seguridad
+		setTimeout(() => observer.disconnect(), 5000);
 	}
 
 	public ngDoCheck() {

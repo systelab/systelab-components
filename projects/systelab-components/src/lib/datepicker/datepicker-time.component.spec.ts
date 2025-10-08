@@ -174,7 +174,7 @@ describe('Systelab DatepickerTimeComponent', () => {
 	});
 
 	it('should be two calendars because one of the datepicker has showCalendar false', () => {
-		expect(fixture.debugElement.nativeElement.querySelectorAll('.p-calendar').length).toEqual(2);
+		expect(fixture.debugElement.nativeElement.querySelectorAll('p-datepicker').length).toEqual(2);
 	});
 
 });
