@@ -121,7 +121,7 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 	}
 
 	public refresh() {
-		this.gridApi.updateGridOptions({datasource: this});
+		this.gridApi?.updateGridOptions({datasource: this});
 	}
 
 }
