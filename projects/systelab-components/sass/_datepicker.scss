@@ -287,6 +287,74 @@ p-datepicker {
     background-color: $light-gray;
     border-top: 1px solid $background-secondary;
   }
+
+  // Estilos para el time picker PrimeNG v20
+  .p-datepicker-time-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-top: 1px solid $background-secondary;
+    background-color: $background-primary;
+
+    .p-datepicker-hour-picker,
+    .p-datepicker-minute-picker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 10px;
+
+      .p-datepicker-increment-button,
+      .p-datepicker-decrement-button {
+        background: transparent !important;
+        border: 1px solid $background-secondary !important;
+        color: $primary !important;
+        margin: 5px 0;
+        border-radius: 50% !important;
+        width: 30px !important;
+        height: 30px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        &:hover {
+          background-color: $primary !important;
+          color: white !important;
+          border-color: $primary !important;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba($primary, 0.25) !important;
+        }
+
+        .p-icon {
+          width: 12px !important;
+          height: 12px !important;
+        }
+      }
+
+      > span {
+        font-size: 18px;
+        font-weight: 500;
+        color: $darker-gray;
+        min-width: 30px;
+        text-align: center;
+        padding: 5px;
+      }
+    }
+
+    .p-datepicker-separator {
+      display: flex;
+      align-items: center;
+      margin: 0 5px;
+
+      span {
+        font-size: 18px;
+        font-weight: 500;
+        color: $darker-gray;
+      }
+    }
+  }
 }
 
 body {
