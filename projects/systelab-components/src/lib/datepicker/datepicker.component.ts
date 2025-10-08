@@ -114,7 +114,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 					this.currentCalendar.el.nativeElement.querySelector('input')
 						.focus();
 				}
-				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-datepicker slab-form-icon w-100';
+				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-inputwrapper slab-form-icon w-100';
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
 		}
@@ -157,8 +157,9 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public changeDate(): void {
 		this.formatError = false;
-		if (this.currentCalendar?.inputfieldViewChild.nativeElement.value !== undefined) {
-			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
+		const inputElement = this.currentCalendar?.el.nativeElement.querySelector('input');
+		if (inputElement?.value !== undefined) {
+			const dateStr = inputElement.value.trim()
 				.toLowerCase();
 			if (this.inputChanged) {
 				if (dateStr.length >= 2) {
@@ -222,7 +223,8 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public onInput(event: KeyboardEvent) {
 		if (event.code === 'Enter' || event.code === 'Tab') {
-			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			inputElement.blur();
 			this.currentCalendar.onBlur.emit(event);
 			this.closeDatepicker();
 		} else {
@@ -249,54 +251,38 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public nextMonth(): void {
 		if (this.currentCalendar) {
-			let month = this.currentCalendar.currentMonth;
-			if (month < 11) {
-				month++;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-			} else {
-				month = 0;
-				let year = this.currentCalendar.currentYear;
-				year++;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-				this.currentCalendar.onYearDropdownChange(year.toString());
-			}
+			this.currentCalendar.navForward(null);
 		}
 	}
 
 	public prevMonth(): void {
 		if (this.currentCalendar) {
-			let month = this.currentCalendar.currentMonth;
-			if (month > 0) {
-				month--;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-			} else {
-				month = 11;
-				let year = this.currentCalendar.currentYear;
-				year--;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-				this.currentCalendar.onYearDropdownChange(year.toString());
-			}
+			this.currentCalendar.navBackward(null);
 		}
 	}
 
 	public nextYear(): void {
 		if (this.currentCalendar) {
-			const currentYear = this.currentCalendar.currentYear + 1;
-			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+			// En PrimeNG 20, navegar un año adelante
+			for (let i = 0; i < 12; i++) {
+				this.currentCalendar.navForward(null);
+			}
 		}
 	}
 
 	public prevYear(): void {
 		if (this.currentCalendar) {
-			const currentYear = this.currentCalendar.currentYear - 1;
-			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+			// En PrimeNG 20, navegar un año atrás
+			for (let i = 0; i < 12; i++) {
+				this.currentCalendar.navBackward(null);
+			}
 		}
 	}
 
 	public clearDate(event): void {
 		if (this.currentCalendar) {
 			this.currentDate = null;
-			this.currentCalendar.onClearButtonClick(event);
+			this.currentCalendar.clear();
 			this.currentDateChange.emit(this.currentDate);
 			this.inputChanged = false;
 		}
@@ -312,8 +298,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public closeDatepicker(): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.focus = false;
-			this.currentCalendar.overlayVisible = false;
+			this.currentCalendar.hideOverlay();
 		}
 	}
 

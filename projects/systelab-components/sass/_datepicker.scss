@@ -1,23 +1,28 @@
-/* This styles are used to override the default primeng styles for calendar (https://www.primefaces.org/primeng/#/calendar).*/
+/* This styles are used to override the default primeng styles for datepicker (https://www.primefaces.org/primeng/#/datepicker).*/
 
 /* $icon-margin-right: defines the margin-right of the arrow buttons.*/
 $icon-margin-right: 10px;
 /* $icon-margin-left: defines the margin-left of the arrow buttons.*/
 $icon-margin-left: 40px;
 
-p-calendar {
+p-datepicker {
 
-  .p-calendar {
+  .p-datepicker-input-wrapper,
+  .p-inputwrapper {
     input::-ms-clear {
       display: none;
     }
 
     .icon-calendar {
       height: 100%;
+      color: black;
+      cursor: pointer;
     }
 
     .icon-clock {
       height: 100%;
+      color: black;
+      cursor: pointer;
     }
 
   }
@@ -59,10 +64,11 @@ p-calendar {
 
   &.is-disabled {
     .p-state-disabled, .p-widget:disabled {
-
+      opacity: 0.6;
     }
 
-    .p-calendar {
+    .p-datepicker-input-wrapper,
+    .p-inputwrapper {
       input {
         opacity: 1;
         cursor: not-allowed !important;
@@ -101,6 +107,52 @@ p-calendar {
 
 .p-datepicker-inline {
   flex-direction: column;
+  border: 1px solid #d6d6d6;
+}
+
+.p-datepicker-panel,
+.p-overlay-panel {
+  z-index: 100000 !important;
+}
+
+/* Estilos específicos para PrimeNG 20 DatePicker */
+.p-inputwrapper,
+.p-inputgroup {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  
+  input {
+    padding: .25em;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 100%;
+    height: $form-elements-height;
+    border: 1px solid #d6d6d6 !important;
+    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+    &:focus {
+      border-color: #8cc8f7 !important;
+      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
+    }
+  }
+}
+
+/* Estilos para el overlay del datepicker */
+.p-datepicker {
+  &.p-component {
+    z-index: 100000 !important;
+    max-width: 425px;
+    min-width: 420px;
+    border: 1px solid $medium-gray;
+    margin-top: 5px;
+    border-radius: 4px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    width: auto;
+    box-shadow: none;
+    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+  }
 }
 
 body {
@@ -299,7 +351,8 @@ body {
   }
 }
 
-body .p-inputtext {
+body .p-inputtext,
+body .p-datepicker-input {
   padding: .25em;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -315,14 +368,21 @@ body .p-inputtext {
 
 }
 
+.p-datepicker-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+
 systelab-datepicker {
   margin-right: 5px;
 
   &.custom-height {
-    p-calendar {
+    p-datepicker {
       height: 100%;
 
-      .p-calendar {
+      .p-datepicker-input-wrapper,
+      .p-inputwrapper {
         height: 100%;
       }
 
@@ -337,10 +397,11 @@ systelab-datepicker {
 
 systelab-date-time {
   &.custom-height {
-    p-calendar {
+    p-datepicker {
       height: 100%;
 
-      .p-calendar {
+      .p-datepicker-input-wrapper,
+      .p-inputwrapper {
         height: 100%;
       }
 
