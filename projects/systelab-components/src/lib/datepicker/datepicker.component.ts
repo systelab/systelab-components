@@ -12,7 +12,7 @@ import {
 	ViewChild
 } from '@angular/core';
 import { addDays } from 'date-fns';
-import { Calendar } from 'primeng/calendar';
+import { DatePicker } from 'primeng/datepicker';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
 import { PrimeNG } from 'primeng/config';
@@ -68,7 +68,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
-	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
+	@ViewChild('calendar', {static: true}) public currentCalendar: DatePicker;
 
 	public inputChanged = false;
 	protected _currentDate: Date;
@@ -114,7 +114,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 					this.currentCalendar.el.nativeElement.querySelector('input')
 						.focus();
 				}
-				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-calendar slab-form-icon w-100';
+				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-datepicker slab-form-icon w-100';
 				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
 			}
 		}

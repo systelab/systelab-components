@@ -1,4 +1,4 @@
-<p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false"
+<p-datepicker #calendar [(ngModel)]="currentDate" [showIcon]="false"
   [dateFormat]="language.dateFormatValue"
   [firstDayOfWeek]="language.firstDayOfWeek"
   (onFocus)="saveEventOnFocus($event)"
@@ -48,5 +48,5 @@
       </div>
     }
   </ng-template>
-</p-calendar>
+</p-datepicker>
 

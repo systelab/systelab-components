@@ -10,7 +10,7 @@ import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { DatepickerComponent } from './datepicker.component';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -103,7 +103,7 @@ describe('Systelab DatepickerTimeComponent', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 }).compileComponents();

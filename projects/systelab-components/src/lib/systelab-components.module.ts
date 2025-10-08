@@ -75,7 +75,7 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
@@ -126,7 +126,7 @@ const providers = [
 	imports:      [
 		CommonModule,
 		FormsModule,
-		CalendarModule,
+		DatePickerModule,
 		AutoCompleteModule,
 		DragDropModule,
 		OverlayModule,
