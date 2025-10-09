@@ -115,7 +115,6 @@ p-datepicker {
   z-index: 100000 !important;
 }
 
-/* Estilos específicos para PrimeNG 20 DatePicker */
 .p-inputwrapper,
 .p-inputgroup {
   position: relative;
@@ -142,7 +141,6 @@ p-datepicker {
   }
 }
 
-/* Estilos para el overlay del datepicker PrimeNG 20 */
 .p-datepicker-panel.p-component {
   color: #333;
   background-color: white !important;
@@ -184,8 +182,6 @@ p-datepicker {
               overflow: hidden;
               text-align: center;
               font-size: 11px;
-              
-              // Mostrar solo la primera letra cortando el resto
               display: inline-block;
               white-space: nowrap;
               text-overflow: clip;
@@ -246,7 +242,6 @@ p-datepicker {
     }
   }
 
-  // Footer con botones
   .p-datepicker-buttonbar {
     display: flex;
     justify-content: space-between;
@@ -264,7 +259,6 @@ p-datepicker {
       font-weight: 400 !important;
       border: 1px solid !important;
       
-      // Today button (blue)
       &:first-child {
         background: transparent !important;
         border-color: #007bff !important;
@@ -276,7 +270,6 @@ p-datepicker {
         }
       }
       
-      // Clear button (red/orange)
       &:last-child {
         background: transparent !important;
         border-color: #dc3545 !important;
@@ -290,7 +283,6 @@ p-datepicker {
     }
   }
 
-  // Estilos para el time picker PrimeNG v20
   .p-datepicker-time-picker {
     display: flex;
     align-items: center;
@@ -398,7 +390,6 @@ p-datepicker {
   }
 }
 
-// Estilos para el header custom de Systelab dentro del panel
 .p-datepicker-panel {
   .slab-datepicker-header {
     display: flex;
@@ -411,13 +402,11 @@ p-datepicker {
     border: none !important;
     width: 100%;
     
-    // Contenedor de botones izquierdos
     .left-buttons {
       display: flex;
       gap: 8px;
     }
     
-    // Contenedor de botones derechos  
     .right-buttons {
       display: flex;
       gap: 8px;

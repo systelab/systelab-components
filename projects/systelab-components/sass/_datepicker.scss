@@ -115,7 +115,6 @@ p-datepicker {
   z-index: 100000 !important;
 }
 
-/* Estilos específicos para PrimeNG 20 DatePicker */
 .p-inputwrapper,
 .p-inputgroup {
   position: relative;
@@ -138,7 +137,6 @@ p-datepicker {
   }
 }
 
-/* Estilos para el overlay del datepicker PrimeNG 20 */
 .p-datepicker-panel.p-component {
   z-index: 100000 !important;
   max-width: 425px;
@@ -281,14 +279,12 @@ p-datepicker {
     }
   }
 
-  // Footer con botones
   .p-3 {
     padding: 15px !important;
     background-color: $light-gray;
     border-top: 1px solid $background-secondary;
   }
 
-  // Estilos para el time picker PrimeNG v20
   .p-datepicker-time-picker {
     display: flex;
     align-items: center;
