@@ -13,12 +13,7 @@ p-datepicker {
       display: none;
     }
 
-    .icon-calendar {
-      height: 100%;
-      color: black;
-      cursor: pointer;
-    }
-
+    .icon-calendar,
     .icon-clock {
       height: 100%;
       color: black;
@@ -120,20 +115,22 @@ p-datepicker {
   position: relative;
   display: inline-flex;
   width: 100%;
-  
-  input {
-    padding: .25em;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    width: 100%;
-    height: $form-elements-height;
-    border: 1px solid #d6d6d6 !important;
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+}
 
-    &:focus {
-      border-color: #8cc8f7 !important;
-      box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
-    }
+.p-inputtext,
+.p-datepicker-input,
+.p-inputwrapper input,
+.p-inputgroup input {
+  padding: .25em 1px;
+  width: 100%;
+  height: $form-elements-height;
+  border: 1px solid #d6d6d6 !important;
+  border-radius: 0.25rem;
+  font: normal $slab-base-body-font-size $slab-base-body-font-family;
+
+  &:focus {
+    border-color: #8cc8f7 !important;
+    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
   }
 }
 
@@ -159,55 +156,7 @@ p-datepicker {
       .p-datepicker-day-view {
         margin: 0 !important;
 
-  p-header {
-    .slab-datepicker-header {
-      $icon-margin-right: 10px;
-      $icon-margin-left: 40px;
-      background: $primary;
-      padding: 15px;
-      margin-bottom: 0;
-      line-height: $slab-datepicker-header-navigation-line-height !important;
-      color: white;
 
-      .p-datepicker-title {
-        margin: 0;
-      }
-
-      a {
-        color: white;
-
-        &:hover {
-          text-decoration: none;
-          background: none;
-          color: white;
-        }
-      }
-
-      .icon-angle-double-left {
-        float: left;
-        margin-left: $icon-margin-right;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-
-      .icon-angle-double-right {
-        float: right;
-        margin-right: $icon-margin-right;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-
-      .icon-angle-left {
-        float: left;
-        margin-left: $icon-margin-left;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-
-      .icon-angle-right {
-        float: right;
-        margin-right: $icon-margin-left;
-        line-height: $slab-datepicker-header-navigation-line-height;
-      }
-    }
-  }
 
         /**
          * 1. Overrides default browser behaviour
@@ -300,35 +249,6 @@ p-datepicker {
       align-items: center;
       margin: 0 10px;
 
-      .p-datepicker-increment-button,
-      .p-datepicker-decrement-button {
-        background: transparent !important;
-        border: 1px solid $background-secondary !important;
-        color: $primary !important;
-        margin: 5px 0;
-        border-radius: 50% !important;
-        width: 30px !important;
-        height: 30px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-
-        &:hover {
-          background-color: $primary !important;
-          color: white !important;
-          border-color: $primary !important;
-        }
-
-        &:focus {
-          box-shadow: 0 0 0 0.2rem rgba($primary, 0.25) !important;
-        }
-
-        .p-icon {
-          width: 12px !important;
-          height: 12px !important;
-        }
-      }
-
       > span {
         font-size: 18px;
         font-weight: 500;
@@ -336,6 +256,35 @@ p-datepicker {
         min-width: 30px;
         text-align: center;
         padding: 5px;
+      }
+    }
+
+    .p-datepicker-increment-button,
+    .p-datepicker-decrement-button {
+      background: transparent !important;
+      border: 1px solid $background-secondary !important;
+      color: $primary !important;
+      margin: 5px 0;
+      border-radius: 50% !important;
+      width: 30px !important;
+      height: 30px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      &:hover {
+        background-color: $primary !important;
+        color: white !important;
+        border-color: $primary !important;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($primary, 0.25) !important;
+      }
+
+      .p-icon {
+        width: 12px !important;
+        height: 12px !important;
       }
     }
 
@@ -405,55 +354,7 @@ body {
 
 
 
-    p-header {
-      .slab-datepicker-header {
-        $icon-margin-right: 10px;
-        $icon-margin-left: 40px;
-        background: $primary;
-        padding: 15px;
-        margin-bottom: 0;
-        line-height: $slab-datepicker-header-navigation-line-height !important;
-        color: white;
 
-        .p-datepicker-title {
-          margin: 0;
-        }
-
-        a {
-          color: white;
-
-          &:hover {
-            text-decoration: none;
-            background: none;
-            color: white;
-          }
-        }
-
-        .icon-angle-double-left {
-          float: left;
-          margin-left: $icon-margin-right;
-          line-height: $slab-datepicker-header-navigation-line-height;
-        }
-
-        .icon-angle-double-right {
-          float: right;
-          margin-right: $icon-margin-right;
-          line-height: $slab-datepicker-header-navigation-line-height;
-        }
-
-        .icon-angle-left {
-          float: left;
-          margin-left: $icon-margin-left;
-          line-height: $slab-datepicker-header-navigation-line-height;
-        }
-
-        .icon-angle-right {
-          float: right;
-          margin-right: $icon-margin-left;
-          line-height: $slab-datepicker-header-navigation-line-height;
-        }
-      }
-    }
 
     /**
      * 1. Overrides default browser behaviour
@@ -527,24 +428,6 @@ body {
       background-color: $light-gray;
     }
   }
-}
-
-body .p-inputtext,
-body .p-datepicker-input {
-  border-radius: 0.25rem;
-  padding: .25em;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  width: 100%;
-  height: $form-elements-height;
-  border: 1px solid #d6d6d6 !important;
-  font: normal $slab-base-body-font-size $slab-base-body-font-family;
-
-  &:focus {
-    border-color: #8cc8f7 !important;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%) !important;
-  }
-
 }
 
 .p-datepicker-input-wrapper {
