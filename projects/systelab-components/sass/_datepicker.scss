@@ -72,10 +72,6 @@ p-datepicker {
       &.input-expand-height {
         height: 100% !important;
       }
-
-      //i {
-      //opacity: 0.5;
-      //}
     }
 
     .p-datepicker-header {
@@ -156,11 +152,6 @@ p-datepicker {
       .p-datepicker-day-view {
         margin: 0 !important;
 
-
-
-        /**
-         * 1. Overrides default browser behaviour
-         */
         $datepicker-max-size: 60px;
         $datepicker-height-size: 50px;
 
@@ -352,20 +343,11 @@ body {
   }
 }
 
-
-
-
-
-    /**
-     * 1. Overrides default browser behaviour
-     */
     .p-datepicker-calendar {
       $datepicker-max-size: 60px;
       $datepicker-height-size: 50px;
       border-spacing: 0;
       margin: 0;
-
-      /* 1 */
 
       thead {
         background-color: $light-gray;
