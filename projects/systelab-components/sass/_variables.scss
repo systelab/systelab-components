@@ -1,8 +1,8 @@
 @use "sass:math";
 @use "sass:string";
-@use "bootstrap/scss/bootstrap" as *;
-@forward "./systelab-bootstrap-settings";
-@forward "./mixins";
+@import "bootstrap/scss/bootstrap";
+@import "./systelab-bootstrap-settings";
+@import "./mixins";
 
 // Internal variable to help set the size
 $slab-size-percentage: 0.7 !default;
@@ -24,6 +24,14 @@ $slab-ipad-width: 1024px !default;
 
 // Defines the primary color
 $primary: #0064D1 !default;
+$success: rgb(194, 217, 93) !default;
+$warning: rgb(255, 210, 54) !default;
+$danger: rgb(255, 73, 68) !default;
+$info: rgb(178, 140, 232) !default;
+$secondary: rgb(170, 170, 170) !default;
+$text-color: rgb(21, 143, 239) !default;
+$text-color-secondary: rgb(255, 255, 255) !default;
+
 $background-primary: rgb(255, 255, 255) !default;
 $background-secondary: rgb(238, 238, 238) !default;
 // Defines the color for selected elements

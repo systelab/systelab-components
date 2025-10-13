@@ -1,4 +1,5 @@
 @use "sass:math";
+@import 'variables';
 
 $icon-header-size: 40px;
 $icon-header-margin: math.div(($slab-app-header-height - $icon-header-size), 2);
