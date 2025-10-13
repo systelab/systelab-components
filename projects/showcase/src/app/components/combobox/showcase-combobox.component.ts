@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'showcase-combobox',
@@ -16,9 +15,8 @@ export class ShowcaseComboboxComponent {
 	public comboOptionList: Array<Object> = [];
 
 	public selectedComboOptionList: Array<Object> = [];
-	public myForm: FormGroup;
 
-	constructor(private fb: FormBuilder) {
+	constructor() {
 
 		this.comboOptionList = [
 			{description: 'New York', id: 1},
@@ -39,22 +37,12 @@ export class ShowcaseComboboxComponent {
 			{description: 'Rome', id: 2},
 			{description: 'St Petersburgo', id: 11}
 		];
-
-		this.myForm = this.fb.group({
-			mySelectField: [{id: null, description: ''}]
-		});
-
-		this.myForm.patchValue({
-			mySelectField: { id: 4 }
-		});
-	}
-
-	submit() {
-		console.log(this.myForm.value);
 	}
 
 	public comboChangeEvent(event: any): void {
+		console.log('comboValue ', event);
 		console.log(this.colorId);
 		console.log(this.colorValue);
+
 	}
 }
