@@ -103,7 +103,7 @@
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
               "node_modules/primeicons/primeicons.css",
               "projects/systelab-components/icons/icomoon.css",
-              "dist/systelab-components/sass/systelab-components.scss",
+              "dist/systelab-components/sass/modern/systelab-components.scss",
               "projects/showcase/src/styles.scss"
             ],
             "scripts": [
