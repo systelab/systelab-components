@@ -19,12 +19,23 @@
         </div>
         <!-- Select -->
         <div class="row mt-1">
-            <label class="col-md-3 col-form-label">Select</label>
+            <label class="col-md-3 col-form-label">Select 1 Option</label>
             <div class="col-md-9">
                 <systelab-select
                         formControlName="mySelectField"
                         [withEmptyValue]="true"
                         [values]="comboOptionList"
+                        (change)="comboChangeEvent($event)">
+                </systelab-select>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <label class="col-md-3 col-form-label">Select Multiple Options</label>
+            <div class="col-md-9">
+                <systelab-select
+                        formControlName="myMultiSelectField"
+                        [values]="comboOptionList"
+                        [multipleSelection]="true"
                         (change)="comboChangeEvent($event)">
                 </systelab-select>
             </div>

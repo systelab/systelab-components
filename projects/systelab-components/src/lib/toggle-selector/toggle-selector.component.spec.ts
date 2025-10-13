@@ -85,5 +85,67 @@ describe('Systelab Toggle Selector', () => {
 		checkHasValue(fixture, '3');
 	});
 
+    it('should call onChange, emit select and currentOptionChange when selectOption is called', () => {
+        const toggleCmp = fixture.debugElement.query(By.directive(ToggleSelectorComponent)).componentInstance as ToggleSelectorComponent;
+        const option = { id: '2', name: 'B' };
+
+        // Spy on all emitters and onChange callback
+        spyOn(toggleCmp.select, 'emit');
+        spyOn(toggleCmp.currentOptionChange, 'emit');
+        toggleCmp['onChange'] = jasmine.createSpy('onChange');
+
+        // Call the method
+        toggleCmp.selectOption(option);
+
+        // Should emit select event with the option object
+        expect(toggleCmp.select.emit).toHaveBeenCalledWith(option);
+
+        // Should emit currentOptionChange with the option id
+        expect(toggleCmp.currentOptionChange.emit).toHaveBeenCalledWith('2');
+
+        // Should notify Angular forms of the change
+        expect(toggleCmp['onChange']).toHaveBeenCalledWith('2');
+
+        // Internal currentOption should be updated
+        expect(toggleCmp.currentOption).toBe('2');
+    });
+
+    it('should call base writeValue and emit currentOptionChange when writeValue is called', () => {
+        const toggleCmp = fixture.debugElement.query(By.directive(ToggleSelectorComponent)).componentInstance as ToggleSelectorComponent;
+
+        // Spy on the base class method
+        const basePrototype = Object.getPrototypeOf(toggleCmp);
+        const writeSpy = spyOn(basePrototype, 'writeValue').and.callThrough();
+
+        // Spy on emitter
+        spyOn(toggleCmp.currentOptionChange, 'emit');
+
+        // Call the method
+        toggleCmp.writeValue('3');
+
+        // Should call base writeValue
+        expect(writeSpy).toHaveBeenCalledWith('3');
+
+        // Should emit the change
+        expect(toggleCmp.currentOptionChange.emit).toHaveBeenCalledWith('3');
+
+        // Should update the internal state
+        expect(toggleCmp.currentOption).toBe('3');
+    });
+
+    it('should call base setDisabledState when setDisabledState is called', () => {
+        const toggleCmp = fixture.debugElement.query(By.directive(ToggleSelectorComponent)).componentInstance as ToggleSelectorComponent;
+
+        // Spy on the base class method
+        const basePrototype = Object.getPrototypeOf(toggleCmp);
+        const disabledSpy = spyOn(basePrototype, 'setDisabledState').and.callThrough();
+
+        // Call the method
+        toggleCmp.setDisabledState(true);
+
+        // Should call the base implementation
+        expect(disabledSpy).toHaveBeenCalledWith(true);
+    });
+
 });
 

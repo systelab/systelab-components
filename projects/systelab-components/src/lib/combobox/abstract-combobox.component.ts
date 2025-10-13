@@ -601,11 +601,15 @@ export abstract class AbstractComboBox<T> extends ControlValueAccessorBase imple
 
 	// ControlValuAccessor method to write value for reactive forms
 	// @Override
-	override writeValue(value: any): void {
+	public override writeValue(value: any): void {
 		if (value) {
-			this.id = value[this.getIdField()];
-			// Calling the method to set code and description
-			this.setCodeDescriptionById();
+            if (!this.multipleSelection) {
+                this.id = value[this.getIdField()];
+                // Calling the method to set code and description
+                this.setCodeDescriptionById();
+            } else {
+                this.multipleSelectedItemList = value;
+            }
 		}
 	}
 
@@ -632,6 +636,8 @@ export abstract class AbstractComboBox<T> extends ControlValueAccessorBase imple
 			}
 		} else {
 			this.selectionChanged = true;
+            // Notify change to form observers
+            this.onChange(this.multipleSelectedItemList);
 		}
 	}
 

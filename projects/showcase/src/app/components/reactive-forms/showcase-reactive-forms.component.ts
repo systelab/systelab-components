@@ -11,9 +11,10 @@ import {
 })
 export class ShowcaseReactiveFormsComponent implements OnInit {
 
-    public comboOptionList: Array<Object> = [];
+    public comboOptionList: Array<{ description: string; id: number }>  = [];
     public myForm: FormGroup;
     public options: Array<ToggleSelectorOption> = [];
+    public multiComboSelectedOptions: Array<{ description: string; id: number }> = [];
 
     constructor(private fb: FormBuilder) {
         this.comboOptionList = [
@@ -34,10 +35,13 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
         this.options.push({ id: '2', name: 'Only A' });
         this.options.push({ id: '3', name: 'Only B' });
 
+        this.multiComboSelectedOptions = [this.comboOptionList[0], this.comboOptionList[3], this.comboOptionList[5]];
+
         this.myForm = this.fb.group({
             name :[{value: 'Homer Simpson', disabled: true}],
             textArea: [{value: 'This is a text area', disabled: true}],
-            mySelectField: [{ value: { id: null, description: '' }, disabled: true }],
+            mySelectField: [{ value: { id: null, description: '' }, disabled: false }],
+            myMultiSelectField: [{ value: this.multiComboSelectedOptions, disabled: false }],
             myCheck1: [{ value: true, disabled: false }],
             myCheck2: [{ value: false, disabled: false }],
             myCheck3: [{ value: true, disabled: true }],
@@ -58,8 +62,8 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
     }
 
     public comboChangeEvent(event: any): void {
-        console.log('Event: ', event);
-        console.log('Form Value: ', this.myForm.value);
+        // console.log('Event: ', event);
+        // console.log('Form Value: ', this.myForm.value);
     }
 
     public doSomething(event: any): void {
@@ -78,7 +82,11 @@ export class ShowcaseReactiveFormsComponent implements OnInit {
         this.myForm.get('mySwitch2')?.enable();
         this.myForm.get('mySwitch3')?.disable();
         this.myForm.get('mySwitch4')?.disable();
+        this.myForm.valueChanges.subscribe(value => {
+            console.log('Form changes', value);
+        });
     }
+
 
 
 }

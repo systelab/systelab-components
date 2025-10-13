@@ -8,6 +8,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SwitchComponent } from './switch.component';
+import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'systelab-switch-test',
@@ -87,4 +88,60 @@ describe('Systelab Switch', () => {
 		setValue(fixture, false);
 		checkHasValue(fixture, false);
 	});
+
+
+    it('should call writeValue and update internal checked state', () => {
+        const switchCmp = fixture.debugElement.query(By.directive(SwitchComponent)).componentInstance as SwitchComponent;
+
+        // Spy on the base class method
+        const basePrototype = Object.getPrototypeOf(switchCmp);
+        const writeSpy = spyOn(basePrototype, 'writeValue').and.callThrough();
+
+        // Call the overridden method
+        switchCmp.writeValue(true);
+
+        // Should call the base class writeValue
+        expect(writeSpy).toHaveBeenCalledWith(true);
+
+        // Internal state 'checked' should be updated
+        expect((switchCmp as any).checked).toBeTrue();
+    });
+
+    it('should emit isCheckedChange and call onChange when isChecked is set', () => {
+        const switchCmp = fixture.debugElement.query(By.directive(SwitchComponent)).componentInstance as SwitchComponent;
+
+        // Spy on the EventEmitter
+        spyOn(switchCmp.isCheckedChange, 'emit');
+
+        // Spy on the onChange callback
+        switchCmp['onChange'] = jasmine.createSpy('onChange');
+
+        // Set isChecked programmatically
+        switchCmp.isChecked = true;
+
+        // Should emit the change event
+        expect(switchCmp.isCheckedChange.emit).toHaveBeenCalledWith(true);
+
+        // Should notify Angular forms via onChange
+        expect(switchCmp['onChange']).toHaveBeenCalledWith(true);
+    });
+
+    it('should correctly get and set disabled state', () => {
+        const switchCmp = fixture.debugElement.query(By.directive(SwitchComponent)).componentInstance as SwitchComponent;
+
+        // Initially disabled should be false
+        expect(switchCmp.disabled).toBeFalse();
+
+        // Set disabled to true
+        switchCmp.disabled = true;
+
+        // Getter should reflect the change
+        expect(switchCmp.disabled).toBeTrue();
+
+        // Set disabled back to false
+        switchCmp.disabled = false;
+        expect(switchCmp.disabled).toBeFalse();
+    });
+
+
 });

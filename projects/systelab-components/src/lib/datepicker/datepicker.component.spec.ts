@@ -12,6 +12,7 @@ import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { DatepickerComponent } from './datepicker.component';
+import {ControlValueAccessorBase} from "../utilities/form/control-value-accessor-base";
 
 @Component({
     selector: 'systelab-datepicker-test',
@@ -502,5 +503,49 @@ describe('Systelab DatepickerComponent', () => {
 			expect(fixture2.componentInstance.currentCalendar.dateFormat).toBe('yy-mm-dd');
 		});
 	});
+
+    describe('Disabled input and writeValue behavior', () => {
+
+        it('should get disabled value from base class', () => {
+            fixture2 = TestBed.createComponent(DatepickerComponent);
+            const component = fixture2.componentInstance;
+
+            // Manually set the base class disabled property
+            (component as any).disabled = true;
+
+            // Expect the getter to return the same value as the base class
+            expect(component.disabled).toBeTrue();
+        });
+
+        it('should set disabled value on base class', () => {
+            fixture2 = TestBed.createComponent(DatepickerComponent);
+            const component = fixture2.componentInstance;
+
+            // Spy on the base class setter to ensure it's being called
+            const spy = spyOnProperty(ControlValueAccessorBase.prototype, 'disabled', 'set').and.callThrough();
+
+            component.disabled = true;
+
+            // Ensure the base class setter was called once with the right value
+            expect(spy).toHaveBeenCalledWith(true);
+        });
+
+        it('should update _currentDate and emit value when writeValue is called', () => {
+            fixture2 = TestBed.createComponent(DatepickerComponent);
+            const component = fixture2.componentInstance;
+            const emitSpy = spyOn(component.currentDateChange, 'emit');
+
+            const newDate = new Date(2025, 5, 10);
+
+            // Act
+            component.writeValue(newDate);
+
+            // Assert internal state and emitted value
+            expect(component['_currentDate']).toEqual(newDate);
+            expect(emitSpy).toHaveBeenCalledWith(newDate);
+        });
+    });
+
+
 });
 

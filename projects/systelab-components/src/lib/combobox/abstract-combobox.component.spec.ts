@@ -196,4 +196,131 @@ describe('Systelab Select Combobox', () => {
 			});
 	});
 
+    it('should initialize inherited properties from ControlValueAccessorBase', () => {
+        const fixture = TestBed.createComponent(ComboboxTestComponent);
+        fixture.detectChanges();
+
+        const combo = fixture.componentInstance.combobox;
+
+        // This test indirectly verifies that the parent constructor (super) was called.
+        // If the ControlValueAccessorBase constructor wasn't executed,
+        // these properties and methods would not be defined in the child class.
+        expect(combo).toBeDefined();
+        expect(combo['onChange']).toBeDefined();
+        expect(combo['onTouched']).toBeDefined();
+        expect(typeof combo['writeValue']).toBe('function');
+        expect(typeof combo['registerOnChange']).toBe('function');
+        expect(typeof combo['registerOnTouched']).toBe('function');
+    });
+
+    it('should update isDisabled and trigger change detection when setDisabledState is called', () => {
+        const fixture = TestBed.createComponent(ComboboxTestComponent);
+        fixture.detectChanges();
+
+        const combo = fixture.componentInstance.combobox;
+
+        // Spy on ChangeDetectorRef.markForCheck to ensure it's called
+        const markForCheckSpy = spyOn(combo['chRef'], 'markForCheck');
+
+        // Call the method with "true" to disable the control
+        combo.setDisabledState(true);
+
+        // The component should reflect the disabled state
+        expect(combo.isDisabled).toBeTrue();
+
+        // Change detection should be triggered
+        expect(markForCheckSpy).toHaveBeenCalled();
+
+        // Now call it again with "false" to re-enable the control
+        combo.setDisabledState(false);
+
+        // The disabled state should be reverted
+        expect(combo.isDisabled).toBeFalse();
+    });
+
+    it('should set id and update description/code when writeValue is called in single selection mode', () => {
+        const fixture = TestBed.createComponent(ComboboxTestComponent);
+        fixture.detectChanges();
+
+        const combo = fixture.componentInstance.combobox;
+
+        // Mock required methods and data
+        spyOn(combo, 'getIdField').and.returnValue('id');
+        spyOn(combo, 'setCodeDescriptionById');
+        combo.multipleSelection = false;
+
+        // Create a mock value representing the selected item
+        const mockValue = { id: 123, description: 'Test Item' };
+
+        // Call the method
+        combo.writeValue(mockValue);
+
+        // The id should be set correctly
+        expect(combo.id).toBe(123);
+
+        // And setCodeDescriptionById should be triggered
+        expect(combo.setCodeDescriptionById).toHaveBeenCalled();
+    });
+
+    it('should set multipleSelectedItemList when writeValue is called in multiple selection mode', () => {
+        const fixture = TestBed.createComponent(ComboboxTestComponent);
+        fixture.detectChanges();
+
+        const combo = fixture.componentInstance.combobox;
+
+        combo.multipleSelection = true;
+        const mockList = [
+            { id: 1, description: 'Item 1' },
+            { id: 2, description: 'Item 2' }
+        ] as any; // force type compatibility
+
+        combo.writeValue(mockList);
+
+        expect(combo.multipleSelectedItemList as any).toEqual(mockList);
+    });
+
+    it('should call onChange with selectedRow when selection changes in single selection mode', () => {
+        const fixture = TestBed.createComponent(ComboboxTestComponent);
+        fixture.detectChanges();
+
+        const combo = fixture.componentInstance.combobox;
+        combo.multipleSelection = false;
+
+        // Mock getSelectedRow() to return a fake selected row
+        const mockRow = { id: '1', description: 'Test item' };
+        spyOn(combo, 'getSelectedRow').and.returnValue(mockRow);
+
+        // Spy on onChange callback
+        combo['onChange'] = jasmine.createSpy('onChange');
+
+        // Simulate event
+        combo.onSelectionChanged({ source: 'rowClicked' });
+
+        // Expect ControlValueAccessor callback to have been called
+        expect(combo['onChange']).toHaveBeenCalledWith(mockRow);
+    });
+
+    it('should call onChange with multipleSelectedItemList when selection changes in multiple selection mode', () => {
+        const fixture = TestBed.createComponent(ComboboxTestComponent);
+        fixture.detectChanges();
+
+        const combo = fixture.componentInstance.combobox;
+        combo.multipleSelection = true;
+
+        // Prepare mock data
+        combo.multipleSelectedItemList = [
+            { id: 1, description: 'Item 1' },
+            { id: 2, description: 'Item 2' }
+        ] as any; // force type compatibility
+
+        // Spy on onChange
+        combo['onChange'] = jasmine.createSpy('onChange');
+
+        // Trigger the selection change logic for multiple mode
+        combo.onSelectionChanged({ source: 'rowClicked' });
+
+        // Verify callback is called with the full list
+        expect(combo['onChange']).toHaveBeenCalledWith(combo.multipleSelectedItemList);
+    });
+
 });

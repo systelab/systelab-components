@@ -31,6 +31,7 @@ export class ToggleSelectorComponent extends ControlValueAccessorBase {
     this.currentOption = option.id;
     this.select.emit(option);
     this.currentOptionChange.emit(option.id);
+    this.onChange(option.id);
   }
 
   public override writeValue(value: any): void {
