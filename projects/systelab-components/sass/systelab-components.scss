@@ -1,15 +1,16 @@
 @charset "utf-8";
 
-@import "./variables";
-@import "./dialog";
-@import "./icon";
+@use "./variables" as *;
+@forward "./components";
 
 html {
   width: 100%;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
-  color: $slab-base-body-color;
+  color: var(--slab_foreground_primary);
 
   body {
+    color: var(--slab_foreground_primary);
+
     &:not(.is-login) {
       min-width: $slab-app-min-width;
       min-height: $slab-app-min-height;

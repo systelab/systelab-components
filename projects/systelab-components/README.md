@@ -3,13 +3,14 @@
 systelab-components is a set of components that use wide accepted and adopted standard technologies like Angular and Bootstrap, as well as other popular libraries. Please read the ATTRIBUTION.md file for a complete list of dependencies.
 
 Bootstrap 4 knowledge will be very useful to understand and use the library, as is based on it.
-                                                    
+
 ## Using the library
 
 In order to use the library, the first step will be to add the dependency in your package.json
 
 ```bash
 npm install systelab-components --save
+
 ```
 
 After, you must add the following styles, stylePreprocessorOptions and scripts in the angular.json file,
@@ -35,9 +36,11 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "node_modules/bootstrap/dist/js/bootstrap.js",
         "node_modules/pako/dist/pako.min.js"
       ],
+
 ```
 
 > Be careful because you will not probably need all fontawesome 5.x. Instead, you can add:
+>
 > - brands.css
 > - fontawesome.css
 > - regular.css
@@ -60,6 +63,7 @@ NgModule({
             GridHeaderContextMenuComponent
         ]),
     ...
+
 ```
 
 You can config some application parameters using the *forRoot* method:
@@ -78,9 +82,10 @@ You can config some application parameters using the *forRoot* method:
       timeout: number,
     }
   }
+
 ```
 
-The *forRoot* method is optional. By default, the module is configured 
+The *forRoot* method is optional. By default, the module is configured
 with:
 
 ```typescript
@@ -93,6 +98,7 @@ with:
       timeout: 5000,
     }
 }
+
 ```
 
 If you need to import SystelabComponentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
@@ -104,6 +110,7 @@ NgModule({
         SystelabComponentsModule
     ]
 })
+
 ```
 
 Finally, you must import the systelab-components sass file in the general styles file in src/styles.scss.
@@ -121,6 +128,7 @@ export class AppComponent {
         ...
     }
 }
+
 ```
 
 src/styles.scss file is visible to AppComponent because is referenced in styles of angular.json file.
@@ -134,18 +142,14 @@ src/styles.scss file is visible to AppComponent because is referenced in styles 
         "node_modules/systelab-components/icons/icomoon.css",
         "src/styles.scss"
       ],
+
 ```
 
 In the sass file src/styles.scss, we have imported systelab-components sass style.
 
 ```sass
 @import "systelab-components/sass/systelab-components";
-```
 
-Import the modern styles in order to be in the last version:
-
-```sass
-@import "systelab-components/sass/modern/systelab-components";
 ```
 
 Bootstrap package is a dependency for systelab-components, and npm will download it.
@@ -162,7 +166,8 @@ In both options it is possible to change the default Bootstrap or systelab-compo
 $slab-size-percentage: 1;
 $primary: rgb(0, 154, 181);
 
-@import "systelab-components/sass/modern/systelab-components";
+@import "systelab-components/sass/systelab-components";
+
 ```
 
 All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) (classic style) or [_variables.scss](sass/modern/_variables.scss) (modern style) can be overwritten.
@@ -171,15 +176,16 @@ Anyway, think it twice before you change this settings and think in the value of
 
 ### Schematics
 
-In order to generate some components, install [systelab-schematics](https://github.com/systelab/systelab-schematics) 
+In order to generate some components, install [systelab-schematics](https://github.com/systelab/systelab-schematics)
 
 ```bash
 npm install -D systelab-schematics --save
+
 ```
 
 ## Components
 
-A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples. 
+A bunch of different components and utilities are provided as part of the library. In the folder with the implementation of each component, you will find documentation about how to use it. In the showcase you will find examples.
 
 As this components will be placed in a container, in the following sections you will find some tips about how to do it. Please check our [application frame](src/lib/applicationframe), [dialog](src/lib/modal/dialog) as a base containers of the layout.
 
@@ -231,11 +237,9 @@ The following table summarizes all the components included in the library.
 | [systelab-week-selector](src/lib/week-selector)          | Component to show a Week Selector                                                 |
 | [systelab-wizard-steps](src/lib/wizard-steps)            | Component to show a Wizard                                                        |
 
-
-
 ### Layout
 
-To manage the layout, alignment, and sizing of grid columns, navigation, components, ... you can use the Bootstrap Grid or Flexbox. 
+To manage the layout, alignment, and sizing of grid columns, navigation, components, ... you can use the Bootstrap Grid or Flexbox.
 
 As a general tip:
 
@@ -255,7 +259,7 @@ As a super basic summary:
 - Use **.d-flex** to set a flex box container. By default the container will arrange the elements in a single row. Use **flex-column** to arranges the items in a column.
 - Use **justify-content-end**, **justify-content-center**, **justify-content-between**, **justify-content-around** if they are needed.
 - Place your elements inside the box container and use **.slab-flex-1** in the element that you want to grow (internally applies the style flex: 1).
-- Apply the same pattern to the containers that you place inside to get more complex layouts. 
+- Apply the same pattern to the containers that you place inside to get more complex layouts.
 
 In the following example, the div in the middle will grow:
 
@@ -265,8 +269,10 @@ In the following example, the div in the middle will grow:
     <div class="slab-flex-1 bg-success"></div>
     <div class="bg-white">White</div>
 </div>
+
 ```
-Combine as needed. In this case will have elements placed in the north (info), south (white), west (warning), east (danger) and in the center (success). 
+
+Combine as needed. In this case will have elements placed in the north (info), south (white), west (warning), east (danger) and in the center (success).
 
 ```html
 <div class="d-flex flex-column">
@@ -279,11 +285,12 @@ Combine as needed. In this case will have elements placed in the north (info), s
     </div>
     <div class="bg-white">White</div>
 </div>
+
 ```
 
 Use **.ml-auto** in a flex container if you want to push the item to the left. This will be helpful for example to push a button and place it to the bottom right of a dialog.
 
-Use **.slab-overflow-container** for the element that could/should scroll. 
+Use **.slab-overflow-container** for the element that could/should scroll.
 
 ### Forms
 
@@ -301,32 +308,31 @@ Add **.border** and **.rounded**, and probably some margin classes, if you want 
 
 Use bootstrap utilities to add responsiveness to your layout. Equivalence between versions 3.x and 4.x are:
 
-
 - Show/hide for breakpoint and down:
 
-    - hidden-xs-down (hidden-xs) = d-none d-sm-block
-    - hidden-sm-down (hidden-sm hidden-xs) = d-none d-md-block
-    - hidden-md-down (hidden-md hidden-sm hidden-xs) = d-none d-lg-block
-    - hidden-lg-down = d-none d-xl-block
-    - hidden-xl-down (n/a 3.x) = d-none (same as hidden)
+   - hidden-xs-down (hidden-xs) = d-none d-sm-block
+   - hidden-sm-down (hidden-sm hidden-xs) = d-none d-md-block
+   - hidden-md-down (hidden-md hidden-sm hidden-xs) = d-none d-lg-block
+   - hidden-lg-down = d-none d-xl-block
+   - hidden-xl-down (n/a 3.x) = d-none (same as hidden)
 
 - Show/hide for breakpoint and up:
 
-    - hidden-xs-up = d-none (same as hidden)
-    - hidden-sm-up = d-sm-none
-    - hidden-md-up = d-md-none
-    - hidden-lg-up = d-lg-none
-    - hidden-xl-up (n/a 3.x) = d-xl-none
+   - hidden-xs-up = d-none (same as hidden)
+   - hidden-sm-up = d-sm-none
+   - hidden-md-up = d-md-none
+   - hidden-lg-up = d-lg-none
+   - hidden-xl-up (n/a 3.x) = d-xl-none
 
 - Show/hide only for a single breakpoint:
 
-    - hidden-xs (only) = d-none d-sm-block (same as hidden-xs-down)
-    - hidden-sm (only) = d-block d-sm-none d-md-block
-    - hidden-md (only) = d-block d-md-none d-lg-block
-    - hidden-lg (only) = d-block d-lg-none d-xl-block
-    - hidden-xl (n/a 3.x) = d-block d-xl-none
-    - visible-xs (only) = d-block d-sm-none
-    - visible-sm (only) = d-none d-sm-block d-md-none
-    - visible-md (only) = d-none d-md-block d-lg-none
-    - visible-lg (only) = d-none d-lg-block d-xl-none
-    - visible-xl (n/a 3.x) = d-none d-xl-block
+   - hidden-xs (only) = d-none d-sm-block (same as hidden-xs-down)
+   - hidden-sm (only) = d-block d-sm-none d-md-block
+   - hidden-md (only) = d-block d-md-none d-lg-block
+   - hidden-lg (only) = d-block d-lg-none d-xl-block
+   - hidden-xl (n/a 3.x) = d-block d-xl-none
+   - visible-xs (only) = d-block d-sm-none
+   - visible-sm (only) = d-none d-sm-block d-md-none
+   - visible-md (only) = d-none d-md-block d-lg-none
+   - visible-lg (only) = d-none d-lg-block d-xl-none
+   - visible-xl (n/a 3.x) = d-none d-xl-block
