@@ -360,6 +360,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	public closeDatepicker(): void {
 		if (this.currentCalendar) {
 			this.currentCalendar.hideOverlay();
+			this.currentCalendar.el.nativeElement.blur();
 		}
 	}
 
@@ -433,7 +434,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	private addListeners(): void {
 		this.destroyWheelListener = this.myRenderer.listen('window', 'wheel', () => {
-			this.closeDatepicker();
+			// this.closeDatepicker();
 		});
 
 		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
