@@ -11,6 +11,7 @@ In order to use the library, the first step will be to add the dependency in you
 ```bash
 npm install systelab-components --save
 
+
 ```
 
 After, you must add the following styles, stylePreprocessorOptions and scripts in the angular.json file,
@@ -21,7 +22,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
         "node_modules/primeng/resources/themes/nova-light/theme.css",
         "node_modules/primeng/resources/primeng.min.css",
-        "node_modules/primeicons/primeicons.css,
+        "node_modules/primeicons/primeicons.css",
         "node_modules/systelab-components/icons/icomoon.css",
         "node_modules/@fortawesome/fontawesome-free/css/all.css"
       ],
@@ -36,6 +37,7 @@ After, you must add the following styles, stylePreprocessorOptions and scripts i
         "node_modules/bootstrap/dist/js/bootstrap.js",
         "node_modules/pako/dist/pako.min.js"
       ],
+
 
 ```
 
@@ -64,6 +66,7 @@ NgModule({
         ]),
     ...
 
+
 ```
 
 You can config some application parameters using the *forRoot* method:
@@ -83,6 +86,7 @@ You can config some application parameters using the *forRoot* method:
     }
   }
 
+
 ```
 
 The *forRoot* method is optional. By default, the module is configured
@@ -99,6 +103,7 @@ with:
     }
 }
 
+
 ```
 
 If you need to import SystelabComponentsModule in a lazy loaded module you must use it without call the *forRoot* method again. If you call twice or more, you will
@@ -110,6 +115,7 @@ NgModule({
         SystelabComponentsModule
     ]
 })
+
 
 ```
 
@@ -129,6 +135,7 @@ export class AppComponent {
     }
 }
 
+
 ```
 
 src/styles.scss file is visible to AppComponent because is referenced in styles of angular.json file.
@@ -143,12 +150,14 @@ src/styles.scss file is visible to AppComponent because is referenced in styles 
         "src/styles.scss"
       ],
 
+
 ```
 
 In the sass file src/styles.scss, we have imported systelab-components sass style.
 
 ```sass
 @import "systelab-components/sass/systelab-components";
+
 
 ```
 
@@ -168,9 +177,10 @@ $primary: rgb(0, 154, 181);
 
 @import "systelab-components/sass/systelab-components";
 
+
 ```
 
-All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) (classic style) or [_variables.scss](sass/modern/_variables.scss) (modern style) can be overwritten.
+All values defined in Bootstrap [_variables.scss](https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss) and systelab-components [_variables.scss](sass/_variables.scss) can be overwritten.
 
 Anyway, think it twice before you change this settings and think in the value of having a homogeneous look and feel.
 
@@ -180,6 +190,7 @@ In order to generate some components, install [systelab-schematics](https://gith
 
 ```bash
 npm install -D systelab-schematics --save
+
 
 ```
 
@@ -270,6 +281,7 @@ In the following example, the div in the middle will grow:
     <div class="bg-white">White</div>
 </div>
 
+
 ```
 
 Combine as needed. In this case will have elements placed in the north (info), south (white), west (warning), east (danger) and in the center (success).
@@ -285,6 +297,7 @@ Combine as needed. In this case will have elements placed in the north (info), s
     </div>
     <div class="bg-white">White</div>
 </div>
+
 
 ```
 

@@ -95,7 +95,7 @@ npm publish
 - Polishing developer experience with style guide updates.
 - Advancements in GenAI development with llms.txt and angular.dev guides and videos for building Generative AI applications
 - Launching a request for comments for an official mascot for Angular
-- Since v20.0.3 the old styles has been removed and now the modern styles are the only ones, so the import of the styles must be updated without the modern path `@import "systelab-components/sass/systelab-components";`
+- Since v20.1.0 the old styles has been removed and now the modern styles are the only ones, so the import of the styles must be updated without the modern path `@import "systelab-components/sass/systelab-components";`
 
 ## Version 19.x.x - Angular 19
 
