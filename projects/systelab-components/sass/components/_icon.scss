@@ -1,3 +1,4 @@
+@use '../variables'as *;
 .slab-icon-medium {
     font-size: 200%;
     vertical-align: -16%;
@@ -10,13 +11,14 @@
 
     & > [class*='icon-'] {
         position: absolute;
-        right: 0;
-        top: 0;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 25px;
-        width: 30px;
+        height: 16px;
+        width: 16px;
         font-size: 14px;
         color: #999999;
         pointer-events: none;
@@ -37,15 +39,15 @@
     }
 
     &.danger {
-        color: $danger !important;
+        color: var(--danger) !important;
     }
 
     &.warning {
-        color: $warning !important;
+        color: var(--warning) !important;
     }
 
     &.info {
-        color: $primary !important;
+        color: var(--text-color) !important;
     }
 }
 

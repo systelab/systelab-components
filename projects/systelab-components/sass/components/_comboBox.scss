@@ -1,14 +1,15 @@
-$slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
+@use "../variables" as *;
+@use "../../../../node_modules/bootstrap/scss/bootstrap" as *;
 
 .slab-combobox {
 
   border-radius: $border-radius;
-  border: solid 1px $medium-gray;
+  border: solid 1px var(--slab_component_border_color);
 
   &:focus-within {
-    border-color: #8cc8f7;
+    border-color: $slab-focus-component-border-color;
     outline: 0;
-    box-shadow: 0 0 0 3px scale-color($primary, $alpha: -75%);
+    box-shadow: $slab-focus-component-shadow;
   }
 
   .slab-dropdown-toogle {
@@ -28,21 +29,17 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: $slab-combobox-button-width;
+    width: $form-elements-height;
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
-
-    @if ($slab-size-percentage == 1) {
-      line-height: $form-elements-height - 9px;
-    }
   }
 
   .slab-combo-button-icon {
     font-family: 'icomoon' !important;
     speak: none;
     font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     font-variant: normal;
     text-transform: none;
     line-height: 1;
@@ -51,7 +48,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     &:before {
-      content: "\f0d7";
+      content: "\f107";
     }
   }
 
@@ -76,18 +73,14 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     border-bottom-right-radius: 0 !important;
     border-color: transparent;
     float: left;
-    width: calc(100% - #{$slab-combobox-button-width}) !important;
+    width: calc(100% - #{$form-elements-height}) !important;
     font-family: $slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
-    padding: 0 12px;
-    height: $form-elements-height - 2px  !important;
+    padding: 0 5px;
+    height: $form-elements-height - 2px;
 
     &.form-control[readonly] {
-      background-color: white;
-    }
-
-    &::selection {
       background-color: white;
     }
   }
@@ -136,7 +129,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
   }
 
   .slab-combo-dropdown {
-    margin-top: 1px;
+    margin-top: 10px;
     padding: 0;
     border: none;
 
@@ -144,7 +137,7 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
       position: fixed;
       z-index: 3;
       -webkit-transform: translate3d(0, 0, 0);
-      border: 1px solid $medium-gray;
+      border: 1px solid var(--slab_component_border_color);
       border-radius: 3px;
       background-color: white;
     }
@@ -152,6 +145,8 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
     .ag-theme-alpine .ag-header {
       height: 0px !important;
       min-height: 0px !important;
+      border-bottom: none !important;
+      border-top: none !important;
     }
 
     .ag-theme-alpine .ag-root {
@@ -161,29 +156,34 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
       .ag-body-viewport {
         .ag-center-cols-viewport {
           overflow-x: hidden;
-          background-color: $background-primary;
+          background-color: var(--slab_background_primary);
 
           .ag-center-cols-container {
-            width: 100% !important;
+            min-width: 100% !important;
 
             .ag-row {
-              background-color: $background-primary;
+              background-color: var(--slab_background_primary);
 
               &.ag-row-selected {
-                background-color: $slab-selected-background-color;
+                background-color: var(--slab_table_row_selection_background);
               }
 
               &.ag-row-hover {
-                background-color: $slab-selected-background-color;
+                background-color: var(--slab_table_row_hover_background);
               }
 
               &.ag-row-focus {
-                background-color: scale-color($primary, $alpha: -90%);
+                background-color: var(--primary_lighter);
               }
 
               .ag-cell {
                 border: none;
                 padding: 0 $slab-combo-check-cell-padding;
+
+                &.ag-cell-focus {
+                  border: none !important;
+                }
+
               }
             }
 
@@ -191,9 +191,10 @@ $slab-combo-check-cell-padding: floor(18px*$slab-size-percentage) !default;
         }
       }
 
-      .ag-body-horizontal-scroll {
-        display: none;
+      .ag-row {
+        border-bottom: none;
       }
+
     }
 
     &.disabled {

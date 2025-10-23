@@ -32,8 +32,6 @@
               "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/styles/ag-grid.css",
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-              "node_modules/primeng/resources/themes/nova/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
@@ -103,11 +101,9 @@
             "styles": [
               "node_modules/ag-grid-community/styles/ag-grid.css",
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-              "node_modules/primeng/resources/themes/nova/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "projects/systelab-components/icons/icomoon.css",
-              "dist/systelab-components/sass/modern/systelab-components.scss",
+              "dist/systelab-components/sass/systelab-components.scss",
               "projects/showcase/src/styles.scss"
             ],
             "scripts": [
@@ -194,8 +190,6 @@
               "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/styles/ag-grid.css",
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-              "node_modules/primeng/resources/themes/nova/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
