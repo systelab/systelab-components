@@ -21,7 +21,7 @@ export type rowSelectionType = 'single' | 'multiple';
 export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandler, GridHeaderMenuActionHandler {
 
 	public static readonly contextMenuColId = 'contextMenu';
-	public static readonly selectionColId = 'selectCol';
+	public static readonly selectionColId = 'ag-Grid-SelectionColumn';
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
 	public overlayNoRowsTemplate;
@@ -220,7 +220,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	private getCheckColumnDef(width: number): ColDef {
 		return {
-			colId:             AbstractGrid.selectionColId,
 			type: 'selection',
 			cellClass: 'checkbox-cell',
 			headerName:        '',
@@ -356,7 +355,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		if (event.column.colId === 'contextMenu' && !(event.event.ctrlKey && this.showChecks)) {
 			event.node.setSelected(true);
 		} else {
-			if (event.column.colId === 'selectCol') {
+			if (event.column.colId === AbstractGrid.selectionColId) {
 				event.node.setSelected(!event.node.isSelected());
 			} else {
 				if (!event.column.isCellEditable(event.node)) {
@@ -411,7 +410,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
 		options.visible = gridApi.getAllDisplayedColumns()
-			.filter(column => column.getColId() !== 'contextMenu' && column.getColId() !== 'selectCol')
+			.filter(column => column.getColId() !== 'contextMenu' && column.getColId() !== AbstractGrid.selectionColId)
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true));
 
 		options.defaultVisibleColumns = columnDefs.filter(column => !column.hide)
@@ -436,7 +435,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		});
 		gridApi.setColumnsVisible(colsToApplyGridOptions, true);
 		gridApi.setColumnsVisible(gridApi.getColumns()
-			.filter(col => col.getColId() !== 'contextMenu' && col.getColId() !== 'selectCol')
+			.filter(col => col.getColId() !== 'contextMenu' && col.getColId() !== AbstractGrid.selectionColId)
 			.filter(col => !columnOptions.visible.some(tlp => tlp.colId === col.getColDef().colId)), false);
 	}
 

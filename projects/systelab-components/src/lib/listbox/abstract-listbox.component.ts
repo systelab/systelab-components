@@ -124,7 +124,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 		return {
 			type: 		   'selection',
-			colId:             'selectCol',
 			headerName:        '',
 			width:             this.getCheckColumnWidth(),
 			suppressSizeToFit: true,
