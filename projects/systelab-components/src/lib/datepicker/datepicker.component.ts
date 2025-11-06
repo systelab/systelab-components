@@ -45,6 +45,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	@Input() public showOtherMonths = true;
 	@Input() public selectOtherMonths = false;
 	@Input() public dateFormat: string;
+	@Input() public keepInvalid = false;
 
 	@Input()
 	get currentDate(): Date {
