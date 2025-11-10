@@ -167,11 +167,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(function(columnDef: ColDef) {
-			if (columnDef.width) {
-				columnDef.suppressSizeToFit = true;
-			}
-		});
+		colDefs.forEach(columnDef =>columnDef.suppressSizeToFit = !columnDef.width);
 	}
 
 	public doGridReady(event: any) {
