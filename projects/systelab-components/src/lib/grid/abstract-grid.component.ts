@@ -116,6 +116,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected onCellEditingStarted(event: any): void {
 		this.startCellEditorWithTab = event.event?.key === 'Tab';
+		if (this.gridApi?.getEditingCells().length > 1) {
+			this.gridApi.stopEditing();
+			event.api.startEditingCell({rowIndex: event.rowIndex, colKey: event.column});
+		}
 	}
 
 	public onModelUpdated(event: any) {
