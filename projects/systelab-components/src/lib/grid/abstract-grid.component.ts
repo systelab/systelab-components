@@ -95,7 +95,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.stopEditingWhenCellsLoseFocus = true;
 		options.singleClickEdit = true;
 		options.defaultColDef = {
-			resizable: this.isColResizeEnabled()
+			resizable: this.isColResizeEnabled(),
+			sortable: false
 		};
 		options.localeText = {
 			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
@@ -177,7 +178,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 						'width':         column.getActualWidth(),
 						'pivotIndex':    null,
 						'pinned':        null,
-						'rowGroupIndex': null
+						'rowGroupIndex': null,
+						'sortable': column.isSortable()
 					};
 
 					if (column.getColId() === AbstractGrid.contextMenuColId || column.getColId() === AbstractGrid.selectionColId) {
