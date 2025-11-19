@@ -136,6 +136,7 @@ $context-menu-width: 39px;
       display: grid;
       line-height: $grid-cell-height;
       border: none;
+      padding: 0 5px;
       outline-width: 0;
 
       &.ag-cell-last-left-pinned {
@@ -159,6 +160,7 @@ $context-menu-width: 39px;
     .ag-cell-inline-editing {
       height: $grid-cell-height;
       background: var(--slab_background_primary);
+      padding: 0;
     }
   }
 }
