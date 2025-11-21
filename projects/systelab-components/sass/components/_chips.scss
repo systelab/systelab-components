@@ -1,46 +1,35 @@
 @use "../variables" as *;
+
 systelab-chips {
-
-  .p-autocomplete-multiple-container.p-inputtext {
-    height: 100%;
-    border: 1px solid var(--slab_component_border_color) !important;
-
-    &:focus {
+  .p-autocomplete {
+    height: $form-elements-height;
+    &:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
       border-color: $slab-focus-component-border-color !important;
       box-shadow: $slab-focus-component-shadow !important;
     }
+    .p-autocomplete-input-multiple {
+      width: 100% !important;
+      margin: 0;
+      height: 100%;
+      border: 1px solid var(--slab_component_border_color) !important;
+      padding: 1px 5px;
+      border-radius: $input-border-radius;
 
-    &:hover:enabled:not(:focus) {
-      border-color:  var(--slab_component_border_color) !important;
+      &:hover:enabled:not(:focus) {
+        border-color:  var(--slab_component_border_color) !important;
+      }
+      .pi {
+        font-size: 15px;
+      }
+      .p-autocomplete-token {
+        background-color: var(--primary);
+        border-radius: 20px;
+        padding: 2px 5px;
+      }
+      .p-autocomplete-input-chip .p-autocomplete-input {
+        height: calc($form-elements-height / 2);
+      }
     }
-  }
-
-  .p-autocomplete-multiple {
-    width: 100% !important;
-
-    .pi {
-      font-size: 15px;
-    }
-  }
-
-  .p-autocomplete-multiple-container {
-    width: 100% !important;
-    margin: 0;
-  }
-
-  .p-autocomplete .p-autocomplete-multiple-container {
-    padding: 1px 5px;
-
-    &:not(.p-disabled).p-focus {
-      border-color: $slab-focus-component-border-color !important;
-      box-shadow: $slab-focus-component-shadow !important;
-    }
-  }
-
-  .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-token {
-    background-color: var(--primary);
-    border-radius: 20px;
-    padding: 2px 5px;
   }
 
   .p-autocomplete-token-label {
