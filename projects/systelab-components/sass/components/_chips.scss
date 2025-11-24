@@ -1,5 +1,7 @@
 @use "../variables" as *;
 
+$chip-item-height: calc($form-elements-height - 6px);
+
 systelab-chips {
   .p-autocomplete {
     height: $form-elements-height;
@@ -21,10 +23,22 @@ systelab-chips {
       .pi {
         font-size: 15px;
       }
-      .p-autocomplete-token {
+      .p-autocomplete-chip-item {
         background-color: var(--primary);
         border-radius: 20px;
-        padding: 2px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: $chip-item-height;
+        .p-autocomplete-chip.p-chip {
+          background-color: transparent;
+          color: white;
+          .p-autocomplete-chip-icon {
+            color: white;
+            height: calc($form-elements-height/2);
+            display: flex;
+          }
+        }
       }
       .p-autocomplete-input-chip .p-autocomplete-input {
         height: calc($form-elements-height / 2);
