@@ -130,7 +130,7 @@ p-datepicker {
     border: 1px solid var(--slab_component_border_color);
     font: normal $slab-base-body-font-size $slab-base-body-font-family;
 
-    &:focus {
+    &:focus:not(.p-autocomplete-input) {
       border-color: $slab-focus-component-border-color !important;
       box-shadow: $slab-focus-component-shadow !important;
     }
