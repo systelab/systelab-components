@@ -59,11 +59,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
-
+	public allowRowManaged: boolean = true;
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
-	private _rowData: Array<T> = new Array<T>();
+	private _rowData: Array<T>;
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
@@ -88,6 +88,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.columnDefs = this.getColumnDefsWithOptions();
 		options.selectionColumnDef = this.getCheckColumnDef(this.getCheckColumnWidth());
 		options.rowSelection = this.getRowSelectionType();
+		options.rowModelType = 'clientSide';
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
 		options.suppressDragLeaveHidesColumns = true;
