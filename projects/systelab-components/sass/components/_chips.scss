@@ -1,10 +1,11 @@
 @use "../variables" as *;
 
 $chip-item-height: calc($form-elements-height - 6px);
-
+$chips-container-max-height: calc($form-elements-height * 5);
 systelab-chips {
   .p-autocomplete {
-    height: $form-elements-height;
+    min-height: $form-elements-height;
+    max-height: $chips-container-max-height;
     &:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
       border-color: $slab-focus-component-border-color !important;
       box-shadow: $slab-focus-component-shadow !important;
@@ -12,7 +13,8 @@ systelab-chips {
     .p-autocomplete-input-multiple {
       width: 100% !important;
       margin: 0;
-      height: 100%;
+      max-height: $chips-container-max-height;
+      overflow-y: auto;
       border: 1px solid var(--slab_component_border_color) !important;
       padding: 1px 5px;
       border-radius: $input-border-radius;
