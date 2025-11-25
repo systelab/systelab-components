@@ -28,4 +28,11 @@ export class Accordion implements OnInit {
 			this.preferenceService.put(this.preferenceName, this.isCollapsed);
 		}
 	}
+
+	public toggleAccordion() {
+		this.isCollapsed = !this.isCollapsed;
+		if (this.preferenceName) {
+			this.preferenceService.put(this.preferenceName, this.isCollapsed);
+		}
+	}
 }
