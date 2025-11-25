@@ -160,6 +160,7 @@ $context-menu-width: 39px;
     .ag-cell-inline-editing {
       height: $grid-cell-height;
       background: var(--slab_background_primary);
+      padding: 0;
     }
   }
 }

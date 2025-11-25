@@ -70,10 +70,16 @@
             <systelab-chips [texts]="texts"></systelab-chips>
         </div>
     </div>
-    <div class="row mt-1 disabled">
-        <label class="col-md-3 col-form-label">Disabled Chips</label>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label">Readonly Chips</label>
         <div class="col-md-9">
             <systelab-chips [texts]="texts" [readonly]="true"></systelab-chips>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label">Disabled Chips</label>
+        <div class="col-md-9">
+            <systelab-chips [texts]="texts" [disabled]="true"></systelab-chips>
         </div>
     </div>
 </div>

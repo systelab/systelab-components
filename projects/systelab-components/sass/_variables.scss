@@ -1,7 +1,7 @@
 @use "sass:math";
 @use "sass:string";
-@use "bootstrap/scss/bootstrap" as *;
-@forward "./systelab-bootstrap-settings";
+@use "./systelab-bootstrap-settings" as bootstrap;
+@forward "./systelab-bootstrap-settings" hide size;
 @forward "./mixins";
 
 .ag-theme-alpine {
@@ -56,7 +56,7 @@ $slab-base-font-size: 15px !default;
 // Defines the application font size
 $slab-base-body-font-size: $slab-base-font-size string.unquote("/") math.ceil($slab-base-font-size * 1.25) !default;
 // Defines the application font family
-$slab-base-body-font-family: $font-family-base;
+$slab-base-body-font-family: bootstrap.$font-family-base;
 // Defines the application body color
 $slab-base-body-color: #3F3F3F !default;
 // Defines the minimum width of the body

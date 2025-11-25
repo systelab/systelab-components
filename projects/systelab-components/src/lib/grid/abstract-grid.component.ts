@@ -63,7 +63,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
-	private _rowData: Array<T>;
+	private _rowData: Array<T> = new Array<T>();
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
@@ -95,7 +95,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.stopEditingWhenCellsLoseFocus = true;
 		options.singleClickEdit = true;
 		options.defaultColDef = {
-			resizable: this.isColResizeEnabled()
+			resizable: this.isColResizeEnabled(),
+			sortable: false
 		};
 		options.localeText = {
 			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
@@ -116,6 +117,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected onCellEditingStarted(event: any): void {
 		this.startCellEditorWithTab = event.event?.key === 'Tab';
+		if (this.gridApi?.getEditingCells().length > 1) {
+			this.gridApi.stopEditing();
+			event.api.startEditingCell({rowIndex: event.rowIndex, colKey: event.column});
+		}
 	}
 
 	public onModelUpdated(event: any) {
@@ -173,7 +178,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 						'width':         column.getActualWidth(),
 						'pivotIndex':    null,
 						'pinned':        null,
-						'rowGroupIndex': null
+						'rowGroupIndex': null,
+						'sortable': column.isSortable()
 					};
 
 					if (column.getColId() === AbstractGrid.contextMenuColId || column.getColId() === AbstractGrid.selectionColId) {
