@@ -474,6 +474,8 @@ systelab-datepicker {
 
   .p-inputtext,
   .p-datepicker-input {
+    color: #333;
+    background: #fff;
     border-radius: 0.25rem;
     padding: .25em;
     padding-top: 1px;
@@ -492,6 +494,11 @@ systelab-datepicker {
       border-color:  var(--slab_component_border_color) !important;
     }
 
+    &:disabled {
+      background-color: #e9ecef;
+      opacity: 0.6 !important;
+      color: #333;
+    }
   }
 
   .p-datepicker-input-wrapper {
