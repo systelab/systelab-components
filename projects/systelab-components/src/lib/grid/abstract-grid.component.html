@@ -6,7 +6,7 @@
                  (gridReady)="doGridReady($event)"
                  (gridSizeChanged)="doGridSizeChanged($event)"
                  (cellClicked)="doClick($event)"
-                 [rowDragManaged]="true"
+                 [rowDragManaged]="allowRowManaged"
                  [animateRows]="true"
                  (rowDragEnd)="onRowDragEnd($event)"
                  (columnResized)="doColumnResized($event)"
