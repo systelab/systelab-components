@@ -4,6 +4,7 @@
 @forward "./components";
 
 html {
+  color-scheme: light !important;
   width: 100%;
   font: normal $slab-base-body-font-size $slab-base-body-font-family;
   color: var(--slab_foreground_primary);
