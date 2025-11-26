@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowSelectionOptions } from 'ag-grid-community';
+import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowModelType, RowSelectionOptions } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -22,6 +22,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public static readonly contextMenuColId = 'contextMenu';
 	public static readonly selectionColId = 'ag-Grid-SelectionColumn';
+	public static readonly clientSideRowModelType: RowModelType = 'clientSide';
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
 	public overlayNoRowsTemplate;
@@ -59,11 +60,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
-
+	public allowRowManaged: boolean = true;
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
-	private _rowData: Array<T> = new Array<T>();
+	private _rowData: Array<T>;
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
@@ -72,12 +73,14 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public ngOnInit(): void {
 
 		this.gridOptions = this.getInitialGridOptions();
-
 		if (this.noRowsText) {
 			this.overlayNoRowsTemplate = this.noRowsText;
 			this.overlayLoadingTemplate = this.loadingText;
 		}
 		this.calculatedGridState = initializeCalculatedGridState(this.autoSizeColumnsToContent);
+		if(this.gridOptions.rowModelType === AbstractGrid.clientSideRowModelType) {
+			this._rowData = new Array<T>();
+		}
 	}
 
 	protected getInitialGridOptions(): GridOptions {
@@ -88,6 +91,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.columnDefs = this.getColumnDefsWithOptions();
 		options.selectionColumnDef = this.getCheckColumnDef(this.getCheckColumnWidth());
 		options.rowSelection = this.getRowSelectionType();
+		options.rowModelType = 'clientSide';
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
 		options.suppressDragLeaveHidesColumns = true;
