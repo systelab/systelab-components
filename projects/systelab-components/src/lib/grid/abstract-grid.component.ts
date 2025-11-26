@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowSelectionOptions } from 'ag-grid-community';
+import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowModelType, RowSelectionOptions } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -22,6 +22,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public static readonly contextMenuColId = 'contextMenu';
 	public static readonly selectionColId = 'ag-Grid-SelectionColumn';
+	public static readonly clientSideRowModelType: RowModelType = 'clientSide';
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
 	public overlayNoRowsTemplate;
@@ -72,13 +73,12 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public ngOnInit(): void {
 
 		this.gridOptions = this.getInitialGridOptions();
-
 		if (this.noRowsText) {
 			this.overlayNoRowsTemplate = this.noRowsText;
 			this.overlayLoadingTemplate = this.loadingText;
 		}
 		this.calculatedGridState = initializeCalculatedGridState(this.autoSizeColumnsToContent);
-		if(this.gridOptions.rowModelType === 'clientSide') {
+		if(this.gridOptions.rowModelType === AbstractGrid.clientSideRowModelType) {
 			this._rowData = new Array<T>();
 		}
 	}
@@ -94,7 +94,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.rowModelType = 'clientSide';
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
-		options.rowModelType = 'clientSide';
 		options.suppressDragLeaveHidesColumns = true;
 		options.suppressCellFocus = true;
 		options.stopEditingWhenCellsLoseFocus = true;
