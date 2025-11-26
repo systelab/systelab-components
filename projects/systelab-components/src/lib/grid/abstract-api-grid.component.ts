@@ -12,19 +12,21 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
-		this.rowData = null;
+		this.allowRowManaged = false;
 	}
 
 	protected override getInitialGridOptions(): GridOptions {
-		const options = super.getInitialGridOptions();
-		options.rowModelType = 'infinite';
-		options.paginationPageSize = 50;
-		options.cacheBlockSize = 50;
-		options.cacheOverflowSize = 2;
-		options.maxConcurrentDatasourceRequests = 4;
-		options.maxBlocksInCache = 15;
-		options.datasource = this;
-		options.loading = false;
+		const options: GridOptions = {
+			...super.getInitialGridOptions(),
+			rowModelType: 'infinite',
+			paginationPageSize: 50,
+			cacheBlockSize: 50,
+			cacheOverflowSize: 2,
+			maxConcurrentDatasourceRequests: 4,
+			maxBlocksInCache: 15,
+			datasource: this,
+			loading: false
+		};
 		return options;
 	}
 
@@ -48,6 +50,7 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
+			this.gridApi.updateGridOptions({loading: false});
 			this.gridApi.showNoRowsOverlay();
 		}
 		this.gridApi.updateGridOptions({loading: false});
