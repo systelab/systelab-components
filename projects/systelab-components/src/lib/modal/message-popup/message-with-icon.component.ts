@@ -7,9 +7,10 @@ export class MessagePopupIcon {
 }
 
 @Component({
-	selector: 'systelab-message-with-icon',
-	templateUrl: 'message-with-icon.component.html',
-	styleUrls: ['message-with-icon.component.scss']
+    selector: 'systelab-message-with-icon',
+    templateUrl: 'message-with-icon.component.html',
+    styleUrls: ['message-with-icon.component.scss'],
+    standalone: false
 })
 export class MessageWithIconComponent {
 

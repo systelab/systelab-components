@@ -1,3 +1,5 @@
-<div *ngIf="data" class="slab-context-menu" (click)="dotsClicked($event)">
+@if (data) {
+  <div class="slab-context-menu" (click)="dotsClicked($event)">
     <i class="icon-context-menu" [style.font-size]="fontSize" [style.color]="fontColor"></i>
-</div>
+  </div>
+}

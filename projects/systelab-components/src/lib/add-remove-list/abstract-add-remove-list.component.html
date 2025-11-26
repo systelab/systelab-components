@@ -1,36 +1,46 @@
 <div class="d-flex mb-1 h-100" [ngClass]="{'flex-column': buttonsOnBottom}">
-    <div class="slab-flex-1 text-nowrap border rounded slab-overflow-container slab-sortable-list"
-         style="min-height:150px"
-         (onDragEnter)="preventDefault($event)"
-         (onDragOver)="preventDefault($event)"
-         (onDragLeave)="preventDefault($event)">
-        <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)" [cdkDropListDisabled]="!dragAndDropEnabled">
+  <div class="slab-flex-1 text-nowrap border rounded slab-overflow-container slab-sortable-list"
+    style="min-height:150px"
+    (onDragEnter)="preventDefault($event)"
+    (onDragOver)="preventDefault($event)"
+    (onDragLeave)="preventDefault($event)">
+    <div class="slab-sortable-list-row list-group w-100" cdkDropList (cdkDropListDropped)="dropped($event)" [cdkDropListDisabled]="!dragAndDropEnabled">
 
-            <div *ngFor="let element of elementsList; let index = index"
-                 class="d-flex slab-sortable-list-row"
-                 [ngClass]="{'slab-sortable-list-row-selected':getSelectionFieldValue(element)}"
-                 [class.slab-sortable-list-even-row]="0 === index % 2"
-                 [class.slab-sortable-list-odd-row]="1 === index % 2"
-                 (click)="selectElement(element,$event)" cdkDrag>
-
-                <div class="slab-sortable-checkbox" *ngIf="showChecks">
-                    <input type="checkbox" id="{{checkId}}-{{index}}-check" (change)="selectCheckbox(element)">
-                    <label for="{{checkId}}-{{index}}-check" class="col-form-label"></label>
-                </div>
-
-                <i *ngIf="showIcon" class="mr-1 d-flex align-items-center" [ngClass]="[getIcon(element), isDisabled ? 'text-black-50' : 'text-primary']"></i>
-                <span [ngClass]="{'text-black-50': isDisabled}">{{getDescription(element)}}</span>
+      @for (element of elementsList; track element; let index = $index) {
+        <div
+          class="d-flex slab-sortable-list-row"
+          [ngClass]="{'slab-sortable-list-row-selected':getSelectionFieldValue(element)}"
+          [class.slab-sortable-list-even-row]="0 === index % 2"
+          [class.slab-sortable-list-odd-row]="1 === index % 2"
+          (click)="selectElement(element,$event)" cdkDrag>
+          @if (showChecks) {
+            <div class="slab-sortable-checkbox">
+              <input type="checkbox" id="{{checkId}}-{{index}}-check" (change)="selectCheckbox(element)">
+              <label for="{{checkId}}-{{index}}-check" class="col-form-label"></label>
             </div>
-
+          }
+          @if (showIcon) {
+            <i class="mr-1 d-flex align-items-center" [ngClass]="[getIcon(element), isDisabled ? 'text-black-50' : 'text-primary']"></i>
+          }
+          <span [ngClass]="{'text-black-50': isDisabled}">{{getDescription(element)}}</span>
         </div>
+      }
+
     </div>
-    <div *ngIf="!isDisabled" class="d-flex p-1"
-         [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
-        <systelab-button (action)="add()">
-            <i *ngIf="!buttonsOnBottom" class="mr-2 icon-plus-circle"></i>{{ 'COMMON_ADD' | translate | async }}
+  </div>
+  @if (!isDisabled) {
+    <div class="d-flex p-1"
+      [ngClass]="{'flex-column ml-2': !buttonsOnBottom, 'ml-auto mt-2': buttonsOnBottom}">
+      <systelab-button (action)="add()">
+        @if (!buttonsOnBottom) {
+          <i class="mr-2 icon-plus-circle"></i>
+          }{{ 'COMMON_ADD' | translate | async }}
         </systelab-button>
         <systelab-button [ngClass]="{'mt-1': !buttonsOnBottom, 'ml-1':buttonsOnBottom}" (action)="remove()">
-            <i *ngIf="!buttonsOnBottom" class="mr-2 icon-minus-circle"></i>{{ 'COMMON_REMOVE' | translate | async }} {{getSelectedElements()}}
-        </systelab-button>
+          @if (!buttonsOnBottom) {
+            <i class="mr-2 icon-minus-circle"></i>
+            }{{ 'COMMON_REMOVE' | translate | async }} {{getSelectedElements()}}
+          </systelab-button>
+        </div>
+      }
     </div>
-</div>

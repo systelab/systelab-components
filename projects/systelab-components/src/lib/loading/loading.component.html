@@ -1,5 +1,6 @@
 
-<div  *ngIf="useClassic" class="application-loader-spinner">
+@if (useClassic) {
+  <div  class="application-loader-spinner">
     <div class="sk-circle1 sk-circle"></div>
     <div class="sk-circle2 sk-circle"></div>
     <div class="sk-circle3 sk-circle"></div>
@@ -12,9 +13,12 @@
     <div class="sk-circle10 sk-circle"></div>
     <div class="sk-circle11 sk-circle"></div>
     <div class="sk-circle12 sk-circle"></div>
-</div>
-<div *ngIf="!useClassic" class="application-loader-spinner">
+  </div>
+}
+@if (!useClassic) {
+  <div class="application-loader-spinner">
     <div class="double-bounce1"></div>
     <div class="double-bounce2"></div>
-</div>
+  </div>
+}
 

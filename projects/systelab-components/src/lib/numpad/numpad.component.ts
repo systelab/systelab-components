@@ -3,8 +3,9 @@ import { DialogService } from '../modal/dialog/dialog.service';
 import { NumPadDialog, NumPadDialogParameters } from './numpad.dialog.component';
 
 @Component({
-	selector:    'systelab-numpad',
-	templateUrl: 'numpad.component.html'
+    selector: 'systelab-numpad',
+    templateUrl: 'numpad.component.html',
+    standalone: false
 })
 export class NumPadComponent {
 	protected _value: string;

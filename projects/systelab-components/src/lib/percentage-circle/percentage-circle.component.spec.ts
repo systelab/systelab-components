@@ -5,18 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { PercentageCircleComponent } from './percentage-circle.component';
 
 @Component({
-	selector: 'systelab-switch-test',
-	template: `
+    selector: 'systelab-switch-test',
+    template: `
                 <div>
                     <systelab-percentage-circle [value]="value" [text]="text" [color]="color"></systelab-percentage-circle>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class PercentageCircleTestComponent {
 	public value = 45;
@@ -62,8 +62,7 @@ describe('Systelab Percentage Circle', () => {
         BrowserAnimationsModule,
         FormsModule,
         DragDropModule,
-        OverlayModule,
-        TreeModule],
+        OverlayModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

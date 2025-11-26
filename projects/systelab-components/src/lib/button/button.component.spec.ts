@@ -5,20 +5,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ButtonComponent } from './button.component';
 
 @Component({
-	selector: 'systelab-button-test',
-	template: `
+    selector: 'systelab-button-test',
+    template: `
                 <div>
                     <systelab-button (action)="doClick()" [disabled]="disabled" [type]="'primary'">
                         <i class="icon-plus-circle"></i>My Button</systelab-button>
                     <label class="label-value">{{isClicked}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ButtonTestComponent {
 
@@ -58,8 +58,7 @@ describe('Systelab Button', () => {
         BrowserAnimationsModule,
         FormsModule,
         DragDropModule,
-        OverlayModule,
-        TreeModule],
+        OverlayModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

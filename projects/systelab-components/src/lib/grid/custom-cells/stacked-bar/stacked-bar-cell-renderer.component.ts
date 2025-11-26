@@ -10,9 +10,10 @@ export interface IStackedBar {
 }
 
 @Component({
-	selector:    'systelab-stacked-bar-cell',
-	templateUrl: 'stacked-bar-cell-renderer.component.html',
-	styleUrls:   ['stacked-bar-cell-renderer.component.scss']
+    selector: 'systelab-stacked-bar-cell',
+    templateUrl: 'stacked-bar-cell-renderer.component.html',
+    styleUrls: ['stacked-bar-cell-renderer.component.scss'],
+    standalone: false
 })
 export class StackedBarCellRendererComponent implements AgRendererComponent {
 	public params: any;

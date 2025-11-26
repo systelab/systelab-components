@@ -31,8 +31,9 @@ export class TimelineEvent {
 }
 
 @Component({
-	selector:    'systelab-timeline',
-	templateUrl: 'timeline.component.html'
+    selector: 'systelab-timeline',
+    templateUrl: 'timeline.component.html',
+    standalone: false
 })
 export class TimelineComponent {
 

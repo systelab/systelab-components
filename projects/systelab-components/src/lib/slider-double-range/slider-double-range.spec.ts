@@ -5,14 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SliderDoubleRangeComponent } from './slider-double-range.component';
 
 
 @Component({
-	selector: 'systelab-slider-double-range-test',
-	template: `
+    selector: 'systelab-slider-double-range-test',
+    template: `
                 <div>
                     <systelab-slider-double-range
 						 [min]="min"
@@ -25,7 +24,8 @@ import { SliderDoubleRangeComponent } from './slider-double-range.component';
 					<label class="max-label-value">{{maxValue}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 
 export class SliderDoubleRangeTestComponent {
@@ -68,7 +68,7 @@ describe('Systelab Slider-Double-Range', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule],
+        ],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

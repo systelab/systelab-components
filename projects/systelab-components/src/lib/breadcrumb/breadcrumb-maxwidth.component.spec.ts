@@ -5,18 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {BreadcrumbComponent, BreadcrumbItem, BreadcrumbSubItem} from './breadcrumb.component';
 
 @Component({
-	selector: 'systelab-breadcrumb-maxwidth-test',
-	template: `
+    selector: 'systelab-breadcrumb-maxwidth-test',
+    template: `
                 <div>
                     <systelab-breadcrumb [items]="items" [itemMaxWidth]="itemMaxWidth" [subItemMaxWidth]="subItemMaxWidth"></systelab-breadcrumb>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class BreadcrumbMaxWidthTestComponent {
 
@@ -70,8 +70,7 @@ describe('Systelab Breadcrumb With Max Width', () => {
         BrowserAnimationsModule,
         FormsModule,
         DragDropModule,
-        OverlayModule,
-        TreeModule],
+        OverlayModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

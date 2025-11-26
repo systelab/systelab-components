@@ -26,7 +26,7 @@ import { DatepickerTimeComponent } from './datepicker/datepicker-time.component'
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
-import { AngularSplitModule, SplitAreaDirective, SplitComponent } from 'angular-split';
+import { AngularSplitModule, SplitComponent } from 'angular-split';
 import { SearcherDialog } from './searcher/searcher.dialog.component';
 import { SearcherTableComponent } from './searcher/searcher.table.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header.component';
@@ -75,8 +75,7 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
-import { CalendarModule } from 'primeng/calendar';
-import { Tree, TreeModule } from 'primeng/tree';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
@@ -85,7 +84,6 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { ChipsComponent } from './chips/chips.component';
 import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
-import { SharedModule } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
@@ -106,6 +104,8 @@ import {
 import { TestIdDirective } from './directives/test-id.directive';
 import { SearcherTreeHeaderRendererComponent } from './grid/custom-cells/searcher-tree-header/searcher-tree-header-renderer.component';
 import { Accordion } from './accordion/accordion.component';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
+import { libConfig } from './lib.config';
 
 export const factory = () => {
 	const systelabComponentsModuleCreated = (factory as any)._systelabComponentsModuleCreated || false;
@@ -116,6 +116,7 @@ export const factory = () => {
 };
 
 const providers = [
+	...libConfig.providers,
 	StylesUtilService,
 	ColorUtilService,
 	LoadingService
@@ -125,9 +126,7 @@ const providers = [
 	imports:      [
 		CommonModule,
 		FormsModule,
-		SharedModule,
-		CalendarModule,
-		TreeModule,
+		DatePickerModule,
 		AutoCompleteModule,
 		DragDropModule,
 		OverlayModule,
@@ -274,9 +273,7 @@ const providers = [
 		MonthSelectorComponent,
 		SignatureCanvasComponent,
 		PercentageCircleComponent,
-		Tree,
 		SplitComponent,
-		SplitAreaDirective,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
 		CheckboxCellRendererComponent,
@@ -321,10 +318,14 @@ const providers = [
 })
 export class SystelabComponentsModule {
 
-	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {
-	}
+	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {}
 
 	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
+		ModuleRegistry.registerModules([ AllCommunityModule ]);
+
+		provideGlobalGridOptions({
+			theme: 'legacy'
+		});
 		return {
 			ngModule: SystelabComponentsModule,
 			providers: [

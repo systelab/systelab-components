@@ -6,8 +6,9 @@ import { DialogRef } from '../modal/dialog/dialog-ref';
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 
 @Component({
-	selector: 'systelab-searcher-dialog',
-	templateUrl: 'searcher.dialog.component.html'
+    selector: 'systelab-searcher-dialog',
+	templateUrl: 'searcher.dialog.component.html',
+    standalone: false
 })
 export class SearcherDialog<T> implements ModalComponent<SearcherDialogParameters<T>>, AfterViewInit {
 

@@ -21,12 +21,13 @@ export const urlValidator = (control: UntypedFormControl): ValidationErrors | nu
 };
 
 @Directive({
-  selector: '[systelab-urlValidator]',
-  providers: [{
-      provide: NG_VALIDATORS,
-      useExisting: UrlValidatorDirective,
-      multi: true
-  }]
+    selector: '[systelab-urlValidator]',
+    providers: [{
+            provide: NG_VALIDATORS,
+            useExisting: UrlValidatorDirective,
+            multi: true
+        }],
+    standalone: false
 })
 export class UrlValidatorDirective implements Validator {
 

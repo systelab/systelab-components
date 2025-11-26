@@ -5,21 +5,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ToggleSelectorOption } from './toggle-selector.component';
 import { ToggleSelectorComponent } from 'systelab-components';
 
 @Component({
-	selector: 'systelab-toggle-selector-test',
-	template: `
+    selector: 'systelab-toggle-selector-test',
+    template: `
                 <div>
                     <systelab-toggle-selector [options]="options" [currentOption]="currentOption"
 											  (select)="doSomething($event)"></systelab-toggle-selector>
                     <label class="label-value">{{currentOption}}</label>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ToggleSelectorTestComponent {
 	public options: Array<ToggleSelectorOption> = [{ id: '1', name: 'A' },{ id: '2', name: 'B' },{ id: '3', name: 'C' }];
@@ -54,7 +54,7 @@ describe('Systelab Toggle Selector', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule],
+        ],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

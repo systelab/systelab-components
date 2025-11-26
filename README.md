@@ -20,6 +20,7 @@ cd systelab-components
 npm ci
 npm run build-lib
 ng serve
+
 ```
 
 This will bootstrap a showcase application to test the different components.
@@ -30,12 +31,14 @@ Terminal 1
 
 ```bash
 ng build systelab-components --watch
+
 ```
 
 Terminal 2
 
 ```bash
 ng serve
+
 ```
 
 ## Test
@@ -44,6 +47,7 @@ ng serve
 
 ```bash
 ng test
+
 ```
 
 ### E2E
@@ -59,12 +63,14 @@ In order to run the test, run the command:
 
 ```bash
 ng e2e
+
 ```
 
 If you want to update the snapshots, run the command:
 
 ```bash
 npm run update-snapshots
+
 ```
 
 ## Publish the Library
@@ -75,52 +81,91 @@ In order to publish the library, an authorized npm user is required. Once set, u
 npm run build-lib
 cd dist/systelab-components
 npm publish
+
 ```
 
 # Breaking changes
+
+## Version 20.x.x - Angular 20
+
+[Angular 20 news](https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301)
+
+- Stabilizing APIs such as effect, linkedSignal, toSignal, incremental hydration, route-level render mode config and promoting zoneless to developer preview
+- Improved debugging with Angular DevTools and partnering with Chrome for custom Angular reporting directly in Chrome DevTools
+- Polishing developer experience with style guide updates.
+- Advancements in GenAI development with llms.txt and angular.dev guides and videos for building Generative AI applications
+- Launching a request for comments for an official mascot for Angular
+- Since v20.1.0 the old styles has been removed and now the modern styles are the only ones, so the import of the styles must be updated without the modern path `@import "systelab-components/sass/systelab-components";`
+
+## Version 19.x.x - Angular 19
+
+[Angular 19 news](https://blog.angular.dev/meet-angular-v19-7b29dfd05b84)
+
+- SSR improvements
+- Enhanced Reactivity (resource, linkedSignal, renderEffect)
+- Standalone by default
+- Zoneless support
+- Developer Experience Improvements (new material components like as time picker, HMR styles, detection of unused imports)
+- New Reactive handler for HTTP requests (httpResource and rxResource)
+
+The following steps should be considered when upgrade to systelab-components 19.x.x
+
+- [AG Grid](https://www.ag-grid.com/angular-data-grid/upgrading-to-ag-grid-33/) has been updated from v28.2.1 to v33.3.0. Some breaking changes must be applied.
+   - gridOptions.api are deprecated now We have a GridApi comes from the gridReady event ([AG Grid 31 deprecations](https://www.ag-grid.com/angular-data-grid/upgrading-to-ag-grid-31/#deprecations)).
+   - columnApi is deprecated now the methods of columnApi is into GridAPi ([AG Grid 31 deprecations](https://www.ag-grid.com/angular-data-grid/upgrading-to-ag-grid-31/#column-api)).
+   - The ag-theme-fresh is deprecated (the new used theme is ag-theme-alpine) ([AG Grid 32 deprecations](https://www.ag-grid.com/javascript-data-grid/theming-v32)).
+   - The ag-grid modules must to be used with ModuleRegistry method in order to load only the neccessary modules ([AG Grid 33 deprecations](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-33/#deprecations)).
+   - The RangeSelectionCell has been disabled because belongs to ag-grid-enterprise library and wasn't use ([AG Grid](https://www.ag-grid.com/javascript-data-grid/cell-selection/)).
+   - The multiple and single selection are changes now needs to be use multiRow and singleRow ([AG Grid 32](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-32-2-1/)).
+   - Several attributes now are functions like as node.selected that now is node.isSelected() ([AG Grid 29](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-29/#removal-of-deprecated-apis)).
+   - setDataSource is deprecated now needs to be use the setGridOptions and updateGridOptions ([AG Grid 31](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-31/#deprecations)).
+   - cellEditorFramework is deprecated with cellEditor ([AG Grid 30](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-30/#removal-of-deprecated-apis)).
+   - suppressRowClickSelection is deprecated now needs to be used enableClickSelection ([AG Grid 32](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-32-2-1/#deprecations)).
+   - node.selectThisNode is deprecated now needs to be use node.setSelected ([AG Grid 29](https://www.ag-grid.com/javascript-data-grid/upgrading-to-ag-grid-29/#removal-of-deprecated-apis)).
+   - Needs to be scope the theme variables to be used in specific theme ([AG Grid 31](https://www.ag-grid.com/javascript-data-grid/theming/)).
 
 ## Version 18.x.x - Angular 18
 
 [Angular 18 news](https://blog.angular.dev/angular-v18-is-now-available-e79d5ac0affe)
 
--   Experimental zoneless support
--   Material 3 deferrable views
--   SSR improvements
--   Deferrable views are now stable
--   Control flow is stable
+- Experimental zoneless support
+- Material 3 deferrable views
+- SSR improvements
+- Deferrable views are now stable
+- Control flow is stable
 
 ## Version 17.x.x - Angular 17
 
 [Angular 17 news](https://blog.angular.dev/introducing-angular-v17-4d7033312e4b)
 
--   Deferrable views
--   Faster runtime
--   Faster builds
--   Built-in control flow
--   New lifecycle hooks ( afterRender and afterNextRender )
--   Default Vite + esbuild for new projects
--   Signals
+- Deferrable views
+- Faster runtime
+- Faster builds
+- Built-in control flow
+- New lifecycle hooks ( afterRender and afterNextRender )
+- Default Vite + esbuild for new projects
+- Signals
 
 ## Version 16.x.x - Angular 16
 
--   Datepicker has been ranamed to DatepickerComponent
+- Datepicker has been ranamed to DatepickerComponent
 
 [Angular 16 news](https://blog.angular.io/angular-v16-is-here-4d7a28ec680d)
 
--   Angular Signals
--   RxJS interoperability 
--   Server-side rendering and hydration
--   Improved tooling for standalone components, directives and pipes
--   Advancing developer tooling
--   Autocomplete imports in templates
+- Angular Signals
+- RxJS interoperability
+- Server-side rendering and hydration
+- Improved tooling for standalone components, directives and pipes
+- Advancing developer tooling
+- Autocomplete imports in templates
 
 ## Version 15.x.x - Angular 15
 
 Tree component migrated to use Angular CDK Tree
 
-1.  Add CdkTreeModule to modules using Tree components
-2.  Replace abstract-tree-status.component.html for abstract-tree.component.html
-3.  Replace
+1. Add CdkTreeModule to modules using Tree components
+2. Replace abstract-tree-status.component.html for abstract-tree.component.html
+3. Replace
 
 import { TreeNode } from 'primeng/api';
 
@@ -128,18 +173,18 @@ for
 
 import { TreeNode } from 'systelab-components';
 
-4.  Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
+4. Review any usages and overrides of CSS classes related to previous PrimeNG Tree (p-tree, p-treenode-label, ...)
 
 [Angular 15 news](https://blog.angular.io/angular-v15-is-now-available-df7be7f2f4c8)
 
--   Router and HttpClient tree-shakable standalone APIs
--   Directive composition API
--   Image directive is now stable
--   Functional router guards
--   Router unwraps default imports
--   Better stack traces
--   Release MDC-based components to stable
--   Improvements in the experimental esbuild support
+- Router and HttpClient tree-shakable standalone APIs
+- Directive composition API
+- Image directive is now stable
+- Functional router guards
+- Router unwraps default imports
+- Better stack traces
+- Release MDC-based components to stable
+- Improvements in the experimental esbuild support
 
 ## Version 14.x.x - Angular 14
 
@@ -193,7 +238,7 @@ The following steps should be considered when migrating from Angular 10 to 11
 
 Support for IE9, IE10, and IE mobile has been removed. This was announced in the v10 update.
 
-Run this command to update the browsers ```npx browserslist@latest --update-db```
+Run this command to update the browsers `npx browserslist@latest --update-db`
 
 3. Upgrade Primeng 11
 
@@ -210,31 +255,32 @@ The following steps should be considered when migrating from version 9.
 
 1. When importing the module do not use .forRoot(); In WebStorm, replace in path:
 
-```
+```hs
 - SystelabComponentsModule.forRoot\(\)
 - SystelabComponentsModule
+
 ```
 
 2. When importing services and modules import them from systelab-components root. In WebStorm, replace in path:
 
-```
+```sql
 - from 'systelab-components/lib.+
 - from 'systelab-components';
+
 ```
 
 3. DialogService and MessagePopupServices are provided in root, so there is no need to provide them in any module. The option here is with WebStorm manually search for any of those services and remove them.
-
-
 4. entryComponents for Modals or Cell renderers will no longer be needed and could be a problem for future Angular versions. In WebStorm, try to replace in path with the following regular expression (second parameter is nothing):
 
-```
+```sql
 - ,\n?entryComponents: [^\]]*
 - (blank)
+
 ```
 
 Finally, update your package.json in order to add the peer dependencies:
 
-```
+```json
 "ag-grid-angular": "^28.2.0",
 "ag-grid-community": "^28.2.0",
 "angular-split": "^4.0.0",
@@ -250,4 +296,5 @@ Finally, update your package.json in order to add the peer dependencies:
 "pako": "^1.0.6",
 "@ngx-translate/core": "^13.0.0",
 "@ngx-translate/http-loader": "^6.0.0",
+
 ```

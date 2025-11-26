@@ -3,12 +3,13 @@ import { DatepickerComponent } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
-	selector:    'systelab-date-time',
-	templateUrl: 'datepicker-time.component.html',
-	providers:   [DataTransformerService]
+    selector: 'systelab-date-time',
+    templateUrl: 'datepicker-time.component.html',
+    providers: [DataTransformerService],
+    standalone: false
 })
 export class DatepickerTimeComponent extends DatepickerComponent {
 	@Input()
@@ -21,7 +22,7 @@ export class DatepickerTimeComponent extends DatepickerComponent {
 	public touchSpinHourValues: TouchSpinValues;
 	public touchSpinMinutesValues: TouchSpinValues;
 
-	constructor(myRenderer: Renderer2, i18nService: I18nService, dataTransformerService: DataTransformerService, config: PrimeNGConfig) {
+	constructor(myRenderer: Renderer2, i18nService: I18nService, dataTransformerService: DataTransformerService, config: PrimeNG) {
 		super(myRenderer, i18nService, dataTransformerService, config);
 
 		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);

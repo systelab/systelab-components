@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 
 @Component({
-	selector:    'showcase-searcher',
-	templateUrl: 'showcase-searcher.component.html'
+    selector: 'showcase-searcher',
+    templateUrl: 'showcase-searcher.component.html',
+    standalone: false
 })
 export class ShowcaseSearcherComponent {
 	public comboOptionList: Array<ShowcaseSearcherData> = [];

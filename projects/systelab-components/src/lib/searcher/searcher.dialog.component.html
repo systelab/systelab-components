@@ -2,45 +2,48 @@
 </systelab-dialog-header>
 
 <div (keydown)="(($event.keyCode===13)?$event.preventDefault():0)"
-     class="slab-flex-1 d-flex flex-column flex-nowrap slab-searcher-dialog-container">
+  class="slab-flex-1 d-flex flex-column flex-nowrap slab-searcher-dialog-container">
 
-    <form class="d-flex p-3">
-        <div class="d-flex slab-flex-1 border rounded">
-            <div class="d-flex border-right pb-1">
-                <div class="slab-first-option ml-3 mr-2">
-                    <input name="status-searchby1" type="radio" id="status-searchby-starts"
-                           [(ngModel)]="searchByContains" [value]="false"
-                           (ngModelChange)="setFocusToInput()">
-                    <label for="status-searchby-starts">{{ 'COMMON_STARTS_WITH' | translate | async}}</label>
-                </div>
-                <div class="slab-second-option ml-2 mr-3">
-                    <input name="status-searchby2" type="radio" id="status-searchby-contains"
-                           [(ngModel)]="searchByContains" [value]="true"
-                           (ngModelChange)="setFocusToInput()">
-                    <label for="status-searchby-contains">{{ 'COMMON_CONTAINS' | translate | async}}</label>
-                </div>
+  <form class="d-flex p-3">
+    <div class="d-flex slab-flex-1 border rounded">
+      <div class="d-flex border-right pb-1">
+        <div class="slab-first-option ml-3 mr-2">
+          <input name="status-searchby1" type="radio" id="status-searchby-starts"
+            [(ngModel)]="searchByContains" [value]="false"
+            (ngModelChange)="setFocusToInput()">
+            <label for="status-searchby-starts">{{ 'COMMON_STARTS_WITH' | translate | async}}</label>
+          </div>
+          <div class="slab-second-option ml-2 mr-3">
+            <input name="status-searchby2" type="radio" id="status-searchby-contains"
+              [(ngModel)]="searchByContains" [value]="true"
+              (ngModelChange)="setFocusToInput()">
+              <label for="status-searchby-contains">{{ 'COMMON_CONTAINS' | translate | async}}</label>
             </div>
-            <div class="slab-input d-flex slab-flex-1">
-                <input type="text" class="slab-flex-1 slab-searcher-dialog-search-text" #valueToSearchInput id="valueToSearch"
-                       keyup-debounce
-                       [keyupDebounceTime]="parameters.debounceTime"
-                       (keyupDebounced)="refreshSearch()" (keydown.tab)="setFocusToGrid($event)"
-                       placeholder="{{'COMMON_SEARCH' | translate | async}}"
-                       [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
+          </div>
+          <div class="slab-input d-flex slab-flex-1">
+            <input type="text" class="slab-flex-1 slab-searcher-dialog-search-text" #valueToSearchInput id="valueToSearch"
+              keyup-debounce
+              [keyupDebounceTime]="parameters.debounceTime"
+              (keyupDebounced)="refreshSearch()" (keydown.tab)="setFocusToGrid($event)"
+              placeholder="{{'COMMON_SEARCH' | translate | async}}"
+              [(ngModel)]="searchingValue" name="valueToSearch" autocomplete="off">
             </div>
+          </div>
+        </form>
+
+        <div class="slab-flex-1 d-flex">
+          <systelab-internal-searcher-table class="slab-flex-1 position-relative" name="searcherTable"
+            [contains]="searchByContains"
+            [showChecks]="multipleSelection"
+            [multipleSelection]="multipleSelection"
+            [valueForSearch]="searchingValue"
+            [searcher]="parameters.searcher"
+                                            (gridReady)="refreshSearch()"
+          (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
         </div>
-    </form>
-
-    <div class="slab-flex-1 d-flex">
-        <systelab-internal-searcher-table class="slab-flex-1 position-relative" name="searcherTable"
-                                          [contains]="searchByContains"
-                                          [showChecks]="multipleSelection"
-                                          [multipleSelection]="multipleSelection"
-                                          [valueForSearch]="searchingValue"
-                                          [searcher]="parameters.searcher"
-                                          (clickRow)="selectOnClick($event)"></systelab-internal-searcher-table>
-    </div>
-</div>
-<systelab-dialog-bottom *ngIf="multipleSelection" class="slab-searcher-dialog-button">
-    <systelab-button type="primary" class="ml-auto" (action)="submit()">{{ 'COMMON_OK' | translate | async }}{{getSelectedElements()}}</systelab-button>
-</systelab-dialog-bottom>
+      </div>
+      @if (multipleSelection) {
+        <systelab-dialog-bottom class="slab-searcher-dialog-button">
+          <systelab-button type="primary" class="ml-auto" (action)="submit()">{{ 'COMMON_OK' | translate | async }}{{getSelectedElements()}}</systelab-button>
+        </systelab-dialog-bottom>
+      }

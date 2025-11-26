@@ -5,14 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TabsComponent } from './tabs.component';
 import { TabComponent } from './tab.component';
 
 @Component({
-	selector: 'systelab-tabs-test',
-	template: `
+    selector: 'systelab-tabs-test',
+    template: `
                 <div>
                     <systelab-tabs class="slab-flex-1" (select)="selectedTab()">
                         <systelab-tab class="tab1 slab-flex-1" [id]="'id-1'" [title]="'Tab 1'">
@@ -27,7 +26,8 @@ import { TabComponent } from './tab.component';
                     </systelab-tabs>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class TabsTestComponent {
 	public selectedTab() {
@@ -55,7 +55,7 @@ describe('Systelab Tabs', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule],
+        ],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

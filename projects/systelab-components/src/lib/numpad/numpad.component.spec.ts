@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NumPadComponent } from './numpad.component';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -15,13 +14,14 @@ import { MessagePopupService } from '../modal/message-popup/message-popup.servic
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 
 @Component({
-	selector: 'systelab-numpad-test',
-	template: `
+    selector: 'systelab-numpad-test',
+    template: `
                 <div>
                     <systelab-numpad #numpad [value]="value" (change)="doSearch()" [isPassword]="isPassword"></systelab-numpad>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class NumpadTestComponent {
 	@ViewChild('numpad') public numpad: NumPadComponent;
@@ -62,7 +62,6 @@ describe('Systelab Numpad', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule],
     providers: [
         DialogService,

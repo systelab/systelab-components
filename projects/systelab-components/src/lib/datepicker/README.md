@@ -32,6 +32,7 @@ All the input parameters are optional.
 | showOtherMonths          | boolean  |   true    |	Whether to display dates in other months (non-selectable) at the start or end of the current month. To make these days selectable use the selectOtherMonths option.
 | selectOtherMonths        | boolean  |   false   |	Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
 | dateFormat               | string   |           |	Format of the date which can also be defined at locale settings.
+| keepInvalid | boolean | false | Keeps invalid date input without clearing the field 
 
 In black the Two-Way Data Binding properties.
 

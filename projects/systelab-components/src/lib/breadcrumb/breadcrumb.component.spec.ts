@@ -5,18 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BreadcrumbComponent, BreadcrumbItem } from './breadcrumb.component';
 
 @Component({
-	selector: 'systelab-breadcrumb-test',
-	template: `
+    selector: 'systelab-breadcrumb-test',
+    template: `
                 <div>
                     <systelab-breadcrumb [items]="items"></systelab-breadcrumb>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class BreadcrumbTestComponent {
 
@@ -59,8 +59,7 @@ describe('Systelab Breadcrumb', () => {
         BrowserAnimationsModule,
         FormsModule,
         DragDropModule,
-        OverlayModule,
-        TreeModule],
+        OverlayModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

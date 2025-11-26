@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -20,13 +19,13 @@ import { ColorUtilService } from '../utilities/color.util.service';
 import { LoadingService } from '../loading/loading.service';
 import { CommonModule } from '@angular/common';
 import { AngularSplitModule } from 'angular-split';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { SharedModule } from 'primeng/api';
 
 @Component({
-	selector: 'systelab-colorpicker-test',
-	template: `
+    selector: 'systelab-colorpicker-test',
+    template: `
                 <div>
                     <systelab-colorpicker [(id)]="colorId" [(description)]="colorValue" (change)="doChange()"></systelab-colorpicker>
                     <p>{{colorId}}</p>
@@ -34,7 +33,8 @@ import { SharedModule } from 'primeng/api';
                 </div>
 
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class ColorpickerTestComponent {
 
@@ -57,8 +57,7 @@ export class ColorpickerTestComponent {
 		CommonModule,
 		FormsModule,
 		SharedModule,
-		CalendarModule,
-		TreeModule,
+		DatePickerModule,
 		DragDropModule,
 		OverlayModule,
 		ContextMenuModule,
@@ -102,7 +101,6 @@ describe('Systelab Color picker', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AgGridModule,

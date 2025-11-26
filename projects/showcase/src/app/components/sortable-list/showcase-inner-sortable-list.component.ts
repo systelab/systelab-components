@@ -14,8 +14,9 @@ export class ShowcaseSortableListData {
 }
 
 @Component({
-	selector: 'systelab-inner-sortable-list',
-	templateUrl: '../../../../../systelab-components/src/lib/sortable-list/abstract-sortable-list.component.html'
+    selector: 'systelab-inner-sortable-list',
+    templateUrl: '../../../../../systelab-components/src/lib/sortable-list/abstract-sortable-list.component.html',
+    standalone: false
 })
 export class ShowcaseInnerSortableListComponent extends AbstractSortableListComponent<ShowcaseSortableListData> {
 

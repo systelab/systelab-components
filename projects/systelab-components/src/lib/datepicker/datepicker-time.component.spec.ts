@@ -10,12 +10,12 @@ import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { DatepickerComponent } from './datepicker.component';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-	selector: 'systelab-datepicker-time-test',
-	template: `
+    selector: 'systelab-datepicker-time-test',
+    template: `
         <div>
             <systelab-date-time [(currentDate)]="currentDate"></systelab-date-time>
             <systelab-date-time [(currentDate)]="currentDateWithReset" [resetTimeWhenChangingCurrentDate]="true"></systelab-date-time>
@@ -24,7 +24,8 @@ import { ButtonComponent } from '../button/button.component';
             <systelab-button class="mt-2 mr-1" (click)="setCurrentDate()">Set Current Date</systelab-button>
         </div>
 	`,
-	styles: []
+    styles: [],
+    standalone: false
 })
 export class DatepickerTimeTestComponent {
 
@@ -102,7 +103,7 @@ describe('Systelab DatepickerTimeComponent', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 }).compileComponents();
@@ -173,7 +174,7 @@ describe('Systelab DatepickerTimeComponent', () => {
 	});
 
 	it('should be two calendars because one of the datepicker has showCalendar false', () => {
-		expect(fixture.debugElement.nativeElement.querySelectorAll('.p-calendar').length).toEqual(2);
+		expect(fixture.debugElement.nativeElement.querySelectorAll('p-datepicker').length).toEqual(2);
 	});
 
 });

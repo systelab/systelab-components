@@ -7,7 +7,8 @@ export class ShowcaseLoadingDialogParameters extends SystelabModalContext {
 }
 
 @Component({
-	templateUrl: 'showcase-loading-dialog.component.html',
+    templateUrl: 'showcase-loading-dialog.component.html',
+    standalone: false
 })
 export class ShowcaseLoadingDialog implements ModalComponent<ShowcaseLoadingDialogParameters> {
 

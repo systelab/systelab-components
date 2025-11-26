@@ -2,9 +2,10 @@ import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, Input
 import { ComboBoxInputRenderer } from './combobox-input-renderer';
 
 @Component( {
-	selector: 'combobox-input-renderer',
-	template: `
-                  <div #target></div>`
+    selector: 'combobox-input-renderer',
+    template: `
+                  <div #target></div>`,
+    standalone: false
 } )
 
 export class ComboBoxInputRendererComponent implements OnChanges, AfterViewInit, OnDestroy {

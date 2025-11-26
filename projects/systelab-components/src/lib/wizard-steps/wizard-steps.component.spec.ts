@@ -5,19 +5,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { WizardStep, WizardStepsComponent } from './wizard-steps.component';
 
 @Component({
-	selector: 'systelab-wizard-steps-test',
-	template: `
+    selector: 'systelab-wizard-steps-test',
+    template: `
                 <div>
                     <systelab-wizard-steps [allowNavigation]="allowNavigation" [steps]="steps"
 										   [(currentStep)]="currentStep" [roundedStep]="roundedStep"></systelab-wizard-steps>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class WizardStepsTestComponent {
 	public allowNavigation = true;
@@ -42,8 +42,7 @@ describe('Systelab Wizard Steps', () => {
         BrowserAnimationsModule,
         FormsModule,
         DragDropModule,
-        OverlayModule,
-        TreeModule],
+        OverlayModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();

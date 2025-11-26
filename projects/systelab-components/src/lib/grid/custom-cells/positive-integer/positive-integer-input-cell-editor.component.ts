@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AgEditorComponent } from 'ag-grid-angular';
 
 @Component({
-	selector: 'systelab-positive-integer-input-cell-editor',
-	templateUrl: 'positive-integer-input-cell-editor.component.html',
+    selector: 'systelab-positive-integer-input-cell-editor',
+    templateUrl: 'positive-integer-input-cell-editor.component.html',
+    standalone: false
 })
 export class PositiveIntegerInputCellEditorComponent implements AgEditorComponent {
 	public value: string;

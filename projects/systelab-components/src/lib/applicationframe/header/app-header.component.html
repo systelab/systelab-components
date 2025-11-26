@@ -1,35 +1,51 @@
 <nav class="slab-app-header-bar d-flex align-items-center align-items-stretch">
-    <i [ngClass]="logoIcon" class="slab-app-header-modulab-icon"></i>
-    <div class="slab-app-header-labels-container slab-flex-1 text-truncate">
-        <label *ngIf="title" class="slab-app-header-title text-truncate">{{title}}</label>
-        <small *ngIf="userFullName" id="username" class="d-block text-truncate">{{userFullName}}
-        </small>
-    </div>
-    <div class="d-flex align-items-center mr-2">
-        <ng-content></ng-content>
-    </div>
-    <div class="dropdown slab-app-header-user-container">
-        <div class="dropdown-toggle" data-toggle="dropdown" data-boundary="window" *ngIf="menu.length > 0 || userName">
-            <button *ngIf="!menuBars" class="slab-app-header-user-icon d-inline-block align-middle">
-                <div class="align-middle h-100">
-                    <i class="icon-user align-bottom"></i>
-                </div>
-            </button>
-            <button *ngIf="menuBars" class="slab-app-header-bars-icon d-inline-block align-middle">
-                <div class="align-middle h-100">
-                    <i class="icon-list align-bottom"></i>
-                </div>
-            </button>
-            <label *ngIf="!menuBars" class="text-truncate align-middle">{{userName}}</label>
-            <div class="dropdown-menu dropdown-menu-right slab-dropdown" *ngIf="menu.length > 0">
-                <ul>
-                    @for (menuEntry of menu; track menuEntry.action) {
-                        <li (click)="menuEntry.action()">{{menuEntry.optionName}}
-                            <div *ngIf="menuEntry.isDivider" class="dropdown-divider"></div>
-                        </li>
-                    }
-                </ul>
+  <i [ngClass]="logoIcon" class="slab-app-header-modulab-icon"></i>
+  <div class="slab-app-header-labels-container slab-flex-1 text-truncate">
+    @if (title) {
+      <label class="slab-app-header-title text-truncate">{{title}}</label>
+    }
+    @if (userFullName) {
+      <small id="username" class="d-block text-truncate">{{userFullName}}
+      </small>
+    }
+  </div>
+  <div class="d-flex align-items-center mr-2">
+    <ng-content></ng-content>
+  </div>
+  <div class="dropdown slab-app-header-user-container">
+    @if (menu.length > 0 || userName) {
+      <div class="dropdown-toggle" data-toggle="dropdown" data-boundary="window">
+        @if (!menuBars) {
+          <button class="slab-app-header-user-icon d-inline-block align-middle">
+            <div class="align-middle h-100">
+              <i class="icon-user align-bottom"></i>
             </div>
-        </div>
-    </div>
+          </button>
+        }
+        @if (menuBars) {
+          <button class="slab-app-header-bars-icon d-inline-block align-middle">
+            <div class="align-middle h-100">
+              <i class="icon-list align-bottom"></i>
+            </div>
+          </button>
+        }
+        @if (!menuBars) {
+          <label class="text-truncate align-middle">{{userName}}</label>
+        }
+        @if (menu.length > 0) {
+          <div class="dropdown-menu dropdown-menu-right slab-dropdown">
+            <ul>
+              @for (menuEntry of menu; track menuEntry.action) {
+                <li (click)="menuEntry.action()">{{menuEntry.optionName}}
+                  @if (menuEntry.isDivider) {
+                    <div class="dropdown-divider"></div>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    }
+  </div>
 </nav>

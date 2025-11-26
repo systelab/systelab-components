@@ -5,15 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { DialogHeaderComponent } from './dialog-header.component';
 
 @Component({
-	selector: 'systelab-dialog-header-test',
-	template: `
+    selector: 'systelab-dialog-header-test',
+    template: `
 		<div>
 			<systelab-dialog-header #header [withClose]="withClose" (close)="doClose()"
 									[withHome]="withHome" (home)="doHome()" [withProgressBar]="withProgressBar"
@@ -22,7 +21,8 @@ import { DialogHeaderComponent } from './dialog-header.component';
 									[withInfo]="withInfo" (info)="doInfo()"></systelab-dialog-header>
 		</div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class DialogHeaderTestComponent {
 
@@ -104,7 +104,6 @@ describe('Systelab Dialog Header', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule,
         SystelabPreferencesModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]

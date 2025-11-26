@@ -7,11 +7,12 @@ import { I18nService } from 'systelab-translate';
 import { DialogService } from '../modal/dialog/dialog.service';
 
 @Directive()
-export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource, OnInit {
+export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource {
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
+		this.rowData = null;
 	}
 
 	protected override getInitialGridOptions(): GridOptions {
@@ -22,17 +23,21 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 		options.cacheOverflowSize = 2;
 		options.maxConcurrentDatasourceRequests = 4;
 		options.maxBlocksInCache = 15;
-		options.infiniteInitialRowCount = 0;
 		options.datasource = this;
+		options.loading = false;
 		return options;
 	}
 
 	public abstract getTotalItems(): number;
 
+	public override doGridReady(event: any) {
+		super.doGridReady(event);
+	}
+
 	protected abstract getData(page: number, itemsPerPage: number): Observable<Array<T>>;
 
 	public getRows(params: IGetRowsParams): void {
-		this.gridOptions.api.showLoadingOverlay();
+		this.gridApi.updateGridOptions({loading: true});
 		this.getData(params.endRow / this.gridOptions.paginationPageSize, this.gridOptions.paginationPageSize)
 			.subscribe({
 				next:  (page: Array<T>) => this.putPage(page, this.getTotalItems(), params),
@@ -41,14 +46,15 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 	}
 
 	protected putPage(page: Array<T>, totalItems: number, params: IGetRowsParams): void {
-		this.gridOptions.api.hideOverlay();
 		params.successCallback(page, totalItems);
 		if (page.length === 0) {
-			this.gridOptions.api.showNoRowsOverlay();
+			this.gridApi.showNoRowsOverlay();
 		}
+		this.gridApi.updateGridOptions({loading: false});
 	}
 
 	public refresh(): void {
-		this.gridOptions.api.setDatasource(this);
+		// the ? is to avoid errors in tests
+		this.gridApi?.updateGridOptions({datasource: this });
 	}
 }

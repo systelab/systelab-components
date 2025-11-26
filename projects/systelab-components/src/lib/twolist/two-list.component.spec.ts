@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TwoListComponent } from './two-list.component';
 import { TwoListItem } from './two-list-utilities';
@@ -15,8 +14,8 @@ import { TwoListSortableListComponent } from './two-list-sortable-list.component
 import { SystelabPreferencesModule } from 'systelab-preferences';
 
 @Component({
-	selector: 'systelab-toggle-button-test',
-	template: `
+    selector: 'systelab-toggle-button-test',
+    template: `
                 <div>
                     <systelab-two-list [(available)]="availableColumns"
                                        [(visible)]="visibleColumns"
@@ -30,7 +29,8 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
                     </div>
                 </div>
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class TwoListTestComponent implements OnInit {
 	public availableColumns: Array<TwoListItem> = [];
@@ -106,7 +106,6 @@ describe('Systelab Two list', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule,
         SystelabPreferencesModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]

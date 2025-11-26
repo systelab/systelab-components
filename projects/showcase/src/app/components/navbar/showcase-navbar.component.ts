@@ -3,8 +3,9 @@ import { MessagePopupService } from 'systelab-components';
 import { NavbarItem } from 'systelab-components';
 
 @Component({
-	selector:    'showcase-navbar',
-	templateUrl: 'showcase-navbar.component.html'
+    selector: 'showcase-navbar',
+    templateUrl: 'showcase-navbar.component.html',
+    standalone: false
 })
 export class ShowcaseNavbarComponent {
 

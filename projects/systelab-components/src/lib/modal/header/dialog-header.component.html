@@ -1,26 +1,42 @@
 <ng-template #headerContent>
-    <div class="d-inline-block text-truncate">
-        <ng-content></ng-content>
-    </div>
-    <div class="d-flex">
-        <div *ngIf="withHome" class="slab-dialog-header-button slab-dialog-home mr-1" (click)="doHome()"></div>
-        <div *ngIf="withMinimize" class="slab-dialog-header-button slab-dialog-minimize mr-1" (click)="doMinimize()"></div>
-        <div *ngIf="withInfo" class="slab-dialog-header-button slab-dialog-info mr-1" (click)="doInfo()"></div>
-        <div *ngIf="withClose" class="slab-dialog-header-button slab-dialog-close" (click)="doClose()"></div>
-    </div>
+  <div class="d-inline-block text-truncate">
+    <ng-content></ng-content>
+  </div>
+  <div class="d-flex">
+    @if (withHome) {
+      <div class="slab-dialog-header-button slab-dialog-home mr-1" (click)="doHome()"></div>
+    }
+    @if (withMinimize) {
+      <div class="slab-dialog-header-button slab-dialog-minimize mr-1" (click)="doMinimize()"></div>
+    }
+    @if (withInfo) {
+      <div class="slab-dialog-header-button slab-dialog-info mr-1" (click)="doInfo()"></div>
+    }
+    @if (withClose) {
+      <div class="slab-dialog-header-button slab-dialog-close" (click)="doClose()"></div>
+    }
+  </div>
 </ng-template>
 
-<div *ngIf="withDrag" class="slab-dialog-header slab-draggable d-flex justify-content-between"
-     cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+@if (withDrag) {
+  <div class="slab-dialog-header slab-draggable d-flex justify-content-between"
+    cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
     <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-</div>
-<div *ngIf="!withDrag" class="slab-dialog-header d-flex justify-content-between">
+  </div>
+}
+@if (!withDrag) {
+  <div class="slab-dialog-header d-flex justify-content-between">
     <ng-container *ngTemplateOutlet="headerContent"></ng-container>
-</div>
+  </div>
+}
 
-<div *ngIf="(withProgressBar || withTextProgressBar) && progress" class="slab-dialog-header-progress text-center"
-     [ngClass]="{'slab-dialog-header-progress-bar-with-text':withTextProgressBar}">
+@if ((withProgressBar || withTextProgressBar) && progress) {
+  <div class="slab-dialog-header-progress text-center"
+    [ngClass]="{'slab-dialog-header-progress-bar-with-text':withTextProgressBar}">
     <div class="slab-dialog-header-progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
-         aria-valuemin="0" aria-valuemax="100"></div>
-    <span *ngIf="withTextProgressBar" class="slab-dialog-header-progress-bar-text h-100 d-flex align-items-center justify-content-center">{{textProgress}}</span>
-</div>
+    aria-valuemin="0" aria-valuemax="100"></div>
+    @if (withTextProgressBar) {
+      <span class="slab-dialog-header-progress-bar-text h-100 d-flex align-items-center justify-content-center">{{textProgress}}</span>
+    }
+  </div>
+}

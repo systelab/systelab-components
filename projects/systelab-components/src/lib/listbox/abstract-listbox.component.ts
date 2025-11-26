@@ -1,20 +1,19 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, GetRowIdParams, GridOptions } from 'ag-grid-community';
+import { ColDef, Column, GetRowIdParams, GridApi, GridOptions, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
 export abstract class AbstractListBox<T> implements OnInit {
-
+	@Input() public rowData
 	public gridOptions: GridOptions;
+	public gridApi: GridApi;
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	public _values: Array<T>;
 	@Input()
 	set values(newValues: Array<T>) {
 		this._values = newValues;
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.setRowData(this._values);
-		}
+		this.rowData = this._values;
 	}
 
 	get values() {
@@ -75,42 +74,40 @@ export abstract class AbstractListBox<T> implements OnInit {
 	public abstract getInstance(): T;
 
 	public ngOnInit() {
+		this.gridOptions = this.getInitialGridOptions();
+	}
 
+	protected getInitialGridOptions(): GridOptions {
 		const rowHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
-
-		this.gridOptions = {};
-
-		this.gridOptions.columnDefs = this.getColumnDefsWithOptions();
-
+		const options: GridOptions = {};
+		options.columnDefs = this.getColumnDefsWithOptions();
 		if (this.multipleSelection && !this.hideChecks) {
-			this.gridOptions.suppressRowClickSelection = true;
-			this.gridOptions.rowClassRules = {
+			options.selectionColumnDef = this.getSelectionColumnDefs();
+			options.rowSelection = {enableClickSelection: false, checkboxes: true, headerCheckbox: this.showAll, selectAll: 'all'} as RowSelectionOptions;
+			options.rowClassRules = {
 				'ag-row-disabled': (params) => {
 					return this.isDisabled;
 				},
 			};
 		} else {
-			this.gridOptions.suppressRowClickSelection = this.isDisabled;
+			options.rowSelection = {enableClickSelection: !this.isDisabled, checkboxes: false, headerCheckbox: false} as RowSelectionOptions;
 		}
 
-		this.gridOptions.rowHeight = Number(rowHeight);
-		this.gridOptions.suppressDragLeaveHidesColumns = true;
-		this.gridOptions.suppressCellFocus = true;
-		this.gridOptions.enableRangeSelection = !this.isDisabled;
-		this.gridOptions.defaultColDef = {};
-		this.gridOptions.defaultColDef.resizable = false;
-		this.gridOptions.rowSelection = this.multipleSelection ? 'multiple' : 'single';
-		this.gridOptions.suppressRowDeselection = this.isDisabled;
+		options.rowHeight = Number(rowHeight);
+		options.suppressDragLeaveHidesColumns = true;
+		options.suppressCellFocus = true;
+		options.defaultColDef = {};
+		options.defaultColDef.resizable = false;
+		(options.rowSelection as RowSelectionOptions).mode = this.multipleSelection ? 'multiRow' : 'singleRow';
+		(options.rowSelection as RowSelectionOptions).enableClickSelection = !this.isDisabled;
+		options.context = {componentParent: this};
 
-		this.gridOptions.context = {componentParent: this};
-
-		this.gridOptions.headerHeight = 0;
-		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
+		options.headerHeight = 0;
+		options.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
 
-		this.gridOptions.rowData = this.values;
-
-		this.gridOptions.enableBrowserTooltips = true;
+		options.enableBrowserTooltips = true;
+		return options;
 	}
 
 	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
@@ -123,6 +120,21 @@ export abstract class AbstractListBox<T> implements OnInit {
 		return '';
 	}
 
+	private getSelectionColumnDefs(): ColDef {
+
+		return {
+			type: 		   'selection',
+			headerName:        '',
+			width:             this.getCheckColumnWidth(),
+			suppressSizeToFit: true,
+			resizable:         false,
+			suppressMovable:   true,
+			pinned:            'left',
+			cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
+		} as ColDef;
+
+	}
+
 	protected getColumnDefsWithOptions(): Array<any> {
 
 		const colDefs: Array<any> = [
@@ -133,20 +145,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 				tooltipField: this.getDescriptionField()
 			}
 		];
-
-		if (this.multipleSelection && !this.hideChecks) {
-			colDefs.unshift({
-				colId:             'selectCol',
-				headerName:        '',
-				checkboxSelection: true,
-				width:             this.getCheckColumnWidth(),
-				suppressSizeToFit: true,
-				resizable:         false,
-				suppressMovable:   true,
-				pinned:            'left',
-				cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
-			});
-		}
 		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
 
 		return colDefs;
@@ -169,15 +167,12 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(function(columnDef: ColDef) {
-			if (columnDef.width) {
-				columnDef.suppressSizeToFit = true;
-			}
-		});
+		colDefs.forEach(columnDef =>columnDef.suppressSizeToFit = !columnDef.width);
 	}
 
 	public doGridReady(event: any) {
-		this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		this.gridApi = event.api;
+		this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 	}
 
 	private onBodyScroll(event: any): void {
@@ -188,11 +183,11 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected doAutoSizeManagement(event?: any) {
-		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridApi, event);
 	}
 
 	public doGridSizeChanged(event: any) {
-		if (this.gridOptions.api) {
+		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
 	}
@@ -205,14 +200,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	// overrides
-	public onRowSelected(event: any) {
+	public onRowSelected(event: RowSelectedEvent) {
 		if (this.multipleSelection) {
 			if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] != null) {
 				if (this.multipleSelectedItemList) {
 					const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 						return item[this.getIdField()] === event.node.data[this.getIdField()];
 					});
-					if (event.node.selected) {
+					if (event.node.isSelected()) {
 						if (elementIndexInSelectedList < 0) {
 							if (this.showAll) {
 								if (event.node.data[this.getIdField()] === this.getAllFieldID()) {
@@ -262,40 +257,39 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected selectItemInGrid(): void {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
-				if (node.data) {
-					if (this.multipleSelection) {
-						if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
-							if (this.multipleSelectedItemList
-								.filter((selectedItem) => {
-									return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
-								}).length > 0) {
-								node.selectThisNode(true);
-							} else {
-								node.selectThisNode(false);
-							}
+		this.gridApi?.forEachNode(node => {
+			if (node.data) {
+				if (this.multipleSelection) {
+					if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
+						if (this.multipleSelectedItemList
+							.filter((selectedItem) => {
+								return (selectedItem !== undefined && selectedItem[this.getIdField()] === this.getRowNodeId(node.data));
+							}).length > 0) {
+							node.setSelected(true);
 						} else {
-							node.selectThisNode(false);
+							node.setSelected(false);
 						}
 					} else {
-						if (!this.selectedItem && this.selectFirstItem) {
-							if (node.rowIndex === 0) {
-								node.setSelected(true);
-								this.selectedItem = node.data;
-								this.selectedItemChange.emit(node.data);
-								return;
-							}
-						} else if (this.selectedItem) {
-							if (this.getRowNodeId(node.data) === this.selectedItem[this.getIdField()]) {
-								node.setSelected(true);
-								return;
-							}
+						node.setSelected(false);
+					}
+				} else {
+					if (!this.selectedItem && this.selectFirstItem) {
+						if (node.rowIndex === 0) {
+							node.setSelected(true);
+							this.selectedItem = node.data;
+							this.selectedItemChange.emit(node.data);
+							return;
+						}
+					} else if (this.selectedItem) {
+						if (this.getRowNodeId(node.data) === this.selectedItem[this.getIdField()]) {
+							node.setSelected(true);
+							return;
 						}
 					}
 				}
-			});
-		}
+			}
+		});
+
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {
@@ -307,23 +301,19 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	private unselectAllNodes() {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
-				if (node && this.getRowNodeId(node.data) !== this.getAllFieldID()) {
-					node.selectThisNode(false);
-				}
-			});
-		}
+		this.gridApi?.forEachNode(node => {
+			if (node && this.getRowNodeId(node.data) !== this.getAllFieldID()) {
+				node.setSelected(false);
+			}
+		});
 	}
 
 	private unselectNodeAll() {
-		if (this.gridOptions && this.gridOptions.api) {
-			this.gridOptions.api.forEachNode(node => {
-				if (node && this.getRowNodeId(node.data) === this.getAllFieldID()) {
-					node.selectThisNode(false);
-				}
-			});
-		}
+		this.gridApi?.forEachNode(node => {
+			if (node && this.getRowNodeId(node.data) === this.getAllFieldID()) {
+				node.setSelected(false);
+			}
+		});
 	}
 
 	public onRowDragEnd(event: any) {

@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { of } from 'rxjs';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
@@ -131,13 +131,14 @@ export class ZHMockI18nService {
 }
 
 @Component({
-	selector: 'systelab-datepicker-test',
-	template: `
+    selector: 'systelab-datepicker-test',
+    template: `
                   <div>
                       <systelab-datepicker [(currentDate)]='currentDate'></systelab-datepicker>
                   </div>
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class DatepickerTestComponent {
 
@@ -172,14 +173,16 @@ const getMonth = (date: Date) => {
 };
 
 const enterText = (fixture: ComponentFixture<DatepickerTestComponent> | ComponentFixture<DatepickerComponent>, text: string) => {
-	const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
-	inputComponent.value = text;
-	inputComponent.dispatchEvent(new Event('keydown'));
-	inputComponent.dispatchEvent(new Event('input'));
-	inputComponent.dispatchEvent(new Event('keyup'));
-	fixture.detectChanges();
-	inputComponent.dispatchEvent(new Event('blur'));
-	fixture.detectChanges();
+	const inputComponent = fixture.debugElement.query(By.css('input'));
+	if (inputComponent?.nativeElement) {
+		inputComponent.nativeElement.value = text;
+		inputComponent.nativeElement.dispatchEvent(new Event('keydown'));
+		inputComponent.nativeElement.dispatchEvent(new Event('input'));
+		inputComponent.nativeElement.dispatchEvent(new Event('keyup'));
+		fixture.detectChanges();
+		inputComponent.nativeElement.dispatchEvent(new Event('blur'));
+		fixture.detectChanges();
+	}
 };
 
 describe('Systelab US DatepickerComponent', () => {
@@ -196,7 +199,7 @@ describe('Systelab US DatepickerComponent', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: USMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
 })
@@ -286,7 +289,7 @@ describe('Systelab ES DatepickerComponent', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: ESMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
 })
@@ -373,7 +376,7 @@ describe('Systelab ZH DatepickerComponent', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: ZHMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
 })
@@ -457,7 +460,7 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: ESMockI18nService2 }, provideHttpClient(withInterceptorsFromDi())]
 })

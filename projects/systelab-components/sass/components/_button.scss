@@ -1,0 +1,203 @@
+@use "../variables" as variables;
+.btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link)
+{
+  border-color: var(--slab_component_border_color);
+  background-color: var(--slab_background_primary);
+  color: var(--slab_foreground_primary);
+
+  &:hover:enabled {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+
+    [class*='icon-'] {
+      color: white !important;
+    }
+  }
+}
+
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.btn-group > .btn:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.btn-link {
+  color: var(--text-color);
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:hover {
+    color: var(--text-color);
+    text-decoration: underline;
+  }
+}
+
+.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-outline-primary, .btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark {
+  border-radius: 20px !important;
+}
+
+.btn {
+  &.btn-searcher {
+    width: variables.$slab-searcher-button-width;
+    aspect-ratio: 1 / 1;
+  }
+  &.btn-outline-primary {
+    color: var(--text-color);
+    border-color: var(--primary) !important;
+
+    &:hover {
+      color: var(--text-color-secondary);
+      background-color: var(--primary) !important;
+    }
+  }
+
+  &.btn-primary {
+    color: var(--text-color-secondary);
+    background-color: var(--primary);
+    border-color: var(--primary);
+    &:hover {
+      background-color: var(--primary_light);
+      border-color: var(--primary_light);
+    }
+
+  }
+
+  &:focus:not(.btn-link) {
+    box-shadow: 0 0 0 0.2rem var(--primary_lighter);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+  }
+
+}
+
+
+systelab-button {
+
+  .slab-btn {
+    width: 100%;
+    order: 0;
+    border-radius: 3em;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: 0.375rem 0.75rem;
+    border: none;
+  }
+
+  .slab-btn-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .slab-btn-small {
+    font-size: 0.875rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .slab-btn-medium {
+    font-size: 1rem;
+    padding: 0.375rem 0.75rem;
+  }
+  .slab-btn-large {
+    font-size: 1.25rem;
+    padding: 0.6rem 1rem;
+  }
+
+
+  .slab-btn-primary {
+    color: white;
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+
+    &:hover:enabled {
+      color: white;
+      background-color: var(--primary_light);
+    }
+    &:focus {
+      box-shadow: var(--primary_lighter);
+    }
+  }
+  .slab-btn-regular {
+    color: var(--text-color);
+    border: 1px solid var(--primary);
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: var(--primary);
+
+      [class*='icon-'] {
+        color: white !important;
+      }
+    }
+    &:focus {
+      box-shadow: var(--primary_lighter);
+    }
+
+    [class*='icon-'] {
+      color: var(--text-color) !important;
+    }
+  }
+  .slab-btn-link {
+    color: var(--text-color);
+    background: transparent;
+    text-decoration-style: solid;
+
+    &:hover:enabled {
+      text-decoration: underline;
+      text-decoration-style: solid;
+    }
+    &:focus {
+      text-decoration: underline;
+      text-decoration-style: dashed;
+    }
+  }
+  .slab-btn-danger {
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: var(--danger);
+    }
+    &:focus {
+      box-shadow: 0 0 0 3px var(--danger_light);
+    }
+  }
+  .slab-btn-warning {
+    color: var(--warning);
+    border: 1px solid var(--warning);
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: var(--warning);
+    }
+    &:focus {
+      box-shadow: 0 0 0 3px var(--warning_light);
+    }
+  }
+  .slab-btn-success {
+    color: var(--success);
+    border: 1px solid var(--success);
+    background-color: transparent;
+
+    &:hover:enabled {
+      color: white;
+      background-color: var(--success);
+    }
+    &:focus {
+      box-shadow: 0 0 0 3px var(--success_light);
+    }
+  }
+}

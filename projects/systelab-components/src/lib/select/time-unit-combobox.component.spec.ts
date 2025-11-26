@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -17,8 +16,8 @@ import { TimeUnitSelectComponent } from './time-unit-combobox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 
 @Component({
-	selector: 'systelab-time-unit-select-test',
-	template: `
+    selector: 'systelab-time-unit-select-test',
+    template: `
                 <div>
                     <systelab-time-unit-select [(id)]="id" [(description)]="description"
                                                [showHoursOption]="showHoursOption"
@@ -29,7 +28,8 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
                 </div>
 
 	          `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class TimeUnitSelectTestComponent {
 
@@ -81,7 +81,6 @@ describe('Systelab Time unit selector', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AgGridModule,

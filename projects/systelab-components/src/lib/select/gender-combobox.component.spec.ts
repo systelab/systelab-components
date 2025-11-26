@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -17,8 +16,8 @@ import { GenderSelect } from './gender-combobox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
 
 @Component({
-	selector: 'systelab-gender-select-test',
-	template: `
+    selector: 'systelab-gender-select-test',
+    template: `
                   <div>
                       <systelab-gender-select [(id)]="id" [(description)]="description"
                                               [showAll]="showAll"
@@ -28,7 +27,8 @@ import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-in
                   </div>
 
 			  `,
-	styles:   []
+    styles: [],
+    standalone: false
 })
 export class GenderSelectTestComponent {
 
@@ -80,7 +80,6 @@ describe('Systelab Gender selector', () => {
         FormsModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AgGridModule,
@@ -115,18 +114,15 @@ describe('Systelab Gender selector', () => {
 			});
 	});
 
-	it('should select unknown', (done) => {
+	it('should select unknown', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'U');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('U');
-						done();
-					});
-			});
+		fixture.detectChanges()
+		await fixture.whenStable();
+		clickOnRow(fixture, 'U');
+		fixture.detectChanges()
+		await fixture.whenStable()
+		expect(fixture.componentInstance.id)
+			.toEqual('U');
 	});
 
 	it('should select male', (done) => {

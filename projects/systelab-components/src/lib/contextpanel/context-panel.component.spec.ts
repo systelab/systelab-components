@@ -5,17 +5,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextPanelComponent } from './context-panel.component';
 
 @Component({
-	selector: 'systelab-context-panel-test',
-	template: `
+    selector: 'systelab-context-panel-test',
+    template: `
                 <systelab-context-panel>
                 </systelab-context-panel>
-	          `
+	          `,
+    standalone: false
 })
 export class ContextPanelTestComponent {
 }
@@ -41,7 +42,7 @@ describe('Systelab Context Panel', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { ScrollSpyDirective } from './scroll-spy.directive';
 
 @Component({
-	template: `
+    template: `
 		<div scrollSpy [spiedTags]="['div']" (sectionChange)="onSectionChange($event)" class="slab-flex-1 d-flex slab-overflow-container">
         	<div class="slab-flex-1">
 				<div id="section1" style="height: 500px">
@@ -14,7 +14,8 @@ import { ScrollSpyDirective } from './scroll-spy.directive';
 				<div id="section3" style="height: 500px">
 				</div>
 			</div>
-    	</div>`
+    	</div>`,
+    standalone: false
 })
 class TestScrollSpyComponent {
 
