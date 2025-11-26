@@ -78,6 +78,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			this.overlayLoadingTemplate = this.loadingText;
 		}
 		this.calculatedGridState = initializeCalculatedGridState(this.autoSizeColumnsToContent);
+		if(this.gridOptions.rowModelType === 'clientSide') {
+			this._rowData = new Array<T>();
+		}
 	}
 
 	protected getInitialGridOptions(): GridOptions {
@@ -91,6 +94,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.rowModelType = 'clientSide';
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
+		options.rowModelType = 'clientSide';
 		options.suppressDragLeaveHidesColumns = true;
 		options.suppressCellFocus = true;
 		options.stopEditingWhenCellsLoseFocus = true;

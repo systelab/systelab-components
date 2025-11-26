@@ -13,14 +13,12 @@ export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDat
 				protected override dialogService: DialogService) {
 		super(preferencesService, i18nService, dialogService);
 		this.allowRowManaged = false;
-		this.rowData = null;
 	}
 
 	protected override getInitialGridOptions(): GridOptions {
 		const options: GridOptions = {
 			...super.getInitialGridOptions(),
 			rowModelType: 'infinite',
-			rowData: undefined,
 			paginationPageSize: 50,
 			cacheBlockSize: 50,
 			cacheOverflowSize: 2,
