@@ -9,7 +9,10 @@ export const libConfig: ApplicationConfig = {
         providePrimeNG({
             ripple: true,
             theme: {
-                preset: Aura
+                preset: Aura,
+                options: {
+                    darkModeSelector: false
+                }
             }
         })
     ]
