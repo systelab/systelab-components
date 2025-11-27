@@ -78,7 +78,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			this.overlayLoadingTemplate = this.loadingText;
 		}
 		this.calculatedGridState = initializeCalculatedGridState(this.autoSizeColumnsToContent);
-		if(this.gridOptions.rowModelType === AbstractGrid.clientSideRowModelType) {
+		if(this.gridOptions.rowModelType === AbstractGrid.clientSideRowModelType && this._rowData == undefined) {
 			this._rowData = new Array<T>();
 		}
 	}
