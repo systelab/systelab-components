@@ -6,13 +6,18 @@ import { ContextMenuOption } from './context-menu-option';
 export abstract class AbstractContextMenuComponent<T> extends AbstractContextComponent<T> implements OnInit {
 
 	@ViewChildren('childdropdownmenu') public childDropdownMenuElement: QueryList<ElementRef>;
-	@ViewChild('scrollableList', {static: false}) public scrollableList: ElementRef;
+	@ViewChild('scrollableList', { static: false }) public scrollableList: ElementRef;
+	@ViewChild('dropdown', { static: false }) public dropdownElement: ElementRef;
 
 	@Output() public override action = new EventEmitter();
 
 	public readonly levelSeparator = '_|_';
 	public hasIcons = false;
 	private contextMenuOptionsList: Array<T>;
+	protected previousActionId: string;
+	protected previousShownMenu: Array<string> = [];
+	protected previousMenuWidth: Array<number> = [];
+	protected lastMenuLevel = 0;
 
 	@Input()
 	set contextMenuOptions(value: Array<T>) {
@@ -43,6 +48,14 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		} else {
 			event.stopPropagation();
 		}
+	}
+
+	public override actionsAfterCloseDropDown(): void {
+		this.previousShownMenu = [];
+		this.previousMenuWidth = [];
+		this.lastMenuLevel = 0;
+		this.previousActionId = undefined;
+		super.actionsAfterCloseDropDown();
 	}
 
 	public doClick(event: any, elementID: string, action: ContextMenuOption, parent?: ContextMenuOption): void {
@@ -132,21 +145,6 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 		this.hasIcons = false;
 	}
 
-	protected override checkTargetAndClose(target: any): void {
-		if (!this.checkIfNgContent(target)) {
-			if (target !== this.scrollableList.nativeElement && this.isDropDownOpened()) {
-				if (this.childDropdownMenuElement) {
-					if (!this.childDropdownMenuElement.toArray()
-						.some((elem) => target === elem.nativeElement)) {
-						this.closeDropDown();
-					}
-				} else {
-					this.closeDropDown();
-				}
-			}
-		}
-	}
-
 	protected hideSubmenus(untilLevel: number): void {
 		if (untilLevel < this.lastMenuLevel) {
 			for (let i = this.lastMenuLevel; i > untilLevel; i--) {
@@ -157,6 +155,37 @@ export abstract class AbstractContextMenuComponent<T> extends AbstractContextCom
 				this.lastMenuLevel = i - 1;
 			}
 		}
+	}
+
+	protected getFirstChildLeftWithLevels(selectedChild: ElementRef, optionLevel: number, previousMenuWidth: Array<number>): number {
+		let firstChildLeft;
+		let accumulativeLeft = 0;
+		const firstChildAbsoluteLeft = this.dropdownElement ? this.dropdownElement.nativeElement.getBoundingClientRect().left : 0;
+
+		if (optionLevel < 1) {
+			firstChildLeft = (this.dropdownElement ? this.dropdownElement.nativeElement.offsetWidth : 0) + 12;
+		} else {
+			firstChildLeft = previousMenuWidth[optionLevel - 1] + 12;
+			for (let i = 0; i < optionLevel; i++) {
+				accumulativeLeft = accumulativeLeft + previousMenuWidth[i];
+			}
+		}
+
+		if (firstChildAbsoluteLeft + (this.dropdownElement ? this.dropdownElement.nativeElement.offsetWidth : 0) + accumulativeLeft +
+			selectedChild.nativeElement.offsetWidth > window.innerWidth) {
+			firstChildLeft = -selectedChild.nativeElement.offsetWidth + 15;
+		}
+		return firstChildLeft;
+	}
+
+	protected getFirstChildTop(event: any, selectedChild: ElementRef): number {
+		const firstChildAbsoluteTop = event.clientY;
+		let firstChildRelativeTop = event.target.offsetTop;
+
+		if (firstChildAbsoluteTop + selectedChild.nativeElement.offsetHeight > window.innerHeight) {
+			firstChildRelativeTop = firstChildRelativeTop - selectedChild.nativeElement.offsetHeight;
+		}
+		return firstChildRelativeTop;
 	}
 
 	public abstract openWithOptions(event: MouseEvent, newContextMenuOptions: Array<T>): void;

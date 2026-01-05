@@ -1,17 +1,18 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { ContextMenuActionData } from './context-menu-action-data';
 import { ContextMenuOption } from './context-menu-option';
 import { AbstractContextMenuComponent } from './abstract-context-menu.component';
+import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
 
 @Component({
-    selector: 'systelab-context-menu',
-    templateUrl: 'context-menu.component.html',
-    standalone: false
+	selector: 'systelab-context-menu',
+	templateUrl: 'context-menu.component.html',
+	standalone: false
 })
 export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMenuOption> implements OnInit, OnDestroy {
 
-	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
-		super(el, myRenderer, cdr);
+	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef, protected override overlay: Overlay, protected override overlayPositionBuilder: OverlayPositionBuilder, protected override viewContainerRef: ViewContainerRef) {
+		super(el, myRenderer, cdr, overlay, overlayPositionBuilder, viewContainerRef);
 	}
 
 	public openWithOptions(event: MouseEvent, newContextMenuOptions: Array<ContextMenuOption>): void {
@@ -48,9 +49,9 @@ export class ContextMenuComponent extends AbstractContextMenuComponent<ContextMe
 		if (option && option.hasChildren()) {
 			this.doMouseOver(event, elementId, actionId);
 		} else {
-				this.closeDropDown();
-				event.stopPropagation();
-				event.preventDefault();
+			this.closeDropDown();
+			event.stopPropagation();
+			event.preventDefault();
 			if (option && option.action) {
 				option.action(new ContextMenuActionData(elementId, actionId));
 			} else {

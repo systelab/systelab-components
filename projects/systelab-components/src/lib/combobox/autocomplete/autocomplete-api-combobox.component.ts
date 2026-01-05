@@ -5,7 +5,7 @@ import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
 
-declare const jQuery: any;
+
 
 export class KeyName {
 	static readonly backspace = 'Backspace';
@@ -124,18 +124,18 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.totalItemsLoaded = false;
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe({
-						next:  (v: Array<T>) => {
-							this.gridApi.setGridOption("loading", false);
-							this.gridApi.hideOverlay();
-							this.totalItemsLoaded = true;
-							params.successCallback(v, this.getTotalItems());
-						},
-						error: () => {
-							this.gridApi.setGridOption("loading", false);
-							this.gridApi.hideOverlay();
-							params.failCallback();
-						}
+					next: (v: Array<T>) => {
+						this.gridApi.setGridOption("loading", false);
+						this.gridApi.hideOverlay();
+						this.totalItemsLoaded = true;
+						params.successCallback(v, this.getTotalItems());
+					},
+					error: () => {
+						this.gridApi.setGridOption("loading", false);
+						this.gridApi.hideOverlay();
+						params.failCallback();
 					}
+				}
 				);
 		}
 	}
@@ -164,8 +164,6 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	private openDropDown(): void {
 		this.showDropDown();
-		jQuery('#' + this.comboId)
-			.dropdown('toggle');
 		this.isDropdownOpened = true;
 	}
 

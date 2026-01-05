@@ -15,13 +15,13 @@ import { ContextMenuItemComponent } from './context-menu-item.component';
 import { ContextMenuSubmenuItemComponent } from './context-menu-submenu-item.component';
 
 @Component({
-    selector: 'systelab-context-menu-test',
-    template: `
+	selector: 'systelab-context-menu-test',
+	template: `
                   <systelab-context-menu [contextMenuOptions]="contextMenuOptions"
                                          (action)="executeContextMenuAction($event)">
                   </systelab-context-menu>
 			  `,
-    standalone: false
+	standalone: false
 })
 export class ContextMenuTestComponent implements OnInit {
 	public contextMenuOptions: Array<ContextMenuOption> = [];
@@ -61,23 +61,22 @@ const clickOnDots = (fixture: ComponentFixture<ContextMenuTestComponent>) => {
 	fixture.detectChanges();
 };
 
-const isPopupVisible = (fixture: ComponentFixture<ContextMenuTestComponent>) => (fixture.debugElement.nativeElement
-	.querySelector('.slab-dropdown-scroll') !== null);
+const isPopupVisible = () => (document.querySelector('.slab-dropdown-scroll') !== null);
 
-const isSubPopupVisible = (fixture: ComponentFixture<ContextMenuTestComponent>) => (fixture.debugElement.nativeElement
-	.querySelector('.slab-dropdown-absolute') !== null);
+const isSubPopupVisible = () => (document.querySelector('.slab-dropdown-absolute') !== null);
 
-const getNumberOfElements = (fixture: ComponentFixture<ContextMenuTestComponent>, className: string) => fixture.debugElement.nativeElement
-	.querySelectorAll(className).length;
+const getNumberOfElements = (className: string) => document.querySelectorAll(className).length;
 
 const clickOnOption = (fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) => {
-	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
-	button.click();
+	const listItems = document.querySelectorAll('.slab-dropdown-scroll > li');
+	const button = listItems[elementNumber - 1];
+	(button as HTMLElement).click();
 	fixture.detectChanges();
 };
 
 const mouseOver = (fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) => {
-	const button = fixture.debugElement.query(By.css('li:nth-child(' + elementNumber + ')')).nativeElement;
+	const listItems = document.querySelectorAll('.slab-dropdown-scroll > li');
+	const button = listItems[elementNumber - 1];
 	button.dispatchEvent(new MouseEvent('mouseover', {
 		view: window,
 		bubbles: true,
@@ -87,9 +86,9 @@ const mouseOver = (fixture: ComponentFixture<ContextMenuTestComponent>, elementN
 };
 
 const clickOnSubOption = (fixture: ComponentFixture<ContextMenuTestComponent>, elementNumber: number) => {
-	const button = fixture.debugElement.query(By.css('systelab-context-menu-submenu-item > li:nth-child(' + elementNumber + ')'))
-		.nativeElement;
-	button.click();
+	const subItems = document.querySelectorAll('systelab-context-menu-submenu-item > li');
+	const button = subItems[elementNumber - 1];
+	(button as HTMLElement).click();
 	fixture.detectChanges();
 };
 
@@ -98,16 +97,16 @@ describe('Systelab Context Menu', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [ContextMenuComponent, ContextMenuItemComponent, ContextMenuTestComponent, ContextMenuSubmenuItemComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        DatePickerModule,
-        SystelabTranslateModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
+			declarations: [ContextMenuComponent, ContextMenuItemComponent, ContextMenuTestComponent, ContextMenuSubmenuItemComponent],
+			imports: [BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				DatePickerModule,
+				SystelabTranslateModule],
+			providers: [provideHttpClient(withInterceptorsFromDi())]
+		})
 			.compileComponents();
 	});
 
@@ -123,13 +122,13 @@ describe('Systelab Context Menu', () => {
 
 	it('should show a popup when clicked', () => {
 		clickOnDots(fixture);
-		expect(isPopupVisible(fixture))
+		expect(isPopupVisible())
 			.toBeTruthy();
 	});
 
 	it('should represent all the menu options and suboptions', () => {
 		clickOnDots(fixture);
-		expect(getNumberOfElements(fixture, 'systelab-context-menu-item'))
+		expect(getNumberOfElements('systelab-context-menu-item'))
 			.toEqual(8);
 	});
 
@@ -142,7 +141,7 @@ describe('Systelab Context Menu', () => {
 	it('should show a submenu when clicked', () => {
 		clickOnDots(fixture);
 		clickOnOption(fixture, 6);
-		expect(isSubPopupVisible(fixture))
+		expect(isSubPopupVisible())
 			.toBeTruthy();
 	});
 

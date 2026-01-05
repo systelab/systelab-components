@@ -1,16 +1,19 @@
 <div #dropdownparent id="{{elementID}}" class="dropdown">
-  <div class="dropdown-toggle slab-context-menu" data-toggle="dropdown" (click)="dotsClicked($event)">
+  <div class="dropdown-toggle slab-context-menu" (click)="dotsClicked($event)">
     <ng-content select=".header-content"></ng-content>
   </div>
-  <div #dropdownmenu class="dropdown-menu slab-dropdown-menu">
-    <div #dropdown class="slab-dropdown slab-dropdown-fixed">
+</div>
+
+<ng-template #dropdowntemplate>
+  <div class="dropdown-menu slab-dropdown-menu show" style="display: block; position: static;">
+    <div class="slab-dropdown slab-dropdown-fixed">
       @if (isOpened) {
-        <div>
-          <div #ngcontent (click)="ngContentStopPropagation($event)">
-            <ng-content select=".main-content"></ng-content>
-          </div>
+      <div>
+        <div (click)="ngContentStopPropagation($event)">
+          <ng-content select=".main-content"></ng-content>
         </div>
+      </div>
       }
     </div>
   </div>
-</div>
+</ng-template>

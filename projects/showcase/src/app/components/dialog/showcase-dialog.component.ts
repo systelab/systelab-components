@@ -9,12 +9,12 @@ import { ShowcaseStandardDialog, ShowcaseStandardDialogParameters } from './stan
 import { ShowcaseVerticaldDialog } from './vertical-dialog/showcase-vertical-dialog.component';
 
 @Component({
-    selector: 'showcase-dialog',
-    templateUrl: 'showcase-dialog.component.html',
-    standalone: false
+	selector: 'showcase-dialog',
+	templateUrl: 'showcase-dialog.component.html',
+	standalone: false
 })
 export class ShowcaseDialogComponent {
-	@ViewChild('btnContextModal', {static: false}) btnContextModal: ElementRef;
+	@ViewChild('btnContextModal', { read: ElementRef }) btnContextModal: ElementRef;
 
 	constructor(protected dialogService: DialogService) {
 	}
