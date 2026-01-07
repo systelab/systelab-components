@@ -27,9 +27,7 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		this.gridOptions.cacheOverflowSize = 2;
 		this.gridOptions.maxConcurrentDatasourceRequests = 1;
 		this.gridOptions.maxBlocksInCache = 100;
-		if (this.gridOptions.rowSelection && typeof this.gridOptions.rowSelection === 'object') {
-			(this.gridOptions.rowSelection as any).headerCheckbox = false;
-		}
+
 	}
 
 	protected override configGridData() {

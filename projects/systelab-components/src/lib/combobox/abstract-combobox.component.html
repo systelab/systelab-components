@@ -1,6 +1,6 @@
 <div #combobox class="dropdown slab-combobox d-flex w-100" [ngClass]="{'disabled': isDisabled}">
   <div #dropdowntoogle class="slab-flex-1 d-flex dropdown-toggle slab-dropdown-toogle" id="{{comboId}}"
-    (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeyArrowDown($event)"
+    data-toggle="dropdown" (click)="onComboClicked($event)" (keydown.arrowDown)="onComboKeyArrowDown($event)"
     (keydown.arrowUp)="onComboKeyArrowUp($event)">
     @if (iconSide === 'left') {
       @if (withIcon && id) {
@@ -95,7 +95,7 @@
           <li class="slab-combo-badge badge badge-primary mr-1 p-2" role="badge"
             ><span
           class="float-left mr-2">{{item.description}}</span>
-          <button type="button" class="close" (click)="removeItem(item)" aria-label="Close"
+          <button data-dismiss="badge" type="button" class="close" (click)="removeItem(item)" aria-label="Close"
             tabindex="-1">
             <span aria-hidden="true">&times;</span>
           </button>

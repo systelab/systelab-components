@@ -14,10 +14,8 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
-import { Column, GridReadyEvent, RowNode, ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import { Column, GridReadyEvent, RowNode } from 'ag-grid-community';
 import { fi } from 'date-fns/locale';
-
-ModuleRegistry.registerModules([AllCommunityModule]);
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -175,22 +173,14 @@ describe('Systelab Combobox', () => {
 		}
 	});
 
-	it('should check selected items', (done) => {
-		fixture = TestBed.createComponent(ComboboxTestComponent);
+	it('should check selected items', async () => {
 		fixture.componentInstance.multipleSelection = true;
-		fixture.detectChanges();
-
-		const component = fixture.componentInstance;
-		component.combobox.gridOptions.onGridReady = async () => {
-			await fixture.whenStable();
-			await fixture.whenRenderingDone();
-			const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
-			expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
-			done();
-		};
-
 		clickButton(fixture);
 		fixture.detectChanges();
+		await fixture.whenStable();
+		const component = fixture.componentInstance;
+			const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
+			expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 	});
 
 	it('should check clear id', async () => {

@@ -6,7 +6,7 @@ import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourit
 import { PreferencesService } from 'systelab-preferences';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
-
+declare var jQuery: any;
 
 @Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
@@ -229,6 +229,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.setStyle('font-weight', this.fontWeight);
 		this.setStyle('font-style', this.fontStyle);
 
+		jQuery(this.comboboxElement.nativeElement)
+			.on('hide.bs.dropdown', this.closeDropDown.bind(this));
+
 		this.initializeFavouriteList();
 		this.configGrid();
 	}
@@ -423,7 +426,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.isDropdownOpened = false;
 		this.removeWindowScrollHandler();
 		this.removeGridScrollHandler();
-		this.removeClickOutsideHandler();
 		this.resetDropDownPositionAndHeight();
 		if (this.isDropDownOpen()) {
 			this.myRenderer.removeClass(this.comboboxElement.nativeElement, 'show');
@@ -494,32 +496,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public showDropDown() {
-		this.myRenderer.addClass(this.comboboxElement.nativeElement, 'show');
-		this.myRenderer.addClass(this.dropdownMenuElement.nativeElement, 'show');
 		this.addWindowScrollHandler();
 		this.setDropdownWidth();
-		if (!this.isTree) {
+		if (!this.isDropDownOpen() && !this.isTree) {
 			setTimeout(() => this.loop(), 10);
-		}
-		this.addClickOutsideHandler();
-	}
-
-	private clickOutsideListener: () => void;
-
-	private addClickOutsideHandler() {
-		if (!this.clickOutsideListener) {
-			this.clickOutsideListener = this.myRenderer.listen('document', 'click', (event: Event) => {
-				if (!this.comboboxElement.nativeElement.contains(event.target)) {
-					this.closeDropDown();
-				}
-			});
-		}
-	}
-
-	private removeClickOutsideHandler() {
-		if (this.clickOutsideListener) {
-			this.clickOutsideListener();
-			this.clickOutsideListener = undefined;
 		}
 	}
 
@@ -804,7 +784,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	public ngOnDestroy() {
 		this.removeWindowScrollHandler();
-		this.removeClickOutsideHandler();
 		this.chRef.detach();
 	}
 
