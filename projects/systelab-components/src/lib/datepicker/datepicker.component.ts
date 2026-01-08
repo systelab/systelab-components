@@ -5,7 +5,6 @@ import {
 	ElementRef,
 	EventEmitter,
 	Input,
-	OnDestroy,
 	OnInit,
 	Output,
 	Renderer2,
@@ -23,7 +22,7 @@ import { PrimeNG } from 'primeng/config';
     providers: [DataTransformerService],
     standalone: false
 })
-export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 
 	@Input() public disabled = false;
 	@Input() public error = false;
@@ -79,10 +78,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public currentDocSize: number;
 	public currentLanguage: string;
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	public destroyWheelListener: Function;
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	public destroyKeyListener: Function;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
@@ -100,7 +95,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 		this.currentDocSize = window.innerWidth;
 		this.currentLanguage = this.i18nService.getCurrentLanguage();
 
-		this.addListeners();
 		if (navigator.userAgent.indexOf('iPad') > -1 || navigator.userAgent.indexOf('Android') > -1) {
 			this.isTablet = true;
 		}
@@ -204,11 +198,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 			this.currentLanguage = this.i18nService.getCurrentLanguage();
 			this.getLanguage();
 		}
-	}
-
-	public ngOnDestroy() {
-		this.destroyKeyListener?.();
-		this.destroyWheelListener?.();
 	}
 
 	public selectDate(): void {
@@ -431,17 +420,5 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 		}
 
 		this.config.setTranslation(this.language.translations);
-	}
-
-	private addListeners(): void {
-		this.destroyWheelListener = this.myRenderer.listen('window', 'wheel', () => {
-			// this.closeDatepicker();
-		});
-
-		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
-			if (evt.key === 'Escape' || evt.key === 'Tab') {
-				this.closeDatepicker();
-			}
-		});
 	}
 }
