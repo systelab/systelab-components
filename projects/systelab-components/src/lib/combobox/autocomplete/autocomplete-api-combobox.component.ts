@@ -5,7 +5,7 @@ import { AbstractApiComboBox } from '../abstract-api-combobox.component';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { PreferencesService } from 'systelab-preferences';
 
-declare const jQuery: any;
+
 
 export class KeyName {
 	static readonly backspace = 'Backspace';
@@ -163,10 +163,10 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 	}
 
 	private openDropDown(): void {
-		this.showDropDown();
-		jQuery('#' + this.comboId)
-			.dropdown('toggle');
-		this.isDropdownOpened = true;
+		if (!this.isDropdownOpened) {
+			this.showDropDown();
+			this.isDropdownOpened = true;
+		}
 	}
 
 	public inputIsEmpty(): boolean {
