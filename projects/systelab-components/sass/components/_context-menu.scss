@@ -1,4 +1,4 @@
-@use '../variables'as *;
+@use '../variables'as Vars;
 $slab-icon-context-menu-font-size: 15px;
 $slab-icon-context-menu-size: 19px;
 
@@ -16,12 +16,12 @@ $slab-icon-context-menu-size: 19px;
   }
 
   systelab-context-menu-item {
-    height: $form-elements-height;
+    height: Vars.$form-elements-height;
   }
 }
 
 .slab-icon-container {
-  @include size($slab-icon-context-menu-size);
+  @include Vars.size($slab-icon-context-menu-size);
   .slab-menu-icon {
     font-size: $slab-icon-context-menu-font-size;
   }

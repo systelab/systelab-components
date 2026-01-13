@@ -1,10 +1,10 @@
-@use "../variables" as *;
+@use "../variables" as Vars;
 .slab-sortable-list {
   display: flex;
   overflow: auto;
 
   .slab-sortable-list-row {
-    line-height: $slab-sort-list-row-height;
+    line-height: Vars.$slab-sort-list-row-height;
     text-indent: 10px;
     cursor: pointer;
 
@@ -16,7 +16,7 @@
       }
     }
 
-    @include user-selection(none);
+    @include Vars.user-selection(none);
   }
 
 

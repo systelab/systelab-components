@@ -1,8 +1,8 @@
-@use "../variables" as *;
+@use "../variables" as Vars;
 
 .slab-tree {
   cdk-nested-tree-node {
-    line-height: $slab-tree-row-height;
+    line-height: Vars.$slab-tree-row-height;
     user-select: none;
 
     .slab-tree-node {

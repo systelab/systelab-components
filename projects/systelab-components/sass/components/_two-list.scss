@@ -1,4 +1,4 @@
-@use "../variables" as *;
+@use "../variables" as Vars;
 systelab-two-list {
 
   .slab-twolist {
@@ -37,8 +37,8 @@ systelab-two-list {
         flex: 1;
         margin-top: 7px;
 
-        border-radius: $slab-border-radius;
-        border: 1px solid $medium-gray;
+        border-radius: Vars.$slab-border-radius;
+        border: 1px solid Vars.$medium-gray;
         display: flex;
         overflow: auto;
 
@@ -46,10 +46,10 @@ systelab-two-list {
           flex: 1 0 auto;
 
           .slab-twolistboxrow {
-            line-height: $slab-twolist-row-height;
+            line-height: Vars.$slab-twolist-row-height;
             cursor: pointer;
             text-indent: 10px;
-            @include user-selection(none);
+            @include Vars.user-selection(none);
           }
 
           .slab-twolistboxrow-even-row {
