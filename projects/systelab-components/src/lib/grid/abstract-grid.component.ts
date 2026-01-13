@@ -1,5 +1,13 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowModelType, RowSelectionOptions } from 'ag-grid-community';
+import { Directive, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+	ColDef,
+	Column,
+	GridApi,
+	GridOptions,
+	IsFullWidthRowParams,
+	RowModelType,
+	RowSelectionOptions
+} from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -9,7 +17,10 @@ import { StylesUtilService } from '../utilities/styles.util.service';
 import { GridContextMenuComponent, GridRowMenuActionHandler } from './contextmenu/grid-context-menu-component';
 import { timer } from 'rxjs';
 import { GridColumnsOptions } from './options/grid-column-options';
-import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './options/grid-column-options-dialog.component';
+import {
+	GridColumnOptionsDialog,
+	GridColumnOptionsDialogParameters
+} from './options/grid-column-options-dialog.component';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { TwoListItem } from '../twolist/two-list-utilities';
 import { GridHeaderContextMenu, GridHeaderMenuActionHandler } from './contextmenu/grid-header-context-menu.component';
@@ -29,7 +40,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public overlayLoadingTemplate;
 	public startCellEditorWithTab = false;
 
-	@Input() public headerMenu: Array<GridContextMenuOption<Object>>;
+	@Input() public headerMenu: Array<GridContextMenuOption<object>>;
 	@Input() public menu: Array<GridContextMenuOption<T>>;
 
 	@Input() public preferenceName: string;
@@ -59,16 +70,16 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
-	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
+	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<object>;
 	public allowRowManaged: boolean = true;
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
 	private _rowData: Array<T>;
 
-	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-						  protected dialogService: DialogService) {
-	}
+	protected preferencesService = inject(PreferencesService);
+	protected i18nService = inject(I18nService);
+	protected dialogService = inject(DialogService);
 
 	public ngOnInit(): void {
 
@@ -259,7 +270,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return false;
 	}
 
-	protected getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
+	protected getIsFullWidthRow(): boolean {
 		return false;
 	}
 
@@ -302,13 +313,13 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: any): void {
 
-		const option: GridContextMenuOption<Object> = this.headerMenu.find(opt => opt.actionId === actionId);
+		const option: GridContextMenuOption<object> = this.headerMenu.find(opt => opt.actionId === actionId);
 
 		if (option && option.action) {
-			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
+			const actionData: GridContextMenuActionData<object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			return option.action(actionData);
 		} else {
-			const actionData: GridContextMenuActionData<Object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
+			const actionData: GridContextMenuActionData<object> = new GridContextMenuActionData(elementId, actionId, headerData, this.gridOptions);
 			this.action.emit(actionData);
 		}
 		this.headerPopupMenu.closeDropDown();
@@ -316,7 +327,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	public isHeaderContextMenuOptionEnabled(elementId: string, actionId: string, headerData: any): boolean {
 
-		const option: GridContextMenuOption<Object> = this.headerMenu.find(opt => opt.actionId === actionId);
+		const option: GridContextMenuOption<object> = this.headerMenu.find(opt => opt.actionId === actionId);
 		if (option && option.isActionEnabled) {
 			return option.isActionEnabled(headerData);
 		}
@@ -376,7 +387,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public doColumnResized(event: any): void {
+	public doColumnResized(): void {
 		this.saveColumnsStateInPreferences();
 	}
 
@@ -384,7 +395,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		this.viewportChanged.emit();
 	}
 
-	public doGridSizeChanged(event: any): void {
+	public doGridSizeChanged(): void {
 		if (this.gridApi) {
 			this.doAutoSizeManagement();
 		}
@@ -460,7 +471,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	public headerDotsClicked(headerData: Object, event: MouseEvent): void {
+	public headerDotsClicked(headerData: object, event: MouseEvent): void {
 		this.headerPopupMenu.setActionManager(this);
 		this.headerPopupMenu.setHeaderData(headerData);
 		if (this.existsAtLeastOneHeaderActionEnabled(headerData)) {
@@ -471,11 +482,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	protected existsAtLeastOneHeaderActionEnabled(data: Object | Array<Object>): boolean {
-		return this.headerMenu ? this.headerMenu.some(menuOption => this.isMenuOptionEnabled(menuOption, data)) : false;
+	protected existsAtLeastOneHeaderActionEnabled(data: object | Array<object>): boolean {
+		return this.headerMenu ? this.headerMenu.some(menuOption => this.isMenuOptionEnabled(menuOption as GridContextMenuOption<T>, data)) : false;
 	}
 
-	protected existsAtLeastOneActionEnabled(data: T | Array<T> | Object | Array<Object>): boolean {
+	protected existsAtLeastOneActionEnabled(data: T | Array<T> | object | Array<object>): boolean {
 		if (this.menu) {
 			return this.menu.some(menuOption => this.isMenuOptionEnabled(menuOption, data));
 		} else {
@@ -483,7 +494,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		}
 	}
 
-	private isMenuOptionEnabled(menuOption: GridContextMenuOption<T>, data: T | Array<T> | Object | Array<Object>): boolean {
+	private isMenuOptionEnabled(menuOption: GridContextMenuOption<T>, data: T | Array<T> | object | Array<object>): boolean {
 		if (menuOption.isActionEnabled) {
 			return menuOption.isActionEnabled.apply(null, [data]);
 		} else {
