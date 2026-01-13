@@ -43,7 +43,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	protected override configGrid() {
 		this.columnDefs = [
 			{
-				colId:        'itemDescription',
+				colId: 'itemDescription',
 				cellRenderer: (params: any) => {
 					return this.getLabelForLevel(params.data);
 				}

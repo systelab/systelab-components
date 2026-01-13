@@ -40,6 +40,7 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
 import { TooltipDirective } from './tooltip/tooltip.directive';
+import { TooltipComponent } from './tooltip/tooltip.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
@@ -123,7 +124,7 @@ const providers = [
 ];
 
 @NgModule({
-	imports:      [
+	imports: [
 		CommonModule,
 		FormsModule,
 		DatePickerModule,
@@ -184,6 +185,7 @@ const providers = [
 		MessageWithIconComponent,
 		ComboBoxInputRendererComponent,
 		TooltipDirective,
+		TooltipComponent,
 		NavbarComponent,
 		BreadcrumbComponent,
 		WeekSelectorComponent,
@@ -223,7 +225,7 @@ const providers = [
 		NumpadDecimalNumericDirective,
 		PositiveIntegerInputCellEditorComponent,
 		NumpadDecimalNumericDirective,
-  		TestIdDirective,
+		TestIdDirective,
 		SearcherTreeHeaderRendererComponent,
 		Accordion,
 	],
@@ -318,10 +320,10 @@ const providers = [
 })
 export class SystelabComponentsModule {
 
-	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) {}
+	constructor(@Inject('SystelabComponentsModuleInstance') instance: any) { }
 
 	public static forRoot(conf?: AppConfig): ModuleWithProviders<SystelabComponentsModule> {
-		ModuleRegistry.registerModules([ AllCommunityModule ]);
+		ModuleRegistry.registerModules([AllCommunityModule]);
 
 		provideGlobalGridOptions({
 			theme: 'legacy'

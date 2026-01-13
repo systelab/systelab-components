@@ -14,8 +14,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public static ROW_HEIGHT = -1;
 	public static DROPDOWN_MENU_MARGIN = 16;
 
-	@ViewChild('input', {static: false}) public input: ElementRef;
-	@ViewChild('filterInput', {static: false}) public filterInput: ElementRef;
+	@ViewChild('input', { static: false }) public input: ElementRef;
+	@ViewChild('filterInput', { static: false }) public filterInput: ElementRef;
 
 	public comboId: string = (Math.floor(Math.random() * (999999999999 - 1))).toString();
 
@@ -70,7 +70,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	set values(newValues: Array<any>) {
 		if (newValues) {
 			if (this.withEmptyValue) {
-				newValues.unshift({description: '', id: undefined});
+				newValues.unshift({ description: '', id: undefined });
 			}
 		}
 		this._values = newValues;
@@ -191,12 +191,12 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	@Output() public multipleSelectedIDListChange = new EventEmitter();
 	@Output() public selectedItemChange = new EventEmitter();
 
-	@ViewChild('combobox', {static: true}) public comboboxElement: ElementRef;
-	@ViewChild('dropdowntoogle', {static: false}) public dropdownToogleElement: ElementRef;
-	@ViewChild('dropdownmenu', {static: false}) public dropdownMenuElement: ElementRef;
-	@ViewChild('dropdown', {static: true}) public dropdownElement: ElementRef;
-	@ViewChild('input', {static: false}) public inputElement: ElementRef;
-	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
+	@ViewChild('combobox', { static: true }) public comboboxElement: ElementRef;
+	@ViewChild('dropdowntoogle', { static: false }) public dropdownToogleElement: ElementRef;
+	@ViewChild('dropdownmenu', { static: false }) public dropdownMenuElement: ElementRef;
+	@ViewChild('dropdown', { static: true }) public dropdownElement: ElementRef;
+	@ViewChild('input', { static: false }) public inputElement: ElementRef;
+	@ViewChild('hidden', { static: true }) public hiddenElement: ElementRef;
 
 	public filterValue = '';
 	public currentSelected: any = {};
@@ -214,7 +214,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	public isDropdownOpened = false;
 	public windowScrollHandler: any;
 
-	private calculatedGridState : CalculatedGridState = initializeCalculatedGridState();
+	private calculatedGridState: CalculatedGridState = initializeCalculatedGridState();
 	private scrollTimeout;
 
 	constructor(public myRenderer: Renderer2, public chRef: ChangeDetectorRef, public preferencesService?: PreferencesService) {
@@ -271,20 +271,20 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected configGrid() {
 		this.columnDefs = (this.withFavourites) ? [
 			{
-				colId:              'itemDescription',
-				id:                 this.getIdField(),
-				field:              this.getDescriptionField(),
-				tooltipField: 		this.getDescriptionField(),
-				cellRenderer:       ComboboxFavouriteRendererComponent,
+				colId: 'itemDescription',
+				id: this.getIdField(),
+				field: this.getDescriptionField(),
+				tooltipField: this.getDescriptionField(),
+				cellRenderer: ComboboxFavouriteRendererComponent,
 				cellRendererParams: {
 					favouriteList: this.favouriteList
 				}
 			}
 		] : [
 			{
-				colId:             	'itemDescription',
-				field:             	this.getDescriptionField(),
-				tooltipField: 		this.getDescriptionField(),
+				colId: 'itemDescription',
+				field: this.getDescriptionField(),
+				tooltipField: this.getDescriptionField(),
 				cellStyle: () => this.multipleSelection ? ({ paddingLeft: '0px' }) : null
 			}
 		];
@@ -345,7 +345,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getInputHeight() {
-		return this.expandToParentContainerHeight ? {'height': '100%'} : undefined;
+		return this.expandToParentContainerHeight ? { 'height': '100%' } : undefined;
 	}
 
 	protected getComboPreferencesPrefix(): string {
@@ -463,9 +463,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected transferFocusToGrid(): void {
 		// remove previous selection
-		if(!this.multipleSelection) {
+		if (!this.multipleSelection) {
 			this.gridApi?.deselectAll();
-			if(this.gridApi?.getDisplayedRowCount() > 0) {
+			if (this.gridApi?.getDisplayedRowCount() > 0) {
 				// scrolls to the first row
 				this.gridApi?.ensureIndexVisible(0);
 			}
@@ -766,7 +766,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected addGridScrollHandler() {
-		if(this.gridApi && !this.gridApi.isDestroyed()) {
+		if (this.gridApi && !this.gridApi.isDestroyed()) {
 			this.gridApi.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
 
 			this.calculatedGridState = initializeCalculatedGridState();
@@ -777,7 +777,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	protected removeGridScrollHandler() {
-		if(this.gridApi) {
+		if (this.gridApi) {
 			this.gridApi.removeEventListener('bodyScroll', this.onBodyScroll.bind(this));
 		}
 	}
@@ -813,7 +813,6 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		if (this.filterValue && this.filter === true) {
 			this.doFilter();
 		}
-
 	}
 
 	private onBodyScroll(event: any): void {

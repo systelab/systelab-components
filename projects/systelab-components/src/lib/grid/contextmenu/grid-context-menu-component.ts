@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
 import { GridContextMenuOption } from './grid-context-menu-option';
+import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
 
 export interface GridRowMenuActionHandler {
 	isContextMenuOptionEnabled(elementId: string, actionId: string): boolean;
@@ -9,16 +10,16 @@ export interface GridRowMenuActionHandler {
 }
 
 @Component({
-    selector: 'systelab-grid-context-menu',
-    templateUrl: '../../contextmenu/context-menu.component.html',
-    standalone: false
+	selector: 'systelab-grid-context-menu',
+	templateUrl: '../../contextmenu/context-menu.component.html',
+	standalone: false
 })
 export class GridContextMenuComponent<T> extends AbstractContextMenuComponent<GridContextMenuOption<T>> {
 
 	protected actionHandler: GridRowMenuActionHandler;
 
-	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
-		super(el, myRenderer, cdr);
+	constructor(protected override el: ElementRef, protected override myRenderer: Renderer2, protected override cdr: ChangeDetectorRef, protected override overlay: Overlay, protected override overlayPositionBuilder: OverlayPositionBuilder, protected override viewContainerRef: ViewContainerRef) {
+		super(el, myRenderer, cdr, overlay, overlayPositionBuilder, viewContainerRef);
 	}
 
 	public setActionManager(actionHandler: GridRowMenuActionHandler): void {

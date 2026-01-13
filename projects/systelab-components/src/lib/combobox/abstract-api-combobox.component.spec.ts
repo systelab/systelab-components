@@ -23,9 +23,9 @@ export class TestData {
 }
 
 @Component({
-    selector: 'systelab-combobox-example',
-    templateUrl: 'abstract-combobox.component.html',
-    standalone: false
+	selector: 'systelab-combobox-example',
+	templateUrl: 'abstract-combobox.component.html',
+	standalone: false
 })
 export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 
@@ -66,8 +66,8 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
 }
 
 @Component({
-    selector: 'systelab-combobox-test',
-    template: `
+	selector: 'systelab-combobox-test',
+	template: `
                 <div class="container-fluid" style="height: 200px;">
                     <div class="row mt-1">
                         <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
@@ -80,7 +80,7 @@ export class SystelabComboboxComponent extends AbstractApiComboBox<TestData> {
                     </div>
                 </div>
 	          `,
-    standalone: false
+	standalone: false
 })
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: SystelabComboboxComponent;
@@ -115,23 +115,23 @@ describe('Systelab Combobox', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        GridContextMenuCellRendererComponent,
-        GridHeaderContextMenuComponent,
-        ComboBoxInputRendererComponent,
-        SystelabComboboxComponent,
-        ComboboxTestComponent
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
+			declarations: [
+				GridContextMenuCellRendererComponent,
+				GridHeaderContextMenuComponent,
+				ComboBoxInputRendererComponent,
+				SystelabComboboxComponent,
+				ComboboxTestComponent
+			],
+			imports: [BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule],
+			providers: [provideHttpClient(withInterceptorsFromDi())]
+		})
 			.compileComponents();
 	});
 
@@ -139,7 +139,7 @@ describe('Systelab Combobox', () => {
 		fixture = TestBed.createComponent(ComboboxTestComponent);
 		gridEventMock = {
 			api: {
-				getSelectedNodes: () => component.multipleSelectedItemList.map(data => ({data} as RowNode)),
+				getSelectedNodes: () => component.multipleSelectedItemList.map(data => ({ data } as RowNode)),
 				setGridOption: () => null
 			}
 		} as any;
@@ -179,8 +179,8 @@ describe('Systelab Combobox', () => {
 		fixture.detectChanges();
 		await fixture.whenStable();
 		const component = fixture.componentInstance;
-		const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
-		expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
+			const listSelectedItems = component.combobox.gridApi.getSelectedNodes().map(node => node.data);
+			expect(listSelectedItems).toEqual(component.multipleSelectedItemList);
 	});
 
 	it('should check clear id', async () => {

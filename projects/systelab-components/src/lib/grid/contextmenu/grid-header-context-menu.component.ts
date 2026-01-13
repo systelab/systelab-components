@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, ElementRef, Renderer2} from '@angular/core';
-import {AbstractContextMenuComponent} from '../../contextmenu/abstract-context-menu.component';
-import {GridContextMenuOption} from './grid-context-menu-option';
-import {IAfterGuiAttachedParams, IHeaderParams} from 'ag-grid-community';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewContainerRef } from '@angular/core';
+import { AbstractContextMenuComponent } from '../../contextmenu/abstract-context-menu.component';
+import { GridContextMenuOption } from './grid-context-menu-option';
+import { IAfterGuiAttachedParams, IHeaderParams } from 'ag-grid-community';
+import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
 
 export interface GridHeaderMenuActionHandler {
 	executeHeaderContextMenuAction(elementId: string, actionId: string, headerData: Object): void;
@@ -10,16 +11,16 @@ export interface GridHeaderMenuActionHandler {
 }
 
 @Component({
-    selector: 'systelab-grid-header-context-menu',
-    templateUrl: '../../contextmenu/context-menu.component.html',
-    standalone: false
+	selector: 'systelab-grid-header-context-menu',
+	templateUrl: '../../contextmenu/context-menu.component.html',
+	standalone: false
 })
 export class GridHeaderContextMenu<Object> extends AbstractContextMenuComponent<GridContextMenuOption<Object>> {
 	public actionHandler: GridHeaderMenuActionHandler;
 	public headerData: Object;
 
-	constructor(protected override el: ElementRef, protected override  myRenderer: Renderer2, protected override cdr: ChangeDetectorRef) {
-		super(el, myRenderer, cdr);
+	constructor(protected override el: ElementRef, protected override  myRenderer: Renderer2, protected override cdr: ChangeDetectorRef, protected override overlay: Overlay, protected override overlayPositionBuilder: OverlayPositionBuilder, protected override viewContainerRef: ViewContainerRef) {
+		super(el, myRenderer, cdr, overlay, overlayPositionBuilder, viewContainerRef);
 	}
 
 	public refresh(params: IHeaderParams): boolean {

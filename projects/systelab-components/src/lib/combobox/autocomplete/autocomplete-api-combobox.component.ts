@@ -124,18 +124,18 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.totalItemsLoaded = false;
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe({
-						next:  (v: Array<T>) => {
-							this.gridApi.setGridOption("loading", false);
-							this.gridApi.hideOverlay();
-							this.totalItemsLoaded = true;
-							params.successCallback(v, this.getTotalItems());
-						},
-						error: () => {
-							this.gridApi.setGridOption("loading", false);
-							this.gridApi.hideOverlay();
-							params.failCallback();
-						}
+					next: (v: Array<T>) => {
+						this.gridApi.setGridOption("loading", false);
+						this.gridApi.hideOverlay();
+						this.totalItemsLoaded = true;
+						params.successCallback(v, this.getTotalItems());
+					},
+					error: () => {
+						this.gridApi.setGridOption("loading", false);
+						this.gridApi.hideOverlay();
+						params.failCallback();
 					}
+				}
 				);
 		}
 	}

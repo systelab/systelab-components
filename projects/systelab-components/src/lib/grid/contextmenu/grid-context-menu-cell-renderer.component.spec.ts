@@ -48,7 +48,7 @@ describe('GridContextMenuCellRendererComponent', () => {
 
     const containerMock = {
         removeSelectionOnOpenContextMenu: false,
-        getSelectedRows: () => [{id: 16, row: 0}],
+        getSelectedRows: () => [{ id: 16, row: 0 }],
         dotsClicked: (rowIndex, selectedRows, event) => {
         },
         gridApi: {
@@ -59,9 +59,11 @@ describe('GridContextMenuCellRendererComponent', () => {
             },
             selectIndex: (rowIndex, tryMulti, supressEvents) => {
             },
-            getDisplayedRowAtIndex: (index: number) => { return {
-                setSelected: (select: boolean) => true
-            } as any}
+            getDisplayedRowAtIndex: (index: number) => {
+                return {
+                    setSelected: (select: boolean) => true
+                } as any
+            }
         }
     } as unknown as AbstractGrid<TestData>
 
@@ -70,7 +72,7 @@ describe('GridContextMenuCellRendererComponent', () => {
             componentParent: containerMock,
         },
         rowIndex: 2,
-        data: {id: 33, row: 3} as TestData
+        data: { id: 33, row: 3 } as TestData
     }
 
     beforeEach(async () => {
@@ -104,7 +106,7 @@ describe('GridContextMenuCellRendererComponent', () => {
 
             component.agInit(paramsMock);
 
-            expect(component['container']).toBe(paramsMock.context.componentParent)
+            expect(component['container']).toBe(paramsMock.context.componentParent as any)
             expect(component.rowIndex).toBe(paramsMock.rowIndex)
             expect(component.data).toEqual(paramsMock.data)
         })
