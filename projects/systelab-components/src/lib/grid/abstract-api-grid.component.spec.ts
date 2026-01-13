@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { I18nService, SystelabTranslateModule } from 'systelab-translate';
+import { SystelabTranslateModule } from 'systelab-translate';
 import { AbstractApiGrid } from './abstract-api-grid.component';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { GridContextMenuComponent } from './contextmenu/grid-context-menu-component';
 import { ContextMenuItemComponent } from '../contextmenu/context-menu-item.component';
-import { PreferencesService, SystelabPreferencesModule } from 'systelab-preferences';
+import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridContextMenuCellRendererComponent } from './contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from './contextmenu/grid-header-context-menu-renderer.component';
@@ -46,11 +46,6 @@ export class TestData {
 export class SystelabGridComponent extends AbstractApiGrid<TestData> implements OnInit {
 
 	private totalItems = 10;
-
-	public constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
-					   protected dialogService: DialogService) {
-		super(preferencesService, i18nService, dialogService);
-	}
 
 	public ngOnInit() {
 		super.ngOnInit();

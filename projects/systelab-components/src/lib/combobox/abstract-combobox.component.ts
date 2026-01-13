@@ -1,12 +1,31 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GetRowIdParams, GridApi, GridOptions, GridReadyEvent, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
+import {
+	GetRowIdParams,
+	GridApi,
+	GridOptions,
+	GridReadyEvent,
+	RowSelectedEvent,
+	RowSelectionOptions
+} from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
-declare var jQuery: any;
+declare let jQuery: any;
 
 @Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
@@ -731,7 +750,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	@HostListener('window:resize', ['$event'])
+	@HostListener('window:resize')
 	public onResize() {
 		if (this.isDropDownOpen()) {
 			this.closeDropDown();

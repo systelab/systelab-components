@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { CellKeyDownEvent, IsFullWidthRowParams, RowSelectedEvent } from 'ag-grid-community';
+import { RowSelectedEvent } from 'ag-grid-community';
 import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -19,10 +19,9 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input() public searcher: AbstractSearcher<T>;
 	@Output() public gridReady: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
-				protected override dialogService: DialogService) {
-		super(preferencesService, i18nService, dialogService);
-	}
+	protected override preferencesService = inject(PreferencesService);
+	protected override i18nService = inject(I18nService);
+	protected override dialogService = inject(DialogService);
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -44,8 +43,8 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		this.gridReady.emit(true);
 	}
 
-	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
-		return this.searcher.getIsFullWidthRow(isFullWidthRowParams);
+	protected override getIsFullWidthRow(): boolean {
+		return this.searcher.getIsFullWidthRow();
 	}
 
 	public override getFullWidthCellRenderer(): any {

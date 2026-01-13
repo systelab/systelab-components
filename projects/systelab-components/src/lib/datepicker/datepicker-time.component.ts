@@ -1,9 +1,7 @@
-import { Component, Input, Renderer2 } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import { TouchSpinValues } from '../spinner/touch.spin-values';
-import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
-import { PrimeNG } from 'primeng/config';
 
 @Component({
     selector: 'systelab-date-time',
@@ -22,8 +20,8 @@ export class DatepickerTimeComponent extends DatepickerComponent {
 	public touchSpinHourValues: TouchSpinValues;
 	public touchSpinMinutesValues: TouchSpinValues;
 
-	constructor(myRenderer: Renderer2, i18nService: I18nService, dataTransformerService: DataTransformerService, config: PrimeNG) {
-		super(myRenderer, i18nService, dataTransformerService, config);
+	constructor() {
+		super();
 
 		this.touchSpinHourValues = new TouchSpinValues(0, 0, 23, 1);
 		this.touchSpinMinutesValues = new TouchSpinValues(0, 0, 59, 1);
