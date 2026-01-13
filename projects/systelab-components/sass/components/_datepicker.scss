@@ -1,5 +1,4 @@
-@use "../variables" as *;
-@use "bootstrap/scss/bootstrap" as *;
+@use "../variables" as Vars;
 
 /* This styles are used to override the default primeng styles for datepicker (https://www.primefaces.org/primeng/#/datepicker).*/
 
@@ -84,7 +83,7 @@ p-datepicker {
     }
 
     .p-datepicker-header {
-      background: $medium-gray;
+      background: Vars.$medium-gray;
     }
 
     .p-datepicker-calendar {
@@ -94,7 +93,7 @@ p-datepicker {
           td {
             a, span {
               &.p-state-active {
-                background-color: $medium-gray !important;
+                background-color: Vars.$medium-gray !important;
               }
             }
           }
@@ -122,17 +121,15 @@ p-datepicker {
   width: 100%;
   
   input {
-    padding: .25em;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding: 1px .25em;
     width: 100%;
-    height: $form-elements-height;
+    height: Vars.$form-elements-height;
     border: 1px solid var(--slab_component_border_color);
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+    font: normal Vars.$slab-base-body-font-size Vars.$slab-base-body-font-family;
 
     &:focus:not(.p-autocomplete-input) {
-      border-color: $slab-focus-component-border-color !important;
-      box-shadow: $slab-focus-component-shadow !important;
+      border-color: Vars.$slab-focus-component-border-color !important;
+      box-shadow: Vars.$slab-focus-component-shadow !important;
     }
 
     &:hover:enabled:not(:focus) {
@@ -351,14 +348,14 @@ p-datepicker {
 }
 
 .slab-custom-calendar-footer {
-  background-color: $light-gray;
+  background-color: Vars.$light-gray;
   padding: 1rem !important;
 }
 
 .slab-custom-calendar-header {
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid Vars.$light-gray;
   background: white !important;
-  color: $darker-gray !important;
+  color: Vars.$darker-gray !important;
   padding: 15px;
   height: 65px !important;
   a {
@@ -477,17 +474,15 @@ systelab-datepicker {
     color: #333;
     background: #fff;
     border-radius: 0.25rem;
-    padding: .25em;
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding: 1px .25em;
     width: 100%;
-    height: $form-elements-height;
+    height: Vars.$form-elements-height;
     border: 1px solid var(--slab_component_border_color);
-    font: normal $slab-base-body-font-size $slab-base-body-font-family;
+    font: normal Vars.$slab-base-body-font-size Vars.$slab-base-body-font-family;
 
     &:focus {
-      border-color: $slab-focus-component-border-color !important;
-      box-shadow: $slab-focus-component-shadow !important;
+      border-color: Vars.$slab-focus-component-border-color !important;
+      box-shadow: Vars.$slab-focus-component-shadow !important;
     }
 
     &:hover:enabled:not(:focus) {
@@ -545,9 +540,7 @@ systelab-date-time {
     }
 
     label {
-      margin: auto;
-      margin-left: 1px;
-      margin-right: 1px;
+      margin: auto 1px;
     }
   }
 

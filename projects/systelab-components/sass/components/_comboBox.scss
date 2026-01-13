@@ -1,15 +1,14 @@
-@use "../variables" as *;
-@use "../../../../node_modules/bootstrap/scss/bootstrap" as *;
+@use "../variables" as Vars;
 
 .slab-combobox {
 
-  border-radius: $border-radius;
+  border-radius: Vars.$border-radius;
   border: solid 1px var(--slab_component_border_color);
 
   &:focus-within {
-    border-color: $slab-focus-component-border-color;
+    border-color: Vars.$slab-focus-component-border-color;
     outline: 0;
-    box-shadow: $slab-focus-component-shadow;
+    box-shadow: Vars.$slab-focus-component-shadow;
   }
 
   .slab-dropdown-toogle {
@@ -18,18 +17,16 @@
   }
 
   .slab-combo-button {
-    @include user-selection(none);
+    @include Vars.user-selection(none);
 
     cursor: pointer;
     padding: 1px 8px;
-    border-radius: 4px;
     color: #424242;
     background-color: white;
     border-color: transparent;
     border-left: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    width: $form-elements-height;
+    border-radius: 0 4px 4px 0;
+    width: Vars.$form-elements-height;
     margin-top: 0;
     -webkit-transition: all linear 0.2s;
     transition: all linear 0.2s;
@@ -61,24 +58,24 @@
   }
 
   .slab-combo-label {
-    @include user-selection(none);
+    @include Vars.user-selection(none);
   }
 
   .slab-combo-input {
     cursor: pointer;
     text-overflow: ellipsis !important;
     border-right: none !important;
-    border-radius: $border-radius;
+    border-radius: Vars.$border-radius;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
     border-color: transparent;
     float: left;
-    width: calc(100% - #{$form-elements-height}) !important;
-    font-family: $slab-base-body-font-family;
+    width: calc(100% - #{Vars.$form-elements-height}) !important;
+    font-family: Vars.$slab-base-body-font-family;
     white-space: nowrap;
     overflow: hidden;
     padding: 0 5px;
-    height: $form-elements-height - 2px;
+    height: Vars.$form-elements-height - 2px;
 
     &.form-control[readonly] {
       background-color: white;
@@ -96,7 +93,7 @@
     border: solid 1px #d6d6d6;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    height: $form-elements-height;
+    height: Vars.$form-elements-height;
   }
 
   .slab-color-tag {
@@ -114,10 +111,7 @@
   }
 
   .slab-filter-container {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 2px;
+    margin: 5px 5px 2px;
 
     input {
       padding-left: 5px;
@@ -143,8 +137,8 @@
     }
 
     .ag-theme-alpine .ag-header {
-      height: 0px !important;
-      min-height: 0px !important;
+      height: 0 !important;
+      min-height: 0 !important;
       border-bottom: none !important;
       border-top: none !important;
     }
@@ -178,7 +172,7 @@
 
               .ag-cell {
                 border: none;
-                padding: 0 $slab-combo-check-cell-padding;
+                padding: 0 Vars.$slab-combo-check-cell-padding;
 
                 &.ag-cell-focus {
                   border: none !important;

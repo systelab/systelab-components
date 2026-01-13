@@ -1,9 +1,9 @@
-@use "../variables" as *;
+@use "../variables" as Vars;
 .table {
   color: var(--slab_foreground_primary);
 
   tr {
-    height: $slab-table-min-row-height;
+    height: Vars.$slab-table-min-row-height;
 
     th,
     td {

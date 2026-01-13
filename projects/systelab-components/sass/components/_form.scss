@@ -1,4 +1,4 @@
-@use '../variables'as *;
+@use '../variables'as Vars;
 .slab-form-title {
   font-size: 1.1rem;
   font-weight: bold;
@@ -17,12 +17,12 @@
 
 .form-control {
   padding: 2px 7px;
-  height: $form-elements-height;
+  height: Vars.$form-elements-height;
   border: 1px solid var(--slab_component_border_color);
   &:focus-within {
-    border-color: $slab-focus-component-border-color;
+    border-color: Vars.$slab-focus-component-border-color;
     outline: 0;
-    box-shadow: $slab-focus-component-shadow;
+    box-shadow: Vars.$slab-focus-component-shadow;
   }
 }
 
@@ -30,7 +30,7 @@
   padding-top: 0;
   padding-bottom: 0;
   margin-bottom: 0; // Override the `<label>` default
-  line-height: $form-elements-height !important;
+  line-height: Vars.$form-elements-height !important;
 }
 
 .row {
@@ -38,7 +38,7 @@
 }
 
 .row:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .disabled {

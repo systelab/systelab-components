@@ -1,4 +1,4 @@
-@use '../variables'as *;
+@use '../variables'as Vars;
 .dropdown, .dropup {
   .dropdown-toggle::after {
     display: none;
@@ -65,7 +65,7 @@
 
     li {
       cursor: pointer;
-      line-height: $slab-dropdown-line-height;
+      line-height: Vars.$slab-dropdown-line-height;
       padding: 0 15px;
       margin: 0 2px;
       text-decoration: none;
@@ -88,7 +88,7 @@
       &.disabled {
         a {
           cursor: not-allowed;
-          color: $slab-dropdown-disabled-fg-color;
+          color: Vars.$slab-dropdown-disabled-fg-color;
         }
 
         &:hover {
