@@ -1,4 +1,4 @@
-import { Directive, inject } from '@angular/core';
+import { Directive, OnInit } from '@angular/core';
 import { AbstractGrid } from './abstract-grid.component';
 import { Observable } from 'rxjs';
 import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
@@ -9,12 +9,9 @@ import { DialogService } from '../modal/dialog/dialog.service';
 @Directive()
 export abstract class AbstractApiGrid<T> extends AbstractGrid<T> implements IDatasource {
 
-	protected override preferencesService = inject(PreferencesService);
-	protected override i18nService = inject(I18nService);
-	protected override dialogService = inject(DialogService);
-
-	constructor() {
-		super();
+	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
+				protected override dialogService: DialogService) {
+		super(preferencesService, i18nService, dialogService);
 		this.allowRowManaged = false;
 	}
 

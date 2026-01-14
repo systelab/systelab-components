@@ -122,7 +122,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			options.headerHeight = 0;
 		}
 
-		options.isFullWidthRow = (isFullWidthRowParams: IsFullWidthRowParams) => this.getIsFullWidthRow();
+		options.isFullWidthRow = (isFullWidthRowParams: IsFullWidthRowParams) => this.getIsFullWidthRow(isFullWidthRowParams);
 		options.fullWidthCellRenderer = this.getFullWidthCellRenderer();
 		options.context = {componentParent: this};
 		options.onCellEditingStarted = (event) => this.onCellEditingStarted(event);

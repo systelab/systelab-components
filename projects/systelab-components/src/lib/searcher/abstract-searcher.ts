@@ -1,5 +1,6 @@
 import { SearcherDialogParameters } from './searcher.dialog.parameters';
 import { Observable } from 'rxjs';
+import { IsFullWidthRowParams } from 'ag-grid-community';
 import { Directive } from '@angular/core';
 
 @Directive()
@@ -44,7 +45,7 @@ export abstract class AbstractSearcher<T> {
 
 	public abstract getGridOptionsPreferencesPrefix(): string;
 
-	public getIsFullWidthRow(): boolean {
+	public getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
 		return false;
 	}
 
