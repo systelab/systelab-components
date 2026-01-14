@@ -34,26 +34,22 @@ export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<TreeListBox
 	}
 
 	protected getData(): Observable<Array<any>> {
-		const testList = [];
-		testList.push({
-			'centerID':           1,
-			'centerDescription':  'Center',
-			'serviceID':          1,
-			'serviceDescription': 'Service 1'
-		});
-		testList.push({
-			'centerID':           1,
-			'centerDescription':  'Center',
-			'serviceID':          2,
-			'serviceDescription': 'Service 2'
-		});
-		testList.push({
-			'centerID':           1,
-			'centerDescription':  'Center',
-			'serviceID':          3,
-			'serviceDescription': 'Service 3'
-		});
-		return of(testList);
+		return of(this.getListBoxValues());
+	}
+
+	private getListBoxValues(): any[] {
+		const values = [];
+		for(let i = 1; i <= 20; i++) {
+			for(let j = 1; j <= 5; j++) {
+				values.push({
+					'centerID':           i,
+					'centerDescription':  'Center ' + i,
+					'serviceID':          j,
+					'serviceDescription': 'Service ' + j + ' of Center ' + i
+				});
+			}
+		}
+		return values;
 	}
 
 	protected getSelectionPrefix(level: number): string {
