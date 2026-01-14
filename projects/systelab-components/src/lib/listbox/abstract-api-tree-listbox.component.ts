@@ -196,9 +196,8 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
-
+		this.addSuppressSizeToFitToColumnsWithWidthDefined(this.columnDefs);
 		this.gridOptions.columnDefs = this.columnDefs;
-
 	}
 
 	protected override getRowNodeId(item: GetRowIdParams): string | number | undefined {
