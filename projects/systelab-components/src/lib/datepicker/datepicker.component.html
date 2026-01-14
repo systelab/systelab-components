@@ -49,7 +49,7 @@
           (click)="setTodayDate()">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
         }
         <systelab-button id="clear" size="small" type="danger" class="ml-auto"
-        (click)="clearDate()">{{ 'COMMON_CLEAR' | translate | async }}</systelab-button>
+        (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</systelab-button>
       </div>
     }
   </ng-template>

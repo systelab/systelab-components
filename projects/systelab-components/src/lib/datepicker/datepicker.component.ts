@@ -4,12 +4,11 @@ import {
 	DoCheck,
 	ElementRef,
 	EventEmitter,
-	inject,
 	Input,
 	OnInit,
 	Output,
 	Renderer2,
-	ViewChild,
+	ViewChild
 } from '@angular/core';
 import { addDays } from 'date-fns';
 import { DatePicker } from 'primeng/datepicker';
@@ -87,10 +86,8 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	protected myRenderer = inject(Renderer2);
-	protected i18nService = inject(I18nService);
-	protected dataTransformerService = inject(DataTransformerService);
-	protected config = inject(PrimeNG);
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNG) {
+	}
 
 	public ngOnInit() {
 		this.getLanguage();
@@ -333,7 +330,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 		}
 	}
 
-	public clearDate(): void {
+	public clearDate(event): void {
 		if (this.currentCalendar) {
 			this.currentDate = null;
 			this.currentCalendar.clear();
