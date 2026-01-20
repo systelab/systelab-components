@@ -59,7 +59,7 @@ export class ESMockI18nService {
 
 export class ESMockI18nService2 {
 	public get() {
-		// eslint-disable-next-line @typescript-eslint/naming-convention
+		 
 		const translations = {
 			COMMON_JANUARY: 'Enero',
 			COMMON_FEBRUARY: 'Febrero',

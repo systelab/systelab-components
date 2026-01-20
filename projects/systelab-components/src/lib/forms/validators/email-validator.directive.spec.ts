@@ -2,7 +2,7 @@ import { UntypedFormControl } from '@angular/forms';
 import { emailValidator } from './email-validator.directive';
 
 describe('Email validation', () => {
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	 
 	beforeEach(() => {});
 
 	[	'valid@email.com',
