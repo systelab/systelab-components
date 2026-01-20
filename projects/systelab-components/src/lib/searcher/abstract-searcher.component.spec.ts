@@ -1,4 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
+import { Component, Directive, Input, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -194,38 +194,40 @@ describe('Systelab Searcher', () => {
 
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
-    declarations: [
-        MockTooltipDirective,
-        DialogBottomComponent,
-        DialogHeaderComponent,
-        SearcherDialog,
-        GridContextMenuCellRendererComponent,
-        GridHeaderContextMenuComponent,
-        ContextMenuItemComponent,
-        ContextMenuSubmenuItemComponent,
-        ComboBoxInputRendererComponent,
-        SystelabSearcherComponent,
-        SearcherTestComponent,
-        GridContextMenuComponent,
-        GridHeaderContextMenu,
-        SearcherTableComponent,
-        ButtonComponent,
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [
-        DialogService,
-        MessagePopupService,
-        provideHttpClient(withInterceptorsFromDi())
-    ]
-});
+			declarations: [
+				MockTooltipDirective,
+				DialogBottomComponent,
+				DialogHeaderComponent,
+				SearcherDialog,
+				GridContextMenuCellRendererComponent,
+				GridHeaderContextMenuComponent,
+				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
+				ComboBoxInputRendererComponent,
+				SystelabSearcherComponent,
+				SearcherTestComponent,
+				GridContextMenuComponent,
+				GridHeaderContextMenu,
+				SearcherTableComponent,
+				ButtonComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule,
+			],
+			providers: [
+				DialogService,
+				MessagePopupService,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		});
 	});
 
 	beforeEach(() => {

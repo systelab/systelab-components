@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,22 +55,28 @@ describe('Systelab Numpad', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [NumPadComponent, NumpadTestComponent, DialogHeaderComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        ButtonModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule,
-        SystelabTranslateModule],
-    providers: [
-        DialogService,
-        MessagePopupService,
-        I18nService,
-        provideHttpClient(withInterceptorsFromDi())
-    ]
-})
-			.compileComponents();
+			declarations: [
+				NumPadComponent,
+				NumpadTestComponent,
+				DialogHeaderComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				ButtonModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+				SystelabTranslateModule,
+			],
+			providers: [
+				DialogService,
+				MessagePopupService,
+				I18nService,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

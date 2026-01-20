@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {I18nService, SystelabTranslateModule} from 'systelab-translate';
+import { NO_ERRORS_SCHEMA, provideZoneChangeDetection } from '@angular/core';
+import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { DialogRef } from '../../modal/dialog/dialog-ref';
-import { GridColumnOptionsDialog } from './grid-column-options-dialog.component';
-import { GridColumnOptionsDialogParameters } from './grid-column-options-dialog.component';
+import { GridColumnOptionsDialog, GridColumnOptionsDialogParameters } from './grid-column-options-dialog.component';
 import { TwoListItem } from '../../twolist/two-list-utilities';
 import { GridColumnsOptions } from './grid-column-options';
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
@@ -22,14 +21,15 @@ describe('GridColumnOptionsDialog', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-    declarations: [GridColumnOptionsDialog],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [SystelabTranslateModule],
-    providers: [
-        { provide: DialogRef, useValue: dialogMock },
-        provideHttpClient(withInterceptorsFromDi()),
-    ]
-}).compileComponents();
+            declarations: [GridColumnOptionsDialog],
+            schemas: [NO_ERRORS_SCHEMA],
+            imports: [SystelabTranslateModule],
+            providers: [
+                { provide: DialogRef, useValue: dialogMock },
+                provideHttpClient(withInterceptorsFromDi()),
+                provideZoneChangeDetection(),
+            ],
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { I18nService } from 'systelab-translate';
 import { TranslationHelper } from './translation-helper';
+import { provideZoneChangeDetection } from '@angular/core';
 
 export class ESMockI18nService {
 
@@ -14,8 +15,11 @@ describe('Translation Helper Test', () => {
 	let service: TranslationHelper;
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [TranslationHelper,
-				{provide: I18nService, useClass: ESMockI18nService}]
+			providers: [
+				TranslationHelper,
+				{provide: I18nService, useClass: ESMockI18nService},
+				provideZoneChangeDetection(),
+			]
 		});
 		service = TestBed.inject(TranslationHelper);
 	});

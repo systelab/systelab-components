@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SpyMenuComponent } from './spy-menu.component';
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { SpyMenuItem } from 'systelab-components';
 import { By } from '@angular/platform-browser';
 
@@ -42,7 +42,8 @@ describe('Systelab SpyMenuComponent', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [SpyMenuComponent, SpyMenuTestComponent],
+			declarations: [ SpyMenuComponent, SpyMenuTestComponent ],
+			providers: [ provideZoneChangeDetection() ],
 		})
 			.compileComponents();
 		fixture = TestBed.createComponent(SpyMenuTestComponent);

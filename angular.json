@@ -39,6 +39,10 @@
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/pako/dist/pako.min.js"
+            ],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
             ]
           }
         },
@@ -168,7 +172,11 @@
           "builder": "@angular/build:karma",
           "options": {
             "main": "projects/showcase/src/test.ts",
-            "polyfills": "projects/showcase/src/polyfills.ts",
+            "polyfills": [
+              "projects/showcase/src/polyfills.ts",
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/showcase/tsconfig.spec.json",
             "karmaConfig": "projects/showcase/karma.conf.js",
             "assets": [

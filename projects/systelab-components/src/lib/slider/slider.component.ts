@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 @Component({
     selector: 'systelab-slider',
     templateUrl: 'slider.component.html',
-    standalone: false
+    standalone: false,
 })
 export class SliderComponent {
 
@@ -17,17 +17,19 @@ export class SliderComponent {
 
 	@ViewChild('range', {static: false}) element: ElementRef;
 
-	public sliderChangeEvent(event: any) {
-		const v = this.element.nativeElement.value;
-		if (v !== this.value) {
-			this.value = v;
-			this.valueChange.emit(this.value);
+	public sliderChangeEvent(evt: Event) {
+		const newValue = Number((evt.target as HTMLInputElement).value);
+		if (newValue !== this.value) {
+			this.value = newValue;
+			setTimeout(() => {
+				this.valueChange.emit(this.value);
+			});
 		}
 	}
 
-	public sliderInputEvent(event: any) {
+	public sliderInputEvent(evt: Event) {
 		if (this.continuous) {
-			this.value = this.element.nativeElement.value;
+			this.value = Number((evt.target as HTMLInputElement).value);
 			this.valueChange.emit(this.value);
 		}
 	}
