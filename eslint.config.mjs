@@ -36,7 +36,6 @@ export default tseslint.config(
         },
         rules: {
             "@typescript-eslint/consistent-type-definitions": "error",
-            "@typescript-eslint/no-use-before-define": "error",
             "brace-style": ["error", "1tbs"],
             "valid-typeof": "error",
         }

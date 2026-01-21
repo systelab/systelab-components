@@ -1,9 +1,6 @@
-import { ColumnEventName, HeaderColumnId, ColumnInstanceId } from 'ag-grid-community/dist/types/src/interfaces/iColumn';
-import {AutosizeGridHelper, initializeCalculatedGridState} from './autosize-grid-helper';
 import {
     AbstractColDef,
     ColDef,
-    ColumnEvent,
     ColumnGroup,
     ColumnGroupShowType,
     ColumnPinnedType,
@@ -13,6 +10,7 @@ import {
     ProvidedColumnGroup,
     SortDirection
 } from 'ag-grid-community';
+import { AutosizeGridHelper, initializeCalculatedGridState } from './autosize-grid-helper';
 
 describe('AutosizeGridHelper', () => {
     let gridApiMock: jasmine.SpyObj<GridApi>;
@@ -53,10 +51,10 @@ describe('AutosizeGridHelper', () => {
                 isTooltipFieldContainsDots: function (): boolean {
                     throw new Error('Function not implemented.');
                 },
-                addEventListener: function <T extends ColumnEventName>(eventType: T, userListener: (params: ColumnEvent<T>) => void): void {
+                addEventListener: function (eventType: string, userListener: (params: any) => void): void {
                     throw new Error('Function not implemented.');
                 },
-                removeEventListener: function <T extends ColumnEventName>(eventType: T, userListener: (params: ColumnEvent<T>) => void): void {
+                removeEventListener: function (eventType: string, userListener: (params: any) => void): void {
                     throw new Error('Function not implemented.');
                 },
                 isSuppressNavigable: function (rowNode: IRowNode): boolean {
@@ -186,7 +184,7 @@ describe('AutosizeGridHelper', () => {
                     throw new Error('Function not implemented.');
                 },
                 isColumn: true,
-                getUniqueId: function (): HeaderColumnId {
+                getUniqueId: function (): any {
                     throw new Error('Function not implemented.');
                 },
                 getMinWidth: function (): number {
@@ -219,7 +217,7 @@ describe('AutosizeGridHelper', () => {
                 isVisible: function (): boolean {
                     throw new Error('Function not implemented.');
                 },
-                getInstanceId: function (): ColumnInstanceId {
+                getInstanceId: function (): any {
                     throw new Error('Function not implemented.');
                 },
                 getOriginalParent: function (): ProvidedColumnGroup | null {
@@ -254,10 +252,10 @@ describe('AutosizeGridHelper', () => {
                 isTooltipFieldContainsDots: function (): boolean {
                     throw new Error('Function not implemented.');
                 },
-                addEventListener: function <T extends ColumnEventName>(eventType: T, userListener: (params: ColumnEvent<T>) => void): void {
+                addEventListener: function (eventType: string, userListener: (params: any) => void): void {
                     throw new Error('Function not implemented.');
                 },
-                removeEventListener: function <T extends ColumnEventName>(eventType: T, userListener: (params: ColumnEvent<T>) => void): void {
+                removeEventListener: function (eventType: string, userListener: (params: any) => void): void {
                     throw new Error('Function not implemented.');
                 },
                 isSuppressNavigable: function (rowNode: IRowNode): boolean {
@@ -390,7 +388,7 @@ describe('AutosizeGridHelper', () => {
                     throw new Error('Function not implemented.');
                 },
                 isColumn: true,
-                getUniqueId: function (): HeaderColumnId {
+                getUniqueId: function (): any {
                     throw new Error('Function not implemented.');
                 },
                 getMinWidth: function (): number {
@@ -423,7 +421,7 @@ describe('AutosizeGridHelper', () => {
                 isVisible: function (): boolean {
                     throw new Error('Function not implemented.');
                 },
-                getInstanceId: function (): ColumnInstanceId {
+                getInstanceId: function (): any {
                     throw new Error('Function not implemented.');
                 },
                 getOriginalParent: function (): ProvidedColumnGroup | null {

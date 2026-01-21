@@ -37,14 +37,14 @@ describe('Systelab Slider', () => {
 	});
 
 	it('should have an initial value', () => {
-		expect(queryLabelElement().textContent).toContain(30);
+		expect(queryLabelElement().textContent).toContain('30');
 	});
 
 	it('should have the changed value if there is a change', () => {
 		component.value = 90;
 		fixture.detectChanges();
 
-		expect(queryLabelElement().textContent).toContain(90);
+		expect(queryLabelElement().textContent).toContain('90');
 	});
 
 	function queryLabelElement(): HTMLElement {
