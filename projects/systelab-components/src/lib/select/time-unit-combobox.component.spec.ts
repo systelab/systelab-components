@@ -85,14 +85,13 @@ describe('Systelab Time unit selector', () => {
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
 				AgGridModule,
-				TestModule
+				TestModule,
 			],
 			providers: [
 				provideHttpClient(withInterceptorsFromDi()),
 				provideZoneChangeDetection(),
 			],
-		})
-			.compileComponents();
+		}).compileComponents();
 	});
 
 	beforeEach(() => {
@@ -105,60 +104,39 @@ describe('Systelab Time unit selector', () => {
 			.toBeDefined();
 	});
 
-	it('should select days', (done) => {
+	it('should select days', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'COMMON_DAYS');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_DAYS');
-						done();
-					});
-			});
+		await fixture.whenStable();
+		clickOnRow(fixture, 'COMMON_DAYS');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.id).toEqual('COMMON_DAYS');
+
 	});
 
-	it('should select weeks', (done) => {
+	it('should select weeks', async () => {
+			clickOnDropDown(fixture);
+			await fixture.whenStable();
+			clickOnRow(fixture, 'COMMON_WEEKS');
+			await fixture.whenStable();
+			expect(fixture.componentInstance.id).toEqual('COMMON_WEEKS');
+
+		});
+
+	it('should select months', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'COMMON_WEEKS');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_WEEKS');
-						done();
-					});
-			});
+		await fixture.whenStable();
+		clickOnRow(fixture, 'COMMON_MONTHS');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.id).toEqual('COMMON_MONTHS');
+
 	});
 
-	it('should select months', (done) => {
+	it('should select years', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'COMMON_MONTHS');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_MONTHS');
-						done();
+		await fixture.whenStable();
+		clickOnRow(fixture, 'COMMON_YEARS');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.id).toEqual('COMMON_YEARS');
 
-					});
-			});
-	});
-
-	it('should select years', (done) => {
-		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'COMMON_YEARS');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('COMMON_YEARS');
-						done();
-					});
-			});
 	});
 });

@@ -107,18 +107,13 @@ describe('Systelab Gender selector', () => {
 
 	});
 
-	it('should select all', (done) => {
+	it('should select all', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'A');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('A');
-						done();
-					});
-			});
+		await fixture.whenStable();
+		clickOnRow(fixture, 'A');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.id).toEqual('A');
+
 	});
 
 	it('should select unknown', async () => {
@@ -132,32 +127,20 @@ describe('Systelab Gender selector', () => {
 			.toEqual('U');
 	});
 
-	it('should select male', (done) => {
+	it('should select male', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'M');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('M');
-						done();
+		await fixture.whenStable();
+		clickOnRow(fixture, 'M');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.id).toEqual('M');
 
-					});
-			});
 	});
 
-	it('should select female', (done) => {
+	it('should select female', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnRow(fixture, 'F');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.id)
-							.toEqual('F');
-						done();
-					});
-			});
+		await fixture.whenStable();
+		clickOnRow(fixture, 'F');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.id).toEqual('F');
 	});
 });

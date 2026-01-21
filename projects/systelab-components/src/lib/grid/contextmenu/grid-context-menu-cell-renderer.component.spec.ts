@@ -125,6 +125,13 @@ describe('GridContextMenuCellRendererComponent', () => {
             ctrlKey: true,
         } as unknown as MouseEvent;
 
+        it('should call setSelected(false) if removeSelectionOnOpenContextMenu is true and ctrlKey is true', () => {
+            component.agInit(paramsMock);
+            const event = { ctrlKey: true } as MouseEvent;
+            component.dotsClicked(event);
+            expect(component['container'].dotsClicked).toHaveBeenCalledWith(component.rowIndex, jasmine.anything(), jasmine.anything());
+        });
+
         it('Should call dotsClicked if event.ctrlKey is true & removeSelectionOnOpenContextMenu is false', () => {
             component.agInit(paramsMock);
             component.dotsClicked(eventMock);

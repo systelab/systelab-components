@@ -252,14 +252,10 @@ describe('Systelab Searcher', () => {
 			.toBeFalsy();
 	});
 
-	it('should select a value if code is entered', (done) => {
+	it('should select a value if code is entered', async () => {
 		enterText(fixture, '1');
-		fixture.whenStable()
-			.then(() => {
-				expect(getDescription(fixture))
-					.toEqual('1');
-				done();
-			});
+		await fixture.whenStable();
+		expect(getDescription(fixture)).toEqual('1');
 	});
 
 	it('should focus input when showing help dialog',  async () => {
@@ -270,7 +266,7 @@ describe('Systelab Searcher', () => {
 		expect(isSearchInputFocused()).toBeTruthy();
 	});
 
-	it('should show counter with the selected items number in the submit button', async() => {
+	it('should show counter with the selected items number in the submit button', async () => {
 		spyOn(SearcherTableComponent.prototype as any, 'refresh').and.stub();
 		enterText(fixture, '1');
 		await fixture.whenStable();

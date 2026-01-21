@@ -111,60 +111,46 @@ describe('Systelab Select Combobox', () => {
 			.toBeDefined();
 	});
 
-	it('should be able to focus in search input when the dropdown is opened and filter input is true', (done) => {
+	it('should be able to focus in search input when the dropdown is opened and filter input is true', async ()  => {
 		const fixture = setupWithFilter();
 		spyOn(fixture.componentInstance.combobox.filterInput.nativeElement, 'focus');
 		fixture.detectChanges();
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				expect(fixture.componentInstance.combobox.filterInput.nativeElement.focus)
-					.toHaveBeenCalled();
-				done();
-			});
+		await fixture.whenStable();
+		expect(fixture.componentInstance.combobox.filterInput.nativeElement.focus).toHaveBeenCalled();
 	});
 
-	it('should not be able to focus in search input when the dropdown is opened and filter input is false', (done) => {
+	it('should not be able to focus in search input when the dropdown is opened and filter input is false', async () => {
 		const fixture = setup();
 		fixture.detectChanges();
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				expect(fixture.componentInstance.combobox.filterInput)
-					.toBeUndefined();
-				done();
-			});
+		await fixture.whenStable();
+		expect(fixture.componentInstance.combobox.filterInput).toBeUndefined();
 	});
 
-	it('should include an empty option when property withEmptyValue is set to true', (done) => {
+	it('should include an empty option when property withEmptyValue is set to true', async () => {
 		const fixture = setup();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.detectChanges();
 		fixture.componentInstance.combobox.values = fixture.componentInstance.valuesList;
 		fixture.detectChanges();
 		clickButton(fixture);
-		fixture.whenStable()
-			.then(() => {
-				fixture.detectChanges();
-				expect(fixture.componentInstance.combobox._values.length)
-					.toEqual(4);
-				done();
-			});
+		await fixture.whenStable();
+		fixture.detectChanges();
+		expect(fixture.componentInstance.combobox._values.length).toEqual(4);
+
 	});
 
-	it('should not include an empty option when property withEmptyValue is set to false', (done) => {
+	it('should not include an empty option when property withEmptyValue is set to false', async () => {
 		const fixture = setup();
 		clickButton(fixture);
 		fixture.detectChanges();
-		fixture.whenStable()
-			.then(() => {
-				expect(fixture.componentInstance.combobox._values.length)
-					.toEqual(3);
-				done();
-			});
+		await fixture.whenStable();
+		expect(fixture.componentInstance.combobox._values.length).toEqual(3);
+
 	});
 
-	it('should set delete icon to rubbish icon', (done) => {
+	it('should set delete icon to rubbish icon', async ()  => {
 		const fixture = setup();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = 1;
@@ -174,15 +160,12 @@ describe('Systelab Select Combobox', () => {
 		clickButton(fixture);
 		fixture.componentInstance.selectValue('1');
 		fixture.detectChanges();
-		fixture.whenStable()
-			.then(() => {
-				expect(fixture.debugElement.nativeElement.querySelectorAll('.icon-trash').length)
-					.toEqual(1);
-				done();
-			});
+		await fixture.whenStable();
+		expect(fixture.debugElement.nativeElement.querySelectorAll('.icon-trash').length).toEqual(1);
+
 	});
 
-	it('should set the Description 0 element that has a zero number id', (done) => {
+	it('should set the Description 0 element that has a zero number id', async () => {
 		const fixture = setup();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = '1';
@@ -191,12 +174,8 @@ describe('Systelab Select Combobox', () => {
 		clickButton(fixture);
 		fixture.componentInstance.selectValue(0);
 		fixture.detectChanges();
-		fixture.whenStable()
-			.then(() => {
-				expect(fixture.componentInstance.combobox._description)
-					.toEqual('Description 0');
-				done();
-			});
+		await fixture.whenStable();
+		expect(fixture.componentInstance.combobox._description).toEqual('Description 0');
 	});
 
 });
