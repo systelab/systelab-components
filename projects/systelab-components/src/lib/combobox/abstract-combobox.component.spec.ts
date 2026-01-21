@@ -85,7 +85,7 @@ describe('Systelab Select Combobox', () => {
 		TestBed.resetTestingModule();
 	});
 
-	const setup = () => {
+	const setupWithoutFilter = () => {
 		const fixture = TestBed.createComponent(ComboboxTestComponent);
 		fixture.componentInstance.filter = false;
 		fixture.detectChanges();
@@ -106,9 +106,20 @@ describe('Systelab Select Combobox', () => {
 	};
 
 	it('should instantiate', () => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		expect(fixture.componentInstance)
 			.toBeDefined();
+	});
+
+	it('should display the correct description when a non-zero ID is selected', async () => {
+		const fixture = setupWithoutFilter();
+		fixture.detectChanges();
+
+		fixture.componentInstance.selectValue('1');
+		fixture.detectChanges();
+		await fixture.whenStable();
+
+		expect(fixture.componentInstance.combobox._description).toEqual('Description 1');
 	});
 
 	it('should be able to focus in search input when the dropdown is opened and filter input is true', async ()  => {
@@ -121,7 +132,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should not be able to focus in search input when the dropdown is opened and filter input is false', async () => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.detectChanges();
 		clickButton(fixture);
 		await fixture.whenStable();
@@ -129,7 +140,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should include an empty option when property withEmptyValue is set to true', async () => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.detectChanges();
 		fixture.componentInstance.combobox.values = fixture.componentInstance.valuesList;
@@ -142,7 +153,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should not include an empty option when property withEmptyValue is set to false', async () => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		clickButton(fixture);
 		fixture.detectChanges();
 		await fixture.whenStable();
@@ -151,7 +162,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should set delete icon to rubbish icon', async ()  => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = 1;
 		fixture.componentInstance.withDeleteOption = true;
@@ -166,7 +177,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should set the Description 0 element that has a zero number id', async () => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = '1';
 		fixture.componentInstance.withDeleteOption = true;
