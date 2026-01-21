@@ -52,15 +52,15 @@
     "@angular-eslint/eslint-plugin-template": "20.1.1",
     "@angular-eslint/schematics": "20.1.1",
     "@angular-eslint/template-parser": "20.1.1",
-    "@angular/build": "^21.0.5",
+    "@angular/build": "21.0.5",
     "@angular/cli": "21.0.5",
     "@angular/compiler-cli": "21.0.8",
     "@angular/language-service": "21.0.8",
     "@babel/core": "7.28.0",
     "@babel/preset-env": "7.28.0",
     "@babel/register": "7.27.1",
-    "@eslint/eslintrc": "^3.3.3",
-    "@eslint/js": "^9.39.2",
+    "@eslint/eslintrc": "3.3.3",
+    "@eslint/js": "9.39.2",
     "@interactjs/types": "1.10.27",
     "@types/jasmine": "5.1.14",
     "@types/jasminewd2": "2.0.13",
@@ -83,6 +83,6 @@
     "ng-packagr": "21.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.53.1"
+    "typescript-eslint": "8.53.1"
   }
 }

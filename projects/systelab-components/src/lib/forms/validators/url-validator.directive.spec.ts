@@ -2,9 +2,6 @@ import { UntypedFormControl } from '@angular/forms';
 import { urlValidator } from './url-validator.directive';
 
 describe('Url validation', () => {
-	 
-	beforeEach(() => {});
-
 	[	'plainUrl',
 		'https://myDomain.com',
 		'http://myDomain.cat',
