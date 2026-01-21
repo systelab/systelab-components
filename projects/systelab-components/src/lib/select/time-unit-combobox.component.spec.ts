@@ -76,7 +76,8 @@ describe('Systelab Time unit selector', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    imports: [BrowserModule,
+    imports: [
+		BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         DragDropModule,
@@ -84,7 +85,8 @@ describe('Systelab Time unit selector', () => {
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AgGridModule,
-        TestModule],
+        TestModule,
+	],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 			.compileComponents();
