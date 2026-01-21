@@ -1,0 +1,67 @@
+@use "../variables" as Vars;
+systelab-app-sidebar-small {
+
+  $sidebar-small-width: 60px !default;
+  $sidebar-small-margin-top: 35px !default;
+
+  .slab-app-sidebar-small-menu-container {
+    @include Vars.position(fixed, $top: Vars.$slab-app-header-height);
+
+    background-color: Vars.$background-secondary;
+    width: $sidebar-small-width;
+    height: calc(100% - #{Vars.$slab-app-header-height});
+
+    ul {
+      list-style-type: none;
+    }
+
+
+    .slab-app-sidebar-button-container {
+      margin-top: $sidebar-small-margin-top;
+      margin-bottom: 0 !important;
+      padding-left: 0;
+      width: 100% !important;
+      text-align: center;
+      background-color: Vars.$background-secondary;
+      @include Vars.user-selection(none);
+      color: #c9c9c9;
+
+      &.slab-bottom {
+        margin-top: 0;
+      }
+
+      .slab-app-sidebar-button {
+        position: relative;
+        width: 100%;
+
+
+        font-size: 26px;
+        cursor: pointer;
+
+        i {
+          margin-top: 15px;
+          margin-bottom: 15px;
+        }
+
+        &.selected, &:hover {
+          color: var(--primary);
+        }
+
+        &:hover {
+          background-color: #dedede;
+        }
+
+        .arrow-left {
+          position: absolute;
+          top: 18px;
+          right: -1px;
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-right: 10px solid var(--slab_background_primary);
+        }
+      }
+    }
+  }
+}

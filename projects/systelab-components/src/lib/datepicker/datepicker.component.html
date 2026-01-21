@@ -1,4 +1,4 @@
-<p-calendar #calendar [(ngModel)]="currentDate" [showIcon]="false"
+<p-datepicker #calendar [(ngModel)]="currentDate" [showIcon]="false"
   [dateFormat]="language.dateFormatValue"
   [firstDayOfWeek]="language.firstDayOfWeek"
   (onFocus)="saveEventOnFocus($event)"
@@ -11,6 +11,7 @@
   [focusTrap]="false"
   [maxDate]="maxDate"
   [inline]="inline"
+  [keepInvalid]="keepInvalid"
   [required]="required"
   [disabled]="disabled"
   [readonlyInput]="isTablet"
@@ -25,13 +26,17 @@
   @if (!onlyTime) {
     <ng-template pTemplate="header">
       <div id="{{datepickerId}}" class="slab-datepicker-header">
-        <a id="previousYear" class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
-        <a id="previousMonth" class="icon-angle-left slab-icon-medium" (click)="prevMonth()"></a>
-        <a id="nextYear" class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
-        <a id="nextMonth" class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
+        <div class="left-buttons">
+          <a id="previousYear" class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
+          <a id="previousMonth" class="icon-angle-left slab-icon-medium" (click)="prevMonth()"></a>
+        </div>
         <div class="p-datepicker-title d-flex align-items-center justify-content-center">
-          <span class="p-datepicker-month">{{ language.translations.monthNames[currentCalendar.currentMonth] }}&nbsp;</span>
           <span class="p-datepicker-year">{{ currentCalendar.currentYear }}</span>
+          <span class="p-datepicker-month">{{ language.translations.monthNames[currentCalendar.currentMonth] }}</span>
+        </div>
+        <div class="right-buttons">
+          <a id="nextMonth" class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
+          <a id="nextYear" class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
         </div>
       </div>
     </ng-template>
@@ -48,5 +53,5 @@
       </div>
     }
   </ng-template>
-</p-calendar>
+</p-datepicker>
 

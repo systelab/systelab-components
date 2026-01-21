@@ -1,0 +1,54 @@
+@use "../variables" as Vars;
+
+$chip-item-height: calc(#{Vars.$form-elements-height} - 6px);
+$chips-container-max-height: calc(#{Vars.$form-elements-height} * 5);
+systelab-chips {
+  .p-autocomplete {
+    min-height: Vars.$form-elements-height;
+    max-height: $chips-container-max-height;
+    &:not(.p-disabled).p-focus .p-autocomplete-input-multiple {
+      border-color: Vars.$slab-focus-component-border-color !important;
+      box-shadow: Vars.$slab-focus-component-shadow !important;
+    }
+    .p-autocomplete-input-multiple {
+      width: 100% !important;
+      margin: 0;
+      max-height: $chips-container-max-height;
+      overflow-y: auto;
+      border: 1px solid var(--slab_component_border_color) !important;
+      padding: 1px 5px;
+      border-radius: Vars.$input-border-radius;
+
+      &:hover:enabled:not(:focus) {
+        border-color:  var(--slab_component_border_color) !important;
+      }
+      .pi {
+        font-size: 15px;
+      }
+      .p-autocomplete-chip-item {
+        background-color: var(--primary);
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: $chip-item-height;
+        .p-autocomplete-chip.p-chip {
+          background-color: transparent;
+          color: white;
+          .p-autocomplete-chip-icon {
+            color: white;
+            height: calc(#{Vars.$form-elements-height}/2);
+            display: flex;
+          }
+        }
+      }
+      .p-autocomplete-input-chip .p-autocomplete-input {
+        height: calc(#{Vars.$form-elements-height} / 2);
+      }
+    }
+  }
+
+  .p-autocomplete-token-label {
+    margin-left: 10px;
+  }
+}

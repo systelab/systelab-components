@@ -1,0 +1,141 @@
+@use "../variables" as Vars;
+systelab-app-sidebar-large {
+  $sidebar-width: 200px !default;
+
+  .slab-app-sidebar-large-menu-container {
+    @include Vars.position(fixed, $top: Vars.$slab-app-header-height);
+
+    background-color: Vars.$background-secondary;
+    width: $sidebar-width;
+    height: calc(100% - #{Vars.$slab-app-header-height});
+
+    .slab-app-sidebar-tabs-container {
+      margin-top: 45px;
+      padding-left: 5px;
+      width: 100% !important;
+      background-color: Vars.$background-secondary;
+
+      .slab-app-sidebar-tab {
+        min-height: 50px;
+        width: 95%;
+        display: block;
+        background-color: white;
+        margin-bottom: 2px;
+        float: right;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-right: 1px solid Vars.$background-secondary;
+        border-top: 1px solid Vars.$background-secondary;
+        border-bottom: 1px solid Vars.$background-secondary;
+        cursor: pointer;
+
+        .slab-app-sidebar-tab-decoration {
+          width: 15px;
+          min-height: 50px;
+          display: inline-block;
+          background-color: Vars.$table-gray;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        span {
+          @include Vars.user-selection(none);
+
+          position: absolute;
+          margin-left: 15px;
+          margin-top: 15px;
+          color: black;
+        }
+
+        &.selected, &:hover {
+          border-right: 1px solid white;
+          border-top: 1px solid var(--primary);
+          border-bottom: 1px solid var(--primary);
+
+          .slab-app-sidebar-tab-decoration {
+            background-color: var(--primary);
+          }
+
+          span {
+            color: var(--primary);
+          }
+
+          .slab-app-sidebar-submenu {
+            margin-top: 55px;
+            height: 100%;
+
+            .slab-app-sidebar-tab-decoration {
+              background-color: Vars.$table-gray !important;
+            }
+
+            span {
+              font-size: 15px;
+              color: black !important;
+            }
+
+            li {
+              height: 52px;
+            }
+          }
+        }
+
+        .slab-app-sidebar-submenu {
+          margin-left: 2%;
+          padding-left: 0;
+          overflow: hidden;
+          height: 0;
+
+          li {
+            height: 0;
+            width: 95%;
+            display: block;
+            margin-bottom: 2px;
+            float: right;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-right: 1px solid Vars.$background-secondary;
+            border-top: 1px solid Vars.$background-secondary;
+            border-bottom: 1px solid Vars.$background-secondary;
+            cursor: pointer;
+            -webkit-transition: all 0.3s ease-out;
+
+            span {
+              font-size: 0;
+            }
+
+            &.selected, &:hover {
+              border-right: 1px solid white;
+              border-top: 1px solid var(--primary);
+              border-bottom: 1px solid var(--primary);
+
+              .slab-app-sidebar-tab-decoration {
+                background-color: var(--primary) !important;
+              }
+
+              span {
+                color: var(--primary) !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .slab-app-sidebar-actions-container {
+      bottom: 0;
+      position: absolute;
+      width: 94%;
+      padding: 0;
+      margin-left: 3%;
+
+      button {
+        width: 100%;
+        display: block;
+
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}

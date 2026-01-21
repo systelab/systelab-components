@@ -285,6 +285,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				colId:             	'itemDescription',
 				field:             	this.getDescriptionField(),
 				tooltipField: 		this.getDescriptionField(),
+				cellStyle: () => this.multipleSelection ? ({ paddingLeft: '0px' }) : null
 			}
 		];
 		this.gridOptions = {};

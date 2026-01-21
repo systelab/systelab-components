@@ -86,7 +86,6 @@ import { ShowcaseInnerGridComponent } from './components/grid/showcase-inner-gri
 import { ShowcaseContextPanel } from './components/context-panel/showcase-context-panel.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
-import { TreeModule } from 'primeng/tree';
 import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
 import { A11yModule } from '@angular/cdk/a11y';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -224,7 +223,6 @@ import { AngularSplitModule } from 'angular-split';
         AgGridModule,
         DragDropModule,
         OverlayModule,
-        TreeModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AutoCompleteModule,

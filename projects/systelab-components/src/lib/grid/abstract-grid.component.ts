@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowSelectionOptions } from 'ag-grid-community';
+import { ColDef, Column, GridApi, GridOptions, IsFullWidthRowParams, RowModelType, RowSelectionOptions } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -21,7 +21,8 @@ export type rowSelectionType = 'single' | 'multiple';
 export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandler, GridHeaderMenuActionHandler {
 
 	public static readonly contextMenuColId = 'contextMenu';
-	public static readonly selectionColId = 'selectCol';
+	public static readonly selectionColId = 'ag-Grid-SelectionColumn';
+	public static readonly clientSideRowModelType: RowModelType = 'clientSide';
 	public gridOptions: GridOptions;
 	public gridApi: GridApi;
 	public overlayNoRowsTemplate;
@@ -35,7 +36,16 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public multipleSelection = false;
 	@Input() public showChecks = false;
 	@Input() public headerCheckboxSelection = false;
-	@Input() public rowData: Array<T> = [];
+	@Input()
+	set rowData(value: Array<T>) {
+		if(value) {
+			this._rowData = [...value];
+		}
+	}
+
+	get rowData(): Array<T> {
+		return this._rowData;
+	}
 	@Input() public noRowsText;
 	@Input() public loadingText;
 	@Input() public removeSelectionOnOpenContextMenu = false;
@@ -50,10 +60,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@ViewChild('hidden', {static: true}) public hiddenElement: ElementRef;
 	@ViewChild('popupmenu', {static: false}) public popupmenu: GridContextMenuComponent<T>;
 	@ViewChild('headerpopupmenu', {static: false}) public headerPopupMenu: GridHeaderContextMenu<Object>;
-
+	public allowRowManaged: boolean = true;
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
+	private _rowData: Array<T>;
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
@@ -62,12 +73,14 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public ngOnInit(): void {
 
 		this.gridOptions = this.getInitialGridOptions();
-
 		if (this.noRowsText) {
 			this.overlayNoRowsTemplate = this.noRowsText;
 			this.overlayLoadingTemplate = this.loadingText;
 		}
 		this.calculatedGridState = initializeCalculatedGridState(this.autoSizeColumnsToContent);
+		if(this.gridOptions.rowModelType === AbstractGrid.clientSideRowModelType && this._rowData == undefined) {
+			this._rowData = new Array<T>();
+		}
 	}
 
 	protected getInitialGridOptions(): GridOptions {
@@ -78,6 +91,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.columnDefs = this.getColumnDefsWithOptions();
 		options.selectionColumnDef = this.getCheckColumnDef(this.getCheckColumnWidth());
 		options.rowSelection = this.getRowSelectionType();
+		options.rowModelType = 'clientSide';
 		options.rowHeight = Number(rowHeight);
 		options.headerHeight = Number(headerHeight);
 		options.suppressDragLeaveHidesColumns = true;
@@ -85,7 +99,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		options.stopEditingWhenCellsLoseFocus = true;
 		options.singleClickEdit = true;
 		options.defaultColDef = {
-			resizable: this.isColResizeEnabled()
+			resizable: this.isColResizeEnabled(),
+			sortable: false
 		};
 		options.localeText = {
 			noRowsToShow: this.i18nService.instant('COMMON_NO_ROWS_TO_SHOW'),
@@ -106,6 +121,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	protected onCellEditingStarted(event: any): void {
 		this.startCellEditorWithTab = event.event?.key === 'Tab';
+		if (this.gridApi?.getEditingCells().length > 1) {
+			this.gridApi.stopEditing();
+			event.api.startEditingCell({rowIndex: event.rowIndex, colKey: event.column});
+		}
 	}
 
 	public onModelUpdated(event: any) {
@@ -163,7 +182,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 						'width':         column.getActualWidth(),
 						'pivotIndex':    null,
 						'pinned':        null,
-						'rowGroupIndex': null
+						'rowGroupIndex': null,
+						'sortable': column.isSortable()
 					};
 
 					if (column.getColId() === AbstractGrid.contextMenuColId || column.getColId() === AbstractGrid.selectionColId) {
@@ -210,7 +230,6 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 
 	private getCheckColumnDef(width: number): ColDef {
 		return {
-			colId:             AbstractGrid.selectionColId,
 			type: 'selection',
 			cellClass: 'checkbox-cell',
 			headerName:        '',
@@ -346,7 +365,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		if (event.column.colId === 'contextMenu' && !(event.event.ctrlKey && this.showChecks)) {
 			event.node.setSelected(true);
 		} else {
-			if (event.column.colId === 'selectCol') {
+			if (event.column.colId === AbstractGrid.selectionColId) {
 				event.node.setSelected(!event.node.isSelected());
 			} else {
 				if (!event.column.isCellEditable(event.node)) {
@@ -401,7 +420,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, false));
 
 		options.visible = gridApi.getAllDisplayedColumns()
-			.filter(column => column.getColId() !== 'contextMenu' && column.getColId() !== 'selectCol')
+			.filter(column => column.getColId() !== 'contextMenu' && column.getColId() !== AbstractGrid.selectionColId)
 			.map(column => new TwoListItem(column.getColDef().headerName, column.getColDef().colId, false, true));
 
 		options.defaultVisibleColumns = columnDefs.filter(column => !column.hide)
@@ -426,7 +445,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		});
 		gridApi.setColumnsVisible(colsToApplyGridOptions, true);
 		gridApi.setColumnsVisible(gridApi.getColumns()
-			.filter(col => col.getColId() !== 'contextMenu' && col.getColId() !== 'selectCol')
+			.filter(col => col.getColId() !== 'contextMenu' && col.getColId() !== AbstractGrid.selectionColId)
 			.filter(col => !columnOptions.visible.some(tlp => tlp.colId === col.getColDef().colId)), false);
 	}
 

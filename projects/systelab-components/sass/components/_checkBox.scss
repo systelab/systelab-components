@@ -1,0 +1,131 @@
+@use '../variables'as Vars;
+
+// Hide native checkbox
+input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
+  @include Vars.position(absolute, $left: -9999px);
+  opacity: 0;
+}
+
+// Styles for label after checkbox
+input[type="checkbox"]:not(.slab-checkbox-not-show) + label {
+
+  @include Vars.user-selection(none);
+
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: Vars.$slab-checkbox-text-gap;
+  cursor: pointer;
+  font-size: 1rem;
+
+  &:empty {
+    padding-left: Vars.$slab-checkbox-height;
+    height: Vars.$form-elements-height;
+  }
+
+  &:before {
+    @include Vars.size(Vars.$slab-checkbox-height);
+
+    @include Vars.position(absolute, $top: null, $left: 0);
+
+    @include Vars.backface-visibility(hidden);
+
+    content: '';
+    z-index: 0;
+
+    text-align: center;
+    border-radius: 4px;
+    border: solid 1px var(--slab_component_border_color);
+    line-height: 1em;
+    color: Vars.$slab-checkbox-color;
+
+    font-weight: bold;
+    font-family: icomoon;
+    font-size: Vars.$slab-checkbox-height - 3px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+// Define background color and icon when checked
+input[type="checkbox"]:not(.slab-checkbox-not-show):checked + label:before {
+  content: '\F00c';
+  font-size: 16px;
+  padding-top: 1px;
+  background-color: Vars.$slab-checkbox-border-color;
+}
+
+input[type="checkbox"]:not(.slab-checkbox-not-show):focus + label:before {
+  border-color: Vars.$slab-focus-component-border-color;
+  outline: 0;
+  box-shadow: Vars.$slab-focus-component-shadow;
+}
+
+input[type="checkbox"]:not(.slab-checkbox-not-show):disabled + label {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ag-theme-alpine {
+
+  .ag-checkbox-input-wrapper {
+    input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
+      left: auto;
+      position: relative;
+    }
+
+    background: none !important;
+    font-family: 'icomoon' !important;
+    font-size: 21px !important;
+    border: solid 1px var(--slab_table_border_color) !important;
+    width: Vars.$slab-checkbox-grid-height !important;
+    height: Vars.$slab-checkbox-grid-height !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.after {
+      background-color: Vars.$white;
+      width: Vars.$slab-checkbox-grid-height !important;
+      height: Vars.$slab-checkbox-grid-height !important;
+      content: '' !important;
+    }
+  }
+
+  .ag-checkbox-input-wrapper::after {
+    color: transparent !important;
+  }
+
+  .ag-checkbox-input-wrapper.ag-checked::after {
+    content: '\f00c' !important;
+    font-size: 16px;
+    width: Vars.$slab-checkbox-grid-height !important;
+    height: Vars.$slab-checkbox-grid-height !important;
+    color: Vars.$white !important;
+    padding-top: 1px !important;
+    padding-left: 2px !important;
+    background-color: Vars.$slab-checkbox-border-color;
+  }
+
+  .ag-checkbox .ag-input-field {
+    width: Vars.$slab-checkbox-grid-height !important;
+    height: Vars.$slab-checkbox-grid-height !important;
+  }
+
+  .ag-checkbox-input-wrapper-cell-editor {
+    margin-top: 2px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ag-checkbox-renderer-click-wrapper {
+    z-index: 10;
+    position: absolute;
+    left: 0;
+  }
+
+  .ag-selection-checkbox-cell-renderer {
+    margin-right: 0 !important;
+  }
+}

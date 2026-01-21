@@ -5,17 +5,16 @@ import {
 	ElementRef,
 	EventEmitter,
 	Input,
-	OnDestroy,
 	OnInit,
 	Output,
 	Renderer2,
 	ViewChild
 } from '@angular/core';
 import { addDays } from 'date-fns';
-import { PrimeNGConfig } from 'primeng/api';
-import { Calendar } from 'primeng/calendar';
+import { DatePicker } from 'primeng/datepicker';
 import { I18nService } from 'systelab-translate';
 import { DataTransformerService } from './date-transformer.service';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
     selector: 'systelab-datepicker',
@@ -23,7 +22,7 @@ import { DataTransformerService } from './date-transformer.service';
     providers: [DataTransformerService],
     standalone: false
 })
-export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 
 	@Input() public disabled = false;
 	@Input() public error = false;
@@ -45,6 +44,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 	@Input() public showOtherMonths = true;
 	@Input() public selectOtherMonths = false;
 	@Input() public dateFormat: string;
+	@Input() public keepInvalid = false;
 
 	@Input()
 	get currentDate(): Date {
@@ -68,7 +68,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	@Output() public currentDateChange = new EventEmitter<Date>();
 
-	@ViewChild('calendar', {static: true}) public currentCalendar: Calendar;
+	@ViewChild('calendar', {static: true}) public currentCalendar: DatePicker;
 
 	public inputChanged = false;
 	protected _currentDate: Date;
@@ -78,10 +78,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public currentDocSize: number;
 	public currentLanguage: string;
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	public destroyWheelListener: Function;
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	public destroyKeyListener: Function;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
 	public isTablet = false;
@@ -90,7 +86,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	private headerElement: any = document.getElementById(this.datepickerId);
 
-	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNGConfig) {
+	constructor(protected myRenderer: Renderer2, protected i18nService: I18nService, protected dataTransformerService: DataTransformerService, protected config: PrimeNG) {
 	}
 
 	public ngOnInit() {
@@ -99,30 +95,90 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 		this.currentDocSize = window.innerWidth;
 		this.currentLanguage = this.i18nService.getCurrentLanguage();
 
-		this.addListeners();
 		if (navigator.userAgent.indexOf('iPad') > -1 || navigator.userAgent.indexOf('Android') > -1) {
 			this.isTablet = true;
 		}
 	}
 
 	public ngAfterViewInit() {
-		const newElement = document.createElement('i');
 		if (!this.inline) {
-			newElement.className = this.onlyTime ? 'icon-clock' : 'icon-calendar';
-			if (this.currentCalendar) {
-				if (this.autofocus) {
-					this.currentCalendar.el.nativeElement.querySelector('input')
-						.focus();
-				}
-				this.currentCalendar.el.nativeElement.childNodes[0].className = 'p-calendar slab-form-icon w-100';
-				this.currentCalendar.el.nativeElement.childNodes[0].appendChild(newElement);
+			this.addIconToDatepicker();
+		}
+		
+		if (this.currentCalendar && this.autofocus) {
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			if (inputElement) {
+				inputElement.focus();
 			}
 		}
-		if (this.tabindex) {
-			this.currentCalendar.el.nativeElement.querySelector('input')
-				.setAttribute('tabindex', this.tabindex);
+		
+		if (this.tabindex && this.currentCalendar) {
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			if (inputElement) {
+				inputElement.setAttribute('tabindex', this.tabindex.toString());
+			}
+		}
+	}
+
+	private addIconToDatepicker(): void {
+		if (!this.currentCalendar) {
+			return;
 		}
 
+		const datepickerElement = this.currentCalendar.el.nativeElement;
+		
+		// Función que intenta agregar el icono
+		const attemptAddIcon = (): boolean => {
+			const inputElement = datepickerElement.querySelector('input');
+			if (!inputElement || !inputElement.parentElement) {
+				return false;
+			}
+
+			const parentWrapper = inputElement.parentElement;
+			
+			// Verificar si ya existe un icono
+			if (parentWrapper.querySelector('i.icon-calendar, i.icon-clock')) {
+				return true;
+			}
+
+			// Crear y configurar el icono
+			const iconElement = document.createElement('i');
+			iconElement.className = this.onlyTime ? 'icon-clock' : 'icon-calendar';
+			
+			// Configurar el contenedor
+			parentWrapper.classList.add('slab-form-icon', 'w-100');
+			parentWrapper.style.position = 'relative';
+			parentWrapper.appendChild(iconElement);
+			
+			return true;
+		};
+
+		// Intentar agregar el icono inmediatamente
+		if (attemptAddIcon()) {
+			return;
+		}
+
+		// Si no funciona, usar MutationObserver para esperar cambios en el DOM
+		const observer = new MutationObserver((mutations) => {
+			for (const mutation of mutations) {
+				if (mutation.type === 'childList' || mutation.type === 'attributes') {
+					if (attemptAddIcon()) {
+						observer.disconnect();
+						return;
+					}
+				}
+			}
+		});
+
+		// Observar cambios en el elemento datepicker
+		observer.observe(datepickerElement, {
+			childList: true,
+			subtree: true,
+			attributes: true
+		});
+
+		// Desconectar el observer después de 5 segundos como medida de seguridad
+		setTimeout(() => observer.disconnect(), 5000);
 	}
 
 	public ngDoCheck() {
@@ -144,11 +200,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 		}
 	}
 
-	public ngOnDestroy() {
-		this.destroyKeyListener?.();
-		this.destroyWheelListener?.();
-	}
-
 	public selectDate(): void {
 		this.formatError = false;
 		this.currentDateChange.emit(this.currentDate);
@@ -157,8 +208,9 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public changeDate(): void {
 		this.formatError = false;
-		if (this.currentCalendar?.inputfieldViewChild.nativeElement.value !== undefined) {
-			const dateStr = this.currentCalendar.inputfieldViewChild.nativeElement.value.trim()
+		const inputElement = this.currentCalendar?.el.nativeElement.querySelector('input');
+		if (inputElement?.value !== undefined) {
+			const dateStr = inputElement.value.trim()
 				.toLowerCase();
 			if (this.inputChanged) {
 				if (dateStr.length >= 2) {
@@ -222,7 +274,8 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public onInput(event: KeyboardEvent) {
 		if (event.code === 'Enter' || event.code === 'Tab') {
-			this.currentCalendar.inputfieldViewChild.nativeElement.blur();
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			inputElement.blur();
 			this.currentCalendar.onBlur.emit(event);
 			this.closeDatepicker();
 		} else {
@@ -249,54 +302,38 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public nextMonth(): void {
 		if (this.currentCalendar) {
-			let month = this.currentCalendar.currentMonth;
-			if (month < 11) {
-				month++;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-			} else {
-				month = 0;
-				let year = this.currentCalendar.currentYear;
-				year++;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-				this.currentCalendar.onYearDropdownChange(year.toString());
-			}
+			this.currentCalendar.navForward(null);
 		}
 	}
 
 	public prevMonth(): void {
 		if (this.currentCalendar) {
-			let month = this.currentCalendar.currentMonth;
-			if (month > 0) {
-				month--;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-			} else {
-				month = 11;
-				let year = this.currentCalendar.currentYear;
-				year--;
-				this.currentCalendar.onMonthDropdownChange(month.toString());
-				this.currentCalendar.onYearDropdownChange(year.toString());
-			}
+			this.currentCalendar.navBackward(null);
 		}
 	}
 
 	public nextYear(): void {
 		if (this.currentCalendar) {
-			const currentYear = this.currentCalendar.currentYear + 1;
-			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+			// En PrimeNG 20, navegar un año adelante
+			for (let i = 0; i < 12; i++) {
+				this.currentCalendar.navForward(null);
+			}
 		}
 	}
 
 	public prevYear(): void {
 		if (this.currentCalendar) {
-			const currentYear = this.currentCalendar.currentYear - 1;
-			this.currentCalendar.onYearDropdownChange(currentYear.toString());
+			// En PrimeNG 20, navegar un año atrás
+			for (let i = 0; i < 12; i++) {
+				this.currentCalendar.navBackward(null);
+			}
 		}
 	}
 
 	public clearDate(event): void {
 		if (this.currentCalendar) {
 			this.currentDate = null;
-			this.currentCalendar.onClearButtonClick(event);
+			this.currentCalendar.clear();
 			this.currentDateChange.emit(this.currentDate);
 			this.inputChanged = false;
 		}
@@ -312,8 +349,8 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 
 	public closeDatepicker(): void {
 		if (this.currentCalendar) {
-			this.currentCalendar.focus = false;
-			this.currentCalendar.overlayVisible = false;
+			this.currentCalendar.hideOverlay();
+			this.currentCalendar.el.nativeElement.blur();
 		}
 	}
 
@@ -383,17 +420,5 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck, OnDe
 		}
 
 		this.config.setTranslation(this.language.translations);
-	}
-
-	private addListeners(): void {
-		this.destroyWheelListener = this.myRenderer.listen('window', 'wheel', () => {
-			this.closeDatepicker();
-		});
-
-		this.destroyKeyListener = this.myRenderer.listen('document', 'keydown', (evt: KeyboardEvent) => {
-			if (evt.key === 'Escape' || evt.key === 'Tab') {
-				this.closeDatepicker();
-			}
-		});
 	}
 }

@@ -1,0 +1,59 @@
+@use '../variables'as Vars;
+.slab-icon-medium {
+    font-size: 200%;
+    vertical-align: -16%;
+}
+
+.slab-form-icon {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+
+    & > [class*='icon-'] {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 16px;
+        width: 16px;
+        font-size: 14px;
+        color: #999999;
+        pointer-events: none;
+    }
+}
+
+.slab-icon,
+[class*='icon-'] {
+    @include Vars.font-smoothing(antialiased, grayscale);
+
+    display: inline-block;
+    line-height: 1;
+    font-weight: normal;
+    font-style: normal;
+
+    &.dark-green {
+        color: Vars.$dark-green;
+    }
+
+    &.danger {
+        color: var(--danger) !important;
+    }
+
+    &.warning {
+        color: var(--warning) !important;
+    }
+
+    &.info {
+        color: var(--text-color) !important;
+    }
+}
+
+[class*='icon-'],
+.slab-icon,
+.slab-icon:hover,
+.slab-icon:focus {
+    text-decoration: none;
+}

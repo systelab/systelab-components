@@ -7,7 +7,7 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { ButtonModule } from 'primeng/button';
-import { Calendar, CalendarModule } from 'primeng/calendar';
+import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
@@ -50,20 +50,24 @@ export class AuxFunctionClass {
 	}
 
 	public static enterText(fixture: ComponentFixture<DatepickerTestComponent>, text: string): void {
-		const inputComponent = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
-		inputComponent.value = text;
-		inputComponent.dispatchEvent(new Event('keydown'));
-		inputComponent.dispatchEvent(new Event('input'));
-		inputComponent.dispatchEvent(new Event('keyup'));
-		fixture.detectChanges();
-		inputComponent.dispatchEvent(new Event('blur'));
-		fixture.detectChanges();
+		const inputComponent = fixture.debugElement.query(By.css('input'));
+		if (inputComponent?.nativeElement) {
+			inputComponent.nativeElement.value = text;
+			inputComponent.nativeElement.dispatchEvent(new Event('keydown'));
+			inputComponent.nativeElement.dispatchEvent(new Event('input'));
+			inputComponent.nativeElement.dispatchEvent(new Event('keyup'));
+			fixture.detectChanges();
+			inputComponent.nativeElement.dispatchEvent(new Event('blur'));
+			fixture.detectChanges();
+		}
 	}
 
 	public static clickOnInput(fixture: ComponentFixture<DatepickerTestComponent>): void {
-		const button = fixture.debugElement.query(By.css('.p-inputtext')).nativeElement;
-		button.click();
-		fixture.detectChanges();
+		const button = fixture.debugElement.query(By.css('input'));
+		if (button?.nativeElement) {
+			button.nativeElement.click();
+			fixture.detectChanges();
+		}
 	}
 
 	public static isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
@@ -130,7 +134,7 @@ describe('Systelab DatepickerComponent', () => {
         FormsModule,
         OverlayModule,
         ButtonModule,
-        CalendarModule,
+        DatePickerModule,
         SystelabTranslateModule],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
@@ -448,7 +452,7 @@ describe('Systelab DatepickerComponent', () => {
 	describe('Set of specs for calendar with inputs showOtherMonths', () => {
 		const setup = (showOtherMonths = true) => {
 
-			const fixtureDatePicker = TestBed.createComponent(Calendar);
+			const fixtureDatePicker = TestBed.createComponent(DatePicker);
 			const calendarComponent = fixtureDatePicker.componentInstance;
 
 			 calendarComponent.showOtherMonths = showOtherMonths;
