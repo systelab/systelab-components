@@ -91,4 +91,23 @@ describe('Systelab SpyMenuComponent', () => {
 		expect(selectedElement).toBe('Section 3');
 	});
 
+	it('should update the highlighted item when sectionSelected is changed programmatically', () => {
+		// Cambiamos la sección seleccionada desde el componente de prueba
+		fixture.componentInstance.sectionSelected = 'section2';
+		fixture.detectChanges();
+
+		const selectedElement = fixture.debugElement.nativeElement.querySelector('.spy-menu-item--selected');
+		const text = selectedElement.children[0].innerText;
+
+		expect(text).toBe('Section 2');
+	});
+
+	it('should render the correct labels for all menu items', () => {
+		const menuItems = fixture.debugElement.nativeElement.querySelectorAll('.spy-menu-item');
+
+		expect(menuItems[0].innerText).toContain('Section 1');
+		expect(menuItems[1].innerText).toContain('Section 2');
+		expect(menuItems[2].innerText).toContain('Section 3');
+	});
+
 });
