@@ -55,6 +55,13 @@ describe('Systelab SpyMenuComponent', () => {
 		expect(fixture.componentInstance).toBeDefined();
 	});
 
+	it('should highlight the first section by default upon initialization', () => {
+		const selectedElement = fixture.debugElement.nativeElement.querySelector('.spy-menu-item--selected');
+		const text = selectedElement.children[0].innerText;
+
+		expect(text).toBe('Section 1');
+	});
+
 	it('should create spy menu', () => {
 		expect(component).toBeDefined();
 	});
