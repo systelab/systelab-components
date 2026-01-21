@@ -25,7 +25,7 @@ describe('Systelab Slider', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
     		declarations: [SliderComponent, SliderTestComponent],
-			providers: [provideZoneChangeDetection()]
+			providers: [provideZoneChangeDetection()],
 		});
 		fixture = TestBed.createComponent(SliderTestComponent);
 		component = fixture.componentInstance;
