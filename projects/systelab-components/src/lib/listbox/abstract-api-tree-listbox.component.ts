@@ -196,14 +196,13 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
-
+		this.addSuppressSizeToFitToColumnsWithWidthDefined(this.columnDefs);
 		this.gridOptions.columnDefs = this.columnDefs;
-
 	}
 
 	protected override getRowNodeId(item: GetRowIdParams): string | number | undefined {
-		if (item?.data?.nodeData[this.getIdField(1)]) {
-			return item.level + '-' + item.data.nodeData[this.getIdField(1)];
+		if (item?.data?.nodeData[this.getIdField(item?.data?.level)]) {
+			return item.level + '-' + item.data.nodeData[this.getIdField(item?.data?.level)];
 		} else {
 			return null;
 		}
@@ -215,8 +214,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 				next:  (dataVector: Array<T>) => {
 					this.loadValues(dataVector);
 					this.gridApi.hideOverlay();
-					this.rowData = this.treeValues;
-					this.gridApi.redrawRows();
+					this.rowData = [...this.treeValues];
 					if (this.multipleSelection) {
 						this.initSelectionList();
 					} else if (this.selectedTreeItem) {
