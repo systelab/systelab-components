@@ -120,32 +120,20 @@ describe('Systelab Color picker', () => {
 			.toBeDefined();
 	});
 
-	it('should select a color', (done) => {
+	it('should select a color', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnColor(fixture, '#008000');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.colorId)
-							.toEqual('#008000');
-						done();
-					});
-			});
+		await fixture.whenStable();
+		clickOnColor(fixture, '#008000');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.colorId).toEqual('#008000');
 	});
 
-	it('should select another color', (done) => {
+	it('should select another color', async () => {
 		clickOnDropDown(fixture);
-		fixture.whenStable()
-			.then(() => {
-				clickOnColor(fixture, '#000080');
-				fixture.whenStable()
-					.then(() => {
-						expect(fixture.componentInstance.colorId)
-							.toEqual('#000080');
-						done();
-					});
-			});
+		await fixture.whenStable();
+		clickOnColor(fixture, '#000080');
+		await fixture.whenStable();
+		expect(fixture.componentInstance.colorId).toEqual('#000080');
 	});
 
 	it('should call method change when a color is selected', async () => {
@@ -160,14 +148,11 @@ describe('Systelab Color picker', () => {
 			.toHaveBeenCalled();
 	});
 
-	it('should have the show the color set', (done) => {
+	it('should have the show the color set', async () => {
 		fixture.componentInstance.colorId = '#0080FF';
 		fixture.detectChanges();
-		fixture.whenStable()
-			.then(() => {
-				checkHasStyle(fixture, 'background-color: rgb(0, 128, 255)');
-				done();
-			});
+		await fixture.whenStable();
+		checkHasStyle(fixture, 'background-color: rgb(0, 128, 255)');
 	});
 
 });
