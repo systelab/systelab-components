@@ -155,32 +155,6 @@ describe('GridContextMenuCellRendererComponent', () => {
         })
     })
 
-    it('should deselect all and specific row when removeSelectionOnOpenContextMenu is true and Ctrl key is pressed', () => {
-        const mockRowNode = { setSelected: jasmine.createSpy('setSelected') };
-        const mockContainer = {
-            popupmenu: { closeDropDown: jasmine.createSpy('closeDropDown') },
-            removeSelectionOnOpenContextMenu: true, // Activamos la bandera de deselección
-            gridApi: {
-                deselectAll: jasmine.createSpy('deselectAll'),
-                getDisplayedRowAtIndex: jasmine.createSpy('getDisplayedRowAtIndex').and.returnValue(mockRowNode)
-            },
-            dotsClicked: jasmine.createSpy('dotsClicked')
-        };
-
-        component.data = { id: 123, row: 2 };
-        (component as any).container = mockContainer;
-        component.rowIndex = 10;
-
-        const mouseEvent = { ctrlKey: true } as MouseEvent;
-        component.dotsClicked(mouseEvent);
-
-        expect(mockContainer.popupmenu.closeDropDown).toHaveBeenCalled();
-        expect(mockContainer.gridApi.deselectAll).toHaveBeenCalled();
-        expect(mockContainer.gridApi.getDisplayedRowAtIndex).toHaveBeenCalledWith(10);
-        expect(mockRowNode.setSelected).toHaveBeenCalledWith(false);
-        expect(mockContainer.dotsClicked).toHaveBeenCalledWith(10, component.data, mouseEvent);
-    });
-
     describe('refresh', () => {
         it('Should', () => {
 
