@@ -23,6 +23,7 @@ before_install:
 
 install:
   - npm install -g makeshift && makeshift -s @systelab-technologies -r https://registry.npmjs.org
+  - npm install -g codecov
   - npm install -g codacy-coverage
   - npm ci
 
@@ -35,9 +36,7 @@ script:
   - npm run test
 
 after_success:
-  - curl -Os https://cli.codecov.io/latest/linux/codecov
-  - chmod +x codecov
-  - ./codecov upload-process -t ${CODECOV_TOKEN} -f coverage/systelab-components/lcov.info
+  - cat coverage/systelab-components/lcov.info | codecov
   - cat ./coverage/systelab-components/lcov.info | codacy-coverage
 
 before_deploy: |
