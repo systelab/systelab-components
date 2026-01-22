@@ -15,8 +15,7 @@ export class ShowcaseComponent {
 	public itemsNav: NavbarItem[] = [];
 	public currentNav = 0;
 	private currentTheme = 'default';
-
-
+	
 	constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 	            protected themeService: ThemeService) {
 		this.itemsNav.push(new NavbarItem(0, 'Form Components', '', false, true, true, () => this.selectNav(0)));
