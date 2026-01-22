@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -85,23 +85,25 @@ describe('Systelab App Sidebar Large', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        TooltipDirective,
-        ApplicationSidebarLargeComponent,
-        AppSidebarLargeTestComponent
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule],
-    providers: [
-        TooltipDirective,
-        provideHttpClient(withInterceptorsFromDi())
-    ]
-})
-			.compileComponents();
+			declarations: [
+				TooltipDirective,
+				ApplicationSidebarLargeComponent,
+				AppSidebarLargeTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+			],
+			providers: [
+				TooltipDirective,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PositiveIntegerInputCellEditorComponent } from './positive-integer-input-cell-editor.component';
+import { provideZoneChangeDetection } from '@angular/core';
 
 describe('PositiveIntegerInputCellEditorComponent', () => {
     let component: PositiveIntegerInputCellEditorComponent;
@@ -8,6 +9,7 @@ describe('PositiveIntegerInputCellEditorComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PositiveIntegerInputCellEditorComponent],
+            providers: [ provideZoneChangeDetection() ],
         });
 
         fixture = TestBed.createComponent(PositiveIntegerInputCellEditorComponent);

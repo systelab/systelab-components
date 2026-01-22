@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,16 +43,19 @@ export class GenderSelectTestComponent {
 }
 
 @NgModule({
-	declarations: [GenderSelect,
+	declarations: [
+		GenderSelect,
 		GenderSelectTestComponent,
 		GridContextMenuCellRendererComponent,
 		ComboBoxInputRendererComponent,
-		GridHeaderContextMenuComponent],
+		GridHeaderContextMenuComponent,
+	],
 	imports:      [
 		CommonModule,
 		FormsModule,
 		SystelabTranslateModule,
-		AgGridModule]
+		AgGridModule,
+	],
 })
 class GenderSelectTestModule {
 }
@@ -75,18 +78,22 @@ describe('Systelab Gender selector', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule,
-        GenderSelectTestModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule,
+				GenderSelectTestModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

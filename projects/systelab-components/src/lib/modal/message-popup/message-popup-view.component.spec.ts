@@ -10,6 +10,7 @@ import { DialogRef } from '../dialog/dialog-ref';
 import { MessagePopupButton } from './message-popup.service';
 import { ButtonComponent } from '../../button/button.component';
 import { MessageWithIconComponent } from './message-with-icon.component';
+import { provideZoneChangeDetection } from '@angular/core';
 
 
 describe('Systelab MessagePopupViewComponent', () => {
@@ -22,15 +23,23 @@ describe('Systelab MessagePopupViewComponent', () => {
 	beforeEach(async () => {
 		spyDialogRef = jasmine.createSpyObj('DialogRef', ['context', 'close']);
 		await TestBed.configureTestingModule({
-    declarations: [ButtonComponent, MessageWithIconComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        SystelabTranslateModule],
-    providers: [{ provide: DialogRef, useValue: spyDialogRef }, provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				ButtonComponent,
+				MessageWithIconComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				SystelabTranslateModule,
+			],
+			providers: [
+				{ provide: DialogRef, useValue: spyDialogRef },
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(async () => {

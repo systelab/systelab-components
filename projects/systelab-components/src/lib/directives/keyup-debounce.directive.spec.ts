@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,18 +32,25 @@ describe('Systelab KeyupDebounce Directive', () => {
 	let inputEl: DebugElement;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [KeyupDebounceDirectiveTest, KeyupDebounceDirective],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				KeyupDebounceDirectiveTest,
+				KeyupDebounceDirective
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 		fixture = TestBed.createComponent(KeyupDebounceDirectiveTest);
 		inputEl = fixture.debugElement.query(By.css('input'));
 	});

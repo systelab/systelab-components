@@ -1,11 +1,11 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { DialogRef, DialogService } from 'systelab-components';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupButton, MessagePopupService } from './message-popup.service';
 import { MessageWithIconComponent } from './message-with-icon.component';
-import {NgZone} from "@angular/core";
-import {MessagePopupViewComponent} from "./message-popup-view.component";
+import { NgZone, provideZoneChangeDetection } from "@angular/core";
+import { MessagePopupViewComponent } from "./message-popup-view.component";
 
 const yesNoNoTemplate = {
     titleDescription: 'Test',
@@ -62,9 +62,9 @@ describe('MessagePopupService', () => {
                 DialogService,
                 {provide: DialogRef, useValue: spyDialogRef},
                 {provide: I18nService, useClass: I18nService},
-				provideHttpClient(withInterceptorsFromDi())
-
-			]
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
 		});
 		service = TestBed.inject(MessagePopupService);
 		ngZone = TestBed.inject(NgZone);

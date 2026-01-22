@@ -1,2 +1,10 @@
-<input #range type="range" min="{{ min }}" max="{{ max }}" value="{{ value }}" step="{{ step }}"
-  (change)="sliderChangeEvent($event)" (input)="sliderInputEvent($event)" class="slab-slider" id="myRange" />
+<input
+    #range
+    type="range"
+    [min]="min"
+    [max]="max"
+    [value]="value"
+    [step]="step"
+    (change)="sliderChangeEvent($event)"
+    (input)="sliderInputEvent($event)"
+    class="slab-slider"/>

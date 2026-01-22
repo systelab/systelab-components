@@ -1,5 +1,12 @@
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
-import { ChangeDetectorRef, Component, NO_ERRORS_SCHEMA, Renderer2, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+	ChangeDetectorRef,
+	Component,
+	NO_ERRORS_SCHEMA,
+	provideZoneChangeDetection,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import { AutocompleteApiComboBox, KeyName } from './autocomplete-api-combobox.component';
 import { Observable, of } from 'rxjs';
 import { GridContextMenuCellRendererComponent } from '../../grid/contextmenu/grid-context-menu-cell-renderer.component';
@@ -14,7 +21,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { Column, GridApi, GridReadyEvent, RowNode } from 'ag-grid-community';
+import { GridApi, RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -122,28 +129,31 @@ describe('AutocompleteApiAutocomplete', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        GridContextMenuCellRendererComponent,
-        GridHeaderContextMenuComponent,
-        ComboBoxInputRendererComponent,
-        SystelabAutocompleteComponent,
-        AutocompleteTestComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [
-        Renderer2,
-        ChangeDetectorRef,
-        provideHttpClient(withInterceptorsFromDi()),
-    ]
-}).compileComponents();
+			declarations: [
+				GridContextMenuCellRendererComponent,
+				GridHeaderContextMenuComponent,
+				ComboBoxInputRendererComponent,
+				SystelabAutocompleteComponent,
+				AutocompleteTestComponent,
+			],
+			schemas: [NO_ERRORS_SCHEMA],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule,
+			],
+			providers: [
+				Renderer2,
+				ChangeDetectorRef,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

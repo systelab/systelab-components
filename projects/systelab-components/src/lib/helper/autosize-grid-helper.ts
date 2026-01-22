@@ -1,4 +1,4 @@
-import { Column, GridApi, GridOptions } from 'ag-grid-community';
+import { Column, GridApi } from 'ag-grid-community';
 
 export interface CalculatedGridState {
 	minRow: number;

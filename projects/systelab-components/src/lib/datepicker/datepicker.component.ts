@@ -381,7 +381,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 		const weekDaysNamesShort: Array<string> = [];
 		const monthNames: Array<string> = [];
 		const monthNamesShort: Array<string> = [];
-		/* eslint-disable max-len */
+		 
 		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY'])
 			.subscribe((res) => {
 				weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);

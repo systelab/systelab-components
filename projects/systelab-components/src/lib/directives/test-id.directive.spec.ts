@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, DebugElement, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { TestIdDirective } from './test-id.directive';
@@ -16,8 +16,9 @@ describe('SystelabTestId Directive without module configuration', () => {
     let fixture: ComponentFixture<SystelabTestIdDirectiveTestComponent>;
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        imports: [BrowserModule],
+        imports: [ BrowserModule ],
         declarations: [ SystelabTestIdDirectiveTestComponent, TestIdDirective ],
+        providers: [ provideZoneChangeDetection() ],
         schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       }).compileComponents();
 

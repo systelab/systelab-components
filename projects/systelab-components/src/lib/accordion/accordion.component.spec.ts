@@ -1,3 +1,4 @@
+import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -14,7 +15,8 @@ describe('Systelab Accordion', () => {
 			imports: [BrowserModule],
 			providers: [
 				PreferencesService,
-				provideHttpClient(withInterceptorsFromDi())
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
 			]
 		}).compileComponents();
 

@@ -86,7 +86,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.gridApi?.redrawRows();
 	}
 
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	 
 	public override doClick(row: any): void {
 		if (!this.multipleSelection && !this.isDisabled) {
 			const selectionLevel = row.node.data.level;
@@ -97,7 +97,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		}
 	}
 
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	 
 	public changeValues(event: any): void {
 		if (this.multipleSelection) {
 			this.addRemoveToMultipleSelectedItem(event);
@@ -150,7 +150,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		return false;
 	}
 
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	 
 	public override onModelUpdated(pEvent: any): void {
 	}
 

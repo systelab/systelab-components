@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 @Component({
     selector: 'systelab-slider',
     templateUrl: 'slider.component.html',
-    standalone: false
+    standalone: false,
 })
 export class SliderComponent {
 
