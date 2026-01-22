@@ -1,6 +1,6 @@
 {
   "name": "systelab-components",
-  "version": "21.0.0",
+  "version": "21.1.0",
   "license": "MIT",
   "keywords": [
     "Angular",
@@ -27,7 +27,7 @@
     "mobile-drag-drop": "^3.0.0-rc.0",
     "popper.js": "^1.16.1",
     "primeicons": "^7.0.0",
-    "primeng": "~20.0.0",
+    "primeng": "~21.0.0",
     "systelab-preferences": "^21.0.0",
     "systelab-translate": "^21.0.0",
     "interactjs": "^1.10.11"
