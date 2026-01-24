@@ -23,7 +23,7 @@
             <showcase-combobox-searcher [(id)]="comboSearcherId" [(description)]="comboSearcherDescription">
                 <systelab-select [values]="comboOptionList"
                                  [id]="comboSearcherId"
-                                 [description]="comboSearcherDescription" />
+                                 [description]="comboSearcherDescription"/>
             </showcase-combobox-searcher>
         </div>
     </div>
@@ -34,7 +34,7 @@
                 <systelab-select
                         [multipleSelection]="true"
                         [(multipleSelectedItemList)]="selectedComboOptionList"
-                        [values]="comboOptionList" />
+                        [values]="comboOptionList"/>
             </showcase-combobox-searcher>
         </div>
     </div>
@@ -44,7 +44,7 @@
             <showcase-combobox-searcher [multipleSelection]="true" [(multipleSelectedItemList)]="selectedComboOptionListPaginate">
                 <showcase-api-paginate-combobox
                         [multipleSelection]="true"
-                        [(multipleSelectedItemList)]="selectedComboOptionListPaginate" />
+                        [(multipleSelectedItemList)]="selectedComboOptionListPaginate"/>
             </showcase-combobox-searcher>
         </div>
     </div>
@@ -54,7 +54,22 @@
             <showcase-combobox-searcher [treeSearcher]="true"
                                         [(id)]="comboTreeSearcherId"
                                         [(description)]="comboTreeSearcherDescription">
-                <showcase-inner-tree-generic-combobox [description]="comboTreeSearcherDescription" [id]="comboTreeSearcherId" />
+                <showcase-inner-tree-generic-combobox [description]="comboTreeSearcherDescription" [id]="comboTreeSearcherId"/>
+            </showcase-combobox-searcher>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <label class="col-md-3 col-form-label">Combo Tree Searcher multiple</label>
+        <div class="col-md-9">
+            <showcase-combobox-searcher [treeSearcher]="true"
+                                        [(id)]="comboTreeSearcherIdMultiple"
+                                        [(description)]="comboTreeSearcherDescription">
+                <showcase-inner-tree-generic-combobox
+                        [isAllSelectable]="false"
+                        [multipleSelection]="true"
+                        [multipleSelectedItemList]="selectedComboOptionListTree"
+                        (multipleSelectedItemListChange)="change($event)"
+                        [description]="comboTreeSearcherDescription" [id]="comboTreeSearcherId"/>
             </showcase-combobox-searcher>
         </div>
     </div>
@@ -66,7 +81,7 @@
                                         [(id)]="comboTreeHeaderSearcherId"
                                         [(description)]="comboTreeHeaderSelectableSearcherDescription">
                 <showcase-inner-tree-generic-combobox [description]="comboTreeHeaderSelectableSearcherDescription"
-                                              [id]="comboTreeHeaderSearcherId"/>
+                                                      [id]="comboTreeHeaderSearcherId"/>
             </showcase-combobox-searcher>
         </div>
     </div>
@@ -76,7 +91,7 @@
             <showcase-combobox-searcher [(id)]="disabledComboSearcherId" [(description)]="disabledComboSearcherDescription" [isDisabled]="true">
                 <systelab-select [values]="comboOptionList"
                                  [id]="disabledComboSearcherId"
-                                 [description]="disabledComboSearcherDescription" [isDisabled]="true" />
+                                 [description]="disabledComboSearcherDescription" [isDisabled]="true"/>
             </showcase-combobox-searcher>
         </div>
     </div>
