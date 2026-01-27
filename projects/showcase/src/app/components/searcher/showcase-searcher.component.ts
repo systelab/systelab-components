@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ShowcaseSearcherData } from './showcase-searcher-data.model';
 
 @Component({
-    selector: 'showcase-searcher',
-    templateUrl: 'showcase-searcher.component.html',
-    standalone: false
+	selector:    'showcase-searcher',
+	templateUrl: 'showcase-searcher.component.html',
+	standalone:  false
 })
 export class ShowcaseSearcherComponent {
 	public comboOptionList: Array<ShowcaseSearcherData> = [];
@@ -47,5 +47,9 @@ export class ShowcaseSearcherComponent {
 		for (let i: number = 1; i <= numOfElements; i++) {
 			this.comboOptionList.push(new ShowcaseSearcherData(`${i}`, `Code${i}`, `Description${i}`));
 		}
+	}
+
+	public change(event: any): void {
+		console.log(event);
 	}
 }
