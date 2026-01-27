@@ -50,4 +50,8 @@ export class ShowcaseSearcherComponent {
 			this.comboOptionList.push(new ShowcaseSearcherData(`${i}`, `Code${i}`, `Description${i}`));
 		}
 	}
+
+	public change(event: any): void {
+		console.log(event);
+	}
 }
