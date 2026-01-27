@@ -13,11 +13,13 @@ export class ShowcaseSearcherComponent {
 	public comboSearcherId: string;
 	public comboSearcherDescription: string;
 	public comboTreeSearcherId: string;
+	public comboTreeSearcherIdMultiple: string;
 	public comboTreeSearcherDescription: string;
 	public comboTreeHeaderSearcherId: string;
 	public comboTreeHeaderSelectableSearcherDescription: string;
 	public disabledComboSearcherId: string;
 	public disabledComboSearcherDescription: string;
+	public selectedComboOptionListTree: Array<ShowcaseSearcherData> = [];
 
 	constructor() {
 		this.generateMockData(100);
