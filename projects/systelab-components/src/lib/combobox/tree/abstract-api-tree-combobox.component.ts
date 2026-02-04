@@ -137,7 +137,6 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public override onModelUpdated(): void {
-		console.log('onModelUpdated');
 		if (this.multipleSelection) {
 			if (this.multipleSelectedItemList && this.multipleSelectedItemList.length > 0) {
 				this.gridApi?.forEachNode(node => {

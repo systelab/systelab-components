@@ -12,6 +12,7 @@ export abstract class AbstractSearcher<T> {
 	public treeSearcher: boolean = false;
 	public parentSelectable: boolean = false;
 	public useIdInMultipleSelectionGrid = false
+	public infiniteScroll = true;
 
 	protected constructor() {
 
