@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { CellKeyDownEvent, IsFullWidthRowParams, RowSelectedEvent } from 'ag-grid-community';
+import { IsFullWidthRowParams, RowSelectedEvent } from 'ag-grid-community';
 import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'systelab-internal-searcher-table',
-    templateUrl: '../grid/abstract-grid.component.html',
-    standalone: false
+	selector:    'systelab-internal-searcher-table',
+	templateUrl: '../grid/abstract-grid.component.html',
+	standalone:  false
 })
 export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnInit {
 
@@ -42,6 +42,9 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	public override doGridReady(event: any) {
 		super.doGridReady(event);
 		this.gridReady.emit(true);
+		if (!this.searcher.infiniteScroll) {
+			this.gridApi.updateGridOptions({paginationPageSize: 100000, cacheBlockSize: 100000});
+		}
 	}
 
 	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
@@ -69,7 +72,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	}
 
 	public refreshTable(): void {
-		if(this.gridApi) {
+		if (this.gridApi) {
 			this.refresh();
 		}
 	}

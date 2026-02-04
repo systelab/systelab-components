@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-listbox-renderer.component';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
@@ -159,7 +159,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		this.gridOptions = {};
 		this.gridOptions.headerHeight = 0;
 		this.gridOptions.rowSelection = {
-			mode: 'singleRow',
+			mode:       'singleRow',
 			checkboxes: false
 		} as RowSelectionOptions;
 		const lineHeight = StylesUtilService.getStyleValue(this.hiddenElement, 'line-height');
@@ -172,6 +172,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		if (this.multipleSelection) {
 			this.gridOptions.rowSelection.enableClickSelection = false;
+			this.gridOptions.rowSelection.mode = 'multiRow';
 		} else {
 			this.gridOptions.rowSelection.enableClickSelection = !this.isDisabled;
 		}
@@ -196,7 +197,6 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 
 		this.gridOptions.getRowId = (item: GetRowIdParams) => this.getRowNodeId(item)
 			?.toString();
-		this.addSuppressSizeToFitToColumnsWithWidthDefined(this.columnDefs);
 		this.gridOptions.columnDefs = this.columnDefs;
 	}
 
