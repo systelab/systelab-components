@@ -220,7 +220,9 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 					} else if (this.selectedTreeItem) {
 						this.selectTreeItemInGrid();
 					}
-					this.doAutoSizeManagement();
+					setTimeout(() => {
+						this.doAutoSizeManagement();
+					}, 0);
 				},
 				error: () => {
 					this.gridApi.hideOverlay();
