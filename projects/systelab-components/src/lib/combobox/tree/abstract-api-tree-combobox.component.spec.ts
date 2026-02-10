@@ -16,9 +16,6 @@ interface TestNode {
 	setSelected?: (value: boolean) => void;
 }
 
-/* =========================================================
- * Clase concreta SOLO para test
- * ========================================================= */
 class TestApiTreeComboBox extends AbstractApiTreeComboBox<{
 	parentId: number;
 	childId: number;
