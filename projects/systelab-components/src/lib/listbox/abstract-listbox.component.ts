@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { StylesUtilService } from '../utilities/styles.util.service';
-import { ColDef, Column, GetRowIdParams, GridApi, GridOptions, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
+import { ColDef, GetRowIdParams, GridApi, GridOptions, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
 
 @Directive()
@@ -46,7 +46,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 
 	protected _multipleSelectedItemList: Array<T>;
 
-	private calculatedGridState : CalculatedGridState = initializeCalculatedGridState();
+	private calculatedGridState: CalculatedGridState = initializeCalculatedGridState();
 	private scrollTimeout;
 
 	@Input()
@@ -99,7 +99,6 @@ export abstract class AbstractListBox<T> implements OnInit {
 		options.defaultColDef = {};
 		options.defaultColDef.resizable = false;
 		(options.rowSelection as RowSelectionOptions).mode = this.multipleSelection ? 'multiRow' : 'singleRow';
-		(options.rowSelection as RowSelectionOptions).enableClickSelection = !this.isDisabled;
 		options.context = {componentParent: this};
 
 		options.headerHeight = 0;
@@ -123,31 +122,28 @@ export abstract class AbstractListBox<T> implements OnInit {
 	private getSelectionColumnDefs(): ColDef {
 
 		return {
-			type: 		   'selection',
+			type:              'selection',
 			headerName:        '',
 			width:             this.getCheckColumnWidth(),
 			suppressSizeToFit: true,
 			resizable:         false,
 			suppressMovable:   true,
 			pinned:            'left',
-			cellStyle: this.isDisabled ? {'pointer-events': 'none'} : ''
+			cellStyle:         this.isDisabled ? {'pointer-events': 'none'} : ''
 		} as ColDef;
 
 	}
 
 	protected getColumnDefsWithOptions(): Array<any> {
 
-		const colDefs: Array<any> = [
+		return [
 			{
-				rowDrag: this.rowDrag,
-				colId:   this.getIdField(),
-				field:   this.getDescriptionField(),
+				rowDrag:      this.rowDrag,
+				colId:        this.getIdField(),
+				field:        this.getDescriptionField(),
 				tooltipField: this.getDescriptionField()
 			}
 		];
-		this.addSuppressSizeToFitToColumnsWithWidthDefined(colDefs);
-
-		return colDefs;
 	}
 
 	protected getCheckColumnWidth(): number {
@@ -167,12 +163,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	protected addSuppressSizeToFitToColumnsWithWidthDefined(colDefs: ColDef[]) {
-		colDefs.forEach(columnDef =>columnDef.suppressSizeToFit = !columnDef.width);
+		colDefs.forEach(columnDef => columnDef.suppressSizeToFit = !columnDef.width);
 	}
 
 	public doGridReady(event: any) {
 		this.gridApi = event.api;
 		this.gridApi.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
+		this.doAutoSizeManagement();
+		this.selectItemInGrid();
 	}
 
 	private onBodyScroll(event: any): void {
@@ -202,7 +200,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 	// overrides
 	public onRowSelected(event: RowSelectedEvent) {
 		if (this.multipleSelection) {
-			if (!this.isDisabled && event.node && event.node.data && event.node.data[this.getIdField()] != null) {
+			if (!this.isDisabled && event.node?.data?.[this.getIdField()] != null) {
 				if (this.multipleSelectedItemList) {
 					const elementIndexInSelectedList: number = this.multipleSelectedItemList.findIndex((item) => {
 						return item[this.getIdField()] === event.node.data[this.getIdField()];

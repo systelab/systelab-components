@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, timer } from 'rxjs';
 import { AbstractApiTreeListBox, TreeListBoxElement } from 'systelab-components';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'showcase-inner-tree-listbox',
-    templateUrl: '../../../../../systelab-components/src/lib/listbox/abstract-listbox.component.html',
-    standalone: false
+	selector:    'showcase-inner-tree-listbox',
+	templateUrl: '../../../../../systelab-components/src/lib/listbox/abstract-listbox.component.html',
+	standalone:  false
 })
 
 export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<TreeListBoxElement<any>> {
@@ -34,13 +35,16 @@ export class ShowcaseInnerTreeListBox extends AbstractApiTreeListBox<TreeListBox
 	}
 
 	protected getData(): Observable<Array<any>> {
-		return of(this.getListBoxValues());
+		return timer(500)
+			.pipe(
+				switchMap(() => of(this.getListBoxValues()))
+			);
 	}
 
 	private getListBoxValues(): any[] {
 		const values = [];
-		for(let i = 1; i <= 20; i++) {
-			for(let j = 1; j <= 5; j++) {
+		for (let i = 1; i <= 20; i++) {
+			for (let j = 1; j <= 5; j++) {
 				values.push({
 					'centerID':           i,
 					'centerDescription':  'Center ' + i,
