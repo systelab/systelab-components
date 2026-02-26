@@ -197,10 +197,12 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 							const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
 							nodeVector.push(favouriteComboNode);
 							const favouriteElements = this.getFavouriteElements(dataVector);
-							favouriteElements.forEach(currentFavouriteElement => {
+							if(favouriteElements?.length > 0) {favouriteElements.forEach(currentFavouriteElement => {
 								const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
-								nodeVector.push(currentFavouriteNode);
-							});
+								nodeVector.push(currentFavouriteNode);});
+							} else {
+								nodeVector.pop();
+							}
 						}
 					}
 
