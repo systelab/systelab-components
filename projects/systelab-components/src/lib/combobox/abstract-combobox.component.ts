@@ -5,6 +5,7 @@ import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
+import { ComboTreeNode } from './tree/abstract-api-tree-combobox.component';
 
 declare var jQuery: any;
 
@@ -308,13 +309,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.gridOptions.enableBrowserTooltips = true;
 	}
 
-	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
+	protected getRowNodeId(item: GetRowIdParams | ComboTreeNode<T>): string | number | undefined {
 		const id = this.getIdField();
 		if (item) {
-			if (item[this.getIdField()] != null) {
-				return item[this.getIdField()];
+			if (item[id] != null) {
+				return item[id];
 			}
-			return this.getIdField() === '' ? '' : item.data ? item.data?.[this.getIdField()] : '';
+			if ('data' in item) {
+				return id === '' ? '' : item.data ? item.data?.[id] : '';
+			} else {
+				return '';
+			}
 		}
 		return '';
 	}

@@ -3,7 +3,7 @@ import { AgRendererComponent } from 'ag-grid-angular';
 import { AbstractComboBox } from '../abstract-combobox.component';
 import { map, Observable } from 'rxjs';
 import { PreferencesService } from 'systelab-preferences';
-import { GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { GetRowIdParams, GridOptions, GridReadyEvent } from 'ag-grid-community';
 
 declare var jQuery: any;
 
@@ -373,5 +373,22 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	private getFavouriteElements(dataVector: Array<T>): Array<T> {
 		return dataVector.filter((data: T) => this.favouriteList.map(String)
 			.includes(data[this.getLevelIdField(1)].toString()));
+	}
+
+	protected override getRowNodeId(item: GetRowIdParams | ComboTreeNode<ComboTreeNode<T>>): string | number | undefined {
+
+		if ('nodeData' in item) {
+			const id = this.getIdField(item.level);
+
+			if (item[id] != null) {
+				return item[id];
+			}
+
+			return id === ''
+				? ''
+				: item.nodeData?.[id] ?? '';
+		}
+
+		return '';
 	}
 }
