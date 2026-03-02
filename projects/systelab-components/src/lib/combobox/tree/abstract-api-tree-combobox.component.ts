@@ -127,7 +127,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 					if (this.totalItemsLoaded) {
 						this.setDropdownHeight(nodeVector.length);
 						this.setDropdownPosition();
-						this.transferFocusToGrid();
+						setTimeout(() => {
+							this.transferFocusToGrid();
+						});
 					}
 				},
 				error: () => {
@@ -378,7 +380,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	protected override getRowNodeId(item: GetRowIdParams | ComboTreeNode<ComboTreeNode<T>>): string | number | undefined {
 
 		if ('nodeData' in item) {
-			const id = this.getIdField(item.level);
+			const id = this.getLevelIdField(item.level);
 
 			if (item[id] != null) {
 				return item[id];
