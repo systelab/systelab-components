@@ -9,14 +9,10 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
 import { AgGridModule } from 'ag-grid-angular';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
 import { ModulabSelect } from '../select/select.component';
-
-// Register AG Grid modules
-ModuleRegistry.registerModules([AllCommunityModule]);
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
