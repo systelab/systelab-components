@@ -28,7 +28,12 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 		super.ngOnInit();
 		this.gridOptions.enableBrowserTooltips = true;
 		this.gridOptions.suppressCellFocus = false;
-		this.gridOptions.onCellKeyDown = this.onEnterPressedCallback()
+		this.gridOptions.onCellKeyDown = this.onEnterPressedCallback();
+		if (!this.searcher.infiniteScroll) {
+			this.gridOptions.paginationPageSize = 100000;
+			this.gridOptions.cacheBlockSize = 100000;
+		}
+
 	}
 
 	protected getColumnDefs(): Array<any> {
@@ -37,14 +42,6 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 
 	protected override hideHeader(): boolean {
 		return this.searcher.hideHeader();
-	}
-
-	public override doGridReady(event: any) {
-		super.doGridReady(event);
-		this.gridReady.emit(true);
-		if (!this.searcher.infiniteScroll) {
-			this.gridApi.updateGridOptions({paginationPageSize: 100000, cacheBlockSize: 100000});
-		}
 	}
 
 	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {

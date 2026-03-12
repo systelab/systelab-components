@@ -197,9 +197,11 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 							const favouriteComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(favouriteElement, 0);
 							nodeVector.push(favouriteComboNode);
 							const favouriteElements = this.getFavouriteElements(dataVector);
-							if(favouriteElements?.length > 0) {favouriteElements.forEach(currentFavouriteElement => {
-								const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
-								nodeVector.push(currentFavouriteNode);});
+							if (favouriteElements?.length > 0) {
+								favouriteElements.forEach(currentFavouriteElement => {
+									const currentFavouriteNode: ComboTreeNode<T> = new ComboTreeNode<T>(currentFavouriteElement, 1);
+									nodeVector.push(currentFavouriteNode);
+								});
 							} else {
 								nodeVector.pop();
 							}
@@ -215,7 +217,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 					}
 
 					dataVector.forEach((element: T) => {
-						if (!previousParent || element[this.getLevelIdField(0)] !== previousParent) {
+						if (previousParent == undefined || element[this.getLevelIdField(0)] !== previousParent) {
 							previousParent = element[this.getLevelIdField(0)];
 							const parentComboNode: ComboTreeNode<T> = new ComboTreeNode<T>(element, 0);
 							nodeVector.push(parentComboNode);
