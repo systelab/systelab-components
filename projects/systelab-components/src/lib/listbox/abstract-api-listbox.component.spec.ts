@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, provideZoneChangeDetection, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +14,6 @@ import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { AbstractApiListBox } from './abstract-api-listbox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
-import { AllCommunityModule, GridReadyEvent, ModuleRegistry } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -98,24 +97,28 @@ describe('Systelab Listbox', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        GridContextMenuCellRendererComponent,
-        GridHeaderContextMenuComponent,
-        ComboBoxInputRendererComponent,
-        SystelabListboxComponent,
-        ListboxTestComponent
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				GridContextMenuCellRendererComponent,
+				GridHeaderContextMenuComponent,
+				ComboBoxInputRendererComponent,
+				SystelabListboxComponent,
+				ListboxTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

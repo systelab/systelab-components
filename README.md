@@ -86,6 +86,24 @@ npm publish
 
 # Breaking changes
 
+## Version 21.x.x - Angular 21
+
+[Angular 21 news](https://blog.angular.dev/announcing-angular-v21-57946c34f14b)
+
+- Zoneless by Default: New Angular applications no longer include zone.js by default. This transition to a zoneless architecture leverages Signals for change detection, resulting in improved performance, smaller bundle sizes, and better compatibility with modern browser APIs.
+- Vitest as Default Test Runner: Following its preview in previous versions, Vitest is now the stable and default test runner for all new Angular projects, replacing Karma to provide faster execution and a better developer experience.
+- Signal Forms (Experimental): A new, completely signal-based approach to forms. It aims to replace the complexities of Reactive and Template-driven forms with a more composable, fully-typed, and reactive API that doesn't require ControlValueAccessor.
+- Angular Aria (Developer Preview): A new library of "headless" components focused on accessibility. It provides the logic and ARIA requirements for complex UI patterns (like accordions or menus) while allowing developers complete control over styling.
+- AI-Powered Tooling with MCP Server: Angular now includes a Model Context Protocol (MCP) server. This allows AI agents and LLMs to better understand the context of an Angular project, facilitating more accurate code generation and automated migrations.
+- Simplified HttpClient: The HttpClient is now automatically provided in the root injector for new applications, simplifying the initial setup and reducing boilerplate in the app.config.ts.
+- Regular Expression Support: You can now use Regex literals directly within templates.
+- Object Spread in @let: Support for the spread operator (...) within the @let syntax for more flexible data manipulation in templates.
+- Generic SimpleChanges: The SimpleChanges interface is now generic, allowing for stricter type checking when using the ngOnChanges lifecycle hook.
+- CLDR v47 Support: Updated the Unicode Common Locale Data Repository support from v41 to v47, improving internationalization, currency, and date formatting.
+
+A part of the usage of the [migration guide](https://angular.dev/update-guide?v=20.0-21.0&l=1) we should - due a bug - use the **provideZoneChangeDetection()**
+into the **providers** array for module based Karma tests.
+
 ## Version 20.x.x - Angular 20
 
 [Angular 20 news](https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301)

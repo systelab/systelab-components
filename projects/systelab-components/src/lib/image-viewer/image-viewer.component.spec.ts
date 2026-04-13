@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, provideZoneChangeDetection, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -118,14 +118,25 @@ describe('ImageViewerTestComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [ImageViewerComponent, ImageViewerTestComponent, ButtonComponent, SliderComponent, ToggleButtonComponent],
-    schemas: [NO_ERRORS_SCHEMA],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        SystelabTranslateModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-}).compileComponents();
+			declarations: [
+				ImageViewerComponent,
+				ImageViewerTestComponent,
+				ButtonComponent,
+				SliderComponent,
+				ToggleButtonComponent,
+			],
+			schemas: [NO_ERRORS_SCHEMA],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				SystelabTranslateModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 
 		fixture = TestBed.createComponent(ImageViewerTestComponent);
 		fixture.detectChanges();

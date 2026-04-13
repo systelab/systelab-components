@@ -1,3 +1,4 @@
+import { provideZoneChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DataTransformerService } from './date-transformer.service';
 
@@ -60,7 +61,8 @@ describe('DataTransformerService Test', () => {
 			imports:   [
 			],
 			providers: [
-				DataTransformerService
+				DataTransformerService,
+				provideZoneChangeDetection(),
 			]
 		});
 		dataTransformerService = TestBed.inject(DataTransformerService);

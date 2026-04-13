@@ -5,6 +5,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NumberHelper } from './number-helper';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideZoneChangeDetection } from '@angular/core';
 
 
 const Number_to_String_Scenarios_For_US = [
@@ -27,10 +28,15 @@ describe('Number Helper from String English Test', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    providers: [NumberHelper,
-        { provide: I18nService, useClass: USMockI18nService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting(),]
-});
+			imports: [RouterTestingModule],
+			providers: [
+				NumberHelper,
+				{ provide: I18nService, useClass: USMockI18nService },
+				provideHttpClient(withInterceptorsFromDi()),
+				provideHttpClientTesting(),
+				provideZoneChangeDetection(),
+			],
+		});
 		service = TestBed.inject(NumberHelper);
 
 	});

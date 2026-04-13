@@ -1,15 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	DoCheck,
-	ElementRef,
-	EventEmitter,
-	Input,
-	OnInit,
-	Output,
-	Renderer2,
-	ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { addDays } from 'date-fns';
 import { DatePicker } from 'primeng/datepicker';
 import { I18nService } from 'systelab-translate';
@@ -17,10 +6,10 @@ import { DataTransformerService } from './date-transformer.service';
 import { PrimeNG } from 'primeng/config';
 
 @Component({
-    selector: 'systelab-datepicker',
-    templateUrl: 'datepicker.component.html',
-    providers: [DataTransformerService],
-    standalone: false
+	selector:    'systelab-datepicker',
+	templateUrl: 'datepicker.component.html',
+	providers:   [DataTransformerService],
+	standalone:  false
 })
 export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 
@@ -104,18 +93,19 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 		if (!this.inline) {
 			this.addIconToDatepicker();
 		}
-		
+
 		if (this.currentCalendar && this.autofocus) {
 			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
 			if (inputElement) {
 				inputElement.focus();
 			}
 		}
-		
-		if (this.tabindex && this.currentCalendar) {
+
+		if (this.currentCalendar) {
 			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
 			if (inputElement) {
-				inputElement.setAttribute('tabindex', this.tabindex.toString());
+				const tabindexValue = this.tabindex ?? 0;
+				inputElement.setAttribute('tabindex', tabindexValue.toString());
 			}
 		}
 	}
@@ -126,7 +116,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 		}
 
 		const datepickerElement = this.currentCalendar.el.nativeElement;
-		
+
 		// Función que intenta agregar el icono
 		const attemptAddIcon = (): boolean => {
 			const inputElement = datepickerElement.querySelector('input');
@@ -135,7 +125,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 			}
 
 			const parentWrapper = inputElement.parentElement;
-			
+
 			// Verificar si ya existe un icono
 			if (parentWrapper.querySelector('i.icon-calendar, i.icon-clock')) {
 				return true;
@@ -144,12 +134,12 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 			// Crear y configurar el icono
 			const iconElement = document.createElement('i');
 			iconElement.className = this.onlyTime ? 'icon-clock' : 'icon-calendar';
-			
+
 			// Configurar el contenedor
 			parentWrapper.classList.add('slab-form-icon', 'w-100');
 			parentWrapper.style.position = 'relative';
 			parentWrapper.appendChild(iconElement);
-			
+
 			return true;
 		};
 
@@ -172,8 +162,8 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 
 		// Observar cambios en el elemento datepicker
 		observer.observe(datepickerElement, {
-			childList: true,
-			subtree: true,
+			childList:  true,
+			subtree:    true,
 			attributes: true
 		});
 
@@ -226,7 +216,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 										this.infereDate(dateStr);
 										break;
 									case 2:
-										const hourPosition = splitDateByHours[0].length-2;
+										const hourPosition = splitDateByHours[0].length - 2;
 										const dateString = splitDateByHours[0].substring(0, hourPosition);
 										this.infereDate(dateString);
 										this.parseTime(+splitDateByHours[0].substring(hourPosition), +splitDateByHours[1]);
@@ -291,7 +281,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 	public repositionateCalendar(element?: ElementRef): void {
 
 		try {
-			const { inputElementTop, inputElementHeight, datepickerElementHeight } = this.inputElement.nativeElement.getBoundingClientRect();
+			const {inputElementTop, inputElementHeight, datepickerElementHeight} = this.inputElement.nativeElement.getBoundingClientRect();
 			if (inputElementTop + inputElementHeight + datepickerElementHeight > window.innerHeight) {
 				const newTop: number = inputElementTop + inputElementHeight - (datepickerElementHeight + inputElementHeight + 10);
 				this.myRenderer.setAttribute(element.nativeElement, 'top', newTop + 'px');
@@ -381,7 +371,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 		const weekDaysNamesShort: Array<string> = [];
 		const monthNames: Array<string> = [];
 		const monthNamesShort: Array<string> = [];
-		/* eslint-disable max-len */
+		 
 		this.i18nService.get(['COMMON_SUNDAY', 'COMMON_MONDAY', 'COMMON_TUESDAY', 'COMMON_WEDNESDAY', 'COMMON_THURSDAY', 'COMMON_FRIDAY', 'COMMON_SATURDAY'])
 			.subscribe((res) => {
 				weekDaysNames.push(res.COMMON_SUNDAY, res.COMMON_MONDAY, res.COMMON_TUESDAY, res.COMMON_WEDNESDAY, res.COMMON_THURSDAY, res.COMMON_FRIDAY, res.COMMON_SATURDAY);

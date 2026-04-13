@@ -1,6 +1,3 @@
-@use "button" as *;
-
-
 systelab-chip-button {
 
   .slab-chip-button {
@@ -17,10 +14,7 @@ systelab-chip-button {
       border: 1px solid var(--primary);
       background-color: transparent;
       font-size: 0.875rem;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      padding-left: 10px;
-      padding-right: 4px;
+      padding: 3px 4px 3px 10px;
       border-radius: 50px;
       min-height: 27px;
 

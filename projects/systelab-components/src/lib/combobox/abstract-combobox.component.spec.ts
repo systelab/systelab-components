@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, provideZoneChangeDetection, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,29 +20,29 @@ export class TestData {
 }
 
 @Component({
-    selector: 'systelab-combobox-test',
-    template: `
-                  <div class="container-fluid" style="height: 200px;">
-                      <div class="row mt-1">
-                          <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
-                          <div class="col-md-9">
-                              <systelab-select #combobox [withDeleteOption]="withDeleteOption"
-                                               [defaultIdValue]="defaultIdValue"
-                                               [withEmptyValue]="withEmptyValue"
-                                               [values]="valuesList"
-                                               [filter]="filter"
-                                               [deleteIconClass]="deleteIconClass">
-                              </systelab-select>
-                          </div>
-                      </div>
-                  </div>
-			  `,
-    standalone: false
+	selector:   'systelab-combobox-test',
+	template:   `
+                    <div class="container-fluid" style="height: 200px;">
+                        <div class="row mt-1">
+                            <label class="col-md-3 col-form-label" for="form-h-s">Test:</label>
+                            <div class="col-md-9">
+                                <systelab-select #combobox [withDeleteOption]="withDeleteOption"
+                                                 [defaultIdValue]="defaultIdValue"
+                                                 [withEmptyValue]="withEmptyValue"
+                                                 [values]="valuesList"
+                                                 [filter]="filter"
+                                                 [deleteIconClass]="deleteIconClass">
+                                </systelab-select>
+                            </div>
+                        </div>
+                    </div>
+				`,
+	standalone: false
 })
 export class ComboboxTestComponent {
 	@ViewChild('combobox') public combobox: ModulabSelect;
 	public filter = false;
-	public valuesList: TestData[] = [new TestData(0, 'Description 0'),new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
+	public valuesList: TestData[] = [new TestData(0, 'Description 0'), new TestData('1', 'Description 1'), new TestData('2', 'Description 2')];
 	public withEmptyValue = false;
 	public deleteIconClass = 'icon-close';
 	public defaultIdValue = undefined;
@@ -58,23 +58,23 @@ describe('Systelab Select Combobox', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        GridContextMenuCellRendererComponent,
-        GridHeaderContextMenuComponent,
-        ComboBoxInputRendererComponent,
-        ModulabSelect,
-        ComboboxTestComponent
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
+			declarations: [
+				GridContextMenuCellRendererComponent,
+				GridHeaderContextMenuComponent,
+				ComboBoxInputRendererComponent,
+				ModulabSelect,
+				ComboboxTestComponent
+			],
+			imports:      [BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule],
+			providers:    [provideHttpClient(withInterceptorsFromDi()), provideZoneChangeDetection()]
+		})
 			.compileComponents();
 	});
 
@@ -82,7 +82,7 @@ describe('Systelab Select Combobox', () => {
 		TestBed.resetTestingModule();
 	});
 
-	const setup = () => {
+	const setupWithoutFilter = () => {
 		const fixture = TestBed.createComponent(ComboboxTestComponent);
 		fixture.componentInstance.filter = false;
 		fixture.detectChanges();
@@ -103,9 +103,20 @@ describe('Systelab Select Combobox', () => {
 	};
 
 	it('should instantiate', () => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		expect(fixture.componentInstance)
 			.toBeDefined();
+	});
+
+	it('should display the correct description when a non-zero ID is selected', async () => {
+		const fixture = setupWithoutFilter();
+		fixture.detectChanges();
+
+		fixture.componentInstance.selectValue('1');
+		fixture.detectChanges();
+		await fixture.whenStable();
+
+		expect(fixture.componentInstance.combobox._description).toEqual('Description 1');
 	});
 
 	it('should be able to focus in search input when the dropdown is opened and filter input is true', (done) => {
@@ -122,7 +133,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should not be able to focus in search input when the dropdown is opened and filter input is false', (done) => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.detectChanges();
 		clickButton(fixture);
 		fixture.whenStable()
@@ -134,7 +145,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should include an empty option when property withEmptyValue is set to true', (done) => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.detectChanges();
 		fixture.componentInstance.combobox.values = fixture.componentInstance.valuesList;
@@ -150,7 +161,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should not include an empty option when property withEmptyValue is set to false', (done) => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		clickButton(fixture);
 		fixture.detectChanges();
 		fixture.whenStable()
@@ -162,7 +173,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should set delete icon to rubbish icon', (done) => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = 1;
 		fixture.componentInstance.withDeleteOption = true;
@@ -180,7 +191,7 @@ describe('Systelab Select Combobox', () => {
 	});
 
 	it('should set the Description 0 element that has a zero number id', (done) => {
-		const fixture = setup();
+		const fixture = setupWithoutFilter();
 		fixture.componentInstance.withEmptyValue = true;
 		fixture.componentInstance.defaultIdValue = '1';
 		fixture.componentInstance.withDeleteOption = true;
@@ -194,6 +205,320 @@ describe('Systelab Select Combobox', () => {
 					.toEqual('Description 0');
 				done();
 			});
+	});
+
+	describe('transferFocusToGrid', () => {
+
+		it('should deselect all rows when multipleSelection is false', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					const mockColumn = {isVisible: () => true};
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort');
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(3);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([mockColumn] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.deselectAll)
+						.toHaveBeenCalled();
+					done();
+				});
+		});
+
+		it('should not deselect rows when multipleSelection is true', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = true;
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.deselectAll)
+						.not
+						.toHaveBeenCalled();
+					done();
+				});
+		});
+
+		it('should find and focus on the row matching the current id', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+					combobox._id = '1';
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					const mockColumn = {isVisible: () => true};
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+
+					// Mock forEachNodeAfterFilterAndSort to simulate finding the row at index 1
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort')
+						.and
+						.callFake((callback: any) => {
+							// Simulate three rows, where the second one (index 1) matches the id '1'
+							callback({data: {id: 0}}, 0);
+							callback({data: {id: '1'}}, 1);
+							callback({data: {id: '2'}}, 2);
+						});
+
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(3);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([mockColumn] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.forEachNodeAfterFilterAndSort)
+						.toHaveBeenCalled();
+					expect(combobox.gridApi.setFocusedCell)
+						.toHaveBeenCalledWith(1, jasmine.anything());
+					done();
+				});
+		});
+
+		it('should ensure the selected row is visible when there are displayed rows', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+					combobox._id = '1';
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort');
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(3);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([{isVisible: () => true}] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.ensureIndexVisible)
+						.toHaveBeenCalled();
+					done();
+				});
+		});
+
+		it('should not ensure row visibility when there are no displayed rows', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					const mockColumn = {isVisible: () => true};
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort');
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(0);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([mockColumn] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.ensureIndexVisible)
+						.not
+						.toHaveBeenCalled();
+					done();
+				});
+		});
+
+		it('should scroll to the first visible column', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					const mockColumn = {isVisible: () => true};
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort');
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(3);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([mockColumn] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.ensureColumnVisible)
+						.toHaveBeenCalledWith(jasmine.anything());
+					done();
+				});
+		});
+
+		it('should set focus on the selected grid cell', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+					combobox._id = '1';
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					const mockColumn = {isVisible: () => true};
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort');
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(3);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([mockColumn] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.setFocusedCell)
+						.toHaveBeenCalledWith(jasmine.any(Number), jasmine.anything());
+					done();
+				});
+		});
+
+		it('should focus on row index 0 when no id is set', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			clickButton(fixture);
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+					combobox._id = undefined;
+
+					// Ensure gridApi exists and has required methods
+					if (!combobox.gridApi) {
+						combobox.gridApi = {} as any;
+					}
+					const mockColumn = {isVisible: () => true};
+					combobox.gridApi.deselectAll = jasmine.createSpy('deselectAll');
+					combobox.gridApi.forEachNodeAfterFilterAndSort = jasmine.createSpy('forEachNodeAfterFilterAndSort');
+					combobox.gridApi.getDisplayedRowCount = jasmine.createSpy('getDisplayedRowCount')
+						.and
+						.returnValue(3);
+					combobox.gridApi.ensureIndexVisible = jasmine.createSpy('ensureIndexVisible');
+					combobox.gridApi.getColumns = jasmine.createSpy('getColumns')
+						.and
+						.returnValue([mockColumn] as any);
+					combobox.gridApi.ensureColumnVisible = jasmine.createSpy('ensureColumnVisible');
+					combobox.gridApi.setFocusedCell = jasmine.createSpy('setFocusedCell');
+
+					combobox['transferFocusToGrid']();
+
+					expect(combobox.gridApi.setFocusedCell)
+						.toHaveBeenCalledWith(0, jasmine.anything());
+					done();
+				});
+		});
+
+		it('should handle null gridApi gracefully', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+					combobox.gridApi = null;
+
+					expect(() => combobox['transferFocusToGrid']())
+						.not
+						.toThrow();
+					done();
+				});
+		});
+
+		it('should handle undefined gridApi gracefully', (done) => {
+			const fixture = setupWithoutFilter();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					combobox.multipleSelection = false;
+					combobox.gridApi = undefined;
+
+					expect(() => combobox['transferFocusToGrid']())
+						.not
+						.toThrow();
+					done();
+				});
+		});
+
 	});
 
 });

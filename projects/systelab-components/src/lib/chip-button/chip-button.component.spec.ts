@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -90,16 +90,23 @@ describe('Systelab Chip Button', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [ChipButtonComponent, ChipButtonTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule,
-        SystelabTranslateModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				ChipButtonComponent,
+				ChipButtonTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+				SystelabTranslateModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

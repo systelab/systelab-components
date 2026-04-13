@@ -1,12 +1,12 @@
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ChipsComponent } from './chips.component';
-import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
     template: `
@@ -54,7 +54,10 @@ describe('Systelab Chips', () => {
 			declarations: [
 				ChipsComponent,
 				ChipsTestComponent,
-			]
+			],
+			providers: [
+				provideZoneChangeDetection(),
+			],
 		});
 
 		fixture = TestBed.createComponent(ChipsTestComponent);

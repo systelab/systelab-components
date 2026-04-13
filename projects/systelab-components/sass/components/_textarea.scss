@@ -1,13 +1,13 @@
-@use "../variables" as *;
-@use "bootstrap/scss/bootstrap" as bootstrap;
+@use "../variables" as Vars;
+
 // Defines the width of the textarea when the w-* class is not present.
 $slab-textarea-default-width: 100% !default;
 
 
 .slab-textarea {
   display: block;
-  min-height: $slab-textarea-min-height;
-  border-radius: bootstrap.$border-radius;
+  min-height: Vars.$slab-textarea-min-height;
+  border-radius: Vars.$border-radius;
   border: 1px solid var(--slab_component_border_color);
 
   &:not([class*="w-"]) {
@@ -33,9 +33,9 @@ $slab-textarea-default-width: 100% !default;
   }
 
   &:focus {
-    border-color: $slab-focus-component-border-color;
+    border-color: Vars.$slab-focus-component-border-color;
     outline: 0;
-    box-shadow: $slab-focus-component-shadow;
+    box-shadow: Vars.$slab-focus-component-shadow;
   }
 }
 

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ScrollSpyDirective } from './scroll-spy.directive';
 
@@ -42,7 +42,8 @@ describe('Systelab ScrollSpyDirective', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [TestScrollSpyComponent, ScrollSpyDirective]
+			declarations: [TestScrollSpyComponent, ScrollSpyDirective],
+			providers: [provideZoneChangeDetection()],
 		});
 		fixture = TestBed.createComponent(TestScrollSpyComponent);
 		component = fixture.componentInstance;

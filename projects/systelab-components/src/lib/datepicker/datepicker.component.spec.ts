@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
@@ -125,20 +125,26 @@ describe('Systelab DatepickerComponent', () => {
 	let fixture2: ComponentFixture<DatepickerComponent>;
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [TouchspinComponent,
-        DatepickerComponent,
-        ButtonComponent,
-        DatepickerTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        DatePickerModule,
-        SystelabTranslateModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				TouchspinComponent,
+				DatepickerComponent,
+				ButtonComponent,
+				DatepickerTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				DatePickerModule,
+				SystelabTranslateModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

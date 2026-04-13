@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, provideZoneChangeDetection } from '@angular/core';
 import { I18nService } from 'systelab-translate';
 import { SystelabGenderListBox } from './gender-listbox.component';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
@@ -14,7 +14,10 @@ describe('SystelabGenderListBox', () => {
         ModuleRegistry.registerModules([AllCommunityModule]);
         await TestBed.configureTestingModule({
             declarations: [SystelabGenderListBox],
-            providers: [{ provide: I18nService, useValue: i18nServiceSpy }],
+            providers: [
+                { provide: I18nService, useValue: i18nServiceSpy },
+                provideZoneChangeDetection(),
+            ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
 

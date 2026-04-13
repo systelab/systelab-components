@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { CheckboxCellEditorComponent } from './checkbox-cell-editor.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, provideZoneChangeDetection } from '@angular/core';
 
 describe('CheckboxCellEditorComponent', () => {
 	let fixture: ComponentFixture<CheckboxCellEditorComponent>;
@@ -10,7 +10,7 @@ describe('CheckboxCellEditorComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [CheckboxCellEditorComponent],
 			imports: [],
-			providers: [],
+			providers: [ provideZoneChangeDetection() ],
 			schemas: [NO_ERRORS_SCHEMA]
 		})
 			.compileComponents();

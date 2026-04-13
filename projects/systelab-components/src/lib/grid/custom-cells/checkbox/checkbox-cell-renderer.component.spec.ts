@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckboxCellRendererComponent } from './checkbox-cell-renderer.component';
-import { AgRendererComponent } from 'ag-grid-angular';
+import { provideZoneChangeDetection } from '@angular/core';
 
 describe('CheckboxCellRendererComponent', () => {
     let component: CheckboxCellRendererComponent;
@@ -9,6 +9,7 @@ describe('CheckboxCellRendererComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [CheckboxCellRendererComponent],
+            providers: [ provideZoneChangeDetection() ]
         }).compileComponents();
     });
 

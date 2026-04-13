@@ -1,10 +1,30 @@
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	Renderer2,
+	ViewChild
+} from '@angular/core';
 import { AgRendererComponent } from 'ag-grid-angular';
-import { GetRowIdParams, GridApi, GridOptions, GridReadyEvent, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
+import {
+	GetRowIdParams,
+	GridApi,
+	GridOptions,
+	GridReadyEvent,
+	RowSelectedEvent,
+	RowSelectionOptions
+} from 'ag-grid-community';
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { ComboboxFavouriteRendererComponent } from './renderer/combobox-favourite-renderer.component';
 import { PreferencesService } from 'systelab-preferences';
 import { AutosizeGridHelper, CalculatedGridState, initializeCalculatedGridState } from '../helper/autosize-grid-helper';
+import { ComboTreeNode } from './tree/abstract-api-tree-combobox.component';
 
 @Directive()
 export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit, OnDestroy {
@@ -304,13 +324,17 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.gridOptions.enableBrowserTooltips = true;
 	}
 
-	protected getRowNodeId(item: GetRowIdParams): string | number | undefined {
+	protected getRowNodeId(item: GetRowIdParams | ComboTreeNode<T>): string | number | undefined {
 		const id = this.getIdField();
 		if (item) {
-			if (item[this.getIdField()] != null) {
-				return item[this.getIdField()];
+			if (item[id] != null) {
+				return item[id];
 			}
-			return this.getIdField() === '' ? '' : item.data ? item.data?.[this.getIdField()] : '';
+			if ('data' in item) {
+				return id === '' ? '' : item.data ? item.data?.[id] : '';
+			} else {
+				return '';
+			}
 		}
 		return '';
 	}
@@ -461,11 +485,22 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	protected transferFocusToGrid(): void {
 		// remove previous selection
-		if(!this.multipleSelection) {
+		if (!this.multipleSelection) {
 			this.gridApi?.deselectAll();
-			if(this.gridApi?.getDisplayedRowCount() > 0) {
-				// scrolls to the first row
-				this.gridApi?.ensureIndexVisible(0);
+
+			// Find the row index of the currently selected item
+			let rowIndexToFocus = 0;
+			if (this._id) {
+				this.gridApi?.forEachNodeAfterFilterAndSort((node, index) => {
+					if (this.getRowNodeId(node.data) === this._id) {
+						rowIndexToFocus = index;
+					}
+				});
+			}
+
+			if (this.gridApi?.getDisplayedRowCount() > 0) {
+				// scrolls to the selected row
+				this.gridApi?.ensureIndexVisible(rowIndexToFocus);
 			}
 
 			// scrolls to the first column
@@ -473,8 +508,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 				?.filter(col => col.isVisible())[0];
 			this.gridApi?.ensureColumnVisible(firstCol);
 
-			// sets focus into the first grid cell
-			this.gridApi?.setFocusedCell(0, firstCol);
+			// sets focus into the selected grid cell
+			this.gridApi?.setFocusedCell(rowIndexToFocus, firstCol);
 		}
 	}
 
@@ -741,7 +776,7 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		}
 	}
 
-	@HostListener('window:resize', ['$event'])
+	@HostListener('window:resize')
 	public onResize() {
 		if (this.isDropDownOpen()) {
 			this.closeDropDown();

@@ -4,8 +4,7 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output } fro
     selector: '[scrollSpy]',
     standalone: false
 })
-export class ScrollSpyDirective implements AfterViewInit
- {
+export class ScrollSpyDirective implements AfterViewInit {
   @Input() public spiedTags: Array<string> = ['div'];
   @Input() public querySelector = '[id^="section"]';
   @Output() public sectionChange = new EventEmitter<string>();

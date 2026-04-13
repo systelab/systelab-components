@@ -9,7 +9,7 @@ import { ButtonModule } from "primeng/button";
 import { OverlayModule } from "primeng/overlay";
 import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
-import { Component } from "@angular/core";
+import { Component, provideZoneChangeDetection } from "@angular/core";
 import { AbstractGrid } from "systelab-components";
 
 
@@ -59,9 +59,11 @@ describe('GridContextMenuCellRendererComponent', () => {
             },
             selectIndex: (rowIndex, tryMulti, supressEvents) => {
             },
-            getDisplayedRowAtIndex: (index: number) => { return {
+            getDisplayedRowAtIndex: (index: number) => {
+ return {
                 setSelected: (select: boolean) => true
-            } as any}
+            } as any
+}
         }
     } as unknown as AbstractGrid<TestData>
 
@@ -76,15 +78,20 @@ describe('GridContextMenuCellRendererComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [GridContextMenuCellRendererMock],
-            imports: [BrowserModule,
+            imports: [
+                BrowserModule,
                 BrowserAnimationsModule,
                 FormsModule,
                 OverlayModule,
                 ButtonModule,
                 SystelabTranslateModule,
                 SystelabPreferencesModule,
-                AgGridModule],
-            providers: [provideHttpClient(withInterceptorsFromDi())]
+                AgGridModule,
+            ],
+            providers: [
+                provideHttpClient(withInterceptorsFromDi()),
+                provideZoneChangeDetection(),
+            ],
         }).compileComponents()
     })
 
@@ -117,6 +124,13 @@ describe('GridContextMenuCellRendererComponent', () => {
         const eventMock = {
             ctrlKey: true,
         } as unknown as MouseEvent;
+
+        it('should call setSelected(false) if removeSelectionOnOpenContextMenu is true and ctrlKey is true', () => {
+            component.agInit(paramsMock);
+            const event = { ctrlKey: true } as MouseEvent;
+            component.dotsClicked(event);
+            expect(component['container'].dotsClicked).toHaveBeenCalledWith(component.rowIndex, jasmine.anything(), jasmine.anything());
+        });
 
         it('Should call dotsClicked if event.ctrlKey is true & removeSelectionOnOpenContextMenu is false', () => {
             component.agInit(paramsMock);

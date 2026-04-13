@@ -1,17 +1,12 @@
-@use "../variables" as *;
-@use "bootstrap/scss/bootstrap" as *;
+@use "../variables" as Vars;
 
 systelab-file-selector {
   .slab-file-selector {
     input {
-      border-radius: $border-radius;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      border-radius: Vars.$border-radius 0 0 Vars.$border-radius;
     }
     input[readonly] {
-      border-radius: $border-radius;
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+      border-radius: Vars.$border-radius;
 
       &:enabled {
         background: white;

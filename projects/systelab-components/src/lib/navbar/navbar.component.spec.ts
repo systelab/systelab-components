@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -58,15 +58,22 @@ describe('Systelab Navbar', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [NavbarComponent, NavbarTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				NavbarComponent,
+				NavbarTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {BrowserModule, By} from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import {BreadcrumbComponent, BreadcrumbItem, BreadcrumbSubItem} from './breadcrumb.component';
+import { BreadcrumbComponent, BreadcrumbItem, BreadcrumbSubItem } from './breadcrumb.component';
 
 @Component({
     selector: 'systelab-breadcrumb-maxwidth-test',
@@ -65,15 +65,22 @@ describe('Systelab Breadcrumb With Max Width', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [BreadcrumbComponent, BreadcrumbMaxWidthTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				BreadcrumbComponent,
+				BreadcrumbMaxWidthTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

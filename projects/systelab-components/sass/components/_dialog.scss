@@ -28,8 +28,8 @@ $slab-button-size: 35px !default;
 $slab-button-fontsize: 25px !default;
 
 
-@use '@angular/cdk/overlay-prebuilt.css';
-@use '../variables'as *;
+//@use '@angular/cdk/overlay-prebuilt.css' as cdk;
+@use '../variables'as Vars;
 
 .cdk-overlay-dark-backdrop {
   backdrop-filter: saturate(30%);
@@ -84,7 +84,7 @@ $slab-button-fontsize: 25px !default;
     }
 
     .slab-dialog-header {
-      background: $slab-dialog-fullscreen-header-color;
+      background: Vars.$slab-dialog-fullscreen-header-color;
     }
   }
 
@@ -103,7 +103,7 @@ $slab-button-fontsize: 25px !default;
  * 2. Preventively hide the 'back' side of a transformed elemenet.
  */
 .slab-dialog {
-  @include size(100%); /* [1] */
+  @include Vars.size(100%); /* [1] */
 
   > * {
     -webkit-backface-visibility: hidden; /* [2] */
@@ -166,7 +166,7 @@ $slab-button-fontsize: 25px !default;
  *    we'd need to tweak all the dialogs and place top buttons in the header.
  */
 .slab-dialog-content {
-  @include size(100%);
+  @include Vars.size(100%);
   display: flex !important; /* [1] */
 
   border: none;
@@ -198,7 +198,7 @@ $slab-button-fontsize: 25px !default;
 .slab-dialog-header {
   display: flex;
   align-items: center;
-  height: $slab-dialog-header-height;
+  height: Vars.$slab-dialog-header-height;
   padding: 16px 24px;
 
   font-size: 20px;
@@ -216,7 +216,7 @@ $slab-button-fontsize: 25px !default;
   padding: 16px 24px;
 
   .square {
-    @include size($slab-button-size);
+    @include Vars.size($slab-button-size);
 
     min-width: $slab-button-size; /* [1] */
     min-height: $slab-button-size; /* [1] */
@@ -225,13 +225,13 @@ $slab-button-fontsize: 25px !default;
   }
 
   .btn {
-    min-width: $slab-minimum-button-width;
+    min-width: Vars.$slab-minimum-button-width;
   }
 
 }
 
 .slab-dialog-header-button {
-  @include size($slab-button-size);
+  @include Vars.size($slab-button-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -243,7 +243,7 @@ $slab-button-fontsize: 25px !default;
 
   i,
   &:before {
-    @include font-smoothing(antialiased);
+    @include Vars.font-smoothing(antialiased);
     color: var(--text-color);
     font-size: $slab-button-fontsize;
     font-family: icomoon;
@@ -296,7 +296,7 @@ $slab-button-fontsize: 25px !default;
 .slab-dialog {
   &.slab-dialog-border { /* [3] */
     .slab-dialog-content {
-      border: $content-border-width solid $slab-dialog-border-color;
+      border: $content-border-width solid Vars.$slab-dialog-border-color;
       border-radius: $content-border-width;
 
       .slab-dialog-header {
@@ -400,7 +400,7 @@ $slab-button-fontsize: 25px !default;
 
 .slab-dialog-header-progress {
   width: 100%;
-  height: $slab-nanobar-height;
+  height: Vars.$slab-nanobar-height;
   z-index: 9998;
   top: 0;
 
@@ -408,13 +408,13 @@ $slab-button-fontsize: 25px !default;
     width: 0;
     height: 100%;
     transition: width 0.3s;
-    background: $slab-nanobar-color;
+    background: Vars.$slab-nanobar-color;
     z-index: 9998;
   }
 }
 
 .slab-dialog-header-progress-bar-with-text {
-  height: $slab-nanobar-with-progress-height;
+  height: Vars.$slab-nanobar-with-progress-height;
   position: relative;
   background-color: #e9ecef;
 

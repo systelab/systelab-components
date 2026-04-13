@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
@@ -59,7 +59,7 @@ export class ESMockI18nService {
 
 export class ESMockI18nService2 {
 	public get() {
-		// eslint-disable-next-line @typescript-eslint/naming-convention
+		 
 		const translations = {
 			COMMON_JANUARY: 'Enero',
 			COMMON_FEBRUARY: 'Febrero',
@@ -190,20 +190,27 @@ describe('Systelab US DatepickerComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [TouchspinComponent,
-        DatepickerComponent,
-        ButtonComponent,
-        DatepickerTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        DatePickerModule,
-        SystelabTranslateModule],
-    providers: [{ provide: I18nService, useClass: USMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				TouchspinComponent,
+				DatepickerComponent,
+				ButtonComponent,
+				DatepickerTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				DatePickerModule,
+				SystelabTranslateModule,
+			],
+			providers: [
+				{ provide: I18nService, useClass: USMockI18nService },
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			]
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

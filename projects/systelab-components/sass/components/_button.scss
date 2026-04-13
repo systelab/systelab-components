@@ -1,4 +1,4 @@
-@use "../variables" as variables;
+@use "../variables" as Vars;
 .btn:not(.btn-primary, .btn-secondary, .btn-info,.btn-success, .btn-warning,  .btn-danger, .btn-light, .btn-dark, .btn-link, .btn-outline-primary,.btn-outline-secondary, .btn-outline-info, .btn-outline-success, .btn-outline-warning, .btn-outline-danger, .btn-outline-light, .btn-outline-dark, .btn-outline-link)
 {
   border-color: var(--slab_component_border_color);
@@ -45,7 +45,7 @@
 
 .btn {
   &.btn-searcher {
-    width: variables.$slab-searcher-button-width;
+    width: Vars.$slab-searcher-button-width;
     aspect-ratio: 1 / 1;
   }
   &.btn-outline-primary {

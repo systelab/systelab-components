@@ -8,14 +8,9 @@
     "declaration": false,
     "experimentalDecorators": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": [
-      "es2018",
-      "dom",
-      "dom.iterable"
-    ],
     "paths": {
       "systelab-components": [
         "dist/systelab-components/systelab-components",

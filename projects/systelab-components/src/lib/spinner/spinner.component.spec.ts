@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TouchSpinValues } from './touch.spin-values';
 import { BrowserModule, By } from '@angular/platform-browser';
@@ -85,15 +85,23 @@ describe('Systelab Spinner', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [TouchspinComponent, SpinnerTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule,
-        TreeModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-}).compileComponents();
+			declarations: [
+				TouchspinComponent,
+				SpinnerTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+				TreeModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

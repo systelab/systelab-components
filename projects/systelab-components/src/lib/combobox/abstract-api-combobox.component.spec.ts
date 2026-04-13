@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, provideZoneChangeDetection, Renderer2, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,8 +14,7 @@ import { AbstractApiComboBox } from './abstract-api-combobox.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { ComboBoxInputRendererComponent } from './renderer/combobox-input-renderer.component';
-import { Column, GridReadyEvent, RowNode } from 'ag-grid-community';
-import { fi } from 'date-fns/locale';
+import { RowNode } from 'ag-grid-community';
 
 export class TestData {
 	constructor(public id: string | number, public description: string) {
@@ -130,7 +129,10 @@ describe('Systelab Combobox', () => {
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AgGridModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
+    providers: [
+		provideHttpClient(withInterceptorsFromDi()),
+		provideZoneChangeDetection(),
+	]
 })
 			.compileComponents();
 	});

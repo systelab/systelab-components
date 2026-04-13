@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SpyMenuComponent } from './spy-menu.component';
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { SpyMenuItem } from 'systelab-components';
 import { By } from '@angular/platform-browser';
 
@@ -42,7 +42,8 @@ describe('Systelab SpyMenuComponent', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [SpyMenuComponent, SpyMenuTestComponent],
+			declarations: [ SpyMenuComponent, SpyMenuTestComponent ],
+			providers: [ provideZoneChangeDetection() ],
 		})
 			.compileComponents();
 		fixture = TestBed.createComponent(SpyMenuTestComponent);
@@ -52,6 +53,13 @@ describe('Systelab SpyMenuComponent', () => {
 
 	it('should instantiate', () => {
 		expect(fixture.componentInstance).toBeDefined();
+	});
+
+	it('should highlight the first section by default upon initialization', () => {
+		const selectedElement = fixture.debugElement.nativeElement.querySelector('.spy-menu-item--selected');
+		const text = selectedElement.children[0].innerText;
+
+		expect(text).toBe('Section 1');
 	});
 
 	it('should create spy menu', () => {

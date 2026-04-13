@@ -2,9 +2,6 @@ import { UntypedFormControl } from '@angular/forms';
 import { phoneValidator } from './phone-validator.directive';
 
 describe('Phone validation', () => {
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	beforeEach(() => {});
-
 	[	{description: 'Number with 9 digits', text: '939999999', expected: true},
 		{description: 'International prefix with 00', text: '0034939999999', expected: true},
 		{description: 'International prefix with 00 and spaces', text: '0034 93 999 99 99', expected: true},

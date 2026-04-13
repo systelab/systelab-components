@@ -1,4 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
+import { Component, Directive, Input, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -194,38 +194,40 @@ describe('Systelab Searcher', () => {
 
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
-    declarations: [
-        MockTooltipDirective,
-        DialogBottomComponent,
-        DialogHeaderComponent,
-        SearcherDialog,
-        GridContextMenuCellRendererComponent,
-        GridHeaderContextMenuComponent,
-        ContextMenuItemComponent,
-        ContextMenuSubmenuItemComponent,
-        ComboBoxInputRendererComponent,
-        SystelabSearcherComponent,
-        SearcherTestComponent,
-        GridContextMenuComponent,
-        GridHeaderContextMenu,
-        SearcherTableComponent,
-        ButtonComponent,
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-
-        SystelabTranslateModule,
-        SystelabPreferencesModule,
-        AgGridModule],
-    providers: [
-        DialogService,
-        MessagePopupService,
-        provideHttpClient(withInterceptorsFromDi())
-    ]
-});
+			declarations: [
+				MockTooltipDirective,
+				DialogBottomComponent,
+				DialogHeaderComponent,
+				SearcherDialog,
+				GridContextMenuCellRendererComponent,
+				GridHeaderContextMenuComponent,
+				ContextMenuItemComponent,
+				ContextMenuSubmenuItemComponent,
+				ComboBoxInputRendererComponent,
+				SystelabSearcherComponent,
+				SearcherTestComponent,
+				GridContextMenuComponent,
+				GridHeaderContextMenu,
+				SearcherTableComponent,
+				ButtonComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+				AgGridModule,
+			],
+			providers: [
+				DialogService,
+				MessagePopupService,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		});
 	});
 
 	beforeEach(() => {
@@ -250,14 +252,10 @@ describe('Systelab Searcher', () => {
 			.toBeFalsy();
 	});
 
-	it('should select a value if code is entered', (done) => {
+	it('should select a value if code is entered', async () => {
 		enterText(fixture, '1');
-		fixture.whenStable()
-			.then(() => {
-				expect(getDescription(fixture))
-					.toEqual('1');
-				done();
-			});
+		await fixture.whenStable();
+		expect(getDescription(fixture)).toEqual('1');
 	});
 
 	it('should focus input when showing help dialog',  async () => {
@@ -268,7 +266,7 @@ describe('Systelab Searcher', () => {
 		expect(isSearchInputFocused()).toBeTruthy();
 	});
 
-	it('should show counter with the selected items number in the submit button', async() => {
+	it('should show counter with the selected items number in the submit button', async () => {
 		spyOn(SearcherTableComponent.prototype as any, 'refresh').and.stub();
 		enterText(fixture, '1');
 		await fixture.whenStable();

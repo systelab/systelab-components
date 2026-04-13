@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { AbstractSortableListComponent } from './abstract-sortable-list.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
@@ -102,21 +102,25 @@ describe('Systelab abstract sortable list', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        SortableListTestComponent,
-        DataFilterPipe
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        DragDropModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				SortableListTestComponent,
+				DataFilterPipe,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				DragDropModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

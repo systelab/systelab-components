@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,69 +30,75 @@ export class ButtonTestComponent {
 	}
 }
 
-const checkHasValue = (fixture: ComponentFixture<ButtonTestComponent>, value: boolean) => {
-	const label = fixture.debugElement.nativeElement.querySelector('.label-value');
-	expect(label.innerHTML)
-		.toContain(value);
-};
-
-const clickButton = (fixture: ComponentFixture<ButtonTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn');
-	button.click();
-	fixture.detectChanges();
-};
-
-const clickOnIcon = (fixture: ComponentFixture<ButtonTestComponent>) => {
-	const button = fixture.debugElement.nativeElement.querySelector('.slab-btn i');
-	button.click();
-	fixture.detectChanges();
-};
-
 describe('Systelab Button', () => {
 	let fixture: ComponentFixture<ButtonTestComponent>;
+	let component: ButtonTestComponent;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [ButtonComponent, ButtonTestComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+    		declarations: [ButtonComponent, ButtonTestComponent],
+    		imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule
+			],
+    		providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection()
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ButtonTestComponent);
+		component = fixture.componentInstance;
+
 		fixture.detectChanges();
 	});
 
 	it('should instantiate', () => {
-		expect(fixture.componentInstance)
-			.toBeDefined();
+		expect(component).toBeDefined();
 	});
 
 	it('should change value if is clicked', () => {
-		checkHasValue(fixture, false);
-		clickButton(fixture);
-		checkHasValue(fixture, true);
+		expect(getLabelValue()).toEqual('false');
+		clickButton();
+		expect(getLabelValue()).toEqual('true');
 	});
 
-	it('should not change value if is clicked when is disabled', () => {
+	it('should not change value if is clicked when is disabled', async () => {
 		fixture.componentInstance.disabled = true;
 		fixture.detectChanges();
-		checkHasValue(fixture, false);
-		clickButton(fixture);
-		checkHasValue(fixture, false);
+		expect(getLabelValue()).toEqual('false');
+		clickButton();
+		await fixture.whenStable();
+		expect(getLabelValue()).toEqual('false');
 	});
 
 	it('should not change value if icon is clicked when is disabled', () => {
 		fixture.componentInstance.disabled = true;
 		fixture.detectChanges();
-		checkHasValue(fixture, false);
-		clickOnIcon(fixture);
-		checkHasValue(fixture, false);
+		expect(getLabelValue()).toEqual('false');
+		clickOnIcon();
+		expect(getLabelValue()).toEqual('false');
 	});
+
+	function getLabelValue() {
+		const label = fixture.debugElement.nativeElement.querySelector('.label-value');
+		return label.textContent;
+	}
+
+	function clickButton() {
+		const button = fixture.debugElement.nativeElement.querySelector('.slab-btn');
+		button.click();
+		fixture.detectChanges();
+	}
+
+	function clickOnIcon() {
+		const button = fixture.debugElement.nativeElement.querySelector('.slab-btn i');
+		button.click();
+		fixture.detectChanges();
+	}
 });

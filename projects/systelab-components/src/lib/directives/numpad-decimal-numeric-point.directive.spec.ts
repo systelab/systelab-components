@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { I18nService } from 'systelab-translate';
@@ -42,8 +42,14 @@ describe('Verify numPadDecimalNumericDirective english', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [ FormsModule ],
-			declarations: [NumpadDecimalNumericDirective, TestComponent],
-			providers: [{provide: I18nService, useClass: USMockI18nService}]
+			declarations: [
+				NumpadDecimalNumericDirective,
+				TestComponent,
+			],
+			providers: [
+				{provide: I18nService, useClass: USMockI18nService},
+				provideZoneChangeDetection(),
+			],
 		}).compileComponents();
 	});
 

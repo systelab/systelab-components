@@ -99,8 +99,11 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	// Overrides
 	public override onComboClicked(event: MouseEvent): void {
+		const wasOpen = this.isDropDownOpen();
 		super.onComboClicked(event);
-		this.doSearchText(this.description);
+		if (!wasOpen) {
+			this.doSearchText(this.description);
+		}
 	}
 
 	// Overrides

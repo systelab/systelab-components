@@ -1,15 +1,15 @@
-@use "../variables" as *;
+@use "../variables" as Vars;
 systelab-app-sidebar-small {
 
   $sidebar-small-width: 60px !default;
   $sidebar-small-margin-top: 35px !default;
 
   .slab-app-sidebar-small-menu-container {
-    @include position(fixed, $top: $slab-app-header-height);
+    @include Vars.position(fixed, $top: Vars.$slab-app-header-height);
 
-    background-color: $background-secondary;
+    background-color: Vars.$background-secondary;
     width: $sidebar-small-width;
-    height: calc(100% - #{$slab-app-header-height});
+    height: calc(100% - #{Vars.$slab-app-header-height});
 
     ul {
       list-style-type: none;
@@ -18,12 +18,12 @@ systelab-app-sidebar-small {
 
     .slab-app-sidebar-button-container {
       margin-top: $sidebar-small-margin-top;
-      margin-bottom: 0px !important;
-      padding-left: 0px;
+      margin-bottom: 0 !important;
+      padding-left: 0;
       width: 100% !important;
       text-align: center;
-      background-color: $background-secondary;
-      @include user-selection(none);
+      background-color: Vars.$background-secondary;
+      @include Vars.user-selection(none);
       color: #c9c9c9;
 
       &.slab-bottom {

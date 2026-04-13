@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -100,17 +100,26 @@ describe('Systelab Two list', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [TwoListComponent, TwoListTestComponent, TwoListSortableListComponent, DataFilterPipe],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DragDropModule,
-        OverlayModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
-			.compileComponents();
+			declarations: [
+				TwoListComponent,
+				TwoListTestComponent,
+				TwoListSortableListComponent,
+				DataFilterPipe,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				DragDropModule,
+				OverlayModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 	});
 
 	beforeEach(() => {

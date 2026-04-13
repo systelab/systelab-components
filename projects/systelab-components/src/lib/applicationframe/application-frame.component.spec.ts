@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,24 +47,27 @@ describe('Systelab ApplicationFrameComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        TooltipDirective,
-        ApplicationHeaderComponent,
-        ApplicationSidebarLargeComponent,
-        ApplicationSidebarSmallComponent,
-        ApplicationFrameComponent,
-        ApplicationFrameTestComponent
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        SystelabTranslateModule,
-        OverlayModule],
-    providers: [
-        TooltipDirective,
-        provideHttpClient(withInterceptorsFromDi())
-    ]
-}).compileComponents();
+			declarations: [
+				TooltipDirective,
+				ApplicationHeaderComponent,
+				ApplicationSidebarLargeComponent,
+				ApplicationSidebarSmallComponent,
+				ApplicationFrameComponent,
+				ApplicationFrameTestComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				SystelabTranslateModule,
+				OverlayModule,
+			],
+			providers: [
+				TooltipDirective,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		}).compileComponents();
 
 	});
 

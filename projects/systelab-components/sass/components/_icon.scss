@@ -1,4 +1,4 @@
-@use '../variables'as *;
+@use '../variables'as Vars;
 .slab-icon-medium {
     font-size: 200%;
     vertical-align: -16%;
@@ -27,7 +27,7 @@
 
 .slab-icon,
 [class*='icon-'] {
-    @include font-smoothing(antialiased, grayscale);
+    @include Vars.font-smoothing(antialiased, grayscale);
 
     display: inline-block;
     line-height: 1;
@@ -35,7 +35,7 @@
     font-style: normal;
 
     &.dark-green {
-        color: $dark-green;
+        color: Vars.$dark-green;
     }
 
     &.danger {

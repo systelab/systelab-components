@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -84,21 +84,26 @@ describe('Systelab Modal', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    declarations: [
-        ModalTestComponent,
-        SampleDialog,
-        DialogHeaderComponent,
-        DialogBottomComponent
-    ],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        OverlayModule,
-        ButtonModule,
-        SystelabTranslateModule,
-        SystelabPreferencesModule],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-});
+			declarations: [
+				ModalTestComponent,
+				SampleDialog,
+				DialogHeaderComponent,
+				DialogBottomComponent,
+			],
+			imports: [
+				BrowserModule,
+				BrowserAnimationsModule,
+				FormsModule,
+				OverlayModule,
+				ButtonModule,
+				SystelabTranslateModule,
+				SystelabPreferencesModule,
+			],
+			providers: [
+				provideHttpClient(withInterceptorsFromDi()),
+				provideZoneChangeDetection(),
+			],
+		});
 	});
 
 	beforeEach(() => {
