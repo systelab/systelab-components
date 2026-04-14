@@ -51,14 +51,3 @@ before_deploy: |
     git push -f -q https://systelab:$GITHUB_API_KEY@github.com/systelab/systelab.github.io
     cd ..
   fi
-  cd dist/systelab-components
-
-deploy:
-  skip_cleanup: true
-  provider: npm
-  email: aserra@werfen.com
-  edge:
-    branch: v2.0.3-beta.5
-  api_key: $NPM_TOKEN
-  on:
-    tags: true
