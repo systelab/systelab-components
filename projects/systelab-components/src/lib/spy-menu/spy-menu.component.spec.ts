@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SpyMenuComponent } from './spy-menu.component';
 import { Component, provideZoneChangeDetection } from '@angular/core';
-import { SpyMenuItem } from 'systelab-components';
+import { SpyMenuItem } from './spy-menu-item';
 import { By } from '@angular/platform-browser';
 
 @Component({

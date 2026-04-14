@@ -1,11 +1,12 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { DialogRef, DialogService } from 'systelab-components';
+import { DialogService } from '../dialog/dialog.service';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { MessagePopupButton, MessagePopupService } from './message-popup.service';
 import { MessageWithIconComponent } from './message-with-icon.component';
 import { NgZone, provideZoneChangeDetection } from "@angular/core";
 import { MessagePopupViewComponent } from "./message-popup-view.component";
+import { DialogRef } from '../dialog/dialog-ref';
 
 const yesNoNoTemplate = {
     titleDescription: 'Test',

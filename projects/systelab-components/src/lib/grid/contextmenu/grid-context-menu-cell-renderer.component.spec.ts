@@ -10,7 +10,7 @@ import { OverlayModule } from "primeng/overlay";
 import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
 import { Component, provideZoneChangeDetection } from "@angular/core";
-import { AbstractGrid } from "systelab-components";
+import { AbstractGrid } from '../abstract-grid.component';
 
 
 interface TestData {
