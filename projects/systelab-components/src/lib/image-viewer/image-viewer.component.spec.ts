@@ -7,7 +7,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { ButtonComponent } from '../button/button.component';
 import { SliderComponent } from '../slider/slider.component';
 import { ToggleButtonComponent } from '../toggle-button/toggle-button.component';
-import { ActionButton, ActionButtonType, ImageViewerComponent } from 'systelab-components';
+import { ActionButton, ActionButtonType, ImageViewerComponent } from './image-viewer.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 
 @Component({

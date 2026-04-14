@@ -6,8 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ToggleSelectorOption } from './toggle-selector.component';
-import { ToggleSelectorComponent } from 'systelab-components';
+import { ToggleSelectorComponent, ToggleSelectorOption } from './toggle-selector.component';
 
 @Component({
     selector: 'systelab-toggle-selector-test',
