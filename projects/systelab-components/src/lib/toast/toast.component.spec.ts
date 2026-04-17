@@ -19,12 +19,17 @@ import { ToastConfig } from './toast-config';
 				<button id="open-toast-with-close-button" type="button" class="btn btn-primary" (click)="showToastWithCloseButton()">
 					Show
 				</button>
+				<button id="open-toast-with-action" type="button" class="btn btn-primary" (click)="showToastWithAction()">
+					Show with action
+				</button>
 	          `,
     standalone: false
 })
 export class ToastTestComponent {
 	private readonly _toastDefaultConfig: ToastConfig;
-	constructor(private toastService: ToastService) {
+	public actionCallbackSpy = jasmine.createSpy('actionCallback');
+
+	constructor(public toastService: ToastService) {
 		this._toastDefaultConfig = this.toastService.getConfig();
 	}
 
@@ -38,6 +43,13 @@ export class ToastTestComponent {
 			showCloseButton: true,
 		});
 		this.toastService.showInformation('Test to show');
+	}
+
+	public showToastWithAction(): void {
+		this.toastService.showInformationMessage({
+			title: 'Action toast',
+			action: { label: 'Undo', callback: this.actionCallbackSpy },
+		});
 	}
 }
 
@@ -103,6 +115,23 @@ describe('Systelab Toast', () => {
 		expect(toastHasCloseButton()).toBeTruthy();
 		clickCloseButton();
 		expect(isToastVisible()).toBeFalsy();
+	});
+
+	it('should show the action button and invoke its callback when clicked.', () => {
+		clickButton(fixture, 'open-toast-with-action');
+		const actionButton = document.querySelector('systelab-toast .slab-toast__action') as HTMLElement;
+		expect(actionButton).not.toBeNull();
+		actionButton.click();
+		expect(fixture.componentInstance.actionCallbackSpy).toHaveBeenCalledTimes(1);
+		expect(isToastVisible()).toBeFalsy();
+	});
+
+	it('should dismiss all active toasts when calling dismissAll.', () => {
+		clickButton(fixture, 'open-toast');
+		clickButton(fixture, 'open-toast');
+		expect(fixture.componentInstance.toastService.getActiveToasts().length).toBeGreaterThan(0);
+		fixture.componentInstance.toastService.dismissAll();
+		expect(fixture.componentInstance.toastService.getActiveToasts().length).toBe(0);
 	});
 });
 
