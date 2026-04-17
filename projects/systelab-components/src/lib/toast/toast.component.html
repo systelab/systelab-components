@@ -1,21 +1,23 @@
-<div [ngClass]="toastClass"
-     [@fadeAnimation]="{ value: animationState, params: { fadeIn: 1000, fadeOut: 1000 } }"
-     (@fadeAnimation.done)="onFadeFinished($event)">
-    <i class="type" [ngClass]="iconClass"></i>
-    <div class="slab-toast__content">
-        <div class="slab-toast__title">{{ title }}</div>
-        @if (body) {
-            <div class="slab-toast__body">{{ body }}</div>
+@for (item of items; track item.id) {
+    <div [ngClass]="item.toastClass"
+         [@fadeAnimation]="{ value: item.animationState, params: { fadeIn: 300, fadeOut: 300 } }"
+         (@fadeAnimation.done)="onFadeFinished($event, item)">
+        <i class="type" [ngClass]="item.iconClass"></i>
+        <div class="slab-toast__content">
+            <div class="slab-toast__title">{{ item.title }}</div>
+            @if (item.body) {
+                <div class="slab-toast__body">{{ item.body }}</div>
+            }
+        </div>
+        @if (item.hasAction) {
+            <button class="slab-toast__action" (click)="onActionClick(item)" type="button">
+                {{ item.data.action.label }}
+            </button>
+        }
+        @if (item.showClose) {
+            <i class="slab-toast__close" (click)="closeToast(item)" role="button" tabindex="0"
+               (keydown.enter)="closeToast(item)"
+               (keydown.space)="closeToast(item)"></i>
         }
     </div>
-    @if (hasAction) {
-        <button class="slab-toast__action" (click)="onActionClick()" type="button">
-            {{ data.action.label }}
-        </button>
-    }
-    @if (config.showCloseButton) {
-        <i class="close" (click)="closeToast()" role="button" tabindex="0"
-           (keydown.enter)="closeToast()"
-           (keydown.space)="closeToast()"></i>
-    }
-</div>
+}

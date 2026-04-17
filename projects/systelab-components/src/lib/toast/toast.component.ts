@@ -1,9 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 import { toastAnimations, ToastAnimationState } from './toast-animation';
 import { ToastConfig, ToastData, ToastSize } from './toast-config';
-import { ToastRef } from './toast-ref';
-import { ToastService } from './toast.service';
 
 const ICONS = {
   success: 'icon-check-circle',
@@ -12,91 +10,104 @@ const ICONS = {
   error: 'icon-times-circle',
 };
 
+interface ToastItem {
+  id: string;
+  data: ToastData;
+  iconClass: string;
+  toastClass: string;
+  title: string;
+  body: string;
+  hasAction: boolean;
+  showClose: boolean;
+  animationState: ToastAnimationState;
+  timerId?: number;
+  onClose?: () => void;
+}
+
 @Component({
     selector: 'systelab-toast',
     templateUrl: './toast.component.html',
     animations: [toastAnimations.fadeToast],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-export class ToastComponent implements OnInit, OnDestroy {
-  public iconClass: string;
-  public toastClass: string;
-  public animationState: ToastAnimationState = 'default';
-  public config: ToastConfig;
-  public title: string;
-  public body: string;
-  public hasAction: boolean;
+export class ToastComponent {
+  public items: ToastItem[] = [];
+  public onEmpty?: () => void;
 
-  private _intervalId: number | undefined;
+  constructor(private readonly _cdr: ChangeDetectorRef) {}
 
-  constructor(readonly data: ToastData, readonly ref: ToastRef, readonly toastService: ToastService) {
-    this.config = this.toastService.getConfig();
-    this.iconClass = `fa ${ICONS[data.type]}`;
-    this.toastClass = `slab-toast slab-toast--${data.type}`;
-    
-    // Handle legacy text or new title/body structure
-    if (data.text && !data.title) {
-      this.title = data.text;
-      this.body = '';
-    } else {
-      this.title = data.title || '';
-      this.body = data.body || '';
+  public addToast(data: ToastData, config: ToastConfig, onClose?: () => void): string {
+    const id = `ti-${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
+    const title = data.title || data.text || '';
+    const body = data.body || '';
+    const hasAction = !!data.action;
+
+    let toastClass = `slab-toast slab-toast--${data.type}`;
+    if (config.autoWidth) {
+      toastClass += ' slab-toast--auto-width';
+    } else if (config.fixedSize === ToastSize.large) {
+      toastClass += ' slab-toast--fixed-size-large';
     }
+    if (config.showCloseButton) { toastClass += ' show-close-button'; }
+    if (hasAction) { toastClass += ' has-action'; }
+    if (body) { toastClass += ' has-body'; }
 
-    this.hasAction = !!data.action;
+    const item: ToastItem = {
+      id, data, title, body, hasAction, onClose,
+      iconClass: `fa ${ICONS[data.type]}`,
+      toastClass,
+      showClose: !!config.showCloseButton,
+      animationState: 'default',
+    };
 
-    // Apply styling classes
-    if (this.config.autoWidth) {
-      this.toastClass = `${this.toastClass} slab-toast--auto-width`;
-    } else if (this.config.fixedSize === ToastSize.small) {
-      this.toastClass = `${this.toastClass} slab-toast--fixed-size-small`;
-    } else if (this.config.fixedSize === ToastSize.large) {
-      this.toastClass = `${this.toastClass} slab-toast--fixed-size-large`;
-    }
-    
-    if (this.config.showCloseButton) {
-      this.toastClass = `${this.toastClass} show-close-button`;
-    }
+    item.timerId = window.setTimeout(() => this._startClose(id), config.timeout);
+    this.items = [...this.items, item];
+    this._cdr.detectChanges();
+    return id;
+  }
 
-    if (this.hasAction) {
-      this.toastClass = `${this.toastClass} has-action`;
-    }
-
-    if (this.body) {
-      this.toastClass = `${this.toastClass} has-body`;
+  public removeToast(id: string): void {
+    const item = this.items.find(i => i.id === id);
+    if (item) {
+      clearTimeout(item.timerId);
+      this._remove(id);
     }
   }
 
-  public ngOnInit(): void {
-    this._intervalId = window.setTimeout(() => (this.animationState = 'closing'), this.config.timeout);
+  public closeToast(item: ToastItem): void {
+    clearTimeout(item.timerId);
+    this._remove(item.id);
   }
 
-  public closeToast(): void {
-    this.close();
-  }
-
-  public onActionClick(): void {
-    if (this.data.action) {
-      this.data.action.callback();
-      this.close();
+  public onActionClick(item: ToastItem): void {
+    if (item.data.action) {
+      item.data.action.callback();
+      clearTimeout(item.timerId);
+      this._remove(item.id);
     }
   }
 
-  public onFadeFinished(event: AnimationEvent) {
-    const { toState } = event;
-    const isFadeOut = (toState as ToastAnimationState) === 'closing';
-    const isFinished = this.animationState === 'closing';
-
-    if (isFadeOut && isFinished) {
-      this.close();
+  public onFadeFinished(event: AnimationEvent, item: ToastItem): void {
+    const isFadeOut = (event.toState as ToastAnimationState) === 'closing';
+    if (isFadeOut && item.animationState === 'closing') {
+      this._remove(item.id);
     }
   }
 
-  public ngOnDestroy() {
-    clearTimeout(this._intervalId);
+  private _startClose(id: string): void {
+    const item = this.items.find(i => i.id === id);
+    if (item && item.animationState !== 'closing') {
+      item.animationState = 'closing';
+      this._cdr.detectChanges();
+    }
   }
 
-  private close(): void {
-    this.ref.close();
+  private _remove(id: string): void {
+    const item = this.items.find(i => i.id === id);
+    this.items = this.items.filter(i => i.id !== id);
+    this._cdr.detectChanges();
+    if (item?.onClose) { item.onClose(); }
+    if (this.items.length === 0) { this.onEmpty?.(); }
   }
 }

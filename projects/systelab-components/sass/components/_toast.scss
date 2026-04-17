@@ -1,3 +1,8 @@
+.cdk-overlay-pane.slab-toast-panel {
+  background: transparent;
+  transition: none !important;
+}
+
 systelab-toast {
   $toast-bg-color: #3f3f3f;
   $toast-text-color: #ffffff;
@@ -5,6 +10,12 @@ systelab-toast {
   $toast-warning-icon-color: #ffd24a;
   $toast-info-icon-color: rgb(5, 122, 201);
   $toast-error-icon-color: #ff4944;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  background: transparent;
 
   .slab-toast {
     color: $toast-text-color;
@@ -29,13 +40,13 @@ systelab-toast {
     }
 
     > i.type,
-    > i.close {
+    > i.slab-toast__close {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
     }
     
-    > i.close {
+    > i.slab-toast__close {
       right: 16px;
       cursor: pointer;
       display: flex;
@@ -132,8 +143,7 @@ systelab-toast {
       }
     }
 
-    &.show-close-button,
-    &.has-action.show-close-button {
+    &.show-close-button {
       padding-right: 48px;
     }
 
@@ -141,9 +151,24 @@ systelab-toast {
       padding-right: 8px;
     }
 
+    &.has-action.show-close-button {
+      padding-right: 56px;
+
+      .slab-toast__action {
+        margin-right: 0;
+      }
+    }
+
     &.has-body {
       padding-top: 12px;
       padding-bottom: 12px;
     }
+  }
+}
+
+.slab-toast-panel--top-end,
+.slab-toast-panel--bottom-end {
+  systelab-toast {
+    align-items: flex-end;
   }
 }

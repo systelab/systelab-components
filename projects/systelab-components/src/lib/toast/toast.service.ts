@@ -1,5 +1,5 @@
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
+﻿import { ComponentRef, Inject, Injectable, Injector, Optional } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ToastRef } from './toast-ref';
 import { DEFAULT_TOAST_CONFIG, ToastConfig, ToastData, ToastAction } from './toast-config';
@@ -19,9 +19,14 @@ export interface ShowToastOptions {
 export class ToastService {
   private _activeToasts: ToastRef[] = [];
   private _config: ToastConfig;
+  private readonly _containers = new Map<string, { overlayRef: OverlayRef; containerRef: ComponentRef<ToastComponent> }>();
 
-  constructor(@Optional() @Inject(APP_CONFIG) private readonly config: any, private readonly overlay: Overlay, private readonly parentInjector: Injector) {
-    this._config = config?.toast ?? DEFAULT_TOAST_CONFIG;
+  constructor(
+    @Optional() @Inject(APP_CONFIG) private readonly appConfig: any,
+    private readonly overlay: Overlay,
+    private readonly parentInjector: Injector,
+  ) {
+    this._config = this.appConfig?.toast ?? DEFAULT_TOAST_CONFIG;
   }
 
   public setConfig(config: ToastConfig): void {
@@ -54,62 +59,40 @@ export class ToastService {
     if (typeof options === 'string') {
       return this.show({ text: options, type: 'error' });
     }
-    return this.show({ 
-      title: options.title, 
-      body: options.body, 
-      type: 'error', 
-      action: options.action 
-    }, options.config);
+    return this.show({ title: options.title, body: options.body, type: 'error', action: options.action }, options.config);
   }
 
   public showWarningMessage(options: ShowToastOptions | string): ToastRef {
     if (typeof options === 'string') {
       return this.show({ text: options, type: 'warning' });
     }
-    return this.show({ 
-      title: options.title, 
-      body: options.body, 
-      type: 'warning', 
-      action: options.action 
-    }, options.config);
+    return this.show({ title: options.title, body: options.body, type: 'warning', action: options.action }, options.config);
   }
 
   public showInformationMessage(options: ShowToastOptions | string): ToastRef {
     if (typeof options === 'string') {
       return this.show({ text: options, type: 'info' });
     }
-    return this.show({ 
-      title: options.title, 
-      body: options.body, 
-      type: 'info', 
-      action: options.action 
-    }, options.config);
+    return this.show({ title: options.title, body: options.body, type: 'info', action: options.action }, options.config);
   }
 
   public showSuccessMessage(options: ShowToastOptions | string): ToastRef {
     if (typeof options === 'string') {
       return this.show({ text: options, type: 'success' });
     }
-    return this.show({ 
-      title: options.title, 
-      body: options.body, 
-      type: 'success', 
-      action: options.action 
-    }, options.config);
+    return this.show({ title: options.title, body: options.body, type: 'success', action: options.action }, options.config);
   }
 
   // Toast management methods
   public dismissAll(): void {
-    this._activeToasts.forEach(toast => toast.close());
+    this._containers.forEach(({ overlayRef }) => overlayRef.dispose());
+    this._containers.clear();
     this._activeToasts = [];
   }
 
   public dismiss(id: string): void {
-    const index = this._activeToasts.findIndex(toast => toast.id === id);
-    if (index !== -1) {
-      this._activeToasts[index].close();
-      this._activeToasts.splice(index, 1);
-    }
+    const toast = this._activeToasts.find(t => t.id === id);
+    toast?.close();
   }
 
   public getActiveToasts(): ToastRef[] {
@@ -117,46 +100,24 @@ export class ToastService {
   }
 
   private show(data: ToastData, customConfig?: Partial<ToastConfig>): ToastRef {
-    // Merge configurations
     const config = { ...this._config, ...customConfig };
 
-    // Validate content length
     this.validateContent(data);
 
-    // Validate action on auto-dismissible toasts
-    if (data.action && !config.showCloseButton) {
-      console.warn('Toast with action button should either have showCloseButton enabled or ensure the action is available elsewhere in the app.');
-    }
+    const container = this._getOrCreateContainer(config);
 
-    // Check max simultaneous toasts limit
     const maxToasts = config.maxSimultaneousToasts ?? DEFAULT_TOAST_CONFIG.maxSimultaneousToasts;
-    if (this._activeToasts.length >= maxToasts) {
-      // Remove oldest toast
-      const oldestToast = this._activeToasts.shift();
-      if (oldestToast) {
-        oldestToast.close();
-      }
+    if (container.items.length >= maxToasts) {
+      container.removeToast(container.items[0].id);
     }
 
-    const positionStrategy = this.getPositionStrategy(config);
-    const overlayRef = this.overlay.create({ positionStrategy, panelClass: 'slab-toast-panel' });
-
-    const toastRef = new ToastRef(overlayRef, data);
-    this._activeToasts.push(toastRef);
-
-    const injector = this.getInjector(data, toastRef, config, this.parentInjector);
-    const toastPortal = new ComponentPortal(ToastComponent, null, injector);
-
-    overlayRef.attach(toastPortal);
-
-    // Clean up when toast is closed
-    overlayRef.detachments().subscribe(() => {
-      const index = this._activeToasts.findIndex(t => t.id === toastRef.id);
-      if (index !== -1) {
-        this._activeToasts.splice(index, 1);
-      }
+    let toastRef: ToastRef;
+    const toastItemId = container.addToast(data, config, () => {
+      this._activeToasts = this._activeToasts.filter(t => t !== toastRef);
     });
 
+    toastRef = new ToastRef(() => container.removeToast(toastItemId));
+    this._activeToasts.push(toastRef);
     return toastRef;
   }
 
@@ -164,46 +125,41 @@ export class ToastService {
     const title = data.title || data.text || '';
     const body = data.body || '';
 
-    // Validate title length (recommend 1 sentence)
     if (title.split('.').length > 2) {
       console.warn('Toast title should be limited to one sentence for better readability.');
     }
-
-    // Validate body length (recommend max 2 sentences)
     if (body.split('.').filter(s => s.trim()).length > 3) {
       console.warn('Toast body should be limited to two sentences for better readability.');
     }
-
-    // Validate action label
     if (data.action && data.action.label.split(' ').length > 2) {
       console.warn('Toast action label should be limited to one or two words.');
     }
   }
 
-  private getPositionStrategy(config: ToastConfig) {
-    const visibleToasts = this._activeToasts.filter(t => t.isVisible());
-    
-    if (visibleToasts.length === 0) {
-      // First toast - use configured position
-      return this.createPositionStrategy(config, '25px');
+  private _getOrCreateContainer(config: ToastConfig): ToastComponent {
+    const positionKey = config.position ?? DEFAULT_TOAST_CONFIG.position;
+    const existing = this._containers.get(positionKey);
+
+    if (existing?.overlayRef.hasAttached()) {
+      return existing.containerRef.instance;
     }
 
-    // Calculate position based on existing toasts
-    const lastToast = visibleToasts[visibleToasts.length - 1];
-    const { height, top, bottom } = lastToast.getPosition();
-    
-    // Determine if we're stacking from top or bottom
-    const position = config.position ?? DEFAULT_TOAST_CONFIG.position;
-    const isTopPosition = position.startsWith('top');
-    
-    let offset: string;
-    if (isTopPosition) {
-      offset = (top + height + 25) + 'px';
-    } else {
-      offset = (window.innerHeight - bottom + 25) + 'px';
+    if (existing) {
+      this._containers.delete(positionKey);
     }
 
-    return this.createPositionStrategy(config, offset);
+    const positionStrategy = this.createPositionStrategy(config, '25px');
+    const overlayRef = this.overlay.create({ positionStrategy, panelClass: ['slab-toast-panel', `slab-toast-panel--${positionKey}`] });
+    const portal = new ComponentPortal(ToastComponent, null, this.parentInjector);
+    const containerRef = overlayRef.attach(portal);
+
+    containerRef.instance.onEmpty = () => {
+      overlayRef.dispose();
+      this._containers.delete(positionKey);
+    };
+
+    this._containers.set(positionKey, { overlayRef, containerRef });
+    return containerRef.instance;
   }
 
   private createPositionStrategy(config: ToastConfig, offset: string) {
@@ -221,15 +177,5 @@ export class ToastService {
       default:
         return position.bottom(offset).centerHorizontally();
     }
-  }
-
-  private getInjector(data: ToastData, toastRef: ToastRef, config: ToastConfig, parentInjector: Injector) {
-    return Injector.create({
-      parent: parentInjector,
-      providers: [
-        { provide: ToastData, useValue: data },
-        { provide: ToastRef, useValue: toastRef },
-      ]
-    });
   }
 }
