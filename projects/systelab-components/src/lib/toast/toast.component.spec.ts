@@ -48,12 +48,12 @@ const clickButton = (fixture: ComponentFixture<ToastTestComponent>, buttonId: st
 };
 
 const queryToast = () => document.querySelector('systelab-toast');
-const queryCloseToastButton = () => queryToast().querySelector('systelab-toast .close');
+const queryCloseToastButton = () => queryToast().querySelector('.slab-toast__close');
 const isToastVisible = () => queryToast() !== null;
 const toastHasCloseButton = () => queryCloseToastButton() !== null;
 
 const clickCloseButton = () => {
-	const button = document.querySelector('systelab-toast .close');
+	const button = document.querySelector('systelab-toast .slab-toast__close');
 	const clickEvent = new Event('click');
 	button.dispatchEvent(clickEvent);
 };
