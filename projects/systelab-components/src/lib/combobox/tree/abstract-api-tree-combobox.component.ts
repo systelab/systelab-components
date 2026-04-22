@@ -5,7 +5,7 @@ import { map, Observable } from 'rxjs';
 import { PreferencesService } from 'systelab-preferences';
 import { GetRowIdParams, GridOptions, GridReadyEvent } from 'ag-grid-community';
 
-declare var jQuery: any;
+
 
 export class ComboTreeNode<T> {
 	public nodeData: T;
@@ -286,8 +286,7 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 			const isChild = event.node.data.level > 0;
 
 			if (isParent || isAll || isChild) {
-				jQuery('#' + this.comboId)
-					.dropdown('toggle');
+				this.closeDropDown(); 
 			} else {
 				event.node.setSelected(false);
 			}
