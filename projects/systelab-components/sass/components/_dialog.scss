@@ -55,7 +55,9 @@ $slab-button-fontsize: 25px !default;
   &.slab-toast-panel {
     border: none;
     background: transparent;
-    border-radius: 30px;
+    box-shadow: none;
+    overflow: visible;
+    border-radius: 0;
   }
 
   &:not(.fullscreen) {

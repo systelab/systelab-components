@@ -1,30 +1,45 @@
 <div class="container-fluid">
-    <systelab-button class="mt-2 mr-1" (click)="showErrorToast()"><i
-            class="icon-times-circle mr-1"></i>Error
-    </systelab-button>
-    <systelab-button class="mt-2 mr-1" (click)="showWarningToast()"><i
-            class="icon-warning mr-1"></i>Warning
-    </systelab-button>
-    <systelab-button class="mt-2 mr-1" (click)="showSuccessToast()"><i
-            class="icon-info-circle mr-1"></i>Success
-    </systelab-button>
-    <systelab-button class="mt-2 mr-1" (click)="showInformationToast()"><i
-            class="icon-question-circle mr-1"></i>Information
-    </systelab-button>
+    
+    <h5 class="mt-3 mb-2">Basic Types</h5>
+    <div class="mb-4">
+        <systelab-button class="mt-2 mr-1" (click)="showErrorToast()">
+            <i class="icon-times-circle mr-1"></i>Error
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showWarningToast()">
+            <i class="icon-warning mr-1"></i>Warning
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showSuccessToast()">
+            <i class="icon-check-circle mr-1"></i>Success
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showInformationToast()">
+            <i class="icon-info-circle mr-1"></i>Information
+        </systelab-button>
+    </div>
 
-    <systelab-button class="mt-2 mr-1" (click)="showSuccessLargeToast()"><i
-            class="icon-info-circle mr-1"></i>Success large toast
-    </systelab-button>
+    <h5 class="mt-4 mb-2">With Title & Body</h5>
+    <div class="mb-4">
+        <systelab-button class="mt-2 mr-1" (click)="showToastWithBody()">
+            <i class="icon-check-circle mr-1"></i>Success with Body
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showToastWithAction()">
+            <i class="icon-info-circle mr-1"></i>With Action Button
+        </systelab-button>
+    </div>
 
-    <systelab-button class="mt-2 mr-1" (click)="showSuccessAutoWidthToast()"><i
-            class="icon-info-circle mr-1"></i>Success auto width toast
-    </systelab-button>
+    <h5 class="mt-4 mb-2">Sizes & Options</h5>
+    <div class="mb-4">
+        <systelab-button class="mt-2 mr-1" (click)="showSuccessLargeToast()">
+            Large
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showSuccessAutoWidthToast()">
+            Auto Width
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showSuccessWithCloseButtonToast()">
+            Close Button
+        </systelab-button>
+        <systelab-button class="mt-2 mr-1" (click)="showToastTopEnd()">
+            Top End Position
+        </systelab-button>
+    </div>
 
-    <systelab-button class="mt-2 mr-1" (click)="showSuccessWithCloseButtonToast()"><i
-            class="icon-info-circle mr-1"></i>Success with close button toast
-    </systelab-button>
-
-    <systelab-button class="mt-2 mr-1" (click)="showSuccessShortTimeoutToast()"><i
-            class="icon-info-circle mr-1"></i>Success with timeout of 1 second toast
-    </systelab-button>
 </div>

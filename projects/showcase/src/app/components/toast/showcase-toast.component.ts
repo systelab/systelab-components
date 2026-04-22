@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastService } from 'systelab-components';
-import { ToastConfig, ToastSize } from "../../../../../systelab-components/src/lib/toast/toast-config";
+import { ToastConfig, ToastSize, ToastPosition } from "../../../../../systelab-components/src/lib/toast/toast-config";
 
 @Component({
     selector: 'showcase-toast',
@@ -10,7 +10,7 @@ import { ToastConfig, ToastSize } from "../../../../../systelab-components/src/l
 export class ShowcaseToastComponent {
 	private readonly _defaultConfig: ToastConfig;
 
-	constructor(private toastService: ToastService) {
+	constructor(private readonly toastService: ToastService) {
 		this._defaultConfig = this.toastService.getConfig();
 	}
 
@@ -30,35 +30,56 @@ export class ShowcaseToastComponent {
 		this.toastService.showInformation('This is an informational toast');
 	}
 
+	public showToastWithBody(): void {
+		this.toastService.showSuccessMessage({
+			title: 'File Uploaded',
+			body: 'Your document has been successfully uploaded.',
+		});
+	}
+
+	public showToastWithAction(): void {
+		this.toastService.showInformationMessage({
+			title: 'New message received',
+			action: {
+				label: 'View',
+				callback: () => alert('Action clicked!')
+			},
+			config: {
+				showCloseButton: true,
+			}
+		});
+	}
+
 	public showSuccessLargeToast(): void {
 		this.toastService.setConfig({
 			...this._defaultConfig,
 			fixedSize: ToastSize.large
-		})
-		this.toastService.showSuccess('This is a successful large action toast');
+		});
+		this.toastService.showSuccess('This is a large toast');
 	}
 
 	public showSuccessAutoWidthToast(): void {
 		this.toastService.setConfig({
 			...this._defaultConfig,
 			autoWidth: true,
-		})
-		this.toastService.showSuccess('This is a successful auto width action toast. It grows according to its content');
+		});
+		this.toastService.showSuccess('This is an auto width toast that grows with content');
 	}
 
 	public showSuccessWithCloseButtonToast(): void {
 		this.toastService.setConfig({
 			...this._defaultConfig,
 			showCloseButton: true,
-		})
-		this.toastService.showSuccess('This is a successful with close button toast');
+		});
+		this.toastService.showSuccess('Toast with close button');
 	}
 
-	public showSuccessShortTimeoutToast(): void {
-		this.toastService.setConfig({
-			...this._defaultConfig,
-			timeout: 1000,
-		})
-		this.toastService.showSuccess('Success with timeout of 1 second toast');
+	public showToastTopEnd(): void {
+		this.toastService.showSuccessMessage({
+			title: 'Top End Position',
+			config: {
+				position: ToastPosition.topEnd,
+			}
+		});
 	}
 }

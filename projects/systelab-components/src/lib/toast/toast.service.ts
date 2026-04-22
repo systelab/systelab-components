@@ -1,20 +1,32 @@
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
+﻿import { ComponentRef, Inject, Injectable, Injector, Optional } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ToastRef } from './toast-ref';
-import { DEFAULT_TOAST_CONFIG, ToastConfig, ToastData } from './toast-config';
+import { DEFAULT_TOAST_CONFIG, ToastConfig, ToastData, ToastAction } from './toast-config';
 import { ToastComponent } from './toast.component';
 import { APP_CONFIG } from '../systelab-components.module.config';
+
+export interface ShowToastOptions {
+  title: string;
+  body?: string;
+  action?: ToastAction;
+  config?: Partial<ToastConfig>;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  private _lastToast: ToastRef;
+  private _activeToasts: ToastRef[] = [];
   private _config: ToastConfig;
+  private readonly _containers = new Map<string, { overlayRef: OverlayRef; containerRef: ComponentRef<ToastComponent> }>();
 
-  constructor(@Optional() @Inject(APP_CONFIG) private config, private overlay: Overlay, private parentInjector: Injector) {
-    this._config = config?.toast ?? DEFAULT_TOAST_CONFIG;
+  constructor(
+    @Optional() @Inject(APP_CONFIG) private readonly appConfig: any,
+    private readonly overlay: Overlay,
+    private readonly parentInjector: Injector,
+  ) {
+    this._config = this.appConfig?.toast ?? DEFAULT_TOAST_CONFIG;
   }
 
   public setConfig(config: ToastConfig): void {
@@ -25,63 +37,145 @@ export class ToastService {
     return this._config;
   }
 
+  // Legacy methods - backward compatible
   public showError(text: string) {
-    this.show({text, type: 'error' });
+    this.show({ text, type: 'error' });
   }
 
   public showWarning(text: string) {
-    this.show({text, type: 'warning' });
+    this.show({ text, type: 'warning' });
   }
 
   public showInformation(text: string) {
-    this.show({text, type: 'info' });
+    this.show({ text, type: 'info' });
   }
 
   public showSuccess(text: string) {
-    this.show({text, type: 'success' });
+    this.show({ text, type: 'success' });
   }
 
-  private show(data: ToastData) {
-    const positionStrategy = this.getPositionStrategy();
-    const overlayRef = this.overlay.create({ positionStrategy, panelClass: 'slab-toast-panel' });
+  // New enhanced methods
+  public showErrorMessage(options: ShowToastOptions | string): ToastRef {
+    if (typeof options === 'string') {
+      return this.show({ text: options, type: 'error' });
+    }
+    return this.show({ title: options.title, body: options.body, type: 'error', action: options.action }, options.config);
+  }
 
-    const toastRef = new ToastRef(overlayRef);
-    this._lastToast = toastRef;
+  public showWarningMessage(options: ShowToastOptions | string): ToastRef {
+    if (typeof options === 'string') {
+      return this.show({ text: options, type: 'warning' });
+    }
+    return this.show({ title: options.title, body: options.body, type: 'warning', action: options.action }, options.config);
+  }
 
-    const injector = this.getInjector(data, toastRef, this.parentInjector);
-    const toastPortal = new ComponentPortal(ToastComponent, null, injector);
+  public showInformationMessage(options: ShowToastOptions | string): ToastRef {
+    if (typeof options === 'string') {
+      return this.show({ text: options, type: 'info' });
+    }
+    return this.show({ title: options.title, body: options.body, type: 'info', action: options.action }, options.config);
+  }
 
-    overlayRef.attach(toastPortal);
+  public showSuccessMessage(options: ShowToastOptions | string): ToastRef {
+    if (typeof options === 'string') {
+      return this.show({ text: options, type: 'success' });
+    }
+    return this.show({ title: options.title, body: options.body, type: 'success', action: options.action }, options.config);
+  }
 
+  // Toast management methods
+  public dismissAll(): void {
+    this._containers.forEach(({ overlayRef }) => overlayRef.dispose());
+    this._containers.clear();
+    this._activeToasts = [];
+  }
+
+  public dismiss(id: string): void {
+    const toast = this._activeToasts.find(t => t.id === id);
+    toast?.close();
+  }
+
+  public getActiveToasts(): ToastRef[] {
+    return [...this._activeToasts];
+  }
+
+  private show(data: ToastData, customConfig?: Partial<ToastConfig>): ToastRef {
+    const config = { ...this._config, ...customConfig };
+
+    this.validateContent(data);
+
+    const container = this._getOrCreateContainer(config);
+
+    const maxToasts = config.maxSimultaneousToasts ?? DEFAULT_TOAST_CONFIG.maxSimultaneousToasts;
+    if (container.items.length >= maxToasts) {
+      container.removeToast(container.items[0].id);
+    }
+
+    let toastRef: ToastRef;
+    const toastItemId = container.addToast(data, config, () => {
+      this._activeToasts = this._activeToasts.filter(t => t !== toastRef);
+    });
+
+    toastRef = new ToastRef(() => container.removeToast(toastItemId));
+    this._activeToasts.push(toastRef);
     return toastRef;
   }
 
-  private getPositionStrategy() {
-    if (!this._lastToast || (this._lastToast && !this._lastToast.isVisible())) {
-      return this.overlay.position().global().bottom(this.getPosition()).centerHorizontally();
-    } else {
-      return this.overlay.position().global().top(this.getPosition()).centerHorizontally();
+  private validateContent(data: ToastData): void {
+    const title = data.title || data.text || '';
+    const body = data.body || '';
+
+    if (title.split('.').length > 2) {
+      console.warn('Toast title should be limited to one sentence for better readability.');
+    }
+    if (body.split('.').filter(s => s.trim()).length > 3) {
+      console.warn('Toast body should be limited to two sentences for better readability.');
+    }
+    if (data.action && data.action.label.split(' ').length > 2) {
+      console.warn('Toast action label should be limited to one or two words.');
     }
   }
 
-  private getPosition() {
-    const lastToastIsVisible = this._lastToast && this._lastToast.isVisible();
-    let position = 25;
-    if (lastToastIsVisible) {
-      const { height, top } = this._lastToast.getPosition();
-      position = top - height - 25;
+  private _getOrCreateContainer(config: ToastConfig): ToastComponent {
+    const positionKey = config.position ?? DEFAULT_TOAST_CONFIG.position;
+    const existing = this._containers.get(positionKey);
+
+    if (existing?.overlayRef.hasAttached()) {
+      return existing.containerRef.instance;
     }
 
-    return position + 'px';
+    if (existing) {
+      this._containers.delete(positionKey);
+    }
+
+    const positionStrategy = this.createPositionStrategy(config, '25px');
+    const overlayRef = this.overlay.create({ positionStrategy, panelClass: ['slab-toast-panel', `slab-toast-panel--${positionKey}`] });
+    const portal = new ComponentPortal(ToastComponent, null, this.parentInjector);
+    const containerRef = overlayRef.attach(portal);
+
+    containerRef.instance.onEmpty = () => {
+      overlayRef.dispose();
+      this._containers.delete(positionKey);
+    };
+
+    this._containers.set(positionKey, { overlayRef, containerRef });
+    return containerRef.instance;
   }
 
-  private getInjector(data: ToastData, toastRef: ToastRef, parentInjector: Injector) {
-    return Injector.create({
-      parent: parentInjector,
-      providers: [
-        { provide: ToastData, useValue: data },
-        { provide: ToastRef, useValue: toastRef },
-      ]
-    });
+  private createPositionStrategy(config: ToastConfig, offset: string) {
+    const position = this.overlay.position().global();
+
+    switch (config.position) {
+      case 'top-center':
+        return position.top(offset).centerHorizontally();
+      case 'bottom-center':
+        return position.bottom(offset).centerHorizontally();
+      case 'top-end':
+        return position.top(offset).right('25px');
+      case 'bottom-end':
+        return position.bottom(offset).right('25px');
+      default:
+        return position.bottom(offset).centerHorizontally();
+    }
   }
 }
