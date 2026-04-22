@@ -1,17 +1,15 @@
-import { OverlayRef } from '@angular/cdk/overlay';
+let nextId = 0;
 
 export class ToastRef {
-  constructor(private readonly overlay: OverlayRef) {}
+  public readonly id: string;
+  private readonly _dismiss: () => void;
 
-  public close() {
-    this.overlay.dispose();
+  constructor(dismissFn: () => void) {
+    this.id = `toast-${nextId++}`;
+    this._dismiss = dismissFn;
   }
 
-  public isVisible() {
-    return this.overlay && this.overlay.overlayElement;
-  }
-
-  public getPosition() {
-    return this.overlay.overlayElement.getBoundingClientRect();
+  public close(): void {
+    this._dismiss();
   }
 }
