@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ColDef, Column, ColumnApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
+import { BodyScrollEvent, ColDef, Column, ColumnApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -40,6 +40,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	@Input() public loadingText;
 	@Input() public removeSelectionOnOpenContextMenu = false;
 	@Input() public autoSizeColumnsToContent = false;
+	@Input() public autoResizableScroll = false;
 
 	@Output() public action = new EventEmitter();
 	@Output() public clickRow = new EventEmitter();
@@ -54,6 +55,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	protected firstSizeToFitExecuted = false;
 	private calculatedGridState: CalculatedGridState;
 	private scrollTimeout;
+	protected savedRowIndex: number = 0;
+	protected savedRowCount: number = 0;
 
 	protected constructor(protected preferencesService: PreferencesService, protected i18nService: I18nService,
 						  protected dialogService: DialogService) {
@@ -93,6 +96,8 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 			loadingOoo:   this.i18nService.instant('COMMON_LOADING')
 		};
 
+		options.suppressScrollOnNewData = this.autoResizableScroll;
+
 		if (this.hideHeader()) {
 			options.headerHeight = 0;
 		}
@@ -114,19 +119,106 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	public onModelUpdated(event: any) {
-		this.doAutoSizeManagement();
+
+			this.doAutoSizeManagement();
+			if (this.autoResizableScroll) {
+				this.restoreScrollPosition();
+			}
+
 		return event;
+	}
+
+	private calculateVisibleRows(scrollableHeight: any, rowHeight: number): number {
+		return Math.ceil((scrollableHeight.bottom - scrollableHeight.top) / rowHeight);
+	}
+
+	private isViewingBottom(savedRowIndex: number, visibleRows: number, savedRowCount: number): boolean {
+		return savedRowIndex + visibleRows >= savedRowCount;
+	}
+
+	private restoreForAddedRows(currentRowCount: number, visibleRows: number): void {
+		this.gridOptions.api.ensureIndexVisible(currentRowCount - 1, 'bottom');
+		this.savedRowIndex = Math.max(0, currentRowCount - visibleRows);
+	}
+
+	private restoreForDeletedRows(currentRowCount: number, visibleRows: number): void {
+		const wasViewingBottom = this.isViewingBottom(this.savedRowIndex, visibleRows, this.savedRowCount);
+
+		if (wasViewingBottom) {
+			this.gridOptions.api.ensureIndexVisible(currentRowCount - 1, 'bottom');
+			this.savedRowIndex = Math.max(0, currentRowCount - visibleRows);
+		} else {
+			const newIndex = Math.min(this.savedRowIndex, currentRowCount - 1);
+			if (newIndex >= 0 && newIndex < currentRowCount) {
+				this.gridOptions.api.ensureIndexVisible(newIndex, 'top');
+			}
+			this.savedRowIndex = newIndex;
+		}
+	}
+
+	public restoreScrollPosition(): void {
+		if (!this.gridOptions.api || !this.autoResizableScroll) {
+			return;
+		}
+
+		const currentRowCount = this.gridOptions.api.getDisplayedRowCount();
+
+		if (this.savedRowCount === 0) {
+			this.savedRowCount = currentRowCount;
+			return;
+		}
+
+		const scrollableHeight = this.gridOptions.api.getVerticalPixelRange();
+		const rowHeight = this.gridOptions.api.getSizesForCurrentTheme().rowHeight;
+		const visibleRows = this.calculateVisibleRows(scrollableHeight, rowHeight);
+
+		if (currentRowCount === this.savedRowCount) {
+			if (rowHeight > 0 && scrollableHeight) {
+				const currentScrollIndex = Math.floor(scrollableHeight.top / rowHeight);
+				const indexToRestore = this.savedRowIndex >= 0 ? this.savedRowIndex : currentScrollIndex;
+				const wasViewingBottom = this.isViewingBottom(this.savedRowIndex, visibleRows, this.savedRowCount);
+
+				if (wasViewingBottom) {
+					this.gridOptions.api.ensureIndexVisible(currentRowCount - 1, 'bottom');
+				} else if (indexToRestore >= 0 && indexToRestore < currentRowCount) {
+					this.gridOptions.api.ensureIndexVisible(indexToRestore, 'top');
+				}
+			}
+			return;
+		}
+
+		if (this.savedRowIndex === 0) {
+			if (rowHeight > 0 && scrollableHeight) {
+				this.savedRowIndex = Math.floor(scrollableHeight.top / rowHeight);
+			}
+		}
+
+		const rowsAdded = currentRowCount > this.savedRowCount;
+		const rowsDeleted = currentRowCount < this.savedRowCount;
+
+		if (rowsAdded) {
+			this.restoreForAddedRows(currentRowCount, visibleRows);
+		} else if (rowsDeleted) {
+			this.restoreForDeletedRows(currentRowCount, visibleRows);
+		}
+
+		this.savedRowCount = currentRowCount;
 	}
 
 	public doGridReady(event: any): void {
 		this.loadColumnsStateFromPreferences();
 
-		if(this.autoSizeColumnsToContent) {
+		if(this.autoSizeColumnsToContent || this.autoResizableScroll) {
 			this.gridOptions.api.addEventListener('bodyScroll', this.onBodyScroll.bind(this));
 		} else {
 			this.doAutoSizeManagement();
 		}
 		this.gridOptions.api.addEventListener('columnMoved', this.saveColumnsStateInPreferences.bind(this));
+
+		if (this.autoResizableScroll) {
+			this.updateSavedScrollState(event.top);
+		}
+
 	}
 
 	protected saveColumnsStateInPreferences(): void {
@@ -485,15 +577,28 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		return 35;
 	}
 
-	private onBodyScroll(event: any): void {
-		clearTimeout(this.scrollTimeout);
-		this.scrollTimeout = setTimeout(() => {
-			this.doAutoSizeManagement(event);
-		}, 150);
+	private onBodyScroll(event: BodyScrollEvent): void {
+		if (this.autoResizableScroll && event.direction === 'vertical') {
+			this.updateSavedScrollState(event.top);
+		}
+		if(this.autoSizeColumnsToContent) {
+			clearTimeout(this.scrollTimeout);
+			this.scrollTimeout = setTimeout(() => {
+				this.doAutoSizeManagement(event);
+			}, 150);
+		}
 	}
 
 	private doAutoSizeManagement(event?: any) {
 		this.firstSizeToFitExecuted = true; 
 		AutosizeGridHelper.doAutoSizeManagement(this.calculatedGridState, this.gridOptions, event);
+	}
+
+	private updateSavedScrollState(scrollTop: number): void {
+		const rowHeight = this.gridOptions.api.getSizesForCurrentTheme().rowHeight;
+		if (rowHeight > 0) {
+			this.savedRowIndex = Math.floor(scrollTop / rowHeight);
+		}
+		this.savedRowCount = this.gridOptions.api.getDisplayedRowCount();
 	}
 }
