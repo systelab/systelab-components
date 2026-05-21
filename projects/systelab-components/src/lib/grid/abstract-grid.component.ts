@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { BodyScrollEvent, ColDef, Column, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
+import { BodyScrollEvent, ColDef, Column, ColumnApi, GridOptions, IsFullWidthRowParams } from 'ag-grid-community';
 import { GridContextMenuOption } from './contextmenu/grid-context-menu-option';
 import { GridContextMenuActionData } from './contextmenu/grid-context-menu-action-data';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -137,7 +137,7 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	private restoreForAddedRows(currentRowCount: number, visibleRows: number): void {
-		this.gridApi.ensureIndexVisible(currentRowCount - 1, 'bottom');
+		this.gridOptions.api.ensureIndexVisible(currentRowCount - 1, 'bottom');
 		this.savedRowIndex = Math.max(0, currentRowCount - visibleRows);
 	}
 
@@ -145,31 +145,31 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 		const wasViewingBottom = this.isViewingBottom(this.savedRowIndex, visibleRows, this.savedRowCount);
 
 		if (wasViewingBottom) {
-			this.gridApi.ensureIndexVisible(currentRowCount - 1, 'bottom');
+			this.gridOptions.api.ensureIndexVisible(currentRowCount - 1, 'bottom');
 			this.savedRowIndex = Math.max(0, currentRowCount - visibleRows);
 		} else {
 			const newIndex = Math.min(this.savedRowIndex, currentRowCount - 1);
 			if (newIndex >= 0 && newIndex < currentRowCount) {
-				this.gridApi.ensureIndexVisible(newIndex, 'top');
+				this.gridOptions.api.ensureIndexVisible(newIndex, 'top');
 			}
 			this.savedRowIndex = newIndex;
 		}
 	}
 
 	public restoreScrollPosition(): void {
-		if (!this.gridApi || !this.autoResizableScroll) {
+		if (!this.gridOptions.api || !this.autoResizableScroll) {
 			return;
 		}
 
-		const currentRowCount = this.gridApi.getDisplayedRowCount();
+		const currentRowCount = this.gridOptions.api.getDisplayedRowCount();
 
 		if (this.savedRowCount === 0) {
 			this.savedRowCount = currentRowCount;
 			return;
 		}
 
-		const scrollableHeight = this.gridApi.getVerticalPixelRange();
-		const rowHeight = this.gridApi.getSizesForCurrentTheme().rowHeight;
+		const scrollableHeight = this.gridOptions.api.getVerticalPixelRange();
+		const rowHeight = this.gridOptions.api.getSizesForCurrentTheme().rowHeight;
 		const visibleRows = this.calculateVisibleRows(scrollableHeight, rowHeight);
 
 		if (currentRowCount === this.savedRowCount) {
@@ -179,9 +179,9 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 				const wasViewingBottom = this.isViewingBottom(this.savedRowIndex, visibleRows, this.savedRowCount);
 
 				if (wasViewingBottom) {
-					this.gridApi.ensureIndexVisible(currentRowCount - 1, 'bottom');
+					this.gridOptions.api.ensureIndexVisible(currentRowCount - 1, 'bottom');
 				} else if (indexToRestore >= 0 && indexToRestore < currentRowCount) {
-					this.gridApi.ensureIndexVisible(indexToRestore, 'top');
+					this.gridOptions.api.ensureIndexVisible(indexToRestore, 'top');
 				}
 			}
 			return;
@@ -595,10 +595,10 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	}
 
 	private updateSavedScrollState(scrollTop: number): void {
-		const rowHeight = this.gridApi.getSizesForCurrentTheme().rowHeight;
+		const rowHeight = this.gridOptions.api.getSizesForCurrentTheme().rowHeight;
 		if (rowHeight > 0) {
 			this.savedRowIndex = Math.floor(scrollTop / rowHeight);
 		}
-		this.savedRowCount = this.gridApi.getDisplayedRowCount();
+		this.savedRowCount = this.gridOptions.api.getDisplayedRowCount();
 	}
 }
