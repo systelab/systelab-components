@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {ButtonComponent} from '../button/button.component';
 import {SliderComponent} from '../slider/slider.component';
 import {ToggleButtonComponent} from '../toggle-button/toggle-button.component';
-import {ImageViewerComponent, ActionButton, ActionButtonType} from 'systelab-components';
+import {ImageViewerComponent, ActionButton, ActionButtonType} from './image-viewer.component';
 import {SystelabTranslateModule} from 'systelab-translate';
 
 @Component({

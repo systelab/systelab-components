@@ -9,8 +9,8 @@ import { ButtonModule } from "primeng/button";
 import { OverlayModule } from "primeng/overlay";
 import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
-import { Component } from "@angular/core";
-import { AbstractGrid } from "systelab-components";
+import { Component, provideZoneChangeDetection } from "@angular/core";
+import { AbstractGrid } from '../abstract-grid.component';
 import { GridContextMenuComponent } from './grid-context-menu-component';
 import createSpyObj = jasmine.createSpyObj;
 
