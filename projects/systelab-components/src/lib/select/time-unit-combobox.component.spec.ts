@@ -58,16 +58,46 @@ export class TimeUnitSelectTestComponent {
 class TestModule {
 }
 
-const clickOnDropDown = (fixture: ComponentFixture<TimeUnitSelectTestComponent>) => {
+const closeDropdown = async (fixture: ComponentFixture<TimeUnitSelectTestComponent>) => {
+	const overlay = document.querySelector('.cdk-overlay-backdrop');
+	if (overlay) {
+		(overlay as HTMLElement).click();
+		fixture.detectChanges();
+		await fixture.whenStable();
+		await new Promise(resolve => setTimeout(resolve, 100));
+	}
+};
+
+const clickOnDropDown = async (fixture: ComponentFixture<TimeUnitSelectTestComponent>) => {
+	// Close any open dropdown first
+	await closeDropdown(fixture);
+
 	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
 	button.click();
 	fixture.detectChanges();
+	await fixture.whenStable();
+	// Wait for ag-Grid to render
+	await new Promise(resolve => setTimeout(resolve, 300));
 };
 
-const clickOnRow = (fixture: ComponentFixture<TimeUnitSelectTestComponent>, id: string) => {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+const clickOnRow = async (fixture: ComponentFixture<TimeUnitSelectTestComponent>, id: string) => {
+	// Retry logic to wait for element to be available
+	let attempts = 0;
+	let button = null;
+
+	while (!button && attempts < 20) {
+		await new Promise(resolve => setTimeout(resolve, 100));
+		button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+		attempts++;
+	}
+
+	if (!button) {
+		throw new Error(`Element with row-id="${id}" not found after ${attempts * 100}ms`);
+	}
+
 	button.click();
 	fixture.detectChanges();
+	await fixture.whenStable();
 };
 
 
@@ -97,43 +127,44 @@ describe('Systelab Time unit selector', () => {
 		fixture.detectChanges();
 	});
 
+	afterEach(async () => {
+		// Ensure dropdown is closed after each test
+		await closeDropdown(fixture);
+		// Destroy the fixture to clean up ag-Grid instances
+		if (fixture) {
+			fixture.destroy();
+		}
+		// Clean up any remaining overlays
+		const overlays = document.querySelectorAll('.cdk-overlay-container');
+		overlays.forEach(overlay => overlay.remove());
+	});
+
 	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 	});
 
 	it('should select days', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnRow(fixture, 'COMMON_DAYS');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'COMMON_DAYS');
 		expect(fixture.componentInstance.id).toEqual('COMMON_DAYS');
-
 	});
 
 	it('should select weeks', async () => {
-			clickOnDropDown(fixture);
-			await fixture.whenStable();
-			clickOnRow(fixture, 'COMMON_WEEKS');
-			await fixture.whenStable();
-			expect(fixture.componentInstance.id).toEqual('COMMON_WEEKS');
-
-		});
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'COMMON_WEEKS');
+		expect(fixture.componentInstance.id).toEqual('COMMON_WEEKS');
+	});
 
 	it('should select months', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnRow(fixture, 'COMMON_MONTHS');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'COMMON_MONTHS');
 		expect(fixture.componentInstance.id).toEqual('COMMON_MONTHS');
-
 	});
 
 	it('should select years', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnRow(fixture, 'COMMON_YEARS');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'COMMON_YEARS');
 		expect(fixture.componentInstance.id).toEqual('COMMON_YEARS');
 
 	});

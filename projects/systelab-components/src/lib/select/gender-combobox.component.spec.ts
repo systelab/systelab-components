@@ -58,16 +58,46 @@ class GenderSelectTestModule {
 }
 
 
-const clickOnDropDown = (fixture: ComponentFixture<GenderSelectTestComponent>) => {
+const closeDropdown = async (fixture: ComponentFixture<GenderSelectTestComponent>) => {
+	const overlay = document.querySelector('.cdk-overlay-backdrop');
+	if (overlay) {
+		(overlay as HTMLElement).click();
+		fixture.detectChanges();
+		await fixture.whenStable();
+		await new Promise(resolve => setTimeout(resolve, 100));
+	}
+};
+
+const clickOnDropDown = async (fixture: ComponentFixture<GenderSelectTestComponent>) => {
+	// Close any open dropdown first
+	await closeDropdown(fixture);
+
 	const button = fixture.debugElement.nativeElement.querySelector('.slab-combo-label');
 	button.click();
 	fixture.detectChanges();
+	await fixture.whenStable();
+	// Wait for ag-Grid to render
+	await new Promise(resolve => setTimeout(resolve, 300));
 };
 
-const clickOnRow = (fixture: ComponentFixture<GenderSelectTestComponent>, id: string) => {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+const clickOnRow = async (fixture: ComponentFixture<GenderSelectTestComponent>, id: string) => {
+	// Retry logic to wait for element to be available
+	let attempts = 0;
+	let button = null;
+
+	while (!button && attempts < 20) {
+		await new Promise(resolve => setTimeout(resolve, 100));
+		button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+		attempts++;
+	}
+
+	if (!button) {
+		throw new Error(`Element with row-id="${id}" not found after ${attempts * 100}ms`);
+	}
+
 	button.click();
 	fixture.detectChanges();
+	await fixture.whenStable();
 };
 
 describe('Systelab Gender selector', () => {
@@ -96,6 +126,18 @@ describe('Systelab Gender selector', () => {
 		fixture.detectChanges();
 	});
 
+	afterEach(async () => {
+		// Ensure dropdown is closed after each test
+		await closeDropdown(fixture);
+		// Destroy the fixture to clean up ag-Grid instances
+		if (fixture) {
+			fixture.destroy();
+		}
+		// Clean up any remaining overlays
+		const overlays = document.querySelectorAll('.cdk-overlay-container');
+		overlays.forEach(overlay => overlay.remove());
+	});
+
 	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
@@ -103,39 +145,26 @@ describe('Systelab Gender selector', () => {
 	});
 
 	it('should select all', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnRow(fixture, 'A');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'A');
 		expect(fixture.componentInstance.id).toEqual('A');
-
 	});
 
 	it('should select unknown', async () => {
-		clickOnDropDown(fixture);
-		fixture.detectChanges()
-		await fixture.whenStable();
-		clickOnRow(fixture, 'U');
-		fixture.detectChanges()
-		await fixture.whenStable()
-		expect(fixture.componentInstance.id)
-			.toEqual('U');
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'U');
+		expect(fixture.componentInstance.id).toEqual('U');
 	});
 
 	it('should select male', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnRow(fixture, 'M');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'M');
 		expect(fixture.componentInstance.id).toEqual('M');
-
 	});
 
 	it('should select female', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnRow(fixture, 'F');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnRow(fixture, 'F');
 		expect(fixture.componentInstance.id).toEqual('F');
 	});
 });

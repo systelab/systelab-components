@@ -74,16 +74,43 @@ export class ColorpickerTestComponent {
 class TestModule {
 }
 
-const clickOnDropDown = (fixture: ComponentFixture<ColorpickerTestComponent>) => {
+const closeDropdown = async (fixture: ComponentFixture<ColorpickerTestComponent>) => {
+	const overlay = document.querySelector('.cdk-overlay-backdrop');
+	if (overlay) {
+		(overlay as HTMLElement).click();
+		fixture.detectChanges();
+		await fixture.whenStable();
+		await new Promise(resolve => setTimeout(resolve, 200));
+	}
+};
+
+const clickOnDropDown = async (fixture: ComponentFixture<ColorpickerTestComponent>) => {
 	const button = fixture.debugElement.nativeElement.querySelector('.slab-color-tag');
 	button.click();
 	fixture.detectChanges();
+	await fixture.whenStable();
+	// Wait longer for ag-Grid to render
+	await new Promise(resolve => setTimeout(resolve, 500));
 };
 
-const clickOnColor = (fixture: ComponentFixture<ColorpickerTestComponent>, color: string) => {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + color + '\']');
+const clickOnColor = async (fixture: ComponentFixture<ColorpickerTestComponent>, color: string) => {
+	// Retry logic to wait for element to be available
+	let attempts = 0;
+	let button = null;
+
+	while (!button && attempts < 30) {
+		await new Promise(resolve => setTimeout(resolve, 150));
+		button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + color + '\']');
+		attempts++;
+	}
+
+	if (!button) {
+		throw new Error(`Element with row-id="${color}" not found after ${attempts * 150}ms`);
+	}
+
 	button.click();
 	fixture.detectChanges();
+	await fixture.whenStable();
 };
 
 const checkHasStyle = (fixture: ComponentFixture<ColorpickerTestComponent>, style: string) => {
@@ -118,37 +145,40 @@ describe('Systelab Color picker', () => {
 		fixture.detectChanges();
 	});
 
+	afterEach(async () => {
+		// Ensure dropdown is closed after each test
+		await closeDropdown(fixture);
+		// Destroy the fixture to clean up ag-Grid instances
+		if (fixture) {
+			fixture.destroy();
+		}
+		// Clean up any remaining overlays
+		const overlays = document.querySelectorAll('.cdk-overlay-container');
+		overlays.forEach(overlay => overlay.remove());
+	});
+
 	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 	});
 
 	it('should select a color', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnColor(fixture, '#008000');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnColor(fixture, '#008000');
 		expect(fixture.componentInstance.colorId).toEqual('#008000');
 	});
 
 	it('should select another color', async () => {
-		clickOnDropDown(fixture);
-		await fixture.whenStable();
-		clickOnColor(fixture, '#000080');
-		await fixture.whenStable();
+		await clickOnDropDown(fixture);
+		await clickOnColor(fixture, '#000080');
 		expect(fixture.componentInstance.colorId).toEqual('#000080');
 	});
 
 	it('should call method change when a color is selected', async () => {
 		spyOn(fixture.componentInstance, 'doChange');
-		clickOnDropDown(fixture);
-		fixture.detectChanges();
-		await fixture.whenStable();
-		clickOnColor(fixture, '#008000');
-		fixture.detectChanges();
-		await fixture.whenStable();
-		expect(fixture.componentInstance.doChange)
-			.toHaveBeenCalled();
+		await clickOnDropDown(fixture);
+		await clickOnColor(fixture, '#008000');
+		expect(fixture.componentInstance.doChange).toHaveBeenCalled();
 	});
 
 	it('should have the show the color set', async () => {
