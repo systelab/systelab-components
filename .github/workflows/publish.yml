@@ -36,4 +36,4 @@ jobs:
 
       - name: Publish to npm
         working-directory: ./dist/systelab-components
-        run: npm publish --provenance --tag lts-20
+        run: npm publish --provenance --tag lts-17
