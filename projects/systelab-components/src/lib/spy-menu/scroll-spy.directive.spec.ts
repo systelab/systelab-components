@@ -29,6 +29,10 @@ class TestScrollSpyComponent {
 	}
 }
 
+const sleep = (ms: number): Promise<void> => {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 describe('Systelab ScrollSpyDirective', () => {
 
 	let component: TestScrollSpyComponent;
@@ -52,14 +56,15 @@ describe('Systelab ScrollSpyDirective', () => {
 		expect(component.sectionSelected).toBe('section1');
 	});
 
-	it('should change section on scroll', () => {
+	it('should change section on scroll', async () => {
 		const mockEvent = {};
 		mockEvent['type'] = 'scroll';
 		mockEvent['target'] = {};
-		mockEvent['target']['scrollTop'] = 1500;
+		mockEvent['target']['scrollTop'] = 1800;
 		mockEvent['target']['offsetTop'] = 0;
 		directiveElList[0].triggerEventHandler('scroll', mockEvent);
 		fixture.detectChanges();
+		await sleep(2000);
 		expect(component.sectionSelected).toBe('section3');
 	});
 
