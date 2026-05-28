@@ -265,16 +265,18 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected setDescriptionAndCodeWhenMultiple(value: Array<T>) {
 		this._description = '';
 		this._code = '';
-		for (const selectedItem of value) {
-			if (this._code !== '') {
-				this._code += '; ';
-			}
-			this._code += selectedItem[this.getCodeField()];
+		if (value && Array.isArray(value) && value.length > 0) {
+			for (const selectedItem of value) {
+				if (this._code !== '') {
+					this._code += '; ';
+				}
+				this._code += selectedItem[this.getCodeField()];
 
-			if (this._description !== '') {
-				this._description += '; ';
+				if (this._description !== '') {
+					this._description += '; ';
+				}
+				this._description += selectedItem[this.getDescriptionField()];
 			}
-			this._description += selectedItem[this.getDescriptionField()];
 		}
 	}
 

@@ -15,7 +15,8 @@ import { ComboBoxInputRendererComponent } from './renderer/combobox-input-render
 import { ModulabSelect } from '../select/select.component';
 
 export class TestData {
-	constructor(public id: string | number, public description: string) {
+	constructor(public id: string | number, public description: string, public code: string = '') {
+		this.code = code || id?.toString() || '';
 	}
 }
 
@@ -515,6 +516,140 @@ describe('Systelab Select Combobox', () => {
 					expect(() => combobox['transferFocusToGrid']())
 						.not
 						.toThrow();
+					done();
+				});
+		});
+
+	});
+
+	describe('setDescriptionAndCodeWhenMultiple', () => {
+
+		it('should set description and code when value is a valid array with elements', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					const testValues = [
+						new TestData('1', 'Description 1'),
+						new TestData('2', 'Description 2')
+					];
+
+					combobox['setDescriptionAndCodeWhenMultiple'](testValues as any);
+
+					expect(combobox._description).toBe('Description 1; Description 2');
+					expect(combobox._code).toBe('1; 2');
+					done();
+				});
+		});
+
+		it('should set empty description and code when value is an empty array', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+
+					combobox['setDescriptionAndCodeWhenMultiple']([]);
+
+					expect(combobox._description).toBe('');
+					expect(combobox._code).toBe('');
+					done();
+				});
+		});
+
+		it('should set empty description and code when value is null', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+
+					expect(() => combobox['setDescriptionAndCodeWhenMultiple'](null))
+						.not
+						.toThrow();
+					expect(combobox._description).toBe('');
+					expect(combobox._code).toBe('');
+					done();
+				});
+		});
+
+		it('should set empty description and code when value is undefined', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+
+					expect(() => combobox['setDescriptionAndCodeWhenMultiple'](undefined))
+						.not
+						.toThrow();
+					expect(combobox._description).toBe('');
+					expect(combobox._code).toBe('');
+					done();
+				});
+		});
+
+		it('should not throw error when value is not an array (string)', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+
+					expect(() => combobox['setDescriptionAndCodeWhenMultiple']('not an array' as any))
+						.not
+						.toThrow();
+					expect(combobox._description).toBe('');
+					expect(combobox._code).toBe('');
+					done();
+				});
+		});
+
+		it('should not throw error when value is not an array (number)', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+
+					expect(() => combobox['setDescriptionAndCodeWhenMultiple'](123 as any))
+						.not
+						.toThrow();
+					expect(combobox._description).toBe('');
+					expect(combobox._code).toBe('');
+					done();
+				});
+		});
+
+		it('should not throw error when value is not an array (object)', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+
+					expect(() => combobox['setDescriptionAndCodeWhenMultiple']({id: '1', description: 'Test'} as any))
+						.not
+						.toThrow();
+					expect(combobox._description).toBe('');
+					expect(combobox._code).toBe('');
+					done();
+				});
+		});
+
+		it('should handle array with single element correctly', (done) => {
+			const fixture = setup();
+			fixture.detectChanges();
+			fixture.whenStable()
+				.then(() => {
+					const combobox = fixture.componentInstance.combobox;
+					const testValues = [new TestData('1', 'Description 1')];
+
+					combobox['setDescriptionAndCodeWhenMultiple'](testValues as any);
+
+					expect(combobox._description).toBe('Description 1');
+					expect(combobox._code).toBe('1');
 					done();
 				});
 		});
