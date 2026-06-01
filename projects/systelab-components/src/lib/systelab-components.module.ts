@@ -39,7 +39,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { FileSelectorComponent } from './file-selector/file-selector.component';
 import { ComboBoxInputRendererComponent } from './combobox/renderer/combobox-input-renderer.component';
-import { TooltipDirective } from './tooltip/tooltip.directive';
+import { TooltipContentComponent, TooltipDirective } from './tooltip/tooltip.directive';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessageWithIconComponent } from './modal/message-popup/message-with-icon.component';
@@ -130,7 +130,6 @@ const providers = [
 		AutoCompleteModule,
 		DragDropModule,
 		OverlayModule,
-		TooltipDirective,
 		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
@@ -138,6 +137,8 @@ const providers = [
 		CdkTreeModule
 	],
 	declarations: [
+		TooltipDirective,
+		TooltipContentComponent,
 		SliderComponent,
 		SliderDoubleRangeComponent,
 		SwitchComponent,

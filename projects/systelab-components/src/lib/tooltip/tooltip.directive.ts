@@ -15,7 +15,7 @@ const TOOLTIP_POSITIONS: Record<TooltipPlacement, ConnectedPosition[]> = {
 };
 
 @Component({
-    standalone: true,
+    standalone: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -31,7 +31,7 @@ export class TooltipContentComponent {
 
 @Directive({
     selector: '[systelabTooltip],[systelabTooltipHtml]',
-    standalone: true,
+    standalone: false,
 })
 export class TooltipDirective implements OnDestroy, OnChanges {
 
