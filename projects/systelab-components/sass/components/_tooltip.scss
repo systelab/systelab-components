@@ -1,3 +1,29 @@
 .tooltip{
   z-index:1000000;
 }
+
+.slab-tooltip-pane .tooltip {
+  position: relative;
+}
+
+.bs-tooltip-top .arrow,
+.bs-tooltip-bottom .arrow {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bs-tooltip-left .arrow,
+.bs-tooltip-right .arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slab-tooltip-pane {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  animation: none !important;
+  transition: none !important;
+}
+
