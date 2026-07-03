@@ -1,15 +1,16 @@
 <div class="slab-searcher-container d-flex flex-nowrap" [ngClass]="{'disabled': isDisabled}" [ngStyle]="getInputHeight()">
-    <div class="input-group" style="width: 120px;">
-        <input #valueToSearch type="input" class="form-control"
-               [(ngModel)]="code"
-               (blur)="doSearch()"
-               [tabindex]="tabindex"
-               [disabled]="isDisabled"
-               [style.font-family]="fontFamily"
-               [style.font-size.px]="fontSize"
-               [style.font-weight]="fontWeight"
-               [ngStyle]="getInputHeight()"
-               [style.font-style]="fontStyle">
+  <div class="input-group" style="width: 120px;">
+    <input #valueToSearch type="input" class="form-control"
+      [(ngModel)]="code"
+      (input)="onUserInput()"
+      (blur)="doSearch()"
+      [tabindex]="tabindex"
+      [disabled]="isDisabled"
+      [style.font-family]="fontFamily"
+      [style.font-size.px]="fontSize"
+      [style.font-weight]="fontWeight"
+      [ngStyle]="getInputHeight()"
+      [style.font-style]="fontStyle">
 
         <div class="input-group-append">
             <button class="btn btn-sm py-0" type="button" [disabled]="isDisabled" [ngStyle]="getWidth()"

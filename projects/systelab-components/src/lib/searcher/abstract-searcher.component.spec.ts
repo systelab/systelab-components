@@ -147,6 +147,17 @@ export class SearcherTestComponent {
 	public description: string;
 }
 
+@Component({
+    selector: 'systelab-searcher-single-test',
+    template: `<systelab-searcher-example [(code)]="code" [(id)]="id" [(description)]="description"></systelab-searcher-example>`,
+    standalone: false
+})
+export class SearcherSingleTestComponent {
+	public id: string;
+	public code: string;
+	public description: string;
+}
+
 const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const button = fixture.debugElement.nativeElement.querySelector('.btn');
 	button.click();
@@ -210,6 +221,7 @@ describe('Systelab Searcher', () => {
 				ComboBoxInputRendererComponent,
 				SystelabSearcherComponent,
 				SearcherTestComponent,
+				SearcherSingleTestComponent,
 				GridContextMenuComponent,
 				GridHeaderContextMenu,
 				SearcherTableComponent,
@@ -265,7 +277,30 @@ describe('Systelab Searcher', () => {
 			});
 	});
 
-	it('should show counter with the selected items number in the submit button', async (done) => {
+	it('should clear id/description/code on blur when user manually empties the input', async () => {
+		const singleFixture = TestBed.createComponent(SearcherSingleTestComponent);
+		singleFixture.detectChanges();
+		singleFixture.componentInstance.id = '42';
+		singleFixture.componentInstance.description = 'Existing';
+		singleFixture.componentInstance.code = 'ABC';
+		singleFixture.detectChanges();
+		await singleFixture.whenStable();
+
+		const input = singleFixture.debugElement.query(By.css('.form-control')).nativeElement;
+		input.value = '';
+		input.dispatchEvent(new Event('input'));
+		singleFixture.detectChanges();
+		input.dispatchEvent(new Event('blur'));
+		singleFixture.detectChanges();
+		await singleFixture.whenStable();
+
+		expect(singleFixture.componentInstance.id).toBeUndefined();
+		expect(singleFixture.componentInstance.description).toBeUndefined();
+		expect(singleFixture.componentInstance.code).toBeUndefined();
+	});
+
+	it('should show counter with the selected items number in the submit button', async () => {
+		spyOn(SearcherTableComponent.prototype as any, 'refresh').and.stub();
 		enterText(fixture, '1');
 		await fixture.whenStable();
 		clickHelpButton(fixture);
