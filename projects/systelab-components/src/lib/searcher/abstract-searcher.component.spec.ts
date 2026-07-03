@@ -299,7 +299,7 @@ describe('Systelab Searcher', () => {
 		expect(singleFixture.componentInstance.code).toBeUndefined();
 	});
 
-	it('should show counter with the selected items number in the submit button', async () => {
+	it('should show counter with the selected items number in the submit button', async (done) => {
 		spyOn(SearcherTableComponent.prototype as any, 'refresh').and.stub();
 		enterText(fixture, '1');
 		await fixture.whenStable();
