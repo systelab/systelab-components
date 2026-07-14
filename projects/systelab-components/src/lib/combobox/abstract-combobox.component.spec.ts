@@ -654,6 +654,38 @@ describe('Systelab Select Combobox', () => {
 				});
 		});
 
+		describe('multipleSelectedItemList undefined handling', () => {
+
+			it('should not throw and should emit empty id list when multipleSelectedItemList is undefined', () => {
+				const fixture = setup();
+				const combobox = fixture.componentInstance.combobox;
+				const emitIdsSpy = spyOn(combobox.multipleSelectedIDListChange, 'emit');
+				emitIdsSpy.calls.reset();
+
+				expect(() => {
+					combobox.multipleSelectedItemList = undefined as any;
+				}).not.toThrow();
+				expect(combobox.multipleSelectedItemList).toEqual([]);
+				expect(emitIdsSpy).toHaveBeenCalledWith([]);
+			});
+
+			it('should return empty id list when selected list is undefined', () => {
+				const fixture = setup();
+				const combobox = fixture.componentInstance.combobox as any;
+				combobox._multipleSelectedItemList = undefined;
+
+				expect(combobox.selectionItemListToIDList()).toEqual([]);
+			});
+
+			it('should not throw in removeItem when selected list is undefined', () => {
+				const fixture = setup();
+				const combobox = fixture.componentInstance.combobox as any;
+				combobox._multipleSelectedItemList = undefined;
+
+				expect(() => combobox.removeItem(new TestData('1', 'Description 1'))).not.toThrow();
+			});
+		});
+
 	});
 
 });
