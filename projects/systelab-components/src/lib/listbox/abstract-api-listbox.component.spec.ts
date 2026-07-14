@@ -127,4 +127,41 @@ describe('Systelab Listbox', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
 	});
+
+	it('should not throw and should emit empty id list when multipleSelectedItemList is undefined', () => {
+		const listbox = fixture.componentInstance.listbox;
+		const emitIdsSpy = spyOn(listbox.multipleSelectedIDListChange, 'emit');
+		emitIdsSpy.calls.reset();
+
+		expect(() => {
+			listbox.multipleSelectedItemList = undefined as any;
+		}).not.toThrow();
+		expect(listbox.multipleSelectedItemList).toEqual([]);
+		expect(emitIdsSpy).toHaveBeenCalledWith([]);
+	});
+
+	it('should return empty id list when selected list is undefined', () => {
+		const listbox = fixture.componentInstance.listbox as any;
+		listbox._multipleSelectedItemList = undefined;
+
+		expect(listbox.selectionItemListToIDList()).toEqual([]);
+	});
+
+	it('should not throw in onRowSelected when selected list is undefined and showAll is true', () => {
+		const listbox = fixture.componentInstance.listbox as any;
+		listbox.multipleSelection = true;
+		listbox.showAll = true;
+		listbox.isDisabled = false;
+		listbox._multipleSelectedItemList = undefined;
+
+		const event: any = {
+			node: {
+				data: {[listbox.getIdField()]: listbox.getAllFieldID()},
+				isSelected: () => true
+			}
+		};
+
+		expect(() => listbox.onRowSelected(event)).not.toThrow();
+		expect(listbox.multipleSelectedItemList.length).toBe(1);
+	});
 });
