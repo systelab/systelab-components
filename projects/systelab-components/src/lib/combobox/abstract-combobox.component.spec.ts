@@ -37,7 +37,7 @@ export class TestData {
                             </div>
                         </div>
                     </div>
-				`,
+	            `,
 	standalone: false
 })
 export class ComboboxTestComponent {
@@ -117,7 +117,8 @@ describe('Systelab Select Combobox', () => {
 		fixture.detectChanges();
 		await fixture.whenStable();
 
-		expect(fixture.componentInstance.combobox._description).toEqual('Description 1');
+		expect(fixture.componentInstance.combobox._description)
+			.toEqual('Description 1');
 	});
 
 	it('should be able to focus in search input when the dropdown is opened and filter input is true', (done) => {
@@ -525,7 +526,7 @@ describe('Systelab Select Combobox', () => {
 	describe('setDescriptionAndCodeWhenMultiple', () => {
 
 		it('should set description and code when value is a valid array with elements', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -537,14 +538,16 @@ describe('Systelab Select Combobox', () => {
 
 					combobox['setDescriptionAndCodeWhenMultiple'](testValues as any);
 
-					expect(combobox._description).toBe('Description 1; Description 2');
-					expect(combobox._code).toBe('1; 2');
+					expect(combobox._description)
+						.toBe('Description 1; Description 2');
+					expect(combobox._code)
+						.toBe('1; 2');
 					done();
 				});
 		});
 
 		it('should set empty description and code when value is an empty array', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -552,14 +555,16 @@ describe('Systelab Select Combobox', () => {
 
 					combobox['setDescriptionAndCodeWhenMultiple']([]);
 
-					expect(combobox._description).toBe('');
-					expect(combobox._code).toBe('');
+					expect(combobox._description)
+						.toBe('');
+					expect(combobox._code)
+						.toBe('');
 					done();
 				});
 		});
 
 		it('should set empty description and code when value is null', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -568,14 +573,16 @@ describe('Systelab Select Combobox', () => {
 					expect(() => combobox['setDescriptionAndCodeWhenMultiple'](null))
 						.not
 						.toThrow();
-					expect(combobox._description).toBe('');
-					expect(combobox._code).toBe('');
+					expect(combobox._description)
+						.toBe('');
+					expect(combobox._code)
+						.toBe('');
 					done();
 				});
 		});
 
 		it('should set empty description and code when value is undefined', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -584,14 +591,16 @@ describe('Systelab Select Combobox', () => {
 					expect(() => combobox['setDescriptionAndCodeWhenMultiple'](undefined))
 						.not
 						.toThrow();
-					expect(combobox._description).toBe('');
-					expect(combobox._code).toBe('');
+					expect(combobox._description)
+						.toBe('');
+					expect(combobox._code)
+						.toBe('');
 					done();
 				});
 		});
 
 		it('should not throw error when value is not an array (string)', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -600,14 +609,16 @@ describe('Systelab Select Combobox', () => {
 					expect(() => combobox['setDescriptionAndCodeWhenMultiple']('not an array' as any))
 						.not
 						.toThrow();
-					expect(combobox._description).toBe('');
-					expect(combobox._code).toBe('');
+					expect(combobox._description)
+						.toBe('');
+					expect(combobox._code)
+						.toBe('');
 					done();
 				});
 		});
 
 		it('should not throw error when value is not an array (number)', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -616,14 +627,16 @@ describe('Systelab Select Combobox', () => {
 					expect(() => combobox['setDescriptionAndCodeWhenMultiple'](123 as any))
 						.not
 						.toThrow();
-					expect(combobox._description).toBe('');
-					expect(combobox._code).toBe('');
+					expect(combobox._description)
+						.toBe('');
+					expect(combobox._code)
+						.toBe('');
 					done();
 				});
 		});
 
 		it('should not throw error when value is not an array (object)', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -632,14 +645,16 @@ describe('Systelab Select Combobox', () => {
 					expect(() => combobox['setDescriptionAndCodeWhenMultiple']({id: '1', description: 'Test'} as any))
 						.not
 						.toThrow();
-					expect(combobox._description).toBe('');
-					expect(combobox._code).toBe('');
+					expect(combobox._description)
+						.toBe('');
+					expect(combobox._code)
+						.toBe('');
 					done();
 				});
 		});
 
 		it('should handle array with single element correctly', (done) => {
-			const fixture = setup();
+			const fixture = setupWithoutFilter();
 			fixture.detectChanges();
 			fixture.whenStable()
 				.then(() => {
@@ -648,8 +663,10 @@ describe('Systelab Select Combobox', () => {
 
 					combobox['setDescriptionAndCodeWhenMultiple'](testValues as any);
 
-					expect(combobox._description).toBe('Description 1');
-					expect(combobox._code).toBe('1');
+					expect(combobox._description)
+						.toBe('Description 1');
+					expect(combobox._code)
+						.toBe('1');
 					done();
 				});
 		});
@@ -657,32 +674,39 @@ describe('Systelab Select Combobox', () => {
 		describe('multipleSelectedItemList undefined handling', () => {
 
 			it('should not throw and should emit empty id list when multipleSelectedItemList is undefined', () => {
-				const fixture = setup();
+				const fixture = setupWithoutFilter();
 				const combobox = fixture.componentInstance.combobox;
 				const emitIdsSpy = spyOn(combobox.multipleSelectedIDListChange, 'emit');
 				emitIdsSpy.calls.reset();
 
 				expect(() => {
 					combobox.multipleSelectedItemList = undefined as any;
-				}).not.toThrow();
-				expect(combobox.multipleSelectedItemList).toEqual([]);
-				expect(emitIdsSpy).toHaveBeenCalledWith([]);
+				})
+					.not
+					.toThrow();
+				expect(combobox.multipleSelectedItemList)
+					.toEqual([]);
+				expect(emitIdsSpy)
+					.toHaveBeenCalledWith([]);
 			});
 
 			it('should return empty id list when selected list is undefined', () => {
-				const fixture = setup();
+				const fixture = setupWithoutFilter();
 				const combobox = fixture.componentInstance.combobox as any;
 				combobox._multipleSelectedItemList = undefined;
 
-				expect(combobox.selectionItemListToIDList()).toEqual([]);
+				expect(combobox.selectionItemListToIDList())
+					.toEqual([]);
 			});
 
 			it('should not throw in removeItem when selected list is undefined', () => {
-				const fixture = setup();
+				const fixture = setupWithoutFilter();
 				const combobox = fixture.componentInstance.combobox as any;
 				combobox._multipleSelectedItemList = undefined;
 
-				expect(() => combobox.removeItem(new TestData('1', 'Description 1'))).not.toThrow();
+				expect(() => combobox.removeItem(new TestData('1', 'Description 1')))
+					.not
+					.toThrow();
 			});
 		});
 
