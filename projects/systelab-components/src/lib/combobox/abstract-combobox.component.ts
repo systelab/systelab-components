@@ -197,8 +197,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	@Input()
 	set multipleSelectedItemList(value: Array<T>) {
-		this._multipleSelectedItemList = value;
-		this.setDescriptionAndCodeWhenMultiple(value);
+		this._multipleSelectedItemList = Array.isArray(value) ? value : [];
+		this.setDescriptionAndCodeWhenMultiple(this._multipleSelectedItemList);
 		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
 		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 	}
@@ -265,16 +265,18 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	protected setDescriptionAndCodeWhenMultiple(value: Array<T>) {
 		this._description = '';
 		this._code = '';
-		for (const selectedItem of value) {
-			if (this._code !== '') {
-				this._code += '; ';
-			}
-			this._code += selectedItem[this.getCodeField()];
+		if (value && Array.isArray(value) && value.length > 0) {
+			for (const selectedItem of value) {
+				if (this._code !== '') {
+					this._code += '; ';
+				}
+				this._code += selectedItem[this.getCodeField()];
 
-			if (this._description !== '') {
-				this._description += '; ';
+				if (this._description !== '') {
+					this._description += '; ';
+				}
+				this._description += selectedItem[this.getDescriptionField()];
 			}
-			this._description += selectedItem[this.getDescriptionField()];
 		}
 	}
 
@@ -824,6 +826,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public removeItem(item: T) {
+		if (!Array.isArray(this.multipleSelectedItemList)) {
+			return;
+		}
 		const index = this.multipleSelectedItemList.findIndex(it => it[this.getIdField()] === item[this.getIdField()]);
 		if (index !== -1) {
 			this.multipleSelectedItemList.splice(index, 1);
@@ -832,6 +837,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {
+		if (!Array.isArray(this.multipleSelectedItemList)) {
+			return [];
+		}
 		return this.multipleSelectedItemList.map(item => item[this.getIdField()]);
 	}
 
