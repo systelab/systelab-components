@@ -150,6 +150,14 @@ describe('Systelab DatepickerComponent', () => {
 		fixture.destroy();
 	});
 
+	it('should close datepicker when window is resized', () => {
+		AuxFunctionClass.clickOnInput(fixture);
+		const datepickerComponent = fixture.debugElement.query(By.css('systelab-datepicker')).componentInstance as DatepickerComponent;
+		spyOn(datepickerComponent, 'closeDatepicker');
+		datepickerComponent.onWindowResize();
+		expect(datepickerComponent.closeDatepicker).toHaveBeenCalled();
+	});
+
 	it('should instantiate', () => {
 		expect(fixture.componentInstance)
 			.toBeDefined();
