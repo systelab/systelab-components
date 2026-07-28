@@ -178,8 +178,8 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 
 	@Input()
 	set multipleSelectedItemList(value: Array<T>) {
-		this._multipleSelectedItemList = value;
-		this.setDescriptionAndCodeWhenMultiple(value);
+		this._multipleSelectedItemList = Array.isArray(value) ? value : [];
+		this.setDescriptionAndCodeWhenMultiple(this._multipleSelectedItemList);
 		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
 		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
 	}
@@ -806,6 +806,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public removeItem(item: T) {
+		if (!Array.isArray(this.multipleSelectedItemList)) {
+			return;
+		}
 		const index = this.multipleSelectedItemList.findIndex(it => it[this.getIdField()] === item[this.getIdField()]);
 		if (index !== -1) {
 			this.multipleSelectedItemList.splice(index, 1);
@@ -814,6 +817,9 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {
+		if (!Array.isArray(this.multipleSelectedItemList)) {
+			return [];
+		}
 		return this.multipleSelectedItemList.map(item => item[this.getIdField()]);
 	}
 
