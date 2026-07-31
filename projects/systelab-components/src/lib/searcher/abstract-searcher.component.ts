@@ -20,6 +20,8 @@ export abstract class AbstractSearcherComponent<T> extends AbstractGenericSearch
 	@Input() public isManagement = false;
 	@Input() public height;
 
+	private userEdited = false;
+
 	protected constructor(public override dialogService: DialogService, public override abstractSearcher: AbstractSearcher<T>) {
 		super(dialogService, abstractSearcher)
 	}
@@ -83,6 +85,10 @@ export abstract class AbstractSearcherComponent<T> extends AbstractGenericSearch
 			);
 	}
 
+	public onUserInput(): void {
+		this.userEdited = true;
+	}
+
 	public doSearch(): void {
 		if (this.code) {
 			this.abstractSearcher.getData(this.code, 1, this.multipleSelection ? 0 : 1, true)
@@ -105,14 +111,18 @@ export abstract class AbstractSearcherComponent<T> extends AbstractGenericSearch
 									}
 								}
 							}
+							this.userEdited = false;
 						},
 						error: (error) => {
 							console.error(`Communication error: ${error}`);
-
+							this.userEdited = false;
 						}
 					}
 				);
 		} else {
+			if (!this.userEdited) {
+				return;
+			}
 			this.id = undefined;
 			this.description = undefined;
 			this.code = undefined;
@@ -120,6 +130,7 @@ export abstract class AbstractSearcherComponent<T> extends AbstractGenericSearch
 				this.multipleSelectedItemList = [];
 			}
 			this.upDateField(undefined);
+			this.userEdited = false;
 		}
 	}
 
