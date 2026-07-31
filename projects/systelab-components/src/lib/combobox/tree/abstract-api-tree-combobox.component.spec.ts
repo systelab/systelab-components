@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { PreferencesService } from 'systelab-preferences';
 import { AbstractApiTreeComboBox } from './abstract-api-tree-combobox.component';
 
@@ -551,6 +551,43 @@ describe('AbstractApiTreeComboBox', () => {
 			expect(component.gridApi.setFocusedCell)
 				.not
 				.toHaveBeenCalled();
+		});
+
+	});
+
+	describe('doGridReady with destroyed grid', () => {
+
+		it('should not call hideOverlay or redrawRows in next callback when grid is destroyed', () => {
+			const hideOverlaySpy = jasmine.createSpy('hideOverlay');
+			const redrawRowsSpy  = jasmine.createSpy('redrawRows');
+			const mockEvent      = {
+				api: {
+					isDestroyed:          () => true,
+					hideOverlay:          hideOverlaySpy,
+					redrawRows:           redrawRowsSpy,
+					getDisplayedRowCount: () => 0
+				}
+			} as any;
+
+			component.doGridReady(mockEvent);
+
+			expect(hideOverlaySpy).not.toHaveBeenCalled();
+			expect(redrawRowsSpy).not.toHaveBeenCalled();
+		});
+
+		it('should not call hideOverlay in error callback when grid is destroyed', () => {
+			const hideOverlaySpy = jasmine.createSpy('hideOverlay');
+			spyOn(component, 'getRows').and.returnValue(throwError(() => new Error('load error')));
+			const mockEvent = {
+				api: {
+					isDestroyed: () => true,
+					hideOverlay: hideOverlaySpy
+				}
+			} as any;
+
+			component.doGridReady(mockEvent);
+
+			expect(hideOverlaySpy).not.toHaveBeenCalled();
 		});
 
 	});

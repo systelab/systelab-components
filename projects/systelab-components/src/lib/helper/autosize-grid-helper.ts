@@ -90,6 +90,10 @@ export class AutosizeGridHelper {
 	//This is only necessary for sizeColumnsToFit, autoSizeColumns does it correctly.
 	public static sizeColumnsToFit(gridApi: GridApi) {
 		if(!gridApi.isDestroyed()) {
+			const range = gridApi.getHorizontalPixelRange();
+			if (!range || range.right === 0) {
+				return;
+			}
 			gridApi.sizeColumnsToFit();
 			const cols: Column[] = gridApi.getColumns() || [];
 			for(let i: number = cols.length - 1; i >= 0; i--) {
