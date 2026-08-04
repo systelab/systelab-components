@@ -27,6 +27,7 @@ export * from './lib/select/period-combobox.component';
 export * from './lib/select/select.component';
 export * from './lib/select/select.component';
 export * from './lib/select/time-unit-combobox.component';
+export * from './lib/datepicker/datepicker-calendar.component';
 export * from './lib/datepicker/datepicker.component';
 export * from './lib/datepicker/datepicker-time.component';
 export * from './lib/spinner/touch.spin-values';

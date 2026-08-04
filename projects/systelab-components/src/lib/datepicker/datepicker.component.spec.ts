@@ -6,11 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
-import { ButtonModule } from 'primeng/button';
-import { DatePicker, DatePickerModule } from 'primeng/datepicker';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
+import { DatepickerCalendarComponent } from './datepicker-calendar.component';
 import { DatepickerComponent } from './datepicker.component';
 
 @Component({
@@ -71,15 +70,15 @@ export class AuxFunctionClass {
 	}
 
 	public static isVisiblePopupVisible(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
-		return (fixture.debugElement.nativeElement.querySelector('.p-datepicker-calendar-container') !== null);
+		return (fixture.debugElement.nativeElement.querySelector('.slab-datepicker-calendar-container') !== null);
 	}
 
 	public static getVisibleYearInPopup(fixture: ComponentFixture<DatepickerTestComponent>): number {
-		return parseInt(fixture.debugElement.nativeElement.querySelector('.p-datepicker-year').firstChild.nodeValue, 10);
+		return parseInt(fixture.debugElement.nativeElement.querySelector('.slab-datepicker-year').firstChild.nodeValue, 10);
 	}
 
 	public static getVisibleMonthInPopup(fixture: ComponentFixture<DatepickerTestComponent>): string {
-		return fixture.debugElement.nativeElement.querySelector('.p-datepicker-month').firstChild.nodeValue;
+		return fixture.debugElement.nativeElement.querySelector('.slab-datepicker-month').firstChild.nodeValue;
 	}
 
 	public static isRedBackground(fixture: ComponentFixture<DatepickerTestComponent>): boolean {
@@ -127,6 +126,7 @@ describe('Systelab DatepickerComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				TouchspinComponent,
+				DatepickerCalendarComponent,
 				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTestComponent,
@@ -136,8 +136,6 @@ describe('Systelab DatepickerComponent', () => {
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
-				ButtonModule,
-				DatePickerModule,
 				SystelabTranslateModule,
 			],
 			providers: [
@@ -458,18 +456,18 @@ describe('Systelab DatepickerComponent', () => {
 	describe('Set of specs for calendar with inputs showOtherMonths', () => {
 		const setup = (showOtherMonths = true) => {
 
-			const fixtureDatePicker = TestBed.createComponent(DatePicker);
-			const calendarComponent = fixtureDatePicker.componentInstance;
+			const fixtureCalendar = TestBed.createComponent(DatepickerCalendarComponent);
+			const calendarComponent = fixtureCalendar.componentInstance;
 
-			 calendarComponent.showOtherMonths = showOtherMonths;
-			fixtureDatePicker.detectChanges();
+			calendarComponent.showOtherMonths = showOtherMonths;
+			fixtureCalendar.detectChanges();
 
-			const button = fixtureDatePicker.debugElement.query(By.css('.p-inputtext')).nativeElement;
-			button.click();
-			fixtureDatePicker.detectChanges();
+			const input = fixtureCalendar.debugElement.query(By.css('.slab-datepicker-input')).nativeElement;
+			input.click();
+			fixtureCalendar.detectChanges();
 
-			const datesContainer = fixtureDatePicker.debugElement.query(By.css('.p-datepicker-calendar-container'));
-			const otherMonthDates = datesContainer.queryAll(By.css('.p-datepicker-other-month'));
+			const datesContainer = fixtureCalendar.debugElement.query(By.css('.slab-datepicker-calendar-container'));
+			const otherMonthDates = datesContainer.queryAll(By.css('.slab-datepicker-other-month'));
 
 			return {otherMonthDates};
 		};
@@ -478,6 +476,8 @@ describe('Systelab DatepickerComponent', () => {
 		it('Calendar show other months days', () => {
 			const {otherMonthDates} = setup(true);
 
+			expect(otherMonthDates.length)
+				.toBeGreaterThan(0);
 			for (const otherMonthDate of otherMonthDates) {
 				expect(otherMonthDate.children.length)
 					.toEqual(1);
@@ -490,6 +490,8 @@ describe('Systelab DatepickerComponent', () => {
 		it('Calendar do not show other months days', () => {
 			const {otherMonthDates} = setup(false);
 
+			expect(otherMonthDates.length)
+				.toBeGreaterThan(0);
 			for (const otherMonthDate of otherMonthDates) {
 				expect(otherMonthDate.children.length)
 					.toEqual(0);
