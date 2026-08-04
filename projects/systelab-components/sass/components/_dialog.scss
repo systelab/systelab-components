@@ -149,11 +149,6 @@ $slab-button-fontsize: 25px !default;
     pointer-events: auto;
   }
 
-  .p-inputtext {
-    @extend .disabled;
-    background-color: #f4f5f7;
-  }
-
   button {
     @extend .disabled;
   }

@@ -19,8 +19,6 @@ import { ColorUtilService } from '../utilities/color.util.service';
 import { LoadingService } from '../loading/loading.service';
 import { CommonModule } from '@angular/common';
 import { AngularSplitModule } from 'angular-split';
-import { ContextMenuModule } from 'primeng/contextmenu';
-import { SharedModule } from 'primeng/api';
 
 @Component({
     selector: 'systelab-colorpicker-test',
@@ -55,10 +53,8 @@ export class ColorpickerTestComponent {
 	imports:         [
 		CommonModule,
 		FormsModule,
-		SharedModule,
 		DragDropModule,
 		OverlayModule,
-		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
 		AgGridModule],

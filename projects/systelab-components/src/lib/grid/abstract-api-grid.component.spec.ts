@@ -4,7 +4,6 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { AbstractApiGrid } from './abstract-api-grid.component';
@@ -222,7 +221,6 @@ describe('Systelab Grid', () => {
         BrowserAnimationsModule,
         DragDropModule,
         OverlayModule,
-        ButtonModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
         AgGridModule],

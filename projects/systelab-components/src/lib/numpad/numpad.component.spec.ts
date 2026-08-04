@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NumPadComponent } from './numpad.component';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -63,7 +62,6 @@ describe('Systelab Numpad', () => {
 			imports: [
 				BrowserModule,
 				BrowserAnimationsModule,
-				ButtonModule,
 				FormsModule,
 				DragDropModule,
 				OverlayModule,

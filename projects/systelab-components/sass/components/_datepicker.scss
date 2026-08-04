@@ -166,33 +166,8 @@ systelab-datepicker-calendar {
   border: 1px solid var(--slab_component_border_color) !important;
 }
 
-.slab-datepicker-panel,
-.p-overlay-panel {
+.slab-datepicker-panel {
   z-index: 100000 !important;
-}
-
-.p-inputwrapper,
-.p-inputgroup {
-  position: relative;
-  display: inline-flex;
-  width: 100%;
-  
-  input {
-    padding: 1px .25em;
-    width: 100%;
-    height: Vars.$form-elements-height;
-    border: 1px solid var(--slab_component_border_color);
-    font: normal Vars.$slab-base-body-font-size Vars.$slab-base-body-font-family;
-
-    &:focus:not(.p-autocomplete-input) {
-      border-color: Vars.$slab-focus-component-border-color !important;
-      box-shadow: Vars.$slab-focus-component-shadow !important;
-    }
-
-    &:hover:enabled:not(:focus) {
-      border-color: var(--slab_component_border_color) !important;
-    }
-  }
 }
 
 .slab-datepicker-panel {

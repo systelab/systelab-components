@@ -4,7 +4,6 @@ import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextPanelComponent } from './context-panel.component';
@@ -44,7 +43,6 @@ describe('Systelab Context Panel', () => {
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
-				ButtonModule,
 				SystelabTranslateModule,
 			],
 			providers: [

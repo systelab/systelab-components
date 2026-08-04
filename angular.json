@@ -31,8 +31,7 @@
               "projects/showcase/src/styles.scss",
               "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/styles/ag-grid.css",
-              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -105,7 +104,6 @@
             "styles": [
               "node_modules/ag-grid-community/styles/ag-grid.css",
               "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-              "node_modules/primeicons/primeicons.css",
               "projects/systelab-components/icons/icomoon.css",
               "dist/systelab-components/sass/systelab-components.scss",
               "projects/showcase/src/styles.scss"
@@ -197,8 +195,7 @@
               "projects/showcase/src/styles.scss",
               "projects/systelab-components/icons/icomoon.css",
               "node_modules/ag-grid-community/styles/ag-grid.css",
-              "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/ag-grid-community/styles/ag-theme-alpine.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { TreeModule } from 'primeng/tree';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TouchspinComponent } from './spinner.component';
 
@@ -95,7 +94,6 @@ describe('Systelab Spinner', () => {
 				FormsModule,
 				DragDropModule,
 				OverlayModule,
-				TreeModule,
 			],
 			providers: [
 				provideHttpClient(withInterceptorsFromDi()),

@@ -76,7 +76,6 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
-import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { StackedBarCellRendererComponent } from './grid/custom-cells/stacked-bar/stacked-bar-cell-renderer.component';
@@ -127,7 +126,6 @@ const providers = [
 		FormsModule,
 		DragDropModule,
 		OverlayModule,
-		ContextMenuModule,
 		AngularSplitModule,
 		SystelabTranslateModule,
 		AgGridModule,

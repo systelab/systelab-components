@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { SystelabPreferencesModule } from 'systelab-preferences';
@@ -83,7 +82,6 @@ describe('Systelab Toast', () => {
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
-				ButtonModule,
 				SystelabTranslateModule,
 				SystelabPreferencesModule,
 			],

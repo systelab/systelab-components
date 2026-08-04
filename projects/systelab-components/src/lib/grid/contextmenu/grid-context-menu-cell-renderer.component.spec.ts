@@ -5,8 +5,6 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AgGridModule } from "ag-grid-angular";
-import { ButtonModule } from "primeng/button";
-import { OverlayModule } from "primeng/overlay";
 import { SystelabPreferencesModule } from "systelab-preferences";
 import { SystelabTranslateModule } from "systelab-translate";
 import { Component, provideZoneChangeDetection } from "@angular/core";
@@ -82,8 +80,6 @@ describe('GridContextMenuCellRendererComponent', () => {
                 BrowserModule,
                 BrowserAnimationsModule,
                 FormsModule,
-                OverlayModule,
-                ButtonModule,
                 SystelabTranslateModule,
                 SystelabPreferencesModule,
                 AgGridModule,
