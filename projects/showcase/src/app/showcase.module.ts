@@ -88,7 +88,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ShowcasePaginatorComponent } from './components/paginator/showcase-paginator-component';
 import { ShowcaseBarsGridComponent } from './components/grid/showcase-inner-bars-grid.component';
 import { A11yModule } from '@angular/cdk/a11y';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ShowcaseInnerTreeComboBox } from './components/combobox/showcase-inner-tree-combobox.component';
 import { ShowcaseToastComponent } from './components/toast/showcase-toast.component';
 import { ShowcaseSpyMenuComponent } from './components/spy-menu/showcase-spy-menu.component';
@@ -225,7 +224,6 @@ import { AngularSplitModule } from 'angular-split';
         OverlayModule,
         SystelabTranslateModule,
         SystelabPreferencesModule,
-        AutoCompleteModule,
         CdkTreeModule,
         SystelabComponentsModule.forRoot()
     ],

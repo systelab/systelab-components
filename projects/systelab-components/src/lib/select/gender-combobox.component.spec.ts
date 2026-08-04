@@ -11,6 +11,7 @@ import { SystelabPreferencesModule } from 'systelab-preferences';
 import { GridContextMenuCellRendererComponent } from '../grid/contextmenu/grid-context-menu-cell-renderer.component';
 import { GridHeaderContextMenuComponent } from '../grid/contextmenu/grid-header-context-menu-renderer.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { CommonModule } from '@angular/common';
 import { GenderSelect } from './gender-combobox.component';
 import { ComboBoxInputRendererComponent } from '../combobox/renderer/combobox-input-renderer.component';
@@ -67,14 +68,32 @@ const clickOnDropDown = (fixture: ComponentFixture<GenderSelectTestComponent>) =
 	fixture.detectChanges();
 };
 
-const clickOnRow = (fixture: ComponentFixture<GenderSelectTestComponent>, id: string) => {
-	const button = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+/**
+ * The rows are rendered by ag-grid, which does it out of the change detection of the fixture, so
+ * waiting for the fixture to be stable is not enough: the row has to be waited for.
+ */
+const waitForRow = async (fixture: ComponentFixture<GenderSelectTestComponent>, id: string): Promise<HTMLElement> => {
+	for (let attempt = 0; attempt < 40; attempt++) {
+		const row = fixture.debugElement.nativeElement.querySelector('[row-id=\'' + id + '\']');
+		if (row) {
+			return row;
+		}
+		await new Promise(resolve => setTimeout(resolve, 25));
+		fixture.detectChanges();
+		await fixture.whenStable();
+	}
+	throw new Error(`The row ${id} has not been rendered`);
+};
+
+const clickOnRow = async (fixture: ComponentFixture<GenderSelectTestComponent>, id: string) => {
+	const button = await waitForRow(fixture, id);
 	button.click();
 	fixture.detectChanges();
 };
 
 describe('Systelab Gender selector', () => {
 	let fixture: ComponentFixture<GenderSelectTestComponent>;
+	ModuleRegistry.registerModules([AllCommunityModule]);
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -110,7 +129,7 @@ describe('Systelab Gender selector', () => {
 	it('should select all', async () => {
 		clickOnDropDown(fixture);
 		await fixture.whenStable();
-		clickOnRow(fixture, 'A');
+		await clickOnRow(fixture, 'A');
 		await fixture.whenStable();
 		expect(fixture.componentInstance.id).toEqual('A');
 
@@ -120,7 +139,7 @@ describe('Systelab Gender selector', () => {
 		clickOnDropDown(fixture);
 		fixture.detectChanges()
 		await fixture.whenStable();
-		clickOnRow(fixture, 'U');
+		await clickOnRow(fixture, 'U');
 		fixture.detectChanges()
 		await fixture.whenStable()
 		expect(fixture.componentInstance.id)
@@ -130,7 +149,7 @@ describe('Systelab Gender selector', () => {
 	it('should select male', async () => {
 		clickOnDropDown(fixture);
 		await fixture.whenStable();
-		clickOnRow(fixture, 'M');
+		await clickOnRow(fixture, 'M');
 		await fixture.whenStable();
 		expect(fixture.componentInstance.id).toEqual('M');
 
@@ -139,7 +158,7 @@ describe('Systelab Gender selector', () => {
 	it('should select female', async () => {
 		clickOnDropDown(fixture);
 		await fixture.whenStable();
-		clickOnRow(fixture, 'F');
+		await clickOnRow(fixture, 'F');
 		await fixture.whenStable();
 		expect(fixture.componentInstance.id).toEqual('F');
 	});
