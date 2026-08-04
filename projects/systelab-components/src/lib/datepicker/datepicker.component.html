@@ -1,6 +1,7 @@
-<p-datepicker #calendar [(ngModel)]="currentDate" [showIcon]="false"
+<systelab-datepicker-calendar #calendar [(ngModel)]="currentDate"
   [dateFormat]="language.dateFormatValue"
   [firstDayOfWeek]="language.firstDayOfWeek"
+  [translations]="language.translations"
   (onFocus)="saveEventOnFocus($event)"
   (onBlur)="changeDate()"
   (onSelect)="selectDate()"
@@ -8,8 +9,7 @@
   [showOtherMonths]="showOtherMonths"
   [selectOtherMonths]="selectOtherMonths"
   [minDate]="minDate"
-  [focusTrap]="false"
-              [autofocus]="autofocus"
+  [autofocus]="autofocus"
   [maxDate]="maxDate"
   [inline]="inline"
   [keepInvalid]="keepInvalid"
@@ -19,40 +19,37 @@
   [style.font-size.px]="inputFontSize"
   [showTime]="withIntegratedTime"
   [timeOnly]="onlyTime"
-  [showTransitionOptions]="'1ms linear'"
-  [hideTransitionOptions]="'1ms linear'"
-  appendTo="body"
   [tabindex]="tabindex"
+  [icon]="onlyTime ? 'icon-clock' : 'icon-calendar'"
+  [headerTemplate]="onlyTime ? null : headerTpl"
+  [footerTemplate]="inline ? null : footerTpl"
   [ngClass]="{'date-error': formatError || error || (required && !currentDate), 'is-disabled': disabled, 'warning-date': tooFarDate || previousAfterDate, 'input-expand-height':inputExpandHeight}">
-  @if (!onlyTime) {
-    <ng-template pTemplate="header">
-      <div id="{{datepickerId}}" class="slab-datepicker-header">
-        <div class="left-buttons">
-          <a id="previousYear" class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
-          <a id="previousMonth" class="icon-angle-left slab-icon-medium" (click)="prevMonth()"></a>
-        </div>
-        <div class="p-datepicker-title d-flex align-items-center justify-content-center">
-          <span class="p-datepicker-year">{{ currentCalendar.currentYear }}</span>
-          <span class="p-datepicker-month">{{ language.translations.monthNames[currentCalendar.currentMonth] }}</span>
-        </div>
-        <div class="right-buttons">
-          <a id="nextMonth" class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
-          <a id="nextYear" class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
-        </div>
-      </div>
-    </ng-template>
-  }
-  <ng-template pTemplate="footer">
-    @if (!inline) {
-      <div class="p-3 d-flex border-top">
-        @if (showTodayButton) {
-          <systelab-button id="today" size="small" class="mr-auto"
-          (click)="setTodayDate()">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
-        }
-        <systelab-button id="clear" size="small" type="danger" class="ml-auto"
-        (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</systelab-button>
-      </div>
-    }
-  </ng-template>
-</p-datepicker>
+</systelab-datepicker-calendar>
 
+<ng-template #headerTpl>
+  <div id="{{datepickerId}}" class="slab-datepicker-header">
+    <div class="left-buttons">
+      <a id="previousYear" class="icon-angle-double-left slab-icon-medium" (click)="prevYear()"></a>
+      <a id="previousMonth" class="icon-angle-left slab-icon-medium" (click)="prevMonth()"></a>
+    </div>
+    <div class="slab-datepicker-title d-flex align-items-center justify-content-center">
+      <span class="slab-datepicker-year">{{ currentCalendar.currentYear }}</span>
+      <span class="slab-datepicker-month">{{ language.translations.monthNames[currentCalendar.currentMonth] }}</span>
+    </div>
+    <div class="right-buttons">
+      <a id="nextMonth" class="icon-angle-right slab-icon-medium" (click)="nextMonth()"></a>
+      <a id="nextYear" class="icon-angle-double-right slab-icon-medium" (click)="nextYear()"></a>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #footerTpl>
+  <div class="p-3 d-flex border-top">
+    @if (showTodayButton) {
+      <systelab-button id="today" size="small" class="mr-auto"
+      (click)="setTodayDate()">{{ 'COMMON_TODAY' | translate | async }}</systelab-button>
+    }
+    <systelab-button id="clear" size="small" type="danger" class="ml-auto"
+    (click)="clearDate($event)">{{ 'COMMON_CLEAR' | translate | async }}</systelab-button>
+  </div>
+</ng-template>
