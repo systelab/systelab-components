@@ -9,8 +9,7 @@ import { DatepickerTimeComponent } from './datepicker-time.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { DatepickerComponent } from './datepicker.component';
-import { ButtonModule } from 'primeng/button';
-import { DatePickerModule } from 'primeng/datepicker';
+import { DatepickerCalendarComponent } from './datepicker-calendar.component';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -95,6 +94,7 @@ describe('Systelab DatepickerTimeComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				TouchspinComponent,
+				DatepickerCalendarComponent,
 				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTimeComponent,
@@ -105,8 +105,6 @@ describe('Systelab DatepickerTimeComponent', () => {
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
-				ButtonModule,
-				DatePickerModule,
 				SystelabTranslateModule,
 			],
 			providers: [
@@ -181,7 +179,7 @@ describe('Systelab DatepickerTimeComponent', () => {
 	});
 
 	it('should be two calendars because one of the datepicker has showCalendar false', () => {
-		expect(fixture.debugElement.nativeElement.querySelectorAll('p-datepicker').length).toEqual(2);
+		expect(fixture.debugElement.nativeElement.querySelectorAll('systelab-datepicker-calendar').length).toEqual(2);
 	});
 
 });

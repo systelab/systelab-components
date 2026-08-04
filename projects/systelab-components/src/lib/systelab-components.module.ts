@@ -23,6 +23,7 @@ import { ApplicationHeaderComponent } from './applicationframe/header/app-header
 import { ApplicationSidebarLargeComponent } from './applicationframe/sidebar/app-sidebar-large.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { DatepickerTimeComponent } from './datepicker/datepicker-time.component';
+import { DatepickerCalendarComponent } from './datepicker/datepicker-calendar.component';
 import { TouchspinComponent } from './spinner/spinner.component';
 import { ModulabSelect } from './select/select.component';
 import { ApplicationFrameComponent } from './applicationframe/application-frame.component';
@@ -75,7 +76,6 @@ import { MessagePopupViewComponent } from './modal/message-popup/message-popup-v
 import { ApplicationSidebarSmallComponent } from './applicationframe/sidebar/app-sidebar-small.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { PaginatorPageComponent } from './paginator/paginator-page.component';
-import { DatePickerModule } from 'primeng/datepicker';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ChipButtonComponent } from './chip-button/chip-button.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
@@ -125,7 +125,6 @@ const providers = [
 	imports:      [
 		CommonModule,
 		FormsModule,
-		DatePickerModule,
 		DragDropModule,
 		OverlayModule,
 		ContextMenuModule,
@@ -166,6 +165,7 @@ const providers = [
 		GenderSelect,
 		TouchspinComponent,
 		ModulabSelect,
+		DatepickerCalendarComponent,
 		DatepickerComponent,
 		DatepickerTimeComponent,
 		SearcherDialog,
@@ -246,6 +246,7 @@ const providers = [
 		PeriodSelect,
 		TimeUnitSelectComponent,
 		GenderSelect,
+		DatepickerCalendarComponent,
 		DatepickerComponent,
 		TouchspinComponent,
 		ModulabSelect,

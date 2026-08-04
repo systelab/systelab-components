@@ -19,7 +19,6 @@ import { ColorUtilService } from '../utilities/color.util.service';
 import { LoadingService } from '../loading/loading.service';
 import { CommonModule } from '@angular/common';
 import { AngularSplitModule } from 'angular-split';
-import { DatePickerModule } from 'primeng/datepicker';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { SharedModule } from 'primeng/api';
 
@@ -57,7 +56,6 @@ export class ColorpickerTestComponent {
 		CommonModule,
 		FormsModule,
 		SharedModule,
-		DatePickerModule,
 		DragDropModule,
 		OverlayModule,
 		ContextMenuModule,
