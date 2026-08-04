@@ -8,6 +8,12 @@
 $icon-margin-right: 10px;
 /* $icon-margin-left: defines the margin-left of the arrow buttons.*/
 $icon-margin-left: 40px;
+/* Disabled input palette, shared by the input and its icon so both fade the same way. It is
+   theme independent on purpose: the disabled background stays light in every theme, matching
+   the rest of the library (spinner, numpad, searcher). */
+$disabled-background: #e9ecef;
+$disabled-color: #333;
+$disabled-opacity: 0.6;
 
 /* Base layout of the widget, no longer provided by any third party theme. */
 systelab-datepicker-calendar {
@@ -62,7 +68,7 @@ systelab-datepicker-calendar {
   }
 
   .slab-datepicker-input {
-    color: var(--ag-foreground-color);
+    color: var(--slab_foreground_primary);
     background: var(--slab_background_primary);
     border-radius: 0.25rem;
     padding: 1px .25em;
@@ -81,9 +87,9 @@ systelab-datepicker-calendar {
     }
 
     &:disabled {
-      background-color: #e9ecef;
-      opacity: 0.6 !important;
-      color: #333;
+      background-color: $disabled-background;
+      opacity: $disabled-opacity !important;
+      color: $disabled-color;
       cursor: not-allowed;
     }
   }
@@ -99,16 +105,23 @@ systelab-datepicker-calendar {
 
     .icon-calendar {
       height: 100%;
-      color: black;
+      color: var(--slab_foreground_primary);
       cursor: pointer;
     }
 
     .icon-clock {
       height: 100%;
-      color: black;
+      color: var(--slab_foreground_primary);
       cursor: pointer;
     }
 
+    /* A disabled input keeps its light background in every theme, so its icon has to follow the
+       input text instead of the theme foreground. */
+    input:disabled ~ [class*='icon-'] {
+      color: $disabled-color;
+      opacity: $disabled-opacity;
+      cursor: not-allowed;
+    }
   }
 
   &.input-expand-height {
@@ -149,9 +162,10 @@ systelab-datepicker-calendar {
   &.is-disabled {
     .slab-datepicker-input-wrapper {
       input {
-        opacity: 0.6;
+        opacity: $disabled-opacity;
         cursor: not-allowed !important;
-        background-color: #e9ecef;
+        background-color: $disabled-background;
+        color: $disabled-color;
       }
 
       &.input-expand-height {
@@ -196,11 +210,11 @@ systelab-datepicker-calendar {
 }
 
 .slab-datepicker-panel {
-  color: var(--secondary);
+  color: var(--slab_foreground_primary);
   background-color: var(--slab_background_primary) !important;
   z-index: 100000 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  border: 1px solid #ddd !important;
+  border: 1px solid var(--slab_component_border_color) !important;
   border-radius: 6px !important;
   padding: 0 15px !important;
   width: 280px !important;
@@ -221,13 +235,14 @@ systelab-datepicker-calendar {
             font-weight: 500;
             padding: 6px 2px !important;
             font-size: 11px;
-            color: #666;
+            color: var(--slab_foreground_primary);
+            opacity: 0.7;
             width: 28px;
             text-align: center;
-            
+
             .slab-datepicker-weekday {
               font-weight: 500;
-              color: #666;
+              color: inherit;
               text-align: center;
               font-size: 11px;
               display: inline-block;
@@ -254,17 +269,14 @@ systelab-datepicker-calendar {
               color: var(--slab_foreground_primary);
 
               &.slab-datepicker-day-disabled {
-                opacity: 0.3;
+                opacity: 0.4;
                 background-color: transparent !important;
-                color: var(--text-color-secondary);
+                color: var(--slab_foreground_primary);
               }
               &.slab-datepicker-day-selected {
                 background-color: var(--primary) !important;
                 color: var(--text-color-secondary) !important;
                 font-weight: 500;
-                &:hover {
-                  color: var(--slab_foreground_primary) !important;
-                }
               }
               &:not(.slab-datepicker-day-selected):not(.slab-datepicker-day-disabled):hover {
                 background: var(--slab_table_row_hover_background);
@@ -280,8 +292,8 @@ systelab-datepicker-calendar {
 
           .slab-datepicker-other-month {
             .slab-datepicker-day {
-              opacity: 0.3;
-              color: #ccc;
+              opacity: 0.45;
+              color: var(--slab_foreground_primary);
             }
           }
         }
@@ -293,7 +305,7 @@ systelab-datepicker-calendar {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--slab_component_border_color);
     background-color: transparent;
     margin-top: 20px;
 
@@ -307,7 +319,7 @@ systelab-datepicker-calendar {
       .slab-datepicker-increment-button,
       .slab-datepicker-decrement-button {
         background: transparent !important;
-        color:  var(--primary) !important;
+        color:  var(--text-color) !important;
         margin: 5px 0;
         width: 32px !important;
         height: 32px !important;
@@ -322,14 +334,14 @@ systelab-datepicker-calendar {
         }
 
         &:focus {
-          box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
+          box-shadow: Vars.$slab-focus-component-shadow !important;
         }
       }
 
       > span {
         font-size: 18px;
         font-weight: 500;
-        color: #333;
+        color: var(--slab_foreground_primary);
         min-width: 40px;
         text-align: center;
       }
@@ -343,7 +355,7 @@ systelab-datepicker-calendar {
       span {
         font-size: 18px;
         font-weight: 500;
-        color: #333;
+        color: var(--slab_foreground_primary);
       }
     }
   }
@@ -397,7 +409,7 @@ systelab-datepicker-calendar {
     justify-content: space-between;
     align-items: center;
     background: transparent !important;
-    color: #333;
+    color: var(--slab_foreground_primary);
     padding: 10px 0;
     position: relative;
     border: none !important;
@@ -445,7 +457,7 @@ systelab-datepicker-calendar {
       gap: 0.5rem;
       
       .slab-datepicker-year {
-        color: #333;
+        color: var(--slab_foreground_primary);
         font-size: 14px;
         line-height: 1.2;
         padding: 0.375rem;
@@ -453,7 +465,7 @@ systelab-datepicker-calendar {
 
       .slab-datepicker-month {
         width: 100% !important;
-        color: #333;
+        color: var(--slab_foreground_primary);
         font-size: 16px;
         line-height: 1.2;
         padding: 0.375rem;
