@@ -1,6 +1,45 @@
-<p-autoComplete #autoComplete [suggestions]="results" (completeMethod)="search($event)"
-                (keydown.enter)="onKeyEnter($event)"
-                [multiple]="true"
-                [readonly]="readonly"
-                [disabled]="disabled"
-                [(ngModel)]="filter"></p-autoComplete>
+<ul #container class="slab-chips-container"
+  [class.slab-chips-focus]="focus || showPanel"
+  [class.slab-chips-disabled]="disabled"
+  [class.slab-chips-readonly]="readonly"
+  (click)="onContainerClick()">
+  @for (chip of filter; track $index) {
+    <li class="slab-chips-chip">
+      <span class="slab-chips-chip-label">{{chip}}</span>
+      @if (!disabled && !readonly) {
+        <span class="slab-chips-chip-remove" aria-hidden="true" (click)="removeChip($index, $event)">×</span>
+      }
+    </li>
+  }
+  <li class="slab-chips-input-chip">
+    <input #input type="text" autocomplete="off" role="combobox" aria-autocomplete="list"
+      class="slab-chips-input"
+      [attr.readonly]="readonly ? '' : null"
+      [attr.disabled]="disabled ? '' : null"
+      [attr.aria-expanded]="showPanel"
+      [attr.aria-controls]="showPanel ? instanceId + '-list' : null"
+      [attr.aria-activedescendant]="highlightedIndex >= 0 ? instanceId + '-item-' + highlightedIndex : null"
+      (input)="onInput($event)"
+      (focus)="onInputFocus()"
+      (blur)="onInputBlur()"
+      (keydown)="onKeydown($event)"
+      (keydown.enter)="onKeyEnter($event)"/>
+  </li>
+</ul>
+
+@if (showPanel) {
+  <div #panel class="slab-chips-panel" (mousedown)="onPanelMouseDown($event)">
+    <ul class="slab-chips-list" role="listbox" [id]="instanceId + '-list'">
+      @for (suggestion of results; track $index) {
+        <li class="slab-chips-item" role="option"
+          [id]="instanceId + '-item-' + $index"
+          [class.slab-chips-item-highlighted]="$index === highlightedIndex"
+          [attr.aria-selected]="$index === highlightedIndex"
+          (mouseenter)="onSuggestionMouseEnter($index)"
+          (click)="onSuggestionClick(suggestion)">
+          <span>{{suggestion}}</span>
+        </li>
+      }
+    </ul>
+  </div>
+}

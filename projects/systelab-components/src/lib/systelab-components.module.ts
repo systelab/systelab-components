@@ -84,7 +84,6 @@ import { DialogHeaderComponent } from './modal/header/dialog-header.component';
 import { ChipsComponent } from './chips/chips.component';
 import { ContextMenuSubmenuItemComponent } from './contextmenu/context-menu-submenu-item.component';
 import { GridHeaderContextMenu } from './grid/contextmenu/grid-header-context-menu.component';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SpyMenuComponent } from './spy-menu/spy-menu.component';
 import { ScrollSpyDirective } from './spy-menu/scroll-spy.directive';
 import { ToastComponent } from './toast/toast.component';
@@ -127,7 +126,6 @@ const providers = [
 		CommonModule,
 		FormsModule,
 		DatePickerModule,
-		AutoCompleteModule,
 		DragDropModule,
 		OverlayModule,
 		ContextMenuModule,

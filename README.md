@@ -86,6 +86,47 @@ npm publish
 
 # Breaking changes
 
+## Version 21.6.0
+
+The **chips** (`systelab-chips`) does not use PrimeNG anymore. The autocomplete is now implemented with plain Angular
+and TypeScript inside `ChipsComponent`, which keeps its state in **signals** and runs with
+`ChangeDetectionStrategy.OnPush`.
+
+- All the `@Input()` (`texts`, `disabled`, `readonly`), the `@Output()` (`filtered`), the `filter` accessor and the
+  `search()` and `onKeyEnter()` methods are kept, so no change is needed in the applications.
+- The `autoComplete` **ViewChild** is gone, because there is no PrimeNG `AutoComplete` behind the component anymore.
+  Code calling `chips.autoComplete.hide()` (or `show()`) has to call `chips.hide()` / `chips.show()` instead. The
+  component also exposes `inputViewChild`, `panelViewChild`, `containerViewChild`, `panelVisible`, `showPanel`,
+  `highlightedIndex` and `focus`.
+- **The `p-` prefixed class names are gone**: the markup now uses the `slab-` prefix of the library. Applications with
+  their own styles or end to end selectors over the chips have to rename them:
+
+| Before | Now |
+| ------ | --- |
+| `p-autocomplete` | *removed*, use the `systelab-chips` element |
+| `p-autocomplete-input-multiple` | `slab-chips-container` |
+| `p-focus` | `slab-chips-focus` |
+| `p-disabled` | `slab-chips-disabled` |
+| `p-autocomplete-chip-item`, `p-autocomplete-chip`, `p-chip` | `slab-chips-chip` |
+| `p-autocomplete-token-label`, `p-chip-label` | `slab-chips-chip-label` |
+| `p-autocomplete-chip-icon` (`pi pi-times-circle`) | `slab-chips-chip-remove` (a `×`, as in `systelab-chip-button`) |
+| `p-autocomplete-input-chip` | `slab-chips-input-chip` |
+| `p-autocomplete-input` | `slab-chips-input` |
+| `p-autocomplete-overlay`, `p-autocomplete-list` | `slab-chips-panel`, `slab-chips-list` |
+| `p-autocomplete-option` | `slab-chips-item` |
+| `p-focus` (on an option) | `slab-chips-item-highlighted` |
+
+- The suggestions panel is no longer appended to `body`: it is rendered inside the component as a `position: fixed`
+  element (the same approach as the datepicker and the combobox). Tests looking for the panel outside the component
+  must be updated.
+- The panel is only shown when there is at least one suggestion, and the chips now support **Arrow up / Arrow down** to
+  highlight a suggestion, **Escape** to close the panel and **Backspace** over an empty input to remove the last chip.
+  The panel is also closed when the input loses the focus, when the window is resized and when the click is outside the
+  component.
+- The chips take their colors from the `--primary`, `--slab_component_border_color`, `--slab_background_primary` and
+  `--slab_table_row_hover_background` variables of the library instead of the PrimeNG theme palette, so they also
+  honour the dark theme.
+
 ## Version 21.x.x - Angular 21
 
 [Angular 21 news](https://blog.angular.dev/announcing-angular-v21-57946c34f14b)
