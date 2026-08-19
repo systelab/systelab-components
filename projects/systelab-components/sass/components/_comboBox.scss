@@ -134,6 +134,11 @@
       border: 1px solid var(--slab_component_border_color);
       border-radius: 3px;
       background-color: white;
+
+      ag-grid-angular {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .ag-theme-alpine .ag-header {
@@ -227,4 +232,15 @@
 
 .pointer {
   cursor: pointer;
+}
+
+// Generates indentation classes for tree combobox nodes (.slab-combo-tree-level-0 to .slab-combo-tree-level-10).
+// Each level adds 20px of left padding. 10 levels is sufficient for any practical tree depth
+// and keeps the generated CSS minimal. Increase only if deeper trees are required.
+.slab-combo-tree-node {
+  @for $i from 0 through 10 {
+    &.slab-combo-tree-level-#{$i} {
+      padding-left: $i * 20px;
+    }
+  }
 }

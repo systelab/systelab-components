@@ -101,9 +101,8 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 	}
 
 	public getLabelForLevel(comboTreeNode: ComboTreeNode<T>): string {
-		const style: string = comboTreeNode.level > 0 ? `style="padding-left: ${(20 * comboTreeNode.level)}px"` : '';
 		const description: string = comboTreeNode.nodeData[this.getLevelDescriptionField(comboTreeNode.level)];
-		return `<span title="${description}" ${style}>${description}</span>`;
+		return `<span title="${description}" class="slab-combo-tree-node slab-combo-tree-level-${comboTreeNode.level}">${description}</span>`;
 	}
 
 	// override

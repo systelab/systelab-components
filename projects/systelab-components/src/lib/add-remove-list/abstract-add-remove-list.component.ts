@@ -1,7 +1,9 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import {AbstractSortableListComponent} from '../sortable-list/abstract-sortable-list.component';
 
-@Directive()
+@Directive({
+  host: { 'class': 'slab-add-remove-list' }
+})
 export abstract class AbstractAddRemoveList<T> extends AbstractSortableListComponent<T> implements OnInit {
 
 	@Input() public override elementsList: Array<T> = [];

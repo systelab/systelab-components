@@ -162,7 +162,9 @@ describe('AbstractApiTreeComboBox', () => {
 		});
 
 		expect(label)
-			.toContain('padding-left: 40px');
+			.toContain('slab-combo-tree-node');
+		expect(label)
+			.toContain('slab-combo-tree-level-2');
 		expect(label)
 			.toContain('Child');
 	});
