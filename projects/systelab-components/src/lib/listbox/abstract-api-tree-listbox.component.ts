@@ -173,7 +173,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		if (this.multipleSelection) {
 			this.gridOptions.rowSelection.enableClickSelection = false;
 			this.gridOptions.rowSelection.mode = 'multiRow';
-			this.gridOptions.selectionColumnDef = {width: 0, maxWidth: 0, suppressSizeToFit: true} as ColDef;
+			this.gridOptions.selectionColumnDef = {...this.gridOptions.selectionColumnDef, width: 0, maxWidth: 0, suppressSizeToFit: true} as ColDef;
 		} else {
 			this.gridOptions.rowSelection.enableClickSelection = !this.isDisabled;
 		}
