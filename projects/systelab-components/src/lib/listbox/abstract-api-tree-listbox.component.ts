@@ -3,7 +3,7 @@ import { AbstractTreeListboxRendererComponent } from './renderer/abstract-tree-l
 import { StylesUtilService } from '../utilities/styles.util.service';
 import { AbstractListBox } from './abstract-listbox.component';
 import { Observable } from 'rxjs';
-import { GetRowIdParams, RowSelectionOptions } from 'ag-grid-community';
+import { GetRowIdParams, RowSelectionOptions, ColDef } from 'ag-grid-community';
 
 export class TreeListBoxElement<T> {
 	public nodeData: T;
@@ -173,6 +173,7 @@ export abstract class AbstractApiTreeListBox<T> extends AbstractListBox<TreeList
 		if (this.multipleSelection) {
 			this.gridOptions.rowSelection.enableClickSelection = false;
 			this.gridOptions.rowSelection.mode = 'multiRow';
+			this.gridOptions.selectionColumnDef = {...this.gridOptions.selectionColumnDef, width: 0, maxWidth: 0, suppressSizeToFit: true} as ColDef;
 		} else {
 			this.gridOptions.rowSelection.enableClickSelection = !this.isDisabled;
 		}
