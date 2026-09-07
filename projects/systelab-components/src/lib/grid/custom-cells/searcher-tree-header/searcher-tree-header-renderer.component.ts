@@ -3,6 +3,7 @@ import { AgRendererComponent } from 'ag-grid-angular';
 
 @Component({
 	templateUrl: './searcher-tree-header-renderer.component.html',
+	styleUrls: ['./searcher-tree-header-renderer.component.scss'],
 	standalone: false
 })
 export class SearcherTreeHeaderRendererComponent implements AgRendererComponent  {

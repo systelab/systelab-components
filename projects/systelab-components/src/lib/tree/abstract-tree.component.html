@@ -6,7 +6,7 @@
     <div class="d-block">
       <div class="slab-tree-node" [class.slab-selected]="node==selectedNode" [ngClass]="node.styleClass?[node.styleClass]:[]"
         (click)="doClick(node)">
-        <button style="min-width: 30px" disabled></button>
+        <button disabled></button>
         @if (node.icon) {
           <i class="{{node.icon}} mr-2"></i>
         }
@@ -29,7 +29,7 @@
     <div class="d-block">
       <div class="slab-tree-node" [class.slab-selected]="node==selectedNode" [ngClass]="node.styleClass?[node.styleClass]:[]"
         (click)="doClick(node)">
-        <button class="slab-tree-toggle-button" style="min-width: 30px" cdkTreeNodeToggle>
+        <button class="slab-tree-toggle-button" cdkTreeNodeToggle>
           <i [ngClass]="[treeControl.isExpanded(node) ? defaultExpandedIcon : defaultCollapsedIcon]"></i>
         </button>
         @if (node.icon) {

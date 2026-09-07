@@ -17,7 +17,7 @@
                 (click)="doClickWithAction($event, elementID, action.actionId)"
                 (mouseover)="doMouseOver($event, elementID, action.actionId)">
                 @if (isEnabled(elementID, action.actionId)) {
-                  <div class="slab-flex-1" style="flex:1 1 auto">
+                  <div class="slab-menu-item-label">
                     <systelab-context-menu-item class="d-flex align-items-center" [action]="action"
                       [isEnabled]="isEnabled(elementID, action.actionId)"
                       [isIconEnabled]="isIconEnabled(elementID, action.actionId)"
