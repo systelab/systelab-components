@@ -86,6 +86,60 @@ npm publish
 
 # Breaking changes
 
+## Version 21.5.0
+
+The **datepicker** (`systelab-datepicker` and `systelab-date-time`) does not use PrimeNG anymore. It is now implemented
+with plain Angular and TypeScript by the new `systelab-datepicker-calendar` component, which is the engine of both.
+
+`DatepickerCalendarComponent` keeps its state in **signals**, derives the rendered month, the week day names and the
+text of the input with `computed()`, and runs with `ChangeDetectionStrategy.OnPush`, so an open calendar is only
+refreshed when something it shows really changes. Every input and every state member is still a plain property (backed
+by a signal through an accessor), so both template bindings and imperative assignment keep working — and both are now
+reactive. `DatepickerComponent` and `DatepickerTimeComponent` keep the default change detection on purpose, because
+their `currentDate` is often modified in place by the applications.
+
+- All the `@Input()`, `@Output()` and public methods are kept, so no change is needed in the applications. The only
+  removed member is the `PrimeNG` config service that `DatepickerComponent` and `DatepickerTimeComponent` received as the
+  **fourth constructor argument**: any class extending them must drop it from its `super(...)` call.
+- **The `p-` prefixed class names are gone**: the markup now uses the `slab-` prefix of the library. Applications with
+  their own styles or end to end selectors over the calendar have to rename them:
+
+| Before | Now |
+| ------ | --- |
+| `p-datepicker` (on the host) | *removed*, use the `systelab-datepicker-calendar` element |
+| `p-datepicker-input-wrapper`, `p-inputwrapper` | `slab-datepicker-input-wrapper` |
+| `p-datepicker-input`, `p-inputtext` | `slab-datepicker-input` |
+| `p-inputwrapper-focus` | `slab-datepicker-input-focus` |
+| `p-datepicker-panel` (+ `p-component`) | `slab-datepicker-panel` |
+| `p-datepicker-panel-inline`, `p-datepicker-inline` | `slab-datepicker-panel-inline` |
+| `p-datepicker-timeonly` | `slab-datepicker-panel-timeonly` |
+| `p-disabled` (on the panel) | `slab-datepicker-panel-disabled` |
+| `p-datepicker-calendar-container` | `slab-datepicker-calendar-container` |
+| `p-datepicker-calendar` | `slab-datepicker-calendar` |
+| `p-datepicker-day-view` | `slab-datepicker-day-view` |
+| `p-datepicker-weekday-cell`, `p-datepicker-weekday` | `slab-datepicker-weekday-cell`, `slab-datepicker-weekday` |
+| `p-datepicker-day-cell`, `p-datepicker-day` | `slab-datepicker-day-cell`, `slab-datepicker-day` |
+| `p-datepicker-day-selected` | `slab-datepicker-day-selected` |
+| `p-disabled` (on a day) | `slab-datepicker-day-disabled` |
+| `p-datepicker-today`, `p-datepicker-other-month` | `slab-datepicker-today`, `slab-datepicker-other-month` |
+| `p-datepicker-title`, `p-datepicker-year`, `p-datepicker-month` | `slab-datepicker-title`, `slab-datepicker-year`, `slab-datepicker-month` |
+| `p-datepicker-time-picker` | `slab-datepicker-time-picker` |
+| `p-datepicker-hour-picker`, `p-datepicker-minute-picker` | `slab-datepicker-hour-picker`, `slab-datepicker-minute-picker` |
+| `p-datepicker-increment-button`, `p-datepicker-decrement-button` | `slab-datepicker-increment-button`, `slab-datepicker-decrement-button` |
+| `p-datepicker-separator` | `slab-datepicker-separator` |
+
+  `slab-datepicker-header`, `date-error`, `warning-date`, `is-disabled` and `input-expand-height` do not change.
+- `DatepickerComponent.currentCalendar` is now a `DatepickerCalendarComponent` instead of a PrimeNG `DatePicker`. It
+  keeps the members the datepicker relied on (`currentMonth`, `currentYear`, `dateFormat`, `inputfieldViewChild`, `el`,
+  `value`, `clear()`, `hideOverlay()`, `navForward()`, `navBackward()`, `isSelectable()`, `isDateDisabled()`, ...) and
+  adds `navYearForward()` / `navYearBackward()`.
+- The calendar panel is no longer appended to `body`: it is rendered inside the component as a `position: fixed`
+  element (the same approach as the combobox). Tests looking for the panel outside the component must be updated.
+- `DatepickerComponent` subscribes to the language changes of the translate service instead of checking the current
+  language on every change detection cycle. It still falls back to the check when no `TranslateService` is provided.
+- Enabled days now take their color from `--slab_foreground_primary` and the current day its background from
+  `--slab_table_row_even_background`, instead of the PrimeNG theme palette, so the calendar also honours the dark theme.
+
 ## Version 21.x.x - Angular 21
 
 [Angular 21 news](https://blog.angular.dev/announcing-angular-v21-57946c34f14b)

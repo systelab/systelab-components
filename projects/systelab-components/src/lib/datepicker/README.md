@@ -2,6 +2,16 @@
 
 The datepicker allows users to enter a date either through text input, or by choosing a date from the calendar.
 
+It has no third party dependency: the calendar itself is the `systelab-datepicker-calendar` component
+(`DatepickerCalendarComponent`), written with plain Angular and TypeScript, and `systelab-datepicker` adds on top of it
+the systelab look, the relative date shortcuts (`3d`, `-2w`, `1m`, ...), the loose date inference (`011219`) and the
+warning states. `systelab-date-time` adds the hour/minute spinners.
+
+Every CSS class uses the `slab-` prefix of the library (`slab-datepicker-panel`, `slab-datepicker-day-cell`,
+`slab-datepicker-day`, `slab-datepicker-day-selected`, `slab-datepicker-today`, `slab-datepicker-other-month`,
+`slab-datepicker-time-picker`, ...). The `p-datepicker-*` names of the previous PrimeNG based implementation no longer
+exist: see the root `README.md` for the full mapping.
+
 ## Using the component
 ```
 <systelab-datepicker [(currentDate)]="toDate" [error]="true" [markPreviousAfterDate]="true" [required]="true" [inputExpandHeight]="true" [inputFontSize]="true" [showTodayButton]="false"></systelab-datepicker>
@@ -77,3 +87,39 @@ The default value is retrieved from the translation system (language). In case o
 | disabled | boolean | false | If true the component is shown disabled |
 | resetTimeWhenChangingCurrentDate | boolean | false | If true the time is reset when day calendar changes |
 | showCalendar | boolean | true | If true the calendar is showed else only timepicker is showed |
+
+## systelab-datepicker-calendar
+
+The calendar widget used by the two components above. It is exported for reuse, but applications are expected to use
+`systelab-datepicker` / `systelab-date-time`, which add the systelab behaviour on top of it.
+
+| Name | Type | Default | Description |
+| ---- |:----:|:-------:| ----------- |
+| dateFormat | string | mm/dd/yy | Date format, with the tokens listed above |
+| firstDayOfWeek | number | 0 | First day of the week shown in the grid (0 = Sunday) |
+| translations | DatePickerTranslations | English names | `dayNames`, `dayNamesShort`, `dayNamesMin`, `monthNames`, `monthNamesShort` used to render, format and parse |
+| inline | boolean | false | Renders the calendar without input, always visible |
+| disabled | boolean | false | Disables the input and the calendar |
+| required | boolean | false | Sets the input as required |
+| readonlyInput | boolean | false | Sets the input as read only (used on tablets) |
+| keepInvalid | boolean | false | Keeps the typed text when it cannot be parsed |
+| showOtherMonths | boolean | true | Renders the days of the previous/next month |
+| selectOtherMonths | boolean | false | Makes those days selectable |
+| showTime | boolean | false | Shows an hour/minute picker below the grid |
+| timeOnly | boolean | false | Shows only the hour/minute picker |
+| minDate / maxDate | Date | | Selectable range |
+| disabledDates | Array&lt;Date&gt; | | Individual dates that cannot be selected |
+| disabledDays | Array&lt;number&gt; | | Week days (0-6) that cannot be selected |
+| tabindex | number | 0 | Tab index of the input |
+| autofocus | boolean | false | Focuses the input once rendered |
+| icon | string | | Class of the icon rendered inside the input (`icon-calendar`, `icon-clock`) |
+| inputId | string | | Id set on the input |
+| headerTemplate / footerTemplate | TemplateRef | | Templates rendered at the top and at the bottom of the panel |
+
+Outputs: `onFocus`, `onBlur`, `onSelect`, `onInput`, `onClear`, `onMonthChange`, `onYearChange`. The value is exposed
+through `ngModel` (the component is a `ControlValueAccessor`).
+
+The component is signal based and runs with `OnPush`: the inputs above and its state (`value`, `currentMonth`,
+`currentYear`, `currentHour`, `currentMinute`, `overlayVisible`) are properties backed by signals, and `months`,
+`weekDays`, `hourDisplay`, `minuteDisplay` and `inputFieldValue` are derived from them with `computed()`. Assigning any
+of them from code (`calendar.minDate = …`) is reactive as well, so there is nothing to invalidate or mark for check.

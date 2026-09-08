@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ButtonModule } from 'primeng/button';
-import { DatePickerModule } from 'primeng/datepicker';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { SystelabTranslateModule } from 'systelab-translate';
 import { ContextMenuComponent } from './context-menu.component';
@@ -110,7 +109,6 @@ describe('Systelab Context Menu', () => {
 				FormsModule,
 				OverlayModule,
 				ButtonModule,
-				DatePickerModule,
 				SystelabTranslateModule,
 			],
 			providers: [

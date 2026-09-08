@@ -1,33 +1,127 @@
 @use "../variables" as Vars;
 
-/* This styles are used to override the default primeng styles for datepicker (https://www.primefaces.org/primeng/#/datepicker).*/
+/* Styles for the systelab datepicker (systelab-datepicker, systelab-date-time and the
+   systelab-datepicker-calendar widget behind them). Every class follows the slab- prefix: the
+   p-datepicker-* names of the former PrimeNG based implementation are gone. */
 
 /* $icon-margin-right: defines the margin-right of the arrow buttons.*/
 $icon-margin-right: 10px;
 /* $icon-margin-left: defines the margin-left of the arrow buttons.*/
 $icon-margin-left: 40px;
+/* Disabled input palette, shared by the input and its icon so both fade the same way. It is
+   theme independent on purpose: the disabled background stays light in every theme, matching
+   the rest of the library (spinner, numpad, searcher). */
+$disabled-background: #e9ecef;
+$disabled-color: #333;
+$disabled-opacity: 0.6;
 
-p-datepicker {
+/* Base layout of the widget, no longer provided by any third party theme. */
+systelab-datepicker-calendar {
+  display: block;
+  width: 100%;
 
+  .slab-datepicker-panel {
+    position: fixed;
+    box-sizing: border-box;
 
-  .p-datepicker-input-wrapper,
-  .p-inputwrapper {
+    &.slab-datepicker-panel-inline {
+      position: static;
+    }
+  }
+
+  .slab-datepicker-day-view {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    th, td {
+      border: none;
+    }
+  }
+
+  .slab-datepicker-day-cell {
+    text-align: center;
+  }
+
+  .slab-datepicker-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    &.slab-datepicker-day-disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  .slab-datepicker-time-picker {
+    .slab-datepicker-increment-button,
+    .slab-datepicker-decrement-button {
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      background: transparent;
+    }
+  }
+
+  .slab-datepicker-input {
+    color: var(--slab_foreground_primary);
+    background: var(--slab_background_primary);
+    border-radius: 0.25rem;
+    padding: 1px .25em;
+    width: 100%;
+    height: Vars.$form-elements-height;
+    border: 1px solid var(--slab_component_border_color);
+    font: normal Vars.$slab-base-body-font-size Vars.$slab-base-body-font-family;
+
+    &:focus {
+      border-color: Vars.$slab-focus-component-border-color !important;
+      box-shadow: Vars.$slab-focus-component-shadow !important;
+    }
+
+    &:hover:enabled:not(:focus) {
+      border-color:  var(--slab_component_border_color) !important;
+    }
+
+    &:disabled {
+      background-color: $disabled-background;
+      opacity: $disabled-opacity !important;
+      color: $disabled-color;
+      cursor: not-allowed;
+    }
+  }
+
+  .slab-datepicker-input-wrapper {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+
     input::-ms-clear {
       display: none;
     }
 
     .icon-calendar {
       height: 100%;
-      color: black;
+      color: var(--slab_foreground_primary);
       cursor: pointer;
     }
 
     .icon-clock {
       height: 100%;
-      color: black;
+      color: var(--slab_foreground_primary);
       cursor: pointer;
     }
 
+    /* A disabled input keeps its light background in every theme, so its icon has to follow the
+       input text instead of the theme foreground. */
+    input:disabled ~ [class*='icon-'] {
+      color: $disabled-color;
+      opacity: $disabled-opacity;
+      cursor: not-allowed;
+    }
   }
 
   &.input-expand-height {
@@ -66,51 +160,27 @@ p-datepicker {
   }
 
   &.is-disabled {
-    .p-state-disabled, .p-widget:disabled {
-      opacity: 0.6;
-    }
-
-    .p-datepicker-input-wrapper,
-    .p-inputwrapper {
+    .slab-datepicker-input-wrapper {
       input {
-        opacity: 0.6;
+        opacity: $disabled-opacity;
         cursor: not-allowed !important;
-        background-color: #e9ecef;
+        background-color: $disabled-background;
+        color: $disabled-color;
       }
 
       &.input-expand-height {
         height: 100% !important;
       }
     }
-
-    .p-datepicker-header {
-      background: Vars.$medium-gray;
-    }
-
-    .p-datepicker-calendar {
-
-      tbody {
-        tr {
-          td {
-            a, span {
-              &.p-state-active {
-                background-color: Vars.$medium-gray !important;
-              }
-            }
-          }
-        }
-      }
-    }
-
   }
 }
 
-.p-datepicker-inline {
+.slab-datepicker-panel-inline {
   flex-direction: column;
   border: 1px solid var(--slab_component_border_color) !important;
 }
 
-.p-datepicker-panel,
+.slab-datepicker-panel,
 .p-overlay-panel {
   z-index: 100000 !important;
 }
@@ -139,25 +209,21 @@ p-datepicker {
   }
 }
 
-.p-datepicker-panel.p-component {
-  color: var(--secondary);
+.slab-datepicker-panel {
+  color: var(--slab_foreground_primary);
   background-color: var(--slab_background_primary) !important;
   z-index: 100000 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  border: 1px solid #ddd !important;
+  border: 1px solid var(--slab_component_border_color) !important;
   border-radius: 6px !important;
   padding: 0 15px !important;
   width: 280px !important;
   margin-top: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
 
-  .p-datepicker-calendar-container {
-    .p-datepicker-calendar {
-      .p-datepicker-header {
-        display: none !important;
-      }
-
-      .p-datepicker-day-view {
+  .slab-datepicker-calendar-container {
+    .slab-datepicker-calendar {
+      .slab-datepicker-day-view {
         margin: 0 !important;
 
         thead {
@@ -165,17 +231,18 @@ p-datepicker {
           border: none !important;
           background: transparent !important;
           
-          .p-datepicker-weekday-cell {
+          .slab-datepicker-weekday-cell {
             font-weight: 500;
             padding: 6px 2px !important;
             font-size: 11px;
-            color: #666;
+            color: var(--slab_foreground_primary);
+            opacity: 0.7;
             width: 28px;
             text-align: center;
-            
-            .p-datepicker-weekday {
+
+            .slab-datepicker-weekday {
               font-weight: 500;
-              color: #666;
+              color: inherit;
               text-align: center;
               font-size: 11px;
               display: inline-block;
@@ -186,10 +253,10 @@ p-datepicker {
         }
 
         tbody {
-          .p-datepicker-day-cell {
+          .slab-datepicker-day-cell {
             padding: 3px !important;
 
-            .p-datepicker-day {
+            .slab-datepicker-day {
               border-radius: 50% !important;
               width: 28px;
               height: 28px;
@@ -199,30 +266,34 @@ p-datepicker {
               font-weight: 400;
               margin: 0 auto;
               font-size: 13px;
+              color: var(--slab_foreground_primary);
 
-              &.p-disabled {
-                opacity: 0.3;
+              &.slab-datepicker-day-disabled {
+                opacity: 0.4;
                 background-color: transparent !important;
-                color: var(--text-color-secondary);
+                color: var(--slab_foreground_primary);
               }
-              &.p-datepicker-day-selected {
+              &.slab-datepicker-day-selected {
                 background-color: var(--primary) !important;
                 color: var(--text-color-secondary) !important;
                 font-weight: 500;
-                &:hover {
-                  color: var(--slab_foreground_primary) !important;
-                }
               }
-              &:not(.p-datepicker-day-selected):not(.p-disabled):hover {
+              &:not(.slab-datepicker-day-selected):not(.slab-datepicker-day-disabled):hover {
                 background: var(--slab_table_row_hover_background);
               }
             }
           }
 
-          .p-datepicker-other-month {
-            .p-datepicker-day {
-              opacity: 0.3;
-              color: #ccc;
+          .slab-datepicker-today {
+            .slab-datepicker-day:not(.slab-datepicker-day-selected) {
+              background-color: var(--slab_table_row_even_background);
+            }
+          }
+
+          .slab-datepicker-other-month {
+            .slab-datepicker-day {
+              opacity: 0.45;
+              color: var(--slab_foreground_primary);
             }
           }
         }
@@ -230,66 +301,25 @@ p-datepicker {
     }
   }
 
-  .p-datepicker-buttonbar {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 15px 0 0 0 !important;
-    background-color: transparent !important;
-    border: none !important;
-    margin-top: 15px;
-    border-top: 1px solid #e0e0e0;
-    
-    .p-button {
-      border-radius: 15px !important;
-      padding: 6px 16px !important;
-      font-size: 14px !important;
-      font-weight: 400 !important;
-      border: 1px solid !important;
-      
-      &:first-child {
-        background: transparent !important;
-        border-color: #007bff !important;
-        color: #007bff !important;
-        
-        &:hover {
-          background: #007bff !important;
-          color: white !important;
-        }
-      }
-      
-      &:last-child {
-        background: transparent !important;
-        border-color: #dc3545 !important;
-        color: #dc3545 !important;
-        
-        &:hover {
-          background: #dc3545 !important;
-          color: white !important;
-        }
-      }
-    }
-  }
-
-  .p-datepicker-time-picker {
+  .slab-datepicker-time-picker {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--slab_component_border_color);
     background-color: transparent;
     margin-top: 20px;
 
-    .p-datepicker-hour-picker,
-    .p-datepicker-minute-picker {
+    .slab-datepicker-hour-picker,
+    .slab-datepicker-minute-picker {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin: 0 15px;
 
-      .p-datepicker-increment-button,
-      .p-datepicker-decrement-button {
+      .slab-datepicker-increment-button,
+      .slab-datepicker-decrement-button {
         background: transparent !important;
-        color:  var(--primary) !important;
+        color:  var(--text-color) !important;
         margin: 5px 0;
         width: 32px !important;
         height: 32px !important;
@@ -304,25 +334,20 @@ p-datepicker {
         }
 
         &:focus {
-          box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
-        }
-
-        .p-icon {
-          width: 12px !important;
-          height: 12px !important;
+          box-shadow: Vars.$slab-focus-component-shadow !important;
         }
       }
 
       > span {
         font-size: 18px;
         font-weight: 500;
-        color: #333;
+        color: var(--slab_foreground_primary);
         min-width: 40px;
         text-align: center;
       }
     }
 
-    .p-datepicker-separator {
+    .slab-datepicker-separator {
       display: flex;
       align-items: center;
       margin: 0 5px;
@@ -330,7 +355,7 @@ p-datepicker {
       span {
         font-size: 18px;
         font-weight: 500;
-        color: #333;
+        color: var(--slab_foreground_primary);
       }
     }
   }
@@ -378,13 +403,13 @@ p-datepicker {
   }
 }
 
-.p-datepicker-panel {
+.slab-datepicker-panel {
   .slab-datepicker-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: transparent !important;
-    color: #333;
+    color: var(--slab_foreground_primary);
     padding: 10px 0;
     position: relative;
     border: none !important;
@@ -423,24 +448,27 @@ p-datepicker {
       }
     }
     
-    .p-datepicker-title {
+    .slab-datepicker-title {
       text-align: center;
       font-weight: 500;
       flex: 1;
       display: flex;
       flex-direction: column;
+      gap: 0.5rem;
       
-      .p-datepicker-year {
-        color: #333;
+      .slab-datepicker-year {
+        color: var(--slab_foreground_primary);
         font-size: 14px;
         line-height: 1.2;
+        padding: 0.375rem;
       }
-      
-      .p-datepicker-month {
+
+      .slab-datepicker-month {
         width: 100% !important;
-        color: #333;
+        color: var(--slab_foreground_primary);
         font-size: 16px;
         line-height: 1.2;
+        padding: 0.375rem;
       }
     }
   }
@@ -461,48 +489,11 @@ p-datepicker {
 systelab-datepicker {
   margin-right: 5px;
 
-
-  .p-inputtext,
-  .p-datepicker-input {
-    color: var(--ag-foreground-color);
-    background: var(--slab_background_primary);
-    border-radius: 0.25rem;
-    padding: 1px .25em;
-    width: 100%;
-    height: Vars.$form-elements-height;
-    border: 1px solid var(--slab_component_border_color);
-    font: normal Vars.$slab-base-body-font-size Vars.$slab-base-body-font-family;
-
-    &:focus {
-      border-color: Vars.$slab-focus-component-border-color !important;
-      box-shadow: Vars.$slab-focus-component-shadow !important;
-    }
-
-    &:hover:enabled:not(:focus) {
-      border-color:  var(--slab_component_border_color) !important;
-    }
-
-    &:disabled {
-      background-color: #e9ecef;
-      opacity: 0.6 !important;
-      color: #333;
-      cursor: not-allowed;
-    }
-  }
-
-  .p-datepicker-input-wrapper {
-    position: relative;
-    display: inline-flex;
-    width: 100%;
-  }
-
-
   &.custom-height {
-    p-datepicker {
+    systelab-datepicker-calendar {
       height: 100%;
 
-      .p-datepicker-input-wrapper,
-      .p-inputwrapper {
+      .slab-datepicker-input-wrapper {
         height: 100%;
       }
 
@@ -517,11 +508,10 @@ systelab-datepicker {
 
 systelab-date-time {
   &.custom-height {
-    p-datepicker {
+    systelab-datepicker-calendar {
       height: 100%;
 
-      .p-datepicker-input-wrapper,
-      .p-inputwrapper {
+      .slab-datepicker-input-wrapper {
         height: 100%;
       }
 

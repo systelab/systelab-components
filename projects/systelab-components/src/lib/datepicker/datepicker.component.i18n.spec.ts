@@ -5,12 +5,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ButtonModule } from 'primeng/button';
-import { DatePickerModule } from 'primeng/datepicker';
 import { of } from 'rxjs';
 import { I18nService, SystelabTranslateModule } from 'systelab-translate';
 import { ButtonComponent } from '../button/button.component';
 import { TouchspinComponent } from '../spinner/spinner.component';
+import { DatepickerCalendarComponent } from './datepicker-calendar.component';
 import { DatepickerComponent } from './datepicker.component';
 
 export class USMockI18nService {
@@ -192,6 +191,7 @@ describe('Systelab US DatepickerComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				TouchspinComponent,
+				DatepickerCalendarComponent,
 				DatepickerComponent,
 				ButtonComponent,
 				DatepickerTestComponent,
@@ -201,8 +201,6 @@ describe('Systelab US DatepickerComponent', () => {
 				BrowserAnimationsModule,
 				FormsModule,
 				OverlayModule,
-				ButtonModule,
-				DatePickerModule,
 				SystelabTranslateModule,
 			],
 			providers: [
@@ -288,6 +286,7 @@ describe('Systelab ES DatepickerComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
     declarations: [TouchspinComponent,
+        DatepickerCalendarComponent,
         DatepickerComponent,
         ButtonComponent,
         DatepickerTestComponent],
@@ -295,8 +294,6 @@ describe('Systelab ES DatepickerComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         OverlayModule,
-        ButtonModule,
-        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: ESMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
 })
@@ -375,6 +372,7 @@ describe('Systelab ZH DatepickerComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
     declarations: [TouchspinComponent,
+        DatepickerCalendarComponent,
         DatepickerComponent,
         ButtonComponent,
         DatepickerTestComponent],
@@ -382,8 +380,6 @@ describe('Systelab ZH DatepickerComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         OverlayModule,
-        ButtonModule,
-        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: ZHMockI18nService }, provideHttpClient(withInterceptorsFromDi())]
 })
@@ -461,13 +457,12 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 		await TestBed.configureTestingModule({
     declarations: [TouchspinComponent,
         ButtonComponent,
+        DatepickerCalendarComponent,
         DatepickerComponent],
     imports: [BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         OverlayModule,
-        ButtonModule,
-        DatePickerModule,
         SystelabTranslateModule],
     providers: [{ provide: I18nService, useClass: ESMockI18nService2 }, provideHttpClient(withInterceptorsFromDi())]
 })
@@ -496,7 +491,7 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 	it('month should be in spanish translation', () => {
 		fixture.whenStable().then(() => {
 			const currentDate=new Date();
-			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
+			const monthSpan = fixture.debugElement.query(By.css(`.slab-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
 				.toEqual(getMonth(currentDate));
 			});
@@ -511,7 +506,7 @@ describe('Systelab ES DatepickerComponent, check translations', () => {
 			nextMonth.dispatchEvent(new Event('click'));
 			fixture.detectChanges();
 
-			const monthSpan = fixture.debugElement.query(By.css(`.p-datepicker-month`));
+			const monthSpan = fixture.debugElement.query(By.css(`.slab-datepicker-month`));
 			expect(monthSpan.nativeElement.textContent.trim())
 				.toEqual(getMonth(nextMonthDate));
 			});

@@ -1,0 +1,113 @@
+@if (!inline) {
+  <div class="slab-datepicker-input-wrapper slab-form-icon w-100"
+    [class.slab-datepicker-input-focus]="focus || overlayVisible">
+    <input #inputfield type="text" autocomplete="off" role="combobox" aria-autocomplete="none" aria-haspopup="dialog"
+      class="slab-datepicker-input"
+      [attr.id]="inputId"
+      [attr.tabindex]="tabindex ?? 0"
+      [attr.required]="required ? '' : null"
+      [attr.readonly]="readonlyInput ? '' : null"
+      [attr.disabled]="disabled ? '' : null"
+      [attr.aria-required]="required"
+      [attr.aria-expanded]="overlayVisible"
+      [value]="inputFieldValue"
+      (focus)="onInputFocus($event)"
+      (blur)="onInputBlur($event)"
+      (click)="onInputClick()"
+      (keydown)="onInputKeydown($event)"
+      (input)="onUserInput($event)"/>
+    @if (icon) {
+      <i [class]="icon" (click)="onIconClick($event)"></i>
+    }
+  </div>
+}
+
+@if (inline || overlayVisible) {
+  <div #panel class="slab-datepicker-panel"
+    [class.slab-datepicker-panel-inline]="inline"
+    [class.slab-datepicker-panel-timeonly]="timeOnly"
+    [class.slab-datepicker-panel-disabled]="disabled"
+    [attr.role]="inline ? null : 'dialog'"
+    (mousedown)="onPanelMouseDown($event)">
+
+    @if (headerTemplate) {
+      <ng-container [ngTemplateOutlet]="headerTemplate"></ng-container>
+    }
+
+    @if (!timeOnly) {
+      <div class="slab-datepicker-calendar-container">
+        @for (month of months; track month.month) {
+          <div class="slab-datepicker-calendar">
+            <table class="slab-datepicker-day-view" role="grid">
+              <thead>
+                <tr>
+                  @for (weekDay of weekDays; track $index) {
+                    <th class="slab-datepicker-weekday-cell" scope="col">
+                      <span class="slab-datepicker-weekday">{{ weekDay }}</span>
+                    </th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                @for (week of month.weeks; track $index) {
+                  <tr>
+                    @for (date of week; track $index) {
+                      <td [class]="date.cellClass" [attr.aria-label]="date.day">
+                        @if (date.visible) {
+                          <span [class]="date.dayClass"
+                          (click)="onDateSelect($event, date)">{{ date.day }}</span>
+                        }
+                      </td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    }
+
+    @if (showTime || timeOnly) {
+      <div class="slab-datepicker-time-picker">
+        <div class="slab-datepicker-hour-picker">
+          <button type="button" class="slab-datepicker-increment-button icon-angle-up" tabindex="-1"
+            [disabled]="disabled"
+            (mousedown)="onTimePickerElementMouseDown($event, 0, 1)"
+            (mouseup)="onTimePickerElementMouseUp($event)"
+            (mouseleave)="onTimePickerElementMouseLeave()"
+          (keydown.enter)="incrementHour($event)"></button>
+          <span>{{ hourDisplay }}</span>
+          <button type="button" class="slab-datepicker-decrement-button icon-angle-down" tabindex="-1"
+            [disabled]="disabled"
+            (mousedown)="onTimePickerElementMouseDown($event, 0, -1)"
+            (mouseup)="onTimePickerElementMouseUp($event)"
+            (mouseleave)="onTimePickerElementMouseLeave()"
+          (keydown.enter)="decrementHour($event)"></button>
+        </div>
+        <div class="slab-datepicker-separator">
+          <span>:</span>
+        </div>
+        <div class="slab-datepicker-minute-picker">
+          <button type="button" class="slab-datepicker-increment-button icon-angle-up" tabindex="-1"
+            [disabled]="disabled"
+            (mousedown)="onTimePickerElementMouseDown($event, 1, 1)"
+            (mouseup)="onTimePickerElementMouseUp($event)"
+            (mouseleave)="onTimePickerElementMouseLeave()"
+          (keydown.enter)="incrementMinute($event)"></button>
+          <span>{{ minuteDisplay }}</span>
+          <button type="button" class="slab-datepicker-decrement-button icon-angle-down" tabindex="-1"
+            [disabled]="disabled"
+            (mousedown)="onTimePickerElementMouseDown($event, 1, -1)"
+            (mouseup)="onTimePickerElementMouseUp($event)"
+            (mouseleave)="onTimePickerElementMouseLeave()"
+          (keydown.enter)="decrementMinute($event)"></button>
+        </div>
+      </div>
+    }
+
+    @if (footerTemplate) {
+      <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+    }
+  </div>
+}
