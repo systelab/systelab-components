@@ -309,6 +309,11 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 		this.configGridData();
 
 		this.gridOptions.enableBrowserTooltips = true;
+		// Clear the gridApi reference when the grid is destroyed so that guards using `?.`
+		// prevent calls on a stale destroyed instance before the next doGridReady fires.
+		this.gridOptions.onGridPreDestroyed = () => {
+			this.gridApi = null;
+		};
 	}
 
 	protected getRowNodeId(item: GetRowIdParams | ComboTreeNode<T>): string | number | undefined {
@@ -584,7 +589,10 @@ export abstract class AbstractComboBox<T> implements AgRendererComponent, OnInit
 	}
 
 	public getSelectedRow(): T {
-		const selectedRow: Array<T> = this.gridApi?.getSelectedRows();
+		if (!this.gridApi || this.gridApi.isDestroyed()) {
+			return undefined;
+		}
+		const selectedRow: Array<T> = this.gridApi.getSelectedRows();
 		if (selectedRow != null) {
 			return selectedRow[0];
 		}

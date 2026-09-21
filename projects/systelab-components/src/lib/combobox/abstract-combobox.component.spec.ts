@@ -677,4 +677,49 @@ describe('Systelab Select Combobox', () => {
 
 	});
 
+	describe('getSelectedRow', () => {
+
+			it('should return undefined without calling getSelectedRows when grid is destroyed', (done) => {
+				const fixture = setup();
+				fixture.detectChanges();
+				clickButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						const combobox = fixture.componentInstance.combobox;
+						const getSelectedRowsSpy = jasmine.createSpy('getSelectedRows');
+						combobox.gridApi = {
+							isDestroyed:     () => true,
+							getSelectedRows: getSelectedRowsSpy
+						} as any;
+
+						const result = combobox.getSelectedRow();
+
+						expect(result).toBeUndefined();
+						expect(getSelectedRowsSpy).not.toHaveBeenCalled();
+						done();
+					});
+			});
+
+			it('should return the first selected row when grid is alive', (done) => {
+				const fixture = setup();
+				fixture.detectChanges();
+				clickButton(fixture);
+				fixture.whenStable()
+					.then(() => {
+						const combobox = fixture.componentInstance.combobox;
+						const mockRow = {id: '1', description: 'Test'};
+						combobox.gridApi = {
+							isDestroyed:     () => false,
+							getSelectedRows: jasmine.createSpy('getSelectedRows').and.returnValue([mockRow])
+						} as any;
+
+						const result = combobox.getSelectedRow();
+
+						expect(result).toEqual(mockRow as any);
+						done();
+					});
+			});
+
+	});
+
 });

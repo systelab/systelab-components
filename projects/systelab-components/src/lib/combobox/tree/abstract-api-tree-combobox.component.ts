@@ -117,6 +117,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 		this.getRows()
 			.subscribe({
 				next:  (nodeVector) => {
+					if (this.gridApi.isDestroyed()) {
+						return;
+					}
 					if (this.multipleSelection) {
 						this.isAllSelectable = false;
 						this.allElement = false;
@@ -133,7 +136,9 @@ export abstract class AbstractApiTreeComboBox<T> extends AbstractComboBox<ComboT
 					}
 				},
 				error: () => {
-					this.gridApi.hideOverlay();
+					if (!this.gridApi.isDestroyed()) {
+						this.gridApi.hideOverlay();
+					}
 				}
 			})
 	}

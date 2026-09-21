@@ -418,4 +418,17 @@ describe('Systelab Grid', () => {
 
 		expect(fixture.componentInstance.grid.startCellEditorWithTab).toBeTrue();
 	})
+
+	it('should not call getDisplayedRowAtIndex in selectRow timer when grid is destroyed', async () => {
+		await fixture.whenStable();
+		const grid = fixture.componentInstance.grid;
+		spyOn(grid.gridApi, 'ensureIndexVisible').and.stub();
+		const getDisplayedRowAtIndexSpy = spyOn(grid.gridApi, 'getDisplayedRowAtIndex');
+		spyOn(grid.gridApi, 'isDestroyed').and.returnValue(true);
+
+		grid.selectRow(0);
+		await new Promise(resolve => setTimeout(resolve, 250));
+
+		expect(getDisplayedRowAtIndexSpy).not.toHaveBeenCalled();
+	});
 });

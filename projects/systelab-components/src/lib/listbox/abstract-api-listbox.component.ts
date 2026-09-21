@@ -24,6 +24,10 @@ export abstract class AbstractApiListBox<T> extends AbstractListBox<T> implement
 		options.maxBlocksInCache= 15;
 		options.datasource = this;
 		options.loading = false;
+		// headerCheckbox is not supported with the infinite row model (AG Grid error #129)
+		if (options.rowSelection) {
+			(options.rowSelection as any).headerCheckbox = false;
+		}
 		return options;
 	}
 

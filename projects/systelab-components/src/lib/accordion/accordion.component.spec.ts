@@ -10,7 +10,7 @@ describe('Systelab Accordion', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [],
+			declarations: [Accordion],
 			imports: [BrowserModule],
 			providers: [
 				PreferencesService,
@@ -23,7 +23,12 @@ describe('Systelab Accordion', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(Accordion);
 		component = fixture.componentInstance;
+		document.body.appendChild(fixture.nativeElement);
 		fixture.detectChanges();
+	});
+
+	afterEach(() => {
+		fixture.nativeElement.remove();
 	});
 
 	it('should be instantiate', () => {
@@ -79,5 +84,30 @@ describe('Systelab Accordion', () => {
 		expect(preferenceServiceGetSpy).toHaveBeenCalledWith(component.preferenceName, false);
 		expect(component.isCollapsed).toEqual(valueReturned);
 		expect(preferenceServicePutSpy).toHaveBeenCalledWith(component.preferenceName, valueReturned);
+	});
+
+	it('should persist isCollapsed to preferences when header is clicked and preferenceName is set', async () => {
+		const preferenceName = 'testName.accordionStatus';
+		component.isCollapsed = false;
+		component.preferenceName = preferenceName;
+		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
+		const collapseExpandIcon = fixture.debugElement.query(By.css('.accordion-header'));
+		collapseExpandIcon.triggerEventHandler('click', null);
+		fixture.detectChanges();
+		await fixture.whenStable();
+		expect(component.isCollapsed).toBeTrue();
+		expect(preferenceServicePutSpy).toHaveBeenCalledWith(preferenceName, true);
+	});
+
+	it('should not call preferences put when header is clicked and preferenceName is not set', async () => {
+		component.isCollapsed = false;
+		component.preferenceName = undefined;
+		const preferenceServicePutSpy = spyOn<any>(component['preferenceService'], 'put').and.callThrough();
+		const collapseExpandIcon = fixture.debugElement.query(By.css('.accordion-header'));
+		collapseExpandIcon.triggerEventHandler('click', null);
+		fixture.detectChanges();
+		await fixture.whenStable();
+		expect(component.isCollapsed).toBeTrue();
+		expect(preferenceServicePutSpy).not.toHaveBeenCalled();
 	});
 });

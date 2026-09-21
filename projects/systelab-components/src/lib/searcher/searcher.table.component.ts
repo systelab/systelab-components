@@ -100,10 +100,10 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 				});
 			}
 		} else if (this.searcher && this.searcher.id && this.searcher.id !== undefined) {
-			this.gridApi.forEachNode(node => {
+			this.gridApi?.forEachNode(node => {
 				if (node.data && node.data[this.searcher.getIdField()] === this.searcher.id) {
 					node.setSelected(true);
-					this.gridApi.ensureNodeVisible(node);
+					this.gridApi?.ensureNodeVisible(node);
 				}
 			});
 		}
