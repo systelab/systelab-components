@@ -240,11 +240,6 @@ $context-menu-width: 39px;
     border-top: solid 1px var(--slab_table_border_color) !important;
   }
 
-  .ag-header-cell::after,
-  .ag-header-group-cell::after {
-    background: var(--slab_background_primary) !important;
-  }
-
   .ag-header-group-cell {
     padding-left: 5px !important;
     padding-right: 5px !important;
