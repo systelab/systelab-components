@@ -6,13 +6,13 @@ import { TooltipContentComponent, TooltipDirective } from './tooltip.directive';
 
 @Component({
 	selector: 'systelab-tooltip-test',
-	template: `<span id="host"
+	template: `<button id="host" type="button"
 		[systelabTooltip]="text"
 		[systelabTooltipHtml]="html"
 		[systelabTooltipPlacement]="placement"
 		[systelabTooltipDelay]="delay"
 		[systelabTooltipHideDelay]="hideDelay"
-		[systelabTooltipOnFocus]="onFocus">host</span>`,
+		[systelabTooltipOnFocus]="onFocus">host</button>`,
 	standalone: false,
 })
 export class TooltipTestComponent {
@@ -25,10 +25,15 @@ export class TooltipTestComponent {
 }
 
 const getTooltipElement = (): HTMLElement | null =>
-	document.body.querySelector('[role="tooltip"]');
+	document.querySelector('.cdk-overlay-container [role="tooltip"]');
 
 const getHost = (fixture: ComponentFixture<TooltipTestComponent>): HTMLElement =>
 	fixture.debugElement.nativeElement.querySelector('#host');
+
+const mockFocusVisible = (host: HTMLElement, isKeyboard: boolean): void => {
+	spyOn(host, 'matches').and.callFake((selector: string) =>
+		selector === ':focus-visible' ? isKeyboard : Element.prototype.matches.call(host, selector));
+};
 
 describe('Systelab Tooltip Directive', () => {
 	let fixture: ComponentFixture<TooltipTestComponent>;
@@ -56,6 +61,7 @@ describe('Systelab Tooltip Directive', () => {
 	});
 
 	afterEach(fakeAsync(() => {
+		flush();
 		fixture.destroy();
 		flush();
 	}));
@@ -120,7 +126,8 @@ describe('Systelab Tooltip Directive', () => {
 		flush();
 	}));
 
-	it('should show tooltip on focus when systelabTooltipOnFocus is true', fakeAsync(() => {
+	it('should show tooltip on keyboard focus when systelabTooltipOnFocus is true', fakeAsync(() => {
+		mockFocusVisible(getHost(fixture), true);
 		getHost(fixture).dispatchEvent(new FocusEvent('focus'));
 		tick(0);
 		fixture.detectChanges();
@@ -128,9 +135,10 @@ describe('Systelab Tooltip Directive', () => {
 		flush();
 	}));
 
-	it('should not show tooltip on focus when systelabTooltipOnFocus is false', fakeAsync(() => {
+	it('should not show tooltip on keyboard focus when systelabTooltipOnFocus is false', fakeAsync(() => {
 		fixture.componentInstance.onFocus = false;
 		fixture.detectChanges();
+		mockFocusVisible(getHost(fixture), true);
 		getHost(fixture).dispatchEvent(new FocusEvent('focus'));
 		tick(0);
 		expect(getTooltipElement()).toBeNull();
@@ -138,6 +146,7 @@ describe('Systelab Tooltip Directive', () => {
 	}));
 
 	it('should hide tooltip on blur when systelabTooltipOnFocus is true', fakeAsync(() => {
+		mockFocusVisible(getHost(fixture), true);
 		getHost(fixture).dispatchEvent(new FocusEvent('focus'));
 		tick(0);
 		fixture.detectChanges();
@@ -278,6 +287,116 @@ describe('Systelab Tooltip Directive', () => {
 		expect(getTooltipElement()).toBeNull();
 		flush();
 	}));
+
+	describe('with show and hide delays', () => {
+		const delay = 100;
+		const hideDelay = 500;
+
+		beforeEach(() => {
+			fixture.componentInstance.delay = delay;
+			fixture.componentInstance.hideDelay = hideDelay;
+			fixture.detectChanges();
+		});
+
+		const dispatch = (type: string): void => {
+			getHost(fixture).dispatchEvent(new Event(type));
+			fixture.detectChanges();
+		};
+
+		it('should show after the delay on mouseenter and hide after the hide delay on mouseleave', fakeAsync(() => {
+			dispatch('mouseenter');
+			tick(delay - 1);
+			expect(getTooltipElement()).toBeNull();
+			tick(1);
+			fixture.detectChanges();
+			expect(getTooltipElement()).not.toBeNull();
+			dispatch('mouseleave');
+			tick(hideDelay - 1);
+			expect(getTooltipElement()).not.toBeNull();
+			tick(1);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should hide the visible tooltip on click', fakeAsync(() => {
+			dispatch('mouseenter');
+			tick(delay);
+			fixture.detectChanges();
+			expect(getTooltipElement()).not.toBeNull();
+			dispatch('click');
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should cancel a pending show on click', fakeAsync(() => {
+			dispatch('mouseenter');
+			tick(delay / 2);
+			dispatch('click');
+			tick(delay);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should show again on the next hover after a click', fakeAsync(() => {
+			dispatch('mouseenter');
+			tick(delay);
+			dispatch('click');
+			dispatch('mouseleave');
+			dispatch('mouseenter');
+			tick(delay);
+			fixture.detectChanges();
+			expect(getTooltipElement()).not.toBeNull();
+		}));
+
+		it('should not leave an orphan show timeout when mouseenter and focus both schedule a show', fakeAsync(() => {
+			mockFocusVisible(getHost(fixture), true);
+			dispatch('mouseenter');
+			dispatch('focus');
+			dispatch('mouseleave');
+			tick(delay * 2);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should not show the tooltip when the host is destroyed with a pending show', fakeAsync(() => {
+			mockFocusVisible(getHost(fixture), true);
+			dispatch('mouseenter');
+			dispatch('focus');
+			fixture.destroy();
+			tick(delay * 2);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should not show the tooltip on mouse focus', fakeAsync(() => {
+			mockFocusVisible(getHost(fixture), false);
+			dispatch('focus');
+			tick(delay);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should show the tooltip on keyboard focus and hide it on blur', fakeAsync(() => {
+			mockFocusVisible(getHost(fixture), true);
+			dispatch('focus');
+			tick(delay);
+			fixture.detectChanges();
+			expect(getTooltipElement()).not.toBeNull();
+			dispatch('blur');
+			tick(hideDelay);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should not show the tooltip on keyboard focus when systelabTooltipOnFocus is false', fakeAsync(() => {
+			fixture.componentInstance.onFocus = false;
+			fixture.detectChanges();
+			mockFocusVisible(getHost(fixture), true);
+			dispatch('focus');
+			tick(delay);
+			expect(getTooltipElement()).toBeNull();
+		}));
+
+		it('should not show the tooltip when the host is not rendered', fakeAsync(() => {
+			getHost(fixture).style.display = 'none';
+			dispatch('mouseenter');
+			tick(delay);
+			expect(getTooltipElement()).toBeNull();
+		}));
+	});
 });
 
 describe('Systelab TooltipContentComponent', () => {
