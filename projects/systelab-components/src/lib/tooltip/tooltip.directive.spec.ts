@@ -1,6 +1,6 @@
 import { Component, provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TooltipContentComponent, TooltipDirective } from './tooltip.directive';
 
@@ -29,6 +29,9 @@ const getTooltipElement = (): HTMLElement | null =>
 
 const getHost = (fixture: ComponentFixture<TooltipTestComponent>): HTMLElement =>
 	fixture.debugElement.nativeElement.querySelector('#host');
+
+const getDirective = (fixture: ComponentFixture<TooltipTestComponent>): TooltipDirective =>
+	fixture.debugElement.query(By.directive(TooltipDirective)).injector.get(TooltipDirective);
 
 const mockFocusVisible = (host: HTMLElement, isKeyboard: boolean): void => {
 	spyOn(host, 'matches').and.callFake((selector: string) =>
@@ -69,6 +72,41 @@ describe('Systelab Tooltip Directive', () => {
 	it('should instantiate', () => {
 		expect(fixture.componentInstance).toBeDefined();
 	});
+
+	it('should use the default show delay when systelabTooltipDelay is not set', fakeAsync(() => {
+		getDirective(fixture).systelabTooltipDelay = undefined as unknown as number;
+		getHost(fixture).dispatchEvent(new MouseEvent('mouseenter'));
+		tick(TooltipDirective.DEFAULT_DELAY - 1);
+		expect(getTooltipElement()).toBeNull();
+		tick(1);
+		fixture.detectChanges();
+		expect(getTooltipElement()).not.toBeNull();
+	}));
+
+	it('should use the default hide delay when systelabTooltipHideDelay is not set', fakeAsync(() => {
+		getDirective(fixture).systelabTooltipHideDelay = null as unknown as number;
+		getHost(fixture).dispatchEvent(new MouseEvent('mouseenter'));
+		tick(0);
+		fixture.detectChanges();
+		getHost(fixture).dispatchEvent(new MouseEvent('mouseleave'));
+		tick(TooltipDirective.DEFAULT_DELAY - 1);
+		expect(getTooltipElement()).not.toBeNull();
+		tick(1);
+		expect(getTooltipElement()).toBeNull();
+	}));
+
+	it('should not show tooltip on focus when the browser does not support :focus-visible', fakeAsync(() => {
+		const host = getHost(fixture);
+		spyOn(host, 'matches').and.callFake((selector: string) => {
+			if (selector === ':focus-visible') {
+				throw new SyntaxError(`'${selector}' is not a valid selector`);
+			}
+			return Element.prototype.matches.call(host, selector);
+		});
+		host.dispatchEvent(new FocusEvent('focus'));
+		tick(0);
+		expect(getTooltipElement()).toBeNull();
+	}));
 
 	it('should not show tooltip immediately on mouseenter before delay expires', fakeAsync(() => {
 		fixture.componentInstance.delay = 300;
