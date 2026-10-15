@@ -59,8 +59,13 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     @HostListener('mouseleave') onMouseLeave(): void { 
 		this.scheduleHide(); 
 	}
+    @HostListener('click')      onClick(): void      {
+		this.clearTimeouts();
+		this.disposeOverlay();
+	}
+
     @HostListener('focus')      onFocus(): void      { 
-		if (this.systelabTooltipOnFocus) { 
+		if (this.systelabTooltipOnFocus && this.isFocusVisible()) { 
 			this.scheduleShow(); 
 		} 
 	}
@@ -80,7 +85,7 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     }
 
     private scheduleShow(): void {
-        this.clearHideTimeout();
+        this.clearTimeouts();
         const delay = this.systelabTooltipDelay ?? TooltipDirective.DEFAULT_DELAY;
         this.showTimeout = setTimeout(() => this.show(), delay);
     }
@@ -92,6 +97,11 @@ export class TooltipDirective implements OnDestroy, OnChanges {
     }
 
     private show(): void {
+        this.showTimeout = null;
+
+        const host: HTMLElement = this.el.nativeElement;
+        if (!host.isConnected || host.getClientRects().length === 0) return;
+
         const content = this.systelabTooltipHtml ?? this.systelabTooltip;
         if (!content || this.overlayRef?.hasAttached()) return;
 
@@ -129,6 +139,14 @@ export class TooltipDirective implements OnDestroy, OnChanges {
         this.overlayRef?.dispose();
         this.overlayRef = null;
         this.tooltipRef = null;
+    }
+
+    private isFocusVisible(): boolean {
+        try {
+            return this.el.nativeElement.matches(':focus-visible');
+        } catch {
+            return false;
+        }
     }
 
     private clearShowTimeout(): void {
