@@ -44,14 +44,14 @@ export abstract class AbstractListBox<T> implements OnInit {
 	@Input() public showAll = false;
 	@Input() public hideChecks = false;
 
-	protected _multipleSelectedItemList: Array<T>;
+	protected _multipleSelectedItemList: Array<T> = [];
 
 	private calculatedGridState : CalculatedGridState = initializeCalculatedGridState();
 	private scrollTimeout;
 
 	@Input()
 	set multipleSelectedItemList(value: Array<T>) {
-		this._multipleSelectedItemList = value;
+		this._multipleSelectedItemList = Array.isArray(value) ? value : [];
 		this.selectItemInGrid();
 		this.multipleSelectedItemListChange.emit(this._multipleSelectedItemList);
 		this.multipleSelectedIDListChange.emit(this.selectionItemListToIDList());
@@ -238,6 +238,7 @@ export abstract class AbstractListBox<T> implements OnInit {
 					}
 				} else {
 					if (this.showAll && (event.node.data[this.getIdField()] === this.getAllFieldID())) {
+						this.multipleSelectedItemList = [];
 						this.multipleSelectedItemList.push(event.node.data);
 						this.unselectAllNodes();
 					} else {
@@ -293,6 +294,9 @@ export abstract class AbstractListBox<T> implements OnInit {
 	}
 
 	private selectionItemListToIDList(): Array<string | number> {
+		if (!Array.isArray(this.multipleSelectedItemList)) {
+			return [];
+		}
 		const idList = new Array<string | number>();
 		for (const item of this.multipleSelectedItemList) {
 			idList.push(item[this.getIdField()]);

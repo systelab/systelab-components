@@ -61,5 +61,9 @@ systelab-switch {
       outline: 0;
       box-shadow: $slab-focus-component-shadow;
     }
+
+    input[type="checkbox"] {
+      display: none;
+    }
   }
 }

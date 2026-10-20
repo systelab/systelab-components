@@ -1,5 +1,5 @@
 <div class="slab-searcher-container d-flex flex-nowrap" [ngClass]="{'disabled': isDisabled}" [ngStyle]="getInputHeight()">
-  <div class="input-group" style="width: 120px;">
+  <div class="input-group">
     <input #valueToSearch type="input" class="form-control"
       [(ngModel)]="code"
       (blur)="doSearch()"
@@ -18,7 +18,7 @@
           }
         </div>
       </div>
-      <p class="slab-flex-1 text-truncate mb-0 ml-1" style="width: 30px;" [ngStyle]="getLineHeight()"
+      <p class="slab-flex-1 text-truncate mb-0 ml-1" [ngStyle]="getLineHeight()"
         [style.font-family]="fontFamily"
         [style.font-size.px]="fontSize"
         [style.font-weight]="fontWeight"
