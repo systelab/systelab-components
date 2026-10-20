@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { addDays } from 'date-fns';
 import { DatePicker } from 'primeng/datepicker';
 import { I18nService } from 'systelab-translate';
@@ -65,7 +65,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 	public tooFarDate = false;
 	public language: any;
 
-	public currentDocSize: number;
 	public currentLanguage: string;
 	public inputElement: ElementRef;
 	public focusEvt: FocusEvent;
@@ -81,7 +80,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 	public ngOnInit() {
 		this.getLanguage();
 
-		this.currentDocSize = window.innerWidth;
 		this.currentLanguage = this.i18nService.getCurrentLanguage();
 
 		if (navigator.userAgent.indexOf('iPad') > -1 || navigator.userAgent.indexOf('Android') > -1) {
@@ -108,6 +106,11 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 				inputElement.setAttribute('tabindex', tabindexValue.toString());
 			}
 		}
+	}
+
+	@HostListener('window:resize')
+	public onWindowResize(): void {
+		this.closeDatepicker();
 	}
 
 	private addIconToDatepicker(): void {
@@ -172,11 +175,6 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 	}
 
 	public ngDoCheck() {
-		if (window.innerWidth !== this.currentDocSize) {
-			this.currentDocSize = window.innerWidth;
-			this.closeDatepicker();
-		}
-
 		if (this.headerElement !== document.getElementById(this.datepickerId)) {
 			this.headerElement = document.getElementById(this.datepickerId);
 			if (this.headerElement) {
@@ -340,6 +338,10 @@ export class DatepickerComponent implements OnInit, AfterViewInit, DoCheck {
 	public closeDatepicker(): void {
 		if (this.currentCalendar) {
 			this.currentCalendar.hideOverlay();
+			const inputElement = this.currentCalendar.el.nativeElement.querySelector('input');
+			if (inputElement) {
+				inputElement.blur();
+			}
 			this.currentCalendar.el.nativeElement.blur();
 		}
 	}
