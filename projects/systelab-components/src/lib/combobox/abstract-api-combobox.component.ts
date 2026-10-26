@@ -28,7 +28,10 @@ export abstract class AbstractApiComboBox<T> extends AbstractComboBox<T> impleme
 		this.gridOptions.cacheOverflowSize = 2;
 		this.gridOptions.maxConcurrentDatasourceRequests = 1;
 		this.gridOptions.maxBlocksInCache = 100;
-
+		// headerCheckbox is not supported with the infinite row model (AG Grid error #129)
+		if (this.gridOptions.rowSelection) {
+			(this.gridOptions.rowSelection as any).headerCheckbox = false;
+		}
 	}
 
 	protected override configGridData() {

@@ -125,12 +125,18 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 			this.getData(page, this.gridOptions.paginationPageSize, this.startsWith)
 				.subscribe({
 						next:  (v: Array<T>) => {
+							if (!this.gridApi || this.gridApi.isDestroyed()) {
+								return;
+							}
 							this.gridApi.setGridOption("loading", false);
 							this.gridApi.hideOverlay();
 							this.totalItemsLoaded = true;
 							params.successCallback(v, this.getTotalItems());
 						},
 						error: () => {
+							if (!this.gridApi || this.gridApi.isDestroyed()) {
+								return;
+							}
 							this.gridApi.setGridOption("loading", false);
 							this.gridApi.hideOverlay();
 							params.failCallback();
@@ -180,7 +186,8 @@ export abstract class AutocompleteApiComboBox<T> extends AbstractApiComboBox<T> 
 
 	public onEnterDoSelect(event: KeyboardEvent) {
 		if (this.isDropdownOpened) {
-			this.gridApi.getDisplayedRowAtIndex(0).setSelected(true);
+			this.gridApi.getDisplayedRowAtIndex(0)
+				.setSelected(true);
 		}
 	}
 
