@@ -240,11 +240,6 @@ $context-menu-width: 39px;
     border-top: solid 1px var(--slab_table_border_color) !important;
   }
 
-  .ag-header-cell::after,
-  .ag-header-group-cell::after {
-    background: var(--slab_background_primary) !important;
-  }
-
   .ag-header-group-cell {
     padding-left: 5px !important;
     padding-right: 5px !important;
@@ -276,4 +271,13 @@ $context-menu-width: 39px;
 
 systelab-spinner-cell {
   display: flex;
+}
+
+.slab-grid {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
 }

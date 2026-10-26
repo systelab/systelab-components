@@ -23,5 +23,7 @@ Use systelabTooltipDelay to indicate delay showing the combo in ms. Default is 1
 
 Use systelabTooltipHideDelay to indicate delay hiding the combo in ms. Default is 1000 ms.
 
-Use systelabTooltipOnFocus to indicate that the tooltip must be opened only with the hover event. By default the trigger value is with hover and focus. By default, the variable value is true.
+Use systelabTooltipOnFocus to indicate that the tooltip must be opened only with the hover event. By default the trigger value is with hover and focus. By default, the variable value is true. Only keyboard focus (`:focus-visible`) shows the tooltip: focus given by a mouse click or restored programmatically (e.g. when a dialog closes) does not.
+
+Clicking the host hides the tooltip and cancels a pending show, so it is not left visible over a dialog opened by the click. It is shown again on the next hover.
 

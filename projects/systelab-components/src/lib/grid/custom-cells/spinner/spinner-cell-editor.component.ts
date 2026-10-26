@@ -5,6 +5,7 @@ import { TouchSpinValues } from '../../../spinner/touch.spin-values';
 @Component({
     selector: 'systelab-spinner-cell-editor',
     templateUrl: 'spinner-cell-editor.component.html',
+    styleUrls: ['spinner-cell-editor.component.scss'],
     standalone: false
 })
 export class SpinnerCellEditorComponent implements AgEditorComponent {
