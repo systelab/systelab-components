@@ -448,7 +448,11 @@ export abstract class AbstractGrid<T> implements OnInit, GridRowMenuActionHandle
 	public selectRow(index: number): void {
 		this.gridApi.ensureIndexVisible(index);
 		timer(200)
-			.subscribe(() => this.gridApi.getDisplayedRowAtIndex(index).setSelected(true));
+			.subscribe(() => {
+				if (this.gridApi && !this.gridApi.isDestroyed()) {
+					this.gridApi.getDisplayedRowAtIndex(index).setSelected(true);
+				}
+			});
 	}
 
 	public doClick(event: any): void {
