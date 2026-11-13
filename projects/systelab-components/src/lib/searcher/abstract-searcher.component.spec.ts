@@ -1,4 +1,4 @@
-import { Component, Directive, Input, provideZoneChangeDetection } from '@angular/core';
+import { Component, Directive, Input, provideZoneChangeDetection, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -161,6 +161,41 @@ export class SearcherSingleTestComponent {
 	public description: string;
 }
 
+@Component({
+    selector: 'systelab-searcher-table-test',
+    template: `
+                  <div style="height: 200px; width: 400px; display: flex;">
+                      <systelab-internal-searcher-table style="flex: 1;" [searcher]="searcher"
+                                                        [multipleSelection]="true" [showChecks]="true">
+                      </systelab-internal-searcher-table>
+                  </div>
+			  `,
+    standalone: false
+})
+export class SearcherTableTestComponent {
+	@ViewChild(SearcherTableComponent) public table: SearcherTableComponent<TestData>;
+	public searcher: SystelabSearcherInnerComponent;
+
+	constructor() {
+		this.searcher = new SystelabSearcherInnerComponent();
+		this.searcher.multipleSelection = true;
+		this.searcher.multipleSelectedItemList = [];
+	}
+}
+
+const waitUntil = async (fixture: ComponentFixture<unknown>, condition: () => boolean) => {
+	for (let attempt = 0; attempt < 50 && !condition(); attempt++) {
+		fixture.detectChanges();
+		await fixture.whenStable();
+		await new Promise(resolve => setTimeout(resolve, 20));
+	}
+};
+
+const areRowsLoaded = (table: SearcherTableComponent<TestData>) => !!table.gridApi?.getDisplayedRowAtIndex(0)?.data;
+
+const getSelectedCodes = (searcher: SystelabSearcherInnerComponent) => searcher.multipleSelectedItemList.map(item => item.code)
+	.sort();
+
 const clickHelpButton = (fixture: ComponentFixture<SearcherTestComponent>) => {
 	const button = fixture.debugElement.nativeElement.querySelector('.btn');
 	button.click();
@@ -217,7 +252,9 @@ describe('Systelab Searcher', () => {
 				ComboBoxInputRendererComponent,
 				SystelabSearcherComponent,
 				SearcherTestComponent,
-				SearcherSingleTestComponent,GridContextMenuComponent,
+				SearcherSingleTestComponent,
+				SearcherTableTestComponent,
+				GridContextMenuComponent,
 				GridHeaderContextMenu,
 				SearcherTableComponent,
 				ButtonComponent,
@@ -325,5 +362,22 @@ describe('Systelab Searcher', () => {
 		fixture.detectChanges();
 		await fixture.whenStable();
 		expect(getSubmitButtonText()).toContain('(1)');
+	});
+
+	it('should keep the multiple selection when the table is refreshed', async () => {
+		const tableFixture = TestBed.createComponent(SearcherTableTestComponent);
+		tableFixture.detectChanges();
+		const table = tableFixture.componentInstance.table;
+		const searcher = tableFixture.componentInstance.searcher;
+		await waitUntil(tableFixture, () => areRowsLoaded(table));
+
+		table.gridApi.forEachNode(node => node.setSelected(node.data.code !== '3'));
+		expect(getSelectedCodes(searcher)).toEqual(['1', '2']);
+
+		table.refreshTable();
+		await waitUntil(tableFixture, () => areRowsLoaded(table));
+
+		expect(getSelectedCodes(searcher)).toEqual(['1', '2']);
+		expect(table.gridApi.getSelectedRows().map(row => row.code).sort()).toEqual(['1', '2']);
 	});
 });
