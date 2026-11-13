@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PreferencesService } from 'systelab-preferences';
 import { I18nService } from 'systelab-translate';
-import { CellKeyDownEvent, IsFullWidthRowParams, RowSelectedEvent } from 'ag-grid-community';
+import { CellKeyDownEvent, IsFullWidthRowParams, RowSelectedEvent, SelectionChangedEvent, SelectionEventSourceType } from 'ag-grid-community';
 import { AbstractSearcher } from './abstract-searcher';
 import { AbstractApiGrid } from '../grid/abstract-api-grid.component';
 import { DialogService } from '../modal/dialog/dialog.service';
@@ -13,11 +13,14 @@ import { Observable } from 'rxjs';
     standalone: false
 })
 export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnInit {
+	private static readonly GRID_RESET_SELECTION_SOURCE: SelectionEventSourceType = 'rowDataChanged';
 
 	@Input() public valueForSearch: string;
 	@Input('contains') public searchForContain: boolean;
 	@Input() public searcher: AbstractSearcher<T>;
 	@Output() public gridReady: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+	private lastMultipleSelectedItemList: Array<T> = [];
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
@@ -41,7 +44,22 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 
 	public override doGridReady(event: any) {
 		super.doGridReady(event);
+		this.keepMultipleSelectionOnGridReset();
 		this.gridReady.emit(true);
+	}
+
+	private keepMultipleSelectionOnGridReset(): void {
+		this.lastMultipleSelectedItemList = this.searcher?.multipleSelectedItemList;
+		this.gridApi.addEventListener('selectionChanged', (event: SelectionChangedEvent) => {
+			if (!this.multipleSelection || !this.searcher) {
+				return;
+			}
+			if (event.source === SearcherTableComponent.GRID_RESET_SELECTION_SOURCE) {
+				this.searcher.multipleSelectedItemList = this.lastMultipleSelectedItemList;
+			} else {
+				this.lastMultipleSelectedItemList = this.searcher.multipleSelectedItemList;
+			}
+		});
 	}
 
 	protected override getIsFullWidthRow(isFullWidthRowParams: IsFullWidthRowParams): boolean {
@@ -70,6 +88,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 
 	public refreshTable(): void {
 		if(this.gridApi) {
+			this.lastMultipleSelectedItemList = this.searcher?.multipleSelectedItemList;
 			this.refresh();
 		}
 	}
