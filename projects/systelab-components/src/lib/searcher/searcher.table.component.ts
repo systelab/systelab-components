@@ -20,7 +20,7 @@ export class SearcherTableComponent<T> extends AbstractApiGrid<T> implements OnI
 	@Input() public searcher: AbstractSearcher<T>;
 	@Output() public gridReady: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	private lastMultipleSelectedItemList: Array<T> = [];
+	private lastMultipleSelectedItemList: Array<T>;
 
 	constructor(protected override preferencesService: PreferencesService, protected override i18nService: I18nService,
 				protected override dialogService: DialogService) {
