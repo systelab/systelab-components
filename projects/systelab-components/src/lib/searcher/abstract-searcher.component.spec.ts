@@ -189,6 +189,9 @@ const waitUntil = async (fixture: ComponentFixture<unknown>, condition: () => bo
 		await fixture.whenStable();
 		await new Promise(resolve => setTimeout(resolve, 20));
 	}
+	if (!condition()) {
+		throw new Error('waitUntil: condition not met after 50 attempts');
+	}
 };
 
 const areRowsLoaded = (table: SearcherTableComponent<TestData>) => !!table.gridApi?.getDisplayedRowAtIndex(0)?.data;
@@ -374,10 +377,11 @@ describe('Systelab Searcher', () => {
 		await waitUntil(tableFixture, () => areRowsLoaded(table));
 
 		table.gridApi.forEachNode(node => node.setSelected(node.data.code !== '3'));
+		await waitUntil(tableFixture, () => getSelectedCodes(searcher).length === 2);
 		expect(getSelectedCodes(searcher)).toEqual(['1', '2']);
 
 		table.refreshTable();
-		await waitUntil(tableFixture, () => areRowsLoaded(table));
+		await waitUntil(tableFixture, () => areRowsLoaded(table) && table.gridApi.getSelectedRows().length === 2);
 
 		expect(getSelectedCodes(searcher)).toEqual(['1', '2']);
 		expect(table.gridApi.getSelectedRows().map(row => row.code).sort()).toEqual(['1', '2']);
