@@ -143,7 +143,7 @@ p-datepicker {
   color: var(--secondary);
   background-color: var(--slab_background_primary) !important;
   z-index: 100000 !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: Vars.$slab-base-body-font-family;
   border: 1px solid #ddd !important;
   border-radius: 6px !important;
   padding: 0 15px !important;
