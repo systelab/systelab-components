@@ -44,7 +44,7 @@
     "systelab-preferences": "21.0.0",
     "systelab-translate": "21.0.0",
     "tslib": "2.8.1",
-    "zone.js": "0.15.1"
+    "zone.js": "0.16.0"
   },
   "devDependencies": {
     "@angular-eslint/builder": "21.1.0",
